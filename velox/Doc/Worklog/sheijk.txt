@@ -62,6 +62,10 @@ Doku:
 
 log:
 
+15.12.2003
+VList samt kleinem Test fertig implementiert, es fehlen nur noch ein paar kleinere Hilfsfunktionen
+und Const Iteratoren
+
 12.12.2003
 STL Wrapper Iteratoren Policies ueberarbeitet, </> Vergleiche funktionieren jetzt mit
 random_access_iteratoren (und auch nur damit, wies sein soll)

@@ -34,11 +34,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Local/ExternalLibs/extgl/extgl.lib"
 				OutputFile="$(OutDir)/WindowService.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/WindowService.pdb"
+				ProgramDatabaseFile="$(OutDir)/$(ProjectName).pdb"
 				SubSystem="2"
 				ImportLibrary="$(OutDir)/WindowService.lib"
 				TargetMachine="1"/>
@@ -71,7 +72,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;&quot;D:\Home\My Desktop\Current Projects\velox\Workspace\Local\ExternalLibs\wxWindows\contrib\include&quot;;Local\ExternalLibs\wxWindows\lib\mswdlld;Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;&quot;D:\Home\My Desktop\Current Projects\velox\Workspace\Local\ExternalLibs\wxWindows\contrib\include&quot;;Local\ExternalLibs\wxWindows\lib\mswdlld;Local/ExternalLibs/gmtl;Local/ExternalLibs"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;__WINDOWS__;__WXMSW__;WINDOWSERVICE_EXPORTS"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
@@ -83,10 +84,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Local/ExternalLibs/extgl/extgl.lib"
 				OutputFile="$(OutDir)/WindowService.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/$(ProjectName).pdb"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"

@@ -52,8 +52,8 @@ TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 	// create tests and register them
 	g_pStringTests.Assign(new VStringTests());
 	g_pSmartPtrTest.Assign(new VSmartPointerTest());
-	g_pIterTests.Assign(new VIteratorTests());
 	g_pContainerTests.Assign(new VContainerTests());
+	g_pIterTests.Assign(new VIteratorTests());
 
 	g_pFileStreamTest.Assign(new VFileStreamTest());
 	g_pMemStreamTest.Assign(new VMemoryStreamTest());

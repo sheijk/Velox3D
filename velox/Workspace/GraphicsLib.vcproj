@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl;Local/ExternalLibs"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs;Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs;Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"

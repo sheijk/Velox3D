@@ -7,7 +7,11 @@
 
 #include <v3d/Core/Container/VList.h>
 
+#include <v3d/Core/VIOStream.h>
+
 #include <iostream>
+#include <list>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace unittests {
@@ -38,14 +42,14 @@ void VContainerTests::GetTestInfo(
 	VString& out_SubjectName)
 {
 	// set the name
-	out_TestName = "VContainerTests";
+	out_TestName = "zz VContainerTests";
 
 	// specifiy the subject of the whole thing
 	out_SubjectName = "VList";
 }
 
 template<typename ContainerType>
-void TestContainer()
+void TestContainer(const std::string& name)
 {
 	typedef ContainerType Container;
 
@@ -55,20 +59,125 @@ void TestContainer()
 	if( cont.begin() != cont.end() )
 	{
 		V3D_UNITTEST_ERROR_STATIC(
-			"Empty Container " "'s begin and end "
-			" iterators did not match"
+			(name + " Empty Container " "'s begin and end "
+			" iterators did not match").c_str()
+			);
+	}
+
+	// add value to container
+	int val = 3;
+	cont.push_back(val);
+
+	// test whether it was correctly added
+	if( *cont.begin() != val )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name +
+			" Container::push_back did not insert element"
+			).c_str()
+			);
+	}
+
+	// empty container
+	cont.clear();
+
+	if( cont.begin() != cont.end() )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name +
+			" Container::clear did not clear container: "
+			" begin() and end() mismatch"
+			).c_str()
+			);
+	}
+
+	if( cont.size() != 0 )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name +
+			" Container::size() != 0 after clear()"
+			).c_str()
+			);
+	}
+
+	// "complex" test:
+	const int cnTestDataCount = 10;
+	int naTestData[cnTestDataCount];
+
+    for(int i = 0; i < cnTestDataCount; ++i)
+	{
+		naTestData[i] = i;
+		cont.push_back(i);
+	}
+
+	// test data
+	if( ! std::equal(cont.begin(), cont.end(), naTestData) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name +
+			" Filling with values and reading them back failed"
+			).c_str()
+			);
+	}
+
+	// test erasing: delete 3rd element
+	typename Container::iterator it(cont.begin());
+
+	advance(it, 2);
+
+	it = cont.erase(it);
+
+	if( *it != 3 )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name +
+			"::erase did not return the correct iterator"
+			).c_str()
+			);
+	}
+
+
+	cout << cont.size() << ": ";
+	for( Container::iterator iter = cont.begin(); iter != cont.end(); ++ iter)
+		cout << *iter << ",";
+	cout << endl;
+
+	// test insert
+	it = cont.begin();
+	advance(it, 2);
+
+	it = cont.insert(it, 2);
+
+	int t = *it;
+	if( *it != 2 )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name+
+			"::insert returned an invalid iterator"
+			).c_str()
+			);
+	}
+
+	cout << cont.size() << ": ";
+	for( Container::iterator iter = cont.begin(); iter != cont.end(); ++ iter)
+		cout << *iter << ",";
+	cout << endl;
+
+	if( ! std::equal(cont.begin(), cont.end(), naTestData) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name+ "::insert did not insert correctly").c_str()
 			);
 	}
 }
 
 void VContainerTests::ExecuteTest()
 {
-	TestContainer< VList<int> >();
+	// validate test correctness
+	TestContainer< std::list<int> >("std::list");
 
-	cout << "---------------------------------------"
-			"---------------------------------------"
-			<< endl;
-	cout << "Executing Container Tests" << endl << endl;
+	// test VList
+	TestContainer< VList<int> >("v3d::VList");
 }
 
 //-----------------------------------------------------------------------------
