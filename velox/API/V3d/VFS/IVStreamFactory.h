@@ -13,22 +13,30 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
-//TODO: insert documentation here
-*/
+ * A factory for streams. Used for seperating the creation of streams
+ * from the rest of the file system.
+ */
 class IVStreamFactory : public VNamedObject
 {
 public:
+	/** c'tor, registers the factory to the object registry */
 	IVStreamFactory(VStringParam in_strName, VNamedObject* in_pParent) 
 		: VNamedObject(in_strName, in_pParent) {};
 
 	virtual ~IVStreamFactory() {};
 
+	/** pointer type for returning offline streams */
 	typedef VPointer<IVOfflineStream>::SharedPtr OfflineStreamPtr;
 
+	/** creates a stream which directly accesses files */
 	virtual OfflineStreamPtr CreateFileStream(
 		VStringParam in_strName, 
 		VCreationFlags in_OpenMode,
 		VAccessModeFlags in_Access) = 0;
+
+	/** creates a stream which automatically reserves as much data as is
+		required in memory */
+	virtual OfflineStreamPtr CreateMemoryStream() = 0;
 };
 
 //-----------------------------------------------------------------------------

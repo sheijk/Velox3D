@@ -12,6 +12,7 @@
 
 #include "CoreLibTests/VStringTests.h"
 #include "VFSTests/VFileStreamTest.h"
+#include "CoreLibTests/VSmartPointerTests.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -30,6 +31,7 @@ using namespace unittests;
 // add all tests here
 VPointer<VStringTests>::AutoPtr g_pStringTests;
 VPointer<VFileStreamTest>::AutoPtr g_pFileStreamTest;
+VPointer<VSmartPointerTest>::AutoPtr g_pSmartPtrTest;
 
 TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -39,12 +41,14 @@ TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 	// create tests and register them
 	g_pStringTests.Assign(new VStringTests());
 	g_pFileStreamTest.Assign(new VFileStreamTest());
+	g_pSmartPtrTest.Assign(new VSmartPointerTest());
 }
 
 TESTSDLL_API void Shutdown()
 {
 	// delete all tests
-	g_pStringTests.Release();
+	g_pSmartPtrTest.Release();
+	g_pFileStreamTest.Release();
 	g_pStringTests.Release();
 }
 

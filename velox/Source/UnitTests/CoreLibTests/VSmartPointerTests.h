@@ -29,6 +29,7 @@ public:
 private:
 	void TestAutoPtr();
 	void TestRefCountPtr();
+	void TestAutoArray();
 };
 
 //-----------------------------------------------------------------------------

@@ -117,7 +117,7 @@ void VSmartPointerTest::TestAutoPtr()
 			VUnitTestException::Error);
 	}
 
-	// more to test
+	//TODO: more to test
 		
 }
 
@@ -145,6 +145,49 @@ void VSmartPointerTest::TestRefCountPtr()
 	// copy c'tor
 	// conversion c'tor from ptr
 	// check scope / auto release / d'tor
+}
+
+void VSmartPointerTest::TestAutoArray()
+{
+	const int nArraySize = 5;
+
+	vbool bAlive[nArraySize];
+	VDestructTest* pSubjects[5];
+
+	for(int i = 0; i < nArraySize; ++i)
+	{
+		pSubjects[i] = new VDestructTest(bAlive[i]);
+	}
+
+	{
+		// create
+		VArray<VDestructTest>::AutoPtr myAutoArrays;
+
+		myAutoArrays = pSubjects[0];		
+
+		// access element
+		VDestructTest& tmp = myAutoArrays[2];
+	}
+
+	// check if all deleted
+	if( bAlive[0] )
+	{
+		V3D_THROW_UNITTEST_ERROR(
+			"VArray<T>::AutoPtr did not release it's targets",
+			VUnitTestException::Error);		
+	}
+
+	for(int i = 1; i < nArraySize; ++i)
+	{
+		if( bAlive[i] )
+		{
+			V3D_THROW_UNITTEST_ERROR(
+				"VArray<T>::AutoPtr did not release all it's elements",
+				VUnitTestException::Error);
+		}
+	}
+
+	//TODO: more tests, see TestAutoPtr
 }
 
 //-----------------------------------------------------------------------------

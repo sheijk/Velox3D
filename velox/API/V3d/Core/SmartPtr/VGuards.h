@@ -5,6 +5,7 @@
 #include "VExclusiveOwnerPol.h"
 #include "VRefCountPol.h"
 #include "VPointerStorage.h"
+#include "VArrayStorage.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -41,23 +42,19 @@ struct VPointer
 /**
  * the same for arrays
  */
-//template<typename T>
-//struct VArrayPtr
-//{
-//	typedef VSmartPointer<
-//		T,
-//		VExclusiveOwnerPol< VArrayStorage<T> >,
-//		VNoCheckPol<T*>,
-//		VNoCheckPol<T*>
-//		> AutoPtr;
-//
-//	typedef VSmartPointer<
-//		T,
-//		VRefCountPol< VArrayStorage<T> >,
-//		VNoCheckPol<T*>,
-//		VNoCheckPol<T*>
-//		> SharedPtr;
-//};
+template<typename T>
+struct VArray
+{
+	typedef VSmartPtrMutable<
+		T,
+		VExclusiveOwnerPol< VArrayStorage<T> >
+		> AutoPtr;
+
+	typedef VSmartPtr<
+		T,
+		VRefCountPol< VArrayStorage<T> >
+		> SharedPtr;
+};
 
 //-----------------------------------------------------------------------------
 } // namespace v3d

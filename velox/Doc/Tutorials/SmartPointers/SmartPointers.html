@@ -146,4 +146,14 @@
 	  </div> 
 	  </p>
 	  
+	  <h3>AutoPtr and SharedPtr for arrays</h3>
+	  <p>
+	  <div id="cpp">
+	  VArray<MyClass>::AutoPtr myAutoArray = new MyClass[100]; <br>
+	  VArray<MyClass>::SharedPtr mySharedArray = new MyClass[3]; <br>
+	  <br>
+	  myAutoArray[4].foo(); <br>
+	  mySharedArray[2].foo(); <br>
+	  </div>
+	  
 </body>
