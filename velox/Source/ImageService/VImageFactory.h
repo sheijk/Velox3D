@@ -21,7 +21,7 @@ public:
 	virtual ImagePtr CreateImage(VStringParam in_sFilename);
 
 	/* Creates and decodes an image file by its param and destination type */
-	virtual void CreateImage(VStringParam in_sFilename, ImagePtr& in_Image);
+	virtual void CreateImage(VStringParam in_sFilename, VImage& in_Image);
 
 	virtual void SaveImageToFile(VStringParam in_sFilename, VImage& in_Image);
 
@@ -58,11 +58,9 @@ private:
 	std::vector<IVImageManipulator*> m_ManipulatorList;
 	
 	VStringRetVal ParseFileExtension(VStringParam sName);
-	
-	//std::vector<std::string> m_ExtensionList;
 
-	//VStringRetVal GetExtensionType(IVImageSaver::ImageType in_Type);
-
+	void MakeDeepImageCopy(VImage& in_Image, VImage& in_ImageDest);
+		 
 
 };
 //-----------------------------------------------------------------------------

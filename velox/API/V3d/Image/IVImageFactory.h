@@ -29,12 +29,10 @@ public:
 	/** returns an image containing the image data of the given image file */
 	virtual ImagePtr CreateImage(VStringParam in_sFilename) = 0;
 
-	//TODO: der 2te param sollte VImage& sein, sonst problem bei VImage img; CreateImage(.., img);
 	/* Creates and decodes an image file by its param and destination type */
-	virtual void CreateImage(VStringParam in_sFilename, ImagePtr& in_Image) = 0;
+	virtual void CreateImage(VStringParam in_sFilename, VImage& in_Image) = 0;
 
 
-	// optimaler weise einfach an der extension erkennen --sheijk
 	/* Save an image to a file */
 	virtual void SaveImageToFile(VStringParam in_sFilename,
 		VImage& in_Image) = 0;

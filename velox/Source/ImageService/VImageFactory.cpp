@@ -91,7 +91,7 @@ void VImageFactory::SaveImageToFile(VStringParam in_sFilename, VImage& in_Image)
     if(theImageSaver)
 	{
 
-		const char* sExtension = ParseFileExtension(in_sFilename);
+		VString sExtension = ParseFileExtension(in_sFilename);
 
 		if(strcmp(sExtension, "bmp") == 0)
 		{
@@ -132,12 +132,12 @@ void VImageFactory::ConvertImage(VImage& in_ImageSource, VImage& in_ImageDest)
 //-----------------------------------------------------------------------------
 
 void VImageFactory::CreateImage(VStringParam in_sFilename,
-								ImagePtr& in_Image)
+								VImage& in_Image)
 {
 
-	if(	in_Image->GetWidth() == 0 ||
-		in_Image->GetHeight()== 0 ||
-		in_Image->GetBitsPerPixel() == 0)
+	if(	in_Image.GetWidth() == 0 ||
+		in_Image.GetHeight()== 0 ||
+		in_Image.GetBitsPerPixel() == 0)
 	{
 		V3D_THROW(VException, "cannot create image. parameters are surely wrong!");
 	}
@@ -146,61 +146,51 @@ void VImageFactory::CreateImage(VStringParam in_sFilename,
 
 
 
-	if(returnImage->IsEqualInProperties(*in_Image))
+	if(returnImage->IsEqualInProperties(in_Image))
 	{
-		in_Image = returnImage;
+		MakeDeepImageCopy(*returnImage, in_Image);
+//		in_Image = *returnImage;
 	}
 	
 	else
 	{
 		/* store the old values because convert returns only a valid image */
-		const vuint nWidth = in_Image->GetWidth();
-		const vuint nHeight = in_Image->GetHeight();
+		const vuint nWidth = in_Image.GetWidth();
+		const vuint nHeight = in_Image.GetHeight();
 
-		ConvertImage(*returnImage, *in_Image);
+		ConvertImage(*returnImage, in_Image);
 
 		/* restore old values */
 		returnImage->iWidth = nWidth;
 		returnImage->iHeight = nHeight;
 
-        ScaleImage(*in_Image, *returnImage);
+        ScaleImage(in_Image, *returnImage);
 	}
 
 	//TODO: gets mem of returnImage freed?
 
-	in_Image = returnImage;
+		
+	MakeDeepImageCopy(*returnImage, in_Image);
+	//in_Image = *returnImage;
 }
 
-//-----------------------------------------------------------------------------
+void VImageFactory::MakeDeepImageCopy(VImage& in_Image, VImage& in_ImageDest)
+{
+	const vuint nSize = in_Image.GetWidth() * in_Image.GetHeight() * in_Image.GetBPP() / 8;
 
-//VStringRetVal VImageFactory::GetExtensionType(IVImageSaver::ImageType in_Type)
-//{
-//	switch(in_Type)
-//	{
-//		case IVImageSaver::ImageType::SaveBMP:
-//			{
-//				return "bmp";
-//				break;
-//			}
-//		case IVImageSaver::ImageType::SaveJPG:
-//			{
-//				return "jpg";
-//				break;
-//			}
-//		case IVImageSaver::ImageType::SaveTGA:
-//			{
-//				return "tga";
-//				break;
-//			}
-//
-//		default:
-//			return "";
-//			break;
-//	}
-//}
+	in_ImageDest.iBPP = in_Image.GetBPP();
+	in_ImageDest.iWidth = in_Image.GetWidth();
+	in_ImageDest.iHeight = in_Image.GetHeight();
 
+	//delete mem if already exists
+	if(in_ImageDest.pData != 0)
+	{
+		in_ImageDest.pData->~VBuffer();
+	}
 
-
+	in_ImageDest.pData = new VImage::ImageData(new vuchar[nSize], nSize);
+	memcpy(in_ImageDest.pData->GetDataAddress(), in_Image.GetData().GetDataAddress(), nSize);
+}
 
 //-----------------------------------------------------------------------------
 } // namespace image
