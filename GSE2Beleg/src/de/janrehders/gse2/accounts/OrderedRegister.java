@@ -111,12 +111,4 @@ public class OrderedRegister {
             }
         };    
     }
-    
-    
-    
-    public static interface AccountIterator
-    {
-        public Account next();
-        public boolean hasNext();
-    }
 }
