@@ -29,8 +29,7 @@ public:
 	virtual graphics::IVDevice& QueryGraphicsDevice();
 	virtual input::IVInputManager& QueryInputManager();
 	virtual void SetTitle(VStringParam in_sName);
-
-	static void OnLostFocus();
+	virtual void SetActive();
 
 	static vbool bFocus;
 

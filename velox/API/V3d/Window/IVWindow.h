@@ -32,6 +32,9 @@ public:
 
 	/* Set the current title for the window */
 	virtual void SetTitle(VStringParam in_sTitle) = 0;
+
+	/* Set the focus to this window */
+	virtual void SetActive() = 0;
 	
 	
 

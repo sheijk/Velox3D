@@ -21,7 +21,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);
 			return 0;
 		}
-
+		
 		case WM_ACTIVATE:
 		{
 			switch(wParam)
@@ -64,7 +64,11 @@ VWindowWin32::~VWindowWin32()
 {
 }
 //-----------------------------------------------------------------------------
-
+void VWindowWin32::SetActive()
+{
+	SetFocus(hWnd);
+}
+//-----------------------------------------------------------------------------
 void VWindowWin32::Register()
 {
 	vout << "Registering window..." << vendl;
