@@ -4,6 +4,7 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include "VImageFactory.h"
 #include "VTgaImageLoader.h"
+#include "VJpegImageLoader.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -14,9 +15,10 @@ using namespace v3d::image;
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-// use a smart pointer to guarante object destruction
+// use a smart pointer to guarantee object destruction
 VPointer<VImageFactory>::AutoPtr g_pImageFactory;
-VPointer<IVImageLoader>::AutoPtr g_pImageLoader;
+VPointer<IVImageLoader>::AutoPtr g_pTgaImageLoader;
+VPointer<IVImageLoader>::AutoPtr g_pJpgImageLoader;
 
 IMAGE_SERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -25,7 +27,8 @@ IMAGE_SERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 
 	// create service object and register it
 	g_pImageFactory.Assign(new VImageFactory());
-	g_pImageLoader.Assign(new VTgaImageLoader());
+	//g_pTgaImageLoader.Assign(new VTgaImageLoader());
+	g_pJpgImageLoader.Assign(new VJpegImageLoader());
 }
 
 IMAGE_SERVICE_API void Shutdown()

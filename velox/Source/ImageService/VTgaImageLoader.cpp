@@ -357,7 +357,7 @@ void VTgaImageLoader::Register()
 	IVImageFactory* Factory = QueryObject<IVImageFactory>("image.service");
 	Factory->Register(this, "tga");
 }
-#pragma warning (disable : 4244)
+#pragma warning (default : 4244)
 //-----------------------------------------------------------------------------
 } // namespace image
 } // namespace v3d
