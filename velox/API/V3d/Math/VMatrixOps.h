@@ -55,15 +55,25 @@ namespace v3d {
 		gmtl::sub(result.m_Mat, op1.m_Mat, op2.m_Mat);
 	}
 
-	template<typename Scalar, vuint RowCount, vuint ColumnCount>
+	template<typename Scalar, int RowCount, int ColumnCount, int Internal>
 		void Mult(
 		VMatrix<Scalar, RowCount, ColumnCount>& result,
-		const VMatrix<Scalar, RowCount, ColumnCount>& op1,
-		const VMatrix<Scalar, RowCount, ColumnCount>& op2
+		const VMatrix<Scalar, RowCount, Internal>& op1,
+		const VMatrix<Scalar, Internal, ColumnCount>& op2
 		)
 	{
 		gmtl::mult(result.m_Mat, op1.m_Mat, op2.m_Mat);
-	}	
+	}
+
+	//template<typename Scalar, vuint RowCount, vuint ColumnCount>
+	//	void Mult(
+	//	VMatrix<Scalar, RowCount, ColumnCount>& result,
+	//	const VMatrix<Scalar, RowCount, ColumnCount>& op1,
+	//	const VMatrix<Scalar, RowCount, ColumnCount>& op2
+	//	)
+	//{
+	//	gmtl::mult(result.m_Mat, op1.m_Mat, op2.m_Mat);
+	//}
 
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
 		VMatrix<Scalar, RowCount, ColumnCount>
@@ -74,7 +84,7 @@ namespace v3d {
 	{
 		VMatrix<Scalar, RowCount, ColumnCount> res;
 		Add(res, a, b);
-		return res;		
+		return res;
 	}
 
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
@@ -86,7 +96,7 @@ namespace v3d {
 	{
 		VMatrix<Scalar, RowCount, ColumnCount> res;
 		Sub(res, a, b);
-		return res;		
+		return res;
 	}
 
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
@@ -98,7 +108,7 @@ namespace v3d {
 	{
 		VMatrix<Scalar, RowCount, ColumnCount> res;
 		Mult(res, a, b);
-		return res;		
+		return res;
 	}
 
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
@@ -130,22 +140,16 @@ namespace v3d {
 
 	// vector/matrix multiplication
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
-	VVector<Scalar, ColumnCount>
-	Mult(
+	void Mult(
+		VVector<Scalar, ColumnCount>& result,
 		const VMatrix<Scalar, RowCount, ColumnCount>& mat,
 		const VVector<Scalar, ColumnCount>& vector
 		)
 	{
-		//gmtl::Vec<Scalar, ColumnCount> r;
-		//gmtl::Vec<Scalar, ColumnCount> v;
-		//gmtl::Matrix<Scalar, ColumnCount, RowCount> m;
-
 		//r = m * v;
-		return VVector<Scalar, ColumnCount>(
+		result = VVector<Scalar, ColumnCount>(
 			gmtl::operator*(mat.m_Mat, vector.m_Vec));
 	}
-
-
 
 //-----------------------------------------------------------------------------
 } // namespace v3d

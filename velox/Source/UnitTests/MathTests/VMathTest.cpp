@@ -44,9 +44,22 @@ void VMathTest::GetTestInfo(
 	out_SubjectName = "VMatrix";
 }
 
+
 //TODO: implement test
 void VMathTest::ExecuteTest()
 {
+	{
+		typedef VMatrix<float, 4, 3> Matrix43f;
+		typedef VMatrix<float, 3, 5> Matrix35f;
+		typedef VMatrix<float, 4, 5> Matrix45f;
+
+		Matrix43f mat1;
+		Matrix35f mat2;
+		Matrix45f res;
+
+		Mult(res, mat1, mat2);
+	}
+
 	{
 		typedef VMatrix<float, 4, 4> Matrix44f;
 
@@ -102,7 +115,7 @@ void VMathTest::ExecuteTest()
 		Vector4f v4f, v4f2;
 		Matrix34f m34f;
 		
-		v4f2 = Mult(m34f, v4f);
+		Mult(v4f2, m34f, v4f);
 	}
 }
 

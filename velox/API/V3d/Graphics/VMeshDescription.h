@@ -26,7 +26,8 @@ struct VMeshDescription
 		Quads,
 		QuadStrip,
 		Lines,
-		LineStrip
+		LineStrip,
+		Points
 	};
 
 	template<typename Buffer>

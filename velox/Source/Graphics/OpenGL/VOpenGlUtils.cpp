@@ -25,6 +25,8 @@ GLint GetGeometryMode(VMeshDescription::GeometryType in_eType)
 		return GL_LINES;
 	case VMeshDescription::LineStrip:
 		return GL_LINE_STRIP;
+	case VMeshDescription::Points:
+		return GL_POINTS;
 	default:
 		V3D_THROW(VException, "invalid geometry mode");
 	}

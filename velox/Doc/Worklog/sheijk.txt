@@ -57,8 +57,8 @@ template member konvertiert?
 	./states usw. ins device bewegen
 	./render state categories ins device
 	./materials erzeugen
-	mesh: render state list liefern
- 
+	./mesh: render state list liefern
+
 	.scene graph
 	interfaces schreiben (basierend auf ins code)
 	simple implementation
@@ -98,6 +98,11 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+06.03.2004
+Mathlib ueberarbeitet: inkonsistenz zwischen matrix * matrix und vektor * vektor
+Multiplikation beseitigt, und mit Mult koennen jetzt auch Matrizen verschiedener
+Groesse multipliziert werden (4x3 * 3x5 -> 4x5)
 
 23.02.2004
 erzeugung von mesh + material verbunden, mesh - material hat jetzt 1:1 assoziation
