@@ -14,6 +14,7 @@
 #include "../UpdateManager/VUpdateManager.h"
 
 #include "../WxConnector/VWxConnector.h"
+#include "../SystemManager/VSystemManager.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -29,6 +30,7 @@ using namespace v3d::updater;
 VPointer<VConfigProvider>::AutoPtr g_pConfigProvider;
 VPointer<VUpdateManager>::AutoPtr g_pUpdater;
 VPointer<window::VWxConnector>::AutoPtr g_pWxConnector;
+VPointer<system::VSystemManager>::AutoPtr g_pSystemManager;
 
 COMMONSERVICES_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -38,7 +40,8 @@ COMMONSERVICES_API void Initialize(VObjectRegistry* in_pObjReg)
 	// create service object and register it
 	g_pConfigProvider.Assign(new VConfigProvider("config.provider"));
 	g_pUpdater.Assign(new VUpdateManager("updater.service"));
-	g_pWxConnector.Assign(new window::VWxConnector());
+	g_pWxConnector.Assign(new window::VWxConnector("wx.connector"));
+	g_pSystemManager.Assign(new system::VSystemManager("system.service"));
 }
 
 COMMONSERVICES_API void Shutdown()
@@ -47,6 +50,7 @@ COMMONSERVICES_API void Shutdown()
 	g_pUpdater.Release();
 	g_pConfigProvider.Release();
 	g_pWxConnector.Release();
+	g_pSystemManager.Release();
 }
 
 /**

@@ -7,6 +7,7 @@
 #include <v3d/Updater/IVUpdateManager.h>
 #include <v3d/Window/IVWindow.h>
 #include <v3d/Window/IVWindowManager.h>
+#include <v3d/System/IVSystemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
@@ -15,6 +16,7 @@ using namespace v3d::console;
 using v3d::updater::IVUpdateManager;
 using namespace v3d::graphics;
 using namespace v3d::window;
+using namespace v3d::system;
 
 
 
@@ -56,26 +58,25 @@ vint VExampleApp::Main()
 	// get update manager
 	IVUpdateManager& updater = * QueryObject<IVUpdateManager>("updater.service");
 	
+	IVSystemManager* system = QueryObject<IVSystemManager>("system.service");
 	IVWindowManager* winmanager = QueryObject<IVWindowManager>("window.manager");
 	
 	typedef VPointer<IVWindow>::SharedPtr IVWindowInterface;
-	IVWindowInterface win, win1;
-	
-	
+	IVWindowInterface win;
+
 
 	win = winmanager->CreateWindow("v3d window");
-	win1 = winmanager->CreateWindow("v3d window 2");
+
 	
 	// main loop
-	bool bActive = true;
-
-	//TODO: fix. (bool Active() in update manager?)
-	//updater.Mainloop();
 	updater.Start();
-	while(bActive)
+	system->SetStatus(true);
+
+	while(system->GetStatus())
 	{
 		updater.StartNextFrame();
 	}
+
 	updater.Stop();
 
 	return 0;

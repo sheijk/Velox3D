@@ -7,7 +7,7 @@ namespace window {
 //-----------------------------------------------------------------------------
 
 
-VWxConnector::VWxConnector() : VNamedObject("wx.connector", 0)
+VWxConnector::VWxConnector(VStringParam in_Name) :	VNamedObject(in_Name, 0)
 {
 	m_iNumElements = 0;
 }

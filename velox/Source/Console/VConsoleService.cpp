@@ -10,6 +10,8 @@ namespace console {
 
 VConsoleService::VConsoleService() : IVConsoleSerivce("console.service", 0)
 {
+	//Do not delete wx will do that
+	m_pFrame = new VConsoleFrame();
 }
 
 VConsoleService::~VConsoleService()
@@ -18,7 +20,7 @@ VConsoleService::~VConsoleService()
 
 void VConsoleService::Write(VStringParam in_strString)
 {
-	m_Frame.WriteText(in_strString);
+	m_pFrame->WriteText(in_strString);
 }
 
 error::IVErrorService& VConsoleService::GetErrorService()

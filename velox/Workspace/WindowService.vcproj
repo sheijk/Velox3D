@@ -131,9 +131,6 @@
 			<File
 				RelativePath="..\Api\V3d\Window\IVWindowManager.h">
 			</File>
-			<File
-				RelativePath="..\Api\V3d\Window\IVWxConnector.h">
-			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
@@ -172,12 +169,6 @@
 				RelativePath="..\Source\WindowService\WindowServiceDLL.cpp">
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\Source\WindowService\VConsoleFrame.cpp">
-		</File>
-		<File
-			RelativePath="..\Source\WindowService\VConsoleFrame.h">
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="CommonServices"
-	ProjectGUID="{586E10B2-24CB-27C7-A973-CDCD6D563659}"
-	RootNamespace="CommonServices"
+	Name="EditorService"
+	ProjectGUID="{C2E15749-4341-4E4B-9019-07F8B0522B91}"
+	RootNamespace="EditorService"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -20,8 +20,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
+				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;Local\ExternalLibs\wxWindows\contrib\include;Local\ExternalLibs\wxWindows\lib\mswdlld"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EDITORSERVICE_EXPORTS;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXDEBUG=1;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -34,12 +34,14 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/CommonServices.dll"
+				AdditionalDependencies="Local/ExternalLibs/wxWindows/lib/wxmsw24d.lib"
+				OutputFile="$(OutDir)/EditorService.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/CommonServices.pdb"
+				ProgramDatabaseFile="$(OutDir)/EditorService.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/CommonServices.lib"
+				ImportLibrary="$(OutDir)/EditorService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -70,8 +72,8 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;Local\ExternalLibs\wxWindows\contrib\include;Local\ExternalLibs\wxWindows\lib\mswdll"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EDITORSERVICE_EXPORTS;__WINDOWS__;__WXMSW__;WXDEBUG=0;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -82,13 +84,15 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/CommonServices.dll"
+				AdditionalDependencies="Local/ExternalLibs/wxWindows/lib/wxmsw24.lib"
+				OutputFile="$(OutDir)/EditorService.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/CommonServices.lib"
+				ImportLibrary="$(OutDir)/EditorService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -116,95 +120,22 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Config Service"
+			Name="Interface"
 			Filter="">
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Config\IVConfigProvider.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\ConfigFiles\VConfigProvider.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\ConfigFiles\VConfigProvider.h">
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
-			Name="Update Manager"
+			Name="Implementation"
 			Filter="">
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateable.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateManager.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\UpdateManager\VUpdateManager.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\UpdateManager\VUpdateManager.h">
-				</File>
-			</Filter>
+			<File
+				RelativePath="..\Source\EditorService\EditorServiceDLL.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\EditorService\VEditorFrame.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\EditorService\VEditorFrame.h">
+			</File>
 		</Filter>
-		<Filter
-			Name="Wx Connector"
-			Filter="">
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\WxConnector\VWxConnector.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\WxConnector\VWxConnector.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Window\IVWxConnector.h">
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="System Manager"
-			Filter="">
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\SystemManager\VSystemManager.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\SystemManager\VSystemManager.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\System\IVSystemManager.h">
-				</File>
-			</Filter>
-		</Filter>
-		<File
-			RelativePath="..\Source\ConfigFiles\CommonServicesDLL.cpp">
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

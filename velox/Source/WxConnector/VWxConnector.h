@@ -16,7 +16,7 @@ class VWxConnector : public IVWxConnector, public VNamedObject
 {
 public:
 
-	VWxConnector();
+	VWxConnector(VStringParam in_Name);
 	virtual ~VWxConnector();
 
 	void Register(IVWindowFrame* in_pFrame);

@@ -25,7 +25,7 @@ public:
 
 private:
 	error::IVErrorService& GetErrorService();
-	VConsoleFrame m_Frame;
+	VConsoleFrame* m_pFrame;
 };
 
 //-----------------------------------------------------------------------------

@@ -1,67 +1,61 @@
-#ifndef V3D_VCONSOLEWINDOW_H
-#define V3D_VCONSOLEWINDOW_H
+#ifndef V3D_EDTITORFRAME_H
+#define V3D_EDTITORFRAME_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <V3d/Error/IVErrorListener.h>
-#include <v3d/Error/VMessageTypeEnum.h>
-#include <v3d/Utils/IVStringStream.h>
 #include <v3d/Window/IVWindowFrame.h>
 //-----------------------------------------------------------------------------
 #include <wx/wx.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace console {
+namespace editor {
 //-----------------------------------------------------------------------------
+class VEditorFrame;
 
-class VConsoleFrame;
-
-class VTextControl : public wxTextCtrl
+/*class VEditorCanvas : public wxScrolledWindow
 {
 public:
 
-	VTextControl(VConsoleFrame *parent, wxWindowID id, const wxString &value,
-		const wxPoint &pos, const wxSize &size, int style = 0);
-		
+	VEditorCanvas(VSysInfoFrame *parent );
+	void OnPaint(wxPaintEvent &event);
 
-	enum Event
-	{
-		ID_Enter = 1,
-	};
+protected:
 
-	void OnEnter(wxKeyEvent& event);
+	void DrawText(wxDC& dc);
 
-private:
+	VEditorFrame* m_Parent;
 
-	VConsoleFrame* m_parent;
-	
-	
 	DECLARE_EVENT_TABLE()
 
+};*/
 
-};
-
-class VConsoleFrame : public wxFrame, public window::IVWindowFrame
+class VEditorFrame : public wxFrame, public window::IVWindowFrame
 {
 public:
 
-	VConsoleFrame();
-	~VConsoleFrame();
+	enum RMenu
+	{
+		ID_Quit = 1,
+		ID_About,
+	};
+	VEditorFrame();
+	~VEditorFrame();
 
-	void WriteText(VStringParam in_Text);
 	void ShowFrame(vbool in_Param);
+	void OnQuit(wxCommandEvent& event);
+	void OnAbout(wxCommandEvent& event);
 
-	
 private:
 
-	wxTextCtrl* m_TextControl;
-	VTextControl* m_InputControl;
+	//VEditorCanvas* m_pCanvas;
+	wxMenuBar* m_MenuBar;
 
+	DECLARE_EVENT_TABLE()
 
 };
 
 
 //-----------------------------------------------------------------------------
-} // namespace console
+} // namespace editor
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VCONSOLEWINDOW_H

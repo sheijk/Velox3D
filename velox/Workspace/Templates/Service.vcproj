@@ -18,8 +18,8 @@ remove everyhing before <?xml ...>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -70,8 +70,8 @@ remove everyhing before <?xml ...>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
