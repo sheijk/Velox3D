@@ -68,6 +68,10 @@ Doku:
 
 log:
 
+23.01.2004
+Geometry Utils zum leichteren Erzeugen von Float Buffer und Mesh Descriptions
+hinzugefuegt
+
 22.01.2004
 Util Fkten zum Erzeugen von Geometrie erstellt
 

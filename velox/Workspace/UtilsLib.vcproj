@@ -177,6 +177,34 @@
 				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="Geometry"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VColor4f.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VecMathUtil.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VGeometryUtil.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VGeometryUtil.inl">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VMeshDescrUtil.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VTexCoord2f.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VVertex3f.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VVertexDataLayout.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

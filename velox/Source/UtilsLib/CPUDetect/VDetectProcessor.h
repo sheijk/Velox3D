@@ -2,12 +2,19 @@
 #define V3D_VDETECTPROCESSOR_H
 //-----------------------------------------------------------------------------
 #include <windows.h>
+
+// *raeusper* cstdio, cstring, cmemory, dann sind die fkten auch alle
+// brav im std namepace - wir programmieren schliesslich C++ und nicht
+// C ;) -sheijk
+// 2.: muessen die alle hier included werden anstatt in der .cpp? -sheijk
 #include <stdio.h>
 #include <string.h>
 #include <memory.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VTypes.h>
 //-----------------------------------------------------------------------------
+// *nochmal.raeusper* V3D_CAPS fuer makros. + fuer sowas reicht ne inline
+// fkt voellig aus -sheijk
 #define CheckBit(var, bit)   ((var & (1 << bit)) ? true : false)
 //-----------------------------------------------------------------------------
 
