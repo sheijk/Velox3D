@@ -29,8 +29,9 @@ VCubeMeshDescr::VCubeMeshDescr(float in_fSize)
 	// build triangles
 	typedef VTriangle::Vertex Vertex;
 	VTriangle tris(vert(1, 0, 0), vert(0, 1, 0), vert(-1, 0, 0));
-
+	
 	m_Triangles.push_back(tris);
+
 }
 
 /**
@@ -42,14 +43,16 @@ VCubeMeshDescr::~VCubeMeshDescr()
 
 IVMeshDescription::TriangleIterator VCubeMeshDescr::TriangleBegin() const
 {
-	typedef VSTLIteratorPol<TriangleContainer::const_iterator, const VTriangle> IterPol;
+	typedef VSTLIteratorPol<TriangleContainer::const_iterator, const VTriangle>
+		IterPol;
 
 	return TriangleIterator(new IterPol(m_Triangles.begin()));
 }
 
 IVMeshDescription::TriangleIterator VCubeMeshDescr::TriangleEnd() const
 {
-	typedef VSTLIteratorPol<TriangleContainer::const_iterator, const VTriangle> IterPol;
+	typedef VSTLIteratorPol<TriangleContainer::const_iterator, const VTriangle>
+		IterPol;
 
 	return TriangleIterator(new IterPol(m_Triangles.end()));
 }

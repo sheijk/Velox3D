@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -109,6 +109,18 @@
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Graphics\VOpenGLDevice.h">
+			</File>
+			<File
+				RelativePath="..\Source\Graphics\OpenGL\VOpenGLMesh.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Graphics\OpenGL\VOpenGLMesh.h">
+			</File>
+			<File
+				RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Graphics\OpenGL\VOpenGLVertexMesh.h">
 			</File>
 		</Filter>
 		<Filter

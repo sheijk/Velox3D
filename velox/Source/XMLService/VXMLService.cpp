@@ -7,7 +7,7 @@ namespace xml{
 //-----------------------------------------------------------------------------
 
 /**
- * Register the service with strind ID "XmlService". 
+ * Register the service with strind ID "xml.service". 
  */
 
 VXMLService::VXMLService(void) : IVXMLService("xml.service", 0)

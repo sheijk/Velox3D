@@ -29,7 +29,7 @@ public:
 	* Inherts from IVDevice
 	*/
 
-	virtual IVMesh* CreateMesh(); //TODO: insert mesh description
+	virtual IVMesh* CreateMesh(IVMeshDescription* in_pMeshDesc);
 	virtual IVMaterial* CreateMaterial();
 	virtual void ApplyMaterial(IVMaterial* in_pMaterial);
 	virtual void RenderMesh(IVMesh* in_pMesh);

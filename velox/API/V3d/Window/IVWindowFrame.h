@@ -16,6 +16,7 @@ public:
 	virtual void ShowFrame(vbool in_Param) = 0;
 
 	//TODO: warum muss das frame von wx windows abhaengen?
+	//@ sheijk: Jedes Window Frame ist ein WxFrame [ins]
 	virtual void Register()
 	{
 

@@ -40,7 +40,7 @@ typedef bool vbool;
  */
 
 /** use this when a string parameter is needed */
-typedef const char* VStringParam;
+typedef const vchar* VStringParam;
 
 class VString;
 

@@ -9,6 +9,7 @@
 #include <v3d/Window/IVWindowManager.h>
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Graphics/IVDevice.h>
+#include <v3d/Utils/Graphics/VCubeMeshDescr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
@@ -34,26 +35,6 @@ VExampleApp::~VExampleApp()
 
 vint VExampleApp::Main()
 {
-	// get the example service
-	IVExampleService* pExServ = QueryObject<IVExampleService>("exService");
-
-	/*if( 0 != pExServ )
-	{
-		V3D_DEBUGMSG("example service could be queried and will be used now");
-		//return pExServ->GiveMeFive();
-	}
-	else 
-	{
-		V3D_DEBUGMSG("Example service could not be queried, -> failure");
-		return -1;
-	}*/
-
-	
-	//m_Console = QueryObject<IVConsoleSerivce>("console.service");
-
-	/*if(!m_Console)
-		V3D_THROW(VException, "console service not found");*/
-	
 	V3D_DEBUGMSG("Velox Main app says hi!");
 
 	// get update manager
@@ -72,6 +53,11 @@ vint VExampleApp::Main()
 	IVDevice* m_Device;
 	m_Device = &(win->QueryGraphicsDevice());
 
+	VCubeMeshDescr test(1);
+	IVMesh* testMesh;
+
+	testMesh = m_Device->CreateMesh(&test);
+
 	
 	// main loop
 	updater.Start();
@@ -80,6 +66,7 @@ vint VExampleApp::Main()
 	while(system->GetStatus())
 	{
 		m_Device->BeginScene();
+		m_Device->RenderMesh(testMesh);
 		updater.StartNextFrame();
 		m_Device->EndScene();
 	}

@@ -1,23 +1,27 @@
-#ifndef V3D_IVMESH_H
-#define V3D_IVMESH_H
+/**
+*  VOpenGLVertexMesh
+*  Implementation of the class VOpenGLVertexMesh
+*  Created on:      25-Nov-2003 23:12:05
+*  Original author: insane
+*/
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <v3d/Graphics/OpenGL/VOpenGLVertexMesh.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-/**
- * IVMesh is the client visible mesh control
- */
-class IVMesh
+VOpenGLVertexMesh::VOpenGLVertexMesh()
 {
-public:
-	virtual ~IVMesh() {};
-};
+	m_Type = VertexMode;
+}
+VOpenGLVertexMesh::~VOpenGLVertexMesh()
+{
+}
 
 //-----------------------------------------------------------------------------
-} // namespace graphics
-} // namespace v3d
+} //namespace graphics
+} //namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVMESH_H
+
+

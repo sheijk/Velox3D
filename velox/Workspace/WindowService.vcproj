@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;&quot;D:\Home\My Desktop\Current Projects\velox\Workspace\Local\ExternalLibs\wxWindows\contrib\include&quot;;Local\ExternalLibs\wxWindows\lib\mswdlld"
+				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;&quot;D:\Home\My Desktop\Current Projects\velox\Workspace\Local\ExternalLibs\wxWindows\contrib\include&quot;;Local\ExternalLibs\wxWindows\lib\mswdlld;Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;WINDOWSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"

@@ -1,5 +1,7 @@
 #include <v3d/Graphics/VOpenGLDevice.h>
 #include <v3d/Core/VIOStream.h>
+#include <v3d/Graphics/OpenGL/VOpenGLVertexMesh.h>
+#include <v3d/Core/Wrappers/VIterator.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -33,14 +35,50 @@ IVMaterial* VOpenGLDevice::CreateMaterial()
 }
 //-----------------------------------------------------------------------------
 
-IVMesh* VOpenGLDevice::CreateMesh()
+IVMesh* VOpenGLDevice::CreateMesh(IVMeshDescription* in_pMeshDesc)
 {
-	return NULL;
+	typedef VBidirectionalIterator<const VTriangle> TriangleIterator;
+    
+	
+	VOpenGLVertexMesh* Mesh = new VOpenGLVertexMesh;
+	
+	for(TriangleIterator iter = in_pMeshDesc->TriangleBegin();
+		iter != in_pMeshDesc->TriangleEnd(); iter++)
+	{
+		for(vuint i = 0; i < 3; i++)
+		{
+			Mesh->m_VertexList.push_back(iter->GetVertex(i));
+		}
+	}
+
+	return Mesh;
 }
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::RenderMesh(IVMesh* in_pMesh)
 {
+	VOpenGLMesh* Mesh = reinterpret_cast<VOpenGLMesh*>(in_pMesh);
+
+	if(Mesh->m_Type == Mesh->VertexMode)
+	{
+		VOpenGLVertexMesh* vmesh = reinterpret_cast<VOpenGLVertexMesh*>(Mesh);
+		
+		/*static vfloat32 rotZ = 0;
+		rotZ += 0.1f;
+		glRotatef(rotZ,0.0f,0.0f,1.0f);*/
+
+		glTranslatef(-0.0f,0.0f,-2.0f);	
+
+		glBegin(GL_TRIANGLES);
+		for (vuint i = 0; i < vmesh->m_VertexList.size(); i++)
+		{
+			glVertex3f(vmesh->m_VertexList[i].Get(0),
+					   vmesh->m_VertexList[i].Get(1),
+					   vmesh->m_VertexList[i].Get(2));
+		}		
+		glEnd();
+	}
+	
 }
 //-----------------------------------------------------------------------------
 
@@ -118,7 +156,6 @@ void VOpenGLDevice::SetPixFormat()
 		vout << "requesting pixelformat failed!" << vendl;
 	}
 }
-
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::CreateContext()

@@ -46,11 +46,6 @@ VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
 	m_TextControl = NULL;
 	m_InputControl = NULL;
 
-	wxIcon Icon;
-	Icon.LoadFile("res/console.ico",wxBITMAP_TYPE_ICO );
-	SetIcon(Icon);
-
-
 	m_TextControl = new  wxTextCtrl(this, -1, _T(""),
 		wxPoint(0,0), wxSize(245,650),
 		wxTE_MULTILINE | wxTE_READONLY );

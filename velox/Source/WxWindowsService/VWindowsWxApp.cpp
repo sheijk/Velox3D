@@ -92,7 +92,7 @@ int VWindowsWxApp::OnExit()
 
 bool VWindowsWxApp::OnInit()
 {
-	return TRUE;	
+	return TRUE;
 }
 //-----------------------------------------------------------------------------
 

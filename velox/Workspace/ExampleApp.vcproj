@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"

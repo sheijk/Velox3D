@@ -4,6 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/IVMesh.h>
 #include <v3d/Graphics/IVMaterial.h>
+#include <v3d/Graphics/Descriptions/IVMeshDescription.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -15,7 +16,7 @@ public:
 	
 	virtual ~IVDevice() {};
 
-	virtual IVMesh* CreateMesh() = 0;
+	virtual IVMesh* CreateMesh(IVMeshDescription* in_pMeshDesc) = 0;
 	virtual IVMaterial* CreateMaterial() = 0;
 	virtual void ApplyMaterial(IVMaterial* in_pMatrial) = 0;
 	virtual void RenderMesh(IVMesh* in_pMesh) = 0;

@@ -11,8 +11,8 @@ namespace graphics {
 //-------------------------------------------------------------------------
 
 /**
- * A class which contains geometry data (vertices and faces). Provides only read
- * access to geometry
+ * A class which contains geometry data (vertices and faces). Provides only
+ * read access to geometry
  */
 class IVMeshDescription
 {

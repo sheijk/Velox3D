@@ -10,7 +10,7 @@ namespace window {
 //-----------------------------------------------------------------------------
 
 /**
- * Specializes WindowManagerBase to Win32 specific stuff
+ * Specializes WindowManagerBase to Win32 specific stuff /warum? WInMBase gilt für alle Plattformen -[ins]
  * TODO: windows cannot share resources. fix!
  */
 

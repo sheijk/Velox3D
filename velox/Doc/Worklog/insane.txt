@@ -18,6 +18,13 @@ Current assigned tasks:
 --------------------------------------------------------------------------------
 
 TODO List:
+-Console is closeable with alt f4
+-Console chrashes on some machines
+
+Done List:
+
+30.11.03
+- Added simple graphics stuff
 
 19.10.03
 - Added a dummy frame to standard wx app for timeing
