@@ -175,6 +175,9 @@
 					RelativePath="..\Api\V3d\Core\VLogging.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Core\VMemory.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Core\VNamedObject.h">
 				</File>
 				<File

@@ -60,6 +60,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleService", "ConsoleSe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonServices", "CommonServices.vcproj", "{586E10B2-24CB-27C7-A973-CDCD6D563659}"
 	ProjectSection(ProjectDependencies) = postProject
+		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
 	EndProjectSection
 EndProject
 Global

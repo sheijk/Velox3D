@@ -21,7 +21,6 @@ namespace
 /** the main function */
 int main(int argv, char* argc[])
 {
-
 	vchar* pcXmlFileName = 0;
 
 	// create the kernel

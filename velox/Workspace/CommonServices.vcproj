@@ -34,12 +34,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleService.dll"
+				OutputFile="$(OutDir)/CommonServices.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/ExampleService.pdb"
+				ProgramDatabaseFile="$(OutDir)/CommonServices.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/ExampleService.lib"
+				ImportLibrary="$(OutDir)/CommonServices.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -82,13 +82,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleService.dll"
+				OutputFile="$(OutDir)/CommonServices.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/ExampleService.lib"
+				ImportLibrary="$(OutDir)/CommonServices.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
