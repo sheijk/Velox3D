@@ -9,6 +9,7 @@ namespace v3d {
 namespace window {
 //-----------------------------------------------------------------------------
 
+//TODO: move to v3d/window/wx/
 class IVWindowFrame
 {
 public:

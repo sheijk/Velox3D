@@ -140,6 +140,13 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 
 IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
 {
+	if( in_strDir[0] != '/' )
+	{
+		V3D_THROW(VIOException, "paths must start with '/', \""
+			+ VString(in_strDir) + "\" is illegal"
+			);
+	}
+
 	IVDirectory* pCurrDir = m_pRootDirSP.Get();
 
 	std::string pathAndName = in_strDir;
