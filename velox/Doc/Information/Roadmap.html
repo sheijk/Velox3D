@@ -1,0 +1,74 @@
+<html>
+<head><title>Velox Roadmap</title></head>
+<body>
+<p>Hier mal ein erster Entwurf, damit wir mal langsam ne ordentliche Planung
+auf die Reihe kriegen. Bitte Kommentare, Erweiterungen, Fragen usw. einfach 
+eintragen, am bestem mit (nick) markiert -(sheijk)</p>
+
+<h1>Unterprojekte</h1>
+
+  <ul>
+    <li>
+      Core
+	  <ul>
+	    <li>CoreLib</li>
+        <li>Kernel</li>
+        <li>VirtualFileSystem Service</li>
+        <li>Error/Logging Service</li>
+        <li>Grafik Pipeline</li>
+		<li>Scene Graph</li>
+	  </ul>
+	</li>
+	<li>
+	  "Engine Teile"
+	  <ul>
+	    <li>Physik (Anbindung von externer Lib)</li>
+        <li>Weltmanager</li>
+        <li>Entity Manager</li>
+        <li>Renderer: Outdoor, Indoor, Objekte usw.</li>
+	  </ul>
+	</li>
+  </ul>
+
+<h1>Velox Roadmap</h1>
+
+ <ol>
+    <li>
+	   Core fertigstellen
+	</li>
+	<li>
+       Struktur/Grundzuege der Engine
+	   <p>Hauptsaechlich Interfaces und die Art wie die einzelnen Teile
+	   zusammenarbeiten. Simple Dummy Implementationen der Libs zu Testzwecken
+	   </p>
+       <ul>
+	      <li>Integration einer Physik Engine</li>
+   	      <li>Representation der Welt</li>
+	      <li>Entities</li>
+		  <li>Steuerung der Welt (Anbindung von Controllern, AI, usw.)</li>
+	      <li>Netzwerkkommunikation</li>
+	      <li>Anbindung von Spiellogik und Skripting</li>
+	   </ul>
+	</li>
+	<li>
+	   Implementation der eigentlichen Engine
+	   <ul>
+	     <li>
+		   Renderer
+		   <ul>
+		     <li>Outdoor</li>
+			 <li>Indoor</li>
+			 <li>Himmelssystem</li>
+			 <li>Objekte</li>
+			 <li>Skelettal Animation</li>
+		   </ul>
+		 </li>
+		 <li>(Einbindung einer) Physik Engine</li>
+		 <li>Entity System</li>
+		 <li>World Manager</li>
+		 <li>Sound System</li>
+		 <li>AI System?</li>
+	  </ul>
+	</li>
+ </ol>
+<body>
