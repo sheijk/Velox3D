@@ -4,6 +4,11 @@
 #include <string>
 
 /*!
+	a macro for defining tests
+*/
+#define VREGISTER_UNIT_TEST(t) namespace vunittests { t g_test##t; };
+
+/*!
 	IVUnitTest
 	abstract interface for all unit tests
 */

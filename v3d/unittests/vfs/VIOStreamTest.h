@@ -9,6 +9,9 @@ public:
 	VIOStreamTest();
 	virtual ~VIOStreamTest();
 
+	virtual void GetTestInfo(std::string& out_TestName, std::string& out_SubjectName);
+
+	virtual VTestResult ExecuteTest();
 };
 
 #endif // V3D_VIOSTREAMTEST_H

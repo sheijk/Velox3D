@@ -10,7 +10,14 @@
 
 // this is important: create one static global instance of your UnitTest
 // or the test will never be executed
-VUnitTestExample g_theExampleUnitTest;
+// VUnitTestExample g_theExampleUnitTest;
+
+//namespace vunittests
+//{
+//	VUnitTestExample g_theExample;
+//}
+
+VREGISTER_UNIT_TEST(VUnitTestExample);
 
 VUnitTestExample::VUnitTestExample()
 {

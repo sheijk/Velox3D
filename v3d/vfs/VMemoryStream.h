@@ -5,7 +5,7 @@
 #include <vfs/VMemStreamFacade.h>
 #include <memory.h>
 
-class VMemoryStream : IVStream
+class VMemoryStream : public IVStream
 {
 private:
 	VMemStreamFacade* m_pMemStreamFacade;

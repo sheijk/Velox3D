@@ -63,11 +63,13 @@ void main(int argc, char* args[])
 	TestList::iterator theTestIter = theTestList.begin();
 	IVUnitTest::VTestResult theResult;
 
+	cout << endl << endl;
+	
 	for( ; theTestList.end() != theTestIter; ++theTestIter )
 	{
 		(*theTestIter)->GetTestInfo(strTestName, strTestInfo);
 
-		cout << endl << "executing test " << strTestName << " : "; 
+		cout << "executing test " << strTestName << " : "; 
 
 		theResult = (*theTestIter)->ExecuteTest();
 
