@@ -71,7 +71,7 @@ void VKernel::LoadXMLService()
 {
 	m_Services.push_back(
 		ServicePointer(new VServiceProxy("XMLService.dll")));
-	ServicePointer XmlServiceProxy = m_Services.front();
+	ServicePointer XmlServiceProxy = m_Services.back();
 	XmlServiceProxy->Initialize(VObjectRegistry::GetInstance());
 
 	m_XmlService = QueryObject<IVXMLService>("xml.service");
@@ -96,7 +96,7 @@ void VKernel::ParseFile(const string &in_strFileName)
 	LoadXMLService();
 
 	VKernelIniReader IniReader(&m_Services);
-	m_XmlService->ParseXMLFile(in_strFileName.c_str(), &IniReader);
+	m_XmlService->ParseLocalXMLFile(in_strFileName.c_str(), &IniReader);
 
 	m_strAppName = IniReader.GetAppName();
 }

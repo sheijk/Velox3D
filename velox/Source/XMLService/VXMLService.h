@@ -17,8 +17,6 @@
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
-using namespace v3d::vfs;
-//-----------------------------------------------------------------------------
 
 /**
  * Implements the XML service interface
@@ -26,19 +24,22 @@ using namespace v3d::vfs;
 class VXMLService :	public IVXMLService
 {
 public:
-
-	typedef VException VXMLException;
-	VXMLService(void);
-	virtual	~VXMLService(void);
+	VXMLService();
+	virtual	~VXMLService();
 
 	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor);
-	virtual void ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor);
+
+	virtual void ParseLocalXMLFile(
+		VStringParam in_pcName, IVXMLVisitor* in_pVisitor);
+	
+	virtual void ParseVfsXMLFile(
+		VStringParam in_pcName, IVXMLVisitor* in_pVisitor);
+	
 	virtual IVXMLWriterPtr CreateXMLWriter(VStringParam FileName);
-	virtual IVXMLWriterPtr CreateXMLWriter(IVStream* pStream);
+	
+	virtual IVXMLWriterPtr CreateXMLWriter(IVStreamPtr pStream);
 
 private: 
-
-
 	void TraversalNodes(TiXmlNode* node);
 	VXMLElement* TraversalAttributes(TiXmlElement* Element);
 

@@ -1,5 +1,7 @@
 #include "VXMLService.h"
 //-----------------------------------------------------------------------------
+#include <v3d/VFS/IVFileSystem.h>
+
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
@@ -32,7 +34,7 @@ IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(VStringParam FileName)
 /**
 * Creates the writer class with a streaming device
 */
-IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(IVStream* pStream)
+IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(IVStreamPtr pStream)
 {
 	IVXMLWriterPtr pWriter;
 	pWriter.Assign(new VXMLWriter(pStream));
@@ -46,7 +48,6 @@ IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(IVStream* pStream)
 
 VXMLElement* VXMLService::TraversalAttributes(TiXmlElement* Element)
 {
-//TODO: Fix the 1. element bug
 	TiXmlAttribute *att;
 	VXMLAttribute attribute;
 	VXMLElement* NewElement = new VXMLElement;
@@ -155,8 +156,10 @@ void VXMLService::TraversalNodes(TiXmlNode* node)
 /**
  * Call this mehtod to parse a xml file with an appro. visitor
  */
-
-void VXMLService::ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor)
+void VXMLService::ParseLocalXMLFile(
+	VStringParam in_pcName, 
+	IVXMLVisitor* in_pVisitor
+	)
 {
 	if(in_pVisitor)
         m_Vistor = in_pVisitor;
@@ -190,13 +193,33 @@ void VXMLService::ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor
 	m_Vistor->OnFileEnd();
 
 }
-void VXMLService::ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor)
+
+void VXMLService::ParseVfsXMLFile(
+									VStringParam in_pcName, 
+									IVXMLVisitor* in_pVisitor
+									)
+{
+	// query vfs
+	vfs::IVFileSystem& fileSys = *QueryObject<vfs::IVFileSystem>("vfs.fs");
+
+	// open file
+	vfs::IVFileSystem::FileStreamPtr fileStream = 
+		fileSys.OpenFile(in_pcName, VReadAccess);
+	
+	// parse it
+	this->ParseXMLFile(fileStream.Get(), in_pVisitor);
+}
+
+void VXMLService::ParseXMLFile(
+	IVStream* in_pStream, 
+	IVXMLVisitor* in_pVisitor
+	)
 {
 	if(in_pVisitor)
 		m_Vistor = in_pVisitor;
 	else
 	{
-		V3D_THROW(VXMLVistorException, "Vistor not vaild!");
+		V3D_THROW(VXMLVistorException, "Visitor not valid!");
 		return;
 	}
 
@@ -223,13 +246,7 @@ void VXMLService::ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor)
 
 	m_Vistor->OnFileEnd();
 }
-VPointer<IVXMLWriter>::AutoPtr CreateXMLWriter(IVStream* pStream)
-{
-	VPointer<IVXMLWriter>::AutoPtr pWriter;
-	pWriter.Assign(new VXMLWriter(pStream));
 
-	return pWriter;
-}
 //-----------------------------------------------------------------------------
 } //xml
 } //v3d

@@ -125,6 +125,13 @@
 			</File>
 
 		</Filter>
+		<Filter
+			Name="System"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3d\System\IVDeviceProvider.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

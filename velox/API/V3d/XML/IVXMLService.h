@@ -22,14 +22,41 @@ using namespace v3d::vfs;
 class IVXMLService : public VNamedObject
 {
 public:
-typedef VPointer<IVXMLWriter>::SharedPtr IVXMLWriterPtr;
+	typedef VPointer<IVXMLWriter>::SharedPtr IVXMLWriterPtr;
+	typedef VPointer<IVStream>::SharedPtr IVStreamPtr;
         
-	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor) = 0;
-	virtual void ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor) = 0;
-	virtual IVXMLWriterPtr CreateXMLWriter(VStringParam FileName) = 0;
-	virtual IVXMLWriterPtr CreateXMLWriter(IVStream* pStream) = 0;
-	virtual ~IVXMLService() {};
+	/**
+	 * parses an xml file through an IVStream
+	 */
+	virtual void ParseXMLFile(
+		IVStream* in_pStream, 
+		IVXMLVisitor* in_pVisitor) = 0;
+
+	/**
+	 * parses a file of the local file system
+	 */
+	virtual void ParseLocalXMLFile(
+		VStringParam in_pcName, 
+		IVXMLVisitor* in_pVisitor) = 0;
+
+	/**
+	 * parses a file from the vfs
+	 */
+	virtual void ParseVfsXMLFile(
+		VStringParam in_pcName, 
+		IVXMLVisitor* in_pVisitor) = 0;
 	
+	/**
+	 * Creates an xml writer to write to an xml file in the vfs
+	 */
+	virtual IVXMLWriterPtr CreateXMLWriter(VStringParam FileName) = 0;
+
+	/**
+	 * Creates an xml writer to write to a stream
+	 //TODO: klaeren, wann der stream geschlossen wird
+	 */
+	virtual IVXMLWriterPtr CreateXMLWriter(IVStreamPtr pStream) = 0;
+
 protected:
 	/**
 	* a protected constructor is needed to pass the parameters to the 

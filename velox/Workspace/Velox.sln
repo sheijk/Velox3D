@@ -58,6 +58,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleService", "ConsoleSe
 		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonServices", "CommonServices.vcproj", "{586E10B2-24CB-27C7-A973-CDCD6D563659}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -287,13 +291,39 @@ Global
 		{92902254-17EE-444A-83C6-F062C52B9122}.Release Unicode DLL.Build.0 = Release|Win32
 		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.ActiveCfg = Release|Win32
 		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.Build.0 = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug.ActiveCfg = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug.Build.0 = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug DLL.ActiveCfg = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug DLL.Build.0 = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug Unicode.ActiveCfg = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug Unicode.Build.0 = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug Unicode DLL.ActiveCfg = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug Unicode DLL.Build.0 = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release.ActiveCfg = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release.Build.0 = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release DLL.ActiveCfg = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release DLL.Build.0 = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release Unicode.ActiveCfg = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release Unicode.Build.0 = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release Unicode DLL.ActiveCfg = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release Unicode DLL.Build.0 = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.UnitTests.ActiveCfg = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.UnitTests.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt
 		Workdir\init.xml = Workdir\init.xml
 		..\Doc\Worklog\insane.txt = ..\Doc\Worklog\insane.txt
+		Templates\ServiceDLL.cpp = Templates\ServiceDLL.cpp
 		..\Doc\Worklog\sheijk.txt = ..\Doc\Worklog\sheijk.txt
+		Templates\UnitTest.cpp = Templates\UnitTest.cpp
+		Templates\UnitTest.h = Templates\UnitTest.h
 		Workdir\unittests.xml = Workdir\unittests.xml
+		Templates\VeloxClass.cpp = Templates\VeloxClass.cpp
+		Templates\VeloxClass.h = Templates\VeloxClass.h
+		Templates\VeloxDoc.html = Templates\VeloxDoc.html
+		Templates\VeloxFile.cpp = Templates\VeloxFile.cpp
+		Templates\VeloxFile.h = Templates\VeloxFile.h
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

@@ -67,20 +67,24 @@ void VXMLTest::ExecuteTest()
 	//Test one finished
 	m_XmlWriter->~IVXMLWriter();
 
-	m_XmlService->ParseXMLFile("test.xml", &m_TestVisitor);
+	m_XmlService->ParseLocalXMLFile("test.xml", &m_TestVisitor);
 	
 	IVStreamFactory* m_pStrFac;
-	IVStreamFactory::OfflineStreamPtr m_pSmartPtr;
-	m_pStrFac = QueryObject<IVStreamFactory>("vfs.strfact");
+	IVXMLService::IVStreamPtr m_pSmartPtr;
+	{
+		IVStreamFactory::OfflineStreamPtr ptr;
+		m_pStrFac = QueryObject<IVStreamFactory>("vfs.strfact");
 
-	if( ! m_pStrFac)
-		V3D_THROW(VException, "Cannot load vfs stream factory!");
+		if( ! m_pStrFac)
+			V3D_THROW(VException, "Cannot load vfs stream factory!");
 
-	m_pSmartPtr = m_pStrFac->CreateFileStream("test2.xml",
-		VCreateAlways, VRWAccess);
-	
+		ptr = m_pStrFac->CreateFileStream("test2.xml",
+			VCreateAlways, VRWAccess);
+
+		m_pSmartPtr.Assign(ptr.DropOwnership());
+	}
 		
-	m_XmlWriter = m_XmlService->CreateXMLWriter(m_pSmartPtr.Get());
+	m_XmlWriter = m_XmlService->CreateXMLWriter(m_pSmartPtr);
 
 	m_XmlWriter->OpenElement("Device");
 	m_XmlWriter->AddComment("Second file test");

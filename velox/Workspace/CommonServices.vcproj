@@ -2,8 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="UnitTests"
-	ProjectGUID="{C0A4072B-D722-4E9A-91FF-BA1F511CF619}"
+	Name="CommonServices"
+	ProjectGUID="{586E10B2-24CB-27C7-A973-CDCD6D563659}"
+	RootNamespace="CommonServices"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -20,7 +21,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -33,12 +34,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/UnitTests.dll"
+				OutputFile="$(OutDir)/ExampleService.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/UnitTests.pdb"
+				ProgramDatabaseFile="$(OutDir)/ExampleService.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/UnitTests.lib"
+				ImportLibrary="$(OutDir)/ExampleService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -70,7 +71,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -81,14 +82,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/UnitTests.dll"
+				OutputFile="$(OutDir)/ExampleService.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/UnitTests.pdb"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/UnitTests.lib"
+				ImportLibrary="$(OutDir)/ExampleService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -116,87 +116,29 @@
 	</References>
 	<Files>
 		<Filter
-			Name="CoreLib Tests"
+			Name="Config Service"
 			Filter="">
-			<File
-				RelativePath="..\Source\UnitTests\CoreLibTests\VDestructTest.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\CoreLibTests\VIteratorTests.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\CoreLibTests\VIteratorTests.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\CoreLibTests\VSmartPointerTests.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\CoreLibTests\VSmartPointerTests.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\CoreLibTests\VStringTests.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\CoreLibTests\VStringTests.h">
-			</File>
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Config\IVConfigProvider.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\ConfigFiles\CommonServicesDLL.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\ConfigFiles\VConfigProvider.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\ConfigFiles\VConfigProvider.h">
+				</File>
+			</Filter>
 		</Filter>
-		<Filter
-			Name="VFS Tests"
-			Filter="">
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\StreamTests.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\StreamTests.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\VFileStreamTest.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\VFileStreamTest.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\VFileSysTest.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\VFileSysTest.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\VMemoryStreamTest.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VFSTests\VMemoryStreamTest.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="XML Tests"
-			Filter="">
-			<File
-				RelativePath="..\Source\UnitTests\XMLTests\VXMLTests.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\XMLTests\VXMLTests.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\XMLTests\VXMLVisitor.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\XMLTests\VXMLVisitor.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Math Tests"
-			Filter="">
-			<File
-				RelativePath="..\Source\UnitTests\MathTests\VMathTest.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\MathTests\VMathTest.h">
-			</File>
-		</Filter>
-		<File
-			RelativePath="..\Source\UnitTests\TestsDLL.cpp">
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

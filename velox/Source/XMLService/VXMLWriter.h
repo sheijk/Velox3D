@@ -2,9 +2,9 @@
 #define V3D_VXMLWRITER_H
 //-----------------------------------------------------------------------------
 #include <v3d/XML/IVXMLWriter.h>
+#include <v3d/XML/IVXMLService.h>
 #include <v3d/Core/Wrappers/VString.h>
 #include <V3d/VFS/IVStream.h>
-#include <V3d/VFS/IVStreamFactory.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <V3d/VFS/VStreamOps.h>
 #include "VFileStream.h"
@@ -24,13 +24,13 @@ using namespace vfs;
  * @author insane
  * @version 1.0
  */
-
-
 class VXMLWriter :	public IVXMLWriter
 {
 public:
+	typedef IVXMLService::IVStreamPtr IVStreamPtr;
+
 	VXMLWriter(VStringParam Filename);
-	VXMLWriter(IVStream* pStream);
+	VXMLWriter(IVStreamPtr pStream);
 	virtual ~VXMLWriter();
 	
 	/*
@@ -67,10 +67,8 @@ private:
 	std::string m_Filename;
 	IVStream* m_pStreamInterface;
 	
-	IVStreamFactory::OfflineStreamPtr m_pSmartPtr;
+	IVStreamPtr m_pSmartPtr;
 	std::stack<std::string> m_ElementOpenStack;
-
-	
 };
 
 //-----------------------------------------------------------------------------

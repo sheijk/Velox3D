@@ -4,13 +4,13 @@
  * Makro um Import und Export in der gleichen Datei zu realisieren
  * wird nicht gebraucht, wg. dynamischen linken
  */
-//TODO: add your service's name here
-#define /*service.name*/_API __declspec(dllexport)
+#define COMMONSERVICES_API __declspec(dllexport)
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
-//TODO: include service header
+
+#include "VConfigProvider.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -22,27 +22,26 @@ using std::cout;
 using std::endl;
 
 using namespace v3d;
+using namespace v3d::config;
 //-----------------------------------------------------------------------------
-
-//TODO: replace /*your.service.class*/ by the objects you want to register
 
 //-----------------------------------------------------------------------------
 // use a smart pointer to guarante object destruction
-VPointer</*your.service.class*/>::AutoPtr g_p/*obj.name*/;
+VPointer<VConfigProvider>::AutoPtr g_pConfigProvider;
 
-/*service.name*/_API void Initialize(VObjectRegistry* in_pObjReg)
+COMMONSERVICES_API void Initialize(VObjectRegistry* in_pObjReg)
 {
 	// store the object registry instance
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create service object and register it
-	g_p/*obj.name*/.Assign(new /*your.service.class*/(/*reg.name*/));
+	g_pConfigProvider.Assign(new VConfigProvider("config.provider"));
 }
 
-/*service.name*/_API void Shutdown()
+COMMONSERVICES_API void Shutdown()
 {
 	// delete and unregister service object
-	g_p/*obj.name*/.Release();
+	g_pConfigProvider.Release();
 }
 
 /**

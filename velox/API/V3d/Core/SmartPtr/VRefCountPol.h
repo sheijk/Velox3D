@@ -49,6 +49,12 @@ private:
 	// no copying etc.
 	void operator=(const VRefCountPol<SharedStorage>&);
 	VRefCountPol(const VRefCountPol<SharedStorage>&);
+
+public:
+	Pointer DropOwnership()
+	{
+		return m_pSharedStorage->DropOwnership();
+	}
 };
 
 //-----------------------------------------------------------------------------

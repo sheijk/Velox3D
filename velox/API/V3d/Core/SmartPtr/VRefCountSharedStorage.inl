@@ -5,24 +5,6 @@ VRefCountSharedStorage<StoragePolicy>::
 }
 
 /**
- * Constructor. Creates a shared storage which points to in_Subject
- *
-template<class StoragePolicy> 
-//void* VRefCountSharedStorage<StoragePolicy>::
-VRefCountSharedStorage<StoragePolicy>* VRefCountSharedStorage<StoragePolicy>::
-//	CreateNew(void* in_Subject)
-	CreateNew(StoragePolicy::TargetType in_Subject)
-{
-	VRefCountSharedStorage<StoragePolicy>* pInstance = new VRefCountSharedStorage<StoragePolicy>();
-
-	// assign subject
-	pInstance->m_Storage.Set(in_Subject);
-	pInstance->m_nRefCount = 1;
-
-	return pInstance;
-}*/
-
-/**
  * will delete the subject
  */
 template<class StoragePolicy> 
@@ -59,16 +41,3 @@ void VRefCountSharedStorage<StoragePolicy>::
 {
 	m_nRefCount++;
 }
-
-/**
- * returns the subject
- *
-template<class StoragePolicy> 
-StoragePolicy::TargetType VRefCountSharedStorage<StoragePolicy>::
-	Get()
-{
-	return m_Storage.Get();
-}
-
-
-/**/

@@ -9,23 +9,22 @@ using v3d::error::IVErrorService;
 
 namespace v3d {
 //-----------------------------------------------------------------------------
-#define LOGGING_NAMESPACE LOGGING##__TIMESTAMP__
 
-namespace LOGGING_NAMESPACE {
+namespace 
+{
 	IVErrorService* g_pErrorService = 0;
 }
 
 IVErrorService* GetLogDevice()
 {
-	if(0 == LOGGING_NAMESPACE::g_pErrorService)
+	if(0 == g_pErrorService)
 	{
-		LOGGING_NAMESPACE::g_pErrorService = QueryObject<IVErrorService>("error.service");
+		g_pErrorService = QueryObject<IVErrorService>("error.service");
 	}
 
-	return LOGGING_NAMESPACE::g_pErrorService;
+	return g_pErrorService;
 }
 
-//TODO: implement this function
 void SendDebugMessage(VStringParam in_pcMessage)
 {
 	// if logging device is available

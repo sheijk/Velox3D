@@ -1,36 +1,41 @@
 #include "VXMLWriter.h"
-#include <V3d/VFS/IVStreamFactory.h>
+
+#include <v3d/VFS/IVFileSystem.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
 
-VXMLWriter::VXMLWriter(VStringParam Filename)
+VXMLWriter::VXMLWriter(VStringParam in_strFileName)
 {
 	m_bIsOpen = false;
-	m_bElementOpen = false; //TODO: remove this code
+	m_bElementOpen = false;
 	m_bOpenTwice = false;
-	m_Filename = Filename;
-	m_pStreamInterface = NULL;
+	m_Filename = in_strFileName;
 	
-	m_pSmartPtr.Assign(new VFileStream(m_Filename.c_str(), VRWAccess, VCreateAlways));
+	vfs::IVFileSystem::FileStreamPtr ptr = QueryObject<vfs::IVFileSystem>("vfs.fs")->OpenFile(
+		in_strFileName, vfs::VWriteAccess);
+	
+	// "type conversion"
+	m_pSmartPtr.Assign(ptr.DropOwnership());
+
 	m_pStreamInterface = m_pSmartPtr.Get();
 	
 	WriteDeclaration();
-	
 }
 
-VXMLWriter::VXMLWriter(IVStream* pStream)
+VXMLWriter::VXMLWriter(IVStreamPtr pStream)
 {
 	m_bIsOpen = false;
 	m_bElementOpen =  false;
 	m_bOpenTwice = false;
 	m_Filename = "";
-	m_pStreamInterface = pStream;
+	m_pStreamInterface = pStream.Get();
+	m_pSmartPtr = pStream;
 	
 	WriteDeclaration();
-
 }
+
 VXMLWriter::~VXMLWriter()
 {
 	vuint i;

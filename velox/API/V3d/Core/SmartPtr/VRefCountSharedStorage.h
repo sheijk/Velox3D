@@ -51,6 +51,13 @@ public:
 	/** decrease ref count by one. self delets on zero */
 	virtual void Release();
 
+	typename StoragePolicy::Pointer DropOwnership()
+	{
+		StoragePolicy::Pointer ptr = m_Storage.Get();
+		m_Storage.Assign(0);
+		return ptr;
+	}
+
 	/** inreases ref count by one */
 	void AddRef();
 

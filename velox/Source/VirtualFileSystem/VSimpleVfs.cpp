@@ -92,7 +92,7 @@ void VSimpleVfs::ParseInitFile()
 	xml::IVXMLService* pXmlServ = QueryObject<xml::IVXMLService>("xml.service");
 
 	// let it parse the ini file
-	pXmlServ->ParseXMLFile("vfs.xml", &reader);
+	pXmlServ->ParseLocalXMLFile("vfs.xml", &reader);
 }
 
 /**
