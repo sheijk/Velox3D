@@ -1,21 +1,18 @@
-#include <v3dlib/Graphics/Renderers/Sky/VSkyDomeBody.h>
+#include <v3dlib/Graphics/Renderers/Sky/VSkyDome.h>
 #include <v3d/Math/VMatrixOps.h>
-//#include <V3dLib/Graphics/VGeometryUtil.h>
-
-
-
+#include <v3d/Image.h>
 //-----------------------------------------------------------------------------
 
+using namespace v3d;
+using namespace v3d::image;
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
-namespace sky {
-	
 
-VVertexDataLayout VSkyDomeBody::SkyVertex::layout;
+VVertexDataLayout VSkyDome::SkyVertex::layout;
        
 
-VSkyDomeBody::VSkyDomeBody( v3d::graphics::IVDevice& in_Device, 
+VSkyDome::VSkyDome( v3d::graphics::IVDevice& in_Device, 
  		    vfloat32 in_fRadius,
 		    vfloat32 in_fScale,
 			vuint in_nDetail,
@@ -31,19 +28,13 @@ VSkyDomeBody::VSkyDomeBody( v3d::graphics::IVDevice& in_Device,
 
 	InverseIndexBuffer();
 	CreateMesh(in_Device);
-	CreateNode();
 }
 
-VSkyDomeBody::~VSkyDomeBody()
+VSkyDome::~VSkyDome()
 {
-	delete m_pNode;
-	m_pNode = 0;
-
-	delete m_pMeshNode;
-	m_pMeshNode = 0;
 }
 
-void VSkyDomeBody::InverseIndexBuffer()
+void VSkyDome::InverseIndexBuffer()
 {
 
 	vuint nSize = m_HalfSphere.GetIndexBuffer().GetSize();
@@ -60,8 +51,13 @@ void VSkyDomeBody::InverseIndexBuffer()
 	delete pTemp;
 }
 
-void VSkyDomeBody::CreateMesh(IVDevice& in_Device)
+void VSkyDome::CreateMesh(IVDevice& in_Device)
 {
+	// Scale halfsphere with m_fRadius
+	ForEachVertex( m_HalfSphere.GetVertexBuffer(), ScaleVertex<SkyVertex>(m_fRadius,
+															   m_fRadius*m_fScale,
+															   m_fRadius) );
+
 	IVImageFactory* pFactory = QueryObject<IVImageFactory>("image.service");
 	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(m_strImage);
 
@@ -98,28 +94,13 @@ void VSkyDomeBody::CreateMesh(IVDevice& in_Device)
 	m_pMesh = in_Device.CreateMesh( meshDesc, m_MaterialDescription );
 }
 
-void VSkyDomeBody::CreateNode()
-{
-	VMatrix44f transformation;
-	Identity(transformation);
 
-	transformation.Set(0,0, m_fRadius);
-	transformation.Set(1,1, m_fRadius*m_fScale);
-	transformation.Set(2,2, m_fRadius);
-		
-	//m_pNode.Assign( new VTransformNode(transformation) );
-	m_pNode =  new VTransformNode(transformation) ;
-	
-	m_pMeshNode = new VMeshNode(m_pMesh);
-	m_pNode->AddChild(m_pMeshNode);
+
+IVDevice::MeshHandle VSkyDome::GetMesh()
+{
+	return m_pMesh;
 }
 
-IVNode* VSkyDomeBody::GetNode()
-{
-	return m_pNode;
-}
-
-} // namespace sky
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
