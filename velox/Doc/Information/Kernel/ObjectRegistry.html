@@ -1,0 +1,20 @@
+<html>
+<head>
+ <title>Velox3D Tutorial</title>
+</head>
+<body>
+ <h1>The Object Registry</h1>
+ <p>
+ The object registry is a singleton object which maintains a mapping between managed objects 
+ and unique keys. What it does: <br>
+ - objects can be registered and unregistered <br>
+ - the key of a known object can be retrieved <br>
+ - an object can be retrieved using a known key <br>
+ - a new unique key can be generated <br>
+ - objects can specify the key they are registed with <br>
+ - keys can be converted to and from std::string <br>
+ </p>
+ <p>
+ Objects that shall be registered at the registry need to be derived from the class VNamedObject.
+ Object keys are of type VObjectKey.
+</body>

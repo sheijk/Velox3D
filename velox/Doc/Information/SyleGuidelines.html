@@ -1,0 +1,236 @@
+<h1>Velox3D Coding Standards</h1>
+Version 0008 (May 2003)
+
+<h2>CVS</h2>
+
+<b>Rule</b>: Always write to your specific textfile in the worklog directory what you are currently doing and what you have finished. Each member of the team uses exectly one file named after his nick or real name<br>
+<b>Reason</b>: The rest of the team knows who is working on which part. Apart from this fact, this mechanism helps avoiding multiple people working on the same piece of source code at the same time.
+
+<br><br>
+
+<b>Rule</b>: Only commit code that compiles. Commit code as soon as possible but try not to commit code which you know is very buggy/unstable <br>
+
+<h2>Filenames</h2>
+
+<b>Rule</b>: The filename has to be identical with the name of the class which is implemented in it. Use correct case<br>
+<b>Reason</b>: The filename for a class is then obvious, even for programmers who didn’t work on the project previously.<br>
+<b>Example</b>: VShader.cpp, VShader.h<br>
+
+<br>
+
+<b>Rule</b>: All headers are called *.h.
+
+<br>
+
+<b>Rule</b>: Only one class should be implemented per file.<br>
+<b>Reason</b>: This makes compile times shorter usually and simplifies finding the implementation / declaration of a specific class.<br>
+
+<br><br>
+
+<b>Rule</b>: Neither use dependent characters nor spaces in the filenames.<br>
+<b>Reason</b>: Not all plattforms support these.<br>
+
+
+<h2>Header Files</h2>
+
+
+<b>Rule</b>: Try not to include any other header files.<br>
+<b>Reason</b>: This helps to avoid cyclic dependencies and decreases compile times.<br>
+
+<br><br>
+
+<b>Rule</b>: Every include file has to provide a mechanism to avoid multiple inclusions. The define has to start with the prefix "V3D_". After this, the filename is following <br>
+<b>Example</b>:<br>
+#ifdef V3D_VSTATICVB_H<br>
+#define V3D_VSTATICVB_H<br>
+…<br>
+#endif<br>
+
+<br><br>
+
+<b>Rule</b>: Header Files which are part of the interface of a service are placed in velox/API/v3d/ServiceName/FileName.h. Use #include &lt;v3d/filename.h&gt; to include them from anywhere.<br>
+Header and Source files which are part of the implementation and thus shall not be visible for the client are placed in velox/Source/ServiceName/FileName.*. Use #include "relativePath/FileName.h" to include these headers.<br>
+
+
+<h2>Classes</h2>
+
+<b>Rule</b>: All classes written inside Sechta Sinn for the Velox3D project start with a “V”. Interfaces start with “IV”. Types which are declared within another class don't need to be prefixed<br>
+<b>Reason</b>:	This helps to avoid name conflicts with other libraries. <br>
+
+<br>
+
+<b>Rule</b>: Never specifiy public member data inside a class. Use access functions (inline if performance is critical) instead.<br>
+<b>Reason</b>:	If this rule is applied then the internal data storage of a class can still be changed without modifying the interface. Giving direct access to member variables forbids you to change any variable in the class in the future.
+
+<br><br>
+
+<b>Rule</b>: Each class declaration has to be commented in a way readable by doxygen. (Javadoc style preferred)
+
+
+<h2>Functions</h2>
+
+<b>Rule</b>: Each token in a function name has to start with an uppercase letter.<br>
+<b>Reason</b>:	This makes the code easier to read.<br>
+<b>Example</b>: void DoSomethingHere();<br>
+
+<br>
+
+<b>Rule</b>: Functions should never be implemented in header files.<br>
+<b>Reason</b>:	Reading code will be easier. When using inline member functions, put them into a different .inl file.<br>
+
+<br>
+
+<b>Rule</b>: A member function that does not affect the state of an object has to be declared as const.<br>
+<b>Reason</b>:	Only const functions are accessible when having a const-pointer to an object.<br>
+<b>Example</b>:<br>
+VBool VClass::GetSomething() const
+{
+&nbsp;&nbsp;&nbsp;return m_bSomething;
+}<br>
+
+<br>
+
+<b>Rule</b>: Use const for function parameters in case they don't get modified.<br>
+<b>Reason</b>:	The one calling a function has to know whether his function parameter might get modified in the function.<br>
+<b>Example</b>:<br>
+void VClass::DoSomething(const vfloat32& in_rfValue)
+{
+&nbsp;&nbsp;&nbsp;m_fValue = in_rfValue;
+}<br>
+
+<br>
+
+<h2>Variables</h2>
+
+<b>Rule</b>: Try to avoid system dependent variable types as much as possible and use standard types or Velox3D types instead.<br>
+
+<br>
+
+<b>Rule</b>: Use the typedefed version of variable-types as much as possible.<br>
+<b>Reason</b>:	The accuracy of a specific type is not standardized and switching to different platforms will be easier this way.<br>
+
+<br>
+
+<b>Rule</b>: Variables which are class members have an additional prefix "m_", global variables have the prefix "g_" and static variables are prefixed with "s_". Use in_, out_ and io_ prefixes for function parameters, and simple type prefixes when sensible<br>
+<b>Reason</b>:	The variable name now shows the scope of the variable, this is especially good for programmers who did not work on the code previously.<br>
+<b>Example</b>:<br>
+vint m_nNumber;<br>
+vchar m_cWhatever;<br>
+static vushort gs_nFoo;<br>
+std::string m_strName;<br>
+FILE* m_pFile;<br>
+vfloat32 m_fValue;<br>
+vfloat64 m_fValue;<br>
+vulong m_nValue;<br>
+vlong m_nValue;<br>
+vint** g_ppnValue;<br>
+static vshort gs_nValue;<br>
+
+<br>
+
+<b>Rule</b>: When using for-loops, declare the counter variable at the beginning of the block.<br>
+<b>Reason</b>:	Microsoft Visual C++ 6.0 implements this functionality different than other compilers do, thus this will provide better compiler independency.<br>
+Example : vint i = 0; ... for (i=0; i<19; i++) { ... } <br>
+
+<br>
+
+<b>Rule</b>: Do not use bool or BOOL or RETVAL or something like this. Better use vbool.<br>
+<b>Reason</b>:	vbool is not predefined by any other libraries while BOOL already exists on plattforms like Windows, Linux or Mac and no standard is given. Apart from this, it is not said that BOOL is implemented correctly on other plattforms while we can be sure when using vbool.<br>
+
+<br>
+
+<b>Rule</b>: Always initialize variables with a value.<br>
+<b>Reason</b>:	This will probably decrease the number of bugs by avoiding error caused by uninitialised variables<br>
+<b>Example</b>: vint iNumber = 0;<br>
+
+<br>
+
+<h2>Misc</h2>
+
+<b>Rule</b>: Do not use anonymous struct in unions.<br>
+<b>Reason</b>:	This is only supported by Microsoft Visual C++ and GCC 3.0.<br>
+<b>Example</b>:<br>
+// Don't write
+union VColor
+{
+	struct
+	{
+		vuchar m_ucR;
+		vuchar m_ucG;
+		vuchar m_ucB;
+		vuchar m_ucA;
+	};
+	DWORD m_dwColor;
+}
+
+// Instead use
+union VColor
+{
+	struct AnyName
+	{
+		vuchar m_ucR;
+		vuchar m_ucG;
+		vuchar m_ucB;
+		vuchar m_ucA;
+	};
+	DWORD m_dwColor;
+}<br>
+
+<br>
+
+<b>Rule</b>: Symbolic constants have to be written in uppercase and have to be prefixed with "V3D_". Avoid #defines whenever possible.<br>
+<b>Reason</b>:	A standard for constant naming has to be defined and it helps to avoid problems with constants from different packages.<br>
+<b>Example</b>:<br>
+#define V3D_USESTL<br>
+const V3D_BUFFERSIZE 16<br>
+
+<br>
+
+<b>Rule</b>: Do not add comments directly after a symbolic constant.<br>
+<b>Reason</b>:	Compilers other than Microsoft Visual C++ might interpret the comment being part of the constant and thus will things will definately not work correctly.<br>
+<b>Example</b>:<br>
+#define V3D_BUFFERSIZE 16 // Not here<br>
+// Better here<br>
+#define V3D_BUFFERSIZE 16<br>
+
+<br>
+
+<b>Rule</b>: Always provide empty brackets when deleting memory of an array.<br>
+<b>Reason</b>:	Deleting memory without empty brackets will not free the complete memory.<br>
+<b>Example</b>: vUchar* pFoo = new VUChar[16]; ... delete [] pFoo;<br>
+
+<br>
+
+<b>Rule</b>: Always assign memory to a pointer pointing to deallocated memory.<br>
+<b>Reason</b>: Freeing memory without resetting the pointer is a common reason for a potential crash.<br>
+<b>Example</b>: delete [] pFoo; pFoo = NULL;<br>
+
+<br>
+
+<b>Rule</b>: Never allocate memory somebody else has to deallocate (and other way round).<br>
+<b>Reason</b>:	Allocating memory in package A and deallocating it in B won't work if the packages use different memory models. Apart from this, it will most likely cause memory leaks. Thus such code should never be written.<br>
+
+<br>
+
+<b>Rule</b>: Use assertions whenever it might be helpful for bug hunting.<br>
+
+<br>
+
+<b>Rule</b>: Never put function calls inside a call of the assertion macro<br>
+<b>Reason</b>:	This function will not be called in release mode.<br>
+<b>Example</b>: VASSERT(VClass::DoSomething() == true);<br>
+
+<br>
+
+<b>Rule</b>: If asserting function results, use the VVERIFY() macro. <br>
+<b>Reason</b>: Function calls will still be done in release compiles.<br>
+<b>Example</b>: VVERIFY(VClass::DoSomething());<br>
+
+<br>
+
+<b>Rule</b>: Opening brackets have to be written in the next line. Same rule applies for closing brackets and other structures where you are opening brackets (like if or while).<br>
+<b>Example</b>:<br>
+// Use<br>
+for (i=0; i<3; i++)<br>
+{<br>
+}<br>

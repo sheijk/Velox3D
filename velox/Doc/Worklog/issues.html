@@ -1,0 +1,103 @@
+<h1>Velox3d Issues</h1>
+ 
+Issue<br>
+Date/Owner<br>
+Description<br>
+Resolution<br>
+
+<hr>
+<h2>Offene Issues</h2>
+<hr>
+
+<h3>Wichtige Utils in Core oder in Utils?</h3>
+04-05-2003 sheijk<br>
+
+Sollte Utils, welche fuer Velox von zentraler Bedeutung sind, wie die SmartPointer und die Container Interfaces in den Core (wo sie im Moment sind), oder in die Utils Lib ausgelagert werden?
+
+<h3>Rueckgabewerte, Fehlerbehandlung</h3>
+23-04-2003 sheijk<br>
+Die Loesung alle Fehler in VTypes.h zu definieren ist nicht praktikabel, da sie die Erweiterbarkeit einschraenkt und die einzelnen Velox Teile komplett voneinander abhaengig macht.Sollte jeder Service eigenen Rueckgabetypen definieren? Verwendung von Exceptions in nicht Geschwindigkeits kritischem Code?
+
+<h3>Core Dir</h3>
+23-04-2003 sheijk<br>
+Die Klassen aus dem (alten) Core Dir muessen entweder zu den Utils oder in einzelne Services verschoben werden. Betrifft evlt. auch andere Teile des Sources
+
+<h3>Klein/Grossschreibung</h3>
+23-04-2003  sheijk<br>
+Wir brauchen eine einheitliche Klein/Grossschreibung von Dateinamen und includes um Portabilitaet auf andere Plattformen zu gewaehleisten<br>
+#include &lt;v3d/Verzeichnisname/DateiName&gt; :<br>
+v3d Kleinschreiben (weil V3D suckt :), Verzeichnisnamen und Dateinamen mit korrekter Gross-/Kleinschreibung
+
+<h3>Cvs</h3>
+23-04-2003  sheijk<br>
+Neues CVS Modul anlegen? (siehe Mail von 23.4.03)<br>
+Neues Velox Modul "velox" wird angelegt, Code der den aktualisierten StyleGuidelines sowie dem Velox Services Desing entspricht wird schrittweise ins neue Modul uebernommen
+
+<h3>OpenGL Enum Types Mapping</h3>
+19-04-2003  insane<br>
+Benötigen einen Container um OpenGL enums (GL_COLOR_ARRAY, GL_VERTEX_ARRAY, etc) zu mappen	Open:     	
+<h3>Callbacks</h3>
+10-04-2003  insane<br>
+
+Für den Scenegraph sind Callbacks von nöten. Eine Idee wir wir callbacks einheitlich und sauber behandeln?
+
+<h3>Scripting von Services</h3>
+08-04-2003  insane<br>
+Wie soll das Scripten eines Services untersützt werden? Wer bekommt die Kontrolle über die Scriptausführung? Über Scripting sollten wir uns so schnell wie möglich Gedanken machen!!!<br>
+Erweiterung (sheijk): Scripting sollten wir uns allgemein Gedanken machen. Im Optimalfall waere es moeglich, alle von VNamedObject abgeleiteten Objekte komplett zu scripten, dass liesse sich auch fuers Netzwerk sowie Speichern/Laden von Spielstaenden nutzen. (siehe auch Netzwerk)
+
+<h3>WxWindows Support & Editor</h3>
+08-04-2003  insane<br>
+Ich bin der Meinung man sollte einen editor als service realisieren.1. wäre gut zu scripten und mit wxWindows umsetbar2. der service läd einige extra fenster zur ingame bearbeitung. das hauptfenster für rendering stellt das graphics device aus velox (auf den screenshot von matt gut zu sehen:  http://softgames.gamigo.de/DUS/bdt.php?bdt_id=346). 	Open:     	
+
+<h3>Wo sollen weitere templates hin?</h3>
+08-04-2003  insane <br>
+(sheijk): welche templates?
+
+<h3>Dokumentation</h3>
+20-02-2003  sheijk<br>
+Wo soll die Dokumentation von Velox hin?Imho sollte soviel wie moeglich im Source stehen, allerdings gibt es noch Tutorials etc., welche evtl. ins CVS sollten 	
+
+<h3>Graphics: Scenegraph Nodes</h3>
+09-02-2003  sheijk
+Wenn ich das richtig verstehe hat der SceneGraph Node eine ID, die seinen Typ angibt, was imho unguenstig ist, da so Fallunterscheidungen gemacht werden muessen. Besser waere Anwendung des Visitor Patterns
+
+<h3>Graphics Service</h3>
+08-02-2003  sheijk<br>
+nicht von IVServiceInterface ableiten, sondern von VNamedObject  	
+
+<hr>
+<h2>Geloeste Issues</h2>
+<hr>
+
+<h3>Bessere Issue Verwaltung?</h3>
+23-04-2003 sheijk<br>
+
+Die Issues ueber das UML Model zu verwalten hat den Nachteil, dass Aktualisierungen nur langsam weitergegeben werden, da jedesmal eine neue Version des Models erstellt und verteilt werden muss. Alternativen: Issue/BugTracking System benutzen? Issues in einer html Datei sammeln welche ins CVS kommt? Ein VC Issues Plugin schreiben? <br>
+Vorlaeufige Loesung: Issues in issues.html sammeln
+
+<h3>Verteilung der Binaries</h3>
+23-04-2003 sheijk<br>
+Wie sollten die Binaries verteilt sein? (Services, Utilities, Kernel, ..)Utilities sowie Object Registry muessen in jedem Service statisch gelinkt werden, daher am besten in .libs. Kernel in eine .exe Datei tun? <br>
+VeloxExe: Kernel samt main.cpp <br>
+v3dcode.lib: Object Registry, SmartPointer, Grundlegende Fehlerbehandlung (VException, VAssert)
+v3dutil.lib: Utility Klassen, welche nicht sinnvoll in einen Service verpackt werden koennen <br>
+services.dll: (mehrere) DLLs, auf welche die Services verteilt werden. DLLs koennen mehrere Services enthalten, wenn die DLLs Probleme verursachen koennen die Services auch in die velox.exe mit eingebunden werden
+
+<h3>Includes</h3>
+23-04-2003  sheijk<br>
+Sollten geaendert werden wenn die CVS Struktur geaendert wird: <v3d/...> fuer alles aus dem API, "lokaler/pfad" fuer Header die nur zur Implementation da sind<br>
+#include "lokalerHeaderZurImplementation.h"<br>
+#include &lt;v3d/dir/interfaceHeader.h&gt;
+
+<h3>Namespaces</h3>
+23-04-2003  sheijk<br>
+Velox sollte in Namespaces kommen, Vorschlag fuer die Struktur: v3d, ein Namespace pro Service <br>
+v3d - Velox3d Namespace, jeder Velox Source ist da drin, enthaelt die core Klassen <br>
+v3d::servicename - Header und Implementation des Services <br>
+v3d::unittests - enthaelt die UnitTests
+
+<h3>Object Registry</h3>
+08-02-2003  sheijk<br>
+Das Object Registry Singleton ist nich ueber DLL Grenzen hinweg gueltig, weil die DLLs und das Hauptprogramm alle verschiedene Speicherbereiche haben. Daher muss jeder Service DLL ein Zeiger auf ein IVObjectRegistry uebergeben werden
+

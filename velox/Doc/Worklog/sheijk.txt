@@ -1,0 +1,46 @@
+Worklog von sheijk
+--------------------------------------------------------------------------------
+----- messages to sheijk:
+
+
+--------------------------------------------------------------------------------
+----- current assigned tasks:
+
+- bestehenden Source umschreiben und ins neue CVS einpflegen
+- vfs service
+- velox design
+- netzwerk + scripting planen
+
+--------------------------------------------------------------------------------
+----- personal todo:
+
+todo:
+UnitTests portieren
+<v3d/Core/VCoreLib.h> in jedem Header includen
+Coding Guidelines ergaenzen
+Vfs als Service
+Netzwerk, Scripting
+Welt erobern
+
+--------------------------------------------------------------------------------
+----- last things sheijk did:
+
+log:
+
+07.05.2003
+Neues CVS Modul angelegt
+
+06.05.2003
+XMLWrapper geplant
+
+05.05.2003
+Entwuerfe fuer den Vfs Service, und den XML Wrapper
+
+02.05.2003
+CoreLib, ExampleService und Kernel in Namespaces verpackt, Code an Coding Guidelines angepasst
+
+01.05.2003
+Weitere Sources ins neue CVS portiert, Geschwindigkeitstest mit Exceptions gemacht, Coding Guidelines in Html verwandelt, umgeschrieben und erweitert, Issues in issues.html exportiert und neu formatiert
+
+30.4.2003
+Neue Velox Verzeichnisstruktur erstellt, und neue Velox Aufteilung nach den Services begonnen. Kernel sowie ObjectRegistry, SmartPointer und ExampleService portiert.

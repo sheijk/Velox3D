@@ -1,0 +1,90 @@
+<html>
+<head>
+ <title>Velox3D Tutorial</title>
+</head>
+<body>
+ <h1>Creating a Velox Service</h1>
+ (erstmal auf deutsch, sollte spaeter noch uebersetzt werden)
+ <h2>The Object Registry</h2>
+ <p> 
+ Die Object Registry verwaltet eine Zuordnung von eindeutigen Schluesseln zu Objekten.
+ Die Schluessel/Objektpaare koennen dabei in einer Baumstruktur hyrarchisch angeordnet
+ werden, indem beim Registrieren eines Objekts ein Parent Objekt angegeben wird.
+ Aufloesungen sind in beide Richtungen moeglich, das heisst zu einem Schluessel kann
+ das zugehoerige Objekt ermittelt werden und zu einem Objekt kann der Schluessel
+ ermittelt werden. Ein Objekt muss sich spaetestens wenn es geloescht wird bei der
+ Objekt Registry wieder abmelden. <br><br>
+ Objekte welche in der Object Registry registriert werden sollen muessen von 
+ VNamedObject abgeleitet werden. Schluessel sind vom Typ VObjectKey, und koennen von
+ und nach std::string Konvertiert werden.<br><br>
+ Mit Hilfe der Template Funktion QueryObject kann
+ ein Objekt typensicher von der Object Registry bekommen werden.
+ </p>
+ 
+ <h2>Aufbau eines Services</h2>
+ <p>
+ Ein Service ist ein Stueck Software welche dem System eine genau spezifizierte
+ Funktionalitaet zur Verfuegung stellt. Diese wird ueber die Object Registry dem
+ gesamten Programm zur Verfuegung gestellt. Clients sind alle Programmteile die
+ den Service benutzen<br>
+ Services bestehen aus 2 Teilen: einer Gruppe von Header Dateien, welche die Interfaces
+ der Klassen des Services beinhalten und dem Client bekannt sein muessen sowie der
+ Implementation, welche sich in einer DLL Datei befindet. Eine DLL kann beliebig
+ viele Services enthalten. <br>
+ Ein Service stellt seine Funktionalitaet den Clients zur Verfuegung, indem er
+ eine Reihe von Objekten welche die Interfaces des Headers implementieren unter
+ festen Namen bei der Object Registry registriert.
+ </p>
+
+ <h2>Beispiel fuer einen Service</h2>
+ <h3>Interface:</h3>
+ <p>
+ class IVWindow { ... }; <br>
+ <br>
+ class IVWindowFactory <br>
+ {<br>
+ &nbsp;&nbsp;virtual IVWindow* CreateWindow() = 0;<br>
+ };<br>
+ <br>
+ class IVWindowManager <br>
+ { <br>
+ &nbsp;&nbsp;virtual void SetFocus(IVWindow* in_pWindow) = 0; <br>
+ };<br>
+ </p>
+ <h3>Implementation:</h3>
+ class VWindow : public VNamedObject, IVWindow { ... }; <br>
+ <br>
+ class VWindowFactory : public VNamedObject, IVWindowFactory <br>
+ {<br>
+ &nbsp;&nbsp;void SetFocus(IVWindow* in_pWindow) { ... }; <br>
+ } <br>
+ <br>
+ class VWindowManager : public VNamedObject, IVWindowManager <br>
+ { <br>
+ &nbsp;&nbsp;void SetFocus(IVWindow* in_pWindow); <br>
+ } </br>
+ <br>
+ VWindowFactory* g_pWndFac = 0;<br>
+ VWindowManager* g_pWndMngr = 0;<br> 
+ // Initialisierung, muss irgendwann aufgerufen werden (z.Bsp. in der DLL Init.. Fktn) <br>
+ void InitializeService() <br>
+ { <br>
+ &nbsp;&nbsp;// VNamedObject uebernimmt die automatische registrierung bei der Object Registry <br>
+ &nbsp;&nbsp;g_pWndFac = new VWindowFactory(...); <br>
+ &nbsp;&nbsp;g_pWndMngr = new VWindowManger(...); <br>
+ } <br>
+ // deinitialisierung, z.B. in der Deinitialize Fkt der Service DLL <br>
+ void DeinitService() <br>
+ { <br>
+ &nbsp;&nbsp;// VNamedObject uebernimmt die deregistrierung im Destruktor
+ &nbsp;&nbsp;delete g_pWndFac; <br>
+ &nbsp;&nbsp;delete g_pWndMngr; <br>
+ } <br>
+ <br>
+ 
+ <h2>Abschliessende Bemerkungen</h2>
+ Wenn Objekte durch eine Service Funktion erzeugt werden muessen SmartPointer zurueckgegeben werden
+ um Speicherlecks zu vermeiden. Das ganze ist noch nicht ganz fertig, im Moment muessen z.B. die
+ Services noch in eine .lib getan werden. 
+ 
+</body>
