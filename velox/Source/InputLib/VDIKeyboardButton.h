@@ -1,10 +1,9 @@
-#ifndef V3D_VDIKEYBOARDBUTTON_H
-#define V3D_VDIKEYBOARDBUTTON_H
-
+#ifndef V3D_VDIKEYBOARDBUTTON_09_02_2004_H
+#define V3D_VDIKEYBOARDBUTTON_09_02_2004_H
+//-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/Input/IVButton.h>
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
@@ -12,7 +11,6 @@ namespace input {
 /**
 //TODO: insert documentation here
 */
-
 class VDIKeyboardButton : public IVButton
 {
 private:
@@ -31,4 +29,4 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace input
 } // namespace v3d
-#endif
+#endif // V3D_VDIKEYBOARDBUTTON_09_02_2004_H

@@ -5,7 +5,6 @@
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
-
 VDIRelativeAxis::VDIRelativeAxis()
 {
 }
@@ -25,8 +24,8 @@ VDIRelativeAxis::VDIRelativeAxis( VStringParam in_strName )
  */
 VDIRelativeAxis::~VDIRelativeAxis()
 {
-	
 }
+
 
 /**
  * Returns axis name

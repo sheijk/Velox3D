@@ -69,6 +69,9 @@ VWindowWin32::~VWindowWin32()
 	// release device
 	delete m_Device;
 	delete m_pDeviceFactory;
+
+	delete m_pInputManager;
+
 	Unregister();
 }
 //-----------------------------------------------------------------------------

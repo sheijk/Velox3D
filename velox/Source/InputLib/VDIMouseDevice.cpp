@@ -1,7 +1,7 @@
 #include "VDIMouseDevice.h"
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/VAssert.h>
-#include <v3d/Input/VInputException.h>
+#include <v3d/Input/VInputExceptions.h>
 #include <v3d/Input/IVInputDevice.h>
 #include <v3d/Core/MemManager.h>
 
@@ -41,10 +41,6 @@ VDIMouseDevice::~VDIMouseDevice()
 
 	m_pDevice->Unacquire();
 	m_pDevice->Release();
-
-	// this causes a crash??!?!?
-	//delete m_pDevice;
-
 	m_pDevice = 0;
 }
 
@@ -218,6 +214,8 @@ void VDIMouseDevice::Update()
 	HRESULT hr;
 	DIMOUSESTATE2 mouseState;
 
+	ZeroMemory(&mouseState, sizeof(mouseState));
+
 	hr = m_pDevice->GetDeviceState( sizeof(DIMOUSESTATE2),
 		(LPVOID) &mouseState );
 
@@ -234,6 +232,8 @@ void VDIMouseDevice::Update()
 
 	m_LeftButton->Set( mouseState.rgbButtons[0] & 0x80 );
 	m_RightButton->Set( mouseState.rgbButtons[1] & 0x80 );
+
+	//vout << mouseState.lX << vendl;
 	
 	m_XAxis->Set( mouseState.lX );
 	m_YAxis->Set( mouseState.lY );
@@ -305,7 +305,10 @@ IVInputDevice::AbsoluteAxisIterator	VDIMouseDevice::AbsoluteAxisEnd()
  */
 IVInputDevice::RelativeAxisIterator	VDIMouseDevice::RelativeAxisBegin()
 {
-	return m_InputHelper.RelativeAxisBegin();
+	IVInputDevice::RelativeAxisIterator temp = m_InputHelper.RelativeAxisBegin();
+	IVRelativeAxis* temp2 = &(*temp);
+	
+	return temp;
 }
 
 /**

@@ -2,13 +2,13 @@
 #define V3D_IVINPUTMANAGER_2004_08_09_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-
 #include <v3d/Updater/IVUpdateable.h>
 #include <v3d/Input/IVInputDevice.h>
 #include <v3d/Input/IVKeyboardDevice.h>
 #include <v3d/Input/IVMouseDevice.h>
 #include <v3d/Input/IVButton.h>
 #include <v3d/Input/IVRelativeAxis.h>
+#include <v3d/Input/VKeyCode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
@@ -32,6 +32,12 @@ public:
 
 	virtual IVKeyboardDevice&	GetStandardKeyboard() = 0;
 	virtual IVMouseDevice&		GetStandardMouse() = 0;
+
+	virtual IVButton&			GetStandardKey(VKeyCode in_Key) = 0;
+	virtual IVRelativeAxis&		GetMouseXAxis() = 0;
+	virtual IVRelativeAxis&		GetMouseYAxis() = 0;
+	virtual IVButton&			GetLeftMouseButton() = 0;
+	virtual IVButton&			GetRightMouseButton() = 0;
 
 	virtual void				Update(vfloat32 in_fSeconds) = 0;
 	virtual void				Activate() = 0;

@@ -1,10 +1,7 @@
-#ifndef V3D_INPUT_H
-#define V3D_INPUT_H
+#ifndef V3D_INPUT_09_02_2004_H
+#define V3D_INPUT_09_02_2004_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-
 #include <v3d/Input/IVInputManager.h>
-#include <v3d/Input/KeyEnumeration.h>
-
 //-----------------------------------------------------------------------------
-#endif // V3D_INPUT_H
+#endif // V3D_INPUT_09_02_2004_H

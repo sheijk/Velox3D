@@ -1,15 +1,13 @@
-#ifndef V3D_VDIABSOLUTEAXIS_H
-#define V3D_VDIABSOLUTEAXIS_H
+#ifndef V3D_VDIABSOLUTEAXIS_09_02_H
+#define V3D_VDIABSOLUTEAXIS_09_02_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/Input/IVAbsoluteAxis.h>
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
-		
 /**
  * DirectInput implementation of IVRelativeAxis
  * @author AcrylSword
@@ -30,9 +28,8 @@ class VDIAbsoluteAxis : public IVAbsoluteAxis
         virtual vfloat32		GetPosition();
         void					Set( vfloat32 in_fPos );
 };
-
 //-----------------------------------------------------------------------------
 } // namespace input
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VDIABSOLUTEAXIS_H
+#endif // V3D_VDIABSOLUTEAXIS_09_02_H

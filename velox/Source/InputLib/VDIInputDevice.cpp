@@ -1,7 +1,7 @@
 #include "VDIInputDevice.h"
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/VAssert.h>
-#include <v3d/Input/VInputException.h>
+#include <v3d/Input/VInputExceptions.h>
 #include "VDIButton.h"
 #include "VDIRelativeAxis.h"
 #include "VDIAbsoluteAxis.h"

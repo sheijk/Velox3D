@@ -3,13 +3,11 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Input/IVInputDevice.h>
-#include <v3d/Input/KeyEnumeration.h>
-
+#include <v3d/Input/VKeyCode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
-
 /**
  * Interface for an attached keyboard
  * @author sheijk
@@ -20,9 +18,8 @@ class IVKeyboardDevice : public IVInputDevice
 public:
 	virtual				~IVKeyboardDevice() {};
 
-	virtual IVButton&	GetKey(const KeyCodes in_KeyCode) = 0;
+	virtual IVButton&	GetKey(const VKeyCode in_Key) = 0;
 };
-
 //-----------------------------------------------------------------------------
 } // namespace input
 } // namespace v3d

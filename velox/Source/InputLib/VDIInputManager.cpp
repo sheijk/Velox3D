@@ -1,7 +1,7 @@
 #include "VDIInputManager.h"
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h> 
-#include <v3d/Input/VInputException.h>
+#include <v3d/Input/VInputExceptions.h>
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 
@@ -59,6 +59,7 @@ VDIInputManager::~VDIInputManager()
 		// the parent object.
 		deleteAll(m_DeviceList.begin(), m_DeviceList.end());
 		m_DeviceList.clear();
+
 		m_InputDeviceList.clear();
 		m_KeyboardList.clear();
 		m_MouseList.clear();
@@ -176,6 +177,61 @@ IVKeyboardDevice& VDIInputManager::GetStandardKeyboard()
 IVMouseDevice& VDIInputManager::GetStandardMouse()
 {
 	return *m_pStandardMouse;
+}
+
+/**
+* Delegates method call to m_pStandardKeyboard.GetKey()
+*
+* @return The desired key
+* @author AcrylSword
+*/
+IVButton& VDIInputManager::GetStandardKey(VKeyCode in_Key)
+{
+	return m_pStandardKeyboard->GetKey(in_Key);
+}
+
+/**
+* Delegates method call to m_pStandardMouse.GetXAxis()
+*
+* @return The mouse's x-axis
+* @author AcrylSword
+*/
+IVRelativeAxis& VDIInputManager::GetMouseXAxis()
+{
+	return m_pStandardMouse->GetXAxis();
+}
+
+/**
+* Delegates method call to m_pStandardMouse.GetYAxis()
+*
+* @return The mouse's y-axis
+* @author AcrylSword
+*/
+IVRelativeAxis&	VDIInputManager::GetMouseYAxis()
+{
+	return m_pStandardMouse->GetYAxis();
+}
+
+/**
+* Delegates method call to m_pStandardMouse.GetLeftButton()
+*
+* @return The mouse's left button
+* @author AcrylSword
+*/
+IVButton& VDIInputManager::GetLeftMouseButton()
+{
+	return m_pStandardMouse->GetLeftButton();
+}
+
+/**
+* Delegates method call to m_pStandardMouse.GetRightButton()
+*
+* @return The mouse's right button
+* @author AcrylSword
+*/
+IVButton& VDIInputManager::GetRightMouseButton()
+{
+	return m_pStandardMouse->GetRightButton();
 }
 /**
  * This method starts enumeration of all kinds of attatched input devices

@@ -63,11 +63,11 @@ void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 	m_pKeyboardDevice    = &in_pInputManager->GetStandardKeyboard();
 	m_pMouseDevice       = &in_pInputManager->GetStandardMouse();
 
-	m_pEscapeButton = &m_pKeyboardDevice->GetKey(Key_Escape);
-	m_pUpButton     = &m_pKeyboardDevice->GetKey(Key_Up);
-	m_pDownButton   = &m_pKeyboardDevice->GetKey(Key_Down);
-	m_pLeftButton   = &m_pKeyboardDevice->GetKey(Key_Left);
-	m_pRightButton  = &m_pKeyboardDevice->GetKey(Key_Right);
+	m_pEscapeButton = &m_pKeyboardDevice->GetKey(KeyEscape);
+	m_pUpButton     = &m_pKeyboardDevice->GetKey(KeyUp);
+	m_pDownButton   = &m_pKeyboardDevice->GetKey(KeyDown);
+	m_pLeftButton   = &m_pKeyboardDevice->GetKey(KeyLeft);
+	m_pRightButton  = &m_pKeyboardDevice->GetKey(KeyRight);
 
 
 	m_pLeftMouseButton	= &m_pMouseDevice->GetButton(1);

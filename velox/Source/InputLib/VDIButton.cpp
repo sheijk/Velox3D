@@ -1,6 +1,4 @@
 #include "VDIButton.h"
-#include <v3d/Core/VIOStream.h>
-#include <windows.h>
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -40,7 +38,7 @@ vbool VDIButton::IsDown()
 	return m_bState;
 }
 
-void VDIButton::Set( vbool in_bState )
+void VDIButton::Set(vbool in_bState)
 {
     m_bState = in_bState;
 }

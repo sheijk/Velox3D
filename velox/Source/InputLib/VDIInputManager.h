@@ -61,6 +61,12 @@ public:
 	virtual IVKeyboardDevice&		GetStandardKeyboard();
 	virtual IVMouseDevice&			GetStandardMouse();
 
+	virtual IVButton&				GetStandardKey(VKeyCode in_Key);
+	virtual IVRelativeAxis&			GetMouseXAxis();
+	virtual IVRelativeAxis&			GetMouseYAxis();
+	virtual IVButton&				GetLeftMouseButton();
+	virtual IVButton&				GetRightMouseButton();
+
 	virtual DeviceIterator			DeviceBegin();
 	virtual DeviceIterator			DeviceEnd();
 
@@ -70,9 +76,7 @@ public:
 	virtual void					SetActive(vbool in_bStatus);
 
 private:
-
 	void							ClearInputData();
-
 	static BOOL CALLBACK			StaticDIEnumDevicesCallback(LPCDIDEVICEINSTANCE lpddi,
 																LPVOID pvRef );
 	vbool							m_bRegistered;

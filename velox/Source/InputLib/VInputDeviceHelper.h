@@ -37,10 +37,6 @@ public:
 	std::list<VDIRelativeAxis*>		m_RelativeAxisList;
 	std::list<VDIAbsoluteAxis*>		m_AbsoluteAxisList;
 
-	std::map<vlong, VDIButton*>		  m_ButtonMap;
-	std::map<vlong, VDIRelativeAxis*> m_RelativeAxisMap;
-	std::map<vlong, VDIAbsoluteAxis*> m_AbsoluteAxisMap;
-
 	VInputDeviceHelper();
 	~VInputDeviceHelper();
 

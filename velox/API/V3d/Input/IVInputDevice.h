@@ -1,5 +1,5 @@
-#ifndef V3D_IVINPUTDEVICE_H
-#define V3D_IVINPUTDEVICE_H
+#ifndef V3D_IVINPUTDEVICE_09_02_2004_H
+#define V3D_IVINPUTDEVICE_09_02_2004_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/VIterator.h>
@@ -11,7 +11,6 @@
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
-
 /**
  * Interface for an attached input controller
  * @author sheijk
@@ -21,7 +20,6 @@ namespace input {
 class IVInputDevice
 {
 public:
-
 	enum DeviceType
 	{
 		Keyboard,
@@ -48,9 +46,8 @@ public:
 	virtual RelativeAxisIterator	RelativeAxisBegin() = 0;
 	virtual RelativeAxisIterator	RelativeAxisEnd() = 0;
 };
-
 //-----------------------------------------------------------------------------
 } // namespace input
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVINPUTDEVICE_H
+#endif // V3D_IVINPUTDEVICE_09_02_2004_H

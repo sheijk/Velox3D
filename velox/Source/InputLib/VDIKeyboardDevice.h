@@ -33,7 +33,7 @@ protected:
 	std::list<VDIRelativeAxis*>		m_RelativeAxisList;
 	std::list<VDIAbsoluteAxis*>		m_AbsoluteAxisList;
 
-	std::map<KeyCodes, VDIKeyboardButton*> m_KeyMap;
+	std::map<VKeyCode, VDIKeyboardButton*> m_KeyMap;
 
 	vbool					CreateDevice(const LPDIRECTINPUT8 in_pDI,
 										 const HWND in_hWnd );
@@ -47,7 +47,7 @@ public:
 
 	void					Update();
 
-	IVButton&				GetKey(const KeyCodes in_KeyCode);
+	IVButton&				GetKey(const VKeyCode in_KeyCode);
 
 	VStringRetVal			GetName();
 	DeviceType				GetType();

@@ -13,11 +13,11 @@ VKeyboardCamera::VKeyboardCamera(input::IVInputManager& in_InputDevice)
 
 void VKeyboardCamera::QueryButtons(input::IVInputManager& in_InputManager)
 {
-	m_pEscapeButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Escape);
-	m_pUpButton			= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Up);
-	m_pDownButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Down);
-	m_pLeftButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Left);
-	m_pRightButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Right);
+	m_pEscapeButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::KeyEscape);
+	m_pUpButton			= &in_InputManager.GetStandardKeyboard().GetKey(input::KeyUp);
+	m_pDownButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::KeyDown);
+	m_pLeftButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::KeyLeft);
+	m_pRightButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::KeyRight);
 
 	m_pLeftMouseButton	= &in_InputManager.GetStandardMouse().GetLeftButton();
 	m_pRightMouseButton	= &in_InputManager.GetStandardMouse().GetRightButton();

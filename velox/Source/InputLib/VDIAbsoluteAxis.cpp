@@ -1,5 +1,4 @@
 #include "VDIAbsoluteAxis.h"
-#include <windows.h>
 #include <v3d/Core/MemManager.h>
 
 //-----------------------------------------------------------------------------
