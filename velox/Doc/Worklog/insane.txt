@@ -23,7 +23,10 @@ Personal Notes:
 
 TODO List:
 - Console is closeable with alt f4
+
+
 - Indoor Rendering
+
 
 low:
 - remove VDisplaySettings.cpp
@@ -36,7 +39,7 @@ medium:
 
 high:
 - wrap bsp renderer out of IVCell to make it more robust
-
+- build in vfs saving for image saving
 
 
 -------------------------------------------------------------------------------
@@ -51,6 +54,9 @@ gesetzt werden, ansonsten sind die states undefiniert.
 
 
 Done List:
+
+31.07.04
+- fixed several todos in the image saving functions
 
 24.07.04
 - added image scale, convert and saving functinality

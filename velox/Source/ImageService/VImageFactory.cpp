@@ -82,15 +82,34 @@ void VImageFactory::Register(IVImageManipulator* in_ImageManipulator)
 }
 //-----------------------------------------------------------------------------
 
-void VImageFactory::SaveImageToFile(VStringParam in_sFilename, VImage& in_Image, 
-					 IVImageSaver::ImageType in_Type)
+void VImageFactory::SaveImageToFile(VStringParam in_sFilename, VImage& in_Image)
 {
 	IVImageSaver* theImageSaver = 0;
 
-	theImageSaver = m_SaverMap[GetExtensionType(in_Type)];
+	theImageSaver = m_SaverMap[ParseFileExtension(in_sFilename)];
 
-	if(theImageSaver)
-		theImageSaver->SaveImageToFile(in_Image, in_Type, in_sFilename);
+    if(theImageSaver)
+	{
+
+		const char* sExtension = ParseFileExtension(in_sFilename);
+
+		if(strcmp(sExtension, "bmp") == 0)
+		{
+			theImageSaver->SaveImageToFile(in_Image,
+			IVImageSaver::ImageType::SaveBMP, in_sFilename);
+		}
+		else if(strcmp(sExtension,"tga") == 0)
+		{
+			theImageSaver->SaveImageToFile(in_Image,
+				IVImageSaver::ImageType::SaveTGA, in_sFilename);
+		}
+		else if(strcmp(sExtension,"jpg") == 0)
+		{
+			theImageSaver->SaveImageToFile(in_Image,
+				IVImageSaver::ImageType::SaveJPG, in_sFilename);
+		}
+	}
+		
 	else
 	{
 		V3D_THROW(VException, "the selected save format is not supported by now!");
@@ -154,31 +173,31 @@ void VImageFactory::CreateImage(VStringParam in_sFilename,
 
 //-----------------------------------------------------------------------------
 
-VStringRetVal VImageFactory::GetExtensionType(IVImageSaver::ImageType in_Type)
-{
-	switch(in_Type)
-	{
-		case IVImageSaver::ImageType::SaveBMP:
-			{
-				return "bmp";
-				break;
-			}
-		case IVImageSaver::ImageType::SaveJPG:
-			{
-				return "jpg";
-				break;
-			}
-		case IVImageSaver::ImageType::SaveTGA:
-			{
-				return "tga";
-				break;
-			}
-
-		default:
-			return "";
-			break;
-	}
-}
+//VStringRetVal VImageFactory::GetExtensionType(IVImageSaver::ImageType in_Type)
+//{
+//	switch(in_Type)
+//	{
+//		case IVImageSaver::ImageType::SaveBMP:
+//			{
+//				return "bmp";
+//				break;
+//			}
+//		case IVImageSaver::ImageType::SaveJPG:
+//			{
+//				return "jpg";
+//				break;
+//			}
+//		case IVImageSaver::ImageType::SaveTGA:
+//			{
+//				return "tga";
+//				break;
+//			}
+//
+//		default:
+//			return "";
+//			break;
+//	}
+//}
 
 
 

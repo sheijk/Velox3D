@@ -14,9 +14,8 @@ namespace v3d{
 namespace image{
 //-----------------------------------------------------------------------------
 
-//TODO: Javadoc Kommentare muessen mit /** (2x *) anfangen, sonst werden sie
-// evtl nicht erkannt --sheijk
-/* Factory for loading / saving / manipulating image data
+/** 
+ * Factory for loading / saving / manipulating image data
  * @author ins
  */
 
@@ -35,11 +34,10 @@ public:
 	virtual void CreateImage(VStringParam in_sFilename, ImagePtr& in_Image) = 0;
 
 
-	//TODO typ als string wie beim laden waere schoener weil erweiterbarer. bzw
 	// optimaler weise einfach an der extension erkennen --sheijk
 	/* Save an image to a file */
 	virtual void SaveImageToFile(VStringParam in_sFilename,
-		VImage& in_Image, IVImageSaver::ImageType in_Type) = 0;
+		VImage& in_Image) = 0;
 
 	//TODO: warum nicht nur ConvertImage? --sheijk
 	/* Scale an image to the given image parameters

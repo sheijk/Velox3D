@@ -23,8 +23,7 @@ public:
 	/* Creates and decodes an image file by its param and destination type */
 	virtual void CreateImage(VStringParam in_sFilename, ImagePtr& in_Image);
 
-	virtual void SaveImageToFile(VStringParam in_sFilename, VImage& in_Image, 
-		IVImageSaver::ImageType in_Type);
+	virtual void SaveImageToFile(VStringParam in_sFilename, VImage& in_Image);
 
 	/* Scale an image to the given image parameters */
 	virtual void ScaleImage(VImage& in_ImageSource, VImage& in_ImageDest);
@@ -62,7 +61,7 @@ private:
 	
 	//std::vector<std::string> m_ExtensionList;
 
-	VStringRetVal GetExtensionType(IVImageSaver::ImageType in_Type);
+	//VStringRetVal GetExtensionType(IVImageSaver::ImageType in_Type);
 
 
 };

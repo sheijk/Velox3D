@@ -15,8 +15,7 @@ namespace image{
 class IVImageSaver
 {
 public:
-	//TODO: hm, wozu soll das hier gut sein? ne extension als string wie beim loader
-	// waer doch sinnvoller, oder?
+	
 	enum ImageType
 	{
 		SaveBMP,
