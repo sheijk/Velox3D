@@ -418,6 +418,12 @@ namespace v3d {
 	{
 		return VVector<Scalar, 3>(gmtl::cross(a.m_Vec, b.m_Vec));
 	}
+	
+	template<typename Scalar>
+		vbool IsNormalized(const VVector<Scalar, 3>& a, Scalar eps = 0.0001)
+	{
+		return gmtl::isNormalized(a.m_Vec, eps);
+	}
 
 	template<typename Scalar>
 		Scalar Dot(
