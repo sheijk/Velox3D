@@ -1,3 +1,4 @@
+
 #ifndef V3D_VMATERIALDESCRIPTION_H
 #define V3D_VMATERIALDESCRIPTION_H
 //-----------------------------------------------------------------------------
@@ -191,8 +192,8 @@ VMaterialDescription::ColorBufferMask::ColorBufferMask()
 
 VMaterialDescription::TextureRef::TextureRef() :
 	nWidth(0), nHeight(0), hData(0),
-	minificationFilter(FilterNearest),
-	magnificationFilter(FilterNearest),
+	minificationFilter(FilterLinear),
+	magnificationFilter(FilterLinear),
 	wrapTexCoordU(TextureRepeat),
 	wrapTexCoordV(TextureRepeat)
 {

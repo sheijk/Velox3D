@@ -27,6 +27,15 @@ VMaterialDescription BuildTextureMaterial(
 
 VMaterialDescription::ColorBufferMask NoColorWrites();
 
+/**
+ * @author: ins
+ */
+
+void ApplyMaterial(IVDevice& in_Device,
+				   IVMaterial* in_pMaterial);
+
+
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

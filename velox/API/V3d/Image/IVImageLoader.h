@@ -18,7 +18,7 @@ class IVImageLoader
 public:
 
 	/* Create an image out of a vfs stream */
-	virtual VImage* Create(vfs::IVStream* in_pStream) = 0;
+	virtual VImage* Create(vfs::IVStream* in_pStream, VStringParam in_sExt) = 0;
 
 protected:
 	

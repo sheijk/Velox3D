@@ -65,6 +65,33 @@ void SetRotationZ(VMatrix<Scalar, RowCount, ColumnCount>& result, Scalar in_RotA
 }
 
 /**
+* @author: ins
+*/
+template<typename Scalar, vuint RowCount, vuint ColumnCount>
+void SetOrtho(VMatrix<Scalar, RowCount, ColumnCount>& result,
+			  Scalar left, Scalar right, Scalar top, Scalar bottom,
+			  Scalar near, Scalar far)
+{
+	Identity(result);
+
+	
+
+    result.Set(0,0, 2/(right-left));
+	result.Set(1,1, 2/(top-bottom));
+	result.Set(2,2, -2/(far-near));
+	
+	Scalar tx = (right+left)/(right-left);
+	Scalar ty = (top+bottom)/(top-bottom);
+	Scalar tz = (far+near)/(far-near);
+
+	result.Set(0,3, tx);
+	result.Set(1,3, ty);
+	result.Set(2,3, tz);
+	result.Set(3,3, -1);
+}
+
+
+/**
  * @author: sheijk
  */
 template<typename Scalar, vuint RowCount, vuint ColumnCount>
