@@ -40,12 +40,6 @@ public:
 		std::string name = pElement->GetAttributeValue<std::string>("name");
 		std::string value = pElement->GetAttributeValue<std::string>("value");
 
-		vout << "\t\t\t"
-			<< name
-			<< "="
-			<< value
-			<< vendl;
-
 		m_State.SetParameter(name.c_str(), value);
 	}
 
@@ -80,7 +74,6 @@ public:
 		{
 			std::string stateName = pElement->GetAttributeValue<std::string>("name");
 
-			vout << "\t\tState " << stateName << vendl;
 			VStateParser parser(stateName.c_str());
 			pElement->VisitChildren(parser);
 			m_RenderPass.AddState(parser.GetState());
@@ -110,8 +103,6 @@ public:
 	{
 		if( pElement->GetName() == VString("renderPass") )
 		{
-			vout << "\tRenderPass" << vendl;
-			
 			VRenderPassParser parser(m_ShaderPath.AddRenderPass());
 			pElement->VisitChildren(parser);
 		}
@@ -176,9 +167,6 @@ void VEffectLoader::LoadEffect(
 
 	pRootNode->VisitChildren(*this);
 
-	vout << "Resulting effect description:" << vendl;
-	PrintEffectDescription(m_Effect);
-
 	// put effect into resource
 	in_pResource->AddData(new VEffectDescription(m_Effect));
 }
@@ -191,7 +179,6 @@ void VEffectLoader::OnElementOpen(IVXMLElement* pElement)
 {
 	if( pElement->GetName() == VString("shaderPath") )
 	{
-		vout << "ShaderPass" << vendl;
 		VShaderPathParser parser(m_Effect.AddShaderPath());
 		pElement->VisitChildren(parser);
 	}
@@ -199,17 +186,14 @@ void VEffectLoader::OnElementOpen(IVXMLElement* pElement)
 
 void VEffectLoader::OnFileEnd()
 {
-	vout << "Parsing effect file '" << m_strFileName << "' done" << vendl;
 }
 
 void VEffectLoader::OnComment(VStringParam pText)
 {
-	vout << "Found comment '" << pText << "'" << vendl;
 }
 
 void VEffectLoader::OnText(VStringParam pText)
 {
-	vout << "Found text '" << pText << "'" << vendl;
 }
 
 //-----------------------------------------------------------------------------

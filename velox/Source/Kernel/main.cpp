@@ -40,11 +40,6 @@ int main(int argv, char* argc[])
 	{
 		pcXmlFileName = "init.xml";
 	}
-	vout << "-------------------------------------------------------" << vendl;
-	vout << "Starting v3d engine..." << vendl;
-	vout << "-------------------------------------------------------" << vendl;
-	vout << "Using xml config file <" << pcXmlFileName << ">" << vendl;
-	vout << "-------------------------------------------------------" << vendl;
 	
 	try
 	{

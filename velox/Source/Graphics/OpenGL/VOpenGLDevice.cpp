@@ -1,7 +1,6 @@
 #include "VOpenGLDevice.h"
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VIOStream.h>
-#include <v3d/Core/Wrappers/VIterator.h>
 #include <v3d/Core/VLogging.h>
 #include <V3d/Graphics/VMeshDescription.h>
 #include <V3d/Graphics/VEffectDescription.h>
@@ -213,10 +212,6 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 	VResourceId edRes = pResManager->GetResourceByName(in_strResource);
 	resource::VResourceDataPtr<const VEffectDescription> in_pEffectDescription
 		= mdRes->GetData<VEffectDescription>();
-
-	//vout << "creating mesh with material:\n";
-	//PrintEffectDescription(*in_pEffectDescription);
-	//vout << "---\n";
 
 	// create materials
 	std::vector<VRenderStateList*> statelists

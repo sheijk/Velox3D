@@ -1,6 +1,8 @@
 #include <v3d/Core/VException.h>
 //-----------------------------------------------------------------------------
+#include <windows.h>
 
+#include <sstream>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -14,11 +16,19 @@ VException::VException()
 	m_ErrorString = "VException Error\n";
 }
 
-VException::VException(VStringParam Error, VStringParam File, vuint Line)
+VException::VException(
+	VStringParam in_strError, VStringParam in_strFile, vuint in_nLine)
 {
-	m_Line = Line;
-	m_FileName = File;
-	m_ErrorString = Error;
+	m_Line = in_nLine;
+	m_FileName = in_strFile;
+	m_ErrorString = in_strError;
+
+
+	std::stringstream message;
+	message << "Throwing Exception from [" << in_strFile << "|"
+		<< in_nLine << "]: '" << in_strError << "'\n";
+	
+	OutputDebugString(message.str().c_str());
 }
 
 vuint VException::GetErrorLine() const

@@ -1,6 +1,5 @@
 #include "VDIInputManager.h"
 #include <v3d/Core/VIOStream.h>
-#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h> 
 #include <v3d/Input/VInputExceptions.h>
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

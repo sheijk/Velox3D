@@ -127,6 +127,11 @@ VNamedObject& VObjectRegistry::GetObject(const VObjectKey& in_Key)
 	return *pObj;
 }
 
+vbool VObjectRegistry::ContainsObject(const VObjectKey& in_Key)
+{
+	return m_Objects.find(in_Key) != m_Objects.end();
+}
+
 VObjectKey VObjectRegistry::GetKey(const VNamedObject& obj)
 {
 	// find the object

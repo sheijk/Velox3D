@@ -60,6 +60,9 @@ public:
 	/** get the single instance */
 	static Pointer GetInstance();
 
+	/** Returns true iff an object of the given name exists */
+	virtual vbool ContainsObject(const VObjectKey& in_Key);
+
 	/** get a registered object by name */
 	virtual VNamedObject& GetObject(const VObjectKey& Name);
 

@@ -2,11 +2,11 @@
 #define V3D_VRENDERSTATELIST_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Container/VList.h>
 
 #include <v3d/Graphics/IVMaterial.h>
 
 #include <vector>
+#include <list>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -16,7 +16,7 @@ namespace graphics {
 class VRenderStateList : public IVMaterial
 {
 public:
-	typedef VList<const IVRenderState*> RenderStateList;
+	typedef std::list<const IVRenderState*> RenderStateList;
 
 private:
 	std::vector<const IVRenderState*> m_States;

@@ -78,10 +78,12 @@ namespace {
 		OutputDebugString(in_strString);
 
 		if(m_Console)
+		{
 			m_Console->Write(in_strString);
+			}
 		else
 		{
-			try
+			if( VObjectRegistry::GetInstance()->ContainsObject("console.service") )
 			{
 				m_Console = 
 					QueryObject<console::IVConsoleService>("console.service");
@@ -94,7 +96,7 @@ namespace {
 				SendToVeloxConsole(in_strString);
 				//m_Console->Write(in_strString);
 			}
-			catch (VException ex)
+			else
 			{
 				m_StringList.push_back(in_strString);
 				

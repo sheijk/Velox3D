@@ -38,6 +38,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+19.02.2005
+- Exceptions durch vout und fehlenden Konsolen Service entfernt, beim Werfen
+  neuer Exceptions wird eine Meldung per OutputDebugString gesendet
+
 18.02.2005
 - Range Iteratoren ins Projekt aufgenommen
 - XML Service, VFS, Input Service, alten Graphic SG auf Range Iteratoren

@@ -2,7 +2,6 @@
 #include <v3d/Input/IVButton.h>
 #include <v3d/Input/IVRelativeAxis.h>
 #include <v3d/Input/IVAbsoluteAxis.h>
-#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h> 
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {

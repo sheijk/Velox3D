@@ -251,7 +251,7 @@ resource::VResourceId BuildResource(
 	if( vertexFormat.GetColorFormat().GetCount() > 0 )
 		pMoonMD->SetColorResource(res->GetQualifiedName());
 
-	for(int texCoordId = 0; 
+	for(vuint texCoordId = 0; 
 		texCoordId < vertexFormat.GetTexCoordCount(); 
 		++texCoordId)
 	{

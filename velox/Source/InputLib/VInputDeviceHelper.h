@@ -2,7 +2,7 @@
 #define V3D_VINPUTDEVICEHELPER_2004_08_18_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Wrappers/VIterator.h>
+#include <v3d/Core/RangeIter/VRangeIterator.h>
 #include <v3d/Input/IVInputDevice.h>
 #include <list>
 #include <map>
