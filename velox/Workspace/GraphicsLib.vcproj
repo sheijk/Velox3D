@@ -129,6 +129,12 @@
 			<Filter
 				Name="Descriptions"
 				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Graphics\Descriptions\IVMeshDescription.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Graphics\Descriptions\VTriangle.h">
+				</File>
 			</Filter>
 		</Filter>
 	</Files>

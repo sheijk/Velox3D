@@ -130,6 +130,16 @@
 				RelativePath="..\Api\V3d\System\IVDeviceProvider.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="GraphicsDescriptions"
+			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\GraphicsDescriptions\VCubeMeshDescr.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VCubeMeshDescr.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

@@ -22,11 +22,11 @@ public:
 	//TODO: documentation
 	virtual ~IVDirectory() {};
 
-	typedef VBirectionalIterator<IVDirectory> DirIter;
-	typedef VBirectionalIterator<IVFile> FileIter;
+	typedef VBidirectionalIterator<IVDirectory> DirIter;
+	typedef VBidirectionalIterator<IVFile> FileIter;
 
-	typedef VBirectionalIterator<const IVDirectory> ConstDirIter;
-	typedef VBirectionalIterator<const IVFile> ConstFileIter;
+	typedef VBidirectionalIterator<const IVDirectory> ConstDirIter;
+	typedef VBidirectionalIterator<const IVFile> ConstFileIter;
 
 	//TODO: in eigene Datei
 	template<typename T> struct Range

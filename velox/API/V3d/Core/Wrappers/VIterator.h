@@ -102,10 +102,10 @@ template<
 	typename T, 
 	typename SmartPtr = typename iterutil::VIteratorDefault<T>::SmartPtr
 >
-class VBirectionalIterator
+class VBidirectionalIterator
 	: public 
-	iterutil::VMoveBackIterInterface<T,	VBirectionalIterator,
-		iterutil::VProceedIterInterface<T, VBirectionalIterator,
+	iterutil::VMoveBackIterInterface<T,	VBidirectionalIterator,
+		iterutil::VProceedIterInterface<T, VBidirectionalIterator,
 			iterutil::VMutableIterInterface<T,
 				iterutil::VEqCompIterInterface<T,
 					iterutil::VIteratorBase<T, SmartPtr>
@@ -118,7 +118,7 @@ class VBirectionalIterator
 public:
 	typedef typename IterBase::IterPointer IterPointer;
 
-	VBirectionalIterator(IterPointer in_pIter)
+	VBidirectionalIterator(IterPointer in_pIter)
 	{
 		Assign(in_pIter);
 	}
@@ -198,8 +198,8 @@ struct std::iterator_traits< v3d::VForwardIterator<T, SmartPtr> >
 };
 
 template<typename T, typename SmartPtr>
-struct std::iterator_traits< v3d::VBirectionalIterator<T, SmartPtr> > 
-	: public v3d::VIterTraitsBase< v3d::VBirectionalIterator<T, SmartPtr> >
+struct std::iterator_traits< v3d::VBidirectionalIterator<T, SmartPtr> > 
+	: public v3d::VIterTraitsBase< v3d::VBidirectionalIterator<T, SmartPtr> >
 {
 	typedef std::bidirectional_iterator_tag iterator_category;
 };

@@ -147,6 +147,9 @@
 					RelativePath="..\Api\V3d\Core\Wrappers\VSTLDerefSPIteratorPol.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\VSTLIteratorPol.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\VString.h">
 				</File>
 			</Filter>

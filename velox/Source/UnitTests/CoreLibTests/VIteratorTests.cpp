@@ -517,7 +517,7 @@ void VIteratorTests::ExecuteTest()
 	typedef VOutputIterator<int> IntOI;
 	typedef VInputIterator<int> IntII;
 	typedef VForwardIterator<int> IntFI;
-	typedef VBirectionalIterator<int> IntBI;
+	typedef VBidirectionalIterator<int> IntBI;
 	typedef VRandomAccessIterator<int> IntRI;
 
 	testOutIter<IntOI>();

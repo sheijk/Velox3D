@@ -39,6 +39,7 @@ void VFileLogger::OnProgressbarEnd()
 
 void VFileLogger::OnStateUpdate( VStringParam in_strStreamName, VStringParam in_strText )
 {
+	//TODO: fehlt da nicht die schliessende klammer(])?
 	m_File << "[" << in_strStreamName << "|State" << in_strText << std::endl;
 	m_File.flush();
 }

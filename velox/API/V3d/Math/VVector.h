@@ -13,10 +13,15 @@ namespace v3d {
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
 	class VMatrix;
 
+	/**
+	 * a simple 1-dimensional vector in the mathematical sense
+	 */
 	template<typename Scalar, vuint Dimension>
 	class VVector
 	{
 	public:
+		// do not use members and functions in this block as they are only
+		// public because of some problem with friend declarations
 		typedef gmtl::Vec<Scalar, Dimension> VecImpl;
 
 		VecImpl m_Vec;
@@ -44,7 +49,7 @@ namespace v3d {
 
 		const Scalar& operator[](vuint in_Pos) const
 		{
-			return m_Vec[in_Pos]
+			return m_Vec[in_Pos];
 		}
 
 		vuint GetDimension()

@@ -59,6 +59,9 @@ Doku:
 
 log:
 
+19.11.2003
+Erste Mesh Description Version implementiert
+
 12.11.2003
 VFileStream.SetSize() implementiert
 

@@ -9,6 +9,7 @@ namespace v3d {
 namespace error {
 
 //-----------------------------------------------------------------------------
+//TODO: 1-2 saetze erklaerung waeren ganz praktisch... (sheijk)
 class VErrorConsoleListener : public IVErrorListener
 {
 public:
