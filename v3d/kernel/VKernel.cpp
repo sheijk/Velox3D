@@ -171,7 +171,7 @@ void VKernel::LoadServices()
 	}
 
 	// load the application
-//	m_App->Initialize(VObjectRegistry::GetInstance());
+	m_App->Initialize(VObjectRegistry::GetInstance());
 }
 
 void VKernel::DelegateControl()
