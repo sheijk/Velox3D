@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<title>Using The Error Service</title>
+		<link rel="stylesheet" type="text/css" href="../../veloxdoc.css">
+	</head>
+	<body>
+		<h1>Using the Error Service</h1>
+		<h2>Purpose of the Error Service</h2>
+		<p>The error service provides IVErrorStream for easy debug messages and IVErrorListener.<br>
+		    For simple messages use the global errorstream, for a complete subsystem get our own errorstream</p>
+
+		<h2>How to use the error service</h2>
+		
+		<p>First we need to query the error service:
+			<div id="cpp">
+				IVErrorService& theErrorService= QueryObject&ltIVErrorService&gt("error.service");
+			</div>
+		</p>
+		<p>Once the interface is ready, we can use the IVErrorService methods to get acess to the global errorstream, create your own errorstream and to (un)register listener.<br>
+		</p>
+
+		<h2>How to use the error streams</h2>
+		<p>If you have just a couple of messages, you can use IVErrorService::GetGlobalErrorStream() to get an IVErrorStream object.<br>
+                   If you want to send debug messages from within a independent sub-system, you should create our own IVErrorStream.<br>
+		   You can stream your messages with the << operator into the error stream. End your message with VEndDbgMsg (or you won't get filename and linenumber).
+			<div id="cpp">
+				//using global errorstream<br>
+				IVErrorStream& theGlobalStream = theErrorService.GetGlobalErrorStream();<br>
+				theGlobalStream << "Hello. This is a debug message on the "global" error stream." << VEndDbgMsg;<br><br>
+				
+				//own errorstream
+				IVErrorStream& theOwnStream = theErrorService.CreateErrorStream("tutorial");<br>
+				theOwnStream << "Hello. This ia a debug message on the "tutorial" error stream." << VEndDbgMsg;
+				
+			</div>	
+		</p>
+
+		<h2>How to use the error listener</h2>
+		<p>Error listener get their information from the error streams. Velox3D provides error listener classes
+		   which writes their information to a file, the console and (soon) the debug monitor<br>
+		   If you want to create our own listener, derive a class from IVErrorListener and implement its methods as you like. 
+		   Then register your listener to the error service using IVErrorService::RegisterListener(). 
+		   You must also pass an IVErrorFilter.
+		
+		<p>- Andreas Donners</p>
+	</body>
