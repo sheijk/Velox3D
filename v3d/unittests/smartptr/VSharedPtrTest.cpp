@@ -4,11 +4,14 @@
 
 #include "VSharedPtrTest.h"
 
+/*
 #include <utils/smartptr/VRefCountPol.h>
 #include <utils/smartptr/VRefCountSharedStorage.h>
 #include <utils/smartptr/VPointerStorage.h>
 #include <utils/smartptr/VSmartPointer.h>
 #include <utils/smartptr/VNoCheckPol.h>
+*/
+#include <utils/smartptr/VGuards.h>
 
 #include "VDestructTest.h"
 
@@ -184,12 +187,15 @@ void VSharedPtrTest::TestRefCountPol()
 
 void VSharedPtrTest::TestSharedPtr()
 {
+/*
 	typedef VSmartPointer<
 		VDestructTest, 
 		VRefCountPol< VPointerStorage<VDestructTest> >,
 		VNoCheckPol<VDestructTest*>,
 		VNoCheckPol<VDestructTest*>
 		> SharedTestPtr;
+*/
+	typedef VPointer<VDestructTest>::SharedPtr SharedTestPtr;
 
 	vbool bAlive;
 	VDestructTest* pDestrTest = new VDestructTest(bAlive);

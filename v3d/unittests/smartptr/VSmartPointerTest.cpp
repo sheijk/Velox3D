@@ -6,10 +6,13 @@
 
 #include "VDestructTest.h"
 
+/*
 #include <Utils/SmartPtr/VSmartPointer.h>
 #include <Utils/SmartPtr/VNoCheckPol.h>
 #include <Utils/SmartPtr/VPointerStorage.h>
 #include <Utils/SmartPtr/VExclusiveOwnerPol.h>
+*/
+#include <utils/smartptr/VGuards.h>
 
 #include <strstream>
 
@@ -37,12 +40,15 @@ void VSmartPointerTest::GetTestInfo(std::string& out_TestName, std::string& out_
 void VSmartPointerTest::ExecuteTest()
 {
 	// create a simple smart pointer
+	/*
 	typedef VSmartPointer<
 		VDestructTest, 
 		VExclusiveOwnerPol< VPointerStorage<VDestructTest> >,
 		VNoCheckPol<VDestructTest*>,
 		VNoCheckPol<VDestructTest*>
 		> OurPointer;
+	*/
+	typedef VPointer<VDestructTest>::AutoPtr OurPointer;
 
 	vbool bAlive;
 	VDestructTest* pDestructTest = new VDestructTest(bAlive);
