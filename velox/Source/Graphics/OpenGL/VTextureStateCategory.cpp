@@ -1,6 +1,8 @@
 #include "VTextureStateCategory.h"
 //-----------------------------------------------------------------------------
+#include <v3d/Graphics/GraphicsExceptions.h>
 
+#include <V3dLib/Graphics/Materials/StateTypes.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -105,13 +107,6 @@ VTextureState* VTextureStateCategory::CreateState(const VMaterialDescription& in
 	}
 	else
 	{
-		//const VMaterialDescription::TextureRef& tex(*in_Descr.pTextureList);
-		//VTextureState* pState = new VTextureState(id);
-
-		//GLint texId = GetTextureId(*in_Descr.pTextureList);
-
-		//VTextureState* pState = new VTextureState(texId);
-
 		return GetTextureState(*in_Descr.pTextureList);
 	}
 }
@@ -122,8 +117,54 @@ VTextureState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 	VState const* pTextureState = in_Pass.GetStateByName("texture");
 	if( pTextureState != 0 )
 	{
-		vbool textureNotSupportedYet_ByEffectDescr = false;
-		V3D_ASSERT(textureNotSupportedYet_ByEffectDescr);
+		// if a texture is referenced by file name, load it using the image service
+		if( pTextureState->ContainsParameter("file") )
+		{
+			//// load image
+			//std::string imageFileName;
+			//pTextureState->GetParameter("file", imageFileName);
+
+			//VServicePtr<image::IVImageFactory> pImageService;
+			//image::IVImageFactory::ImagePtr pImage =
+			//	pImageService->CreateImage(imageFileName.c_str());
+
+			//// create buffer
+			vbool notImplementedYet = false;
+			V3D_ASSERT(notImplementedYet);
+
+			return 0;
+		}
+		// if a texture is referenced by a buffer id, get and check it
+		else if( pTextureState->ContainsParameter("bufferref") )
+		{
+			VMaterialDescription::TextureRef texRef;
+			void* hBuffer = 0;
+			pTextureState->GetParameter<void*>("bufferref", hBuffer);
+			texRef.hData = static_cast<VMaterialDescription::ByteBufferHandle>(hBuffer);
+			pTextureState->GetParameter("width", texRef.nWidth);
+			pTextureState->GetParameter("height", texRef.nHeight);
+
+			VTextureFilter magnification, minification;
+			pTextureState->GetParameter("magnification.filter", magnification);
+			texRef.magnificationFilter = (VMaterialDescription::TextureFilter)magnification;
+			pTextureState->GetParameter("minification.filter", minification);
+			texRef.minificationFilter = (VMaterialDescription::TextureFilter)minification;
+
+			VTextureWrapMode wrapu, wrapv;
+			pTextureState->GetParameter("wrapu", wrapu);
+			texRef.wrapTexCoordU = (VMaterialDescription::TextureWrapMode)wrapu;
+			pTextureState->GetParameter("wrapv", wrapv);
+			texRef.wrapTexCoordV = (VMaterialDescription::TextureWrapMode)wrapv;
+
+			return GetTextureState(texRef);
+		}
+		// necessary state parameters are missing
+		else
+		{
+			V3D_THROW(VMissingStateParameterException, "The effect description "
+				"contained a 'texture' state which is missing 'file' or "
+				"buffer reference parameters");
+		}
 	}
 	else
 	{
@@ -156,7 +197,6 @@ vuint VTextureStateCategory::GetGLModeNum(const TextureWrapMode  in_WrapMode)
 
 	V3D_THROW(VException, "illegal texture wrapping mode");
 }
-
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

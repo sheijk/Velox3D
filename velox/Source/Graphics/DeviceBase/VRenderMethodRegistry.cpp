@@ -36,7 +36,10 @@ VMeshBase* VRenderMethodRegistry::CreateMesh(
 	IVRenderMethod& renderMethod = * m_RenderMethods.front();
 
 	// create mesh for it
-	return renderMethod.CreateMesh(in_MeshDescr, in_Flags, in_pMaterial);
+	VMeshBase* pMesh = renderMethod.CreateMesh(in_MeshDescr, in_Flags, in_pMaterial);
+	pMesh->SetBuffers(in_MeshDescr.GetAllBuffers());
+
+	return pMesh;
 }
 
 //-----------------------------------------------------------------------------

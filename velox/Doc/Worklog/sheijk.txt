@@ -2,8 +2,6 @@ Worklog von sheijk
 -------------------------------------------------------------------------------
 ----- messages to sheijk:
 
->> neuer bsp render commit ist pre pre pre alpha! nicht rummotzen :))
-
 TODO: Einige typedefs sollte einfacher zugaenglcher sein z.b. Vertex
 TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
 zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
@@ -51,6 +49,22 @@ Doku:
 log:
 
 TODO:
+
+23.09.2004
+todo: 
+	VDisplaySettings
+	VImage
+	
+- weitere Hilfsfunktionen + Typen um Effect Descriptions bequem zu erstellen
+
+22.09.2004
+- diverse Hilfsfunktionen um States in einer Effect Description zu erzeugen
+  (siehe V3dLib/Graphics/Materials StateTypes.h, EffectUtils.h, VModeTypeInfo.h)
+- Vertex Buffer im Device verwenden Reference Counting und werden automatisch
+  freigegeben
+- Texturen koennen ueber Effect Description gesetzt werden (erstmal nur per 
+  Buffer Referenz)
+- Fehler im Window Service (doppeltes Input Manager loeschen) gefixt
 
 31.08.2004
 = Blending + Misc States werden aus Effect Description geladen (Format/Namen siehe

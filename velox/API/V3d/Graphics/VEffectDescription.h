@@ -163,7 +163,7 @@ public:
 	VRenderPass& RenderPass(vuint in_nIndex);
 	const VRenderPass& RenderPass(vuint in_nIndex) const;
 
-	vuint AddRenderPass();
+	VRenderPass& AddRenderPass();
 
 private:
 	typedef VPointer<VRenderPass>::SharedPtr RenderPassPtr;
@@ -179,7 +179,7 @@ public:
 	VShaderPath& ShaderPath(vuint in_nIndex);
 	const VShaderPath& ShaderPath(vuint in_nIndex) const;
 
-	vuint AddShaderPath();
+	VShaderPath& AddShaderPath();
 
 private:
 	typedef VPointer<VShaderPath>::SharedPtr ShaderPathPtr;

@@ -19,12 +19,14 @@
 #include "../DeviceBase/VStateCategoryList.h"
 #include "VTextureStateCategory.h"
 #include "VMiscStateCategory.h"
+#include "../DeviceBase/VMeshBase.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
+using namespace v3d; // using no auto indent
 
 /**
  * A graphic device on top of OpenGL
@@ -101,12 +103,13 @@ private:
 	VImmediateRenderMethod m_ImmediateRenderMethod;
 	VOpenGLVBORenderMethod m_VBORenderMethod;
 
+	// render state categories
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;
 	VMiscStateCategory m_MiscStateCategory;
-	
 
-	typedef std::list<IVMesh*> MeshList;
+	// current existing meshes
+	typedef std::list<VMeshBase*> MeshList;
 	MeshList m_Meshes;
 
 	// the matrices
@@ -115,10 +118,6 @@ private:
 	VMatrix44f m_ProjectionMatrix;
 	VMatrix44f m_TextureMatrix;
 
-	/**
-	 * All gl internal calling methods
-	 */
-	
 	void SetDisplay();
 	void SetPixFormat();
 	void CreateContext();
@@ -130,14 +129,14 @@ private:
 	/**
 	 * Device dependant variables:
 	 */
-	graphics::VDisplaySettings* m_DisplaySettings;
+	graphics::VDisplaySettings m_DisplaySettings;
 	HWND hWnd;
 	HDC hDC;
 	HGLRC hRC;
 
-	vchar		*m_pVendor;
-	vchar		*m_pRenderer;
-	vchar		*m_pVersion;
+	vchar* m_pVendor;
+	vchar* m_pRenderer;
+	vchar* m_pVersion;
 };
 
 //-----------------------------------------------------------------------------

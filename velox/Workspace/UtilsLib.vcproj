@@ -412,6 +412,28 @@
 					RelativePath="..\Api\V3dLib\Graphics\Image\VGraphicSprite.h">
 				</File>
 			</Filter>
+			<Filter
+				Name="Materials"
+				Filter="">
+				<File
+					RelativePath="..\Source\Graphics\Lib\EffectUtils.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Materials\EffectUtils.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\Lib\StateTypes.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Materials\StateTypes.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\Lib\VModeTypeInfo.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Materials\VModeTypeInfo.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Math"
@@ -485,9 +507,6 @@
 			</File>
 			<File
 				RelativePath="..\Api\V3dLib\Utils\VStreamReader.h">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\VStringValue.cpp">
 			</File>
 			<File
 				RelativePath="..\Api\V3dLib\Utils\VStringValue.h">

@@ -2,6 +2,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Graphics/GraphicsExceptions.h>
 
+#include <V3dLib/Graphics/Materials/VModeTypeInfo.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -17,6 +19,7 @@ VMiscState::VMiscState(const VMaterialDescription& in_Mat)
 
 	m_DepthFunction = GetGLModeNum(in_Mat.depthTestFunction);
 	m_bDepthWrite = in_Mat.depthWriteMask == VMaterialDescription::DepthWrite;
+	m_bDepthTestEnabled = true;
 
 	m_DefaultColor = in_Mat.defaultColor;
 
@@ -46,81 +49,17 @@ VColor4f VMiscState::GetColor(const VRenderPass& in_Pass)
 
 vuint VMiscState::GetPolygonMode(const std::string& in_strMode)
 {
-	if( in_strMode == "line" )
-		return GL_LINE;
-	else if( in_strMode == "point" )
-		return GL_POINT;
-	else if( in_strMode == "fill" )
-		return GL_FILL;
-	else
-	{
-		std::string message = "Invalid polygon mode \'";
-		message += in_strMode;
-		message += "\' in effect description";
-
-		V3D_THROW(VInvalidModeException, message.c_str());
-	}
+	return GetPolygonModeInfo().GetGLEnum(in_strMode);
 }
 
 vuint VMiscState::GetDepthFunction(const std::string& in_strFunc)
 {
-	if( in_strFunc == "always" )
-		return GL_ALWAYS;
-	else if( in_strFunc == "never" )
-		return GL_NEVER;
-	else if( in_strFunc == "onless" )
-		return GL_LESS;
-	else if( in_strFunc == "onlesseq" )
-		return GL_LEQUAL;
-	else if( in_strFunc == "ongreater" )
-		return GL_GREATER;
-	else if( in_strFunc == "ongreatereq" )
-		return GL_GEQUAL;
-	else if( in_strFunc == "onequal" )
-		return GL_EQUAL;
-	else if( in_strFunc == "onnotequal" )
-		return GL_NOTEQUAL;
-	else
-	{
-		std::string message = "Invalid depth function mode: '";
-		message += in_strFunc;
-		message += "'";
-		V3D_THROW(VInvalidModeException, message.c_str());
-	}
+	return GetDepthTestInfo().GetGLEnum(in_strFunc);
 }
 
 vuint VMiscState::GetBlendFunction(const std::string& in_strFunc)
 {
-	if( in_strFunc == "zero" )
-		return GL_ZERO;
-	else if( in_strFunc == "one" )
-		return GL_ONE;
-	else if( in_strFunc == "source.color" )
-		return GL_SRC_COLOR;
-	else if( in_strFunc == "one.minus.source.color" )
-		return GL_ONE_MINUS_SRC_COLOR;
-	else if( in_strFunc == "dest.color" )
-		return GL_DST_COLOR;
-	else if( in_strFunc == "one.minus.dest.color" )
-		return GL_ONE_MINUS_DST_COLOR;
-	else if( in_strFunc == "source.alpha" )
-		return GL_SRC_ALPHA;
-	else if( in_strFunc == "one.minus.source.alpha" )
-		return GL_ONE_MINUS_SRC_ALPHA;
-	else if( in_strFunc == "dest.alpha" )
-		return GL_DST_ALPHA;
-	else if( in_strFunc == "one.minus.depth.alpha" )
-		return GL_ONE_MINUS_DST_ALPHA;
-	else if( in_strFunc == "source.alpha.saturate" )
-		return GL_SRC_ALPHA_SATURATE;
-	else
-	{
-		std::string message = "Invalid alpha blending mode: '";
-		message += in_strFunc;
-		message += "'";
-
-		V3D_THROW(VInvalidModeException, message.c_str());
-	}
+	return GetBlendFactorInfo().GetGLEnum(in_strFunc);
 }
 
 VMiscState::VMiscState(const VRenderPass& in_Pass)
@@ -131,6 +70,7 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 
 	m_DepthFunction = GL_LESS;
 	m_bDepthWrite = true;
+	m_bDepthTestEnabled = true;
 
 	m_DefaultColor = VColor4f(0, 0, 0, 1);
 
@@ -145,6 +85,7 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 
 	// overwrite with options from render pass
 
+	// read polygon mode
 	VState const* polyState = in_Pass.GetStateByName("polygonmode");
 	if( polyState != 0 )
 	{
@@ -157,17 +98,21 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 		m_nBackPolygonMode = GetPolygonMode(backmode);
 	}
 
+	// get z buffer modes
 	VState const* depthState = in_Pass.GetStateByName("depth");
 	if( depthState != 0 )
 	{
 		std::string depthTest = "onless";
 		vbool depthWrite = true;
+		vbool enable = true;
 
 		depthState->GetParameter("function", depthTest);
 		depthState->GetParameter("write", depthWrite);
+		depthState->GetParameter("enable", enable);
 
 		m_DepthFunction = GetDepthFunction(depthTest);
 		m_bDepthWrite = depthWrite;
+		m_bDepthTestEnabled = enable;
 	}
 
 	VState const* colorMask = in_Pass.GetStateByName("colormask");
@@ -201,6 +146,14 @@ void VMiscState::Apply() const
 	glPolygonMode(GL_FRONT, m_nFrontPolygonMode);
 	glPolygonMode(GL_BACK, m_nBackPolygonMode);
 
+	if( m_bDepthTestEnabled )
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+	else
+	{
+		glDisable(GL_DEPTH_TEST);
+	}
 	glDepthFunc(m_DepthFunction);
 	glDepthMask(m_bDepthWrite);
 
@@ -218,11 +171,9 @@ void VMiscState::Apply() const
 		m_ColorMask.writeAlpha
 		);
 
-	//TODO: GL_DEPTH_TEST wegmachen
 	if(m_bBlendingEnabled)
 	{
 		glEnable(GL_BLEND);
-		glDisable(GL_DEPTH_TEST);
 
 		glBlendFunc(m_SourceFactor, m_DestFactor);
 	}
@@ -230,7 +181,6 @@ void VMiscState::Apply() const
 	{
 		glDisable(GL_BLEND);
 	}
-	glEnable(GL_DEPTH_TEST);
 }
 
 vuint VMiscState::GetGLModeNum(const PolygonMode in_Mode)

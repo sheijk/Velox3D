@@ -20,6 +20,7 @@ VMaterialDescription BuildTextureMaterial(
 
 	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(in_pcTextureFile);
 
+	//TODO: automatisch auf 2^n Groesse skalieren
 	VImage image(myImage->GetWidth(), myImage->GetHeight(), 24);
 	pFactory->ConvertImage(*myImage, image);
 

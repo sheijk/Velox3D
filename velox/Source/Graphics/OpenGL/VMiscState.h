@@ -33,15 +33,19 @@ private:
 	typedef VMaterialDescription::DepthTest DepthTest;
 	typedef VMaterialDescription::BlendFactor BlendMode;
 
+	// alpha blending
 	vuint m_SourceFactor;
 	vuint m_DestFactor;
 	vbool m_bBlendingEnabled;
 
+	// polygon mode (lines, filled, points,..)
 	vuint m_nFrontPolygonMode;
 	vuint m_nBackPolygonMode;
 
+	// z buffer / depth test
 	vuint m_DepthFunction;
 	vbool m_bDepthWrite;
+	vbool m_bDepthTestEnabled;
 
 	VMaterialDescription::ColorBufferMask m_ColorMask;
 

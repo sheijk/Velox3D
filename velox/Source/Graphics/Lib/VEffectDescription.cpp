@@ -163,10 +163,10 @@ const VRenderPass& VShaderPath::RenderPass(vuint in_nIndex) const
 		V3D_THROW(VException, "blahblub");
 }
 
-vuint VShaderPath::AddRenderPass()
+VRenderPass& VShaderPath::AddRenderPass()
 {
     m_RenderPasses.push_back(RenderPassPtr(new VRenderPass()));
-	return vuint(m_RenderPasses.size())-1;
+	return *m_RenderPasses.back();
 }
 
 //-----------------------------------------------------------------------------
@@ -196,10 +196,10 @@ const VShaderPath& VEffectDescription::ShaderPath(vuint in_nIndex) const
 		V3D_THROW(VException, "bhasd");
 }
 
-vuint VEffectDescription::AddShaderPath()
+VShaderPath& VEffectDescription::AddShaderPath()
 {
 	m_ShaderPaths.push_back(ShaderPathPtr(new VShaderPath()));
-	return vuint(m_ShaderPaths.size())-1;
+	return *m_ShaderPaths.back();
 }
 
 

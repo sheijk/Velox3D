@@ -5,7 +5,9 @@
 
 #include <v3d/Graphics/IVMesh.h>
 #include <v3d/Graphics/IVMaterial.h>
+#include <v3d/Graphics/VMeshDescription.h>
 
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
@@ -14,6 +16,7 @@ using namespace v3d;
 
 class VMeshBase : public IVMesh
 {
+	std::vector<VMeshDescription::BufferHandle> m_Buffers;
 	IVMaterial* const m_pMaterial;
 
 public:
@@ -21,6 +24,9 @@ public:
 
 	virtual IVMaterial& GetMaterial();
 	virtual void Render() = 0;
+
+	void SetBuffers(std::vector<VMeshDescription::BufferHandle> in_Buffers);
+	std::vector<VMeshDescription::BufferHandle> GetBuffers() const;
 };
 
 //-----------------------------------------------------------------------------

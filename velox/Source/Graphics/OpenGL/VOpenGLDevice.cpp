@@ -9,6 +9,8 @@
 
 #include "IVOpenGLRenderState.h"
 
+#include <v3d/Graphics/GraphicsExceptions.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -32,19 +34,19 @@ namespace {
 	 * Converts a MeshHandle to a pointer to a mesh
 	 * Use this to enable changing the exact type of MeshHandle
 	 */
-	IVMesh* MakeMeshPointer(IVDevice::MeshHandle handle)
+	VMeshBase* MakeMeshPointer(IVDevice::MeshHandle handle)
 	{
-		return handle;
+		return static_cast<VMeshBase*>(handle);
 	}
 }
 
 VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
+	:
+	m_DisplaySettings(*in_pSettings)
 {
-	m_DisplaySettings = new VDisplaySettings(*in_pSettings);
 	hWnd = in_hWnd;
 
 	SetDisplay();
-
 
 	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
 	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
@@ -57,9 +59,10 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 	Identity(m_ViewMatrix);
 	Identity(m_ProjectionMatrix);
 	Identity(m_TextureMatrix);
+
+	RecalcModelViewMatrix();
 }
 //-----------------------------------------------------------------------------
-
 VOpenGLDevice::~VOpenGLDevice()
 {
 	// output warnings for unreleased resources
@@ -74,6 +77,19 @@ VOpenGLDevice::~VOpenGLDevice()
 
 		V3D_DEBUGMSG(message.str().c_str());
 		vout << message.str();
+
+		for(vuint bufid = 0; bufid < m_Buffers.GetBufferCount(); ++bufid)
+		{
+			std::stringstream msg;
+			msg << "\tBuffer with " 
+				<< m_Buffers.GetReferenceCount(m_Buffers.GetBuffer(bufid)) 
+				<< " references at address 0x"
+				<< m_Buffers.GetBuffer(bufid)
+				<< "\n";
+
+			V3D_DEBUGMSG(msg.str().c_str());
+			vout << msg.str();
+		}
 	}
 
 	const vuint nUnreleasedMeshes = vuint(m_Meshes.size());
@@ -89,8 +105,6 @@ VOpenGLDevice::~VOpenGLDevice()
 	}
 
 	DestroyContext();
-
-	delete m_DisplaySettings;
 }
 
 IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
@@ -99,23 +113,19 @@ IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 	BufferCopyMode in_CopyMode
 	)
 {
-	// DropData will cause crashes when deleting the buffer..
-	//in_CopyMode = VBufferBase::CopyData;
-
-	//Buffer* pBuffer = new VByteBuffer(in_pBuffer, in_CopyMode);
-	Buffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
+	Buffer* pBuffer = new VByteBuffer(in_pBuffer, VBufferBase::CopyData);
 
 	switch(in_Type)
 	{
 	case VertexBuffer:
-		{
-			m_Buffers.Add(pBuffer);
-		} break;
+	{
+		m_Buffers.Add(pBuffer);
+	} break;
 
 	case Texture:
-		{
-			m_TextureBuffers.Add(pBuffer);
-		} break;
+	{
+		m_TextureBuffers.Add(pBuffer);
+	} break;
 
 	default:
 		V3D_THROW(VException, "tried to create illegal buffer type");
@@ -162,6 +172,10 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	const VMaterialDescription& in_MaterialDesc
 	)
 {
+	vout << "warning: using deprecation function v3d::graphics::IVDevice::Crea"
+		"teMesh(VMeshDescription&, VMaterialDescription&). Use an effect "
+		"description instead" << vendl;
+
 	IVMaterial* pMaterial = CreateMaterial(in_MaterialDesc);
 
 	VMeshDescription descr = in_MeshDesc;
@@ -169,10 +183,13 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	// add buffers to device, if they are external
 	InternalizeBuffers(descr);
 	
-	//TODO
-	// increase reference count for all used buffers
+	//std::vector<BufferHandle> buffers = descr.GetAllBuffers();
+	//for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
+	//{
+	//	m_Buffers.Add(static_cast<VByteBuffer*>(buffers[bufid]));
+	//}
 
-	IVMesh* pMesh = m_RenderMethods.CreateMesh(descr, 0, pMaterial);
+	VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, pMaterial);
 
 	m_Meshes.push_back(pMesh);
 
@@ -193,16 +210,25 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 
 		VMeshDescription descr = in_MeshDescr;
 
+		// add buffers to device, if they are external
 		InternalizeBuffers(descr);
 
-		IVMesh* pMesh = m_RenderMethods.CreateMesh(descr, 0, materials[0]);
+		//std::vector<BufferHandle> buffers = descr.GetAllBuffers();
+		//for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
+		//{
+		//	m_Buffers.Add(static_cast<VByteBuffer*>(buffers[bufid]));
+		//}
+
+		VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, materials[0]);
 
 		m_Meshes.push_back(pMesh);
 
 		return MakeMeshHandle(pMesh);
 	}
 	else
+	{
 		return 0;
+	}
 }
 
 VOpenGLDevice::MaterialHandle VOpenGLDevice::CreateMaterial(
@@ -219,11 +245,16 @@ void VOpenGLDevice::DeleteMaterial(MaterialHandle& in_Material)
 
 void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 {
-	//TODO
-	// decrease reference count for all used buffers
-	// maybe: delete buffers not needed anymore
+	VMeshBase* pMesh = MakeMeshPointer(in_Mesh);
 
-	IVMesh* pMesh = MakeMeshPointer(in_Mesh);
+	// release buffers
+	std::vector<VMeshDescription::BufferHandle> buffers = pMesh->GetBuffers();
+
+	for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
+	{
+		VByteBuffer* pByteBuffer = static_cast<VByteBuffer*>(buffers[bufid]);
+		m_Buffers.Delete(pByteBuffer);
+	}
 
 	m_Meshes.remove(pMesh);
 
@@ -269,34 +300,38 @@ void VOpenGLDevice::ApplyState(const IVRenderState& in_State)
 
 void VOpenGLDevice::SetDisplay()
 {
-
-    if (!(hDC=GetDC(hWnd)))
-
-	if(m_DisplaySettings->m_bFullscreen)
+	// setup fullscreen if needed
+    if( !(hDC=GetDC(hWnd)) )
+	if(m_DisplaySettings.m_bFullscreen)
 	{
-		DEVMODE DisplayFormat;
+		V3D_THROW(VIllegalDisplayException, "Fullscreen mode currently not supported");
 
-		DisplayFormat.dmSize		= sizeof(DEVMODE);
-		DisplayFormat.dmPelsWidth	= m_DisplaySettings->m_iWidth;
-		DisplayFormat.dmPelsHeight	= m_DisplaySettings->m_iHeight;
-		DisplayFormat.dmBitsPerPel	= m_DisplaySettings->m_iBitsPerPixel;
-		DisplayFormat.dmFields	    = DM_PELSWIDTH | DM_PELSHEIGHT |
+		/*
+		DEVMODE displayFormat;
+
+		displayFormat.dmSize		= sizeof(DEVMODE);
+		displayFormat.dmPelsWidth	= m_DisplaySettings.m_iWidth;
+		displayFormat.dmPelsHeight	= m_DisplaySettings.m_iHeight;
+		displayFormat.dmBitsPerPel	= m_DisplaySettings.m_iBitsPerPixel;
+		displayFormat.dmFields	    = DM_PELSWIDTH | DM_PELSHEIGHT |
 													 DM_BITSPERPEL;
 
-		if (ChangeDisplaySettings(&DisplayFormat, CDS_FULLSCREEN) !=
+		if (ChangeDisplaySettings(&displayFormat, CDS_FULLSCREEN) !=
 									DISP_CHANGE_SUCCESSFUL)
 		{
 			vout << "requesting fullscreen mode failed!" << vendl;
-			m_DisplaySettings->m_bFullscreen = false;
+			m_DisplaySettings.m_bFullscreen = false;
 		}
+		*/
 	}
+
 	SetPixFormat();
 	CreateContext();
 	InitializeExtensions();
 	SetScreenSize();
 	SetBackgroundColor();
 
-	glClearDepth(m_DisplaySettings->m_fClearDepth);
+	glClearDepth(m_DisplaySettings.m_fClearDepth);
 	glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);
 }
@@ -328,10 +363,10 @@ void VOpenGLDevice::SetPixFormat()
 		0, 0, 0
 	};
 
-	PixelFormatDesc.cAccumBits		= m_DisplaySettings->m_iAccumulationBuffer;
-	PixelFormatDesc.cDepthBits		= m_DisplaySettings->m_iDepthBits;
-	PixelFormatDesc.cStencilBits	= m_DisplaySettings->m_iStencilBits;
-	PixelFormatDesc.cColorBits		= m_DisplaySettings->m_iBitsPerPixel;
+	PixelFormatDesc.cAccumBits		= m_DisplaySettings.m_iAccumulationBuffer;
+	PixelFormatDesc.cDepthBits		= m_DisplaySettings.m_iDepthBits;
+	PixelFormatDesc.cStencilBits	= m_DisplaySettings.m_iStencilBits;
+	PixelFormatDesc.cColorBits		= m_DisplaySettings.m_iBitsPerPixel;
 
 	if (!(PixelFormat=ChoosePixelFormat(hDC,&PixelFormatDesc)))
 	{
@@ -392,27 +427,27 @@ void VOpenGLDevice::DestroyContext()
 
 void VOpenGLDevice::SetScreenSize()
 {
-	if(m_DisplaySettings->m_iHeight <= 0) m_DisplaySettings->m_iHeight = 1;
-	glViewport(0, 0, m_DisplaySettings->m_iWidth, m_DisplaySettings->m_iHeight);
+	if(m_DisplaySettings.m_iHeight <= 0) m_DisplaySettings.m_iHeight = 1;
+	glViewport(0, 0, m_DisplaySettings.m_iWidth, m_DisplaySettings.m_iHeight);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(m_DisplaySettings->m_fFieldOfView,
-					((vfloat32)m_DisplaySettings->m_iWidth /
-					m_DisplaySettings->m_iHeight),
-					m_DisplaySettings->m_fNearClippingPlane,
-					m_DisplaySettings->m_fFarClippingPlane);
+	gluPerspective(m_DisplaySettings.m_fFieldOfView,
+					((vfloat32)m_DisplaySettings.m_iWidth /
+					m_DisplaySettings.m_iHeight),
+					m_DisplaySettings.m_fNearClippingPlane,
+					m_DisplaySettings.m_fFarClippingPlane);
 	glMatrixMode(GL_MODELVIEW);
 }
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::SetBackgroundColor()
 {
-	glClearColor(m_DisplaySettings->m_fBackgroundRed,
-				 m_DisplaySettings->m_fBackgroundGreen,
-				 m_DisplaySettings->m_fBackgroundBlue,
-				 m_DisplaySettings->m_fBackgroundAlpha);
+	glClearColor(m_DisplaySettings.m_fBackgroundRed,
+				 m_DisplaySettings.m_fBackgroundGreen,
+				 m_DisplaySettings.m_fBackgroundBlue,
+				 m_DisplaySettings.m_fBackgroundAlpha);
 }
 //-----------------------------------------------------------------------------
 
@@ -461,17 +496,13 @@ void VOpenGLDevice::BeginScene()
 {
 	wglMakeCurrent(hDC, hRC);
 
-	// fuer sowas solltes noch fkten geben - wir brauchen eine komplette state engine -ins
+	// fuer sowas solltes noch fkten geben -ins
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	RecalcModelViewMatrix();
-
 }
 
 //-----------------------------------------------------------------------------
@@ -571,6 +602,8 @@ IVDevice::BufferHandle VOpenGLDevice::GetInternalVertexBuffer(
 	if( m_Buffers.Contains( buffer ) )
 	{
 		hBuffer = in_hBuffer;
+
+		m_Buffers.Add(buffer);
 	}
 	else if( buffer != 0 )
 	{

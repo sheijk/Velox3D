@@ -44,7 +44,6 @@ VWindowBase::VWindowBase()
 
 VWindowBase::~VWindowBase()
 {
-	delete m_pInputManager;
 }
 
 //-----------------------------------------------------------------------------
