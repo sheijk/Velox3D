@@ -29,7 +29,7 @@ inline vfloat32 RadianToDegree(vfloat32 radian)
 
 inline vfloat32 Pi()
 {
-	return 3.1415;
+	return 3.1415f;
 }
 
 //-----------------------------------------------------------------------------

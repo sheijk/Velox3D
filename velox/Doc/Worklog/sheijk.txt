@@ -147,6 +147,7 @@ V3dLib/Graphics/Misc/VKeyboardCamera
 V3dlib/graphics/geometry/vresizablegeometry + vdynamicgeometry
 z-buffer settings in mat. descr.
 VTerrainChunk
+VMultipassDrawList
 
 09.04.2004
 Buffer Operationen (BufferManipulations.h)

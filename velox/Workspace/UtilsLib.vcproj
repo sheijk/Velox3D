@@ -232,6 +232,9 @@
 					RelativePath="..\Api\V3dLib\Graphics\Misc\IVDrawList.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3dLib\Graphics\Misc\MiscUtils.h">
+				</File>
+				<File
 					RelativePath="..\Source\UtilsLib\Camera\VCamera.cpp">
 				</File>
 				<File
@@ -242,6 +245,9 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Misc\VKeyboardCamera.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Misc\VMultipassDrawList.h">
 				</File>
 				<File
 					RelativePath="..\Source\UtilsLib\DrawList\VSimpleDrawList.cpp">
