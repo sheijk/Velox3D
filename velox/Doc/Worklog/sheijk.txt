@@ -40,6 +40,10 @@ Doku:
 
 
 14.02.2005
+- textur koordinaten support im model loader
+- Scripts ins CVS getan (Workspace/Templates/Scripts)
+
+13.02.2005
 - erste version vom model loader
 - kleinere xml service extras
 

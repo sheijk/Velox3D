@@ -91,7 +91,7 @@ void SetCoordinate(
 
 	// copy data
 	V3D_ASSERT( offset >= 0 );
-	V3D_ASSERT( (offset+sizeof(VVertex3f)) <= io_Buffer.GetSize() );
+	V3D_ASSERT( (offset+sizeof(in_Coordinate)) <= io_Buffer.GetSize() );
 
 	memcpy(io_Buffer.GetDataAddress()+offset, &in_Coordinate, sizeof(in_Coordinate));
 }
@@ -106,9 +106,27 @@ void SetColor(
 		in_nIndex, in_Format.GetColorFormat());
 
 	V3D_ASSERT( offset >= 0 );
-	V3D_ASSERT( (offset+sizeof(VVertex3f)) <= io_Buffer.GetSize() );
+	V3D_ASSERT( (offset+sizeof(in_Color)) <= io_Buffer.GetSize() );
 
 	memcpy(io_Buffer.GetDataAddress()+offset, &in_Color, sizeof(in_Color));
+}
+
+void SetTexCoord(
+	vuint in_nTexCoordNum,
+	VByteBuffer& io_Buffer,
+	vuint in_nIndex,
+	const VVertexFormat& in_Format,
+	const VTexCoord2f& in_TexCoord)
+{
+	V3D_ASSERT( in_nTexCoordNum == 0 );
+
+	const vuint offset = CalculateOffsetInBytes(
+		in_nIndex, in_Format.GetTexCoordFormat(in_nTexCoordNum));
+
+	V3D_ASSERT( offset >= 0 );
+	V3D_ASSERT( (offset+sizeof(in_TexCoord)) <= io_Buffer.GetSize() );
+
+	memcpy(io_Buffer.GetDataAddress()+offset, &in_TexCoord, sizeof(in_TexCoord));
 }
 
 VVertex3f ReadCoordinate(IVXMLElement* in_pElement)
@@ -128,6 +146,22 @@ VColor4f ReadColor(IVXMLElement* in_pElement)
 		in_pElement->GetAttributeValue<vfloat32>("b"),
 		in_pElement->GetAttributeValue<vfloat32>("a")
 		);
+}
+
+VTexCoord2f ReadTexCoord(IVXMLElement* in_pElement, vuint in_nTexCoordNum)
+{
+	std::stringstream name;
+	name << "u" << in_nTexCoordNum;
+
+	vfloat32 u = in_pElement->GetAttributeValue<vfloat32>(name.str().c_str());
+
+	// clear string stream
+	name.str("");
+	name << "v" << in_nTexCoordNum;
+
+	vfloat32 v = in_pElement->GetAttributeValue<vfloat32>(name.str().c_str());
+
+	return VTexCoord2f(u, v);
 }
 
 void VModelLoader::CheckRootNode(IVXMLElement* in_pRootNode)
@@ -192,18 +226,23 @@ void VModelLoader::CreateMeshNode(
 		in_pMeshNode, "coords", "yes");
 	const vbool bColors = HasAttributeWithValue<std::string>(
 		in_pMeshNode, "colors", "yes");
+	const vuint nTexCoordCount = 
+		in_pMeshNode->GetAttributeValue<vuint>("texCoordCount");
 
 	// calculate size per vertex
 	vuint vertexSize = 0;
 
 	const vuint coordSize = sizeof(VVertex3f) / sizeof(vfloat32);
 	const vuint colorSize = sizeof(VColor4f) / sizeof(vfloat32);
+	const vuint texCoordSize = sizeof(VTexCoord2f) / sizeof(vfloat32);
 
 	if( bCoordinates )
 		vertexSize += coordSize;
 
 	if( bColors )
 		vertexSize += colorSize;
+
+	vertexSize += nTexCoordCount * texCoordSize;
 
 	// set data format
 	VVertexFormat format;
@@ -213,7 +252,7 @@ void VModelLoader::CreateMeshNode(
 	{
 		format.SetCoordinateFormat(
 			VDataFormat(dataEnd, vertexCount, coordSize));
-        dataEnd += coordSize * vertexCount;
+		dataEnd += coordSize * vertexCount;
 	}
 
 	if( bColors )
@@ -221,6 +260,13 @@ void VModelLoader::CreateMeshNode(
 		format.SetColorFormat(
 			VDataFormat(dataEnd, vertexCount, colorSize));
 		dataEnd += colorSize * vertexCount;
+	}
+
+	format.SetTexCoordCount(nTexCoordCount);
+	for(int i = 0; i < nTexCoordCount; ++i)
+	{
+		format.SetTexCoordFormat(i, VDataFormat(dataEnd, vertexCount, texCoordSize));
+		dataEnd += texCoordSize * vertexCount;
 	}
 
 	V3D_ASSERT(dataEnd == vertexSize * vertexCount);
@@ -245,11 +291,18 @@ void VModelLoader::CreateMeshNode(
 				VVertex3f v = ReadCoordinate(pVertexNode);
 				SetCoordinate(vertices, nVertexId, format, v);
 			}
+
 			if( bColors )
 			{
 				VColor4f color = ReadColor(pVertexNode);
 				//VColor4f color(1, 0, 0, 1);
 				SetColor(vertices, nVertexId, format, color);
+			}
+
+			for(int i = 0; i < nTexCoordCount; ++i)
+			{
+				VTexCoord2f texCoord = ReadTexCoord(pVertexNode, i);
+				SetTexCoord(i, vertices, nVertexId, format, texCoord);
 			}
 
 			++nVertexId;
@@ -278,6 +331,8 @@ void VModelLoader::CreateMeshNode(
 		pMeshDescription->SetCoordinateResource(in_pResource->GetQualifiedName());
 	if( bColors )
 		pMeshDescription->SetColorResource(in_pResource->GetQualifiedName());
+	for(int i = 0; i < nTexCoordCount; ++i)
+		pMeshDescription->SetTexCoordResource(i, in_pResource->GetQualifiedName());
 
 	in_pResource->AddData(pMeshDescription);
 

@@ -2,6 +2,8 @@
 #include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h> 
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/MemManager.h>
+
+#include <sstream>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
@@ -47,17 +49,17 @@ IVXMLAttribute* VXMLElement::GetAttribute(VStringParam in_strName)
 {
 	VString name(in_strName);
 
-	if(m_AttributeList.empty())
-		V3D_THROW(VXMLAttributeException, "Attribute cannot be found. List empty");
-	else
+	for(vuint i = 0; i<m_AttributeList.size(); i++)
 	{
-		for(vuint i = 0; i<m_AttributeList.size(); i++)
-		{
-			if(name == m_AttributeList[i]->GetName() )
-				return m_AttributeList[i];
-		}
+		if(name == m_AttributeList[i]->GetName() )
+			return m_AttributeList[i];
 	}
-	V3D_THROW(VXMLAttributeException, "Attribute cannot be found. Not in list");
+
+	std::stringstream message;
+	message << "Could not find attribute '" << in_strName << "' in xml "
+		<< "element '" << m_strName << "'";
+
+	V3D_THROW(VXMLAttributeException, message.str().c_str());
 }
 
 /**
