@@ -35,6 +35,7 @@ high:
 Done List:
 
 22.01.05
+- renamend graphics::VVector3f to graphics::VVertex3f to avoid nameing conflcit 
 - moved VVector<Scalar, Dimension> template functions to VVectorOps.h
 
 21.01.05
