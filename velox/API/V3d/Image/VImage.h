@@ -15,6 +15,10 @@ namespace image{
 struct VImage
 {
 	VImage(){};
+	~VImage()
+	{
+		m_pData->~VBuffer();
+	}
 	vuint iHeight;
 	vuint iWidth;
 	vuint iBPP;
