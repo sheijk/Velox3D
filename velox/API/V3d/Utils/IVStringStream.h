@@ -5,7 +5,7 @@
 #include <sstream>
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace util {
+namespace utils {
 //-----------------------------------------------------------------------------
 class IVStringStream
 {
@@ -42,6 +42,6 @@ inline IVStringStream& Flush( IVStringStream& in_Stream )
 	return in_Stream;
 }
 //-----------------------------------------------------------------------------
-} // namespace util
+} // namespace utils
 } // namespace v3d
 #endif // V3D_IVSTRINGSTREAM_H
