@@ -121,34 +121,6 @@ VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
 	return meshDesc;
 }
 
-//VMaterialDescription BuildTextureMaterial(
-//	IVDevice* in_pDevice,
-//	VStringParam in_pcTextureFile)
-//{
-//	IVImageFactory* pFactory = QueryObject<IVImageFactory>("image.service");
-//
-//	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(in_pcTextureFile);
-//
-//	VMaterialDescription texMat;
-//
-//	VMaterialDescription::TextureRef* pTexRef =
-//		new VMaterialDescription::TextureRef();
-//
-//	IVDevice::BufferHandle hTextureBuffer = in_pDevice->CreateBuffer(
-//		IVDevice::Texture,
-//		myImage->pData,
-//		IVDevice::Buffer::DropData
-//		);
-//
-//	pTexRef->nWidth = myImage->iWidth;
-//	pTexRef->nHeight = myImage->iHeight;
-//	pTexRef->hData = hTextureBuffer;
-//
-//	texMat.AddTexture(pTexRef);
-//
-//	return texMat;
-//}
-
 void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 {
 	m_pEscapeButton		= &in_pInputManager->GetStandardKey(IVInputManager::Escape);
@@ -170,10 +142,10 @@ void VExampleApp::MoveCamera(VCamera* in_pCamera)
 	const vfloat32 fSeconds = m_pUpdateManager->GetFrameDuration();
 
 	if(m_pUpButton->IsDown() == true)
-		in_pCamera->MoveForward(-5.0f * fSeconds);
+		in_pCamera->MoveForward(5.0f * fSeconds);
 
 	if(m_pDownButton->IsDown() == true)
-		in_pCamera->MoveForward(5.0f * fSeconds);
+		in_pCamera->MoveForward(-5.0f * fSeconds);
 
 	if(m_pLeftButton->IsDown() == true)
 		in_pCamera->Strafe(-5 * fSeconds);
@@ -272,11 +244,9 @@ vint VExampleApp::Main()
 	consoleCallbackConn = pConsole->RegisterCommandListener(&OnConsoleCommand);
 
 	m_pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
-	//IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
-	//IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
-
+	
 	IVWindowManager::IVWindowPtr pWindow;
-	pWindow = pWindowManager->QueryWindow("v3d window");
+	pWindow = pWindowManager->QueryWindow("app");
 	m_pDevice = &(pWindow->QueryGraphicsDevice());
 
 	IVInputManager* pInputManager;
@@ -284,16 +254,10 @@ vint VExampleApp::Main()
 
 	VCamera* pCamera;
 
-	//run system
-
-	//pSystemManager->GetCPU(); // just for testing...
-
 	QueryButtons(pInputManager);
 
 	pCamera = new VCamera();
-	//pCamera->SetZ(-10.0f);
-	//m_pDevice->SetCamera(pCamera);
-
+	
 	// build scene graph
 	VPointer<IVNode>::AutoPtr pRootNode;
 
@@ -322,36 +286,24 @@ vint VExampleApp::Main()
 	}
 
 	{
-		VBox<ColoredVertex> box(.9f, .9f, .9f);
-		box.CreateCoordinates();
+		VBoxMesh<ColoredVertex> box(1);
+		box.GenerateCoordinates();
 
-		for(int vertnum = 0; vertnum < box.buffer.GetSize(); ++vertnum)
+		for(int vertnum = 0; vertnum < box.GetVertexBuffer().GetSize(); ++vertnum)
 		{
-			box.buffer[vertnum].color = VColor4f(1, 0, 0, 1);
+			box.GetVertexBuffer()[vertnum].color = VColor4f(1, 0, 0, 1);
 		}		
 		
 		VMeshDescription md = BuildMeshDescription(
 			*m_pDevice,
-			box.buffer.GetDataAddress(),
-			box.buffer.GetSize()
+			box.GetVertexBuffer().GetDataAddress(),
+			box.GetVertexBuffer().GetSize()
 			);
 
 		IVDevice::MeshHandle hMesh = m_pDevice->CreateMesh(
 			md, 
 			VMaterialDescription());
 		
-		//pRootNode->AddChild(
-		//	CreateMeshTransformNode(hMesh, BuildTranslateMatrix(0, 0, -6))
-		//	);
-
-		//for(int xpos = -15; xpos < 15; xpos += 3)
-		//for(int ypos = -15; ypos < 15; ypos += 3)
-		//for(int zpos = -15; zpos < 15; zpos += 3)
-		//{
-		//	pRootNode->AddChild(
-		//		CreateMeshTransformNode(hMesh, BuildTranslateMatrix(xpos, ypos, zpos))
-		//		);
-		//}
 	}
 
 	VSimpleDrawList drawList(*m_pDevice);
@@ -372,8 +324,6 @@ vint VExampleApp::Main()
 		m_pDevice->BeginScene();
 		m_pDevice->SetMatrix(IVDevice::MatrixMode::ViewMatrix, *pCamera->GetMatrix());
 
-		//ApplyMaterial(m_pDevice, &pMesh->GetMaterial());
-		//m_pDevice->RenderMesh(pMesh);
 		drawList.Render();
 
         m_pDevice->EndScene();
@@ -387,11 +337,6 @@ vint VExampleApp::Main()
 		// input checking
 		MoveCamera(pCamera);
 
-		/* das kommt nicht von mir! ;) */
-		static vchar strFrameRate[50] = {0};
-		sprintf(strFrameRate, "Current Frames Per Second: %d",
-			int( 1 / m_pUpdateManager->GetFrameDuration()));
-		pWindow->SetTitle(strFrameRate);
 	}
 
 	m_pUpdateManager->Stop();

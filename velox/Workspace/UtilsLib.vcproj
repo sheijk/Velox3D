@@ -186,52 +186,49 @@
 				Name="Generators"
 				Filter="">
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VBox.h">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VBoxMesh.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VBox.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VCircleMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VCircle.h">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VCircleMesh.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VCircle.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VCylinderMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VCylinder.h">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VCylinderMesh.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VCylinder.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VGeoSphere.h">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VGeoSphere.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VHeightmap.h">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VHeightmap.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VPolarSphere.h">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VPolarSphere.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\Lib\VTerrainChunk.cpp">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunk.h">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangleMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangle.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangle.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangleMesh.inl">
 				</File>
 			</Filter>
 			<Filter

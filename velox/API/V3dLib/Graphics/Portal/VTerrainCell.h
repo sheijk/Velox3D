@@ -4,8 +4,8 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3dLib/Graphics/Portal/IVCell.h>
-#include <V3dLib/Graphics/Generators/VTerrainChunk.h>
-#include <V3dLib/Graphics/Generators/VHeightmap.h>
+#include <V3dLib/Graphics/Generators/VTerrainChunkMesh.h>
+#include <V3dLib/Graphics/Generators/VHeightmapMesh.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
@@ -47,7 +47,7 @@ public:
 
 	void GenerateSubArea(
 		VRect<vuint> area,		
-		const VTerrainChunk& terrain
+		const VTerrainChunkMesh& terrain
 		);
 };
 
@@ -68,11 +68,11 @@ public:
 
 class VTerrainCell : public IVCell
 {
-	VTerrainChunk terrain;
+	VTerrainChunkMesh terrain;
 	IVCell& modelCell;
 	//VModelCell modelCell;
 	VPortal portal;
-	VHeightmap<VSimpleVertex> hole;
+	VHeightmapMesh<VSimpleVertex> hole;
 
 public:
 	VTerrainCell(

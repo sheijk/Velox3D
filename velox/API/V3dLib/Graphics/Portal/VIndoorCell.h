@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3dLib/Graphics/Portal/IVCell.h>
-#include <V3dLib/Graphics/Generators/VBox.h>
+#include <V3dLib/Graphics/Generators/VBoxMesh.h>
 #include <V3dLib/Graphics/Geometry/VSimpleVertex.h>
 #include <V3dLib/Graphics/Geometry/VTexturedVertex.h>
 #include <list>
@@ -33,8 +33,8 @@ private:
 	IVDevice* m_pDevice;
 	v3d::graphics::VMultipassDrawList* m_pDrawList;
 
-	VBox<VTexturedVertex>* m_pBox;
-	VBox<VSimpleVertex>* m_pPortalBox;
+	VBoxMesh<VTexturedVertex>* m_pBox;
+	VBoxMesh<VSimpleVertex>* m_pPortalBox;
 
 	
 	

@@ -1,4 +1,4 @@
-#include <V3dLib/Graphics/Generators/VTerrainChunk.h>
+#include <V3dLib/Graphics/Generators/VTerrainChunkMesh.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

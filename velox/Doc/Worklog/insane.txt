@@ -11,8 +11,20 @@ TODO List:
 - InputManager should be deactivated by loosing focus  
 - xml file for window service and console
 
+
+
+- rename resizable geome to resizE
 -------------------------------------------------------------------------------
 Done List:
+
+05.05.04
+- made changes to code for new *Mesh classes
+
+04.05.04
+- renamed all geomerty templates to *Mesh
+
+30.04.04
+- removed a compilier error in VResizeableGeomertyData
 
 12.04
 - added rudemental indoor cell

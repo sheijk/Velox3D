@@ -10,7 +10,7 @@ using v3d::math::IdentityPtr;
 
 void VHeightmapSubMesh::GenerateSubArea(
 	VRect<vuint> area,		
-	const VTerrainChunk& terrain
+	const VTerrainChunkMesh& terrain
 	)
 {
 	SetGeometryType(VMeshDescription::TriangleStrip);
