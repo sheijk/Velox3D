@@ -41,6 +41,11 @@ struct VVertexDataLayout
 	static void SetTexCoordOffset();
 };
 
+vbool VVertexDataLayout::IsValidOffset(Offset offs)
+{
+	return offs >= 0;
+}
+
 template<typename VertexData>
 void VVertexDataLayout::SetPositionOffset()
 {

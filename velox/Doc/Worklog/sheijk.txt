@@ -1,5 +1,5 @@
 Worklog von sheijk
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 ----- messages to sheijk:
 
 TODO: Einige typedefs sollte einfacher zugaenglcher sein z.b. Vertex
@@ -10,31 +10,48 @@ die gleichen services stehen -[ins]
 <ins>: vfs bug:wenn ich eine date mit VReadAccess oeffnen will bekomme ich eine
 exception: vfs does not allow writeacess! <- stimmt gar nicht! ;) -- sheijk
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 ----- current assigned tasks:
 
 - velox design
 - entity system / world planen
 - netzwerk + scripting planen
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 ----- random thoughts:
 eine map fuer xml files? (config.services.vfs.filename = "vfs.dll" etc.),
 dafuer ein any objekt, was strings speichert und in bel. datentypen mittels
 template member konvertiert?
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+----- team todo:
+
+
+-------------------------------------------------------------------------------
 ----- personal todo:
+	roadmap:
+	drawlist state sortierung
+	design der engine: entity system + zusammenarbeit der einzelnen engine teile
+
 	.refactorings
+	IVDeviceProvider.h finden und aus dem CVS schmeissen
 	./example app aufraeumen
 
 	.mem manager
 	./mem manager schreiben
 	./in kernel + corelib integrieren
 	./in xml service integrieren
+	simpel malloc/dealloc version bauen
+	leak finder bauen, evtl flipcode leak finder einbaun?
 	in vfs integrieren
 	in restliche services integrieren
+	managed objects schreiben
 
+	.geometry
+	./design fuer im speicher gehaltene geometry (ausserhalb des devices)
+	interface
+	einfache geometry klasse fuer dynamische geometrie
+	
 	.drawlist:
 	./interfaces
 	./objekte hinzufuegen
@@ -100,6 +117,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+14.03.2004
+Einige alte Dateileichen aus dem CVS entfernt
+Translate Fkt zu den Geometrie (Rotations) Funktionen hinzugefuegt
 
 11.03.2004
 Kamera Bewegung in der Example App Zeitabhaengig gemacht

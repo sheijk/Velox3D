@@ -55,6 +55,19 @@ void SetRotationZ(VMatrix<Scalar, RowCount, ColumnCount>& result, Scalar in_RotA
 	result.Set(1,1, cosinus);
 }
 
+template<typename Scalar, vuint RowCount, vuint ColumnCount>
+void SetTranslate(
+	VMatrix<Scalar, RowCount, ColumnCount>& result,
+	Scalar x, Scalar y, Scalar z
+	)
+{
+	Identity(result);
+
+    result.Set(0, 3, x);
+	result.Set(1, 3, y);
+	result.Set(2, 3, z);
+}
+
 //-----------------------------------------------------------------------------
 } // namespace math
 } // namespace v3d

@@ -44,13 +44,13 @@ VNodeBase::NodeIterator VNodeBase::ChildsEnd()
 	return NodeIterator(new IterPol(m_NodeList.end()));
 }
 
-class CullNode
+class VCullNode
 {
 	drawlist::IVDrawList* m_pDrawList;
 	IVCamera* m_pCamera;
 
 public:
-	CullNode(drawlist::IVDrawList* in_pDrawList, IVCamera* in_pCamera) :
+	VCullNode(drawlist::IVDrawList* in_pDrawList, IVCamera* in_pCamera) :
 		m_pDrawList(in_pDrawList), m_pCamera(in_pCamera)
 	{}
 
@@ -71,7 +71,7 @@ void VNodeBase::ApplyCulling(
 	std::for_each(
 		m_NodeList.begin(), 
 		m_NodeList.end(), 
-		CullNode(in_pDrawList, in_pCamera)
+		VCullNode(in_pDrawList, in_pCamera)
 		);
 
 	//for(
@@ -83,11 +83,11 @@ void VNodeBase::ApplyCulling(
 	//}
 }
 
-class RemoveGeometry
+class VRemoveGeometry
 {
 	drawlist::IVDrawList* m_pDrawList;
 public:
-	RemoveGeometry(drawlist::IVDrawList* in_pDrawList) :
+	VRemoveGeometry(drawlist::IVDrawList* in_pDrawList) :
 		m_pDrawList(in_pDrawList)
 	{}
 
@@ -106,7 +106,7 @@ void VNodeBase::Remove(drawlist::IVDrawList* in_pDrawList)
 	for_each(
 		m_NodeList.begin(),
 		m_NodeList.end(),
-		RemoveGeometry(in_pDrawList)
+		VRemoveGeometry(in_pDrawList)
 		);
 
 	//for(
