@@ -50,7 +50,7 @@ void VFileStreamTest::GetTestInfo(
 void VFileStreamTest::ExecuteTest()
 {
 	IVStreamFactory* pStreamFac = 0;
-	IVStreamFactory::OfflineStreamPtr pFileStream;
+	IVStreamFactory::FileStreamPtr pFileStream;
 
 	// create a file stream
 	try 

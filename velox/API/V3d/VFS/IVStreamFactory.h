@@ -3,7 +3,7 @@
 #define V3D_IVStreamFactory_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVOfflineStream.h>
+#include <v3d/VFS/IVBufferStream.h>
 #include <v3d/VFS/VFlags.h>
 #include <v3d/Core/VNamedObject.h>
 
@@ -25,6 +25,9 @@ public:
 
 	virtual ~IVStreamFactory() {};
 
+	/** pointer type for returnging file streams */
+	typedef VPointer<IVBufferStream>::SharedPtr FileStreamPtr;
+
 	/** pointer type for returning offline streams */
 	typedef VPointer<IVOfflineStream>::SharedPtr OfflineStreamPtr;
 
@@ -32,7 +35,7 @@ public:
 	typedef VPointer<IVStream>::SharedPtr StreamPtr;
 
 	/** creates a stream which directly accesses files */
-	virtual OfflineStreamPtr CreateFileStream(
+	virtual FileStreamPtr CreateFileStream(
 		VStringParam in_strName, 
 		VCreationFlags in_OpenMode,
 		VAccessModeFlags in_Access) = 0;

@@ -9,6 +9,7 @@
 namespace v3d {
 namespace editor {
 //-----------------------------------------------------------------------------
+//TODO: huh? wozu ist das gut? (sheijk)
 class VEditorFrame;
 
 class VEditorFrame : public wxFrame, public window::IVWindowFrame

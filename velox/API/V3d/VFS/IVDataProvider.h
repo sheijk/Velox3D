@@ -26,7 +26,7 @@ class IVDataProvider
 public:
 	virtual ~IVDataProvider() {}
 
-	typedef VPointer<IVOfflineStream>::SharedPtr StreamPtr;
+	typedef VPointer<IVBufferStream>::SharedPtr StreamPtr;
 	typedef VPointer<IVDirectory>::SharedPtr DirPtr;
 	typedef VPointer<IVFile>::SharedPtr FilePtr;
 

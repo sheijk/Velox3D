@@ -1,8 +1,8 @@
-#ifndef V3D_VStreamFactory_H
-#define V3D_VStreamFactory_H
+#ifndef V3D_IVBUFFERSTREAM_H
+#define V3D_IVBUFFERSTREAM_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVStreamFactory.h>
+#include <v3d/VFS/IVOfflineStream.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -10,25 +10,20 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
-//TODO: insert documentation here
-*/
-class VStreamFactory : public IVStreamFactory
+ * Adds functions for streams which operate on buffers which have a limited size
+ */
+class IVBufferStream : public IVOfflineStream
 {
 public:
-	VStreamFactory(VStringParam in_strName);
-	virtual ~VStreamFactory();
+	/** return the size of the buffer in bytes */
+	virtual ByteCount GetSize() = 0;
 
-	virtual FileStreamPtr CreateFileStream(
-		VStringParam in_strName, 
-		VCreationFlags in_OpenMode,
-		VAccessModeFlags in_Access);
-
-	virtual StreamPtr CreateMemoryStream(
-		IVStream::ByteCount in_nInitialSize = 0);
+	/** change the size of the buffer */
+	virtual void SetSize(ByteCount in_nNewSize) = 0;
 };
-
+		
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VStreamFactory_H
+#endif // V3D_IVBUFFERSTREAM_H

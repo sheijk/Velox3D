@@ -73,6 +73,15 @@ IVFile::FileStreamPtr VFile::Open(VAccessModeFlags in_Access) const
 	return dataProv.OpenFile(m_strSource.c_str(), in_Access);
 }
 
+void VFile::Clear()
+{
+	// open the file
+	FileStreamPtr pFileStream = this->Open(VWriteAccess);
+
+	// and set it's size to zero
+	pFileStream->SetSize(0);
+}
+
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

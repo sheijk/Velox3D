@@ -20,6 +20,7 @@ class IVWxConnector
 {
 public:
 
+	//TODO: koennte problematisch sein, wenn stl klassen im interface sind (sheijk)
 	typedef std::vector<IVWindowFrame*> VFrameList;
 
 	virtual void Register(IVWindowFrame* in_pFrame) = 0;

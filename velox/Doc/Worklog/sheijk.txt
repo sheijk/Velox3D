@@ -22,7 +22,8 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-	vfs: groesse von dateien aendern
+	VFileStream.SetSize() implementieren
+
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
 	Objekts auf 0 gesetzt)
 	Service Abhaengigkeiten Dokumentieren
@@ -58,12 +59,20 @@ Doku:
 
 log:
 
+09.11.2003
+Module Klasse entworfen, damit die .dll Sourcen leichter auf andere Systeme
+portiert werden koennen
+
 07.11.2003
+VFS kann die Groessen von Dateien mittels IVFile::Clear oder IVBufferStream::SetSize
+aendern. IVBufferStream in die Stream Hyrarchie aufgenommen
+(Funktion mangels MSDN noch nicht implementiert)
+
 einige kleinere Aenderungen
 
 01.11.2003
-nur damit das hier nicht so aussieht als wuerd ich gar nix mehr machen:
-neue UML Model Struktur, diverse Designs usw. :)
+nur damit das hier nicht so aussieht als wuerd ich gar nix mehr machen: ;)
+neue UML Model Struktur, diverse Designs usw.
 
 09.09.2003
 UpdateManager Service geschrieben

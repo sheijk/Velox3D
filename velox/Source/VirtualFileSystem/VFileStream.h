@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/VFS/IVOfflineStream.h>
+#include <v3d/VFS/IVBufferStream.h>
 #include <v3d/VFS/VFlags.h>
 
 #include "VLegalOperations.h"
@@ -19,7 +19,7 @@ namespace vfs {
 /**
  * stream class for reading/writing files
  */
-class VFileStream :public IVOfflineStream
+class VFileStream : public IVBufferStream
 {
 private:
 	VFileStream();	
@@ -72,6 +72,12 @@ public:
 
 	/** true -> read, write, set/get pos possible */
 	virtual vbool IsConnected() const;
+
+	/** return the size of the buffer in bytes */
+	virtual ByteCount GetSize();
+
+	/** change the size of the buffer */
+	virtual void SetSize(ByteCount in_nNewSize);
 };
 
 //-----------------------------------------------------------------------------

@@ -126,6 +126,10 @@
 			<File
 				RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
 			</File>
+			<Filter
+				Name="Descriptions"
+				Filter="">
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

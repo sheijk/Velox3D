@@ -46,6 +46,8 @@ public:
 
 	/** @see IVFile#Open */
 	virtual FileStreamPtr Open(VAccessModeFlags in_Access) const;
+
+	virtual void Clear();
 };
 
 //-----------------------------------------------------------------------------

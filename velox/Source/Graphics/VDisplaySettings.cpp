@@ -24,6 +24,8 @@ VDisplaySettings::VDisplaySettings()
 	m_sAPIType = "OpenGL";
 }
 
+//TODO: ziemlich den gleichen code sollte der compiler fuer assignment op und copy c'tor
+// generieren.. wozu diese fkt? (sheijk)
 void VDisplaySettings::Assign(VDisplaySettings* in_pInfo)
 {
 	m_bFullscreen   = in_pInfo->m_bFullscreen;

@@ -62,6 +62,7 @@ vint VExampleApp::Main()
 	IVSystemManager* system = QueryObject<IVSystemManager>("system.service");
 	IVWindowManager* winmanager = QueryObject<IVWindowManager>("window.manager");
 	
+	// warum nicht typedef IVWindowManager::WindowPtr ... oder so? waere leichter "wartbar" (sheijk)
 	typedef VPointer<IVWindow>::SharedPtr IVWindowInterface;
 	IVWindowInterface win;
 
@@ -69,7 +70,7 @@ vint VExampleApp::Main()
 	win = winmanager->CreateWindow("v3d window");
 
 	IVDevice* m_Device;
-	m_Device = &win->QueryGraphicsDevice();
+	m_Device = &(win->QueryGraphicsDevice());
 
 	
 	// main loop

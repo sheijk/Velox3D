@@ -4,7 +4,7 @@
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/VFS/VFlags.h>
-#include <v3d/VFS/IVOfflineStream.h>
+#include <v3d/VFS/IVBufferStream.h>
 #include <v3d/VFS/IVDirectory.h>
 #include <v3d/VFS/IVFile.h>
 
@@ -22,7 +22,7 @@ namespace vfs {
 class IVFileSystem : public VNamedObject
 {
 public:
-	typedef VPointer<IVOfflineStream>::SharedPtr FileStreamPtr;
+	typedef VPointer<IVBufferStream>::SharedPtr FileStreamPtr;
 	typedef VPointer<IVDirectory>::SharedPtr DirectoryPtr;
 	
 	IVFileSystem(VStringParam in_strName, VNamedObject* in_pParent) 

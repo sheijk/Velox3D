@@ -129,6 +129,9 @@
 					RelativePath="..\Api\V3d\Vfs\IVAccessRights.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Vfs\IVBufferStream.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Vfs\IVLegalOperations.h">
 				</File>
 				<File
@@ -188,6 +191,12 @@
 			<Filter
 				Name="Streams"
 				Filter="">
+				<File
+					RelativePath="..\Source\VirtualFileSystem\VBufferStreamGuard.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\VirtualFileSystem\VBufferStreamGuard.h">
+				</File>
 				<File
 					RelativePath="..\Source\VirtualFileSystem\VFileStream.cpp">
 				</File>

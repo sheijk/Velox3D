@@ -1,6 +1,7 @@
 #include "VFileStream.h"
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VException.h>
+#include <v3d/Core/VLogging.h>
 
 #include <sstream>
 #include <iostream>
@@ -259,6 +260,25 @@ void VFileStream::Connect()
 vbool VFileStream::IsConnected() const
 {
 	return m_bConnected;
+}
+
+IVStream::ByteCount VFileStream::GetSize()
+{
+	StreamPos currentPos = this->GetPos();
+
+	this->SetPos(End, 0);
+
+	ByteCount size = this->GetPos();
+
+	this->SetPos(Begin, currentPos);
+
+	return size;
+}
+
+void VFileStream::SetSize(ByteCount in_nNewSize)
+{
+	//TODO: implementieren
+	V3D_DEBUGMSG("warning: using unimplemented function");
 }
 
 //-----------------------------------------------------------------------------

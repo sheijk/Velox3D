@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 #include "VFileStream.h"
 #include "VMemoryStream.h"
-#include "VOfflineStreamGuard.h"
+#include "VBufferStreamGuard.h"
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -24,7 +24,7 @@ VStreamFactory::~VStreamFactory()
 {
 }
 
-IVStreamFactory::OfflineStreamPtr VStreamFactory::CreateFileStream(
+IVStreamFactory::FileStreamPtr VStreamFactory::CreateFileStream(
 	VStringParam in_strName, 
 	VCreationFlags in_OpenMode,
 	VAccessModeFlags in_Access)
@@ -33,9 +33,9 @@ IVStreamFactory::OfflineStreamPtr VStreamFactory::CreateFileStream(
 		= new VFileStream(in_strName, in_Access, in_OpenMode);
 
 	// add access right guard
-	VOfflineStreamGuard* pGuard = new VOfflineStreamGuard(pFileStream);
+	VBufferStreamGuard* pGuard = new VBufferStreamGuard(pFileStream);
 
-	return OfflineStreamPtr(pGuard);
+	return FileStreamPtr(pGuard);
 }
 
 //TODO: exception werfen wenn 0 zurueck gegeben wuerde

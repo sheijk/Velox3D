@@ -16,6 +16,8 @@ class VDisplaySettings
 {
 public:
 
+	//TODO: problematisch, klasse kann nur von gfx service selbst gesetzt werden,
+	// sonst gibts linker fehler (sheijk)
 	VDisplaySettings();
 	void Assign(VDisplaySettings* in_pInfo);
 

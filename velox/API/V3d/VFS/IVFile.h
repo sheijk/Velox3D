@@ -5,7 +5,7 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/VFS/IVFileSysObject.h>
 #include <v3d/VFS/VFlags.h>
-#include <v3d/VFS/IVOfflineStream.h>
+#include <v3d/VFS/IVBufferStream.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -21,10 +21,13 @@ public:
 	virtual ~IVFile() {};
 
 	/** a (smart) pointer to a file stream */
-	typedef VPointer<IVOfflineStream>::SharedPtr FileStreamPtr;
+	typedef VPointer<IVBufferStream>::SharedPtr FileStreamPtr;
 
 	/** opens the file with the given access mode */
 	virtual FileStreamPtr Open(VAccessModeFlags in_Access) const = 0;
+
+	/** delete the content of the file and set it's size to 0 */
+	virtual void Clear() = 0;
 };
 
 //-----------------------------------------------------------------------------

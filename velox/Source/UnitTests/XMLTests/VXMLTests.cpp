@@ -72,7 +72,7 @@ void VXMLTest::ExecuteTest()
 	IVStreamFactory* m_pStrFac;
 	IVXMLService::IVStreamPtr m_pSmartPtr;
 	{
-		IVStreamFactory::OfflineStreamPtr ptr;
+		IVStreamFactory::FileStreamPtr ptr;
 		m_pStrFac = QueryObject<IVStreamFactory>("vfs.strfact");
 
 		if( ! m_pStrFac)

@@ -37,6 +37,7 @@ public:
 	/**
 	* This is only implemented to show anything by now
 	* TODO: build the damn renderer ;)
+	* copy & paste suckt :P - sheijk
 	*/
 
 	virtual void BeginScene(); 
