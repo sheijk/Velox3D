@@ -25,7 +25,7 @@ VSkyDome::VSkyDome( v3d::graphics::IVDevice& in_Device,
 	  m_strImage(in_strImage),
 	  //m_Colorizer( 1.0f, 2.2, 2.0f)
 	  //m_Colorizer( 1.40f, 1.5f, 2.0f)
-	  m_Colorizer( 0.5f, 0.5f, 2.0f)
+	  m_Colorizer( .8f, 0.7f, 3.0f)
 {
 	m_HalfSphere.GenerateCoordinates();
 
@@ -150,6 +150,9 @@ void VSkyDome::CreateMesh(IVDevice& in_Device)
 	ForEachVertex( m_HalfSphere.GetVertexBuffer(), ScaleVertex<SkyVertex>(m_fRadius,
 															   m_fRadius,
 															   m_fRadius) );
+
+	// Swap halfsphere to y z axis
+	ForEachVertex( m_HalfSphere.GetVertexBuffer(), SwitchYZ<SkyVertex>);
 	
 	m_MaterialDescription.frontPolyMode = VMaterialDescription::PolygonMode::Filled;
 	m_MaterialDescription.backPolyMode = VMaterialDescription::PolygonMode::Filled;

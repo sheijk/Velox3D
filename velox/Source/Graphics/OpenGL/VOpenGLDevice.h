@@ -77,6 +77,8 @@ public:
 	virtual void EndScene();
 
 	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix);
+
+	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode);
 	
 private:
 	void RecalcModelViewMatrix();

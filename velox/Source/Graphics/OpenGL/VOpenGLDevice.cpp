@@ -399,6 +399,7 @@ void VOpenGLDevice::BeginScene()
 	glLoadIdentity();
 
 	RecalcModelViewMatrix();
+
 }
 
 //-----------------------------------------------------------------------------
@@ -456,6 +457,29 @@ void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix)
 }
 
 //-----------------------------------------------------------------------------
+
+const VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode)
+{
+	switch(in_Mode)
+	{
+		case ModelMatrix:
+			return m_ModelMatrix;
+			break;
+		case TextureMatrix:
+			return m_TextureMatrix;
+			break;
+		case ViewMatrix:
+			return m_ViewMatrix;
+			break;
+		case ProjectionMatrix:
+			return m_ProjectionMatrix;
+			break;
+		default:
+			V3D_THROW(
+				VInvalidMatrixTypeException, 
+				"invalid matrix type specified");
+	}
+}
 
 void VOpenGLDevice::RecalcModelViewMatrix()
 {

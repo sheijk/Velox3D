@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib ../Local/ExternalLibs/jpeglib/jpeg.lib ../Local/ExternalLibs/tinyxml/tinyxmld.lib ../Local/ExternalLibs/extgl/extgl.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib ../Local/ExternalLibs/DevIL/lib/DevIL.lib"
+				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib ../Local/ExternalLibs/jpeglib/jpeg.lib ../Local/ExternalLibs/tinyxml/tinyxmld.lib ../Local/ExternalLibs/extgl/extgl.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib ../Local/ExternalLibs/DevIL/lib/DevIL.lib ../Local/ExternalLibs/DevIL/lib/ilu.lib"
 				OutputFile="$(OutDir)/VeloxServices.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -419,6 +419,12 @@
 					RelativePath="..\Api\V3d\Image\IVImageLoader.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Image\IVImageManipulator.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Image\IVImageSaver.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Image\VImage.h">
 				</File>
 			</Filter>
@@ -432,10 +438,22 @@
 					RelativePath="..\Source\ImageService\VDevILLoader.h">
 				</File>
 				<File
+					RelativePath="..\Source\ImageService\VDevILSaver.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\ImageService\VDevILSaver.h">
+				</File>
+				<File
 					RelativePath="..\Source\ImageService\VImageFactory.cpp">
 				</File>
 				<File
 					RelativePath="..\Source\ImageService\VImageFactory.h">
+				</File>
+				<File
+					RelativePath="..\Source\ImageService\VImageManipulator.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\ImageService\VImageManipulator.h">
 				</File>
 				<File
 					RelativePath="..\Source\ImageService\VJpegImageLoader.cpp">

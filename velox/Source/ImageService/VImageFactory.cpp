@@ -14,7 +14,6 @@ VImageFactory::VImageFactory() : IVImageFactory("image.service", 0)
 VImageFactory::~VImageFactory()
 {
 }
-
 //-----------------------------------------------------------------------------
 
 VStringRetVal VImageFactory::ParseFileExtension(VStringParam sName)
@@ -38,8 +37,8 @@ void VImageFactory::Register(IVImageLoader* in_ImageLoader,
 
 IVImageFactory::ImagePtr VImageFactory::CreateImage(VStringParam in_sFilename)
 {
-	IVImageLoader* theLoader = NULL;
-	VImage* theImage = NULL;
+	IVImageLoader* theLoader = 0;
+	VImage* theImage = 0;
 
 	
 	vfs::IVFileSystem& fileSys = *QueryObject<vfs::IVFileSystem>("vfs.fs");
@@ -61,12 +60,129 @@ IVImageFactory::ImagePtr VImageFactory::CreateImage(VStringParam in_sFilename)
 		V3D_THROW(VException, message.AsCString());
 	}
 	
+	//TODO: check if this is not a real bad mistake
 	ImagePtr retrunImage;
 	retrunImage.Assign(theImage);
+	
 	return retrunImage;
+}
+//-----------------------------------------------------------------------------
 
+void VImageFactory::Register(IVImageSaver* in_ImageSaver,
+							 VStringParam in_sExtension)
+{
+	m_SaverMap.insert(MapPairSaver(in_sExtension, in_ImageSaver));
 
 }
+//-----------------------------------------------------------------------------
+
+void VImageFactory::Register(IVImageManipulator* in_ImageManipulator)
+{
+	m_ManipulatorList.push_back(in_ImageManipulator);
+}
+//-----------------------------------------------------------------------------
+
+void VImageFactory::SaveImageToFile(VStringParam in_sFilename, VImage& in_Image, 
+					 IVImageSaver::ImageType in_Type)
+{
+	IVImageSaver* theImageSaver = 0;
+
+	theImageSaver = m_SaverMap[GetExtensionType(in_Type)];
+
+	if(theImageSaver)
+		theImageSaver->SaveImageToFile(in_Image, in_Type, in_sFilename);
+	else
+	{
+		V3D_THROW(VException, "the selected save format is not supported by now!");
+	}
+
+}
+//-----------------------------------------------------------------------------
+void VImageFactory::ScaleImage(VImage& in_ImageSource, VImage& in_ImageDest)
+{
+	//TODO: make flexible by choosing manipulator to use
+	m_ManipulatorList[0]->Scale(in_ImageSource, in_ImageDest);
+}
+//-----------------------------------------------------------------------------
+
+void VImageFactory::ConvertImage(VImage& in_ImageSource, VImage& in_ImageDest)
+{
+	//TODO: make flexible by choosing manipulator to use
+	m_ManipulatorList[0]->Convert(in_ImageSource, in_ImageDest);
+}
+//-----------------------------------------------------------------------------
+
+void VImageFactory::CreateImage(VStringParam in_sFilename,
+								ImagePtr& in_Image)
+{
+
+	if(	in_Image->GetWidth() == 0 ||
+		in_Image->GetHeight()== 0 ||
+		in_Image->GetBitsPerPixel() == 0)
+	{
+		V3D_THROW(VException, "cannot create image. parameters are surely wrong!");
+	}
+
+	ImagePtr returnImage = CreateImage(in_sFilename);
+
+
+
+	if(returnImage->IsEqualInProperties(*in_Image))
+	{
+		in_Image = returnImage;
+	}
+	
+	else
+	{
+		/* store the old values because convert returns only a valid image */
+		const vuint nWidth = in_Image->GetWidth();
+		const vuint nHeight = in_Image->GetHeight();
+
+		ConvertImage(*returnImage, *in_Image);
+
+		/* restore old values */
+		returnImage->iWidth = nWidth;
+		returnImage->iHeight = nHeight;
+
+        ScaleImage(*in_Image, *returnImage);
+	}
+
+	//TODO: gets mem of returnImage freed?
+
+	in_Image = returnImage;
+}
+
+//-----------------------------------------------------------------------------
+
+VStringRetVal VImageFactory::GetExtensionType(IVImageSaver::ImageType in_Type)
+{
+	switch(in_Type)
+	{
+		case IVImageSaver::ImageType::SaveBMP:
+			{
+				return "bmp";
+				break;
+			}
+		case IVImageSaver::ImageType::SaveJPG:
+			{
+				return "jpg";
+				break;
+			}
+		case IVImageSaver::ImageType::SaveTGA:
+			{
+				return "tga";
+				break;
+			}
+
+		default:
+			return "";
+			break;
+	}
+}
+
+
+
+
 //-----------------------------------------------------------------------------
 } // namespace image
 } // namespace v3d

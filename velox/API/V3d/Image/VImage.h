@@ -58,6 +58,7 @@ public:
 		}
 	}
 
+	//TODO: remove
 	vuint GetBPP() const { return iBPP; }
 
 	ImageData& GetData() { return *pData; }
@@ -127,6 +128,17 @@ public:
 		}
 
 		return color;
+	}
+
+	/* check for equal width, height and bpp */
+	vbool IsEqualInProperties(VImage& in_Image)
+	{
+		if(iHeight == in_Image.GetHeight() &&
+			iWidth == in_Image.GetWidth()  &&
+			iBPP   == in_Image.GetBitsPerPixel())
+			return true;
+		
+		return false;
 	}
 
 public: // ja, das soll mal private werden

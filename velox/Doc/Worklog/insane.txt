@@ -52,7 +52,10 @@ gesetzt werden, ansonsten sind die states undefiniert.
 
 Done List:
 
--19.06.04
+24.07.04
+- added image scale, convert and saving functinality
+
+19.06.04
 - added GraphicSprite to Graphics/Image
 
 17.06.04

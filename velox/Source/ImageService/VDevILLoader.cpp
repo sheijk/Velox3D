@@ -21,6 +21,7 @@ VDevILLoader::VDevILLoader()
 
 VDevILLoader::~VDevILLoader()
 {
+	ilShutDown();
 }
 
 VImage* VDevILLoader::Create(vfs::IVStream* in_pStream, VStringParam in_sExt)
@@ -48,6 +49,8 @@ VImage* VDevILLoader::Create(vfs::IVStream* in_pStream, VStringParam in_sExt)
 	VImage* pic = new VImage(nWidth, nHeight, nBPP * 8);
 
 	memcpy(pic->GetData().GetDataAddress(), pData, nWidth*nHeight*nBPP);
+
+	ilDeleteImages(1, &id);
 
 	//VImage* pic = new VImage();
 
