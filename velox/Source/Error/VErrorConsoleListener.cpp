@@ -1,5 +1,6 @@
 #include "VErrorConsoleListener.h"
 #include <iostream>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {

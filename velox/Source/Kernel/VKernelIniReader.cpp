@@ -2,7 +2,7 @@
 #include "VKernelIniReader.h"
 #include "VKernelException.h"
 //#include <iostream>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d::xml;
 //-----------------------------------------------------------------------------

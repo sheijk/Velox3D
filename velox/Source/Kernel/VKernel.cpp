@@ -9,6 +9,7 @@
 #include <v3d/Core/VIOStream.h>
 #include "VKernelIniReader.h"
 
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using std::string;
 

@@ -5,6 +5,8 @@
 #include <v3d/Core/VObjectRegistry.h>
 
 #include <string>
+
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace config {

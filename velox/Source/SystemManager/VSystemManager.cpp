@@ -1,6 +1,7 @@
 #include <v3d/Core/VIOStream.h>
 #include "VSystemManager.h"
 #include "../UtilsLib/CPUDetect/VDetectProcessor.h"
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 
 

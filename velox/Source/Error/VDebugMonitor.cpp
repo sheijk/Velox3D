@@ -1,6 +1,6 @@
 #include "VDebugMonitor.h"
 #include "VDebugMonitorEnum.h"
-
+#include <v3d/Core/MemManager.h>
 namespace v3d {
 namespace error {
 
