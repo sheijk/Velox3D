@@ -13,17 +13,17 @@ namespace graphics {
  */
 struct VColor4f
 {
-	float red;
-	float green;
-	float blue;
-	float alpha;
+	vfloat32 red;
+	vfloat32 green;
+	vfloat32 blue;
+	vfloat32 alpha;
 
 	VColor4f()
 	{
 		red = green = blue = alpha = 0;
 	}
 
-	VColor4f(float in_Red, float in_Green, float in_Blue, float in_Alpha)
+	VColor4f(vfloat32 in_Red, vfloat32 in_Green, vfloat32 in_Blue, vfloat32 in_Alpha)
 	{
 		red = in_Red;
 		green = in_Green;
