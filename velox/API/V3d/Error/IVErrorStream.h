@@ -22,7 +22,7 @@ public:
 	vuint m_nLine;
 };
 
-class IVErrorStream : public util::IVStringStream
+class IVErrorStream : public utils::IVStringStream
 {
 public:
 	IVErrorStream() {};

@@ -2,7 +2,7 @@
 #define V3D_IVDRAWLIST_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-
+#include <v3d/Graphics/IVDevice.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

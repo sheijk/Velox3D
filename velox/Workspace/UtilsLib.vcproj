@@ -230,6 +230,16 @@
 				RelativePath="..\Api\V3d\Graphics\VCamera.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="DrawList"
+			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\DrawList\VSimpleDrawList.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\DrawList\VSimpleDrawList.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

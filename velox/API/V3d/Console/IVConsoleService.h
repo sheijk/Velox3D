@@ -12,7 +12,7 @@ namespace console {
 /**
  * An simple console service using wxWindows
  */
-class IVConsoleSerivce : public VNamedObject, public util::IVStringStream
+class IVConsoleSerivce : public VNamedObject, public utils::IVStringStream
 {
 public:
 

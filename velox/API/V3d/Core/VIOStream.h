@@ -9,7 +9,7 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 
 /** a std::cout style output stream. outputs to the velox console */
-extern util::IVStringStream& vout;
+extern utils::IVStringStream& vout;
 
 /** equivalent to std::endl */
 extern const char* vendl;

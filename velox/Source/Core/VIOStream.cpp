@@ -36,7 +36,7 @@ namespace {
 	 * The console redirector redirects vout streaming into the console
 	 * window that is registered as error listener
 	 */
-	class VConsoleRedirector : public util::IVStringStream
+	class VConsoleRedirector : public utils::IVStringStream
 	{
 	public:
 		VConsoleRedirector();
@@ -106,7 +106,7 @@ namespace {
 	VConsoleRedirector Redirector;
 }
 
-util::IVStringStream& vout(Redirector);
+utils::IVStringStream& vout(Redirector);
 const char* vendl = "\n";
 
 //-----------------------------------------------------------------------------

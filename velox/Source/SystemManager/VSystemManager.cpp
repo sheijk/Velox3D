@@ -23,7 +23,7 @@ VSystemManager::~VSystemManager()
 
 void VSystemManager::GetCPU()
 {
-	util::VDetectProcessor CPUInfo;
+	utils::VDetectProcessor CPUInfo;
 	CPUInfo.GetCPUInfo();
 	vout << "Detetcting CPU:" << vendl;
 	vout << "Name: " << CPUInfo.m_cCPUName << vendl;
