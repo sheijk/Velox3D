@@ -23,6 +23,7 @@ VBSPRenderer::VBSPRenderer(IVDevice* in_pDevice, VMultipassDrawList& in_DrawList
 	m_pLightmapCoordsSorted			= 0;
 	m_bModelAdded					= false;
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::CreateMap(VStringParam in_sName)
 {
@@ -35,6 +36,7 @@ void VBSPRenderer::CreateMap(VStringParam in_sName)
 	SortLightmapCoords();
 	BuildModelList();
 }
+//-----------------------------------------------------------------------------
 
 VBSPRenderer::~VBSPRenderer()
 {
@@ -58,6 +60,7 @@ VBSPRenderer::~VBSPRenderer()
 
 
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::Cull(VCamera* in_pCamera, VMultipassDrawList& in_DrawList)
 {
@@ -74,6 +77,7 @@ void VBSPRenderer::Cull(VCamera* in_pCamera, VMultipassDrawList& in_DrawList)
 		(*begin)->Cull(in_pCamera, in_DrawList);
 	}
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::Show()
 {
@@ -90,6 +94,7 @@ void VBSPRenderer::Show()
 	}
 
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::Hide(VMultipassDrawList& in_DrawList)
 {
@@ -99,6 +104,7 @@ void VBSPRenderer::Hide(VMultipassDrawList& in_DrawList)
 		m_bModelAdded = false;
 	}
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::BuildCell()
 {
@@ -122,6 +128,7 @@ void VBSPRenderer::BuildCell()
 		m_pLightmapCoords[i*2+1]  = m_Level.m_pVertices[i].LightmapCoord.v;
 	}
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::BuildModelList()
 {
@@ -149,7 +156,7 @@ void VBSPRenderer::BuildModelList()
 	translate.Assign(new VMatrix44f());
 	Identity(*translate);
 
-	math::SetTranslate(*translate, 0.0f,0.0f, 0.0f);
+	math::SetTranslate(*translate, 0.0f, 0.0f, 0.0f);
 
 	//build our index list thus we know how to render the faces
 	for(int i = 0; i<m_Level.m_iNumFaces; i++)
@@ -159,12 +166,16 @@ void VBSPRenderer::BuildModelList()
 
 		cell.ResizeIndexBuffer(face->iNumVertices);
 
+		std::string sTexName = m_Level.m_pTextures[face->iTextureID].sTextureName;
+		if(sTexName == "textures/radiant/notex")
+			break;
+
 		for(vint32 j = face->iVertexIndexStart;
 			j < face->iNumVertices + face->iVertexIndexStart;
 			j++
 			)
 		{
-			cell.GetIndexBuffer()[count] = (vuint)j;
+    		cell.GetIndexBuffer()[count] = (vuint)j;
 			count++;
 		}
 
@@ -225,6 +236,7 @@ void VBSPRenderer::BuildModelList()
 			m_pModelList.push_back(model2);
 	}
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::GetFaceElements()
 {
@@ -233,6 +245,7 @@ void VBSPRenderer::GetFaceElements()
 		m_iNumFaceElements += m_Level.m_pFaces[i].iNumVertices;
 	}
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::CreateTextures()
 {
@@ -246,7 +259,7 @@ void VBSPRenderer::CreateTextures()
 		std::string sBaseTextureName;
 		std::string sTextureName(m_Level.m_pTextures[i].sTextureName);
 	
-		if(sTextureName =="noshader")
+		if(sTextureName =="textures/radiant/notex")
 		{
 			vout << "warning: noshader found" << vendl;
 			delete mat;
@@ -268,8 +281,10 @@ void VBSPRenderer::CreateTextures()
 				*mat = BuildTextureMaterial(
 					m_pDevice, sTextureName.c_str());
 
-				mat->destBlendFactor = VMaterialDescription::BlendSourceColor;
-				mat->sourceBlendFactor = VMaterialDescription::BlendZero;
+				mat->destBlendFactor	=
+					VMaterialDescription::BlendSourceColor;
+				mat->sourceBlendFactor	=
+					VMaterialDescription::BlendZero;
 				mat->enableBlending = true;
 			}
 			
@@ -284,14 +299,18 @@ void VBSPRenderer::CreateTextures()
 					*mat = BuildTextureMaterial(
 					m_pDevice, sBaseTextureName.c_str());
 
-					mat->destBlendFactor = VMaterialDescription::BlendSourceColor;
-					mat->sourceBlendFactor = VMaterialDescription::BlendZero;
-					mat->enableBlending = true;
+					mat->destBlendFactor	=
+						VMaterialDescription::BlendSourceColor;
+					mat->sourceBlendFactor	=
+						VMaterialDescription::BlendZero;
+					mat->enableBlending		= true;
 				}
 				catch(VException e2)
 				{
-					mat->destBlendFactor = VMaterialDescription::BlendSourceColor;
-					mat->sourceBlendFactor = VMaterialDescription::BlendZero;
+					mat->destBlendFactor	=
+						VMaterialDescription::BlendSourceColor;
+					mat->sourceBlendFactor	=
+						VMaterialDescription::BlendZero;
 					mat->enableBlending = true;
 
 					m_MaterialList.push_back(mat);
@@ -302,8 +321,10 @@ void VBSPRenderer::CreateTextures()
 			}
 			if(!bIsAdded)
 			{
-				mat->destBlendFactor = VMaterialDescription::BlendSourceColor;
-				mat->sourceBlendFactor = VMaterialDescription::BlendZero;
+				mat->destBlendFactor	 =
+					VMaterialDescription::BlendSourceColor;
+				mat->sourceBlendFactor	 = 
+					VMaterialDescription::BlendZero;
 				mat->enableBlending = true;
 
 				m_MaterialList.push_back(mat);
@@ -313,6 +334,7 @@ void VBSPRenderer::CreateTextures()
 
 	vout << "loading texture list done..." << vendl;
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::CreateLightmaps()
 {
@@ -320,10 +342,13 @@ void VBSPRenderer::CreateLightmaps()
 	{
 	
 		VMaterialDescription* mat = new VMaterialDescription();
-		VMaterialDescription::TextureRef* texRef = new VMaterialDescription::TextureRef();
+		VMaterialDescription::TextureRef* texRef = 
+			new VMaterialDescription::TextureRef();
 		
 		//FIX: who deletes this?
-		VBuffer<vbyte>* buffer = new VBuffer<vbyte>(m_Level.m_pLightmaps[i].LightmapData, 49152);
+		VBuffer<vbyte>* buffer = new VBuffer<vbyte>(
+			m_Level.m_pLightmaps[i].LightmapData,
+			49152);
 
 		IVDevice::BufferHandle hTextureBuffer = m_pDevice->CreateBuffer(
 		IVDevice::Texture,
@@ -347,6 +372,7 @@ void VBSPRenderer::CreateLightmaps()
 		m_LightMaterialList.push_back(mat);
 	}
 }
+//-----------------------------------------------------------------------------
 
 void VBSPRenderer::SortLightmapCoords()
 {
@@ -385,8 +411,6 @@ void VBSPRenderer::SortLightmapCoords()
 		}
 	}
 }
-
-
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
