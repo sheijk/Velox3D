@@ -1,7 +1,9 @@
 Worklog von AcrylSword
 --------------------------------------------------------------------------------
 ----- messages to AcrylSword:
-
+<sheijk> ein kurzer eintrag was geaendert/neu gemacht wurde waere nett, thx
+Hab im Error Service Source ein paar TODO Tags verteilt, bei allem was mir nicht 
+klar war, etc., damits nicht vergessen wird Hoffe das ist ok?
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:

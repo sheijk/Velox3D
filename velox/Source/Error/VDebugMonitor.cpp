@@ -36,58 +36,58 @@ void VDebugMonitor::OnMessage( const VString& Message, const LogMode LogMode )
 		default:			m_MyCopyData.dwData = MessageError;		break;
 	}
 
-	m_MyCopyData.cbData = Message.length()+1;
-	m_MyCopyData.lpData = (void*) Message.c_str();
+	m_MyCopyData.cbData = Message.Length()+1;
+	m_MyCopyData.lpData = (void*) Message.AsCString();
 
 	//send the structure
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 }
 
 void VDebugMonitor::OnStateCreate( const VString& in_Name, const VString& in_Text )
 {
 	// First send a StateAdd message with the state name
 	m_MyCopyData.dwData = StateCreate;
-	m_MyCopyData.cbData = in_Name.length()+1;
-	m_MyCopyData.lpData = (void*) in_Name.c_str();
+	m_MyCopyData.cbData = in_Name.Length()+1;
+	m_MyCopyData.lpData = (void*) in_Name.AsCString();
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 
 	// Then send a StateData message with the text
 	m_MyCopyData.dwData = StateData;
-	m_MyCopyData.cbData = in_Text.length()+1;
-	m_MyCopyData.lpData = (void*) in_Text.c_str();
+	m_MyCopyData.cbData = in_Text.Length()+1;
+	m_MyCopyData.lpData = (void*) in_Text.AsCString();
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 }
 
 void VDebugMonitor::OnStateUpdate( const VString& in_Name, const VString& in_Text )
 {
 	m_MyCopyData.dwData = StateUpdate;
-	m_MyCopyData.cbData = in_Name.length()+1;
-	m_MyCopyData.lpData = (void*) in_Name.c_str();
+	m_MyCopyData.cbData = in_Name.Length()+1;
+	m_MyCopyData.lpData = (void*) in_Name.AsCString();
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 
 	m_MyCopyData.dwData = StateData;
-	m_MyCopyData.cbData = in_Text.length()+1;
-	m_MyCopyData.lpData = (void*) in_Text.c_str();
+	m_MyCopyData.cbData = in_Text.Length()+1;
+	m_MyCopyData.lpData = (void*) in_Text.AsCString();
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 }
 
 void VDebugMonitor::OnStateDelete( const VString& in_Name )
 {
 	m_MyCopyData.dwData = StateDelete;
-	m_MyCopyData.cbData = in_Name.length()+1;
-	m_MyCopyData.lpData = (void*) in_Name.c_str();
+	m_MyCopyData.cbData = in_Name.Length()+1;
+	m_MyCopyData.lpData = (void*) in_Name.AsCString();
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 }
 
 void VDebugMonitor::OnProgressbarBegin()
@@ -97,7 +97,7 @@ void VDebugMonitor::OnProgressbarBegin()
 	m_MyCopyData.lpData = NULL;
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 
 }
 
@@ -108,7 +108,7 @@ void VDebugMonitor::OnProgressbarUpdate( const vfloat32 fIndex )
 	m_MyCopyData.lpData = (void*) &fIndex;
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 }
 
 void VDebugMonitor::OnProgressbarEnd()
@@ -118,7 +118,7 @@ void VDebugMonitor::OnProgressbarEnd()
 	m_MyCopyData.lpData = NULL;
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 
 }
 
@@ -129,7 +129,7 @@ void VDebugMonitor::SetDebugLevel( const vuint iLevel )
 	m_MyCopyData.lpData = (void*) &iLevel;
 
 	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
+		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 }
 
  } //error

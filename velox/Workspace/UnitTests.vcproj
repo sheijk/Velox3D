@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -69,7 +69,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="4"
 				RuntimeTypeInfo="TRUE"
@@ -156,6 +156,10 @@
 		<Filter
 			Name="Tests"
 			Filter="">
+			<Filter
+				Name="Xml"
+				Filter="">
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

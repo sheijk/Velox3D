@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="ExampleApp"
-	ProjectGUID="{8B1DF56D-2D3D-4AD0-BBF5-C3DECE06B82F}"
+	Name="ErrorService"
+	ProjectGUID="{05714B12-F9AA-4697-9179-305F137118A5}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -13,14 +13,14 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Lokal/BinDebug"
-			IntermediateDirectory="Lokal/ExampleAppDebug"
+			IntermediateDirectory="Lokal/ErrorService/Debug"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API/"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;ERRORSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -33,12 +33,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleApp.dll"
+				OutputFile="$(OutDir)/ErrorService.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/ExampleApp.pdb"
+				ProgramDatabaseFile="$(OutDir)/ErrorService.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/ExampleApp.lib"
+				ImportLibrary="$(OutDir)/ErrorService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -64,13 +64,13 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Lokal/BinRelease"
-			IntermediateDirectory="Lokal/ExampleAppRelease"
+			IntermediateDirectory="Lokal/ErrorService/Release"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API/"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;ERRORSERVICE_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -81,13 +81,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleApp.dll"
+				OutputFile="$(OutDir)/ErrorService.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/ExampleApp.lib"
+				ImportLibrary="$(OutDir)/ErrorService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -118,20 +118,41 @@
 			Name="Interface"
 			Filter="">
 			<File
-				RelativePath="..\Api\V3d\Core\IVApplication.h">
+				RelativePath="..\Api\V3d\Error\IVErrorService.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Error\IVLogDevice.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Error\VLogModeEnum.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
 			Filter="">
 			<File
-				RelativePath="..\Source\Example\App\ExampleAppDLL.cpp">
+				RelativePath="..\Source\Error\ErrorServiceDLL.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Example\App\VExampleApp.cpp">
+				RelativePath="..\Source\Error\IVLogDevice.h">
 			</File>
 			<File
-				RelativePath="..\Source\Example\App\VExampleApp.h">
+				RelativePath="..\Source\Error\VDebugMonitor.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Error\VDebugMonitor.h">
+			</File>
+			<File
+				RelativePath="..\Source\Error\VDebugMonitorEnum.h">
+			</File>
+			<File
+				RelativePath="..\Source\Error\VErrorService.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Error\VErrorService.h">
+			</File>
+			<File
+				RelativePath="..\Source\Error\VLogModeEnum.h">
 			</File>
 		</Filter>
 	</Files>

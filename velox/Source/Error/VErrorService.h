@@ -29,7 +29,7 @@ public:
 	virtual vbool RegisterLogDevice( IVLogDevice* in_pLogDevice );
 	virtual vbool UnregisterLogDevice( IVLogDevice* in_pLogDevice );
 			
-	virtual void Message( const VString& in_Message, LogMode in_LogMode = OK );
+	virtual void Message( const VString& in_Message, LogMode in_LogMode = Ok );
 	
 	virtual void BeginProgressbar();
 	virtual void UpdateProgressbar( const vfloat32 in_fIndex );

@@ -3,7 +3,7 @@
 
 #include <windows.h>
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/IVErrorServie.h"
+#include <v3d/Error/IVErrorService.h>
 
 namespace v3d {
 	namespace error {
@@ -19,7 +19,7 @@ protected:
 
 	void	OnStateCreate( const VString& StateName, const VString& StateText );
 	void	OnStateUpdate( const VString& Name, const VString& Text );
-	void	OnStateDelete( const VSstring& Name );
+	void	OnStateDelete( const VString& Name );
 
 	void	SetDebugLevel( const vuint iLevel );
 

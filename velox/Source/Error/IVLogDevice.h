@@ -8,6 +8,8 @@
 namespace v3d {
 namespace error {
 
+//TODO: warum alle Fkten protected und friend VErrorService, anstatt public Fkten?
+
 class IVLogDevice
 {
 protected:

@@ -25,6 +25,9 @@ using namespace v3d::error;
 VPointer<VErrorService>::AutoPtr g_pErrorService;
 //VPointer<VNamedObject>::AutoPtr g_pTest;
 
+//TODO: den debug monitor in einem VPointer speichern, 
+//und Devices in VErrorService nicht loeschen, sondern in Shutdown()
+
 ERRORSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
 	// store the object registry instance

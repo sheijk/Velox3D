@@ -7,11 +7,16 @@ namespace v3d {
 namespace error {
 //-----------------------------------------------------------------------------
 
+//TODO: wo ist UnregisterLogDevice()? (sheijk)
+
 VErrorService::VErrorService() :
 	IVErrorService("error", 0)
 {
 }
 
+//TODO: Log Devices wirklich loeschen? 
+// sollte nicht derjenige der den Log Device registriert und erstellt 
+// hat das uebernehmen? (sheijk)
 VErrorService::~VErrorService()
 {
 	// delete all register logdevices and clear list

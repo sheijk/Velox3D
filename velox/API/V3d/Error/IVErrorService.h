@@ -10,8 +10,11 @@ namespace v3d {
 namespace error {
 //-----------------------------------------------------------------------------
 
+//TODO: Dokumentation (sheijk)
+
 /**
  * the error service
+ *
  */
 class IVErrorService : public VNamedObject
 {
@@ -23,9 +26,9 @@ public:
 	}
 
 	virtual vbool RegisterLogDevice( IVLogDevice* in_pLogDevice ) = 0;
-	virtual vbool UnregisterLogDevice( IVLogDevice* in_pLogDevice ) = ;
+	virtual vbool UnregisterLogDevice( IVLogDevice* in_pLogDevice ) = 0;
 
-	virtual void Message( const VString& in_Message, LogMode in_LogMode = OK ) = 0;
+	virtual void Message( const VString& in_Message, LogMode in_LogMode = Ok ) = 0;
 	
 	virtual void BeginProgressbar() = 0;
 	virtual void UpdateProgressbar( const vfloat32 in_fIndex ) = 0;
