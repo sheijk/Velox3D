@@ -80,7 +80,7 @@ vbool VQ3BspImporter::LoadQ3Level(VStringParam in_sFilename)
 	m_pLightmaps   = (BSPLightmap*)(m_pRawData + lumps[LIGHTMAPS].iOffset);
 
 
-	SwapAxis();
+	//SwapAxis();
 	return true;
 
 }

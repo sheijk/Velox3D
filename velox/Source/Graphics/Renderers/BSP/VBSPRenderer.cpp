@@ -156,7 +156,7 @@ void VBSPRenderer::BuildModelList()
 	translate.Assign(new VMatrix44f());
 	Identity(*translate);
 
-	math::SetTranslate(*translate, 0.0f, 0.0f, 0.0f);
+	math::SetTranslate(*translate, 1000.0f, 3000.0f, 100.0f);
 
 	//build our index list thus we know how to render the faces
 	for(int i = 0; i<m_Level.m_iNumFaces; i++)
@@ -286,6 +286,8 @@ void VBSPRenderer::CreateTextures()
 				mat->sourceBlendFactor	=
 					VMaterialDescription::BlendZero;
 				mat->enableBlending = true;
+
+				mat->depthTestFunction = VMaterialDescription::DepthOnLess;
 			}
 			
 			catch(VException e)
@@ -304,6 +306,8 @@ void VBSPRenderer::CreateTextures()
 					mat->sourceBlendFactor	=
 						VMaterialDescription::BlendZero;
 					mat->enableBlending		= true;
+
+					mat->depthTestFunction = VMaterialDescription::DepthOnLess;
 				}
 				catch(VException e2)
 				{
@@ -312,6 +316,8 @@ void VBSPRenderer::CreateTextures()
 					mat->sourceBlendFactor	=
 						VMaterialDescription::BlendZero;
 					mat->enableBlending = true;
+
+					mat->depthTestFunction = VMaterialDescription::DepthOnLess;
 
 					m_MaterialList.push_back(mat);
 					bIsAdded = true;
@@ -326,6 +332,8 @@ void VBSPRenderer::CreateTextures()
 				mat->sourceBlendFactor	 = 
 					VMaterialDescription::BlendZero;
 				mat->enableBlending = true;
+
+				mat->depthTestFunction = VMaterialDescription::DepthOnLess;
 
 				m_MaterialList.push_back(mat);
 			}
@@ -366,6 +374,7 @@ void VBSPRenderer::CreateLightmaps()
 		mat->destBlendFactor =  VMaterialDescription::BlendSourceColor;
 		//mat->enableBlending = true;
 
+		// turn this off for lighting only
 		mat->depthWriteMask = VMaterialDescription::DepthReadOnly;
 		
 

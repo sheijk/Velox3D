@@ -42,7 +42,7 @@ public:
 	virtual void Render(vuint in_iFrameNum, vfloat32 x, vfloat32 y);
 	virtual void Render(vuint in_iFrameNum, vfloat32 x, vfloat32 y, vfloat32 z);
 	virtual void SetFrame(vuint in_iID, VGraphicFrame in_Frame);
-
+    
 	//creates a new frame
 	virtual void AddFrame(VGraphicFrame in_Frame);
 

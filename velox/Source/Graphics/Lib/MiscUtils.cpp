@@ -52,6 +52,15 @@ VMaterialDescription::ColorBufferMask NoColorWrites()
 	return mask;
 }
 
+void ApplyMaterial(IVDevice& in_Device,
+				   IVMaterial* in_pMaterial)
+{
+	for(vuint i = 0; i < in_pMaterial->StateCount(); ++i)
+	{	
+		in_Device.ApplyState(in_pMaterial->GetState(i));
+	}
+}
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

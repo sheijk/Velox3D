@@ -19,6 +19,7 @@
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VJpegImageLoader.h"
 #include "ImageService/VTgaImageLoader.h"
+#include "ImageService/VDevILLoader.h"
 
 #include "WindowService/VWindowManagerWin32.h"
 
@@ -58,8 +59,10 @@ class VVeloxModules : public v3d::VModuleBase
 
 	// image
 	VPointer<VImageFactory>::AutoPtr g_pImageFactory;
-	VPointer<IVImageLoader>::AutoPtr g_pTgaImageLoader;
-	VPointer<IVImageLoader>::AutoPtr g_pJpgImageLoader;
+//	VPointer<IVImageLoader>::AutoPtr g_pTgaImageLoader;
+//	VPointer<IVImageLoader>::AutoPtr g_pJpgImageLoader;
+	VPointer<IVImageLoader>::AutoPtr g_pDevILLoader;
+	
 
 	// window
 	VPointer<VWindowManagerWin32>::AutoPtr g_pWindowManagerWin;
@@ -97,8 +100,9 @@ void VVeloxModules::Initialize()
 
 	// image
 	g_pImageFactory.Assign(new VImageFactory());
-	g_pTgaImageLoader.Assign(new VTgaImageLoader());
-	g_pJpgImageLoader.Assign(new VJpegImageLoader());
+	//g_pTgaImageLoader.Assign(new VTgaImageLoader());
+	//g_pJpgImageLoader.Assign(new VJpegImageLoader());
+	g_pDevILLoader.Assign(new VDevILLoader());
 
 	// window
 	g_pWindowManagerWin.Assign(new VWindowManagerWin32());

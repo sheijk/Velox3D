@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="UtilsLib"
+	Name="VeloxLib"
 	ProjectGUID="{BB57F1C9-0039-40BC-8188-02F384F49322}"
 	RootNamespace="UtilsLib"
 	Keyword="Win32Proj">
@@ -207,9 +207,6 @@
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.inl">
-				</File>
-				<File
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangleMesh.h">
 				</File>
 				<File
@@ -351,6 +348,25 @@
 						RelativePath="..\Api\V3dLib\Graphics\Renderers\Bsp\VBSPRenderer.h">
 					</File>
 				</Filter>
+				<Filter
+					Name="Sky"
+					Filter="">
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Renderers\Sky\IVSkyColorizer.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Renderers\Sky\VDaylightSkyColorizer.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Renderers\Sky\VDaylightSkyColorizer.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Renderers\Sky\VSkyDome.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Renderers\Sky\VSkyDome.h">
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Includes"
@@ -375,6 +391,16 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\SimpleSG.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Image"
+				Filter="">
+				<File
+					RelativePath="..\Source\Graphics\Image\VGraphicSprite.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Image\VGraphicSprite.h">
 				</File>
 			</Filter>
 		</Filter>
@@ -415,6 +441,12 @@
 		<Filter
 			Name="Misc"
 			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\ColorConversion.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Utils\ColorConversion.h">
+			</File>
 			<File
 				RelativePath="..\Api\V3d\Utils\IVStringStream.h">
 			</File>
