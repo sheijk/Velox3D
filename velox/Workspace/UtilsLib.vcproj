@@ -324,6 +324,28 @@
 			<Filter
 				Name="Renderers"
 				Filter="">
+				<Filter
+					Name="Terrain"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\Renderers\Terrain\VLodHeightmap.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Renderers\Terrain\VLodHeightmap.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Renderers\Terrain\VTerrainLodChunk.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Renderers\Terrain\VTerrainLodChunk.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Renderers\Terrain\VTerrainRenderer.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Renderers\Terrain\VTerrainRenderer.h">
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

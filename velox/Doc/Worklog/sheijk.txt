@@ -27,6 +27,10 @@ template member konvertiert?
 -------------------------------------------------------------------------------
 ----- personal todo:
 
+	.roadmap
+	IVCamera
+	terrain: zwischen lod stufen umschalten
+
 	geometry generation:
 	das hier dokumentieren:
 	concept GeometryProvider
@@ -37,10 +41,6 @@ template member konvertiert?
 		IndexBuffer GetIndexBuffer()
 		VBuffer<VertexStructure> VertexBuffer
 		VBuffer<vuint> IndexBuffer
-
-	roadmap:
-	drawlist state sortierung
-	design der engine: entity system + zusammenarbeit der einzelnen engine teile
 
 	.refactorings
 
@@ -54,7 +54,6 @@ template member konvertiert?
 
 	.geometry
 	geometrie welche aus mehreren meshes + models besteht
-	geometrie generatoren vereinheitlichen (geometry provider concept, s.o.)
 
 	.drawlist:
 	nach states sortieren
@@ -69,11 +68,8 @@ template member konvertiert?
 	nodes sollten irgendwann auch geloescht werden (shared ptr?)
 	zusammenarbeit mit physik, etc (-> entity system)
 
-	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
-	Objekts auf 0 gesetzt)
-	alternativ: "reset" funktion fuer Shared Pointer
+	"reset" funktion fuer Shared Pointer(?)
 	Service Abhaengigkeiten Dokumentieren
-	Klasse zum Laden einer DLL (fuer Kernel, und sonstiges)
 
 	Dokumentation
 	Coding Guidelines uebersichtlicher machen
@@ -102,6 +98,12 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+10.04.2004
+terrain: mehrere chunks koennen zu einer map zusammen gefuegt werden
+
+09.04.2004
+Terrain: wechseln zwischen lod stufen fuer chunks
 
 02.04.2004
 VBox an Geometry Generater Konvention (s.o.) angepasst

@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <v3d/Graphics/VMeshDescription.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

@@ -93,6 +93,12 @@ public:
 	vbool Resize(const TIndex width, const TIndex height, const ResizeFlags flags = FillZero);
 
 	/**
+	 * Behaves like Resize(w, h, Uninitialized) but does not require the
+	 * TElement type to have an operator=(const TElement)
+	 */
+	void ResizeUninit(TIndex width, TIndex height);
+
+	/**
 	 * Copy data from an other array.
 	 *
 	 * @return true on success
@@ -241,6 +247,12 @@ template <class TElement, class TIndex> vbool VArray2d<TElement, TIndex>::
    }
 
    return ret;
+}
+
+template <class TElement, class TIndex> 
+void VArray2d<TElement, TIndex>::ResizeUninit(TIndex width, TIndex height)
+{
+	SetSize(width, height);
 }
 
 /****************************************************************************
