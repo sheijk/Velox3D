@@ -10,38 +10,36 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
- * Describes in which device buffers the data for a mesh is
+ * Describes which data to use for a mesh and how to interprete it
  *
  * @author sheijk
  */
 struct VMeshDescription
 {
-	//typedef VBufferBase* BufferHandle;
-	typedef IVBuffer<vfloat32>* FloatBufferHandle;
-	typedef IVBuffer<vint32>* IntBufferHandle;
 	typedef IVBuffer<vbyte>* ByteBufferHandle;
 
-	template<typename Buffer>
-		struct DataRef
+	enum GeometryType
 	{
-		DataRef()
-		{
-			hBuffer = 0;
-			nStart = nCount = nStride = 0;
-		}
+		Triangles,
+		TriangleStrip,
+		TriangleFan,
+		Quads,
+		QuadStrip,
+		Lines,
+		LineStrip
+	};
+
+	template<typename Buffer>
+	struct DataRef
+	{
+		DataRef();
 
 		DataRef(
 			Buffer in_hBuffer,
 			vuint in_nStart,
 			vuint in_nCount,
 			vuint in_nStride
-			)
-		{
-			hBuffer = in_hBuffer;
-			nStart = in_nStart;
-            nCount = in_nCount;
-			nStride = in_nStride;
-		}
+			);
 
 		Buffer hBuffer;
 		vuint nStart;
@@ -49,15 +47,40 @@ struct VMeshDescription
         vuint nStride;
 	};
 
-	typedef DataRef<FloatBufferHandle> FloatDataRef;
-	typedef DataRef<IntBufferHandle> IntDataRef;
 	typedef DataRef<ByteBufferHandle> ByteDataRef;
+
+	GeometryType geometryType;
 
 	ByteDataRef triangleVertices;
 	ByteDataRef triangleColors;
 	ByteDataRef triangleTexCoords;
 	ByteDataRef triangleIndices;
+
+	VMeshDescription() : geometryType(Triangles) {}
 };
+
+//-----------------------------------------------------------------------------
+template<typename Buffer>
+VMeshDescription::DataRef<Buffer>::DataRef()
+{
+	hBuffer = 0;
+	nStart = nCount = nStride = 0;
+}
+
+
+template<typename Buffer>
+VMeshDescription::DataRef<Buffer>::DataRef(
+		Buffer in_hBuffer,
+		vuint in_nStart,
+		vuint in_nCount,
+		vuint in_nStride
+		)
+{
+	hBuffer = in_hBuffer;
+	nStart = in_nStart;
+	nCount = in_nCount;
+	nStride = in_nStride;
+}
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 #include "VOpenGLVertexMesh.h"
 //-----------------------------------------------------------------------------
-
+#include "VOpenGlUtils.h"
 #include <v3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -18,7 +18,7 @@ VOpenGLVertexMesh::VOpenGLVertexMesh(const VMeshDescription& in_Descr)
 	m_bColors = (m_ColorData.hBuffer != 0);
 	m_bTexCoords = (m_TexCoordData.hBuffer != 0);
 
-	m_PrimitiveType = GL_TRIANGLES;
+	m_PrimitiveType = GetGeometryMode(in_Descr.geometryType);
 }
 
 VOpenGLVertexMesh::~VOpenGLVertexMesh()

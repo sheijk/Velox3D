@@ -7,6 +7,8 @@
 
 #include "../DeviceBase/VRenderMethodRegistry.h"
 
+#include <windows.h>
+#include <gl/gl.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -25,6 +27,8 @@ class VOpenGLIndexMesh : public VBaseMesh
 	VMeshDescription::ByteDataRef m_ColorData;
 	VMeshDescription::ByteDataRef m_TexCoordData;
 	VMeshDescription::ByteDataRef m_IndexData;
+
+	GLint m_PrimitiveType;
 
 public:
 	VOpenGLIndexMesh(const VMeshDescription& in_Descr);

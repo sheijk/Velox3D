@@ -90,6 +90,7 @@ log:
 22.02.2004
 erste mem manager version (noch nicht im cvs)
 image lib fix: tga loader einkommentiert + exception bei fehlern
+verschiedene geometry typen fuer meshes + utils fuer ogl
 
 21.02.2004
 draw list geschrieben, mit simpelst implementation

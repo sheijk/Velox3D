@@ -158,7 +158,7 @@
 					RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.h">
 				</File>
 				<Filter
-					Name="Utils"
+					Name="Base Utils"
 					Filter="">
 					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VBaseMesh.h">
@@ -225,6 +225,16 @@
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VTextureStateCategory.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="GL Utils"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGlUtils.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGLUtils.h">
 					</File>
 				</Filter>
 			</Filter>

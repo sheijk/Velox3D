@@ -11,7 +11,7 @@ namespace graphics {
  * Describes the layout of a VertexData structure in memory.
  * VertexData structures must follow the following rules:
  * - public static member VVertexDataLayout layout.
- * - reserved members: VVertex3f vertex, VColor4f color, VTexCoord2f texCoord
+ * - reserved members: VVertex3f position, VColor4f color, VTexCoord2f texCoord
  */
 struct VVertexDataLayout
 {

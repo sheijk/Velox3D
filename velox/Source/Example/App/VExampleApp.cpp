@@ -164,6 +164,7 @@ vint VExampleApp::Main()
 		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
 		1);*/
 
+	MeshDesc.geometryType = VMeshDescription::TriangleStrip;
 	MeshDesc.triangleVertices = VMeshDescription::ByteDataRef(
 		VertexHandle,
 		0,

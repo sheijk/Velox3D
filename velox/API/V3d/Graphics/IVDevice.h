@@ -25,12 +25,6 @@ namespace graphics {
 class IVDevice
 {
 public:
-	// deprecated, beeing removed -- sheijk
-	typedef VMeshDescription::FloatBufferHandle FloatBufferHandle;
-	typedef VMeshDescription::IntBufferHandle IntBufferHandle;
-	typedef VFloatBuffer::CopyMode FloatBufferCopyMode;
-	typedef VIntBuffer::CopyMode  IntBufferCopyMode;
-
 	/** a handle to a device buffer */
 	typedef VMeshDescription::ByteBufferHandle BufferHandle;
 
