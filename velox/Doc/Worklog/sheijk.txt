@@ -15,12 +15,8 @@ Worklog von sheijk
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-Exceptions: std::string entfernen
-Project Files umstellen: Multithreaded und Namen auf ..Lib, ..Service und Engine,
-sowie Kernel in ein Extra Projekt
 Kernel: Fkten virtual machen, damit der Editor einen angepasste Version ableiten
 kann
-Services: Namen per Konstruktor einstellbar
 UnitTests als Service
 Vfs als Service
 <v3d/Core/VCoreLib.h> in jedem Header includen
@@ -34,7 +30,9 @@ log:
 
 06.06.2003
 std::string aus dem Core entfernt, und durch VStringParam/VStringRetVal/VString
-ersetzt, 
+ersetzt
+Project Files auf Multithreaded DLL gestellt, Kernel in KernelLib verbannt
+Services: Name kann im Konstruktor angegeben werden
 
 05.06.2003
 VNamedObject usw.: std::string aus Interfaces entfernt

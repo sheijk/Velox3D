@@ -16,28 +16,27 @@ namespace v3d {
 namespace kernel {
 //-----------------------------------------------------------------------------
 
-//TODO: ableiten von "Spezial Kerneln" ermoeglichen
-
 /**
  * The kernel
  * Initializes the program and loads all libraries
  */
 class VKernel
 {
-private:
-	void CreateObjectRegistry();
-	void ParseFile(const std::string& in_strFileName);
-	void GenerateInitSequence();
-	void LoadServices();
-	void DelegateControl();
-	void Shutdown();
+protected:
+	virtual void CreateObjectRegistry();
+	virtual void ParseFile(const std::string& in_strFileName);
+	virtual void GenerateInitSequence();
+	virtual void LoadServices();
+	virtual void DelegateControl();
+	virtual void Shutdown();
 
+private:
 	typedef VPointer<VServiceProxy>::SharedPtr ServicePointer;
 	typedef std::list<ServicePointer> ServiceList;
 
 	ServiceList m_Services;
 	std::string m_strAppName;
-//	ServicePointer m_App;
+
 public:
 	VKernel();
 	virtual ~VKernel();
