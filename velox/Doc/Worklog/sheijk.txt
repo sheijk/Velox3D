@@ -6,11 +6,9 @@ Worklog von sheijk
 --------------------------------------------------------------------------------
 ----- current assigned tasks:
 
-- bestehenden Source umschreiben und ins neue CVS einpflegen
 - vfs service
 - velox design
 - netzwerk + scripting planen
-- UnitTestFramework als Service, damit andere Services benutzt werden koennen
 
 --------------------------------------------------------------------------------
 ----- random thoughts:
@@ -21,12 +19,9 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-Kernel: Fkten virtual machen, damit der Editor einen angepasste Version ableiten
-kann
-UnitTests wieder einbauen
 Vfs als Service
-<v3d/Core/VCoreLib.h> in jedem Header includen
-Netzwerk, Scripting
+Netzwerk, Scripting planen
+Konzept fuer erweiterten Error Service
 Auf die Langnese Insel ziehen
 
 --------------------------------------------------------------------------------

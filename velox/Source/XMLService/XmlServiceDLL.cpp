@@ -33,7 +33,7 @@ EXAMPLESERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create service object and register it
-	g_pXMLService.Reset(new VXMLService());
+	g_pXMLService.Assign(new VXMLService());
 }
 
 EXAMPLESERVICE_API void Shutdown()

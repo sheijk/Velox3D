@@ -29,9 +29,13 @@ public:
 //	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor) = 0;
 	virtual void ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor) = 0;
 	//virtual IVXMLWriter* CreateXMLWriter(IVStream* in_pStream) = 0;
+
+	//TODO: auf keine Fall einfach eine Ptr zurueckgeben, 
+	// sondern einen SmartPointer verwenden, sonst gibts Speicherlecks (sheijk)
 	virtual IVXMLWriter* CreateXMLWriter() = 0;
 };
 
+//TODO: } // namespace ..., ist besser lesbar (sheijk)
 }
 }
 

@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding = "Windows-1252"?>
+<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
+	Version="7.10"
 	Name="XmlService"
 	ProjectGUID="{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}"
 	Keyword="Win32Proj">
@@ -19,6 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="../API"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -52,12 +53,18 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
+			OutputDirectory="Lokal/$(ConfigurationName)"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -65,6 +72,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
+				AdditionalIncludeDirectories="../API"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -98,37 +106,26 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 	</Configurations>
+	<References>
+	</References>
 	<Files>
 		<Filter
-			Name="Source Files"
-			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm">
+			Name="Interface"
+			Filter="">
 			<File
-				RelativePath="..\Source\XMLService\VXMLAttribute.cpp">
+				RelativePath="..\Api\V3d\Xml\IVXMLAttribute.h">
 			</File>
 			<File
-				RelativePath="..\Source\XMLService\VXMLElement.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\VXMLService.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\VXMLWriter.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\XmlServiceDLL.cpp">
-			</File>
-		</Filter>
-		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl;inc">
-			<File
-				RelativePath="..\API\V3d\XML\IVXMLAttribute.h">
-			</File>
-			<File
-				RelativePath="..\API\V3d\XML\IVXMLElement.h">
+				RelativePath="..\Api\V3d\Xml\IVXMLElement.h">
 			</File>
 			<File
 				RelativePath="..\API\V3d\XML\IVXMLService.h">
@@ -139,42 +136,57 @@
 			<File
 				RelativePath="..\API\V3d\XML\IVXMLWriter.h">
 			</File>
+		</Filter>
+		<Filter
+			Name="Implementation"
+			Filter="">
+			<File
+				RelativePath="..\Source\XMLService\VXMLAttribute.cpp">
+			</File>
 			<File
 				RelativePath="..\Source\XMLService\VXMLAttribute.h">
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VXMLElement.cpp">
 			</File>
 			<File
 				RelativePath="..\Source\XMLService\VXMLElement.h">
 			</File>
 			<File
+				RelativePath="..\Source\XMLService\VXMLService.cpp">
+			</File>
+			<File
 				RelativePath="..\Source\XMLService\VXMLService.h">
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VXMLWriter.cpp">
 			</File>
 			<File
 				RelativePath="..\Source\XMLService\VXMLWriter.h">
 			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			<File
+				RelativePath="..\Source\XMLService\XmlServiceDLL.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="TinyXML">
 			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinystr.cpp">
+				RelativePath="..\Source\XMLService\tinyxml\tinystr.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinystr.h">
+				RelativePath="..\Source\XMLService\tinyxml\tinystr.h">
 			</File>
 			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxml.cpp">
+				RelativePath="..\Source\XMLService\tinyxml\tinyxml.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxml.h">
+				RelativePath="..\Source\XMLService\tinyxml\tinyxml.h">
 			</File>
 			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxmlerror.cpp">
+				RelativePath="..\Source\XMLService\tinyxml\tinyxmlerror.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxmlparser.cpp">
+				RelativePath="..\Source\XMLService\tinyxml\tinyxmlparser.cpp">
 			</File>
 		</Filter>
 	</Files>

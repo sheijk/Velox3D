@@ -5,6 +5,8 @@ namespace v3d
 namespace xml
 {
 
+//TODO: Code kommentieren (sheijk)
+
 VXMLService::VXMLService(void) : IVXMLService("XmlService", 0)
 {
 	m_Vistor = NULL;
@@ -17,8 +19,7 @@ VXMLService::~VXMLService(void)
 IVXMLWriter* VXMLService::CreateXMLWriter()
 {
 	VXMLWriter* Writer = new VXMLWriter();
-	return Writer;
-
+	return Writer; //TODO: und wer garantiert die Freigabe? (->IV...h), (sheijk)
 }
 
 /*IVXMLWriter* VXMLService::CreateXMLWriter(IVStream* in_pStream)
@@ -72,6 +73,8 @@ void VXMLService::TraversalNodes(TiXmlNode* node)
 
 }
 
+//TODO: IVStream benutzen. (erstmal alle Daten laden 
+// und dann mit TinyXML aus dem Hauptspeicher laden (sheijk)
 void VXMLService::ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor)
 {
 	if(in_pVisitor)
