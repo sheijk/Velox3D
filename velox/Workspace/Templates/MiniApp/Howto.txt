@@ -1,0 +1,19 @@
+How to use velox application templates:
+
+Install the velox scripts on your system 
+(put them into a directory contained in your PATH environment variable)
+Change v3dgetdir so that it echos the absolute path of your velox
+directory
+
+Call
+v3dmakeapp MyAppName TemplateName
+
+This will create a velox application called MyAppName within the current directory. It will be based on the applicaition template called TemplateName. Application templates must be located in velox/Workspace/Templates/TemplateName. It must at least contain Application.vcproj and Application.cpp. All files in this directory will be copied to ./MyAppName. Application.vcproj and Application.cpp will be renamed to MyAppName.*. The following string substitutions will be applied to these files:
+
+In Application.vcproj:
+%%name%% -> MyAppName
+%%projectid%% -> a unique project id composed of the date and milliseconds passed since 0:00. (20050130-0000-0000-0000-000123456789 etc.)
+
+To create your own application templates simply copy velox/Workspace/Templates/MiniApp to a new directory inside the Template directory and modify it as you like.
+
+
