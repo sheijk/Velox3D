@@ -159,17 +159,19 @@ void VGraphicSprite::CreateDefaultMesh()
 		m_pTexCoordDeviceBuffer,
 		IVDevice::Buffer::CopyData);
 
-	m_MeshDescription.triangleVertices = VMeshDescription::ByteDataRef(
-        m_VertexHandle, 0, 12, 3);
+	m_MeshDescription.SetCoordinateData(m_VertexHandle, VDataFormat(0, 12, 3));
+	//m_MeshDescription.triangleVertices = VMeshDescription::ByteDataRef(
+ //       m_VertexHandle, 0, 12, 3);
 
-	m_MeshDescription.triangleTexCoords = VMeshDescription::ByteDataRef(
-		m_TexHandle, 0, 4, 2);
+	m_MeshDescription.SetTexCoordData(0, m_TexHandle, VDataFormat(0, 4, 2));
+	//m_MeshDescription.triangleTexCoords = VMeshDescription::ByteDataRef(
+	//	m_TexHandle, 0, 4, 2);
 
-	m_MeshDescription.geometryType = VMeshDescription::Quads;
+	m_MeshDescription.SetGeometryType(VMeshDescription::Quads);
+	//m_MeshDescription.geometryType = VMeshDescription::Quads;
 
 	m_MeshHandle = m_Device.CreateMesh(m_MeshDescription, m_TextureDescription);
 }
-
 
 //-----------------------------------------------------------------------------
 } //namespace graphics

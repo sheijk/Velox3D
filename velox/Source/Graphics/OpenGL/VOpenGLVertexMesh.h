@@ -24,9 +24,16 @@ class VOpenGLVertexMesh : public VMeshBase
 {
 	typedef VVector<vfloat32, 3> Vertex;
 
-	VMeshDescription::ByteDataRef m_TriangleData;
-	VMeshDescription::ByteDataRef m_ColorData;
-	VMeshDescription::ByteDataRef m_TexCoordData;
+	VMeshDescription::BufferHandle m_hCoordinateBuffer;
+	VMeshDescription::BufferHandle m_hColorBuffer;
+	VMeshDescription::BufferHandle m_hTexCoordBuffer;
+
+	VDataFormat m_CoordinateFormat;
+	VDataFormat m_ColorFormat;
+	VDataFormat m_TexCoordFormat;
+	//VMeshDescription::ByteDataRef m_TriangleData;
+	//VMeshDescription::ByteDataRef m_ColorData;
+	//VMeshDescription::ByteDataRef m_TexCoordData;
 
 	vbool m_bColors;
 	vbool m_bTexCoords;

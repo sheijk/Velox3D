@@ -50,6 +50,12 @@ Doku:
 
 log:
 
+TODO:
+
+27.08.2004
+VMeshDescription refeactored: alle Member private gemacht, Getter+Setter
+Funktionen geschrieben, VDataFormat Klasse statt ByteDataRef. Source angepasst
+
 21.07.2004
 Erste Version des Memory Leak Finders ist fertig, bisher nur in der CoreLib
 eingebaut. Kann Mem Leaks in allen Modulen entdecken, und Ausgeben

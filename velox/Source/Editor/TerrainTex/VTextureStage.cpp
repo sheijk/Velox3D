@@ -79,7 +79,8 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 		provider.GetIndexBuffer().GetSize()
 		);
 
-	meshDescr.geometryType = provider.GetGeometryType();
+	meshDescr.SetGeometryType(provider.GetGeometryType());
+	//meshDescr.geometryType = provider.GetGeometryType();
 
 	return meshDescr;
 }

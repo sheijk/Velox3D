@@ -254,11 +254,14 @@ void VTerrainLodChunk::UpdateCurrentMesh(const VMaterialDescription& in_Mat)
 		model.GetVertexBuffer().GetSize(),
 		model.GetIndexBuffer().GetDataAddress(),
 		model.GetIndexBuffer().GetSize());
-	meshd.geometryType = model.GetGeometryType();
+	meshd.SetGeometryType(model.GetGeometryType());
+	//meshd.geometryType = model.GetGeometryType();
 	m_MeshDescription = meshd;
 
-	m_hVertexBuffer = meshd.triangleVertices.hBuffer;
-	m_hIndexBuffer = meshd.triangleIndices.hBuffer;
+	m_hVertexBuffer = meshd.GetCoordinateBuffer();
+	//m_hVertexBuffer = meshd.triangleVertices.hBuffer;
+	m_hIndexBuffer = meshd.GetIndexBuffer();
+	//m_hIndexBuffer = meshd.triangleIndices.hBuffer;
 
 	m_hCurrentMesh = m_Device.CreateMesh(meshd, mat);
 }

@@ -3,6 +3,8 @@
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
+#include <v3d/Core/MemManager.h>
+//-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
@@ -15,20 +17,11 @@ VMeshBase* VOpenGLVBORenderMethod::CreateMesh(
 {
 	V3D_ASSERT(in_pMaterial != 0);
 	V3D_ASSERT(&in_MeshDescr != 0);
+	V3D_ASSERT(in_MeshDescr.GetCoordinateBuffer() != 0);
 
-	VMeshBase* pMesh = 0;
-
-	
-	if( in_MeshDescr.triangleVertices.hBuffer != 0 )
-	{
-
-		pMesh = new VOpenGLVBOMesh(in_MeshDescr, in_pMaterial);
-	}
-
-	V3D_ASSERT(pMesh != 0);
+	VMeshBase* pMesh = new VOpenGLVBOMesh(in_MeshDescr, in_pMaterial);
 
 	return pMesh;
-
 }
 //-----------------------------------------------------------------------------
 

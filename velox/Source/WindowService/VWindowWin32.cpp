@@ -62,6 +62,8 @@ VWindowWin32::VWindowWin32()
 
 VWindowWin32::~VWindowWin32()
 {
+	// release device
+	delete m_Device;
 }
 //-----------------------------------------------------------------------------
 void VWindowWin32::SetActive()

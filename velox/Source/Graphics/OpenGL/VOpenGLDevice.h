@@ -82,6 +82,8 @@ public:
 	
 private:
 	void RecalcModelViewMatrix();
+	BufferHandle GetInternalVertexBuffer(BufferHandle in_hBuffer);
+	void InternalizeBuffers(VMeshDescription& in_MeshDescr);
 
 	/** vertex buffers */
 	VBufferManager<Buffer> m_Buffers;

@@ -2,6 +2,9 @@
 #include <extgl/extgl.h>
 #include "VOpenGLVBOMesh.h"
 #include "VOpenGlUtils.h"
+
+//-----------------------------------------------------------------------------
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -16,7 +19,6 @@ VOpenGLVBOMesh::VOpenGLVBOMesh(
 		IVMaterial* in_pMaterial)  : VMeshBase(in_pMaterial)
 
 {
-
 	// init def vals
 	m_bColors = false;
 	m_bTexCoords = false;
@@ -28,34 +30,40 @@ VOpenGLVBOMesh::VOpenGLVBOMesh(
 	m_IndexVBOID = 0;
 
     // do vertices exist?
-	V3D_VERIFY(in_Descr.triangleVertices.hBuffer != 0);
+	V3D_VERIFY(in_Descr.GetCoordinateBuffer() != 0);
 
-	m_PrimitiveType = GetGeometryMode(in_Descr.geometryType);
+	m_PrimitiveType = GetGeometryMode(in_Descr.GetGeometryType());
 	
-	m_VertexVBOID = GetVertexBuffer(in_Descr.triangleVertices.hBuffer);
+	m_VertexVBOID = GetVertexBuffer(in_Descr.GetCoordinateBuffer());
 	
-	m_TriangleData  = in_Descr.triangleVertices;
+	//m_TriangleData  = in_Descr.triangleVertices;
+	m_CoordinateFormat = in_Descr.GetCoordinateFormat();
 	
-	if(in_Descr.triangleColors.hBuffer != 0)
+	if(in_Descr.GetColorBuffer() != 0)
 	{
 		m_bColors = true;
-		m_ColorData = in_Descr.triangleColors;
-		m_ColorVBOID = GetVertexBuffer(in_Descr.triangleColors.hBuffer);
+		//m_ColorData = in_Descr.triangleColors;
+		m_ColorFormat = in_Descr.GetColorFormat();
+		m_ColorVBOID = GetVertexBuffer(in_Descr.GetColorBuffer());
 	}
 
-	if(in_Descr.triangleTexCoords.hBuffer != 0)
+	V3D_ASSERT(in_Descr.GetTexCoordCount() == 0);
+
+	if(in_Descr.GetTexCoordBuffer(0) != 0)
 	{
 		m_bTexCoords = true;
-		m_TexCoordData = in_Descr.triangleTexCoords;
-		m_TexCoordVBOID = GetVertexBuffer(in_Descr.triangleTexCoords.hBuffer);
+		//m_TexCoordData = in_Descr.triangleTexCoords;
+		m_TexCoordFormat = in_Descr.GetTexCoordFormat(0);
+		m_TexCoordVBOID = GetVertexBuffer(in_Descr.GetTexCoordBuffer(0));
 	}
 	
-	if(in_Descr.triangleIndices.hBuffer != 0)
+	if(in_Descr.GetIndexBuffer() != 0)
 	{
 		m_bIndex = true;
-		m_IndexData = in_Descr.triangleIndices;
+		//m_IndexData = in_Descr.triangleIndices;
+		m_IndexFormat = in_Descr.GetIndexFormat();
 		
-		m_IndexVBOID = GetVertexBuffer(in_Descr.triangleIndices.hBuffer);
+		m_IndexVBOID = GetVertexBuffer(in_Descr.GetIndexBuffer());
 	}
 	
 }
@@ -77,32 +85,39 @@ void VOpenGLVBOMesh::Render()
 	glEnableClientState(GL_VERTEX_ARRAY);
 	
 	glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_VertexVBOID);
-	glVertexPointer(3, GL_FLOAT,	m_TriangleData.nStride * sizeof(vfloat32), (void*)(m_TriangleData.nStart * sizeof(vfloat32)));
+	glVertexPointer(3, GL_FLOAT, 
+		m_CoordinateFormat.GetStride() * sizeof(vfloat32), 
+		(void*)(m_CoordinateFormat.GetFirstIndex() * sizeof(vfloat32)));
 		
 	if(m_bColors)
 	{
 		glEnableClientState(GL_COLOR_ARRAY);
 		glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_ColorVBOID);
-		glColorPointer(4,	GL_FLOAT, m_ColorData.nStride * sizeof(vfloat32), (void*) (m_ColorData.nStart* sizeof(vfloat32)));
-		
+		glColorPointer(4, GL_FLOAT,
+			m_ColorFormat.GetStride() * sizeof(vfloat32), 
+			(void*) (m_ColorFormat.GetFirstIndex() * sizeof(vfloat32)));		
 	}
 
 	if(m_bTexCoords)
 	{
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_TexCoordVBOID);
-		glTexCoordPointer(2,	GL_FLOAT, m_TexCoordData.nStride * sizeof(vfloat32), (void*) (m_TexCoordData.nStart* sizeof(vfloat32)));
+		glTexCoordPointer(2, GL_FLOAT, 
+			m_TexCoordFormat.GetStride() * sizeof(vfloat32), 
+			(void*) (m_TexCoordFormat.GetFirstIndex() * sizeof(vfloat32)));
 	}
 
 	if(m_bIndex)
 	{
 		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, m_IndexVBOID);
 		//glDrawElements(m_PrimitiveType, m_IndexData.nCount, GL_UNSIGNED_INT, m_IndexData.hBuffer->GetDataAddress());
-		glDrawElements(m_PrimitiveType, m_IndexData.nCount, GL_UNSIGNED_INT, (void*)(m_IndexData.nStart * sizeof(vuint)));
+		glDrawElements(m_PrimitiveType, 
+			m_IndexFormat.GetCount(), GL_UNSIGNED_INT, 
+			(void*)(m_IndexFormat.GetFirstIndex() * sizeof(vuint)));
 	}
 	else
 	{
-		glDrawArrays(m_PrimitiveType, 0, m_TriangleData.nCount);
+		glDrawArrays(m_PrimitiveType, 0, m_CoordinateFormat.GetCount());
 	}
 	
 	/* one way to draw the array */
@@ -114,7 +129,7 @@ void VOpenGLVBOMesh::Render()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
-GLuint VOpenGLVBOMesh::GetVertexBuffer(VMeshDescription::ByteBufferHandle in_hHandle)
+GLuint VOpenGLVBOMesh::GetVertexBuffer(VMeshDescription::BufferHandle in_hHandle)
 {
 	//look if our handle is still in the list
 	HandleVBOMap::iterator findIter;

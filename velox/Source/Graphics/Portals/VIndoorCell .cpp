@@ -118,7 +118,8 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 		box.GetIndexBuffer().GetSize()
 		);
 
-	meshDescs.geometryType = box.GetGeometryType();
+	meshDescs.SetGeometryType(box.GetGeometryType());
+	//meshDescs.geometryType = box.GetGeometryType();
 	
 
 	VMaterialDescription matDescs =

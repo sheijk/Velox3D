@@ -143,6 +143,9 @@
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.inl">
 				</File>
 				<File
+					RelativePath="..\Source\Graphics\Lib\VMeshDescription.cpp">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VPlane3f.h">
 				</File>
 				<File

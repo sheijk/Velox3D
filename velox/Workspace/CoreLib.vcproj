@@ -219,10 +219,26 @@
 					RelativePath="..\Api\V3d\Core\Modules\VModuleParams.h">
 				</File>
 			</Filter>
+			<Filter
+				Name="Mem Manager"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Core\IVMemoryManager.h">
+				</File>
+				<File
+					RelativePath="..\Source\Core\MemLocalSettings.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\MemManager.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Implementation"
 			Filter="">
+			<File
+				RelativePath="..\Source\Core\MemManager.cpp">
+			</File>
 			<File
 				RelativePath="..\Source\Core\VIOStream.cpp">
 			</File>
@@ -282,15 +298,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath="..\Api\V3d\Core\IVMemoryManager.h">
-		</File>
-		<File
-			RelativePath="..\Source\Core\MemManager.cpp">
-		</File>
-		<File
-			RelativePath="..\Api\V3d\Core\MemManager.h">
-		</File>
 	</Files>
 	<Globals>
 		<Global

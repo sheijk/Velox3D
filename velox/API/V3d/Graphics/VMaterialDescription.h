@@ -16,7 +16,7 @@ struct VMaterialDescription
 {
 	// types
 
-	typedef VMeshDescription::ByteBufferHandle ByteBufferHandle;
+	typedef VMeshDescription::BufferHandle ByteBufferHandle;
 
 	/**
 	 * The polygon mode for rendering.

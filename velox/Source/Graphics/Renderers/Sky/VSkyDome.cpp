@@ -166,13 +166,14 @@ void VSkyDome::CreateMesh(IVDevice& in_Device)
 	m_MaterialDescription.AddTexture( m_pTexRef );
 
 	VMeshDescription meshDesc = 
-	 BuildMeshDescription( in_Device,
+	BuildMeshDescription( in_Device,
 		m_HalfSphere.GetVertexBuffer().GetDataAddress(),
 		m_HalfSphere.GetVertexBuffer().GetSize(),
 		m_HalfSphere.GetIndexBuffer().GetDataAddress(),
 		m_HalfSphere.GetIndexBuffer().GetSize() );
 
-	meshDesc.geometryType = VMeshDescription::TriangleStrip;
+	meshDesc.SetGeometryType(VMeshDescription::TriangleStrip);
+	//meshDesc.geometryType = VMeshDescription::TriangleStrip;
 
 	m_pMesh = in_Device.CreateMesh( meshDesc, m_MaterialDescription );
 }

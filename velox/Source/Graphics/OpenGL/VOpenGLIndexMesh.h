@@ -23,10 +23,11 @@ class VOpenGLIndexMesh : public VMeshBase
 {
 	typedef VVector<vfloat32, 3> Vertex;
 
-	VMeshDescription::ByteDataRef m_TriangleData;
-	VMeshDescription::ByteDataRef m_ColorData;
-	VMeshDescription::ByteDataRef m_TexCoordData;
-	VMeshDescription::ByteDataRef m_IndexData;
+	VMeshDescription m_MeshDescription;
+	//VMeshDescription::ByteDataRef m_TriangleData;
+	//VMeshDescription::ByteDataRef m_ColorData;
+	//VMeshDescription::ByteDataRef m_TexCoordData;
+	//VMeshDescription::ByteDataRef m_IndexData;
 
 	GLint m_PrimitiveType;
 

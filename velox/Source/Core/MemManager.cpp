@@ -1,18 +1,8 @@
 #include <malloc.h>
 #include <cstdio>
 
-//-----------------------------------------------------------------------------
-// some defines to change the behaviour of the memory manager
-
-// enable memory logging
-#define V3D_MEM_ENABLE_LOGGING
-
-// show every allocation/release
-//#define V3D_MEM_SHOW_ALLOCRELEASE
-
-// print .a. for allocations and .r. for releases
-//#define V3D_MEM_SHOW_SHORTALLOCRELEASE
-
+// include mem manager behaviour
+#include "MemLocalSettings.h"
 //-----------------------------------------------------------------------------
 
 namespace v3d {

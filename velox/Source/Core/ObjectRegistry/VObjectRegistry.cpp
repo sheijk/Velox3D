@@ -75,10 +75,10 @@ void VObjectRegistry::RegisterObject(
 	const VObjectKey& in_Name,
 	VNamedObject& in_Object)
 {
-	std::ostringstream str;
-	str << "Object registered: addr(" << &in_Object << "), name: \""
-		<< in_Name.ToString().AsCString() << "\"" << std::endl;
-	V3D_DEBUGMSG(str.str().c_str());
+	//std::ostringstream str;
+	//str << "Object registered: addr(" << &in_Object << "), name: \""
+	//	<< in_Name.ToString().AsCString() << "\"" << std::endl;
+	//V3D_DEBUGMSG(str.str().c_str());
 
 	// register object
 	pair<ObjectKeyMap::iterator, bool> res;
@@ -99,14 +99,13 @@ void VObjectRegistry::RegisterObject(
 
 void VObjectRegistry::UnregisterObject(VNamedObject& in_Object)
 {
-	std::ostringstream str;
-	str << "Object unregistered: " << in_Object.GetKey().ToString() << std::endl;
-	V3D_DEBUGMSG(str.str().c_str());
-
 	ObjectKeyMap::iterator iter;
 	iter = m_Objects.find(in_Object.GetKey());
-
 	m_Objects.erase(iter);
+
+	//std::ostringstream str;
+	//str << "Object unregistered: " << in_Object.GetKey().ToString() << std::endl;
+	//V3D_DEBUGMSG(str.str().c_str());
 }
 
 VNamedObject& VObjectRegistry::GetObject(const VObjectKey& in_Key)

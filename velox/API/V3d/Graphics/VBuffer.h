@@ -30,8 +30,9 @@ protected:
 };
 
 template<typename T>
-struct IVBuffer : public VBufferBase
+class IVBuffer : public VBufferBase
 {
+public:
 	/**
 	 * returns the address of the first element. all elements have to be
 	 * aligned linearly starting at this address (like an array)
@@ -140,7 +141,7 @@ public:
 	/**
 	 * Delete's its assosiated memory region
 	 */
-	~VBuffer()
+	virtual ~VBuffer()
 	{
 		delete m_pBuffer;
 		m_pBuffer = 0;

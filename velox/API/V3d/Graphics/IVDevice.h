@@ -28,7 +28,7 @@ class IVDevice
 {
 public:
 	/** a handle to a device buffer */
-	typedef VMeshDescription::ByteBufferHandle BufferHandle;
+	typedef VMeshDescription::BufferHandle BufferHandle;
 
 	typedef VBufferBase::CopyMode BufferCopyMode;
 
@@ -52,7 +52,7 @@ public:
 		ViewMatrix
 	};
 
-	/** 
+	/**
 	 * creates a buffer inside the device which can be referred to using
 	 * the given handle
 	 *
@@ -70,7 +70,11 @@ public:
 	/** deletes the buffer and sets the handle to 0 */
 	virtual void DeleteBuffer(BufferHandle& in_Buffer) = 0;
 
-	/** Overwrites a part of a buffer with new data */
+	/**
+	 * Overwrites a part of a buffer with new data. Only overwrites existing
+	 * data. Can not change the buffers size. Take care not to write over the
+	 * end of the buffer
+	 */
 	virtual void OverwriteBuffer(
 		BufferHandle& in_hBuffer,
 		vuint in_nFirstElement,
@@ -95,8 +99,8 @@ public:
 	/** sends the vertices of a mesh to the device */
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
 
-	/** 
-	 * creates mesh and material on the fly and renders them. mesh and 
+	/**
+	 * creates mesh and material on the fly and renders them. mesh and
 	 * material will only be created temporarily
 	 */
 	virtual void RenderImmediate(
@@ -111,7 +115,7 @@ public:
 	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix) = 0;
 
 	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode) = 0;
-	
+
 	/**
 	* This is only implemented to show anything by now
 	* TODO: build the damn renderer ;)

@@ -20,6 +20,9 @@ VMaterialDescription BuildTextureMaterial(
 
 	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(in_pcTextureFile);
 
+	VImage image(myImage->GetWidth(), myImage->GetHeight(), 24);
+	pFactory->ConvertImage(*myImage, image);
+
 	VMaterialDescription texMat;
 
 	VMaterialDescription::TextureRef* pTexRef =
@@ -27,7 +30,8 @@ VMaterialDescription BuildTextureMaterial(
 
 	IVDevice::BufferHandle hTextureBuffer = in_pDevice->CreateBuffer(
 		IVDevice::Texture,
-		myImage->pData,
+		image.pData,
+		//myImage->pData,
 		IVDevice::Buffer::DropData
 		);
 

@@ -7,33 +7,49 @@ VMeshDescription BuildMeshDescription(
 	VMeshDescription descr;
 
 	// set vertex coord info
-	descr.triangleVertices = VMeshDescription::ByteDataRef(
-		bufHandle, 
-		vuint(layout.positionOffset), 
-		cnVertexCount, 
-		vuint(layout.vertexSize / sizeof(vfloat32))
-		);
+	VDataFormat triangleFormat;
+	triangleFormat.SetFirstIndex(vuint(layout.positionOffset));
+	triangleFormat.SetCount(cnVertexCount);
+	triangleFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+	descr.SetCoordinateData(bufHandle, triangleFormat);
+
+	//descr.triangleVertices = VMeshDescription::ByteDataRef(
+	//	bufHandle, 
+	//	vuint(layout.positionOffset), 
+	//	cnVertexCount, 
+	//	vuint(layout.vertexSize / sizeof(vfloat32))
+	//	);
 
 	// set color info, if contained
 	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
 	{
-		descr.triangleColors = VMeshDescription::ByteDataRef(
-			bufHandle,
-			vuint(layout.colorOffset),
-			cnVertexCount,
-			vuint(layout.vertexSize / sizeof(vfloat32))
-			);
+		VDataFormat colorFormat;
+		colorFormat.SetFirstIndex(vuint(layout.colorOffset));
+		colorFormat.SetCount(cnVertexCount);
+		colorFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+		descr.SetColorData(bufHandle, colorFormat);
+		//descr.triangleColors = VMeshDescription::ByteDataRef(
+		//	bufHandle,
+		//	vuint(layout.colorOffset),
+		//	cnVertexCount,
+		//	vuint(layout.vertexSize / sizeof(vfloat32))
+		//	);
 	}
 
 	// set tex coord if contained
 	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
 	{
-		descr.triangleTexCoords = VMeshDescription::ByteDataRef(
-			bufHandle,
-			vuint(layout.texCoordOffset),
-			cnVertexCount,
-			vuint(layout.vertexSize / sizeof(vfloat32))
-			);
+		VDataFormat texCoordFormat;
+		texCoordFormat.SetFirstIndex(vuint(layout.texCoordOffset));
+		texCoordFormat.SetCount(cnVertexCount);
+		texCoordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+		descr.SetTexCoordData(0, bufHandle, texCoordFormat);
+		//descr.triangleTexCoords = VMeshDescription::ByteDataRef(
+		//	bufHandle,
+		//	vuint(layout.texCoordOffset),
+		//	cnVertexCount,
+		//	vuint(layout.vertexSize / sizeof(vfloat32))
+		//	);
 	}
 
 	return descr;
@@ -105,16 +121,21 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	// add indices
 	if( in_pIndices && in_nIndexCount > 0 )
 	{
-		md.triangleIndices = VMeshDescription::ByteDataRef(
-			in_Device.CreateBuffer(
-			IVDevice::VertexBuffer,
-			&indexBuffer,
-			VByteBuffer::CopyData
-			),
-			0,
-			in_nIndexCount,
-			1
-			);
+		IVDevice::BufferHandle hIndexBuffer = in_Device.CreateBuffer(
+			IVDevice::VertexBuffer, &indexBuffer, VByteBuffer::CopyData);
+
+		md.SetIndexData(hIndexBuffer, VDataFormat(0, in_nIndexCount, 1));
+
+		//md.triangleIndices = VMeshDescription::ByteDataRef(
+		//	in_Device.CreateBuffer(
+		//	IVDevice::VertexBuffer,
+		//	&indexBuffer,
+		//	VByteBuffer::CopyData
+		//	),
+		//	0,
+		//	in_nIndexCount,
+		//	1
+		//	);
 	}
 
 	return md;
@@ -134,7 +155,8 @@ v3d::graphics::IVDevice::MeshHandle BuildMesh(
 		provider.GetIndexBuffer().GetSize()
 		);
 
-	meshDescr.geometryType = provider.GetGeometryType();
+	meshDescr.SetGeometryType(provider.GetGeometryType());
+	//meshDescr.geometryType = provider.GetGeometryType();
 
 	return device.CreateMesh(meshDescr, mat);
 }

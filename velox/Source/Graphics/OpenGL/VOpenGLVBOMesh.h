@@ -26,7 +26,7 @@ class VOpenGLVBOMesh : public VMeshBase
 	
 public:
 
-	typedef std::map<VMeshDescription::ByteBufferHandle, GLuint> HandleVBOMap;
+	typedef std::map<VMeshDescription::BufferHandle, GLuint> HandleVBOMap;
 
 	VOpenGLVBOMesh(
 		const VMeshDescription& in_Descr,
@@ -39,12 +39,16 @@ public:
 
 private: 
 	typedef VVector<vfloat32, 3> Vertex;
-	typedef std::pair<VMeshDescription::ByteBufferHandle, GLuint> HandleVBOPair;
+	typedef std::pair<VMeshDescription::BufferHandle, GLuint> HandleVBOPair;
 
-	VMeshDescription::ByteDataRef m_TriangleData;
-	VMeshDescription::ByteDataRef m_ColorData;
-	VMeshDescription::ByteDataRef m_TexCoordData;
-	VMeshDescription::ByteDataRef m_IndexData;
+	VDataFormat m_CoordinateFormat;
+	VDataFormat m_ColorFormat;
+	VDataFormat m_TexCoordFormat;
+	VDataFormat m_IndexFormat;
+//	VMeshDescription::ByteDataRef m_TriangleData;
+//	VMeshDescription::ByteDataRef m_ColorData;
+//	VMeshDescription::ByteDataRef m_TexCoordData;
+//	VMeshDescription::ByteDataRef m_IndexData;
 
 	vbool m_bColors;
 	vbool m_bTexCoords;
@@ -58,7 +62,7 @@ private:
 	GLuint m_TexCoordVBOID;
 	GLuint m_IndexVBOID;
 
-	GLuint GetVertexBuffer(VMeshDescription::ByteBufferHandle in_hHandle);
+	GLuint GetVertexBuffer(VMeshDescription::BufferHandle in_hHandle);
 
 	static HandleVBOMap s_VBOMap;
 

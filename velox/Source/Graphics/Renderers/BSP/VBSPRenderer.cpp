@@ -187,53 +187,65 @@ void VBSPRenderer::BuildModelList()
 			);
 
 		// add indices
-		meshTextured.triangleIndices = VMeshDescription::ByteDataRef
+		meshTextured.SetIndexData(
+			m_pDevice->CreateBuffer
 			(
-				m_pDevice->CreateBuffer
-				(
-					IVDevice::VertexBuffer,
-					&indexBuffer,
-					VByteBuffer::DropData
-				),
-				0,
-				face->iNumVertices,
-				1
+				IVDevice::VertexBuffer,
+				&indexBuffer,
+				VByteBuffer::DropData
+			),
+			VDataFormat(0, face->iNumVertices, 1)
 			);
-		
-			meshTextured.geometryType = cell.GetGeometryType();
 
-			VMeshDescription m2 = meshTextured;
+		//meshTextured.triangleIndices = VMeshDescription::ByteDataRef
+		//	(
+		//		m_pDevice->CreateBuffer
+		//		(
+		//			IVDevice::VertexBuffer,
+		//			&indexBuffer,
+		//			VByteBuffer::DropData
+		//		),
+		//		0,
+		//		face->iNumVertices,
+		//		1
+		//	);
 
-			// build up finished...
+		meshTextured.SetGeometryType(cell.GetGeometryType());
+		//meshTextured.geometryType = cell.GetGeometryType();
 
-			// textured polygons were build. now let us assign lightmap coords
-			
-			m2.triangleTexCoords = VMeshDescription::ByteDataRef(
-				lightbuffer,
-				0,
-				face->iNumVertices,
-				2
-				);
+		VMeshDescription m2 = meshTextured;
 
-			IVDevice::MeshHandle handle = m_pDevice->CreateMesh(
-				m2,
-				*m_LightMaterialList[face->iLightmapID]
-				);
+		// build up finished...
 
-			VModel* model = new VModel(handle, translate);
+		// textured polygons were build. now let us assign lightmap coords
 
-			IVDevice::MeshHandle handle2 = m_pDevice->CreateMesh(
-				meshTextured,
-				*m_MaterialList[face->iTextureID]
-				);
+		m2.SetTexCoordData(0, lightbuffer, VDataFormat(0, face->iNumVertices, 2));
+		//m2.triangleTexCoords = VMeshDescription::ByteDataRef(
+		//	lightbuffer,
+		//	0,
+		//	face->iNumVertices,
+		//	2
+		//	);
 
-			VModel* model2 = new VModel(handle2, translate);
+		IVDevice::MeshHandle handle = m_pDevice->CreateMesh(
+			m2,
+			*m_LightMaterialList[face->iLightmapID]
+			);
 
-			// first lightmaps
-			m_pModelList.push_back(model);
+		VModel* model = new VModel(handle, translate);
 
-			// now the textures with blending
-			m_pModelList.push_back(model2);
+		IVDevice::MeshHandle handle2 = m_pDevice->CreateMesh(
+			meshTextured,
+			*m_MaterialList[face->iTextureID]
+			);
+
+		VModel* model2 = new VModel(handle2, translate);
+
+		// first lightmaps
+		m_pModelList.push_back(model);
+
+		// now the textures with blending
+		m_pModelList.push_back(model2);
 	}
 }
 //-----------------------------------------------------------------------------

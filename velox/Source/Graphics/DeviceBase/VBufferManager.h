@@ -37,6 +37,11 @@ public:
 		}
 	}
 
+	vuint GetBufferCount() const
+	{
+		return vuint(m_Buffers.size());
+	}
+
 	void Add(Buffer* in_pBuffer)
 	{
 		m_Buffers.push_back(in_pBuffer);
@@ -49,12 +54,25 @@ public:
 		
         if( it != m_Buffers.end() )
 		{
-			m_Buffers.erase(it);
 			delete in_pBuffer;
+			m_Buffers.erase(it);
 			in_pBuffer = 0;
 		}
 	}
+
+	vbool Contains(const Buffer* in_pBuffer);
 };
+
+//-----------------------------------------------------------------------------
+//TODO: move to inline file
+template<typename BufferType>
+vbool VBufferManager<BufferType>::Contains(const Buffer* in_pBuffer)
+{
+	BufferList::iterator iter = std::find(
+		m_Buffers.begin(), m_Buffers.end(), in_pBuffer);
+
+	return iter != m_Buffers.end();
+}
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

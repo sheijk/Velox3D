@@ -3,6 +3,9 @@
 
 #include "VOpenGLVertexMesh.h"
 #include "VOpenGLIndexMesh.h"
+
+//-----------------------------------------------------------------------------
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -19,7 +22,8 @@ VMeshBase* VImmediateRenderMethod::CreateMesh(
 	VMeshBase* pMesh = 0;
 
 	// on indexed mode
-	if( in_MeshDescr.triangleIndices.hBuffer != 0 )
+	if( in_MeshDescr.GetIndexBuffer() != 0)
+	//if( in_MeshDescr.triangleIndices.hBuffer != 0 )
 	{
 		pMesh = new VOpenGLIndexMesh(in_MeshDescr, in_pMaterial);
 	}

@@ -2,11 +2,15 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/Wrappers/VIterator.h>
+#include <v3d/Core/VLogging.h>
+
 #include <v3d/Graphics/VDeviceMatrix.h>
 #include <v3d/Math/VMatrixOps.h>
 
 #include "IVOpenGLRenderState.h"
 
+//-----------------------------------------------------------------------------
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -58,6 +62,32 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 VOpenGLDevice::~VOpenGLDevice()
 {
+	// output warnings for unreleased resources
+	const vuint nUnreleasedBufferCount = m_Buffers.GetBufferCount();
+
+	if( nUnreleasedBufferCount > 0 )
+	{
+		std::stringstream message;
+		message << "Warning: ";
+		message << nUnreleasedBufferCount;
+		message << " gfx device buffers have not been released\n";
+
+		V3D_DEBUGMSG(message.str().c_str());
+		vout << message.str();
+	}
+
+	const vuint nUnreleasedMeshes = vuint(m_Meshes.size());
+	if( nUnreleasedMeshes > 0 )
+	{
+		std::stringstream message;
+		message << "Warning: " 
+				<< nUnreleasedMeshes 
+				<< " gfx device meshes have not been released\n";
+
+		V3D_DEBUGMSG(message.str().c_str());
+		vout << message.str();
+	}
+
 	DestroyContext();
 }
 
@@ -70,6 +100,7 @@ IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 	// DropData will cause crashes when deleting the buffer..
 	//in_CopyMode = VBufferBase::CopyData;
 
+	//Buffer* pBuffer = new VByteBuffer(in_pBuffer, in_CopyMode);
 	Buffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
 
 	switch(in_Type)
@@ -123,14 +154,23 @@ void VOpenGLDevice::OverwriteBuffer(
 		);
 }
 
+
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
-	const VMeshDescription& in_pMeshDesc,
-	const VMaterialDescription& in_pMaterialDesc
+	const VMeshDescription& in_MeshDesc,
+	const VMaterialDescription& in_MaterialDesc
 	)
 {
-	IVMaterial* pMaterial = CreateMaterial(in_pMaterialDesc);
+	IVMaterial* pMaterial = CreateMaterial(in_MaterialDesc);
 
-	IVMesh* pMesh = m_RenderMethods.CreateMesh(in_pMeshDesc, 0, pMaterial);
+	VMeshDescription descr = in_MeshDesc;
+
+	// add buffers to device, if they are external
+	InternalizeBuffers(descr);
+	
+	//TODO
+	// increase reference count for all used buffers
+
+	IVMesh* pMesh = m_RenderMethods.CreateMesh(descr, 0, pMaterial);
 
 	m_Meshes.push_back(pMesh);
 
@@ -151,6 +191,10 @@ void VOpenGLDevice::DeleteMaterial(MaterialHandle& in_Material)
 
 void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 {
+	//TODO
+	// decrease reference count for all used buffers
+	// maybe: delete buffers not needed anymore
+
 	IVMesh* pMesh = MakeMeshPointer(in_Mesh);
 
 	m_Meshes.remove(pMesh);
@@ -489,6 +533,41 @@ void VOpenGLDevice::RecalcModelViewMatrix()
 
 	SetGLMatrix(GL_MODELVIEW, modelView, this);
 }
+
+IVDevice::BufferHandle VOpenGLDevice::GetInternalVertexBuffer(
+	BufferHandle in_hBuffer)
+{
+	BufferHandle hBuffer = 0;
+	VByteBuffer* const buffer = static_cast<VByteBuffer*>(in_hBuffer);
+
+	if( m_Buffers.Contains( buffer ) )
+	{
+		hBuffer = in_hBuffer;
+	}
+	else if( buffer != 0 )
+	{
+		hBuffer = CreateBuffer(VertexBuffer, buffer, VBufferBase::CopyData);
+	}
+
+	return hBuffer;
+}
+
+void VOpenGLDevice::InternalizeBuffers(VMeshDescription& io_MeshDescr)
+{
+	std::vector<BufferHandle> buffers = io_MeshDescr.GetAllBuffers();
+
+    // for each buffer
+	for(vuint bufId = 0; bufId < buffers.size(); ++bufId)
+	{
+		// get internal version
+		BufferHandle hInternalBuffer = GetInternalVertexBuffer(buffers[bufId]);
+
+		// replace all buffers in md which are equal to replaced buffer
+		// by internal version
+		io_MeshDescr.ReplaceBuffer(buffers[bufId], hInternalBuffer);
+	}
+}
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

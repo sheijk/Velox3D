@@ -479,22 +479,6 @@
 				RelativePath="..\Api\V3d\Window.h">
 			</File>
 			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Window\IVWindow.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Window\IVWindowManager.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Window\IVWxConnector.h">
-				</File>
-			</Filter>
-			<Filter
 				Name="Implementation"
 				Filter="">
 				<File
@@ -521,6 +505,22 @@
 				<File
 					RelativePath="..\Source\WindowService\VWindowWin32.h">
 				</File>
+				<Filter
+					Name="Interface"
+					Filter="">
+					<File
+						RelativePath="..\Api\V3d\Window\IVWindow.h">
+					</File>
+					<File
+						RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
+					</File>
+					<File
+						RelativePath="..\Api\V3d\Window\IVWindowManager.h">
+					</File>
+					<File
+						RelativePath="..\Api\V3d\Window\IVWxConnector.h">
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -621,6 +621,9 @@
 					RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Graphics\VEffectDescription.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Graphics\VMaterialDescription.h">
 				</File>
 				<File
@@ -651,25 +654,6 @@
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.h">
 					</File>
-					<Filter
-						Name="Base Utils"
-						Filter="">
-						<File
-							RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
-						</File>
-						<File
-							RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.cpp">
-						</File>
-						<File
-							RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.h">
-						</File>
-						<File
-							RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
-						</File>
-						<File
-							RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.h">
-						</File>
-					</Filter>
 				</Filter>
 				<Filter
 					Name="Meshes"
@@ -741,6 +725,25 @@
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VOpenGLUtils.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Base Utils"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.h">
 					</File>
 				</Filter>
 			</Filter>
