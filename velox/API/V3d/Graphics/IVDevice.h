@@ -11,7 +11,7 @@
 
 #include <v3d/Math/VMatrix.h>
 
-#include <v3d/Graphics/VCamera.h>
+#include <v3d/Utils/Graphics/VCamera.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

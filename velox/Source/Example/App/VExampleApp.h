@@ -5,7 +5,7 @@
 #include <v3d/Core/VNamedObject.h>
 #include <V3d/Console/IVConsoleService.h>
 
-#include <v3d/Graphics/VCamera.h>
+#include <v3d/Utils/Graphics/VCamera.h>
 #include <v3d/Graphics/IVDevice.h>
 #include <v3d/Input/IVInputManager.h>
 //-----------------------------------------------------------------------------

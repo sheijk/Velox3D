@@ -152,9 +152,6 @@
 				Name="Implementation"
 				Filter="">
 				<File
-					RelativePath="..\Source\Graphics\VCamera.cpp">
-				</File>
-				<File
 					RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.cpp">
 				</File>
 				<File

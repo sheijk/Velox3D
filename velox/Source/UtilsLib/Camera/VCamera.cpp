@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-#include <v3d/Graphics/VCamera.h>
+#include <v3d/Utils/Graphics/VCamera.h>
 #include <v3d/Math/VMatrixOps.h>
 //-----------------------------------------------------------------------------
 namespace v3d {

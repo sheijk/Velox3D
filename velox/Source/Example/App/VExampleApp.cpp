@@ -264,6 +264,7 @@ vint VExampleApp::Main()
 	// main loop
 	m_pUpdateManager->Start();
 	pSystemManager->SetStatus(true);
+	pWindow->SetActive();
 
 	while(pSystemManager->GetStatus())
 	{

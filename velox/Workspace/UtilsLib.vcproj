@@ -236,13 +236,13 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Provisorium"
+			Name="Camera"
 			Filter="">
 			<File
-				RelativePath="..\Source\Graphics\VCamera.cpp">
+				RelativePath="..\Source\UtilsLib\Camera\VCamera.cpp">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Graphics\VCamera.h">
+				RelativePath="..\Api\V3d\Utils\Graphics\VCamera.h">
 			</File>
 		</Filter>
 		<Filter
