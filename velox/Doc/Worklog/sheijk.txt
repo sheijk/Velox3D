@@ -33,7 +33,7 @@ template member konvertiert?
 	.terrain: cracks entfernen
 	.terrain: texturen (eine pro chunk, eine total?)
 	terrain: bessere lod wahl heuristik (screen space error basierend?)
-	terrain: sanfte lod ueberblendungen
+	terrain: sanfte lod ueberblendungen (?)
 	device: info ueber nicht geloeschte buffer
 
 	geometry generation:
@@ -105,6 +105,9 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+27.05.2004
+V3dLib/Utils/VFrameCounter
 
 25.05.2004
 Terragen 8-bit Raw Heightmaps werden geladen

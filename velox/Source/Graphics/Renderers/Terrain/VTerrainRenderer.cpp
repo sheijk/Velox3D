@@ -23,11 +23,13 @@ VTerrainRenderer::Heightmap&
 VTerrainRenderer::VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device)
 	:
 	m_nPatchCount(in_nPatchCount),
-	m_fChunkModelSize(10.0f),
+	m_fChunkModelSize(100.0f),
 	m_DrawList(in_Device)
 {
 	// load texture
 	m_TextureMat = BuildTextureMaterial(&in_Device, "/data/saltlake_tex.jpg");
+	//m_TextureMat.frontPolyMode = VMaterialDescription::Line;
+	//m_TextureMat.backPolyMode = VMaterialDescription::Line;
 
 	//m_Chunks.Resize(in_nPatchCount, in_nPatchCount, ChunkMap::Uninitialized);
 	m_Chunks.ResizeUninit(in_nPatchCount, in_nPatchCount);
@@ -54,8 +56,9 @@ VTerrainRenderer::VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device)
 				LodCount, 
 				m_fChunkModelSize, 
 				VRectangle<vfloat32>(left, top, right, bottom),
-				in_Device, 
-				m_TextureMat));
+				in_Device 
+				//m_TextureMat
+				));
 		}
 	}
 
@@ -264,7 +267,7 @@ void VTerrainRenderer::CreateMeshes()
 		vuint lod = (x == 1 && y == 1)? 1 : 0;
 		m_Chunks(x,y).lod = 0;
 		m_Chunks(x,y).pChunk->SetLod(0);
-		m_Chunks(x,y).pChunk->UpdateCurrentMesh();
+		m_Chunks(x,y).pChunk->UpdateCurrentMesh(m_TextureMat);
 		IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->GetCurrentMesh();
 
 		// calculate position
@@ -381,7 +384,7 @@ void VTerrainRenderer::UpdateChunkMesh(vuint x, vuint y)
 	// add new model
 //	m_Chunks(x,y).lod = detail;
 //	m_Chunks(x,y).pChunk->SetLod(detail);
-	m_Chunks(x,y).pChunk->UpdateCurrentMesh();
+	m_Chunks(x,y).pChunk->UpdateCurrentMesh(m_TextureMat);
 	IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->GetCurrentMesh();
 	//IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->CreateMesh(detail);
 	vfloat32 xpos = 2 * x * GetChunkUnitWidth();
@@ -561,7 +564,7 @@ void VTerrainRenderer::AdjustVerticalBorder(
 		math::IdentityPtr()));
 
 	// update mesh
-	io_HighChunk.UpdateCurrentMesh();
+	io_HighChunk.UpdateCurrentMesh(m_TextureMat);
 
 	// add new mesh
 	VModel::TransformMatrixPtr pTransform(new VModel::TransformMatrix());
@@ -602,7 +605,7 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 	// linear interpolation in between
 
 	vuint lod = 0;
-	const vfloat32 maxdist = 130.0f;
+	const vfloat32 maxdist = 1000.0f;
 	const vfloat32 mindist = 10.0f;
 
 	if( in_fDistance > mindist )

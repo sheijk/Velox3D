@@ -400,6 +400,12 @@
 			<File
 				RelativePath="..\Source\UtilsLib\CPUDetect\VDetectProcessor.h">
 			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\VFrameCounter.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Utils\VFrameCounter.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Importer"

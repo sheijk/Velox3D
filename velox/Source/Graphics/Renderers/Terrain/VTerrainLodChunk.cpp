@@ -10,8 +10,9 @@ VTerrainLodChunk::VTerrainLodChunk(
 		vuint in_nLodCount,
 		vfloat32 in_fMeshSize,
 		VRectangle<vfloat32> in_TexCoords,
-		IVDevice& in_Device,
-		const VMaterialDescription& in_Material)
+		IVDevice& in_Device
+		//const VMaterialDescription& in_Material
+		)
 	: 
 	m_nLodCount(in_nLodCount),
 	m_fMeshSize(in_fMeshSize),
@@ -21,7 +22,7 @@ VTerrainLodChunk::VTerrainLodChunk(
 	m_hCurrentMesh(0),
 	m_hIndexBuffer(0),
 	m_hVertexBuffer(0),
-	m_Material(in_Material),
+	//m_Material(in_Material),
 	m_TexCoords(in_TexCoords)
 {
 	SetLod(0);
@@ -190,7 +191,7 @@ void GenerateInterpolatedTexCoords(
 	}    
 }
 
-void VTerrainLodChunk::UpdateCurrentMesh()
+void VTerrainLodChunk::UpdateCurrentMesh(const VMaterialDescription& in_Mat)
 {
 	// delete old mesh
 	DeleteDeviceData();
@@ -204,9 +205,7 @@ void VTerrainLodChunk::UpdateCurrentMesh()
 	model.GenerateIndices();
 
 	// create a mesh from the model	and store it
-	const VMaterialDescription& mat = m_Material;
-	//mat.frontPolyMode = VMaterialDescription::Line;
-	//mat.backPolyMode = VMaterialDescription::Line;
+	const VMaterialDescription& mat = in_Mat;
 
 	ApplyHeightValues(model, GetCurrentHeightmap());
 	GenerateInterpolatedTexCoords(
@@ -218,7 +217,7 @@ void VTerrainLodChunk::UpdateCurrentMesh()
 
 	ForEachVertex(
 		model.GetVertexBuffer(), 
-		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 5.0f));
+		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 50.0f));
 
 	// move border vertices if the neighbour mesh has a lower detail
 	if( m_NeighbourLod[vint(Left)] > GetLod() )

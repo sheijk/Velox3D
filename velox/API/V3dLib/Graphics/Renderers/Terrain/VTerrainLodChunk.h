@@ -57,8 +57,9 @@ public:
 		vuint in_nLodCount, 
 		vfloat32 in_fMeshSize, 
 		VRectangle<vfloat32> in_TexCoords,
-		IVDevice& in_Device,
-		const VMaterialDescription& in_Material);
+		IVDevice& in_Device
+		//const VMaterialDescription& in_Material
+		);
 
 	virtual ~VTerrainLodChunk();
 	
@@ -74,7 +75,7 @@ public:
 	MeshHandle GetCurrentMesh() const;
 	VLodHeightmap::Heightmap& GetCurrentHeightmap();
 	const VLodHeightmap::Heightmap& GetCurrentHeightmap() const;
-	void UpdateCurrentMesh();
+	void UpdateCurrentMesh(const VMaterialDescription& in_Mat);
 
 	enum Direction
 	{
@@ -110,7 +111,7 @@ private:
 
 	VRectangle<vfloat32> m_TexCoords;
 
-	const VMaterialDescription& m_Material;
+	//const VMaterialDescription& m_Material;
 
 	void DeleteDeviceData();
 	void AdjustBorderVertical(
