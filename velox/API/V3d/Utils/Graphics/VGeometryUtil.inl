@@ -36,7 +36,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	// set vertex coord info
 	descr.triangleVertices = VMeshDescription::ByteDataRef(
 		bufHandle, 
-		layout.vertexOffset, 
+		layout.positionOffset, 
 		in_cnVertexCount, 
 		sizeof(VertexStructure) / sizeof(float)
 		);

@@ -1,36 +1,30 @@
-#ifndef V3D_VPLANE3F_H
-#define V3D_VPLANE3F_H
+#ifndef V3D_VVECTOR3F_H
+#define V3D_VVECTOR3F_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Utils/Graphics/VVector3f.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-/**
- * A plane consisting of a vertex and distance to coordinate system
- * @author ins
- */
-
-struct VPlane3f
+//TODO: frage: wie konvertierung zu VVector<float, 3>? oder alternative
+// um cross, etc fkten zu implementiern?
+struct VVector3f
 {
-	VVector3f m_Normal;
-	vfloat32 m_fDistance;
+	vfloat32 v[3];
 
-	VPlane3f()
+	VVector3f()
 	{
-		m_fDistance = 0;
+		v[0] = v[1] = v[2] = 0;
 	}
 
-	VPlane3f(vfloat32 in_X, vfloat32 in_Y, vfloat32 in_Z, vfloat32 in_Distance)
+	VVector3f(float in_X, float in_Y, float in_Z)
 	{
-		m_Normal.v[0] = in_X;
-		m_Normal.v[1] = in_Y;
-		m_Normal.v[2] = in_Z;
-
-		m_fDistance = in_Distance;
+		v[0] = in_X;
+		v[1] = in_Y;
+		v[2] = in_Z;
 	}
 };
 
@@ -39,5 +33,4 @@ struct VPlane3f
 } // namespace utils
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VPLANE3F_H
-
+#endif // V3D_VVECTOR3F_H

@@ -3,14 +3,15 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/Utils/Graphics/VVertex3f.h>
+#include <v3d/Utils/Graphics/VVector3f.h>
 #include <v3d/Utils/Graphics/VColor4f.h>
 #include <v3d/Utils/Graphics/VVertexDataLayout.h>
 
 #include <v3d/Graphics/IVDevice.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace util {
+namespace utils {
+namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
@@ -26,6 +27,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 //-----------------------------------------------------------------------------
 #include "VGeometryUtil.inl"
 //-----------------------------------------------------------------------------
+} // namespace graphics
 } // namespace util
 } // namespace v3d
 //-----------------------------------------------------------------------------

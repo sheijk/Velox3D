@@ -2,7 +2,7 @@
 #define V3D_VBOX_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Utils/Graphics/VVertex3f.h>
+#include <v3d/Utils/Graphics/VVector3f.h>
 #include <v3d/Utils/Graphics/VTexCoord2f.h>
 #include <v3d/Graphics/VBuffer.h>
 
@@ -10,8 +10,6 @@
 namespace v3d {
 namespace utils {
 namespace graphics {
-
-typedef v3d::graphics::VVertex3f VVector3f;
 
 template<typename VertexStructure>
 class VBox

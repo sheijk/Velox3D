@@ -1,11 +1,4 @@
-/*
-template <typename VertexStructure>
-VBox::VBox( vfloat32 in_fHeight, vfloat32 in_fWidth, vfloat32 in_fDepth ) 
-: m_fHeight(in_fHeight), m_fWidth(in_fWidth), m_fDepth(in_fDepth)
-{
-	buffer = VBuffer(new VertexStructure[36], 36);
-}
-*/
+
 using namespace v3d::graphics;
 
 template <typename VertexStructure> 
@@ -16,61 +9,61 @@ void VBox<VertexStructure>::CreateCoordinates()
 	vfloat32 fDepthHalf = m_fDepth / 2.0f;
 
 	//front face
-	buffer[0].vertex = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
-	buffer[1].vertex = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
-	buffer[2].vertex = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[0].position = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[1].position = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[2].position = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
 	
-	buffer[3].vertex = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
-	buffer[4].vertex = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
-	buffer[5].vertex = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[3].position = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[4].position = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[5].position = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
 
 	//top face
-	buffer[6].vertex = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
-	buffer[7].vertex = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
-	buffer[8].vertex = VVector3f( -fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[6].position = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[7].position = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[8].position = VVector3f( -fWidthHalf, +fHeightHalf, -fDepthHalf);
 
-	buffer[9].vertex =  VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
-	buffer[10].vertex = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
-	buffer[11].vertex = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[9].position =  VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[10].position = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[11].position = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
 
 
 	//back face
-	buffer[12].vertex = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[13].vertex = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
-	buffer[14].vertex = VVector3f( +fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[12].position = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[13].position = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[14].position = VVector3f( +fWidthHalf, -fHeightHalf, -fDepthHalf);
 	
-	buffer[15].vertex = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[16].vertex = VVector3f( -fWidthHalf, +fHeightHalf, -fDepthHalf);
-	buffer[17].vertex = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[15].position = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[16].position = VVector3f( -fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[17].position = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
 	
 	//bottom face
-	buffer[18].vertex = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[19].vertex = VVector3f( +fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[20].vertex = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[18].position = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[19].position = VVector3f( +fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[20].position = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
 
-    buffer[21].vertex = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[22].vertex = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
-	buffer[23].vertex = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
+    buffer[21].position = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[22].position = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[23].position = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
 
 	//right face
-	buffer[24].vertex = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
-	buffer[25].vertex = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
-	buffer[26].vertex = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[24].position = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[25].position = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[26].position = VVector3f( +fWidthHalf, +fHeightHalf, +fDepthHalf);
 
 
-	buffer[27].vertex = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
-	buffer[28].vertex = VVector3f( +fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[29].vertex = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[27].position = VVector3f( +fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[28].position = VVector3f( +fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[29].position = VVector3f( +fWidthHalf, +fHeightHalf, -fDepthHalf);
 
 
 	//left face
-	buffer[30].vertex = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[31].vertex = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
-	buffer[32].vertex = VVector3f( -fWidthHalf, +fHeightHalf, -fDepthHalf);
+	buffer[30].position = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[31].position = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[32].position = VVector3f( -fWidthHalf, +fHeightHalf, -fDepthHalf);
 
-	buffer[33].vertex = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
-	buffer[34].vertex = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
-	buffer[35].vertex = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
+	buffer[33].position = VVector3f( -fWidthHalf, -fHeightHalf, -fDepthHalf);
+	buffer[34].position = VVector3f( -fWidthHalf, -fHeightHalf, +fDepthHalf);
+	buffer[35].position = VVector3f( -fWidthHalf, +fHeightHalf, +fDepthHalf);
 
 }
 
@@ -132,10 +125,3 @@ void VBox<VertexStructure>::CreateTextureCoordinates()
 	buffer[34].texCoord = VTexCoord2f(1.0f, 0.0f);
 	buffer[35].texCoord = VTexCoord2f(1.0f, 1.0f);
 }
-/*
-template <typename VertexStructure>
-v3d::graphics::VByteBuffer VBox<VertexStructure>::GetByteBuffer()
-{
-	return VByteBuffer( reinterpret_cast<vbyte*>( buffer.GetDataAdress() ),
-						buffer.GetSize() * sizeof(VertexStructure)  );
-}*/

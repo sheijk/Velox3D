@@ -187,6 +187,12 @@
 			Name="Geometry"
 			Filter="">
 			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VBox.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VBox.inl">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VColor4f.h">
 			</File>
 			<File
@@ -202,7 +208,7 @@
 				RelativePath="..\Api\V3d\Utils\Graphics\VTexCoord2f.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Utils\Graphics\VVertex3f.h">
+				RelativePath="..\Api\V3d\Utils\Graphics\VVector3f.h">
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VVertexDataLayout.h">

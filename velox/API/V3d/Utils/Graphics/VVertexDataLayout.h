@@ -18,13 +18,13 @@ struct VVertexDataLayout
 {
 	typedef vint Offset;
 
-	Offset vertexOffset;
+	Offset positionOffset;
 	Offset colorOffset;
 	Offset texCoordOffset;
 
 	VVertexDataLayout()
 	{
-		vertexOffset = -1;
+		positionOffset = -1;
 		colorOffset = -1;
 		texCoordOffset = -1;
 	}
@@ -32,7 +32,7 @@ struct VVertexDataLayout
 	static vbool IsValidOffset(Offset offs);
 
 	template<typename VertexData>
-	static void SetVertexOffset();
+	static void SetPositionOffset();
 
 	template<typename VertexData>
 	static void SetColorOffset();
@@ -47,14 +47,14 @@ vbool VVertexDataLayout::IsValidOffset(Offset offs)
 }
 
 template<typename VertexData>
-void VVertexDataLayout::SetVertexOffset()
+void VVertexDataLayout::SetPositionOffset()
 {
 	VertexData* zero = 0;
 
 	typedef VVertexDataLayout::Offset Offset;
 
-	VertexData::layout.vertexOffset = 
-		reinterpret_cast<Offset>(&(zero->vertex)) / sizeof(float);
+	VertexData::layout.positionOffset = 
+		reinterpret_cast<Offset>(&(zero->position)) / sizeof(float);
 }
 
 template<typename VertexData>
