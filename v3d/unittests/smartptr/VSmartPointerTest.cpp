@@ -113,11 +113,11 @@ void VSmartPointerTest::ExecuteTest()
 	}
 
 	// check size of smart pointer
-	if( sizeof(ptr) != 4 ) 
+	if( sizeof(ptr) != 8 ) 
 	{
 		std::strstream strm;
 		strm << "sizeof(VSmartPointer<..>) is " << sizeof(ptr)
-			<< " instead of 4 bytes";
+			<< " instead of 8 bytes";
 
 		strm << " , sizeof(SmartHandle): " << sizeof(ptr.m_Handle);
 
