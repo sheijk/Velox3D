@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <list>
-#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h>
 
 #include <V3dLib/Graphics/SimpleSG/IVNode.h>
 //-----------------------------------------------------------------------------
@@ -40,7 +39,8 @@ public:
 
 protected:
 	typedef std::list<IVNode*> NodeList;
-	typedef VSTLDerefIteratorPol<NodeList::iterator, IVNode> IterPol;
+
+	//typedef VSTLDerefIteratorPol<NodeList::iterator, IVNode> IterPol;
 
 	virtual void RemoveThis(IVDrawList* in_pDrawList) = 0;
 	virtual void CullThis(IVDrawList* in_pDrawList, IVCamera*) = 0;

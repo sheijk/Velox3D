@@ -36,12 +36,14 @@ void VNodeBase::DeleteChild(IVNode* in_pNode)
 
 VNodeBase::NodeIterator VNodeBase::ChildsBegin()
 {
-	return NodeIterator(new IterPol(m_NodeList.begin()));
+	//return NodeIterator(new IterPol(m_NodeList.begin()));
+	return CreateDerefBeginIterator<IVNode>(m_NodeList);
 }
 
 VNodeBase::NodeIterator VNodeBase::ChildsEnd()
 {
-	return NodeIterator(new IterPol(m_NodeList.end()));
+	//return NodeIterator(new IterPol(m_NodeList.end()));
+	return CreateDerefEndIterator<IVNode>(m_NodeList);
 }
 
 class VCullNode

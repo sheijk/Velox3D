@@ -290,9 +290,11 @@ IVInputDevice::DeviceType VDIKeyboardDevice::GetType()
  */
 IVInputDevice::ButtonIterator VDIKeyboardDevice::ButtonBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIKeyboardButton*>::iterator, IVButton> ButtonIterPol;
-	return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.begin()) );
+	//typedef VSTLDerefIteratorPol<std::list<VDIKeyboardButton*>::iterator, IVButton> ButtonIterPol;
+	//return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.begin()) );
+	return CreateDerefBeginIterator<IVButton>(m_ButtonList);
 }
+
 /**
  * Returns a VForwardIterator which points to the beginning of the button list
  *
@@ -300,8 +302,9 @@ IVInputDevice::ButtonIterator VDIKeyboardDevice::ButtonBegin()
  */
 IVInputDevice::ButtonIterator VDIKeyboardDevice::ButtonEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIKeyboardButton*>::iterator, IVButton> ButtonIterPol;
-	return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.end()) );
+	//typedef VSTLDerefIteratorPol<std::list<VDIKeyboardButton*>::iterator, IVButton> ButtonIterPol;
+	//return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.end()) );
+	return CreateDerefEndIterator<IVButton>(m_ButtonList);
 }
 
 /**
@@ -313,9 +316,11 @@ IVInputDevice::ButtonIterator VDIKeyboardDevice::ButtonEnd()
 */
 IVInputDevice::AbsoluteAxisIterator VDIKeyboardDevice::AbsoluteAxisBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,	IVAbsoluteAxis> AbsoluteAxisIterPol;
-	return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.begin()));
+	//typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,	IVAbsoluteAxis> AbsoluteAxisIterPol;
+	//return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.begin()));
+	return CreateDerefBeginIterator<IVAbsoluteAxis>(m_AbsoluteAxisList);
 }
+
 /**
 * Returns a VForwardIterator pointing to the end of the absolute
 * axis list.
@@ -325,8 +330,9 @@ IVInputDevice::AbsoluteAxisIterator VDIKeyboardDevice::AbsoluteAxisBegin()
 */
 IVInputDevice::AbsoluteAxisIterator	VDIKeyboardDevice::AbsoluteAxisEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,	IVAbsoluteAxis> AbsoluteAxisIterPol;
-	return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.end()));
+	//typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,	IVAbsoluteAxis> AbsoluteAxisIterPol;
+	//return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.end()));
+	return CreateDerefEndIterator<IVAbsoluteAxis>(m_AbsoluteAxisList);
 }
 
 /**
@@ -338,8 +344,9 @@ IVInputDevice::AbsoluteAxisIterator	VDIKeyboardDevice::AbsoluteAxisEnd()
 */
 IVInputDevice::RelativeAxisIterator	VDIKeyboardDevice::RelativeAxisBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator,	IVRelativeAxis> RelativeAxisIterPol;
-	return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.begin()));
+	//typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator,	IVRelativeAxis> RelativeAxisIterPol;
+	//return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.begin()));
+	return CreateDerefBeginIterator<IVRelativeAxis>(m_RelativeAxisList);
 }
 
 /**
@@ -351,8 +358,9 @@ IVInputDevice::RelativeAxisIterator	VDIKeyboardDevice::RelativeAxisBegin()
  */
 IVInputDevice::RelativeAxisIterator	VDIKeyboardDevice::RelativeAxisEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator, IVRelativeAxis> RelativeAxisIterPol;
-	return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.end()));
+	//typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator, IVRelativeAxis> RelativeAxisIterPol;
+	//return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.end()));
+	return CreateDerefEndIterator<IVRelativeAxis>(m_RelativeAxisList);
 }
 
 //-----------------------------------------------------------------------------

@@ -50,10 +50,10 @@ public:
 	virtual VStringRetVal GetSource() const;
 	virtual AccessRightsPtr GetAccessRights() const;
 
-	virtual DirIterRange SubDirs();
-	virtual ConstDirIterRange SubDirs() const;
-	virtual FileIterRange Files();
-	virtual ConstFileIterRange Files() const;
+	virtual DirIter SubDirs();
+	virtual ConstDirIter SubDirs() const;
+	virtual FileIter Files();
+	virtual ConstFileIter Files() const;
 
 	virtual IVDirectory& CreateSubdir(
 		VStringParam in_strName,

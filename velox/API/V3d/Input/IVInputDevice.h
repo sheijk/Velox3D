@@ -2,7 +2,8 @@
 #define V3D_IVINPUTDEVICE_09_02_2004_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Wrappers/VIterator.h>
+//#include <v3d/Core/Wrappers/VIterator.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 #include <v3d/Input/IVButton.h>
 #include <v3d/Input/IVRelativeAxis.h>
 #include <v3d/Input/IVAbsoluteAxis.h>
@@ -28,9 +29,12 @@ public:
 		Undefined
 	};
 
-	typedef VForwardIterator<IVButton>		 ButtonIterator;
-	typedef VForwardIterator<IVRelativeAxis> RelativeAxisIterator;
-	typedef VForwardIterator<IVAbsoluteAxis> AbsoluteAxisIterator;
+	typedef VRangeIterator<IVButton> ButtonIterator;
+	typedef VRangeIterator<IVRelativeAxis> RelativeAxisIterator;
+	typedef VRangeIterator<IVAbsoluteAxis> AbsoluteAxisIterator;
+	//typedef VForwardIterator<IVButton>		 ButtonIterator;
+	//typedef VForwardIterator<IVRelativeAxis> RelativeAxisIterator;
+	//typedef VForwardIterator<IVAbsoluteAxis> AbsoluteAxisIterator;
     
 	virtual							~IVInputDevice() {};
 

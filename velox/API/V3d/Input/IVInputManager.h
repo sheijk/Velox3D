@@ -9,6 +9,7 @@
 #include <v3d/Input/IVButton.h>
 #include <v3d/Input/IVRelativeAxis.h>
 #include <v3d/Input/VKeyCode.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
@@ -23,7 +24,8 @@ namespace input {
 class IVInputManager : public updater::IVUpdateable
 {
 public:
-	typedef VForwardIterator<IVInputDevice>		DeviceIterator;
+	typedef VRangeIterator<IVInputDevice> DeviceIterator;
+	//typedef VForwardIterator<IVInputDevice>		DeviceIterator;
 
 	virtual						~IVInputManager() {};
 

@@ -356,9 +356,11 @@ void VDIInputManager::SetActive(vbool in_bStatus)
 */
 IVInputManager::DeviceIterator VDIInputManager::DeviceBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<IVInputDevice*>::iterator, IVInputDevice> DeviceIterPol;
-	return DeviceIterator( new DeviceIterPol(m_DeviceList.begin()));
+	//typedef VSTLDerefIteratorPol<std::list<IVInputDevice*>::iterator, IVInputDevice> DeviceIterPol;
+	//return DeviceIterator( new DeviceIterPol(m_DeviceList.begin()));
+	return CreateDerefBeginIterator<IVInputDevice>(m_DeviceList);
 }
+
 /**
 * Returns a VForwardIterator pointing to the end of the device list
 * @return A iterator pointing to the end of the device list
@@ -366,8 +368,9 @@ IVInputManager::DeviceIterator VDIInputManager::DeviceBegin()
 */
 IVInputManager::DeviceIterator VDIInputManager::DeviceEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<IVInputDevice*>::iterator, IVInputDevice> DeviceIterPol;
-	return DeviceIterator( new DeviceIterPol(m_DeviceList.end()));
+	//typedef VSTLDerefIteratorPol<std::list<IVInputDevice*>::iterator, IVInputDevice> DeviceIterPol;
+	//return DeviceIterator( new DeviceIterPol(m_DeviceList.end()));
+	return CreateDerefEndIterator<IVInputDevice>(m_DeviceList);
 }
 
 /**

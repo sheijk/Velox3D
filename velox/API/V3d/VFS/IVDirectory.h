@@ -2,7 +2,7 @@
 #define V3D_IVDirectory_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Wrappers/VIterator.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 #include <v3d/VFS/IVFileSysObject.h>
 #include <v3d/VFS/IVFile.h>
 #include <v3d/VFS/VAccessRightsFlags.h>
@@ -22,33 +22,19 @@ public:
 	//TODO: documentation
 	virtual ~IVDirectory() {};
 
-	typedef VBidirectionalIterator<IVDirectory> DirIter;
-	typedef VBidirectionalIterator<IVFile> FileIter;
+	typedef VRangeIterator<IVDirectory> DirIter;
+	typedef VRangeIterator<IVFile> FileIter;
 
-	typedef VBidirectionalIterator<const IVDirectory> ConstDirIter;
-	typedef VBidirectionalIterator<const IVFile> ConstFileIter;
-
-	//TODO: in eigene Datei
-	template<typename T> struct Range
-	{
-		Range(T b, T e) : Begin(b), End(e) {}
-
-        T Begin, End;
-	};
-	
-	typedef Range<DirIter> DirIterRange;
-	typedef Range<FileIter> FileIterRange;
-
-	typedef Range<ConstDirIter> ConstDirIterRange;
-	typedef Range<ConstFileIter> ConstFileIterRange;
+	typedef VRangeIterator<const IVDirectory> ConstDirIter;
+	typedef VRangeIterator<const IVFile> ConstFileIter;
 
 	/** get sub directory iterators */
-	virtual DirIterRange SubDirs() = 0;
-	virtual ConstDirIterRange SubDirs() const = 0;
+	virtual DirIter SubDirs() = 0;
+	virtual ConstDirIter SubDirs() const = 0;
 
 	/** get file iterators */
-	virtual FileIterRange Files() = 0;
-	virtual ConstFileIterRange Files() const = 0;
+	virtual FileIter Files() = 0;
+	virtual ConstFileIter Files() const = 0;
 
 	// Create/Delete File/Dir
 	/** create a sub directory */
@@ -66,14 +52,6 @@ public:
 
 	/** delete file */
 	virtual void DeleteFile(VStringParam in_strName) = 0;
-
-	/** create a file */
-	//virtual IVFile* CreateFile(
-	//	VStringParam in_strName,
-	//	AccessRightsPtr in_pAccessRights) = 0;
-
-	/** delete a file */
-	//virtual void DeleteFile(VStringParam in_strName) = 0;
 };
 
 //-----------------------------------------------------------------------------

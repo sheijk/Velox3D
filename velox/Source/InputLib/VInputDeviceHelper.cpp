@@ -55,9 +55,11 @@ void VInputDeviceHelper::Release()
  */
 IVInputDevice::ButtonIterator VInputDeviceHelper::ButtonBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIButton*>::iterator, IVButton> ButtonIterPol;
-	return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.begin()) );
+	//typedef VSTLDerefIteratorPol<std::list<VDIButton*>::iterator, IVButton> ButtonIterPol;
+	//return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.begin()) );
+	return CreateDerefBeginIterator<IVButton>(m_ButtonList);
 }
+
 /**
 * Returns a Velox iterator pointing to the end of an std::list
 * @return A iterator pointing to the end of the button list
@@ -65,8 +67,9 @@ IVInputDevice::ButtonIterator VInputDeviceHelper::ButtonBegin()
 */
 IVInputDevice::ButtonIterator VInputDeviceHelper::ButtonEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIButton*>::iterator, IVButton> ButtonIterPol;
-	return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.end()) );
+	//typedef VSTLDerefIteratorPol<std::list<VDIButton*>::iterator, IVButton> ButtonIterPol;
+	//return IVInputDevice::ButtonIterator( new ButtonIterPol(m_ButtonList.end()) );
+	return CreateDerefEndIterator<IVButton>(m_ButtonList);
 }
 
 /**
@@ -76,9 +79,10 @@ IVInputDevice::ButtonIterator VInputDeviceHelper::ButtonEnd()
 */
 IVInputDevice::AbsoluteAxisIterator VInputDeviceHelper::AbsoluteAxisBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,
-								 IVAbsoluteAxis> AbsoluteAxisIterPol;
-	return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.begin()));
+	//typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,
+	//							 IVAbsoluteAxis> AbsoluteAxisIterPol;
+	//return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.begin()));
+	return CreateDerefBeginIterator<IVAbsoluteAxis>(m_AbsoluteAxisList);
 }
 
 /**
@@ -88,9 +92,10 @@ IVInputDevice::AbsoluteAxisIterator VInputDeviceHelper::AbsoluteAxisBegin()
 */
 IVInputDevice::AbsoluteAxisIterator VInputDeviceHelper::AbsoluteAxisEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,
-								 IVAbsoluteAxis> AbsoluteAxisIterPol;
-	return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.end()));
+	//typedef VSTLDerefIteratorPol<std::list<VDIAbsoluteAxis*>::iterator,
+	//							 IVAbsoluteAxis> AbsoluteAxisIterPol;
+	//return IVInputDevice::AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.end()));
+	return CreateDerefEndIterator<IVAbsoluteAxis>(m_AbsoluteAxisList);
 }
 
 /**
@@ -100,9 +105,10 @@ IVInputDevice::AbsoluteAxisIterator VInputDeviceHelper::AbsoluteAxisEnd()
 */
 IVInputDevice::RelativeAxisIterator VInputDeviceHelper::RelativeAxisBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator,
-								 IVRelativeAxis> RelativeAxisIterPol;
-	return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.begin() ));
+	//typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator,
+	//							 IVRelativeAxis> RelativeAxisIterPol;
+	//return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.begin() ));
+	return CreateDerefBeginIterator<IVRelativeAxis>(m_RelativeAxisList);
 }
 
 /**
@@ -112,9 +118,10 @@ IVInputDevice::RelativeAxisIterator VInputDeviceHelper::RelativeAxisBegin()
 */
 IVInputDevice::RelativeAxisIterator VInputDeviceHelper::RelativeAxisEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator,
-								 IVRelativeAxis> RelativeAxisIterPol;
-	return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.end()));
+	//typedef VSTLDerefIteratorPol<std::list<VDIRelativeAxis*>::iterator,
+	//							 IVRelativeAxis> RelativeAxisIterPol;
+	//return IVInputDevice::RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.end()));
+	return CreateDerefEndIterator<IVRelativeAxis>(m_RelativeAxisList);
 }
 //-----------------------------------------------------------------------------
 }; // namespace input

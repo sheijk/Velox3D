@@ -214,7 +214,7 @@ void VModelLoader::CreateMeshNode(
 {
 	// get format and size
 	// get vertex count
-	const vertexCount = CountNodesWithName(
+	const vuint vertexCount = CountNodesWithName(
 			in_pMeshNode->ChildBegin(), in_pMeshNode->ChildEnd(),
 			"vertex");
 //		Count(in_pMeshNode->ChildBegin(), in_pMeshNode->ChildEnd());
@@ -261,7 +261,7 @@ void VModelLoader::CreateMeshNode(
 	}
 
 	format.SetTexCoordCount(nTexCoordCount);
-	for(int i = 0; i < nTexCoordCount; ++i)
+	for(vuint i = 0; i < nTexCoordCount; ++i)
 	{
 		format.SetTexCoordFormat(i, VDataFormat(dataEnd, vertexCount, texCoordSize));
 		dataEnd += texCoordSize * vertexCount;
@@ -301,7 +301,7 @@ void VModelLoader::CreateMeshNode(
 				SetColor(vertices, nVertexId, format, color);
 			}
 
-			for(int i = 0; i < nTexCoordCount; ++i)
+			for(vuint i = 0; i < nTexCoordCount; ++i)
 			{
 				VTexCoord2f texCoord = ReadTexCoord(pVertexNode, i);
 				SetTexCoord(i, vertices, nVertexId, format, texCoord);
@@ -313,11 +313,6 @@ void VModelLoader::CreateMeshNode(
 		else
 		{
 			bReadingVertices = false;
-			//std::stringstream msg;
-			//msg << "Error while parsing file '" << m_strCurrentFile
-			//	<< "': expected 'vertex' element";
-
-			//V3D_THROW(VModelLoadingException, msg.str().c_str());
 		}
 	}
 
@@ -336,7 +331,7 @@ void VModelLoader::CreateMeshNode(
 		pMeshDescription->SetCoordinateResource(in_pResource->GetQualifiedName());
 	if( bColors )
 		pMeshDescription->SetColorResource(in_pResource->GetQualifiedName());
-	for(int i = 0; i < nTexCoordCount; ++i)
+	for(vuint i = 0; i < nTexCoordCount; ++i)
 		pMeshDescription->SetTexCoordResource(i, in_pResource->GetQualifiedName());
 
 	// if indices are present, read them now

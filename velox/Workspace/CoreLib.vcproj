@@ -138,31 +138,10 @@
 				Name="Wrapper"
 				Filter="">
 				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\IVContainer.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\IVIteratorPol.h">
-				</File>
-				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\VGenericUtils.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\VIterator.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\VIteratorBases.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\VSTLDerefIteratorPol.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\VSTLIteratorPol.h">
-				</File>
-				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\VString.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\VWrapIteratorPolBase.h">
 				</File>
 			</Filter>
 			<Filter
@@ -239,6 +218,25 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\MemManager.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="RangeIter"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Core\RangeIter\IVRangeIteratorPolicy.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\RangeIter\VRangeIterator.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\RangeIter\VSTLRangeDerefPolicy.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\RangeIter\VSTLRangePolicy.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\RangeIter\VSTLRangePolicyBase.h">
 				</File>
 			</Filter>
 		</Filter>

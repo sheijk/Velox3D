@@ -2,7 +2,7 @@
 #define V3D_IVXMLELEMENT_09_11_2004_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VTypes.h>
-#include <V3d/Core/Wrappers/VIterator.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 #include <V3d/XML/IVXMLAttribute.h>
 #include <V3d/XML/IVXMLNode.h>
 #include <V3d/XML/VXMLExceptions.h>
@@ -19,8 +19,8 @@ namespace xml{
 class IVXMLElement : public IVXMLNode
 {
 public:
-	typedef VBidirectionalIterator<IVXMLAttribute> AttributeIter;
-	typedef VBidirectionalIterator<IVXMLNode> NodeIter;
+	typedef VRangeIterator<IVXMLAttribute> AttributeIter;
+	typedef VRangeIterator<IVXMLNode> NodeIter;
 
 	/** Returns the name od the xml element */
 	virtual VStringRetVal GetName() = 0;

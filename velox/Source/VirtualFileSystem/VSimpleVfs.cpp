@@ -120,10 +120,19 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 		strPathAndName.end() );
 
 	// open it
-	VDirectory::FileIter fileIter = std::find_if(
-		pDir->Files().Begin, pDir->Files().End, VCompareFSOName(strFileName));
+	VDirectory::FileIter fileIter = pDir->Files();
+	while(fileIter.HasNext())
+	{
+		if( strFileName == fileIter->GetName().AsCString() )
+			break;
+		else
+			++fileIter;
+	}
+	//VDirectory::FileIter fileIter = std::find_if(
+	//	pDir->Files().Begin, pDir->Files().End, VCompareFSOName(strFileName));
 
-	if( fileIter == pDir->Files().End )
+	if( !fileIter.HasNext() )
+	//if( fileIter == pDir->Files().End )
 	{
 		std::string errorMsg = "file \"";
 		errorMsg += strFileName;
@@ -163,20 +172,16 @@ IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
 		currDirName.assign(pos, substrEnd);
 
 		// find it in current directory
-		VDirectory::DirIter nextDir = pCurrDir->SubDirs().Begin;
+		VDirectory::DirIter nextDir = pCurrDir->SubDirs();
 		VDirectory* tmp = (VDirectory*)&(*nextDir);
 		VCompareFSOName fsoCmp(currDirName);
-		while( nextDir != pCurrDir->SubDirs().End )
+		while( nextDir.HasNext() )
 		{
-            if( fsoCmp(*nextDir) ) break;
+			if( fsoCmp(*nextDir) ) break;
 			++nextDir;
 		}
 
-		//VDirectory::DirIter nextDir = std::find_if(
-		//	pCurrDir->SubDirs().Begin, pCurrDir->SubDirs().End, 
-		//	VCompareFSOName(currDirName));
-
-		if(nextDir == pCurrDir->SubDirs().End)
+		if( !nextDir.HasNext() )
 		{
 			V3D_THROW(VIOException, "could not find directory \"" 
 				+ VString(currDirName.c_str()) + "\"");

@@ -2,7 +2,6 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/VFS/IVAccessRights.h>
-#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h>
 #include <v3d/VFS/VIOException.h>
 #include <v3d/VFS/IVDataProviderPool.h>
 #include <v3d/Core/VObjectRegistry.h>
@@ -59,51 +58,67 @@ IVFileSystemObject::AccessRightsPtr VDirectory::GetAccessRights() const
 	return m_pAccessRights.Get();
 }
 
-IVDirectory::DirIterRange VDirectory::SubDirs()
+IVDirectory::DirIter VDirectory::SubDirs()
 {
-	typedef VSTLDerefIteratorPol<
-		DirList::iterator, 
-		IVDirectory> DirIterPol;
+	//typedef VSTLDerefIteratorPol<
+	//	DirList::iterator, 
+	//	IVDirectory> DirIterPol;
 
-	return DirIterRange(
-		DirIter(new DirIterPol(m_Dirs.begin())),
-		DirIter(new DirIterPol(m_Dirs.end())) );
+	//return DirIterRange(
+		//DirIter(new DirIterPol(m_Dirs.begin())),
+		//DirIter(new DirIterPol(m_Dirs.end())) );
+
+	return CreateDerefIterator<IVDirectory>(m_Dirs.begin(), m_Dirs.end());
+	//return DirIterRange(
+	//	CreateDerefBeginIterator<IVDirectory>(m_Dirs),
+	//	CreateDerefEndIterator<IVDirectory>(m_Dirs)
+	//	);
 }
 
-IVDirectory::ConstDirIterRange VDirectory::SubDirs() const
+IVDirectory::ConstDirIter VDirectory::SubDirs() const
 {
-	typedef VSTLDerefIteratorPol<
-		DirList::const_iterator, 
-		const IVDirectory
-	> DirIterPol;
+	//typedef VSTLDerefIteratorPol<
+	//	DirList::const_iterator, 
+	//	const IVDirectory
+	//> DirIterPol;
 
-	return ConstDirIterRange(
-		ConstDirIter(new DirIterPol(m_Dirs.begin())),
-		ConstDirIter(new DirIterPol(m_Dirs.end())) );
+	//return ConstDirIterRange(
+	//	ConstDirIter(new DirIterPol(m_Dirs.begin())),
+	//	ConstDirIter(new DirIterPol(m_Dirs.end())) );
+
+	return CreateDerefIterator<const IVDirectory>(m_Dirs.begin(), m_Dirs.end());
+	//return ConstDirIterRange(
+	//	CreateDerefBeginIterator<const IVDirectory>(m_Dirs),
+	//	CreateDerefEndIterator<const IVDirectory>(m_Dirs)
+	//	);
 }
 
-IVDirectory::FileIterRange VDirectory::Files()
+IVDirectory::FileIter VDirectory::Files()
 {
-	typedef VSTLDerefIteratorPol<
-		FileList::iterator, 
-		IVFile
-	> FileIterPol;
+	//typedef VSTLDerefIteratorPol<
+	//	FileList::iterator, 
+	//	IVFile
+	//> FileIterPol;
 
-	return FileIterRange(
-		FileIter(new FileIterPol(m_Files.begin())),
-		FileIter(new FileIterPol(m_Files.end())) );
+	//return FileIterRange(
+	//	FileIter(new FileIterPol(m_Files.begin())),
+	//	FileIter(new FileIterPol(m_Files.end())) );
+
+	return CreateDerefIterator<IVFile>(m_Files.begin(), m_Files.end());
 }
 
-IVDirectory::ConstFileIterRange VDirectory::Files() const
+IVDirectory::ConstFileIter VDirectory::Files() const
 {
-	typedef VSTLDerefIteratorPol<
-		FileList::const_iterator, 
-		const IVFile
-	> FileIterPol;
+	//typedef VSTLDerefIteratorPol<
+	//	FileList::const_iterator, 
+	//	const IVFile
+	//> FileIterPol;
 
-	return ConstFileIterRange(
-		ConstFileIter(new FileIterPol(m_Files.begin())),
-		ConstFileIter(new FileIterPol(m_Files.end())) );
+	//return ConstFileIterRange(
+	//	ConstFileIter(new FileIterPol(m_Files.begin())),
+	//	ConstFileIter(new FileIterPol(m_Files.end())) );
+
+	return CreateDerefIterator<const IVFile>(m_Files.begin(), m_Files.end());
 }
 
 void VDirectory::AddSubdir(DirPtr in_pSubdir)

@@ -38,6 +38,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+18.02.2005
+- Range Iteratoren ins Projekt aufgenommen
+- XML Service, VFS, Input Service, alten Graphic SG auf Range Iteratoren
+	umgestellt
+- IVContainer mangels Sinn geloescht
 
 15.02.2005
 - mesh loader kann indices und ist fertig

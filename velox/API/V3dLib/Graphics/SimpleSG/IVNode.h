@@ -2,7 +2,7 @@
 #define V3D_IVNODE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <V3d/Core/Wrappers/VIterator.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 #include <V3dLib/Graphics/Misc/IVDrawList.h>
 #include <v3d/Math/VMatrix.h>
 
@@ -21,7 +21,8 @@ class IVCamera;
 class IVNode
 {
 public:
-	typedef VBidirectionalIterator<IVNode> NodeIterator;
+	typedef VRangeIterator<IVNode> NodeIterator;
+	//typedef VBidirectionalIterator<IVNode> NodeIterator;
 	typedef VMatrix<float, 4, 4> Matrix44f;
 
 	/** transforms the given matrix by node's local transformation */

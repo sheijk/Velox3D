@@ -125,34 +125,38 @@ void VXMLElement::AddChild(IVXMLNode* in_pChild)
 
 IVXMLElement::NodeIter VXMLElement::ChildBegin()
 {
-	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
-		IVXMLNode> IterPol;
-
-	return NodeIter(new IterPol(m_Childs.begin()));
+	//	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
+	//		IVXMLNode> IterPol;
+	//
+	//	return NodeIter(new IterPol(m_Childs.begin()));
+	return CreateDerefBeginIterator<IVXMLNode>(m_Childs);
 }
 
 IVXMLElement::NodeIter VXMLElement::ChildEnd()
 {
-	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
-		IVXMLNode> IterPol;
-
-	return NodeIter(new IterPol(m_Childs.end()));
+	//	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
+	//		IVXMLNode> IterPol;
+	//
+	//	return NodeIter(new IterPol(m_Childs.end()));
+	return CreateDerefEndIterator<IVXMLNode>(m_Childs);
 }
 
 IVXMLElement::AttributeIter VXMLElement::AttributeBegin()
 {
-typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
-		IVXMLAttribute> IterPol;
-
-	return AttributeIter(new IterPol(m_AttributeList.begin()));
+	//	typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
+	//		IVXMLAttribute> IterPol;
+	//
+	//	return AttributeIter(new IterPol(m_AttributeList.begin()));
+	return CreateDerefBeginIterator<IVXMLAttribute>(m_AttributeList);
 }
 
 IVXMLElement::AttributeIter VXMLElement::AttributeEnd()
 {
-typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
-		IVXMLAttribute> IterPol;
-
-	return AttributeIter(new IterPol(m_AttributeList.end()));
+	//	typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
+	//		IVXMLAttribute> IterPol;
+	//
+	//	return AttributeIter(new IterPol(m_AttributeList.end()));
+	return CreateDerefEndIterator<IVXMLAttribute>(m_AttributeList);
 }
 
 //-----------------------------------------------------------------------------
