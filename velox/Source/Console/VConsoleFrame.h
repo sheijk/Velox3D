@@ -6,6 +6,7 @@
 #include <v3d/Error/VMessageTypeEnum.h>
 #include <v3d/Utils/IVStringStream.h>
 #include <v3d/Window/IVWindowFrame.h>
+#include <v3d/Console/IVConsoleService.h>
 //-----------------------------------------------------------------------------
 #pragma warning( disable : 4267 )
 #include <wx/wx.h>
@@ -65,36 +66,36 @@ public:
 	void OnEnter(wxKeyEvent& event);
 
 private:
-
 	VConsoleFrame* m_parent;
 	
-	
 	DECLARE_EVENT_TABLE()
-
-
 };
 
 class VConsoleFrame : public wxFrame, public window::IVWindowFrame
 {
 public:
+	typedef IVConsoleService::CommandConnection CommandConnection;
+	typedef IVConsoleService::CommandSlot CommandSlot;
 
 	VConsoleFrame();
 	virtual ~VConsoleFrame();
 
+	CommandConnection RegisterCommandListener(const CommandSlot& slot);
+
 	void WriteText(VStringParam in_Text);
+	void InvokeCommand(VStringParam in_strCommand);
+
 	void ShowFrame(vbool in_Param);
 	wxTextCtrl* GetTextControl();
 
 	
 private:
+	IVConsoleService::CommandSignal m_CommandSignal;
 
 	wxTextCtrl* m_TextControl;
 	VTextControl* m_InputControl;
 	VQuitButton* m_QuitButton;
 	VClearButton* m_ClearButton;
-
-
-
 };
 
 

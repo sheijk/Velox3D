@@ -420,6 +420,9 @@
 				RelativePath="..\Api\V3dLib\Containers\VArray2d.h">
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\Api\V3dLib\BoostSignals.h">
+		</File>
 	</Files>
 	<Globals>
 		<Global

@@ -37,10 +37,10 @@ VQuitButton::VQuitButton(wxWindow* parent, const wxPoint& pos,
 
 void VQuitButton::OnQuit(wxMouseEvent& event)
 {
-	system::IVSystemManager* SystemManager;
-	SystemManager =	QueryObject<system::IVSystemManager>("system.service");
+	system::IVSystemManager* systemManager;
+	systemManager =	QueryObject<system::IVSystemManager>("system.service");
 
-	SystemManager->SetStatus(false);
+	systemManager->SetStatus(false);
 }
 
 VClearButton::VClearButton(VConsoleFrame* parent, const wxPoint& pos,
@@ -67,13 +67,11 @@ VTextControl::VTextControl(VConsoleFrame *parent, wxWindowID id, const wxString
 
 }
 
-// TODO: implement command processing
 void VTextControl::OnEnter(wxKeyEvent& event)
 {
 	wxString text = this->GetValue();
-	m_parent->WriteText("Command: ");
-	m_parent->WriteText(text.c_str());
-	m_parent->WriteText("\n");
+	
+	m_parent->InvokeCommand(text.c_str());
 
 	Clear();
 }
@@ -148,6 +146,12 @@ void VConsoleFrame::WriteText(VStringParam in_Text)
 	wxString string(in_Text);
 	m_TextControl->AppendText(string);
 }
+
+void VConsoleFrame::InvokeCommand(VStringParam in_strCommand)
+{
+	m_CommandSignal(in_strCommand);
+}
+
 //TODO: this damn fuck is going to crash on ALT F4! stupid damn fuck..
 // no idea of fixing....
 VConsoleFrame::~VConsoleFrame()
@@ -156,9 +160,15 @@ VConsoleFrame::~VConsoleFrame()
 	delete m_QuitButton;
 	delete m_ClearButton;
 	delete m_InputControl;
-	wxFrame::~wxFrame();
-
+	wxFrame::~wxFrame(); //TODO: was soll das denn? -- sheijk
 }
+
+IVConsoleService::CommandConnection 
+VConsoleFrame::RegisterCommandListener(const CommandSlot& slot)
+{
+	m_CommandSignal.connect(slot);
+}
+
 //-----------------------------------------------------------------------------
 } // namespace console
 } // namespace v3d

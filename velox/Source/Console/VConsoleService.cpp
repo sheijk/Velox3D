@@ -8,7 +8,7 @@ namespace v3d {
 namespace console {
 //-----------------------------------------------------------------------------
 
-VConsoleService::VConsoleService() : IVConsoleSerivce("console.service", 0)
+VConsoleService::VConsoleService() : IVConsoleService("console.service", 0)
 {
 	//Do not delete wx will do that
 	m_pFrame = new VConsoleFrame();
@@ -26,6 +26,13 @@ void VConsoleService::Write(VStringParam in_strString)
 error::IVErrorService& VConsoleService::GetErrorService()
 {
 	return * QueryObject<error::IVErrorService>("error.service");
+}
+
+IVConsoleService::CommandConnection 
+VConsoleService::RegisterCommandListener(const CommandSlot& slot)
+{
+	// register to frame
+	return m_pFrame->RegisterCommandListener(slot);
 }
 
 //-----------------------------------------------------------------------------

@@ -9,21 +9,23 @@
 #pragma warning( disable : 4267 )
 #include <wx/wx.h>
 #pragma warning( default : 4267 )
-//-----------------------------------------------------------------------------
 
 #include "VConsoleFrame.h"
+//-----------------------------------------------------------------------------
 namespace v3d {
 namespace console {
 //-----------------------------------------------------------------------------
 
 
-class VConsoleService : public IVConsoleSerivce
+class VConsoleService : public IVConsoleService
 {
 public:
 	VConsoleService();
 	virtual ~VConsoleService();
 	virtual void Flush() {};
 	virtual void Write(VStringParam in_strString);
+
+	virtual CommandConnection RegisterCommandListener(const CommandSlot& slot);
 
 private:
 	error::IVErrorService& GetErrorService();

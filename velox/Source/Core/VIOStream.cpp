@@ -47,7 +47,7 @@ namespace {
 	private:
 		void SendToVeloxConsole(VStringParam in_pcMessage);
 
-		console::IVConsoleSerivce* m_Console;
+		console::IVConsoleService* m_Console;
 		typedef std::list<std::string> StringList;
 		StringList m_StringList;
 
@@ -82,7 +82,7 @@ namespace {
 			try
 			{
 				m_Console = 
-					QueryObject<console::IVConsoleSerivce>("console.service");
+					QueryObject<console::IVConsoleService>("console.service");
 				StringList::iterator iter = m_StringList.begin();
 				for(; iter != m_StringList.end(); iter++)
 				{

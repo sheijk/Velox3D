@@ -106,15 +106,20 @@ Doku:
 
 log:
 
+24.04.2004
+boost signal lib eingebaut
+callback fuer befehle in konsolen service aufgenommen
+ftp: sheijk/boost update.rar nach Local/ExternalLibs/boost entzippen
+
 19.04.2004
 v3dlib/containers/varray2d aus altem cvs geholt + aufpoliert
 
 18.04.2004
-VBuffer wieder gefixt, so dass der konvertierungs c'tor klappt + nicht mehr 
+VBuffer wieder gefixt, so dass der konvertierungs c'tor klappt + nicht mehr
 alle member public sein muessen
 
 13.04.2004
-IVDevice: buffer ueberschreibbar 
+IVDevice: buffer ueberschreibbar
 (achtung: geht nur mit immediate render method)
 ueberschreibbare buffer im device
 direktes rendern von buffern welche nicht im device sind
