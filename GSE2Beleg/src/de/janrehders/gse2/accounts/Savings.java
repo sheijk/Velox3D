@@ -68,11 +68,16 @@ public class Savings extends Account {
 	        return false;
 	}
 	
-	public void copy(Savings inOther)
+	public boolean copy(Account inOther)
 	{
-	    super.copy(inOther);
-	    
-	    myRateOfInterest = inOther.myRateOfInterest;
+	    if( inOther instanceof Savings && super.copy(inOther) )
+	    {
+	        myRateOfInterest = ((Savings)inOther).myRateOfInterest;
+	        
+	        return true;
+	    }
+	    else
+	        return false;
 	}
 	
 	public float getRateOfInterest() {
@@ -93,8 +98,7 @@ public class Savings extends Account {
      * @see de.janrehders.gse2.accounts.Account#generate()
      */
     public Account generate() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Savings();
     }
 
     /* (non-Javadoc)

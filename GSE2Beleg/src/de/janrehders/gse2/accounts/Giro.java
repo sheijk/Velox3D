@@ -84,17 +84,24 @@ public class Giro extends Account {
 	}
 	
 	/** copies values from another Giro */
-	public void copy(Giro inSource) {
-	    super.copy(inSource);
-	    
-	    myDispoCreditLine = inSource.myDispoCreditLine;
-	    myECExpirationDate = (Date)inSource.myECExpirationDate.clone();
-	    myECNo = inSource.myECNo;	    
+	public boolean copy(Account inSource) {
+	    if( inSource instanceof Giro && super.copy(inSource) )
+	    {
+	        Giro inGiroSource = (Giro)inSource;
+	        
+		    myDispoCreditLine = inGiroSource.myDispoCreditLine;
+		    myECExpirationDate = (Date)inGiroSource.myECExpirationDate.clone();
+		    myECNo = inGiroSource.myECNo;
+		    
+		    return true;
+	    }
+	    else
+	        return false;
 	}
 
 	/** transfer some money to other giro account */
 	public boolean transfer(Giro inDest, float inAmount) {
-	    if( withdraw(inAmount) ) {
+	    if( withDraw(inAmount) ) {
 	        return inDest.deposit(inAmount);
 	    }
 	    else
@@ -165,7 +172,7 @@ public class Giro extends Account {
 			return false;
 		}
 		else {
-			super.withdraw(inAmount);
+			super.withDraw(inAmount);
 			return true;
 		}
 	}
@@ -174,8 +181,7 @@ public class Giro extends Account {
      * @see de.janrehders.gse2.accounts.Account#generate()
      */
     public Account generate() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Giro();        
     }
 
     /* (non-Javadoc)

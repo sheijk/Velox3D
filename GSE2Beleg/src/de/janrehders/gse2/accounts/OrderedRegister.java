@@ -112,4 +112,16 @@ public class OrderedRegister implements Serializable {
             }
         };    
     }
+
+    /**
+     * @param out_reg2
+     * @return
+     */
+    public boolean copy(OrderedRegister inSource) {
+        myAccounts = (TreeSet) inSource.myAccounts.clone();
+        myDateOfCreation = (Date) inSource.myDateOfCreation.clone();
+        myRegisterInformation = inSource.myRegisterInformation;
+        
+        return true;        
+    }
 }

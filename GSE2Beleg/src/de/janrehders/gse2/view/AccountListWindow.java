@@ -42,7 +42,7 @@ public class AccountListWindow extends Document {
         getContentPane().add(myListOptionPanel);
         
         // add some buttons
-        JButton giroAddButton = new JButton("new giro");
+        JButton giroAddButton = new JButton("New giro");
         giroAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 addAccount(new Giro());
@@ -63,7 +63,7 @@ public class AccountListWindow extends Document {
             }
         });
         
-        JButton removeAccountButton = new JButton("remove");
+        JButton removeAccountButton = new JButton("Remove");
         removeAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 Account account = getSelectedAccount();
@@ -71,7 +71,7 @@ public class AccountListWindow extends Document {
             }
         });
         
-        JButton editAccountButton = new JButton("edit");
+        JButton editAccountButton = new JButton("Edit");
         editAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 Account account = getSelectedAccount();
@@ -80,7 +80,7 @@ public class AccountListWindow extends Document {
             }
         });
         
-        JButton viewAccountButton = new JButton("view");
+        JButton viewAccountButton = new JButton("View");
         viewAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 Account account = getSelectedAccount();

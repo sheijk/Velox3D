@@ -86,12 +86,20 @@ public class StudentGiro extends Giro {
 	}
 	
 	/** copy values */
-	public void copy(StudentGiro inSource)
+	public boolean copy(Account inSource)
 	{
-	    super.copy(inSource);
+	    if( inSource instanceof StudentGiro && super.copy(inSource) )
+	    {
+	        StudentGiro studentGiroSource = (StudentGiro)inSource;
 	    
-	    myRateOfInterest = inSource.myRateOfInterest;
-	    myStudentIdExpirationDate = (Date)myStudentIdExpirationDate.clone();
+	        myRateOfInterest = studentGiroSource.myRateOfInterest;
+	        myStudentIdExpirationDate = 
+	            (Date)studentGiroSource.myStudentIdExpirationDate.clone();
+	        
+	        return true;
+	    }
+	    else
+	        return false;
 	}
 	
 	public float getRateOfInterest() {

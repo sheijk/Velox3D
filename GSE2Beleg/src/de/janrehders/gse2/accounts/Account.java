@@ -24,7 +24,7 @@ public abstract class Account implements Comparable, Serializable {
     private String myOwner;
     private float myBalance = 0;
     
-    private static int ourLastAccountId = 0;
+    private static int ourLastAccountId = 1;
     
     private static int getNewAccountId()
     {
@@ -67,8 +67,7 @@ public abstract class Account implements Comparable, Serializable {
 	    	myAccountNo > 0 &&
 	    	myDateOfCreation != null &&
 	    	myType != null &&
-	    	myOwner != null && 
-	    	myOwner.equalsIgnoreCase("") == false;       	
+	    	myOwner != null; 
     }
     
     /** returns true if both object identities are equal */
@@ -163,7 +162,7 @@ public abstract class Account implements Comparable, Serializable {
     }
     
     /** withdraws money from the account */
-    public boolean withdraw(float inAmount) {
+    public boolean withDraw(float inAmount) {
         if( inAmount > 0 ) {
             myBalance -= inAmount;
             return true;
