@@ -50,10 +50,12 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 	LoadServices();
 
 	// if there is a local module, initialize it
-	if( v3d::VModuleBase::GetInstance() != 0 )
+	try
 	{
 		v3d::VModuleBase::GetInstance()->Initialize();
 	}
+	catch(VModuleLoadFailure&)
+	{}
 
 	vout << "Dumping registered objects:" << vendl;
 	vout << "-------------------------------------------------------" << vendl;
@@ -66,10 +68,12 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 	DelegateControl();
 
 	// deinitialize local instance if it exists
-	if( v3d::VModuleBase::GetInstance() != 0 )
+	try
 	{
 		v3d::VModuleBase::GetInstance()->Shutdown();
 	}
+	catch(VModuleLoadFailure&)
+	{}
 }
 
 struct VServiceInfo
