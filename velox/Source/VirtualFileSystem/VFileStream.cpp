@@ -70,8 +70,8 @@ VFileStream::VFileStream(
 	}
 
 	// create legal op class
-	vbool bReadAccess = in_nAccess & VReadAccess;
-	vbool bWriteAccess = in_nAccess & VWriteAccess;
+	vbool bReadAccess = ((in_nAccess & VReadAccess)==VReadAccess);
+	vbool bWriteAccess = ((in_nAccess & VWriteAccess)==VWriteAccess);
 
 	m_pLegalOps.Assign(new VLegalOperations(
 		bReadAccess, bWriteAccess, true, true));
