@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- Velox3D services load info for unit tests -->
+<Config>
+	<Services>
+		<Service id="testsuite" desc="The UnitTest Manager" filename="UnitTestService.dll"/>
+		<!--Service id="tests.corelib" desc="Tests of the core lib" filename="CoreLibTests.dll"/-->
+		<!--Service id="vfs" desc="The virtual file system" filename="VFS.dll"/-->
+		<!--Service id="tests.vfs" desc="Tests of the vfs" filename="VfsTests.dll"/-->
+	</Services>
+	<Main id="main" desc="Velox Test Application" filename="ExampleApp.dll"/>
+</Config>
