@@ -11,6 +11,7 @@
 #include <V3d/XML/IVXMLVisitor.h>
 #include <V3d/XML/IVXMLWriter.h>
 #include <V3d/XML/VXMLExceptions.h>
+#include <V3d/XML/XMLUtils.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_CONSOLE_2004_04_24_H

@@ -17,9 +17,14 @@ using namespace v3d::resource;
  */
 VModelLoader::VModelLoader()
 {
-	m_PrimitiveNames["triangles"] = VMeshDescription::Triangles;
-	m_PrimitiveNames["triangleStrip"] = VMeshDescription::TriangleStrip;
-	m_PrimitiveNames["triangleFan"] = VMeshDescription::TriangleFan;
+	m_PrimitiveNames["triangles"] =		VMeshDescription::Triangles;
+	m_PrimitiveNames["triangleStrip"] =	VMeshDescription::TriangleStrip;
+	m_PrimitiveNames["triangleFan"] =	VMeshDescription::TriangleFan;
+	m_PrimitiveNames["points"] =		VMeshDescription::Points;
+	m_PrimitiveNames["lines"] =			VMeshDescription::Lines;
+	m_PrimitiveNames["lineStrip"] =		VMeshDescription::LineStrip;
+	m_PrimitiveNames["quads"] =			VMeshDescription::Quads;
+	m_PrimitiveNames["quadStrip"] =		VMeshDescription::QuadStrip;
 }
 
 /**
@@ -27,37 +32,6 @@ VModelLoader::VModelLoader()
  */
 VModelLoader::~VModelLoader()
 {
-}
-
-IVXMLElement* ToElement(IVXMLNode* in_pNode)
-{
-	if( in_pNode != 0 && in_pNode->GetType() == IVXMLNode::Element )
-		return reinterpret_cast<IVXMLElement*>(in_pNode);
-	else
-		return 0;
-}
-
-template<typename T>
-vbool HasAttributeWithValue(
-	IVXMLElement* in_pElement, 
-	VStringParam in_strAttribName,
-	const T& in_ExpectedValue)
-{
-	vbool result = false;
-
-	try
-	{
-		IVXMLAttribute* pAttrib = in_pElement->GetAttribute(in_strAttribName);
-
-		if( pAttrib != 0 )
-		{
-			result = pAttrib->GetValue().Get<T>() == in_ExpectedValue;
-		}
-	}
-	catch(VException&)
-	{}
-
-	return result;
 }
 
 template<typename Iterator>
@@ -212,14 +186,38 @@ void VModelLoader::LoadMesh(
 	}
 }
 
+vuint CountNodesWithName(
+	IVXMLElement::NodeIter in_Begin,
+	IVXMLElement::NodeIter in_End,
+	std::string in_Name
+	)
+{
+	vuint nodeCount = 0;
+	const VString countedName(in_Name.c_str());
+
+	for(IVXMLElement::NodeIter node = in_Begin; node != in_End; ++node)
+	{
+		IVXMLElement* pNode = ToElement(&*node);
+
+		if( pNode != 0 && pNode->GetName() == countedName )
+		{
+			++nodeCount;
+		}
+	}
+
+	return nodeCount;
+}
+
 void VModelLoader::CreateMeshNode(
 	xml::IVXMLElement* in_pMeshNode, 
 	resource::VResourceId in_pResource)
 {
 	// get format and size
 	// get vertex count
-	const vertexCount = 
-		Count(in_pMeshNode->ChildBegin(), in_pMeshNode->ChildEnd());
+	const vertexCount = CountNodesWithName(
+			in_pMeshNode->ChildBegin(), in_pMeshNode->ChildEnd(),
+			"vertex");
+//		Count(in_pMeshNode->ChildBegin(), in_pMeshNode->ChildEnd());
 
 	// get contained vertex elements
 	const vbool bCoordinates = HasAttributeWithValue<std::string>(
@@ -227,7 +225,7 @@ void VModelLoader::CreateMeshNode(
 	const vbool bColors = HasAttributeWithValue<std::string>(
 		in_pMeshNode, "colors", "yes");
 	const vuint nTexCoordCount = 
-		in_pMeshNode->GetAttributeValue<vuint>("texCoordCount");
+		in_pMeshNode->GetAttributeValue<vuint>("texCoords");
 
 	// calculate size per vertex
 	vuint vertexSize = 0;
@@ -275,15 +273,19 @@ void VModelLoader::CreateMeshNode(
 	const bufferSize = vertexSize * vertexCount * sizeof(vfloat32);
 	VByteBuffer vertices(new vbyte[bufferSize], bufferSize);
 
+	IVXMLElement::NodeIter meshChildNode = in_pMeshNode->ChildBegin();
+
 	// read all vertices
 	vuint nVertexId = 0;
-	for(IVXMLElement::NodeIter vertexNode = in_pMeshNode->ChildBegin();
-		vertexNode != in_pMeshNode->ChildEnd();
-		++vertexNode)
+	vbool bReadingVertices = true;
+	//for(vbool bReadingVertices = true;
+	//	bReadingVertices && meshChildNode != in_pMeshNode->ChildEnd();
+	//	++meshChildNode)
+	while( bReadingVertices && meshChildNode != in_pMeshNode->ChildEnd() )
 	{
-		IVXMLElement* pVertexNode = ToElement(&*vertexNode);
+		IVXMLElement* pVertexNode = ToElement(&*meshChildNode);
 
-		if( pVertexNode != 0 )
+		if( pVertexNode != 0 && pVertexNode->GetName() == VString("vertex") )
 		{
 			// get vertex data and write it to the buffer
 			if( bCoordinates )
@@ -306,14 +308,16 @@ void VModelLoader::CreateMeshNode(
 			}
 
 			++nVertexId;
+			++meshChildNode;
 		}
 		else
 		{
-			std::stringstream msg;
-			msg << "Error while parsing file '" << m_strCurrentFile
-				<< "': expected 'vertex' element";
+			bReadingVertices = false;
+			//std::stringstream msg;
+			//msg << "Error while parsing file '" << m_strCurrentFile
+			//	<< "': expected 'vertex' element";
 
-			V3D_THROW(VModelLoadingException, msg.str().c_str());
+			//V3D_THROW(VModelLoadingException, msg.str().c_str());
 		}
 	}
 
@@ -323,7 +327,8 @@ void VModelLoader::CreateMeshNode(
 		new VMeshDescription(format);
 	
 	// get geometry type
-	std::string strGeometryType = in_pMeshNode->GetAttribute("type")->GetValue().Get<std::string>();
+	std::string strGeometryType = 
+		in_pMeshNode->GetAttribute("type")->GetValue().Get<std::string>();
 	pMeshDescription->SetGeometryType(GetGeometryType(strGeometryType));
 
 	// set resource references
@@ -333,6 +338,53 @@ void VModelLoader::CreateMeshNode(
 		pMeshDescription->SetColorResource(in_pResource->GetQualifiedName());
 	for(int i = 0; i < nTexCoordCount; ++i)
 		pMeshDescription->SetTexCoordResource(i, in_pResource->GetQualifiedName());
+
+	// if indices are present, read them now
+	if( HasAttributeWithValue<std::string>(in_pMeshNode, "indices", "yes") )
+	{
+		const vuint indexCount = CountNodesWithName(
+			in_pMeshNode->ChildBegin(), in_pMeshNode->ChildEnd(), "index");
+
+		const vuint indexBufferSize = indexCount * sizeof(vuint);
+
+		VBuffer<vuint> indices(new vuint[indexBufferSize], indexBufferSize);
+
+		vuint indexNum = 0;
+		for( ; meshChildNode != in_pMeshNode->ChildEnd(); ++meshChildNode)
+		{
+			IVXMLElement* pIndexNode = ToElement(&*meshChildNode);
+
+			if( pIndexNode != 0 )
+			{
+				if( pIndexNode->GetName() == VString("index") )
+				{
+					vuint nVertex = pIndexNode->GetAttributeValue<vuint>("id");
+					V3D_ASSERT(nVertex <= vertexCount);
+					indices[indexNum] = nVertex;
+
+					++indexNum;
+				}
+				else
+				{
+					std::stringstream msg;
+					msg << "Error when parsing xml model file '"
+						<< m_strCurrentFile << "': ";
+					msg << "found invalid node '" << pIndexNode->GetName() 
+						<< "' expected 'index'";
+
+					V3D_THROW(VModelLoadingException, msg.str().c_str());
+				}
+			}
+		}
+
+		// add index buffer
+		VResourceId indexRes = in_pResource->AddSubResource("indices");
+		VVertexFormat indexFormat;
+		indexFormat.SetIndexFormat(VDataFormat(0, indexCount, 0));
+		pMeshDescription->SetIndexFormat(indexFormat.GetIndexFormat());
+		pMeshDescription->SetIndexResource(indexRes->GetQualifiedName());
+        indexRes->AddData(new VVertexBuffer(indices, indexFormat));
+	}
 
 	in_pResource->AddData(pMeshDescription);
 

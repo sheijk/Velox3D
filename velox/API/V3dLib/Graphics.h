@@ -8,6 +8,7 @@
 #include <V3dLib/Graphics/SimpleSG.h>
 #include <V3dLib/Graphics/Portal.h>
 #include <V3dLib/Graphics/Materials.h>
+#include <V3dLib/Graphics/Importer.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_GRAPHICS_2004_04_10_H

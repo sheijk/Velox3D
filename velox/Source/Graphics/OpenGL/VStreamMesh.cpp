@@ -45,6 +45,20 @@ VStreamMesh::VStreamMesh(
 		m_pIndexStream.reset(new StreamRes(pIndexResource->GetData<VImmediateVertexStream>()));
 
 		m_nPrimitiveCount = in_MeshDescription.GetIndexFormat().GetCount();
+
+//#ifdef V3D_DEBUG
+//		VImmediateVertexStream* pIndexStream = pIndexResource->GetData<VImmediateVertexStream>();
+//		V3D_ASSERT(pIndexStream != 0);
+//
+//		const vuint* pIndexAddress = pIndexStream->GetIndexAddress();
+//		V3D_ASSERT(pIndexAddress != 0);
+//
+//		// check for invalid indices
+//		for(vuint index = 0; index < m_nPrimitiveCount; ++index)
+//		{
+//            V3D_ASSERT(pIndexAddress[index] < 
+//		}
+//#endif
 	}
 }
 

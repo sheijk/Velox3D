@@ -297,6 +297,12 @@
 				Name="Importer"
 				Filter="">
 				<File
+					RelativePath="..\Source\UtilsLib\Importer\VEffectLoader.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Importer\VEffectLoader.h">
+				</File>
+				<File
 					RelativePath="..\Source\UtilsLib\Importer\VModelLoader.cpp">
 				</File>
 				<File
@@ -793,133 +799,66 @@
 				Filter="">
 				<File
 					RelativePath="..\Source\Physics\VPhysicBody.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicBoxMassState.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometry.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometryBox.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometryPlane.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometrySphere.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicJoint.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicJointGroup.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicJointHinge2State.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicMass.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicObject.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicPositionState.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicSpace.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicSphereMassState.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicState.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicWorld.cpp">
-					<FileConfiguration
-						Name="Debug|Win32">
-						<Tool
-							Name="VCCLCompilerTool"/>
-					</FileConfiguration>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="XML"
+			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\Xml\XMLUtils.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Xml\XMLUtils.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Xml\XMLUtils.inl">
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\Api\V3dLib\BoostSignals.h">

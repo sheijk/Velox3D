@@ -39,6 +39,10 @@ Doku:
 ----- last things sheijk finished:
 
 
+15.02.2005
+- mesh loader kann indices und ist fertig
+- effect loader, um effect descriptions aus uml dateien zu laden
+
 14.02.2005
 - textur koordinaten support im model loader
 - Scripts ins CVS getan (Workspace/Templates/Scripts)

@@ -195,7 +195,14 @@ VRenderPass& VShaderPath::RenderPass(vuint in_nIndex)
 		return *m_RenderPasses[in_nIndex].Get();
 	}
 	else
-		V3D_THROW(VException, "blahblub");
+	{
+		std::stringstream msg;
+		msg << "Accessing non existing render pass nr. "
+			<< in_nIndex << " only " << GetRenderPassCount()
+			<< " paths existing";
+
+		V3D_THROW(VException, msg.str().c_str());
+	}
 }
 
 const VRenderPass& VShaderPath::RenderPass(vuint in_nIndex) const
@@ -205,7 +212,14 @@ const VRenderPass& VShaderPath::RenderPass(vuint in_nIndex) const
 		return *m_RenderPasses[in_nIndex].Get();
 	}
 	else
-		V3D_THROW(VException, "blahblub");
+	{
+		std::stringstream msg;
+		msg << "Accessing non existing render pass nr. "
+			<< in_nIndex << " only " << GetRenderPassCount()
+			<< " paths existing";
+
+		V3D_THROW(VException, msg.str().c_str());
+	}
 }
 
 VRenderPass& VShaderPath::AddRenderPass()
@@ -254,7 +268,14 @@ VShaderPath& VEffectDescription::ShaderPath(vuint in_nIndex)
 		return *m_ShaderPaths[in_nIndex].Get();
 	}
 	else
-		V3D_THROW(VException, "bhasd");
+	{
+		std::stringstream msg;
+		msg << "Accessing non existing shader path nr. "
+			<< in_nIndex << " only " << GetShaderPathCount()
+			<< " paths existing";
+
+		V3D_THROW(VException, msg.str().c_str());
+	}
 }
 
 const VShaderPath& VEffectDescription::ShaderPath(vuint in_nIndex) const
@@ -264,7 +285,14 @@ const VShaderPath& VEffectDescription::ShaderPath(vuint in_nIndex) const
 		return *m_ShaderPaths[in_nIndex].Get();
 	}
 	else
-		V3D_THROW(VException, "bhasd");
+	{
+		std::stringstream msg;
+		msg << "Accessing non existing shader path nr. "
+			<< in_nIndex << " only " << GetShaderPathCount()
+			<< " paths existing";
+
+		V3D_THROW(VException, msg.str().c_str());
+	}
 }
 
 VShaderPath& VEffectDescription::AddShaderPath()

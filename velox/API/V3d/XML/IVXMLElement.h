@@ -55,7 +55,7 @@ public:
 	virtual NodeIter ChildEnd() = 0;
 
 	/** Call Visit from all child nodes */
-	void VisitChildren(IVXMLVisitor& in_Visitor);
+	virtual void VisitChildren(IVXMLVisitor& in_Visitor) = 0;
 };
 //-----------------------------------------------------------------------------
 
