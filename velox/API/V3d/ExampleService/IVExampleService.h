@@ -13,13 +13,21 @@ namespace example {
  */
 class IVExampleService : public VNamedObject
 {
-//	IVExampleService();
-public:
+protected:
+	/**
+	 * a protected constructor is needed to pass the parameters to the 
+	 * VNamedObject constructor
+	 */
 	IVExampleService(std::string in_strName, VNamedObject* in_pParent) 
 		: VNamedObject(in_strName, in_pParent)
 	{
 	}
 
+public:
+
+	/**
+	 * a demonstration function. returns always 5
+	 */
 	virtual vint GiveMeFive() = 0;
 };
 

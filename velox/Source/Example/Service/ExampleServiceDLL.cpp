@@ -2,12 +2,10 @@
  * Example Service DLL
  *
  * Makro um Import und Export in der gleichen Datei zu realisieren
+ * wird nicht gebraucht, wg. dynamischen linken
  */
-//#ifdef EXAMPLESERVICE_EXPORTS
 #define EXAMPLESERVICE_API __declspec(dllexport)
-//#else
-//#define EXAMPLESERVICE_API __declspec(dllimport)
-//#endif
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
@@ -27,8 +25,8 @@ using namespace v3d::example;
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
+// use a smart pointer to guarante object destruction
 VPointer<VExampleService>::AutoPtr g_pExService;
-VPointer<VNamedObject>::AutoPtr g_pTest;
 
 EXAMPLESERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -37,10 +35,6 @@ EXAMPLESERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 
 	// create service object and register it
 	g_pExService.Reset(new VExampleService());
-	
-	g_pTest.Reset(new VNamedObject("exserv.test", 0));
-
-	cout << "exService.init()" << endl;
 }
 
 EXAMPLESERVICE_API void Shutdown()

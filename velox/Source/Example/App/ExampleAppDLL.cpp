@@ -1,9 +1,11 @@
-// kann evtl weggelassen werden, da diese Deklarationen nie importiert werden
-#ifdef EXAMPLEAPP_EXPORTS
+/**
+ * Example Service DLL
+ *
+ * Makro um Import und Export in der gleichen Datei zu realisieren
+ * wird nicht gebraucht, wg. dynamischen linken
+ */
 #define EXAMPLEAPP_API __declspec(dllexport)
-#else
-#define EXAMPLEAPP_API __declspec(dllimport)
-#endif
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VObjectRegistry.h>
 #include "VExampleApp.h"
@@ -11,6 +13,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::example;
