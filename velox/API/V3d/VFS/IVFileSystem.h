@@ -42,6 +42,7 @@ public:
 //	virtual void Unmount() = 0;
 };
 
+typedef VServicePtr<IVFileSystem> VFileSystemPtr;
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

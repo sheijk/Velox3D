@@ -21,14 +21,13 @@ VXMLService::VXMLService() : IVXMLService("xml.service", 0)
 	m_bRecursionFirstCall = false;
 }
 
-
-
 /**
  * The destructor has nothing to do..
  */
 VXMLService::~VXMLService()
 {
 }
+
 /**
  * Creates the writer class that writes a xml file to a local data 
  * file with specified file name.

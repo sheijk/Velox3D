@@ -297,30 +297,17 @@
 				Name="Importer"
 				Filter="">
 				<File
+					RelativePath="..\Source\UtilsLib\Importer\VModelLoader.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Importer\VModelLoader.h">
+				</File>
+				<File
 					RelativePath="..\Source\UtilsLib\Importer\VQ3BspImporter.cpp">
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h">
 				</File>
-				<Filter
-					Name="Portals"
-					Filter="">
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Portal\IVCell.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Portals\VIndoorCell .cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Portal\VIndoorCell.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Portals\VTerrainCell.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Portal\VTerrainCell.h">
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="Renderers"
@@ -374,6 +361,25 @@
 					</File>
 					<File
 						RelativePath="..\Api\V3dLib\Graphics\Renderers\Sky\VSkyDome.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Portals"
+					Filter="">
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Portal\IVCell.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Portals\VIndoorCell .cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Portal\VIndoorCell.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Portals\VTerrainCell.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Portal\VTerrainCell.h">
 					</File>
 				</Filter>
 			</Filter>
@@ -787,51 +793,131 @@
 				Filter="">
 				<File
 					RelativePath="..\Source\Physics\VPhysicBody.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicBoxMassState.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometry.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometryBox.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometryPlane.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicGeometrySphere.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicJoint.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicJointGroup.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicJointHinge2State.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicMass.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicObject.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicPositionState.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicSpace.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicSphereMassState.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicState.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\Source\Physics\VPhysicWorld.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
 				</File>
 			</Filter>
 		</Filter>

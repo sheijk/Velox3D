@@ -10,7 +10,7 @@
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
-
+	
 /**
  * The XML Element interface
  * @author ins/acrylsword/sheijk
@@ -34,6 +34,14 @@ public:
 	/** Returns the attribute with the given name. if not exisitng returning NULL */
 	virtual IVXMLAttribute* GetAttribute(VStringParam Name) = 0;
 
+	/**
+	 * Returns the value of the given attribute. If it does not exists or
+	 * if it can not be converted to type T, an exception of type VException
+	 * or VStringValueException will be thrown
+	 */
+	template<typename T>
+	T GetAttributeValue(VStringParam in_strName);
+
 	/** Returns an iterator at first position through all attributes on this element */
 	virtual AttributeIter AttributeBegin() = 0;
 
@@ -49,6 +57,18 @@ public:
 	/** Call Visit from all child nodes */
 	void VisitChildren(IVXMLVisitor& in_Visitor);
 };
+//-----------------------------------------------------------------------------
+
+template<typename T>
+T IVXMLElement::GetAttributeValue(VStringParam in_strName)
+{
+	IVXMLAttribute* pAttrib = GetAttribute(in_strName);
+
+	V3D_ASSERT(pAttrib != 0);
+
+	return pAttrib->GetValue().Get<T>();
+}
+
 //-----------------------------------------------------------------------------
 } //xml
 } //v3d

@@ -6,6 +6,8 @@
 #include <v3d/XML/IVXMLWriter.h>
 #include <V3d/XML/IVXMLVisitor.h>
 #include <V3d/Core/SmartPtr/VGuards.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
@@ -87,8 +89,15 @@ protected:
 		}
 };
 
+typedef VServicePtr<IVXMLService> VXMLServicePtr;
 //-----------------------------------------------------------------------------
 } //xml
 } //v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::xml::IVXMLService* v3d::QueryService<v3d::xml::IVXMLService>()
+{
+	return QueryObject<v3d::xml::IVXMLService>("xml.service");
+}
 //-----------------------------------------------------------------------------
 #endif //V3D_IVXMLSERVICE_H

@@ -214,9 +214,9 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 	resource::VResourceDataPtr<const VEffectDescription> in_pEffectDescription
 		= mdRes->GetData<VEffectDescription>();
 
-	vout << "creating mesh with material:\n";
-	PrintEffectDescription(*in_pEffectDescription);
-	vout << "---\n";
+	//vout << "creating mesh with material:\n";
+	//PrintEffectDescription(*in_pEffectDescription);
+	//vout << "---\n";
 
 	// create materials
 	std::vector<VRenderStateList*> statelists

@@ -38,6 +38,20 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+
+14.02.2005
+- erste version vom model loader
+- kleinere xml service extras
+
+12.02.2005
+- Application Templates
+- diverse bash Skripts
+
+bis Februar 2005
+- OS X Port angefangen
+- RangeIteratoren
+- ..
+
 16.11.2004
 - VSharedPtr umgestellt, wrappt jetzt einen boost::shared_ptr
 - Managed Resource Types fuer VImage und VTextureState

@@ -213,6 +213,9 @@
 				RelativePath="..\Source\XMLService\XmlServiceDLL.cpp">
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\Api\V3d\XML.h">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
