@@ -247,6 +247,9 @@
 					RelativePath="..\Api\V3dLib\Graphics\Misc\VKeyboardCamera.h">
 				</File>
 				<File
+					RelativePath="..\Source\Graphics\Lib\VMultipassDrawList.cpp">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Misc\VMultipassDrawList.h">
 				</File>
 				<File

@@ -10,11 +10,17 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // and again..
 
+/**
+ * @author sheijk
+ */
 template<typename VertexStructure, typename Operation>
 void ForEachVertex(VBuffer<VertexStructure>& buffer, Operation& op);
 
 //-----------------------------------------------------------------------------
 
+/**
+ * @author sheijk
+ */
 template<typename VertexStructure>
 class SetColor
 {
@@ -31,6 +37,9 @@ public:
 	}    
 };
 
+/**
+ * @author sheijk
+ */
 #define V3D_DECLARE_BUFFER_OP(opName, opLine) \
 	template<typename VertexStructure>\
 	class opName\
@@ -71,15 +80,27 @@ V3D_DECLARE_BUFFER_OP(SetVertex,
 
 #undef V3D_DECLARE_BUFFER_OP
 
+/**
+ * @author sheijk
+ */
 template<typename VertexStructure>
 void InverseX(VertexStructure& vertex);
 
+/**
+ * @author sheijk
+ */
 template<typename VertexStructure>
 void InverseY(VertexStructure& vertex);
 
+/**
+ * @author sheijk
+ */
 template<typename VertexStructure>
 void InverseZ(VertexStructure& vertex);
 
+/**
+ * @author sheijk
+ */
 template<typename VertexStructure>
 void SwitchYZ(VertexStructure& vertex);
 
