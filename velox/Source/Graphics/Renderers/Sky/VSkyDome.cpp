@@ -50,10 +50,10 @@ void VSkyDome::InverseIndexBuffer()
 	vuint* pBuffer = m_HalfSphere.GetIndexBuffer().GetDataAddress();
 	vuint nIndex = 0;
 
-	for (int i=0; i<nSize; ++i)
+	for (vuint i=0; i<nSize; ++i)
 		pTemp[i] = pBuffer[nSize-1-i];
 
-	for (int i=0; i<nSize; ++i)
+	for (vuint i=0; i<nSize; ++i)
 		pBuffer[i] = pTemp[i];
 
 	delete pTemp;
@@ -66,9 +66,9 @@ vuint VSkyDome::GetVertexNum(vuint sector, vuint ring)
 
 struct SphereCoords
 {
-	float fTheta;
-	float fPhi;
-	float fRadius;
+	vfloat32 fTheta;
+	vfloat32 fPhi;
+	vfloat32 fRadius;
 };
 
 inline SphereCoords CarthesicToSpherical( const VVector3f& in_vec )

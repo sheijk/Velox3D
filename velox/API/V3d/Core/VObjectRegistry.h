@@ -6,7 +6,7 @@
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/Core/VObjectRegistryExceptions.h>
 
-#pragma warning(disable:4786)
+#pragma warning(disable:4786) //TODO: restore warning --ins
 #include <map>
 
 //-----------------------------------------------------------------------------

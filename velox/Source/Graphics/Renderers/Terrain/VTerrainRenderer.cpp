@@ -116,7 +116,7 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
 
 	const vuint nSize = pStream->GetSize();
 	const vfloat32 fSizeLen = std::sqrt(vfloat32(nSize));
-	const vuint nSizeLen = fSizeLen;
+	const vuint nSizeLen = (vuint)fSizeLen;
 
 	if( nSizeLen * nSizeLen != nSize )
 	{
@@ -572,7 +572,7 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 	{
 		in_fDistance -= mindist;
 	
-		lod = in_fDistance / maxdist * GetLodSteps();
+		lod = (vuint)(in_fDistance / maxdist * GetLodSteps());
 
 		lod = std::min(lod, GetLodSteps()-1);
 	}

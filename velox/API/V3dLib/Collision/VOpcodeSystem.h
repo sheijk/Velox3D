@@ -7,9 +7,9 @@
 #include "VContactReport.h"
 #include "VCollisionException.h"
 #include "VCollisionObject.h"
+#include <V3dLib/Collision/VOpcode.h>
 
 
-#include <Opcode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace collision {

@@ -3,8 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Math/VMatrix.h>
-
-#include <Opcode.h>
+#include <V3dLib/Collision/VOpcode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace collision {

@@ -120,7 +120,7 @@ vbool VDIInputManager::InitStandardKeyboardDevice()
 	try {
 		m_pStandardKeyboard = new VDIKeyboardDevice(deviceInstance, m_pDI, m_hWnd);
 	}
-	catch (VInputException& e)
+	catch (VInputException&)
 	{
 		return false;
 	}
@@ -149,7 +149,7 @@ vbool VDIInputManager::InitStandardMouseDevice()
 	try {
 		m_pStandardMouse = new VDIMouseDevice(deviceInstance, m_pDI, m_hWnd);
 	}
-	catch (VInputException& e)
+	catch (VInputException&)
 	{
 		return false;
 	}
@@ -275,7 +275,7 @@ vbool VDIInputManager::EnumDevicesCallback(const DIDEVICEINSTANCE* in_pdiDeviceI
 				return true;
 		}
 	}
-	catch(VCreationException& e) {
+	catch(VCreationException&) {
 		vout << "Failed to create direct input device object" << vendl;
 		return true;
 	}

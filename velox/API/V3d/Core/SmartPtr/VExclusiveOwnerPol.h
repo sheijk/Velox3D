@@ -4,7 +4,7 @@
 
 // Warnung fuer gekappte Template Methoden Namen ausschalten
 #pragma warning( disable : 4786)
-
+//TODO: wieder anschalten waere nicht schlecht :) --ins
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
