@@ -1,6 +1,5 @@
-//TODO: correct file guard
-#ifndef V3D_/*classname*/_H
-#define V3D_/*classname*/_H
+#ifndef V3D_/*fileguard*/_H
+#define V3D_/*fileguard*/_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/UnitTests/IVUnitTest.h>
@@ -10,6 +9,7 @@ namespace v3d {
 namespace unittests {
 //-----------------------------------------------------------------------------
 
+//TODO: replace /*fileguard*/ by the class name in CAPS
 //TODO: replace /*classname*/ by your class's name
 
 /**
@@ -23,7 +23,7 @@ public:
 
 	/*! @see IVUnitTest#GetTestInfo(VStringParam, VStringParam) */
 	virtual void GetTestInfo(
-		VString& out_TestName, 
+		VString& out_TestName,
 		VString& out_SubjectName);
 
 	/*! @see IVUnitTest#Execute() */
@@ -34,4 +34,4 @@ public:
 } // namespace unittests
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_/*classname*/_H
+#endif // V3D_/*fileguard*/_H

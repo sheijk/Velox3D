@@ -5,7 +5,7 @@
  * wird nicht gebraucht, wg. dynamischen linken
  */
 //TODO: add your service's name here
-#define /*service.name*/_API __declspec(dllexport)
+#define /*service.name.caps*/_API __declspec(dllexport)
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VObjectRegistry.h>
@@ -49,8 +49,8 @@ VPointer</*your.service.class*/>::AutoPtr g_p/*obj.name*/;
  * DLL Einsprungspunkt, wird beim laden der DLL aufgerufen, sollte
  * aber meist nichts tun
  */
-BOOL APIENTRY DllMain( HANDLE hModule, 
-                       DWORD  ul_reason_for_call, 
+BOOL APIENTRY DllMain( HANDLE hModule,
+                       DWORD  ul_reason_for_call,
                        LPVOID lpReserved
 					 )
 {

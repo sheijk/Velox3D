@@ -1,6 +1,5 @@
-//TODO: correct file guard
-#ifndef V3D_/*classname*/_H
-#define V3D_/*classname*/_H
+#ifndef V3D_/*fileguard*/_H
+#define V3D_/*fileguard*/_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
@@ -8,6 +7,7 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
+//TODO: replace /*fileguard*/ by your class's name in CAPS
 //TODO: replace /*classname*/ by your class's name
 
 /**
@@ -23,4 +23,4 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_/*classname*/_H
+#endif // V3D_/*fileguard*/_H
