@@ -24,8 +24,3 @@ template<typename T> void VPointerStorage<T>::Release()
 	m_pTarget = 0;
 }
 
-template<typename T> void VPointerStorage<T>::Clone(const VPointerStorage<T>& in_Other)
-{
-	m_pTarget = new T(*(in_Other.m_pTarget));
-}
-

@@ -35,13 +35,13 @@ UNITTESTSUITE_API void Initialize(VObjectRegistry* in_pObjReg)
 	// create service object and register it
 
 	// create TestManager
-	g_pTestManager.Reset(new VTestManager("testmngr"));
+	g_pTestManager.Assign(new VTestManager("testmngr"));
 
 	// create Application
-	g_pTestSuite.Reset(new VTestSuite("main"));
+	g_pTestSuite.Assign(new VTestSuite("main"));
 
 	// create example test
-	g_pExampleTest.Reset(new VUnitTestExample());
+	g_pExampleTest.Assign(new VUnitTestExample());
 }
 
 UNITTESTSUITE_API void Shutdown()

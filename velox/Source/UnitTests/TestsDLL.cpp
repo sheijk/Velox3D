@@ -37,8 +37,8 @@ TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create tests and register them
-	g_pStringTests.Reset(new VStringTests());
-	g_pFileStreamTest.Reset(new VFileStreamTest());
+	g_pStringTests.Assign(new VStringTests());
+	g_pFileStreamTest.Assign(new VFileStreamTest());
 }
 
 TESTSDLL_API void Shutdown()

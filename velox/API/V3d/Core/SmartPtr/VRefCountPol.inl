@@ -9,23 +9,12 @@ VRefCountPol<StoragePolicy>
 	CreateSharedStorage(0);
 }
 
-///**
-// * Destructor
-// */
-//template<class StoragePolicy> 
-//VRefCountPol<StoragePolicy>
-//	::~VRefCountPol()
-//{
-//	// release shared storage
-////	Release();
-//}
-
 /**
  * returns the subject
  */
 template<class StoragePolicy> 
 typename VRefCountPol<StoragePolicy>::PointerType VRefCountPol<StoragePolicy>
-	::GetTarget() const
+	::Get() const
 {
 	return m_pSharedStorage->Get();
 }
@@ -36,7 +25,7 @@ typename VRefCountPol<StoragePolicy>::PointerType VRefCountPol<StoragePolicy>
  */
 template<class StoragePolicy> 
 void VRefCountPol<StoragePolicy>
-	::AssignTarget(typename VRefCountPol<StoragePolicy>::AssignParam in_NewVal)
+	::Assign(typename VRefCountPol<StoragePolicy>::AssignParam in_NewVal)
 {
 	// release old
 	Release();
@@ -51,7 +40,7 @@ void VRefCountPol<StoragePolicy>
  */
 template<class StoragePolicy> 
 void VRefCountPol<StoragePolicy>
-	::ReleaseTarget()
+	::Release()
 {
 	m_pSharedStorage->Release();
 

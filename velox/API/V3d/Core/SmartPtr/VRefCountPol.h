@@ -26,9 +26,9 @@ public:
 	typedef typename StoragePolicy::ValueType ValueType;
 	typedef typename StoragePolicy::RefType RefType;
 
-	PointerType GetTarget() const;
-	void AssignTarget(AssignParam in_NewVal);
-	void ReleaseTarget();
+	PointerType Get() const;
+	void Assign(AssignParam in_NewVal);
+	void Release();
 	void Clone(const VRefCountPol<StoragePolicy>& in_Other);
 
 protected:
@@ -38,13 +38,15 @@ private:
 	typedef VRefCountPol<StoragePolicy> Type;
 	typedef VRefCountSharedStorage<StoragePolicy> SharedStorage;
 
+	/** hold the ptr and the ref. count */
 	SharedStorage* m_pSharedStorage;
 
+	/** create the object which hold the ptr and ref count */
 	void CreateSharedStorage(PointerType in_Subject);
 
+	// no copying etc.
 	void operator=(const VRefCountPol<SharedStorage>&);
 	VRefCountPol(const VRefCountPol<SharedStorage>&);
-
 };
 
 //-----------------------------------------------------------------------------

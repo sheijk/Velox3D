@@ -29,11 +29,11 @@ ERRORSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create log devices
-	g_pDebugMonitor.Reset( new VDebugMonitor );
-	g_pFileLogger.Reset( new VFileLogger );
+	g_pDebugMonitor.Assign( new VDebugMonitor );
+	g_pFileLogger.Assign( new VFileLogger );
 
 	// create service object and register VDebuglogger and VFileLogger
-	g_pErrorService.Reset( new VErrorService() );
+	g_pErrorService.Assign( new VErrorService() );
 	g_pErrorService->RegisterLogDevice( g_pDebugMonitor.Get() );
 	g_pErrorService->RegisterLogDevice( g_pFileLogger.Get() );
 }

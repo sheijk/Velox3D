@@ -40,7 +40,7 @@ void VTestManager::AddCommonTest(IVUnitTest* in_pTest)
 VTestManager::TestIteratorPtr VTestManager::CommonTestsBegin()
 {
 	TestIteratorPtr theIter;
-	theIter.Reset(new 
+	theIter.Assign(new 
 		VSTLIteratorAdaptor<UnitTestList::iterator>(
 //		VSTLIterDerefAdaptor<IVUnitTest, UnitTestList::iterator>(
 		m_CommonTests.begin()));
@@ -51,7 +51,7 @@ VTestManager::TestIteratorPtr VTestManager::CommonTestsBegin()
 VTestManager::TestIteratorPtr VTestManager::CommonTestsEnd()
 {
 	TestIteratorPtr theIter;
-	theIter.Reset(new 
+	theIter.Assign(new 
 		VSTLIteratorAdaptor<UnitTestList::iterator>(
 //		VSTLIterDerefAdaptor<IVUnitTest, UnitTestList::iterator>(
 		m_CommonTests.end()));

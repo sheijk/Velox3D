@@ -71,7 +71,7 @@ VFileStream::VFileStream(
 	vbool bReadAccess = in_nAccess & VReadAccess;
 	vbool bWriteAccess = in_nAccess & VWriteAccess;
 
-	m_pLegalOps.Reset(new VLegalOperations(
+	m_pLegalOps.Assign(new VLegalOperations(
 		bReadAccess, bWriteAccess, true, true));
 
 	// open file

@@ -18,7 +18,9 @@ public:
 	typedef VRefCountSharedStorage<StoragePolicy> MyType;
 
 private:
+	/** number of references (by how many clients the storage is used */
 	mutable int m_nRefCount;
+	/** the storage (pointer) */
 	StoragePolicy m_Storage;
 
 	/** object may only be constructed via CreateNew */
@@ -34,13 +36,13 @@ private:
 
 public:
 	/** create a new shared storage which points to in_Subject */
-	static MyType* CreateNew(typename StoragePolicy::TargetType in_Subject)
+	static MyType* CreateNew(typename StoragePolicy::PointerType in_Subject)
 	{
 		VRefCountSharedStorage<StoragePolicy>* pInstance 
 			= new VRefCountSharedStorage<StoragePolicy>();
 
 		// assign subject
-		pInstance->m_Storage.Set(in_Subject);
+		pInstance->m_Storage.Assign(in_Subject);
 		pInstance->m_nRefCount = 1;
 
 		return pInstance;
@@ -53,7 +55,7 @@ public:
 	void AddRef();
 
 	/** returns the subject */
-	typename StoragePolicy::TargetType Get() const
+	typename StoragePolicy::PointerType Get() const
 	{
 		return m_Storage.Get();
 	}

@@ -21,7 +21,7 @@ int main(int argv, char* argc[])
 	char* pcXmlFileName = 0;
 
 	// create the kernel
-	g_pKernel.Reset(new VKernel());
+	g_pKernel.Assign(new VKernel());
 
 	// get name of xml config file
 

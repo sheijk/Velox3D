@@ -28,7 +28,6 @@ public:
 	virtual PointerType Get() const;
 	virtual void Assign(AssignParam in_pNewTarget);
 	virtual void Release();
-	virtual void Clone(const VPointerStorage<T>& in_Other);
 
 private:
 	PointerType m_pTarget;

@@ -37,7 +37,7 @@ VFSSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create service object and register it
-	g_pStreamFac.Reset(new VStreamFactory("vfs.strfact"));
+	g_pStreamFac.Assign(new VStreamFactory("vfs.strfact"));
 }
 
 VFSSERVICE_API void Shutdown()
