@@ -244,11 +244,17 @@ VVertexDataLayout ColoredVertex::layout;
 #include <Windows.h>
 #include <gl/GL.h>
 
+boost::signals::connection consoleCallbackConn;
+
 void OnConsoleCommand(VStringParam in_strCommand)
 {
 	if( std::string("exit") == in_strCommand )
 	{
 		VServicePtr<IVSystemManager>()->SetStatus(false);
+	}
+	else if( std::string("disconnect") == in_strCommand )
+	{
+		consoleCallbackConn.disconnect();
 	}
 		
 	vout << "Cmd: \"" << in_strCommand << "\"" << vendl;
@@ -263,7 +269,7 @@ vint VExampleApp::Main()
 	VServicePtr<IVWindowManager> pWindowManager;
 	VServicePtr<IVConsoleService> pConsole;
 
-	pConsole->RegisterCommandListener(&OnConsoleCommand);
+	consoleCallbackConn = pConsole->RegisterCommandListener(&OnConsoleCommand);
 
 	m_pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
 	//IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");

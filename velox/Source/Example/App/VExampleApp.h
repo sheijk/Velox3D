@@ -8,6 +8,9 @@
 #include <V3dLib/Graphics/Misc/VCamera.h>
 #include <v3d/Graphics/IVDevice.h>
 #include <v3d/Input/IVInputManager.h>
+
+#include <V3dLib/BoostSignals.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example {
