@@ -27,7 +27,7 @@ public:
 	virtual ~VErrorService();
 
 	virtual vbool RegisterLogDevice( IVLogDevice* in_pLogDevice );
-	virtual vbool UnregisterLogDevice( IVLogDevice* in_pLogDevice );
+	virtual void UnregisterLogDevice( IVLogDevice* in_pLogDevice );
 			
 	virtual void Message( const VString& in_Message, LogMode in_LogMode = Ok );
 	

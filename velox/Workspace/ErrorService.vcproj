@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="Windows-1252"?>
+<?xml version="1.0" encoding = "Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="7.00"
 	Name="ErrorService"
 	ProjectGUID="{05714B12-F9AA-4697-9179-305F137118A5}"
 	Keyword="Win32Proj">
@@ -53,13 +53,7 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
 				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
@@ -102,17 +96,9 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
 				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 	</Configurations>
-	<References>
-	</References>
 	<Files>
 		<Filter
 			Name="Interface"
@@ -134,9 +120,6 @@
 				RelativePath="..\Source\Error\ErrorServiceDLL.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Error\IVLogDevice.h">
-			</File>
-			<File
 				RelativePath="..\Source\Error\VDebugMonitor.cpp">
 			</File>
 			<File
@@ -152,7 +135,10 @@
 				RelativePath="..\Source\Error\VErrorService.h">
 			</File>
 			<File
-				RelativePath="..\Source\Error\VLogModeEnum.h">
+				RelativePath="..\Source\Error\VFileLogger.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Error\VFileLogger.h">
 			</File>
 		</Filter>
 	</Files>

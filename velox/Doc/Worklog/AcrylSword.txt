@@ -25,6 +25,9 @@ sheijk daran hindern, die Welt zu erobern
 ----- last things AcrylSword finished:
 
 log:
+27.5.2003
+Fehler im error service behoben und neue Funktionen implementiert.
+IVLogDevice ist nun mit im Interface
 
 13.5.2003
 error service fertiggestellt

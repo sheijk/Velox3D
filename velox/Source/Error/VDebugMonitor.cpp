@@ -13,7 +13,7 @@ VDebugMonitor::VDebugMonitor()
 	if (m_DebugMonitorHWND != NULL)
 	{
 		m_bIsAvaible = true;
-		//SetDebugLevel( V3D_DEBUG_LEVEL );
+		SetDebugLevel( V3D_DEBUG_LEVEL );
 	}
 	else
 		m_bIsAvaible = false;

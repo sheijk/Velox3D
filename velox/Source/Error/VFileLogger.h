@@ -1,19 +1,24 @@
-#ifndef V3D_VDEBUGMONITOR_H
-#define V3D_VDEBUGMONITOR_H
+#ifndef V3D_VFILELOGGER_H
+#define V3D_VFILELOGGER_H
 //-----------------------------------------------------------------------------
-#include <windows.h>
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/IVErrorService.h>
+#include <v3d/Error/IVLogDevice.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 	namespace error {
 //-----------------------------------------------------------------------------
 
-class VDebugMonitor : public IVLogDevice
+/**
+ * A simple file logger. logs all data into a file
+ * @author AcrylSword
+ * @version 1.0
+ */
+class VFileLogger :	public IVLogDevice
 {
-protected:
+public:
 	void	OnMessage(const VString& in_Msg, LogMode in_LogMode );
-	
+
 	void	OnProgressbarBegin();
 	void	OnProgressbarUpdate(const vfloat32 in_fIndex);
 	void	OnProgressbarEnd();
@@ -21,21 +26,10 @@ protected:
 	void	OnStateCreate( const VString& in_StateName, const VString& in_Text );
 	void	OnStateUpdate( const VString& in_StateName, const VString& in_Text );
 	void	OnStateDelete( const VString& in_StateName );
-
-	void	SetDebugLevel( const vuint in_iLevel );
-
-	HWND	m_DebugMonitorHWND;
-	vbool	m_bIsAvaible;
-	COPYDATASTRUCT m_MyCopyData;
-
-public:
-			VDebugMonitor();
-			~VDebugMonitor();
 };
 
 //-----------------------------------------------------------------------------
-} // error
-} // v3d;
+}// error
+}// v3d
 //-----------------------------------------------------------------------------
 #endif
-

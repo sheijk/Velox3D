@@ -4,7 +4,11 @@
 namespace v3d {
 namespace error {
 
+	/**
+	 * Different types of message logging.
+	 */
 	enum LogMode {
+
 		Ok,
 		Warning,
 		Error

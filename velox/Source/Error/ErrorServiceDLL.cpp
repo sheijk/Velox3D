@@ -11,44 +11,44 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include "VErrorService.h"
 #include "VDebugMonitor.h"
-#include <iostream>
+#include "VFileLogger.h"
 
 //-----------------------------------------------------------------------------
-using std::cout;
-using std::endl;
-
 using namespace v3d;
 using namespace v3d::error;
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 VPointer<VErrorService>::AutoPtr g_pErrorService;
-//VPointer<VNamedObject>::AutoPtr g_pTest;
-
-//TODO: den debug monitor in einem VPointer speichern, 
-//und Devices in VErrorService nicht loeschen, sondern in Shutdown()
+VPointer<VDebugMonitor>::AutoPtr g_pDebugMonitor;
+VPointer<VFileLogger>::AutoPtr g_pFileLogger;
 
 ERRORSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
 	// store the object registry instance
 	VObjectRegistry::SetInstance(in_pObjReg);
 
+	// create log devices
+	g_pDebugMonitor.Reset( new VDebugMonitor );
+	g_pFileLogger.Reset( new VFileLogger );
+
 	// create service object and register VDebuglogger and VFileLogger
-	VErrorService* MyService = new VErrorService();
-	MyService->RegisterLogDevice( new VDebugMonitor() );
-//	MyService->RegisterLogDevice( new VFileLogger() );
-
-	//and register it
-	g_pErrorService.Reset( MyService );
-	
-	//(g_pTest.Reset(new VNamedObject("exserv.test", 0));
-
-	cout << "ErrorService.init()" << endl;
+	g_pErrorService.Reset( new VErrorService() );
+	g_pErrorService->RegisterLogDevice( g_pDebugMonitor.Get() );
+	g_pErrorService->RegisterLogDevice( g_pFileLogger.Get() );
 }
 
 ERRORSERVICE_API void Shutdown()
 {
-	// delete and unregister service object
+	//unregister debug loggers
+	g_pErrorService->UnregisterLogDevice( g_pDebugMonitor.Get() );
+	g_pErrorService->UnregisterLogDevice( g_pFileLogger.Get() );
+
+	// delete debug loggers
+	g_pDebugMonitor.Release();
+	g_pFileLogger.Release();
+
+    // delete and unregister service object
 	g_pErrorService.Release();
 }
 
