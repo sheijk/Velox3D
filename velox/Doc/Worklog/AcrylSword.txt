@@ -1,0 +1,28 @@
+Worklog von AcrylSword
+--------------------------------------------------------------------------------
+----- messages to AcrylSword:
+
+
+--------------------------------------------------------------------------------
+----- current assigned tasks:
+
+- sound service
+- error service
+- Informationen für ein SkySystem sammeln
+
+--------------------------------------------------------------------------------
+----- personal todo:
+
+todo:
+sound fertig implementieren
+FileLogging in den error service hinzufügen
+Quellcode vom Debugmonitor in einen veröffentlichbaren Zustand bringen
+sheijk daran hindern, die Welt zu erobern
+
+--------------------------------------------------------------------------------
+----- last things AcrylSword finished:
+
+log:
+
+13.5.2003
+error service fertiggestellt
