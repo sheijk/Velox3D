@@ -34,7 +34,7 @@ low:
 medium:
 
 - add multiple window ogl context sharing support
-- fix WxConnector and old non needed wx stuff + make it clean an safe
+- fix WxConnector and old non needed wx stuff + make it clean and safe
 
 high:
 - wrap bsp renderer out of IVCell to make it more robust
@@ -58,6 +58,9 @@ req
 
 
 Done List:
+
+31.08.04
+- implemented VStringValue required for the new xml service
 
 30.08.04
 - removed old image service files no longer needed
