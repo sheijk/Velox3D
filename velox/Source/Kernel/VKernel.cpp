@@ -7,6 +7,7 @@
 #include <v3d/Core/VException.h>
 #include <v3d/Core/IVApplication.h>
 #include <v3d/Core/VIOStream.h>
+#include <v3d/Core/Modules/VModuleBase.h>
 #include "VKernelIniReader.h"
 
 #include <v3d/Core/MemManager.h>
@@ -47,6 +48,14 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 	// load and init services
 	LoadServices();
 
+	// if there is a local module, initialize it
+	try
+	{
+		v3d::VModuleBase::GetInstance()->Initialize();
+	}
+	catch(VModuleLoadFailure&)
+	{}
+
 	vout << "Dumping registered objects:" << vendl;
 	vout << "-------------------------------------------------------" << vendl;
 	vout << VObjectRegistry::GetInstance()->GetObjectDump();
@@ -56,6 +65,14 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 
 	// delegate control to app service
 	DelegateControl();
+
+	// deinitialize local instance if it exists
+	try
+	{
+		v3d::VModuleBase::GetInstance()->Shutdown();
+	}
+	catch(VModuleLoadFailure&)
+	{}
 }
 
 struct VServiceInfo
