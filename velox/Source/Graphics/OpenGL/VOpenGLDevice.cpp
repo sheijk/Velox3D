@@ -29,6 +29,7 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
 	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
+	m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
 }
 //-----------------------------------------------------------------------------
 
@@ -307,7 +308,7 @@ void VOpenGLDevice::BeginScene()
 
 	//TODO for testing purpose -ins
 	static vfloat32 rotZ = 0;
-	glTranslatef(0.0f, 0.0f, -100.0f);
+	glTranslatef(0.0f, 0.0f, -10.0f);
 	rotZ += 0.3f;
 	glRotatef(rotZ,0.0f,1.0f,0.0f);
 

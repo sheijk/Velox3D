@@ -22,7 +22,7 @@ VOpenGLIndexMesh::~VOpenGLIndexMesh()
 
 void VOpenGLIndexMesh::Render()
 {
-	const vuint iNumElements = m_IndexData.nEnd - m_IndexData.nStart;
+	const vuint iNumElements = m_IndexData.nCount;
 
 	const vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
 	const vint32* pIndexBuffer = m_IndexData.hBuffer->GetDataAddress();

@@ -45,7 +45,6 @@ void VOpenGLVertexMesh::Render()
 	glBegin(GL_TRIANGLES);
 
 	const vuint cnVertexCount = m_TriangleData.nCount;
-		//= (m_TriangleData.nEnd - m_TriangleData.nStart) / 3;
 
 	vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
 	pBuffer += m_TriangleData.nStart;
@@ -53,11 +52,7 @@ void VOpenGLVertexMesh::Render()
 	vfloat32* pColorBuffer = m_ColorData.hBuffer->GetDataAddress();
 	pColorBuffer += m_ColorData.nStart;
 
-	//glVertex3f(1,0,0);
-	//glVertex3f(0,1,0);
-	//glVertex3f(-1,0,0);
-
-	for(vuint nVertex = 0; nVertex < cnVertexCount; ++nVertex)
+	for(vuint nVertex = 0; nVertex < cnVertexCount; nVertex++)
 	{
 		glColor4f(
 			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 0),
@@ -73,24 +68,6 @@ void VOpenGLVertexMesh::Render()
 			);
 
 	}
-
-	static bool firstTime = true;
-
-	if( firstTime )
-	{
-		for(vuint nVertex = 0; nVertex < cnVertexCount; ++nVertex)
-		{
-			vout << "("
-				<< GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, X_AXIS)
-				<< ","
-				<< GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Y_AXIS)
-				<< ","
-				<< GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Z_AXIS)
-				<< ") ";
-		}
-		firstTime = false;
-		}
-
 	glEnd();
 }
 

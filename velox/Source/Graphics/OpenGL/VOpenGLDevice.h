@@ -10,7 +10,7 @@
 //#include "VOpenGLVertexMesh.h"
 #include "VOpenGLPlainRenderMethod.h"
 //#include "VOpenGLVBORenderMethod.h"
-//#include "VOpenGLIndexRenderMethod.h"
+#include "VOpenGLIndexRenderMethod.h"
 
 #include <windows.h>
 #include <extgl/extgl.h>
@@ -64,7 +64,7 @@ private:
 	VRenderMethodRegistry m_RenderMethods;
 	VOpenGLPlainRenderMethod m_PlainRenderMethod;
 //	VOpenGLVBORenderMethod m_VBORenderMethod;
-//	VOpenGLIndexRenderMethod m_IndexRenderMethod;
+	VOpenGLIndexRenderMethod m_IndexRenderMethod;
 
 	typedef std::list<IVMesh*> MeshList;
 	MeshList m_Meshes;
