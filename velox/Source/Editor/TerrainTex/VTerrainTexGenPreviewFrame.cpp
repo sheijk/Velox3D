@@ -12,10 +12,12 @@ END_EVENT_TABLE()
 
 VTerrainTexGenPreviewFrame::VTerrainTexGenPreviewFrame(
 	wxWindow* in_pParent, 
-	IVDocument& in_Doc
+	IVDocument& in_Doc,
+	VTextureStageSetupFrame* in_pTexStageFrame
 	) :
 	VRenderFrame(in_pParent),
-	m_Doc(in_Doc)
+	m_Doc(in_Doc),
+	m_pTexStageFrame(in_pTexStageFrame)
 {
 	SetSize(400, 300);
 	CenterOnParent();

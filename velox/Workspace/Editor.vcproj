@@ -194,9 +194,6 @@
 			<File
 				RelativePath="..\Source\Editor\Controls\VRenderFrame.cpp">
 			</File>
-			<File
-				RelativePath="..\Source\Editor\Controls\VRenderFrame.h">
-			</File>
 		</Filter>
 		<Filter
 			Name="TerrainTex"
@@ -206,6 +203,9 @@
 			</File>
 			<File
 				RelativePath="..\Source\Editor\TerrainTex\Messages.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\Controls\VRenderFrame.h">
 			</File>
 			<File
 				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexDocClass.cpp">

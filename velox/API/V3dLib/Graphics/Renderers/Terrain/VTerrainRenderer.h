@@ -60,7 +60,9 @@ class VTerrainRenderer
 	/** the terrain chunks */
 	ChunkMap m_Chunks;
 	vuint m_nChunkSize;
+	IVDevice& m_Device;
 	VSimpleDrawList m_DrawList;
+	VSimpleDrawList m_DetailDrawList;
 
 	vbool m_bShowWireFrame;
 
@@ -84,6 +86,7 @@ class VTerrainRenderer
 	LodChangeList m_LodChanges;
 
 	VMaterialDescription m_TextureMat;
+	VMaterialDescription m_DetailTextureMat;
 
 public:
 	VTerrainRenderer(

@@ -14,6 +14,8 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
+VMaterialDescription detailMat;
+
 VTerrainRenderer::Heightmap& 
 	VTerrainRenderer::GetHeightmap(vuint chunkx, vuint chunky)
 {
@@ -29,12 +31,30 @@ VTerrainRenderer::VTerrainRenderer(
 	m_nPatchCount(in_nPatchCount),
 	m_fChunkModelSize(10.0f),
 	m_DrawList(in_Device),
-	m_bShowWireFrame(false)
+	m_DetailDrawList(in_Device),
+	m_bShowWireFrame(true),
+	m_Device(in_Device)
 {
 	// load texture
 	m_TextureMat = BuildTextureMaterial(&in_Device, in_strTextureFile);
-	//m_TextureMat.frontPolyMode = VMaterialDescription::Line;
-	//m_TextureMat.backPolyMode = VMaterialDescription::Line;
+	m_TextureMat.pTextureList->magnificationFilter = VMaterialDescription::FilterLinear;
+	m_TextureMat.pTextureList->minificationFilter = VMaterialDescription::FilterLinear;
+
+	//m_TextureMat.defaultColor = VColor4f(1.0f, .5f, .5f, 1.0f);
+
+	detailMat = BuildTextureMaterial(&in_Device, "/data/dusmdetail.jpg");
+	detailMat.pTextureList->magnificationFilter = VMaterialDescription::FilterLinear;
+	detailMat.pTextureList->minificationFilter = VMaterialDescription::FilterLinear;
+
+	detailMat.destBlendFactor = VMaterialDescription::BlendSourceColor;
+	detailMat.sourceBlendFactor = VMaterialDescription::BlendDestColor;
+	detailMat.enableBlending = true;
+	//detailMat.depthWriteMask = VMaterialDescription::DepthReadOnly;
+	detailMat.depthTestFunction = VMaterialDescription::DepthOnLessEqual;
+
+	//m_TextureMat.sourceBlendFactor = VMaterialDescription::BlendDestColor;
+	//m_TextureMat.destBlendFactor =  VMaterialDescription::BlendSourceColor;
+//	m_TextureMat.depthWriteMask = VMaterialDescription::DepthReadOnly;
 
 	//m_Chunks.Resize(in_nPatchCount, in_nPatchCount, ChunkMap::Uninitialized);
 	m_Chunks.ResizeUninit(in_nPatchCount, in_nPatchCount);
@@ -137,8 +157,8 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 	vbyte heightValue = 0;
 	vfloat32 height = 0.0f;
 
-	for(vuint y = 0; y < pTerrain->GetWidth(); ++y)
-	for(vuint x = 0; x < pTerrain->GetHeight(); ++x)
+	for(vuint y = 0; y < in_nSize; ++y)
+	for(vuint x = 0; x < in_nSize; ++x)
 	{
 		in_Stream >> heightValue;
 
@@ -304,6 +324,19 @@ void VTerrainRenderer::CreateMeshes()
 void VTerrainRenderer::Render()
 {
 	m_DrawList.Render();
+
+	VMatrix44f mat;
+	math::Identity(mat);
+	math::SetScale(mat, 15);
+
+	m_Device.SetMatrix(IVDevice::TextureMatrix, mat);
+
+	m_DetailDrawList.Render();
+
+	math::Identity(mat);
+
+	m_Device.SetMatrix(IVDevice::TextureMatrix, mat);
+
 }
 
 vuint VTerrainRenderer::GetLodSteps() const
@@ -397,7 +430,7 @@ void VTerrainRenderer::UpdateChunkMesh(vuint x, vuint y)
 
 	if( m_bShowWireFrame )
 	{
-		m_DrawList.Remove(VModel(
+		m_DetailDrawList.Remove(VModel(
 			m_Chunks(x,y).pChunk->GetWireFrameMesh(),
 			math::IdentityPtr()));
 	}
@@ -420,7 +453,7 @@ void VTerrainRenderer::UpdateChunkMesh(vuint x, vuint y)
 	{
 		IVDevice::MeshHandle hWireframeMesh = 
 			m_Chunks(x,y).pChunk->GetWireFrameMesh();
-		m_DrawList.Add(VModel(hWireframeMesh, pTransform));
+		m_DetailDrawList.Add(VModel(hWireframeMesh, pTransform));
 	}
 }
 
@@ -468,7 +501,7 @@ void VTerrainRenderer::Update(const IVCamera& in_Camera)
 
 	// for each item in change list
 	vuint updatedChunks = 0;
-	const vuint chunksPerFrameMax = 2;
+	const vuint chunksPerFrameMax = 5;
 
 	for(
 		vuint pos = 0; 
@@ -512,8 +545,8 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 	// linear interpolation in between
 
 	vuint lod = 0;
-	const vfloat32 maxdist = 400.0f;
-	const vfloat32 mindist = 10.0f;
+	const vfloat32 maxdist = 100.0f;
+	const vfloat32 mindist = 5.0f;
 
 	if( in_fDistance > mindist )
 	{

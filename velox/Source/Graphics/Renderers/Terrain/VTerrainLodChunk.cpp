@@ -59,18 +59,20 @@ VTerrainLodChunk::MeshHandle VTerrainLodChunk::GetCurrentMesh() const
 	return m_hCurrentMesh;
 }
 
+extern VMaterialDescription detailMat;
+
 VTerrainLodChunk::MeshHandle VTerrainLodChunk::GetWireFrameMesh() const
 {
 	// if wireframe mesh does not exist, yet
 	if( 0 == m_hWireFrameMesh )
 	{
 		// create wire frame mesh
-		VMaterialDescription wfMat;
-		wfMat.frontPolyMode = VMaterialDescription::Line;
-		wfMat.backPolyMode = VMaterialDescription::Line;
-		wfMat.defaultColor = VColor4f(0.0f, 1.0f, 1.0f, 1.0f);
+		//VMaterialDescription wfMat;
+		//wfMat.frontPolyMode = VMaterialDescription::Line;
+		//wfMat.backPolyMode = VMaterialDescription::Line;
+		//wfMat.defaultColor = VColor4f(0.0f, 1.0f, 1.0f, 1.0f);
 
-		m_hWireFrameMesh = m_Device.CreateMesh(m_MeshDescription, wfMat);        
+		m_hWireFrameMesh = m_Device.CreateMesh(m_MeshDescription, detailMat);
 	}
 
 	V3D_ASSERT(0 != m_hWireFrameMesh);
@@ -205,7 +207,7 @@ void VTerrainLodChunk::UpdateCurrentMesh(const VMaterialDescription& in_Mat)
 
 	ForEachVertex(
 		model.GetVertexBuffer(), 
-		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 5.0f));
+		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 20.0f));
 
 	// move border vertices if the neighbour mesh has a lower detail
 	if( m_NeighbourLod[vint(Left)] > GetLod() )

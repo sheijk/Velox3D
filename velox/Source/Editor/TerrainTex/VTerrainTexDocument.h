@@ -10,16 +10,29 @@
 
 #include "VTerrainTexGenPreviewFrame.h"
 #include "VTextureStage.h"
+#include "VTextureStageSetupFrame.h"
 
 #include <vector>
 #include <wx/wx.h>
+#include <wx/tbarsmpl.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-class VTerrainTexDocument : public IVDocument
+class VRenderPanel : public wxPanel
+{
+public:
+	VRenderPanel(wxWindow* in_pParent, wxPoint in_Pos, wxSize in_Size);
+	v3d::graphics::IVDevice& GetDevice();
+	const v3d::graphics::IVDevice& GetDevice() const;
+
+private:
+	v3d::window::IVWindowManager::GraphicsDevicePtr m_pDevice;
+};
+
+class VTerrainTexDocument : public wxMiniFrame, public IVDocument
 {
 public:
 	VTerrainTexDocument(
@@ -30,17 +43,35 @@ public:
 	virtual Connection RegisterFocusListener(const FocusSlot& in_Slot);
 	virtual void SetWindowMode(WindowMode in_Mode);
 	virtual VMessageTreatment DeliverMessage(IVMessage& in_Message);
+
 private:
+	// document
 	typedef std::vector<VTextureStage> TextureStageList;
 
+	void UpdateTexStageListBox();
 	void Render();
 
 	VPointer<v3d::graphics::VSimpleDrawList>::SharedPtr m_pDrawList;
 
-	VTerrainTexGenPreviewFrame* m_pPreviewWindow;
 	TextureStageList m_TextureStages;
-};
 
+	// user interface
+	enum Ids
+	{
+		TimerId = 1
+	};
+
+	void OnRegularUpdate(wxTimerEvent& in_Event);
+
+    wxPanel* m_pTexStagePanel;
+	wxListBox* m_pTexStageListBox;
+	VRenderPanel* m_pRenderPanel;
+	wxToolBarSimple* m_pToolbar;
+
+	wxTimer* m_pTimer;
+
+	DECLARE_EVENT_TABLE();
+};
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::editor

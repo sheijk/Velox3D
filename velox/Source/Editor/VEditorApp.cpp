@@ -60,8 +60,6 @@ vint VEditorApp::Main()
 	//VCameraTool cameraPlugin(cam);
 	//RegisterTool(cameraPlugin);
 
-	VTerrainTexDocClass texgenDocClass;
-
 	vout << "Velox3D proudly presents: the editor!" << vendl;
 
 	// no plugin registering at runtime
@@ -69,10 +67,13 @@ vint VEditorApp::Main()
 
 	// create the main window
 	VEditorFrame* pFrame = new VEditorFrame(m_Plugins);
+
+	VTerrainTexDocClass texgenDocClass;
 	pFrame->RegisterDocumentClass(texgenDocClass);
-	VTextureStageSetupFrame* pTexStageFrame = 
-		new VTextureStageSetupFrame(pFrame);
-	pFrame->RegisterTool(*pTexStageFrame);
+
+	//VTextureStageSetupFrame* pTexStageFrame = 
+	//	new VTextureStageSetupFrame(pFrame);
+	//pFrame->RegisterTool(*pTexStageFrame);
 
 	VServicePtr<system::IVSystemManager> pSystem;
 	VServicePtr<v3d::updater::IVUpdateManager> pUpdater;

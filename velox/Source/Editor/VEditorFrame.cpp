@@ -15,6 +15,7 @@ namespace editor {
 BEGIN_EVENT_TABLE(VEditorFrame, wxFrame)
 EVT_MENU(QuitId, VEditorFrame::OnQuit)
 EVT_MENU(AboutId, VEditorFrame::OnAbout)
+EVT_MENU(RepaintId, VEditorFrame::OnRepaint)
 END_EVENT_TABLE()
 
 VEditorFrame::VEditorFrame(PluginList& in_Plugins) 
@@ -56,6 +57,7 @@ VEditorFrame::VEditorFrame(PluginList& in_Plugins)
 
 	pFileMenu->Append(AboutId, "About");
 	pFileMenu->Append(dummyId, "Dummy");
+	pFileMenu->Append(RepaintId, "Repaint");
 	pFileMenu->AppendSeparator();
 	pFileMenu->Append(QuitId, "E&xit");
 	m_Menues.push_back(pFileMenu);
@@ -172,6 +174,11 @@ void VEditorFrame::OnShowDocument(wxCommandEvent& in_Event)
 {
     // get active document
 	// change it's visible mode
+}
+
+void VEditorFrame::OnRepaint(wxCommandEvent& in_Event)
+{
+	Refresh(false);
 }
 
 void VEditorFrame::CreateDocument(IVDocumentClass& in_DocClass)

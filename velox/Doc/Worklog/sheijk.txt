@@ -40,6 +40,10 @@ template member konvertiert?
 	.terrain: wireframe + texturierte darstellung
 	.editor: message basierte plugin kommunikation?
 	.editor: message system konkret entwerfen
+	VBuffer(vbyte*,count, Copy);
+	VBuffer(10) -> speicher selber allokieren
+	meshhandle + mat wieder trennen?
+	PolygonMode enums in MatDescr mit PM prefixen
 	?editor: terrain xml format
 	?editor: texturen setzen fuer terrain
 	?editor: heightmap importieren fuer terrain
@@ -123,6 +127,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+19.06.2004
+detail texturen fuers terrain
+fast eine toolbar mit wxwidgets
 
 18.06.2004
 Editor Nachrichtensystem

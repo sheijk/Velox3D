@@ -5,6 +5,8 @@
 
 #include <V3d/Editor/IVDocumentClass.h>
 
+#include "VTextureStageSetupFrame.h"
+
 #include <wx/wx.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {

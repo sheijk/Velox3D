@@ -31,6 +31,7 @@ public:
 	{
 		QuitId = 1,
 		AboutId,
+		RepaintId,
 		ActionId,
 		FirstFreeId
 	};
@@ -77,6 +78,7 @@ private:
 	void OnAction(wxCommandEvent& in_Event);
 	void OnNewDocument(wxCommandEvent& in_Event);
 	void OnShowDocument(wxCommandEvent& in_Event);
+	void OnRepaint(wxCommandEvent& in_Event);
 
 	vint GetNextMessageId();
 

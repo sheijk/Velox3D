@@ -6,6 +6,7 @@
 #include <v3d/Editor/IVDocument.h>
 
 #include "../Controls/VRenderFrame.h"
+#include "VTextureStageSetupFrame.h"
 
 #include <wx/wx.h>
 //-----------------------------------------------------------------------------
@@ -16,7 +17,11 @@ using namespace v3d; // prevent auto indenting
 class VTerrainTexGenPreviewFrame : public VRenderFrame
 {
 public:
-	VTerrainTexGenPreviewFrame(wxWindow* in_pParent, IVDocument& in_Doc);
+	VTerrainTexGenPreviewFrame(
+		wxWindow* in_pParent, 
+		IVDocument& in_Doc,
+		VTextureStageSetupFrame* in_pTexStageFrame
+		);
 
 	IVDocument::Connection RegisterFocusListener(
 		const IVDocument::FocusSlot& in_Slot);
@@ -27,6 +32,7 @@ private:
 
 	IVDocument& m_Doc;
 	IVDocument::FocusSignal m_FocusChangeSignal;
+	const VTextureStageSetupFrame* m_pTexStageFrame;
 
 	DECLARE_EVENT_TABLE();
 };
