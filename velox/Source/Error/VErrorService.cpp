@@ -12,7 +12,7 @@ namespace error {
 //-----------------------------------------------------------------------------
 
 VErrorService::VErrorService() :
-	IVErrorService("error", 0)
+	IVErrorService("error.service", 0)
 {
     m_GlobalErrorStream.Assign( new VErrorStream("global", this) );
 }

@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/IVApplication.h>
 #include <v3d/Core/VNamedObject.h>
+#include <V3d/Console/IVConsoleService.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example {
@@ -17,8 +18,14 @@ public:
 	VExampleApp(VStringParam in_strName);
 	virtual ~VExampleApp();
 
-public:
+	void Initialize();
 	virtual int Main();
+	vint Idle();
+
+private:
+
+	console::IVConsoleSerivce* m_Console;
+	
 };
 
 //-----------------------------------------------------------------------------

@@ -19,7 +19,7 @@ IVErrorService* GetLogDevice()
 {
 	if(0 == LOGGING_NAMESPACE::g_pErrorService)
 	{
-		LOGGING_NAMESPACE::g_pErrorService = QueryObject<IVErrorService>("error");
+		LOGGING_NAMESPACE::g_pErrorService = QueryObject<IVErrorService>("error.service");
 	}
 
 	return LOGGING_NAMESPACE::g_pErrorService;

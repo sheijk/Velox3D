@@ -134,6 +134,7 @@ void VTestSuite::ExecuteTests()
 }
 
 int VTestSuite::Main()
+
 {
 	// generate test list and print it
 	GenerateTestList();

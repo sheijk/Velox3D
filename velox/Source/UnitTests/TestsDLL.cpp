@@ -41,6 +41,7 @@ VPointer<VMemoryStreamTest>::AutoPtr g_pMemStreamTest;
 VPointer<VFileSysTest>::AutoPtr g_pFileSysTest;
 VPointer<VXMLTest>::AutoPtr g_pXmlTest;
 
+
 TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 {
 	// store the object registry instance

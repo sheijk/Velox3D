@@ -47,7 +47,7 @@ void VXMLTest::ExecuteTest()
 		
 	IVXMLService::IVXMLWriterPtr m_XmlWriter;
 	
-	/*m_XmlWriter = m_XmlService->CreateXMLWriter("test.xml");
+	m_XmlWriter = m_XmlService->CreateXMLWriter("test.xml");
 	m_XmlWriter->AddComment("This is a comment");
 	m_XmlWriter->AddComment("This is a comment 2");
 	m_XmlWriter->AddComment("This is a comment 3");
@@ -65,7 +65,7 @@ void VXMLTest::ExecuteTest()
 	
 	
 	//Test one finished
-	m_XmlWriter->~IVXMLWriter();*/
+	m_XmlWriter->~IVXMLWriter();
 
 	m_XmlService->ParseXMLFile("test.xml", &m_TestVisitor);
 	

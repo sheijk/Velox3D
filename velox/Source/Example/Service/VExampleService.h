@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/ExampleService/IVExampleService.h>
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example {
@@ -17,9 +16,9 @@ class VExampleService : public IVExampleService
 public:
 	VExampleService(VStringParam in_strName);
 	virtual ~VExampleService();
-
 public:
 	virtual vint GiveMeFive();
+	
 };
 
 //-----------------------------------------------------------------------------

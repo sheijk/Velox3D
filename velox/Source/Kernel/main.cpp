@@ -50,6 +50,7 @@ int main(int argv, char* argc[])
 			<< "extended error string: "
 			<< "\"" << exc.GetExtendedErrorString() << "\""
 			<< endl << endl;
+		throw exc;
 	}
 
 	// delete kernel

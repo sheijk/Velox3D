@@ -4,6 +4,7 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Error/IVErrorFilter.h>
+#include <v3d/Utils/VAllFilter.h>
 #include "VErrorService.h"
 #include "VErrorConsoleListener.h"
 #include "windows.h"
@@ -13,19 +14,14 @@
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::error;
+using namespace v3d::util;
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 VPointer<VErrorService>::AutoPtr g_pErrorService;
 VPointer<VErrorConsoleListener>::AutoPtr g_pConsoleListener;
+//-----------------------------------------------------------------------------
 
-class VAllFilter : public IVErrorFilter
-{
-public:
-	vbool AcceptMessage(VStringParam in_strName, VMessageType in_MessageTyoe ) { return true; };
-	vbool AcceptState( VStringParam in_strName ) {return false;};
-	vbool AcceptProgressbar( VStringParam in_strName ) {return false;};
-};
 
 ERRORSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {

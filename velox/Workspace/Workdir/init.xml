@@ -3,6 +3,7 @@
 <Config>
 	<Services>
 		<Service id="error" desc="Logging functionality" filename="ErrorService.dll"/>
+		<Service id="console" desc="Win32 Console" filename="ConsoleService.dll"/>
 		<Service id="example" desc="An example service" filename="ExampleService.dll"/>
 		<Service id="app" desc="The main program" filename="ExampleApp.dll"/>
 	</Services>

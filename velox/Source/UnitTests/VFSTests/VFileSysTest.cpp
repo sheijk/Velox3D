@@ -238,6 +238,8 @@ void CheckCreateDelete()
 	//TODO: delete dir.. :)
 
 	VAccessRightsFlags accFlags;
+	accFlags.allowDelete = true;
+		
 
 	// create a dir
 	IVFileSystem* pFS = QueryObject<IVFileSystem>("vfs.fs");

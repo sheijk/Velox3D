@@ -166,6 +166,9 @@
 					RelativePath="..\Api\V3d\Core\VCoreLib.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Core\VEnforce.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Core\VException.h">
 				</File>
 				<File
