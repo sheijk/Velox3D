@@ -60,6 +60,9 @@ void VMeshPart::RemoveMesh(graphics::IVDevice::MeshHandle in_hMesh)
 		GetDrawList().Remove(graphics::VModel(in_hMesh));
 	}
 
+	//TODO: loeschst du hier nicht das letzte elemend, wenn find nichts findet und
+	//iterator::end() zurueckliefert? -ins
+
 	MeshList::iterator iter = std::find(m_Meshes.begin(), m_Meshes.end(), graphics::VModel(in_hMesh));
 	m_Meshes.erase(iter);
 }

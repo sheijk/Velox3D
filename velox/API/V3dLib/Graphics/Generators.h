@@ -11,6 +11,7 @@
 #include <V3dLib/Graphics/Generators/VTerrainChunkMesh.h>
 #include <V3dLib/Graphics/Generators/VTriangleMesh.h>
 #include <V3dLib/Graphics/Generators/VQuadMesh.h>
+#include <V3dLib/Graphics/Generators/VPlaneMesh.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_VGENERATORS_2004_04_09_H

@@ -22,6 +22,7 @@ medium:
 - fix WxConnector and old non needed wx stuff + make it clean and safe
 
 high:
+- move othro vector extractor of planeMesh into mathlib
 
 - TODO check external libs for correct debug information
 - TODO rewrite Velocity2 into Hinge2 instead of Joint!
@@ -33,6 +34,12 @@ high:
 //-----------------------------------------------------------------------------
 
 Done List:
+
+13.02.05
+- added simple physic demo
+
+12.02.05
+- written a small plane generator
 
 22.01.05
 - renamend graphics::VVector3f to graphics::VVertex3f to avoid nameing conflcit 
