@@ -61,11 +61,16 @@ public:
 	virtual void DeleteBuffer(BufferHandle& in_Buffer) = 0;
 
 	/** create a mesh ins the device */
-	virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc) = 0;
+	//virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc) = 0;
+	virtual MeshHandle CreateMesh(
+		const VMeshDescription& in_pMeshDesc,
+		const VMaterialDescription& in_pMaterialDesc
+		) = 0;
+
 	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;
 
-	virtual MaterialHandle CreateMaterial(
-		const VMaterialDescription& in_MatDesc) = 0;
+	//virtual MaterialHandle CreateMaterial(
+	//	const VMaterialDescription& in_MatDesc) = 0;
 
 	virtual void DeleteMaterial(MaterialHandle& in_Material) = 0;
 

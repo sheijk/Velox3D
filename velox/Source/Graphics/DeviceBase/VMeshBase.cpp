@@ -1,29 +1,22 @@
-#ifndef V3D_IVMESH_H
-#define V3D_IVMESH_H
+#include "VMeshBase.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
-namespace v3d {
+namespace v3d { 
 namespace graphics {
 //-----------------------------------------------------------------------------
-class IVMaterial;
 
-/**
- * A handle for a mesh loaded in the device
- *
- * @author sheijk/insane
- */
-class IVMesh
+VMeshBase::VMeshBase(IVMaterial* in_pMaterial) : 
+	m_pMaterial(in_pMaterial)
 {
-public:
-	virtual ~IVMesh() {};
+}
 
-	virtual IVMaterial& GetMaterial() = 0;
-};
+IVMaterial& VMeshBase::GetMaterial()
+{
+	return *m_pMaterial;
+}
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVMESH_H

@@ -19,11 +19,10 @@ namespace drawlist {
 struct VModel
 {
 	IVDevice::MeshHandle hMesh;
-	IVDevice::MaterialHandle hMaterial;
 
 	vbool operator==(const VModel& other)
 	{
-		return ((hMesh == other.hMesh) && (hMaterial == other.hMaterial));
+		return (hMesh == other.hMesh);
 	}
 };
 

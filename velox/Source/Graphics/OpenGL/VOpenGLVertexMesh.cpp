@@ -9,7 +9,11 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 
 
-VOpenGLVertexMesh::VOpenGLVertexMesh(const VMeshDescription& in_Descr)
+VOpenGLVertexMesh::VOpenGLVertexMesh(
+	const VMeshDescription& in_Descr,
+	IVMaterial* in_pMaterial
+	) :
+	VMeshBase(in_pMaterial)	
 {
 	m_TriangleData = in_Descr.triangleVertices;
 	m_ColorData = in_Descr.triangleColors;

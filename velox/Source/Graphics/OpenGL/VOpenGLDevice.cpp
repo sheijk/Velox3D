@@ -107,9 +107,14 @@ void VOpenGLDevice::DeleteBuffer(BufferHandle& in_Buffer)
 	//in_Buffer = t;
 }
 
-IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VMeshDescription& in_pMeshDesc)
+IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
+	const VMeshDescription& in_pMeshDesc,
+	const VMaterialDescription& in_pMaterialDesc
+	)
 {
-	IVMesh* pMesh = m_RenderMethods.CreateMesh(in_pMeshDesc, 0);
+	IVMaterial* pMaterial = CreateMaterial(in_pMaterialDesc);
+
+	IVMesh* pMesh = m_RenderMethods.CreateMesh(in_pMeshDesc, 0, pMaterial);
 
 	m_Meshes.push_back(pMesh);
 
@@ -142,7 +147,7 @@ void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 
 void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 {
-	VBaseMesh* pMesh = reinterpret_cast<VBaseMesh*>(MakeMeshPointer(in_pMesh));
+	VMeshBase* pMesh = reinterpret_cast<VMeshBase*>(MakeMeshPointer(in_pMesh));
 
 	pMesh->Render();
 }

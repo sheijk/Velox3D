@@ -16,7 +16,11 @@ namespace graphics {
 
 class VImmediateRenderMethod : public IVRenderMethod
 {
-	virtual VBaseMesh* CreateMesh(VMeshDescription& in_MeshDescr);
+	virtual VMeshBase* CreateMesh(
+		const VMeshDescription& in_MeshDescr,
+		MeshCreationFlags in_Flags,
+		IVMaterial* in_pMaterial
+		);
 };
 
 //-----------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 #include <v3d/Math/VVector.h>
 #include <v3d/Graphics/VMeshDescription.h>
 
-#include "../DeviceBase/VRenderMethodRegistry.h"
+#include "../DeviceBase/VMeshBase.h"
 
 #include <windows.h>
 #include <gl/gl.h>
@@ -19,7 +19,7 @@ namespace graphics {
  *
  * @author ins 
  */
-class VOpenGLIndexMesh : public VBaseMesh
+class VOpenGLIndexMesh : public VMeshBase
 {
 	typedef VVector<vfloat32, 3> Vertex;
 
@@ -31,7 +31,11 @@ class VOpenGLIndexMesh : public VBaseMesh
 	GLint m_PrimitiveType;
 
 public:
-	VOpenGLIndexMesh(const VMeshDescription& in_Descr);
+	VOpenGLIndexMesh(
+		const VMeshDescription& in_Descr,
+		IVMaterial* in_pMaterial
+		);
+
 	virtual ~VOpenGLIndexMesh();
 
 	virtual void Render();	

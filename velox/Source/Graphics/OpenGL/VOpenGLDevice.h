@@ -46,7 +46,12 @@ public:
 
 	virtual void DeleteBuffer(BufferHandle& in_Buffer);
 
-	virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc);
+//	virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc);
+	virtual MeshHandle CreateMesh(
+		const VMeshDescription& in_pMeshDesc,
+		const VMaterialDescription& in_pMaterialDesc
+		) ;
+
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 
 	virtual MaterialHandle CreateMaterial(const VMaterialDescription& in_MatDesc);

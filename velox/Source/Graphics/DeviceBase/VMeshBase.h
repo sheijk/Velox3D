@@ -1,22 +1,25 @@
-#ifndef V3D_VBASEMESH_H
-#define V3D_VBASEMESH_H
+#ifndef V3D_VMeshBase_H
+#define V3D_VMeshBase_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+
 #include <v3d/Graphics/IVMesh.h>
+#include <v3d/Graphics/IVMaterial.h>
 
 //-----------------------------------------------------------------------------
-namespace v3d {
+namespace v3d { 
 namespace graphics {
 //-----------------------------------------------------------------------------
+using namespace v3d;
 
-/**
- * Interface for alle meshes...
- *
- * @author sheijk
- */
-class VBaseMesh : public IVMesh
+class VMeshBase : public IVMesh
 {
+	IVMaterial* const m_pMaterial;
+
 public:
+	VMeshBase(IVMaterial* in_pMaterial);
+
+	virtual IVMaterial& GetMaterial();
 	virtual void Render() = 0;
 };
 
@@ -24,4 +27,4 @@ public:
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VBASEMESH_H
+#endif // V3D_VMeshBase_H

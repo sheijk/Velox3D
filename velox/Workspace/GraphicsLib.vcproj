@@ -161,9 +161,6 @@
 					Name="Base Utils"
 					Filter="">
 					<File
-						RelativePath="..\Source\Graphics\DeviceBase\VBaseMesh.h">
-					</File>
-					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
 					</File>
 					<File
@@ -195,6 +192,12 @@
 				<Filter
 					Name="Meshes"
 					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.h">
+					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.cpp">
 					</File>

@@ -7,18 +7,18 @@
 #include <v3d/Window/IVWindow.h>
 #include <v3d/Window/IVWindowManager.h>
 #include <v3d/System/IVSystemManager.h>
-#include <v3d/Graphics/IVDevice.h>
 #include <v3d/Image/IVImageFactory.h>
 
+#include <v3d/Graphics/DrawList/IVDrawList.h>
 
 //TODO...
 //#include <windows.h>
 //#include <gl/gl.h>
 //#include <gl/glu.h>
+#include "../../UtilsLib/DrawList/VSimpleDrawList.h"
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
-#include <v3d/Graphics/VCamera.h>
 #include "../../UtilsLib/Importer/VQuake2BspImporter.h"
 
 //-----------------------------------------------------------------------------
@@ -44,75 +44,22 @@ VExampleApp::~VExampleApp()
 	V3D_DEBUGMSG("Example app has been destroyed and unregistered");
 }
 
-void ApplyMaterial(IVDevice* in_pDevice, IVMaterial* in_pRenderStates)
+void ApplyMaterial(IVDevice* in_m_pDevice, IVMaterial* in_pRenderStates)
 {
 	for(vuint prio = 0; prio < in_pRenderStates->StateCount(); ++prio)
 	{
-		in_pDevice->ApplyState(in_pRenderStates->GetState(prio));
+		in_m_pDevice->ApplyState(in_pRenderStates->GetState(prio));
 	}
 }
 
-vint VExampleApp::Main()
+VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
 {
-	V3D_DEBUGMSG("Velox Main app says hi!");
-
-	// get services
-	IVUpdateManager* pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
-	IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
-	IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
-	IVImageFactory*  pFactory		= QueryObject<IVImageFactory>("image.service");
-
-	//geting later...
-	IVInputManager* pInputManager;
-
-
-	IVWindowManager::IVWindowPtr pWindow;
-	IVDevice* pDevice;
-	IVButton* pEscButton;
-	IVButton* pUpButton;
-	IVButton* pDownButton;
-	IVButton* pLeftButton;
-	IVButton* pRightButton;
-
-	IVButton* pLeftMouseButton;
-	IVButton* pRightMouseButton;
-
 	utils::importer::VModel3D Model;
 	utils::importer::VOBJModelImporter Importer;
 	utils::importer::VQuake2BspImporter bspImporter;
 
-	VMeshDescription MeshDesc;
-	IVDevice::MeshHandle Mesh;
-
-	VCamera* pCamera;
-
-	//run system
-
-	//pSystemManager->GetCPU(); // just for testing...
-
-	pWindow = pWindowManager->QueryWindow("v3d window");
-	pDevice = &(pWindow->QueryGraphicsDevice());
-
-	pInputManager = &(pWindow->QueryInputManager());
-
-	pEscButton			= &pInputManager->GetStandardKey(IVInputManager::Escape);
-	pUpButton			= &pInputManager->GetStandardKey(IVInputManager::CursorUp);
-	pDownButton			= &pInputManager->GetStandardKey(IVInputManager::CursorDown);
-	pLeftButton			= &pInputManager->GetStandardKey(IVInputManager::CursorLeft);
-	pRightButton		= &pInputManager->GetStandardKey(IVInputManager::CursorRight);
-
-	pLeftMouseButton	= &pInputManager->GetMouseButton(1);
-	pRightMouseButton	= &pInputManager->GetMouseButton(0);
-
-
-	pCamera = new VCamera();
-	pCamera->SetZ(-10.0f);
-	pDevice->SetCamera(pCamera);
-
-	Importer.Create("/data/test.obj", &Model);
-	bspImporter.Create("/data/test.bsp", "none");
-
-	// create a test mesh
+	Importer.Create(in_pcFileName, &Model);
+	//bspImporter.Create("/data/test.bsp", "none");
 
 	IVDevice::Buffer VertexData(
 		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_VerticesList),
@@ -126,76 +73,60 @@ vint VExampleApp::Main()
 		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_TextureCoordsList),
 		Model.m_Objects[0]->m_iNumTexCoords2f * 2 * sizeof(float));
 
-
-	//VFloatBuffer VertexData((vfloat32*)bspImporter.m_pVertices,bspImporter.m_iNumVertices *3);
-	//VIntBuffer VertexIndex(bspImporter.m_pIndexList, bspImporter.m_iNumFaceElements);
-	//VFloatBuffer TexData(bspImporter.m_TextureCoordsList,
-	//	Model.m_Objects[0]->m_iNumTexCoords2f * 2);
-
 	IVDevice::BufferHandle VertexHandle;
 	IVDevice::BufferHandle VertexIndexHandle;
 	IVDevice::BufferHandle TexHandle;
 
 	//assign handles
-	VertexHandle = pDevice->CreateBuffer(
+	VertexHandle = in_pDevice->CreateBuffer(
 		IVDevice::VertexBuffer,
 		&VertexData,
 		IVDevice::Buffer::CopyData
 		);
-	VertexIndexHandle = pDevice->CreateBuffer(
+	VertexIndexHandle = in_pDevice->CreateBuffer(
 		IVDevice::VertexBuffer,
 		&VertexIndex,
 		IVDevice::Buffer::CopyData
 		);
-	TexHandle = pDevice->CreateBuffer(
+	TexHandle = in_pDevice->CreateBuffer(
 		IVDevice::VertexBuffer,
 		&TexData,
 		IVDevice::Buffer::CopyData);
 
+	VMeshDescription meshDesc;
 
-	/*MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
-		0, bspImporter.m_iNumVertices *3,
-		1);
-	MeshDesc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle,
-		0, bspImporter.m_iNumFaceElements,
-		1);
-
-	MeshDesc.triangleCoords = VMeshDescription::FloatDataRef(TexHandle,
-		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
-		1);*/
-
-	MeshDesc.geometryType = VMeshDescription::TriangleStrip;
-	MeshDesc.triangleVertices = VMeshDescription::ByteDataRef(
+	meshDesc.geometryType = VMeshDescription::TriangleStrip;
+	meshDesc.triangleVertices = VMeshDescription::ByteDataRef(
 		VertexHandle,
 		0,
 		Model.m_Objects[0]->m_iNumVertices * 3,
 		1
 		);
-	MeshDesc.triangleIndices = VMeshDescription::ByteDataRef(VertexIndexHandle,
+	meshDesc.triangleIndices = VMeshDescription::ByteDataRef(VertexIndexHandle,
 		0, Model.m_Objects[0]->m_iNumFaces *3,
 		1);
 
-	MeshDesc.triangleTexCoords = VMeshDescription::ByteDataRef(TexHandle,
+	meshDesc.triangleTexCoords = VMeshDescription::ByteDataRef(TexHandle,
 		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
 		1);
 
+	return meshDesc;
+}
 
+VMaterialDescription BuildTextureMaterial(
+	IVDevice* in_pDevice,
+	VStringParam in_pcTextureFile)
+{
+	IVImageFactory* pFactory = QueryObject<IVImageFactory>("image.service");
 
-	Mesh = pDevice->CreateMesh(MeshDesc);
+	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(in_pcTextureFile);
 
-	// main loop
-	pUpdateManager->Start();
-	pSystemManager->SetStatus(true);
-
-	// main loop...
-	IVImageFactory::ImagePtr myImage = pFactory->CreateImage("/data/tgatest.tga");
-
-    VMaterialDescription texMat;
+	VMaterialDescription texMat;
 
 	VMaterialDescription::TextureRef* pTexRef =
 		new VMaterialDescription::TextureRef();
 
-	IVDevice::BufferHandle hTextureBuffer = pDevice->CreateBuffer(
+	IVDevice::BufferHandle hTextureBuffer = in_pDevice->CreateBuffer(
 		IVDevice::Texture,
 		myImage->pData,
 		IVDevice::Buffer::DropData
@@ -207,39 +138,105 @@ vint VExampleApp::Main()
 
 	texMat.AddTexture(pTexRef);
 
-	IVDevice::MaterialHandle pTextureMaterial = pDevice->CreateMaterial(texMat);
+	return texMat;
+}
+
+void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
+{
+	m_pEscapeButton		= &in_pInputManager->GetStandardKey(IVInputManager::Escape);
+	m_pUpButton			= &in_pInputManager->GetStandardKey(IVInputManager::CursorUp);
+	m_pDownButton		= &in_pInputManager->GetStandardKey(IVInputManager::CursorDown);
+	m_pLeftButton		= &in_pInputManager->GetStandardKey(IVInputManager::CursorLeft);
+	m_pRightButton		= &in_pInputManager->GetStandardKey(IVInputManager::CursorRight);
+
+	m_pLeftMouseButton	= &in_pInputManager->GetMouseButton(1);
+	m_pRightMouseButton	= &in_pInputManager->GetMouseButton(0);
+}
+
+void VExampleApp::MoveCamera(VCamera* in_pCamera)
+{
+	if(m_pUpButton->IsDown() == true)
+		in_pCamera->AddZ(0.2f);
+
+	if(m_pDownButton->IsDown() == true)
+		in_pCamera->AddZ(-0.2f);
+
+	if(m_pLeftButton->IsDown() == true)
+		in_pCamera->AddX(0.2f);
+
+	if(m_pRightButton->IsDown() == true)
+		in_pCamera->AddX(-0.2f);
+
+	if(m_pRightMouseButton->IsDown() == true)
+		in_pCamera->AddY(-.3f);
+
+	if(m_pLeftMouseButton->IsDown() == true)
+		in_pCamera->AddY(.3f);
+}
+
+vint VExampleApp::Main()
+{
+	V3D_DEBUGMSG("Velox Main app says hi!");
+
+	// get services
+	IVUpdateManager* pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
+	IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
+	IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
+
+	IVWindowManager::IVWindowPtr pWindow;
+	pWindow = pWindowManager->QueryWindow("v3d window");
+	m_pDevice = &(pWindow->QueryGraphicsDevice());
+
+	IVInputManager* pInputManager;
+	pInputManager = &(pWindow->QueryInputManager());
+
+	VCamera* pCamera;
+
+	//run system
+
+	//pSystemManager->GetCPU(); // just for testing...
+
+	QueryButtons(pInputManager);
+
+	pCamera = new VCamera();
+	pCamera->SetZ(-10.0f);
+	m_pDevice->SetCamera(pCamera);
+
+	// create textured mesh
+	VMeshDescription meshDesc = BuildModel(m_pDevice, "/data/test.obj");
+	VMaterialDescription texMat = BuildTextureMaterial(
+		m_pDevice, "/data/tgatest.tga");
+
+	IVDevice::MeshHandle pMesh = m_pDevice->CreateMesh(meshDesc, texMat);
+
+	v3d::graphics::drawlist::VSimpleDrawList drawList(*m_pDevice);
+
+	v3d::graphics::drawlist::VModel model;
+	model.hMesh = pMesh;
+	drawList.Add(model);
+
+	// main loop
+	pUpdateManager->Start();
+	pSystemManager->SetStatus(true);
 
 	while(pSystemManager->GetStatus())
 	{
-		pDevice->BeginScene();
-		ApplyMaterial(pDevice, pTextureMaterial);
-		pDevice->RenderMesh(Mesh);
-        pDevice->EndScene();
+		m_pDevice->BeginScene();
+		
+		//ApplyMaterial(m_pDevice, &pMesh->GetMaterial());
+		//m_pDevice->RenderMesh(pMesh);
+		drawList.Render();
+
+        m_pDevice->EndScene();
 
 		pUpdateManager->StartNextFrame();
 		pUpdateManager->GetFrameDuration();
 
-		// input checking
-		if (pEscButton->IsDown() == true)
+		if (m_pEscapeButton->IsDown() == true)
 			pSystemManager->SetStatus(false);
 
-		if(pUpButton->IsDown() == true)
-			pCamera->AddZ(0.2f);
-
-		if(pDownButton->IsDown() == true)
-			pCamera->AddZ(-0.2f);
-
-		if(pLeftButton->IsDown() == true)
-			pCamera->AddX(0.2f);
-
-		if(pRightButton->IsDown() == true)
-			pCamera->AddX(-0.2f);
-
-		if(pRightMouseButton->IsDown() == true)
-			pCamera->AddY(-.3f);
-		if(pLeftMouseButton->IsDown() == true)
-			pCamera->AddY(.3f);
-
+		// input checking
+		MoveCamera(pCamera);
 	}
 
 	pUpdateManager->Stop();

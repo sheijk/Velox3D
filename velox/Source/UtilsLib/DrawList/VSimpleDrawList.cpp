@@ -35,8 +35,8 @@ void VSimpleDrawList::Render()
 	for( ; modelIter != m_Models.end(); ++modelIter)
 	{
 		VModel pModel = *modelIter;
-		MaterialHandle hMaterial = (*modelIter).hMaterial;
 		MeshHandle hMesh = (*modelIter).hMesh;
+		MaterialHandle hMaterial = &(hMesh->GetMaterial());
 
 		ApplyMaterial(hMaterial);
 		m_Device.RenderMesh(hMesh);

@@ -25,7 +25,16 @@ template member konvertiert?
 
 --------------------------------------------------------------------------------
 ----- personal todo:
+	.refactorings
+	vcamera -> utils
+	./example app aufraeumen
+
 	.mem manager
+	./mem manager schreiben
+	./in kernel + corelib integrieren
+	./in xml service integrieren
+	in vfs integrieren
+	in restliche services integrieren
 
 	.drawlist:
 	./interfaces
@@ -50,6 +59,9 @@ template member konvertiert?
 	./materials erzeugen
 	mesh: render state list liefern
  
+	.scene graph
+	interfaces schreiben (basierend auf ins code)
+	simple implementation
 
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
@@ -61,31 +73,36 @@ template member konvertiert?
 	Conding Guidelines uebersichtlicher machen
 
 	Netzwerk, Scripting planen
-	Graphics Device: Design
+	./Graphics Device: Design
 	SceneGraph / Engine Architektur
 	Editor Plugin System Design
 	Auf die Langnese Insel ziehen
 
 Doku:
 	Doku System
-	VFS Doku
+	./VFS Doku
 	Tutorials fuer
-		Exceptions
-		Iteratoren verbessern
-		SmartPointer erweitern (erzeugen eigener Policies)
-		Virtual File System
-			benutzen (laden/schreiben von Daten)
-			erweitern (DataProvider)
+	  Exceptions
+	  Iteratoren verbessern
+	  SmartPointer erweitern (erzeugen eigener Policies)
+	  Virtual File System
+	    benutzen (laden/schreiben von Daten)
+	    erweitern (DataProvider)
 		Schreiben von Services
 	Infos ueber
-		Velox Architektur
-		Services
+	  Velox Architektur
+	  Services
 
 
 --------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
 log:
+
+23.02.2004
+erzeugung von mesh + material verbunden, mesh - material hat jetzt 1:1 assoziation
+material aus drawlist VModel genommen, mat wird jetzt uebers mesh.GetMaterial
+bestimmt
 
 22.02.2004
 erste mem manager version (noch nicht im cvs)

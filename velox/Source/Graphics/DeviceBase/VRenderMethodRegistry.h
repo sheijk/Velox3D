@@ -3,7 +3,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/VMeshDescription.h>
-#include "VBaseMesh.h"
+
+#include "VMeshBase.h"
 
 #include <list>
 //-----------------------------------------------------------------------------
@@ -19,11 +20,17 @@ using namespace v3d; // does nothing.. only stops vs from auto indenting :)
  */
 struct IVRenderMethod
 {
+	typedef vuint32 MeshCreationFlags;
+
 	/** 
 	 * creates a mesh implementation which will render with the render
 	 * method of the IVRenderMethod derived class
 	 */
-	 virtual VBaseMesh* CreateMesh(VMeshDescription& in_MeshDescr) = 0;
+	 virtual VMeshBase* CreateMesh(
+		 const VMeshDescription& in_MeshDescr,
+		 MeshCreationFlags in_Flags,
+		 IVMaterial* in_pMaterial
+		 ) = 0;
 };
 
 /**
@@ -41,7 +48,7 @@ public:
 	VRenderMethodRegistry();
 	~VRenderMethodRegistry();
 
-	typedef vuint32 MeshCreationFlags;
+	typedef IVRenderMethod::MeshCreationFlags MeshCreationFlags;
 
 	/**
 	 * TODO: sollte vllt. nur Register() im allgemeinen heissen? Einheitliche
@@ -55,9 +62,10 @@ public:
 	 * creates a new mesh, automatically selects appropriate 
 	 * rendering method
 	 */
-	VBaseMesh* CreateMesh(
-		VMeshDescription& in_MeshDescr, 
-		MeshCreationFlags in_Flags
+	VMeshBase* CreateMesh(
+		const VMeshDescription& in_MeshDescr, 
+		MeshCreationFlags in_Flags,
+		IVMaterial* in_pMaterial
 		);
 
 	// frage: wie wird entschieden, welche render methode benutzt wird? (wer?)
