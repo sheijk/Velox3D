@@ -7,18 +7,23 @@
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
+
 /**
  * IVCell interface. Derive each geometry implementation of this class
+ *
+ * @author ins, sheijk
  */
-
 class IVCell
 {
 public:
 
-	virtual void Cull(graphics::VCamera* in_pCamera) = 0;
-	virtual void Hide() = 0;
-	virtual void Show() = 0;
+	virtual void Cull(
+		VCamera* in_pCamera,
+		VMultipassDrawList& in_DrawList
+		) = 0;
 
+	virtual void Hide(VMultipassDrawList& in_DrawList) = 0;
+	//virtual void Show(VMultipassDrawList& in_DrawList) = 0;
 };
 
 //-----------------------------------------------------------------------------

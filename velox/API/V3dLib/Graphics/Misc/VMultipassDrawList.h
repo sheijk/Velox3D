@@ -92,6 +92,9 @@ public:
 	 * Renders all passes and sub passes
 	 */
 	virtual void Render();
+
+	/** returns the associated device */
+	IVDevice& GetDevice();
 };
 
 //-----------------------------------------------------------------------------

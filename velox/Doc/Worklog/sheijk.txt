@@ -31,6 +31,7 @@ template member konvertiert?
 ----- personal todo:
 
 	geometry generation:
+	das hier dokumentieren:
 	concept GeometryProvider
 		void GenerateCoordinates()
 		void GenerateTexCoords()
@@ -40,69 +41,34 @@ template member konvertiert?
 		VBuffer<VertexStructure> VertexBuffer
 		VBuffer<vuint> IndexBuffer
 
-
-
-
 	roadmap:
 	drawlist state sortierung
 	design der engine: entity system + zusammenarbeit der einzelnen engine teile
 
 	.refactorings
-	./velox services zu einem projekt zusammen fassen
-	./services auf VModuleBase umstellen
-	wxWidgets abhaengige services in eine dll
-	IVDeviceProvider.h finden und aus dem CVS schmeissen
-	./example app aufraeumen
 
 	.mem manager
-	./mem manager schreiben
-	./in kernel + corelib integrieren
-	./in xml service integrieren
-	simpel malloc/dealloc version bauen
+	mem manager fuer leak reports
+	simple malloc/dealloc version bauen
 	leak finder bauen, evtl flipcode leak finder einbaun?
 	in vfs integrieren
 	in restliche services integrieren
 	managed objects schreiben
 
 	.geometry
-	./design fuer im speicher gehaltene geometry (ausserhalb des devices)
-	alle geometrie generatoren vereinheitlichen
-	interface
-	einfache geometry klasse fuer dynamische geometrie
+	geometrie welche aus mehreren meshes + models besteht
+	geometrie generatoren vereinheitlichen (geometry provider concept, s.o.)
 
 	.drawlist:
-	./interfaces
-	./objekte hinzufuegen
-	./objekte rendern
 	nach states sortieren
 
 	.gfx device:
-	./texturen: nur eine textur pro buffer anlegen..
 	mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
 	mat descr. durch alternativ system ersetzen? (default mat zurueckgeben,
 	und dass dann mit effekten veraendern?)
-	./buffer aendern
-	./indexed/non indexed geometry auto auswahl
-	./render states anwenden
-	./render states aus vmaterial descr erzeugen
-	./textur buffer erzeugen
-	./unterstuetzung fuer tex coords in mesh und mesh descr
-	./mesh vor abstuerzen durch fehlende felder sichern
-	./textur in mat desc + tex state
-	./render state categories
-	./category list
-	./device states anwenden lassen
-	./states usw. ins device bewegen
-	./render state categories ins device
-	./materials erzeugen
-	./mesh: render state list liefern
-	./default color in die mat descr aufnehmen
+	konzept fuer material effekte
 
 	.scene graph
-	./interfaces schreiben (basierend auf ins code)
-	./simple implementation
-	./in example app einbaun
-	animationen erlauben
 	nodes sollten irgendwann auch geloescht werden (shared ptr?)
 	zusammenarbeit mit physik, etc (-> entity system)
 
@@ -116,14 +82,12 @@ template member konvertiert?
 	Coding Guidelines uebersichtlicher machen
 
 	Netzwerk, Scripting planen
-	./Graphics Device: Design
 	SceneGraph / Engine Architektur
 	Editor Plugin System Design
 	Auf die Langnese Insel ziehen
 
 Doku:
 	Doku System
-	./VFS Doku
 	Tutorials fuer
 	  Exceptions
 	  Iteratoren verbessern

@@ -106,6 +106,10 @@ void VMultipassDrawList::Render()
 	}
 }
 
+IVDevice& VMultipassDrawList::GetDevice()
+{
+	return m_Device;
+}
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
