@@ -14,9 +14,9 @@ VXMLWriter::VXMLWriter(void)
 
 }
 
-void VXMLWriter::WriteDeclaration(const char* text)
+void VXMLWriter::WriteDeclaration(VStringParam FileName)
 {
-	XmlFile = fopen (text, "w");
+	XmlFile = fopen (FileName, "w");
 	if(XmlFile != NULL)
 		m_bIsOpen = true;
 
@@ -27,12 +27,12 @@ void VXMLWriter::WriteDeclaration(const char* text)
 		
 }
 
-void VXMLWriter::AddComment(char* text)
+void VXMLWriter::AddComment(VStringParam text)
 {
 	m_bOpenTwice = false;
 
 	if(m_bIsOpen)
-		fprintf(XmlFile, "<!%s>",text);
+		fprintf(XmlFile, "<!--%s-->",text);
 }
 
 void VXMLWriter::Close()
@@ -43,7 +43,7 @@ void VXMLWriter::Close()
 	m_bIsOpen = false;
 }
 
-void VXMLWriter::OpenElement(char* name)
+void VXMLWriter::OpenElement(VStringParam name)
 {
 	if(m_bIsOpen)
 	{
@@ -56,7 +56,7 @@ void VXMLWriter::OpenElement(char* name)
 	m_bOpenTwice = true;
 }
 
-void VXMLWriter::CloseElement(char* name)
+void VXMLWriter::CloseElement(VStringParam name)
 {
 	m_bOpenTwice = false;
 
@@ -70,7 +70,7 @@ void VXMLWriter::CloseElement(char* name)
 	m_bElementOpen = false;
 }
 
-void VXMLWriter::AddAttribute(const char* name, const char* value, ...)
+void VXMLWriter::AddAttribute(VStringParam name, VStringParam value, ...)
 {
 	va_list	arguments;
 

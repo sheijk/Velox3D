@@ -18,24 +18,24 @@ class VXMLWriter :	public IVXMLWriter
 public:
 	VXMLWriter(void);
 	
-	virtual void WriteDeclaration(const char* text);
+	virtual void WriteDeclaration(VStringParam FileName);
 	/*
 	* Creates a new xml element (<Name)
 	*/
-	virtual void OpenElement(char* name);
+	virtual void OpenElement(VStringParam name);
 	/*
 	* Closes the last opened element. (/> oder </Name>)
 	*/
-	virtual void CloseElement(char* name);
+	virtual void CloseElement(VStringParam name);
 	/*
 	* Adds an attribute to the current element. May only be called directly after
 	* OpenElement
 	*/
-	virtual void AddAttribute(const char* name, const char* value, ...);
+	virtual void AddAttribute(VStringParam name, VStringParam value, ...);
 	/*
 	* Adds a comment
 	*/
-	virtual void AddComment(char* text);
+	virtual void AddComment(VStringParam text);
 	/*
 	* Adds a text
 	*/
