@@ -31,7 +31,7 @@ TODO List:
   data stored in model view space
   color data is clamped to the range of [0...1]
   which chunks our app should handle??
-  Should we use vfs for loading model??
+  Should we use vfs for loading model?? <- das sollte fuer alle daten benutzt werden, sonst verlieren wir den nutzen des vfs (zugriff auf daten unabhaengig vom speicherort, archive, ..)
 
 Done List:
 29.01.04

@@ -69,6 +69,8 @@ public:
 	virtual DeviceIterator	DeviceBegin();
 	virtual DeviceIterator	DeviceEnd();
 
+	//TODO: virtuelle funktionen inlinen ist nicht soo sauber
+	// und kann bei dummen compilern afair zu probs fuehren -- sheijk
 	virtual void			Activate() {;};
 	virtual void			Deactivate() {;};
 

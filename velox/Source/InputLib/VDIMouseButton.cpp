@@ -13,6 +13,7 @@ namespace input {
  */
 VDIMouseButton::VDIMouseButton( VStringParam in_strName, vbyte* in_pPointer )
 {
+	// sowas sollten wir oefter machen, gut -- sheijk
 	V3D_ASSERT( in_pPointer != NULL);
 	m_pPointer = in_pPointer;
 	m_strName = in_strName;

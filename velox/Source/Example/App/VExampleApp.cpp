@@ -91,9 +91,7 @@ vint VExampleApp::Main()
 	pCamera = new VCamera();
 	pDevice->SetCamera(pCamera);
 
-
-	//TODO: changed back cos of missing workdir -ins
-	Importer.Create("ObjFile", &Model);
+	Importer.Create("/data/test.obj", &Model);
 
 	// create a test mesh
     

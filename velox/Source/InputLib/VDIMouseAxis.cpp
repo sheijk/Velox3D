@@ -39,6 +39,7 @@ namespace v3d {
 		*/
 		vfloat32 VDIMouseAxis::GetLastMovement()
 		{
+			//FIXME: soll da wirklich ein impliziter cast hin? -- sheijk
 			return *m_pPointer;
 		}
 

@@ -28,6 +28,10 @@ VDIInputManager::~VDIInputManager()
 
 vbool VDIInputManager::Create()
 {
+	//FIXME: bitte exceptions statt rueckgabewerte fuer fehler signalisierung
+	// verwenden, wie im rest von velox. rueckgabewerte werden zu leicht
+	// vergessen zu ueberpruefen - sheijk
+
     // Create DirectInput interface
 	vout << "Init DirectInput..." << vendl;
 	if ( DI_OK != DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pDI, NULL) )
@@ -84,6 +88,9 @@ vbool VDIInputManager::InitStandardKeyboardDevice()
 
 	vout << "sucessful" << vendl;
 
+	//REMINDER: evtl key namen von DInput holen, fuer lokalisierte texte
+	// und konsistenz mit den enumerierten devices -- sheijk
+
 	// name keys
 	m_StandardKeys[0] = VDIKeyboardButton( "Escape", &m_KeyboardBuffer[DIK_ESCAPE] );
     m_StandardKeys[1] = VDIKeyboardButton( "Enter", &m_KeyboardBuffer[DIK_RETURN] );
@@ -130,6 +137,8 @@ vbool VDIInputManager::InitStandardMouseDevice()
 
 	vout << "sucessful" << vendl;
 
+	//REMINDER: das sollte spaeter mal die wirkliche button anzahl
+	// beruecksichtigen -- sheijk
 	m_MouseButtons[0] = VDIMouseButton( "Mousebutton 0", &m_MouseState.rgbButtons[0] );
 	m_MouseButtons[1] = VDIMouseButton( "Mousebutton 1", &m_MouseState.rgbButtons[1] );
 	m_MouseButtons[2] = VDIMouseButton( "Mousebutton 2", &m_MouseState.rgbButtons[2] );
@@ -190,6 +199,13 @@ vbool VDIInputManager::EnumerateDevices()
 										   
 IVButton& VDIInputManager::GetStandardKey( KeyCode in_myKey )
 {
+	//TODO: dumme frage: warum nicht einfach
+	// if( in_myKey >= Escape && in_myKey <= CursorDown )
+	//		return m_StandardKeys[in_myKey];
+	// else
+	//		V3D_THROW(VIllegalKeyIdentifyer, "illegal key id");
+	// oder sowas? -- sheijk
+
 	switch ( in_myKey )
 	{
         case Escape:		return m_StandardKeys[Escape];
@@ -205,6 +221,8 @@ IVButton& VDIInputManager::GetStandardKey( KeyCode in_myKey )
 
 IVButton& VDIInputManager::GetMouseButton(vuint in_iButton)
 {
+	//REMINDER: auch hier sollte lieber die echte button anzahl
+	// beruecksichtigt werden -- sheijk
 	if ( in_iButton > 3 )
 		V3D_THROW( VException, "VDIInputManager::GetMouseButton(): in_iButton out of range" );
 
@@ -238,6 +256,7 @@ void VDIInputManager::Release()
 			m_pDIStandardKeyboard = 0;
 		}
 
+		//TODO: muessend die devices hier nicht freigegeben werden? -- sheijk
 		m_DeviceList.clear();
 
 		m_pDI->Release();
@@ -248,6 +267,8 @@ void VDIInputManager::Release()
 // from IVUpdateable
 void VDIInputManager::Update(vfloat32 in_fSeconds)
 {
+	//TODO: line break nach 80 zeilen beachten (->coding style guide) -- sheijk
+
 	HRESULT hr;
 	// update standard devices
 	hr = m_pDIStandardKeyboard->GetDeviceState( sizeof(m_KeyboardBuffer),(LPVOID)&m_KeyboardBuffer);
@@ -292,6 +313,7 @@ IVInputManager::DeviceIterator VDIInputManager::DeviceEnd()
 
 BOOL CALLBACK VDIInputManager::EnumDevicesStaticCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef )
 {
+	// ieh, ist directx mal wieder eklig ;) -- sheijk
 	return ((VDIInputManager*) pvRef)->EnumDevicesCallback(lpddi);
 }
 

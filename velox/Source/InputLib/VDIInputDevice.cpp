@@ -46,6 +46,7 @@ VDIInputDevice::VDIInputDevice( DIDEVICEINSTANCE in_diDeviceInstance, LPDIRECTIN
 //	if ( !Create( in_pDI, in_hWnd) )
 //		V3D_THROW(VException, "Could not create DI device");
 	
+	//TODO: das sollte glaub ich wieder entkommentiert werden... -- sheijk
 //    EnumerateDeviceObjects();
 }
 
@@ -90,6 +91,7 @@ void VDIInputDevice::EnumerateDeviceObjects()
 
 vbool VDIInputDevice::EnumDeviceObjectCallback(const DIDEVICEOBJECTINSTANCE* in_pdiDOI)
 {
+	//TODO: das sollte lesbarer formatiert werden... -- sheijk
 	switch (in_pdiDOI->dwType)
 	{
 	case DIDFT_ABSAXIS:			m_AbsoluteAxisList.push_back( VDIAbsoluteAxis(*in_pdiDOI, m_pdiDevice) );

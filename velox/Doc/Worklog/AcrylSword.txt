@@ -6,6 +6,7 @@ Hab im Error Service Source ein paar TODO Tags verteilt, bei allem was mir nicht
 klar war, etc., damits nicht vergessen wird Hoffe das ist ok?
 
 <ins>gute arbeit. kezboard funktioniert einwandrei.
+<sheijk> ack. btw: bitte updates ins worklog eintragen
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:
