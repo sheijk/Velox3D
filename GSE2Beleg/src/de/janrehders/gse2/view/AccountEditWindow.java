@@ -31,10 +31,11 @@ public class AccountEditWindow extends Document {
     public AccountEditWindow(
             Controller inController, 
             Account inAccount,
-            boolean inAllowEditing
+            boolean inAllowEditing,
+            MainWindow inMainWindow
             )
     {
-        super(getHeader(inAccount));
+        super(getHeader(inAccount), inMainWindow);
 
         assert inController != null;
         assert inAccount != null;

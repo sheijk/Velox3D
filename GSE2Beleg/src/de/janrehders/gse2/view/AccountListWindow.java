@@ -30,9 +30,9 @@ public class AccountListWindow extends Document {
     private final ListOptionPanel myListOptionPanel;
     private final Controller myController;
     
-    public AccountListWindow(Controller inController)
+    public AccountListWindow(Controller inController, final MainWindow inMainWindow)
     {
-        super("Account list");
+        super("Account list", inMainWindow);
         
         assert inController != null;
         
@@ -40,7 +40,7 @@ public class AccountListWindow extends Document {
         
         myListOptionPanel = new ListOptionPanel(null);
         
-        setSize(400, 300);
+        setSize(400, 600);
         getContentPane().add(myListOptionPanel);
         
         // add some buttons
@@ -54,7 +54,7 @@ public class AccountListWindow extends Document {
             public void actionPerformed(ActionEvent out_e) {
                 Account account = getSelectedAccount();
                 
-                new AccountEditWindow(myController, account, true);
+                new AccountEditWindow(myController, account, true, inMainWindow);
             }
         });
         
@@ -63,10 +63,10 @@ public class AccountListWindow extends Document {
             public void actionPerformed(ActionEvent out_e) {
                 Account account = getSelectedAccount();
                 
-                new AccountEditWindow(myController, account, false);
+                new AccountEditWindow(myController, account, false, inMainWindow);
             }
         });
-                
+
         myListOptionPanel.addButton(giroAddButton);
         myListOptionPanel.addButton(removeAccountButton);
         myListOptionPanel.addButton(editAccountButton);
@@ -78,6 +78,8 @@ public class AccountListWindow extends Document {
                 updateAccountList();
             }
         });
+        
+        updateAccountList();
         
         show();        
     }
@@ -121,7 +123,7 @@ public class AccountListWindow extends Document {
             System.out.println(i);
             
             // open it for editing
-            new AccountEditWindow(myController, giro, true);
+            new AccountEditWindow(myController, giro, true, getMainWindow());
         }
     }
 }

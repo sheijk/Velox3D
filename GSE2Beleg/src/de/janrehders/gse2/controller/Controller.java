@@ -6,6 +6,8 @@
  */
 package de.janrehders.gse2.controller;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -99,6 +101,36 @@ public class Controller extends Observable {
          */
         public Account getById(int inAccountId) {
             return myDelegate.getById(inAccountId);
+        }
+
+        /* (non-Javadoc)
+         * @see de.janrehders.gse2.model.Model#writeToStream(java.io.OutputStream)
+         */
+        public boolean writeToStream(OutputStream ioStream) {
+            return myDelegate.writeToStream(ioStream);
+        }
+
+        /* (non-Javadoc)
+         * @see de.janrehders.gse2.model.Model#loadFromStream(java.io.InputStream)
+         */
+        public boolean loadFromStream(InputStream ioStream) {
+            if( myDelegate.loadFromStream(ioStream) )
+            {
+                notifyUpdate();
+                
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /* (non-Javadoc)
+         * @see de.janrehders.gse2.model.Model#erase()
+         */
+        public void erase() {
+            myDelegate.erase();            
         }
     }
 }

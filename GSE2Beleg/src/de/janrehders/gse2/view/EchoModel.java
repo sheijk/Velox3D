@@ -6,6 +6,8 @@
  */
 package de.janrehders.gse2.view;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -75,6 +77,29 @@ public class EchoModel implements Model {
      */
     public Account getById(int inAccountId) {
         return null;
+    }
+
+    /* (non-Javadoc)
+     * @see de.janrehders.gse2.model.Model#writeToStream(java.io.OutputStream)
+     */
+    public boolean writeToStream(OutputStream out_ioStream) {
+        System.out.println("Attempted to save model to stream");
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see de.janrehders.gse2.model.Model#loadFromStream(java.io.InputStream)
+     */
+    public boolean loadFromStream(InputStream out_ioStream) {
+        System.out.println("Attempted to load model from stream");
+        return true;
+    }
+
+    /* (non-Javadoc)
+     * @see de.janrehders.gse2.model.Model#erase()
+     */
+    public void erase() {
+        System.out.println("Erased model");
     }
 
 }

@@ -8,9 +8,16 @@ package de.janrehders.gse2.view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 
+import de.janrehders.gse2.accounts.Giro;
 import de.janrehders.gse2.controller.Controller;
 import de.janrehders.gse2.model.Model;
 
@@ -31,6 +38,10 @@ public class MainWindow extends JFrame {
     }
     
     private final Controller myController;
+    private String myCurrentFileName = null;
+    private LinkedList myDocuments = new LinkedList();
+    
+    private final Menu myDocumentMenu;
     
     public MainWindow(Controller inController)
     {
@@ -39,6 +50,8 @@ public class MainWindow extends JFrame {
         
         setSize(800, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        myDocumentMenu = new Menu("Documents");
         
         // add a menu
         this.setMenuBar(createMenuBar());
@@ -65,26 +78,136 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+
+        // create "File" menu
+        Menu fileMenu = new Menu("File");
+
+        MenuItem newItem = new MenuItem("New");
+        newItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                setCurrentFileName(null);
+                myController.getModel().erase();
+            }
+        });
         
-        Menu mainMenu = new Menu("File");
-        mainMenu.add(new MenuItem("New"));
-        mainMenu.add(new MenuItem("Open"));
-        mainMenu.add(new MenuItem("Close"));
-        mainMenu.add(new MenuItem());
-        mainMenu.add(exitItem);
+        MenuItem openItem = new MenuItem("Open");
+        openItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                JFileChooser dialog = new JFileChooser(System.getProperty("user.dir"));
+                dialog.setFileFilter(new GSEFileFilter());
+
+                if( dialog.showOpenDialog(MainWindow.this) == JFileChooser.APPROVE_OPTION )
+                {
+                    try {
+                        setCurrentFileName(null);
+                        
+                        // load file if it exists, else init with default values
+                        if( dialog.getSelectedFile().exists() )
+                        {
+                            myController.getModel().loadFromStream(new FileInputStream(dialog.getSelectedFile()));                                                
+                        }
+                        else
+                        {
+                            myController.getModel().erase();
+                        }
+                        
+                        setCurrentFileName(dialog.getSelectedFile().getAbsolutePath());
+                    } catch (FileNotFoundException e) {
+                        JOptionPane.showMessageDialog(
+                                MainWindow.this, 
+                                "Failed to open file: " + e.getMessage()); 
+
+                        e.printStackTrace(System.err);
+                    }
+                }
+            }
+        });
+        
+        MenuItem saveItem = new MenuItem("Save");
+        saveItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                try {
+                    // ask for a file if we don't have a filename
+                    if( null == getCurrentFileName() )
+                    {
+                        setCurrentFileName(getFileNameToSave());
+                    }
+                    
+                    if( getCurrentFileName() != null )
+                    {
+                        // save to file
+                        if( ! myController.getModel().writeToStream(
+                                new FileOutputStream(getCurrentFileName())) )
+                        {
+                            setCurrentFileName(null);
+                        }
+                    }
+                } catch (FileNotFoundException e) {
+                    JOptionPane.showMessageDialog(
+                            MainWindow.this, 
+                            "Could not save file: " + e.getMessage());
+                    
+                    e.printStackTrace(System.err);
+                }
+            }
+        });
+        
+        MenuItem saveasItem = new MenuItem("Save as...");
+        saveasItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String fileName = getFileNameToSave();
+                    
+                    if( fileName != null ) 
+                    {
+                        // save
+                        if( myController.getModel().writeToStream(
+                                new FileOutputStream(fileName)) )
+                        {                        
+                            // and store file name if succeeded
+                            setCurrentFileName(fileName);
+                        }
+                    }
+                } catch (FileNotFoundException e1) {
+                    JOptionPane.showMessageDialog(
+                            MainWindow.this,
+                            "Could not save file: " + e1.getMessage());
+                
+                    e1.printStackTrace(System.err);
+                }
+            }
+        });
+        
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        fileMenu.add(saveasItem);
+//        fileMenu.add(new MenuItem("Close"));
+        fileMenu.addSeparator();
+        fileMenu.add(exitItem);
         
         MenuItem listAccountItem = new MenuItem("List accounts");
         listAccountItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 // create new window listing all accounts
-                new AccountListWindow(myController);
+                new AccountListWindow(myController, MainWindow.this);
             }
         });
         
         Menu accountMenu = new Menu("Accounts");
-        accountMenu.add(new MenuItem("New Giro"));
-        accountMenu.add(new MenuItem("New StudentGiro"));
-        accountMenu.add(new MenuItem("New Savings"));
+        MenuItem newGiroItem = new MenuItem("New Giro");
+        newGiroItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                Giro giro = new Giro();
+                myController.getModel().addAccount(giro);
+                new AccountEditWindow(myController, giro, true, MainWindow.this);
+            }
+        });
+        
+        accountMenu.add(newGiroItem);
+//        accountMenu.add(new MenuItem("New StudentGiro"));
+//        accountMenu.add(new MenuItem("New Savings"));
+        accountMenu.addSeparator();
         accountMenu.add(listAccountItem);
         
         Menu testMenu = new Menu("Test");
@@ -131,10 +254,93 @@ public class MainWindow extends JFrame {
         testMenu.add(showTestWindow);
         
         MenuBar menu = new MenuBar();
-        menu.add(mainMenu);
+        menu.add(fileMenu);
         menu.add(accountMenu);
+        menu.add(myDocumentMenu);
         menu.add(testMenu);
         
         return menu;
+    }
+    
+    private void updateDocumentList()
+    {
+        myDocumentMenu.removeAll();
+        
+        Iterator iter = myDocuments.iterator();
+        while(iter.hasNext())
+        {
+            final Document doc = (Document)iter.next();
+            
+            MenuItem docItem = new MenuItem(doc.getTitle());
+            docItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent out_e) {
+                    // try to focus document
+                    doc.requestFocus();
+                    
+//                    if( ! doc.requestFocusInWindow() )
+//                    {
+//                        boolean focusEnabled = doc.isFocusable();
+//                        boolean vis = doc.isVisible();
+//                        boolean disp = doc.isDisplayable();
+//                        
+//                        System.err.println("Failed to give focus");
+//                    }
+                }
+            });
+            
+            myDocumentMenu.add(docItem);            
+        }
+    }
+    
+    public void registerDocument(Document inDocument)
+    {
+        myDocuments.add(inDocument);
+        updateDocumentList();
+    }
+    
+    public void unregisterDocument(Document inDocument)
+    {
+        myDocuments.remove(inDocument);
+        updateDocumentList();
+    }
+
+    /** lets the user select a file for saving. returns null if user canceled */
+    private String getFileNameToSave()
+    {
+        JFileChooser dialog = new JFileChooser(System.getProperty("user.dir"));
+        dialog.setFileFilter(new GSEFileFilter());
+        if( dialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION )
+        {
+            return dialog.getSelectedFile().getAbsolutePath();
+        }
+        else
+            return null;
+    }
+
+    /**
+     * @param currentFileName The currentFileName to set.
+     */
+    private void setCurrentFileName(String inCurrentFileName) {
+        this.setTitle("Account manager <" + inCurrentFileName + ">");
+        myCurrentFileName = inCurrentFileName;
+    }
+
+    /**
+     * @return Returns the currentFileName.
+     */
+    private String getCurrentFileName() {
+        return myCurrentFileName;
+    }
+
+    private final class GSEFileFilter extends FileFilter {
+        public boolean accept(File inFile) {
+            return
+            	inFile.isDirectory() ||
+            	inFile.getName().matches(".*\\.gse2");
+        }
+
+        public String getDescription() {
+            return "GSE2 Beleg Kontodaten";
+        }
     }
 }

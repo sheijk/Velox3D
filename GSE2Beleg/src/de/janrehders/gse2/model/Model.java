@@ -6,6 +6,9 @@
  */
 package de.janrehders.gse2.model;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import de.janrehders.gse2.accounts.Account;
 import de.janrehders.gse2.accounts.AccountIterator;
 
@@ -29,4 +32,13 @@ public interface Model {
     
     /** get an account by it's id */
     Account getById(int inAccountId);
+    
+    /** remove all data */
+    void erase();
+    
+    /** store the whole register including all accounts to a stream */
+    boolean writeToStream(OutputStream ioStream);
+    
+    /** load the whole register from a stream */
+    boolean loadFromStream(InputStream ioStream);
 }
