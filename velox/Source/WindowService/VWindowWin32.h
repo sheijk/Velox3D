@@ -22,13 +22,17 @@ class VWindowWin32 : public VWindowBase
 public:
 	VWindowWin32();
 	virtual ~VWindowWin32();
-
+	
 	virtual void Create(VStringParam in_pName);
 	virtual void Destroy();
 	virtual void ChangeDisplay(graphics::VDisplaySettings* in_pInfo);
 	virtual graphics::IVDevice& QueryGraphicsDevice();
 	virtual input::IVInputManager& QueryInputManager();
 	virtual void SetTitle(VStringParam in_sName);
+
+	static void OnLostFocus();
+
+	static vbool bFocus;
 
 private:
 

@@ -71,57 +71,57 @@ template <typename VertexStructure>
 void VBox<VertexStructure>::CreateTextureCoordinates()
 {
 	//front face
-	buffer[0].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[1].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[2].texCoord = VTexCoord2f(1.0f, 1.0f);
+	buffer[0].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[1].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[2].texCoords = VTexCoord2f(1.0f, 1.0f);
 
-	buffer[3].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[4].texCoord = VTexCoord2f(1.0f, 1.0f);
-	buffer[5].texCoord = VTexCoord2f(0.0f, 1.0f);
+	buffer[3].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[4].texCoords = VTexCoord2f(1.0f, 1.0f);
+	buffer[5].texCoords = VTexCoord2f(0.0f, 1.0f);
 	
 	//top face
-	buffer[6].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[7].texCoord = VTexCoord2f(1.0f, 1.0f);
-	buffer[8].texCoord = VTexCoord2f(0.0f, 1.0f);
+	buffer[6].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[7].texCoords = VTexCoord2f(1.0f, 1.0f);
+	buffer[8].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[9].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[10].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[11].texCoord = VTexCoord2f(1.0f, 1.0f);
+	buffer[9].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[10].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[11].texCoords = VTexCoord2f(1.0f, 1.0f);
 
 	//back face
 
-	buffer[12].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[13].texCoord = VTexCoord2f(0.0f, 1.0f);
-	buffer[14].texCoord = VTexCoord2f(0.0f, 0.0f);
+	buffer[12].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[13].texCoords = VTexCoord2f(0.0f, 1.0f);
+	buffer[14].texCoords = VTexCoord2f(0.0f, 0.0f);
 	
-	buffer[15].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[16].texCoord = VTexCoord2f(1.0f, 1.0f);
-	buffer[17].texCoord = VTexCoord2f(0.0f, 1.0f);
+	buffer[15].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[16].texCoords = VTexCoord2f(1.0f, 1.0f);
+	buffer[17].texCoords = VTexCoord2f(0.0f, 1.0f);
 	
 	//bottom face
-	buffer[18].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[19].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[20].texCoord = VTexCoord2f(0.0f, 1.0f);
+	buffer[18].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[19].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[20].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[21].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[22].texCoord = VTexCoord2f(0.0f, 1.0f);
-	buffer[23].texCoord = VTexCoord2f(1.0f, 1.0f);
+	buffer[21].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[22].texCoords = VTexCoord2f(0.0f, 1.0f);
+	buffer[23].texCoords = VTexCoord2f(1.0f, 1.0f);
 
 	//right face
-	buffer[24].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[25].texCoord = VTexCoord2f(1.0f, 1.0f);
-	buffer[26].texCoord = VTexCoord2f(0.0f, 1.0f);
+	buffer[24].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[25].texCoords = VTexCoord2f(1.0f, 1.0f);
+	buffer[26].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[27].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[28].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[29].texCoord = VTexCoord2f(1.0f, 1.0f);
+	buffer[27].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[28].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[29].texCoords = VTexCoord2f(1.0f, 1.0f);
 
 	//bottom face
-	buffer[30].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[31].texCoord = VTexCoord2f(1.0f, 1.0f);
-	buffer[32].texCoord = VTexCoord2f(0.0f, 1.0f);
+	buffer[30].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[31].texCoords = VTexCoord2f(1.0f, 1.0f);
+	buffer[32].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[33].texCoord = VTexCoord2f(0.0f, 0.0f);
-	buffer[34].texCoord = VTexCoord2f(1.0f, 0.0f);
-	buffer[35].texCoord = VTexCoord2f(1.0f, 1.0f);
+	buffer[33].texCoords = VTexCoord2f(0.0f, 0.0f);
+	buffer[34].texCoords = VTexCoord2f(1.0f, 0.0f);
+	buffer[35].texCoords = VTexCoord2f(1.0f, 1.0f);
 }

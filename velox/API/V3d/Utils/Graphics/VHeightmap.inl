@@ -11,15 +11,15 @@ void VHeightmap<VertexStructure>::CreateCoordinates()
 			
 			for(vint y = Size; y >= 0; y -= Stepsize)
 			{
-				buffer[count].position.v[0]  = i;
-				buffer[count].position.v[1]  = GetHeight(i,y);
-				buffer[count].position.v[2]  = y;
+				buffer[count].position.v[0]  = (vfloat32)i;
+				buffer[count].position.v[1]  = (vfloat32)GetHeight(i,y);
+				buffer[count].position.v[2]  = (vfloat32)y;
 
 				count++;
 
-				buffer[count].position.v[0]  = i + Stepsize;
-				buffer[count].position.v[1]  = GetHeight(i + Stepsize, y);
-				buffer[count].position.v[2]  = y;
+				buffer[count].position.v[0]  = (vfloat32)i + Stepsize;
+				buffer[count].position.v[1]  = (vfloat32)GetHeight(i + Stepsize, y);
+				buffer[count].position.v[2]  = (vfloat32)y;
 				
 				count++;
 			}
@@ -28,15 +28,15 @@ void VHeightmap<VertexStructure>::CreateCoordinates()
 		{
 			for ( vint y = 0; y <= Size; y += Stepsize)
 			{
-				buffer[count].position.v[0] = i + Stepsize; 
-				buffer[count].position.v[1] = GetHeight(i + Stepsize, y); 
-				buffer[count].position.v[2]=  y;
+				buffer[count].position.v[0] = (vfloat32)i + Stepsize; 
+				buffer[count].position.v[1] = (vfloat32)GetHeight(i + Stepsize, y); 
+				buffer[count].position.v[2]=  (vfloat32)y;
 
 				count++;
 
-				buffer[count].position.v[0]  = i;
-				buffer[count].position.v[1]  = GetHeight(i, y);
-				buffer[count].position.v[2]  = y;
+				buffer[count].position.v[0]  = (vfloat32)i;
+				buffer[count].position.v[1]  = (vfloat32)GetHeight(i, y);
+				buffer[count].position.v[2]  = (vfloat32)y;
 
 				count++;
 			}
@@ -100,14 +100,14 @@ void VHeightmap<VertexStructure>::CreateTextureCoordinates()
 				x = (vfloat32)i / (vfloat32)Size;
 				z = (vfloat32)y / (vfloat32)Size;
 				buffer[count].texCoords =
-					v3d::graphics::VTexCoord2f(x, -z);
+					v3d::utils::graphics::VTexCoord2f(x, -z);
 								
 				count++;
 
 				x = (vfloat32)(i + Stepsize) / (vfloat32) Size;
 				z = (vfloat32)y / (vfloat32)Size;
 				buffer[count].texCoords  =
-					v3d::graphics::VTexCoord2f(x, -z);
+					v3d::utils::graphics::VTexCoord2f(x, -z);
 				
 				count++;
 			}
@@ -120,7 +120,7 @@ void VHeightmap<VertexStructure>::CreateTextureCoordinates()
 				z = (vfloat32)y /(vfloat32)Size;
 				
 				buffer[count].texCoords  =
-					v3d::graphics::VTexCoord2f(x, -z);
+					v3d::utils::graphics::VTexCoord2f(x, -z);
 				
 				count++;
 
@@ -128,7 +128,7 @@ void VHeightmap<VertexStructure>::CreateTextureCoordinates()
 				z = (vfloat32)y / (vfloat32)Size;
 
 				buffer[count].texCoords =
-					v3d::graphics::VTexCoord2f(x, -z);
+					v3d::utils::graphics::VTexCoord2f(x, -z);
 				
 				count++;
 			}

@@ -217,6 +217,12 @@
 				RelativePath="..\Api\V3d\Utils\Graphics\VPlane3f.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VSkyBox.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VSkyBox.inl">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VTexCoord2f.h">
 			</File>
 			<File

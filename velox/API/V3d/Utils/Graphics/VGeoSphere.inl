@@ -109,7 +109,7 @@ void VGeoSphere<VertexStructure>::CreateCoordinates()
 
 template <typename VertexStructure> 
 void VGeoSphere<VertexStructure>::CreateColor(
-	v3d::graphics::VColor4f in_Colors[8]
+	v3d::utils::graphics::VColor4f in_Colors[8]
 	)
 {
 	vbool bIterations = false;

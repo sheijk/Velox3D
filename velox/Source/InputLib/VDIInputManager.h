@@ -23,7 +23,7 @@ namespace input {
 //-----------------------------------------------------------------------------
 /** VDIInputManager manages all DirectInput related stuff such as constructing, 
   * destructing und updating the single input devices
-  * @author AcrylSword
+  * @author AcrylSword / ins
   * @version 1.0
   */
 
@@ -40,7 +40,7 @@ protected:
 	LPDIRECTINPUTDEVICE8	m_pDIStandardKeyboard;
 	LPDIRECTINPUTDEVICE8	m_pDIStandardMouse;
 
-	char				    m_KeyboardBuffer[256];
+	vchar				    m_KeyboardBuffer[256];
 	VDIKeyboardButton		m_StandardKeys[7];
 
 	DIMOUSESTATE			m_MouseState;
@@ -77,8 +77,14 @@ public:
 	virtual void			Activate();
 	virtual void			Deactivate();
 
+	virtual void			SetActive(vbool in_bStatus);
+
 private:
+
+	void ClearInputData();
+
 	static BOOL CALLBACK	EnumDevicesStaticCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef );
+	vbool m_bRegistered;
 	
 };
 

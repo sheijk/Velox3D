@@ -21,6 +21,10 @@ TODO List:
 -------------------------------------------------------------------------------
 Done List:
 
+02.03.04
+- added focus losing for input manager
+- added skybox
+
 27.02.04
 - fixed some warnings in vfs
 - renamed utils namespace to fit guidelines

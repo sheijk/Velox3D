@@ -18,7 +18,7 @@ VDisplaySettings::VDisplaySettings()
 	m_iStencilBits = 0;
 	m_fFieldOfView = 90;
 	m_fNearClippingPlane = 1.0f;
-	m_fFarClippingPlane = 1000.0f;
+	m_fFarClippingPlane = 900000.0f;
     m_fBackgroundRed = 0.235f;
 	m_fBackgroundGreen = 0.39f;
 	m_fBackgroundBlue = 0.627f;

@@ -10,9 +10,10 @@ namespace v3d {
 namespace window {
 using namespace graphics;
 //-----------------------------------------------------------------------------
+vbool VWindowWin32::bFocus;
+//-----------------------------------------------------------------------------
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
-
 	switch(iMsg)
 	{
 		case WM_CLOSE:
@@ -20,8 +21,33 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			PostQuitMessage(0);
 			return 0;
 		}
+
+		case WM_ACTIVATE:
+		{
+			switch(wParam)
+			{
+				case WA_ACTIVE:
+				{
+					VWindowWin32::bFocus = true;
+					return 0;
+				} 
+
+				case WA_CLICKACTIVE:
+				{
+					VWindowWin32::bFocus = true;
+					return 0;
+				}
+
+				case WA_INACTIVE:
+				{
+					VWindowWin32::bFocus = false;
+					return 0;
+				}
+			}
+		}
 	}
-	return DefWindowProc(hWnd, iMsg, wParam, lParam);
+
+return DefWindowProc(hWnd, iMsg, wParam, lParam);
 }
 //-----------------------------------------------------------------------------
 
@@ -29,6 +55,7 @@ VWindowWin32::VWindowWin32()
 {
 	hInstance = NULL;
 	hWnd = NULL;
+	bFocus = false;
 	IVUpdateable::Register();
 }
 //-----------------------------------------------------------------------------
@@ -129,16 +156,16 @@ void VWindowWin32::CreateWindow()
 
 	else
 	{
-		AdjustWindowRectEx(&WindowRect, WS_OVERLAPPEDWINDOW, TRUE,
-							WS_EX_APPWINDOW | WS_EX_WINDOWEDGE);
+		AdjustWindowRectEx(&WindowRect, WS_POPUP, FALSE, WS_EX_APPWINDOW);
 
 		hWnd = CreateWindowEx(WS_EX_APPWINDOW |
 								WS_EX_WINDOWEDGE,
 								m_Name.c_str(),
 								m_Name.c_str(),
 								//WS_OVERLAPPEDWINDOW |
-								WS_CLIPSIBLINGS |
-								WS_CLIPCHILDREN,
+								//WS_CLIPSIBLINGS |
+								//WS_CLIPCHILDREN,
+								0,
 								m_DisplaySettings.m_iWinCoordX,
 								m_DisplaySettings.m_iWinCoordY,
 								WindowRect.right-WindowRect.left,
@@ -182,6 +209,9 @@ void VWindowWin32::ChangeDisplay(graphics::VDisplaySettings* in_pInfo)
 
 void VWindowWin32::Update(vfloat32 in_fSeconds)
 {
+
+	m_pInputManager->SetActive(bFocus);
+
 	MSG msg;
 
 	while(PeekMessage(&msg, hWnd, 0, 0, PM_NOREMOVE)) {

@@ -9,6 +9,7 @@
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
+//TODO add construction values here if not to be surprised by call std const [ins]
 VDIInputManager::VDIInputManager()
 {
 
@@ -21,6 +22,7 @@ VDIInputManager::VDIInputManager( HWND in_hWnd )
 	m_pDI = 0;
 	m_pDIStandardKeyboard = 0;
 	m_pDIStandardMouse = 0;
+	m_bRegistered = false;
 
 	Create();
 }
@@ -302,6 +304,41 @@ void VDIInputManager::Activate()
 
 void VDIInputManager::Deactivate()
 {
+}
+
+void VDIInputManager::SetActive(vbool in_bStatus)
+{
+	if(in_bStatus)
+	{
+		if(!m_bRegistered)
+		{
+			IVUpdateable::Register();
+			m_bRegistered = true;
+		}
+	}
+	else
+	{
+		if(m_bRegistered)
+		{
+			
+			IVUpdateable::Unregister();
+			m_bRegistered = false;
+			ClearInputData();
+	
+		}
+	}
+
+}
+
+void VDIInputManager::ClearInputData()
+{
+	ZeroMemory(m_KeyboardBuffer, sizeof(vchar) *256);
+	m_MouseState.rgbButtons[0] = 0;
+	m_MouseState.rgbButtons[1] = 0;
+	m_MouseState.rgbButtons[2] = 0;
+	m_MouseState.rgbButtons[3] = 0;
+	m_MouseState.lX  = 0;
+	m_MouseState.lY	 = 0;
 }
 
 IVInputManager::DeviceIterator VDIInputManager::DeviceBegin()

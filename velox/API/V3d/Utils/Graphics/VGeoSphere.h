@@ -39,7 +39,7 @@ class VGeoSphere
 
 	struct TriangleColor
 	{
-		v3d::graphics::VColor4f color[3];
+		v3d::utils::graphics::VColor4f color[3];
 
 		TriangleColor()
 		{
@@ -47,9 +47,9 @@ class VGeoSphere
 		}
 
 		TriangleColor(
-			v3d::graphics::VColor4f a,
-			v3d::graphics::VColor4f b,
-			v3d::graphics::VColor4f c
+			v3d::utils::graphics::VColor4f a,
+			v3d::utils::graphics::VColor4f b,
+			v3d::utils::graphics::VColor4f c
 			)
 		{
             color[0] = a;
@@ -78,7 +78,7 @@ public:
 
 	void	CreateCoordinates();
 	void	CreateTextureCoordinates();
-	void	CreateColor(v3d::graphics::VColor4f in_Colors[8] );
+	void	CreateColor(v3d::utils::graphics::VColor4f in_Colors[8] );
 };
 
 #include "VGeoSphere.inl"

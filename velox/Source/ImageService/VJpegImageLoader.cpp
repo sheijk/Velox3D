@@ -115,35 +115,6 @@ void VJpegImageLoader::DecodeJPG(jpeg_decompress_struct* cinfo, tImageJPG *pImag
 	jpeg_finish_decompress(cinfo);
 }
 
-//-----------------------------------------------------------------------------
-
-//void VJpegImageLoader::StreamToFile(vuchar* in_pBuffer, vuint in_nByte)
-//{
-//	VStringParam theFilename = "systemcache.bin";
-//	std::ofstream theFile;
-//
-//	theFile.open(theFilename, std::ios::out | std::ios::binary);
-//
-//	if(theFile.is_open())
-//	{
-//		for (int i = 0; i < in_nByte; i++)
-//		{
-//			vuchar ab = in_pBuffer[i];
-//			vchar ac = in_pBuffer[i];
-//			theFile << ab;
-//
-//		}
-//		//may the error be here??
-//		//theFile.write((const vuchar*)in_pBuffer, sizeof(vuchar) * in_nByte);
-//	}
-//
-//	theFile.close();
-//
-//
-//}
-//
-//-----------------------------------------------------------------------------
-
 void VJpegImageLoader::Register()
 {
 	IVImageFactory* Factory = QueryObject<IVImageFactory>("image.service");

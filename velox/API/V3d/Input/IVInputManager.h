@@ -60,6 +60,7 @@ class IVInputManager : public updater::IVUpdateable //: public VNamedObject
 	virtual void				Update(vfloat32 in_fSeconds) = 0;
 	virtual void				Activate() = 0;
 	virtual void				Deactivate() = 0;
+	virtual void				SetActive(vbool in_bStatus) = 0;
 };
 
 //-----------------------------------------------------------------------------

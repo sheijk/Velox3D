@@ -49,7 +49,7 @@ void VVertexDataLayout::SetPositionOffset()
 	typedef VVertexDataLayout::Offset Offset;
 
 	VertexData::layout.positionOffset = 
-		reinterpret_cast<Offset>(&(zero->position)) / sizeof(float);
+		reinterpret_cast<Offset>(&(zero->position)) / sizeof(vfloat32);
 }
 
 template<typename VertexData>
@@ -60,7 +60,7 @@ void VVertexDataLayout::SetColorOffset()
 	typedef VVertexDataLayout::Offset Offset;
 
 	VertexData::layout.colorOffset = 
-		reinterpret_cast<Offset>(&(zero->color)) / sizeof(float);
+		reinterpret_cast<Offset>(&(zero->color)) / sizeof(vfloat32);
 }
 
 template<typename VertexData>
@@ -69,7 +69,7 @@ void VVertexDataLayout::SetTexCoordOffset()
 	VertexData* zero = 0;
 
 	VertexData::layout.texCoordOffset =
-		reinterpret_cast<Offset>(&(zero->texCoords)) / sizeof(float);
+		reinterpret_cast<Offset>(&(zero->texCoords)) / sizeof(vfloat32);
 }
 
 
