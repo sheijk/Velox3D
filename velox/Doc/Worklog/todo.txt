@@ -1,0 +1,63 @@
+Diese soll eine Liste anstehender Aufgabe sowie eine Uebersicht wer woran arbeitet enthalten. Sinn und Zweck ist es, eine Reihe wichtiger Informationen zentral zu speichern und jederzeit fuer jeden einsehbar zu haben
+
+Anmerkung: ihr duerft diese Datei ruhig bearbeiten, sie ist zu Kommunikation da.. ;)
+Vor allem Eintraege woran ihr arbeitet (s.u.) sowie Vorschlaege fuer Mittelfristige (bis zur Dusmania?) sowie langfristige Ziele (Ende des Jahres?)
+
+--------------------
+Aktuelles Teilziel:
+--------------------
+Kurzfristiges Ziel ist die Schaffung einer simplen Sprite Engine, welche im Optimalfall in der Lage sein sollte ins DVW Grafiksystem uebernommen zu werden.
+
+Dazu wird gebraucht:
+- simples Sprite System: rendern von Sprites
+- Laden von .tga Grafiken (implementiert)
+- Sortieren nach States und weitere Optimierungen
+- VBOs wieder einbauen
+
+Mittelfristiges Ziel
+[sheijk]
+Hauptgebiet ist das Grafiksubsystem. Es soll eine solide Basis auf Seiten des Devices geschaffen werden um mit verschiedenen Rechernerkonfigurationen klar zu kommen und wichtige Aufgaben wie Sortieren nach States, Tiefe fuer transparente Flaechen usw. durchfuehren zu koennen. Dazu soll ein einfacher Scene Graph implementiert werden. Darauf aufbauend sollen eine Outdoor ein Indoor Renderer sowie ein einfacher Skydome implementiert und zur Zusammenarbeit gebracht werden. <- sollte noch richtig aktualisiert werden
+Dazu soll die technische Basis fuer den Editor erstellt werden
+[/sheijk]
+
+Langfristiges Ziel...
+
+--------------------
+Wer macht was?
+--------------------
+Hier bitte eintragen wenn ihr an etwas arbeitet und eine grobe Einschaetzung wann das ganze fertig sein sollte.
+
+Wer		start		ziel		was
+================================================================================
+ins		14.03.04				VBOs wieder (vollstaendig) einbaun
+ins		03/04					Multithreadtools entwerfen + implementieren
+sheijk	26.12.03	29.02.04	SG: zusammenarbeit + entity system etc Planung
+sheijk	26.03.04	31.03.04	Sprite System entwerfen
+sheijk	02/04					memory manager: leak finder und managed objects
+acryl							error service cfg file
+acryl	01.03.04				himmelssystem: skydome mit textur
+
+
+--------------------
+Zu erledigen:
+--------------------
+
+--------------------
+Wer ist fuer was zustaendig:
+--------------------
+Hier eine Auflistung, wer fuer welche Services usw zustaendig ist. D.h. sie implementiert/entworfen hat und bei Fragen die Anspruchsperson ist
+
+-- sheijk
+Core
+Vfs
+UML Model
+..
+
+-- ins
+Xml
+Doxygen (Doc/Reference)
+...
+
+-- acryl
+Error
+...
