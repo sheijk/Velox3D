@@ -34,7 +34,7 @@ private:
 
 public:
 	/** create a new shared storage which points to in_Subject */
-	static MyType* CreateNew(StoragePolicy::TargetType in_Subject)
+	static MyType* CreateNew(typename StoragePolicy::TargetType in_Subject)
 	{
 		VRefCountSharedStorage<StoragePolicy>* pInstance 
 			= new VRefCountSharedStorage<StoragePolicy>();
@@ -53,7 +53,7 @@ public:
 	void AddRef();
 
 	/** returns the subject */
-	StoragePolicy::TargetType Get()
+	typename StoragePolicy::TargetType Get()
 	{
 		return m_Storage.Get();
 	}

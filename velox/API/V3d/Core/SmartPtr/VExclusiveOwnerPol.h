@@ -18,7 +18,7 @@ template<class StoragePolicy>
 class VExclusiveOwnerPol
 {
 public:
-	typedef StoragePolicy::TargetType TargetType;
+	typedef typename StoragePolicy::TargetType TargetType;
 	VExclusiveOwnerPol();
 	~VExclusiveOwnerPol();
 

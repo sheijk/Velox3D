@@ -7,7 +7,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
-	
+
 /**
  * Simply wraps a C-Style string to guarantee memory release
  * @author sheijk
@@ -18,7 +18,7 @@ namespace v3d {
 class VString
 {
 private:
-	mutable VPointer<vchar>::AutoPtr m_pCStr;
+	mutable VPointer<vchar>::SharedPtr m_pCStr;
 	vuint m_nLength;
 
 public:

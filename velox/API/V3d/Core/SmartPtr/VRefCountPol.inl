@@ -24,7 +24,7 @@ VRefCountPol<StoragePolicy>::
  * returns the subject
  */
 template<class StoragePolicy> 
-VRefCountPol<StoragePolicy>::TargetType VRefCountPol<StoragePolicy>::
+typename VRefCountPol<StoragePolicy>::TargetType VRefCountPol<StoragePolicy>::
 	Get()
 {
 	return m_pSharedStorage->Get();
@@ -36,7 +36,7 @@ VRefCountPol<StoragePolicy>::TargetType VRefCountPol<StoragePolicy>::
  */
 template<class StoragePolicy> 
 void VRefCountPol<StoragePolicy>::
-	Set(VRefCountPol<StoragePolicy>::TargetType in_NewVal)
+	Set(typename VRefCountPol<StoragePolicy>::TargetType in_NewVal)
 {
 	// release old
 	Release();
@@ -76,7 +76,7 @@ void VRefCountPol<StoragePolicy>::Clone(const Type& in_Other)
 
 template<class StoragePolicy> 
 void VRefCountPol<StoragePolicy>::
-	CreateSharedStorage(VRefCountPol<StoragePolicy>::TargetType in_Subject)
+	CreateSharedStorage(typename VRefCountPol<StoragePolicy>::TargetType in_Subject)
 {
 	m_pSharedStorage = SharedStorage::CreateNew(in_Subject);
 }

@@ -21,7 +21,7 @@ template<class StoragePolicy>
 class VRefCountPol
 {
 private:
-	typedef StoragePolicy::TargetType TargetType;
+	typedef typename StoragePolicy::TargetType TargetType;
 	
 	typedef VRefCountPol<StoragePolicy> Type;
 	typedef VRefCountSharedStorage<StoragePolicy> SharedStorage;
@@ -33,7 +33,7 @@ public:
 	VRefCountPol();
 	~VRefCountPol();
 
-	TargetType Get();
+	typename TargetType Get();
 	void Set(TargetType in_NewVal);
 	void Release();
 	void Clone(const Type& in_Other);

@@ -21,7 +21,7 @@ VExclusiveOwnerPol<StoragePolicy>::~VExclusiveOwnerPol()
 	Zugriffsmethode
 */
 template<class StoragePolicy> 
-VExclusiveOwnerPol<StoragePolicy>::TargetType VExclusiveOwnerPol<StoragePolicy>::Get()
+typename VExclusiveOwnerPol<StoragePolicy>::TargetType VExclusiveOwnerPol<StoragePolicy>::Get()
 {
 	return m_Storage.Get();
 }
