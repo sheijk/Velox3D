@@ -125,13 +125,11 @@ void VKernel::ParseFile(const string &in_strFileName)
 		// parse service
 		serviceInfo.Parse(pServiceNode);
 
-		/*
 		cout << "service:"
 			<< "id=\"" << serviceInfo.strId << "\" "
 			<< "desc=\"" << serviceInfo.strDesc << "\" "
 			<< "filename=\"" << serviceInfo.strFileName << "\""
 			<< endl;
-		*/
 
 		// add service info to list
 		m_Services.push_back(

@@ -18,8 +18,8 @@ namespace v3d {
 class VString
 {
 private:
-	//TODO: array pointer verwenden, und AutoPtr
-	VArrayPtr<vchar>::AutoPtr m_pCStr;
+	//TODO: einen deep copy ptr verwenden
+	VArrayPtr<vchar>::SharedPtr m_pCStr;
 	vuint m_nLength;
 
 public:

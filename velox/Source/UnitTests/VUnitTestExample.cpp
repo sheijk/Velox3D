@@ -46,13 +46,13 @@ void VUnitTestExample::ExecuteTest()
 {
 	enum VWheather
 	{
-		VSun, VRain
+		Sun, Rain
 	};
 
-	VWheather theWeather = VSun;
+	VWheather theWeather = Sun;
 	
 	// bad weather, return a warning ;)
-	if( VSun != theWeather )
+	if( Sun != theWeather )
 	{
 		V3D_THROW_UNITTEST_ERROR("bad weather detected", VUnitTestException::Warning);
 	}
