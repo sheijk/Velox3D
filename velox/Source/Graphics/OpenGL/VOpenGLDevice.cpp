@@ -25,6 +25,9 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 {
 	m_DisplaySettings = in_pSettings;
 	hWnd = in_hWnd;
+
+	m_pCamera = NULL;
+
 	SetDisplay();
 
 	m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
@@ -308,7 +311,12 @@ void VOpenGLDevice::BeginScene()
 
 	//TODO for testing purpose -ins
 	static vfloat32 rotZ = 0;
-	glTranslatef(0.0f, 0.0f, -200.0f);
+
+	if(m_pCamera)
+		glTranslatef(m_pCamera->GetX(), m_pCamera->GetY(), m_pCamera->GetZ());
+	else 
+		glTranslatef(0,0,0);
+
 	rotZ += 0.3f;
 	glRotatef(rotZ,0.0f,1.0f,0.0f);
 
@@ -320,7 +328,12 @@ void VOpenGLDevice::EndScene()
 	wglMakeCurrent(hDC, hRC);
 	SwapBuffers(hDC);
 }
+//-----------------------------------------------------------------------------
 
+void VOpenGLDevice::SetCamera(VCamera* in_pCamera)
+{
+	m_pCamera = in_pCamera;
+}
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

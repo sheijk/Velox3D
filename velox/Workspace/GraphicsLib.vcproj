@@ -116,6 +116,9 @@
 				RelativePath="..\Api\V3d\Graphics\VBuffer.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Graphics\VCamera.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
 			</File>
 			<File
@@ -125,6 +128,9 @@
 		<Filter
 			Name="Implementation"
 			Filter="">
+			<File
+				RelativePath="..\Source\Graphics\VCamera.cpp">
+			</File>
 			<File
 				RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.cpp">
 			</File>

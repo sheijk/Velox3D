@@ -7,6 +7,8 @@
 #include <v3d/Graphics/VBuffer.h>
 #include <v3d/Graphics/VMeshDescription.h>
 
+#include <v3d/Graphics/VCamera.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -51,6 +53,8 @@ public:
 	//virtual IVMaterial* CreateMaterial() = 0;
 	//virtual void ApplyMaterial(IVMaterial* in_pMatrial) = 0;
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
+
+	virtual void SetCamera(VCamera* in_pCamera) = 0;
 
 	/**
 	* This is only implemented to show anything by now

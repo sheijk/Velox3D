@@ -34,6 +34,8 @@ TODO List:
   Should we use vfs for loading model??
 
 Done List:
+29.01.04
+- Added a small camera and movement
 
 28.01.04
 - Added input manager into workspace and project

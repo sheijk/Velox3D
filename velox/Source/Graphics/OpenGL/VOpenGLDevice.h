@@ -54,6 +54,8 @@ public:
 
 	virtual void BeginScene();
 	virtual void EndScene();
+
+	virtual void SetCamera(VCamera* in_pCamera);
 	
 private:
 	/** the float buffers */
@@ -92,6 +94,8 @@ private:
 	vchar		*m_pVendor;
 	vchar		*m_pRenderer;
 	vchar		*m_pVersion;
+
+	VCamera*	m_pCamera;
 };
 
 //-----------------------------------------------------------------------------

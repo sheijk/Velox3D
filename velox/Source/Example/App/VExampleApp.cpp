@@ -15,12 +15,13 @@
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
+#include <v3d/Graphics/VCamera.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
 //-----------------------------------------------------------------------------
-using namespace v3d::updater::IVUpdateManager;
+using namespace v3d::updater;
 using namespace v3d::console;
 using namespace v3d::graphics;
 using namespace v3d::window;
@@ -56,6 +57,10 @@ vint VExampleApp::Main()
 	IVWindowManager::IVWindowPtr pWindow;
 	IVDevice* pDevice;
 	IVButton* pEscButton;
+	IVButton* pUpButton;
+	IVButton* pDownButton;
+	IVButton* pLeftButton;
+	IVButton* pRightButton;
 
 	IVDevice::FloatBufferHandle VertexHandle;
 	IVDevice::IntBufferHandle VertexIndexHandle;
@@ -66,6 +71,7 @@ vint VExampleApp::Main()
 	VMeshDescription MeshDesc;
 	IVDevice::MeshHandle Mesh;
 
+	VCamera* pCamera;
 
 	//run system
 
@@ -75,7 +81,15 @@ vint VExampleApp::Main()
 	pDevice = &(pWindow->QueryGraphicsDevice());
 
 	pInputManager = &(pWindow->QueryInputManager());
+	
 	pEscButton = &pInputManager->GetStandardKey(IVInputManager::Escape);
+	pUpButton = &pInputManager->GetStandardKey(IVInputManager::CursorUp);
+	pDownButton = &pInputManager->GetStandardKey(IVInputManager::CursorDown);
+	pLeftButton = &pInputManager->GetStandardKey(IVInputManager::CursorLeft);
+	pRightButton = &pInputManager->GetStandardKey(IVInputManager::CursorRight);
+	
+	pCamera = new VCamera();
+	pDevice->SetCamera(pCamera);
 
 
 	//TODO: changed back cos of missing workdir -ins
@@ -121,6 +135,18 @@ vint VExampleApp::Main()
 		// input checking
 		if (pEscButton->IsDown() == true)
 			pSystemManager->SetStatus(false);
+		
+		if(pUpButton->IsDown() == true)
+			pCamera->AddZ(0.2f);
+
+		if(pDownButton->IsDown() == true)
+			pCamera->AddZ(-0.2f);
+
+		if(pLeftButton->IsDown() == true)
+			pCamera->AddX(0.2f);
+
+		if(pRightButton->IsDown() == true)
+			pCamera->AddX(-0.2f);
 	}
 
 	pUpdateManager->Stop();
