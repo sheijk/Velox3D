@@ -308,6 +308,12 @@
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Portal\IVCell.h">
 				</File>
+				<File
+					RelativePath="..\Source\Graphics\Portals\VIndoorCell .cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Portal\VIndoorCell.h">
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
