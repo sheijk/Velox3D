@@ -19,7 +19,6 @@
 #include "../DeviceBase/VStateCategoryList.h"
 #include "VTextureStateCategory.h"
 #include "VMiscStateCategory.h"
-#include "VBlendingStateCategory.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -57,7 +56,12 @@ public:
 	virtual MeshHandle CreateMesh(
 		const VMeshDescription& in_pMeshDesc,
 		const VMaterialDescription& in_pMaterialDesc
-		) ;
+		);
+
+	virtual MeshHandle CreateMesh(
+		const VMeshDescription& in_MeshDescr,
+		const VEffectDescription& in_EffectDescr
+		);
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 
@@ -100,7 +104,6 @@ private:
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;
 	VMiscStateCategory m_MiscStateCategory;
-	VBlendingStateCategory m_BlendingStateCategory;
 	
 
 	typedef std::list<IVMesh*> MeshList;

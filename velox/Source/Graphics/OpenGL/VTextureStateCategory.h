@@ -44,7 +44,8 @@ public:
 
 	virtual const IVRenderState& GetDefault() const;
 
-	VTextureState* CreateState(const VMaterialDescription& in_Descr);
+	virtual VTextureState* CreateState(const VMaterialDescription& in_Descr);
+	virtual VTextureState* CreateState(const VRenderPass& in_Pass);
 };
 
 //-----------------------------------------------------------------------------

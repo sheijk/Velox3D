@@ -52,6 +52,16 @@ log:
 
 TODO:
 
+31.08.2004
+= Blending + Misc States werden aus Effect Description geladen (Format/Namen siehe
+Source in VMiscState.cpp, VMistState(VRenderPass)
+= Blending State Klassen in Misc Klassen gemergt
+= VDIInputManager: Fehler beim Finden unbekannter Geraetetypen gefixt (werden
+jetzt ignoriert)
+= VEffectDescription in Device eingebaut,
+= State erzeugen bisher nur Default States
+= VEffectDescription erstellt
+
 27.08.2004
 VMeshDescription refeactored: alle Member private gemacht, Getter+Setter
 Funktionen geschrieben, VDataFormat Klasse statt ByteDataRef. Source angepasst

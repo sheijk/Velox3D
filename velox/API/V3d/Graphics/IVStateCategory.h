@@ -5,6 +5,7 @@
 
 #include <v3d/Graphics/IVRenderState.h>
 #include <v3d/Graphics/VMaterialDescription.h>
+#include <v3d/Graphics/VEffectDescription.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
@@ -15,6 +16,7 @@ class IVStateCategory
 {
 public:
 	virtual IVRenderState* CreateState(const VMaterialDescription& in_Mat) = 0;
+	virtual IVRenderState* CreateState(const VRenderPass& in_Pass) = 0;
 };
 
 //-----------------------------------------------------------------------------

@@ -116,6 +116,21 @@ VTextureState* VTextureStateCategory::CreateState(const VMaterialDescription& in
 	}
 }
 
+VTextureState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
+{
+	// if a texture is specified
+	VState const* pTextureState = in_Pass.GetStateByName("texture");
+	if( pTextureState != 0 )
+	{
+		vbool textureNotSupportedYet_ByEffectDescr = false;
+		V3D_ASSERT(textureNotSupportedYet_ByEffectDescr);
+	}
+	else
+	{
+		return &m_DefaultState;
+	}
+}
+
 vuint VTextureStateCategory::GetGLModeNum(const TextureFilter in_Filer)
 {
 	switch( in_Filer )

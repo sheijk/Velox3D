@@ -161,6 +161,25 @@ v3d::graphics::IVDevice::MeshHandle BuildMesh(
 	return device.CreateMesh(meshDescr, mat);
 }
 
+template<typename GeometryProvider>
+v3d::graphics::IVDevice::MeshHandle BuildMesh(
+	v3d::graphics::IVDevice& device,
+	GeometryProvider& provider, 
+	v3d::graphics::VEffectDescription& effect)
+{
+	v3d::graphics::VMeshDescription meshDescr = BuildMeshDescription(
+		device,
+		provider.GetVertexBuffer().GetDataAddress(),
+		provider.GetVertexBuffer().GetSize(),
+		provider.GetIndexBuffer().GetDataAddress(),
+		provider.GetIndexBuffer().GetSize()
+		);
+
+	meshDescr.SetGeometryType(provider.GetGeometryType());
+
+	return device.CreateMesh(meshDescr, effect);
+}
+
 template<typename VertexStructure>
 void GenerateInterpolatedTexCoords(
 	v3d::graphics::VBuffer<VertexStructure>& buffer,

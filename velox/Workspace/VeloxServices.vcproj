@@ -594,6 +594,9 @@
 					RelativePath="..\Api\V3d\Graphics.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Graphics\GraphicsExceptions.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Graphics\IVDevice.h">
 				</File>
 				<File
@@ -687,15 +690,6 @@
 						RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
 					</File>
 					<File
-						RelativePath="..\Source\Graphics\OpenGL\VBlendingState.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VBlendingState.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VBlendingStateCategory.h">
-					</File>
-					<File
 						RelativePath="..\Source\Graphics\OpenGL\VMiscState.cpp">
 					</File>
 					<File
@@ -738,6 +732,9 @@
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.cpp">
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.h">

@@ -4,6 +4,8 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <v3d/Graphics/VMaterialDescription.h>
+#include <v3d/Graphics/VEffectDescription.h>
+
 #include <v3d/Graphics/IVStateCategory.h>
 
 #include "VRenderStateList.h"
@@ -26,33 +28,16 @@ private:
 	CategoryContainer m_Categories;
 	RenderStateList m_DefaultStates;
 
-	void BuildDefaultList()
-	{
-		//CategoryContainer::iterator catIter = m_Categories.begin();
-		//for( ;
-	}
+	VRenderStateList* CreateMaterialForPass(const VRenderPass& in_Pass);
+	std::vector<VRenderStateList*> CreateMaterialsForPath(
+		const VShaderPath& in_Path);
+
 public:
+	void RegisterCategory(IVStateCategory& in_Category);
 
-	void RegisterCategory(IVStateCategory& in_Category)
-	{
-		m_Categories.insert(&in_Category);
-	}
-
-	VRenderStateList* CreateRenderStateList(const VMaterialDescription& in_Mat)
-	{
-		CategoryContainer::iterator cat = m_Categories.begin();
-
-		RenderStateList states;
-		IVRenderState* pState;
-
-		for( ; cat != m_Categories.end(); ++cat)
-		{
-			pState = (*cat)->CreateState(in_Mat);
-			states.push_back(pState);
-		}
-
-		return new VRenderStateList(states);
-	}
+	VRenderStateList* CreateRenderStateList(const VMaterialDescription& in_Mat);
+	std::vector<VRenderStateList*> CreateMaterialList(
+		const VEffectDescription& in_Effect);
 };
 
 //-----------------------------------------------------------------------------

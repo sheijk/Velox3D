@@ -131,6 +131,9 @@
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VDynamicGeometryData.h">
 				</File>
 				<File
+					RelativePath="..\Source\Graphics\Lib\VEffectDescription.cpp">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VGeometryData.h">
 				</File>
 				<File

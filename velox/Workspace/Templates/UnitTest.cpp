@@ -9,8 +9,9 @@
 //TODO: replace /*classname*/ by your class's name
 
 //-----------------------------------------------------------------------------
-namespace v3d {
-namespace unittests {
+#include <v3d/Core/MemManager.h>
+//-----------------------------------------------------------------------------
+namespace v3d { namespace unittests {
 //-----------------------------------------------------------------------------
 
 /*classname*/::/*classname*/()
@@ -50,6 +51,5 @@ void /*classname*/::ExecuteTest()
 }
 
 //-----------------------------------------------------------------------------
-} // namespace unittests
-} // namespace v3d
+}} // namespace v3d::unittests
 //-----------------------------------------------------------------------------

@@ -31,10 +31,10 @@ public:
 	~VBufferManager()
 	{
 		// delete all buffers
-		while( ! m_Buffers.empty() )
-		{
-			Delete(m_Buffers.front());
-		}
+		//while( ! m_Buffers.empty() )
+		//{
+		//	Delete(m_Buffers.front());
+		//}
 	}
 
 	vuint GetBufferCount() const

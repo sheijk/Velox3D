@@ -51,7 +51,7 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	m_StateCategories.RegisterCategory(m_MiscStateCategory);
-	m_StateCategories.RegisterCategory(m_BlendingStateCategory);
+	//m_StateCategories.RegisterCategory(m_BlendingStateCategory);
 
 	Identity(m_ModelMatrix);
 	Identity(m_ViewMatrix);
@@ -175,6 +175,32 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	m_Meshes.push_back(pMesh);
 
 	return MakeMeshHandle(pMesh);
+}
+
+IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
+	const VMeshDescription& in_MeshDescr,
+	const VEffectDescription& in_EffectDescr
+	)
+{
+	std::vector<VRenderStateList*> materials
+		= m_StateCategories.CreateMaterialList(in_EffectDescr);
+
+	if( materials.size() > 0 )
+	{
+		V3D_ASSERT(materials.size() == 1);
+
+		VMeshDescription descr = in_MeshDescr;
+
+		InternalizeBuffers(descr);
+
+		IVMesh* pMesh = m_RenderMethods.CreateMesh(descr, 0, materials[0]);
+
+		m_Meshes.push_back(pMesh);
+
+		return MakeMeshHandle(pMesh);
+	}
+	else
+		return 0;
 }
 
 VOpenGLDevice::MaterialHandle VOpenGLDevice::CreateMaterial(

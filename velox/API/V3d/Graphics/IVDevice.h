@@ -7,6 +7,7 @@
 #include <v3d/Graphics/VBuffer.h>
 #include <v3d/Graphics/VMeshDescription.h>
 #include <v3d/Graphics/VMaterialDescription.h>
+#include <v3d/Graphics/VEffectDescription.h>
 #include <v3d/Graphics/IVRenderState.h>
 
 #include <v3d/Math/VMatrix.h>
@@ -87,6 +88,11 @@ public:
 	virtual MeshHandle CreateMesh(
 		const VMeshDescription& in_pMeshDesc,
 		const VMaterialDescription& in_pMaterialDesc
+		) = 0;
+
+	virtual MeshHandle CreateMesh(
+		const VMeshDescription& in_MeshDescr,
+		const VEffectDescription& in_EffectDescr
 		) = 0;
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;

@@ -215,10 +215,12 @@ vbool VDIInputManager::EnumDevicesCallback(const DIDEVICEINSTANCE* in_pdiDeviceI
 			case DI8DEVTYPE_MOUSE:
 				device = new VDIMouseDevice(*in_pdiDeviceInstance, m_pDI, m_hWnd);
 				break;
+			default:
+				return true;
 		}
 	}
 	catch(VCreationException& e) {
-		vout << "Bong" << vendl;
+		vout << "Failed to create direct input device object" << vendl;
 		return true;
 	}
 
