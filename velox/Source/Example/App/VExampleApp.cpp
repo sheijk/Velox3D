@@ -168,29 +168,33 @@ void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 
 void VExampleApp::MoveCamera(VCamera* in_pCamera)
 {
+	const vfloat32 fSeconds = m_pUpdateManager->GetFrameDuration();
+
 	if(m_pUpButton->IsDown() == true)
-		in_pCamera->MoveForward(-5.0f);
+		in_pCamera->MoveForward(-5.0f * fSeconds);
 
 	if(m_pDownButton->IsDown() == true)
-		in_pCamera->MoveForward(5.0f);
+		in_pCamera->MoveForward(5.0f * fSeconds);
 	
 	if(m_pLeftButton->IsDown() == true)
-		in_pCamera->Strafe(-5);
+		in_pCamera->Strafe(-5 * fSeconds);
 		
 
 	if(m_pRightButton->IsDown() == true)
-		in_pCamera->Strafe(5);
+		in_pCamera->Strafe(5 * fSeconds);
 		
 
 	if(m_pRightMouseButton->IsDown() == true)
-		in_pCamera->RotateZ(-1);
+		in_pCamera->RotateZ(-5 * fSeconds);
 		
 
 	if(m_pLeftMouseButton->IsDown() == true)
-		in_pCamera->RotateZ(1);
+		in_pCamera->RotateZ(5 * fSeconds);
 
-	in_pCamera->RotateX(m_pMouseYAxis->GetLastMovement());
-	in_pCamera->RotateY(m_pMouseXAxis->GetLastMovement());
+	// das ist bestimmt nicht absicht dass hier x + y achsen vertauscht
+	// wurden, oder?
+	in_pCamera->RotateX(- m_pMouseYAxis->GetLastMovement() * 5 * fSeconds);
+	in_pCamera->RotateY(m_pMouseXAxis->GetLastMovement() * 5 * fSeconds);
 		
 }
 
@@ -199,7 +203,7 @@ vint VExampleApp::Main()
 	V3D_DEBUGMSG("Velox Main app says hi!");
 
 	// get services
-	IVUpdateManager* pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
+	m_pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
 	IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
 	IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
 
@@ -258,7 +262,7 @@ vint VExampleApp::Main()
 	pRootNode->ApplyCulling(&drawList, 0);
 
 	// main loop
-	pUpdateManager->Start();
+	m_pUpdateManager->Start();
 	pSystemManager->SetStatus(true);
 
 	while(pSystemManager->GetStatus())
@@ -272,17 +276,23 @@ vint VExampleApp::Main()
 
         m_pDevice->EndScene();
 
-		pUpdateManager->StartNextFrame();
-		pUpdateManager->GetFrameDuration();
+		m_pUpdateManager->StartNextFrame();
+		m_pUpdateManager->GetFrameDuration();
 
 		if (m_pEscapeButton->IsDown() == true)
 			pSystemManager->SetStatus(false);
 
 		// input checking
 		MoveCamera(pCamera);
+
+		/* das kommt nicht von mir! ;) */
+		static vchar strFrameRate[50] = {0};
+		sprintf(strFrameRate, "Current Frames Per Second: %d",
+			int( 1 / m_pUpdateManager->GetFrameDuration()));
+		pWindow->SetTitle(strFrameRate);
 	}
 
-	pUpdateManager->Stop();
+	m_pUpdateManager->Stop();
 
 	//exiting...
 	return 0;

@@ -30,6 +30,7 @@ private:
 	void MoveCamera(v3d::utils::graphics::VCamera* in_pCamera);
 
 	graphics::IVDevice* m_pDevice;
+	updater::IVUpdateManager* m_pUpdateManager;
 
 	console::IVConsoleSerivce* m_Console;
 

@@ -26,7 +26,6 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 	.refactorings
-	vcamera -> utils
 	./example app aufraeumen
 
 	.mem manager
@@ -63,7 +62,9 @@ template member konvertiert?
 	./interfaces schreiben (basierend auf ins code)
 	./simple implementation
 	./in example app einbaun
-
+	animationen erlauben
+	nodes sollten irgendwann auch geloescht werden (shared ptr?)
+	zusammenarbeit mit physik, etc (-> entity system)
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
 	Objekts auf 0 gesetzt)
@@ -71,7 +72,7 @@ template member konvertiert?
 	Klasse zum Laden einer DLL (fuer Kernel, und sonstiges)
 
 	Dokumentation
-	Conding Guidelines uebersichtlicher machen
+	Coding Guidelines uebersichtlicher machen
 
 	Netzwerk, Scripting planen
 	./Graphics Device: Design
@@ -99,6 +100,9 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+11.03.2004
+Kamera Bewegung in der Example App Zeitabhaengig gemacht
 
 10.03.2004
 Erste Version des SceneGraphen fertig gestellt
