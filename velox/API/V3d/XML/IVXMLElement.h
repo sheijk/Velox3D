@@ -22,11 +22,22 @@ public:
 
 	typedef VBidirectionalIterator<IVXMLAttribute> AttributeIter;
 
+	/* Returns the name od the xml element */
 	virtual VStringRetVal GetName() = 0;
+	
+	/* Returns the first attribute in the element */
 	virtual IVXMLAttribute* GetFirstAttribute() = 0;
+
+	/* Returns the next attribute in the elemenet */
 	virtual IVXMLAttribute* NextAttribute() = 0;
+
+	/* Returns the attribute with the given name. if not exisitng returning NULL */
 	virtual IVXMLAttribute* GetAttribute(VStringParam Name) = 0;
+
+	/* Returns an iterator at first position through all attributes on this element */
 	virtual AttributeIter AttributeBegin() = 0;
+
+	/* Returns an iterator to the last position in all attributes on this element */
 	virtual AttributeIter AttributeEnd() = 0;
 
 

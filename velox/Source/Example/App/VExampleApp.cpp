@@ -9,9 +9,13 @@
 #include <v3d/Window/IVWindowManager.h>
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Graphics/IVDevice.h>
+#include <v3d/Image/IVImageFactory.h>
 
 
 //TODO...
+#include <windows.h>
+#include <gl/gl.h>
+#include <gl/glu.h>
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
@@ -28,6 +32,7 @@ using namespace v3d::graphics;
 using namespace v3d::window;
 using namespace v3d::system;
 using namespace v3d::input;
+using namespace v3d::image;
 
 
 
@@ -50,6 +55,7 @@ vint VExampleApp::Main()
 	IVUpdateManager* pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
 	IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
 	IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
+	IVImageFactory*  pFactory		= QueryObject<IVImageFactory>("image.service");
 
 	//geting later...
 	IVInputManager* pInputManager;
@@ -68,6 +74,7 @@ vint VExampleApp::Main()
 
 	IVDevice::FloatBufferHandle VertexHandle;
 	IVDevice::IntBufferHandle VertexIndexHandle;
+	IVDevice::FloatBufferHandle TexHandle;
 
 	util::importer::VModel3D Model;
 	util::importer::VOBJModelImporter Importer;
@@ -78,6 +85,8 @@ vint VExampleApp::Main()
 
 	VCamera* pCamera;
 
+	VImagePtr myImage = pFactory->CreateImage("/data/tgatest.tga");
+
 	//run system
 
 	//pSystemManager->GetCPU(); // just for testing...
@@ -87,14 +96,14 @@ vint VExampleApp::Main()
 
 	pInputManager = &(pWindow->QueryInputManager());
 
-	pEscButton = &pInputManager->GetStandardKey(IVInputManager::Escape);
-	pUpButton = &pInputManager->GetStandardKey(IVInputManager::CursorUp);
-	pDownButton = &pInputManager->GetStandardKey(IVInputManager::CursorDown);
-	pLeftButton = &pInputManager->GetStandardKey(IVInputManager::CursorLeft);
-	pRightButton = &pInputManager->GetStandardKey(IVInputManager::CursorRight);
+	pEscButton			= &pInputManager->GetStandardKey(IVInputManager::Escape);
+	pUpButton			= &pInputManager->GetStandardKey(IVInputManager::CursorUp);
+	pDownButton			= &pInputManager->GetStandardKey(IVInputManager::CursorDown);
+	pLeftButton			= &pInputManager->GetStandardKey(IVInputManager::CursorLeft);
+	pRightButton		= &pInputManager->GetStandardKey(IVInputManager::CursorRight);
 
-	pLeftMouseButton = &pInputManager->GetMouseButton(1);
-	pRightMouseButton = &pInputManager->GetMouseButton(0);
+	pLeftMouseButton	= &pInputManager->GetMouseButton(1);
+	pRightMouseButton	= &pInputManager->GetMouseButton(0);
 
 
 	pCamera = new VCamera();
@@ -106,29 +115,52 @@ vint VExampleApp::Main()
 
 	// create a test mesh
 
-	/*VFloatBuffer VertexData(Model.m_Objects[0]->m_VerticesList,
+	VFloatBuffer VertexData(Model.m_Objects[0]->m_VerticesList,
 		Model.m_Objects[0]->m_iNumVertices*3);
 
 	VIntBuffer VertexIndex(Model.m_Objects[0]->m_pVertexIndex,
-	Model.m_Objects[0]->m_iNumFaces *3); */
+	Model.m_Objects[0]->m_iNumFaces *3);
+
+	VFloatBuffer TexData(Model.m_Objects[0]->m_TextureCoordsList,
+		Model.m_Objects[0]->m_iNumTexCoords2f * 2);
 
 
-	VFloatBuffer VertexData((vfloat32*)bspImporter.m_pVertices,bspImporter.m_iNumVertices *3);
-	VIntBuffer VertexIndex(bspImporter.m_pIndexList, bspImporter.m_iNumFaceElements);
+	//VFloatBuffer VertexData((vfloat32*)bspImporter.m_pVertices,bspImporter.m_iNumVertices *3);
+	//VIntBuffer VertexIndex(bspImporter.m_pIndexList, bspImporter.m_iNumFaceElements);
+	//VFloatBuffer TexData(bspImporter.m_TextureCoordsList,
+	//	Model.m_Objects[0]->m_iNumTexCoords2f * 2);
 
 
 
 	//assign handles
 	VertexHandle = pDevice->CreateBuffer(&VertexData, VFloatBuffer::CopyData);
 	VertexIndexHandle = pDevice->CreateBuffer(&VertexIndex, VIntBuffer::CopyData);
+	TexHandle = pDevice->CreateBuffer(&TexData, VFloatBuffer::CopyData);
 
 
-	MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
+	/*MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
 		0, bspImporter.m_iNumVertices *3,
 		1);
 	MeshDesc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle,
 		0, bspImporter.m_iNumFaceElements,
 		1);
+
+	MeshDesc.triangleCoords = VMeshDescription::FloatDataRef(TexHandle,
+		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
+		1);*/
+
+	MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
+		0, Model.m_Objects[0]->m_iNumVertices*3,
+		1);
+	MeshDesc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle,
+		0, Model.m_Objects[0]->m_iNumFaces *3,
+		1);
+
+	MeshDesc.triangleCoords = VMeshDescription::FloatDataRef(TexHandle,
+		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
+		1);
+
+
 
 	Mesh = pDevice->CreateMesh(MeshDesc);
 
@@ -137,8 +169,26 @@ vint VExampleApp::Main()
 	pSystemManager->SetStatus(true);
 
 	// main loop...
+
+	GLuint id;
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
+
+	glPixelStorei  (GL_UNPACK_ALIGNMENT, 1);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,  GL_LINEAR);
+	glTexEnvi	   (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,  GL_MODULATE);
+
+
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, myImage->m_iWidth, myImage->m_iHeight, GL_RGB, GL_UNSIGNED_BYTE, myImage->m_pData->GetDataAddress());
+
 	while(pSystemManager->GetStatus())
 	{
+	//	glActiveTextureARB(GL_TEXTURE0_ARB);
+		glBindTexture(GL_TEXTURE_2D, id);
+		glEnable(GL_TEXTURE_2D);
 
 		pDevice->BeginScene();
 		pDevice->RenderMesh(Mesh);

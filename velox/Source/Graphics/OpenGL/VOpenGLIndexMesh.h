@@ -23,6 +23,7 @@ class VOpenGLIndexMesh : public VBaseMesh
 
 	VMeshDescription::FloatDataRef m_TriangleData;
 	VMeshDescription::FloatDataRef m_ColorData;
+	VMeshDescription::FloatDataRef m_TexCoordData;
 	VMeshDescription::IntDataRef m_IndexData;
 
 public:

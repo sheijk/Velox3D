@@ -13,10 +13,10 @@ class IVWindowFrame
 {
 public:
 	
+	/* Shows the window frame if the given param is true */
 	virtual void ShowFrame(vbool in_Param) = 0;
 
-	//TODO: warum muss das frame von wx windows abhaengen?
-	//@ sheijk: Jedes Window Frame ist ein WxFrame [ins]
+	/* Registers the window to the wx connector */
 	virtual void Register()
 	{
 
@@ -24,6 +24,8 @@ public:
 		WinConnect = QueryObject<IVWxConnector>("wx.connector");
 		WinConnect->Register(this);
 	};
+
+
 	virtual ~IVWindowFrame(){};
 };
 

@@ -19,7 +19,9 @@ public:
 
 	typedef VPointer<IVWindow>::SharedPtr IVWindowPtr;
 
+	/* Returns a pointer to the window created by this manager */
 	virtual IVWindowPtr QueryWindow(VStringParam in_pName) = 0;
+	
 	virtual ~IVWindowManager() {};
 
 };

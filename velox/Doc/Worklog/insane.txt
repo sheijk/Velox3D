@@ -10,11 +10,6 @@ Unbehandelte Ausnahme (Zugriffsverletzung in VObjectRegistry.cpp/Z108)
 waer praktisch wenn Konsolen + Editor Fenster resizable waeren 
 - unwichtig im moment + aufwaendig... -ins
 
-
-Current assigned tasks:
--creating rendering methods and implementing gfx service
-
-
 -------------------------------------------------------------------------------
 Personal Notes:
 
@@ -23,17 +18,12 @@ TODO List:
 - Console crashes on some machines
 - InputManager should be deactivated by loosing focus  
 
-
-
-- Cinema4d uses left handed coordinate system.
-  On intel machine swap byte order!
-  angles are in radians
-  data stored in model view space
-  color data is clamped to the range of [0...1]
-  which chunks our app should handle??
-  Should we use vfs for loading model?? <- das sollte fuer alle daten benutzt werden, sonst verlieren wir den nutzen des vfs (zugriff auf daten unabhaengig vom speicherort, archive, ..)
-
+-------------------------------------------------------------------------------
 Done List:
+
+11.02.04
+- added documentation
+- finished ImageService with TGA loading
 
 30.01.04
 - added small plane class

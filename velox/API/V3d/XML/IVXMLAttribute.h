@@ -17,7 +17,10 @@ class IVXMLAttribute
 {
 public:
 
-	virtual VStringRetVal GetName() = 0;
+	/* Returns the name of the xml attribute*/
+    virtual VStringRetVal GetName() = 0;
+	
+	/* Returns the value of this xml attribute */
 	virtual VStringRetVal GetValue() = 0;
 
 };

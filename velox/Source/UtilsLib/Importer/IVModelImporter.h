@@ -17,6 +17,7 @@ namespace importer{
 class IVModelImporter
 {
 public:
+	/* Loads a model out of the file and save to Model param */
 	virtual void Create(VStringParam sFilename, VModel3D* Model) = 0;
 };
 //-----------------------------------------------------------------------------

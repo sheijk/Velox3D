@@ -54,7 +54,9 @@ struct VMeshDescription
 	FloatDataRef triangleVertices; // extra felder fuer tris, fans + strips? -wozu?
 	//vertex array hat nichts mit rendering mode zu tun. sollte evtl in IndexBuffer stehen
 	FloatDataRef triangleColors;
+	FloatDataRef triangleCoords;
 	IntDataRef triangleIndices;
+
 };
 
 //-----------------------------------------------------------------------------
