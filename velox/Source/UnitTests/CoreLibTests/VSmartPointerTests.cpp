@@ -7,11 +7,13 @@
 #include <v3d/UnitTests/VUnitTestException.h>
 
 #include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/SmartPtr/VSharedPtr.h>
 
 #include "VDestructTest.h"
 
 #include <list>
 #include <string>
+#include <vector>
 //-----------------------------------------------------------------------------
 using std::string;
 namespace v3d {
@@ -168,6 +170,65 @@ void testDeleteOnDestructor(const VString& strPtrName)
 	}
 }
 
+
+template<typename SharedPtr>
+void testSimpleRefCounting(const VString& strPtrName)
+{
+	vbool bCheck;
+	SharedPtr pShared(new VDestructTest(bCheck));
+	SharedPtr pSecond(pShared);
+	V3D_ASSERT(bCheck);
+
+	pSecond.Release();
+	V3D_ASSERT(bCheck);
+
+	pShared.Release();
+	V3D_ASSERT(!bCheck);
+}
+
+template<typename SharedPtr>
+void testRefCounting(const VString& strPtrName)
+{
+	vbool bCheck;
+	SharedPtr firstPtr(new VDestructTest(bCheck));
+
+	if(!bCheck)
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
+			": reference counting failed. subject deleted"
+			" immediately after creation"
+			);
+	}
+
+	const int pointerCount = 10;
+	SharedPtr pointers[pointerCount];
+
+	for(int i = 0; i < pointerCount; ++i)
+	{
+		pointers[i] = firstPtr;
+	}
+
+	if(!bCheck)
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
+			": reference counting failed. subject deleted to early");
+	}
+
+	firstPtr.Release();
+
+	for(int i = 0; i < pointerCount; ++i)
+	{
+		pointers[i].Release();
+	}
+
+	if(bCheck)
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName +
+			": subject was not deleted after all shared pointers referencing"
+			" it have been Release()ed");
+	}
+}
+
 template<typename SmartPtr>
 void testEqCmp(const VString& strPtrName)
 {
@@ -270,7 +331,8 @@ void VSmartPointerTest::TestAutoPtr()
 
 void VSmartPointerTest::TestRefCountPtr()
 {
-	typedef VPointer<VDestructTest>::SharedPtr TestPtr;
+	//typedef VPointer<VDestructTest>::SharedPtr TestPtr;
+	typedef VSharedPtr<VDestructTest> TestPtr;
 
 	const VString& ptrName("SharedPtr");
 
@@ -288,6 +350,10 @@ void VSmartPointerTest::TestRefCountPtr()
 
 	// test release on destruction
 	testDeleteOnDestructor<TestPtr>(ptrName);
+
+	// test whether reference counting works
+	testSimpleRefCounting<TestPtr>(ptrName);
+	testRefCounting<TestPtr>(ptrName);
 
 	// test eq compare (==/!=)
 	testEqCmp<TestPtr>(ptrName);

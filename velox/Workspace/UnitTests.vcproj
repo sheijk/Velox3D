@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="UnitTests"
-	ProjectGUID="{C0A4072B-D722-4E9A-91FF-BA1F511CF619}"
+	ProjectGUID="{20041016-04E0-47C5-B84B-8E9DE2BE6843}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -14,16 +14,16 @@
 			Name="Debug|Win32"
 			OutputDirectory="../Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\gmtl"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -33,11 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/UnitTests.dll"
+				OutputFile="$(OutDir)/UnitTests.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/UnitTests.pdb"
-				SubSystem="2"
+				SubSystem="1"
 				ImportLibrary="$(OutDir)/UnitTests.lib"
 				TargetMachine="1"/>
 			<Tool
@@ -69,8 +69,8 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\gmtl"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -81,10 +81,9 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/UnitTests.dll"
+				OutputFile="$(OutDir)/UnitTests.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/UnitTests.pdb"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -116,8 +115,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="CoreLib Tests"
-			Filter="">
+			Name="CoreLib Tests">
 			<File
 				RelativePath="..\Source\UnitTests\CoreLibTests\VContainerTests.cpp">
 			</File>
@@ -147,8 +145,26 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="VFS Tests"
+			Name="ModuleImpl"
 			Filter="">
+			<File
+				RelativePath="..\Source\Kernel\main.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Module\VeloxModule.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Math Tests">
+			<File
+				RelativePath="..\Source\UnitTests\MathTests\VMathTest.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\MathTests\VMathTest.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="VFS Tests">
 			<File
 				RelativePath="..\Source\UnitTests\VFSTests\StreamTests.cpp">
 			</File>
@@ -175,8 +191,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="XML Tests"
-			Filter="">
+			Name="XML Tests">
 			<File
 				RelativePath="..\Source\UnitTests\XMLTests\VXMLTests.cpp">
 			</File>
@@ -191,17 +206,47 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Math Tests"
+			Name="Test Suite"
 			Filter="">
-			<File
-				RelativePath="..\Source\UnitTests\MathTests\VMathTest.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\MathTests\VMathTest.h">
-			</File>
+			<Filter
+				Name="Interface">
+				<File
+					RelativePath="..\Api\V3d\UnitTests\IVTestManager.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\UnitTests\IVUnitTest.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\UnitTests\VUnitTestException.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Example">
+				<File
+					RelativePath="..\Source\UnitTests\VUnitTestExample.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\UnitTests\VUnitTestExample.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Implementation">
+				<File
+					RelativePath="..\Source\UnitTests\VTestManager.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\UnitTests\VTestManager.h">
+				</File>
+				<File
+					RelativePath="..\Source\UnitTests\VTestSuite.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\UnitTests\VTestSuite.h">
+				</File>
+			</Filter>
 		</Filter>
 		<File
-			RelativePath="..\Source\UnitTests\TestsDLL.cpp">
+			RelativePath="..\Source\UnitTests\TestsApp.cpp">
 		</File>
 	</Files>
 	<Globals>

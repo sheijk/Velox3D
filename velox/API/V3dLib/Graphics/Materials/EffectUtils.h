@@ -15,6 +15,8 @@ using namespace v3d; // prevent auto indenting
 
 /** creates a state which sets the materials default color */
 VState DefaultColorState(VColor4f in_Color);
+VState DefaultColorState(
+	vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha);
 
 /** creates a state for the color buffer write mask */
 VState ColorBufferWriteMaskState(VColorBufferMask in_Mask);

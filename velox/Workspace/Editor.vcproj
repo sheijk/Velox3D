@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/boost/boostd.lib ../Local/ExternalLibs/wxWindows/lib/wxmsw24d.lib"
+				AdditionalDependencies="boostd.lib wxmsw24d.lib"
 				OutputFile="$(OutDir)/Editor.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"

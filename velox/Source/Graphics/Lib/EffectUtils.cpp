@@ -19,6 +19,12 @@ VState DefaultColorState(VColor4f in_Color)
 	return colorState;
 }
 
+VState DefaultColorState(
+	vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha)
+{
+	return DefaultColorState(VColor4f(red, green, blue, alpha));
+}
+
 VState ColorBufferWriteMaskState(VColorBufferMask in_Mask)
 {
 	VState colorMaskState("colormask");

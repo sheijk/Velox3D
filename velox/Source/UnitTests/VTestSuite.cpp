@@ -24,17 +24,12 @@ namespace unittests {
 	implementation of class VTestSuite
 */
 
-// constructor
-VTestSuite::VTestSuite(VStringParam in_strName) :
-	VNamedObject(in_strName, 0)
+VTestSuite::VTestSuite()
 {
-
 }
 
-// destructor
 VTestSuite::~VTestSuite()
 {
-
 }
 
 void VTestSuite::GenerateTestList()

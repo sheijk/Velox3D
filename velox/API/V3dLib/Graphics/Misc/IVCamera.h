@@ -3,6 +3,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <V3d/Math/VVector.h>
+#include <V3d/Math/VMatrix.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

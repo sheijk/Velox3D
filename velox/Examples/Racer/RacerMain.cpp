@@ -16,6 +16,7 @@
 
 #include "Graphics/VMeshPart.h"
 #include "Shared/VUpdateablePart.h"
+#include "Graphics/VCameraPosPart.h"
 
 using namespace v3d;
 using namespace window;
@@ -35,53 +36,6 @@ using namespace std;
 #include "RacerUtils.h"
 //-----------------------------------------------------------------------------
 
-/**
- * Gets a VRigidBodyPart named "body" and sets it's position vector to the
- * camera's position vector
- */
-class VCameraPosPart : public VUpdateablePart
-{
-	VRigidBodyPart* m_pRigidBody;
-	const IVCamera& m_Camera;
-
-public:
-	VCameraPosPart(
-		const IVCamera& in_Camera, 
-		VEntityUpdater<VUpdateablePart>* in_pUpdater
-		);
-
-	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part);
-	virtual void Update();
-};
-
-VCameraPosPart::VCameraPosPart(
-	const IVCamera& in_Camera,
-	VEntityUpdater<VUpdateablePart>* in_pUpdater
-) : 
-	VUpdateablePart(in_pUpdater),
-	m_Camera(in_Camera)
-{
-	m_pRigidBody = 0;
-}
-
-void VCameraPosPart::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
-{
-	if( in_Id.AsStdString() == "body" && in_Part.IsOfType<VRigidBodyPart>() )
-	{
-		m_pRigidBody = in_Part.Convert<VRigidBodyPart>();
-	}
-}
-
-void VCameraPosPart::Update()
-{
-	if( m_pRigidBody != 0 )
-	{
-		m_pRigidBody->SetPosition(m_Camera.GetPosition());
-	}
-}
-
-//-----------------------------------------------------------------------------
-
 class VRacerApp : public VVeloxApp
 {
 	IVDevice& GetDevice() { return *m_pDevice; }
@@ -89,13 +43,35 @@ class VRacerApp : public VVeloxApp
 	IVEntityManager::EntityPtr CreateSkyEntity();
 	IVEntityManager::EntityPtr CreateHeightmapEntity();
 
+	IVEntityManager::EntityPtr CreateSphereBodyEntity(VVector<vfloat32, 3> in_Position);
+
+	void CreateMeshes();
+
+	IVDevice::MeshHandle m_hSphereMesh;
+	IVDevice::BufferHandle m_hSphereTexture;
+
 	VGraphicsManager m_GraphicsManager;
 	IVDevice* m_pDevice;
 public:
+	VRacerApp();
+	virtual ~VRacerApp();
+
 	virtual vint Main(vector<string> args);
 };
 
 //-----------------------------------------------------------------------------
+VRacerApp::VRacerApp()
+{
+	m_hSphereMesh = 0;
+	m_hSphereTexture = 0;
+	m_pDevice = 0;
+}
+
+VRacerApp::~VRacerApp()
+{
+	m_pDevice = 0;
+}
+
 vint VRacerApp::Main(vector<string> args)
 {
 	vout << "brumm brumm" << vendl;
@@ -115,6 +91,8 @@ vint VRacerApp::Main(vector<string> args)
 	VSimpleDrawList drawList(device);
 	m_GraphicsManager.SetDrawList(drawList);
 	VEntityUpdater<VUpdateablePart> m_PartUpdater;
+
+	CreateMeshes();
 
 	// setup camera
 	VKeyboardCamera cam(input);
@@ -139,6 +117,19 @@ vint VRacerApp::Main(vector<string> args)
 	IVEntityManager::EntityPtr pHeightmapEntity = CreateHeightmapEntity();
 	pHeightmapEntity->Activate();
 	pEntityManager->Add(pHeightmapEntity);
+
+	// add some balls
+	for(vint i = 0; i < 5; ++i)
+	{
+		VVector<vfloat32, 3> pos;
+		pos.Set(0, math::PseudoRandom(i*1000, 0.0f, 256.0f));
+		pos.Set(1, math::PseudoRandom(i*1000, 0.0f, 256.0f));
+		pos.Set(2, 0);
+
+		IVEntityManager::EntityPtr pBallEntity = CreateSphereBodyEntity(pos);
+		pBallEntity->Activate();
+		pEntityManager->Add(pBallEntity);
+	}
 
 	VUpdateManagerPtr pUpdater;
 	VSystemManagerPtr pSystem;
@@ -269,6 +260,52 @@ IVEntityManager::EntityPtr VRacerApp::CreateSkyEntity()
 	pSkyEntity->AddPart(VFourCC("mesh"), VEntity::PartPtr(pSkyMeshPart));
 	pSkyEntity->AddPart(VFourCC("body"), VEntity::PartPtr(new VRigidBodyPart()));
 	return pSkyEntity;
+}
+
+void VRacerApp::CreateMeshes()
+{
+	V3D_ASSERT(m_pDevice != 0);
+	V3D_ASSERT(m_hSphereMesh == 0);
+	V3D_ASSERT(m_hSphereTexture == 0);
+
+	VPolarSphereMesh<VTexturedVertex> sphere(10, 10);
+	sphere.GenerateCoordinates();
+	sphere.GenerateTexCoords();
+
+	VEffectDescription sphereSurface;
+	VRenderPass& pass(sphereSurface.AddShaderPath().AddRenderPass());
+
+	// load texture
+	VImage ballTex(64, 64, 24);
+	VImageServicePtr()->CreateImage("/data/ball.tga", ballTex);
+	m_hSphereTexture = m_pDevice->CreateBuffer(IVDevice::Texture, &ballTex.GetData());
+
+	pass.AddState(TextureState(
+		m_hSphereTexture, 
+		ballTex.GetWidth(), ballTex.GetHeight(),
+		FilterLinear, FilterLinear,
+		TextureRepeat, TextureRepeat));
+
+	pass.AddState(DefaultColorState(1, 1, 1, 1));
+
+    m_hSphereMesh = BuildMesh(*m_pDevice, sphere, sphereSurface);
+}
+
+IVEntityManager::EntityPtr VRacerApp::CreateSphereBodyEntity(
+	VVector<vfloat32, 3> in_Position)
+{
+	IVEntityManager::EntityPtr pBallEntity(new VEntity());
+
+	VMeshPart* pMeshPart = new VMeshPart(&m_GraphicsManager);
+	pMeshPart->AddMesh(m_hSphereMesh);
+
+	pBallEntity->AddPart(VFourCC("mesh"), VEntity::PartPtr(pMeshPart));
+	
+	VRigidBodyPart* pRigidBodyPart = new VRigidBodyPart();
+	pRigidBodyPart->SetPosition(in_Position);
+	pBallEntity->AddPart(VFourCC("body"), VEntity::PartPtr(pRigidBodyPart));
+
+	return pBallEntity;
 }
 
 	//{

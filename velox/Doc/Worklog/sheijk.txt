@@ -38,6 +38,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+17.10.2004
+- VSharedPtr. (sollte statt VPointer<T>::SharedPtr benutzt werden, bzw ist das
+  selbe)
+- UnitTest Framework wieder brauchbar gemacht
+- neue Tests fuer VSharedPtr
+
 14.10.2004
 - Erste Version der Racer App fertig
 - Einige Entity Part Typen fuer Meshes, Festkoerper(Position,etc), Kamera usw

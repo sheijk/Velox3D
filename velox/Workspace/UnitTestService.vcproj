@@ -114,48 +114,6 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Interface"
-			Filter="">
-			<File
-				RelativePath="..\Api\V3d\UnitTests\IVTestManager.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\UnitTests\IVUnitTest.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\UnitTests\VUnitTestException.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Implementation"
-			Filter="">
-			<File
-				RelativePath="..\Source\UnitTests\UnitTestSuiteDLL.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VTestManager.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VTestManager.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VTestSuite.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VTestSuite.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Example"
-			Filter="">
-			<File
-				RelativePath="..\Source\UnitTests\VUnitTestExample.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VUnitTestExample.h">
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

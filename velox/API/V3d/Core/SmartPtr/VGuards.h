@@ -5,6 +5,7 @@
 #include "VExclusiveOwnerPol.h"
 #include "VRefCountPol.h"
 #include "VPointerStorage.h"
+#include "VSharedPtr.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -34,10 +35,11 @@ struct VPointer
 	 * subject will be deleted when last pointer refering to
 	 * it releases the subject or is set to a new subject
 	 */
-	typedef VSmartPtr<
-		T,
-		VRefCountPol< VPointerStorage<T> >
-		> SharedPtr;
+	typedef VSharedPtr<T> SharedPtr;
+	//typedef VSmartPtr<
+	//	T,
+	//	VRefCountPol< VPointerStorage<T> >
+	//	> SharedPtr;
 
 private:
 	// prevent user from accidently writing VPointer<Blah> 

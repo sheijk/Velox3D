@@ -157,6 +157,12 @@
 			Name="Graphic Entities"
 			Filter="">
 			<File
+				RelativePath=".\Graphics\VCameraPosPart.cpp">
+			</File>
+			<File
+				RelativePath=".\Graphics\VCameraPosPart.h">
+			</File>
+			<File
 				RelativePath=".\Graphics\VMeshPart.cpp">
 			</File>
 			<File

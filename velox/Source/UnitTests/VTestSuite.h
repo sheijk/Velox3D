@@ -39,13 +39,14 @@ struct VUnitTestInfo
 	IVUnitTest* pUnitTest;
 };
 
-class VTestSuite : public IVApplication, public VNamedObject
+class VTestSuite
 {
 public:
-	VTestSuite(VStringParam in_strName);
+	VTestSuite();
 	virtual ~VTestSuite();
 
-	virtual int Main();
+	int Main();
+
 private:
 	void ExecuteTests();
 	void PrintList() const;
