@@ -13,8 +13,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Local/$(ConfigurationName)"
-			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
@@ -56,15 +56,15 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Local/$(ConfigurationName)"
-			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
-				RuntimeLibrary="0"
+				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -73,16 +73,8 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib glu32.lib"
-				OutputFile="$(OutDir)/GraphicsService.dll"
-				LinkIncremental="1"
-				GenerateDebugInformation="TRUE"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/GraphicsService.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				AdditionalDependencies="opengl32.lib glu32.lib"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -97,8 +89,6 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool

@@ -4,9 +4,9 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/VFS/IVDataProvider.h>
 #include <v3d/VFS/IVStreamFactory.h>
-
+//-----------------------------------------------------------------------------
 #include "VDirectory.h"
-
+//-----------------------------------------------------------------------------
 #include <boost/filesystem/convenience.hpp>
 #include <string>
 //-----------------------------------------------------------------------------

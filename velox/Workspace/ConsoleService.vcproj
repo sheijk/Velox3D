@@ -12,14 +12,14 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Local/$(ConfigurationName)"
-			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;Local\ExternalLibs\wxWindows\contrib\include;Local\ExternalLibs\wxWindows\lib\mswdlld"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;CONSOLESERVICE_EXPORTS;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXDEBUG=1;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
 				MinimalRebuild="FALSE"
 				BasicRuntimeChecks="3"
@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/wxWindows/wxmsw24d.lib"
+				AdditionalDependencies="Local/ExternalLibs/wxWindows/lib/wxmsw24d.lib"
 				OutputFile="$(OutDir)/ConsoleService.dll"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="libcd.lib;libcid.lib;msvcrt.lib;comctl32.lib;Ws2_32.lib"
@@ -65,14 +65,14 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Local/$(ConfigurationName)"
-			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="_USRDLL;EDITORSERVICE_EXPORTS;NDEBUG;WIN32;_WINDOWS;__WINDOWS__;__WXMSW__;__WIN95__;__WIN32__;WINVER=0x0400;STRICT"
+				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;Local\ExternalLibs\wxWindows\contrib\include;Local\ExternalLibs\wxWindows\lib\mswdll"
+				PreprocessorDefinitions="_USRDLL;CONSOLESERVICE_EXPORTS;NDEBUG;WIN32;_WINDOWS;__WINDOWS__;__WXMSW__;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXDEBUG=0;WXUSINGDLL"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -83,7 +83,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/wxWindows/wxmsw24.lib"
+				AdditionalDependencies="Local/ExternalLibs/wxWindows/lib/wxmsw24.lib"
 				OutputFile="$(OutDir)/ConsoleService.dll"
 				LinkIncremental="1"
 				IgnoreDefaultLibraryNames="libcd.lib;libcid.lib;msvcrt.lib;comctl32.lib;Ws2_32.lib"

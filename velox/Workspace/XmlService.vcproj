@@ -13,14 +13,14 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Local/$(ConfigurationName)"
-			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;/Local/ExternalLibs/tinyxml"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,6 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Local/ExternalLibs/tinyxml/tinyxmld.lib"
 				OutputFile="$(OutDir)/XmlService.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -64,8 +65,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Local/$(ConfigurationName)"
-			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -73,11 +74,12 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="TRUE"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -86,6 +88,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Local/ExternalLibs/tinyxml/tinyxmld.lib"
 				OutputFile="$(OutDir)/XmlService.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
@@ -182,28 +185,6 @@
 			</File>
 			<File
 				RelativePath="..\Source\XMLService\XmlServiceDLL.cpp">
-			</File>
-		</Filter>
-		<Filter
-			Name="NewFolder1"
-			Filter="">
-			<File
-				RelativePath="..\Source\XMLService\TinyXML\tinystr.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\TinyXML\tinystr.h">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\TinyXML\tinyxml.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\TinyXML\tinyxml.h">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\TinyXML\tinyxmlerror.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\TinyXML\tinyxmlparser.cpp">
 			</File>
 		</Filter>
 	</Files>

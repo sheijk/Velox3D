@@ -10,9 +10,16 @@ Current assigned tasks:
 
 TODO List:
 
+25.09.03
+- Templates need update!!
+- project does not need any global includes. make sure you have the ExternalLib
+  file extracted to your "Local" directory
+- builds are now moved to "Local/Build" for more clearness
+
 24.09.03
 - Added WindowService
 - Added OpenGL device
+- Added External Lib html to information
 
 
 07.09.03
