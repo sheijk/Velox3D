@@ -13,14 +13,14 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;Local\ExternalLibs\boost"
+				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\boost"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;VIRTUALFILESYSTEM_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/boost/boost_fsd.lib"
+				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fsd.lib"
 				OutputFile="$(OutDir)/VirtualFileSystem.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
@@ -66,13 +66,13 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;Local\ExternalLibs\boost"
+				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\boost"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;VIRTUALFILESYSTEM_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -84,7 +84,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/boost/boost_fs.lib"
+				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib"
 				OutputFile="$(OutDir)/VirtualFileSystem.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""

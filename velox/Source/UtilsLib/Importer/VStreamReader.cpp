@@ -6,12 +6,14 @@ namespace util{
 using namespace v3d::vfs;
 VStreamReader::VStreamReader(IVStream* in_pStream)
 {
+	// allgemein in dieser fkt: naming conventions beachten,
+	// kein m_ fuer lok. vars, kein grossbuchst. am anfang -sheijk
     CharList m_BufferPartList;
 	iSizeOfBuffer = 0;
 	iSizeOfBufferElements = 0;
 	
 	
-	//We are going to loop until a break
+	//We are going to loop until a break - ach nee ;) -sheijk
 	for(;;)
 	{
 		//Create a buffer for our data

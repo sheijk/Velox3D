@@ -60,7 +60,7 @@ vint VExampleApp::Main()
 	util::VModel3D Model;
 	util::VOBJModelImporter Importer;
 
-	Importer.Create("ObjFile", &Model);
+	Importer.Create("/data/test.obj", &Model);
 
 	// create a test mesh
     // dafuer brauchen wir spaeter hilfsklassen... -spaeter? jetzt! :)

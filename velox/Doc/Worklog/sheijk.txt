@@ -1,18 +1,14 @@
 Worklog von sheijk
 --------------------------------------------------------------------------------
 ----- messages to sheijk:
+
 TODO: Einige typedefs sollte einfacher zugaenglcher sein z.b. Vertex
 TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
 zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
 die gleichen services stehen -[ins]
-<ins>Bitte postet am ende dieser Datei eure ogl extensions damit ich sehe, mit
-as wir arbeiten koennen (siehe console fuer extensions)
 
 <ins>: vfs bug:wenn ich eine date mit VReadAccess oeffnen will bekomme ich eine
 exception: vfs does not allow writeacess!
-
-<ins> es ist sehr leastig, wenn nicht sogar ein design fehler, wenn man aus einer datei
-ueber das vfs lesen will jedes mal eine VStreamReader Klasse zu implementieren!!!!
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:
@@ -29,9 +25,6 @@ template member konvertiert?
 
 --------------------------------------------------------------------------------
 ----- personal todo:
-
-	Ausgabeverzeichnisse von V/Workspace/Local/Build nach V/Local/Build 
-	bewegen
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
 	Objekts auf 0 gesetzt)
@@ -67,6 +60,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+24.01.2004
+Ausgabeverzeichnisse und External Libs von velox/workspace/local nach velox/local
+bewegt
 
 23.01.2004
 Geometry Utils zum leichteren Erzeugen von Float Buffer und Mesh Descriptions

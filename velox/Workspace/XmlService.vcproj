@@ -13,14 +13,14 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;Local/ExternalLibs/"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/tinyxml/tinyxmld.lib"
+				AdditionalDependencies="../Local/ExternalLibs/tinyxml/tinyxmld.lib"
 				OutputFile="$(OutDir)/XmlService.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -65,8 +65,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -74,7 +74,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories="../API;Local/ExternalLibs/"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -88,7 +88,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/tinyxml/tinyxmld.lib"
+				AdditionalDependencies="../Local/ExternalLibs/tinyxml/tinyxmld.lib"
 				OutputFile="$(OutDir)/XmlService.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"

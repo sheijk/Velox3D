@@ -13,14 +13,14 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;&quot;D:\Home\My Desktop\Current Projects\velox\Workspace\Local\ExternalLibs\wxWindows\contrib\include&quot;;Local\ExternalLibs\wxWindows\lib\mswdlld;Local/ExternalLibs/gmtl;Local/ExternalLibs"
+				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\wxWindows\include;..\Local\ExternalLibs\wxWindows\contrib\include;../Local\ExternalLibs\wxWindows\lib\mswdlld;../Local/ExternalLibs/gmtl;../Local/ExternalLibs"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;WINDOWSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/extgl/extgl.lib"
+				AdditionalDependencies="../Local/ExternalLibs/extgl/extgl.lib"
 				OutputFile="$(OutDir)/WindowService.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
@@ -66,13 +66,13 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;Local\ExternalLibs\wxWindows\include;&quot;D:\Home\My Desktop\Current Projects\velox\Workspace\Local\ExternalLibs\wxWindows\contrib\include&quot;;Local\ExternalLibs\wxWindows\lib\mswdlld;Local/ExternalLibs/gmtl;Local/ExternalLibs"
+				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\wxWindows\include;..\Local\ExternalLibs\wxWindows\contrib\include;../Local\ExternalLibs\wxWindows\lib\mswdlld;../Local/ExternalLibs/gmtl;../Local/ExternalLibs"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;__WINDOWS__;__WXMSW__;WINDOWSERVICE_EXPORTS"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
@@ -84,7 +84,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Local/ExternalLibs/extgl/extgl.lib"
+				AdditionalDependencies="../Local/ExternalLibs/extgl/extgl.lib"
 				OutputFile="$(OutDir)/WindowService.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
