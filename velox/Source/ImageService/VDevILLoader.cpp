@@ -41,12 +41,24 @@ VImage* VDevILLoader::Create(vfs::IVStream* in_pStream, VStringParam in_sExt)
 
 	vbyte* pData = ilGetData();
 
-	VImage* pic = new VImage();
+	const vuint nHeight = ilGetInteger(IL_IMAGE_HEIGHT);
+	const vuint nWidth = ilGetInteger(IL_IMAGE_WIDTH);
+	const vuint nBPP = ilGetInteger(IL_IMAGE_BPP);
 
-	pic->iWidth  = ilGetInteger(IL_IMAGE_WIDTH);
-	pic->iHeight = ilGetInteger(IL_IMAGE_HEIGHT);
+	VImage* pic = new VImage(nWidth, nHeight, nBPP * 8);
 
-	pic->pData = new VImage::ImageData(pData, pic->GetWidth()*pic->GetHeight());
+	memcpy(pic->GetData().GetDataAddress(), pData, nWidth*nHeight*nBPP);
+
+	//VImage* pic = new VImage();
+
+	//pic->iWidth  = ilGetInteger(IL_IMAGE_WIDTH);
+	//pic->iHeight = ilGetInteger(IL_IMAGE_HEIGHT);
+	//pic->iBPP = ilGetInteger(IL_IMAGE_BPP);
+
+	//pic->pData = new VImage::ImageData(
+	//	pData, 
+	//	pic->GetWidth() * pic->GetHeight()
+	//	);
 	
 	return pic;
 }

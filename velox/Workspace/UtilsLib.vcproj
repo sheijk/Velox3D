@@ -204,6 +204,9 @@
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.inl">
 				</File>
 				<File
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VQuadMesh.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.h">
 				</File>
 				<File

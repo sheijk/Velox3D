@@ -3,8 +3,13 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <v3d/Graphics/IVDevice.h>
 #include <v3d/Image.h>
 //-----------------------------------------------------------------------------
+namespace v3d { namespace graphics { 
+	class IVDrawList; 
+}}
+
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
@@ -18,7 +23,7 @@ struct VTextureDistributionOptions
 class VTextureStage
 {
 public:
-	VTextureStage(VStringParam in_strFileName);
+	VTextureStage(VStringParam in_strFileName, graphics::IVDevice& device);
 
 	VTextureDistributionOptions& Distribution();
 
@@ -28,10 +33,20 @@ public:
 
 	v3d::image::VImage& Image();
 
+	void AddPreviewMesh(graphics::IVDrawList& in_DrawList);
+	void RemovePreviewMesh(graphics::IVDrawList& in_DrawList);
+
 private:
+	// no copy'ing
+	VTextureStage(const VTextureStage&);
+
+	void CreatePreviewMesh(graphics::IVDevice& device);
+	void ReleaseResources();
+
 	VString m_TextureFileName;
 	VTextureDistributionOptions m_Distri;
 	v3d::image::IVImageFactory::ImagePtr m_pImage;
+	graphics::IVDevice::MeshHandle m_hPreviewMesh;
 };
 
 //-----------------------------------------------------------------------------

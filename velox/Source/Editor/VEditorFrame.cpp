@@ -5,6 +5,8 @@
 
 #include <v3d/Core/VIOStream.h>
 
+#include "TerrainTex/MainWindow.h"
+
 #include <algorithm>
 
 //-----------------------------------------------------------------------------
@@ -121,6 +123,9 @@ VEditorFrame::VEditorFrame(PluginList& in_Plugins)
 
 
 	SetMenuBar(&m_MenuBar);
+
+	//MainWindow* pMainWindow = new MainWindow(0);
+	//pMainWindow->Show(true);
 }
 
 void VEditorFrame::RegisterDocumentClass(IVDocumentClass& in_DocClass)

@@ -61,6 +61,8 @@ struct IVDrawList
 	virtual void Remove(VModel in_Model) = 0;
 
 	virtual void Render() = 0;
+
+	virtual IVDevice& GetDevice() = 0;
 };
 
 //-----------------------------------------------------------------------------

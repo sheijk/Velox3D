@@ -15,15 +15,32 @@ class VQuadMesh : public VGeometryData<VertexStructure>
 {
 public:
 	VQuadMesh(vfloat32 in_fSize = 1.0f) :
-		VGeometryData<VertexStructure>(VMeshDescription::Quads, 4, 0)
+		VGeometryData<VertexStructure>(VMeshDescription::Quads, 4, 0),
+		m_fSize(in_fSize)
+	{
+		GenerateCoordinates();
+	}
+
+	void GenerateCoordinates()
 	{
 		VertexBuffer& vertices(GetVertexBuffer());
-		vertices[0].position = VVector3f(-in_fSize, -in_fSize, 0);
-		vertices[1].position = VVector3f(-in_fSize,  in_fSize, 0);
-		vertices[2].position = VVector3f( in_fSize,  in_fSize, 0);
-		vertices[3].position = VVector3f( in_fSize, -in_fSize, 0);
+		vertices[0].position = VVector3f(-m_fSize, -m_fSize, 0);
+		vertices[1].position = VVector3f(-m_fSize,  m_fSize, 0);
+		vertices[2].position = VVector3f( m_fSize,  m_fSize, 0);
+		vertices[3].position = VVector3f( m_fSize, -m_fSize, 0);
+	}
+
+	void GenerateTexCoords()
+	{
+		VertexBuffer& vertices(GetVertexBuffer());
+
+		vertices[0].texCoords = VTexCoord2f(0, 1);
+		vertices[1].texCoords = VTexCoord2f(0, 0);
+		vertices[2].texCoords = VTexCoord2f(1, 0);
+		vertices[3].texCoords = VTexCoord2f(1, 1);
 	}
 private:
+	vfloat32 m_fSize;
 };
 
 //-----------------------------------------------------------------------------

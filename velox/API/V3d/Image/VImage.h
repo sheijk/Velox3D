@@ -31,7 +31,7 @@ public:
 	{
 		V3D_VERIFY(bpp == 8 || bpp == 16 || bpp == 24 || bpp == 32);
 
-		const vuint bufSize = width * height * bpp;
+		const vuint bufSize = width * height * bpp/8;
 		pData = new ImageData(new vuchar[bufSize], bufSize);
 
 		iHeight = height;

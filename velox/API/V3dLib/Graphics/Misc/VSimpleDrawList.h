@@ -22,11 +22,11 @@ public:
 	virtual void Remove(VModel in_Model);
 
 	virtual void Render();
-
-	void ApplyMaterial(IVMaterial* in_pRenderStates);
-	
+	virtual IVDevice& GetDevice();
 
 private:
+	void ApplyMaterial(IVMaterial* in_pRenderStates);
+
 	typedef VModel::TransformMatrixPtr TransformMatrixPtr;
 	typedef std::list<VModel> ModelList;
 	

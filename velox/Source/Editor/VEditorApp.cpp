@@ -29,7 +29,6 @@
 #include <V3dLib/Math.h>
 
 #include "TerrainTex/VTerrainTexDocClass.h"
-#include "TerrainTex/VTextureStageSetupFrame.h"
 
 #include <wx/wx.h>
 #include <wx/frame.h>
@@ -42,107 +41,137 @@ using namespace v3d;
 
 //-----------------------------------------------------------------------------
 
-wxWindow* GetRootWindow(wxWindow* in_pWin)
-{
-	wxWindow* parent = in_pWin->GetParent();
-	if( parent == 0 )
-	{
-		return in_pWin;
-	}
-	else
-	{
-		return GetRootWindow(parent);
-	}
-}
+//wxWindow* GetRootWindow(wxWindow* in_pWin)
+//{
+//	wxWindow* parent = in_pWin->GetParent();
+//	if( parent == 0 )
+//	{
+//		return in_pWin;
+//	}
+//	else
+//	{
+//		return GetRootWindow(parent);
+//	}
+//}
 
 VEditorApp::VEditorApp() : VNamedObject("main", 0)
 {
 	m_bAllowNewPlugins = true;
 }
 
-void* GetDesktopHandle();
+//void* GetDesktopHandle();
+
+using namespace v3d;
+using namespace v3d::graphics;
+using namespace v3d::window;
+using namespace v3d::system;
+using namespace v3d::updater;
+using namespace v3d::image;
 
 vint VEditorApp::Main()
 {
-	using namespace graphics;
-	using namespace math;
+	vout << "lalelu" << vendl;
+
+	VServicePtr<IVSystemManager> pSystem;
+	VServicePtr<IVWindowManager> pWindowManager;
+	VServicePtr<IVUpdateManager> pUpdater;
+	VServicePtr<IVImageFactory> pImageFactory;
+
+	IVWindowManager::IVWindowPtr pWindow(pWindowManager->QueryWindow("."));
+	IVDevice& device(pWindow->QueryGraphicsDevice());
+
+	VQuadMesh<graphics::VColoredTextureVertex> quad;
+	quad.GenerateCoordinates();
+	quad.GenerateTexCoords();
+
+	quad.GetVertexBuffer()[0].color = VColor4f(1, 0, 0, 1);
+	quad.GetVertexBuffer()[1].color = VColor4f(0, 1, 0, 1);
+	quad.GetVertexBuffer()[2].color = VColor4f(0, 0, 1, 1);
+	quad.GetVertexBuffer()[3].color = VColor4f(1, 1, 1, 1);
+
+	IVImageFactory::ImagePtr pImage = pImageFactory->CreateImage(
+		"/data/worldmap.jpg");
+
+	VImage& image(*pImage);
+
+	//for(vint i = 0; i < image.GetData().GetSize(); ++i)
+	//{
+	//	vout << vuint(image.GetData()[i]) 
+	//		<< ((i+1) % (image.GetBitsPerPixel()/8) == 0 ? vendl : ",");
+	//}
+
+	//VImage image(256, 256, 32);
+
+	//for(vuint y = 0; y < 256; y += 2)
+	//for(vuint x = 0; x < 256; ++x)
+	//{
+	//	//if( y % 8 < 4 )
+	//		//image.SetPixel(x, y, 0xFFFFFFFF);
+	//	//else
+	//		image.SetPixel(x, y, 0x00000000);
+	//}
+
+	VMaterialDescription mat;
+	mat.AddTexture(graphics::CreateTextureRef(device, *pImage));
+	//VMaterialDescription mat = BuildTextureMaterial(&device, "/data/moon.jpg");
+
+	IVDevice::MeshHandle hMesh = BuildMesh(device, quad, mat);
 
 	VCamera cam;
 
-	vout << "Velox3D proudly presents: the editor!" << vendl;
-
-	// no plugin registering at runtime
-	m_bAllowNewPlugins = false;
-
-	// create the main window
-	VEditorFrame* pFrame = new VEditorFrame(m_Plugins);
-
-	VTerrainTexDocClass texgenDocClass;
-	pFrame->RegisterDocumentClass(texgenDocClass);
-
-	VServicePtr<system::IVSystemManager> pSystem;
-	VServicePtr<v3d::updater::IVUpdateManager> pUpdater;
-
-	//using v3d::window::IVWindowManager;
-
-	//VServicePtr<v3d::window::IVWindowManager> pWindowManager;
-
-	//void* pDesktop;
-
-	//v3d::graphics::VDisplaySettings settings;
-	//settings.m_iWidth = 400;
-	//settings.m_iHeight = 300;
-
-	//{
-	//	wxFrame* splash = new wxFrame(
-	//		0,
-	//		-1,
-	//		"invisible splash screen",
-	//		wxPoint(0,0),
-	//		wxSize(settings.m_iWidth, settings.m_iHeight),
-	//		wxSTAY_ON_TOP | wxFRAME_NO_TASKBAR
-	//		);
-
-	//	splash->Show(true);
-	//	splash->CenterOnScreen();
-
-	//	//pDesktop = GetDesktopHandle();
-	//	pDesktop = (void*)splash->GetHandle();
-	//}
-
-	//V3D_ASSERT(pDesktop != 0);
-
-	//IVWindowManager::GraphicsDevicePtr pDevice =
-	//	pWindowManager->CreateGraphicsDevice(
-	//		settings, 
-	//		pDesktop
-	//		//(void*)pDesktop->GetHandle()
-	//		);
-
-	//cam.RotateZ(-45);
-	//cam.RotateX(-45);
-	////cam.RotateX(90);
-	//cam.MoveForward(-20);
-	//pDevice->SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
-
-	//VVeloxCubeMesh cube;
-	//IVDevice::MeshHandle hMesh = BuildMesh(
-	//	*pDevice, cube, cube.MaterialDescription());
-
-	//math::VMatrix44f matrix;
-	//math::SetScale(matrix, 5);
+	cam.MoveForward(-2);
+	device.SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
 
 	pUpdater->Start();
 	pSystem->SetStatus(true);
 	while(pSystem->GetStatus())
 	{
-		//pDevice->BeginScene();
+		device.BeginScene();
+
+		ApplyMaterial(device, & hMesh->GetMaterial());
+		device.RenderMesh(hMesh);
+
+		device.EndScene();
+
+		pUpdater->StartNextFrame();
+	}
+	pUpdater->Stop();
+
+	return 1;
+}
+
+/*
+vint VEditorApp::Main()
+{
+	vout << "Velox3D proudly presents: the editor!" << vendl;
+
+	VServicePtr<system::IVSystemManager> pSystem;
+	VServicePtr<v3d::updater::IVUpdateManager> pUpdater;
+	VServicePtr<v3d::window::IVWindowManager> pWindowManager;
+
+	window::IVWindowManager::IVWindowPtr pWindow = pWindowManager->QueryWindow("blub");
+	graphics::IVDevice* pDevice = & pWindow->QueryGraphicsDevice();
+
+	graphics::VQuadMesh<graphics::VSimpleVertex> quad;
+	quad.GenerateCoordinates();
+
+	graphics::VMaterialDescription mat;
+	mat = graphics::BuildTextureMaterial(pDevice, "/data/moon.jpg");
+
+	graphics::IVDevice::MeshHandle hMesh = graphics::BuildMesh(
+		*pDevice, quad, mat);
+
+	pUpdater->Start();
+	pSystem->SetStatus(true);
+	while(pSystem->GetStatus())
+	{
+		pDevice->BeginScene();
 
 		//pDevice->SetMatrix(IVDevice::ModelMatrix, matrix);
-		//ApplyMaterial(*pDevice, & hMesh->GetMaterial());
-		//pDevice->RenderMesh(hMesh);
+		graphics::ApplyMaterial(*pDevice, & hMesh->GetMaterial());
+		pDevice->RenderMesh(hMesh);
 
-		//pDevice->EndScene();
+		pDevice->EndScene();
 
 		pUpdater->StartNextFrame();
 	}
@@ -154,6 +183,70 @@ vint VEditorApp::Main()
 
 	return 666;
 }
+
+vint VEditorApp::Main()
+{
+	using namespace graphics;
+	using namespace math;
+
+	//VCamera cam;
+
+	vout << "Velox3D proudly presents: the editor!" << vendl;
+
+	// no plugin registering at runtime
+	m_bAllowNewPlugins = false;
+
+	// create the main window
+	//VEditorFrame* pFrame = new VEditorFrame(m_Plugins);
+
+	//VTerrainTexDocClass texgenDocClass;
+	//pFrame->RegisterDocumentClass(texgenDocClass);
+
+	VServicePtr<system::IVSystemManager> pSystem;
+	VServicePtr<v3d::updater::IVUpdateManager> pUpdater;
+	VServicePtr<v3d::window::IVWindowManager> pWindowManager;
+
+	v3d::graphics::VDisplaySettings settings;
+	settings.m_iWidth = 400;
+	settings.m_iHeight = 300;
+
+	window::IVWindowManager::IVWindowPtr pWindow =
+		pWindowManager->QueryWindow("blub");
+
+	graphics::IVDevice* pDevice = & pWindow->QueryGraphicsDevice();
+
+	graphics::VQuadMesh<graphics::VSimpleVertex> quad;
+	quad.GenerateCoordinates();
+
+	graphics::VMaterialDescription mat;
+	mat = graphics::BuildTextureMaterial(pDevice, "/data/moon.jpg");
+
+	graphics::IVDevice::MeshHandle hMesh = graphics::BuildMesh(
+		*pDevice, quad, mat);
+
+	pUpdater->Start();
+	pSystem->SetStatus(true);
+	while(pSystem->GetStatus())
+	{
+		pDevice->BeginScene();
+
+		//pDevice->SetMatrix(IVDevice::ModelMatrix, matrix);
+		graphics::ApplyMaterial(*pDevice, & hMesh->GetMaterial());
+		pDevice->RenderMesh(hMesh);
+
+		pDevice->EndScene();
+
+		pUpdater->StartNextFrame();
+	}
+	pUpdater->Stop();
+
+	//pDevice.DropOwnership();
+
+//	pFrame->Destroy();
+
+	return 666;
+}
+*/
 
 void VEditorApp::RegisterTool(IVTool& in_Tool)
 {

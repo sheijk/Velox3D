@@ -47,6 +47,12 @@ void VSimpleDrawList::Render()
 }
 //-----------------------------------------------------------------------------
 
+IVDevice& VSimpleDrawList::GetDevice()
+{
+	return m_Device;
+}
+//-----------------------------------------------------------------------------
+
 void VSimpleDrawList::ApplyMaterial(IVMaterial* in_pRenderStates)
 {
 	for(vuint prio = 0; prio < in_pRenderStates->StateCount(); ++prio)

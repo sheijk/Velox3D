@@ -48,10 +48,10 @@ public:
 VDisplaySettings::VDisplaySettings()
 {
 	m_bFullscreen   = false;
-	m_iWidth	    = 1200;
-	m_iHeight	    = 1000;
+	m_iWidth	    = 400;
+	m_iHeight	    = 300;
 	m_iWinCoordX    = 300;
-	m_iWinCoordY    = 100;
+	m_iWinCoordY    = 10;
 	m_iBitsPerPixel = 16;
 	m_iAccumulationBuffer = 0;
 	m_iDepthBits = 16;

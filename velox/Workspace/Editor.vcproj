@@ -145,12 +145,6 @@
 			Name="Implementation"
 			Filter="">
 			<File
-				RelativePath=".\blub.cpp">
-			</File>
-			<File
-				RelativePath=".\blub.h">
-			</File>
-			<File
 				RelativePath="..\Source\Editor\CameraTool.h">
 			</File>
 			<File
@@ -226,24 +220,18 @@
 				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexDocument.h">
 			</File>
 			<File
-				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexGenPreviewFrame.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexGenPreviewFrame.h">
-			</File>
-			<File
 				RelativePath="..\Source\Editor\TerrainTex\VTextureStage.cpp">
 			</File>
 			<File
 				RelativePath="..\Source\Editor\TerrainTex\VTextureStage.h">
 			</File>
-			<File
-				RelativePath="..\Source\Editor\TerrainTex\VTextureStageSetupFrame.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Editor\TerrainTex\VTextureStageSetupFrame.h">
-			</File>
 		</Filter>
+		<File
+			RelativePath="..\Source\Editor\TerrainTex\MainWindow.cpp">
+		</File>
+		<File
+			RelativePath="..\Source\Editor\TerrainTex\MainWindow.h">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

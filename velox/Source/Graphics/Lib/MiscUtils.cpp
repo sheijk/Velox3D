@@ -5,7 +5,7 @@
 #include <v3d/Core/VObjectRegistry.h>
 
 //-----------------------------------------------------------------------------
-namespace v3d { 
+namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
@@ -55,9 +55,9 @@ VMaterialDescription::ColorBufferMask NoColorWrites()
 void ApplyMaterial(IVDevice& in_Device,
 				   IVMaterial* in_pMaterial)
 {
-	for(vuint i = 0; i < in_pMaterial->StateCount(); ++i)
-	{	
-		in_Device.ApplyState(in_pMaterial->GetState(i));
+	for(vuint prio = 0; prio < in_pMaterial->StateCount(); ++prio)
+	{
+		in_Device.ApplyState(in_pMaterial->GetState(prio));
 	}
 }
 
