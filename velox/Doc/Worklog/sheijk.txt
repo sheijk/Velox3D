@@ -25,95 +25,10 @@ eine map fuer xml files? (config.services.vfs.filename = "vfs.dll" etc.),
 dafuer ein any objekt, was strings speichert und in bel. datentypen mittels
 template member konvertiert?
 
--------------------------------------------------------------------------------
------ team todo:
-
-
--------------------------------------------------------------------------------
------ personal todo:
-	.roadmap
-	memory management
-	refactorings
-		texture manager
-		device buffer management, etc
-	terrain texture editor
-	terrain renderer
-
-	VImage: copy c'tor, usw
-
-	.gfx device
-		device: reference counting + loeschen von unbenutzten buffer
-		verschiedenen bild tiefen unterstuetzen
-		VMaterialDescription.AddTexture: TextureRef selbst anlegen oder kopieren
-		VBuffer(vbyte*,count, Copy);
-		VBuffer(10) -> speicher selber allokieren
-		meshhandle + mat wieder trennen?
-		gfx device: glViewPort setzen, fuer window resize, etc
-		PolygonMode enums in MatDescr mit PM prefixen
-		textur/geometrie manager: zuordnung file-buffer
-		meshhandle als klasse? (mit default initialisierung..)
-		info ueber nicht geloeschte buffer
-
-		mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
-		mat descr. durch alternativ system ersetzen? (default mat zurueckgeben,
-		und dass dann mit effekten veraendern?) <- effekte als ergaenzung der md
-		konzept fuer material effekte
-
-	.math
-		interpolation zwischen 2 VArray2ds, etc
-
-	.editor
-		terrained: preview in 3d
-		IVDevice im window loeschen + dafuer sorgen dass das loeschen geht :)
-
-	.terrain
-		umbau auf geometry clip maps?
-		bessere lod wahl heuristik (screen space error basierend?)
-		sanfte lod ueberblendungen (?)
-		VLodHeightmap entfernen(?) oder umbaun (nicht mehrere arrays)
-
-	image service: schreiben von bildern
-	.later
-		?editor: terrain xml format
-		?editor: texturen setzen fuer terrain
-		?editor: heightmap importieren fuer terrain
-
-	geometry generation:
-	das hier dokumentieren:
-	concept GeometryProvider
-		void GenerateCoordinates()
-		void GenerateTexCoords()
-		MD.GeometryType GetGeometryType()
-		VertexBuffer GetVertexBuffer()
-		IndexBuffer GetIndexBuffer()
-		VBuffer<VertexStructure> VertexBuffer
-		VBuffer<vuint> IndexBuffer
-
-	.refactorings
-
-	.mem manager
-		mem manager fuer leak reports
-		simple malloc/dealloc version bauen
-		leak finder bauen, evtl flipcode leak finder einbaun?
-		in vfs integrieren
-		in restliche services integrieren
-		managed objects schreiben
-
-	.drawlist:
-		nach states sortieren
-
-	.scene graph
-		nodes sollten irgendwann auch geloescht werden (shared ptr?)
-		zusammenarbeit mit physik, etc (-> entity system)
-
-	Service Abhaengigkeiten Dokumentieren
-
-	Dokumentation
-	Coding Guidelines uebersichtlicher machen
-
-	Netzwerk, Scripting planen
-	SceneGraph / Engine Architektur
-	Auf die Langnese Insel ziehen
+Mem manager: fuer erzwungene Haltepunkte bei bestimmten Allokationen:
+ForceBreakpointOnMemAlloc(int num, string module); Funktion, die zu jeder Zeit
+aufgerufen werden kann (kann dann im entsprechenden modul, oder an beliebiger
+Stelle aufgerufen werden)
 
 Doku:
 	Doku System

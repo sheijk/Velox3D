@@ -14,26 +14,44 @@ namespace v3d{
 namespace image{
 //-----------------------------------------------------------------------------
 
+//TODO: Javadoc Kommentare muessen mit /** (2x *) anfangen, sonst werden sie
+// evtl nicht erkannt --sheijk
 /* Factory for loading / saving / manipulating image data
  * @author ins
  */
 
-class IVImageFactory : public VNamedObject 
+class IVImageFactory : public VNamedObject
 {
 
 public:
 
 	typedef VPointer<VImage>::SharedPtr ImagePtr;
 
-	/* initialize the interface and make it queryable */
-	IVImageFactory(VStringParam in_strName, VNamedObject* in_pParent) 
-		: VNamedObject(in_strName, in_pParent){}
-
+	/** returns an image containing the image data of the given image file */
 	virtual ImagePtr CreateImage(VStringParam in_sFilename) = 0;
 
+	//TODO: der 2te param sollte VImage& sein, sonst problem bei VImage img; CreateImage(.., img);
 	/* Creates and decodes an image file by its param and destination type */
 	virtual void CreateImage(VStringParam in_sFilename, ImagePtr& in_Image) = 0;
-    
+
+
+	//TODO typ als string wie beim laden waere schoener weil erweiterbarer. bzw
+	// optimaler weise einfach an der extension erkennen --sheijk
+	/* Save an image to a file */
+	virtual void SaveImageToFile(VStringParam in_sFilename,
+		VImage& in_Image, IVImageSaver::ImageType in_Type) = 0;
+
+	//TODO: warum nicht nur ConvertImage? --sheijk
+	/* Scale an image to the given image parameters
+	 * @note: only scales images. does not convert to other byte format
+	 */
+	virtual void ScaleImage(VImage& in_ImageSource, VImage& in_ImageDest) = 0;
+
+	//TODO: io_ImageDest, weil ein- und ausgabeparameter --sheijk
+	/* Converts an image to the given image parameters */
+	virtual void ConvertImage(VImage& in_ImageSource, VImage& in_ImageDest) = 0;
+
+
 
 	/* Register an Imageloader object to this factory */
 	virtual void Register(IVImageLoader* in_ImageLoader,
@@ -50,20 +68,10 @@ public:
 		IVImageManipulator* in_ImageManipulator
 		) = 0;
 
-
-	/* Save an image to a file */
-	virtual void SaveImageToFile(VStringParam in_sFilename,
-		VImage& in_Image, IVImageSaver::ImageType in_Type) = 0;
-
-	/* Scale an image to the given image parameters
-	 * @note: only scales images. does not convert to other byte format
-	 */
-	virtual void ScaleImage(VImage& in_ImageSource, VImage& in_ImageDest) = 0;
-
-	/* Converts an image to the given image parameters */
-	virtual void ConvertImage(VImage& in_ImageSource, VImage& in_ImageDest) = 0;
-
-	
+protected:
+	/* initialize the interface and make it queryable */
+	IVImageFactory(VStringParam in_strName, VNamedObject* in_pParent)
+		: VNamedObject(in_strName, in_pParent){}
 };
 //-----------------------------------------------------------------------------
 } // namespace image

@@ -19,7 +19,7 @@ public:
 	virtual void Convert(VImage& in_ImageSource, VImage& in_ImageDest) = 0;
 
 protected:
-	
+
 	/* Call this method to register the saver to the factory */
 	virtual void Register() = 0;
 
