@@ -16,6 +16,12 @@ namespace updater {
 VUpdateManager::VUpdateManager(VStringParam in_strId)
 	: IVUpdateManager(in_strId)
 {
+	m_pTimer = 0;
+
+	// instanciate VTimer here
+	m_pTimer = new VPerformanceCounter();
+
+
 }
 
 /**
@@ -72,6 +78,11 @@ void VUpdateManager::Mainloop()
 	}
 
 	Stop();
+}
+
+vfloat64 VUpdateManager::GetFrameDuration()
+{
+	return m_pTimer->GetFrameDuration();
 }
 
 //-----------------------------------------------------------------------------

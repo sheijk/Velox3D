@@ -60,7 +60,7 @@ VImage* VTgaImageLoader::Create(vfs::IVStream* in_pStream)
 
 
 	VImage* pImage  = new VImage();
-	pImage->m_pData = new VImage::ImageData(m_pData,
+	pImage->pData = new VImage::ImageData(m_pData,
 					 m_FileHeader.Width * m_FileHeader.Height);
 	
 	pImage->iWidth  = m_iWidth;

@@ -16,6 +16,7 @@ namespace updater {
 	class IVUpdateable
 	{
 	public:
+
 		/**
 		 * Updates the object.
 		 * @param in_fSeconds Seconds since last update

@@ -143,6 +143,9 @@
 				Name="Interface"
 				Filter="">
 				<File
+					RelativePath="..\Api\V3d\Updater\IVTimer.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Updater\IVUpdateable.h">
 				</File>
 				<File
@@ -152,6 +155,12 @@
 			<Filter
 				Name="Implementation"
 				Filter="">
+				<File
+					RelativePath="..\Source\UpdateManager\VPerformanceCounter.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\UpdateManager\VPerformanceCounter.h">
+				</File>
 				<File
 					RelativePath="..\Source\UpdateManager\VUpdateManager.cpp">
 				</File>

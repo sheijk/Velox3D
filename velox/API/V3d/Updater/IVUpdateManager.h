@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VNamedObject.h>
-
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace updater {
@@ -50,6 +49,8 @@ namespace updater {
 		 * until program shut down is requested. Then calls Stop()
 		 */
 		virtual void Mainloop() = 0;
+
+		virtual vfloat64 GetFrameDuration() = 0;
 
 	protected:
 		/**

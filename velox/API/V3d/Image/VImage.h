@@ -17,14 +17,14 @@ struct VImage
 	VImage(){};
 	~VImage()
 	{
-		m_pData->~VBuffer();
+		pData->~VBuffer();
 	}
 	vuint iHeight;
 	vuint iWidth;
 	vuint iBPP;
 
 	typedef graphics::VBuffer<vuchar> ImageData;
-	ImageData* m_pData;
+	ImageData* pData;
 };
 //-----------------------------------------------------------------------------
 } // namespace image

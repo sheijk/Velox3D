@@ -205,12 +205,15 @@ vint VExampleApp::Main()
 		glBindTexture(GL_TEXTURE_2D, id);
 		glEnable(GL_TEXTURE_2D);
 
+		
+
 		pDevice->BeginScene();
 		pDevice->RenderMesh(Mesh);
         pDevice->EndScene();
 
 
 		pUpdateManager->StartNextFrame();
+		pUpdateManager->GetFrameDuration();
 
 		// input checking
 		if (pEscButton->IsDown() == true)
@@ -232,6 +235,7 @@ vint VExampleApp::Main()
 			pCamera->AddY(-.3f);
 		if(pLeftMouseButton->IsDown() == true)
 			pCamera->AddY(.3f);
+		
 	}
 
 	pUpdateManager->Stop();

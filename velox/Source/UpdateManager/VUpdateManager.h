@@ -3,7 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Updater/IVUpdateManager.h>
-
+#include <v3d/Updater/IVTimer.h>
+//-----------------------------------------------------------------------------
+#include "VPerformanceCounter.h"
 #include <list>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -26,10 +28,13 @@ public:
 	virtual void Start();
 	virtual void Stop();
 	virtual void Mainloop();
+	vfloat64 GetFrameDuration();
 
 protected:
 	virtual void Register(IVUpdateable* in_pObject);
 	virtual void Unregister(IVUpdateable* in_pObject);
+
+	IVTimer* m_pTimer;
 };
 
 //-----------------------------------------------------------------------------

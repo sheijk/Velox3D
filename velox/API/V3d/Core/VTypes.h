@@ -18,7 +18,7 @@ typedef __int16 vint16;
 typedef unsigned __int16 vuint16;
 typedef __int32 vint32;
 typedef unsigned __int32 vuint32;
-typedef __int64 vint64;		//support by other compilers than VC?? borland: ok
+typedef __int64 vint64;
 typedef unsigned __int64 vuint64;
 typedef short vshort;
 typedef unsigned short vushort;
