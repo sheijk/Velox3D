@@ -156,6 +156,7 @@ IVDataProvider::DirPtr VFileDataProvider::CreateDir(
 	const VMountOptions& in_Options)
 {
 	// build the path + dirname
+	//TODO: auf "\" am ende pruefen
 	fs::path dirPath(in_Options.GetSource() + "/" + in_Options.GetName().AsCString());
 
 	// create the dir

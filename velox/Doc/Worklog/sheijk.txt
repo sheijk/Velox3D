@@ -1,6 +1,9 @@
 Worklog von sheijk
 --------------------------------------------------------------------------------
 ----- messages to sheijk:
+TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
+zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
+die gleichen services stehen -[ins]
 
 
 --------------------------------------------------------------------------------
@@ -15,10 +18,6 @@ Worklog von sheijk
 eine map fuer xml files? (config.services.vfs.filename = "vfs.dll" etc.),
 dafuer ein any objekt, was strings speichert und in bel. datentypen mittels
 template member konvertiert?
-
-TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
-zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
-die gleichen services stehen -[ins]
 
 --------------------------------------------------------------------------------
 ----- personal todo:
@@ -51,6 +50,9 @@ Auf die Langnese Insel ziehen
 ----- last things sheijk finished:
 
 log:
+
+04.09.2003
+erste Mathlib Version fertig
 
 02.08.2003
 Zugriffsrechte koennen im .xml File gesetzt werden

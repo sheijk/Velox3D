@@ -101,13 +101,17 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Interface"
+			Name="Math"
 			Filter="">
-		</Filter>
-		<Filter
-			Name="Implementation"
-			Filter="">
-
+			<File
+				RelativePath="..\Api\V3d\Math\VMatrix.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Math\VMatrixOps.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Math\VVector.h">
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
