@@ -13,7 +13,7 @@
 //////////////////////////////////////////////////////////////////////
 
 // register test
-VREGISTER_UNIT_TEST(VStoragePolTests);
+V3D_REGISTER_UNIT_TEST(VStoragePolTests);
 
 VStoragePolTests::VStoragePolTests()
 {
@@ -31,7 +31,7 @@ void VStoragePolTests::GetTestInfo(std::string& out_TestName, std::string& out_S
 	out_SubjectName = "Storage Policies of SmartHandle/SmartPointers";
 }
 
-VStoragePolTests::VTestResult VStoragePolTests::ExecuteTest()
+void VStoragePolTests::ExecuteTest()
 {
 	vbool bAlive;
 
@@ -43,23 +43,27 @@ VStoragePolTests::VTestResult VStoragePolTests::ExecuteTest()
 
 	if( PointerStore.Get() != pDestTest )
 	{
-		return VCriticalError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VPointerStorage.Get() returned wrong value",
+			VError);
 	}
 
 	if( !bAlive )
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VPointerStorage: Object was illegally deleted",
+			VError);
 	}
 
 	PointerStore.Release();
 
 	if( bAlive )
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VPointerStorage.Release(): Object was not deleted",
+			VError);
 	}
 
 	// test array storage policy
 	// TODO .. :)
-
-	return VOk;
 }

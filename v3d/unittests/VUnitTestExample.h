@@ -16,7 +16,7 @@ public:
 	virtual void GetTestInfo(std::string& out_TestName, std::string& out_SubjectName);
 
 	/*! @see IVUnitTest#Execute() */
-	virtual VTestResult ExecuteTest();
+	virtual void ExecuteTest();
 };
 
 #endif // V3D_VUNITTESTEXAMPLE_H

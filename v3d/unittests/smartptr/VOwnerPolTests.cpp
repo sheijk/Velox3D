@@ -12,7 +12,7 @@
 //////////////////////////////////////////////////////////////////////
 // Konstruktion/Destruktion
 //////////////////////////////////////////////////////////////////////
-VREGISTER_UNIT_TEST(VOwnerPolTests);
+V3D_REGISTER_UNIT_TEST(VOwnerPolTests);
 
 VOwnerPolTests::VOwnerPolTests()
 {
@@ -32,7 +32,7 @@ void VOwnerPolTests::GetTestInfo(
 	out_SubjectName = "VExclusiveStoragePol";
 }
 
-IVUnitTest::VTestResult VOwnerPolTests::ExecuteTest()
+void VOwnerPolTests::ExecuteTest()
 {
 	VExclusiveOwnerPol< VPointerStorage<VDestructTest> > owner, owner2;
 
@@ -45,14 +45,18 @@ IVUnitTest::VTestResult VOwnerPolTests::ExecuteTest()
 
 	if( owner.Get() != pBlah ) 
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VExclusiveOwnerPol.Get() returned wrong value",
+			VError);
 	}
 
 	owner.Set(0);
 
 	if( bAlive == true ) 
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VExclusiveOwnerPol: Object was not deleted when setting to 0",
+			VError);
 	}
 
 	owner.Set(new VDestructTest(bAlive));
@@ -60,15 +64,18 @@ IVUnitTest::VTestResult VOwnerPolTests::ExecuteTest()
 
 	if( ! bAlive )
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VExclusiveOwnerPol.Clone(): Object was deleted when copying",
+			VError);
 	}
 
 	owner2.Release();
 
 	if( bAlive )
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VExclusiveOwnerPol.Release(): Object was not deleted",
+			VError);
 	}
 
-	return VOk;
 }

@@ -3,12 +3,10 @@
 
 #include <string>
 
-/*!
-	a macro for defining tests
-*/
-#define VREGISTER_UNIT_TEST(t) namespace vunittests { t g_test##t; };
+/**	a macro for defining tests */
+#define V3D_REGISTER_UNIT_TEST(t) namespace vunittests { t g_test##t; };
 
-/*!
+/**
 	IVUnitTest
 	abstract interface for all unit tests
 */
@@ -16,10 +14,8 @@ class IVUnitTest
 {
 public:
 	//! result of a unit test
-	enum VTestResult
+	enum VErrorType
 	{
-		//! ok, no problems occured
-		VOk = 0,
 		// warning, minor problems which wont affect the functionality
 		VWarning,
 		//! error, a tested functionality did not work
@@ -38,7 +34,7 @@ public:
 	/*!
 		executes the test. must catch all exceptions
 	*/
-	virtual VTestResult ExecuteTest() = 0;
+	virtual void ExecuteTest() = 0;
 
 	//! make constructor virtual
 	virtual ~IVUnitTest();

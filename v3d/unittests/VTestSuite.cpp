@@ -26,6 +26,7 @@ VTestSuite::~VTestSuite()
 
 }
 
+/*
 // no comment :)
 void main(int argc, char* args[])
 {
@@ -107,3 +108,94 @@ void main(int argc, char* args[])
 		}
 	}
 }
+*/
+
+void VTestSuite::GenerateTestList()
+{
+	// get all test from the test manager
+
+	VTestManager::TestIterator iter;
+	iter = VTestManager::GetInstance().CommonTestsBegin();
+
+	VUnitTestInfo info;
+
+	for( ; iter != VTestManager::GetInstance().CommonTestsEnd(); ++iter)
+	{
+		// generate test info
+		(*iter)->GetTestInfo(info.strName, info.strSubject);
+		info.pUnitTest = *iter;
+
+		// add to list
+		m_UnitTests.insert(info);
+
+		info.Reset();
+	}
+}
+
+void VTestSuite::PrintList() const
+{
+	UnitTestInfoList::iterator iter = m_UnitTests.begin();
+
+	for( ; iter != m_UnitTests.end(); ++iter)
+	{
+		cout << "\"" << iter->strName<< "\" tests \"" 
+			<< iter->strSubject << "\"" << endl;
+	}
+}
+
+void VTestSuite::ExecuteTests()
+{
+	UnitTestInfoList::iterator iter = m_UnitTests.begin();
+	vbool bErrors = false;
+
+	for( ; iter != m_UnitTests.end(); ++iter)
+	{
+		try
+		{
+			iter->pUnitTest->ExecuteTest();
+		}
+		catch(VUnitTestException exc)
+		{
+			cout << "Test \"" << iter->strName << "\" detected an error "
+				<< "(Subject: \"" << iter->strSubject << "\") : \""
+				<< exc.GetExtendedErrorString() << "\"" << endl;
+
+			bErrors = true;
+//			cout << "Test \"" + iter->strName + "\" detected an error in"
+//				+ iter->strSubject << "Line nr. " << exc.GetErrorLine()
+//				<< " File \"" << exc.GetErrorFile() << endl;
+//			cout << "  Error message: \"" + exc.GetExtendedErrorString()
+//				+ "\"";
+		}
+		catch(...)
+		{
+			cout << "\nunknown error occured in test" << iter->strName << endl
+				<< "unit test might be corrupt or incomplete" << endl;
+
+			bErrors = true;
+		}
+	}
+
+	if( !bErrors )
+	{
+		cout << "no errors detected" << endl;
+	}
+}
+
+void main(int argc, char* args[])
+{
+	VTestSuite suite;
+
+	// generate test list and print it
+	suite.GenerateTestList();
+
+	cout << "list of unit tests" << endl << endl;
+	
+	suite.PrintList();
+
+	cout << endl << endl << "executing tests" << endl << endl;
+
+	// do tests
+	suite.ExecuteTests();
+}
+

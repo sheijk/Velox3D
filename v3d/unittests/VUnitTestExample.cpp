@@ -10,14 +10,7 @@
 
 // this is important: create one static global instance of your UnitTest
 // or the test will never be executed
-// VUnitTestExample g_theExampleUnitTest;
-
-//namespace vunittests
-//{
-//	VUnitTestExample g_theExample;
-//}
-
-VREGISTER_UNIT_TEST(VUnitTestExample);
+V3D_REGISTER_UNIT_TEST(VUnitTestExample);
 
 VUnitTestExample::VUnitTestExample()
 {
@@ -38,38 +31,24 @@ void VUnitTestExample::GetTestInfo(std::string& out_TestName, std::string& out_S
 	out_SubjectName = "CPU, the weather and the whole shit";		
 }
 
-IVUnitTest::VTestResult VUnitTestExample::ExecuteTest()
+void VUnitTestExample::ExecuteTest()
 {
 	enum VWheather
 	{
 		VSun, VRain
 	};
 
-	// do test functions (remember to assure that no exception will "leave"
-	// this function
-	try
+	VWheather theWeather = VSun;
+	
+	// bad weather, return a warning ;)
+	if( VSun != theWeather )
 	{
-		VWheather theWeather = VSun;
-		
-		// bad weather, return a warning ;)
-		if( VSun != theWeather )
-		{
-			return IVUnitTest::VWarning;
-		}
-
-		// cpu is broken, return an error
-		if( 1 + 1 != 2 ) 
-		{
-			return IVUnitTest::VError;
-		}
-	}
-	catch(...)
-	{
-		// an unknown exception occured which might crash the whole system
-		// indicate critical error
-		return IVUnitTest::VCriticalError;
+		V3D_THROW_UNITTEST_ERROR("bad weather detected", IVUnitTest::VWarning);
 	}
 
-	// indicates that no error occured
-	return IVUnitTest::VOk;
+	// cpu is broken, return an error
+	if( 1 + 1 != 2 ) 
+	{
+		V3D_THROW_UNITTEST_ERROR("cpu broken", IVUnitTest::VCriticalError);
+	}
 }

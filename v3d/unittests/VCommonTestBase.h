@@ -1,7 +1,8 @@
 #ifndef VCommonTestBase_h
 #define VCommonTestBase_h
 
-#include "IVUnitTest.h"
+#include <UnitTests/IVUnitTest.h>
+#include <UnitTests/VUnitTestException.h>
 
 /*!
 	the base class for common unit tests.
@@ -15,22 +16,18 @@ private:
 	void operator=(const VCommonTestBase&);
 
 protected:
-	/*!
-		registers the test to the test manager
-	*/
+	/** registers the test to the test manager */
 	VCommonTestBase();
 
 	virtual ~VCommonTestBase();
 public:
-	/*!
-		@see IVUnitTest::GetTestInfo
-	*/
-	virtual void GetTestInfo(std::string& out_TestName, std::string& out_SubjectName);
+	/** @see IVUnitTest::GetTestInfo */
+	virtual void GetTestInfo(
+		std::string& out_TestName, 
+		std::string& out_SubjectName) = 0;
 
-	/*!
-		@see IVUnitTest::ExecuteTest
-	*/
-	virtual VTestResult ExecuteTest();
+	/** @see IVUnitTest::ExecuteTest */
+	virtual void ExecuteTest() = 0;
 };
 
 #endif // eof

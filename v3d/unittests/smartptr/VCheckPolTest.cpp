@@ -14,7 +14,7 @@
 // Konstruktion/Destruktion
 //////////////////////////////////////////////////////////////////////
 
-VREGISTER_UNIT_TEST(VCheckPolTest);
+V3D_REGISTER_UNIT_TEST(VCheckPolTest);
 
 VCheckPolTest::VCheckPolTest()
 {
@@ -32,7 +32,7 @@ void VCheckPolTest::GetTestInfo(std::string& out_TestName, std::string& out_Subj
 	out_SubjectName = "SmartHandle/Pointer CheckPolicies";
 }
 
-VCheckPolTest::VTestResult VCheckPolTest::ExecuteTest()
+void VCheckPolTest::ExecuteTest()
 {
 	// check no check policy
 	VNoCheckPol<int*> pol;
@@ -42,7 +42,8 @@ VCheckPolTest::VTestResult VCheckPolTest::ExecuteTest()
 
 	if( pol.IsValid(nullInt) != true || pol.IsValid(einsInt) != true ) 
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR("VNoCheckPol rejected a pointer",	
+			VError);
 	}
 
 	try
@@ -50,37 +51,49 @@ VCheckPolTest::VTestResult VCheckPolTest::ExecuteTest()
 		pol.Check(nullInt);
 		pol.Check(einsInt);
 	} 
-	catch(...)
+	catch(VException e)
 	{
-		return VCriticalError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VNoCheckPol. raised exception while checking",
+			VError);
 	}
 
 	// check NULL check policy
 	VNullCheckPol<int*> pol0;
 
-	if( pol0.IsValid(nullInt) == true || pol0.IsValid(einsInt) == false )
+	if( pol0.IsValid(nullInt) == true )
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR("VNullCheckPol accepted null ptr", 
+			VError);
+	}
+
+	if( pol0.IsValid(einsInt) == false )
+	{
+		V3D_THROW_UNITTEST_ERROR("VNullCheckPol rejected non null ptr", 
+			VError);
 	}
 
 	try
 	{
 		pol0.Check(einsInt);
 	}
-	catch(...)
+	catch(VException e)
 	{
-		return VCriticalError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VNullCheckPol raised exception while checking a non null ptr",
+			VError);
 	}
 
 	try
 	{
 		pol0.Check(nullInt);
 
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VNullCheckPol did not throw exception while checking null ptr",
+			VError);
 	}
-	catch(...)
+	catch(VException e)
 	{
 	}
 
-	return VOk;
 }

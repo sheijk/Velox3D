@@ -14,6 +14,7 @@
 //////////////////////////////////////////////////////////////////////
 // Konstruktion/Destruktion
 //////////////////////////////////////////////////////////////////////
+V3D_REGISTER_UNIT_TEST(VSmartHandleBaseTest);
 
 VSmartHandleBaseTest::VSmartHandleBaseTest()
 {
@@ -31,7 +32,7 @@ void VSmartHandleBaseTest::GetTestInfo(
 	out_SubjectName = "SmartHandleBase";
 }
 
-IVUnitTest::VTestResult VSmartHandleBaseTest::ExecuteTest()
+void VSmartHandleBaseTest::ExecuteTest()
 {
 	typedef VSmartHandleBase<	VDestructTest*, 
 								VExclusiveOwnerPol<VPointerStorage<VDestructTest> >, 
@@ -47,7 +48,9 @@ IVUnitTest::VTestResult VSmartHandleBaseTest::ExecuteTest()
 	handle.SetTarget(pDestTest);
 	if( handle.GetTarget() != pDestTest ) 
 	{
-		return VError;
+		V3D_THROW_UNITTEST_ERROR(
+			"VSmartHandleBase.Get(): returned wrong value",
+			VError);
 	}
 
 	// test cloning
@@ -61,5 +64,4 @@ IVUnitTest::VTestResult VSmartHandleBaseTest::ExecuteTest()
 	// test auto target release
 
 
-	return VOk;
 }

@@ -18,7 +18,7 @@ public:
 	virtual ~VStoragePolTests();
 
 	virtual void GetTestInfo(std::string& out_TestName, std::string& out_SubjectName);
-	virtual VTestResult ExecuteTest();
+	virtual void ExecuteTest();
 
 };
 

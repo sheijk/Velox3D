@@ -18,7 +18,7 @@ public:
 	virtual ~VOwnerPolTests();
 
 	virtual void GetTestInfo(std::string& out_TestName, std::string& out_SubjectName);
-	virtual VTestResult ExecuteTest();
+	virtual void ExecuteTest();
 };
 
 #endif // !defined(AFX_VOwnerPolTests_H__10819185_D06C_43A0_AFD5_B3C38627D7F5__INCLUDED_)

@@ -18,7 +18,7 @@ public:
 	virtual ~VSmartHandleBaseTest();
 
 	virtual void GetTestInfo(std::string& out_TestName, std::string& out_SubjectName);
-	virtual VTestResult ExecuteTest();
+	virtual void ExecuteTest();
 };
 
 #endif // !defined(AFX_VSMARTHANDLEBASETEST_H__8742C298_C8FC_46A8_85BF_0862C309ADAC__INCLUDED_)

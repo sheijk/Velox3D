@@ -18,7 +18,7 @@ public:
 	virtual ~VCheckPolTest();
 
 	virtual void GetTestInfo(std::string& out_TestName, std::string& out_SubjectName);
-	virtual VTestResult ExecuteTest();
+	virtual void ExecuteTest();
 };
 
 #endif // !defined(AFX_VCHECKPOLTEST_H__74D24B09_2FDB_468A_8E60_32EC2C874988__INCLUDED_)

@@ -13,7 +13,7 @@
 //////////////////////////////////////////////////////////////////////
 
 //! one instance of IOStreamTest
-VREGISTER_UNIT_TEST(VIOStreamTest);
+V3D_REGISTER_UNIT_TEST(VIOStreamTest);
 
 
 template<class t_type>
@@ -68,7 +68,7 @@ VIOStreamTest::~VIOStreamTest()
 /*!
 	does a simple read/write test of the stream
 */
-IVUnitTest::VTestResult TestIOStreamRW(IVStream* in_Stream)
+void VIOStreamTest::TestIOStreamRW(IVStream* in_Stream)
 {
 	char* pcTestData = "this is a little test string for IVStream";
 	char* pcCheckData = 0;
@@ -86,16 +86,15 @@ IVUnitTest::VTestResult TestIOStreamRW(IVStream* in_Stream)
 	if( memcmp(pcTestData, pcCheckData, strlen(pcTestData)) != 0 )
 	{
 		delete[] pcCheckData;
-		return IVUnitTest::VError;
+		V3D_THROW_UNITTEST_ERROR("reading stream data failed", VError);
 	}
 	else
 	{
 		delete[] pcCheckData;
-		return IVUnitTest::VOk;
 	}
 }
 
-IVUnitTest::VTestResult TestIOStreamSetpos(IVStream* in_pStream)
+void VIOStreamTest::TestIOStreamSetpos(IVStream* in_pStream)
 {
 	array_ptr<char> pcTestData;
 	pcTestData = new char[10];
@@ -121,21 +120,17 @@ IVUnitTest::VTestResult TestIOStreamSetpos(IVStream* in_pStream)
 	if( memcmp(pcTestData.addr(), pcCheckData.addr(), strlen(pcTestData.addr())) != 0 )
 	{
 		// error
-		return IVUnitTest::VError;
-	}
-	else 
-	{
-		return IVUnitTest::VOk;
+		V3D_THROW_UNITTEST_ERROR("read/write of stream failed", VError);
 	}
 }
 
 /*!
 	applies all stream tests to stream
 */
-IVUnitTest::VTestResult TestStreamIO(IVStream* in_Stream)
+void VIOStreamTest::TestStreamIO(IVStream* in_Stream)
 {
 	// test simple read write
-	return TestIOStreamRW(in_Stream);
+	TestIOStreamRW(in_Stream);
 }
 
 void VIOStreamTest::GetTestInfo(std::string& out_TestName, std::string& out_SubjectName)
@@ -144,9 +139,9 @@ void VIOStreamTest::GetTestInfo(std::string& out_TestName, std::string& out_Subj
 	out_SubjectName = "IVStream";
 }
 
-IVUnitTest::VTestResult VIOStreamTest::ExecuteTest()
+void VIOStreamTest::ExecuteTest()
 {
 	VMemoryStream theMemStream;
 
-	return TestStreamIO(&theMemStream);
+	TestStreamIO(&theMemStream);
 }
