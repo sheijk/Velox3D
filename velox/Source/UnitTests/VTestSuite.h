@@ -34,8 +34,8 @@ struct VUnitTestInfo
 		return (strName < other.strName);
 	}
 
-	std::string strSubject;
-	std::string strName;
+	VString strSubject;
+	VString strName;
 	IVUnitTest* pUnitTest;
 };
 

@@ -28,6 +28,9 @@ Auf die Langnese Insel ziehen
 
 log:
 
+14.06.2003
+Das UnitTest Framework ist in Service Form (wieder) einsatzbereit
+
 13.06.2003
 Interface fuer Iteratoren sowie ein Template um STL konforme Iteratoren damit
 zu wrappen geschrieben (API/v3d/Core/Wrappers/IVIterator.h,..)

@@ -1,39 +1,34 @@
-#ifndef V3D_IVUNITTEST_H
-#define V3D_IVUNITTEST_H
+#ifndef V3D_VUNITTESTEXAMPLE_H
+#define V3D_VUNITTESTEXAMPLE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Wrappers/VString.h>
+#include <v3d/UnitTests/IVUnitTest.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace unittests {
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
 
-/**
- *	abstract interface for all unit tests
- */
-class IVUnitTest
+/*!
+	This is an example for a unit test class
+*/
+class VUnitTestExample : public IVUnitTest
 {
 public:
-	/*!
-		returns the name of the test and the name of the subject to 
-		be tested
-	*/
+	VUnitTestExample();
+	virtual ~VUnitTestExample();
+
+	/*! @see IVUnitTest#GetTestInfo(VStringParam, VStringParam) */
 	virtual void GetTestInfo(
 		VString& out_TestName, 
-		VString& out_SubjectName) = 0;
+		VString& out_SubjectName);
 
-	/*!
-		executes the test. must catch all exceptions
-	*/
-	virtual void ExecuteTest() = 0;
-
-	virtual ~IVUnitTest() {};
+	/*! @see IVUnitTest#Execute() */
+	virtual void ExecuteTest();
 };
 
 //-----------------------------------------------------------------------------
 } // namespace unittests
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVUNITTEST_H
+#endif // V3D_VUNITTESTEXAMPLE_H

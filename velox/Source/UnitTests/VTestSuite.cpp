@@ -53,7 +53,7 @@ void VTestSuite::GenerateTestList()
 		iter->Proceed())
 	{
 		// generate test info
-		(*iter)->GetTestInfo(info.strName.c_str(), info.strSubject.c_str());
+		(*iter)->GetTestInfo(info.strName, info.strSubject);
 		info.pUnitTest = iter->Get();
 
 		// add to list

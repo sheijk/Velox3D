@@ -27,12 +27,12 @@ public:
 	enum ErrorLevel
 	{
 		// warning, minor problems which wont affect the functionality
-		VWarning,
+		Warning,
 		//! error, a tested functionality did not work
-		VError,
+		Error,
 		/*! an error which would affect the stability of other system, 
 		crashes, illegal memory operations etc. */
-		VCriticalError
+		CriticalError
 	};
 
 	VUnitTestException( VStringParam in_strReason, 

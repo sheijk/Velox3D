@@ -11,6 +11,7 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include "VTestManager.h"
 #include "VTestSuite.h"
+#include "VUnitTestExample.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -20,14 +21,11 @@ using namespace v3d;
 using namespace v3d::unittests;
 //-----------------------------------------------------------------------------
 
-//TODO: VNamedObject korrigieren
-//TODO: IVIterator samt Implementationen fuer ein list usw erzeugen
-//TODO: UnitTest Framework fertig machen
-
 //-----------------------------------------------------------------------------
 // use a smart pointer to guarante object destruction
 VPointer<IVTestManager>::AutoPtr g_pTestManager;
 VPointer<VTestSuite>::AutoPtr g_pTestSuite;
+VPointer<VUnitTestExample>::AutoPtr g_pExampleTest;
 
 UNITTESTSUITE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -41,11 +39,15 @@ UNITTESTSUITE_API void Initialize(VObjectRegistry* in_pObjReg)
 
 	// create Application
 	g_pTestSuite.Reset(new VTestSuite("main"));
+
+	// create example test
+	g_pExampleTest.Reset(new VUnitTestExample());
 }
 
 UNITTESTSUITE_API void Shutdown()
 {
 	// delete and unregister service object
+	g_pExampleTest.Release();
 	g_pTestSuite.Release();
 	g_pTestManager.Release();
 }
