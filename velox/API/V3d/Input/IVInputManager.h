@@ -18,7 +18,7 @@ namespace input {
  * Inputmanager interface.
  * Provides access to standard keyboard/mouse devices and provides interator for all
  * attached input controllers
- * @author AcrylSword
+ * @author sheijk
  * @version 1.0
  */
 class IVInputManager : public updater::IVUpdateable //: public VNamedObject
