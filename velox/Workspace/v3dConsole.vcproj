@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -35,6 +35,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/v3dConsoleD.exe"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
 				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
@@ -69,7 +70,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
@@ -83,6 +84,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/v3dConsole.exe"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
 				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				SubSystem="1"

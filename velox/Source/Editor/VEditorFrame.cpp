@@ -5,9 +5,10 @@
 
 #include <v3d/Core/VIOStream.h>
 
-#include "TerrainTex/MainWindow.h"
+//#include "TerrainTex/MainWindow.h"
 
 #include <algorithm>
+//-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {

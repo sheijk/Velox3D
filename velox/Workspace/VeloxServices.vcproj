@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost;../Local/ExternalLibs/DevIL/include"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,9 +34,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/boost/boostd.lib ../Local/ExternalLibs/jpeglib/jpeg.lib ../Local/ExternalLibs/tinyxml/tinyxmld.lib ../Local/ExternalLibs/extgl/extgl.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib ../Local/ExternalLibs/DevIL/lib/DevIL.lib ../Local/ExternalLibs/DevIL/lib/ilu.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/VeloxServices.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/VeloxServices.pdb"
 				SubSystem="2"
@@ -71,7 +72,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost;../Local/ExternalLibs/DevIL/include"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -86,6 +87,7 @@
 				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib ../Local/ExternalLibs/jpeglib/jpeg.lib ../Local/ExternalLibs/tinyxml/tinyxmld.lib ../Local/ExternalLibs/extgl/extgl.lib dinput8.lib dxguid.lib  ../Local/ExternalLibs/DevIL/lib/DevIL.lib"
 				OutputFile="$(OutDir)/VeloxServices.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"

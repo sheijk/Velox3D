@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,9 +34,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/tinyxml/tinyxmld.lib"
+				AdditionalDependencies="tinyxmld.lib"
 				OutputFile="$(OutDir)/XmlService.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/XmlService.pdb"
 				SubSystem="2"
@@ -74,7 +75,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				OmitFramePointers="TRUE"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -91,6 +92,7 @@
 				AdditionalDependencies="../Local/ExternalLibs/tinyxml/tinyxmld.lib"
 				OutputFile="$(OutDir)/XmlService.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
