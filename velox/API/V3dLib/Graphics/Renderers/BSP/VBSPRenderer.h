@@ -2,13 +2,10 @@
 #define V3D_VBSPRENDERER_21_04_04_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3dLib/Graphics/Portal/IVCell.h>
-#include <V3dLib/Graphics/Generators/VBoxMesh.h>
-#include <V3dLib/Graphics/Geometry/VSimpleVertex.h>
-#include <V3dLib/Graphics/Geometry/VTexturedVertex.h>
-#include <V3dLib/Graphics/Geometry/VResizeableGeometryData.h>
-#include <V3dLib/Utils/VStreamReader.h>
-#include <V3dLib/Graphics/Importer/VQ3BspImporter.h>
+#include <v3dLib/Graphics.h>
+#include <v3dLib/Utils/VStreamReader.h>
+#include <v3dLib/Graphics/Importer/VQ3BspImporter.h>
+#include <V3d/Math/VVector.h>
 #include <list>
 #include <vector>
 
@@ -16,62 +13,96 @@
 namespace v3d {
 namespace graphics{
 //-----------------------------------------------------------------------------
-class VBSPRenderer : public IVCell
+class VBSPRenderer
 {
 public:
 	
-	//interface
-
-	virtual void Cull(VCamera* in_pCamera, VMultipassDrawList& in_DrawList) ;
-	virtual void Hide(VMultipassDrawList& in_DrawList) ;
-	
-	VBSPRenderer(IVDevice* in_pDevice, VMultipassDrawList& in_DrawList);
+	VBSPRenderer(IVDevice* in_pDevice, IVCamera* in_pCamera);
 	~VBSPRenderer();
 
-	void Show();
-	
+	void Render();
+		
+	/**
+	 * Loads the map by given filename
+	 */
+	void Create(VStringParam in_sName);
 
-	//void AddCell(IVCell* in_pCell);
-
-	// own
-
-	void CreateMap(VStringParam in_sName);
+	/**
+	 * Call this to free the used resources
+	 */
+	void Delete();
 
 private:
 
-	typedef VPointer<VMatrix44f>::SharedPtr MatrixPtr;
+	typedef VVector<vfloat32, 3> Vector;
 
-	void BuildCell();
-	void BuildModelList();
+	//no copying for this class
+	VBSPRenderer(const VBSPRenderer&);
+	//no assigment
+	VBSPRenderer& operator=(const VBSPRenderer);
+
+	void BuildMesh();
 	
-	void GetFaceElements();
+	void CreateVertexBuffer();
 	void CreateTextures();
-	void CreateLightmaps();
 
-	void SortLightmapCoords();
+	/**
+	 * creates for each vertex in the vertexbuffer the indexset
+	 * to render a face
+	 */
+    void CreateLightmapCoords();
+	
+	void AddTextureEffect(VStringParam in_sTextureName);
+	void AddLightmapEffect();
+
+
+	void CreateEmptyEffect(VEffectDescription& in_rEffect);
+
+
+	/**
+	 * rendering
+	 */
+
+	/**
+	 * takes in a vector as an position and determines visible face
+	 * @return: face id number
+	 */
+	vint FindLeaf(Vector in_Pos);
+
+	/**
+	 * checks cluster for visiblity.
+	 * @param: returns true on visible false otherwise
+	 */
+	vbool IsClusterVisible(vint in_VisCluster, vint in_TestCluster);
+	
+	std::vector<VEffectDescription*> m_TexEffectList;
+	std::vector<VEffectDescription*> m_LightEffectList;
+	std::vector<std::string>		 m_TextureNameList;
+	std::list<IVDevice::MeshHandle>  m_MeshList;
+
+	IVDevice::MeshHandle* m_MeshTextureTable;
+	IVDevice::MeshHandle* m_MeshLightTable;
+	int m_Bla;
+
+
 	
 	
-	vuint m_iNumFaceElements;
-	utils::VQ3BspImporter m_Level;
+	
+	std::list<IVDevice::BufferHandle> m_BufferHandleList;
 
-	//our list we are connecting this cell to another
-	std::list<IVCell*> m_CellList;
-
-	//flag indicating model is added to drawlist
-	vbool m_bModelAdded;
+		
+	utils::VQ3BSPImporter m_Level;
 
 	// rendering members
 	IVDevice* m_pDevice;
-	v3d::graphics::VMultipassDrawList* m_pDrawList;
-
-	VResizeableGeometryData<VTexturedVertex> cell;
+	
+	VResizeableGeometryData<VTexturedVertex> m_GeometryData;
+	
 	vfloat32*  m_pLightmapCoords;
 	vfloat32*  m_pLightmapCoordsSorted;
 	vuint32    m_iNumSortedLightmapElements;
 
-	std::list<VModel*> m_pModelList;
-	std::vector<VMaterialDescription*> m_MaterialList;
-	std::vector<VMaterialDescription*> m_LightMaterialList;
+	IVCamera* m_pCamera;
 };
 //-----------------------------------------------------------------------------
 } // namespace graphics
