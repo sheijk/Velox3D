@@ -476,7 +476,7 @@ void VQuake2BspImporter::GetFaceElements()
 {
 	m_iNumFaceElements = 0;
 
-	for (vuint i = 0; i < m_iNumFaces; i++)
+	for (vint i = 0; i < m_iNumFaces; i++)
 	{
 		m_iNumFaceElements += m_pFaces[i].m_iNumEdges;
 	}
@@ -488,9 +488,9 @@ void VQuake2BspImporter::CreateIndexListBuffer()
 	m_pIndexList = new vuint[m_iNumFaceElements];
 	vuint iCount = 0;
 	
-	for (vuint i = 0; i < m_iNumFaces; i++)
+	for (vint i = 0; i < m_iNumFaces; i++)
 	{
-		for(vuint y = m_pFaces[i].m_iFirstEdge;
+		for(vint y = m_pFaces[i].m_iFirstEdge;
 			y < m_pFaces[i].m_iFirstEdge + m_pFaces[i].m_iNumEdges;
 			y++)
 		{

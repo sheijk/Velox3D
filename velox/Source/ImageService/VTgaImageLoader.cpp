@@ -4,6 +4,8 @@
 #include <v3d/Image/VImage.h>
 #include "VTgaImageLoader.h"
 #include <memory.h>
+
+#pragma warning (disable : 4244)
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace image{
@@ -57,13 +59,13 @@ VImage* VTgaImageLoader::Create(vfs::IVStream* in_pStream)
 
 
 
-	VImage* pImage = new VImage();
+	VImage* pImage  = new VImage();
 	pImage->m_pData = new VImage::ImageData(m_pData,
-					m_FileHeader.Width * m_FileHeader.Height);
+					 m_FileHeader.Width * m_FileHeader.Height);
 	
-	pImage->m_iWidth  = m_iWidth;
-	pImage->m_iHeight = m_iHeight;
-	pImage->m_iBPP    = m_iBPP;
+	pImage->iWidth  = m_iWidth;
+	pImage->iHeight = m_iHeight;
+	pImage->iBPP    = m_iBPP;
 
 	return pImage;
 
@@ -355,6 +357,7 @@ void VTgaImageLoader::Register()
 	IVImageFactory* Factory = QueryObject<IVImageFactory>("image.service");
 	Factory->Register(this, "tga");
 }
+#pragma warning (disable : 4244)
 //-----------------------------------------------------------------------------
 } // namespace image
 } // namespace v3d

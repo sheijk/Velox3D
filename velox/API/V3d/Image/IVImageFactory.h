@@ -18,6 +18,8 @@ class IVImageFactory : public VNamedObject
 {
 
 public:
+
+	typedef VPointer<VImage>::SharedPtr ImagePtr;
 	
 	/* initialize the interface and make it queryable */
 	IVImageFactory(VStringParam in_strName, VNamedObject* in_pParent) 
@@ -25,7 +27,7 @@ public:
 
 
 	/* Creates and decodes an image file given by its param */
-	virtual VImagePtr CreateImage(VStringParam in_sFilename) = 0;
+	virtual ImagePtr CreateImage(VStringParam in_sFilename) = 0;
 
 	/* Register an Imageloader object to this factory */
 	virtual void Register(IVImageLoader* in_ImageLoader,

@@ -7,7 +7,9 @@
 #include <v3d/Utils/IVStringStream.h>
 #include <v3d/Window/IVWindowFrame.h>
 //-----------------------------------------------------------------------------
+#pragma warning( disable : 4267 )
 #include <wx/wx.h>
+#pragma warning( default : 4267 )
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace console {

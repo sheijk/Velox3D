@@ -4,7 +4,9 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Window/IVWindowFrame.h>
 //-----------------------------------------------------------------------------
+#pragma warning (disable : 4267)
 #include <wx/wx.h>
+#pragma warning (default : 4267)
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace editor {

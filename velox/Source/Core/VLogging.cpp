@@ -21,7 +21,7 @@ namespace
 			return QueryObject<IVErrorService>("error.service");
 		}
 		//TODO: eleminate warning - ins
-		catch(VObjectRegistryException& e)
+		catch(VObjectRegistryException& )
 		{
 			return 0;
 		}

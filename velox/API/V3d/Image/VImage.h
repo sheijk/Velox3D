@@ -15,15 +15,13 @@ namespace image{
 struct VImage
 {
 	VImage(){};
-	vuint m_iHeight;
-	vuint m_iWidth;
-	vuint m_iBPP;
+	vuint iHeight;
+	vuint iWidth;
+	vuint iBPP;
 
 	typedef graphics::VBuffer<vuchar> ImageData;
 	ImageData* m_pData;
 };
-
-typedef VPointer<VImage>::SharedPtr VImagePtr;
 //-----------------------------------------------------------------------------
 } // namespace image
 } // namespace v3d

@@ -17,7 +17,7 @@ public:
 	VImageFactory();
 	virtual ~VImageFactory();
 
-	virtual VImagePtr CreateImage(VStringParam in_sFilename);
+	virtual ImagePtr CreateImage(VStringParam in_sFilename);
 	
 	virtual void Register(
 		IVImageLoader* in_ImageLoader,

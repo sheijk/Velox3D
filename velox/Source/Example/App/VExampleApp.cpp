@@ -85,7 +85,7 @@ vint VExampleApp::Main()
 
 	VCamera* pCamera;
 
-	VImagePtr myImage = pFactory->CreateImage("/data/tgatest.tga");
+	IVImageFactory::ImagePtr myImage = pFactory->CreateImage("/data/tgatest.tga");
 
 	//run system
 
@@ -182,7 +182,7 @@ vint VExampleApp::Main()
 	glTexEnvi	   (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,  GL_MODULATE);
 
 
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, myImage->m_iWidth, myImage->m_iHeight, GL_RGB, GL_UNSIGNED_BYTE, myImage->m_pData->GetDataAddress());
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, myImage->iWidth, myImage->iHeight, GL_RGB, GL_UNSIGNED_BYTE, myImage->m_pData->GetDataAddress());
 
 	while(pSystemManager->GetStatus())
 	{

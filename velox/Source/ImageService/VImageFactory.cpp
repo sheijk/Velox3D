@@ -21,7 +21,7 @@ VStringRetVal VImageFactory::ParseFileExtension(VStringParam sName)
 {
 	std::string Filename(sName);
 	std::string Extension;
-	vuint PointPos = Filename.rfind(".");
+	std::size_t PointPos = Filename.rfind(".");
 	Extension = Filename.substr(PointPos+1, Filename.size());
 	return Extension.c_str();
 }
@@ -36,7 +36,7 @@ void VImageFactory::Register(IVImageLoader* in_ImageLoader,
 //-----------------------------------------------------------------------------
 
 
-VImagePtr VImageFactory::CreateImage(VStringParam in_sFilename)
+IVImageFactory::ImagePtr VImageFactory::CreateImage(VStringParam in_sFilename)
 {
 	IVImageLoader* theLoader = NULL;
 	VImage* theImage = NULL;
@@ -54,7 +54,7 @@ VImagePtr VImageFactory::CreateImage(VStringParam in_sFilename)
 	if(theLoader)
 		theImage = theLoader->Create(fileStream.Get());
 	
-	VImagePtr retrunImage;
+	ImagePtr retrunImage;
 	retrunImage.Assign(theImage);
 	return retrunImage;
 

@@ -4,8 +4,10 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Updater/IVUpdateable.h>
 //-----------------------------------------------------------------------------
+#pragma warning (disable : 4267)
 #include <wx/wx.h>
 #include <wx/docview.h>
+#pragma warning (default : 4267)
 #include <list>
 //-----------------------------------------------------------------------------
 namespace v3d {
