@@ -48,6 +48,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlService", "XmlService.vc
 		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UtilsLib", "UtilsLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49322}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -115,6 +120,12 @@ Global
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Release.Build.0 = Release|Win32
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.ActiveCfg = Debug|Win32
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.Build.0 = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.ActiveCfg = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.Build.0 = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.Build.0 = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt

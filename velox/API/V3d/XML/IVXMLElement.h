@@ -10,6 +10,8 @@ namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
 
+	typedef VException VXMLException;
+
 /**
  * The XML Element interface
  * @author insane
@@ -19,9 +21,6 @@ namespace xml{
 class IVXMLElement
 {
 public:
-
-typedef VException VXMLException;
-
 typedef VBirectionalIterator<IVXMLAttribute> AttributeIter;
 
 	virtual VStringRetVal GetName() = 0;
