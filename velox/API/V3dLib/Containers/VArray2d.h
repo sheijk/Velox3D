@@ -196,7 +196,7 @@ template <class TElement, class TIndex> vbool VArray2d<TElement, TIndex>::
    Resize(const TIndex width, const TIndex height, const ResizeFlags flags)
 {
    vbool ret = false;
-   vint x=0 ,y=0 , h=0 , w=0;
+   TIndex x=0 ,y=0 , h=0 , w=0;
    VArray2d<TElement, TIndex>* bak;
 
    // backup old data

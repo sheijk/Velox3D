@@ -14,7 +14,7 @@ using namespace v3d; // beware of evil indenting!
 /**
  * A simple mesh structure
  *
- * //TODO: make type, vertices and indices private
+ * @author sheijk
  */
 template<typename VertexStructure>
 class VGeometryData

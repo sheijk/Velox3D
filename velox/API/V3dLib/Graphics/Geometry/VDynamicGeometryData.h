@@ -9,6 +9,12 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d;
 
+/**
+ * Contains geometry data, like VGeometryData, but vertex and index buffers
+ * may be resized by derived classes
+ *
+ * @author sheijk
+ */
 template<typename VertexStructure>
 class VDynamicGeometryData
 {

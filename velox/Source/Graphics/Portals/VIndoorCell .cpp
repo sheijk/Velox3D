@@ -144,6 +144,7 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 
 VIndoorCell::~VIndoorCell()
 {
+	//TODO: warum wird hier nix geloescht?
 }
 
 void VIndoorCell::Cull(VCamera* in_pCamera, VMultipassDrawList& in_DrawList)
