@@ -25,7 +25,7 @@
 	  if( pInstance == 0 ) alert("krawae!"); <br>
 	  pInstance->foo(3);<br>
 	  </div>
-	  The SmartPointer will delete his subject once he is destroyed himself.
+	  The SmartPointer will delete his subject once it is destroyed itself.
 	  Use a smart pointer exactly like a normal pointer. You can assign values,
 	  other smart pointers of the same type (or of compatible types if supported
 	  by the smart pointer class), compare two smart pointers, compare smart 
@@ -84,7 +84,7 @@
 	  eliminated. We change the definition of our FileManger class:
 	  <div id="cpp">
 	  class FileManager { <br>
-	  &nbsp;&nbsp;&nbsp;// use a typedef for ease of use an to be able to change the used
+	  &nbsp;&nbsp;&nbsp;// use a typedef for ease of use and to be able to change the used
 	  smart pointer class easily <br>
 	  &nbsp;&nbsp;&nbsp;typedef VPointer<File>::AutoPtr FilePtr; <br>
 	  &nbsp;&nbsp;&nbsp;FilePtr Open(string); <br>
