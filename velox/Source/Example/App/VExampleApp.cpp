@@ -32,6 +32,9 @@ using namespace v3d::window;
 using namespace v3d::system;
 using namespace v3d::input;
 using namespace v3d::image;
+using namespace v3d::utils::graphics;
+using namespace v3d::utils::graphics::drawlist;
+using namespace v3d::graphics::drawlist;
 
 VExampleApp::VExampleApp(VStringParam in_strName)
 	: VNamedObject(in_strName, 0)
@@ -209,9 +212,9 @@ vint VExampleApp::Main()
 
 	IVDevice::MeshHandle pMesh = m_pDevice->CreateMesh(meshDesc, texMat);
 
-	v3d::graphics::drawlist::VSimpleDrawList drawList(*m_pDevice);
+	VSimpleDrawList drawList(*m_pDevice);
 
-	v3d::graphics::drawlist::VModel model;
+	VModel model;
 	model.hMesh = pMesh;
 	drawList.Add(model);
 

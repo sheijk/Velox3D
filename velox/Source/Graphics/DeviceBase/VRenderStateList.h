@@ -29,7 +29,7 @@ public:
 
 	virtual vuint StateCount() const
 	{
-		return m_States.size();
+		return (vuint)m_States.size();
 	}
 
 	virtual const IVRenderState& GetState(vuint in_nPriority) const

@@ -4,6 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
+namespace utils {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
@@ -74,6 +75,7 @@ void VVertexDataLayout::SetTexCoordOffset()
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
+} // namespace utils
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VVERTEXDATALAYOUT_H

@@ -158,7 +158,7 @@ void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 					}
 
 				}
-				catch(VXMLException& e)
+				catch(VXMLException&)
 				{
 					V3D_THROW(VIOException, "did not find element");
 				}

@@ -21,6 +21,10 @@ TODO List:
 -------------------------------------------------------------------------------
 Done List:
 
+27.02.04
+- fixed some warnings in vfs
+- renamed utils namespace to fit guidelines
+
 11.02.04
 - added documentation
 - finished ImageService with TGA loading

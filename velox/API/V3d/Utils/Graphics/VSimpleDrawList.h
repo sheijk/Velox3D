@@ -6,37 +6,39 @@
 #include <list>
 //-----------------------------------------------------------------------------
 namespace v3d {
+namespace utils {
 namespace graphics {
 namespace drawlist {
 //-----------------------------------------------------------------------------
-class VSimpleDrawList : public IVDrawList
+class VSimpleDrawList : public v3d::graphics::drawlist::IVDrawList
 {
 public:
 
-	typedef IVDevice::BufferHandle BufferHandle;
-	typedef IVDevice::MeshHandle MeshHandle;
-	typedef IVDevice::MaterialHandle MaterialHandle;
+	typedef v3d::graphics::IVDevice::BufferHandle BufferHandle;
+	typedef v3d::graphics::IVDevice::MeshHandle MeshHandle;
+	typedef v3d::graphics::IVDevice::MaterialHandle MaterialHandle;
 
-	VSimpleDrawList(IVDevice& in_Device);
+	VSimpleDrawList(v3d::graphics::IVDevice& in_Device);
 	~VSimpleDrawList();
 		
-	virtual void Add(VModel in_Model);
-	virtual void Remove(VModel in_Model);
+	virtual void Add(v3d::graphics::drawlist::VModel in_Model);
+	virtual void Remove(v3d::graphics::drawlist::VModel in_Model);
 
 	virtual void Render();
 
-	void ApplyMaterial(IVMaterial* in_pRenderStates);
+	void ApplyMaterial(v3d::graphics::IVMaterial* in_pRenderStates);
 	
 
 private:
-	typedef std::list<VModel> ModelList;
+	typedef std::list<v3d::graphics::drawlist::VModel> ModelList;
 	
 	ModelList m_Models;
-	IVDevice& m_Device;
+	v3d::graphics::IVDevice& m_Device;
 };
 
 //-----------------------------------------------------------------------------
 } // namespace drawlist
+} // namespace utils
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------

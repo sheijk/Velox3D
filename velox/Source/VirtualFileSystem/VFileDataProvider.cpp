@@ -164,7 +164,7 @@ IVDataProvider::DirPtr VFileDataProvider::CreateDir(
 	{
 		fs::create_directory(dirPath);
 	}
-	catch(fs::filesystem_error& e)
+	catch(fs::filesystem_error&)
 	{
 		V3D_THROW(VElementNotFoundException, std::string(
 			"could not create directory \""
@@ -190,7 +190,7 @@ void VFileDataProvider::DeleteDir(VStringParam in_strDir)
 		// remove dir
 		fs::remove( fs::path(in_strDir) );
 	}
-	catch(fs::filesystem_error& e)
+	catch(fs::filesystem_error&)
 	{
 		V3D_THROW(VIOException, 
 			"unknown error occured, please correct function");
@@ -227,7 +227,7 @@ IVDataProvider::FilePtr VFileDataProvider::CreateFile(
 		VFile* pFile = new VFile(fileInfo);
 		return FilePtr(pFile);
 	}
-	catch(fs::filesystem_error& e)
+	catch(fs::filesystem_error&)
 	{
 		V3D_THROW(VIOException, "eehm.. this should never happen");
 	}
@@ -240,7 +240,7 @@ void VFileDataProvider::DeleteFile(VStringParam in_strSource)
 	{
 		fs::remove(fs::path(in_strSource));
 	}
-	catch(fs::filesystem_error& e)
+	catch(fs::filesystem_error&)
 	{
 		V3D_THROW(VIOException, "this should never happen");
 	}

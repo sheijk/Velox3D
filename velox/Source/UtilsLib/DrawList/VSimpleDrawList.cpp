@@ -1,8 +1,11 @@
 #include <v3d/Utils/Graphics/VSimpleDrawList.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
+namespace utils {
 namespace graphics {
 namespace drawlist {
+using namespace v3d::graphics;
+using namespace v3d::graphics::drawlist;
 //-----------------------------------------------------------------------------
 
 VSimpleDrawList::VSimpleDrawList(IVDevice& in_Device) : m_Device(in_Device)
@@ -54,5 +57,6 @@ void VSimpleDrawList::ApplyMaterial(IVMaterial* in_pRenderStates)
 //-----------------------------------------------------------------------------
 } // namespace drawlist
 } // namespace graphics
+} // namespace utils
 } // namespace v3d
 //-----------------------------------------------------------------------------
