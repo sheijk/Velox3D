@@ -6,6 +6,7 @@
 #include <Core/VCoreLib.h>
 
 #include <Utils/smartptr/VPointerStorage.h>
+#include "VDestructTest.h"
 
 //////////////////////////////////////////////////////////////////////
 // Konstruktion/Destruktion
@@ -29,24 +30,6 @@ void VStoragePolTests::GetTestInfo(std::string& out_TestName, std::string& out_S
 	out_TestName = "Storage Policy Test";
 	out_SubjectName = "Storage Policies of SmartHandle/SmartPointers";
 }
-
-// constructor sets flag to true, destructor to false
-class VDestructTest 
-{
-private:
-	vbool& m_bFlag;
-
-public:
-	VDestructTest(bool& io_bDestFlag) : m_bFlag(io_bDestFlag) 
-	{
-		m_bFlag = true;
-	}
-	
-	~VDestructTest()
-	{
-		m_bFlag = false;
-	}
-};
 
 VStoragePolTests::VTestResult VStoragePolTests::ExecuteTest()
 {
