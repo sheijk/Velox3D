@@ -9,7 +9,7 @@ namespace graphics {
 using v3d::math::IdentityPtr;
 
 void VHeightmapSubMesh::GenerateSubArea(
-	VRect<vuint> area,		
+	math::VRect<vuint> area,		
 	const VTerrainChunkMesh& terrain
 	)
 {

@@ -1,6 +1,7 @@
 #include "VTextureStage.h"
 //-----------------------------------------------------------------------------
 
+#include <v3d/Image.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
@@ -8,6 +9,11 @@ namespace v3d { namespace editor {
 VTextureStage::VTextureStage(VStringParam in_strFileName)
 {
 	m_TextureFileName = in_strFileName;
+
+	// try to open the image
+	//VServicePtr<v3d::image::IVImageFactory> pImageService;
+
+	//m_pImage = pImageService->CreateImage(in_strFileName);
 }
 
 VTextureDistributionOptions& VTextureStage::Distribution()
@@ -27,7 +33,7 @@ VStringRetVal VTextureStage::GetTextureFileName()
 
 v3d::image::VImage& VTextureStage::Image()
 {
-	return m_Image;
+	return *m_pImage;
 }
 
 //-----------------------------------------------------------------------------

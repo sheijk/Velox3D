@@ -31,19 +31,16 @@ low:
 medium:
 
 - add multiple window ogl context sharing support
-- include DevIL
 - fix WxConnector and old non needed wx stuff + make it clean an safe
 - commit cleaned example app
-- remove old importer files out of cvs
 
 high:
 - wrap bsp renderer out of IVCell to make it more robust
 
 
+
 -------------------------------------------------------------------------------
 Questions:
-- Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.inl empty?
-
 - rendere calls enabled in states should be deactiveted on framebuffer flush
 nein, das ist unnoetig. vor jedem mesh muessen die korrekten render states
 gesetzt werden, ansonsten sind die states undefiniert.
@@ -54,6 +51,12 @@ gesetzt werden, ansonsten sind die states undefiniert.
 
 
 Done List:
+
+-19.06.04
+- added GraphicSprite to Graphics/Image
+
+17.06.04
+- added DevIL for correct image loading
 
 15.06.04
 - removed VDisplaySettings.cpp

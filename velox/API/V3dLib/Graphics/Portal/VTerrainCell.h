@@ -6,39 +6,12 @@
 #include <V3dLib/Graphics/Portal/IVCell.h>
 #include <V3dLib/Graphics/Generators/VTerrainChunkMesh.h>
 #include <V3dLib/Graphics/Generators/VHeightmapMesh.h>
+
+#include <V3d/Math/VRect.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
 //-----------------------------------------------------------------------------
-
-template<typename Scalar>
-struct VRect
-{
-	typedef Scalar ScalarType;
-
-	VRect(ScalarType l, ScalarType t, ScalarType r, Scalar b)
-	{
-		left = l;
-		top = t;
-		right = r;
-		bottom = b;
-	}
-
-	ScalarType left;
-	ScalarType top;
-	ScalarType right;
-	ScalarType bottom;
-
-	ScalarType GetWidth() const
-	{
-		return right - left;
-	}
-
-	ScalarType GetHeight() const
-	{
-		return top - bottom;
-	}
-};
 
 class VHeightmapSubMesh : public VDynamicGeometryData<VSimpleVertex>
 {
@@ -46,7 +19,7 @@ public:
 	VHeightmapSubMesh();
 
 	void GenerateSubArea(
-		VRect<vuint> area,		
+		math::VRect<vuint> area,		
 		const VTerrainChunkMesh& terrain
 		);
 };

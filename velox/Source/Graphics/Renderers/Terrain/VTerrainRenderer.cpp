@@ -25,11 +25,12 @@ VTerrainRenderer::Heightmap&
 VTerrainRenderer::VTerrainRenderer(
 	vuint in_nPatchCount, 
 	IVDevice& in_Device,
-	VStringParam in_strTextureFile
+	VStringParam in_strTextureFile,
+	math::VRect<vfloat32> in_BoundingRect
 	)
 	:
 	m_nPatchCount(in_nPatchCount),
-	m_fChunkModelSize(10.0f),
+	m_fChunkModelSize(200.0f),
 	m_DrawList(in_Device),
 	m_DetailDrawList(in_Device),
 	m_bShowWireFrame(true),
@@ -49,14 +50,9 @@ VTerrainRenderer::VTerrainRenderer(
 	detailMat.destBlendFactor = VMaterialDescription::BlendSourceColor;
 	detailMat.sourceBlendFactor = VMaterialDescription::BlendDestColor;
 	detailMat.enableBlending = true;
-	//detailMat.depthWriteMask = VMaterialDescription::DepthReadOnly;
 	detailMat.depthTestFunction = VMaterialDescription::DepthOnLessEqual;
 
-	//m_TextureMat.sourceBlendFactor = VMaterialDescription::BlendDestColor;
-	//m_TextureMat.destBlendFactor =  VMaterialDescription::BlendSourceColor;
-//	m_TextureMat.depthWriteMask = VMaterialDescription::DepthReadOnly;
-
-	//m_Chunks.Resize(in_nPatchCount, in_nPatchCount, ChunkMap::Uninitialized);
+	// create chunk array
 	m_Chunks.ResizeUninit(in_nPatchCount, in_nPatchCount);
 
 	vfloat32 left = 1.0f;
@@ -80,7 +76,15 @@ VTerrainRenderer::VTerrainRenderer(
 			m_Chunks(x,y).pChunk.Assign(new VTerrainLodChunk(
 				LodCount, 
 				m_fChunkModelSize, 
-				VRectangle<vfloat32>(left, top, right, bottom),
+				math::VRect<vfloat32>(left, top, right, bottom),
+				math::VRect<vfloat32>(
+					0, 0, 100, 100
+					//left * in_BoundingRect.GetWidth() - in_BoundingRect.GetLeft(),
+					//top * in_BoundingRect.GetHeight() - in_BoundingRect.GetTop(),
+					//right * in_BoundingRect.GetWidth() - in_BoundingRect.GetLeft(),
+					//bottom * in_BoundingRect.GetHeight() - in_BoundingRect.GetTop()
+					),
+				200.0f,
 				in_Device 
 				//m_TextureMat
 				));
@@ -95,6 +99,7 @@ VTerrainRenderer::VTerrainRenderer(
 VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
 	VStringParam in_strFileName, 
 	IVDevice& in_Device,
+	math::VRect<vfloat32> in_BoundingRect,
 	VStringParam in_strTextureFile
 	)
 {
@@ -127,14 +132,22 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
 	}
 
 	// load data
-	return CreateFromStream(*pStream, nSizeLen, in_Device, in_strTextureFile);
+	return CreateFromStream(
+		*pStream, 
+		nSizeLen, 
+		in_Device, 
+		in_BoundingRect,
+		in_strTextureFile
+		);
 }
 
 VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 	vfs::IVStream& in_Stream,
 	vuint in_nSize,
 	IVDevice& in_Device,
-	VStringParam in_strTextureFile)
+	math::VRect<vfloat32> in_BoundingRect,
+	VStringParam in_strTextureFile
+	)
 {
 	// calc patch nr. for terrain
 	vuint nPatchCount = 1;
@@ -147,8 +160,8 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 	}
 
 	// create terrain
-	TerrainRendererPtr pTerrain(
-		new VTerrainRenderer(nPatchCount, in_Device, in_strTextureFile));
+	TerrainRendererPtr pTerrain(new VTerrainRenderer(
+		nPatchCount, in_Device, in_strTextureFile, in_BoundingRect));
 
 	vuint nTerrainSize = pTerrain->GetWidth();
 	V3D_ASSERT(nPatchSize <= nTerrainSize);

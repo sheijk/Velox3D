@@ -31,7 +31,7 @@ public:
 private:
 	VString m_TextureFileName;
 	VTextureDistributionOptions m_Distri;
-	v3d::image::VImage m_Image;
+	v3d::image::IVImageFactory::ImagePtr m_pImage;
 };
 
 //-----------------------------------------------------------------------------

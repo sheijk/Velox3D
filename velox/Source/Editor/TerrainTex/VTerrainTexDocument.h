@@ -51,6 +51,9 @@ private:
 	void UpdateTexStageListBox();
 	void Render();
 
+	void OnAddTexStage(wxCommandEvent& in_Event);
+	void OnRemoveTexStage(wxCommandEvent& in_Event);
+
 	VPointer<v3d::graphics::VSimpleDrawList>::SharedPtr m_pDrawList;
 
 	TextureStageList m_TextureStages;
@@ -58,7 +61,9 @@ private:
 	// user interface
 	enum Ids
 	{
-		TimerId = 1
+		TimerId = 1,
+		AddTexStageId,
+		RemoveTexStageId
 	};
 
 	void OnRegularUpdate(wxTimerEvent& in_Event);
@@ -66,7 +71,7 @@ private:
     wxPanel* m_pTexStagePanel;
 	wxListBox* m_pTexStageListBox;
 	VRenderPanel* m_pRenderPanel;
-	wxToolBarSimple* m_pToolbar;
+	wxToolBar* m_pToolbar;
 
 	wxTimer* m_pTimer;
 

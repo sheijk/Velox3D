@@ -9,7 +9,9 @@ namespace graphics {
 VTerrainLodChunk::VTerrainLodChunk(
 		vuint in_nLodCount,
 		vfloat32 in_fMeshSize,
-		VRectangle<vfloat32> in_TexCoords,
+		math::VRect<vfloat32> in_TexCoords,
+		math::VRect<vfloat32> in_Area,
+		vfloat32 in_fHeightScale,
 		IVDevice& in_Device
 		//const VMaterialDescription& in_Material
 		)
@@ -23,7 +25,9 @@ VTerrainLodChunk::VTerrainLodChunk(
 	m_hWireFrameMesh(0),
 	m_hIndexBuffer(0),
 	m_hVertexBuffer(0),
-	m_TexCoords(in_TexCoords)
+	m_TexCoords(in_TexCoords),
+	m_Area(in_Area),
+	m_fHeightScale(in_fHeightScale)
 {
 	SetLod(0);
 }
@@ -165,19 +169,21 @@ void GenerateInterpolatedTexCoords(
 	v3d::graphics::VBuffer<VertexStructure>& buffer,
 	vuint width,
 	vuint height,
-	VRectangle<vfloat32> in_Range
+	math::VRect<vfloat32> in_Range
 	)
 {
 	V3D_ASSERT(width * height == buffer.GetSize());
 
-	const vfloat32 deltax = (in_Range.right-in_Range.left) / vfloat32(width-1);
-	const vfloat32 deltay = (in_Range.bottom-in_Range.top) / vfloat32(height-1);
+	const vfloat32 deltax = (in_Range.GetRight()-in_Range.GetLeft()) / vfloat32(width-1);
+	const vfloat32 deltay = (in_Range.GetBottom()-in_Range.GetTop()) / vfloat32(height-1);
+	//const vfloat32 deltax = (in_Range.GetWidth()) / vfloat32(width-1);
+	//const vfloat32 deltay = (in_Range.GetHeight()) / vfloat32(height-1);
 
 	for(vuint x = 0; x < width; ++x)
 	for(vuint y = 0; y < height; ++y)
 	{
-		buffer[x + y*width].texCoords.u = x * deltax + in_Range.left;
-		buffer[x + y*width].texCoords.v = y * deltay + in_Range.top;
+		buffer[x + y*width].texCoords.u = x * deltax + in_Range.GetLeft();
+		buffer[x + y*width].texCoords.v = y * deltay + in_Range.GetTop();
 	}    
 }
 
@@ -207,7 +213,20 @@ void VTerrainLodChunk::UpdateCurrentMesh(const VMaterialDescription& in_Mat)
 
 	ForEachVertex(
 		model.GetVertexBuffer(), 
-		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 20.0f));
+		ScaleVertex<MyVertexType>(
+			//m_Area.GetWidth()/2, 
+			//m_Area.GetHeight()/2, 
+			m_fMeshSize, m_fMeshSize,
+			m_fHeightScale)
+		);
+
+	//ForEachVertex(
+	//	model.GetVertexBuffer(),
+	//	AddVertex<MyVertexType>(
+	//		m_Area.GetLeft() - m_Area.GetWidth()/2,
+	//		m_Area.GetTop() - m_Area.GetHeight()/2,
+	//		0
+	//		));
 
 	// move border vertices if the neighbour mesh has a lower detail
 	if( m_NeighbourLod[vint(Left)] > GetLod() )

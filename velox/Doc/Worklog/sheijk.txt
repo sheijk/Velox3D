@@ -10,7 +10,7 @@ zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
 die gleichen services stehen -[ins]
 
 VFS stuertzt ab, wenn eine Datei in einem nicht existierenden Verzeichniss geladen]
-werden soll [ins]
+werden soll [ins] gar nicht wahr --sheijk
 
 -------------------------------------------------------------------------------
 ----- current assigned tasks:
@@ -40,6 +40,7 @@ template member konvertiert?
 	.terrain: wireframe + texturierte darstellung
 	.editor: message basierte plugin kommunikation?
 	.editor: message system konkret entwerfen
+	IVDevice im window loeschen + dafuer sorgen dass das loeschen geht :)
 	VBuffer(vbyte*,count, Copy);
 	VBuffer(10) -> speicher selber allokieren
 	meshhandle + mat wieder trennen?
@@ -127,6 +128,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+20.06.2004
+VImage um praktische Funktionen erweitert
+Toolbar klappt
 
 19.06.2004
 detail texturen fuers terrain

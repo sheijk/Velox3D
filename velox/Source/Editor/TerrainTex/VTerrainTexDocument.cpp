@@ -66,19 +66,32 @@ VTerrainTexDocument::VTerrainTexDocument(
 	this->wxMiniFrame::Show(true);
 
 	//m_pToolbar = new wxToolBarSimple(this);
+	CreateToolBar();
+	wxToolBar* pToolbar = GetToolBar();
+
+	wxBitmap plus("icons/plus.bmp", wxBITMAP_TYPE_BMP);
+	plus.SetMask(new wxMask(plus, wxColour(255, 255, 255)));
+	pToolbar->AddTool(AddTexStageId, plus, wxNullBitmap, false, 5, 0, NULL, "Add texture stage");
+
+	wxBitmap redx("icons/redx.bmp", wxBITMAP_TYPE_BMP);
+	redx.SetMask(new wxMask(redx, wxColour(255, 255, 255)));
+	pToolbar->AddTool(RemoveTexStageId, redx, wxNullBitmap, false, 5, 0, NULL, "Delete texture stage");
+
+	pToolbar->Realize();
+	pToolbar->SetRows(1);
 
 	// create texture stage panel
     m_pTexStagePanel = new wxPanel(
 		this,
 		-1,
-		wxPoint(0,0),
+		wxPoint(GetClientRect().GetX(), GetClientRect().GetY()),
 		wxSize(100, GetClientSize().GetHeight())
 		);
 
 	m_pTexStageListBox = new wxListBox(
-		this,
+		m_pTexStagePanel,
 		-1,
-		wxPoint(0,0),
+		wxPoint(0, 0),
 		m_pTexStagePanel->GetClientSize()
 		);
 
@@ -187,8 +200,44 @@ void VTerrainTexDocument::OnRegularUpdate(wxTimerEvent& in_Event)
 	Render();
 }
 
+void VTerrainTexDocument::OnAddTexStage(wxCommandEvent& in_Event)
+{
+	wxString filename = wxGetTextFromUser("Please enter a vfs file name");
+
+	try
+	{
+		if( filename != "" )
+		{
+			m_TextureStages.push_back(VTextureStage(filename));
+
+			UpdateTexStageListBox();
+		}
+	}
+	catch(VException& e)
+	{
+		std::string message = "Could not find file: ";
+		message += e.GetErrorString().AsCString();
+
+		wxMessageBox(message.c_str(), "Error");
+	}
+}
+
+void VTerrainTexDocument::OnRemoveTexStage(wxCommandEvent& in_Event)
+{
+	vuint selection = m_pTexStageListBox->GetSelection();
+
+	if( selection >= 0 && selection < m_pTexStageListBox->GetCount() )
+	{
+		m_TextureStages.erase(m_TextureStages.begin()+selection);
+
+		UpdateTexStageListBox();
+	}
+}
+
 BEGIN_EVENT_TABLE(VTerrainTexDocument, wxMiniFrame)
 EVT_TIMER(TimerId, OnRegularUpdate)
+EVT_TOOL(AddTexStageId, OnAddTexStage)
+EVT_TOOL(RemoveTexStageId, OnRemoveTexStage)
 END_EVENT_TABLE()
 
 //-----------------------------------------------------------------------------

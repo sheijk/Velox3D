@@ -119,6 +119,7 @@ VEditorFrame::VEditorFrame(PluginList& in_Plugins)
 
 	//m_MenuBar.Append(pEditorMenu.Get(), "Editors");
 
+
 	SetMenuBar(&m_MenuBar);
 }
 
@@ -185,9 +186,12 @@ void VEditorFrame::CreateDocument(IVDocumentClass& in_DocClass)
 {
 	IVDocumentClass::DocumentPtr pDoc = in_DocClass.Create(this);
 
-	pDoc->RegisterFocusListener(m_FocusConnector);
+	if( pDoc.Get() != 0 )
+	{
+		pDoc->RegisterFocusListener(m_FocusConnector);
 
-	m_OpenDocuments.push_back(pDoc);
+		m_OpenDocuments.push_back(pDoc);
+	}
 }
 
 void VEditorFrame::OnDocumentFocusChange(

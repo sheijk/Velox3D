@@ -30,6 +30,12 @@
 
 #include "TerrainTex/VTerrainTexDocClass.h"
 #include "TerrainTex/VTextureStageSetupFrame.h"
+
+#include <wx/wx.h>
+#include <wx/frame.h>
+#include <wx/splash.h>
+//-----------------------------------------------------------------------------
+#include "../../Workspace/blub.h"
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
@@ -38,10 +44,25 @@ using namespace v3d;
 
 //-----------------------------------------------------------------------------
 
+wxWindow* GetRootWindow(wxWindow* in_pWin)
+{
+	wxWindow* parent = in_pWin->GetParent();
+	if( parent == 0 )
+	{
+		return in_pWin;
+	}
+	else
+	{
+		return GetRootWindow(parent);
+	}
+}
+
 VEditorApp::VEditorApp() : VNamedObject("main", 0)
 {
 	m_bAllowNewPlugins = true;
 }
+
+void* GetDesktopHandle();
 
 vint VEditorApp::Main()
 {
@@ -49,16 +70,6 @@ vint VEditorApp::Main()
 	using namespace math;
 
 	VCamera cam;
-
-	//VTestPlugin testPlugin;
-	//RegisterTool(testPlugin);
-
-	//VTerrainTexGenEditor terrTexEdit;
-	//RegisterEditor(terrTexEdit);
-	//m_pActiveEditor = &terrTexEdit;
-
-	//VCameraTool cameraPlugin(cam);
-	//RegisterTool(cameraPlugin);
 
 	vout << "Velox3D proudly presents: the editor!" << vendl;
 
@@ -71,46 +82,75 @@ vint VEditorApp::Main()
 	VTerrainTexDocClass texgenDocClass;
 	pFrame->RegisterDocumentClass(texgenDocClass);
 
-	//VTextureStageSetupFrame* pTexStageFrame = 
-	//	new VTextureStageSetupFrame(pFrame);
-	//pFrame->RegisterTool(*pTexStageFrame);
-
 	VServicePtr<system::IVSystemManager> pSystem;
 	VServicePtr<v3d::updater::IVUpdateManager> pUpdater;
 
-	//graphics::IVDevice& device(testPlugin.GetDevice());
+	//using v3d::window::IVWindowManager;
 
-	//VSimpleDrawList drawList(device);
+	//VServicePtr<v3d::window::IVWindowManager> pWindowManager;
 
-	//vout << vendl << "Loading terrain...";
-	//VTerrainRenderer::TerrainRendererPtr pTerrain = 
-	//	VTerrainRenderer::CreateFromRawFile(
-	//		"/data/hills.raw", device);
-	//pTerrain->CreateMeshes();
-	//vout << "done" << vendl;
+	//void* pDesktop;
 
-	//cam.MoveForward(-15);
+	//v3d::graphics::VDisplaySettings settings;
+	//settings.m_iWidth = 400;
+	//settings.m_iHeight = 300;
+
+	//{
+	//	wxFrame* splash = new wxFrame(
+	//		0,
+	//		-1,
+	//		"invisible splash screen",
+	//		wxPoint(0,0),
+	//		wxSize(settings.m_iWidth, settings.m_iHeight),
+	//		wxSTAY_ON_TOP | wxFRAME_NO_TASKBAR
+	//		);
+
+	//	splash->Show(true);
+	//	splash->CenterOnScreen();
+
+	//	//pDesktop = GetDesktopHandle();
+	//	pDesktop = (void*)splash->GetHandle();
+	//}
+
+	//V3D_ASSERT(pDesktop != 0);
+
+	//IVWindowManager::GraphicsDevicePtr pDevice =
+	//	pWindowManager->CreateGraphicsDevice(
+	//		settings, 
+	//		pDesktop
+	//		//(void*)pDesktop->GetHandle()
+	//		);
+
 	//cam.RotateZ(-45);
-	//cam.RotateX(-55);
-	//cam.MoveForward(5);
-	//device.SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
+	//cam.RotateX(-45);
+	////cam.RotateX(90);
+	//cam.MoveForward(-20);
+	//pDevice->SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
+
+	//VVeloxCubeMesh cube;
+	//IVDevice::MeshHandle hMesh = BuildMesh(
+	//	*pDevice, cube, cube.MaterialDescription());
+
+	//math::VMatrix44f matrix;
+	//math::SetScale(matrix, 5);
 
 	pUpdater->Start();
 	pSystem->SetStatus(true);
 	while(pSystem->GetStatus())
 	{
-		//device.BeginScene();
-		//device.SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
+		//pDevice->BeginScene();
 
-		//drawList.Render();
-		//pTerrain->Update(cam);
-		//pTerrain->Render();
+		//pDevice->SetMatrix(IVDevice::ModelMatrix, matrix);
+		//ApplyMaterial(*pDevice, & hMesh->GetMaterial());
+		//pDevice->RenderMesh(hMesh);
 
-		//device.EndScene();
+		//pDevice->EndScene();
 
 		pUpdater->StartNextFrame();
 	}
 	pUpdater->Stop();
+
+	//pDevice.DropOwnership();
 
 //	pFrame->Destroy();
 
@@ -132,3 +172,12 @@ void VEditorApp::RegisterTool(IVTool& in_Tool)
 //-----------------------------------------------------------------------------
 }} // namespace v3d::editor
 //-----------------------------------------------------------------------------
+
+#include <windows.h>
+
+namespace v3d { namespace editor {
+void* GetDesktopHandle()
+{
+	return GetDesktopWindow();
+}
+}}

@@ -23,25 +23,6 @@ void ApplyHeightValues(
 	const Array2d& in_Heights
 	);
 
-template<typename T>
-class VRectangle
-{
-public:
-	typedef T Scalar;
-	
-	Scalar left, top, right, bottom;
-
-	VRectangle() :
-		left(0), top(0), right(0), bottom(0)
-	{
-	}
-
-	VRectangle(Scalar l, Scalar t, Scalar r, Scalar b) :
-		left(l), top(t), right(r), bottom(b)
-	{
-	}
-};
-
 /**
  * Creates meshes from a heightmap and manages the meshes, and geometry data
  *
@@ -56,7 +37,9 @@ public:
 	VTerrainLodChunk(
 		vuint in_nLodCount, 
 		vfloat32 in_fMeshSize, 
-		VRectangle<vfloat32> in_TexCoords,
+		math::VRect<vfloat32> in_TexCoords,
+		math::VRect<vfloat32> in_Area,
+		vfloat32 in_fHeightScale,
 		IVDevice& in_Device
 		);
 
@@ -112,7 +95,9 @@ private:
 
 	vuint m_nCurrentLod;
 
-	VRectangle<vfloat32> m_TexCoords;
+	const math::VRect<vfloat32> m_TexCoords;
+	const math::VRect<vfloat32> m_Area;
+	const vfloat32 m_fHeightScale;
 
 	//const VMaterialDescription& m_Material;
 

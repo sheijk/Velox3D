@@ -6,6 +6,7 @@
 #include <V3dLib/Graphics/Misc/VSimpleDrawList.h>
 #include <V3dLib/Graphics/Renderers/Terrain/VTerrainLodChunk.h>
 #include <V3dLib/Math.h>
+
 #include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { 
@@ -16,8 +17,71 @@ namespace graphics {
 V3D_DECLARE_EXCEPTION(VTerrainException, VException);
 V3D_DECLARE_EXCEPTION(VTerrainGenException, VTerrainException);
 
+//-----------------------------------------------------------------------------
+
+/**
+ * Renders a heightmap with detail texture using geometry mipmaps
+ *
+ * @author sheijk
+ */
 class VTerrainRenderer
 {
+public:
+	VTerrainRenderer(
+		vuint in_nPatchCount, 
+		IVDevice& in_Device,
+		VStringParam in_strTextureFile,
+		math::VRect<vfloat32> in_BoundingRect
+		);
+
+	virtual ~VTerrainRenderer();
+
+	typedef VPointer<VTerrainRenderer>::SharedPtr TerrainRendererPtr;
+	
+	static TerrainRendererPtr CreateFromRawFile(
+		VStringParam in_strFileName, 
+		IVDevice& in_Device,
+		math::VRect<vfloat32> in_BoundingRect,
+		VStringParam in_strTextureFile = 0
+		);
+
+	static TerrainRendererPtr CreateFromStream(
+		vfs::IVStream& in_Stream,
+		vuint in_nSize,
+		IVDevice& in_Device,
+		math::VRect<vfloat32> in_BoundingRect,
+		VStringParam in_strTextureFile
+		);
+
+	static vuint SizeWithNChunks(vuint in_nChunkCount);
+
+	vuint GetWidth();
+	vuint GetHeight();
+
+	void Set(vuint x, vuint y, vfloat32 in_fHeight);
+	vfloat32 Get(vuint x, vuint y);
+
+	/**
+	 * Recalculates all low level of detail data. Needs to be called after
+	 * a change to the heightmap data has been made
+	 */
+	void UpdateLods();
+
+	/**
+	 * Changes lods of chunks depending on distance to camera 
+	 * [todo]and culls away invisible chunks [/todo]
+	 */
+	void Update(const IVCamera& in_Camera);
+
+	void CreateMeshes();
+
+	void Render();
+
+	vuint GetLodSteps() const;
+
+	void ApplyHeightData(const VArray2d<vfloat32, vuint>& hf);
+
+private:
 	typedef VLodHeightmap::Heightmap Heightmap;
 	typedef VPointer<VTerrainLodChunk>::AutoPtr TerrainLodChunkPtr;
 
@@ -87,58 +151,6 @@ class VTerrainRenderer
 
 	VMaterialDescription m_TextureMat;
 	VMaterialDescription m_DetailTextureMat;
-
-public:
-	VTerrainRenderer(
-		vuint in_nPatchCount, 
-		IVDevice& in_Device,
-		VStringParam in_strTextureFile
-		);
-
-	virtual ~VTerrainRenderer();
-
-	typedef VPointer<VTerrainRenderer>::SharedPtr TerrainRendererPtr;
-	
-	static TerrainRendererPtr CreateFromRawFile(
-		VStringParam in_strFileName, 
-		IVDevice& in_Device,
-		VStringParam in_strTextureFile = 0
-		);
-
-	static TerrainRendererPtr CreateFromStream(
-		vfs::IVStream& in_Stream,
-		vuint in_nSize,
-		IVDevice& in_Device,
-		VStringParam in_strTextureFile
-		);
-
-	static vuint SizeWithNChunks(vuint in_nChunkCount);
-
-	vuint GetWidth();
-	vuint GetHeight();
-
-	void Set(vuint x, vuint y, vfloat32 in_fHeight);
-	vfloat32 Get(vuint x, vuint y);
-
-	/**
-	 * Recalculates all low level of detail data. Needs to be called after
-	 * a change to the heightmap data has been made
-	 */
-	void UpdateLods();
-
-	/**
-	 * Changes lods of chunks depending on distance to camera 
-	 * [todo]and culls away invisible chunks [/todo]
-	 */
-	void Update(const IVCamera& in_Camera);
-
-	void CreateMeshes();
-
-	void Render();
-
-	vuint GetLodSteps() const;
-
-	void ApplyHeightData(const VArray2d<vfloat32, vuint>& hf);
 };
 
 //-----------------------------------------------------------------------------
