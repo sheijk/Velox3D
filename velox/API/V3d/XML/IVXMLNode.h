@@ -7,6 +7,11 @@
 namespace v3d {
 namespace xml {
 //-----------------------------------------------------------------------------
+/**
+ * The XML Node interface
+ * @author insane/acrylsword/sheijk
+ * @version 2.0
+ */
 class IVXMLNode
 {
 public:
@@ -17,8 +22,11 @@ public:
 		Text,
 		Element
 	};
-
+	
+	/** Visit this node */
 	virtual void Visit(IVXMLVisitor& in_Visitor) = 0;
+
+	/** Returns the node type */
 	virtual NodeType GetType() = 0;
 };
 //-----------------------------------------------------------------------------

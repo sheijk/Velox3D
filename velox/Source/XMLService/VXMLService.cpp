@@ -136,7 +136,6 @@ VXMLElement* VXMLService::BeginTranslation(TiXmlDocument& in_Doc)
 	TiXmlNode* pChild = 0;
 	while( pChild = pRootElement->IterateChildren(pChild) )
 	{
-		vout << "hier endlos?" << vendl;
 		pReturn->AddChild(TranslateNode(pChild));
 	}
 */
@@ -180,7 +179,7 @@ IVXMLNode* VXMLService::TranslateNode(TiXmlNode* in_pNode)
 VXMLElement* VXMLService::TranslateElement(TiXmlElement* in_pElement)
 {
 	V3D_ASSERT(in_pElement != 0);
-	vout << "TranslateElement: " << in_pElement->Value() << vendl;
+	
 
 	VXMLElement *pReturn = new VXMLElement(in_pElement->Value());
 

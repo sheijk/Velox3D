@@ -73,8 +73,7 @@ IVXMLAttribute* VXMLElement::GetAttribute(VStringParam in_strName)
 void VXMLElement::AddAttribute(VXMLAttribute* in_pAttribute)
 {
 	V3D_ASSERT(in_pAttribute != 0);
-	vout << "Name: " << in_pAttribute->GetName() << " Value: " << in_pAttribute->GetValue().Get<std::string>() << vendl;
-
+	
 	m_AttributeList.push_back(in_pAttribute);
 }
 

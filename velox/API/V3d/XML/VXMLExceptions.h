@@ -19,4 +19,4 @@ V3D_DECLARE_EXCEPTION(VXMLTinyXMLException, VXMLException);
 } // namespace xml
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VXMLEXCEPTION_H
+#endif // V3D_VXMLEXCEPTIONS_H

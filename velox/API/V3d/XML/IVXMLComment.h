@@ -7,9 +7,15 @@
 namespace v3d {
 namespace xml {
 //-----------------------------------------------------------------------------
+/**
+ * The XML Comment interface
+ * @author insane/acrylsword/sheijk
+ * @version 2.0
+ */
 class IVXMLComment : public IVXMLNode
 {
 public:
+	/** Returns the Comment */
 	virtual VStringRetVal GetComment() = 0;
 };
 //-----------------------------------------------------------------------------

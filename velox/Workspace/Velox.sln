@@ -3,7 +3,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KernelLib", "KernelLib.vcpr
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UtilsLib", "UtilsLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49322}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxLib", "UtilsLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49322}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -96,7 +96,7 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt
-		Workdir\init.xml = Workdir\init.xml
+		..\local\Workdir\default\init.xml = ..\local\Workdir\default\init.xml
 		..\Doc\Worklog\insane.txt = ..\Doc\Worklog\insane.txt
 		Templates\ServiceDLL.cpp = Templates\ServiceDLL.cpp
 		..\Doc\Worklog\sheijk.txt = ..\Doc\Worklog\sheijk.txt

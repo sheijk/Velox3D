@@ -13,7 +13,7 @@ namespace xml{
 
 /**
  * The XML Element interface
- * @author ins
+ * @author ins/acrylsword/sheijk
  * @version 2.0
  */
 class IVXMLElement : public IVXMLNode
@@ -22,31 +22,31 @@ public:
 	typedef VBidirectionalIterator<IVXMLAttribute> AttributeIter;
 	typedef VBidirectionalIterator<IVXMLNode> NodeIter;
 
-	/* Returns the name od the xml element */
+	/** Returns the name od the xml element */
 	virtual VStringRetVal GetName() = 0;
 
-	/* Returns the first attribute in the element */
+	/** Returns the first attribute in the element */
 	virtual IVXMLAttribute* GetFirstAttribute() = 0;
 
-	/* Returns the next attribute in the elemenet */
+	/** Returns the next attribute in the elemenet */
 	virtual IVXMLAttribute* NextAttribute() = 0;
 
-	/* Returns the attribute with the given name. if not exisitng returning NULL */
+	/** Returns the attribute with the given name. if not exisitng returning NULL */
 	virtual IVXMLAttribute* GetAttribute(VStringParam Name) = 0;
 
-	/* Returns an iterator at first position through all attributes on this element */
+	/** Returns an iterator at first position through all attributes on this element */
 	virtual AttributeIter AttributeBegin() = 0;
 
-	/* Returns an iterator to the last position in all attributes on this element */
+	/** Returns an iterator to the last position in all attributes on this element */
 	virtual AttributeIter AttributeEnd() = 0;
 
-	/* Returns an iterator to the first node element of the child tree */
+	/** Returns an iterator to the first node element of the child tree */
 	virtual NodeIter ChildBegin() = 0;
 
-	/* Returns an iterator to the last node element of the child tree */ 
+	/** Returns an iterator to the last node element of the child tree */ 
 	virtual NodeIter ChildEnd() = 0;
 
-	/* Call Visit from all child nodes */
+	/** Call Visit from all child nodes */
 	void VisitChildren(IVXMLVisitor& in_Visitor);
 };
 //-----------------------------------------------------------------------------

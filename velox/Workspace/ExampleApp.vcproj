@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS;BOOST_SIGNALS_STATIC_LINK"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"

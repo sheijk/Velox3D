@@ -7,9 +7,15 @@
 namespace v3d {
 namespace xml {
 //-----------------------------------------------------------------------------
+/**
+ * The XML Text interface
+ * @author insane/acrylsword/sheijk
+ * @version 2.0
+ */
 class IVXMLText : public IVXMLNode
 {
 public:
+	/** Returns the text */
 	virtual VStringRetVal GetText() = 0;
 };
 

@@ -7,21 +7,19 @@
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
-//using namespace v3d::utils; // for VStringValue
-//-----------------------------------------------------------------------------
 /**
  * The XML Attribute interface
- * @author insane/acrylsword
+ * @author insane/acrylsword/sheijk
  * @version 2.0
  */
 class IVXMLAttribute
 {
 public:
 
-	/* Returns the name of the xml attribute*/
+	/** Returns the name of the xml attribute*/
     virtual VStringRetVal GetName() = 0;
 	
-	/* Returns the value of this xml attribute */
+	/** Returns the value of this xml attribute */
 	virtual v3d::utils::VStringValue GetValue() = 0;
 };
 //-----------------------------------------------------------------------------

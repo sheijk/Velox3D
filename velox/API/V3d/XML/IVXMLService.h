@@ -13,10 +13,9 @@ namespace xml{
 
 /**
  * The interface for the XML service
- * @author insane
- * @version 1.0
+ * @author insane/acrylsword/sheijk
+ * @version 2.0
  */
-
 class IVXMLService : public VNamedObject
 {
 public:
@@ -24,14 +23,12 @@ public:
 	typedef VPointer<vfs::IVStream>::SharedPtr IVStreamPtr;
 	typedef VPointer<IVXMLElement>::SharedPtr IVXMLElementPtr;
 
-//	IVXMLService() {;};
-        
 	/**
 	 * Parses an xml file through an IVStream. Returns the root node of
 	 * the xml tree.
 	 *
 	 * @param in_pStream A vfs data stream that represents a xml file
-	 * @authod acrylsword
+	 * @author acrylsword
 	 */
 	virtual IVXMLElementPtr GetRootElement(vfs::IVStream* in_pStream) = 0; 
 
@@ -40,7 +37,7 @@ public:
 	* node of the xml tree.
 	*
 	* @param in_strName The file to open
-	* @authod acrylsword
+	* @author acrylsword
 	*/
 	virtual IVXMLElementPtr GetRootElement(VStringParam in_strName) = 0; 
 

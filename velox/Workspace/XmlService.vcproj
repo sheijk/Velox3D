@@ -152,9 +152,6 @@
 				RelativePath="..\Api\V3d\Xml\IVXMLWriter.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Xml\VXMLException.h">
-			</File>
-			<File
 				RelativePath="..\Api\V3d\Xml\VXMLExceptions.h">
 			</File>
 		</Filter>
