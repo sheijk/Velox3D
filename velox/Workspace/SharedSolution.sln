@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 8.00
+Microsoft Visual Studio Solution File, Format Version 7.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "CoreLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49029}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
