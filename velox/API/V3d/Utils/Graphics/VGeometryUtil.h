@@ -16,7 +16,8 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
- * Takes an array of vertices and builds a mesh description of it
+ * Takes an array of vertices and builds a mesh description of it.
+ * Loads the data of the mesh into the device
  */
 template<typename VertexStructure>
 v3d::graphics::VMeshDescription BuildMeshDescription(

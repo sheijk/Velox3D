@@ -9,6 +9,13 @@
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Image/IVImageFactory.h>
 
+#include <v3d/Utils/Graphics/VBox.h>
+#include <v3d/Utils/Graphics/VColor4f.h>
+#include <v3d/Utils/Graphics/VTexCoord2f.h>
+#include <v3d/Utils/Graphics/VVector3f.h>
+#include <v3d/Utils/Graphics/VVertexDataLayout.h>
+#include <v3d/Utils/Graphics/VGeometryUtil.h>
+
 #include <v3d/Math/VMatrixOps.h>
 
 #include <v3d/Graphics/DrawList/IVDrawList.h>
@@ -162,8 +169,8 @@ void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 	m_pRightMouseButton	= &in_pInputManager->GetMouseButton(0);
 	m_pMouseXAxis		= &in_pInputManager->GetMouseXAxis();
 	m_pMouseYAxis		= &in_pInputManager->GetMouseYAxis();
-	
-	
+
+
 }
 
 void VExampleApp::MoveCamera(VCamera* in_pCamera)
@@ -175,28 +182,77 @@ void VExampleApp::MoveCamera(VCamera* in_pCamera)
 
 	if(m_pDownButton->IsDown() == true)
 		in_pCamera->MoveForward(5.0f * fSeconds);
-	
+
 	if(m_pLeftButton->IsDown() == true)
 		in_pCamera->Strafe(-5 * fSeconds);
-		
+
 
 	if(m_pRightButton->IsDown() == true)
 		in_pCamera->Strafe(5 * fSeconds);
-		
+
 
 	if(m_pRightMouseButton->IsDown() == true)
 		in_pCamera->RotateZ(-5 * fSeconds);
-		
+
 
 	if(m_pLeftMouseButton->IsDown() == true)
 		in_pCamera->RotateZ(5 * fSeconds);
 
-	// das ist bestimmt nicht absicht dass hier x + y achsen vertauscht
-	// wurden, oder?
 	in_pCamera->RotateX(- m_pMouseYAxis->GetLastMovement() * 5 * fSeconds);
 	in_pCamera->RotateY(m_pMouseXAxis->GetLastMovement() * 5 * fSeconds);
-		
+
 }
+
+void Translate(VMatrix44f& io_Matrix, float x, float y, float z)
+{
+	io_Matrix.Set(0, 3, x);
+	io_Matrix.Set(1, 3, y);
+	io_Matrix.Set(2, 3, z);
+}
+
+VMatrix44f BuildTranslateMatrix(float x, float y, float z)
+{
+	VMatrix44f mat;
+
+	Identity(mat);
+	Translate(mat, x, y, z);
+
+	return mat;
+}
+
+using namespace v3d::graphics::simplesg;
+
+IVNode* CreateMeshTransformNode(
+								IVDevice::MeshHandle in_hMesh, 
+								const VMatrix44f& in_Transform)
+{
+	VMeshNode* pMeshNode = new VMeshNode(in_hMesh);
+	VTransformNode* pTransformNode = new VTransformNode(in_Transform);
+	pTransformNode->AddChild(pMeshNode);
+
+	return pTransformNode;
+}
+
+struct ColoredVertex
+{
+	ColoredVertex()
+	{
+		VVertexDataLayout::SetPositionOffset<ColoredVertex>();
+		VVertexDataLayout::SetColorOffset<ColoredVertex>();
+		VVertexDataLayout::SetTexCoordOffset<ColoredVertex>();
+	}
+
+	VVector3f position;
+	VColor4f color;
+	VTexCoord2f texCoords;
+
+	static VVertexDataLayout layout;
+};
+
+VVertexDataLayout ColoredVertex::layout;
+
+#include <Windows.h>
+#include <gl/GL.h>
 
 vint VExampleApp::Main()
 {
@@ -228,7 +284,7 @@ vint VExampleApp::Main()
 
 	// build scene graph
 	VPointer<IVNode>::AutoPtr pRootNode;
-	
+
 	VMatrix44f identity;
 	Identity(identity);
 
@@ -253,6 +309,39 @@ vint VExampleApp::Main()
 		pTransformNode->AddChild(pMeshNode);
 	}
 
+	{
+		utils::graphics::VBox<ColoredVertex> box(.9f, .9f, .9f);
+		box.CreateCoordinates();
+
+		for(int vertnum = 0; vertnum < box.buffer.GetSize(); ++vertnum)
+		{
+			box.buffer[vertnum].color = VColor4f(1, 0, 0, 1);
+		}		
+		
+		VMeshDescription md = BuildMeshDescription(
+			*m_pDevice,
+			box.buffer.GetDataAddress(),
+			box.buffer.GetSize()
+			);
+
+		IVDevice::MeshHandle hMesh = m_pDevice->CreateMesh(
+			md, 
+			VMaterialDescription());
+		
+		//pRootNode->AddChild(
+		//	CreateMeshTransformNode(hMesh, BuildTranslateMatrix(0, 0, -6))
+		//	);
+
+		for(int xpos = -15; xpos < 15; xpos += 3)
+		for(int ypos = -15; ypos < 15; ypos += 3)
+		for(int zpos = -15; zpos < 15; zpos += 3)
+		{
+			pRootNode->AddChild(
+				CreateMeshTransformNode(hMesh, BuildTranslateMatrix(xpos, ypos, zpos))
+				);
+		}
+	}
+
 	VSimpleDrawList drawList(*m_pDevice);
 
 	// calculate absolute transforms for alle SG nodes
@@ -266,11 +355,13 @@ vint VExampleApp::Main()
 	pSystemManager->SetStatus(true);
 	pWindow->SetActive();
 
+	glDisable(GL_TEXTURE_2D);
+
 	while(pSystemManager->GetStatus())
 	{
 		m_pDevice->BeginScene();
 		m_pDevice->SetMatrix(IVDevice::MatrixMode::ViewMatrix, *pCamera->GetMatrix());
-		
+
 		//ApplyMaterial(m_pDevice, &pMesh->GetMaterial());
 		//m_pDevice->RenderMesh(pMesh);
 		drawList.Render();

@@ -61,6 +61,59 @@ public:
 	}
 
 	/**
+	 * Creates a new buffer containing the same date like the source buffer
+	 * Either copies data, or takes over ownership
+	 * If the copy mode is CopyData a new buffer will be allocated and the
+	 * source buffer will be copied. If DrowData is used as copy mode the
+	 * original buffer looses it's data and the new buffer obtains it's
+	 * ownership. The source buffer will be empty after the copy and thus
+	 * become useless. In DropData mode no data will be lost thus it is good
+	 * for fast changing data types etc
+	 *
+	 * @param in_pSource the source buffer
+	 * @param in_Mode CopyData -> copy data, DropData -> take over data
+	 */
+	template<typename OldDataType>
+	VBuffer(VBuffer<OldDataType>* in_pSource, CopyMode in_CopyMode)
+	{
+		// calc source size in bytes
+		const vuint nSizeInBytes = m_nSize * sizeof(DataType);
+
+		// calc new size in number of elements
+		const vuint nDestSize = nSizeInBytes / sizeof(DestType);
+
+		// buffer sizes in bytes must match
+		if( nDestSize * sizeof(DestType) != nSizeInBytes )
+		{
+			V3D_THROW(VException, "type size mismatch");
+		}
+
+		if( in_CopyMode == DropData )
+		{
+			// take ownership of buffer
+			m_pBuffer = reinterpret_cast<DestType*>(m_pBuffer);
+			m_nSize = nDestSize;
+
+			// empty source buffer
+			in_pSource->m_pBuffer = 0;
+			in_pSource->m_nSize = 0;
+		}
+		else if( in_CopyMode == CopyData )
+		{
+			// create a copy of the data
+			vbyte* pNewData = new vbyte[nSizeInBytes];
+			memcpy(pNewData, m_pBuffer, nSizeInBytes);
+
+			m_pBuffer = reinterpret_cast<DataType>(pNewData);
+			m_nSize = nDestSize;
+		}
+		else
+		{
+			V3D_THROW(VException, "invalid copy mode");
+		}
+	}
+
+	/**
 	 * Delete's its assosiated memory region
 	 */
 	~VBuffer()
@@ -75,6 +128,7 @@ public:
 	 * Buffers do not share memory, thus either the memory is copied or the
 	 * source buffer looses it's memory
 	 *
+	 * @deprecated use VBuffer(VBuffer<OldType>,CopyMode) instead
 	 * @param in_Mode CopyData copies, DropData transfers ownership
 	 */
 	VBuffer<DataType>* CreateCopy(CopyMode in_Mode)
@@ -124,6 +178,9 @@ public:
 		return m_pBuffer;
 	}
 
+	/**
+	 * @deprecated use VBuffer(VBuffer<OldType>*, CopyMode) instead
+	 */
 	template<typename DestType>
 	VBuffer<DestType>* Convert(CopyMode in_CopyMode)
 	{

@@ -114,9 +114,6 @@
 		<Filter
 			Name="Device"
 			Filter="">
-			<File
-				RelativePath="..\Api\V3d\Graphics\VDeviceMatrix.h">
-			</File>
 			<Filter
 				Name="Interfaces"
 				Filter="">
@@ -137,6 +134,9 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Graphics\VBuffer.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Graphics\VDeviceMatrix.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">

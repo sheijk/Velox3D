@@ -430,7 +430,8 @@ void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix)
 void VOpenGLDevice::RecalcModelViewMatrix()
 {
 	VMatrix44f modelView;
-	Mult(modelView, m_ModelMatrix, m_ViewMatrix);
+	Mult(modelView, m_ViewMatrix, m_ModelMatrix);
+	//Mult(modelView, m_ModelMatrix, m_ViewMatrix);
 
 	SetGLMatrix(GL_MODELVIEW, modelView, this);
 }

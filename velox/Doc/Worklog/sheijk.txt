@@ -74,6 +74,7 @@ template member konvertiert?
 	./render state categories ins device
 	./materials erzeugen
 	./mesh: render state list liefern
+	default color in die mat descr aufnehmen
 
 	.scene graph
 	./interfaces schreiben (basierend auf ins code)
@@ -118,9 +119,14 @@ Doku:
 
 log:
 
+15.03.2004
+View/Model Matrix Kombination gefixt
+kleine Performance Demo in die Example App gebaut ;)
+
 14.03.2004
 Einige alte Dateileichen aus dem CVS entfernt
 Translate Fkt zu den Geometrie (Rotations) Funktionen hinzugefuegt
+UtilsLib VS Projectfile Ornderstruktur etwas umsortiert
 
 11.03.2004
 Kamera Bewegung in der Example App Zeitabhaengig gemacht

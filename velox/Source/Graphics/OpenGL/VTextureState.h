@@ -38,6 +38,7 @@ public:
 		}
 		else
 		{
+			//glEnable(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, m_nTextureId);
 			glEnable(GL_TEXTURE_2D);
 		}
