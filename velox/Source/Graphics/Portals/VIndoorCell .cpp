@@ -3,6 +3,9 @@
 #include <V3dLib/Graphics/Geometry/VGeometryData.h>
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Math/TransformationOps.h>
+#include <v3d/Image/IVImageFactory.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3dlib/Graphics/Misc/MiscUtils.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -18,47 +21,58 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 	m_pPortalBox->CreateCoordinates();
 	*///m_pPortalBox->CreateTextureCoordinates();
 
-	VGeometryData<VSimpleVertex> box(VMeshDescription::GeometryType::Quads, 8, 20);
+	VGeometryData<VTexturedVertex> box(VMeshDescription::GeometryType::Quads, 8, 20);
 
-	//1
 	box.GetVertexBuffer()[0].position.x = 10;
 	box.GetVertexBuffer()[0].position.y = 0;
 	box.GetVertexBuffer()[0].position.z = -15;
-
-	//2
+	box.GetVertexBuffer()[0].texCoords.u = 0.7f;
+	box.GetVertexBuffer()[0].texCoords.v = 0.7f;
+    	
 	box.GetVertexBuffer()[1].position.x = 10;
 	box.GetVertexBuffer()[1].position.y = 0;
 	box.GetVertexBuffer()[1].position.z = -5;
+	box.GetVertexBuffer()[1].texCoords.u = 0.7f;
+	box.GetVertexBuffer()[1].texCoords.v = 0.3f;
 
-	//3
 	box.GetVertexBuffer()[2].position.x = -10;
 	box.GetVertexBuffer()[2].position.y = 0;
 	box.GetVertexBuffer()[2].position.z = -15;
+	box.GetVertexBuffer()[2].texCoords.u = 0.3f;
+	box.GetVertexBuffer()[2].texCoords.v = 0.7f;
 
-    //4
 	box.GetVertexBuffer()[3].position.x = -10;
 	box.GetVertexBuffer()[3].position.y = 0;
 	box.GetVertexBuffer()[3].position.z = -5;
+	box.GetVertexBuffer()[3].texCoords.u = 0.3f;
+	box.GetVertexBuffer()[3].texCoords.v = 0.3f;
 
-	////5
-	box.GetVertexBuffer()[4].position.x = -10;
-	box.GetVertexBuffer()[4].position.y = 10;
-	box.GetVertexBuffer()[4].position.z = -5;
+	box.GetVertexBuffer()[4].position.x = -30;
+	box.GetVertexBuffer()[4].position.y = 20;
+	box.GetVertexBuffer()[4].position.z = 15;
+	box.GetVertexBuffer()[4].texCoords.u = 0.0f;
+	box.GetVertexBuffer()[4].texCoords.v = 0.0f;
 
-	////6
-	box.GetVertexBuffer()[5].position.x = 10;
-	box.GetVertexBuffer()[5].position.y = 10;
-	box.GetVertexBuffer()[5].position.z = -5;
+	box.GetVertexBuffer()[5].position.x = 30;
+	box.GetVertexBuffer()[5].position.y = 20;
+	box.GetVertexBuffer()[5].position.z = 15;
+	box.GetVertexBuffer()[5].texCoords.u = 1.0f;
+	box.GetVertexBuffer()[5].texCoords.v = 0;
 
-	////7
-	box.GetVertexBuffer()[6].position.x = -10;
-	box.GetVertexBuffer()[6].position.y = 10;
-	box.GetVertexBuffer()[6].position.z = -15;
+	box.GetVertexBuffer()[6].position.x = -30;
+	box.GetVertexBuffer()[6].position.y = 20;
+	box.GetVertexBuffer()[6].position.z = -30;
+	box.GetVertexBuffer()[6].texCoords.u = 0.0f;
+	box.GetVertexBuffer()[6].texCoords.v = 1.0f;
+
 
 	////8
-	box.GetVertexBuffer()[7].position.x = 10;
-	box.GetVertexBuffer()[7].position.y = 10;
-	box.GetVertexBuffer()[7].position.z = -15;
+	box.GetVertexBuffer()[7].position.x = 30;
+	box.GetVertexBuffer()[7].position.y = 20;
+	box.GetVertexBuffer()[7].position.z = -30;
+	box.GetVertexBuffer()[7].texCoords.u = 1.0f;
+	box.GetVertexBuffer()[7].texCoords.v = 1.0f;
+
 
 	box.GetIndexBuffer()[0] = 0;
 	box.GetIndexBuffer()[1] = 1;
@@ -84,11 +98,10 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 	box.GetIndexBuffer()[17] = 6;
 	box.GetIndexBuffer()[18] = 7;
 	box.GetIndexBuffer()[19] = 0;
-
- 
+	
 	VMeshDescription meshDescs;
 
-	meshDescs =	BuildMeshDescription<VSimpleVertex>(
+	meshDescs =	BuildMeshDescription<VTexturedVertex>(
 		*m_pDevice,
 		box.GetVertexBuffer().GetDataAddress(), 
 		box.GetVertexBuffer().GetSize(),
@@ -99,10 +112,13 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 	meshDescs.geometryType = box.GetGeometryType();
 	
 
-	VMaterialDescription matDescs;
+	VMaterialDescription matDescs =
+		BuildTextureMaterial(m_pDevice, "/data/test2.jpg");
 
-	matDescs.backPolyMode = VMaterialDescription::Point;
-	matDescs.frontPolyMode = VMaterialDescription::Line;
+
+
+	matDescs.backPolyMode = VMaterialDescription::Filled;
+	matDescs.frontPolyMode = VMaterialDescription::Point;
 
 	IVDevice::MeshHandle BoxHandle = m_pDevice->CreateMesh(meshDescs, matDescs);
 

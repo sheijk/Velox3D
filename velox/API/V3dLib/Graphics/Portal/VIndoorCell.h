@@ -27,9 +27,9 @@ public:
 	void AddCell(IVCell* in_pCell);
 	
 private:
-
+    
 	typedef VPointer<VMatrix44f>::SharedPtr MatrixPtr;
-
+	
 	IVDevice* m_pDevice;
 	v3d::graphics::VMultipassDrawList* m_pDrawList;
 
