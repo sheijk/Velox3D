@@ -42,7 +42,6 @@ int main(int argv, char* argc[])
 		// load and init
 		g_pKernel->ProcessIniFile(pcXmlFileName);
 	}
-
 	catch(VException& exc)
 	{
 	

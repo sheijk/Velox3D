@@ -38,6 +38,7 @@ public:
 	 * This method returns a global error stream
 	 * @return SharedPointer
 	 */ 
+	//TODO: warum ein shared ptr?
 	virtual ErrorStreamPtr GetGlobalErrorStream() = 0;
 
 	/**

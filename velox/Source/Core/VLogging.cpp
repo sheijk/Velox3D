@@ -12,22 +12,31 @@ namespace v3d {
 
 namespace 
 {
-	IVErrorService* g_pErrorService = 0;
+	//IVErrorService* g_pErrorService = 0;
 
 	IVErrorService* GetLogDevice()
 	{
-		if(0 == g_pErrorService)
+		try 
 		{
-			try 
-			{
-				g_pErrorService = QueryObject<IVErrorService>("error.service");
-			}
-			catch(VObjectRegistryException& e)
-			{
-			}
+			return QueryObject<IVErrorService>("error.service");
+		}
+		catch(VObjectRegistryException& e)
+		{
+			return 0;
 		}
 
-		return g_pErrorService;
+		//if(0 == g_pErrorService)
+		//{
+			//try 
+			//{
+			//	g_pErrorService = QueryObject<IVErrorService>("error.service");
+			//}
+			//catch(VObjectRegistryException& e)
+			//{
+			//}
+		//}
+
+	//	return g_pErrorService;
 	}
 }
 
@@ -37,7 +46,11 @@ void SendDebugMessage(VStringParam in_pcMessage)
 	if( 0 != GetLogDevice() )
 	{
 		// send message to log device
-		*(GetLogDevice()->GetGlobalErrorStream())
+		v3d::error::IVErrorStream& errorStream
+			= * (GetLogDevice()->GetGlobalErrorStream());
+
+		//*(GetLogDevice()->GetGlobalErrorStream())
+		errorStream
 			<< v3d::error::Normal << in_pcMessage;
 	}
 }

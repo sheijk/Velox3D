@@ -25,6 +25,7 @@ private:
 	VNamedObject();
 
 	VObjectKey m_Key;
+	vbool m_bRegistered;
 public:
 	/** create object and register it to the object registry */
 	VNamedObject(const VNamedObject* in_Parent);
@@ -37,6 +38,12 @@ public:
 
 	/** get the key of the object */
 	const VObjectKey& GetKey() const;
+
+protected:
+	/**
+	 * Unregisters the object from the object registry
+	 */
+	void UnregisterFromObjectRegistry();
 };
 
 //-----------------------------------------------------------------------------

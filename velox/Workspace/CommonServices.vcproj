@@ -129,9 +129,6 @@
 				Name="Implementation"
 				Filter="">
 				<File
-					RelativePath="..\Source\ConfigFiles\CommonServicesDLL.cpp">
-				</File>
-				<File
 					RelativePath="..\Source\ConfigFiles\VConfigProvider.cpp">
 				</File>
 				<File
@@ -139,6 +136,33 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="Update Manager"
+			Filter="">
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Updater\IVUpdateable.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Updater\IVUpdateManager.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\UpdateManager\VUpdateManager.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\UpdateManager\VUpdateManager.h">
+				</File>
+			</Filter>
+		</Filter>
+		<File
+			RelativePath="..\Source\ConfigFiles\CommonServicesDLL.cpp">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

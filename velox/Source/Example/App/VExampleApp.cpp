@@ -4,12 +4,14 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/VLogging.h>
 #include <v3d/Core/VIOStream.h>
+#include <v3d/Updater/IVUpdateManager.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
 //-----------------------------------------------------------------------------
 using namespace v3d::console;
+using v3d::updater::IVUpdateManager;
 
 VExampleApp::VExampleApp(VStringParam in_strName) 
 	: VNamedObject(in_strName, 0)
@@ -41,19 +43,23 @@ vint VExampleApp::Main()
 	Initialize();
 	
 	V3D_DEBUGMSG("Velox Main app says hi!");
+
+	// get update manager
+	IVUpdateManager& updater = * QueryObject<IVUpdateManager>("updater.service");
 	
-	while(Idle())
-	{   
-		m_Console->Update();
+	// main loop
+	bool bActive = true;
+
+	//TODO: fix. (bool Active() in update manager?)
+	//updater.Mainloop();
+	updater.Start();
+	while(bActive)
+	{
+		updater.StartNextFrame();
 	}
-	
+	updater.Stop();
 
 	return 0;
-}
-
-vbool VExampleApp::Idle()
-{
-	return true;
 }
 
 void VExampleApp::Initialize()

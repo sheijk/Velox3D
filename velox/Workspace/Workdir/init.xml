@@ -2,9 +2,11 @@
 <!-- Velox3D services load info -->
 <Config>
 	<Services>
+		<Service id="common" desc="Some small services" filename="CommonServices.dll"/>
 		<Service id="error" desc="Logging functionality" filename="ErrorService.dll"/>
 		<Service id="console" desc="Win32 Console" filename="ConsoleService.dll"/>
 		<Service id="example" desc="An example service" filename="ExampleService.dll"/>
+		<Service id="vfs" desc="Virtual File System" filename="VirtualFileSystem.dll"/>
 		<Service id="app" desc="The main program" filename="ExampleApp.dll"/>
 	</Services>
 	<Main id="main"/>

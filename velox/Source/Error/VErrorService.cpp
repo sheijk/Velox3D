@@ -1,6 +1,9 @@
 #include "VErrorService.h"
+
 #include "VErrorStream.h"
-#include <V3d/Core/VAssert.h>
+#include <v3d/Core/VAssert.h>
+#include <v3d/Core/VObjectRegistry.h>
+
 #include <exception>
 #include <iostream>
 
@@ -19,7 +22,7 @@ VErrorService::VErrorService() :
 
 VErrorService::~VErrorService()
 {
-		
+	VNamedObject::UnregisterFromObjectRegistry();		
 }
 
 vbool VErrorService::RegisterListener( IVErrorListener* in_pListener, IVErrorFilter* in_pFilter )

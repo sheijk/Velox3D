@@ -16,11 +16,11 @@ VConsoleWindow& wxGetApp();
  */
 VConsoleService::VConsoleService() : IVConsoleSerivce("console.service", 0)
 {
-	ErrorService = NULL;
-	ErrorService = QueryObject<error::IVErrorService>("error.service");
-	
 	VConsoleWindow& app = wxGetApp();
-	ErrorService->RegisterListener(&app, new util::VAllFilter());
+	GetErrorService().RegisterListener(&app, new util::VAllFilter());
+
+	// register at the update manager
+	this->Register();
 }
 
 /**
@@ -29,7 +29,13 @@ VConsoleService::VConsoleService() : IVConsoleSerivce("console.service", 0)
 VConsoleService::~VConsoleService()
 {
 	VConsoleWindow& app = wxGetApp();
-	ErrorService->UnregisterListener(&app);
+	try
+	{
+		GetErrorService().UnregisterListener(&app);
+	}
+	catch(VObjectRegistryException&)
+	{
+	}
 }
 
 
@@ -43,6 +49,24 @@ void VConsoleService::Write(VStringParam in_strString)
 {
 	VConsoleWindow& app = wxGetApp();
 	app.Write(in_strString);
+}
+
+void VConsoleService::Update(float in_fSeconds)
+{
+	Update();
+}
+
+void VConsoleService::Activate()
+{
+}
+
+void VConsoleService::Deactivate()
+{
+}
+
+error::IVErrorService& VConsoleService::GetErrorService()
+{
+	return * QueryObject<error::IVErrorService>("error.service");
 }
 
 //-----------------------------------------------------------------------------

@@ -5,6 +5,7 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Error/IVErrorService.h>
 #include <V3d/Console/IVConsoleService.h>
+#include <v3d/Updater/IVUpdateable.h>
 #include <wx/wx.h>
 //-----------------------------------------------------------------------------
 
@@ -14,7 +15,9 @@ namespace console {
 //-----------------------------------------------------------------------------
 
 
-class VConsoleService : public v3d::console::IVConsoleSerivce
+class VConsoleService 
+	: public IVConsoleSerivce, 
+	  public v3d::updater::IVUpdateable
 {
 public:
 	VConsoleService();
@@ -23,8 +26,11 @@ public:
 	virtual void Flush() {};
 	virtual void Write(VStringParam in_strString);
 
+	virtual void Update(float in_fSeconds);
+	virtual void Activate();
+	virtual void Deactivate();
 private:
-	error::IVErrorService* ErrorService;
+	error::IVErrorService& GetErrorService();
 };
 
 //-----------------------------------------------------------------------------

@@ -60,12 +60,6 @@ public:
 	/** get the single instance */
 	static Pointer GetInstance();	
 
-	/** register an object to the manager */
-	virtual void RegisterObject(const VObjectKey& in_Name, VNamedObject& in_Object);
-
-	/** unregister a registered object */
-	virtual void UnregisterObject(VNamedObject& in_Object);
-
 	/** get a registered object by name */
 	virtual VNamedObject& GetObject(const VObjectKey& Name);
 
@@ -74,6 +68,15 @@ public:
 
 	/** generate an unused object name */
 	virtual VObjectKey GenerateKey();
+
+protected:
+	/** register an object to the manager */
+	virtual void RegisterObject(const VObjectKey& in_Name, VNamedObject& in_Object);
+
+	/** unregister a registered object */
+	virtual void UnregisterObject(VNamedObject& in_Object);
+
+	friend VNamedObject;
 };
 
 /**

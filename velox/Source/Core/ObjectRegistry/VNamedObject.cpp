@@ -15,6 +15,7 @@ VNamedObject::VNamedObject(
 {
 	// register object
 	VObjectRegistry::GetInstance()->RegisterObject(m_Key, *this);
+	m_bRegistered = true;
 }
 
 VNamedObject::VNamedObject(const VNamedObject *in_Parent) :
@@ -23,17 +24,27 @@ VNamedObject::VNamedObject(const VNamedObject *in_Parent) :
 {
 	// register object
 	VObjectRegistry::GetInstance()->RegisterObject(m_Key, *this);
+	m_bRegistered = true;
 }
 
 VNamedObject::~VNamedObject()
 {
 	// unregister object
-	VObjectRegistry::GetInstance()->UnregisterObject(*this);
+	UnregisterFromObjectRegistry();
 }
 
 const VObjectKey& VNamedObject::GetKey() const
 {
 	return m_Key;
+}
+
+void VNamedObject::UnregisterFromObjectRegistry()
+{
+	if( m_bRegistered )
+	{
+		VObjectRegistry::GetInstance()->UnregisterObject(*this);
+		m_bRegistered = false;
+	}
 }
 
 //-----------------------------------------------------------------------------
