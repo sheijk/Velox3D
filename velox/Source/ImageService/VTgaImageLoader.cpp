@@ -5,6 +5,8 @@
 #include "VTgaImageLoader.h"
 #include <memory.h>
 
+#include <v3d/Core/MemManager.h>
+
 #pragma warning (disable : 4244)
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -6,6 +6,9 @@
 #include <memory.h>
 #include <string>
 #include "VDevILLoader.h"
+
+//-----------------------------------------------------------------------------
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace image{

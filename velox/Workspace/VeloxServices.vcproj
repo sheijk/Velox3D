@@ -482,9 +482,6 @@
 				Name="Implementation"
 				Filter="">
 				<File
-					RelativePath="..\Source\WindowService\VConsoleFrame.h">
-				</File>
-				<File
 					RelativePath="..\Source\WindowService\VDeviceFactory.h">
 				</File>
 				<File
@@ -510,9 +507,6 @@
 				</File>
 				<File
 					RelativePath="..\Source\WindowService\VWindowManagerWin32.h">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowsWxApp.h">
 				</File>
 				<File
 					RelativePath="..\Source\WindowService\VWindowWin32.cpp">

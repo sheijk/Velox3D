@@ -4,6 +4,7 @@
 #include <v3d/Core/Modules/VModuleBase.h>
 
 #include "VXMLService.h"
+#include <v3d/Core/MemManager.h>
 
 //-----------------------------------------------------------------------------
 

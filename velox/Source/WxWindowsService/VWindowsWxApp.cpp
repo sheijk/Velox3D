@@ -3,6 +3,7 @@
 #include <v3d/Window/IVWindowFrame.h>
 //-----------------------------------------------------------------------------
 #include "VWindowsWxApp.h"
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace wxwindows {

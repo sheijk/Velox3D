@@ -1,5 +1,5 @@
 #include "VWxCOnnector.h"
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace wxwindows {

@@ -1,4 +1,5 @@
 #include "VStreamReader.h"
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{

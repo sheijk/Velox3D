@@ -13,7 +13,7 @@
 #include <wx/msw/private.h>
 
 #include <iostream>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 void WXDLLEXPORT wxEntryCleanup();
 //-----------------------------------------------------------------------------

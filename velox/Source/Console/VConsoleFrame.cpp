@@ -1,7 +1,7 @@
 #include "VConsoleFrame.h"
 #include <v3d/System/IVSystemManager.h>
 //-----------------------------------------------------------------------------
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace console {

@@ -7,6 +7,8 @@
 #include <iostream>
 #include "VJpegImageLoader.h"
 
+#include <v3d/Core/MemManager.h>
+
 #undef CreateFile
 #pragma warning (disable : 4244)
 //-----------------------------------------------------------------------------

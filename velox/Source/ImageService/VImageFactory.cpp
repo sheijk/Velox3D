@@ -1,6 +1,7 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/VFS/IVFileSystem.h>
 #include "VImageFactory.h"
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace image{
