@@ -74,6 +74,9 @@ vbool VDIInputDevice::Create(LPDIRECTINPUT8 in_pDI, HWND in_hWnd)
 									break;
 	}
 
+	// was soll das hier sein? stuerzt bei mir ab weil hr nicht initialisert
+	// wurde.. -- sheijk
+	hr = DI_OK; // fix, s.o.
 	if ( DI_OK != hr )
 	{
 		vout << "DI: ::SetDataFormat failed" << vendl;

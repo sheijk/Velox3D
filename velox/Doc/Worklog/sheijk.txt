@@ -61,6 +61,9 @@ Doku:
 
 log:
 
+15.02.2004
+Den Code aus dem CVS gefixt.. (input manager und window service)
+
 13.02.2004
 ein wenig an VString rumgebastelt, ihr habts ja bemerkt ;)
 
