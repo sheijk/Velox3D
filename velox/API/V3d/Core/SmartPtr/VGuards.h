@@ -43,7 +43,7 @@ struct VPointer
  * the same for arrays
  */
 template<typename T>
-struct VArray
+struct VArrayPtr
 {
 	typedef VSmartPtrMutable<
 		T,

@@ -36,7 +36,8 @@ public:
 
 	/** creates a stream which automatically reserves as much data as is
 		required in memory */
-	virtual OfflineStreamPtr CreateMemoryStream() = 0;
+	virtual OfflineStreamPtr CreateMemoryStream(
+		IVStream::ByteCount in_nInitialSize = 0) = 0;
 };
 
 //-----------------------------------------------------------------------------

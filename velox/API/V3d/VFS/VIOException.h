@@ -1,8 +1,8 @@
-#ifndef V3D_VStreamFactory_H
-#define V3D_VStreamFactory_H
+#ifndef V3D_VIOException_H
+#define V3D_VIOException_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVStreamFactory.h>
+#include <v3d/Core/VException.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -10,25 +10,22 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
-//TODO: insert documentation here
-*/
-class VStreamFactory : public IVStreamFactory
+ * Base exception class for all virtual file system exceptions
+ */
+class VIOException : public VException
 {
 public:
-	VStreamFactory(VStringParam in_strName);
-	virtual ~VStreamFactory();
+	VIOException(
+		VStringParam errorMsg, 
+		VStringParam fileName, 
+		vuint lineNumber)
+		: VException(errorMsg, fileName, lineNumber) {};
 
-	virtual OfflineStreamPtr CreateFileStream(
-		VStringParam in_strName, 
-		VCreationFlags in_OpenMode,
-		VAccessModeFlags in_Access);
-
-	virtual OfflineStreamPtr CreateMemoryStream(
-		IVStream::ByteCount in_nInitialSize = 0);
+	virtual ~VIOException() {};
 };
 
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VStreamFactory_H
+#endif // V3D_VIOException_H

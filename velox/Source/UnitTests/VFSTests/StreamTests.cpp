@@ -11,7 +11,7 @@ namespace unittests {
 //-----------------------------------------------------------------------------
 using v3d::vfs::IVStream;
 
-//TODO: v3d smart pointer fuer arrays
+//TODO: v3d smart pointer fuer arrays benutzen
 template<class t_type>
 class array_ptr
 {

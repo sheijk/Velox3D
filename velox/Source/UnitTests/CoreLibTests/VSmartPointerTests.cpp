@@ -131,6 +131,8 @@ void VSmartPointerTest::TestRefCountPtr()
 	MySubject* pSubject = new VDestructTest(bAlive);
 	MySharedPtr myPtr;
 
+	//TODO: more tests for SharedPtr
+
 	// assign, retrieve
 	// release
 	// cloning
@@ -161,7 +163,7 @@ void VSmartPointerTest::TestAutoArray()
 
 	{
 		// create
-		VArray<VDestructTest>::AutoPtr myAutoArrays;
+		VArrayPtr<VDestructTest>::AutoPtr myAutoArrays;
 
 		myAutoArrays = pSubjects[0];		
 
@@ -182,12 +184,12 @@ void VSmartPointerTest::TestAutoArray()
 		if( bAlive[i] )
 		{
 			V3D_THROW_UNITTEST_ERROR(
-				"VArray<T>::AutoPtr did not release all it's elements",
+				"VArrayPtr<T>::AutoPtr did not release all it's elements",
 				VUnitTestException::Error);
 		}
 	}
 
-	//TODO: more tests, see TestAutoPtr
+	//TODO: more tests for AutoArray, see TestAutoPtr
 }
 
 //-----------------------------------------------------------------------------
