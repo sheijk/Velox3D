@@ -72,57 +72,57 @@ void VBoxMesh<VertexStructure>::GenerateTexCoords()
 	using namespace v3d::graphics;
 
 	//front face
-	buffer[0].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[1].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[2].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[0].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[1].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[2].texCoords = VTexCoord2f(1.0f, 1.0f);
 
-	buffer[3].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[4].texCoords = VTexCoord2f(1.0f, 1.0f);
-	buffer[5].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[3].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[4].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[5].texCoords = VTexCoord2f(0.0f, 1.0f);
 	
 	//top face
-	buffer[6].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[7].texCoords = VTexCoord2f(1.0f, 1.0f);
-	buffer[8].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[6].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[7].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[8].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[9].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[10].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[11].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[9].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[10].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[11].texCoords = VTexCoord2f(1.0f, 1.0f);
 
 	//back face
 
-	buffer[12].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[13].texCoords = VTexCoord2f(0.0f, 1.0f);
-	buffer[14].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[12].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[13].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[14].texCoords = VTexCoord2f(0.0f, 0.0f);
 	
-	buffer[15].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[16].texCoords = VTexCoord2f(1.0f, 1.0f);
-	buffer[17].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[15].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[16].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[17].texCoords = VTexCoord2f(0.0f, 1.0f);
 	
 	//bottom face
-	buffer[18].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[19].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[20].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[18].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[19].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[20].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[21].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[22].texCoords = VTexCoord2f(0.0f, 1.0f);
-	buffer[23].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[21].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[22].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[23].texCoords = VTexCoord2f(1.0f, 1.0f);
 
 	//right face
-	buffer[24].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[25].texCoords = VTexCoord2f(1.0f, 1.0f);
-	buffer[26].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[24].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[25].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[26].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[27].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[28].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[29].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[27].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[28].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[29].texCoords = VTexCoord2f(1.0f, 1.0f);
 
 	//bottom face
-	buffer[30].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[31].texCoords = VTexCoord2f(1.0f, 1.0f);
-	buffer[32].texCoords = VTexCoord2f(0.0f, 1.0f);
+	GetVertexBuffer()[30].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[31].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[32].texCoords = VTexCoord2f(0.0f, 1.0f);
 
-	buffer[33].texCoords = VTexCoord2f(0.0f, 0.0f);
-	buffer[34].texCoords = VTexCoord2f(1.0f, 0.0f);
-	buffer[35].texCoords = VTexCoord2f(1.0f, 1.0f);
+	GetVertexBuffer()[33].texCoords = VTexCoord2f(0.0f, 0.0f);
+	GetVertexBuffer()[34].texCoords = VTexCoord2f(1.0f, 0.0f);
+	GetVertexBuffer()[35].texCoords = VTexCoord2f(1.0f, 1.0f);
 }
