@@ -6,6 +6,7 @@
 #include <v3d/Utils/Graphics/VVector3f.h>
 #include <v3d/Utils/Graphics/VColor4f.h>
 #include <v3d/Utils/Graphics/VVertexDataLayout.h>
+#include <v3d/Graphics/VMeshDescription.h>
 
 #include <v3d/Graphics/IVDevice.h>
 //-----------------------------------------------------------------------------

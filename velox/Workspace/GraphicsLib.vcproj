@@ -101,117 +101,132 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Interfaces"
+			Name="DrawList"
 			Filter="">
-			<File
-				RelativePath="..\Api\V3d\Graphics\IVDevice.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\IVMaterial.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\IVMesh.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\IVRenderState.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\IVStateCategory.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\VBuffer.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\VMaterialDescription.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\VMeshDescription.h">
-			</File>
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\DrawList\IVDrawList.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
-			Name="Implementation"
+			Name="Device"
 			Filter="">
-			<File
-				RelativePath="..\Source\Graphics\VCamera.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.h">
-			</File>
 			<Filter
-				Name="Utils"
+				Name="Interfaces"
 				Filter="">
 				<File
-					RelativePath="..\Source\Graphics\DeviceBase\VBaseMesh.h">
+					RelativePath="..\Api\V3d\Graphics\IVDevice.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
+					RelativePath="..\Api\V3d\Graphics\IVMaterial.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\VDisplaySettings.cpp">
+					RelativePath="..\Api\V3d\Graphics\IVMesh.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.cpp">
+					RelativePath="..\Api\V3d\Graphics\IVRenderState.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.h">
+					RelativePath="..\Api\V3d\Graphics\IVStateCategory.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
+					RelativePath="..\Api\V3d\Graphics\VBuffer.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.h">
+					RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Graphics\VMaterialDescription.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Graphics\VMeshDescription.h">
 				</File>
 			</Filter>
 			<Filter
-				Name="Render Methods"
+				Name="Implementation"
 				Filter="">
 				<File
-					RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.cpp">
+					RelativePath="..\Source\Graphics\VCamera.cpp">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Meshes"
-				Filter="">
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.cpp">
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.cpp">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.h">
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.h">
 				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="States"
-				Filter="">
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VMiscState.h">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VMiscStateCategory.h">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VTextureState.h">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VTextureStateCategory.h">
-				</File>
+				<Filter
+					Name="Utils"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VBaseMesh.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\VDisplaySettings.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Render Methods"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Meshes"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="States"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VMiscState.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VMiscStateCategory.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VTextureState.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VTextureStateCategory.h">
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 	</Files>

@@ -25,6 +25,16 @@ template member konvertiert?
 
 --------------------------------------------------------------------------------
 ----- personal todo:
+	.mem manager
+
+	.drawlist:
+	./interfaces
+	./objekte hinzufuegen
+	./objekte rendern
+	nach states sortieren
+	
+
+
 	.gfx device:
 	./buffer aendern
 	./indexed/non indexed geometry auto auswahl
@@ -80,6 +90,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+21.02.2004
+draw list geschrieben, mit simpelst implementation
+mem manager spass
 
 20.02.2004
 texturen + poly mode sind als material umsetzbar
