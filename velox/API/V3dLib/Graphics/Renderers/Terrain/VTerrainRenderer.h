@@ -9,7 +9,7 @@
 #include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { 
-namespace vfs { class IVStream; } // forward declaration for v3d::vfs::IVStream
+namespace vfs { class IVStream; } // forward declaration for v3d::vfs::IVStream //das haet ich jetzt nicht gedacht btw: forward dec. OF ...:)))
 namespace graphics {
 //-----------------------------------------------------------------------------
 

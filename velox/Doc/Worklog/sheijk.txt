@@ -2,10 +2,15 @@ Worklog von sheijk
 -------------------------------------------------------------------------------
 ----- messages to sheijk:
 
+>> neuer bsp render commit ist pre pre pre alpha! nicht rummotzen :))
+
 TODO: Einige typedefs sollte einfacher zugaenglcher sein z.b. Vertex
 TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
 zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
 die gleichen services stehen -[ins]
+
+VFS stuertzt ab, wenn eine Datei in einem nicht existierenden Verzeichniss geladen]
+werden soll [ins]
 
 -------------------------------------------------------------------------------
 ----- current assigned tasks:

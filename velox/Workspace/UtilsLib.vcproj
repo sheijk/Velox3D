@@ -113,6 +113,9 @@
 				RelativePath="..\Api\V3dLib\Graphics.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3dLib\Graphics\Importer.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3dLib\Graphics\Misc.h">
 			</File>
 			<File
@@ -325,6 +328,16 @@
 				</File>
 			</Filter>
 			<Filter
+				Name="Importer"
+				Filter="">
+				<File
+					RelativePath="..\Source\UtilsLib\Importer\VQ3BspImporter.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h">
+				</File>
+			</Filter>
+			<Filter
 				Name="Renderers"
 				Filter="">
 				<Filter
@@ -347,6 +360,16 @@
 					</File>
 					<File
 						RelativePath="..\Api\V3dLib\Graphics\Renderers\Terrain\VTerrainRenderer.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="BSP"
+					Filter="">
+					<File
+						RelativePath="..\Source\Graphics\Renderers\Bsp\VBSPRenderer.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Renderers\Bsp\VBSPRenderer.h">
 					</File>
 				</Filter>
 			</Filter>
@@ -412,48 +435,11 @@
 			<File
 				RelativePath="..\Api\V3dLib\Utils\VFrameCounter.h">
 			</File>
-		</Filter>
-		<Filter
-			Name="Importer"
-			Filter="">
 			<File
-				RelativePath="..\Source\UtilsLib\Importer\IVModelImporter.h">
+				RelativePath="..\Source\UtilsLib\VStreamReader.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\UtilsLib\Importer\VModel3D.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VModel3D.h">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VModelFace.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VModelFace.h">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VModelObject3D.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VModelObject3D.h">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VOBJModelImporter.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VOBJModelImporter.h">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VQuake2BspImporter.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VQuake2BspImporter.h">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
+				RelativePath="..\Api\V3dLib\Utils\VStreamReader.h">
 			</File>
 		</Filter>
 		<Filter

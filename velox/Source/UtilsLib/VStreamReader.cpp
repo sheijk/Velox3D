@@ -1,8 +1,7 @@
-#include "VStreamReader.h"
+#include <v3dLib/Utils/VStreamReader.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace utils{
-namespace importer{
 //-----------------------------------------------------------------------------
 using namespace v3d::vfs;
 VStreamReader::VStreamReader(IVStream* in_pStream)
@@ -13,8 +12,6 @@ VStreamReader::VStreamReader(IVStream* in_pStream)
 	iSizeOfBuffer = 0;
 	iSizeOfBufferElements = 0;
 	
-	
-	//We are going to loop until a break - ach nee ;) -sheijk
 	for(;;)
 	{
 		//Create a buffer for our data
@@ -98,7 +95,6 @@ vulong VStreamReader::GetSizeOfBuffer()
 	return iSizeOfBufferElements;
 }
 //-----------------------------------------------------------------------------
-} // namespace importer
 } // util
 } // v3d
 //-----------------------------------------------------------------------------

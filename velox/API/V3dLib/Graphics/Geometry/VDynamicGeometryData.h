@@ -54,6 +54,13 @@ public:
 	{
 		return *m_pIndexBuffer;
 	}
+
+	void SetGeometryType(VMeshDescription::GeometryType in_Type)
+	{
+		m_GeometryType = in_Type;
+	}
+
+
 protected:
 	void ResizeVertexBuffer(vuint in_nSize)
 	{
@@ -64,13 +71,10 @@ protected:
 	void ResizeIndexBuffer(vuint in_nSize)
 	{
 		m_pIndexBuffer.Assign(new IndexBuffer(new vuint[in_nSize], in_nSize));
+
 	}
 
-	void SetGeometryType(VMeshDescription::GeometryType in_Type)
-	{
-		m_GeometryType = in_Type;
-	}
-
+	
 private:
 	VMeshDescription::GeometryType m_GeometryType;
 

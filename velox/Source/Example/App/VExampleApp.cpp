@@ -22,7 +22,7 @@
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
-#include "../../UtilsLib/Importer/VQuake2BspImporter.h"
+//#include "../../UtilsLib/Importer/VQuake2BspImporter.h"
 
 #include <V3dLib/Graphics/Misc.h>
 #include <V3dLib/Graphics/SimpleSG.h>

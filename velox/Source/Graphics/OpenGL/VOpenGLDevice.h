@@ -19,7 +19,7 @@
 #include "../DeviceBase/VStateCategoryList.h"
 #include "VTextureStateCategory.h"
 #include "VMiscStateCategory.h"
-
+#include "VBlendingStateCategory.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -96,6 +96,8 @@ private:
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;
 	VMiscStateCategory m_MiscStateCategory;
+	VBlendingStateCategory m_BlendingStateCategory;
+	
 
 	typedef std::list<IVMesh*> MeshList;
 	MeshList m_Meshes;

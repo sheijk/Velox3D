@@ -47,6 +47,7 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	m_StateCategories.RegisterCategory(m_MiscStateCategory);
+	m_StateCategories.RegisterCategory(m_BlendingStateCategory);
 
 	Identity(m_ModelMatrix);
 	Identity(m_ViewMatrix);

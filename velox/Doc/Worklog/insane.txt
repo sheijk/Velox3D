@@ -1,21 +1,80 @@
-Worklog von insane:
--------------------------------------------------------------------------------
-messages to insane:
-der .jpg Loader kann keine 8bit Bilder.. -- sheijk
+Worklog von ins:
+
+//notes to ins here...
+
+>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -------------------------------------------------------------------------------
 Personal Notes:
 
 TODO List:
 - Console is closeable with alt f4
-- Console crashes on some machines
-- InputManager should be deactivated by loosing focus  
-- xml file for window service and console
+- Indoor Rendering
 
 
+medium:
 
-- rename resizable geome to resizE
+- include DevIL
+- fix WxConnector and old non needed wx stuff + make it clean an safe
+- commit cleaned example app
+- remove old importer files out of cvs
+
+high:
+- build mesh with 2 texture coords
+- wrap bsp renderer out of IVCell to make it more robust
+- get multiple texturecoords working
+- apply multitexturing mechansim to renderer
+
+
 -------------------------------------------------------------------------------
+Questions:
+- Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.inl empty?
+
+- rendere calls enabled in states should be deactiveted on framebuffer flush
+-------------------------------------------------------------------------------
+
+
+
+
+
 Done List:
+
+07.06.04
+- added blending to bsp renderer
+- removed obsolute importer files in sln
+
+06.06.04
+- added to device
+- added BlendingState
+- added BlendingStateCategory
+
+05-06.04
+- addded API\V3dLib\Graphics\Importer
+- moved VStreamReader to API\V3dLib\Utils
+
+-27.05.04
+- began adding blending state
+
+24.05.04
+- added lightmap loading to importer and renderer
+
+20.05.04
+- q3 importer finished
+- loading own maps
 
 05.05.04
 - renamed VResiz_ableGeometry template and file to VResizeableGeometry
@@ -154,5 +213,3 @@ Du hast die VCamera.MoveForward Methode geaendert.. (hab ich in den letzten
 - VStreamReader now working correct [done]
 
 -------------------------------------------------------------------------------
--- little fixes
-- api dir portals / portal source

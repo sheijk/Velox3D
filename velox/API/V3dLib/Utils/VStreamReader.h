@@ -8,14 +8,11 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils {
-namespace importer {
 //-----------------------------------------------------------------------------
-//using namespace v3d::vfs;
 
 /**
- * VStreamReader reads out a stream and creates an buffer
- * @author insane
- * @version 1.0
+ * VStreamReader reads out a stream and creates a buffer
+ * @author ins
  */
 
 class VStreamReader
@@ -24,8 +21,8 @@ public:
 	typedef VException VXMLException;
 	typedef std::list<char*> CharList;
 
-	enum SizeofBuffer { BufferSize = 32768 }; //TODO cached to 3mb. files can get big
-	
+	enum SizeofBuffer { BufferSize = 32768 }; 
+		
 	~VStreamReader();
 	VStreamReader(vfs::IVStream* in_pStream);
 	void* GetStreamBuffer();
@@ -40,7 +37,6 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-} // namespace importer
 } // v3d
 } // util
 //-----------------------------------------------------------------------------

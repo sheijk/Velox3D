@@ -682,6 +682,15 @@
 						RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
 					</File>
 					<File
+						RelativePath="..\Source\Graphics\OpenGL\VBlendingState.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VBlendingState.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VBlendingStateCategory.h">
+					</File>
+					<File
 						RelativePath="..\Source\Graphics\OpenGL\VMiscState.cpp">
 					</File>
 					<File
