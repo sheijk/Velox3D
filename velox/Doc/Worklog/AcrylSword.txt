@@ -1,29 +1,16 @@
 Worklog von AcrylSword
 --------------------------------------------------------------------------------
------ messages to AcrylSword:
-<sheijk> ein kurzer eintrag was geaendert/neu gemacht wurde waere nett, thx
-Hab im Error Service Source ein paar TODO Tags verteilt, bei allem was mir nicht 
-klar war, etc., damits nicht vergessen wird Hoffe das ist ok?
-
-<ins>gute arbeit. kezboard funktioniert einwandrei.
-<sheijk> ack. btw: bitte updates ins worklog eintragen
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:
 
-- sound service
-- error service
-- Informationen für ein SkySystem sammeln
-- Datenstrukturen fuer Baeume
+
+- SkySystem 
+
 
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-todo:
-sound fertig implementieren (Anmerkung von sheijk: das kann erstmal warten)
-FileLogging in den error service hinzufügen
-Quellcode vom Debugmonitor in einen veröffentlichbaren Zustand bringen
-sheijk daran hindern, die Welt zu erobern
 
 - Dieses File aktuell halten! ( --ins)
 
@@ -31,6 +18,12 @@ sheijk daran hindern, die Welt zu erobern
 ----- last things AcrylSword finished:
 
 log:
+5.1.2005
+SceneGraph für Entity
+VRBTransform
+
+17.10.2004
+XML Service Refactoring fertig
 
 20.8.2004
 InputManger aktualisiert

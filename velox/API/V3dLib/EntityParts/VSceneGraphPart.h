@@ -4,7 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3d/Entity.h>
-#include <V3dlib/EntityParts/VRBTransform.h>
+#include <V3dlib/Math/VRBTransform.h>
 #include <V3dlib/EntityParts/VRigidBodyPart.h>
 #include <list>
 //-----------------------------------------------------------------------------

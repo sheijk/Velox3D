@@ -5,7 +5,7 @@
 
 #include <V3d/Entity.h>
 #include <V3dLib/Math.h>
-#include <V3dLib/EntityParts/VRBTransform.h>
+#include <V3dLib/Math/VRBTransform.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
@@ -14,8 +14,7 @@ using namespace v3d; // prevent auto indenting
 class VRigidBodyPart : public IVPart
 {
 public:
-	typedef VRBTransform::Vector Vector;
-	
+		
 	VRigidBodyPart();
 
 	virtual void Activate();
@@ -26,14 +25,14 @@ public:
 	 *
 	 * @param in_Position The new position
 	 */
-	virtual void SetPosition(const Vector& in_Position);
+	virtual void SetPosition(const VVector3f& in_Position);
 
 	/**
 	 * Gets the position
 	 *
 	 * @return The position
 	 */
-	virtual Vector GetPosition() const;
+	virtual VVector3f GetPosition() const;
 
 	/**
 	 * Gets the current rigid body transformation of this part
