@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <V3dLib/Graphics/Misc/VCamera.h>
+#include <V3dLib/Graphics/Misc/VMultipassDrawList.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

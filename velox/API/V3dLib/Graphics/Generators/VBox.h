@@ -18,8 +18,12 @@ class VBox
 	vfloat32	m_fWidth;
 	vfloat32	m_fDepth;
 
+	VBuffer<VertexStructure>	buffer;
+
 public:
-	v3d::graphics::VBuffer<VertexStructure>	buffer;
+
+	VBuffer<VertexStructure>* GetVertexBuffer();
+	
 
 	VBox( vfloat32 in_fHeight, vfloat32 in_fWidth, vfloat32 in_fDepth )
 		: m_fHeight(in_fHeight), m_fWidth(in_fWidth), m_fDepth(in_fDepth), buffer(new VertexStructure[36], 36)

@@ -125,3 +125,10 @@ void VBox<VertexStructure>::CreateTextureCoordinates()
 	buffer[34].texCoords = VTexCoord2f(1.0f, 0.0f);
 	buffer[35].texCoords = VTexCoord2f(1.0f, 1.0f);
 }
+
+template <typename VertexStructure>
+VBuffer<VertexStructure>* VBox<VertexStructure>::GetVertexBuffer()
+{
+	return &buffer;
+
+}
