@@ -32,7 +32,7 @@ class VBuffer : public IVBuffer<DataType>
 	vuint m_nSize;
 
 	// no copying
-	void operator==(const VBuffer&);
+	void operator=(const VBuffer&);
 	VBuffer(const VBuffer&);
 
 public:

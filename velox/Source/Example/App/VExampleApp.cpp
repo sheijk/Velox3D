@@ -206,7 +206,8 @@ vint VExampleApp::Main()
 	desc.triangleColors = VMeshDescription::FloatDataRef(colorHandle, 0, cnVertexCount, 1);
 	desc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle, 0, Model.m_Objects[0]->m_iNumFaces *3, 1);
 
-	IVMesh& mesh( pDevice->CreateMesh(desc));
+	// @ins: die typedefs benutzen, statt direkt IVMesh& -sheijk
+	IVDevice::MeshHandle mesh( pDevice->CreateMesh(desc));
 
 	
 

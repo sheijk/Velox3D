@@ -3,6 +3,8 @@
 //-----------------------------------------------------------------------------
 #include <windows.h>
 #include <gl/gl.h>
+
+#include <v3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -25,14 +27,15 @@ namespace
 	const Y_AXIS = 1;
 	const Z_AXIS = 2;
 
+	// returns the float value of the triangle
 	inline float GetVertexVal(
 		float pStart[],
 		vuint nStride,
-		vuint nTriangle,
+		vuint nVertex,
 		vuint nAxis
 		)
 	{
-		vuint nOffset = (3 * nStride * nTriangle) + nAxis;
+		vuint nOffset = (nStride * nVertex) + nAxis;
 		return *(pStart+nOffset);
 	}
 } // anonymous namespace
@@ -41,27 +44,52 @@ void VOpenGLVertexMesh::Render()
 {
 	glBegin(GL_TRIANGLES);
 
-	const vuint cnTriangleCount 
-		= (m_TriangleData.nEnd - m_TriangleData.nStart) / 3;
+	const vuint cnVertexCount = m_TriangleData.nCount;
+		//= (m_TriangleData.nEnd - m_TriangleData.nStart) / 3;
 
 	vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
-	vfloat32* pColorBuffer = m_ColorData.hBuffer->GetDataAddress();
+	pBuffer += m_TriangleData.nStart;
 
-	for(vuint i = 0; i < cnTriangleCount; i++)
+	vfloat32* pColorBuffer = m_ColorData.hBuffer->GetDataAddress();
+	pColorBuffer += m_ColorData.nStart;
+
+	//glVertex3f(1,0,0);
+	//glVertex3f(0,1,0);
+	//glVertex3f(-1,0,0);
+
+	for(vuint nVertex = 0; nVertex < cnVertexCount; ++nVertex)
 	{
-		glVertex3f( 
-			GetVertexVal(pBuffer, m_TriangleData.nStride, i, X_AXIS),
-			GetVertexVal(pBuffer, m_TriangleData.nStride, i, Y_AXIS),
-			GetVertexVal(pBuffer, m_TriangleData.nStride, i, Z_AXIS)
+		glColor4f(
+			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 0),
+			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 1),
+			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 2),
+			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 3)
 			);
 
-		glColor3f( 
-			GetVertexVal(pColorBuffer, m_ColorData.nStride, i, X_AXIS),
-			GetVertexVal(pColorBuffer, m_ColorData.nStride, i, Y_AXIS),
-			GetVertexVal(pColorBuffer, m_ColorData.nStride, i, Z_AXIS)
+		glVertex3f(
+			GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, X_AXIS),
+			GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Y_AXIS),
+			GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Z_AXIS)
 			);
 
 	}
+
+	static bool firstTime = true;
+
+	if( firstTime )
+	{
+		for(vuint nVertex = 0; nVertex < cnVertexCount; ++nVertex)
+		{
+			vout << "("
+				<< GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, X_AXIS)
+				<< ","
+				<< GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Y_AXIS)
+				<< ","
+				<< GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Z_AXIS)
+				<< ") ";
+		}
+		firstTime = false;
+		}
 
 	glEnd();
 }

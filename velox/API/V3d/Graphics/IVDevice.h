@@ -23,7 +23,8 @@ public:
 	typedef VMeshDescription::BufferHandle BufferHandle;
 	typedef VMeshDescription::FloatBufferHandle FloatBufferHandle;
 	typedef VMeshDescription::IntBufferHandle IntBufferHandle;
-	typedef IVMesh& MeshHandle;
+
+	typedef IVMesh* MeshHandle;
 
 	virtual ~IVDevice() {};
 
@@ -33,11 +34,11 @@ public:
 
 	/** creates an internal buffer in the device */
 	virtual FloatBufferHandle CreateBuffer(
-		VFloatBuffer* in_pBuffer, 
+		VFloatBuffer* in_pBuffer,
 		FloatBufferCopyMode in_CopyMode = VFloatBuffer::CopyData) = 0;
 
 	virtual IntBufferHandle CreateBuffer(
-		VIntBuffer* in_pBuffer, 
+		VIntBuffer* in_pBuffer,
 		IntBufferCopyMode in_CopyMode = VIntBuffer::CopyData) = 0;
 
 	/** deletes the buffer and sets the handle to 0 */
@@ -46,18 +47,17 @@ public:
 	/** create a mesh ins the device */
 	virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc) = 0;
 	virtual void DeleteMesh(MeshHandle in_Mesh) = 0;
-	
+
 	//virtual IVMaterial* CreateMaterial() = 0;
 	//virtual void ApplyMaterial(IVMaterial* in_pMatrial) = 0;
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
-	
+
 	/**
 	* This is only implemented to show anything by now
 	* TODO: build the damn renderer ;)
 	*/
 	virtual void BeginScene() = 0;
 	virtual void EndScene() = 0;
-	
 };
 
 //-----------------------------------------------------------------------------

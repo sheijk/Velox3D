@@ -15,7 +15,7 @@ namespace graphics {
 /**
  * Simplest rendering method. Renders using glBegin, glVertex.. etc
  *
- * @author sheijk / ins 
+ * @author sheijk
  */
 class VOpenGLVertexMesh : public VBaseMesh
 {
@@ -28,7 +28,7 @@ public:
 	VOpenGLVertexMesh(const VMeshDescription& in_Descr);
 	virtual ~VOpenGLVertexMesh();
 
-	virtual void Render();	
+	virtual void Render();
 };
 
 

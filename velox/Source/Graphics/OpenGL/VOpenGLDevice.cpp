@@ -10,6 +10,17 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics;
 //-----------------------------------------------------------------------------
+
+IVDevice::MeshHandle MakeMeshHandle(IVMesh* pMesh)
+{
+	return pMesh;
+}
+
+IVMesh* MakeMeshPointer(IVDevice::MeshHandle handle)
+{
+	return handle;
+}
+
 VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 {
 	m_DisplaySettings = in_pSettings;
@@ -17,9 +28,7 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 	SetDisplay();
 
 	m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
-	m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
-	m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
-
+	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
 }
 //-----------------------------------------------------------------------------
 
@@ -76,12 +85,12 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VMeshDescription& in_pMeshDesc)
 
 	m_Meshes.push_back(pMesh);
 
-	return *pMesh;
+	return MakeMeshHandle(pMesh);
 }
 
 void VOpenGLDevice::DeleteMesh(MeshHandle in_Mesh)
 {
-	IVMesh* pMesh = &in_Mesh;
+	IVMesh* pMesh = MakeMeshPointer(in_Mesh);
 
 	m_Meshes.remove(pMesh);
 
@@ -92,7 +101,7 @@ void VOpenGLDevice::DeleteMesh(MeshHandle in_Mesh)
 
 void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 {
-	VBaseMesh* pMesh = reinterpret_cast<VBaseMesh*>(&in_pMesh);
+	VBaseMesh* pMesh = reinterpret_cast<VBaseMesh*>(MakeMeshPointer(in_pMesh));
 
 	pMesh->Render();
 }
@@ -100,9 +109,9 @@ void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 
 void VOpenGLDevice::SetDisplay()
 {
-	
+
     if (!(hDC=GetDC(hWnd)))
-	    
+
 	if(m_DisplaySettings->m_bFullscreen)
 	{
 		DEVMODE DisplayFormat;
@@ -114,7 +123,7 @@ void VOpenGLDevice::SetDisplay()
 		DisplayFormat.dmFields	    = DM_PELSWIDTH | DM_PELSHEIGHT |
 													 DM_BITSPERPEL;
 
-		if (ChangeDisplaySettings(&DisplayFormat, CDS_FULLSCREEN) != 
+		if (ChangeDisplaySettings(&DisplayFormat, CDS_FULLSCREEN) !=
 									DISP_CHANGE_SUCCESSFUL)
 		{
 			vout << "requesting fullscreen mode failed!" << vendl;
@@ -129,7 +138,7 @@ void VOpenGLDevice::SetDisplay()
 
 	glClearDepth(m_DisplaySettings->m_fClearDepth);
 	glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
-	glDepthFunc(GL_LEQUAL);	
+	glDepthFunc(GL_LEQUAL);
 }
 //-----------------------------------------------------------------------------
 
@@ -141,13 +150,13 @@ void VOpenGLDevice::SetPixFormat()
 	{
 		sizeof(PIXELFORMATDESCRIPTOR),
 		1,
-		PFD_DRAW_TO_WINDOW | 
-		PFD_SUPPORT_OPENGL | 
+		PFD_DRAW_TO_WINDOW |
+		PFD_SUPPORT_OPENGL |
 		PFD_DOUBLEBUFFER,
 		PFD_TYPE_RGBA,
 		0,
 		0, 0, 0, 0, 0, 0,
-		0, 
+		0,
 		0,
 		0,
 		0, 0, 0, 0,
@@ -163,14 +172,14 @@ void VOpenGLDevice::SetPixFormat()
 	PixelFormatDesc.cDepthBits		= m_DisplaySettings->m_iDepthBits;
 	PixelFormatDesc.cStencilBits	= m_DisplaySettings->m_iStencilBits;
 	PixelFormatDesc.cColorBits		= m_DisplaySettings->m_iBitsPerPixel;
-	
+
 	if (!(PixelFormat=ChoosePixelFormat(hDC,&PixelFormatDesc)))
-	{	
+	{
 		//TODO: error checking
 		vout << "finding suitable pixelformat failed!" << vendl;
 	}
 
-	
+
 	if(!SetPixelFormat(hDC,PixelFormat,&PixelFormatDesc))
 	{
 		//TODO: error checking
@@ -199,7 +208,7 @@ void VOpenGLDevice::DestroyContext()
 	{
 		if(!(wglMakeCurrent(hDC,hRC)))
 			vout << "destroying rendering contexts faild!" << vendl;
-		
+
 		hDC = NULL;
 	}
 
@@ -231,7 +240,7 @@ void VOpenGLDevice::SetScreenSize()
 
 	gluPerspective(m_DisplaySettings->m_fFieldOfView,
 					((vfloat32)m_DisplaySettings->m_iWidth /
-					m_DisplaySettings->m_iHeight), 
+					m_DisplaySettings->m_iHeight),
 					m_DisplaySettings->m_fNearClippingPlane,
 					m_DisplaySettings->m_fFarClippingPlane);
 	glMatrixMode(GL_MODELVIEW);
@@ -276,14 +285,14 @@ void VOpenGLDevice::InitializeExtensions()
 			y=0;
 			vout << ExtensionName << vendl;
 		}
-		
+
 	}
 
 	if(extgl_Initialize() != 0)
 		vout << "Initializing extensions failed!" << vendl;
 	else
 		vout << "Initializing extensions done..." << vendl;
-	
+
 }
 
 //-----------------------------------------------------------------------------
@@ -293,9 +302,9 @@ void VOpenGLDevice::BeginScene()
 	wglMakeCurrent(hDC, hRC);
 
 	// fuer sowas solltes noch fkten geben - wir brauchen eine komplette state engine -ins
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	
+
 	//TODO for testing purpose -ins
 	static vfloat32 rotZ = 0;
 	glTranslatef(0.0f, 0.0f, -100.0f);

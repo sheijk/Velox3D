@@ -21,30 +21,30 @@ struct VMeshDescription
 	typedef IVBuffer<vint32>* IntBufferHandle;
 
 	template<typename Buffer>
-	struct DataRef
+		struct DataRef
 	{
 		DataRef()
 		{
 			hBuffer = 0;
-			nStart = nEnd = nStride = 0;
+			nStart = nCount = nStride = 0;
 		}
 
 		DataRef(
 			Buffer in_hBuffer,
 			vuint in_nStart,
-			vuint in_nEnd,
+			vuint in_nCount,
 			vuint in_nStride
 			)
 		{
 			hBuffer = in_hBuffer;
 			nStart = in_nStart;
-            nEnd = in_nEnd;
+            nCount = in_nCount;
 			nStride = in_nStride;
 		}
 
 		Buffer hBuffer;
 		vuint nStart;
-		vuint nEnd;
+		vuint nCount;
         vuint nStride;
 	};
 
@@ -55,7 +55,6 @@ struct VMeshDescription
 	//vertex array hat nichts mit rendering mode zu tun. sollte evtl in IndexBuffer stehen
 	FloatDataRef triangleColors;
 	IntDataRef triangleIndices;
-	
 };
 
 //-----------------------------------------------------------------------------

@@ -2,14 +2,14 @@
 <!-- Velox3D services load info -->
 <Config>
 	<Services>
-		<Service id="common" desc="Some small services" filename="CommonServices.dll"/>
-		<Service id="error" desc="Logging functionality" filename="ErrorService.dll"/>
-		<Service id="window" desc="Window Manager" filename="WindowService.dll"/>
-		<Service id="wxwindows" desc="WxWindows Manager" filename="WxWindowsService.dll"/>
-		<Service id="console" desc="Console" filename="ConsoleService.dll"/>
-		<!-- Service id="editor" desc="Editor service" filename="EditorService.dll"/ -->
-		<Service id="vfs" desc="Virtual File System" filename="VirtualFileSystem.dll"/>
-		<Service id="app" desc="The main program" filename="ExampleApp.dll"/>
+		<Service id="common"		desc="Some small services"		filename="CommonServices.dll"/>
+		<Service id="error"			desc="Logging functionality"	filename="ErrorService.dll"/>
+		<Service id="window"		desc="Window Manager"			filename="WindowService.dll"/>
+		<Service id="wxwindows"		desc="WxWindows Manager"		filename="WxWindowsService.dll"/>
+		<Service id="console"		desc="Console"					filename="ConsoleService.dll"/>
+		<!-- Service id="editor"	desc="Editor service"			filename="EditorService.dll"/ -->
+		<Service id="vfs" 			desc="Virtual File System"		filename="VirtualFileSystem.dll"/>
+		<Service id="app" 			desc="The main program"			filename="SheijkApp.dll"/>
 	</Services>
 	<Main id="main"/>
 </Config>

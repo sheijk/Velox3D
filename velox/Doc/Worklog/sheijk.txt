@@ -30,6 +30,9 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 
+	Ausgabeverzeichnisse von V/Workspace/Local/Build nach V/Local/Build 
+	bewegen
+
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
 	Objekts auf 0 gesetzt)
 	Service Abhaengigkeiten Dokumentieren
@@ -64,6 +67,16 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+22.01.2004
+Util Fkten zum Erzeugen von Geometrie erstellt
+
+21.01.2004
+Hilfsfunktionen fuer das Schreiben von Geometiedaten in Float Buffer angefangen
+diverse nervenzusammenbrueche durchgestanden
+
+18.01.2004
+Einige Simple Datentypen fuer die Grafik API erstellt
 
 20.12.2003
 Dokumentationen mit Author Tags versehn
