@@ -4,6 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <v3d/Image/IVImageFactory.h>
+#include <V3dLib/Graphics/Misc/MiscUtils.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
