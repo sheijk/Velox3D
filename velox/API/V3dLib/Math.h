@@ -16,5 +16,8 @@
 
 #include <v3d/Math/VRect.h>
 
+#include <V3dLib/Math/VQuaternion.h>
+#include <V3dLib/Math/VQuaternionOps.h>
+
 //-----------------------------------------------------------------------------
 #endif // V3D_MATH_2004_04_09_H
