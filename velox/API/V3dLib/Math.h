@@ -9,15 +9,18 @@
 #include <v3d/Math/TransformationOps.h>
 
 #include <v3d/Math/VMatrix.h>
-#include <v3d/Math/VVector.h>
-
 #include <v3d/Math/VMatrixOps.h>
+
+#include <v3d/Math/VVector.h>
+#include <V3dLib/Math/VVectorOps.h>
+
 #include <V3dLib/Math/ArrayOps.h>
 
 #include <v3d/Math/VRect.h>
 
 #include <V3dLib/Math/VQuaternion.h>
 #include <V3dLib/Math/VQuaternionOps.h>
+#include <V3dLib/Math/VVectorBase.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_MATH_2004_04_09_H
