@@ -69,6 +69,9 @@ struct VMaterialDescription
 	PolygonMode frontPolyMode;
 	PolygonMode backPolyMode;
 
+	DepthTest depthTestFunction;
+	DepthMask depthWriteMask;
+
 	TextureRef* pTextureList;
 
 	v3d::graphics::VColor4f defaultColor;
@@ -76,32 +79,38 @@ struct VMaterialDescription
 	// functions
 
 	// setting sensible default values
-	VMaterialDescription() :
-		frontPolyMode(Filled),
-		backPolyMode(Filled),
-		pTextureList(0),
-		defaultColor(1, 1, 1, 1)
-	{
-	}
+	inline VMaterialDescription();
 
-	void AddTexture(TextureRef* in_pTexture)
-	{
-		if( pTextureList == 0 )
-		{
-			pTextureList = in_pTexture;
-		}
-		else
-		{
-			// append at the end
-			TextureRef* pTex = pTextureList;
-			while(pTex->pNext != 0)
-			{
-				pTex = pTex->pNext;
-			}
-			pTex->pNext = in_pTexture;
-		}
-	}
+	inline void AddTexture(TextureRef* in_pTexture);
 };
+
+VMaterialDescription::VMaterialDescription()  :
+	frontPolyMode(Filled),
+	backPolyMode(Filled),
+	depthTestFunction(DepthOnLess),
+	depthWriteMask(DepthWrite),
+	pTextureList(0),
+	defaultColor(1, 1, 1, 1)
+{
+}
+
+void VMaterialDescription::AddTexture(TextureRef* in_pTexture)
+{
+	if( pTextureList == 0 )
+	{
+		pTextureList = in_pTexture;
+	}
+	else
+	{
+		// append at the end
+		TextureRef* pTex = pTextureList;
+		while(pTex->pNext != 0)
+		{
+			pTex = pTex->pNext;
+		}
+		pTex->pNext = in_pTexture;
+	}
+}
 
 //-----------------------------------------------------------------------------
 } // namepace graphics

@@ -9,30 +9,23 @@
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Image/IVImageFactory.h>
 
-#include <v3d/Utils/Graphics/VBox.h>
-#include <v3d/Utils/Graphics/VColor4f.h>
-#include <v3d/Utils/Graphics/VTexCoord2f.h>
-#include <v3d/Utils/Graphics/VVector3f.h>
-#include <v3d/Utils/Graphics/VVertexDataLayout.h>
-#include <v3d/Utils/Graphics/VGeometryUtil.h>
+#include <V3dLib/Graphics/Geometry.h>
+#include <V3dLib/Graphics/Generators.h>
+#include <V3dLib/Graphics/Misc.h>
 
 #include <v3d/Math/VMatrixOps.h>
-
-#include <v3d/Graphics/DrawList/IVDrawList.h>
 
 //TODO...
 //#include <windows.h>
 //#include <gl/gl.h>
 //#include <gl/glu.h>
-#include <v3d/Utils/Graphics/VSimpleDrawList.h>
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
 #include "../../UtilsLib/Importer/VQuake2BspImporter.h"
 
-#include <v3d/Utils/Graphics/SimpleSG/VMeshNode.h>
-#include <v3d/Utils/Graphics/SimpleSG/VTransformNode.h>
-#include <v3d/Utils/Graphics/SimpleSG/VSceneGraphTools.h>
+#include <V3dLib/Graphics/Misc.h>
+#include <V3dLib/Graphics/SimpleSG.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 
@@ -45,10 +38,6 @@ using namespace v3d::window;
 using namespace v3d::system;
 using namespace v3d::input;
 using namespace v3d::image;
-using namespace v3d::utils::graphics;
-using namespace v3d::utils::graphics::drawlist;
-using namespace v3d::graphics::drawlist;
-using namespace v3d::graphics::simplesg;
 
 VExampleApp::VExampleApp(VStringParam in_strName)
 	: VNamedObject(in_strName, 0)
@@ -223,8 +212,6 @@ VMatrix44f BuildTranslateMatrix(float x, float y, float z)
 	return mat;
 }
 
-using namespace v3d::graphics::simplesg;
-
 IVNode* CreateMeshTransformNode(
 								IVDevice::MeshHandle in_hMesh, 
 								const VMatrix44f& in_Transform)
@@ -297,7 +284,7 @@ vint VExampleApp::Main()
 	{
 		VMeshDescription meshDesc = BuildModel(m_pDevice, "/data/test.obj");
 		VMaterialDescription texMat = BuildTextureMaterial(
-			m_pDevice, "/data/tgatest.tga");
+			m_pDevice, "/data/fuss.jpg");
 
 		IVDevice::MeshHandle pMesh = m_pDevice->CreateMesh(meshDesc, texMat);
 
@@ -313,7 +300,7 @@ vint VExampleApp::Main()
 	}
 
 	{
-		utils::graphics::VBox<ColoredVertex> box(.9f, .9f, .9f);
+		VBox<ColoredVertex> box(.9f, .9f, .9f);
 		box.CreateCoordinates();
 
 		for(int vertnum = 0; vertnum < box.buffer.GetSize(); ++vertnum)

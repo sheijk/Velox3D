@@ -5,7 +5,7 @@
 #include <v3d/Core/VNamedObject.h>
 #include <V3d/Console/IVConsoleService.h>
 
-#include <v3d/Utils/Graphics/VCamera.h>
+#include <V3dLib/Graphics/Misc/VCamera.h>
 #include <v3d/Graphics/IVDevice.h>
 #include <v3d/Input/IVInputManager.h>
 //-----------------------------------------------------------------------------
@@ -27,7 +27,7 @@ public:
 private:
 	void QueryButtons(input::IVInputManager* in_pInputManager);
 
-	void MoveCamera(v3d::utils::graphics::VCamera* in_pCamera);
+	void MoveCamera(v3d::graphics::VCamera* in_pCamera);
 
 	graphics::IVDevice* m_pDevice;
 	updater::IVUpdateManager* m_pUpdateManager;

@@ -15,6 +15,22 @@ void ForEachVertex(VBuffer<VertexStructure>& buffer, Operation& op);
 
 //-----------------------------------------------------------------------------
 
+template<typename VertexStructure>
+class SetColor
+{
+	VColor4f color;
+public:
+	SetColor(const VColor4f col) : color(col) {}
+	SetColor(float red, float green, float blue, float alpha = 1.0f)
+		: color(VColor4f(red, green, blue, alpha))
+	{}
+
+    void operator()(VertexStructure& vertex)
+	{
+		vertex.color = color;
+	}    
+};
+
 #define V3D_DECLARE_BUFFER_OP(opName, opLine) \
 	template<typename VertexStructure>\
 	class opName\
@@ -45,6 +61,12 @@ V3D_DECLARE_BUFFER_OP(ScaleVertex,
 	vertex.position.x *= mx;
 	vertex.position.y *= my;
 	vertex.position.z *= mz;
+	);
+
+V3D_DECLARE_BUFFER_OP(SetVertex,
+	vertex.position.x = mx;
+	vertex.position.y = my;
+	vertex.position.z = mz;
 	);
 
 #undef V3D_DECLARE_BUFFER_OP

@@ -110,6 +110,9 @@
 				RelativePath="..\Api\V3dLib\Graphics\Geometry.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3dLib\Graphics.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3dLib\Graphics\Misc.h">
 			</File>
 			<File
@@ -156,6 +159,9 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VPlane3f.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Geometry\VResizableGeometryData.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VSimpleVertex.h">
@@ -227,6 +233,12 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Misc\VCamera.h">
+				</File>
+				<File
+					RelativePath="..\Source\UtilsLib\Camera\VKeyboardCamera.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Misc\VKeyboardCamera.h">
 				</File>
 				<File
 					RelativePath="..\Source\UtilsLib\DrawList\VSimpleDrawList.cpp">
@@ -310,6 +322,49 @@
 			</File>
 			<File
 				RelativePath="..\Source\UtilsLib\CPUDetect\VDetectProcessor.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Importer"
+			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\IVModelImporter.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModel3D.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModel3D.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelFace.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelFace.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelObject3D.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelObject3D.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VOBJModelImporter.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VOBJModelImporter.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VQuake2BspImporter.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VQuake2BspImporter.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
 			</File>
 		</Filter>
 	</Files>

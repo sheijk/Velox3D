@@ -15,21 +15,30 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
+/**
+ * @author sheijk
+ */
 class VMiscState : public IVOpenGLRenderState
 {
 public:
-	typedef VMaterialDescription::PolygonMode PolygonMode;
-
 	VMiscState(const VMaterialDescription& in_Mat);
 
 	virtual void Apply() const;
 
 private:
-	int m_nFrontPolygonMode;
-	int m_nBackPolygonMode;
+	typedef VMaterialDescription::PolygonMode PolygonMode;
+	typedef VMaterialDescription::DepthTest DepthTest;
+
+	vuint m_nFrontPolygonMode;
+	vuint m_nBackPolygonMode;
+
+	vuint m_DepthFunction;
+	vbool m_bDepthWrite;
+
 	v3d::graphics::VColor4f m_DefaultColor;
 
-	vuint GetGLModeNum(const PolygonMode in_Mode);
+	static vuint GetGLModeNum(const DepthTest in_Test);
+	static vuint GetGLModeNum(const PolygonMode in_Mode);
 };
 
 //-----------------------------------------------------------------------------

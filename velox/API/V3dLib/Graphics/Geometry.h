@@ -17,6 +17,7 @@
 
 #include <V3dLib/Graphics/Geometry/VGeometryData.h>
 #include <V3dLib/Graphics/Geometry/VDynamicGeometryData.h>
+#include <V3dLib/Graphics/Geometry/VResizableGeometryData.h>
 #include <V3dLib/Graphics/Geometry/VGeometryUtil.h>
 #include <V3dLib/Graphics/Geometry/BufferManipulation.h>
 

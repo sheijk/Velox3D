@@ -2,15 +2,15 @@
 #ifndef V3D_QUAKE2BSPIMPORTER_H
 #define V3D_QUAKE2BSPIMPORTER_H
 //-----------------------------------------------------------------------------
-#include <v3d/utils/Graphics/VPlane3f.h>
+#include <V3dLib/Graphics/Geometry/VPlane3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace utils{
 namespace importer{
 //-----------------------------------------------------------------------------
 
-using v3d::utils::graphics::VPlane3f;
-using v3d::utils::graphics::VVector3f;
+using v3d::graphics::VPlane3f;
+using v3d::graphics::VVector3f;
 
 #define BSPVERSION	38
 

@@ -13,6 +13,9 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
+/**
+ * @author sheijk
+ */
 class VTextureState : public IVOpenGLRenderState
 {
 	GLint m_nTextureId;

@@ -142,6 +142,11 @@ Doku:
 
 log:
 
+10.04.2004
+V3dLib/Graphics/Misc/VKeyboardCamera
+V3dlib/graphics/geometry/vresizablegeometry + vdynamicgeometry
+z-buffer settings in mat. descr.
+
 09.04.2004
 Buffer Operationen (BufferManipulations.h)
 einige utilities
