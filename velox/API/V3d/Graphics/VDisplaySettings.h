@@ -9,7 +9,7 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
- * This class holds a complete set of display varables
+ * This class holds a complete set of display variables
  *
  * @author insane
  */

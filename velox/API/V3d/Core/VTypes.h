@@ -22,6 +22,7 @@ typedef __int64 vint64;		//support by other compilers than VC?? borland: ok
 typedef unsigned __int64 vuint64;
 typedef short vshort;
 typedef unsigned short vushort;
+typedef unsigned short vword; // added by ins
 typedef char vchar;
 typedef unsigned char vuchar;
 typedef unsigned char vbyte;

@@ -17,7 +17,8 @@ namespace graphics {
 struct VMeshDescription
 {
 	typedef VBufferBase* BufferHandle;
-	typedef IVBuffer<float>* FloatBufferHandle;
+	typedef IVBuffer<vfloat32>* FloatBufferHandle;
+	typedef IVBuffer<vint32>* IntBufferHandle;
 
 	template<typename Buffer>
 	struct DataRef
@@ -48,9 +49,13 @@ struct VMeshDescription
 	};
 
 	typedef DataRef<FloatBufferHandle> FloatDataRef;
+	typedef DataRef<IntBufferHandle> IntDataRef;
 
-	FloatDataRef triangleVertices; // extra felder fuer tris, fans + strips?
-	FloatDataRef theColorsVertices;
+	FloatDataRef triangleVertices; // extra felder fuer tris, fans + strips? -wozu?
+	//vertex array hat nichts mit rendering mode zu tun. sollte evtl in IndexBuffer stehen
+	FloatDataRef triangleColors;
+	IntDataRef triangleIndices;
+	
 };
 
 //-----------------------------------------------------------------------------

@@ -15,23 +15,30 @@ namespace graphics {
 /**
  * A graphical device. Abstraction of DirectGraphics/OpenGL/..
  *
- * @author sheijk
+ * @author sheijk / ins
  */
 class IVDevice
 {
 public:
 	typedef VMeshDescription::BufferHandle BufferHandle;
 	typedef VMeshDescription::FloatBufferHandle FloatBufferHandle;
+	typedef VMeshDescription::IntBufferHandle IntBufferHandle;
 	typedef IVMesh& MeshHandle;
 
 	virtual ~IVDevice() {};
 
-	typedef VFloatBuffer::CopyMode BufferCopyMode;
+	//changed - ins
+	typedef VFloatBuffer::CopyMode FloatBufferCopyMode;
+	typedef VIntBuffer::CopyMode  IntBufferCopyMode;
 
 	/** creates an internal buffer in the device */
 	virtual FloatBufferHandle CreateBuffer(
 		VFloatBuffer* in_pBuffer, 
-		BufferCopyMode in_CopyMode = VFloatBuffer::CopyData) = 0;
+		FloatBufferCopyMode in_CopyMode = VFloatBuffer::CopyData) = 0;
+
+	virtual IntBufferHandle CreateBuffer(
+		VIntBuffer* in_pBuffer, 
+		IntBufferCopyMode in_CopyMode = VIntBuffer::CopyData) = 0;
 
 	/** deletes the buffer and sets the handle to 0 */
 	virtual void DeleteBuffer(BufferHandle& in_Buffer) = 0;

@@ -93,9 +93,8 @@ public:
 	}
 };
 
-typedef VBuffer<vuint32> VIntBuffer;
 typedef VBuffer<vfloat32> VFloatBuffer;
-
+typedef VBuffer<vint32> VIntBuffer;
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

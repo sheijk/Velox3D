@@ -140,6 +140,43 @@
 				RelativePath="..\Source\UtilsLib\CPUDetect\VDetectProcessor.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="Importer"
+			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\IVModelImporter.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModel3D.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModel3D.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelFace.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelFace.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelObject3D.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VModelObject3D.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VOBJModelImporter.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VOBJModelImporter.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

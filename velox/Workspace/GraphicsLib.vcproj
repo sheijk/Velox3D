@@ -153,6 +153,12 @@
 				Name="Render Methods"
 				Filter="">
 				<File
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexRenderMethod.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexRenderMethod.h">
+				</File>
+				<File
 					RelativePath="..\Source\Graphics\OpenGL\VOpenGLPlainRenderMethod.cpp">
 				</File>
 				<File
@@ -168,6 +174,12 @@
 			<Filter
 				Name="Meshes"
 				Filter="">
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.h">
+				</File>
 				<File
 					RelativePath="..\Source\Graphics\OpenGL\VOpenGLVBOMesh.cpp">
 				</File>

@@ -12,6 +12,7 @@ namespace graphics {
 VOpenGLVertexMesh::VOpenGLVertexMesh(const VMeshDescription& in_Descr)
 {
 	m_TriangleData = in_Descr.triangleVertices;
+	m_ColorData = in_Descr.triangleColors;
 }
 
 VOpenGLVertexMesh::~VOpenGLVertexMesh()
@@ -44,18 +45,22 @@ void VOpenGLVertexMesh::Render()
 		= (m_TriangleData.nEnd - m_TriangleData.nStart) / 3;
 
 	vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
+	vfloat32* pColorBuffer = m_ColorData.hBuffer->GetDataAddress();
 
-	//glVertex3f(1,0,0);
-	//glVertex3f(0,1,0);
-	//glVertex3f(-1,0,0);
-
-	for(vuint nTriangle = 0; nTriangle < cnTriangleCount; ++nTriangle)
+	for(vuint i = 0; i < cnTriangleCount; i++)
 	{
 		glVertex3f( 
-			GetVertexVal(pBuffer, m_TriangleData.nStride, nTriangle, X_AXIS),
-			GetVertexVal(pBuffer, m_TriangleData.nStride, nTriangle, Y_AXIS),
-			GetVertexVal(pBuffer, m_TriangleData.nStride, nTriangle, Z_AXIS)
+			GetVertexVal(pBuffer, m_TriangleData.nStride, i, X_AXIS),
+			GetVertexVal(pBuffer, m_TriangleData.nStride, i, Y_AXIS),
+			GetVertexVal(pBuffer, m_TriangleData.nStride, i, Z_AXIS)
 			);
+
+		glColor3f( 
+			GetVertexVal(pColorBuffer, m_ColorData.nStride, i, X_AXIS),
+			GetVertexVal(pColorBuffer, m_ColorData.nStride, i, Y_AXIS),
+			GetVertexVal(pColorBuffer, m_ColorData.nStride, i, Z_AXIS)
+			);
+
 	}
 
 	glEnd();

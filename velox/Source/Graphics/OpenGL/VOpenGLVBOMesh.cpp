@@ -8,7 +8,7 @@ namespace graphics {
 VOpenGLVBOMesh::VOpenGLVBOMesh(VMeshDescription& in_MeshDescr)
 {
 	m_TriangleData = in_MeshDescr.triangleVertices;
-	m_ColorData = in_MeshDescr.theColorsVertices;
+	m_ColorData = in_MeshDescr.triangleColors;
 	vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
 	vfloat32* pColorBuffer = m_ColorData.hBuffer->GetDataAddress();
 	

@@ -10,6 +10,7 @@
 //#include "VOpenGLVertexMesh.h"
 #include "VOpenGLPlainRenderMethod.h"
 #include "VOpenGLVBORenderMethod.h"
+#include "VOpenGLIndexRenderMethod.h"
 
 #include <windows.h>
 #include <extgl/extgl.h>
@@ -36,7 +37,12 @@ public:
 
 	virtual FloatBufferHandle CreateBuffer(
 		VFloatBuffer* in_pBuffer, 
-		BufferCopyMode in_CopyMode = VFloatBuffer::CopyData
+		FloatBufferCopyMode in_CopyMode = VFloatBuffer::CopyData
+		);
+
+	virtual IntBufferHandle CreateBuffer(
+		VIntBuffer* in_pBuffer, 
+		IntBufferCopyMode in_CopyMode = VIntBuffer::CopyData
 		);
 
 	virtual void DeleteBuffer(BufferHandle& in_Buffer);
@@ -52,11 +58,13 @@ public:
 private:
 	/** the float buffers */
 	VBufferManager<VFloatBuffer> m_FloatBuffer;
+	VBufferManager<VIntBuffer> m_IntBuffer;
 
 	/** store all render methods here */
 	VRenderMethodRegistry m_RenderMethods;
 	VOpenGLPlainRenderMethod m_PlainRenderMethod;
 	VOpenGLVBORenderMethod m_VBORenderMethod;
+	VOpenGLIndexRenderMethod m_IndexRenderMethod;
 
 	typedef std::list<IVMesh*> MeshList;
 	MeshList m_Meshes;

@@ -82,6 +82,7 @@ VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
 										  "Velox Console",wxPoint(50, 50),
 										  wxSize(250, 700), wxCAPTION, "frame")
 {
+	wxFrame::wxFrame();
 	Register();
 
 	// some constant for easier tweaking of the layout
@@ -138,6 +139,7 @@ void VConsoleFrame::ShowFrame(vbool in_Param)
 wxTextCtrl* VConsoleFrame::GetTextControl()
 {
 	return m_TextControl;
+
 }
 
 
@@ -146,9 +148,15 @@ void VConsoleFrame::WriteText(VStringParam in_Text)
 	wxString string(in_Text);
 	m_TextControl->AppendText(string);
 }
-
+//TODO: this damn fuck is going to crash on ALT F4! stupid damn fuck..
+// no idea of fixing....
 VConsoleFrame::~VConsoleFrame()
 {
+	delete m_TextControl;
+	delete m_QuitButton;
+	delete m_ClearButton;
+	delete m_InputControl;
+	wxFrame::~wxFrame();
 
 }
 //-----------------------------------------------------------------------------

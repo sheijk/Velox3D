@@ -18,6 +18,7 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
 	m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
+	m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
 
 }
 //-----------------------------------------------------------------------------
@@ -41,7 +42,7 @@ VOpenGLDevice::~VOpenGLDevice()
 
 IVDevice::FloatBufferHandle VOpenGLDevice::CreateBuffer(
 	VFloatBuffer* in_pBuffer,
-	BufferCopyMode in_CopyMode
+	FloatBufferCopyMode in_CopyMode
 	)
 {
 	VFloatBuffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
@@ -49,7 +50,19 @@ IVDevice::FloatBufferHandle VOpenGLDevice::CreateBuffer(
 
 	return FloatBufferHandle(pBuffer);
 }
+//-----------------------------------------------------------------------------
 
+IVDevice::IntBufferHandle VOpenGLDevice::CreateBuffer(
+	VIntBuffer* in_pBuffer,
+	IntBufferCopyMode in_CopyMode
+	)
+{
+	VIntBuffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
+	m_IntBuffer.Add(pBuffer);
+
+	return IntBufferHandle(pBuffer);
+}
+//TODO lacks for int support -ins
 void VOpenGLDevice::DeleteBuffer(BufferHandle& in_Buffer)
 {
 	VFloatBuffer* t = reinterpret_cast<VFloatBuffer*>(in_Buffer);
@@ -279,13 +292,13 @@ void VOpenGLDevice::BeginScene()
 {
 	wglMakeCurrent(hDC, hRC);
 
-	// fuer sowas solltes noch fkten geben
+	// fuer sowas solltes noch fkten geben - wir brauchen eine komplette state engine -ins
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 	glLoadIdentity();
 	
 	//TODO for testing purpose -ins
 	static vfloat32 rotZ = 0;
-	glTranslatef(0.0f, 0.0f, -5.0f);
+	glTranslatef(0.0f, 0.0f, -100.0f);
 	rotZ += 0.3f;
 	glRotatef(rotZ,0.0f,1.0f,0.0f);
 

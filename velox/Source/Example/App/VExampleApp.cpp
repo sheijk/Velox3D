@@ -9,7 +9,8 @@
 #include <v3d/Window/IVWindowManager.h>
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Graphics/IVDevice.h>
-
+#include "../../UtilsLib/Importer/VObjModelImporter.h"
+#include "../../UtilsLib/Importer/VModel3D.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
@@ -38,7 +39,7 @@ vint VExampleApp::Main()
 	V3D_DEBUGMSG("Velox Main app says hi!");
 
 	// get update manager
-	IVUpdateManager& updater = * QueryObject<IVUpdateManager>("updater.service");
+	IVUpdateManager* updater = QueryObject<IVUpdateManager>("updater.service");
 	
 	IVSystemManager* system = QueryObject<IVSystemManager>("system.service");
 	IVWindowManager* winmanager = QueryObject<IVWindowManager>("window.manager");
@@ -55,14 +56,37 @@ vint VExampleApp::Main()
 	IVDevice* pDevice;
 	pDevice = &(win->QueryGraphicsDevice());
 
+
+	util::VModel3D Model;
+	util::VOBJModelImporter Importer;
+
+	Importer.Create("ObjFile", &Model);
+
 	// create a test mesh
-    // dafuer brauchen wir spaeter hilfsklassen...
+    // dafuer brauchen wir spaeter hilfsklassen... -spaeter? jetzt! :)
 	const cnVertexCount = 36;
 	VFloatBuffer vertexData(new float[cnVertexCount], cnVertexCount);
 	VFloatBuffer colorData(new float[cnVertexCount], cnVertexCount);
 
+	VFloatBuffer VertexData(new vfloat32[Model.m_Objects[0]->m_iNumVertices*3],
+		Model.m_Objects[0]->m_iNumVertices*3);
+
+	VIntBuffer VertexIndex(new vint32[Model.m_Objects[0]->m_iNumFaces *3],
+		Model.m_Objects[0]->m_iNumFaces *3);
 
 
+	//wieoft soll man denn noch die  buffer rumkopieren???
+	for(vuint i = 0; i < Model.m_Objects[0]->m_iNumVertices*3; i++)
+	{
+		VertexData[i] = Model.m_Objects[0]->m_VerticesList[i];
+	}
+	
+	for(vuint i = 0; i < Model.m_Objects[0]->m_iNumFaces*3; i++)
+	{
+		VertexIndex[i] = Model.m_Objects[0]->m_pVertexIndex[i];
+	}
+	
+	
 	colorData[0]  = 0.0f;
 	colorData[1]  = 1.0f;
 	colorData[2]  = 0.0f;
@@ -162,24 +186,32 @@ vint VExampleApp::Main()
 	vertexData[34] = -1.0f;
 	vertexData[35] = 1.0f;
 
+
+
 	IVDevice::FloatBufferHandle bufHandle;
-
-	bufHandle = pDevice->CreateBuffer(&vertexData, VFloatBuffer::CopyData);
-
 	IVDevice::FloatBufferHandle colorHandle;
 
+	IVDevice::FloatBufferHandle VertexHandle;
+	IVDevice::IntBufferHandle VertexIndexHandle;
+
+	bufHandle = pDevice->CreateBuffer(&vertexData, VFloatBuffer::CopyData);
 	colorHandle = pDevice->CreateBuffer(&colorData, VFloatBuffer::CopyData);
+	VertexHandle = pDevice->CreateBuffer(&VertexData, VFloatBuffer::CopyData);
+	VertexIndexHandle = pDevice->CreateBuffer(&VertexIndex, VIntBuffer::CopyData);
 
 
 	VMeshDescription desc;
-	desc.triangleVertices = VMeshDescription::FloatDataRef(bufHandle, 0, cnVertexCount, 1);
-	desc.theColorsVertices = VMeshDescription::FloatDataRef(colorHandle, 0, cnVertexCount, 1);
+	//desc.triangleVertices = VMeshDescription::FloatDataRef(bufHandle, 0, cnVertexCount, 1);
+	desc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle, 0, Model.m_Objects[0]->m_iNumVertices, 1);
+	desc.triangleColors = VMeshDescription::FloatDataRef(colorHandle, 0, cnVertexCount, 1);
+	desc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle, 0, Model.m_Objects[0]->m_iNumFaces *3, 1);
 
+	IVMesh& mesh( pDevice->CreateMesh(desc));
 
-	IVMesh& mesh( pDevice->CreateMesh(desc) );
 	
+
 	// main loop
-	updater.Start();
+	updater->Start();
 	system->SetStatus(true);
 
 	while(system->GetStatus())
@@ -187,11 +219,11 @@ vint VExampleApp::Main()
 
 		pDevice->BeginScene();
 		pDevice->RenderMesh(mesh);
-		updater.StartNextFrame();
+		updater->StartNextFrame();
 		pDevice->EndScene();
 	}
 
-	updater.Stop();
+	updater->Stop();
 
 	return 0;
 }

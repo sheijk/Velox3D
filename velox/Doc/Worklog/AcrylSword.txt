@@ -6,6 +6,8 @@ Hab im Error Service Source ein paar TODO Tags verteilt, bei allem was mir nicht
 klar war, etc., damits nicht vergessen wird Hoffe das ist ok?
 <ins>Bitte postet am ende dieser Datei eure ogl extensions damit ich sehe, mit
 as wir arbeiten koennen (siehe console fuer extensions)
+<ins> Mach mal wieder was. Warten immer noch auf den Input Manager und den 
+VertexBuffer Access  utils class!!!
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:

@@ -8,6 +8,11 @@ die gleichen services stehen -[ins]
 <ins>Bitte postet am ende dieser Datei eure ogl extensions damit ich sehe, mit
 as wir arbeiten koennen (siehe console fuer extensions)
 
+<ins>: vfs bug:wenn ich eine date mit VReadAccess oeffnen will bekomme ich eine
+exception: vfs does not allow writeacess!
+
+<ins> es ist sehr leastig, wenn nicht sogar ein design fehler, wenn man aus einer datei
+ueber das vfs lesen will jedes mal eine VStreamReader Klasse zu implementieren!!!!
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:
