@@ -21,6 +21,12 @@ TODO List:
 -------------------------------------------------------------------------------
 Done List:
 
+10.03.04
+- added camera
+- cleaned device
+- updated example app for using camera
+- added matrix functions
+
 02.03.04
 - added focus losing for input manager
 - added skybox

@@ -160,27 +160,38 @@ void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 
 	m_pLeftMouseButton	= &in_pInputManager->GetMouseButton(1);
 	m_pRightMouseButton	= &in_pInputManager->GetMouseButton(0);
+	m_pMouseXAxis		= &in_pInputManager->GetMouseXAxis();
+	m_pMouseYAxis		= &in_pInputManager->GetMouseYAxis();
+	
+	
 }
 
 void VExampleApp::MoveCamera(VCamera* in_pCamera)
 {
 	if(m_pUpButton->IsDown() == true)
-		in_pCamera->AddZ(0.2f);
+		in_pCamera->MoveForward(-5.0f);
 
 	if(m_pDownButton->IsDown() == true)
-		in_pCamera->AddZ(-0.2f);
-
+		in_pCamera->MoveForward(5.0f);
+	
 	if(m_pLeftButton->IsDown() == true)
-		in_pCamera->AddX(0.2f);
+		in_pCamera->Strafe(-5);
+		
 
 	if(m_pRightButton->IsDown() == true)
-		in_pCamera->AddX(-0.2f);
+		in_pCamera->Strafe(5);
+		
 
 	if(m_pRightMouseButton->IsDown() == true)
-		in_pCamera->AddY(-.3f);
+		in_pCamera->RotateZ(-1);
+		
 
 	if(m_pLeftMouseButton->IsDown() == true)
-		in_pCamera->AddY(.3f);
+		in_pCamera->RotateZ(1);
+
+	in_pCamera->RotateX(m_pMouseYAxis->GetLastMovement());
+	in_pCamera->RotateY(m_pMouseXAxis->GetLastMovement());
+		
 }
 
 vint VExampleApp::Main()
@@ -208,8 +219,8 @@ vint VExampleApp::Main()
 	QueryButtons(pInputManager);
 
 	pCamera = new VCamera();
-	pCamera->SetZ(-10.0f);
-	m_pDevice->SetCamera(pCamera);
+	//pCamera->SetZ(-10.0f);
+	//m_pDevice->SetCamera(pCamera);
 
 	// build scene graph
 	VPointer<IVNode>::AutoPtr pRootNode;
@@ -253,6 +264,7 @@ vint VExampleApp::Main()
 	while(pSystemManager->GetStatus())
 	{
 		m_pDevice->BeginScene();
+		m_pDevice->SetMatrix(IVDevice::MatrixMode::ViewMatrix, *pCamera->GetMatrix());
 		
 		//ApplyMaterial(m_pDevice, &pMesh->GetMaterial());
 		//m_pDevice->RenderMesh(pMesh);

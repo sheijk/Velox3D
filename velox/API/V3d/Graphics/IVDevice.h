@@ -92,10 +92,7 @@ public:
 
 	/** set the projection, view, model and texture matrices */
 	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix) = 0;
-
-	// evil hack :)
-	virtual void SetCamera(VCamera* in_pCamera) = 0;
-
+	
 	/**
 	* This is only implemented to show anything by now
 	* TODO: build the damn renderer ;)

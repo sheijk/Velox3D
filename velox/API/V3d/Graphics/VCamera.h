@@ -2,48 +2,64 @@
 #define V3D_VCAMERA_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VTypes.h>
+#include <v3d/Math/VMatrix.h>
+#include <v3d/Math/VVector.h>
+#include <v3d/Utils/Graphics/VVector3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
+namespace utils {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
- * A simple rustical camera for testing purpose
+* A first person camera implementation
  *
  * @author ins
  */
 class VCamera
 {
 public:
+
 	VCamera();
 	VCamera(vfloat32 x, vfloat32 y, vfloat32 z);
+
 	virtual ~VCamera(){};
 
-	vfloat32 GetX();
-	vfloat32 GetY();
-	vfloat32 GetZ();
+	/** Move to absolute position */
+	void Move(vfloat32 in_fX, vfloat32 in_fY, vfloat32 in_fZ);
 
-	
-	void SetX(vfloat32 x);
-	void SetY(vfloat32 y);
-	void SetZ(vfloat32 z);
+	void MoveForward(vfloat32 in_fUnits);
+	void MoveUp(vfloat32 in_fUnits);
+	void Strafe(vfloat32 in_fUnits);
+	void RotateX(vfloat32 in_fAngle);
+	void RotateY(vfloat32 in_fAngle);
+	void RotateZ(vfloat32 in_fAngle);
 
-	void AddX(vfloat32 x);
-	void AddY(vfloat32 y);
-	void AddZ(vfloat32 z);
-
-	vfloat32 rotX;
-	vfloat32 rotY;
+	/** Retruns current view matrix */
+	VMatrix<vfloat32, 4,4>* GetMatrix();
 
 private:
 
-	vfloat32 m_pPosition[3];
-	
+	typedef VMatrix<vfloat32, 4,4> Matrix4f;
+	typedef VVector<vfloat32, 3> Vector;
 
+	void CalculateMatrix();
+
+	const vfloat32 m_fPiDiv180;
+
+	Matrix4f m_ViewMatrix;
+
+	Vector m_UpVector;
+	Vector m_RightVector;
+	Vector m_RotationVector;
+	Vector m_ViewVector;
+
+	v3d::utils::graphics::VVector3f m_PositionVector;
 
 };
 
 //-----------------------------------------------------------------------------
+} // namespace utils
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------

@@ -27,7 +27,7 @@ public:
 private:
 	void QueryButtons(input::IVInputManager* in_pInputManager);
 
-	void MoveCamera(graphics::VCamera* in_pCamera);
+	void MoveCamera(v3d::utils::graphics::VCamera* in_pCamera);
 
 	graphics::IVDevice* m_pDevice;
 
@@ -41,6 +41,8 @@ private:
 
 	input::IVButton* m_pLeftMouseButton;
 	input::IVButton* m_pRightMouseButton;
+	input::IVRelativeAxis* m_pMouseXAxis;
+	input::IVRelativeAxis* m_pMouseYAxis;
 };
 
 //-----------------------------------------------------------------------------

@@ -39,8 +39,6 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 	m_DisplaySettings = in_pSettings;
 	hWnd = in_hWnd;
 
-	m_pCamera = NULL;
-
 	SetDisplay();
 
 	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
@@ -370,19 +368,7 @@ void VOpenGLDevice::BeginScene()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	if(m_pCamera)
-	{
-		m_ViewMatrix.Set(0, 3, m_pCamera->GetX());
-		m_ViewMatrix.Set(1, 3, m_pCamera->GetY());
-		m_ViewMatrix.Set(2, 3, m_pCamera->GetZ());
-		RecalcModelViewMatrix();
-
-		//glRotatef(m_pCamera->rotX, 0.0f,1.0f,0.0f);
-		//glRotatef(m_pCamera->rotY, 1.0f,0.0f,0.0f);
-		//glTranslatef(m_pCamera->GetX(), m_pCamera->GetY(), m_pCamera->GetZ());
-	}
-	else
-		glTranslatef(0,0,0);
+	RecalcModelViewMatrix();
 }
 
 //-----------------------------------------------------------------------------
@@ -447,13 +433,6 @@ void VOpenGLDevice::RecalcModelViewMatrix()
 	Mult(modelView, m_ModelMatrix, m_ViewMatrix);
 
 	SetGLMatrix(GL_MODELVIEW, modelView, this);
-}
-
-//-----------------------------------------------------------------------------
-
-void VOpenGLDevice::SetCamera(VCamera* in_pCamera)
-{
-	m_pCamera = in_pCamera;
 }
 //-----------------------------------------------------------------------------
 } // namespace graphics

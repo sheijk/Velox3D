@@ -65,8 +65,6 @@ public:
 	virtual void EndScene();
 
 	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix);
-
-	virtual void SetCamera(VCamera* in_pCamera);
 	
 private:
 	void RecalcModelViewMatrix();
@@ -119,8 +117,6 @@ private:
 	vchar		*m_pVendor;
 	vchar		*m_pRenderer;
 	vchar		*m_pVersion;
-
-	VCamera*	m_pCamera;
 };
 
 //-----------------------------------------------------------------------------
