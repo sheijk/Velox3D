@@ -68,14 +68,16 @@ void VMeshPart::Update()
 {
 	if( m_pRigidBodyPart != 0 )
 	{
-		VRigidBodyPart::PositionVector pos = m_pRigidBodyPart->GetPosition();
+		//VVector3f pos = m_pRigidBodyPart->GetPosition();
+		VMatrix44f transform = m_pRigidBodyPart->GetTransform()->GetAsMatrix();
 
 		// for all meshes, set position
 		for(MeshList::iterator model = m_Meshes.begin(); model != m_Meshes.end(); ++model)
 		{
-			model->pTransformation->Set(0, 3, pos.Get(0));
-			model->pTransformation->Set(1, 3, pos.Get(1));
-			model->pTransformation->Set(2, 3, pos.Get(2));
+
+			*model->pTransformation = transform;
+			//model->pTransformation->Set(1, 3, pos.Get(1));
+			//model->pTransformation->Set(2, 3, pos.Get(2));
 		}
 	}
 }
@@ -113,9 +115,9 @@ void VMeshPart::Deactivate()
 void VMeshPart::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 {
 	// get rigid body part
-	if( in_Id.AsStdString() == "body" && in_Part.IsOfType<VRigidBodyPart>() )
+	if( in_Id.AsStdString() == "body" && in_Part.IsOfType<entity::VRigidBodyPart>() )
 	{
-		m_pRigidBodyPart = in_Part.Convert<VRigidBodyPart>();
+		m_pRigidBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
 	}
 }
 

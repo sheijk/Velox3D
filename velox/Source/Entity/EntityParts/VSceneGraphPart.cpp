@@ -138,7 +138,7 @@ VRBTransform VSceneGraphPart::GetTransform() const
 
 VRBTransform VSceneGraphPart::GetAbsoluteTransform()
 {
-	return m_pRigidBodyPart->GetTransform();
+	return *m_pRigidBodyPart->GetTransform();
 }
 
 

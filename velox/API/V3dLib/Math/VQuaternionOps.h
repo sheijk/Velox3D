@@ -1,6 +1,7 @@
 #ifndef V3D_VQUATERNIONOPS_01_09_05_H
 #define V3D_VQUATERNIONOPS_01_09_05_H
 //-----------------------------------------------------------------------------
+#include <v3d/Math/VVector.h>
 #include <V3dLib/Math/VQuaternion.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
@@ -259,6 +260,28 @@ template<typename Scalar>
 
 {
 	return gmtl::isEquiv(q1.m_Data, q2.m_Data, delta);
+}
+
+/**
+ * Construct a quaternion from an axis and angle
+ * @note: in_Angle in radians
+ */
+template<typename Scalar>
+VQuaternion<Scalar> ConstructFromAxisAngle(
+								   VVector<Scalar, 3> in_Axis,
+								   Scalar in_Angle)
+{
+	Scalar sinx = sin(in_Angle / 2);
+	Scalar cosy = cos(in_Angle / 2);
+
+	Scalar x,y,z,w;
+
+	x = in_Axis.Get(0) * sinx;
+	y = in_Axis.Get(1) * sinx;
+	z = in_Axis.Get(2) * sinx;
+	w = cosy;
+
+	return VQuaternion<Scalar>(x,y,z,w);
 }
 //-----------------------------------------------------------------------------
 } // namespace v3d

@@ -10,6 +10,7 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
+using namespace math;
 
 class VRigidBodyPart : public IVPart
 {
@@ -39,7 +40,7 @@ public:
 	 *
 	 * @return The current rigid body transformation
 	 */
-	VRBTransform GetTransform() const;
+	VRBTransform* GetTransform();
 
 	/**
 	 * Sets the rigid body transformation of this part

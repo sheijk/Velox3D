@@ -8,7 +8,6 @@ namespace math {
  * Defines a 3D base for spanning a vector space
  *
  * @author: ins
- * TODO: in cpp verschieben
  */
 
 template<typename Scalar>

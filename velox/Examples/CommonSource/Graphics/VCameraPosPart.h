@@ -3,8 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
+#include <V3dLib/EntityParts/VRigidBodyPart.h>
 #include "../Shared/VUpdateablePart.h"
-#include "../Shared/VRigidBodyPart.h"
+//#include "../Shared/VRigidBodyPart.h"
 #include <V3dLib/Graphics/Misc/IVCamera.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace racer {
@@ -17,7 +18,7 @@ using namespace v3d; // prevent auto indenting
  */
 class VCameraPosPart : public VUpdateablePart
 {
-	VRigidBodyPart* m_pRigidBody;
+	entity::VRigidBodyPart* m_pRigidBody;
 	const graphics::IVCamera& m_Camera;
 
 public:

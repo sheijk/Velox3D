@@ -36,9 +36,9 @@ void VRigidBodyPart::SetTransform(const VRBTransform& in_Trans)
 	m_Transformation = in_Trans;
 }
 
-VRBTransform VRigidBodyPart::GetTransform() const
+VRBTransform* VRigidBodyPart::GetTransform()
 {
-	return m_Transformation;
+	return &m_Transformation;
 }
 
 //-----------------------------------------------------------------------------

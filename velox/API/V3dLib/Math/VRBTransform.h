@@ -3,11 +3,11 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <V3dLib/Math.h>
-
 //-----------------------------------------------------------------------------
-namespace v3d { namespace entity {
+namespace v3d {
+namespace math {
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indenting
+using namespace v3d;
 
 /**
  * A rigid body transform is transform that consists of concatenations of only

@@ -9,8 +9,8 @@
 #include <V3dLib/Math/VQuaternion.h>
 #include <ode/ode.h>
 
-//TODO: change to lib rigid
-#include "../../../Examples/CommonSource/Shared/VRigidBodyPart.h"
+#include <V3dLib/EntityParts/VRigidBodyPart.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
@@ -27,10 +27,9 @@ public:
 		
 	VPhysicBody();
 	virtual ~VPhysicBody();
-	
-	racer::VRigidBodyPart* pBodyPart;
 
 	void Create(VPhysicWorld* in_PhysicWorld);
+	void SetTransformation();
 	void SetPosition(vfloat32 x, vfloat32 y, vfloat32 z);
 	void Activate();
     void Deactivate();
@@ -66,7 +65,7 @@ private:
 protected: 
 
 	dBodyID m_BodyID;
-	
+	entity::VRigidBodyPart* pBodyPart;
 	VQuatf m_Quaternion;
 	VPhysicPositionState m_PositionState;
 };

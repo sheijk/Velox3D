@@ -23,17 +23,32 @@ medium:
 
 high:
 - move othro vector extractor of planeMesh into mathlib
+- rewrite Physic code to use rigidbody in lib
 
 - TODO check external libs for correct debug information
 - TODO rewrite Velocity2 into Hinge2 instead of Joint!
 - build in vfs saving for image saving
 
-- reorganizate VVector to use VVectorOps
 - ODE indepenadnt frame movement
+
+- klaeren, warum es 2 VRBTransforms in /Math und /EntityParts gibt
+	- namespace in math rbtransform aendern
+
 
 //-----------------------------------------------------------------------------
 
 Done List:
+
+22.02.05
+- added a stuff to QuaternionOps
+- added some methods to MathOps
+- fixed a bug in MathOps
+- implemented orientation using quaternions
+
+19.02.05
+- rewritten several source files to use the correct RigidBodyEntity 
+  in /EntityParts
+- implemented a way to apply a quaternion rotation to a 3d axis
 
 13.02.05
 - added simple physic demo

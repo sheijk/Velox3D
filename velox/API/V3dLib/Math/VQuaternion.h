@@ -11,6 +11,7 @@ namespace v3d{
  * @author: ins
  */
 
+
 template <typename Scalar>
 class VQuaternion
 {
@@ -48,6 +49,17 @@ public:
 	VQuaternion(const QuatImpl& quat) : m_Data(quat)
 	{
 	}
+
+	VQuaternion(
+		const Scalar x,
+		const Scalar y,
+		const Scalar z,
+		const Scalar w
+		)
+	{
+		m_Data.set(x,y,z,w);
+	}
+	
 	
 
 	VQuaternion& operator=(const VQuaternion& in_Quaternion)

@@ -3,6 +3,7 @@
 #include <V3dLib/Physics/VPhysicWorld.h>
 #include <V3dLib/Physics/VPhysicPositionState.h>
 #include <V3dLib/Physics/VPhysicGeometry.h>
+#include <V3dLib/Math/VRBTransform.h>
 #include <V3d/Core.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -35,8 +36,7 @@ void VPhysicBody::Create(VPhysicWorld* in_PhysicWorld)
 
 void VPhysicBody::Update()
 {
-	const dReal* p = dBodyGetPosition(m_BodyID);
-	SetPosition((vfloat32)p[0], (vfloat32)p[1], (vfloat32)p[2]);
+	SetTransformation();
 }
 
 void VPhysicBody::Activate()
@@ -52,24 +52,73 @@ void VPhysicBody::Deactivate()
 
 void VPhysicBody::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 {
-	if( in_Part.IsOfType<racer::VRigidBodyPart>() )
-		pBodyPart = in_Part.Convert<racer::VRigidBodyPart>();
+	if( in_Part.IsOfType<entity::VRigidBodyPart>() )
+		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
 }
 
 void VPhysicBody::SetPosition(vfloat32 x, vfloat32 y, vfloat32 z)
 {
-	//vout << "x: " << x << "y: " << y << "z: " << z<< vendl;
-
-	//TODO: andere koennen VRigidBody aendern
 	m_PositionState.SetPosition(x,y,z);
 	AddState(&m_PositionState);
+}
+							
+
+void VPhysicBody::SetTransformation()
+{
 	
-	Position pos;
-	pos.Set(0, x);
-	pos.Set(1, y);
-	pos.Set(2, z);
+	//TODO: andere koennen VRigidBody aendern
+	const dReal* p = dBodyGetPosition(m_BodyID);
+	const dReal* q = dBodyGetQuaternion(m_BodyID);
+
+	m_PositionState.SetPosition(p[0],p[1],p[2]);
+	m_Quaternion.Set(q[0], q[1], q[2],q[3]);
+	AddState(&m_PositionState);
+		
+	//Quaternion calc's
+	VVector3f x1,y1,z1;
+	VMatrix<vfloat32, 3, 3> axis;
+	VMatrix<vfloat32, 4, 4> trans; //TODO: rbtransform accessmethoden aendern
+
+	pBodyPart->GetTransform()->GetAxis(x1,y1,z1);
+
+	axis.Set(0,0, x1.Get(0)); 
+	axis.Set(1,0, x1.Get(1));
+	axis.Set(2,0, x1.Get(2));
+
+	axis.Set(0,1, y1.Get(0));
+	axis.Set(1,1, y1.Get(1));
+	axis.Set(2,1, y1.Get(2));
+
+	axis.Set(0,2, z1.Get(0));
+	axis.Set(1,2, z1.Get(1));
+	axis.Set(2,2, z1.Get(2));
 	
-	pBodyPart->SetPosition(pos);
+	//MakeTranspose(axis);
+	
+	Rotate(axis, m_Quaternion);
+	MakeTranspose(axis); //TODO: should be coorect but recheck!
+
+	trans.Set(0,0, axis.Get(0,0));
+	trans.Set(0,1, axis.Get(0,1));
+	trans.Set(0,2, axis.Get(0,2));
+	trans.Set(0,3, p[0]);
+	
+	trans.Set(1,0, axis.Get(1,0));
+	trans.Set(1,1, axis.Get(1,1));
+	trans.Set(1,2, axis.Get(1,2));
+	trans.Set(1,3, p[1]);
+
+	trans.Set(2,0, axis.Get(2,0));
+	trans.Set(2,1, axis.Get(2,1));
+	trans.Set(2,2, axis.Get(2,2));
+	trans.Set(2,3, p[2]);
+
+	trans.Set(3,0, 0);
+	trans.Set(3,1, 0);
+	trans.Set(3,2, 0);
+	trans.Set(3,3, 1);
+	
+	pBodyPart->GetTransform()->Set(trans);
 }
 
 void VPhysicBody::SetCollisionBody(VPhysicGeometry* in_CollisionBodyState)

@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d { namespace racer {
 //-----------------------------------------------------------------------------
-
+using namespace entity;
 VCameraPosPart::VCameraPosPart(
 	const graphics::IVCamera& in_Camera,
 	VEntityUpdater<VUpdateablePart>* in_pUpdater

@@ -4,9 +4,10 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
-namespace v3d { namespace entity {
+namespace v3d {
+namespace math {
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indent
+using namespace v3d;
 
 VRBTransform::Type VRBTransform::defaultType = VRBTransform::LeftHanded;
 
@@ -32,7 +33,11 @@ VRBTransform::VRBTransform(const VVector3f& in_Position,
 
 VRBTransform::VRBTransform(VMatrix44f in_Matrix)
 {
-	Set(in_Matrix);
+	Set(in_Matrix); //TODO: validiereung der matrix einbauen (VectorBase kann das realisieren) --ins
+}
+
+VRBTransform::~VRBTransform()
+{
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -59,7 +64,7 @@ void VRBTransform::SetLookAt(const VVector3f& in_Direction,
 	//TODO: sollen wirklich beide zweige das gleiche tun? --sheijk
     if (in_Type == LeftHanded)
 	{
-		m_XAxis = Normalized(Cross(in_Direction, in_Up));
+		m_XAxis = Normalized(Cross(in_Direction, in_Up)); //normalisiere 2 vektoren vorher, dann  nimm kreuzprodukt. spart ein normalize --ins
 		m_YAxis = Normalized(in_Direction);
 		m_ZAxis = Normalized(Cross(m_XAxis, in_Up));
 	}
@@ -115,7 +120,7 @@ VMatrix44f VRBTransform::GetAsMatrix() const
 	VMatrix44f ret;
 
 	//set position
-	math::SetTranslate(ret, m_Position[0], m_Position[1], m_Position[3]);
+	math::SetTranslate(ret, m_Position[0], m_Position[1], m_Position[2]);
 
 	//set first axis
 	ret.Set(0,0, m_XAxis[0]);
@@ -151,12 +156,14 @@ void VRBTransform::Set(VMatrix44f in_Matrix)
 	m_YAxis[1] = in_Matrix.Get(1,1);
 	m_YAxis[2] = in_Matrix.Get(1,2);
 
-	m_ZAxis = Cross(m_XAxis, m_ZAxis);
+	//TODO:cross nicht kommutativ, sollte aus ursprungsmatrix uebernommen werden --ins
+	m_ZAxis = Cross(m_XAxis, m_YAxis); //TODO:soll das nicht m_YAXIS sein??? --ins
 
-	Normalize(m_Position);
+	//Normalize(m_Position); //position (ist eigentl. kein vektor) normailisieren??? --ins
 	Normalize(m_XAxis);
 	Normalize(m_YAxis);
-	Normalize(m_ZAxis);
+	Normalize(m_ZAxis); //normalisiere X und Y vor cross,
+	//spart ein normailze, da cross von 2 orthogonalen(!!) unit vektoren immer einheitslaenge hat --ins
 }
 
 void Concatenate(VRBTransform& in_Result,
@@ -176,5 +183,18 @@ VRBTransform operator*( const VRBTransform& in_A,
 	Concatenate(ret, in_A, in_B);
 	return ret;
 }
-}} //namespace v3d::entity
+void VRBTransform::GetAxis(
+						   VVector3f& out_XAxis,
+						   VVector3f& out_YAxis,
+						   VVector3f& out_ZAxis
+						   )
+{
+	out_XAxis = m_XAxis;
+	out_YAxis = m_YAxis;
+	out_ZAxis = m_ZAxis;
+}
 
+//-----------------------------------------------------------------------------
+} //namespace math
+} //namespace v3d
+//-----------------------------------------------------------------------------

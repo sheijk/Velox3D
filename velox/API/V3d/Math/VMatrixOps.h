@@ -5,6 +5,7 @@
 
 #include <v3d/Math/VMatrix.h>
 #include <v3d/Math/VVector.h>
+#include <V3dLib/Math/VQuaternion.h>
 #include <gmtl/gmtl.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -31,7 +32,7 @@ namespace v3d {
 		VMatrix<Scalar, RowCount, ColumnCount>& result
 		)
 	{
-		gmtl::makeTranspose(result.m_Mat);
+		result = gmtl::makeTranspose(result.m_Mat);
 	}
 
 	// matrix operations:
@@ -151,6 +152,52 @@ namespace v3d {
 			gmtl::operator*(mat.m_Mat, vector.m_Vec));
 	}
 
+	/**
+	 * matrix quaternion rotation, works only for 3x3 matrices
+	 * @author: ins
+	 */
+
+	template<typename Scalar>
+		void Rotate(VMatrix<Scalar, 3, 3>& in_Matrix,
+		VQuaternion<Scalar>& in_Quat)
+	{
+		vfloat32 scale, xs,ys,zs, wx,wy,wz, xx,xy,xz, yy,yz, zz;
+		vfloat32 qx,qy,qz,qw;
+
+		in_Quat.Get(qx,qy,qz,qw);
+		
+		//scaling factor for non normalized quaternion rotation
+		scale = 2.0f / Length(in_Quat);
+
+		xs = scale * qx;
+		ys = scale * qy;
+		zs = scale * qz;
+
+		wx = qw * xs;
+		wy = qw * ys;
+		wz = qw * zs;
+
+		xx = qx * xs;
+		xy = qx * ys;
+		xz = qx * zs;
+
+		yy = qy * ys;
+		yz = qy * zs;
+		
+		zz = qz * zs;
+
+		in_Matrix.Set(0,0, 1.0f - (yy + zz));
+		in_Matrix.Set(0,1, xy - wz);
+		in_Matrix.Set(0,2, xz + wy);
+
+		in_Matrix.Set(1,0, xy + wz);
+		in_Matrix.Set(1,1, 1.0f - (xx + zz));
+		in_Matrix.Set(1,2, yz - wx);
+
+		in_Matrix.Set(2,0, xz - wy);
+		in_Matrix.Set(2,1, yz + wx);
+		in_Matrix.Set(2,2, 1.0f - (xx + yy));
+	}
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------

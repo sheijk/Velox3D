@@ -7,7 +7,8 @@
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics.h>
 
-#include "../Shared/VRigidBodyPart.h"
+//#include "../Shared/VRigidBodyPart.h"
+#include <V3dLib/EntityParts/VRigidBodyPart.h>
 #include "../Shared/VEntityUpdater.h"
 #include <list>
 //-----------------------------------------------------------------------------
@@ -52,7 +53,7 @@ class VMeshPart : public entity::IVPart
 	VGraphicsManager* m_pManager;
 	MeshList m_Meshes;
 
-	VRigidBodyPart* m_pRigidBodyPart;
+	entity::VRigidBodyPart* m_pRigidBodyPart;
 	vbool m_bActive;
 
 	graphics::IVDrawList& GetDrawList();
