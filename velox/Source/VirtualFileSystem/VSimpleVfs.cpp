@@ -1,18 +1,25 @@
 #include "VSimpleVfs.h"
 //-----------------------------------------------------------------------------
+#include <v3d/Core/VObjectRegistry.h>
+
 #include <v3d/VFS/IVStreamFactory.h>
 #include <v3d/VFS/IVAccessRights.h>
 #include <v3d/VFS/VIOException.h>
 #include <v3d/VFS/IVDataProviderPool.h>
 #include <v3d/VFS/VMountOptions.h>
-#include <v3d/Core/VObjectRegistry.h>
+
+#include <v3d/XML/IVXMLService.h>
 
 #include "VFile.h"
 #include "VDirectory.h"
 #include "VAccessRights.h"
+#include "VfsUtils.h"
+#include "VxmlIniReader.h"
 
 #include <algorithm>
 #include <string>
+
+#include <boost/filesystem/operations.hpp>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
@@ -38,7 +45,9 @@ VSimpleVfs::VSimpleVfs(
 {
 	// create root dir
 	m_pRootDir = new VDirectory(
-		"", 
+		"",
+		"",
+		boost::filesystem::current_path().string(),
 		VAccessRights::CreateRODirAR(VAccessRights::DeletingForbidden));
 	m_pRootDirSP.Assign(m_pRootDir);
 
@@ -61,15 +70,29 @@ VSimpleVfs::VSimpleVfs(
 		"vfstestdir", 
 		"", 
 		"localfs", 
-		VAccessRights::CreateRODirAR(VAccessRights::DeletingForbidden)
+		VAccessRights::CreateDirAR(VAccessRights::DeletingForbidden)
 		);
 
 	// get localfs data provider and let it create a mounted dir
 	// add dir to vfs dir structure
-	m_pRootDir->AddSubdir(
-		GetDataProvider("localfs").CreateMountedDir(mountOpt)
-		);
+	//m_pRootDir->AddSubdir(
+	//	GetDataProvider("localfs").CreateMountedDir(mountOpt)
+	//	);
 
+	// load vfs.xml file
+	ParseInitFile();
+}
+
+void VSimpleVfs::ParseInitFile()
+{
+	// create visitor
+	VXmlIniReader reader(m_pRootDir);
+	
+	// get xml service
+	xml::IVXMLService* pXmlServ = QueryObject<xml::IVXMLService>("xml.service");
+
+	// let it parse the ini file
+	pXmlServ->ParseXMLFile("vfs.xml", &reader);
 }
 
 /**
@@ -78,21 +101,6 @@ VSimpleVfs::VSimpleVfs(
 VSimpleVfs::~VSimpleVfs()
 {
 }
-
-class VCompareFSOName
-{
-	VString m_strDirName;
-public:
-	VCompareFSOName(std::string name)
-	{
-		m_strDirName = VString(name.c_str());
-	}
-
-	bool operator()(IVFileSystemObject& dir)
-	{
-		return dir.GetName() == m_strDirName;
-	}
-};
 
 IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 	VStringParam in_strPathAndName,
@@ -128,7 +136,7 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 
 IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
 {
-	IVDirectory* pCurrDir = m_pRootDirSP;
+	IVDirectory* pCurrDir = m_pRootDirSP.Get();
 
 	std::string pathAndName = in_strDir;
 	std::string::iterator pos = pathAndName.begin();

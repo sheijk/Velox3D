@@ -87,7 +87,7 @@ void testZeroInit(const VString& strPtrName)
 	string str("abc");
 	str += "def";
 
-	if( ptr != pVal )
+	if( ptr.Get() != pVal )
 	{
 		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
 			": default c'tor did not initialize with 0");
@@ -106,7 +106,7 @@ void testAssignment(const VString& strPtrName)
 
 	ptr.Assign(pVal);
 
-	if( ptr != pVal )
+	if( ptr.Get() != pVal )
 	{
 		V3D_UNITTEST_ERROR_STATIC(strPtrName + ": op= / get failure");
 	}
@@ -194,13 +194,13 @@ void testEqCmp(const VString& strPtrName)
 			": op== returned false for equal objects");
 	}
 
-	if( a != pVal || pVal != a )
+	if( a.Get() != pVal || pVal != a.Get() )
 	{
 		V3D_UNITTEST_ERROR_STATIC(strPtrName +
 			": op!=(T*) returned true for 'equal' smart pointer and pointer");
 	}
 
-	if( !(a == pVal) || !(pVal == a) )
+	if( !(a.Get() == pVal) || !(pVal == a.Get()) )
 	{
 		V3D_UNITTEST_ERROR_STATIC(strPtrName +
 			": op==(T*) returned false for 'equal' smart ptr and pointer");
@@ -221,13 +221,13 @@ void testEqCmp(const VString& strPtrName)
 			": op== returned true for distinct objects");
 	}
 
-	if( !(b != pVal) || !(pVal != b) )
+	if( !(b.Get() != pVal) || !(pVal != b.Get()) )
 	{
 		V3D_UNITTEST_ERROR_STATIC(strPtrName +	": op!=(pointer) returned"
 			" false for 'distinct' pointer and smart ptr ");
 	}
 
-	if( b == pVal || pVal == b )
+	if( b.Get() == pVal || pVal == b.Get() )
 	{
 		V3D_UNITTEST_ERROR_STATIC(strPtrName + ": op==(pointer) returned"
 			" true for 'distinct' pointer and smart pointer");

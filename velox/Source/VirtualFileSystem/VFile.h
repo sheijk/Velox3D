@@ -41,7 +41,7 @@ public:
 	virtual ~VFile();
 
 	virtual VStringRetVal GetName() const;
-	virtual VStringRetVal GetPath() const;
+	virtual VStringRetVal GetSource() const;
 	virtual AccessRightsPtr GetAccessRights() const;
 
 	/** @see IVFile#Open */

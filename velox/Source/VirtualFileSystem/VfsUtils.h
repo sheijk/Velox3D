@@ -1,37 +1,31 @@
-#ifndef V3D_VFLAGS_H
-#define V3D_VFLAGS_H
+#ifndef V3D_VFSUTILS_H
+#define V3D_VFSUTILS_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <v3d/VFS/IVFileSysObject.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
 
-/**
- * Determines how a file/etc. shall be opened
- */
-enum VCreationFlags
-{
-	VCreateNew,
-	VCreateAlways,
-	VOpenExisting,
-	VOpenAlways,
-	VTruncate
-};
+	class VCompareFSOName
+	{
+		VString m_strDirName;
+	public:
+		VCompareFSOName(std::string name)
+		{
+			m_strDirName = VString(name.c_str());
+		}
 
-/**
- * Specifies the desired access mode when opening a data source
- */
-enum VAccessModeFlags
-{
-	VReadAccess = 1,
-	VWriteAccess = 2,
-	VRWAccess = 3
-};
+		bool operator()(IVFileSystemObject& dir)
+		{
+			return dir.GetName() == m_strDirName;
+		}
+	};
 
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VFLAGS_H
+#endif // V3D_VFSUTILS_H

@@ -6,14 +6,18 @@
 #include <v3d/VFS/IVOfflineStream.h>
 #include <v3d/VFS/VMountOptions.h>
 #include <v3d/VFS/IVDirectory.h>
+#include <v3d/VFS/IVFile.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
 
+// fix some of the troubles caused by windows.h
+#undef CreateFile
+
 /**
- * A "plugin" that can create a stream from a xml file descriptions. 
+ * A "plugin" that can create a stream from an xml file descriptions. 
  * Registers itself to the vfs, handles all file descriptions with 
  * a specific "type" attribute
  */
@@ -24,6 +28,7 @@ public:
 
 	typedef VPointer<IVOfflineStream>::SharedPtr StreamPtr;
 	typedef VPointer<IVDirectory>::SharedPtr DirPtr;
+	typedef VPointer<IVFile>::SharedPtr FilePtr;
 
 	/** returns the type id */
 	virtual VStringRetVal GetId() const = 0;
@@ -36,7 +41,14 @@ public:
 	/** creates a dir from mount info */
 	virtual DirPtr CreateMountedDir(const VMountOptions& in_MountOptions) = 0;
 
+	virtual vbool IsDirectory(VStringParam in_strPossibleDir) = 0;
+	virtual vbool IsFile(VStringParam in_strPossibleFile) = 0;
+
 	// create files (?)
+	virtual DirPtr CreateDir(const VMountOptions& in_Options) = 0;
+	virtual void DeleteDir(VStringParam in_strDir) = 0;
+	virtual FilePtr CreateFile(const VMountOptions& in_Options) = 0;
+	virtual void DeleteFile(VStringParam in_strSource) = 0;
 };
 
 //-----------------------------------------------------------------------------

@@ -168,6 +168,16 @@
 				RelativePath="..\Source\UnitTests\VFSTests\VMemoryStreamTest.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="XML Tests"
+			Filter="">
+			<File
+				RelativePath="..\Source\UnitTests\XMLTests\VXMLTests.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\XMLTests\VXMLTests.h">
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\Source\UnitTests\TestsDLL.cpp">
 		</File>

@@ -28,6 +28,8 @@ private:
 
 	std::string m_strName;
 	std::string m_strPath;
+	std::string m_strTypeId;
+	std::string m_strSource;
 
 	SharedAccessRightsPtr m_pAccessRights;
 
@@ -36,17 +38,34 @@ private:
 
 public:
 	VDirectory();
-	VDirectory(std::string in_strName, SharedAccessRightsPtr in_pAccessRights);
+	VDirectory(
+		std::string in_strName, 
+		std::string in_strTypeId,
+		std::string in_strSource,
+		SharedAccessRightsPtr in_pAccessRights);
+
 	~VDirectory();
 
 	virtual VStringRetVal GetName() const;
-	virtual VStringRetVal GetPath() const;
+	virtual VStringRetVal GetSource() const;
 	virtual AccessRightsPtr GetAccessRights() const;
 
 	virtual DirIterRange SubDirs();
 	virtual ConstDirIterRange SubDirs() const;
 	virtual FileIterRange Files();
 	virtual ConstFileIterRange Files() const;
+
+	virtual IVDirectory& CreateSubdir(
+		VStringParam in_strName,
+		const VAccessRightsFlags& in_AccessRights);
+
+	virtual void DeleteSubdir(VStringParam in_strName);
+
+	virtual void CreateFile(
+		VStringParam in_strName,
+		const VAccessRightsFlags& in_AccessRights);
+
+	virtual void DeleteFile(VStringParam in_strName);
 
 	/** add a subdir */
 	void AddSubdir(DirPtr in_pSubdir);

@@ -1,37 +1,31 @@
-#ifndef V3D_VFLAGS_H
-#define V3D_VFLAGS_H
+#ifndef V3D_VACCESSRIGHTSFLAGS_H
+#define V3D_VACCESSRIGHTSFLAGS_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
-namespace v3d {
+namespace v3d { 
 namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
- * Determines how a file/etc. shall be opened
+ * Flags for access rights. Contains the same information like
+ * IVAccessRights but can be constructed more easily.
  */
-enum VCreationFlags
+struct VAccessRightsFlags
 {
-	VCreateNew,
-	VCreateAlways,
-	VOpenExisting,
-	VOpenAlways,
-	VTruncate
-};
+	VAccessRightsFlags() : allowRead(false), allowWrite(false),
+		allowDelete(false), allowCreateDir(false), allowCreateFile(false) {};
 
-/**
- * Specifies the desired access mode when opening a data source
- */
-enum VAccessModeFlags
-{
-	VReadAccess = 1,
-	VWriteAccess = 2,
-	VRWAccess = 3
+	vbool allowRead;
+	vbool allowWrite;
+	vbool allowDelete;
+	vbool allowCreateDir;
+	vbool allowCreateFile;
 };
 
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VFLAGS_H
+#endif // V3D_VACCESSRIGHTSFLAGS_H

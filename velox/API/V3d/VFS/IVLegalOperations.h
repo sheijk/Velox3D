@@ -9,16 +9,24 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
- * Information about the access rights of a stream
+ * Returns information about which functions may be performed on a
+ * IVStream
  */
 class IVLegalOperations
 {
 public:
 	virtual ~IVLegalOperations() {};
 
+	/** Returns whether reading from the stream is allowed */
 	virtual vbool AllowRead() const = 0;
+	
+	/** Returns wheter writing to stream is allowed */
 	virtual vbool AllowWrite() const = 0;
+
+	/** Returns whether changing the read/write position is allowed */
 	virtual vbool AllowPositioning() const = 0;
+
+	/** Returns whether the read/write pos can be retrieved */
 	virtual vbool AllowGetPosition() const = 0;
 };
 

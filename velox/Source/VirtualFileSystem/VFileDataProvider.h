@@ -24,7 +24,7 @@ class VFileDataProvider : public IVDataProvider
 
 	static IVStreamFactory* GetStreamFactory();
 
-	static void AddDirContent(
+	void AddDirContent(
 		VDirectory& io_Dir, 
 		boost::filesystem::path in_Dir,
 		VDirectory::SharedAccessRightsPtr in_pAR);
@@ -39,6 +39,14 @@ public:
 		VAccessModeFlags in_Access);
 
 	virtual DirPtr CreateMountedDir(const VMountOptions& in_MountOptions);
+
+	virtual vbool IsDirectory(VStringParam in_strPossibleDir);
+	virtual vbool IsFile(VStringParam in_strPossibleFile);
+
+	virtual DirPtr CreateDir(const VMountOptions& in_Options);
+	virtual void DeleteDir(VStringParam in_strDir);
+	virtual FilePtr CreateFile(const VMountOptions& in_Options);
+	virtual void DeleteFile(VStringParam in_strSource);
 };
 
 //-----------------------------------------------------------------------------

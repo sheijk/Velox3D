@@ -17,7 +17,7 @@ namespace vfs {
  * Virtual File System
  * - mount and unmount data
  * - open files
- * - access directory structure
+ * - access a virtual directory structure
  */
 class IVFileSystem : public VNamedObject
 {

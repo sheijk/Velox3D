@@ -22,13 +22,13 @@ public:
 	typedef const IVAccessRights* AccessRightsPtr;
 
 	virtual VStringRetVal GetName() const = 0;
-	virtual VStringRetVal GetPath() const = 0;
+	virtual VStringRetVal GetSource() const = 0;
 	virtual AccessRightsPtr GetAccessRights() const = 0;
 };
 
 inline bool operator==(const IVFileSystemObject& pA, const IVFileSystemObject& pB)
 {
-	return pA.GetName() == pB.GetName() && pA.GetPath() == pB.GetPath();
+	return pA.GetName() == pB.GetName() && pA.GetSource() == pB.GetSource();
 }
 //-----------------------------------------------------------------------------
 } // namespace vfs

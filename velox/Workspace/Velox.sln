@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 7.00
+Microsoft Visual Studio Solution File, Format Version 8.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "CoreLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49029}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -39,6 +39,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Velox", "Velox.vcproj", "{5
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "UnitTests.vcproj", "{C0A4072B-D722-4E9A-91FF-BA1F511CF619}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlService", "XmlService.vcproj", "{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
 	EndProjectSection
@@ -104,15 +109,24 @@ Global
 		{C0A4072B-D722-4E9A-91FF-BA1F511CF619}.Release.Build.0 = Release|Win32
 		{C0A4072B-D722-4E9A-91FF-BA1F511CF619}.UnitTests.ActiveCfg = Debug|Win32
 		{C0A4072B-D722-4E9A-91FF-BA1F511CF619}.UnitTests.Build.0 = Debug|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Debug.ActiveCfg = Debug|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Debug.Build.0 = Debug|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Release.ActiveCfg = Release|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Release.Build.0 = Release|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.ActiveCfg = Debug|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.Build.0 = Debug|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt
 		..\Doc\Worklog\insane.txt = ..\Doc\Worklog\insane.txt
+		Templates\ServiceDLL.cpp = Templates\ServiceDLL.cpp
 		..\Doc\Worklog\sheijk.txt = ..\Doc\Worklog\sheijk.txt
 		Templates\UnitTest.cpp = Templates\UnitTest.cpp
 		Templates\UnitTest.h = Templates\UnitTest.h
 		Templates\VeloxClass.cpp = Templates\VeloxClass.cpp
 		Templates\VeloxClass.h = Templates\VeloxClass.h
+		Templates\VeloxFile.cpp = Templates\VeloxFile.cpp
+		Templates\VeloxFile.h = Templates\VeloxFile.h
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

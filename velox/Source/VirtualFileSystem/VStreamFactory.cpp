@@ -38,6 +38,8 @@ IVStreamFactory::OfflineStreamPtr VStreamFactory::CreateFileStream(
 	return OfflineStreamPtr(pGuard);
 }
 
+//TODO: exception werfen wenn 0 zurueck gegeben wuerde
+
 IVStreamFactory::StreamPtr VStreamFactory::CreateMemoryStream(
 	IVStream::ByteCount in_nInitialSize)
 {

@@ -136,6 +136,9 @@
 					RelativePath="..\Api\V3d\Vfs\IVStream.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Vfs\VAccessRightsFlags.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Vfs\VFlags.h">
 				</File>
 				<File
@@ -258,6 +261,9 @@
 					RelativePath="..\Source\VirtualFileSystem\VFileDataProvider.h">
 				</File>
 				<File
+					RelativePath="..\Source\VirtualFileSystem\VfsUtils.h">
+				</File>
+				<File
 					RelativePath="..\Source\VirtualFileSystem\VSimpleVfs.cpp">
 				</File>
 				<File
@@ -269,22 +275,28 @@
 				<File
 					RelativePath="..\Source\VirtualFileSystem\VStreamFactory.h">
 				</File>
+				<File
+					RelativePath="..\Source\VirtualFileSystem\VXmlIniReader.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\VirtualFileSystem\VXmlIniReader.h">
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="boost fs"
 			Filter="">
 			<File
-				RelativePath="..\..\..\libs\boost_1_30_0\libs\filesystem\src\convenience.cpp">
+				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\convenience.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\libs\boost_1_30_0\libs\filesystem\src\exception.cpp">
+				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\exception.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\libs\boost_1_30_0\libs\filesystem\src\operations_posix_windows.cpp">
+				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\operations_posix_windows.cpp">
 			</File>
 			<File
-				RelativePath="..\..\..\libs\boost_1_30_0\libs\filesystem\src\path_posix_windows.cpp">
+				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\path_posix_windows.cpp">
 			</File>
 		</Filter>
 	</Files>

@@ -12,38 +12,41 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
-* Streaming Interface
-* Provides methods to read and write data. A stream is anything that can receive
-* and/or provide data.
-* @author sheijk
-* @version 1.0
-* @updated 26-May-2003 13:31:08
-*/
+ * A streaming interface. Provides methods for writing to and reading
+ * from a stream and set/get it's read/write position.
+ * Is the base class for file, memory, network, .. streams. Use it
+ * whenever you have to read from/write to a buffer
+ */
 class IVStream
 {
 public:
+	/** A signed number of bytes */
 	typedef vlong ByteCount;
+
+	/** Type for the read/write position of a stream */
 	typedef vlong StreamPos;
+
+	/** Pointer to the IVLegalOperations interface (-> GetLegalOps()) */
 	typedef const IVLegalOperations* LegalOpsPtr;
 
 	virtual ~IVStream() {};
 
-	/** anchors for changing the stream's r/w position */
+	/** Anchors for changing the stream's r/w position */
 	enum Anchor { Begin, End, CurrentPos };
 
-	/** write data to stream */
+	/** Write data to stream. Throws VIOException if data could not be written */
 	virtual void Write(const void* in_pSource, ByteCount in_nByteCount) = 0;
 
-	/** read data from stream. returns number of read bytes */
+	/** Read data from stream. Returns number of read bytes */
 	virtual ByteCount Read(void* out_pDest, ByteCount in_pBytesToRead) = 0;
 
-	/** reset r/w position */
+	/** Reset r/w position. Anchor determines from where distance is measured */
 	virtual void SetPos(Anchor in_Anchor, ByteCount in_nDistance) = 0;
 
-	/** get r/w position */
+	/** Get read/write position */
 	virtual StreamPos GetPos() const = 0;
 
-	/** get a list of legal operations */
+	/** Get information about which operations may be performed on this stream */
 	virtual LegalOpsPtr GetLegalOps() const = 0;
 };
 

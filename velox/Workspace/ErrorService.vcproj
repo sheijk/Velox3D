@@ -118,13 +118,19 @@
 			Name="Interface"
 			Filter="">
 			<File
+				RelativePath="..\Api\V3d\Error\IVErrorFilter.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Error\IVErrorListener.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Error\IVErrorService.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Error\IVLogDevice.h">
+				RelativePath="..\Api\V3d\Error\IVErrorStream.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Error\VLogModeEnum.h">
+				RelativePath="..\Api\V3d\Error\VMessageTypeEnum.h">
 			</File>
 		</Filter>
 		<Filter
@@ -134,13 +140,10 @@
 				RelativePath="..\Source\Error\ErrorServiceDLL.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Error\VDebugMonitor.cpp">
+				RelativePath="..\Source\Error\VErrorConsoleListener.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Error\VDebugMonitor.h">
-			</File>
-			<File
-				RelativePath="..\Source\Error\VDebugMonitorEnum.h">
+				RelativePath="..\Source\Error\VErrorConsoleListener.h">
 			</File>
 			<File
 				RelativePath="..\Source\Error\VErrorService.cpp">
@@ -149,14 +152,30 @@
 				RelativePath="..\Source\Error\VErrorService.h">
 			</File>
 			<File
-				RelativePath="..\Source\Error\VFileLogger.cpp">
+				RelativePath="..\Source\Error\VErrorStream.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Error\VFileLogger.h">
+				RelativePath="..\Source\Error\VErrorStream.h">
 			</File>
-			<File
-				RelativePath="..\Source\Error\VLogModeEnum.h">
-			</File>
+			<Filter
+				Name="nicht fertig"
+				Filter="">
+				<File
+					RelativePath="..\Source\Error\VDebugMonitor.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Error\VDebugMonitor.h">
+				</File>
+				<File
+					RelativePath="..\Source\Error\VDebugMonitorEnum.h">
+				</File>
+				<File
+					RelativePath="..\Source\Error\VFileLogger.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Error\VFileLogger.h">
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

@@ -20,6 +20,24 @@ VAccessRights::VAccessRights(
 	m_bAllowWriteAccess = alwWA;
 }
 
+VAccessRights::VAccessRights(const VAccessRightsFlags& accRightFlags)
+{
+	m_bAllowCreateFile = accRightFlags.allowCreateFile;
+	m_bAllowCreateDir = accRightFlags.allowCreateDir;
+	m_bAllowReadAccess = accRightFlags.allowRead;
+	m_bAllowWriteAccess = accRightFlags.allowWrite;
+	m_bAllowDelete = accRightFlags.allowDelete;
+}
+
+VAccessRights::VAccessRights(const IVAccessRights& source)
+{
+	m_bAllowCreateFile = source.AllowCreateFile();
+	m_bAllowCreateDir = source.AllowCreateDir();
+	m_bAllowDelete = source.AllowDelete();
+	m_bAllowReadAccess = source.AllowReadAccess();
+	m_bAllowWriteAccess = source.AllowWriteAccess();
+}
+
 /**
  * d'tor
  */

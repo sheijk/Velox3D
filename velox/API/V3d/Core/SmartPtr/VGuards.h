@@ -37,6 +37,11 @@ struct VPointer
 		T,
 		VRefCountPol< VPointerStorage<T> >
 		> SharedPtr;
+
+private:
+	// prevent user from accidently writing VPointer<Blah> 
+	// instead of VPointer<Blah>::AutoPtr etc.
+	VPointer(int);
 };
 
 /**

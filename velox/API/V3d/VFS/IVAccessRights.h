@@ -9,28 +9,29 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
- * Access rights for directories and files
+ * Interface for getting access rights for a file system object.
+ * Each function returns whether a specific operations may be performed
+ * on the associated object. (the associated object is the one which
+ * returned this interface)
  */
 class IVAccessRights
 {
 public:
 	virtual ~IVAccessRights() {};
 
-	/** allow to create a file inside dir */
+	/** Returns whether it is allowed to create a file inside dir */
 	virtual vbool AllowCreateFile() const = 0;
 
-	/** allow to create a subdirectory */
+	/** Retuns whether it is allowed to create a subdirectory in dir */
 	virtual vbool AllowCreateDir() const = 0;
 	
-	/** allow element to be deleted */
+	/** Returns whether it's allowed delete the current element */
 	virtual vbool AllowDelete() const = 0;
 	
-	//virtual vbool AllowDeleteChild() = 0;
-	
-	/** allow read access (files: open for reading, dirs: access content */
+	/** Returns whether the content of the dir/file may be read */
 	virtual vbool AllowReadAccess() const = 0;
 	
-	/** allow writing (file: open for writing, dir: child files permission */
+	/** Returns whether data may be written to the file */
 	virtual vbool AllowWriteAccess() const = 0;
 };
 

@@ -25,7 +25,7 @@ struct VMountOptions
 	AccessRightsPtr m_pAccessRights;
 
 public:
-	VMountOptions();
+	VMountOptions() {};
 
 	VMountOptions(
 		VStringParam name, VStringParam source, 

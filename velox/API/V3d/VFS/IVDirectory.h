@@ -5,6 +5,7 @@
 #include <v3d/Core/Wrappers/VIterator.h>
 #include <v3d/VFS/IVFileSysObject.h>
 #include <v3d/VFS/IVFile.h>
+#include <v3d/VFS/VAccessRightsFlags.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -50,6 +51,29 @@ public:
 	virtual ConstFileIterRange Files() const = 0;
 
 	// Create/Delete File/Dir
+	/** create a sub directory */
+	virtual IVDirectory& CreateSubdir(
+		VStringParam in_strName,
+		const VAccessRightsFlags& in_AccessRights) = 0;
+
+	/** delete a subdirectory */
+	virtual void DeleteSubdir(VStringParam in_strName) = 0;
+
+	/** create a file */
+	virtual void CreateFile(
+		VStringParam in_strName,
+		const VAccessRightsFlags& in_AccessRights) = 0;
+
+	/** delete file */
+	virtual void DeleteFile(VStringParam in_strName) = 0;
+
+	/** create a file */
+	//virtual IVFile* CreateFile(
+	//	VStringParam in_strName,
+	//	AccessRightsPtr in_pAccessRights) = 0;
+
+	/** delete a file */
+	//virtual void DeleteFile(VStringParam in_strName) = 0;
 };
 
 //-----------------------------------------------------------------------------

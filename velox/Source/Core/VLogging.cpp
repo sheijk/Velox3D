@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Error/IVErrorService.h>
 #include <v3d/Core/VObjectRegistry.h>
+#include <sstream>
 
 //-----------------------------------------------------------------------------
 using v3d::error::IVErrorService;
@@ -31,7 +32,7 @@ void SendDebugMessage(VStringParam in_pcMessage)
 	if( 0 != GetLogDevice() )
 	{
 		// send message to log device
-		GetLogDevice()->Message(in_pcMessage, v3d::error::Ok);
+		*(GetLogDevice()->GetGlobalErrorStream()) << v3d::error::Normal << in_pcMessage << V3D_DBGMSGEND;
 	}
 }
 

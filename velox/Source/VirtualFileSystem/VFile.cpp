@@ -38,9 +38,9 @@ VStringRetVal VFile::GetName() const
 	return VStringRetVal(m_strName.c_str());
 }
 
-VStringRetVal VFile::GetPath() const
+VStringRetVal VFile::GetSource() const
 {
-	return VStringRetVal(m_strPath.c_str());
+	return VStringRetVal(m_strSource.c_str());
 }
 
 IVFileSystemObject::AccessRightsPtr VFile::GetAccessRights() const

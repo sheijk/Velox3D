@@ -1,5 +1,5 @@
-#ifndef V3D_VSTLDEREFITERATORPOL_H
-#define V3D_VSTLDEREFITERATORPOL_H
+#ifndef V3D_VSTLDEREFSPITERATORPOL_H
+#define V3D_VSTLDEREFSPITERATORPOL_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/IVIteratorPol.h>
@@ -7,8 +7,6 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
-
-//TODO: move implementation to .inl
 
 /**
  * an iterator policy for STL container which store pointers
@@ -18,28 +16,25 @@ template<
 	typename Iter,
 	typename T
 >
-class VSTLDerefIteratorPol : public IVIteratorPol<T>
+class VSTLDerefSPIteratorPol : public IVIteratorPol<T>
 {
-protected:
 	Iter m_Iter;
 
 public:
-	typedef T Value;
-	typedef T* Pointer;
-
-	VSTLDerefIteratorPol(Iter in_Iter) : m_Iter(in_Iter) {}
+	VSTLDerefSPIteratorPol(Iter in_Iter) 
+		: m_Iter(in_Iter) {}
 
 	virtual vbool IsEqual(const IVIteratorPol<T>& in_Other) const
 	{ 
 		//TODO: "korrekte" Version machen
 
-		return m_Iter == ((VSTLDerefIteratorPol&)in_Other).m_Iter;
+		return m_Iter == ((VSTLDerefSPIteratorPol&)in_Other).m_Iter;
 
 		//return *m_Iter == in_Other.Get(); 
 	}
 
-	virtual VSTLDerefIteratorPol* CreateCopy() const
-	{ return new VSTLDerefIteratorPol(m_Iter); }
+	virtual VSTLDerefSPIteratorPol* CreateCopy() const
+	{ return new VSTLDerefSPIteratorPol(m_Iter); }
 
 	virtual void MoveBy(vint in_nDistance)
 	{
@@ -48,14 +43,18 @@ public:
 
 	virtual Pointer Get() const
 	{
-		return *m_Iter;
+		Iter::value_type val = *m_Iter;
+
+		T* ptr = val.Get();
+
+		return ptr;
 	}
 
 	virtual void Proceed() { MoveBy(1); }
-	virtual void MoveBack() { MoveBy(-1); }
+	virtual void MoveBack() { MoveBy(-1); }	
 };
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VSTLDEREFITERATORPOL_H
+#endif // V3D_VSTLDEREFSPITERATORPOL_H

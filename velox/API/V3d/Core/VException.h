@@ -39,10 +39,10 @@ public:
 };
 
 //! Eine Exception werfen mit "normalen" Parametern
-#define V3D_THROW(excep, cause)				throw excep(cause, __FILE__, __LINE__);
+#define V3D_THROW(excep, cause)				throw excep(cause, __FILE__, __LINE__)
 
 //! Eine Exception mit einem Extra Parameter werfen
-#define V3D_THROWX(excep, cause, xparam)	throw excep(cause, __FILE__, __LINE__, xparam);
+#define V3D_THROWX(excep, cause, xparam)	throw excep(cause, __FILE__, __LINE__, xparam)
 
 // Start of documentation
 

@@ -40,8 +40,6 @@ int main(int argv, char* argc[])
 	{
 		// load and init
 		g_pKernel->ProcessIniFile(pcXmlFileName);
-
-//		V3D_THROW(VException, "lala");
 	}
 	catch(VException& exc)
 	{
@@ -56,6 +54,8 @@ int main(int argv, char* argc[])
 
 	// delete kernel
 	g_pKernel.Release();
+
+	throw std::string("let's shutdown :)");
 
 	// exit program
 	return 0;

@@ -49,13 +49,13 @@ VFSSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	g_pStreamFac.Assign(new VStreamFactory("vfs.strfact"));
 	g_pDataProvPool.Assign(new VDataProviderPool("vfs.dpp"));
 	g_pFileDataProv.Assign(new VFileDataProvider());
-	g_pDataProvPool->RegisterDataProvider(g_pFileDataProv);
+	g_pDataProvPool->RegisterDataProvider(g_pFileDataProv.Get());
 	g_pFileSys.Assign(new VSimpleVfs("vfs.fs", "vfs.xml"));
 }
 
 VFSSERVICE_API void Shutdown()
 {
-	g_pDataProvPool->UnregisterDataProvider(g_pFileDataProv);
+	g_pDataProvPool->UnregisterDataProvider(g_pFileDataProv.Get());
 
 	// delete and unregister service object
 	g_pFileSys.Release();

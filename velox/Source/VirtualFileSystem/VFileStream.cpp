@@ -64,7 +64,7 @@ VFileStream::VFileStream(
 		str << in_nCreation << endl;
 
 		//TODO: durch vfs exception ersetzen
-		V3D_THROW( VException, str.str().c_str() )
+		V3D_THROW( VException, str.str().c_str() );
 	}
 
 	// create legal op class

@@ -19,8 +19,7 @@ class VSimpleVfs : public IVFileSystem
 	VDirectory* m_pRootDir;
 	DirectoryPtr m_pRootDirSP;
 
-	// the data provider pool
-
+    void ParseInitFile();
 public:
 	VSimpleVfs(
 		VStringParam in_strName, 

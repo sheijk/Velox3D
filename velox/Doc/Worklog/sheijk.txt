@@ -12,26 +12,23 @@ Worklog von sheijk
 
 --------------------------------------------------------------------------------
 ----- random thoughts:
-eine map fuer xml files? (confing.services.vfs.filename = "vfs.dll" etc.),
+eine map fuer xml files? (config.services.vfs.filename = "vfs.dll" etc.),
 dafuer ein any objekt, was strings speichert und in bel. datentypen mittels
 template member konvertiert?
 
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-	operator T*() aus SmartPointern entfernen, wg. Fehlertraechtigkeit
+	Klasse zum Laden einer DLL (fuer Kernel, und sonstiges)
+	VException: Standard c'tor entfernen
 Vfs:
-	IVAccessRights: gegen einfache konkrete Klasse austauschen (?)
-	.xml MountTable parsen
 	Archive
-	Dateien + Verzeichnisse erzeugen und loeschen
-	Zugriffsrechte einhalten bei
-		Dateien/Verzeichnisse erzeugen
+	Dokumentation
 
 Doku:
 	Tutorials fuer
 		SmartPointer erweitern
-		Iteratoren benutzen
+		Iteratoren schreiben
 		Virtual File System
 			benutzen (laden/schreiben von Daten)
 			erweitern (DataProvider)
@@ -50,6 +47,19 @@ Auf die Langnese Insel ziehen
 ----- last things sheijk finished:
 
 log:
+
+02.08.2003
+Zugriffsrechte koennen im .xml File gesetzt werden
+Mounten von Verzeichnissen + Dateien
+Erstellen komplett virtueller Verzeichnisse im vfs.xml File
+Parsen der vfs.xml Config Datei, lesen vom Mount Infos, Verzeichnissen
+VAccessRightsFlags eingebaut, zur Vereinfachung
+CreateFile/DeleteFile
+Fehler der SmartPointer entfernt
+
+01.08.2003
+diverses Design Zeug
+CreateSubdir/DeleteSubdir Funktionen fuers Vfs
 
 28.07.2003
 Iteratoren Tutorial

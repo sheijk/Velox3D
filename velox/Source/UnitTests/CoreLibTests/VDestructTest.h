@@ -1,6 +1,8 @@
 #ifndef V3D_VDESTRUCT_TEST_H
 #define V3D_VDESTRUCT_TEST_H
 
+//TODO: in namespace tun
+
 // constructor sets flag to true, destructor to false
 class VDestructTest 
 {

@@ -2,8 +2,8 @@
 #define V3D_VCORELIB_H
 //-----------------------------------------------------------------------------
 
-#include <V3D/Core/VBuild.h>
-#include <V3D/Core/VTypes.h>
+#include <v3d/Core/VBuild.h>
+#include <v3d/Core/VTypes.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_VCORELIB_H

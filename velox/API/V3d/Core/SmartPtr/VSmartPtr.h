@@ -46,15 +46,15 @@ namespace v3d {
 			return *Get();
 		}
 		
-		operator Pointer()
-		{
-			return Get();
-		}
+		//operator Pointer()
+		//{
+		//	return Get();
+		//}
 
-		operator const Pointer() const
-		{
-			return Get();
-		}
+		//operator const Pointer() const
+		//{
+		//	return Get();
+		//}
 
 		// make release, get and assign accessible
 		using BehaviorPol::Release;
@@ -152,16 +152,16 @@ namespace v3d {
 	//	return pT != pSP.Get();
 	//}
 
-	//template<
-	//	typename T,
-	//	typename BehaviorPol
-	//>
-	//vbool operator!=(
-	//	const VSmartPtrBase<T, BehaviorPol>& pSP1,
-	//	const VSmartPtrBase<T, BehaviorPol>& pSP2)
-	//{
-	//	return ! pSP1.IsEqual(pSP2);
-	//}
+	template<
+		typename T,
+		typename BehaviorPol
+	>
+	vbool operator!=(
+		const VSmartPtrBase<T, BehaviorPol>& pSP1,
+		const VSmartPtrBase<T, BehaviorPol>& pSP2)
+	{
+		return ! pSP1.IsEqual(pSP2);
+	}
 
 	//// operator==
 
@@ -187,16 +187,16 @@ namespace v3d {
 	//	return pT == pSP.Get();
 	//}
 
-	//template<
-	//	typename T,
-	//	typename BehaviorPol
-	//>
-	//vbool operator==(
-	//const VSmartPtrBase<T, BehaviorPol>& pSP1,
-	//const VSmartPtrBase<T, BehaviorPol>& pSP2)
-	//{
-	//	return pSP1.IsEqual(pSP2);
-	//}
+	template<
+		typename T,
+		typename BehaviorPol
+	>
+	vbool operator==(
+	const VSmartPtrBase<T, BehaviorPol>& pSP1,
+	const VSmartPtrBase<T, BehaviorPol>& pSP2)
+	{
+		return pSP1.IsEqual(pSP2);
+	}
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------

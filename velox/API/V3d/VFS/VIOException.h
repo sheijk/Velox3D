@@ -34,6 +34,16 @@ public:
 		: VIOException(errorMsg, fileName, lineNumber) {};
 };
 
+class VElementNotFoundException : public VIOException
+{
+public:
+	VElementNotFoundException(
+		VStringParam errorMsg,
+		VStringParam fileName,
+		vuint lineNumber)
+		: VIOException(errorMsg, fileName, lineNumber) {};
+};
+
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

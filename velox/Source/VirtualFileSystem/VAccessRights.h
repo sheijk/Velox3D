@@ -4,6 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/VFS/IVAccessRights.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
+#include <v3d/VFS/VAccessRightsFlags.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -37,6 +38,10 @@ private:
 public:
 	VAccessRights(vbool alwCF, vbool alwCD, 
 		vbool alwDel, vbool alwRA, vbool alwWA);
+
+	VAccessRights(const VAccessRightsFlags& accRightFlags);
+
+	VAccessRights(const IVAccessRights& source);
 
 	virtual ~VAccessRights();
 

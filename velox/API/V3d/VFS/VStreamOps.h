@@ -6,10 +6,15 @@
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/VFS/VIOException.h>
 
+#include <cstring>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
+/**
+ * Streaming operations for IVStream
+ * stream << data;
+ */
 
 	// write operators
 	inline IVStream& operator<<(IVStream& stream, const vint8 val)
@@ -81,6 +86,12 @@ namespace vfs {
 	inline IVStream& operator<<(IVStream& stream, const VString& txt)
 	{
 		stream.Write(txt.AsCString(), txt.Length());
+		return stream;
+	}
+
+	inline IVStream& operator<<(IVStream& stream, const char* txt)
+	{
+		stream.Write(txt, (IVStream::ByteCount)std::strlen(txt));
 		return stream;
 	}
 

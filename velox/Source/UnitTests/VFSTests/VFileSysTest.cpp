@@ -9,6 +9,8 @@
 #include <v3d/VFS/IVDirectory.h>
 #include <v3d/VFS/IVFile.h>
 #include <v3d/VFS/VIOException.h>
+#include <v3d/VFS/VAccessRightsFlags.h>
+#include <v3d/VFS/IVAccessRights.h>
 
 #include <iostream>
 #include <algorithm>
@@ -50,6 +52,19 @@ void VFileSysTest::GetTestInfo(
 	out_SubjectName = "IVFileSystem";
 }
 
+std::string GetARInfo(const IVAccessRights* pAR)
+{
+	std::string res = "-----";
+
+	if( pAR->AllowReadAccess() ) res[0] = 'r';
+	if( pAR->AllowWriteAccess() ) res[1] = 'w';
+	if( pAR->AllowDelete() ) res[2] = 'x';
+	if( pAR->AllowCreateDir() ) res[3] = 'd';
+	if( pAR->AllowCreateFile() ) res[4] = 'f';
+
+	return res;
+}
+
 void PrintDirInfo(const IVDirectory& in_Dir, vuint in_prefWS)
 {
 	// construct info:
@@ -63,7 +78,7 @@ void PrintDirInfo(const IVDirectory& in_Dir, vuint in_prefWS)
 	// access rights
 
 	// output info
-	cout << strOut << "\n";
+	cout << "[" << GetARInfo(in_Dir.GetAccessRights()) << "]" << strOut << "\n";
 }
 
 void PrintFileInfo(const IVFile& in_File, vuint in_prefWS)
@@ -78,7 +93,7 @@ void PrintFileInfo(const IVFile& in_File, vuint in_prefWS)
 	// access rights
 	
 	// output info
-	cout << strOut << "\n";
+	cout << "[" << GetARInfo(in_File.GetAccessRights()) << "]" << strOut << "\n";
 }
 
 template<typename T>
@@ -214,8 +229,44 @@ void CheckAccessRights()
 	catch(...)
 	{
 		V3D_UNITTEST_ERROR_STATIC("unknown error occured when trying to "
-			"write to read-only stream. (VIllegalOperationException expected");
+			"write to read-only stream. VIllegalOperationException expected");
 	}
+}
+
+void CheckCreateDelete()
+{
+	//TODO: delete dir.. :)
+
+	VAccessRightsFlags accFlags;
+
+	// create a dir
+	IVFileSystem* pFS = QueryObject<IVFileSystem>("vfs.fs");
+
+	IVDirectory* pDir = pFS->GetDir("/mount'd.dir/");
+
+	pDir->CreateSubdir("testCreateDir", accFlags);
+	
+	// check whether it exists
+
+	OutputFSDirStructure();
+
+	// delete it
+	pDir->DeleteSubdir("testCreateDir");
+
+	// check if it's gone
+
+	// create file
+	accFlags.allowCreateDir = false;
+	accFlags.allowCreateFile = false;
+
+	pDir->CreateFile("createTest.file", accFlags);
+
+	OutputFSDirStructure();
+
+	// delete file
+	pDir->DeleteFile("createTest.file");
+
+	OutputFSDirStructure();
 }
 
 void VFileSysTest::ExecuteTest()
@@ -228,6 +279,7 @@ void VFileSysTest::ExecuteTest()
 	// read test file
 	CheckTestFile();
 	CheckAccessRights();
+	CheckCreateDelete();
 }
 
 //-----------------------------------------------------------------------------
