@@ -17,6 +17,8 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 	SetDisplay();
 
 	m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
+	m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
+
 }
 //-----------------------------------------------------------------------------
 
@@ -62,25 +64,6 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VMeshDescription& in_pMeshDesc)
 	m_Meshes.push_back(pMesh);
 
 	return *pMesh;
-
-	//TODO: implementieren
-
-	//typedef VBidirectionalIterator<const VTriangle> TriangleIterator;
-	//
-	//VOpenGLVertexMesh* Mesh = new VOpenGLVertexMesh;
-	//
-	//for(TriangleIterator iter = in_pMeshDesc->TriangleBegin();
-	//	iter != in_pMeshDesc->TriangleEnd(); iter++)
-	//{
-	//	for(vuint i = 0; i < 3; i++)
-	//	{
-	//		Mesh->m_VertexList.push_back(iter->GetVertex(i));
-	//	}
-	//}
-
-	//return Mesh;
-
-	//V3D_THROW(VException, "method VOpenGL.CreateMesh not implemented");
 }
 
 void VOpenGLDevice::DeleteMesh(MeshHandle in_Mesh)
@@ -99,28 +82,6 @@ void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 	VBaseMesh* pMesh = reinterpret_cast<VBaseMesh*>(&in_pMesh);
 
 	pMesh->Render();
-
-	//VOpenGLMesh* Mesh = reinterpret_cast<VOpenGLMesh*>(&in_pMesh);
-
-	//if(Mesh->m_Type == Mesh->VertexMode)
-	//{
-	//	VOpenGLVertexMesh* vmesh = reinterpret_cast<VOpenGLVertexMesh*>(Mesh);
-	//	
-	//	/*static vfloat32 rotZ = 0;
-	//	rotZ += 0.1f;
-	//	glRotatef(rotZ,0.0f,0.0f,1.0f);*/
-
-	//	glTranslatef(-0.0f,0.0f,-2.0f);	
-
-	//	glBegin(GL_TRIANGLES);
-	//	for (vuint i = 0; i < vmesh->m_VertexList.size(); i++)
-	//	{
-	//		glVertex3f(vmesh->m_VertexList[i].Get(0),
-	//				   vmesh->m_VertexList[i].Get(1),
-	//				   vmesh->m_VertexList[i].Get(2));
-	//	}		
-	//	glEnd();
-	//}
 }
 //-----------------------------------------------------------------------------
 
@@ -141,7 +102,7 @@ void VOpenGLDevice::SetDisplay()
 													 DM_BITSPERPEL;
 
 		if (ChangeDisplaySettings(&DisplayFormat, CDS_FULLSCREEN) != 
-													DISP_CHANGE_SUCCESSFUL)
+									DISP_CHANGE_SUCCESSFUL)
 		{
 			vout << "requesting fullscreen mode failed!" << vendl;
 			m_DisplaySettings->m_bFullscreen = false;
@@ -152,6 +113,10 @@ void VOpenGLDevice::SetDisplay()
 	InitializeExtensions();
 	SetScreenSize();
 	SetBackgroundColor();
+
+	glClearDepth(m_DisplaySettings->m_fClearDepth);
+	glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
+	glDepthFunc(GL_LEQUAL);	
 }
 //-----------------------------------------------------------------------------
 
@@ -277,7 +242,7 @@ void VOpenGLDevice::InitializeExtensions()
 
 	vchar* Extensions = (vchar*)glGetString(GL_EXTENSIONS);
 	vchar  ExtensionName[64];
-	vuint Length = strlen(Extensions);
+	vuint Length =(vuint) strlen(Extensions);
 	vuint y = 0;
 
     vout << "-------------------------------------------------------" << vendl;
@@ -317,8 +282,13 @@ void VOpenGLDevice::BeginScene()
 	// fuer sowas solltes noch fkten geben
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 	glLoadIdentity();
+	
+	//TODO for testing purpose -ins
+	static vfloat32 rotZ = 0;
+	glTranslatef(0.0f, 0.0f, -5.0f);
+	rotZ += 0.3f;
+	glRotatef(rotZ,0.0f,1.0f,0.0f);
 
-	glTranslatef(0.0f, 0.0f, -2.0f);
 }
 
 //-----------------------------------------------------------------------------

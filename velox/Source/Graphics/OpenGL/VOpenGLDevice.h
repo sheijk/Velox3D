@@ -7,7 +7,9 @@
 
 #include "../DeviceBase/VBufferManager.h"
 #include "../DeviceBase/VRenderMethodRegistry.h"
-#include "VOpenGLVertexMesh.h"
+//#include "VOpenGLVertexMesh.h"
+#include "VOpenGLPlainRenderMethod.h"
+#include "VOpenGLVBORenderMethod.h"
 
 #include <windows.h>
 #include <extgl/extgl.h>
@@ -53,7 +55,8 @@ private:
 
 	/** store all render methods here */
 	VRenderMethodRegistry m_RenderMethods;
-	VStupidRenderMethod m_PlainRenderMethod;
+	VOpenGLPlainRenderMethod m_PlainRenderMethod;
+	VOpenGLVBORenderMethod m_VBORenderMethod;
 
 	typedef std::list<IVMesh*> MeshList;
 	MeshList m_Meshes;

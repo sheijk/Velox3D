@@ -30,10 +30,6 @@ public:
 	virtual void Render();	
 };
 
-class VStupidRenderMethod : public IVRenderMethod
-{
-	virtual VOpenGLVertexMesh* CreateMesh(VMeshDescription& in_MeshDescr);
-};
 
 //-----------------------------------------------------------------------------
 } //namespace graphics

@@ -43,6 +43,11 @@ public:
 
 	typedef vuint32 MeshCreationFlags;
 
+	/**
+	 * TODO: sollte vllt. nur Register() im allgemeinen heissen? Einheitliche
+	 * standard methoden fuer die api in die guidelines aufnehmen!?
+	 * Waere sinnvoll fuer die einfache erlernbarkeit der api.
+	
 	/** registers a rendering method */
 	void RegisterRenderMethod(IVRenderMethod& in_RenderMethod);
 

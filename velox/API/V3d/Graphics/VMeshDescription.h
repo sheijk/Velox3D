@@ -50,7 +50,7 @@ struct VMeshDescription
 	typedef DataRef<FloatBufferHandle> FloatDataRef;
 
 	FloatDataRef triangleVertices; // extra felder fuer tris, fans + strips?
-	//FloatDataRef theColors;
+	FloatDataRef theColorsVertices;
 };
 
 //-----------------------------------------------------------------------------

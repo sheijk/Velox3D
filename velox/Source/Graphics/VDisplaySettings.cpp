@@ -22,6 +22,7 @@ VDisplaySettings::VDisplaySettings()
 	m_fBackgroundBlue = 0.627f;
 	m_fBackgroundAlpha = 1.0f;
 	m_sAPIType = "OpenGL";
+	m_fClearDepth = 1.0f;
 }
 
 //TODO: ziemlich den gleichen code sollte der compiler fuer assignment op und copy c'tor

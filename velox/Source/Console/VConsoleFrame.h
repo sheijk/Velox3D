@@ -77,7 +77,7 @@ class VConsoleFrame : public wxFrame, public window::IVWindowFrame
 public:
 
 	VConsoleFrame();
-	~VConsoleFrame();
+	virtual ~VConsoleFrame();
 
 	void WriteText(VStringParam in_Text);
 	void ShowFrame(vbool in_Param);

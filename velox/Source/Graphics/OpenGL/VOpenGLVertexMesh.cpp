@@ -1,20 +1,13 @@
 //-----------------------------------------------------------------------------
 #include "VOpenGLVertexMesh.h"
 //-----------------------------------------------------------------------------
-
-#include <Windows.h>
-#include <gl/GL.h>
+#include <windows.h>
+#include <gl/gl.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-VOpenGLVertexMesh* VStupidRenderMethod
-	::CreateMesh(VMeshDescription& in_MeshDescr)
-{
-	VOpenGLVertexMesh* pMesh = new VOpenGLVertexMesh(in_MeshDescr);
-	return pMesh;
-}
 
 VOpenGLVertexMesh::VOpenGLVertexMesh(const VMeshDescription& in_Descr)
 {
@@ -50,7 +43,7 @@ void VOpenGLVertexMesh::Render()
 	const vuint cnTriangleCount 
 		= (m_TriangleData.nEnd - m_TriangleData.nStart) / 3;
 
-	float* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
+	vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
 
 	//glVertex3f(1,0,0);
 	//glVertex3f(0,1,0);
@@ -72,5 +65,3 @@ void VOpenGLVertexMesh::Render()
 } //namespace graphics
 } //namespace v3d
 //-----------------------------------------------------------------------------
-
-

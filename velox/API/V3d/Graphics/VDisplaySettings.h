@@ -34,6 +34,7 @@ public:
 	vfloat32 m_fFieldOfView;
 	vfloat32 m_fNearClippingPlane;
 	vfloat32 m_fFarClippingPlane;
+	vfloat32 m_fClearDepth;
 
 	vfloat32 m_fBackgroundRed;
 	vfloat32 m_fBackgroundGreen;

@@ -14,9 +14,10 @@ VRenderMethodRegistry::~VRenderMethodRegistry()
 {
 }
 
-void VRenderMethodRegistry::RegisterRenderMethod(IVRenderMethod& in_RenderMethod)
+void VRenderMethodRegistry::RegisterRenderMethod(
+	IVRenderMethod& in_RenderMethod)
 {
-	m_RenderMethods.push_back(&in_RenderMethod);
+	m_RenderMethods.push_front(&in_RenderMethod);
 }
 
 VBaseMesh* VRenderMethodRegistry::CreateMesh(

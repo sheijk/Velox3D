@@ -24,7 +24,7 @@ void VWxConnector::Register(IVWindowFrame* in_pFrame)
 
 void VWxConnector::Unregister(IVWindowFrame* in_pFrame)
 {
-	//TODO
+	//TODO loeschen muss gehen, sonst immer alt f4 bug! -ins
 	//m_FrameList.remove(in_pFrame);
 }
 //-----------------------------------------------------------------------------

@@ -31,8 +31,7 @@ public:
 	/** creates an internal buffer in the device */
 	virtual FloatBufferHandle CreateBuffer(
 		VFloatBuffer* in_pBuffer, 
-		BufferCopyMode in_CopyMode = VFloatBuffer::CopyData
-		) = 0;
+		BufferCopyMode in_CopyMode = VFloatBuffer::CopyData) = 0;
 
 	/** deletes the buffer and sets the handle to 0 */
 	virtual void DeleteBuffer(BufferHandle& in_Buffer) = 0;
