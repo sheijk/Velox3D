@@ -184,11 +184,6 @@
 			</File>
 			<File
 				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
@@ -208,6 +203,9 @@
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VMeshDescrUtil.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VPlane3f.h">
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VTexCoord2f.h">
