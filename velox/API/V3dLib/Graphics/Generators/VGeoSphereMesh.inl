@@ -1,12 +1,12 @@
 template <typename VertexStructure>
-vuint VGeoSphere<VertexStructure>::CalculateVertexNumber( vuint in_nLevel )
+vuint VGeoSphereMesh<VertexStructure>::CalculateVertexNumber( vuint in_nLevel )
 {
 	return 24 * std::pow(4, in_nLevel-1);
 }
 
 
 template <typename VertexStructure> 
-void VGeoSphere<VertexStructure>::CreateCoordinates()
+void VGeoSphereMesh<VertexStructure>::CreateCoordinates()
 {
 	vbool bIterations = false;
 
@@ -108,7 +108,7 @@ void VGeoSphere<VertexStructure>::CreateCoordinates()
 }
 
 template <typename VertexStructure> 
-void VGeoSphere<VertexStructure>::CreateColor(
+void VGeoSphereMesh<VertexStructure>::CreateColor(
 	v3d::graphics::VColor4f in_Colors[8]
 	)
 {
@@ -205,7 +205,7 @@ void VGeoSphere<VertexStructure>::CreateColor(
 }
 
 template <typename VertexStructure> 
-VVector3f VGeoSphere<VertexStructure>::Normalize( VVector3f in_Vector)
+VVector3f VGeoSphereMesh<VertexStructure>::Normalize( VVector3f in_Vector)
 {
 	vfloat32 fMagnitude = in_Vector.v[0] * in_Vector.v[0]
 						  + in_Vector.v[1] * in_Vector.v[1]
@@ -223,7 +223,7 @@ VVector3f VGeoSphere<VertexStructure>::Normalize( VVector3f in_Vector)
 
 /* Return the average of two points */
 template <typename VertexStructure>
-VVector3f VGeoSphere<VertexStructure>::GetMidPoint( VVector3f in_vecA, VVector3f in_vecB)
+VVector3f VGeoSphereMesh<VertexStructure>::GetMidPoint( VVector3f in_vecA, VVector3f in_vecB)
 {
 	return VVector3f( (in_vecA.v[0] + in_vecB.v[0]) * 0.5,
 					  (in_vecA.v[1] + in_vecB.v[1]) * 0.5,

@@ -2,7 +2,7 @@
 using namespace v3d::graphics;
 
 template <typename VertexStructure> 
-void VBox<VertexStructure>::CreateCoordinates()
+void VBoxMesh<VertexStructure>::CreateCoordinates()
 {
 	vfloat32 fHeightHalf = m_fHeight / 2.0f;
 	vfloat32 fWidthHalf = m_fWidth / 2.0f;
@@ -68,7 +68,7 @@ void VBox<VertexStructure>::CreateCoordinates()
 }
 
 template <typename VertexStructure>
-void VBox<VertexStructure>::CreateTextureCoordinates()
+void VBoxMesh<VertexStructure>::CreateTextureCoordinates()
 {
 	//front face
 	buffer[0].texCoords = VTexCoord2f(0.0f, 0.0f);
@@ -127,7 +127,7 @@ void VBox<VertexStructure>::CreateTextureCoordinates()
 }
 
 template <typename VertexStructure>
-VBuffer<VertexStructure>* VBox<VertexStructure>::GetVertexBuffer()
+VBuffer<VertexStructure>* VBoxMesh<VertexStructure>::GetVertexBuffer()
 {
 	return &buffer;
 

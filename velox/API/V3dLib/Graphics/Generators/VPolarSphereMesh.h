@@ -17,7 +17,7 @@ using namespace v3d; // anti indent task force was here ;)
  * @author sheijk
  */
 template<typename VertexStructure>
-class VPolarSphere
+class VPolarSphereMesh
 {
 	const vfloat32 m_cfTop;
 	const vfloat32 m_cfBottom;
@@ -35,8 +35,8 @@ public:
 	typedef v3d::graphics::VBuffer<VertexStructure> VertexBuffer;
 	typedef v3d::graphics::VBuffer<vuint> IndexBuffer;
 
-	VPolarSphere(vuint in_nRings, vuint in_nSectors);
-	VPolarSphere(
+	VPolarSphereMesh(vuint in_nRings, vuint in_nSectors);
+	VPolarSphereMesh(
 		vuint in_nRings, vuint in_nSectors, 
 		vfloat32 in_fBottom, vfloat32 in_fTop
 		);
@@ -50,7 +50,7 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-#include "VPolarSphere.inl"
+#include "VPolarSphereMesh.inl"
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

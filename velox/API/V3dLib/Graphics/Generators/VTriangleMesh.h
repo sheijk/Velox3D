@@ -13,11 +13,11 @@ namespace graphics{
 */
 
 template<typename VertexStructure>
-class VTriangle : public v3d::graphics::VGeometryData<VertexStructure>
+class VTriangleMesh : public v3d::graphics::VGeometryData<VertexStructure>
 {
 public:
 
-	VTriangle() : VGeometryData<VertexStructure>(VMeshDescription::Triangles, 3,0)
+	VTriangleMesh() : VGeometryData<VertexStructure>(VMeshDescription::Triangles, 3,0)
 	{
 		GetVertexBuffer()[0].position.x = -10.0f;
 		GetVertexBuffer()[0].position.y = 0.0f;
@@ -33,7 +33,7 @@ public:
 
 	}
 
-	VTriangle(VVector3f a, VVector3f b, VVector3f c) :VGeometryData<VertexStructure>(VMeshDescription::Triangles, 3, 0)
+	VTriangleMesh(VVector3f a, VVector3f b, VVector3f c) :VGeometryData<VertexStructure>(VMeshDescription::Triangles, 3, 0)
 	{
 		// point a
 		GetVertexBuffer()[0].position.x = a.x;

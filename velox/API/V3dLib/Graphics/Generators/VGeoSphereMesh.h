@@ -15,7 +15,7 @@ namespace v3d {
 namespace graphics {
 
 template<typename VertexStructure>
-class VGeoSphere
+class VGeoSphereMesh
 {
 	struct Triangle
 	{
@@ -68,19 +68,19 @@ public:
     
 	v3d::graphics::VBuffer<VertexStructure>	buffer;
 
-    VGeoSphere( vfloat32 in_fRadius, vuint in_nLevel )
+    VGeoSphereMesh( vfloat32 in_fRadius, vuint in_nLevel )
         : m_fRadius(in_fRadius), m_nLevel(in_nLevel), buffer(new VertexStructure[CalculateVertexNumber(in_nLevel)], CalculateVertexNumber(in_nLevel))
 	{
     }
 
-	~VGeoSphere() {};
+	~VGeoSphereMesh() {};
 
 	void	CreateCoordinates();
 	void	CreateTextureCoordinates();
 	void	CreateColor(v3d::graphics::VColor4f in_Colors[8] );
 };
 
-#include "VGeoSphere.inl"
+#include "VGeoSphereMesh.inl"
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

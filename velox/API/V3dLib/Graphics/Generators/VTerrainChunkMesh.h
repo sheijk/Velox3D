@@ -20,7 +20,7 @@ using namespace v3d;
  *
  * @author sheijk
  */
-class VTerrainChunk : public VDynamicGeometryData<VTexturedVertex>
+class VTerrainChunkMesh : public VDynamicGeometryData<VTexturedVertex>
 {
 	typedef VTexturedVertex VertexStructure;
 
@@ -46,7 +46,7 @@ class VTerrainChunk : public VDynamicGeometryData<VTexturedVertex>
 	void GenerateIndices();
 
 public:
-	VTerrainChunk(
+	VTerrainChunkMesh(
 		VStringParam in_strHeighmapFile,
 		VStringParam in_strTexture
 		);
@@ -60,7 +60,7 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-#include "VTerrainChunk.inl"
+#include "VTerrainChunkMesh.inl"
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

@@ -1,7 +1,7 @@
 #include <cmath>
 
 template<typename VertexStructure>
-VPolarSphere<VertexStructure>::VPolarSphere(
+VPolarSphereMesh<VertexStructure>::VPolarSphere(
 	vuint in_nRings, 
 	vuint in_nSectors) :
 m_cfTop(1.0f),
@@ -18,7 +18,7 @@ geometry(
 }
 
 template<typename VertexStructure>
-VPolarSphere<VertexStructure>::VPolarSphere(
+VPolarSphereMesh<VertexStructure>::VPolarSphere(
 	vuint in_nRings, vuint in_nSectors, 
 	vfloat32 in_fBottom, vfloat32 in_fTop
 	) :
@@ -36,19 +36,19 @@ geometry(
 }
 
 template<typename VertexStructure>
-vuint VPolarSphere<VertexStructure>::CalculateVertexCount()
+vuint VPolarSphereMesh<VertexStructure>::CalculateVertexCount()
 {
 	return m_nSectors * m_nRings;
 }
 
 template<typename VertexStructure>
-vuint VPolarSphere<VertexStructure>::CalculateIndexCount()
+vuint VPolarSphereMesh<VertexStructure>::CalculateIndexCount()
 {
 	return 2 * (m_nSectors+1) * m_nRings;
 }
 
 template<typename VertexStructure>
-void VPolarSphere<VertexStructure>::GenerateCoordinates()
+void VPolarSphereMesh<VertexStructure>::GenerateCoordinates()
 {
 	using namespace std;
 
@@ -77,7 +77,7 @@ void VPolarSphere<VertexStructure>::GenerateCoordinates()
 }
 
 template<typename VertexStructure>
-void VPolarSphere<VertexStructure>::GenerateTexCoords()
+void VPolarSphereMesh<VertexStructure>::GenerateTexCoords()
 {
 	const vfloat32 deltaRing =  1.0f / m_nRings;
 	const vfloat32 deltaSector = 1.0f / m_nSectors;
@@ -98,13 +98,13 @@ void VPolarSphere<VertexStructure>::GenerateTexCoords()
 }
 
 template<typename VertexStructure>
-vuint VPolarSphere<VertexStructure>::GetVertexNum(vuint sector, vuint ring)
+vuint VPolarSphereMesh<VertexStructure>::GetVertexNum(vuint sector, vuint ring)
 {
 	return ring * m_nSectors + sector;
 }
 
 template<typename VertexStructure>
-void VPolarSphere<VertexStructure>::GenerateIndices()
+void VPolarSphereMesh<VertexStructure>::GenerateIndices()
 {
 	for(vuint index = 0; index < geometry.GetIndexBuffer().GetSize(); ++index)
 	{
@@ -130,22 +130,22 @@ void VPolarSphere<VertexStructure>::GenerateIndices()
 }
 
 template<typename VertexStructure>
-typename VPolarSphere<VertexStructure>::VertexBuffer&
-VPolarSphere<VertexStructure>::GetVertexBuffer()
+typename VPolarSphereMesh<VertexStructure>::VertexBuffer&
+VPolarSphereMesh<VertexStructure>::GetVertexBuffer()
 {
 	return geometry.GetVertexBuffer();
 }
 
 template<typename VertexStructure>
-typename VPolarSphere<VertexStructure>::IndexBuffer&
-VPolarSphere<VertexStructure>::GetIndexBuffer()
+typename VPolarSphereMesh<VertexStructure>::IndexBuffer&
+VPolarSphereMesh<VertexStructure>::GetIndexBuffer()
 {
 	return geometry.GetIndexBuffer();
 }
 
 template<typename VertexStructure>
 v3d::graphics::VMeshDescription::GeometryType
-VPolarSphere<VertexStructure>::GetGeometryType()
+VPolarSphereMesh<VertexStructure>::GetGeometryType()
 {
 	return geometry.GetGeometryType();
 }

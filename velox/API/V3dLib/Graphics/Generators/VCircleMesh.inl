@@ -1,12 +1,12 @@
 template <typename VertexStructure>
-vuint VCircle<VertexStructure>::CalculateVertexNumber( vuint in_nDetail )
+vuint VCircleMesh<VertexStructure>::CalculateVertexNumber( vuint in_nDetail )
 {
 	return 3*in_nDetail;
 }
 
 
 template <typename VertexStructure> 
-void VCircle<VertexStructure>::CreateCoordinates()
+void VCircleMesh<VertexStructure>::CreateCoordinates()
 {
 	vfloat32 fTheta = 0.0f;
 	vfloat32 fDelta = 6.29f / m_nDetail;

@@ -1,5 +1,5 @@
-#ifndef V3D_VCYLINDER_H
-#define V3D_VCYLINDER_H
+#ifndef V3D_VCIRCLE_H
+#define V3D_VCIRCLE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <V3dLib/Graphics/Geometry/VVector3f.h>
@@ -9,32 +9,30 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
-
 //-----------------------------------------------------------------------------
 template<typename VertexStructure>
-class VCylinder
+class VCircleMesh
 {
     vfloat32	m_fRadius;
-	vfloat32	m_fHeight;
-    vint		m_nDetail;
+	vint		m_nDetail;
 
-    static vuint CalculateVertexNumber(vuint in_nDetail);
+	static vuint CalculateVertexNumber(vuint in_nDetail);
 
-public:
-    v3d::graphics::VBuffer<VertexStructure>	buffer;
+	public:
+        v3d::graphics::VBuffer<VertexStructure>	buffer;
 
-    VCylinder( vfloat32 in_fRadius, vfloat32 in_fHeight, vuint in_nDetail )
-        : m_fRadius(in_fRadius), m_fHeight(in_fHeight), m_nDetail(in_nDetail), buffer(new VertexStructure[CalculateVertexNumber(in_nDetail)], CalculateVertexNumber(in_nDetail))
-    {
-    }
+        VCircleMesh( vfloat32 in_fRadius, vuint in_nDetail )
+            : m_fRadius(in_fRadius), m_nDetail(in_nDetail), buffer(new VertexStructure[CalculateVertexNumber(in_nDetail)], CalculateVertexNumber(in_nDetail))
+				{
+				}
 
-	~VCylinder() {};
+		~VCircleMesh() {};
 
 		void	CreateCoordinates();
 		void	CreateTextureCoordinates();
 };
 //-----------------------------------------------------------------------------
-#include "VCylinder.inl"
+#include "VCircleMesh.inl"
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
