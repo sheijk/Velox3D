@@ -2,6 +2,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/Wrappers/VIterator.h>
+#include <v3d/Graphics/VDeviceMatrix.h>
+#include <v3d/Math/VMatrixOps.h>
 
 #include "IVOpenGLRenderState.h"
 
@@ -41,13 +43,15 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	SetDisplay();
 
-	//m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
-	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
-	//m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
 	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
 
 	m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	m_StateCategories.RegisterCategory(m_MiscStateCategory);
+
+	Identity(m_ModelMatrix);
+	Identity(m_ViewMatrix);
+	Identity(m_ProjectionMatrix);
+	Identity(m_TextureMatrix);
 }
 //-----------------------------------------------------------------------------
 
@@ -83,7 +87,7 @@ IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 		{
 			m_Buffers.Add(pBuffer);
 		} break;
-		
+
 	case Texture:
 		{
 			m_TextureBuffers.Add(pBuffer);
@@ -359,17 +363,25 @@ void VOpenGLDevice::BeginScene()
 
 	// fuer sowas solltes noch fkten geben - wir brauchen eine komplette state engine -ins
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	if(m_pCamera)
 	{
-		glRotatef(m_pCamera->rotX, 0.0f,1.0f,0.0f);
-		glRotatef(m_pCamera->rotY, 1.0f,0.0f,0.0f);
-		glTranslatef(m_pCamera->GetX(), m_pCamera->GetY(), m_pCamera->GetZ());
-		
-		
+		m_ViewMatrix.Set(0, 3, m_pCamera->GetX());
+		m_ViewMatrix.Set(1, 3, m_pCamera->GetY());
+		m_ViewMatrix.Set(2, 3, m_pCamera->GetZ());
+		RecalcModelViewMatrix();
+
+		//glRotatef(m_pCamera->rotX, 0.0f,1.0f,0.0f);
+		//glRotatef(m_pCamera->rotY, 1.0f,0.0f,0.0f);
+		//glTranslatef(m_pCamera->GetX(), m_pCamera->GetY(), m_pCamera->GetZ());
 	}
-	else 
+	else
 		glTranslatef(0,0,0);
 }
 
@@ -379,6 +391,64 @@ void VOpenGLDevice::EndScene()
 	wglMakeCurrent(hDC, hRC);
 	SwapBuffers(hDC);
 }
+
+//-----------------------------------------------------------------------------
+//TODO: move to a graphics exception header
+V3D_DECLARE_EXCEPTION(VInvalidMatrixTypeException, VException);
+
+namespace
+{
+	void SetGLMatrix(int mode, const VMatrix44f& mat, IVDevice* pDevice)
+	{
+		VDeviceMatrix devMat;
+		VDeviceMatrix::ConvertFromTransform(&devMat, mat, *pDevice);
+
+		glMatrixMode(mode);
+		glLoadMatrixf(devMat.GetElements());	
+	}
+}
+
+void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix)
+{
+	switch(in_Mode)
+	{
+	case ProjectionMatrix:
+		m_ProjectionMatrix = in_Matrix;
+		SetGLMatrix(GL_PROJECTION, in_Matrix, this);
+		break;
+
+	case ModelMatrix:
+		m_ModelMatrix = in_Matrix;
+		RecalcModelViewMatrix();
+		break;
+
+	case ViewMatrix:
+		m_ViewMatrix = in_Matrix;
+		RecalcModelViewMatrix();
+		break;
+
+	case TextureMatrix:
+		m_TextureMatrix = in_Matrix;
+		SetGLMatrix(GL_TEXTURE, m_TextureMatrix, this);
+		break;
+
+	default:
+		V3D_THROW(
+			VInvalidMatrixTypeException, 
+			"invalid matrix type specified");
+	}
+}
+
+//-----------------------------------------------------------------------------
+
+void VOpenGLDevice::RecalcModelViewMatrix()
+{
+	VMatrix44f modelView;
+	Mult(modelView, m_ModelMatrix, m_ViewMatrix);
+
+	SetGLMatrix(GL_MODELVIEW, modelView, this);
+}
+
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::SetCamera(VCamera* in_pCamera)

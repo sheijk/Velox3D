@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -254,6 +254,44 @@
 			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VSimpleDrawList.h">
 			</File>
+		</Filter>
+		<Filter
+			Name="SceneGraph"
+			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\SimpleSG\VMeshNode.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\SimpleSG\VMeshNode.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\SimpleSG\VNodeBase.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\SimpleSG\VNodeBase.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\SimpleSG\VSceneGraphTools.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\SimpleSG\VSceneGraphTools.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\SimpleSG\VTransformNode.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\SimpleSG\VTransformNode.h">
+			</File>
+			<Filter
+				Name="unfinished"
+				Filter="">
+				<File
+					RelativePath="..\Source\UtilsLib\SimpleSG\VSimpleSceneGraph.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\UtilsLib\SimpleSG\VSimpleSceneGraph.h">
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

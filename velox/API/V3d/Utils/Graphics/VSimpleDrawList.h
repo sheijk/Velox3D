@@ -13,7 +13,6 @@ namespace drawlist {
 class VSimpleDrawList : public v3d::graphics::drawlist::IVDrawList
 {
 public:
-
 	typedef v3d::graphics::IVDevice::BufferHandle BufferHandle;
 	typedef v3d::graphics::IVDevice::MeshHandle MeshHandle;
 	typedef v3d::graphics::IVDevice::MaterialHandle MaterialHandle;
@@ -30,6 +29,7 @@ public:
 	
 
 private:
+	typedef v3d::graphics::drawlist::VModel::TransformMatrixPtr TransformMatrixPtr;
 	typedef std::list<v3d::graphics::drawlist::VModel> ModelList;
 	
 	ModelList m_Models;

@@ -9,6 +9,8 @@
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Image/IVImageFactory.h>
 
+#include <v3d/Math/VMatrixOps.h>
+
 #include <v3d/Graphics/DrawList/IVDrawList.h>
 
 //TODO...
@@ -21,6 +23,9 @@
 #include <v3d/Input/IVInputManager.h>
 #include "../../UtilsLib/Importer/VQuake2BspImporter.h"
 
+#include <v3d/Utils/Graphics/SimpleSG/VMeshNode.h>
+#include <v3d/Utils/Graphics/SimpleSG/VTransformNode.h>
+#include <v3d/Utils/Graphics/SimpleSG/VSceneGraphTools.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
@@ -35,6 +40,7 @@ using namespace v3d::image;
 using namespace v3d::utils::graphics;
 using namespace v3d::utils::graphics::drawlist;
 using namespace v3d::graphics::drawlist;
+using namespace v3d::graphics::simplesg;
 
 VExampleApp::VExampleApp(VStringParam in_strName)
 	: VNamedObject(in_strName, 0)
@@ -205,18 +211,40 @@ vint VExampleApp::Main()
 	pCamera->SetZ(-10.0f);
 	m_pDevice->SetCamera(pCamera);
 
-	// create textured mesh
-	VMeshDescription meshDesc = BuildModel(m_pDevice, "/data/test.obj");
-	VMaterialDescription texMat = BuildTextureMaterial(
-		m_pDevice, "/data/tgatest.tga");
+	// build scene graph
+	VPointer<IVNode>::AutoPtr pRootNode;
+	
+	VMatrix44f identity;
+	Identity(identity);
 
-	IVDevice::MeshHandle pMesh = m_pDevice->CreateMesh(meshDesc, texMat);
+	pRootNode.Assign(new VTransformNode(identity));
+
+	// create textured mesh and add it to SG
+	{
+		VMeshDescription meshDesc = BuildModel(m_pDevice, "/data/test.obj");
+		VMaterialDescription texMat = BuildTextureMaterial(
+			m_pDevice, "/data/tgatest.tga");
+
+		IVDevice::MeshHandle pMesh = m_pDevice->CreateMesh(meshDesc, texMat);
+
+		VMatrix44f transform;
+		Identity(transform);
+		// change x value
+		transform.Set(0, 3, 3);
+		VTransformNode* pTransformNode = new VTransformNode(transform);
+		pRootNode->AddChild(pTransformNode);
+
+        VMeshNode* pMeshNode = new VMeshNode(pMesh);
+		pTransformNode->AddChild(pMeshNode);
+	}
 
 	VSimpleDrawList drawList(*m_pDevice);
 
-	VModel model;
-	model.hMesh = pMesh;
-	drawList.Add(model);
+	// calculate absolute transforms for alle SG nodes
+	UpdateLocations(&*pRootNode, identity);
+
+	// put nodes into drawlist
+	pRootNode->ApplyCulling(&drawList, 0);
 
 	// main loop
 	pUpdateManager->Start();

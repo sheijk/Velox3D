@@ -2,6 +2,8 @@
 #define V3D_IVDRAWLIST_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+
+#include <v3d/Math/VMatrix.h>
 #include <v3d/Graphics/IVDevice.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -18,7 +20,23 @@ namespace drawlist {
  */
 struct VModel
 {
+	typedef VMatrix44f TransformMatrix;
+	typedef VPointer<TransformMatrix>::SharedPtr TransformMatrixPtr;
+
+	/** the mesh to be rendered */
 	IVDevice::MeshHandle hMesh;
+
+	/** it's associated transformation (position, rotation,..) */
+	TransformMatrixPtr pTransformation;
+
+	VModel(
+		IVDevice::MeshHandle in_hMesh,
+		TransformMatrixPtr in_pTransform
+		):
+		hMesh(in_hMesh),
+		pTransformation(in_pTransform)
+	{
+	}
 
 	vbool operator==(const VModel& other)
 	{

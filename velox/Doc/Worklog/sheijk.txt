@@ -60,8 +60,9 @@ template member konvertiert?
 	./mesh: render state list liefern
 
 	.scene graph
-	interfaces schreiben (basierend auf ins code)
-	simple implementation
+	./interfaces schreiben (basierend auf ins code)
+	./simple implementation
+	./in example app einbaun
 
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
@@ -98,6 +99,11 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+10.03.2004
+Erste Version des SceneGraphen fertig gestellt
+SetMatrix Methode ins Device aufgenommen
+DeviceMatrix geschrieben
 
 06.03.2004
 Mathlib ueberarbeitet: inkonsistenz zwischen matrix * matrix und vektor * vektor

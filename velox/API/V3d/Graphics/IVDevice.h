@@ -9,6 +9,8 @@
 #include <v3d/Graphics/VMaterialDescription.h>
 #include <v3d/Graphics/IVRenderState.h>
 
+#include <v3d/Math/VMatrix.h>
+
 #include <v3d/Graphics/VCamera.h>
 
 //-----------------------------------------------------------------------------
@@ -40,6 +42,14 @@ public:
 	{
 		VertexBuffer,
 		Texture
+	};
+
+	enum MatrixMode
+	{
+		ProjectionMatrix,
+		TextureMatrix,
+		ModelMatrix,
+		ViewMatrix
 	};
 
 	/** 
@@ -79,6 +89,9 @@ public:
 
 	/** applys a render state */
 	virtual void ApplyState(const IVRenderState& in_State) = 0;
+
+	/** set the projection, view, model and texture matrices */
+	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix) = 0;
 
 	// evil hack :)
 	virtual void SetCamera(VCamera* in_pCamera) = 0;

@@ -24,12 +24,48 @@ class VDeviceMatrix
 public:
 	typedef VMatrix<float, 4, 4> TransformMatrix;
 
+	/** Standard c'tor, loads the identity matrix */
+	VDeviceMatrix()
+	{
+		for(int index = 0; index < 16; ++index)
+		{
+			m_afElements[index] = 0;
+		}
+
+		m_afElements[0] = 1;
+		m_afElements[5] = 1;
+		m_afElements[10] = 1;
+		m_afElements[15] = 1;
+	}
+
+	/**
+	 * Build the matrix from an array of 16 float values
+	 * Note that the array has to be in the matrix order of the device
+	 * with which the matrix shall be used
+	 */
+	VDeviceMatrix(const float* in_pData)
+	{
+		memcpy(m_afElements, in_pData, 16 * sizeof(float));
+	}
+
+	/**
+	 * Returns a pointer to the first element of the matrix. All elements
+	 * are guaranteed to be in linear order
+	 */
 	float* GetElements()
 	{
 		return m_afElements;
 	}
 
+	/** Access the n-th element of the array */
 	float& operator[](const vuint in_nIndex)
+	{
+		V3D_ASSERT(in_nIndex < 16);
+
+		return m_afElements[in_nIndex];
+	}
+
+	float operator[](const vuint in_nIndex) const
 	{
 		V3D_ASSERT(in_nIndex < 16);
 

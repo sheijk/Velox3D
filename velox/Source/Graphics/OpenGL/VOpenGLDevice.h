@@ -64,9 +64,13 @@ public:
 	virtual void BeginScene();
 	virtual void EndScene();
 
+	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix);
+
 	virtual void SetCamera(VCamera* in_pCamera);
 	
 private:
+	void RecalcModelViewMatrix();
+
 	/** vertex buffers */
 	VBufferManager<Buffer> m_Buffers;
 
@@ -85,6 +89,12 @@ private:
 
 	typedef std::list<IVMesh*> MeshList;
 	MeshList m_Meshes;
+
+	// the matrices
+	VMatrix44f m_ViewMatrix;
+	VMatrix44f m_ModelMatrix;
+	VMatrix44f m_ProjectionMatrix;
+	VMatrix44f m_TextureMatrix;
 
 	/**
 	 * All gl internal calling methods

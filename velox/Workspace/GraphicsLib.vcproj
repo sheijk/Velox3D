@@ -114,6 +114,9 @@
 		<Filter
 			Name="Device"
 			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Graphics\VDeviceMatrix.h">
+			</File>
 			<Filter
 				Name="Interfaces"
 				Filter="">
@@ -241,6 +244,13 @@
 					</File>
 				</Filter>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="SceneGraph"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Graphics\SimpleSG\IVNode.h">
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -37,10 +37,12 @@ void VSimpleDrawList::Render()
 
 	for( ; modelIter != m_Models.end(); ++modelIter)
 	{
-		VModel pModel = *modelIter;
+		VModel& model = *modelIter;
 		MeshHandle hMesh = (*modelIter).hMesh;
+		TransformMatrixPtr pTransform = model.pTransformation;
 		MaterialHandle hMaterial = &(hMesh->GetMaterial());
 
+		m_Device.SetMatrix(IVDevice::ModelMatrix, *pTransform);
 		ApplyMaterial(hMaterial);
 		m_Device.RenderMesh(hMesh);
 	}

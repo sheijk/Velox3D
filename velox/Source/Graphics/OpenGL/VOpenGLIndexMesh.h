@@ -17,7 +17,7 @@ namespace graphics {
 /**
  * Simplest rendering method. Renders using glBegin, glVertex.. etc
  *
- * @author ins 
+ * @author ins/sheijk
  */
 class VOpenGLIndexMesh : public VMeshBase
 {

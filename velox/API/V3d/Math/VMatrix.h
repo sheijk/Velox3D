@@ -56,6 +56,8 @@ namespace v3d {
 		//friend MakeInverse(VMatrix&);
 		//friend MakeTranspose(VMatrix&);
 	};
+
+	typedef VMatrix<float, 4, 4> VMatrix44f;
 	
 //-----------------------------------------------------------------------------
 } // namespace v3d
