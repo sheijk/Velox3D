@@ -17,8 +17,6 @@
 #undef NO_ERROR
 
 #include "ImageService/VImageFactory.h"
-#include "ImageService/VJpegImageLoader.h"
-#include "ImageService/VTgaImageLoader.h"
 #include "ImageService/VDevILLoader.h"
 #include "ImageService/VDevILSaver.h"
 #include "ImageService/VImageManipulator.h"
@@ -61,8 +59,6 @@ class VVeloxModules : public v3d::VModuleBase
 
 	// image
 	VPointer<VImageFactory>::AutoPtr g_pImageFactory;
-//	VPointer<IVImageLoader>::AutoPtr g_pTgaImageLoader;
-//	VPointer<IVImageLoader>::AutoPtr g_pJpgImageLoader;
 	VPointer<IVImageLoader>::AutoPtr g_pDevILLoader;
 	VPointer<IVImageSaver>::AutoPtr  g_pDevILSaver;
 	VPointer<IVImageManipulator>::AutoPtr g_pImageManipulator;
@@ -109,8 +105,6 @@ void VVeloxModules::Initialize()
 
 	// image
 	g_pImageFactory.Assign(new VImageFactory());
-	//g_pTgaImageLoader.Assign(new VTgaImageLoader());
-	//g_pJpgImageLoader.Assign(new VJpegImageLoader());
 	g_pDevILLoader.Assign(new VDevILLoader());
 	g_pDevILSaver.Assign(new VDevILSaver());
 	g_pImageManipulator.Assign(new VImageManipulator());

@@ -458,18 +458,6 @@
 				<File
 					RelativePath="..\Source\ImageService\VImageManipulator.h">
 				</File>
-				<File
-					RelativePath="..\Source\ImageService\VJpegImageLoader.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\ImageService\VJpegImageLoader.h">
-				</File>
-				<File
-					RelativePath="..\Source\ImageService\VTgaImageLoader.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\ImageService\VTgaImageLoader.h">
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
