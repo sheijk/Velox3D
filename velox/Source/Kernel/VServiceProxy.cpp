@@ -1,10 +1,13 @@
 #include "VServiceProxy.h"
 //-----------------------------------------------------------------------------
 #include <iostream>
+
 using namespace std;
 
 //-----------------------------------------------------------------------------
 using std::string;
+
+//extern v3d::IVMemoryManager* GetMemoryManager();
 
 namespace v3d {
 namespace kernel {
@@ -45,7 +48,8 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	// store the function pointers
 	m_pInitFunction = (InitFunction) GetProcAddress(
 		m_hDllInstance, 
-		"?Initialize@@YAXPAVVObjectRegistry@v3d@@@Z");
+		//"?Initialize@@YAXPAVVObjectRegistry@v3d@@@Z");
+		"?Initialize@@YAXPAUVModuleParams@v3d@@@Z");
 
 	m_pDeInitFunction = (ShutdownFunction) GetProcAddress(
 		m_hDllInstance, 
@@ -59,7 +63,10 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	}
 	
 	// call the init function
-	m_pInitFunction(in_pObjectRegistry);
+	VModuleParams modParams;
+	modParams.pObjectRegistry = in_pObjectRegistry;
+	//modParams.pMemoryManager = GetMemoryManager();
+	m_pInitFunction(&modParams);
 	m_bIsLoaded = true;
 }
 

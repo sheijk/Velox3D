@@ -1,61 +1,36 @@
-/**
- * XML Service DLL
- *
- */
-
-#define XMLSERVICE_API __declspec(dllexport)
-//-----------------------------------------------------------------------------
-#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
+
+#include <v3d/Core/Modules/VModuleBase.h>
+
 #include "VXMLService.h"
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 //-----------------------------------------------------------------------------
 
-using namespace v3d;
-using namespace v3d::xml;
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-// use a smart pointer to guarante object destruction
-VPointer<VXMLService>::AutoPtr g_pXMLService;
-
-XMLSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
+class VXmlModule : public v3d::VModuleBase
 {
-	// store the object registry instance
-	VObjectRegistry::SetInstance(in_pObjReg);
+	v3d::VPointer<v3d::xml::VXMLService>::AutoPtr m_pXMLService;
 
-	// create service object and register it
-	//TODO: name sollte hier als parameter angegeben werden koennen
-	// wie bei den anderen services (sheijk)
-	g_pXMLService.Assign(new VXMLService());
-}
-
-XMLSERVICE_API void Shutdown()
-{
-	// delete and unregister service object
-	g_pXMLService.Release();
-}
-
-/**
- * DLL Einsprungspunkt, wird beim laden der DLL aufgerufen, sollte
- * aber meist nichts tun
- */
-BOOL APIENTRY DllMain( HANDLE hModule, 
-                       DWORD  ul_reason_for_call, 
-                       LPVOID lpReserved
-					 )
-{
-    switch (ul_reason_for_call)
+public:
+	VXmlModule() : VModuleBase("xml") 
 	{
-		case DLL_PROCESS_ATTACH:
-		case DLL_THREAD_ATTACH:
-		case DLL_THREAD_DETACH:
-		case DLL_PROCESS_DETACH:
-			break;
-    }
-    return TRUE;
+	}
+
+	virtual void Initialize();
+	virtual void Shutdown();
+};
+
+namespace {
+	VXmlModule g_XMLModule;
+}
+//-----------------------------------------------------------------------------
+
+void VXmlModule::Initialize()
+{
+	m_pXMLService.Assign(new v3d::xml::VXMLService());
 }
 
-//-----------------------------------------------------------------------------
+void VXmlModule::Shutdown()
+{
+	m_pXMLService.Release();
+}

@@ -16,6 +16,12 @@ struct VMaterialDescription
 
 	typedef VMeshDescription::ByteBufferHandle ByteBufferHandle;
 
+	/**
+	 * The polygon mode for rendering.
+	 * Filled means normal
+	 * Point means render vertices as points
+	 * Line means wireframe
+	 */
     enum PolygonMode
 	{
 		Filled, Point, Line
@@ -45,6 +51,10 @@ struct VMaterialDescription
 		DepthReadOnly
 	};
 
+	/**
+	 * A reference to a texture
+	 * add references to more textures using AddTexture for mult texturing
+	 */
 	struct TextureRef
 	{
 		vuint nWidth, nHeight;

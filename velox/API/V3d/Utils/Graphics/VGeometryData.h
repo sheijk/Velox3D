@@ -14,22 +14,51 @@ using namespace v3d; // beware of evil indenting!
 
 /**
  * A simple mesh structure
+ *
+ * //TODO: make type, vertices and indices private
  */
 template<typename VertexStructure>
 class VGeometryData
 {
 public:
 	typedef v3d::graphics::VMeshDescription::GeometryType GeometryType;
+	typedef v3d::graphics::VBuffer<VertexStructure> VertexBuffer;
+	typedef v3d::graphics::VBuffer<vuint> IndexBuffer;
 
 	VGeometryData(
 		GeometryType in_GeometryType,
-		vuint in_nVertexCount, 
+		vuint in_nVertexCount,
 		int in_nIndexCount = 0
 		);
 
-	GeometryType type;
+	const GeometryType type;
 	v3d::graphics::VBuffer<VertexStructure> vertices;
 	v3d::graphics::VBuffer<vuint> indices;
+
+	GeometryType GetGeometryType() const
+	{
+		return type;
+	}
+
+	VertexBuffer& GetVertexBuffer()
+	{
+		return vertices;
+	}
+
+	const VertexBuffer& GetVertexBuffer() const
+	{
+		return vertices;
+	}
+
+	IndexBuffer& GetIndices()
+	{
+		return indices;
+	}
+
+	const IndexBuffer& GetIndices() const
+	{
+		return indices;
+	}
 };
 
 //-----------------------------------------------------------------------------

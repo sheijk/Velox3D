@@ -148,6 +148,9 @@
 			Name="Implementation"
 			Filter="">
 			<File
+				RelativePath="..\Source\Module\VeloxModule.cpp">
+			</File>
+			<File
 				RelativePath="..\Source\XMLService\VFileStream.cpp">
 			</File>
 			<File

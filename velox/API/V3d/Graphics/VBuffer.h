@@ -172,6 +172,11 @@ public:
 		return m_pBuffer[in_nIndex];
 	}
 
+	const DataType& operator[](vuint in_nIndex) const
+	{
+		return m_pBuffer[in_nIndex];
+	}
+
 	/** @see VBufferBase::GetDataAddress */
 	virtual DataType* GetDataAddress()
 	{
@@ -185,7 +190,7 @@ public:
 	VBuffer<DestType>* Convert(CopyMode in_CopyMode)
 	{
 		VBuffer<DestType>* pNewBuffer = 0;
-		
+
 		const vuint nSizeInBytes = m_nSize * sizeof(DataType);
 		const vuint nDestSize = nSizeInBytes / sizeof(DestType);
 
@@ -194,11 +199,11 @@ public:
 		{
 			V3D_THROW(VException, "type size mismatch");
 		}
-		
+
 		if( in_CopyMode == DropData )
 		{
 			pNewBuffer = new VBuffer<DestType>(
-				reinterpret_cast<DestType*>(m_pBuffer), 
+				reinterpret_cast<DestType*>(m_pBuffer),
 				nDestSize
 				);
 
@@ -209,9 +214,9 @@ public:
 		{
 			vbyte* pNewData = new vbyte[nSizeInBytes];
 			memcpy(pNewData, m_pBuffer, nSizeInBytes);
-            
+
 			pNewBuffer = new VBuffer<DestType>(
-				reinterpret_cast<DestType*>(pNewData), 
+				reinterpret_cast<DestType*>(pNewData),
 				nDestSize
 				);
 		}
@@ -219,7 +224,7 @@ public:
 		{
 			V3D_THROW(VException, "invalid copy mode");
 		}
-		
+
 		return pNewBuffer;
 	}
 };

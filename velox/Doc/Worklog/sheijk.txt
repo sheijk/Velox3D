@@ -34,6 +34,9 @@ template member konvertiert?
 	design der engine: entity system + zusammenarbeit der einzelnen engine teile
 
 	.refactorings
+	./velox services zu einem projekt zusammen fassen
+	./services auf VModuleBase umstellen
+	wxWidgets abhaengige services in eine dll
 	IVDeviceProvider.h finden und aus dem CVS schmeissen
 	./example app aufraeumen
 
@@ -51,7 +54,7 @@ template member konvertiert?
 	./design fuer im speicher gehaltene geometry (ausserhalb des devices)
 	interface
 	einfache geometry klasse fuer dynamische geometrie
-	
+
 	.drawlist:
 	./interfaces
 	./objekte hinzufuegen
@@ -59,6 +62,8 @@ template member konvertiert?
 	nach states sortieren
 
 	.gfx device:
+	texturen: nur eine textur pro buffer anlegen..
+	mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
 	./buffer aendern
 	./indexed/non indexed geometry auto auswahl
 	./render states anwenden
@@ -118,6 +123,27 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+04.04.2004
+alle Services zu einem project file zusammengefasst
+example app aufgeraeumt
+module auf VModuleBase umgestellt
+VTextureStateCategory.cpp erzeugt
+
+02.04.2004
+angefangen mit Sprite Tests
+
+01.04.2004
+Console + WxWindows Services auf neues Modul System umgestellt
+
+31.03.2004
+Alle Services bis auf xml in einem Project File zusammengefasst
+Modul Abstraktion eingebaut: statt DLLEntry Fkt von VModuleBase
+ableiten + 1 globale Instanz der Klasse erstellen.
+
+29.03.2004
+VMaterialDescription erweitert (teilweise noch ohne Implementierung)
+Details am Gfx Kram geaendert, erweitert use
 
 18.03.2004
 VPolarSphere und VGeometryData in eigene Datei gepackt und committet

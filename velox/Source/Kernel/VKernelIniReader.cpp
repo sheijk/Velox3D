@@ -2,9 +2,9 @@
 #include "VKernelIniReader.h"
 #include "VKernelException.h"
 //#include <iostream>
+
 //-----------------------------------------------------------------------------
 using namespace v3d::xml;
-//using namespace std;
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace kernel{

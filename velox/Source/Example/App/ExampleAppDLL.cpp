@@ -11,41 +11,45 @@
 #include "VExampleApp.h"
 #include <v3d/Core/SmartPtr/VGuards.h>
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <v3d/Core/Modules/VModuleBase.h>
 
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::example;
 //-----------------------------------------------------------------------------
 
-/** instance of the application service */
-VPointer<VExampleApp>::AutoPtr g_pService;
-
-EXAMPLEAPP_API void Initialize(VObjectRegistry* in_pObjReg)
+class VExampleAppModule : public VModuleBase
 {
-	// store the object registry instance
-	VObjectRegistry::SetInstance(in_pObjReg);
+	/** instance of the application service */
+	VPointer<VExampleApp>::AutoPtr g_pService;
 
+public:
+	VExampleAppModule();
+
+	virtual void Initialize();
+	virtual void Shutdown();
+};
+
+VExampleAppModule::VExampleAppModule() : VModuleBase("app")
+{
+}
+
+void VExampleAppModule::Initialize()
+{
 	// create the application service instance
 	// (registers itself at the Object Registry)
 	g_pService.Assign(new VExampleApp("main"));
 }
 
-EXAMPLEAPP_API void Shutdown()
+void VExampleAppModule::Shutdown()
 {
 	// destroy the application instance
 	g_pService.Release();
 }
 
-/**
- * DLL Entry Punkt, fuer DLL spezifische Funktionen beim Laden
- * der DLL. (wird fuer Services nicht gebraucht)
- */
-BOOL APIENTRY DllMain( HANDLE hModule, 
-                       DWORD  ul_reason_for_call, 
-                       LPVOID lpReserved
-					 )
+//-----------------------------------------------------------------------------
+namespace
 {
-	return TRUE;
+	VExampleAppModule g_theApp;
 }
+//-----------------------------------------------------------------------------

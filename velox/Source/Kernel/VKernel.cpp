@@ -9,9 +9,6 @@
 #include <v3d/Core/VIOStream.h>
 #include "VKernelIniReader.h"
 
-
-//#include <iostream>
-
 //-----------------------------------------------------------------------------
 using std::string;
 

@@ -50,57 +50,86 @@ namespace
 
 void VOpenGLVertexMesh::Render()
 {
-	glBegin(m_PrimitiveType);
+	//glBegin(m_PrimitiveType);
 
 	const vuint cnVertexCount = m_TriangleData.nCount;
 
-	vfloat32* pBuffer = reinterpret_cast<vfloat32*>(m_TriangleData.hBuffer->GetDataAddress());
-	pBuffer += m_TriangleData.nStart;
+	const vfloat32* pBuffer = 
+		reinterpret_cast<vfloat32*>(m_TriangleData.hBuffer->GetDataAddress());
+	//pBuffer += m_TriangleData.nStart;
 
-	vfloat32* pColorBuffer = 0;
-	vfloat32* pTexCoordBuffer = 0;
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(
+		3,
+		GL_FLOAT,
+		m_TriangleData.nStride * sizeof(vfloat32),
+		pBuffer + m_TriangleData.nStart
+		);
 
 	if( m_bColors )
 	{
-		pColorBuffer = reinterpret_cast<vfloat32*>(m_ColorData.hBuffer->GetDataAddress());
-		pColorBuffer += m_ColorData.nStart;
+		const vfloat32* pColorBuffer = reinterpret_cast<vfloat32*>(
+			m_ColorData.hBuffer->GetDataAddress());
+		//pColorBuffer += m_ColorData.nStart;
+
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(
+			4,
+			GL_FLOAT,
+			m_ColorData.nStride * sizeof(vfloat32),
+			pColorBuffer + m_ColorData.nStart
+			);
 	}
 
 	if( m_bTexCoords )
 	{
-		pTexCoordBuffer = reinterpret_cast<vfloat32*>(
+		const vfloat32* pTexCoordBuffer = reinterpret_cast<vfloat32*>(
 			m_TexCoordData.hBuffer->GetDataAddress());
-		pTexCoordBuffer += m_TexCoordData.nStart;
+		//pTexCoordBuffer += m_TexCoordData.nStart;
+
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(
+			2, 
+			GL_FLOAT, 
+			m_TexCoordData.nStride * sizeof(vfloat32), 
+			pTexCoordBuffer + m_TexCoordData.nStart
+			);
 	}
 
-	for(vuint nVertex = 0; nVertex < cnVertexCount; nVertex++)
-	{
-		if( m_bColors )
-		{
-			glColor4f(
-				GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 0),
-				GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 1),
-				GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 2),
-				GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 3)
-				);
-		}
+	glDrawArrays(m_PrimitiveType, 0, m_TriangleData.nCount);
 
-		if( m_bTexCoords )
-		{
-			glTexCoord2f(
-			GetVertexVal(pTexCoordBuffer, m_TexCoordData.nStride, nVertex, 0),
-			GetVertexVal(pTexCoordBuffer, m_TexCoordData.nStride, nVertex, 1)
-			);
-		}
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
-		glVertex3f(
-			GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, X_AXIS),
-			GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Y_AXIS),
-			GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Z_AXIS)
-			);
+	//for(vuint nVertex = 0; nVertex < cnVertexCount; nVertex++)
+	//{
+	//	if( m_bColors )
+	//	{
+	//		glColor4f(
+	//			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 0),
+	//			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 1),
+	//			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 2),
+	//			GetVertexVal(pColorBuffer, m_ColorData.nStride, nVertex, 3)
+	//			);
+	//	}
 
-	}
-	glEnd();
+	//	if( m_bTexCoords )
+	//	{
+	//		glTexCoord2f(
+	//		GetVertexVal(pTexCoordBuffer, m_TexCoordData.nStride, nVertex, 0),
+	//		GetVertexVal(pTexCoordBuffer, m_TexCoordData.nStride, nVertex, 1)
+	//		);
+	//	}
+
+	//	glVertex3f(
+	//		GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, X_AXIS),
+	//		GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Y_AXIS),
+	//		GetVertexVal(pBuffer, m_TriangleData.nStride, nVertex, Z_AXIS)
+	//		);
+
+	//}
+	//glEnd();
 }
 
 //-----------------------------------------------------------------------------

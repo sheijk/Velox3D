@@ -3,6 +3,8 @@
 //------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <v3d/Core/Modules/VModuleParams.h>
+
 #include "VKernelException.h"
 
 #include <string>
@@ -29,7 +31,7 @@ private:
 	
 	std::string m_strDLL;
 
-	typedef void (*InitFunction)(VObjectRegistry*);
+	typedef void (*InitFunction)(VModuleParams*);
 	typedef void (*ShutdownFunction)();
 
 	InitFunction m_pInitFunction;

@@ -206,6 +206,16 @@
 					RelativePath="..\Api\V3d\Core\Container\VList.h">
 				</File>
 			</Filter>
+			<Filter
+				Name="Modules"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Core\Modules\VModuleBase.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\Modules\VModuleParams.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Implementation"

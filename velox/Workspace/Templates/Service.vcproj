@@ -1,15 +1,10 @@
-Instructions:
-replace /!/ServiceName/!/ by the service name (i.e. VirtualFileSystem)
-replace /!/ServiceNameCAPS/!/ by ServiceName in Caps (i.e. VIRTUAL_FILE_SYSTEM)
-remove everyhing before <?xml ...>
-
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="/!/ServiceName/!/Service"
-	ProjectGUID="{C2E15749-4341-4E4B-9019-07F8B0522B91}"
-	RootNamespace="/!/ServiceName/!/Service"
+	Name="[*ServiceName]"
+	ProjectGUID="{[*change]586E10B2-24CB-27C7-A973-CDCD6D563659}"
+	RootNamespace="[*ServiceName]"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -18,15 +13,15 @@ remove everyhing before <?xml ...>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;/!/ServiceNameCAPS/!/SERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -39,13 +34,12 @@ remove everyhing before <?xml ...>
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)//!/ServiceName/!/Service.dll"
+				OutputFile="$(OutDir)/[*ServiceName].dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)//!/ServiceName/!/Service.pdb"
+				ProgramDatabaseFile="$(OutDir)/[*ServiceName].pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)//!/ServiceName/!/Service.lib"
+				ImportLibrary="$(OutDir)/[*ServiceName].lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -70,14 +64,14 @@ remove everyhing before <?xml ...>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;/!/ServiceNameCAPS/!/SERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -88,14 +82,13 @@ remove everyhing before <?xml ...>
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)//!/ServiceName/!/Service.dll"
+				OutputFile="$(OutDir)/[*ServiceName].dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)//!/ServiceName/!/Service.lib"
+				ImportLibrary="$(OutDir)/[*ServiceName].lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -125,12 +118,10 @@ remove everyhing before <?xml ...>
 		<Filter
 			Name="Interface"
 			Filter="">
-
 		</Filter>
 		<Filter
 			Name="Implementation"
 			Filter="">
-
 		</Filter>
 	</Files>
 	<Globals>

@@ -22,12 +22,15 @@ public:
 	enum NoTex { NoTexture };
 
 	/**
-	 *
+	 * Erzeugt eine Textur State zum ausschalten von Texturing
 	 */
 	VTextureState(NoTex) : m_nTextureId(0), m_bNoTexture(true)
 	{
 	}
 
+	/**
+	 * Erzeugt einen Texture State der die gegebene Textur bindet
+	 */
 	VTextureState(GLint in_nTextureId) :
 	m_nTextureId(in_nTextureId),
 		m_bNoTexture(false)

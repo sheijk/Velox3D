@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Image/IVImageLoader.h>
-#include <jpeglib.h>
+#include <jpeglib/jpeglib.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace image {

@@ -1,24 +1,21 @@
-#ifndef V3D_IVSTATECATEGORY_H
-#define V3D_IVSTATECATEGORY_H
+#ifndef V3D_VMODULEPARAMS_H
+#define V3D_VMODULEPARAMS_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/IVRenderState.h>
-#include <v3d/Graphics/VMaterialDescription.h>
 //-----------------------------------------------------------------------------
-namespace v3d { 
-namespace graphics {
+namespace v3d {
 //-----------------------------------------------------------------------------
-class IVRenderState;
+class VObjectRegistry;
+//class IVMemoryManager;
 
-class IVStateCategory
+struct VModuleParams
 {
-public:
-	virtual IVRenderState* CreateState(const VMaterialDescription& in_Mat) = 0;
+	VObjectRegistry* pObjectRegistry;
+//	IVMemoryManager* pMemoryManager;
 };
 
 //-----------------------------------------------------------------------------
-} // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVSTATECATEGORY_H
+#endif // V3D_VMODULEPARAMS_H
