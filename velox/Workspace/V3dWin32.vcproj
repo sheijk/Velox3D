@@ -2,8 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="Velox"
-	ProjectGUID="{594DBDEA-14ED-4A95-B219-98A18432E8E7}"
+	Name="v3dWin32"
+	ProjectGUID="{C125F830-6341-4D5B-8062-3A6551406920}"
+	RootNamespace="Velox3dWin32"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -13,18 +14,17 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
-				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -33,12 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/VeloxExe.exe"
+				OutputFile="$(OutDir)/v3dWin32D.exe"
 				LinkIncremental="2"
-				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
-				SubSystem="1"
+				ProgramDatabaseFile="$(OutDir)/Velox3dWin32.pdb"
+				SubSystem="2"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -64,15 +63,14 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="1"
-				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -81,64 +79,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/VeloxExe.exe"
+				OutputFile="$(OutDir)/v3dWin32.exe"
 				LinkIncremental="1"
-				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-		</Configuration>
-		<Configuration
-			Name="UnitTests|Win32"
-			OutputDirectory="Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="Local/Build/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="1"
-			CharacterSet="2">
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../API/"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
-				MinimalRebuild="TRUE"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/UnitTests.exe"
-				LinkIncremental="2"
-				IgnoreAllDefaultLibraries="FALSE"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
-				SubSystem="1"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -165,9 +111,30 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath="..\Source\Kernel\main.cpp">
-		</File>
+		<Filter
+			Name="Implementation"
+			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			<File
+				RelativePath="..\Source\Kernel\win32\main32.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\win32\VCommandLineParser.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\win32\VCommandLineParser.h">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\win32\VWinDialogBox.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\win32\VWinDialogBox.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Interface"
+			Filter="">
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

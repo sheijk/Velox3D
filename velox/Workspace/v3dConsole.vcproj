@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="ErrorService"
-	ProjectGUID="{05714B12-F9AA-4697-9179-305F137118A5}"
+	Name="v3dConsole"
+	ProjectGUID="{594DBDEA-14ED-4A95-B219-98A18432E8E7}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -14,13 +14,13 @@
 			Name="Debug|Win32"
 			OutputDirectory="Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;ERRORSERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -33,12 +33,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ErrorService.dll"
+				OutputFile="$(OutDir)/v3dConsoleD.exe"
 				LinkIncremental="2"
+				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/ErrorService.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/ErrorService.lib"
+				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
+				SubSystem="1"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -65,13 +65,13 @@
 			Name="Release|Win32"
 			OutputDirectory="Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;ERRORSERVICE_EXPORTS"
-				RuntimeLibrary="0"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -81,13 +81,64 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ErrorService.dll"
+				OutputFile="$(OutDir)/v3dConsole.exe"
 				LinkIncremental="1"
+				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
-				SubSystem="2"
+				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/ErrorService.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="UnitTests|Win32"
+			OutputDirectory="Local/Build/debug"
+			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../API/"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="1"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)/v3dUnitTests.exe"
+				LinkIncremental="2"
+				IgnoreAllDefaultLibraries="FALSE"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
+				SubSystem="1"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -114,69 +165,9 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Interface"
-			Filter="">
-			<File
-				RelativePath="..\Api\V3d\Error\IVErrorFilter.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Error\IVErrorListener.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Error\IVErrorService.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Error\IVErrorStream.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Error\VMessageTypeEnum.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Implementation"
-			Filter="">
-			<File
-				RelativePath="..\Source\Error\ErrorServiceDLL.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Error\VErrorConsoleListener.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Error\VErrorConsoleListener.h">
-			</File>
-			<File
-				RelativePath="..\Source\Error\VErrorService.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Error\VErrorService.h">
-			</File>
-			<File
-				RelativePath="..\Source\Error\VErrorStream.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Error\VErrorStream.h">
-			</File>
-			<Filter
-				Name="nicht fertig"
-				Filter="">
-				<File
-					RelativePath="..\Source\Error\VDebugMonitor.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Error\VDebugMonitor.h">
-				</File>
-				<File
-					RelativePath="..\Source\Error\VDebugMonitorEnum.h">
-				</File>
-				<File
-					RelativePath="..\Source\Error\VFileLogger.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Error\VFileLogger.h">
-				</File>
-			</Filter>
-		</Filter>
+		<File
+			RelativePath="..\Source\Kernel\main.cpp">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

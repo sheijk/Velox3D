@@ -10,6 +10,10 @@ Current assigned tasks:
 
 TODO List:
 
+29.09.03
+- Added a win32 project and renamend older ones
+- Added win32 spefic classes (VCommandLineParser, VWinDialogBox)
+
 25.09.03
 - Templates need update!!
 - project does not need any global includes. make sure you have the ExternalLib
