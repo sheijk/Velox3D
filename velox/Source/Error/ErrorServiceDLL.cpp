@@ -1,17 +1,14 @@
-/**
- * Makro um Import und Export in der gleichen Datei zu realisieren
- */
-#ifdef ERRORSERVICE_EXPORTS
 #define ERRORSERVICE_API __declspec(dllexport)
-#else
-#define ERRORSERVICE_API __declspec(dllimport)
-#endif
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
+#include <v3d/Error/IVErrorFilter.h>
 #include "VErrorService.h"
-#include "VDebugMonitor.h"
-#include "VFileLogger.h"
+#include "VErrorConsoleListener.h"
+#include "windows.h"
+//#include "VDebugMonitor.h"
+//#include "VFileLogger.h"
 
 //-----------------------------------------------------------------------------
 using namespace v3d;
@@ -20,8 +17,15 @@ using namespace v3d::error;
 
 //-----------------------------------------------------------------------------
 VPointer<VErrorService>::AutoPtr g_pErrorService;
-VPointer<VDebugMonitor>::AutoPtr g_pDebugMonitor;
-VPointer<VFileLogger>::AutoPtr g_pFileLogger;
+VPointer<VErrorConsoleListener>::AutoPtr g_pConsoleListener;
+
+class VAllFilter : public IVErrorFilter
+{
+public:
+	vbool AcceptMessage(VStringParam in_strName, VMessageType in_MessageTyoe ) { return true; };
+	vbool AcceptState( VStringParam in_strName ) {return false;};
+	vbool AcceptProgressbar( VStringParam in_strName ) {return false;};
+};
 
 ERRORSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -29,26 +33,26 @@ ERRORSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create log devices
-	g_pDebugMonitor.Assign( new VDebugMonitor );
-	g_pFileLogger.Assign( new VFileLogger );
+	g_pConsoleListener.Assign( new VErrorConsoleListener() );
 
-	// create service object and register VDebuglogger and VFileLogger
+	// create service object
 	g_pErrorService.Assign( new VErrorService() );
-	g_pErrorService->RegisterLogDevice( g_pDebugMonitor.Get() );
-	g_pErrorService->RegisterLogDevice( g_pFileLogger.Get() );
+
+	// register standard listener
+//TODO: hack entfernen
+	g_pErrorService->RegisterListener( g_pConsoleListener.Get(), new VAllFilter()  );
+
 }
 
 ERRORSERVICE_API void Shutdown()
 {
 	//unregister debug loggers
-	g_pErrorService->UnregisterLogDevice( g_pDebugMonitor.Get() );
-	g_pErrorService->UnregisterLogDevice( g_pFileLogger.Get() );
-
+	g_pErrorService->UnregisterListener( g_pConsoleListener.Get() );
+	
 	// delete debug loggers
-	g_pDebugMonitor.Release();
-	g_pFileLogger.Release();
+	g_pConsoleListener.Release();
 
-    // delete and unregister service object
+	// delete and unregister service object
 	g_pErrorService.Release();
 }
 

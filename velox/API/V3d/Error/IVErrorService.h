@@ -2,10 +2,12 @@
 #define V3D_IVERRORSERVICE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+//#include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Core/VNamedObject.h>
-#include <v3d/Error/IVLogDevice.h>
-#include <v3d/Error/VLogModeEnum.h>
-
+#include <v3d/Error/VMessageTypeEnum.h>
+#include <v3d/Error/IVErrorListener.h>
+#include <v3d/Error/IVErrorStream.h>
+#include <v3d/Error/IVErrorFilter.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {
@@ -23,37 +25,36 @@ public:
 		: VNamedObject(in_strName, in_pParent)
 	{
 	}
+	typedef VPointer<IVErrorStream>::SharedPtr ErrorStreamPtr;
 
 	/**
-	 * This method registers an error::IVLogDevice object to the error service. If sucessful it will imidently
+	 * This method creates an IVErrorStream
+	 * @param in_strName Name of the error stream
+	 * @return SharedPointer of the error stream
+	 */
+	virtual ErrorStreamPtr CreateErrorStream( VStringParam in_strName ) = 0;
+
+	/**
+	 * This method returns a global error stream
+	 * @return SharedPointer
+	 */ 
+	virtual ErrorStreamPtr GetGlobalErrorStream() = 0;
+
+	/**
+	 * This method registers an error::IVListener object to the error service. If sucessful it will imidently
 	 * start to log. 
 	 * @param in_pLogDevice Pointer to the object that should be registerd
 	 * @return Returns true on sucess, false if the registration failed
 	 */
-	virtual vbool RegisterLogDevice( IVLogDevice* in_pLogDevice ) = 0;
+	virtual vbool RegisterListener( IVErrorListener* in_pListerner, IVErrorFilter* in_pFilter ) = 0;
 	
 	/**
-	 * This method unregisters an error:IVLogDevice object. 	
+	 * This method unregisters an error:IVListener object. 	
 	 * Be sure to call UnregisterLogDevice for every registered log device.
 	 * @param in_pLogDevice Pointer to the object that should be unregisterd
 	 */
-	virtual void UnregisterLogDevice( IVLogDevice* in_pLogDevice ) = 0;
-
-	/**
-	 * Prints a simple debug message
-	 * @param in_Message The debug message
-	 * @param in_LogMode A member of the LogMode enumeration describing the way the message should be displayed
-	 */
-	//TODO: VStringParam/VStringRetVal benutzen
-	virtual void Message( const VString& in_Message, LogMode in_LogMode = Ok ) = 0;
+	virtual void UnregisterListener( IVErrorListener* in_pListener ) = 0;
 	
-	virtual void BeginProgressbar() = 0;
-	virtual void UpdateProgressbar( const vfloat32 in_fIndex ) = 0;
-	virtual void EndProgressbar() = 0;
-
-	virtual void CreateState( const VString& in_StateName, const VString& in_Text ) = 0;
-	virtual void UpdateState( const VString& in_StateName, const VString& in_Text ) = 0;
-	virtual void DeleteState( const VString& in_StateName ) = 0;
 };
 
 //-----------------------------------------------------------------------------

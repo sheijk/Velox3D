@@ -1,4 +1,8 @@
 #include "VErrorService.h"
+#include "VErrorStream.h"
+#include <V3d/Core/VAssert.h>
+#include <exception>
+#include <iostream>
 
 //-----------------------------------------------------------------------------
 
@@ -10,74 +14,90 @@ namespace error {
 VErrorService::VErrorService() :
 	IVErrorService("error", 0)
 {
+    m_GlobalErrorStream.Assign( new VErrorStream("global", this) );
 }
 
 VErrorService::~VErrorService()
 {
-	m_LogDevices.clear();
+		
 }
 
-vbool VErrorService::RegisterLogDevice( IVLogDevice* in_pLogDevice )
+vbool VErrorService::RegisterListener( IVErrorListener* in_pListener, IVErrorFilter* in_pFilter )
 {
-	if ( in_pLogDevice == NULL )
-		return false;
+	V3D_ASSERT( (in_pListener != NULL) );
+	V3D_ASSERT( (in_pFilter != NULL) );
 
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++ )
-	{
-		if ( (*m_Iter) == in_pLogDevice )
-			return false;
+//TODO: Falls push_back fehlschlägt, false zurückgeben
+	try {
+		m_Listeners.push_back( FLPair( in_pFilter, in_pListener ) );
+	}
+	catch ( std::exception exp) {
+		return false;
 	}
 
-	m_LogDevices.push_back( in_pLogDevice );
 	return true;
 }
 
-void VErrorService::UnregisterLogDevice( IVLogDevice* in_pLogDevice )
+void VErrorService::UnregisterListener( IVErrorListener* in_pListener )
 {
-	m_LogDevices.remove( in_pLogDevice );
+	for ( m_Iter = m_Listeners.begin(); m_Iter != m_Listeners.end(); m_Iter++ )
+		if ( (*m_Iter).second == in_pListener )
+		{
+            m_Listeners.erase( m_Iter );
+			return;
+		}
 }
 
-void VErrorService::Message( const VString& in_Message, LogMode in_LogMode )
+VErrorService::ErrorStreamPtr VErrorService::GetGlobalErrorStream()
 {
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
-		(*m_Iter)->OnMessage( in_Message, static_cast<v3d::error::LogMode>(in_LogMode) );
+	return m_GlobalErrorStream;
 }
 
-void VErrorService::BeginProgressbar()
+VErrorService::ErrorStreamPtr VErrorService::CreateErrorStream( VStringParam in_strName )
 {
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
-		(*m_Iter)->OnProgressbarBegin();
+	return ErrorStreamPtr( new VErrorStream(in_strName, this) );
 }
 
-void VErrorService::UpdateProgressbar( const vfloat32 in_fIndex )
+
+void VErrorService::BeginProgressbar( VStringParam in_strStreamName )
 {
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
-		(*m_Iter)->OnProgressbarUpdate(in_fIndex);
+	for ( m_Iter = m_Listeners.begin(); m_Iter != m_Listeners.end(); m_Iter++ )
+		if ( (*m_Iter).first->AcceptProgressbar( in_strStreamName ) )
+			(*m_Iter).second->OnProgressbarBegin();
 }
 
-void VErrorService::EndProgressbar()
+void VErrorService::UpdateProgressbar( VStringParam in_strStreamName, vfloat32 in_fIndex )
 {
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
-		(*m_Iter)->OnProgressbarEnd();
+	for ( m_Iter = m_Listeners.begin(); m_Iter != m_Listeners.end(); m_Iter++ )
+		if ( (*m_Iter).first->AcceptProgressbar( in_strStreamName ) )
+			(*m_Iter).second->OnProgressbarUpdate( in_fIndex );
 }
 
-void VErrorService::CreateState( const VString& in_StateName, const VString& in_Text )
+void VErrorService::EndProgressbar( VStringParam in_strStreamName )
 {
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
-		(*m_Iter)->OnStateCreate(in_StateName, in_Text);
+	for ( m_Iter = m_Listeners.begin(); m_Iter != m_Listeners.end(); m_Iter++ )
+		if ( (*m_Iter).first->AcceptProgressbar( in_strStreamName ) )
+			(*m_Iter).second->OnProgressbarEnd();
 }
 
-void VErrorService::UpdateState( const VString& in_StateName, const VString& in_Text )
+void VErrorService::UpdateState( VStringParam in_strStreamName, VStringParam in_strText )
 {
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
-		(*m_Iter)->OnStateUpdate(in_StateName, in_Text);
+	for ( m_Iter = m_Listeners.begin(); m_Iter != m_Listeners.end(); m_Iter++ )
+		if ( (*m_Iter).first->AcceptState( in_strStreamName ) )
+			(*m_Iter).second->OnStateUpdate( in_strText );
 }
 
-void VErrorService::DeleteState( const VString& in_StateName )
+void VErrorService::Message( VStringParam in_strStreamName,
+							 VStringParam in_strMessage,
+							 VMessageType in_MessageType,
+							 VStringParam in_strFile,
+							vuint in_nLine )
 {
-	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
-		(*m_Iter)->OnStateDelete(in_StateName);
+	for ( m_Iter = m_Listeners.begin(); m_Iter != m_Listeners.end(); m_Iter++ )
+		if ( (*m_Iter).first->AcceptMessage( in_strStreamName, in_MessageType ) )
+			(*m_Iter).second->OnMessage( in_strMessage, in_MessageType, in_strFile, in_nLine );
 }
+
 
 //-----------------------------------------------------------------------------
 } // error

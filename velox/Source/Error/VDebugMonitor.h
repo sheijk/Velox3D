@@ -3,34 +3,32 @@
 //-----------------------------------------------------------------------------
 #include <windows.h>
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/IVErrorService.h>
+#include <v3d/Error/IVErrorListener.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
-	namespace error {
+namespace error {
 //-----------------------------------------------------------------------------
 
-class VDebugMonitor : public IVLogDevice
+class VDebugMonitor : public IVErrorListener
 {
+public:
+			VDebugMonitor();
+			~VDebugMonitor();
+
 protected:
-	void	OnMessage(const VString& in_Msg, LogMode in_LogMode );
+	void	OnMessage(VStringParam in_Message, VMessageType in_MessageType );
 	
 	void	OnProgressbarBegin();
 	void	OnProgressbarUpdate(const vfloat32 in_fIndex);
 	void	OnProgressbarEnd();
 
-	void	OnStateCreate( const VString& in_StateName, const VString& in_Text );
-	void	OnStateUpdate( const VString& in_StateName, const VString& in_Text );
-	void	OnStateDelete( const VString& in_StateName );
-
+	void	OnStateUpdate( VStringParam in_Text );
+	
 	void	SetDebugLevel( const vuint in_iLevel );
 
 	HWND	m_DebugMonitorHWND;
 	vbool	m_bIsAvaible;
 	COPYDATASTRUCT m_MyCopyData;
-
-public:
-			VDebugMonitor();
-			~VDebugMonitor();
 };
 
 //-----------------------------------------------------------------------------

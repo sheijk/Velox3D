@@ -2,7 +2,7 @@
 #include "VDebugMonitorEnum.h"
 
 namespace v3d {
-	namespace error {
+namespace error {
 
 VDebugMonitor::VDebugMonitor()
 {
@@ -25,69 +25,15 @@ VDebugMonitor::~VDebugMonitor()
 	m_bIsAvaible = false;
 }
 
-void VDebugMonitor::OnMessage( const VString& Message, const LogMode LogMode )
+void VDebugMonitor::OnMessage( VStringParam in_strMessage, VMessageType in_MessageType )
 {
-	// Prepare struct
-	switch (LogMode)
-	{
-		case Ok:			m_MyCopyData.dwData = (int)MessageOk;		break;
-		case Warning:		m_MyCopyData.dwData = MessageWarning;	break;
-		case Error:			m_MyCopyData.dwData = MessageError;		break;
-		default:			m_MyCopyData.dwData = MessageError;		break;
-	}
 
-	m_MyCopyData.cbData = Message.Length()+1;
-	m_MyCopyData.lpData = (void*) Message.AsCString();
-
-	//send the structure
-	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
 }
 
-void VDebugMonitor::OnStateCreate( const VString& in_Name, const VString& in_Text )
+
+void VDebugMonitor::OnStateUpdate( VStringParam in_strText )
 {
-	// First send a StateAdd message with the state name
-	m_MyCopyData.dwData = StateCreate;
-	m_MyCopyData.cbData = in_Name.Length()+1;
-	m_MyCopyData.lpData = (void*) in_Name.AsCString();
-
-	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
-
-	// Then send a StateData message with the text
-	m_MyCopyData.dwData = StateData;
-	m_MyCopyData.cbData = in_Text.Length()+1;
-	m_MyCopyData.lpData = (void*) in_Text.AsCString();
-
-	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
-}
-
-void VDebugMonitor::OnStateUpdate( const VString& in_Name, const VString& in_Text )
-{
-	m_MyCopyData.dwData = StateUpdate;
-	m_MyCopyData.cbData = in_Name.Length()+1;
-	m_MyCopyData.lpData = (void*) in_Name.AsCString();
-
-	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
-
-	m_MyCopyData.dwData = StateData;
-	m_MyCopyData.cbData = in_Text.Length()+1;
-	m_MyCopyData.lpData = (void*) in_Text.AsCString();
-
-	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
-}
-
-void VDebugMonitor::OnStateDelete( const VString& in_Name )
-{
-	m_MyCopyData.dwData = StateDelete;
-	m_MyCopyData.cbData = in_Name.Length()+1;
-	m_MyCopyData.lpData = (void*) in_Name.AsCString();
-
-	if ( m_DebugMonitorHWND != NULL )
-		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (LPARAM) &m_MyCopyData) ;
+	
 }
 
 void VDebugMonitor::OnProgressbarBegin()

@@ -4,13 +4,14 @@
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/Error/IVErrorService.h>
 #include <list>
+#include <utility>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {
 //-----------------------------------------------------------------------------
 
-class IVLogDevice;
+class IVErrorListener;
 
 /**
  * A service which implements the error interface
@@ -18,26 +19,35 @@ class IVLogDevice;
 class VErrorService : public IVErrorService
 {
 private:
-	
-	std::list<IVLogDevice*>		m_LogDevices;
-	std::list<IVLogDevice*>::iterator m_Iter;
+	//typedef VPointer<IVErrorStream>::SharedPtr ErrorStreamPtr;
+	typedef std::pair< IVErrorFilter*, IVErrorListener*> FLPair;
+
+	ErrorStreamPtr m_GlobalErrorStream;
+
+	std::list< FLPair >	m_Listeners;
+	std::list< FLPair >::iterator m_Iter;
 
 public:
 	VErrorService();
 	virtual ~VErrorService();
 
-	virtual vbool RegisterLogDevice( IVLogDevice* in_pLogDevice );
-	virtual void UnregisterLogDevice( IVLogDevice* in_pLogDevice );
-			
-	virtual void Message( const VString& in_Message, LogMode in_LogMode = Ok );
-	
-	virtual void BeginProgressbar();
-	virtual void UpdateProgressbar( const vfloat32 in_fIndex );
-	virtual void EndProgressbar();
+	virtual vbool RegisterListener( IVErrorListener* in_pListener, IVErrorFilter* in_pFilter );
+	virtual void  UnregisterListener( IVErrorListener* in_pListener );
 
-	virtual void CreateState( const VString& in_Name, const VString& in_Text );
-	virtual void UpdateState( const VString& in_Name, const VString& in_Text );
-	virtual void DeleteState( const VString& in_Name );
+	virtual ErrorStreamPtr GetGlobalErrorStream();
+	virtual ErrorStreamPtr CreateErrorStream( VStringParam in_strName );
+
+	void BeginProgressbar( VStringParam in_strStreamName );
+	void UpdateProgressbar( VStringParam in_strStreamName, vfloat32 in_fIndex );
+	void EndProgressbar( VStringParam in_strStreamName );
+
+	void UpdateState( VStringParam in_strStreamName, VStringParam in_strText );
+
+	void Message( VStringParam in_strStreamName,
+				  VStringParam in_strMessage,
+				  VMessageType inMessageType,
+				  VStringParam in_strFile,
+				  vuint in_nLine );
 };
 
 //-----------------------------------------------------------------------------
