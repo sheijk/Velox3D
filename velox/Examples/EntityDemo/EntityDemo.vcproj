@@ -120,10 +120,15 @@
 			<File
 				RelativePath=".\EntityDemo.cpp">
 			</File>
-		</Filter>
-		<Filter
-			Name="Header"
-			Filter="h;hpp">
+			<File
+				RelativePath=".\VDataPart.h">
+			</File>
+			<File
+				RelativePath=".\VReaderPart.h">
+			</File>
+			<File
+				RelativePath=".\VSetterPart.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="ModuleImpl"
