@@ -47,7 +47,7 @@ public:
 	}
 
 	/** decrease ref count by one. self delets on zero */
-	void Release();
+	virtual void Release();
 
 	/** inreases ref count by one */
 	void AddRef();

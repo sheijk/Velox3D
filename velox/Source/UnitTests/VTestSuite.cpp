@@ -87,9 +87,13 @@ void VTestSuite::ExecuteTests()
 		}
 		catch(VUnitTestException exc)
 		{
-			cout << "Test \"" << iter->strName << "\" detected an error "
-				<< "(Subject: \"" << iter->strSubject << "\") : \""
-				<< exc.GetExtendedErrorString() << "\"" << endl;
+			cout << "Error detected:" << endl
+				<< "Test name:     " << iter->strName << endl
+				<< "Error message: " << "\"" << exc.GetErrorString() 
+				<< "\"" << endl
+				<< "Line:          " << exc.GetErrorLine() << endl
+				<< "File:          " << exc.GetErrorFile() << endl
+				<< endl;
 
 			bErrors = true;
 //			cout << "Test \"" + iter->strName + "\" detected an error in"
@@ -101,18 +105,22 @@ void VTestSuite::ExecuteTests()
 		catch(VException exc)
 		{
 			cout << "A Velox non UnitTest Exception occured while testing "
-				<< "test may be corrupt. Error message:"
-				<< "\"" << exc.GetErrorString() << "\""
-				<< " in line " << exc.GetErrorLine()
-				<< " in file " << exc.GetErrorFile()
+				<< "test may be corrupt." << endl
+				<< "Test name:     " << iter->strName << endl
+				<< "Error message: " << "\"" << exc.GetErrorString() 
+				<< "\"" << endl
+				<< "Line:          " << exc.GetErrorLine() << endl
+				<< "File:          " << exc.GetErrorFile() << endl
 				<< endl;
 
 			bErrors = true;
 		}
 		catch(...)
 		{
-			cout << "\nunknown error occured in test" << iter->strName << endl
-				<< "unit test might be corrupt or incomplete" << endl;
+			cout << "Unknown error occured in test " << endl
+				<< "<" << iter->strName << ">" << endl
+				<< "Unit test might be corrupt or incomplete" << endl
+				<< endl;
 
 			bErrors = true;
 		}

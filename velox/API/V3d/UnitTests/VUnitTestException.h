@@ -19,9 +19,6 @@ namespace unittests {
  */
 class VUnitTestException : public VException
 {
-private:
-	VUnitTestException();
-
 public:
 	//! result of a unit test
 	enum ErrorLevel
@@ -47,6 +44,8 @@ public:
 		m_ErrorLevel = in_ErrorLevel;
 	}
 
+	//TODO: Konv. c'tor von VException
+
 	virtual ~VUnitTestException() {};
 
 	const IVUnitTest* GetUnitTest() const
@@ -68,6 +67,9 @@ private:
 #define V3D_THROW_UNITTEST_ERROR(error_string, error_type) \
 	throw VUnitTestException(error_string, __FILE__, __LINE__, this, error_type);
 
+/** use this macro to throw an unit test exception from a static function */
+#define V3D_THROW_UNITTEST_ERROR_STATIC(errorString, errorType) \
+	throw VUnitTestException(errorString, __FILE__, __LINE__, 0, errorType);
 //-----------------------------------------------------------------------------
 } // namespace unittests
 } // namespace v3d

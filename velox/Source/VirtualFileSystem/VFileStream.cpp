@@ -219,6 +219,25 @@ void VFileStream::Connect()
 		if( m_hFile == INVALID_HANDLE_VALUE )
 		{
 			// throw error
+			vchar* pMsgBuf;
+
+			FormatMessage(
+				FORMAT_MESSAGE_ALLOCATE_BUFFER |
+				FORMAT_MESSAGE_FROM_SYSTEM |
+				FORMAT_MESSAGE_IGNORE_INSERTS,
+				NULL,
+				GetLastError(),
+				MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+				(LPTSTR)&pMsgBuf,
+				0,
+				NULL);
+
+			// copy to a VString
+			VString str(pMsgBuf);
+
+			// release it
+			LocalFree(pMsgBuf);
+
 			//TODO: vfs exc.
 			V3D_THROW( VException, 
 				VString("could not open file: \"") 

@@ -28,6 +28,14 @@ Auf die Langnese Insel ziehen
 
 log:
 
+17.06.2003
+Bug in SharedPtr behoben
+Tests fuer IVStream und VFileStream geschrieben
+Details am Unittest System geaendert
+
+16.06.2003
+Stream Factory fuers Vfs
+
 14.06.2003
 Das UnitTest Framework ist in Service Form (wieder) einsatzbereit
 

@@ -4,13 +4,14 @@
 * Makro um Import und Export in der gleichen Datei zu realisieren
 * wird nicht gebraucht, wg. dynamischen linken
 */
-#define CORELIBTESTDLL_API __declspec(dllexport)
+#define TESTSDLL_API __declspec(dllexport)
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
 
-#include "VStringTests.h"
+#include "CoreLibTests/VStringTests.h"
+#include "VFSTests/VFileStreamTest.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -28,19 +29,22 @@ using namespace unittests;
 //-----------------------------------------------------------------------------
 // add all tests here
 VPointer<VStringTests>::AutoPtr g_pStringTests;
+VPointer<VFileStreamTest>::AutoPtr g_pFileStreamTest;
 
-CORELIBTESTDLL_API void Initialize(VObjectRegistry* in_pObjReg)
+TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 {
 	// store the object registry instance
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create tests and register them
 	g_pStringTests.Reset(new VStringTests());
+	g_pFileStreamTest.Reset(new VFileStreamTest());
 }
 
-CORELIBTESTDLL_API void Shutdown()
+TESTSDLL_API void Shutdown()
 {
 	// delete all tests
+	g_pStringTests.Release();
 	g_pStringTests.Release();
 }
 
