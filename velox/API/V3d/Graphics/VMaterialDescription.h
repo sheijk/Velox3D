@@ -13,12 +13,36 @@ using namespace v3d; // f***in' VC auto indent ;)
 struct VMaterialDescription
 {
 	// types
-	
+
 	typedef VMeshDescription::ByteBufferHandle ByteBufferHandle;
 
     enum PolygonMode
 	{
 		Filled, Point, Line
+	};
+
+	/**
+	 * The depth buffer test mode
+	 */
+	enum DepthTest
+	{
+		DepthAlways,
+		DepthOnLess,
+		DepthOnLessEqual,
+		DepthOnGreater,
+		DepthOnGreaterEqual,
+		DepthNever,
+		DepthOnEqual,
+		DepthOnNotEqual
+	};
+
+	/**
+	 * The depth buffer write mode
+	 */
+	enum DepthMask
+	{
+		DepthWrite,
+		DepthReadOnly
 	};
 
 	struct TextureRef

@@ -18,13 +18,17 @@ class VTextureState : public IVOpenGLRenderState
 	GLint m_nTextureId;
 	vbool m_bNoTexture;
 public:
+	/** create a state disabling texturing like follows: noTexState = VTextureState(NoTexture); */
 	enum NoTex { NoTexture };
 
-	VTextureState(NoTex) : m_nTextureId(0), m_bNoTexture(true) 
+	/**
+	 *
+	 */
+	VTextureState(NoTex) : m_nTextureId(0), m_bNoTexture(true)
 	{
 	}
 
-	VTextureState(GLint in_nTextureId) : 
+	VTextureState(GLint in_nTextureId) :
 	m_nTextureId(in_nTextureId),
 		m_bNoTexture(false)
 	{
