@@ -1,17 +1,15 @@
-#ifndef V3D_/*filename*/_H
-#define V3D_/*filename*/_H
+//TODO: insert header file name
+#include "/*filename*/.h"
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
 
+//-----------------------------------------------------------------------------
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
-using namespace v3d; // prevent auto indenting
 
-//TODO: replace /*filename*/ by file name in CAPS
-//TODO: insert declarations here
+//TODO: insert definitions here
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_/*filename*/_H

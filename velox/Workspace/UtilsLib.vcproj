@@ -503,6 +503,12 @@
 				RelativePath="..\Source\UtilsLib\CPUDetect\VDetectProcessor.h">
 			</File>
 			<File
+				RelativePath="..\Source\UtilsLib\VFourCC.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Utils\VFourCC.h">
+			</File>
+			<File
 				RelativePath="..\Source\UtilsLib\VFrameCounter.cpp">
 			</File>
 			<File
@@ -572,6 +578,28 @@
 			</File>
 			<File
 				RelativePath="..\Api\V3dLib\Property\VPropertyManager.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Entity"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Entity\IVPart.h">
+			</File>
+			<File
+				RelativePath="..\Source\Entity\VEntity.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Entity\VEntity.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Entity\VEntityExceptions.h">
+			</File>
+			<File
+				RelativePath="..\Source\Entity\VEntityManager.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Entity\VEntityManager.h">
 			</File>
 		</Filter>
 		<File

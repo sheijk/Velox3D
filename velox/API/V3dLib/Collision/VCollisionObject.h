@@ -27,7 +27,8 @@ public:
 
 	VCollisionObject();
 	virtual ~VCollisionObject();
-	
+
+	//TODO: const correctness sollte noch beachtet werden (Get..Count() const; etc) -- sheijk
 	vint GetVertexCount();
 	vint GetIndexCount();
 	Point* GetVertexPointer();
@@ -38,7 +39,7 @@ public:
 	/**
 	* Set the world matrix for this object. 0 is identity
 	* and will be special treated by opcode with faster results
-	* @note:  matrix MUST not contain scale. 
+	* @note:  matrix MUST not contain scale.
 	*		  only rotation and translation
 	*		  is supported by opcode
 	*/
@@ -51,7 +52,7 @@ public:
 	 */
 
 	virtual void CreatePoints(vfloat32* in_Array, int iNumVertices);
-	
+
 	/**
 	 * overwrite this method if you need
 	 * a concrete index to triangleIndex conversion
@@ -66,8 +67,8 @@ public:
 	 */
 
 	void Initialize();
-	
-	
+
+
 protected:
 
 	vuint				m_iNumVertices;

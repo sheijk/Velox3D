@@ -221,6 +221,9 @@
 				<File
 					RelativePath="..\Api\V3d\Core\Modules\VModuleParams.h">
 				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\Modules\VVeloxApp.h">
+				</File>
 			</Filter>
 			<Filter
 				Name="Mem Manager"
@@ -244,6 +247,9 @@
 			</File>
 			<File
 				RelativePath="..\Source\Core\VIOStream.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Core\VVeloxApp.cpp">
 			</File>
 			<Filter
 				Name="Object Registry"

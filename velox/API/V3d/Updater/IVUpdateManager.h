@@ -78,6 +78,7 @@ protected:
 	}
 };
 
+typedef VServicePtr<IVUpdateManager> VUpdateManagerPtr;
 //-----------------------------------------------------------------------------
 } // namespace updater
 } // namespace v3d

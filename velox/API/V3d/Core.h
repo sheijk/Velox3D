@@ -20,6 +20,7 @@
 #include <V3d/Core/SmartPtr/VServicePtr.h>
 
 #include <V3d/Core/Modules/VModuleBase.h>
+#include <V3d/Core/Modules/VVeloxApp.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_CONFIG_2004_09_26_H

@@ -28,6 +28,7 @@ public:
 
 };
 
+typedef VServicePtr<IVSystemManager> VSystemManagerPtr;
 //-----------------------------------------------------------------------------
 } // namespace system
 } // namespace v3d

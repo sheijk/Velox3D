@@ -7,6 +7,7 @@ namespace v3d {
 namespace collision {
 //-----------------------------------------------------------------------------
 
+//TODO: VCollisionException --sheijk
 V3D_DECLARE_EXCEPTION(CollisionException, VException)
 
 //-----------------------------------------------------------------------------

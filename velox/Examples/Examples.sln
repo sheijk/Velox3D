@@ -29,6 +29,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v3dConsole", "..\Workspace\
 		{F5A203BC-C39E-43DB-B426-4CC8114C84E6} = {F5A203BC-C39E-43DB-B426-4CC8114C84E6}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EntityDemo", "EntityDemo\EntityDemo.vcproj", "{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F5A203BC-C39E-43DB-B426-4CC8114C84E6} = {F5A203BC-C39E-43DB-B426-4CC8114C84E6}
+		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
+		{BB57F1C9-0039-40BC-8188-02F384F49322} = {BB57F1C9-0039-40BC-8188-02F384F49322}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -72,6 +79,12 @@ Global
 		{594DBDEA-14ED-4A95-B219-98A18432E8E7}.Release.Build.0 = Release|Win32
 		{594DBDEA-14ED-4A95-B219-98A18432E8E7}.UnitTests.ActiveCfg = UnitTests|Win32
 		{594DBDEA-14ED-4A95-B219-98A18432E8E7}.UnitTests.Build.0 = UnitTests|Win32
+		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.Debug.ActiveCfg = Debug|Win32
+		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.Debug.Build.0 = Debug|Win32
+		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.Release.ActiveCfg = Release|Win32
+		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.Release.Build.0 = Release|Win32
+		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.UnitTests.ActiveCfg = Release|Win32
+		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.UnitTests.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt

@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="KernelLib"
-	ProjectGUID="{F5A203BC-C39E-43DB-B426-4CC8114C84E6}"
+	Name="/*name*/"
+	ProjectGUID="{2DADAA67-04E0-47C5-B84B-8E9DE2BE6843}"/*change guid*/
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -12,15 +12,15 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="4"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -32,9 +32,14 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/KernelLib.lib"
-				IgnoreAllDefaultLibraries="TRUE"/>
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)/GraphicsDemo.dll"
+				LinkIncremental="2"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/GraphicsDemo.pdb"
+				SubSystem="2"
+				ImportLibrary="$(OutDir)/GraphicsDemo.lib"
+				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -50,20 +55,22 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="4"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -73,9 +80,15 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/KernelLib.lib"
-				IgnoreAllDefaultLibraries="TRUE"/>
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)/GraphicsDemo.dll"
+				LinkIncremental="1"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)/GraphicsDemo.lib"
+				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -91,6 +104,8 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
@@ -99,38 +114,14 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Kernel"
-			Filter="">
+		<Filter Name="Implementation" Filter="cpp">
 			<File
-				RelativePath="..\Source\Module\VeloxModule.cpp">
+				RelativePath="..\..\Source\Module\VeloxModule.cpp">
 			</File>
-			<File
-				RelativePath="..\Source\Kernel\VKernel.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VKernel.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VKernelException.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VKernelIniReader.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VKernelIniReader.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VServiceProxy.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VServiceProxy.h">
-			</File>
+		</Filter>
+		<Filter Name="Header" Filter="h;hpp">
 		</Filter>
 	</Files>
 	<Globals>
-		<Global
-			Name="DevPartner_IsInstrumented"
-			Value="1"/>
 	</Globals>
 </VisualStudioProject>

@@ -49,7 +49,9 @@ int main(int argv, char* argc[])
 	try
 	{
 		// load and init
-		g_pKernel->ProcessIniFile(pcXmlFileName);
+		std::string fileName;
+		fileName = pcXmlFileName;
+		g_pKernel->ProcessIniFile(fileName);
 	}
 	catch(VException& exc)
 	{

@@ -47,6 +47,7 @@ public:
 	virtual ~IVWindowManager() {};
 };
 
+typedef VServicePtr<IVWindowManager> VWindowManagerPtr;
 //-----------------------------------------------------------------------------
 } // namespace window
 } // namespace v3d
