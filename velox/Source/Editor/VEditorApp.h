@@ -6,7 +6,7 @@
 #include <v3d/Core/IVApplication.h>
 #include <v3d/Core/VNamedObject.h>
 
-#include <v3d/Editor/IVRegistry.h>
+#include <v3d/Editor/IVEditorSuite.h>
 
 #include "VEditorFrame.h"
 
@@ -19,13 +19,16 @@ using namespace v3d;
  * The velox editor application. Initializes the editor main frame and plugin
  * registry
  */
-class VEditorApp : public IVApplication, VNamedObject, IVRegistry
+class VEditorApp : public IVApplication, VNamedObject
 {
 public:
 	VEditorApp();
 
+	/** the main function */
 	virtual vint Main();
-	virtual void RegisterPlugin(IVPlugin& in_Plugin);
+
+	/** register a tool */
+	virtual void RegisterTool(IVTool& in_Tool);
 
 private:
 	typedef VEditorFrame::PluginList PluginList;

@@ -19,117 +19,24 @@
 
 #include <wx/wx.h>
 #include <wx/minifram.h>
+#include <wx/listbox.h>
 
+#include "Utils/VPrintAction.h"
+#include "Controls/VRenderFrame.h"
+
+#include <V3dLib/Graphics/Geometry.h>
+#include <V3dLib/Graphics/Misc/VSimpleDrawList.h>
+#include <V3dLib/Math.h>
+
+#include "TerrainTex/VTerrainTexDocClass.h"
+#include "TerrainTex/VTextureStageSetupFrame.h"
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
 using namespace v3d;
+//-----------------------------------------------------------------------------
 
-class VPrintAction : public IVAction
-{
-public:
-	VPrintAction(VStringParam in_strMessage)
-	{
-		m_Message = in_strMessage;
-	}
-
-	virtual VStringRetVal GetName()
-	{
-		return "print test";
-	}
-	
-	virtual void Execute()
-	{
-		vout << m_Message.AsCString();
-	}
-
-private:
-	VString m_Message;
-};
-
-class VRenderToolWindow : public wxMiniFrame
-{
-public:
-	VRenderToolWindow(wxWindow* in_pParent) : 
-	  wxMiniFrame(
-		  in_pParent,
-		  -1, 
-		  "demo plugin",
-          wxPoint(0, 0),
-		  wxSize(640, 480),
-		  wxTINY_CAPTION_HORIZ | wxFRAME_FLOAT_ON_PARENT | wxFRAME_NO_TASKBAR
-		  )
-	{
-		CenterOnParent();
-
-		VServicePtr<window::IVWindowManager> pWinManager;
-
-		graphics::VDisplaySettings settings;
-		settings.m_bFullscreen = false;
-		settings.m_sAPIType = "OpenGL";
-		settings.m_iWidth = GetSize().GetWidth();
-		settings.m_iHeight = GetSize().GetHeight();
-
-		m_pDevice = pWinManager->CreateGraphicsDevice(settings, (void*)GetHandle());
-	}
-
-	graphics::IVDevice& QueryDevice()
-	{
-		return *m_pDevice;
-	}
-
-private:
-	window::IVWindowManager::GraphicsDevicePtr m_pDevice;
-};
-
-class VTestPlugin : public IVPlugin
-{
-	typedef VPointer<IVAction>::SharedPtr ActionPtr;
-	typedef std::vector<ActionPtr> ActionList;
-	typedef VSTLDerefIteratorPol<ActionList::iterator, IVAction> ActionIterPol;
-
-public:
-	VTestPlugin()
-		:
-		m_pWindow(0)
-	{
-		ActionPtr pAction(new VPrintAction("this is the test action\n"));
-		m_Actions.push_back(pAction);
-	}
-
-	ActionIterator ActionsBegin() 
-	{
-		return ActionIterator(new ActionIterPol(m_Actions.begin()));
-	}
-
-	ActionIterator ActionsEnd() 
-	{
-		return ActionIterator(new ActionIterPol(m_Actions.end()));
-	}
-
-	VStringRetVal GetName()
-	{
-		return "Test";
-	}
-
-	virtual void Enable(wxWindow* in_pParent)
-	{
-		if(! m_pWindow)
-		{
-			m_pWindow = new VRenderToolWindow(in_pParent);
-			m_pWindow->Show(true);
-		}
-	}
-
-	graphics::IVDevice& GetDevice()
-	{
-		return m_pWindow->QueryDevice();
-	}
-
-private:
-	ActionList m_Actions;
-	VRenderToolWindow* m_pWindow;
-};
+//-----------------------------------------------------------------------------
 
 VEditorApp::VEditorApp() : VNamedObject("main", 0)
 {
@@ -141,9 +48,19 @@ vint VEditorApp::Main()
 	using namespace graphics;
 	using namespace math;
 
-	VTestPlugin testPlugin;
+	VCamera cam;
 
-	RegisterPlugin(testPlugin);
+	//VTestPlugin testPlugin;
+	//RegisterTool(testPlugin);
+
+	//VTerrainTexGenEditor terrTexEdit;
+	//RegisterEditor(terrTexEdit);
+	//m_pActiveEditor = &terrTexEdit;
+
+	//VCameraTool cameraPlugin(cam);
+	//RegisterTool(cameraPlugin);
+
+	VTerrainTexDocClass texgenDocClass;
 
 	vout << "Velox3D proudly presents: the editor!" << vendl;
 
@@ -152,51 +69,43 @@ vint VEditorApp::Main()
 
 	// create the main window
 	VEditorFrame* pFrame = new VEditorFrame(m_Plugins);
+	pFrame->RegisterDocumentClass(texgenDocClass);
+	VTextureStageSetupFrame* pTexStageFrame = 
+		new VTextureStageSetupFrame(pFrame);
+	pFrame->RegisterTool(*pTexStageFrame);
 
 	VServicePtr<system::IVSystemManager> pSystem;
 	VServicePtr<v3d::updater::IVUpdateManager> pUpdater;
 
-	graphics::IVDevice& device(testPlugin.GetDevice());
+	//graphics::IVDevice& device(testPlugin.GetDevice());
 
-	VPolarSphereMesh<VSimpleVertex> sphere(10, 10);
-	sphere.GenerateCoordinates();
+	//VSimpleDrawList drawList(device);
 
-	VMaterialDescription mat;
-	mat.frontPolyMode = VMaterialDescription::Line;
-	mat.backPolyMode = VMaterialDescription::Line;
-	mat.defaultColor = VColor4f(0.0f, 1.0f, 0.2f, 1.0f);
+	//vout << vendl << "Loading terrain...";
+	//VTerrainRenderer::TerrainRendererPtr pTerrain = 
+	//	VTerrainRenderer::CreateFromRawFile(
+	//		"/data/hills.raw", device);
+	//pTerrain->CreateMeshes();
+	//vout << "done" << vendl;
 
-	IVDevice::MeshHandle hMesh = BuildMesh(device, sphere, mat);
-
-	VSimpleDrawList drawList(device);
-
-	drawList.Add(VModel(hMesh, IdentityPtr()));
-
-	vout << vendl << "Loading terrain...";
-	VTerrainRenderer::TerrainRendererPtr pTerrain = 
-		VTerrainRenderer::CreateFromRawFile(
-			"/data/hills.raw", device);
-	pTerrain->CreateMeshes();
-	vout << "done" << vendl;
-
-	VCamera cam;
-	cam.MoveForward(-15);
-	cam.RotateZ(-45);
-	cam.RotateX(-55);
-	cam.MoveForward(5);
-	device.SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
+	//cam.MoveForward(-15);
+	//cam.RotateZ(-45);
+	//cam.RotateX(-55);
+	//cam.MoveForward(5);
+	//device.SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
 
 	pUpdater->Start();
 	pSystem->SetStatus(true);
 	while(pSystem->GetStatus())
 	{
-		device.BeginScene();
+		//device.BeginScene();
+		//device.SetMatrix(IVDevice::ViewMatrix, cam.TransformMatrix());
 
-		drawList.Render();
-		pTerrain->Update(cam);
-		pTerrain->Render();
+		//drawList.Render();
+		//pTerrain->Update(cam);
+		//pTerrain->Render();
 
-		device.EndScene();
+		//device.EndScene();
 
 		pUpdater->StartNextFrame();
 	}
@@ -207,11 +116,15 @@ vint VEditorApp::Main()
 	return 666;
 }
 
-void VEditorApp::RegisterPlugin(IVPlugin& in_Plugin)
+void VEditorApp::RegisterTool(IVTool& in_Tool)
 {
 	if( m_bAllowNewPlugins )
 	{
-		m_Plugins.push_back(&in_Plugin);
+		m_Plugins.push_back(&in_Tool);
+	}
+	else
+	{
+		vout << "tool \"" << in_Tool.GetName() << "\" registered late" << vendl;
 	}
 }
 

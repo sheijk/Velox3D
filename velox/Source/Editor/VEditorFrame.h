@@ -4,20 +4,25 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Window/IVWindowFrame.h>
 //-----------------------------------------------------------------------------
-#include <V3d/Editor/IVRegistry.h>
+#include <V3d/Editor/IVEditorSuite.h>
+
+#include <v3d/Core/SmartPtr/VGuards.h>
 
 #pragma warning (disable : 4267)
 #include <wx/wx.h>
 #pragma warning (default : 4267)
 
+#include <v3d/Editor/IVDocument.h>
+#include <v3d/Editor/IVDocumentClass.h>
+#include <V3dLib/BoostSignals.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace editor {
 //-----------------------------------------------------------------------------
-//TODO: huh? wozu ist das gut? (sheijk)
-class VEditorFrame;
 
-class VEditorFrame : public wxFrame, public window::IVWindowFrame
+class VEditorFrame :	public wxFrame, 
+						public window::IVWindowFrame, 
+						IVEditorSuite
 {
 public:
 	typedef std::vector<IVPlugin*> PluginList;
@@ -33,24 +38,67 @@ public:
 	VEditorFrame(PluginList& in_Plugins);
 	~VEditorFrame();
 
+	/** registers a new document class */
+	void RegisterDocumentClass(IVDocumentClass& in_DocumentClass);
+
+	void RegisterTool(IVTool& in_Tool);
+
+	virtual VMessageTreatment SendToActiveDocument(IVMessage& in_Message);
+
 	void ShowFrame(vbool in_Param);
 
 private:
+	class FocusChangeConnector
+	{
+	public:
+		FocusChangeConnector(VEditorFrame* in_pFrame) : m_pFrame(in_pFrame)
+		{
+			V3D_ASSERT(m_pFrame != 0);
+		}
+
+		void operator()(IVDocument& doc, IVDocument::FocusEventType type)
+		{
+			m_pFrame->OnDocumentFocusChange(doc, type);
+		}
+
+	private:
+		VEditorFrame* m_pFrame;
+	};
+
 	typedef VPointer<wxMenu>::SharedPtr WxMenuPtr;
 	typedef std::vector<WxMenuPtr> WxMenuList;
 	typedef std::map<vint, IVAction*> MenuActionMap;
 
-	void OnQuit(wxCommandEvent& event);
-	void OnAbout(wxCommandEvent& event);
-	void OnAction(wxCommandEvent& event);
+	typedef std::vector<IVDocumentClass*> DocumentClassList;
+	typedef std::vector<IVDocumentClass::DocumentPtr> DocumentList;
+
+	void OnQuit(wxCommandEvent& in_Event);
+	void OnAbout(wxCommandEvent& in_Event);
+	void OnAction(wxCommandEvent& in_Event);
+	void OnNewDocument(wxCommandEvent& in_Event);
+	void OnShowDocument(wxCommandEvent& in_Event);
 
 	vint GetNextMessageId();
 
+	void CreateDocument(IVDocumentClass& in_DocClass);
+	void CloseDocument(IVDocument* in_pDocument);
+
+	void OnDocumentFocusChange(
+		IVDocument& in_Doc, 
+		IVDocument::FocusEventType in_Type);
+
+	// ui management
 	wxMenuBar m_MenuBar;
 	WxMenuList m_Menues;
 	MenuActionMap m_MenuActions;
-
 	vint m_nNextFreeMessageId;
+	FocusChangeConnector m_FocusConnector;
+
+	// document and tool management
+	DocumentList m_OpenDocuments;
+	DocumentClassList m_DocumentClasses;
+
+	IVDocument* m_pActiveDocument;
 
 	DECLARE_EVENT_TABLE()
 };

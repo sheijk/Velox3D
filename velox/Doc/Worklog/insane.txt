@@ -45,6 +45,8 @@ Questions:
 - Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.inl empty?
 
 - rendere calls enabled in states should be deactiveted on framebuffer flush
+nein, das ist unnoetig. vor jedem mesh muessen die korrekten render states
+gesetzt werden, ansonsten sind die states undefiniert.
 -------------------------------------------------------------------------------
 
 
@@ -197,7 +199,7 @@ Du hast die VCamera.MoveForward Methode geaendert.. (hab ich in den letzten
 - adaptor fuer IVXMLVisitor, welcher alle Methoden leer implementiert (sheijK)
   Brauchen utils workspace ! [!!!!!]
 - Cannot step into exception thrower
-- Exception throw cannot be relocated (says what throws exception but not who 
+- Exception throw cannot be relocated (says what throws exception but not who
   called service and tried to handle unspecified request)
 - IVLogging requests error service in corelib, shouldn't kernel handle this
 

@@ -5,6 +5,8 @@
 
 #include <v3d/Core/VIOStream.h>
 
+#include <algorithm>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace editor {
@@ -25,7 +27,10 @@ VEditorFrame::VEditorFrame(PluginList& in_Plugins)
 		wxSize(800, 600), 
 		wxCAPTION, 
 		"frame"
-		)
+		),
+	m_FocusConnector(this),
+	m_pActiveDocument(0),
+	IVEditorSuite("editor.suite")
 {
 	m_nNextFreeMessageId = vint(FirstFreeId);
 
@@ -37,8 +42,18 @@ VEditorFrame::VEditorFrame(PluginList& in_Plugins)
 
 	// build file menu
 	vint dummyId = GetNextMessageId();
+	vint newTerrainId = GetNextMessageId();
 
 	WxMenuPtr pFileMenu(new wxMenu());
+	pFileMenu->Append(newTerrainId, "New Terrain");
+
+	Connect(
+		newTerrainId,
+		wxEVT_COMMAND_MENU_SELECTED,
+		(wxObjectEventFunction)(wxEventFunction)(wxCommandEventFunction)
+		VEditorFrame::OnNewDocument,
+		0);
+
 	pFileMenu->Append(AboutId, "About");
 	pFileMenu->Append(dummyId, "Dummy");
 	pFileMenu->AppendSeparator();
@@ -88,10 +103,32 @@ VEditorFrame::VEditorFrame(PluginList& in_Plugins)
 		m_MenuBar.Append(pPluginMenu.Get(), (*plugin)->GetName().AsCString());
 
 		// enable plugin
-		(*plugin)->Enable(this);
+		(*plugin)->Enable();
 	}
 
+	//WxMenuPtr pEditorMenu(new wxMenu());
+
+	//// for each editor
+	//EditorList::iterator editor = in_Editors.begin();
+	//for( ; editor != in_Editors.end(); ++editor)
+	//{
+	//	// add it to editor menu selection
+	//}
+
+	//m_MenuBar.Append(pEditorMenu.Get(), "Editors");
+
 	SetMenuBar(&m_MenuBar);
+}
+
+void VEditorFrame::RegisterDocumentClass(IVDocumentClass& in_DocClass)
+{
+	m_DocumentClasses.push_back(&in_DocClass);
+}
+
+void VEditorFrame::RegisterTool(IVTool& in_Tool)
+{
+	//TODO: add to menu etc
+	in_Tool.Enable();
 }
 
 void VEditorFrame::ShowFrame(vbool in_bParam)
@@ -122,6 +159,83 @@ void VEditorFrame::OnAction(wxCommandEvent& in_Event)
 	{
 		action->second->Execute();
 	}
+}
+
+void VEditorFrame::OnNewDocument(wxCommandEvent& in_Event)
+{
+	vout << "created new document" << vendl;
+
+	CreateDocument(*m_DocumentClasses.front());
+}
+
+void VEditorFrame::OnShowDocument(wxCommandEvent& in_Event)
+{
+    // get active document
+	// change it's visible mode
+}
+
+void VEditorFrame::CreateDocument(IVDocumentClass& in_DocClass)
+{
+	IVDocumentClass::DocumentPtr pDoc = in_DocClass.Create(this);
+
+	pDoc->RegisterFocusListener(m_FocusConnector);
+
+	m_OpenDocuments.push_back(pDoc);
+}
+
+void VEditorFrame::OnDocumentFocusChange(
+	IVDocument& in_Doc,
+	IVDocument::FocusEventType in_Type
+	)
+{
+	switch(in_Type)
+	{
+	case IVDocument::GotFocus:
+		{
+			m_pActiveDocument = &in_Doc;
+			vout << "document " << &in_Doc << " got focus" << vendl;
+		} break;
+	case IVDocument::LostFocus:
+		{
+			vout << "document " << &in_Doc << " lost focus" << vendl;
+		} break;
+	default:
+		{
+			vout << "illegal focus event for window " << &in_Doc << vendl;
+		} break;
+	};
+}
+
+void VEditorFrame::CloseDocument(IVDocument* in_pDocument)
+{
+	V3D_ASSERT(in_pDocument != 0);
+
+	// remove document from list
+	for(
+		DocumentList::iterator iter = m_OpenDocuments.begin();
+		iter != m_OpenDocuments.end() && iter->Get() != in_pDocument;
+		++iter
+			)
+	{
+	}
+
+	m_OpenDocuments.erase(iter);
+}
+
+VMessageTreatment VEditorFrame::SendToActiveDocument(IVMessage& in_Message)
+{
+	VMessageTreatment treatment;
+
+	if( m_pActiveDocument != 0 )
+	{
+		treatment = m_pActiveDocument->DeliverMessage(in_Message);
+	}
+	else
+	{
+		treatment = MessageIgnored;
+	}
+
+	return treatment;
 }
 
 vint VEditorFrame::GetNextMessageId()

@@ -31,15 +31,22 @@ template member konvertiert?
 
 -------------------------------------------------------------------------------
 ----- personal todo:
-
+ glTexParameter
 	.roadmap
 	IVCamera
 	.terrain: zwischen lod stufen umschalten
 	.terrain: cracks entfernen
 	.terrain: texturen (eine pro chunk, eine total?)
 	.terrain: wireframe + texturierte darstellung
-	editor: message basierte plugin kommunikation?
+	.editor: message basierte plugin kommunikation?
+	.editor: message system konkret entwerfen
+	?editor: terrain xml format
+	?editor: texturen setzen fuer terrain
+	?editor: heightmap importieren fuer terrain
+	editor: terrain texture generator
 	device: meshhandle als klasse? (mit default initialisierung..)
+	terrain: umbau auf geometry clip maps?
+	terrain: chunks mit konstanter vertex anzahl, aber unterschiedlicher groesse?
 	terrain: VRectangle aus VTerrainLodChunk.h auslagern
 	terrain: detail texturen
 	terrain: bessere lod wahl heuristik (screen space error basierend?)
@@ -116,6 +123,21 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+18.06.2004
+Editor Nachrichtensystem
+Editor Tool/Dokumentensystem
+Terrain Texture Generator Skeleton
+VQuadMesh
+
+11.06.2004
+Editor Message System angefangen
+
+09.06.2004
+diverse modi fuer das camera tool
+
+08.06.2004
+Kamera Steuerungs Plugin (provisorisch in VEditorApp.cpp :))
 
 06.06.2004
 Erste Editor Version. Plugins sind moeglich, Demo Plugin (Text Ausgabe) vorhanden,

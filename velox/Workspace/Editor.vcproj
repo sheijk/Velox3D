@@ -126,17 +126,35 @@
 				RelativePath="..\Api\V3d\Editor\IVAction.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Editor\IVPlugin.h">
+				RelativePath="..\Api\V3d\Editor\IVDocument.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Editor\IVRegistry.h">
+				RelativePath="..\Api\V3d\Editor\IVDocumentClass.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Editor\IVEditorSuite.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Editor\IVMessage.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Editor\IVPlugin.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
 			Filter="">
 			<File
+				RelativePath="..\Source\Editor\CameraTool.h">
+			</File>
+			<File
 				RelativePath="..\Source\Editor\EditorModule.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\HeightmapTexGen.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\Interface.h">
 			</File>
 			<File
 				RelativePath="..\Source\Editor\VEditorApp.cpp">
@@ -152,6 +170,72 @@
 			</File>
 			<File
 				RelativePath="..\Source\Module\VeloxModule.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Utils"
+			Filter="">
+			<File
+				RelativePath="..\Source\Editor\Utils\VPrintAction.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\Utils\VPrintAction.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\Utils\VToolBase.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\Utils\VToolBase.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Controls"
+			Filter="">
+			<File
+				RelativePath="..\Source\Editor\Controls\VRenderFrame.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\Controls\VRenderFrame.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="TerrainTex"
+			Filter="">
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\Messages.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\Messages.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexDocClass.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexDocClass.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexDocument.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexDocument.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexGenPreviewFrame.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTerrainTexGenPreviewFrame.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTextureStage.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTextureStage.h">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTextureStageSetupFrame.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Editor\TerrainTex\VTextureStageSetupFrame.h">
 			</File>
 		</Filter>
 	</Files>

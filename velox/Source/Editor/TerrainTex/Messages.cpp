@@ -1,17 +1,26 @@
-#ifndef V3D_/*filename*/_H
-#define V3D_/*filename*/_H
+#include "Messages.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
-namespace v3d {
+namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
-using namespace v3d; // prevent auto indenting
 
-//TODO: replace /*filename*/ by file name in CAPS
-//TODO: insert declarations here
+VTextureStageUpdated::VTextureStageUpdated(VTextureStage& in_Stage, vuint in_nId) :
+	m_Stage(in_Stage),
+	m_nId(in_nId)
+{
+}
+
+VTextureStage& VTextureStageUpdated::GetTextureStage()
+{
+	return m_Stage;
+}
+
+vuint VTextureStageUpdated::GetStageId()
+{
+	return m_nId;
+}
 
 //-----------------------------------------------------------------------------
-} // namespace v3d
+}} // namespace v3d::editor
 //-----------------------------------------------------------------------------
-#endif // V3D_/*filename*/_H

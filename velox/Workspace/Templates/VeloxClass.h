@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
+using namespace v3d; // anti auto indenting
 
 //TODO: replace /*fileguard*/ by your class's name in CAPS
 //TODO: replace /*classname*/ by your class's name

@@ -103,27 +103,6 @@
 		<Filter
 			Name="Graphics"
 			Filter="">
-			<File
-				RelativePath="..\Api\V3dLib\Graphics\Generators.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3dLib\Graphics\Geometry.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3dLib\Graphics.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3dLib\Graphics\Importer.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3dLib\Graphics\Misc.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3dLib\Graphics\Portal.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3dLib\Graphics\SimpleSG.h">
-			</File>
 			<Filter
 				Name="Geometry"
 				Filter="">
@@ -372,6 +351,31 @@
 						RelativePath="..\Api\V3dLib\Graphics\Renderers\Bsp\VBSPRenderer.h">
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="Includes"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Generators.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Geometry.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Importer.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Misc.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Portal.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\SimpleSG.h">
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

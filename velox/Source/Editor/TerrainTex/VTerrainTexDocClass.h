@@ -1,17 +1,23 @@
-#ifndef V3D_/*filename*/_H
-#define V3D_/*filename*/_H
+#ifndef V3D_VTEXTURETEXDOCCLASS_2004_06_18_H
+#define V3D_VTEXTURETEXDOCCLASS_2004_06_18_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <V3d/Editor/IVDocumentClass.h>
+
+#include <wx/wx.h>
 //-----------------------------------------------------------------------------
-namespace v3d {
+namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-//TODO: replace /*filename*/ by file name in CAPS
-//TODO: insert declarations here
+class VTerrainTexDocClass : public IVDocumentClass
+{
+public:
+	virtual DocumentPtr Create(wxWindow* in_pParent);
+};
 
 //-----------------------------------------------------------------------------
-} // namespace v3d
+}} // namespace v3d::editor
 //-----------------------------------------------------------------------------
-#endif // V3D_/*filename*/_H
+#endif // V3D_VTEXTURETEXDOCCLASS_2004_06_18_H

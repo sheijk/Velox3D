@@ -20,7 +20,11 @@ VTerrainRenderer::Heightmap&
 	return m_Chunks(chunkx, chunky).pChunk->GetLodHeights(0);
 }
 
-VTerrainRenderer::VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device)
+VTerrainRenderer::VTerrainRenderer(
+	vuint in_nPatchCount, 
+	IVDevice& in_Device,
+	VStringParam in_strTextureFile
+	)
 	:
 	m_nPatchCount(in_nPatchCount),
 	m_fChunkModelSize(10.0f),
@@ -28,7 +32,7 @@ VTerrainRenderer::VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device)
 	m_bShowWireFrame(false)
 {
 	// load texture
-	m_TextureMat = BuildTextureMaterial(&in_Device, "/data/hills.jpg");
+	m_TextureMat = BuildTextureMaterial(&in_Device, in_strTextureFile);
 	//m_TextureMat.frontPolyMode = VMaterialDescription::Line;
 	//m_TextureMat.backPolyMode = VMaterialDescription::Line;
 
@@ -70,8 +74,19 @@ VTerrainRenderer::VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device)
 
 VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
 	VStringParam in_strFileName, 
-	IVDevice& in_Device)
+	IVDevice& in_Device,
+	VStringParam in_strTextureFile
+	)
 {
+	std::string rawfile(in_strFileName);
+	std::string withoutExt(rawfile, 0, rawfile.find_last_of('.'));
+	withoutExt += ".jpg";
+
+	if( 0 == in_strTextureFile ) 
+	{
+		in_strTextureFile = withoutExt.c_str();
+	}
+
 	// open file and get size
 	VServicePtr<vfs::IVFileSystem> pFS;
 
@@ -92,13 +107,14 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
 	}
 
 	// load data
-	return CreateFromStream(*pStream, nSizeLen, in_Device);
+	return CreateFromStream(*pStream, nSizeLen, in_Device, in_strTextureFile);
 }
 
 VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 	vfs::IVStream& in_Stream,
 	vuint in_nSize,
-	IVDevice& in_Device)
+	IVDevice& in_Device,
+	VStringParam in_strTextureFile)
 {
 	// calc patch nr. for terrain
 	vuint nPatchCount = 1;
@@ -111,7 +127,8 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 	}
 
 	// create terrain
-	TerrainRendererPtr pTerrain(new VTerrainRenderer(nPatchCount, in_Device));
+	TerrainRendererPtr pTerrain(
+		new VTerrainRenderer(nPatchCount, in_Device, in_strTextureFile));
 
 	vuint nTerrainSize = pTerrain->GetWidth();
 	V3D_ASSERT(nPatchSize <= nTerrainSize);

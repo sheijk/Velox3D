@@ -86,19 +86,28 @@ class VTerrainRenderer
 	VMaterialDescription m_TextureMat;
 
 public:
-	VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device);
+	VTerrainRenderer(
+		vuint in_nPatchCount, 
+		IVDevice& in_Device,
+		VStringParam in_strTextureFile
+		);
+
 	virtual ~VTerrainRenderer();
 
 	typedef VPointer<VTerrainRenderer>::SharedPtr TerrainRendererPtr;
 	
 	static TerrainRendererPtr CreateFromRawFile(
 		VStringParam in_strFileName, 
-		IVDevice& in_Device);
+		IVDevice& in_Device,
+		VStringParam in_strTextureFile = 0
+		);
 
 	static TerrainRendererPtr CreateFromStream(
 		vfs::IVStream& in_Stream,
 		vuint in_nSize,
-		IVDevice& in_Device);
+		IVDevice& in_Device,
+		VStringParam in_strTextureFile
+		);
 
 	static vuint SizeWithNChunks(vuint in_nChunkCount);
 
