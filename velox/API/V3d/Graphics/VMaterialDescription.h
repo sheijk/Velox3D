@@ -53,6 +53,19 @@ struct VMaterialDescription
 	};
 
 	/**
+	 * Enable or disable any color channel for writing
+	 */
+	struct ColorBufferMask
+	{
+		inline ColorBufferMask();
+
+		vbool writeRed;
+		vbool writeGreen;
+		vbool writeBlue;
+		vbool writeAlpha;
+	};
+
+	/**
 	 * A reference to a texture
 	 * add references to more textures using AddTexture for mult texturing
 	 */
@@ -76,6 +89,10 @@ struct VMaterialDescription
 
 	v3d::graphics::VColor4f defaultColor;
 
+	ColorBufferMask colorMask;
+
+	// mask the different buffers
+
 	// functions
 
 	// setting sensible default values
@@ -90,7 +107,8 @@ VMaterialDescription::VMaterialDescription()  :
 	depthTestFunction(DepthOnLess),
 	depthWriteMask(DepthWrite),
 	pTextureList(0),
-	defaultColor(1, 1, 1, 1)
+	defaultColor(1, 1, 1, 1),
+	colorMask()
 {
 }
 
@@ -110,6 +128,14 @@ void VMaterialDescription::AddTexture(TextureRef* in_pTexture)
 		}
 		pTex->pNext = in_pTexture;
 	}
+}
+
+VMaterialDescription::ColorBufferMask::ColorBufferMask()
+{
+	writeRed = true;
+	writeGreen = true;
+	writeBlue = true;
+	writeAlpha = true;
 }
 
 //-----------------------------------------------------------------------------

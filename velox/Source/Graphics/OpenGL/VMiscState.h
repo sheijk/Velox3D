@@ -35,6 +35,8 @@ private:
 	vuint m_DepthFunction;
 	vbool m_bDepthWrite;
 
+	VMaterialDescription::ColorBufferMask m_ColorMask;
+
 	v3d::graphics::VColor4f m_DefaultColor;
 
 	static vuint GetGLModeNum(const DepthTest in_Test);

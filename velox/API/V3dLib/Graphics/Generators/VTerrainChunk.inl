@@ -23,6 +23,11 @@ VTerrainChunk::VertexStructure& VTerrainChunk::GetVertex(vuint x, vuint y)
 	return GetVertexBuffer()[y * m_nWidth + x];
 }
 
+const VTerrainChunk::VertexStructure& VTerrainChunk::GetVertex(vuint x, vuint y) const
+{
+	return GetVertexBuffer()[y * m_nWidth + x];
+}
+
 vfloat32 VTerrainChunk::GetHeight(vuint x, vuint y)
 {
 	return vfloat32(m_pHeightmap->GetData()[y * m_nWidth + x]) / 30.0f;
@@ -109,9 +114,20 @@ VMaterialDescription VTerrainChunk::GetMaterialDescription(IVDevice& device)
 	VMaterialDescription matDescr =
 		BuildTextureMaterial(&device, m_strTextureFileName.c_str());
 
+	matDescr.depthTestFunction = VMaterialDescription::DepthOnLess;
 	//matDescr.depthWriteMask = VMaterialDescription::DepthReadOnly;
 
 	//matDescr.AddTexture(CreateTextureRef(device, *m_pTexture));
 
 	return matDescr;
+}
+
+vuint VTerrainChunk::GetWidth() const
+{
+	return m_nWidth;
+}
+
+vuint VTerrainChunk::GetHeight() const 
+{
+	return m_nHeight;
 }

@@ -23,7 +23,7 @@ public:
 		ResizeIndexBuffer(0);
 	}
 
-	VMeshDescription::GeometryType GetGeometryType()
+	VMeshDescription::GeometryType GetGeometryType() const
 	{
 		return m_GeometryType;
 	}
@@ -38,6 +38,15 @@ public:
 		return *m_pIndexBuffer;
 	}
 
+	const VertexBuffer& GetVertexBuffer() const
+	{
+		return *m_pVertexBuffer;
+	}
+
+	const IndexBuffer& GetIndexBuffer() const
+	{
+		return *m_pIndexBuffer;
+	}
 protected:
 	void ResizeVertexBuffer(vuint in_nSize)
 	{

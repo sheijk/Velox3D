@@ -1,138 +1,133 @@
 template <typename VertexStructure>
-void VHeightmap<VertexStructure>::CreateCoordinates()
+vuint VHeightmap<VertexStructure>::GetVertexCount() const
 {
-	vbool bSwitchSides = false;
-	int count = 0;
-
-	for(vint i = 0; i <= Size; i += Stepsize)
-	{
-		if(bSwitchSides)
-		{
-			
-			for(vint y = Size; y >= 0; y -= Stepsize)
-			{
-				buffer[count].position.v[0]  = (vfloat32)i;
-				buffer[count].position.v[1]  = (vfloat32)GetHeight(i,y);
-				buffer[count].position.v[2]  = (vfloat32)y;
-
-				count++;
-
-				buffer[count].position.v[0]  = (vfloat32)i + Stepsize;
-				buffer[count].position.v[1]  = (vfloat32)GetHeight(i + Stepsize, y);
-				buffer[count].position.v[2]  = (vfloat32)y;
-				
-				count++;
-			}
-		}
-		else
-		{
-			for ( vint y = 0; y <= Size; y += Stepsize)
-			{
-				buffer[count].position.v[0] = (vfloat32)i + Stepsize; 
-				buffer[count].position.v[1] = (vfloat32)GetHeight(i + Stepsize, y); 
-				buffer[count].position.v[2]=  (vfloat32)y;
-
-				count++;
-
-				buffer[count].position.v[0]  = (vfloat32)i;
-				buffer[count].position.v[1]  = (vfloat32)GetHeight(i, y);
-				buffer[count].position.v[2]  = (vfloat32)y;
-
-				count++;
-			}
-		}
-		bSwitchSides = !bSwitchSides;
-	}
-				
+	return m_nWidth * m_nHeight;
 }
 
 template <typename VertexStructure>
-vint VHeightmap<VertexStructure>::GetHeight(vint in_iX, vint in_iY)
+vuint VHeightmap<VertexStructure>::GetIndexCount() const
 {
-	vint x = in_iX % Size;					// Error check our x value
-	vint y = in_iY % Size;					// Error check our y value
-
-	return m_pBuffer[x + (y * Size)];
-}
-template <typename VertexStructure>
-vint VHeightmap<VertexStructure>::GetNumElements()
-{
-	vbool bSwitchSides = false;
-	vint count = 0;
-	for(vint i = 0; i <= Size; i += Stepsize)
-	{
-		if(bSwitchSides)
-		{
-			for(vint y = Size; y >= 0; y -= Stepsize)
-			{
-				count++;
-				count++;
-			}
-		}
-		else
-		{
-			for ( vint y = 0; y <= Size; y += Stepsize)
-			{
-				count++;
-				count++;
-			}
-		}
-		bSwitchSides = !bSwitchSides;
-	}
-	return count;
+	return m_nWidth * (m_nHeight-1) * 2 + ((m_nHeight-1) * 2);
 }
 
 template <typename VertexStructure>
-void VHeightmap<VertexStructure>::CreateTextureCoordinates()
+vuint VHeightmap<VertexStructure>::GetVertexNum(vuint x, vuint y) const
 {
-	vbool bSwitchSides = false;
-	int count = 0;
-	vfloat32 x = 0;
-	vfloat32 z = 0;
+	return y * m_nWidth + x;
+}
 
-	for(vint i = 0; i <= Size; i += Stepsize)
+template <typename VertexStructure>
+VertexStructure& VHeightmap<VertexStructure>::GetVertex(vuint x, vuint y)
+{
+	return GetVertexBuffer()[y * m_nWidth + x];
+}
+
+template <typename VertexStructure>
+const VertexStructure& 
+VHeightmap<VertexStructure>::GetVertex(vuint x, vuint y) const
+{
+	return GetVertexBuffer()[y * m_nWidth + x];
+}
+
+template <typename VertexStructure>
+vfloat32 VHeightmap<VertexStructure>::GetHeight(vuint x, vuint y) const
+{
+	return vfloat32(m_pHeightmap->GetData()[y * m_nWidth + x]) / 30.0f;
+}
+
+template <typename VertexStructure>
+void VHeightmap<VertexStructure>::GenerateCoordinatesAtZ(vfloat32 in_nZ)
+{
+	vfloat32 left = -15;
+	vfloat32 right = 15;
+	vfloat32 top = -15;
+	vfloat32 bottom = 15;
+
+	const vfloat32 xdelta = (right - left) / m_nWidth;
+	const vfloat32 ydelta = (bottom - top) / m_nHeight;
+    
+	for(vint x = 0; x < m_nWidth; ++x)
 	{
-		if(bSwitchSides)
+		for(vint y = 0; y < m_nHeight; ++y)
 		{
-
-			for(vint y = Size; y >= 0; y -= Stepsize)
-			{
-				x = (vfloat32)i / (vfloat32)Size;
-				z = (vfloat32)y / (vfloat32)Size;
-				buffer[count].texCoords =
-					v3d::graphics::VTexCoord2f(x, -z);
-								
-				count++;
-
-				x = (vfloat32)(i + Stepsize) / (vfloat32) Size;
-				z = (vfloat32)y / (vfloat32)Size;
-				buffer[count].texCoords  =
-					v3d::graphics::VTexCoord2f(x, -z);
-				
-				count++;
-			}
+            GetVertex(x, y).position.x = x * xdelta + left;
+			GetVertex(x, y).position.y = y * ydelta + top;
+			GetVertex(x, y).position.z = in_nZ;
 		}
-		else
-		{
-			for ( vint y = 0; y <= Size; y += Stepsize)
-			{
-				x = (vfloat32)(i + Stepsize) /(vfloat32)Size; 
-				z = (vfloat32)y /(vfloat32)Size;
-				
-				buffer[count].texCoords  =
-					v3d::graphics::VTexCoord2f(x, -z);
-				
-				count++;
-
-				x = (vfloat32)i / (vfloat32)Size;
-				z = (vfloat32)y / (vfloat32)Size;
-
-				buffer[count].texCoords =
-					v3d::graphics::VTexCoord2f(x, -z);
-				
-				count++;
-			}
-		}
-		bSwitchSides = !bSwitchSides;
 	}
+}
+
+template <typename VertexStructure>
+void VHeightmap<VertexStructure>::GenerateTexCoords()
+{
+	GenerateInterpolatedTexCoords(GetVertexBuffer(), m_nWidth, m_nHeight);
+}
+
+template <typename VertexStructure>
+void VHeightmap<VertexStructure>::GenerateIndices()
+{
+	vuint num = 0;
+
+	// for each y
+	for(vuint y = 0; y < m_nHeight - 1; ++y)
+	{
+		// create strip
+		for(vint x = 0; x < m_nWidth; ++x)
+		{
+			GetIndexBuffer()[num] = GetVertexNum(x, y);
+			++num;
+
+			GetIndexBuffer()[num] = GetVertexNum(x, y + 1);
+			++num;
+		}
+
+		// add degenerated triangle
+        GetIndexBuffer()[num] = GetVertexNum(x - 1, y + 1);
+		++num;
+		GetIndexBuffer()[num] = GetVertexNum(0, y + 1);
+		++num;
+	}
+
+	V3D_ASSERT(num == GetIndexBuffer().GetSize());
+}
+
+template <typename VertexStructure>
+VHeightmap<VertexStructure>::VHeightmap(vuint in_nWidth, vuint in_nHeight)
+{
+	SetGeometryType(VMeshDescription::TriangleStrip);
+
+	ResetSize(in_nWidth, in_nHeight);
+}
+
+template<typename VertexStructure>
+VHeightmap<VertexStructure>::VHeightmap()
+{
+	SetGeometryType(VMeshDescription::TriangleStrip);
+	ResizeVertexBuffer(0);
+	ResizeIndexBuffer(0);
+//	ResetSize(0,0);
+}
+
+template <typename VertexStructure>
+void VHeightmap<VertexStructure>::ResetSize(vuint in_nWidth, vuint in_nHeight)
+{
+	m_nHeight = in_nHeight;
+	m_nWidth = in_nWidth;
+
+	ResizeVertexBuffer(GetVertexCount());
+	ResizeIndexBuffer(GetIndexCount());        
+
+	GenerateCoordinatesAtZ(0);
+}
+
+template <typename VertexStructure>
+vuint VHeightmap<VertexStructure>::GetWidth() const
+{
+	return m_nWidth;
+}
+
+template <typename VertexStructure>
+vuint VHeightmap<VertexStructure>::GetHeight() const 
+{
+	return m_nHeight;
 }

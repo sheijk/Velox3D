@@ -241,6 +241,9 @@
 					RelativePath="..\Api\V3dLib\Graphics\Misc\IVDrawList.h">
 				</File>
 				<File
+					RelativePath="..\Source\Graphics\Lib\MiscUtils.cpp">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Misc\MiscUtils.h">
 				</File>
 				<File

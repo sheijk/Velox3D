@@ -16,6 +16,8 @@ VMiscState::VMiscState(const VMaterialDescription& in_Mat)
 	m_bDepthWrite = in_Mat.depthWriteMask == VMaterialDescription::DepthWrite;
 
 	m_DefaultColor = in_Mat.defaultColor;
+
+	m_ColorMask = in_Mat.colorMask;
 }
 
 void VMiscState::Apply() const
@@ -31,6 +33,13 @@ void VMiscState::Apply() const
 		m_DefaultColor.green,
 		m_DefaultColor.blue,
 		m_DefaultColor.alpha
+		);
+
+	glColorMask(
+		m_ColorMask.writeRed,
+		m_ColorMask.writeGreen,
+		m_ColorMask.writeBlue,
+		m_ColorMask.writeAlpha
 		);
 }
 

@@ -12,65 +12,40 @@ namespace graphics{
 //-----------------------------------------------------------------------------
 
 /**
- * Heightmap template creation class
- * Size is hardcoded because non 1024x1024 images would be hard to traversal
- * @author: ins
+ * A heightmap generation geometry provider
+ *
+ * @author sheijk
  */
-
 template <typename VertexStructure>
-class VHeightmap
+class VHeightmap : public VDynamicGeometryData<VertexStructure>
 {
+	vuint m_nWidth;
+	vuint m_nHeight;
+
+	vuint GetVertexCount() const;
+	vuint GetIndexCount() const;
+
+	vuint GetVertexNum(vuint x, vuint y) const;
+	vfloat32 GetHeight(vuint x, vuint y) const;
+
 public:
+	VHeightmap(vuint in_nWidth, vuint in_nHeight);
+	VHeightmap();
 
-	VHeightmap(vbyte* in_pBuffer, vuint in_iWidth, vuint in_iHeight)
-		: m_pBuffer(in_pBuffer), m_iWidth(in_iWidth), m_iHeight(in_iHeight),
-		buffer(new VertexStructure[GetNumElements()], GetNumElements())
-	{};
-		  
+	void ResetSize(vuint in_nWidth, vuint in_nHeight);
 
-	
-	void CreateCoordinates();
-	void CreateTextureCoordinates();
-	
-	
-	v3d::graphics::VBuffer<VertexStructure>	buffer;
+	void GenerateCoordinatesAtZ(vfloat32 in_nZ);
+	//void GenerateCoordinates();
+	void GenerateTexCoords();
+	void GenerateIndices();
 
-private:
-
-	static vint GetNumElements();
-	vint GetHeight(vint in_iX, vint in_iY);
-
-	struct Triangle
-	{
-		VVector3f tri[3];
-
-		Triangle()
-		{
-			tri[0] = VVector3f(0.0f, 0.0f, 0.0f);
-			tri[1] = VVector3f(0.0f, 0.0f, 0.0f);
-			tri[2] = VVector3f(0.0f, 0.0f, 0.0f);
-		}
-
-		Triangle( VVector3f a, VVector3f b, VVector3f c)
-		{
-			tri[0]=a;
-			tri[1]=b;
-			tri[2]=c;
-		}
-	};
-
-	enum Heightmap
-	{
-		Size = 1024, // Size of our heightmap
-		Stepsize = 16, // This is width and height of each QUAD
-	};
-
-	vbyte* m_pBuffer;
-	vuint m_iWidth;
-	vuint m_iHeight;
-
+	vuint GetWidth() const;
+	vuint GetHeight() const;
+	VertexStructure& GetVertex(vuint x, vuint y);
+	const VertexStructure& GetVertex(vuint x, vuint y) const;
 };
 
+//-----------------------------------------------------------------------------
 #include "VHeightmap.inl"
 //-----------------------------------------------------------------------------
 } // namespace graphics

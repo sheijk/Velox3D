@@ -34,7 +34,6 @@ class VTerrainChunk : public VDynamicGeometryData<VTexturedVertex>
 	vuint GetIndexCount();
 
 	vuint GetVertexNum(vuint x, vuint y);
-	VertexStructure& GetVertex(vuint x, vuint y);
 	
 	vfloat32 GetHeight(vuint x, vuint y);
 
@@ -49,6 +48,11 @@ public:
 		);
 
 	VMaterialDescription GetMaterialDescription(IVDevice& device);
+
+	vuint GetWidth() const;
+	vuint GetHeight() const;
+	VertexStructure& GetVertex(vuint x, vuint y);
+	const VertexStructure& GetVertex(vuint x, vuint y) const;
 };
 
 //-----------------------------------------------------------------------------
