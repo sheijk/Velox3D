@@ -25,7 +25,7 @@ IVErrorService* GetLogDevice()
 }
 
 //TODO: implement this function
-void SendDebugMessage(const char* in_pcMessage)
+void SendDebugMessage(VStringParam in_pcMessage)
 {
 	// if logging device is available
 	if( 0 != GetLogDevice() )

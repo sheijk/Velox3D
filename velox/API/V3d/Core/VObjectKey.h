@@ -1,9 +1,8 @@
 #ifndef V3D_VOBJECTKEY_H
 #define V3D_VOBJECTKEY_H
 //------------------------------------------------------------------------
-#include <string>
-
 #include <v3d/Core/VCoreLib.h>
+#include <v3d/Core/Wrappers/VString.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -17,21 +16,18 @@ class VObjectKey
 private:
 
 	// the name of it..
-	std::string m_strName;
+	VString m_strName;
 public:
 	VObjectKey();
 
 	/** create with name */
-	VObjectKey(const std::string& in_strName);
-
-	/** create with name */
-	VObjectKey(const char* in_pcName);
+	VObjectKey(VStringParam in_pcName);
 
 	/** destructor.. */
 	virtual ~VObjectKey();
 
 	/** convert to string */
-	const std::string& ToString() const;
+	VStringRetVal ToString() const;
 
 	bool operator<(const VObjectKey& in_Other) const
 	{

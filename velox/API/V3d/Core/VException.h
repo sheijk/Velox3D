@@ -1,28 +1,41 @@
 #ifndef V3D_EXCEPTION_H
 #define V3D_EXCEPTION_H
 //-----------------------------------------------------------------------------
-#include <string>
 #include <v3d/Core/VCoreLib.h>
+#include <v3d/Core/Wrappers/VString.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
 
+//TODO: beide Kommentare zu einem verbinden (sheijk)
+
+/**
+ * Base class for all Velox exceptions
+ * Dervice your own velox related exceptions from this class
+ */
 class VException
 {
 protected:
-	vuint				m_Line;
-	std::string			m_FileName;
-	std::string			m_ErrorString;
+	vuint	m_Line;
+	VString	m_FileName;
+	VString	m_ErrorString;
 
 public:
-						VException();
-						VException(std::string Error, std::string File, vuint Line);
+	VException();
+	VException(VStringParam Error, VStringParam File, vuint Line);
 
-	vuint				GetErrorLine() const;
-	std::string			GetErrorFile() const;
-	std::string			GetErrorString() const;
+	/** returns the line where the exception was thrown */
+	vuint GetErrorLine() const;
 
-	virtual std::string	GetExtendedErrorString() const;
+	/** returns the file where the exception was thrown */
+	VStringRetVal GetErrorFile() const;
+
+	/** returns info about the error */
+	VStringRetVal GetErrorString() const;
+
+	/** returns an extended error description */
+	virtual VStringRetVal GetExtendedErrorString() const;
 };
 
 //! Eine Exception werfen mit "normalen" Parametern

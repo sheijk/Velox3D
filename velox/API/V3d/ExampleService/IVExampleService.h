@@ -18,7 +18,7 @@ protected:
 	 * a protected constructor is needed to pass the parameters to the 
 	 * VNamedObject constructor
 	 */
-	IVExampleService(std::string in_strName, VNamedObject* in_pParent) 
+	IVExampleService(VStringParam in_strName, VNamedObject* in_pParent) 
 		: VNamedObject(in_strName, in_pParent)
 	{
 	}

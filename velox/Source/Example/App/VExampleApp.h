@@ -14,7 +14,7 @@ namespace example {
 class VExampleApp : public IVApplication, public VNamedObject
 {
 public:
-	VExampleApp();
+	VExampleApp(VStringParam in_strName);
 	virtual ~VExampleApp();
 
 public:

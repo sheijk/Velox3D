@@ -45,7 +45,7 @@ public:
 	};
 
 	//! opens a file
-	VFileStream(std::string in_strFileName, vuint in_nMode, vuint in_nCreation);
+	VFileStream(VStringParam in_strFileName, vuint in_nMode, vuint in_nCreation);
 
 	//! destructor, automatically closes opened file
 	virtual ~VFileStream();

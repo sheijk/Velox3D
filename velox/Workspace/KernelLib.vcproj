@@ -2,9 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="ExampleService"
-	ProjectGUID="{586E10B2-24CB-47C7-A973-CDCD6D563659}"
-	RootNamespace="ExampleService"
+	Name="KernelLib"
+	ProjectGUID="{F5A203BC-C39E-43DB-B426-4CC8114C84E6}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -15,17 +14,16 @@
 			Name="Debug|Win32"
 			OutputDirectory="Lokal/$(ConfigurationName)"
 			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -33,14 +31,8 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleService.dll"
-				LinkIncremental="2"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/ExampleService.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/ExampleService.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/KernelLib.lib"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -55,8 +47,6 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -66,14 +56,13 @@
 			Name="Release|Win32"
 			OutputDirectory="Lokal/$(ConfigurationName)"
 			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
-				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -81,15 +70,8 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleService.dll"
-				LinkIncremental="1"
-				GenerateDebugInformation="TRUE"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/ExampleService.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/KernelLib.lib"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -104,8 +86,6 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -116,23 +96,44 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Interface"
+			Name="Kernel"
 			Filter="">
 			<File
-				RelativePath="..\Api\V3d\ExampleService\IVExampleService.h">
+				RelativePath="..\Source\Kernel\VKernel.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VKernel.h">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VKernelException.h">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VServiceProxy.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VServiceProxy.h">
 			</File>
 		</Filter>
 		<Filter
-			Name="Implementation"
+			Name="TinyXML"
 			Filter="">
 			<File
-				RelativePath="..\Source\Example\Service\ExampleServiceDLL.cpp">
+				RelativePath="..\Source\Kernel\tinyxml\tinystr.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Example\Service\VExampleService.cpp">
+				RelativePath="..\Source\Kernel\tinyxml\tinystr.h">
 			</File>
 			<File
-				RelativePath="..\Source\Example\Service\VExampleService.h">
+				RelativePath="..\Source\Kernel\tinyxml\tinyxml.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\tinyxml\tinyxml.h">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\tinyxml\tinyxmlerror.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\tinyxml\tinyxmlparser.cpp">
 			</File>
 		</Filter>
 	</Files>

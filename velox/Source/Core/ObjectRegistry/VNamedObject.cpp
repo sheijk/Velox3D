@@ -7,11 +7,11 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 
 VNamedObject::VNamedObject(
-	const std::string &in_strName, 
+	VStringParam in_pcName, 
 	const VNamedObject *in_Parent)
 	:
 	// save name
-	m_Key(in_strName)
+	m_Key(in_pcName)
 {
 	// register object
 	VObjectRegistry::GetInstance()->RegisterObject(m_Key, *this);

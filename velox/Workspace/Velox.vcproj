@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="VirtualFileSystem"
-	ProjectGUID="{C2E15749-4341-4E4B-9019-07F8B0522B91}"
+	Name="Velox"
+	ProjectGUID="{594DBDEA-14ED-4A95-B219-98A18432E8E7}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -14,16 +14,16 @@
 			Name="Debug|Win32"
 			OutputDirectory="Lokal/$(ConfigurationName)"
 			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;VIRTUALFILESYSTEM_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -33,12 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/VirtualFileSystem.dll"
+				OutputFile="$(OutDir)/VeloxExe.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/VirtualFileSystem.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/VirtualFileSystem.lib"
+				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
+				SubSystem="1"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -65,13 +64,13 @@
 			Name="Release|Win32"
 			OutputDirectory="Lokal/$(ConfigurationName)"
 			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;VIRTUALFILESYSTEM_EXPORTS"
-				RuntimeLibrary="0"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -81,13 +80,62 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/VirtualFileSystem.dll"
+				OutputFile="$(OutDir)/VeloxExe.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
-				SubSystem="2"
+				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/VirtualFileSystem.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="UnitTests|Win32"
+			OutputDirectory="Lokal/Debug"
+			IntermediateDirectory="Lokal/$(ProjectName)/Debug"
+			ConfigurationType="1"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../API/"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="1"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)/VeloxExe.exe"
+				LinkIncremental="2"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
+				SubSystem="1"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -114,41 +162,9 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Interface"
-			Filter="">
-			<File
-				RelativePath="..\Api\V3d\Vfs\IVAccessRights.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Vfs\IVFileSystem.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Vfs\IVLegalOperations.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Vfs\IVOfflineStream.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Vfs\IVStream.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Implementation"
-			Filter="">
-			<File
-				RelativePath="..\Source\VirtualFileSystem\VFileStream.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\VirtualFileSystem\VFileStream.h">
-			</File>
-			<File
-				RelativePath="..\Source\VirtualFileSystem\VLegalOperations.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\VirtualFileSystem\VLegalOperations.h">
-			</File>
-		</Filter>
+		<File
+			RelativePath="..\Source\Kernel\main.cpp">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

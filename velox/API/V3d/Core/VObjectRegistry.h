@@ -45,7 +45,8 @@ private:
 	std::string m_strLastGeneratedName;
 	vint64 m_nLastKeyNum;
 public:
-	std::string GetObjectDump() const;
+	//TODO: VStringRetVal
+	VStringRetVal GetObjectDump() const;
 
 	/** in case a smart pointer might be used in future */
 	typedef VObjectRegistry* Pointer;

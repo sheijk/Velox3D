@@ -11,8 +11,8 @@ class VObjectRegistryException : public VException
 {
 public:
 	VObjectRegistryException(
-		std::string in_Error, 
-		std::string in_File, 
+		VStringParam in_Error, 
+		VStringParam in_File, 
 		int in_nLine);
 };
 

@@ -8,6 +8,8 @@
 namespace v3d {
 namespace error {
 
+//TODO: VStringParam/VStringRetVal benutzen
+
 /**
  * Interface for log device. 
  * @author AcrylSword

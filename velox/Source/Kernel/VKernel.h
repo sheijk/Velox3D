@@ -16,6 +16,8 @@ namespace v3d {
 namespace kernel {
 //-----------------------------------------------------------------------------
 
+//TODO: ableiten von "Spezial Kerneln" ermoeglichen
+
 /**
  * The kernel
  * Initializes the program and loads all libraries

@@ -9,7 +9,8 @@ namespace v3d {
 namespace example {
 //-----------------------------------------------------------------------------
 
-VExampleApp::VExampleApp() : VNamedObject("main", 0)
+VExampleApp::VExampleApp(VStringParam in_strName) 
+	: VNamedObject(in_strName, 0)
 {
 	V3D_DEBUGMSG("Example app has been created and registered");
 }

@@ -14,8 +14,8 @@ class VKernelException : public VException
 {
 public:
 	VKernelException(
-		std::string in_Error, 
-		std::string in_File, 
+		VStringParam in_Error, 
+		VStringParam in_File, 
 		int in_nLine)
 		: VException(in_Error, in_File, in_nLine)
 	{

@@ -15,7 +15,7 @@ namespace example {
 class VExampleService : public IVExampleService
 {
 public:
-	VExampleService();
+	VExampleService(VStringParam in_strName);
 	virtual ~VExampleService();
 
 public:

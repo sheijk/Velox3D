@@ -29,7 +29,7 @@ EXAMPLEAPP_API void Initialize(VObjectRegistry* in_pObjReg)
 
 	// create the application service instance
 	// (registers itself at the Object Registry)
-	g_pService.Reset(new VExampleApp());
+	g_pService.Reset(new VExampleApp("main"));
 }
 
 EXAMPLEAPP_API void Shutdown()

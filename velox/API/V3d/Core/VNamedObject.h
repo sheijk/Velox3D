@@ -1,10 +1,9 @@
 #ifndef V3D_VNAMEDOBJECT_H
 #define V3D_VNAMEDOBJECT_H
 //------------------------------------------------------------------------
-#include <v3d/Core//VCoreLib.h>
+#include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VObjectKey.h>
 
-#include <string>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -31,8 +30,7 @@ public:
 	VNamedObject(const VNamedObject* in_Parent);
 
 	/** create object and register it using the given name */
-	//TODO: std::string hat hier nix zu suchen (sheijk)
-	VNamedObject(const std::string& in_strName, const VNamedObject* in_Parent);
+	VNamedObject(VStringParam in_pcName, const VNamedObject* in_Parent);
 
 	/** destructor */
 	virtual ~VNamedObject();

@@ -94,7 +94,7 @@ void VKernel::ParseFile(const string &in_strFileName)
 	if( iniDoc.Error() )
 	{
 		V3D_THROW(VKernelException, 
-			string("could not load file <") + in_strFileName + string(">"));
+			VString("could not load file <") + in_strFileName.c_str() + ">");
 	}
 
 	// remove all services
@@ -190,7 +190,7 @@ void VKernel::LoadServices()
 void VKernel::DelegateControl()
 {
 	// get application service
-	VObjectKey key(m_strAppName);
+	VObjectKey key(m_strAppName.c_str());
 	IVApplication* pApp = QueryObject<IVApplication>(key);
 
 	// start it

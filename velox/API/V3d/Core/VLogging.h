@@ -7,7 +7,7 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
-void SendDebugMessage(const char* in_pcMessage);
+void SendDebugMessage(VStringParam in_pcMessage);
 
 /** send a debug message */
 #ifdef V3D_DEBUG

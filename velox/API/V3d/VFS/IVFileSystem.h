@@ -20,7 +20,7 @@ class IVFileSystem : public VNamedObject
 public:
 	typedef VPointer<IVOfflineStream>::AutoPtr FileStreamPtr;
 
-	virtual FileStreamPtr OpenFile(const char* in_strPathAndName) = 0;
+	virtual FileStreamPtr OpenFile(VStringParam in_strPathAndName) = 0;
 
 //	typedef ... DirectoryIteratorPtr;
 //	typedef ... FileIteratorPtr;

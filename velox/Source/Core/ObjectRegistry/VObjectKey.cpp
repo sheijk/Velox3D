@@ -9,12 +9,7 @@ VObjectKey::VObjectKey()
 {
 }
 
-VObjectKey::VObjectKey(const std::string &in_strName)
-{
-	m_strName = in_strName;
-}
-
-VObjectKey::VObjectKey(const char* in_pcName)
+VObjectKey::VObjectKey(VStringParam in_pcName)
 {
 	m_strName = in_pcName;
 }
@@ -23,9 +18,9 @@ VObjectKey::~VObjectKey()
 {
 }
 
-const std::string& VObjectKey::ToString() const
+VStringRetVal VObjectKey::ToString() const
 {
-	return m_strName;
+	return m_strName.AsCString();
 }
 
 //-----------------------------------------------------------------------------

@@ -7,6 +7,7 @@ namespace error {
 	/**
 	 * Different types of message logging.
 	 */
+	//TODO: muesste VLogMode heissen, weil nicht in einer Klasse
 	enum LogMode {
 
 		Ok,

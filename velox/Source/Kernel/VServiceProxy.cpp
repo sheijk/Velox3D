@@ -33,9 +33,9 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	if( NULL == m_hDllInstance )
 	{
 		V3D_THROW(VKernelException, 
-			string("could not load DLL file <")
-			+ m_strDLL
-			+ string(">") );
+			VString("could not load DLL file <")
+			+ m_strDLL.c_str()
+			+ ">" );
 	}
 
 	// store the function pointers
@@ -51,7 +51,7 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	{
 		V3D_THROW(VKernelException,
 			"could not get address of Initialize/DeInitialize function of DLL \""
-			+ m_strDLL + "\"");
+			+ VString(m_strDLL.c_str()) + "\"");
 	}
 	
 	// call the init function

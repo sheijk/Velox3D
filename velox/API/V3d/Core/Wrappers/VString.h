@@ -18,6 +18,7 @@ namespace v3d {
 class VString
 {
 private:
+	//TODO: array pointer verwenden, und AutoPtr
 	mutable VPointer<vchar>::SharedPtr m_pCStr;
 	vuint m_nLength;
 
@@ -37,9 +38,17 @@ public:
 	/** sets the string to the value of a c style string */
 	void Set(const vchar* in_pCStr);
 
+	void operator=(const char* in_pCStr);
+	bool operator<(const VString& in_Other) const;
+
+	operator const char*() const;
+
 	/** returns the string's length */
 	vuint Length() const;
 };
+
+VString operator+(const char* in_pcChar, const VString& in_VStr);
+VString operator+(const VString& in_VStr, const char* in_pcChar);
 
 //-----------------------------------------------------------------------------
 } // namespace v3d

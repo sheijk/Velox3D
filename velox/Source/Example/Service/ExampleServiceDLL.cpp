@@ -34,7 +34,7 @@ EXAMPLESERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create service object and register it
-	g_pExService.Reset(new VExampleService());
+	g_pExService.Reset(new VExampleService("exService"));
 }
 
 EXAMPLESERVICE_API void Shutdown()

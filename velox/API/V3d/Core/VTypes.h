@@ -1,5 +1,6 @@
 #ifndef V3D_VTYPES_H
 #define V3D_VTYPES_H
+//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -29,6 +30,22 @@ typedef unsigned long vulong;
 typedef float vfloat32;
 typedef double vfloat64;
 typedef bool vbool;
+
+/**
+ * Conventions for VStringParam and VStringRetVal:
+ * const char* c = param [VStringParam param] is valid
+ * VStringRetVal v = c [const char* c] ist valid
+ *
+ * thus, VStringParam and VStringRetVal can be used like const char*
+ */
+
+/** use this when a string parameter is needed */
+typedef const char* VStringParam;
+
+class VString;
+
+/** use this when returning a string */
+typedef VString VStringRetVal;
 
 //TODO: wozu wird das gebraucht? - sheijk
 #define V3D_MULTITHREADING_SUPPORT

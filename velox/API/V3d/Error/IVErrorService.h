@@ -19,7 +19,7 @@ namespace error {
 class IVErrorService : public VNamedObject
 {
 public:
-	IVErrorService(std::string in_strName, VNamedObject* in_pParent) 
+	IVErrorService(VStringParam in_strName, VNamedObject* in_pParent) 
 		: VNamedObject(in_strName, in_pParent)
 	{
 	}
@@ -44,6 +44,7 @@ public:
 	 * @param in_Message The debug message
 	 * @param in_LogMode A member of the LogMode enumeration describing the way the message should be displayed
 	 */
+	//TODO: VStringParam/VStringRetVal benutzen
 	virtual void Message( const VString& in_Message, LogMode in_LogMode = Ok ) = 0;
 	
 	virtual void BeginProgressbar() = 0;

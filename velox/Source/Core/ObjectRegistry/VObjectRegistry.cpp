@@ -76,7 +76,7 @@ void VObjectRegistry::RegisterObject(
 	VNamedObject& in_Object)
 {
 	cout << "Object registered: addr(" << &in_Object << "), name: \""
-		<< in_Name.ToString() << "\"" << endl;
+		<< in_Name.ToString().AsCString() << "\"" << endl;
 
 	// register object
 	pair<ObjectKeyMap::iterator, bool> res;
@@ -89,7 +89,9 @@ void VObjectRegistry::RegisterObject(
 	{
 		// throw exception
 		V3D_THROW(VObjectRegistryException, 
-			"tried to register object \"" + in_Name.ToString() + "\"twice");
+			"tried to register object \"" 
+			+ in_Name.ToString()
+			+ "\"twice");
 	}
 }
 
@@ -147,8 +149,8 @@ VObjectKey VObjectRegistry::GenerateKey()
 {
 	ostringstream str;
 
-	// generate an usused key
-	while( m_Objects.find(m_strLastGeneratedName) != m_Objects.end() )
+	// generate an unused key
+	while( m_Objects.find(m_strLastGeneratedName.c_str()) != m_Objects.end() )
 	{
 		m_nLastKeyNum++;
 		
@@ -157,10 +159,10 @@ VObjectKey VObjectRegistry::GenerateKey()
 		m_strLastGeneratedName = str.str();
 	}
 
-	return VObjectKey(m_strLastGeneratedName);
+	return VObjectKey(m_strLastGeneratedName.c_str());
 }
 
-std::string VObjectRegistry::GetObjectDump() const
+VStringRetVal VObjectRegistry::GetObjectDump() const
 {
 	ObjectKeyMap::const_iterator objIter = m_Objects.begin();
 	std::string strObjList;
@@ -170,7 +172,7 @@ std::string VObjectRegistry::GetObjectDump() const
 		strObjList += "<" + objIter->first.ToString() + ">, ";
 	}
 
-	return strObjList;
+	return strObjList.c_str();
 }
 
 //-----------------------------------------------------------------------------

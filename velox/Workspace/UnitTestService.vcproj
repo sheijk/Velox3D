@@ -2,9 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="ExampleService"
-	ProjectGUID="{586E10B2-24CB-47C7-A973-CDCD6D563659}"
-	RootNamespace="ExampleService"
+	Name="UnitTestService"
+	ProjectGUID="{1FBF5A7F-2E9B-4E27-99B7-980EDEB8C0ED}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -21,7 +20,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -34,12 +33,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleService.dll"
+				OutputFile="$(OutDir)/UnitTestService.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/ExampleService.pdb"
+				ProgramDatabaseFile="$(OutDir)/UnitTestService.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/ExampleService.lib"
+				ImportLibrary="$(OutDir)/UnitTestService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -71,7 +70,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -82,13 +81,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/ExampleService.dll"
+				OutputFile="$(OutDir)/UnitTestService.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/ExampleService.lib"
+				ImportLibrary="$(OutDir)/UnitTestService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -119,20 +118,23 @@
 			Name="Interface"
 			Filter="">
 			<File
-				RelativePath="..\Api\V3d\ExampleService\IVExampleService.h">
+				RelativePath="..\Api\V3d\UnitTests\IVTestManager.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\UnitTests\IVUnitTest.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
 			Filter="">
 			<File
-				RelativePath="..\Source\Example\Service\ExampleServiceDLL.cpp">
+				RelativePath="..\Source\UnitTests\UnitTestSuiteDLL.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Example\Service\VExampleService.cpp">
+				RelativePath="..\Source\UnitTests\VTestManager.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Example\Service\VExampleService.h">
+				RelativePath="..\Source\UnitTests\VTestManager.h">
 			</File>
 		</Filter>
 	</Files>

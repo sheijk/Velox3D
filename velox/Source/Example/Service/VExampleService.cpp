@@ -6,8 +6,8 @@ namespace v3d {
 namespace example {
 //-----------------------------------------------------------------------------
 
-VExampleService::VExampleService() :
-	IVExampleService("exService", 0)
+VExampleService::VExampleService(VStringParam in_strName) :
+	IVExampleService(in_strName, 0)
 {
 
 }

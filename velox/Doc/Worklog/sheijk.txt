@@ -15,18 +15,29 @@ Worklog von sheijk
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-todo:
-<v3d/Core/VCoreLib.h> in jedem Header includen
-Vfs als Service
+Exceptions: std::string entfernen
+Project Files umstellen: Multithreaded und Namen auf ..Lib, ..Service und Engine,
+sowie Kernel in ein Extra Projekt
+Kernel: Fkten virtual machen, damit der Editor einen angepasste Version ableiten
+kann
+Services: Namen per Konstruktor einstellbar
 UnitTests als Service
-Utilities: Container Interfaces
+Vfs als Service
+<v3d/Core/VCoreLib.h> in jedem Header includen
 Netzwerk, Scripting
-Welt erobern
+Auf die Langnese Insel ziehen
 
 --------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
 log:
+
+06.06.2003
+std::string aus dem Core entfernt, und durch VStringParam/VStringRetVal/VString
+ersetzt, 
+
+05.06.2003
+VNamedObject usw.: std::string aus Interfaces entfernt
 
 03.06.2003
 IVIterator und IVContainer erstellt

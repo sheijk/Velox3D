@@ -5,7 +5,7 @@
 #include "VExclusiveOwnerPol.h"
 #include "VRefCountPol.h"
 #include "VNoCheckPol.h"
-#include "VNullCheckPol.h"
+//#include "VNullCheckPol.h"
 #include "VPointerStorage.h"
 
 //-----------------------------------------------------------------------------
@@ -44,26 +44,26 @@ struct VPointer
 		VNoCheckPol<T*>
 		> SharedPtr;
 
-	/**
-	 * behaves like AutoPtr but must not be assigned a 0 pointer
-	 */
-	typedef VSmartPointer<
-		T,
-		VExclusiveOwnerPol< VPointerStorage<T> >,
-		VNoCheckPol<T*>,
-		VNullCheckPol<T*>
-		> AutoPtrNonNull;
+	///**
+	// * behaves like AutoPtr but must not be assigned a 0 pointer
+	// */
+	//typedef VSmartPointer<
+	//	T,
+	//	VExclusiveOwnerPol< VPointerStorage<T> >,
+	//	VNoCheckPol<T*>,
+	//	VNullCheckPol<T*>
+	//	> AutoPtrNonNull;
 
-	/**
-	 * behaves like SharedPtr but throws a VNullPointerException
-	 * when trying to set it to 0
-	 */
-	typedef VSmartPointer<
-		T,
-		VRefCountPol< VPointerStorage<T> >,
-		VNoCheckPol<T*>,
-		VNullCheckPol<T*>
-		> SharedPtrNonNull;
+	///**
+	// * behaves like SharedPtr but throws a VNullPointerException
+	// * when trying to set it to 0
+	// */
+	//typedef VSmartPointer<
+	//	T,
+	//	VRefCountPol< VPointerStorage<T> >,
+	//	VNoCheckPol<T*>,
+	//	VNullCheckPol<T*>
+	//	> SharedPtrNonNull;
 };
 
 //-----------------------------------------------------------------------------

@@ -20,7 +20,7 @@ namespace vfs {
 	Creates the stream and opens a file
 */
 VFileStream::VFileStream(
-	string in_strFileName, 
+	VStringParam in_strFileName, 
 	vuint in_nAccess, 
 	vuint in_nCreation )
 {
@@ -64,7 +64,7 @@ VFileStream::VFileStream(
 		str << in_nCreation << endl;
 
 		//TODO: durch vfs exception ersetzen
-		V3D_THROW( VException, str.str() )
+		V3D_THROW( VException, str.str().c_str() )
 	}
 
 	// create legal op class
@@ -221,8 +221,8 @@ void VFileStream::Connect()
 			// throw error
 			//TODO: vfs exc.
 			V3D_THROW( VException, 
-				string("could not open file: \"") 
-				+ m_strFileName + string( "\"" ) );
+				VString("could not open file: \"") 
+				+ m_strFileName.c_str() + "\"" );
 		}	
 
 		SetFilePointer( m_hFile, m_nFilePos, 0, FILE_BEGIN );
