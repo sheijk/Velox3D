@@ -92,7 +92,7 @@ public class AccountListWindow extends Document {
         while(iter.hasNext()) {
             Account account = iter.next();
             
-            accountNames.add("account " + account.getAccountNo() + " " + account.getOwner());
+            accountNames.add(account.getTypeString() + " " + account.getAccountNo() + " " + account.getOwner());
         }
         
         myListOptionPanel.setItems(accountNames);
@@ -117,7 +117,7 @@ public class AccountListWindow extends Document {
             // add a giro account
             Model model = myController.getModel();
             Giro giro = new Giro();
-            model.addAccount(giro);
+            model.insert(giro);
             
             int i = 1;
             System.out.println(i);

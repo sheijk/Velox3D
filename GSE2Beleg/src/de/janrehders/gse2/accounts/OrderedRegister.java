@@ -6,6 +6,7 @@
  */
 package de.janrehders.gse2.accounts;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -15,7 +16,7 @@ import java.util.TreeSet;
  * 
  * @author Jan Rehders
  */
-public class OrderedRegister {
+public class OrderedRegister implements Serializable {
     private String myRegisterInformation;
     private Date myDateOfCreation;
     private TreeSet myAccounts;

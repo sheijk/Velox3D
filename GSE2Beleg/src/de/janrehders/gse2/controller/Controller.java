@@ -52,8 +52,8 @@ public class Controller extends Observable {
         /* (non-Javadoc)
          * @see de.janrehders.gse2.model.Model#addAccount(de.janrehders.gse2.accounts.Account)
          */
-        public boolean addAccount(Account inAccount) {
-            if( myDelegate.addAccount(inAccount) )
+        public boolean insert(Account inAccount) {
+            if( myDelegate.insert(inAccount) )
             {
                 notifyUpdate();
                 
@@ -66,8 +66,8 @@ public class Controller extends Observable {
         /* (non-Javadoc)
          * @see de.janrehders.gse2.model.Model#removeAccount(de.janrehders.gse2.accounts.Account)
          */
-        public boolean removeAccount(Account inAccount) {
-            if( myDelegate.removeAccount(inAccount) )
+        public boolean remove(Account inAccount) {
+            if( myDelegate.remove(inAccount) )
             {
                 notifyUpdate();
                 return true;
@@ -79,8 +79,8 @@ public class Controller extends Observable {
         /* (non-Javadoc)
          * @see de.janrehders.gse2.model.Model#updateAccount(int, de.janrehders.gse2.accounts.Account)
          */
-        public boolean updateAccount(int inAccountId, Account inAccount) {
-            if( myDelegate.updateAccount(inAccountId, inAccount) )
+        public boolean update(int inAccountId, Account inAccount) {
+            if( myDelegate.update(inAccountId, inAccount) )
             {
                 notifyUpdate();
                 return true;
@@ -129,8 +129,8 @@ public class Controller extends Observable {
         /* (non-Javadoc)
          * @see de.janrehders.gse2.model.Model#erase()
          */
-        public void erase() {
-            myDelegate.erase();            
+        public void scratch() {
+            myDelegate.scratch();            
         }
     }
 }

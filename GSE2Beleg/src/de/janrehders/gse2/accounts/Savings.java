@@ -88,4 +88,19 @@ public class Savings extends Account {
 	    super.show();
 		System.out.println("Rate of interest: " + myRateOfInterest);
 	}
+
+    /* (non-Javadoc)
+     * @see de.janrehders.gse2.accounts.Account#generate()
+     */
+    public Account generate() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see de.janrehders.gse2.accounts.Account#visit(de.janrehders.gse2.accounts.AccountVisitor)
+     */
+    public Object visit(AccountVisitor inVisitor) {
+        return inVisitor.onSavings(this);
+    }
 }

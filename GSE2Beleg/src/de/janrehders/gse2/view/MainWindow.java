@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileFilter;
 import de.janrehders.gse2.accounts.Giro;
 import de.janrehders.gse2.controller.Controller;
 import de.janrehders.gse2.model.Model;
+import de.janrehders.gse2.model.ModelImpl;
 
 import java.util.*;
 
@@ -31,7 +32,8 @@ import java.util.*;
  */
 public class MainWindow extends JFrame {
     public static void main(String[] args) {
-        Model model = new EchoModel();
+//        Model model = new EchoModel();
+        Model model = new ModelImpl();
         Controller controller = new Controller(model);
         
         MainWindow wnd = new MainWindow(controller);
@@ -51,7 +53,7 @@ public class MainWindow extends JFrame {
         setSize(800, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        myDocumentMenu = new Menu("Documents");
+        myDocumentMenu = new Menu("Windows");
         
         // add a menu
         this.setMenuBar(createMenuBar());
@@ -86,7 +88,7 @@ public class MainWindow extends JFrame {
         newItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 setCurrentFileName(null);
-                myController.getModel().erase();
+                myController.getModel().scratch();
             }
         });
         
@@ -108,7 +110,7 @@ public class MainWindow extends JFrame {
                         }
                         else
                         {
-                            myController.getModel().erase();
+                            myController.getModel().scratch();
                         }
                         
                         setCurrentFileName(dialog.getSelectedFile().getAbsolutePath());
@@ -199,7 +201,7 @@ public class MainWindow extends JFrame {
         newGiroItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 Giro giro = new Giro();
-                myController.getModel().addAccount(giro);
+                myController.getModel().insert(giro);
                 new AccountEditWindow(myController, giro, true, MainWindow.this);
             }
         });
@@ -262,10 +264,23 @@ public class MainWindow extends JFrame {
         return menu;
     }
     
+    private void closeAllDocuments()
+    {
+        Iterator iter = myDocuments.iterator();
+        while(iter.hasNext())
+        {
+            Document doc = (Document)iter.next();
+            
+                        
+        }
+    }
+    
     private void updateDocumentList()
     {
+        // remove all documents from menu
         myDocumentMenu.removeAll();
         
+        // rebuild documents menu
         Iterator iter = myDocuments.iterator();
         while(iter.hasNext())
         {

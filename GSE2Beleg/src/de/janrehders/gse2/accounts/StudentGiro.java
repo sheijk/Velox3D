@@ -137,4 +137,7 @@ public class StudentGiro extends Giro {
 		return balance;
 	}
 	
+    public Object visit(AccountVisitor inVisitor) {
+        return inVisitor.onStudentGiro(this);
+    }
 }

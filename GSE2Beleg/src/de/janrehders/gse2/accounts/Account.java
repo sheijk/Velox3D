@@ -6,6 +6,7 @@
  */
 package de.janrehders.gse2.accounts;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,16 +15,23 @@ import java.util.Date;
  * 
  * @author Jan Rehders
  */
-public class Account implements Comparable {
-    private int myAccountNo;
+public abstract class Account implements Comparable, Serializable {
+    private int myAccountNo = getNewAccountId();
     private Date myDateOfCreation = new Date();
     private AccountType myType;
     private String myOwner;
     private float myBalance = 0;
     
+    private static int ourLastAccountId = 0;
+    
+    private static int getNewAccountId()
+    {
+        return ++ourLastAccountId;
+    }
+    
     /** creates a default account */
     public Account() {
-        myAccountNo = -1;
+//        myAccountNo = -1;
         myType = AccountType.invalid();
         myOwner = "";
         myBalance = 0;
@@ -31,7 +39,7 @@ public class Account implements Comparable {
     
     /** inits the account with the given values */
     public Account(int inNumber, AccountType inType, String inOwner, float inBalance) {
-        myAccountNo = inNumber;
+//        myAccountNo = inNumber;
         myType = inType;
         myOwner = inOwner;
         myBalance = inBalance;
@@ -44,9 +52,7 @@ public class Account implements Comparable {
     }
     
     /** clones an object */
-    public Account generate() {
-        return new Account(this);
-    }
+    public abstract Account generate();
     
     /** proves the class invariant */
     public boolean classInvariant() {
@@ -162,6 +168,27 @@ public class Account implements Comparable {
             return false;
     }
     
+    /** determine exact type of account */
+    public abstract Object visit(AccountVisitor inVisitor);
+    
+    /** gets a short string identifying the account type */
+    public final String getTypeString()
+    {
+        return (String)visit(new AccountVisitor() {
+            public Object onGiro(Giro inGiro) {
+                return "Giro";
+            }
+
+            public Object onStudentGiro(StudentGiro inGiro) {
+                return "StudentGiro";
+            }
+
+            public Object onSavings(Savings inSavings) {
+                return "Savings";
+            }
+        });
+    }
+
     /** print's the accounts fields to the standard output stream */
     public void show() {
         System.out.println("Account no.: " + myAccountNo);

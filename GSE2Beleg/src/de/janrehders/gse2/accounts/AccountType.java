@@ -6,12 +6,14 @@
  */
 package de.janrehders.gse2.accounts;
 
+import java.io.Serializable;
+
 /**
  * Stellt den Typ eines Accounts dar.
  * 
  * @author sheijk
  */
-public class AccountType {
+public class AccountType implements Serializable {
     /** creates a commercial account type */
     public static AccountType commercial() {
         return new Commercial();        

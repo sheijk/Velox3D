@@ -35,7 +35,7 @@ public class AccountEditWindow extends Document {
             MainWindow inMainWindow
             )
     {
-        super(getHeader(inAccount), inMainWindow);
+        super(getHeader(inAccount, inAllowEditing), inMainWindow);
 
         assert inController != null;
         assert inAccount != null;
@@ -66,7 +66,7 @@ public class AccountEditWindow extends Document {
                     myAccount.setOwner(myOwnerTextField.getText());
                     
                     // notify controller
-                    myController.getModel().updateAccount(myAccount.getAccountNo(), myAccount);
+                    myController.getModel().update(myAccount.getAccountNo(), myAccount);
                 }
             });
             
@@ -115,9 +115,12 @@ public class AccountEditWindow extends Document {
         myOwnerTextField.setText(myAccount.getOwner());
     }
     
-    private static String getHeader(Account inAccount)
+    private static String getHeader(Account inAccount, boolean inAllowEditing)
     {
         assert inAccount != null;
-        return "Account nr. " + inAccount.getAccountNo();
+        String title = inAllowEditing ? "Edit " : "View "
+        	+ inAccount.getTypeString() + " nr. " + inAccount.getAccountNo();
+        
+        return title;        	
     }
 }

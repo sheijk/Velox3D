@@ -143,4 +143,19 @@ public class Giro extends Account {
 			return true;
 		}
 	}
+
+    /* (non-Javadoc)
+     * @see de.janrehders.gse2.accounts.Account#generate()
+     */
+    public Account generate() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    /* (non-Javadoc)
+     * @see de.janrehders.gse2.accounts.Account#visit(de.janrehders.gse2.accounts.AccountVisitor)
+     */
+    public Object visit(AccountVisitor inVisitor) {
+        return inVisitor.onGiro(this);
+    }
 }

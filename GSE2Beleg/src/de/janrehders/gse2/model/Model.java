@@ -19,13 +19,13 @@ import de.janrehders.gse2.accounts.AccountIterator;
  */
 public interface Model {
     /** adds an account */
-    boolean addAccount(Account inAccount);
+    boolean insert(Account inAccount);
     
     /** removes an account */
-    boolean removeAccount(Account inAccount);
+    boolean remove(Account inAccount);
     
     /** updates an account with new data */
-    boolean updateAccount(int inAccountId, Account inAccount);
+    boolean update(int inAccountId, Account inAccount);
     
     /** get an iterator to access all existing acounts */
     AccountIterator accountIterator();
@@ -34,7 +34,7 @@ public interface Model {
     Account getById(int inAccountId);
     
     /** remove all data */
-    void erase();
+    void scratch();
     
     /** store the whole register including all accounts to a stream */
     boolean writeToStream(OutputStream ioStream);

@@ -27,7 +27,7 @@ public class EchoModel implements Model {
     /* (non-Javadoc)
      * @see de.janrehders.gse2.model.Model#addAccount(de.janrehders.gse2.accounts.Account)
      */
-    public boolean addAccount(Account inAccount) {
+    public boolean insert(Account inAccount) {
         System.out.println("created new account: ");
         inAccount.show();
         
@@ -37,7 +37,7 @@ public class EchoModel implements Model {
     /* (non-Javadoc)
      * @see de.janrehders.gse2.model.Model#removeAccount(de.janrehders.gse2.accounts.Account)
      */
-    public boolean removeAccount(Account inAccount) {
+    public boolean remove(Account inAccount) {
         System.out.println("removed account:");
         inAccount.show();
         
@@ -47,7 +47,7 @@ public class EchoModel implements Model {
     /* (non-Javadoc)
      * @see de.janrehders.gse2.model.Model#updateAccount(int, de.janrehders.gse2.accounts.Account)
      */
-    public boolean updateAccount(int inAccountId, Account inAccount) {
+    public boolean update(int inAccountId, Account inAccount) {
         System.out.println("updated account with id " + inAccountId + ":");
         inAccount.show();
         
@@ -98,7 +98,7 @@ public class EchoModel implements Model {
     /* (non-Javadoc)
      * @see de.janrehders.gse2.model.Model#erase()
      */
-    public void erase() {
+    public void scratch() {
         System.out.println("Erased model");
     }
 
