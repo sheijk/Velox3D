@@ -28,7 +28,7 @@ namespace v3d {
 			m_Mat(r, c) = val;
 		}
 
-		Scalar Get(vuint n, vuint m) const
+		Scalar Get(vuint r, vuint c) const
 		{
 			return m_Mat(r,c);
 		}
