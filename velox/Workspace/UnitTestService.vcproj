@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="7.0"
 	Name="UnitTestService"
 	ProjectGUID="{1FBF5A7F-2E9B-4E27-99B7-980EDEB8C0ED}"
 	Keyword="Win32Proj">
@@ -23,7 +23,7 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -71,7 +71,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;UNITTESTSERVICE_EXPORTS"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"

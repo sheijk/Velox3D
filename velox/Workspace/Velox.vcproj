@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="7.0"
 	Name="Velox"
 	ProjectGUID="{594DBDEA-14ED-4A95-B219-98A18432E8E7}"
 	Keyword="Win32Proj">
@@ -23,7 +23,7 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -35,6 +35,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/VeloxExe.exe"
 				LinkIncremental="2"
+				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
 				SubSystem="1"
@@ -70,7 +71,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="2"
+				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -82,6 +83,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/VeloxExe.exe"
 				LinkIncremental="1"
+				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -133,6 +135,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/VeloxExe.exe"
 				LinkIncremental="2"
+				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/VeloxExe.pdb"
 				SubSystem="1"
@@ -162,6 +165,47 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="kernel"
+			Filter="">
+			<File
+				RelativePath="..\Source\Kernel\VKernel.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VKernel.h">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VKernelException.h">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VServiceProxy.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VServiceProxy.h">
+			</File>
+			<Filter
+				Name="xml"
+				Filter="">
+				<File
+					RelativePath="..\Source\Kernel\tinyxml\tinystr.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Kernel\tinyxml\tinystr.h">
+				</File>
+				<File
+					RelativePath="..\Source\Kernel\tinyxml\tinyxml.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Kernel\tinyxml\tinyxml.h">
+				</File>
+				<File
+					RelativePath="..\Source\Kernel\tinyxml\tinyxmlerror.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Kernel\tinyxml\tinyxmlparser.cpp">
+				</File>
+			</Filter>
+		</Filter>
 		<File
 			RelativePath="..\Source\Kernel\main.cpp">
 		</File>
