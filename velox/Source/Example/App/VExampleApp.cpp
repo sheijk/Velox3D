@@ -8,6 +8,7 @@
 #include <v3d/Window/IVWindow.h>
 #include <v3d/Window/IVWindowManager.h>
 #include <v3d/System/IVSystemManager.h>
+#include <v3d/Graphics/IVDevice.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
@@ -67,6 +68,9 @@ vint VExampleApp::Main()
 
 	win = winmanager->CreateWindow("v3d window");
 
+	IVDevice* m_Device;
+	m_Device = &win->QueryGraphicsDevice();
+
 	
 	// main loop
 	updater.Start();
@@ -74,7 +78,9 @@ vint VExampleApp::Main()
 
 	while(system->GetStatus())
 	{
+		m_Device->BeginScene();
 		updater.StartNextFrame();
+		m_Device->EndScene();
 	}
 
 	updater.Stop();

@@ -7,14 +7,6 @@ namespace v3d {
 namespace editor {
 //-----------------------------------------------------------------------------
 
-/**
- * standard c'tor
- */
-
-/*BEGIN_EVENT_TABLE(VEditorCanvas, wxScrolledWindow)
-EVT_PAINT(  VEditorCanvas::OnPaint)
-END_EVENT_TABLE()*/
-
 BEGIN_EVENT_TABLE(VEditorFrame, wxFrame)
 EVT_MENU(ID_Quit, VEditorFrame::OnQuit)
 EVT_MENU(ID_About, VEditorFrame::OnAbout)
@@ -28,19 +20,13 @@ VEditorFrame::VEditorFrame() : wxFrame ((wxFrame *) NULL, -1,
 	CreateStatusBar();
 	SetStatusText("ready");
 
-	m_MenuBar = new wxMenuBar;
-	
-	wxMenu *menuFile = new wxMenu;
-
-	menuFile->Append( ID_About, "About" );
-	menuFile->AppendSeparator();
-	menuFile->Append( ID_Quit, "E&xit" );
+	menuFile.Append( ID_About, "About" );
+	menuFile.AppendSeparator();
+	menuFile.Append( ID_Quit, "E&xit" );
 	
 
-	m_MenuBar->Append(menuFile, "File");
-	SetMenuBar(m_MenuBar);
-
-	//m_pCanvas = new VEditorCanvas(this);
+	m_MenuBar.Append(&menuFile, "File");
+	SetMenuBar(&m_MenuBar);
 
 }
 
@@ -70,31 +56,7 @@ void VEditorFrame::OnAbout(wxCommandEvent& event)
 }
 
 
-
-/*VEditorCanvas::VEditorCanvas(VEditorFrame *parent) : wxScrolledWindow(parent, -1,
-												wxDefaultPosition,
-												wxDefaultSize, wxHSCROLL | 
-												wxVSCROLL | 
-												wxNO_FULL_REPAINT_ON_RESIZE)
-{
-
-	m_Parent = parent;
-}
-
-void VEditorCanvas::OnPaint(wxPaintEvent &event)
-{
-	wxPaintDC dc(this);
-	PrepareDC( dc );
-	DrawText(dc);
-}
-
-
-void VEditorCanvas::DrawText(wxDC& dc)
-{
-	dc.SetFont( wxFont(8, wxNORMAL, wxNORMAL, wxNORMAL, FALSE) );
-	dc.DrawText( _T("This is text"), 10, 10 );
-}*/
 //-----------------------------------------------------------------------------
-} // namespace console
+} // namespace editor
 } // namespace v3d
 //-----------------------------------------------------------------------------

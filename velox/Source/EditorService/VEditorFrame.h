@@ -11,23 +11,6 @@ namespace editor {
 //-----------------------------------------------------------------------------
 class VEditorFrame;
 
-/*class VEditorCanvas : public wxScrolledWindow
-{
-public:
-
-	VEditorCanvas(VSysInfoFrame *parent );
-	void OnPaint(wxPaintEvent &event);
-
-protected:
-
-	void DrawText(wxDC& dc);
-
-	VEditorFrame* m_Parent;
-
-	DECLARE_EVENT_TABLE()
-
-};*/
-
 class VEditorFrame : public wxFrame, public window::IVWindowFrame
 {
 public:
@@ -35,7 +18,7 @@ public:
 	enum RMenu
 	{
 		ID_Quit = 1,
-		ID_About,
+		ID_About
 	};
 	VEditorFrame();
 	~VEditorFrame();
@@ -46,8 +29,8 @@ public:
 
 private:
 
-	//VEditorCanvas* m_pCanvas;
-	wxMenuBar* m_MenuBar;
+	wxMenuBar m_MenuBar;
+	wxMenu menuFile;
 
 	DECLARE_EVENT_TABLE()
 

@@ -14,6 +14,7 @@ TODO List:
 - Added a dummy frame to standard wx app for timeing
 - Added a timer to wxApp to circumwent idling and stop rendering
 - in editor mode fps are limited to  x <= 1000
+- editor service is not running in release build. internal wx build bug!!! :/
 
 18.10.03
 - Adding WxWindowsService and removing parts of wx from WindowService to
