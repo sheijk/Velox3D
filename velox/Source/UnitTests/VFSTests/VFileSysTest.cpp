@@ -8,6 +8,7 @@
 #include <v3d/VFS/IVFileSystem.h>
 #include <v3d/VFS/IVDirectory.h>
 #include <v3d/VFS/IVFile.h>
+#include <v3d/VFS/VIOException.h>
 
 #include <iostream>
 #include <algorithm>
@@ -181,11 +182,40 @@ void CheckTestFile()
 	IVFileSystem::FileStreamPtr pFileStream = 
 		pFS->OpenFile("/mount'd.dir/testfile.txt", VReadAccess);
 
+	pFileStream.Release();
+	pFileStream = pFS->OpenFile("/mount'd.dir/testfile.txt", VReadAccess);
+
 	vchar expectedFileContent[] = "Dies ist ein Textfile";
 
 	CheckStreamContent(
 		*pFileStream, expectedFileContent, 
 		strlen(expectedFileContent));
+}
+
+void CheckAccessRights()
+{
+	// open file for reading
+	IVFileSystem::FileStreamPtr pFileStream
+		= QueryObject<IVFileSystem>("vfs.fs")
+		->OpenFile("/mount'd.dir/testfile.txt", VReadAccess);
+
+	vchar testString[] = "lalala";
+
+	try
+	{
+		pFileStream->Write(testString, 4);
+
+		V3D_UNITTEST_ERROR_STATIC("could write to read-only file");
+	}
+	catch(VIllegalOperationException e)
+	{
+		// ok, this should happen
+	}
+	catch(...)
+	{
+		V3D_UNITTEST_ERROR_STATIC("unknown error occured when trying to "
+			"write to read-only stream. (VIllegalOperationException expected");
+	}
 }
 
 void VFileSysTest::ExecuteTest()
@@ -197,6 +227,7 @@ void VFileSysTest::ExecuteTest()
 
 	// read test file
 	CheckTestFile();
+	CheckAccessRights();
 }
 
 //-----------------------------------------------------------------------------

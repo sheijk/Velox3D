@@ -79,15 +79,15 @@ namespace v3d {
 			Clone(in_Other);
 		}
 
-		VSmartPtr(Pointer in_pVal)
+		explicit VSmartPtr(Pointer in_pVal)
 		{
 			Assign(in_pVal);
 		}
 
-		void operator=(Pointer in_pNewTarget)
-		{
-			Assign(in_pNewTarget);
-		}
+		//void operator=(Pointer in_pNewTarget)
+		//{
+		//	Assign(in_pNewTarget);
+		//}
 
 		void operator=(const SmartPointerType& in_Other)
 		{
@@ -111,15 +111,15 @@ namespace v3d {
 			Clone(in_Other);
 		}
 
-		VSmartPtrMutable(Pointer in_pVal)
+		explicit VSmartPtrMutable(Pointer in_pVal)
 		{
 			Assign(in_pVal);
 		}
 
-		void operator=(Pointer in_pVal)
-		{
-			Assign(in_pVal);
-		}
+		//void operator=(Pointer in_pVal)
+		//{
+		//	Assign(in_pVal);
+		//}
 
 		void operator=(SmartPointerType& in_Other)
 		{

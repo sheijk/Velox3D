@@ -19,9 +19,28 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-Vfs als Service
+Vfs:
+	Archive
+	Dateien + Verzeichnisse erzeugen und loeschen
+	Zugriffsrechte einhalten bei
+		Dateien/Verzeichnisse erzeugen
+
+Doku:
+	Tutorials fuer
+		SmartPointer erweitern
+		Iteratoren benutzen
+		Virtual File System
+			benutzen (laden/schreiben von Daten)
+			erweitern (DataProvider)
+		Schreiben von Services
+	Infos ueber 
+		Velox Architektur
+		Services
+	
 Netzwerk, Scripting planen
-Konzept fuer erweiterten Error Service
+Graphics Device: Design
+SceneGraph / Engine Architektur
+Editor Plugin System Design
 Auf die Langnese Insel ziehen
 
 --------------------------------------------------------------------------------

@@ -24,6 +24,16 @@ public:
 	virtual ~VIOException() {};
 };
 
+class VIllegalOperationException : public VIOException
+{
+public:
+	VIllegalOperationException(
+		VStringParam errorMsg, 
+		VStringParam fileName, 
+		vuint lineNumber)
+		: VIOException(errorMsg, fileName, lineNumber) {};
+};
+
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

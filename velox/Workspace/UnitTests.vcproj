@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.0"
+	Version="7.10"
 	Name="UnitTests"
 	ProjectGUID="{C0A4072B-D722-4E9A-91FF-BA1F511CF619}"
 	Keyword="Win32Proj">
@@ -122,6 +122,12 @@
 				RelativePath="..\Source\UnitTests\CoreLibTests\VDestructTest.h">
 			</File>
 			<File
+				RelativePath="..\Source\UnitTests\CoreLibTests\VIteratorTests.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\CoreLibTests\VIteratorTests.h">
+			</File>
+			<File
 				RelativePath="..\Source\UnitTests\CoreLibTests\VSmartPointerTests.cpp">
 			</File>
 			<File
@@ -148,6 +154,18 @@
 			</File>
 			<File
 				RelativePath="..\Source\UnitTests\VFSTests\VFileStreamTest.h">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\VFSTests\VFileSysTest.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\VFSTests\VFileSysTest.h">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\VFSTests\VMemoryStreamTest.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\VFSTests\VMemoryStreamTest.h">
 			</File>
 		</Filter>
 		<File

@@ -39,7 +39,7 @@ vchar* VMemoryStream::GetAddressOfByte(ByteCount in_nPos)
 	return (&m_Data[0]) + in_nPos;
 }
 
-void VMemoryStream::Write(void* in_pSource, ByteCount in_nByteCount)
+void VMemoryStream::Write(const void* in_pSource, ByteCount in_nByteCount)
 {
 	vlong nNewRWPos;
 	nNewRWPos = m_nRWPos + in_nByteCount;

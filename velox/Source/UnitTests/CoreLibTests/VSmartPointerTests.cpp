@@ -104,7 +104,7 @@ void testAssignment(const VString& strPtrName)
 
 	SmartPtr ptr;
 
-	ptr = pVal;
+	ptr.Assign(pVal);
 
 	if( ptr != pVal )
 	{
@@ -142,7 +142,7 @@ void testDeleteOnNewVal(const VString& strPtrName)
 
 	SmartPtr ptr(pDestTest);
 
-	ptr = pNewVal;
+	ptr.Assign(pNewVal);
 
 	if( bCheck != false )
 	{
@@ -179,8 +179,8 @@ void testEqCmp(const VString& strPtrName)
 	SmartPtr a, b;
 
 	// test for equal smart ptrs
-	a = pVal;
-	b = pVal;
+	a.Assign(pVal);
+	b.Assign(pVal);
 
 	if( a != b )
 	{
@@ -207,7 +207,7 @@ void testEqCmp(const VString& strPtrName)
 	}
 
 	// test for different smart ptrs
-	b = new Value();
+	b.Assign(new Value());
 
 	if( !(a != b) || !(b != a) )
 	{

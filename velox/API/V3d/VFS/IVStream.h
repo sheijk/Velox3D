@@ -26,11 +26,13 @@ public:
 	typedef vlong StreamPos;
 	typedef const IVLegalOperations* LegalOpsPtr;
 
+	virtual ~IVStream() {};
+
 	/** anchors for changing the stream's r/w position */
 	enum Anchor { Begin, End, CurrentPos };
 
 	/** write data to stream */
-	virtual void Write(void* in_pSource, ByteCount in_nByteCount) = 0;
+	virtual void Write(const void* in_pSource, ByteCount in_nByteCount) = 0;
 
 	/** read data from stream. returns number of read bytes */
 	virtual ByteCount Read(void* out_pDest, ByteCount in_pBytesToRead) = 0;

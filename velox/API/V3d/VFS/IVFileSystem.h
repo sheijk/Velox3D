@@ -33,7 +33,7 @@ public:
 		VAccessModeFlags in_Access) = 0;
 
 	/** get directory info */
-	virtual DirectoryPtr GetDir(VStringParam in_strDir = "/") = 0;
+	virtual IVDirectory* GetDir(VStringParam in_strDir = "/") = 0;
 
 //	virtual void MoveDir() = 0;
 //	virtual void Mount() = 0;

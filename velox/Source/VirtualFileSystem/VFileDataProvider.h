@@ -26,7 +26,8 @@ class VFileDataProvider : public IVDataProvider
 
 	static void AddDirContent(
 		VDirectory& io_Dir, 
-		boost::filesystem::path in_Dir);
+		boost::filesystem::path in_Dir,
+		VDirectory::SharedAccessRightsPtr in_pAR);
 
 public:
 	VFileDataProvider();

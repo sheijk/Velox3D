@@ -16,6 +16,8 @@
 namespace v3d{
 namespace xml{
 
+//TODO: stil an den restlichen velox source anpassen, vor allem die doku
+// im javadoc style (sheijk)
 class IVXMLAttribute
 {
 public:
@@ -24,6 +26,9 @@ public:
 	virtual VStringRetVal GetValue() = 0;
 
 };
+
+//TODO: hier unbedingt // namespace xml hinterschreiben, sonst sieht
+//man nicht wozu die schliessende klammer gehoert
 }
 }
 

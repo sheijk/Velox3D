@@ -16,18 +16,23 @@ namespace vfs {
  */
 class VFile : public IVFile
 {
+public:
+	typedef VPointer<IVAccessRights>::SharedPtr SharedAccessRightsPtr;
+
+private:
 	std::string m_strName;
 	std::string m_strPath;
 	std::string m_strSource;
 	std::string m_strTypeId;
 	
-	VPointer<IVAccessRights>::SharedPtr m_pAccessRights;
+	SharedAccessRightsPtr m_pAccessRights;
 
 public:
 	struct CreationInfo
 	{
 		CreationInfo() {}
 		std::string name, type, source;
+		SharedAccessRightsPtr pAccRights;
 	};
 
 	VFile();

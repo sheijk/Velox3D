@@ -27,6 +27,8 @@ IVXMLWriter* VXMLService::CreateXMLWriter()
 	return NULL;
 }*/
 
+//TODO: kurzer kommetar der die fkt beschreibt (ala wandelt TiXmlElement
+//in ein VXMLElement um, oder sowas (fuer alle Fkten) (sheijk)
 VXMLElement* VXMLService::TraversalAttributes(TiXmlElement* Element)
 {
 	TiXmlAttribute *att;

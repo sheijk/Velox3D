@@ -9,6 +9,7 @@
 
 #include "VFile.h"
 #include "VDirectory.h"
+#include "VAccessRights.h"
 
 #include <algorithm>
 #include <string>
@@ -29,32 +30,45 @@ IVDataProvider& GetDataProvider(std::string in_strId)
 /**
  * standard c'tor
  */
-VSimpleVfs::VSimpleVfs(VStringParam in_strName, VNamedObject* in_pParent)
+VSimpleVfs::VSimpleVfs(
+					   VStringParam in_strName, 
+					   VStringParam in_strCfgFile,
+					   VNamedObject* in_pParent)
 	: IVFileSystem(in_strName, in_pParent)
 {
-	// create some dirs/files for testing:
+	// create root dir
+	m_pRootDir = new VDirectory(
+		"", 
+		VAccessRights::CreateRODirAR(VAccessRights::DeletingForbidden));
+	m_pRootDirSP.Assign(m_pRootDir);
 
-	m_pRootDir = new VDirectory("", "");
-	m_pRootDirSP = m_pRootDir;
+	// create some dirs/files for testing:
 
 	// add some files
 	//m_pRootDir->AddFile(VDirectory::FilePtr(new VFile("manual.file")));
 	//m_pRootDir->AddFile(VDirectory::FilePtr(new VFile("another.file.here")));
-
 	//VDirectory* pDir(new VDirectory("a.dir", ""));
 	//pDir->AddFile(VDirectory::FilePtr(new VFile("nested.file")));
 	//pDir->AddFile(VDirectory::FilePtr(new VFile("2nd.nested.file")));
-
 	//m_pRootDir->AddSubdir(VDirectory::DirPtr(pDir));
+
 
 	// mount a (real) directory:
 
 	// set mount options
-	VMountOptions mountOpt("mount'd.dir", "vfstestdir", "", "localfs");
+	VMountOptions mountOpt(
+		"mount'd.dir", 
+		"vfstestdir", 
+		"", 
+		"localfs", 
+		VAccessRights::CreateRODirAR(VAccessRights::DeletingForbidden)
+		);
 
 	// get localfs data provider and let it create a mounted dir
 	// add dir to vfs dir structure
-	m_pRootDir->AddSubdir(GetDataProvider("localfs").CreateMountedDir(mountOpt));
+	m_pRootDir->AddSubdir(
+		GetDataProvider("localfs").CreateMountedDir(mountOpt)
+		);
 
 }
 
@@ -84,7 +98,7 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 	VStringParam in_strPathAndName,
 	VAccessModeFlags in_Access)
 {
-	DirectoryPtr pDir;
+	IVDirectory* pDir;
 	
 	// get dir
 	pDir = GetDir(in_strPathAndName);
@@ -112,9 +126,9 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 
 //TODO: testen
 
-IVFileSystem::DirectoryPtr VSimpleVfs::GetDir(VStringParam in_strDir)
+IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
 {
-	DirectoryPtr pCurrDir = m_pRootDirSP;
+	IVDirectory* pCurrDir = m_pRootDirSP;
 
 	std::string pathAndName = in_strDir;
 	std::string::iterator pos = pathAndName.begin();
@@ -129,9 +143,18 @@ IVFileSystem::DirectoryPtr VSimpleVfs::GetDir(VStringParam in_strDir)
 		currDirName.assign(pos, substrEnd);
 
 		// find it in current directory
-		VDirectory::DirIter nextDir = std::find_if(
-			pCurrDir->SubDirs().Begin, pCurrDir->SubDirs().End, 
-			VCompareFSOName(currDirName));
+		VDirectory::DirIter nextDir = pCurrDir->SubDirs().Begin;
+		VDirectory* tmp = (VDirectory*)&(*nextDir);
+		VCompareFSOName fsoCmp(currDirName);
+		while( nextDir != pCurrDir->SubDirs().End )
+		{
+            if( fsoCmp(*nextDir) ) break;
+			++nextDir;
+		}
+
+		//VDirectory::DirIter nextDir = std::find_if(
+		//	pCurrDir->SubDirs().Begin, pCurrDir->SubDirs().End, 
+		//	VCompareFSOName(currDirName));
 
 		if(nextDir == pCurrDir->SubDirs().End)
 		{

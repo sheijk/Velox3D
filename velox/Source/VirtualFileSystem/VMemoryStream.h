@@ -35,7 +35,7 @@ public:
 
 	virtual ~VMemoryStream();
 
-	virtual void Write(void* in_pSource, ByteCount in_nByteCount);
+	virtual void Write(const void* in_pSource, ByteCount in_nByteCount);
 
 	virtual ByteCount Read(void* out_pDest, ByteCount in_pBytesToRead);
 

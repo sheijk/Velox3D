@@ -48,7 +48,7 @@ public:
 	// from IVStream:
 
 	/** write data to stream */
-	virtual void Write(void* in_pSource, ByteCount in_nByteCount);
+	virtual void Write(const void* in_pSource, ByteCount in_nByteCount);
 
 	/** read data from stream */
 	virtual ByteCount Read(void* out_pDest, ByteCount in_pBytesToRead);

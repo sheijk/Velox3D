@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/VString.h>
+#include <v3d/VFS/IVAccessRights.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -15,19 +16,23 @@ namespace vfs {
  */
 struct VMountOptions
 {
+	typedef VPointer<IVAccessRights>::SharedPtr AccessRightsPtr;
+
 	VString m_strName;
 	VString m_strSource;
 	VString m_strOptions;
 	VString m_strType;
+	AccessRightsPtr m_pAccessRights;
 
 public:
 	VMountOptions();
 
 	VMountOptions(
 		VStringParam name, VStringParam source, 
-		VStringParam options, VStringParam type)
+		VStringParam options, VStringParam type,
+		AccessRightsPtr accRights)
 		: m_strName(name), m_strSource(source), m_strOptions(options),
-		m_strType(type)
+		m_strType(type), m_pAccessRights(accRights)
 	{}
 
 	virtual ~VMountOptions() {}
@@ -36,11 +41,13 @@ public:
 	const VString& GetType() const;
 	const VString& GetOptions() const;
 	const VString& GetSource() const;
+	const AccessRightsPtr GetAccessRights() const;
 
 	void SetName(VStringParam name) { m_strName = name; }
 	void SetSource(VStringParam source) { m_strSource = source; }
 	void SetOptions(VStringParam opt) { m_strOptions = opt; }
 	void SetType(VStringParam type) { m_strType = type; }
+	void SetAccessRights(AccessRightsPtr pAR) { m_pAccessRights = pAR; }
 };
 
 //-----------------------------------------------------------------------------

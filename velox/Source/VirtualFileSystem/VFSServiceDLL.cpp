@@ -50,7 +50,7 @@ VFSSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	g_pDataProvPool.Assign(new VDataProviderPool("vfs.dpp"));
 	g_pFileDataProv.Assign(new VFileDataProvider());
 	g_pDataProvPool->RegisterDataProvider(g_pFileDataProv);
-	g_pFileSys.Assign(new VSimpleVfs("vfs.fs"));
+	g_pFileSys.Assign(new VSimpleVfs("vfs.fs", "vfs.xml"));
 }
 
 VFSSERVICE_API void Shutdown()

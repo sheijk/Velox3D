@@ -116,15 +116,15 @@ void VTestSuite::ExecuteTests()
 
 			bErrors = true;
 		}
-		catch(...)
-		{
-			cout << "Unknown error occured in test " << endl
-				<< "<" << iter->strName << ">" << endl
-				<< "Unit test might be corrupt or incomplete" << endl
-				<< endl;
+		//catch(...)
+		//{
+		//	cout << "Unknown error occured in test " << endl
+		//		<< "<" << iter->strName << ">" << endl
+		//		<< "Unit test might be corrupt or incomplete" << endl
+		//		<< endl;
 
-			bErrors = true;
-		}
+		//	bErrors = true;
+		//}
 	}
 
 	if( !bErrors )

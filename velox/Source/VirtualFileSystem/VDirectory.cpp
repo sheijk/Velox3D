@@ -16,11 +16,13 @@ VDirectory::VDirectory()
 {
 }
 
-VDirectory::VDirectory(std::string in_strName, std::string in_strPath)
+VDirectory::VDirectory(
+	std::string in_strName, 
+	SharedAccessRightsPtr in_pAccessRights)
 {
 	m_strName = in_strName;
-	m_strPath = in_strPath;
 
+	m_pAccessRights = in_pAccessRights;
 }
 
 /**

@@ -14,14 +14,24 @@ namespace vfs {
 class IVAccessRights
 {
 public:
-	virtual ~IVAccessRights() = 0;
+	virtual ~IVAccessRights() {};
 
-	virtual vbool AllowCreateFile() = 0;
-	virtual vbool AllowCreateDir() = 0;
-	virtual vbool AllowDelete() = 0;
-	virtual vbool AllowDeleteChild() = 0;
-	virtual vbool AllowReadAccess() = 0;
-	virtual vbool AllowWriteAccess() = 0;
+	/** allow to create a file inside dir */
+	virtual vbool AllowCreateFile() const = 0;
+
+	/** allow to create a subdirectory */
+	virtual vbool AllowCreateDir() const = 0;
+	
+	/** allow element to be deleted */
+	virtual vbool AllowDelete() const = 0;
+	
+	//virtual vbool AllowDeleteChild() = 0;
+	
+	/** allow read access (files: open for reading, dirs: access content */
+	virtual vbool AllowReadAccess() const = 0;
+	
+	/** allow writing (file: open for writing, dir: child files permission */
+	virtual vbool AllowWriteAccess() const = 0;
 };
 
 //-----------------------------------------------------------------------------

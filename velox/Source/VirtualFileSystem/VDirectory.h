@@ -20,6 +20,7 @@ class VDirectory : public IVDirectory
 public:
 	typedef VPointer<IVFile>::SharedPtr FilePtr;
 	typedef VPointer<IVDirectory>::SharedPtr DirPtr;
+	typedef VPointer<IVAccessRights>::SharedPtr SharedAccessRightsPtr;
 
 private:
 	typedef std::list<FilePtr> FileList;
@@ -27,14 +28,15 @@ private:
 
 	std::string m_strName;
 	std::string m_strPath;
-	VPointer<IVAccessRights>::SharedPtr m_pAccessRights;
+
+	SharedAccessRightsPtr m_pAccessRights;
 
 	FileList m_Files;
 	DirList m_Dirs;
 
 public:
 	VDirectory();
-	VDirectory(std::string in_strName, std::string in_strPath);
+	VDirectory(std::string in_strName, SharedAccessRightsPtr in_pAccessRights);
 	~VDirectory();
 
 	virtual VStringRetVal GetName() const;

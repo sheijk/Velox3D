@@ -33,8 +33,10 @@ namespace xml
 
 class IVXMLVisitor
 {
-
 public:
+	//TODO: wo sind kommentare (<!-- -->), sowie einfacher Text etc.? (sheijk)
+	// <text>dies ist ein text</text><!-- textfeld --> <- was passiert da?
+	// text muss unbedingt noch rein, comments waeren gut
 	virtual void OnElementClose(IVXMLElement* Element) =0;
 	virtual void OnElementOpen(IVXMLElement* Element) =0;
 	virtual void OnFileEnd() =0;

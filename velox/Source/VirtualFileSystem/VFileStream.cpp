@@ -3,7 +3,7 @@
 #include <v3d/Core/VException.h>
 
 #include <sstream>
-
+#include <iostream>
 //-----------------------------------------------------------------------------
 using namespace std;
 
@@ -92,6 +92,7 @@ VFileStream::~VFileStream()
 	}
 	catch(VException e)
 	{
+		cout << "Warning: error while closing file" << endl;
 	}
 }
 
@@ -119,7 +120,7 @@ IVStream::ByteCount VFileStream
 }
 
 
-void VFileStream::Write(void* in_pSource, ByteCount in_nBytesToWrite)
+void VFileStream::Write(const void* in_pSource, ByteCount in_nBytesToWrite)
 {
 	DWORD dwBytesWritten = 0;
 
@@ -195,6 +196,7 @@ void VFileStream::Disconnect()
 				// throw error
 				//TODO: vfs exc.
 				V3D_THROW(VException, "could not close file");
+
 			}
 
 			m_hFile = INVALID_HANDLE_VALUE;

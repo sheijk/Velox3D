@@ -22,14 +22,18 @@ class VSimpleVfs : public IVFileSystem
 	// the data provider pool
 
 public:
-	VSimpleVfs(VStringParam in_strName, VNamedObject* in_pParent = 0);
+	VSimpleVfs(
+		VStringParam in_strName, 
+		VStringParam in_strCfgFile,
+		VNamedObject* in_pParent = 0);
+
 	virtual ~VSimpleVfs();
 
 	virtual FileStreamPtr OpenFile(
 		VStringParam in_strPathAndName,
 		VAccessModeFlags in_Access);
 
-	virtual DirectoryPtr GetDir(VStringParam in_strDir);
+	virtual IVDirectory* GetDir(VStringParam in_strDir);
 
 };
 

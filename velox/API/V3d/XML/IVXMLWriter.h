@@ -27,6 +27,10 @@ class IVXMLWriter
 
 public:
 	virtual void WriteDeclaration(VStringParam FileName) =0;
+
+	//TODO: javadoc style kommentare: /** (2x '*') .. */. (darf auch in 
+	//einer Zeile stehen (sheijk)
+
 	/*
 	* Creates a new xml element (<Name)
 	*/
@@ -47,6 +51,7 @@ public:
 	/*
 	* Adds a text
 	*/
+	//TODO: warum ist die auskommentiert? (sheijk)
 	//virtual void AddText(char* text) =0;
 	/*
 	* Finishes writing. Cache will be written to disk.

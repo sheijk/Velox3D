@@ -33,6 +33,8 @@ EXAMPLESERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	VObjectRegistry::SetInstance(in_pObjReg);
 
 	// create service object and register it
+	//TODO: name sollte hier als parameter angegeben werden koennen
+	// wie bei den anderen services (sheijk)
 	g_pXMLService.Assign(new VXMLService());
 }
 

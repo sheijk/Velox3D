@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 #include "VFileStream.h"
 #include "VMemoryStream.h"
+#include "VOfflineStreamGuard.h"
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -31,7 +32,10 @@ IVStreamFactory::OfflineStreamPtr VStreamFactory::CreateFileStream(
 	VFileStream* pFileStream
 		= new VFileStream(in_strName, in_Access, in_OpenMode);
 
-	return OfflineStreamPtr(pFileStream);
+	// add access right guard
+	VOfflineStreamGuard* pGuard = new VOfflineStreamGuard(pFileStream);
+
+	return OfflineStreamPtr(pGuard);
 }
 
 IVStreamFactory::StreamPtr VStreamFactory::CreateMemoryStream(

@@ -19,12 +19,14 @@ namespace v3d{
 namespace xml{
 
 
-
+//TODO: doku (sheijk)
 class IVXMLElement
 {
 public:
 
 	virtual VStringRetVal GetName() = 0;
+	//TODO: warum keine iteratoren? was ist wenn man die elemente
+	// 2x durchlaufen will? (sheijk)
 	virtual IVXMLAttribute* GetFirstAttribute() = 0;
 	virtual IVXMLAttribute* NextAttribute() = 0;
 	virtual IVXMLAttribute* GetAttribute(VStringParam Name) = 0;

@@ -3,6 +3,7 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/VFS/IVAccessRights.h>
 
+#include "VAccessRights.h"
 #include "VFile.h"
 
 #include <boost/filesystem/path.hpp>
@@ -67,11 +68,16 @@ IVDataProvider::DirPtr VFileDataProvider::CreateMountedDir(
 	const VMountOptions& in_MountOptions)
 {
 	VDirectory* pDirectory = new VDirectory(
-		in_MountOptions.GetName().AsCString(), "");
+		in_MountOptions.GetName().AsCString(), 
+		in_MountOptions.GetAccessRights());
+
 	DirPtr pDirAP(pDirectory);
 
 	// add files and directories to dir
-	AddDirContent(*pDirectory, in_MountOptions.GetSource().AsCString());
+	AddDirContent(
+		*pDirectory, 
+		in_MountOptions.GetSource().AsCString(),
+		in_MountOptions.GetAccessRights());
 
 	return pDirAP;
 }
@@ -80,10 +86,18 @@ IVDataProvider::DirPtr VFileDataProvider::CreateMountedDir(
  * Adds the content of a (real) directory to the VDirectory. Recursively
  * loads all subdirectories
  */
-void VFileDataProvider::AddDirContent(VDirectory& io_Dir, fs::path in_Dir)
+void VFileDataProvider::AddDirContent(
+	VDirectory& io_Dir, 
+	fs::path in_Dir,
+	VDirectory::SharedAccessRightsPtr in_pAR)
 {
+	//TODO: bessere Angabe der Zugriffsrechte
+
 	const fs::directory_iterator dirEnd;
 	fs::directory_iterator dirIt(in_Dir);
+	
+	VFile::SharedAccessRightsPtr pFileAccRights( VAccessRights::CreateFileAR(
+		GetAccMode(*in_pAR), GetDelMode(in_pAR->AllowDelete())) );
 
 	// add content of current dir
 	for( ; dirIt != dirEnd; ++dirIt )
@@ -92,10 +106,10 @@ void VFileDataProvider::AddDirContent(VDirectory& io_Dir, fs::path in_Dir)
 		if( fs::is_directory(*dirIt) )
 		{
 			// create virtual subdir
-			VDirectory* pDir = new VDirectory((*dirIt).leaf(), "");
+			VDirectory* pDir = new VDirectory((*dirIt).leaf(), in_pAR);
 			
 			// enter dir and add it's content
-			AddDirContent(*pDir, *dirIt);
+			AddDirContent(*pDir, *dirIt, in_pAR);
 
 			// add it to current dir
 			io_Dir.AddSubdir(VDirectory::DirPtr(pDir));
@@ -108,6 +122,7 @@ void VFileDataProvider::AddDirContent(VDirectory& io_Dir, fs::path in_Dir)
 			fileOpt.name = dirIt->leaf();
 			fileOpt.type = "localfs";
 			fileOpt.source = dirIt->string();
+			fileOpt.pAccRights = pFileAccRights;
 
 			io_Dir.AddFile(VDirectory::FilePtr(new VFile(fileOpt)));
 		}

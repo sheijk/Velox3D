@@ -26,7 +26,7 @@ class VStreamToOfflineStreamWrapper : public IVOfflineStream
 public:
 	VStreamToOfflineStreamWrapper(IVStream* in_pStream);
 
-	virtual void Write(void* in_pSource, ByteCount in_nByteCount);
+	virtual void Write(const void* in_pSource, ByteCount in_nByteCount);
 	virtual ByteCount Read(void* out_pDest, ByteCount in_pBytesToRead);
 	virtual void SetPos(Anchor in_Anchor, ByteCount in_nDistance);
 	virtual StreamPos GetPos() const;

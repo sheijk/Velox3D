@@ -11,12 +11,13 @@ klar war, etc., damits nicht vergessen wird Hoffe das ist ok?
 - sound service
 - error service
 - Informationen für ein SkySystem sammeln
+- Datenstrukturen fuer Baeume
 
 --------------------------------------------------------------------------------
 ----- personal todo:
 
 todo:
-sound fertig implementieren
+sound fertig implementieren (Anmerkung von sheijk: das kann erstmal warten)
 FileLogging in den error service hinzufügen
 Quellcode vom Debugmonitor in einen veröffentlichbaren Zustand bringen
 sheijk daran hindern, die Welt zu erobern

@@ -15,7 +15,7 @@ VStreamToOfflineStreamWrapper
 }
 
 void VStreamToOfflineStreamWrapper
-	::Write(void* in_pSource, ByteCount in_nByteCount)
+	::Write(const void* in_pSource, ByteCount in_nByteCount)
 {
 	if( m_bConnected )
 	{

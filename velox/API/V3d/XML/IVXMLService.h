@@ -27,7 +27,11 @@ protected:
 public:
         
 //	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor) = 0;
+	
+	//TODO: sollte das vfs verwenden, bzw. ganz wegbleiben (sheijk)
 	virtual void ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor) = 0;
+	
+	//TODO: die ivstream fkt brauchen wir (sheijk)
 	//virtual IVXMLWriter* CreateXMLWriter(IVStream* in_pStream) = 0;
 
 	//TODO: auf keine Fall einfach eine Ptr zurueckgeben, 

@@ -17,3 +17,9 @@ inline const VString& VMountOptions::GetSource() const
 {
 	return m_strSource;
 }
+
+inline const VMountOptions::AccessRightsPtr VMountOptions
+	::GetAccessRights() const
+{
+	return m_pAccessRights;
+}

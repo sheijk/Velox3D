@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.0"
+	Version="7.10"
 	Name="KernelLib"
 	ProjectGUID="{F5A203BC-C39E-43DB-B426-4CC8114C84E6}"
 	Keyword="Win32Proj">
