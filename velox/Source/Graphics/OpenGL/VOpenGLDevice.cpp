@@ -89,6 +89,8 @@ VOpenGLDevice::~VOpenGLDevice()
 	}
 
 	DestroyContext();
+
+	delete m_DisplaySettings;
 }
 
 IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
