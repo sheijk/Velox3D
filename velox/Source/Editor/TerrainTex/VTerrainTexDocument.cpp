@@ -33,6 +33,7 @@
 #include <v3d/Vfs.h>
 #include <v3d/VFS/IVFileSystem.h>
 #include <v3d/VFS/VIOException.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------

@@ -33,6 +33,7 @@
 #include <wx/wx.h>
 #include <wx/frame.h>
 #include <wx/splash.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------

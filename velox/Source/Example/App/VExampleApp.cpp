@@ -24,6 +24,7 @@
 
 #include <V3dLib/Graphics/Misc.h>
 #include <V3dLib/Graphics/SimpleSG.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 

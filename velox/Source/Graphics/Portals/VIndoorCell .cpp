@@ -7,6 +7,7 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3dlib/Graphics/Misc/MiscUtils.h>
 #include <V3dLib/Graphics/Geometry.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

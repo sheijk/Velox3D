@@ -4,7 +4,7 @@
 #include <V3d/Graphics/IVMesh.h>
 
 #include <stdlib.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace graphics{

@@ -61,6 +61,10 @@ req
 
 Done List:
 
+26.09.04
+- removed WxConnecter folder in Source (depricated)
+- added memmanger to missing files
+
 25.09.04
 - added collision system to cvs
 

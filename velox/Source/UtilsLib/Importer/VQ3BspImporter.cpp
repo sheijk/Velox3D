@@ -4,7 +4,7 @@
 #include <v3dLib/Graphics/Importer/VQ3BspImporter.h>
 
 #include <memory.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils{

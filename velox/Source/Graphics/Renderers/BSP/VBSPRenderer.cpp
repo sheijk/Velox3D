@@ -9,6 +9,7 @@
 #include <v3d/Vfs/VIOException.h>
 
 #include <string>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

@@ -3,7 +3,7 @@
 #include <v3d/Core/Modules/VModuleBase.h>
 
 #include "VEditorApp.h"
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------

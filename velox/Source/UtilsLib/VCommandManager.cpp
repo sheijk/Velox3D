@@ -3,6 +3,7 @@
 #include <string>
 
 #include <v3d/Console.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils {

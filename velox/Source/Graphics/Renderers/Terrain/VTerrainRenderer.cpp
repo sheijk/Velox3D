@@ -5,6 +5,7 @@
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
 #include <V3d/Vfs.h>
 #include <cmath>
+#include <v3d/Core/MemManager.h>
 
 extern vuint highDetail;
 extern vuint lowDetail;

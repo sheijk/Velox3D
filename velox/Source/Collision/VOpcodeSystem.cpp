@@ -1,7 +1,7 @@
 #include <v3dLib/Collision/VOpcodeSystem.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
 #include <Opcode.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace collision {

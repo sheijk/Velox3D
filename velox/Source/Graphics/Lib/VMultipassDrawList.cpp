@@ -1,7 +1,7 @@
 #include <V3dLib/Graphics/Misc/VMultipassDrawList.h>
 //-----------------------------------------------------------------------------
-
 #include <V3dLib/Graphics/Misc/VSimpleDrawList.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

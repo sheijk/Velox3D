@@ -7,6 +7,9 @@
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 
+
+//TODO: convert to cv --ins
+
 namespace {
 	VModeTypeInfo<VPolygonMode>		g_PolygonModeInfo;
 	VModeTypeInfo<VDepthTest>		g_DepthTestInfo;

@@ -1,6 +1,6 @@
 #include <V3dLib/Graphics/Renderers/Terrain/VTerrainLodChunk.h>
 //-----------------------------------------------------------------------------
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

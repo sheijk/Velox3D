@@ -12,7 +12,7 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 
 #include <v3d/Core/Modules/VModuleBase.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::example;

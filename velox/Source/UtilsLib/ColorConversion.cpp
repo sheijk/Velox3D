@@ -1,5 +1,6 @@
 #include <v3dLib/Utils/ColorConversion.h>
 #include <cmath>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace utils{

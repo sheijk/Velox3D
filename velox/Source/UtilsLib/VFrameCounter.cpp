@@ -1,7 +1,7 @@
 #include <V3dLib/Utils/VFrameCounter.h>
 //-----------------------------------------------------------------------------
-
 #include <cstdio>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils {

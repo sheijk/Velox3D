@@ -1,6 +1,6 @@
 #include <v3d/Graphics/VMeshDescription.h>
-
 #include <set>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 #include "VEditorFrame.h"
 #include "wx/statline.h"
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace editor {

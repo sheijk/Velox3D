@@ -4,6 +4,7 @@
 #include <V3dLib/Graphics.h>
 #include <v3d/Image.h>
 #include <V3dLib/Math.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 #include <v3dlib/Graphics/Renderers/Sky/VDaylightSkyColorizer.h>
 #include <v3dlib/Math.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d::utils;
 

@@ -28,7 +28,7 @@
 #include "Error/VErrorConsoleListener.h"
 #include "Error/VErrorService.h"
 #include <v3d/Utils/VAllFilter.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::vfs;

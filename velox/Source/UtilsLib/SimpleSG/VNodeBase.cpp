@@ -1,4 +1,5 @@
 #include <V3dLib/Graphics/SimpleSG/VNodeBase.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 #include <functional>
 

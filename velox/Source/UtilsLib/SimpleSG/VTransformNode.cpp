@@ -1,7 +1,7 @@
 #include <V3dLib/Graphics/SimpleSG/VTransformNode.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Math/VMatrixOps.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

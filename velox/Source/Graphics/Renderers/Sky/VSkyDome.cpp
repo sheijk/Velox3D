@@ -2,6 +2,7 @@
 #include <v3d/Math/VMatrixOps.h>
 #include <v3d/Image.h>
 #include <v3dLib/Math.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 
 using namespace v3d;

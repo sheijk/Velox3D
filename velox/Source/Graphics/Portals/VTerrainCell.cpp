@@ -1,7 +1,7 @@
 #include <V3dLib/Graphics/Portal/VTerrainCell.h>
 //-----------------------------------------------------------------------------
 #include <V3dLib/Math.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

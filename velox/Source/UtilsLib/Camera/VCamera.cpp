@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------------------
 #include <V3dLib/Graphics/Misc/VCamera.h>
 #include <v3d/Math/VMatrixOps.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

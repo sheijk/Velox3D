@@ -6,7 +6,7 @@
 #include <v3d/Editor/IVEditorSuite.h>
 
 #include "Messages.h"
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
