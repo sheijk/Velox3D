@@ -15,6 +15,16 @@
 #include "VSmartPointer.h"
 
 /**
+ * Standard constructor, initializes with 0
+ */
+template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
+VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
+	VSmartPointer()
+{
+	m_Handle.SetTarget(0);
+}
+
+/**
  * Initialisiert das Zeiger mit einem gegebenem Pointer
  */
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
@@ -87,13 +97,15 @@ T* VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
 }
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
-T* VSmartPointer<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy>::operator->()
+T* VSmartPointer<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy>::
+	operator->()
 {
 	return Get();
 }
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
-T& VSmartPointer<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy>::operator*()
+T& VSmartPointer<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy>::
+	operator*()
 {
 	return *Get();
 }

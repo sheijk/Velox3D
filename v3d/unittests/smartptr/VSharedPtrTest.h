@@ -14,7 +14,9 @@
 class VSharedPtrTest : public VCommonTestBase  
 {
 private:
+	void TestSharedPtr();
 	void TestSharedStorage();
+	void TestRefCountPol();
 
 public:
 	VSharedPtrTest();

@@ -119,8 +119,6 @@ void VSmartPointerTest::ExecuteTest()
 		strm << "sizeof(VSmartPointer<..>) is " << sizeof(ptr)
 			<< " instead of 8 bytes";
 
-		strm << " , sizeof(SmartHandle): " << sizeof(ptr.m_Handle);
-
 		std::string str = strm.str();
 
 		V3D_THROW_UNITTEST_ERROR(str.c_str(), VWarning);

@@ -25,18 +25,18 @@ template
 	>
 class VSmartPointer
 {
-public:
+private:
 	typedef VSmartHandleBase<T*, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy>
 		Handle;
 
 	Handle m_Handle;
 
-	VSmartPointer();
 public:
 	/** for convience */
 	typedef VSmartPointer<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy> PtrType;
 	typedef T TargetType;
 
+	VSmartPointer();
 	VSmartPointer(T* in_pTarget);
 	VSmartPointer(PtrType& in_Other);
 	~VSmartPointer();

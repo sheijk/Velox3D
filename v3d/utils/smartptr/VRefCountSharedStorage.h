@@ -46,7 +46,8 @@ public:
 	/** create a new shared storage which points to in_Subject */
 	static MyType* CreateNew(StoragePolicy::TargetType in_Subject)
 	{
-		VRefCountSharedStorage<StoragePolicy>* pInstance = new VRefCountSharedStorage<StoragePolicy>();
+		VRefCountSharedStorage<StoragePolicy>* pInstance 
+			= new VRefCountSharedStorage<StoragePolicy>();
 
 		// assign subject
 		pInstance->m_Storage.Set(in_Subject);
