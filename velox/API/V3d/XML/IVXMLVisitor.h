@@ -1,13 +1,14 @@
 #ifndef V3D_IVXMLVISITOR_H
 #define V3D_IVXMLVISITOR_H
 //-----------------------------------------------------------------------------
-#include <V3d/XML/IVXMLAttribute.h>
-#include <V3d/XML/IVXMLElement.h>
+//#include <V3d/XML/IVXMLAttribute.h>
+//#include <V3d/XML/IVXMLElement.h>
 //-----------------------------------------------------------------------------
-namespace v3d{
-namespace xml{
+namespace v3d {
+namespace xml {
 //-----------------------------------------------------------------------------
 
+class IVXMLElement;
 /**
  * The interface for a XML visitor
  * @author insane

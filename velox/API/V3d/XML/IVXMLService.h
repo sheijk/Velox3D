@@ -10,8 +10,6 @@
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
-using namespace v3d::vfs;
-//-----------------------------------------------------------------------------
 
 /**
  * The interface for the XML service
@@ -23,29 +21,53 @@ class IVXMLService : public VNamedObject
 {
 public:
 	typedef VPointer<IVXMLWriter>::SharedPtr IVXMLWriterPtr;
-	typedef VPointer<IVStream>::SharedPtr IVStreamPtr;
+	typedef VPointer<vfs::IVStream>::SharedPtr IVStreamPtr;
+	typedef VPointer<IVXMLElement>::SharedPtr IVXMLElementPtr;
+
+//	IVXMLService() {;};
         
 	/**
-	 * parses an xml file through an IVStream
+	 * Parses an xml file through an IVStream. Returns the root node of
+	 * the xml tree.
+	 *
+	 * @param in_pStream A vfs data stream that represents a xml file
+	 * @authod acrylsword
 	 */
-	virtual void ParseXMLFile(
-		IVStream* in_pStream, 
-		IVXMLVisitor* in_pVisitor) = 0;
+	virtual IVXMLElementPtr GetRootElement(vfs::IVStream* in_pStream) = 0; 
 
 	/**
-	 * parses a file of the local file system
-	 */
-	virtual void ParseLocalXMLFile(
-		VStringParam in_pcName, 
-		IVXMLVisitor* in_pVisitor) = 0;
+	* Parses an xml file through the local file system. Returns the root
+	* node of the xml tree.
+	*
+	* @param in_strName The file to open
+	* @authod acrylsword
+	*/
+	virtual IVXMLElementPtr GetRootElement(VStringParam in_strName) = 0; 
 
 	/**
-	 * parses a file from the vfs
+	 * Loads a xml file from the virtual file system an uses the visitor
+	 * to travesal the xml tree.
+	 * 
+	 * @param in_Visitor The visitor that visits this xml tree
+	 * @param in_Stream The data stream to the xml file
+	 *
+	 * @author acrylsword
+	 * @version 1.0
 	 */
-	virtual void ParseVfsXMLFile(
-		VStringParam in_pcName, 
-		IVXMLVisitor* in_pVisitor) = 0;
-	
+	virtual bool Visit(IVXMLVisitor& in_Visitor, vfs::IVStream& in_Stream) = 0;
+
+	/**
+	* Loads a xml file from the local file system an uses the visitor
+	* to travesal the xml tree.
+	* 
+	* @param in_Visitor The visitor that visits this xml tree
+	* @param in_strFile The xml file 
+	*
+	* @author acrylsword
+	* @version 1.0
+	*/
+	virtual bool Visit(IVXMLVisitor& in_Visitor, VStringParam in_strFile) = 0;
+
 	/**
 	 * Creates an xml writer to write to an xml file in the vfs
 	 */

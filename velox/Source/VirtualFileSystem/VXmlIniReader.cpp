@@ -122,10 +122,10 @@ void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 				try
 				{
 					// get attributes
-					name = pElement->GetAttribute("name")->GetValue().AsCString();
-					type = pElement->GetAttribute("type")->GetValue().AsCString();
-					source = pElement->GetAttribute("source")->GetValue().AsCString();
-					access = pElement->GetAttribute("rights")->GetValue().AsCString();
+					name = pElement->GetAttribute("name")->GetValue().GetSafe<string>();
+					type = pElement->GetAttribute("type")->GetValue().GetSafe<string>();
+					source = pElement->GetAttribute("source")->GetValue().GetSafe<string>();
+					access = pElement->GetAttribute("rights")->GetValue().GetSafe<string>();
 
 					IVDataProvider& dataProv = GetDataProvider(type);
 
@@ -168,7 +168,7 @@ void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 			{
 				string access, name;
 
-				name = pElement->GetAttribute("name")->GetValue().AsCString();
+				name = pElement->GetAttribute("name")->GetValue().GetSafe<string>();
 				access = "rw";
 
 				// create new dir

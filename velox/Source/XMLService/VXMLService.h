@@ -4,7 +4,7 @@
 #include <V3d/XML/IVXMLService.h>
 //-----------------------------------------------------------------------------
 #include "VXMLWriter.h"
-#include "tinyxml/tinyxml.h"
+#include <tinyxml/tinyxml.h>
 #include "VXMLAttribute.h"
 #include "VXMLElement.h"
 #include "VStreamReader.h"
@@ -26,27 +26,25 @@ class VXMLService :	public IVXMLService
 public:
 	VXMLService();
 	virtual	~VXMLService();
+    
+	virtual IVXMLElementPtr GetRootElement(IVStream* in_pStream); 
+	virtual IVXMLElementPtr GetRootElement(VStringParam in_strName); 
 
-	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor);
-
-	virtual void ParseLocalXMLFile(
-		VStringParam in_pcName, IVXMLVisitor* in_pVisitor);
-	
-	virtual void ParseVfsXMLFile(
-		VStringParam in_pcName, IVXMLVisitor* in_pVisitor);
+	virtual bool Visit(IVXMLVisitor& in_Visitor, IVStream& in_Stream);
+	virtual bool Visit(IVXMLVisitor& in_Visitor, VStringParam in_strFile);
 	
 	virtual IVXMLWriterPtr CreateXMLWriter(VStringParam FileName);
-	
 	virtual IVXMLWriterPtr CreateXMLWriter(IVStreamPtr pStream);
 
 private: 
-	void TraversalNodes(TiXmlNode* node);
-	VXMLElement* TraversalAttributes(TiXmlElement* Element);
+	VXMLElement* BeginTranslation(TiXmlDocument& in_Doc);
+
+	IVXMLNode* TranslateNode(TiXmlNode* in_pNode);
+	VXMLElement* TranslateElement(TiXmlElement* in_pElement);
 
 	IVXMLVisitor* m_Vistor;
 	vbool m_bRecursionFirstCall;
 	std::stack<std::string> m_LastElementNameList;
-
 };
 
 //-----------------------------------------------------------------------------

@@ -1,4 +1,5 @@
 #include <v3d/Core/VIOStream.h>
+#include <v3d/XML/IVXMLElement.h>
 #include "VKernelIniReader.h"
 #include "VKernelException.h"
 //#include <iostream>
@@ -79,11 +80,11 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 			if(sElementName == "Service")
 			{
 				std::string sServiceName =
-					pElement->GetFirstAttribute()->GetValue().AsCString();
+					pElement->GetFirstAttribute()->GetValue().GetSafe<std::string>();
 				std::string sServiceDesc =
-					pElement->NextAttribute()->GetValue().AsCString();
+					pElement->NextAttribute()->GetValue().GetSafe<std::string>();
 				std::string sServiceFile =
-					pElement->NextAttribute()->GetValue().AsCString();
+					pElement->NextAttribute()->GetValue().GetSafe<std::string>();
 				vout << "Service Name: " << sServiceName << vendl;
 				vout << "Service Description: " << sServiceDesc << vendl;
 				vout << "Service Filename: " << sServiceFile << vendl;
@@ -96,7 +97,7 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 		{
 			if(sElementName == "Main")
 			{
-				m_AppName = pElement->GetAttribute("id")->GetValue().AsCString();
+				m_AppName = pElement->GetAttribute("id")->GetValue().GetSafe<std::string>();
 				if(m_AppName.length() == 0)
 					V3D_THROW(VKernelIniException, "Main application is not valid.");
 			}

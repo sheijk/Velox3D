@@ -1,4 +1,6 @@
 #include "VXmlElement.h"
+#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h> 
+#include <v3d/Core/VIOStream.h>
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
@@ -7,11 +9,16 @@ namespace xml{
 
 VXMLElement::VXMLElement()
 {
-
-	m_Name = "NoName";
+	m_strName = "NoName";
 	m_iPos = 0;
-
 }
+
+VXMLElement::VXMLElement(VStringParam in_strName)
+{
+	m_strName = in_strName;
+	m_iPos = 0;
+}
+
 VXMLElement::~VXMLElement()
 {
 	vuint i;
@@ -22,7 +29,7 @@ VXMLElement::~VXMLElement()
 
 VStringRetVal VXMLElement::GetName()
 {
-	return m_Name.c_str();
+	return m_strName;
 }
 
 IVXMLAttribute* VXMLElement::GetFirstAttribute()
@@ -36,33 +43,39 @@ IVXMLAttribute* VXMLElement::GetFirstAttribute()
 	}
 }
 
-IVXMLAttribute* VXMLElement::GetAttribute(VStringParam Name)
+IVXMLAttribute* VXMLElement::GetAttribute(VStringParam in_strName)
 {
+	VString name(in_strName);
+
 	if(m_AttributeList.empty())
 		V3D_THROW(VXMLAttributeException, "Attribute cannot be found. List empty");
 	else
 	{
-		std::string NameCheck = Name;
-		vuint i;
-		for(i = 0; i<m_AttributeList.size(); i++)
+		for(vuint i = 0; i<m_AttributeList.size(); i++)
 		{
-			IVXMLAttribute* att = m_AttributeList[i];
-			std::string NameCheck2 = att->GetName();
-			if(NameCheck == NameCheck2)
+			if(name == m_AttributeList[i]->GetName() )
 				return m_AttributeList[i];
-
 		}
 	}
 	V3D_THROW(VXMLAttributeException, "Attribute cannot be found. Not in list");
 }
 
-void VXMLElement::AddAttribute(VXMLAttribute* p_Attribute)
+/**
+ * Adds a new VXMLAttribute to this element. The <code>in_pAttribute
+ * </code> parameter must be unequal to 0. If it equals zero you will
+ * get an assertion. :)
+ * 
+ * @param in_pAttribute A pointer to the attribute that is added
+ *	    				to this element. Must be not zero.
+ * @author ins/acrylsword
+ * @see VXMLAttribute
+ */
+void VXMLElement::AddAttribute(VXMLAttribute* in_pAttribute)
 {
-	VXMLAttribute* Attribute = new VXMLAttribute;
-	Attribute->SetName(p_Attribute->GetName());
-	Attribute->SetValue(p_Attribute->GetValue());
+	V3D_ASSERT(in_pAttribute != 0);
+	vout << "Name: " << in_pAttribute->GetName() << " Value: " << in_pAttribute->GetValue().Get<std::string>() << vendl;
 
-	m_AttributeList.push_back(Attribute);
+	m_AttributeList.push_back(in_pAttribute);
 }
 
 IVXMLAttribute* VXMLElement::NextAttribute()
@@ -75,9 +88,54 @@ IVXMLAttribute* VXMLElement::NextAttribute()
 		return NULL;
 }
 
-void VXMLElement::SetName(VStringParam Name)
+void VXMLElement::SetName(const VStringParam in_strName)
 {
-	m_Name = Name;
+	m_strName = in_strName;
+}
+
+void VXMLElement::Visit(IVXMLVisitor& in_Visitor)
+{
+	in_Visitor.OnElementOpen(this);
+		VisitChildren(in_Visitor);
+	in_Visitor.OnElementClose(this);
+}
+
+void VXMLElement::VisitChildren(IVXMLVisitor& in_Visitor)
+{
+	for (std::list<IVXMLNode*>::iterator iter = m_Childs.begin();
+		 iter != m_Childs.end();
+		 ++iter)
+	{
+		(*iter)->Visit(in_Visitor);
+	}
+}
+
+IVXMLNode::NodeType VXMLElement::GetType()
+{
+	return Element;
+}
+
+void VXMLElement::AddChild(IVXMLNode* in_pChild)
+{
+	V3D_ASSERT(in_pChild != 0);
+
+	m_Childs.push_back(in_pChild);
+}
+
+IVXMLElement::NodeIter VXMLElement::ChildBegin()
+{
+	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
+		IVXMLNode> IterPol;
+
+	return NodeIter(new IterPol(m_Childs.begin()));
+}
+
+IVXMLElement::NodeIter VXMLElement::ChildEnd()
+{
+	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
+		IVXMLNode> IterPol;
+
+	return NodeIter(new IterPol(m_Childs.end()));
 }
 
 IVXMLElement::AttributeIter VXMLElement::AttributeBegin()

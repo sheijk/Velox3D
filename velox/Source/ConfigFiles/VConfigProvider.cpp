@@ -42,9 +42,8 @@ void VConfigProvider::ParseConfigFile(
 		*QueryObject<xml::IVXMLService>("xml.service");
 
 	// parse file
-	xmlService.ParseVfsXMLFile(
-		GetConfigFileName(in_strCfgFileId).c_str(), 
-		&io_Visitor);
+	xmlService.Visit(io_Visitor,
+		GetConfigFileName(in_strCfgFileId).c_str());
 }
 
 VConfigProvider::IVXMLWriterPtr VConfigProvider::CreateConfigFileWriter(

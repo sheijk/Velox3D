@@ -1,6 +1,9 @@
 #include "VXMLService.h"
 //-----------------------------------------------------------------------------
+#include <v3d/Core/VIOStream.h>
 #include <v3d/VFS/IVFileSystem.h>
+#include "VXMLComment.h"
+#include "VXMLText.h"
 #include <v3d/Core/MemManager.h>
 
 namespace v3d{
@@ -8,168 +11,71 @@ namespace xml{
 //-----------------------------------------------------------------------------
 
 /**
- * Register the service with strind ID "xml.service". 
+ * The constructor registers the service with unique string ID 
+ * "xml.service". The attribute are initialized to a default
+ * value.
  */
-
-VXMLService::VXMLService(void) : IVXMLService("xml.service", 0)
+VXMLService::VXMLService() : IVXMLService("xml.service", 0)
 {
 	m_Vistor = NULL;
 	m_bRecursionFirstCall = false;
-	
 }
 
-VXMLService::~VXMLService(void)
+
+
+/**
+ * The destructor has nothing to do..
+ */
+VXMLService::~VXMLService()
 {
 }
 /**
- * Creates the writer class with a filename
+ * Creates the writer class that writes a xml file to a local data 
+ * file with specified file name.
+ * 
+ * @param in_strFileName The name of the file.
  */
-IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(VStringParam FileName)
+IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(VStringParam in_strFileName)
 {
 	IVXMLWriterPtr pWriter;
-	pWriter.Assign(new VXMLWriter(FileName));
+	pWriter.Assign(new VXMLWriter(in_strFileName));
 	
 	return pWriter;
 	
 }
 /**
-* Creates the writer class with a streaming device
+* Creates the writer class that writes a xml file in the virtual file
+* system.
+* 
+* @param in_pStream The stream to which the data is written ?!?! (muß besser werden :( )
 */
-IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(IVStreamPtr pStream)
+IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(IVStreamPtr in_pStream)
 {
 	IVXMLWriterPtr pWriter;
-	pWriter.Assign(new VXMLWriter(pStream));
+	pWriter.Assign(new VXMLWriter(in_pStream));
 
 	return pWriter;
 }
 
-/**
-* Traversals the tinyxml tree and saves the attribute stats in a own format
-*/
-
-VXMLElement* VXMLService::TraversalAttributes(TiXmlElement* Element)
+bool VXMLService::Visit(IVXMLVisitor& in_Visitor, IVStream& in_Stream)
 {
-	TiXmlAttribute *att;
-	VXMLAttribute attribute;
-	VXMLElement* NewElement = new VXMLElement;
+	GetRootElement(&in_Stream)->Visit(in_Visitor);
 
+	return true;
+}
 
-	NewElement->SetName(Element->Value());
+bool VXMLService::Visit(IVXMLVisitor& in_Visitor, VStringParam in_strFile)
+{
+	GetRootElement(in_strFile)->Visit(in_Visitor);
 
-	for(att = Element->FirstAttribute(); att; att = att->Next())
-	{
-		attribute.SetName(att->Name());
-		attribute.SetValue(att->Value());
-
-		NewElement->AddAttribute(&attribute);
-
-	}
-
-	return NewElement;
+	return true;
 }
 
 /**
- * Traversals the tinyxml tree by recursion
+ * Datei laden
  */
-void VXMLService::TraversalNodes(TiXmlNode* node)
+IVXMLService::IVXMLElementPtr VXMLService::GetRootElement(VStringParam in_pcName)
 {
-	
-	TiXmlNode* child = 0;
-	vbool bCloseElement = false;
-
-	if(m_bRecursionFirstCall)
-	{
-		
-		if(node->Type() == TiXmlNode::ELEMENT)
-		{
-			TiXmlElement *ele;
-			VXMLElement *NewElement;
-
-			ele = node->ToElement();
-			NewElement = TraversalAttributes(ele);
-
-			m_Vistor->OnElementOpen(NewElement);
-			std::string sName = NewElement->GetName();
-			m_LastElementNameList.push(sName);
-			bCloseElement = true;
-			
-			delete NewElement;
-			m_bRecursionFirstCall = false;
-		}
-
-		if(node->Type() == TiXmlNode::COMMENT)
-		{
-			m_Vistor->OnComment(node->Value());
-			m_bRecursionFirstCall = false;
-		}
-
-		if(node->Type() == TiXmlNode::TEXT)
-				m_Vistor->OnText(node->Value());
-	}
-
-	for(child = node->FirstChild(); child; child = child->NextSibling())
-	{
-		vbool bElementOpen = false;
-
-		if(child->Type() == TiXmlNode::ELEMENT)
-		{
-			VXMLElement *NewElement;
-			TiXmlElement *ele;
-		
-			ele = child->ToElement();
-			NewElement = TraversalAttributes(ele);
-			m_Vistor->OnElementOpen(NewElement);
-			std::string sName = NewElement->GetName();
-			m_LastElementNameList.push(sName);
-			bElementOpen = true;
-			//m_Vistor->OnElementClose(NewElement);
-			delete NewElement;
-		
-		}
-		if(child->Type() == TiXmlNode::COMMENT)
- 				m_Vistor->OnComment(child->Value());
-		
-		if(child->Type() == TiXmlNode::TEXT)
-				m_Vistor->OnText(child->Value());
-		
-			
-		TraversalNodes(child);
-		
-		if(bElementOpen)
-		{
-			VXMLElement ClosedElement;
-			std::string sName = m_LastElementNameList.top();
-			ClosedElement.SetName(sName.c_str());
-			m_Vistor->OnElementClose(&ClosedElement);
-			m_LastElementNameList.pop();
-		}
-	}
-	if(bCloseElement)
-	{
-		VXMLElement ClosedElement;
-		std::string sName = m_LastElementNameList.top();
-		ClosedElement.SetName(sName.c_str());
-		m_Vistor->OnElementClose(&ClosedElement);
-		m_LastElementNameList.pop();
-	}
-
-}
-/**
- * Call this mehtod to parse a xml file with an appro. visitor
- */
-void VXMLService::ParseLocalXMLFile(
-	VStringParam in_pcName, 
-	IVXMLVisitor* in_pVisitor
-	)
-{
-	if(in_pVisitor)
-        m_Vistor = in_pVisitor;
-	else
-	{
-		V3D_THROW(VXMLVistorException, "Vistor not vaild!");
-		return;
-	}
-
 	TiXmlDocument Doc(in_pcName);
 	Doc.LoadFile();
 
@@ -181,77 +87,121 @@ void VXMLService::ParseLocalXMLFile(
 		V3D_THROW(VXMLTinyXMLException, Error.c_str());
 	}
 
-	TiXmlNode* node;
+	IVXMLElementPtr pElement;
+	pElement.Assign(BeginTranslation(Doc));
 
-    //skip the decleration
-	node = Doc.FirstChild();
-
-	node = node->NextSibling();
-
-	m_bRecursionFirstCall = true;
-	
-	for(node; node; node = node->NextSibling())
-	{
-		m_bRecursionFirstCall = true;
-		TraversalNodes(node);
-	}
-
-
-	m_Vistor->OnFileEnd();
-
+	return pElement;    
 }
 
-void VXMLService::ParseVfsXMLFile(
-									VStringParam in_pcName, 
-									IVXMLVisitor* in_pVisitor
-									)
+/**
+ * Stream in Buffer kopieren um tinyXML nitzen zu können.
+ *
+ * @author acrylsword
+ */
+IVXMLService::IVXMLElementPtr VXMLService::GetRootElement(IVStream* in_pStream)
 {
-	// query vfs
-	vfs::IVFileSystem& fileSys = *QueryObject<vfs::IVFileSystem>("vfs.fs");
+	V3D_ASSERT(in_pStream != 0);
 
-	// open file
-	vfs::IVFileSystem::FileStreamPtr fileStream = 
-		fileSys.OpenFile(in_pcName, VReadAccess);
-	
-	// parse it
-	this->ParseXMLFile(fileStream.Get(), in_pVisitor);
-}
-
-void VXMLService::ParseXMLFile(
-	IVStream* in_pStream, 
-	IVXMLVisitor* in_pVisitor
-	)
-{
-	if(in_pVisitor)
-		m_Vistor = in_pVisitor;
-	else
-	{
-		V3D_THROW(VXMLVistorException, "Visitor not valid!");
-		return;
-	}
-
-	TiXmlDocument Doc;
+    TiXmlDocument Doc;
 	
 	//create a class to read from the stream
 	VStreamReader Reader(in_pStream);
 	
 	Doc.Parse((char*)Reader.GetStreamBuffer());
-
-	TiXmlNode* node;
-
-	//skip the decleration
-	node = Doc.FirstChild();
-	node = node->NextSibling();
-
-	m_bRecursionFirstCall = true;
-
-	for(node ; node; node = node->NextSibling())
+	
+	if( Doc.Error())
 	{
-		TraversalNodes(node);
-		m_bRecursionFirstCall = true;
+//TODO:: in_pStream in die Fehlermeldung einbauen
+		std::string Error;
+		Error.append("Document could not be parsed: ");
+		V3D_THROW(VXMLTinyXMLException, Error.c_str());
 	}
 
-	m_Vistor->OnFileEnd();
+	IVXMLElementPtr pElement;
+	pElement.Assign(BeginTranslation(Doc));
+
+	return pElement;    
+}
+
+VXMLElement* VXMLService::BeginTranslation(TiXmlDocument& in_Doc)
+{
+	VXMLElement* pReturn = TranslateElement(in_Doc.RootElement());
+
+	TiXmlElement* pRootElement = in_Doc.RootElement();
+
+	//skip the decleration
+//	TiXmlNode* pNode = in_Doc.FirstChild();
+/*		
+	//add other node to our root element
+	TiXmlNode* pChild = 0;
+	while( pChild = pRootElement->IterateChildren(pChild) )
+	{
+		vout << "hier endlos?" << vendl;
+		pReturn->AddChild(TranslateNode(pChild));
+	}
+*/
+	return pReturn;
+}
+
+/**
+ * Translate tiny xml node into the corresponding IVXMLNode
+ *
+ * @author acrlysword
+ * @version 1.0
+ * @todo Exception werfen statt 0 zurückzugeben
+ */
+IVXMLNode* VXMLService::TranslateNode(TiXmlNode* in_pNode)
+{
+    V3D_ASSERT(in_pNode != 0);
+	
+	if (in_pNode->Type() == TiXmlNode::ELEMENT)
+	{
+		return TranslateElement(in_pNode->ToElement());
+	}
+
+	if (in_pNode->Type() == TiXmlNode::COMMENT)
+	{
+	    return new VXMLComment(in_pNode->Value());
+	}
+
+	if (in_pNode->Type() == TiXmlNode::TEXT)
+	{
+		return new VXMLText(in_pNode->Value());
+	}
+
+	return 0;
+}
+
+/**
+* Translates a TiXmlElement into a VXMLElement.
+* @author acrylsword
+* @version 1.0
+*/
+VXMLElement* VXMLService::TranslateElement(TiXmlElement* in_pElement)
+{
+	V3D_ASSERT(in_pElement != 0);
+	vout << "TranslateElement: " << in_pElement->Value() << vendl;
+
+	VXMLElement *pReturn = new VXMLElement(in_pElement->Value());
+
+	// Add attributes to VXMLElement
+	TiXmlAttribute *pAttribute = in_pElement->FirstAttribute();
+	while(pAttribute != 0) 
+	{
+		pReturn->AddAttribute(new VXMLAttribute(pAttribute->Name(),
+			pAttribute->Value()));
+
+		pAttribute = pAttribute->Next();
+	}
+
+	// Translate all children
+	TiXmlNode* pChild = 0;
+	while( pChild = in_pElement->IterateChildren(pChild))
+	{
+		pReturn->AddChild(TranslateNode(pChild));
+	}
+
+	return pReturn;
 }
 
 //-----------------------------------------------------------------------------
