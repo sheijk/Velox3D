@@ -12,6 +12,11 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
+//TODO: die childs werden nirgendwo geloescht.. entweder korrekt in destruktor
+// deactivate/remove/.. loeschen, oder intern einfach VSharedPtr<VSceneGraphPart>
+// statt VSceneGraphPart* benutzen. ausserdem copy ctor + assignment operator
+// private machen, weil sonst ploetzlich sg nodes in mehreren anderen nodes
+// childs sein koennen --sheijk
 class VSceneGraphPart
 {
 public:

@@ -8,6 +8,8 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
+//TODO: alle .cpp files nach velox/Source/... --sheijk
+
 VRBTransform::Type VRBTransform::m_sDefaultType = VRBTransform::LeftHanded;
 
 VRBTransform::VRBTransform()
@@ -56,6 +58,7 @@ void VRBTransform::SetLookAt(const Vector& in_Direction,
 {
 	V3D_ASSERT( Length(in_Up) != 0.0f );
 
+	//TODO: sollen wirklich beide zweige das gleiche tun? --sheijk
     if (in_Type == LeftHanded)
 	{
 		m_XAxis = Normalized(Cross(in_Direction, in_Up));
@@ -123,6 +126,10 @@ VRBTransform::Vector VRBTransform::GetPosition() const
 
 math::VMatrix<vfloat32, 4, 4> VRBTransform::GetAsMatrix() const
 {
+	//TODO: funktion duerfte bei "unregulaeren" matrizen komische
+	//ergebnisse haben, sowas sollte abgefangen, oder zumindest dokumentiert
+	//werden --sheijk
+	
 	VMatrix<vfloat32, 4, 4> ret;
 
 	//set position

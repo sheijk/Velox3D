@@ -16,12 +16,15 @@ VSceneGraphPart::VSceneGraphPart()
 
 VSceneGraphPart::VSceneGraphPart(VSceneGraphPart* in_pParent)
 {
+	//TODO: sollte der sich hier nicht beim parent registrieren? --sheijk
 	m_bActive = false;
 	m_pParent = in_pParent;
 }
 
 void VSceneGraphPart::Update()
 {
+	//TODO: zuerst selbst updaten, sonst sind die kinder noch an der
+	// alten position --sheijk
 	for(std::list<VSceneGraphPart*>::iterator iter = m_pChilds.begin();
 		iter != m_pChilds.end();
 		++iter)
@@ -54,6 +57,7 @@ void VSceneGraphPart::AddChild(VSceneGraphPart* in_pChild)
 
 void VSceneGraphPart::RemoveChild(VSceneGraphPart* in_pChild)
 {
+	// child sollte evtl benachrichtigt werden --sheijk
 	std::list<VSceneGraphPart*>::iterator iter = 
 		std::find(m_pChilds.begin(), m_pChilds.end(), in_pChild);
 
@@ -62,6 +66,8 @@ void VSceneGraphPart::RemoveChild(VSceneGraphPart* in_pChild)
 
 void VSceneGraphPart::Activate()
 {
+	//TODO: erst pruefen ob aktiv, sonst doppelt angemeldet.
+	// ausserdem sollten alle childs auch aktiviert werden --sheijk
 	if (m_pParent != 0)
         m_pParent->AddChild(this);
 
@@ -70,6 +76,7 @@ void VSceneGraphPart::Activate()
 
 void VSceneGraphPart::Deactivate()
 {
+	// auch alle kinder deaktivieren(?) --sheijk
 	if (m_pParent != 0)
 		m_pParent->RemoveChild(this);
 
@@ -95,6 +102,7 @@ VRBTransform VSceneGraphPart::GetTransform() const
 
 VRBTransform VSceneGraphPart::GetAbsoluteTransform()
 {
+	//TODO: aus VRBTransform auslesen (wird nur durch Update aktualisiert) --sheijk
 	return m_pParent->GetAbsoluteTransform()*m_Transform;
 }
 

@@ -9,6 +9,8 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
+//TODO: in die mathlib verschieben --sheijk
+
 /**
  * A rigid body transformation represented as an orthogonal coordinate system.
  * There are orthogonal normalized vectors forming a coordinate system plus a
@@ -22,6 +24,7 @@ class VRBTransform
 public:
 
 	enum Type { LeftHanded, RightHanded };
+	//TODO: muss defaultType heissen, da public member --sheijk
 	static Type m_sDefaultType;
 
 	typedef math::VVector<vfloat32, 3> Vector;
