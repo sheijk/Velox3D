@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="v3dcsg2html.xsl"?>
+<guidelines> 
+<!--	xmlns="http://www.sechsta-sinn.de/velox" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.sechsta-sinn.de/velox csg.xsd" -->
+	<title>Velox3D Coding Conventions</title>
+	<subtitle>Naming conventions and recommendes practices</subtitle>
+	<author>Jan Rehders, Christian Nowke</author>
+	<version>009</version>
+
+	<section name="Naming">
+		<rule>
+			Namespaces have short lower case letter names without underscored like 'v3d', 'graphics' etc
+		</rule>
+		<rule>
+			All velox identifiers have to be inside the v3d namespace or one of it's childs.
+		</rule>
+		<rule>
+			Identifiers should be self describing. Their name should indicate their primary purpose. Do not use idetifiers
+			which might be misleading. Only use abbreviations where it their meaning can be clearly seen even by people not
+			familar with the system
+		</rule>
+		<rule>
+			All velox class, struct, enum and function names start with upper case letters. Use an upper case for each
+			'sub word' inside the identifier. Example: <br/>
+			<code>
+class VEditorSuite;
+void PrintSomeLine();
+			</code>
+		</rule>
+		<rule>
+			All velox classes, structs and enums which are not nested inside another class have to be prefixed with an 
+			upper case 'V'. Interface classes are prefixed with 'IV'. Nested types don't have a prefix. <br/>
+			Examples:
+			<code>
+class VTopLevel
+{
+  enum NestedEnum { One, Two };
+  class NestedClass;
+  struct NestedStruct;
+};
+
+struct IVSomeInterface
+{
+	typedef void* EvilPtr;
+};
+
+enum VTopLevelEnum
+{
+	One, Two
+};
+			</code>
+		</rule>
+		<rule>
+			enum member names start with an uppercase letter, each 'subword' starts with an upper case letter
+			<code>
+enum VSomeEnum
+{
+	FirstValue, 
+	SecondValue
+};
+			</code>
+		</rule>
+		<rule>
+			Variables which are class members have an additional prefix "m_", global variables have the prefix "g_" and 
+			static variables are prefixed with "s_". Use in_, out_ and io_ prefixes for function parameters, and simple type 
+			prefixes when sensible. Local variables only get type prefixes. When no prefix makes sence (instances of a class 
+			etc) make the first word lower case (vertexColor) to be distinguished from a typename.
+			Use prefixes for types based on their semantics not on their type (n for number instead of dw for DWORD etc)
+			<code>
+vint m_nNumber;
+vchar m_cWhatever;
+static vushort gs_nFoo;
+std::string m_strName;
+FILE* m_pFile;
+vfloat32 m_fValue;
+vfloat64 m_fValue;
+vulong m_nValue;
+vlong m_nValue;
+			</code>			
+			<reason>
+				The variable name now shows the scope of the variable, this is especially good for programmers who did not work 
+				on the code previously.
+			</reason>
+		</rule>
+	</section>
+	
+	<section name="Style">
+		<rule>
+			Use the template files located at velox/Workspace/Templates for orientation how to structure velox header,
+			implementation and inline files
+		</rule>
+		<rule>
+			Do not use the C++ standard types. Instead use the velox typedef versions. (vint instead of int, etc)
+			<reason>Historical nonsense passed into habit ;)</reason>
+		</rule>
+		<rule>
+			Only use system dependent typed like DWORD, HWND etc where absolutely required (= system dependent code)
+		</rule>
+		<rule>
+			Each class declaration has to be commented in a way readable by doxygen. (Javadoc style preferred)
+		</rule>
+		<rule>
+			Comment everything. Document enough that anyone without any knowledge about the system will be able to use it
+			after reading your documentation. Name your identifiers in a self describing way showing their primary intent.
+			Use comments where necessary to understand your code. Remember that other people might have trouble following
+			train of thoughs which where obvious to you while coding them. 
+		</rule>
+		<rule>
+			Prefer speaking identifiers over javadoc annotations over a seperate documentation but do not skip anyone of 
+			them when they are necessary for understanding.
+		</rule>
+		<rule type="recommended">
+			Namespace declarations should have the following form:
+			<code>
+--------------------------------------------------------------------------------
+namespace v3d {
+namespace blub {
+--------------------------------------------------------------------------------
+
+class NoIndentingForNamespace;
+
+--------------------------------------------------------------------------------
+} // namespace blub
+} // namespace v3d
+--------------------------------------------------------------------------------
+      </code>
+			or
+      <code>
+--------------------------------------------------------------------------------
+namespace v3d { namespace blub {
+--------------------------------------------------------------------------------
+
+class NoIndentingForNamespace;
+
+--------------------------------------------------------------------------------
+}} // namspace v3d::blub
+--------------------------------------------------------------------------------
+      </code>      
+		</rule>
+		<rule>
+			Never specifiy public member data inside a class. Use access functions (inline if performance is critical)
+			instead.
+			<reason>
+				If this rule is applied then the internal data storage of a class can still be changed without modifying 
+				the interface. Giving direct access to member variables forbids you to change any variable in the class in 
+				the future.
+			</reason>
+		</rule>
+		<rule>
+			Do not implement functions in a header. If they need to be inline put them inside a seperate .inl file which
+			will be included by the header
+			<reason>
+				Reading code will be easier. When using inline member functions, put them into a seperate .inl file.
+			</reason>
+		</rule>
+		<rule>
+			A member function that does not affect the state of an object has to be declared as const
+			<code>
+			vbool VClass::GetSomething() const
+			{
+      		return m_bSomething;
+			}
+			</code>
+			<reason>
+				Only const functions are accessible when having a const-pointer to an object
+			</reason>
+		</rule>
+		
+		<rule>
+			Use const for reference and pointer function parameters in case they don't get modified
+			<code>
+void Print(const std::string&amp; message);
+void Clear(std::string&amp; message);
+//...
+const std::string msg("i can only be passed to Print");
+			</code>
+			<reason>
+				The function's client should know when he can trust a parameter not being modified. Const variables could not
+				be passed when a non const reference is expected
+			</reason>
+		</rule>
+	</section>
+	
+	<section name="Files">
+		<rule>
+			The filename has to be identical with the name of the class which is implemented in it. Use correct case
+			<reason>
+				The filename for a class is then obvious, even for programmers who didnt work on the project
+				previously
+			</reason>
+		</rule>
+		<rule>
+			Header files are called *.h, Implementation files *.cpp and inline files *.inl
+		</rule>
+		<rule>
+			Only one class should be implemented per file.
+			<reason>
+				This makes compile times shorter usually and simplifies finding the implementation / declaration of a 
+				specific class.
+			</reason>
+		</rule>
+		<rule>
+			Neither use dependent characters nor spaces in the filenames.
+			<reason>Not all plattforms support these.</reason>
+		</rule>
+		<rule>
+			Try not to include any other header files
+			<reason>This helps to avoid cyclic dependencies and decreases compile times.</reason>
+		</rule>
+		<rule>
+			Include files have to be guarded against multiple inclusion using a macro named V3D_FILENAME_YYYY_MM_DD_H.
+			YYYY_MM_DD means the date of creation, FileName the file's name in CAPS. Do not use #pragma once etc
+			<code>
+#ifndef V3D_VSOMEFILE_2004_06_11_H
+#define V3D_VSOMEFILE_2004_06_11_H
+//...
+#endif V3D_VSOMEFILE_2004_06_11_H
+			</code>
+		</rule>
+		<rule>
+			Header files which are part of the public API of velox are placed in the velox/API directory. Headers being
+			part of a service are placed in velox/API/V3d/.. and headers of the velox .lib are located in
+			velox/API/V3dLib/...
+			Header files which are part of the implementation and shall not be available for clients of the engine
+			are located in the same dir than their corresponding cpp file inside the velox/Source directory
+		</rule>
+		<rule>
+			Do not use anonymous struct in unions
+			<code>
+// Don't write
+union VColor
+{
+  struct
+  {
+    vuchar m_ucR;
+    vuchar m_ucG;
+    vuchar m_ucB;
+    vuchar m_ucA;
+  };
+  DWORD m_dwColor;
+}
+
+// Instead use
+union VColor
+{
+  struct AnyName
+  {
+    vuchar m_ucR;
+    vuchar m_ucG;
+    vuchar m_ucB;
+    vuchar m_ucA;
+  };
+  DWORD m_dwColor;
+}
+			</code>
+			<reason>This is only supported by Microsoft Visual C++ and GCC 3.0.</reason>
+		</rule>
+		
+	</section>
+	
+	<section name="CVS usage">
+		<rule>
+			Always write to your specific textfile in the worklog directory what you are currently doing and what you 
+			have finished. Each member of the team uses exectly one file named after his nick or real name
+			<reason>
+					The rest of the team knows who is working on which part. Apart from this fact, this mechanism helps 
+					avoiding multiple people working on the same piece of source code at the same time.
+			</reason>
+		</rule>
+		<rule>
+			Only commit code that compiles. Commit code as soon as possible but try not to commit code which you know is 
+			very buggy/unstable
+		</rule>
+	</section>
+	
+	<section name="Coding practices">
+		<rule>
+			Always initialize variables with a value
+			<reason>
+				This will probably decrease the number of bugs by avoiding error caused by uninitialised variables
+			</reason>
+		</rule>
+		<rule>
+			Use the "resource aquisition is initialisation" idiom. (see SmartPointer tutorial)
+		</rule>
+	</section>
+
+<!--
+
+	<br>
+
+
+	<br>
+	<b>Rule</b>: Symbolic constants have to be written in uppercase and have to be prefixed with "V3D_". Avoid #defines whenever possible.<br>
+	<b>Reason</b>:	A standard for constant naming has to be defined and it helps to avoid problems with constants from different packages.<br>
+	<b>Example</b>:<br>
+	#define V3D_USESTL<br>
+	const V3D_BUFFERSIZE 16<br>
+
+	<b>Rule</b>: Do not add comments directly after a symbolic constant.<br>
+	<b>Reason</b>:	Compilers other than Microsoft Visual C++ might interpret the comment being part of the constant and thus will things will definately not work correctly.<br>
+	<b>Example</b>:<br>
+	#define V3D_BUFFERSIZE 16 // Not here<br>
+	// Better here<br>
+	#define V3D_BUFFERSIZE 16<br>
+
+	<br>
+
+	<b>Rule</b>: Always provide empty brackets when deleting memory of an array.<br>
+	<b>Reason</b>:	Deleting memory without empty brackets will not free the complete memory.<br>
+	<b>Example</b>: vUchar* pFoo = new VUChar[16]; ... delete [] pFoo;<br>
+
+	<br>
+
+	<b>Rule</b>: Always assign 0 to a pointer pointing to deallocated memory. Best use the SafeDelete and SafeDeleteArray functions from v3d/Core/VMemory.h<br>
+	<b>Reason</b>: Freeing memory without resetting the pointer is a common reason for a potential crash.<br>
+	<b>Example</b>: <br>
+	delete [] pFoo; pFoo = NULL; <br>
+	// or even better: <br>
+	SafeDeleteArray(pFoo); <br>
+	<br>
+
+	<br>
+
+	<b>Rule</b>: Never allocate memory somebody else has to deallocate (and other way round).<br>
+	<b>Reason</b>:	Allocating memory in package A and deallocating it in B won't work if the packages use different memory models. Apart from this, it will most likely cause memory leaks. Thus such code should never be written.<br>
+
+	<br>
+
+	<b>Rule</b>: Use assertions whenever it might be helpful for bug hunting.<br>
+
+	<br>
+
+	<b>Rule</b>: Never put function calls inside a call of the assertion macro<br>
+	<b>Reason</b>:	This function will not be called in release mode.<br>
+	<b>Example</b>: V3D_ASSERT(VClass::DoSomething() == true);<br>
+
+	<br>
+
+	<b>Rule</b>: If asserting function results, use the V3D_VERIFY() macro from v3d/Core/VAssert.h <br>
+	<b>Reason</b>: Function calls will still be done in release compiles.<br>
+	<b>Example</b>: V3D_VERIFY(VClass::DoSomething());<br>
+
+	<br>
+
+	<b>Rule</b>: Opening brackets have to be written in the next line. Same rule applies for closing brackets and other structures where you are opening brackets (like if or while).<br>
+	<b>Example</b>:<br>
+	// Use<br>
+	for (i=0; i<3; i++)<br>
+	{<br>
+	}<br>
+-->
+</guidelines>
