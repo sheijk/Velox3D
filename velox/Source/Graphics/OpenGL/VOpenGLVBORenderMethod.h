@@ -28,7 +28,11 @@ public:
 	/**
 	 * @param creates VBOMesh out of a Mesh description
 	 */
-	virtual VOpenGLVBOMesh* CreateMesh(VMeshDescription& desc);
+	virtual VMeshBase* CreateMesh(
+		const VMeshDescription& in_MeshDescr,
+		MeshCreationFlags in_Flags,
+		IVMaterial* in_pMaterial
+		);
 
 };
 

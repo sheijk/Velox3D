@@ -74,9 +74,9 @@ VCamera::Matrix4f* VCamera::GetMatrix()
 
 void VCamera::MoveForward(vfloat32 in_fUnits)
 {
-	m_PositionVector.v[0] = m_PositionVector.v[0] + (m_ViewVector.Get(0) *- in_fUnits);
-	m_PositionVector.v[1] = m_PositionVector.v[1] + (m_ViewVector.Get(1) *- in_fUnits);
-	m_PositionVector.v[2] = m_PositionVector.v[2] + (m_ViewVector.Get(2) *- in_fUnits);
+	m_PositionVector.v[0] = m_PositionVector.v[0] + (m_ViewVector.Get(0) * in_fUnits);
+	m_PositionVector.v[1] = m_PositionVector.v[1] + (m_ViewVector.Get(1) * in_fUnits);
+	m_PositionVector.v[2] = m_PositionVector.v[2] + (m_ViewVector.Get(2) * in_fUnits);
 }
 //-----------------------------------------------------------------------------
 

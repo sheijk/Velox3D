@@ -295,7 +295,7 @@
 				Name="Portals"
 				Filter="">
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\IVSector.h">
+					RelativePath="..\Api\V3dLib\Graphics\IVCell.h">
 				</File>
 			</Filter>
 		</Filter>

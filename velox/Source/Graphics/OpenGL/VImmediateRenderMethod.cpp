@@ -16,9 +16,6 @@ VMeshBase* VImmediateRenderMethod::CreateMesh(
 	V3D_ASSERT(in_pMaterial != 0);
 	V3D_ASSERT(&in_MeshDescr != 0);
 
-	//TODO: was wenn new scheitert? -ins 
-	// dann stuertzt es halt ab -- sheijk
-
 	VMeshBase* pMesh = 0;
 
 	// on indexed mode

@@ -35,6 +35,7 @@
 #include <v3d/Utils/Graphics/SimpleSG/VSceneGraphTools.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
+
 namespace example{
 //-----------------------------------------------------------------------------
 using namespace v3d::updater;

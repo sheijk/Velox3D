@@ -57,7 +57,7 @@ struct VVertexDataLayout
 	 * Returns true if the given value is a possible offset. Does not hint
 	 * whether the offset is correct
 	 */
-	static vbool IsValidOffset(Offset offs);
+	inline static vbool IsValidOffset(Offset offs);
 
 	/**
 	 * Sets VertexData::layout.positionOffset to the correct value

@@ -1,8 +1,6 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
-
 #include <v3d/Core/Modules/VModuleBase.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
 
 //-----------------------------------------------------------------------------
 #include "VirtualFileSystem/VStreamFactory.h"
@@ -15,7 +13,7 @@
 #include "UpdateManager/VUpdateManager.h"
 #include "SystemManager/VSystemManager.h"
 
-// thank you, windows.h
+// thank you, windows.h -- it's a feature, not a bug :P -ins
 #undef NO_ERROR
 
 #include "ImageService/VImageFactory.h"

@@ -1,11 +1,15 @@
 //-----------------------------------------------------------------------------
 #ifndef V3D_VOPENGLVBOMESH_H
 #define V3D_VOPENGLVBOMESH_H
-//-------------------------------------------------------------------------
-#include "../DeviceBase/VBaseMesh.h"
-#include "../DeviceBase/VRenderMethodRegistry.h"
-//-------------------------------------------------------------------------
-#include <extgl/extgl.h>
+//-----------------------------------------------------------------------------
+#include <v3d/Math/VVector.h>
+#include <v3d/Graphics/VMeshDescription.h>
+
+#include "../DeviceBase/VMeshBase.h"
+
+#include <windows.h>
+#include <gl/gl.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -13,36 +17,41 @@ namespace graphics {
 
 
 /**
- * @author ins
- * @version 1.0
- * @created 23-Dez-2003 18:14:53
- */
+* VBO rendering implementation
+* @author ins
+*/
 
-
-class VOpenGLVBOMesh : public VBaseMesh 
+class VOpenGLVBOMesh : public VMeshBase
 {
-	VMeshDescription::FloatDataRef m_TriangleData;
-	VMeshDescription::FloatDataRef m_ColorData;
+	typedef VVector<vfloat32, 3> Vertex;
+
+	VMeshDescription::ByteDataRef m_TriangleData;
+	VMeshDescription::ByteDataRef m_ColorData;
+	VMeshDescription::ByteDataRef m_TexCoordData;
+
+	vbool m_bColors;
+	vbool m_bTexCoords;
+
+	GLint m_PrimitiveType;
+	GLuint m_ArrayID;
 
 public:
-	VOpenGLVBOMesh(VMeshDescription& in_MeshDescr);
+
+	VOpenGLVBOMesh(
+		const VMeshDescription& in_Descr,
+		IVMaterial* in_pMaterial
+		);
+
 	virtual ~VOpenGLVBOMesh();
+
 	virtual void Render();
-
-private:
-
-	vuint m_iNumElements;
-
-	/* array id for the vertex buffer object */
-	GLuint m_ArrayID;
-	GLuint m_ColorArrayID;
-
 };
+
 
 //-----------------------------------------------------------------------------
 } //namespace graphics
 } //namespace v3d
 //-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
-#endif // V3D_VOPENGLVBOMESH_H
+
+#endif // V3D_VOPENGLVVBOMESH_H

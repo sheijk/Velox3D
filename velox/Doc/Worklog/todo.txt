@@ -55,6 +55,8 @@ UML Model
 
 -- ins
 Xml
+Utils, Graphics
+WxWidget Service
 Doxygen (Doc/Reference)
 ...
 

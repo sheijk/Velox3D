@@ -13,6 +13,7 @@
 #include "../DeviceBase/VBufferManager.h"
 #include "../DeviceBase/VRenderMethodRegistry.h"
 #include "VImmediateRenderMethod.h"
+#include "VOpenGLVBORenderMethod.h"
 
 #include "../DeviceBase/VRenderStateList.h"
 #include "../DeviceBase/VStateCategoryList.h"
@@ -79,7 +80,7 @@ private:
 	VRenderMethodRegistry m_RenderMethods;
 
 	VImmediateRenderMethod m_ImmediateRenderMethod;
-//	VOpenGLVBORenderMethod m_VBORenderMethod;
+	//VOpenGLVBORenderMethod m_VBORenderMethod;
 
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;

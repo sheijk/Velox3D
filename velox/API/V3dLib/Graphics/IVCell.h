@@ -8,14 +8,17 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 /**
- * IVSector interface. Derive each geometry implementation of this class
+ * IVCell interface. Derive each geometry implementation of this class
  */
 
 class IVCell
 {
 public:
 
-	virtual void Render(const utils::graphics::VCamera& in_Camera) = 0;
+	virtual void Cull(utils::graphics::VCamera* in_pCamera) = 0;
+	virtual void Hide() = 0;
+	virtual void Show() = 0;
+
 };
 
 //-----------------------------------------------------------------------------

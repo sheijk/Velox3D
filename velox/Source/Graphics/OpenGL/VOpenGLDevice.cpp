@@ -42,6 +42,7 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 	SetDisplay();
 
 	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
+	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
 
 	m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	m_StateCategories.RegisterCategory(m_MiscStateCategory);
