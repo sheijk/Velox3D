@@ -361,17 +361,16 @@ void VOpenGLDevice::BeginScene()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	//TODO for testing purpose -ins
-	static vfloat32 rotZ = 0;
-
 	if(m_pCamera)
+	{
+		glRotatef(m_pCamera->rotX, 0.0f,1.0f,0.0f);
+		glRotatef(m_pCamera->rotY, 1.0f,0.0f,0.0f);
 		glTranslatef(m_pCamera->GetX(), m_pCamera->GetY(), m_pCamera->GetZ());
+		
+		
+	}
 	else 
 		glTranslatef(0,0,0);
-
-	rotZ += 0.3f;
-	glRotatef(rotZ,0.0f,1.0f,0.0f);
-
 }
 
 //-----------------------------------------------------------------------------

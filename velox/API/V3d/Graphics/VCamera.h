@@ -32,9 +32,14 @@ public:
 	void AddY(vfloat32 y);
 	void AddZ(vfloat32 z);
 
+	vfloat32 rotX;
+	vfloat32 rotY;
+
 private:
 
 	vfloat32 m_pPosition[3];
+	
+
 
 };
 

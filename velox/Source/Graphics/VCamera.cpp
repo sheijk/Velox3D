@@ -10,6 +10,9 @@ VCamera::VCamera(vfloat32 x, vfloat32 y, vfloat32 z)
 	m_pPosition[0] = x;
 	m_pPosition[1] = y;
 	m_pPosition[2] = z;
+
+	rotX = 0;
+	rotY = 0;
 }
 //-----------------------------------------------------------------------------
 VCamera::VCamera()

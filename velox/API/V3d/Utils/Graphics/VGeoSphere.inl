@@ -108,7 +108,9 @@ void VGeoSphere<VertexStructure>::CreateCoordinates()
 }
 
 template <typename VertexStructure> 
-void VGeoSphere<VertexStructure>::CreateColor( VColor4f in_Colors[8] )
+void VGeoSphere<VertexStructure>::CreateColor(
+	v3d::graphics::VColor4f in_Colors[8]
+	)
 {
 	vbool bIterations = false;
 

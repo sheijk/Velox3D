@@ -15,7 +15,7 @@
 //#include <windows.h>
 //#include <gl/gl.h>
 //#include <gl/glu.h>
-#include "../../UtilsLib/DrawList/VSimpleDrawList.h"
+#include <v3d/Utils/Graphics/VSimpleDrawList.h>
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>

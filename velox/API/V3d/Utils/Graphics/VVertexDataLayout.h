@@ -68,7 +68,7 @@ void VVertexDataLayout::SetTexCoordOffset()
 	VertexData* zero = 0;
 
 	VertexData::layout.texCoordOffset =
-		reinterpret_cast<Offset>(&(zero->texCoord)) / sizeof(float);
+		reinterpret_cast<Offset>(&(zero->texCoords)) / sizeof(float);
 }
 
 

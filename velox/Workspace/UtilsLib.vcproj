@@ -208,6 +208,12 @@
 				RelativePath="..\Api\V3d\Utils\Graphics\VGeoSphere.inl">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VHeightmap.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\Graphics\VHeightmap.inl">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VPlane3f.h">
 			</File>
 			<File
