@@ -6,5 +6,6 @@ Implementation:		Source/..		(Implementation von Velox und Services)
 Coding Style Guides: 	Doc/Information/StyleGuidelines.html
 Issues:			Doc/Worklog/Issues.html
 Goals:			Doc/Information/GoalDefinitions.html
+Roadmap:		Doc/Information/Roadmap.html
 Pers.Files:		Doc/Worklog/Name.txt	(Nachrichten an Entwickler, Informationen ueber aktuellen Aufgaben, .plan, usw.)
 Dokumentation:		Doc/Index.html
