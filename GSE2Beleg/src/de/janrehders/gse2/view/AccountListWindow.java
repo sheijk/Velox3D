@@ -14,9 +14,7 @@ import java.util.Vector;
 
 import javax.swing.*;
 
-import de.janrehders.gse2.accounts.Account;
-import de.janrehders.gse2.accounts.AccountIterator;
-import de.janrehders.gse2.accounts.Giro;
+import de.janrehders.gse2.accounts.*;
 import de.janrehders.gse2.controller.Controller;
 import de.janrehders.gse2.model.Model;
 
@@ -45,7 +43,25 @@ public class AccountListWindow extends Document {
         
         // add some buttons
         JButton giroAddButton = new JButton("new giro");
-        giroAddButton.addActionListener(new AddGiroAction());
+        giroAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                addAccount(new Giro());
+            }
+        });
+        
+        JButton studentGiroAddButton = new JButton("New student giro");
+        studentGiroAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                addAccount(new StudentGiro());
+            }
+        });
+        
+        JButton savingsAddButton = new JButton("New savings");
+        savingsAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                addAccount(new Savings());
+            }
+        });
         
         JButton removeAccountButton = new JButton("remove");
         removeAccountButton.addActionListener(new ActionListener() {
@@ -74,6 +90,8 @@ public class AccountListWindow extends Document {
         });
 
         myListOptionPanel.addButton(giroAddButton);
+        myListOptionPanel.addButton(studentGiroAddButton);
+        myListOptionPanel.addButton(savingsAddButton);
         myListOptionPanel.addButton(removeAccountButton);
         myListOptionPanel.addButton(editAccountButton);
         myListOptionPanel.addButton(viewAccountButton);
@@ -98,7 +116,11 @@ public class AccountListWindow extends Document {
         while(iter.hasNext()) {
             Account account = iter.next();
             
-            accountNames.add(account.getTypeString() + " " + account.getAccountNo() + " " + account.getOwner());
+            String item = "No. " + account.getAccountNo()
+            	+ " " + account.getTypeString()
+            	+ " Owner: " + account.getOwner();
+            
+            accountNames.add(item);
         }
         
         myListOptionPanel.setItems(accountNames);
@@ -116,20 +138,10 @@ public class AccountListWindow extends Document {
         Account account = iter.next();
         return account;
     }
-
-    private class AddGiroAction implements ActionListener
+    
+    private void addAccount(Account inAccount)
     {
-        public void actionPerformed(ActionEvent e) {
-            // add a giro account
-            Model model = myController.getModel();
-            Giro giro = new Giro();
-            model.insert(giro);
-            
-            int i = 1;
-            System.out.println(i);
-            
-            // open it for editing
-            MainWindow.createAccountEditWindow(myController, giro, true, getMainWindow());
-        }
+        myController.getModel().insert(inAccount);
+        MainWindow.createAccountEditWindow(myController, inAccount, true, getMainWindow());
     }
 }

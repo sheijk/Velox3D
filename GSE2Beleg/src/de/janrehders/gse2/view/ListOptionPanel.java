@@ -78,8 +78,12 @@ public class ListOptionPanel extends JPanel {
         listPanel.setLayout(new BorderLayout());
         TitledBorder border = BorderFactory.createTitledBorder("list");
         listPanel.setBorder(border);
+        
+        JScrollPane scrollPanel = new JScrollPane();
+        
+        scrollPanel.getViewport().setView(myList);
 
-        listPanel.add(myList);
+        listPanel.add(scrollPanel);
         
         myButtonPanel = new JPanel();
         myButtonPanel.setLayout(new BoxLayout(myButtonPanel, BoxLayout.Y_AXIS));
