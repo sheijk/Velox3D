@@ -616,9 +616,6 @@
 						RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
 					</File>
 					<File
-						RelativePath="..\Source\Graphics\VDisplaySettings.cpp">
-					</File>
-					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.cpp">
 					</File>
 					<File

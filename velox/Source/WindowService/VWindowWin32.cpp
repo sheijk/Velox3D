@@ -204,7 +204,7 @@ void VWindowWin32::Create(VStringParam in_pName)
 void VWindowWin32::ChangeDisplay(graphics::VDisplaySettings* in_pInfo)
 {
 
-	m_DisplaySettings.Assign(in_pInfo);
+	m_DisplaySettings = *in_pInfo;
 	vout << "Changing display settings..." << vendl;
 	Destroy();
 	Create(m_Name.c_str());

@@ -20,7 +20,6 @@ public:
 	//TODO: problematisch, klasse kann nur von gfx service selbst gesetzt werden,
 	// sonst gibts linker fehler (sheijk)
 	inline VDisplaySettings();
-	void Assign(VDisplaySettings* in_pInfo);
 
 	vbool m_bFullscreen;
 	vuint m_iWidth;

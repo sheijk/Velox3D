@@ -53,6 +53,10 @@ Questions:
 
 Done List:
 
+15.06.04
+- removed VDisplaySettings.cpp
+- cleanded bsp renderer
+
 12.06.04
 - fixed texcoord buffer bug after several hours debugging.......
 
