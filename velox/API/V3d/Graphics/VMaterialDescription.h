@@ -71,6 +71,28 @@ struct VMaterialDescription
 	};
 
 	/**
+	 * Handling of texture coordinates outside the range [0,1]
+	 */
+	enum TextureWrapMode
+	{
+		TextureRepeat,
+		TextureClamp
+	};
+
+	/**
+	 * Filtering of textures for minification/magnification
+	 */
+	enum TextureFilter
+	{
+		FilterNearest,
+		FilterLinear,
+		FilterNearestMipmapNearest,
+		FilterLinearMipmapNearest,
+		FilterNearestMipmapLinear,
+		FilterLinearMipmapLinear
+	};
+
+	/**
 	 * Enable or disable any color channel for writing
 	 */
 	struct ColorBufferMask
@@ -89,8 +111,14 @@ struct VMaterialDescription
 	 */
 	struct TextureRef
 	{
+		inline TextureRef();
+
 		vuint nWidth, nHeight;
 		ByteBufferHandle hData;
+		TextureFilter minificationFilter;
+		TextureFilter magnificationFilter;
+		TextureWrapMode wrapTexCoordU;
+		TextureWrapMode wrapTexCoordV;
 
 		TextureRef* pNext;
 	};
@@ -159,6 +187,15 @@ VMaterialDescription::ColorBufferMask::ColorBufferMask()
 	writeGreen = true;
 	writeBlue = true;
 	writeAlpha = true;
+}
+
+VMaterialDescription::TextureRef::TextureRef() :
+	nWidth(0), nHeight(0), hData(0),
+	minificationFilter(FilterNearest),
+	magnificationFilter(FilterNearest),
+	wrapTexCoordU(TextureRepeat),
+	wrapTexCoordV(TextureRepeat)
+{
 }
 
 //-----------------------------------------------------------------------------
