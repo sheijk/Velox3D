@@ -34,6 +34,17 @@ public:
 	 */
 	
 	virtual IVWindowPtr QueryWindow(VStringParam in_pName);
+	
+	/**
+	* @param: in_pName - the window caption
+	*         in_pDisplaySettings - the display properties
+	* 
+	*/
+
+	virtual IVWindowPtr QueryWindow(
+		VStringParam in_pName,
+		const graphics::VDisplaySettings* in_pDisplaySettings
+		);
 
 	virtual GraphicsDevicePtr CreateGraphicsDevice(
 		const graphics::VDisplaySettings& in_Settings,

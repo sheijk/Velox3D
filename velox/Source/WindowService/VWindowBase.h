@@ -19,46 +19,19 @@ namespace window {
 class VWindowBase : public IVWindow, public updater::IVUpdateable
 {
 
-	public:
-		
-	/**
-	 * -----------------------------------------------------------------------------
-	 */
+public:
 		VWindowBase();		
-	/**
-	 * -----------------------------------------------------------------------------
-	 */
 		virtual ~VWindowBase();
 		
-	/**
-	 * -----------------------------------------------------------------------------
-	 */
 		virtual void Activate();
-	/**
-	 * -----------------------------------------------------------------------------
-	 */
 		virtual void Deactivate();
-	/**
-	 * -----------------------------------------------------------------------------
-	 * @param in_pName
-	 * 
-	 */
 		virtual void SetName(VStringParam in_pName);
-
-	/**
-	 * -----------------------------------------------------------------------------
-	 */
 		VStringParam GetWindowName();
-	/**
-	 * -----------------------------------------------------------------------------
-	 */
 		graphics::VDisplaySettings GetDisplaySettings();
-		
 
-	protected:
+protected:
 
 		input::IVInputManager* m_pInputManager;
-	
 		graphics::IVDevice* m_Device;
 		std::string m_Name;
 		graphics::VDisplaySettings m_DisplaySettings;

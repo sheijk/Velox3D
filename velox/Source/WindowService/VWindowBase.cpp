@@ -22,6 +22,7 @@ VDisplaySettings VWindowBase::GetDisplaySettings()
 {
 	return m_DisplaySettings;
 }
+
 //-----------------------------------------------------------------------------
 
 void VWindowBase::Activate()

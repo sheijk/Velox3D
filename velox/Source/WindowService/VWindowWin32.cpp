@@ -58,8 +58,8 @@ return DefWindowProc(hWnd, iMsg, wParam, lParam);
 
 VWindowWin32::VWindowWin32()
 {
-	hInstance = NULL;
-	hWnd = NULL;
+	hInstance = 0;
+	hWnd = 0;
 	bFocus = false;
 	IVUpdateable::Register();
 }
@@ -294,6 +294,12 @@ input::IVInputManager& VWindowWin32::QueryInputManager()
 void VWindowWin32::SetTitle(VStringParam in_sName)
 {
 	SetWindowText(hWnd, in_sName);
+}
+//-----------------------------------------------------------------------------
+void VWindowWin32::SetDisplaySettings(
+	 const graphics::VDisplaySettings* in_pDisplaySettings)
+{
+	m_DisplaySettings = *in_pDisplaySettings;
 }
 
 //-----------------------------------------------------------------------------

@@ -29,6 +29,12 @@ public:
 
 	/* Returns a pointer to the window created by this manager */
 	virtual IVWindowPtr QueryWindow(VStringParam in_pName) = 0;
+
+	/* Returns a pointer to the window created by this manager */
+	virtual IVWindowPtr QueryWindow(
+		VStringParam in_pName,
+		const graphics::VDisplaySettings* in_pDisplaySettings
+		) = 0;
 	
 	/**
 	 * returns a graphics device. The handle will be casted to the platforms

@@ -12,6 +12,7 @@ namespace window {
 
 /**
  * IVWindow interface for window creating and managing
+ * @author: ins
  */
 
 class IVWindow

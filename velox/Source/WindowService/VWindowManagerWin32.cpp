@@ -15,7 +15,6 @@ namespace window {
 
 VWindowManagerWin32::VWindowManagerWin32()
 {
-	//m_iNumWindows = 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -26,12 +25,35 @@ VWindowManagerWin32::~VWindowManagerWin32()
 
 //-----------------------------------------------------------------------------
 
-IVWindowManager::IVWindowPtr VWindowManagerWin32::QueryWindow(VStringParam in_pName)
+IVWindowManager::IVWindowPtr VWindowManagerWin32::QueryWindow(
+	VStringParam in_pName
+	)
 {
 	IVWindowManager::IVWindowPtr window;
 	VWindowWin32* window32 = new VWindowWin32;
 
 	vout << "Window manager creating window:" << vendl;
+	window32->Create(in_pName);
+
+	m_iNumWindows++;
+	vout << "-------------------------------------------------------" << vendl;
+
+	window.Assign(window32);
+	return window;
+}
+
+//-----------------------------------------------------------------------------
+
+IVWindowManager::IVWindowPtr VWindowManagerWin32::QueryWindow(
+    VStringParam in_pName,
+	const graphics::VDisplaySettings* in_pDisplaySettings
+	)
+{
+	IVWindowManager::IVWindowPtr window;
+	VWindowWin32* window32 = new VWindowWin32;
+
+	vout << "Window manager creating window:" << vendl;
+	window32->SetDisplaySettings(in_pDisplaySettings);
 	window32->Create(in_pName);
 
 	m_iNumWindows++;

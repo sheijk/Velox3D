@@ -514,22 +514,22 @@
 				<File
 					RelativePath="..\Source\WindowService\VWindowWin32.h">
 				</File>
-				<Filter
-					Name="Interface"
-					Filter="">
-					<File
-						RelativePath="..\Api\V3d\Window\IVWindow.h">
-					</File>
-					<File
-						RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
-					</File>
-					<File
-						RelativePath="..\Api\V3d\Window\IVWindowManager.h">
-					</File>
-					<File
-						RelativePath="..\Api\V3d\Window\IVWxConnector.h">
-					</File>
-				</Filter>
+			</Filter>
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Window\IVWindow.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Window\IVWindowManager.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Window\IVWxConnector.h">
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
