@@ -17,13 +17,13 @@ Worklog von sheijk
 todo:
 UnitTests portieren
 <v3d/Core/VCoreLib.h> in jedem Header includen
-Coding Guidelines ergaenzen
+x Coding Guidelines ergaenzen
 Vfs als Service
 Netzwerk, Scripting
 Welt erobern
 
 --------------------------------------------------------------------------------
------ last things sheijk did:
+----- last things sheijk finished:
 
 log:
 
@@ -37,10 +37,16 @@ XMLWrapper geplant
 Entwuerfe fuer den Vfs Service, und den XML Wrapper
 
 02.05.2003
-CoreLib, ExampleService und Kernel in Namespaces verpackt, Code an Coding Guidelines angepasst
+- CoreLib, ExampleService und Kernel in Namespaces verpackt
+- Code an Coding Guidelines angepasst
 
 01.05.2003
-Weitere Sources ins neue CVS portiert, Geschwindigkeitstest mit Exceptions gemacht, Coding Guidelines in Html verwandelt, umgeschrieben und erweitert, Issues in issues.html exportiert und neu formatiert
+- Weitere Sources ins neue CVS portiert 
+- Geschwindigkeitstest mit Exceptions gemacht
+- Coding Guidelines in Html verwandelt, umgeschrieben und erweitert
+- Issues in issues.html exportiert und neu formatiert
 
 30.4.2003
-Neue Velox Verzeichnisstruktur erstellt, und neue Velox Aufteilung nach den Services begonnen. Kernel sowie ObjectRegistry, SmartPointer und ExampleService portiert.
+- Neue Velox Verzeichnisstruktur erstellt
+- neue Velox Aufteilung nach den Services begonnen
+- Kernel sowie ObjectRegistry, SmartPointer und ExampleService portiert.
