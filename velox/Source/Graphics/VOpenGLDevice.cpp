@@ -39,7 +39,7 @@ IVMesh* VOpenGLDevice::CreateMesh(IVMeshDescription* in_pMeshDesc)
 	typedef VBidirectionalIterator<const VTriangle> TriangleIterator;
     
 	
-	VOpenGLVertexMesh* Mesh = new VOpenGLVertexMesh;
+	VOpenGLVertexMesh* Mesh = new VOpenGLVertexMesh();
 	
 	for(TriangleIterator iter = in_pMeshDesc->TriangleBegin();
 		iter != in_pMeshDesc->TriangleEnd(); iter++)

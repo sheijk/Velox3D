@@ -15,6 +15,38 @@ namespace console {
 
 class VConsoleFrame;
 
+class VQuitButton : public wxButton
+{
+public:
+
+	VQuitButton(wxWindow* parent, const wxPoint& pos,
+		const wxSize& size);
+
+	void OnQuit(wxMouseEvent& event);
+
+private:
+	DECLARE_EVENT_TABLE()
+
+};
+
+class VClearButton : public wxButton
+{
+public:
+
+	VClearButton(VConsoleFrame* parent, const wxPoint& pos,
+		const wxSize& size);
+
+	void OnClear(wxMouseEvent& event);
+
+private:
+	
+	VConsoleFrame* m_pParent;
+
+	DECLARE_EVENT_TABLE()
+
+};
+
+
 class VTextControl : public wxTextCtrl
 {
 public:
@@ -23,10 +55,10 @@ public:
 		const wxPoint &pos, const wxSize &size, int style = 0);
 		
 
-	enum Event
+	/*enum Event
 	{
 		ID_Enter = 1,
-	};
+	};*/
 
 	void OnEnter(wxKeyEvent& event);
 
@@ -49,12 +81,16 @@ public:
 
 	void WriteText(VStringParam in_Text);
 	void ShowFrame(vbool in_Param);
+	wxTextCtrl* GetTextControl();
 
 	
 private:
 
 	wxTextCtrl* m_TextControl;
 	VTextControl* m_InputControl;
+	VQuitButton* m_QuitButton;
+	VClearButton* m_ClearButton;
+
 
 
 };

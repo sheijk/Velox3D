@@ -173,7 +173,12 @@ void VXMLService::ParseLocalXMLFile(
 	Doc.LoadFile();
 
 	if( Doc.Error())
-		V3D_THROW(VXMLTinyXMLException, "Document could not be parsed!");
+	{
+		std::string Error;
+		Error.append("Document could not be parsed: ");
+		Error.append(in_pcName);
+		V3D_THROW(VXMLTinyXMLException, Error.c_str());
+	}
 
 	TiXmlNode* node;
 

@@ -76,8 +76,12 @@ vint VExampleApp::Main()
 
 	bufHandle = pDevice->CreateBuffer(&vertexData, VFloatBuffer::CopyData);
 
+/*/<<<<<<< VExampleApp.cpp
+	testMesh = m_Device->CreateMesh(&test);
+=======*/
 	VMeshDescription desc;
 	desc.triangleVertices = VMeshDescription::FloatDataRef(bufHandle, 0, 9, 1);
+//>>>>>>> 1.13
 
 	IVMesh& mesh( pDevice->CreateMesh(desc) );
 	
@@ -87,8 +91,13 @@ vint VExampleApp::Main()
 
 	while(system->GetStatus())
 	{
+/*<<<<<<< VExampleApp.cpp
+		m_Device->BeginScene();
+		m_Device->RenderMesh(testMesh);
+=======*/
 		pDevice->BeginScene();
 		pDevice->RenderMesh(mesh);
+//>>>>>>> 1.13
 		updater.StartNextFrame();
 		pDevice->EndScene();
 	}

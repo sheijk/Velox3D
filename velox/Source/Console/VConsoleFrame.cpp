@@ -1,4 +1,5 @@
 #include "VConsoleFrame.h"
+#include <v3d/System/IVSystemManager.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -16,6 +17,46 @@ namespace console {
 BEGIN_EVENT_TABLE(VTextControl, wxTextCtrl)
 EVT_TEXT_ENTER(-1,VTextControl::OnEnter)
 END_EVENT_TABLE()
+
+BEGIN_EVENT_TABLE(VQuitButton, wxButton)
+EVT_BUTTON(-1, VQuitButton::OnQuit) 
+END_EVENT_TABLE()
+
+BEGIN_EVENT_TABLE(VClearButton, wxButton)
+EVT_BUTTON(-1, VClearButton::OnClear) 
+END_EVENT_TABLE()
+
+
+VQuitButton::VQuitButton(wxWindow* parent, const wxPoint& pos,
+						 const wxSize& size) : wxButton(parent, -1, _T("Quit"), 
+									  pos, size, wxBU_EXACTFIT,
+									  wxDefaultValidator, _T("Button"))
+{
+
+}
+
+void VQuitButton::OnQuit(wxMouseEvent& event)
+{
+	system::IVSystemManager* SystemManager;
+	SystemManager =	QueryObject<system::IVSystemManager>("system.service");
+
+	SystemManager->SetStatus(false);
+}
+
+VClearButton::VClearButton(VConsoleFrame* parent, const wxPoint& pos,
+						 const wxSize& size) : wxButton(parent, -1, _T("Clear"), 
+						 pos, size, wxBU_EXACTFIT,
+						 wxDefaultValidator, _T("Button"))
+{
+	m_pParent = parent;
+}
+
+void VClearButton::OnClear(wxMouseEvent& event)
+{
+	m_pParent->GetTextControl()->Clear();
+	
+}
+
 
 VTextControl::VTextControl(VConsoleFrame *parent, wxWindowID id, const wxString
 						   &value, const wxPoint &pos, const wxSize &size,
@@ -39,7 +80,7 @@ void VTextControl::OnEnter(wxKeyEvent& event)
 
 VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
 										  "Velox Console",wxPoint(100, 100),
-										  wxSize(250, 700), wxCAPTION, "frame")
+										  wxSize(250, 750), wxCAPTION, "frame")
 {
 	Register();
 
@@ -54,11 +95,19 @@ VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
 		wxPoint(0,650), wxSize(250,25),
 		wxTE_LEFT);
 
+	m_QuitButton = new VQuitButton(this, wxPoint(0,675), wxSize(245,25));
+	m_ClearButton = new VClearButton(this, wxPoint(0,700), wxSize(245,25));
+
 }
 
 void VConsoleFrame::ShowFrame(vbool in_Param)
 {
 	wxFrame::Show(in_Param);
+}
+
+wxTextCtrl* VConsoleFrame::GetTextControl()
+{
+	return m_TextControl;
 }
 
 

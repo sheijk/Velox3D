@@ -41,14 +41,14 @@ void VKernelIniReader::OnElementClose(IVXMLElement* pElement)
 
 void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 {
-	std::string ElementName;
-	ElementName = pElement->GetName().AsCString();
+	std::string sElementName;
+	sElementName = pElement->GetName().AsCString();
 	
 	switch (m_State)
 	{
 	case ConfigState:
 		{
-			if(ElementName == "Config")
+			if(sElementName == "Config")
 			{
 				m_State = ServiceState;
 				vout << "Parsing configuration of ini file:" << vendl;
@@ -57,41 +57,44 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 			else
 			{			
 				std::string errorMsg = "xml ini file invalid expected \"Config\", got \"";
-				errorMsg += ElementName;
+				errorMsg += sElementName;
 				errorMsg += "\"";
 				V3D_THROW(VKernelIniException, errorMsg.c_str());
 			}
 		} break;
 	case ServiceState:
 		{
-			if(ElementName == "Services")
+			if(sElementName == "Services")
 				m_State = ServiceElementState;
 			else
 			{			
 				std::string errorMsg = "xml ini file invalid expected \"Services\", got \"";
-				errorMsg += ElementName;
+				errorMsg += sElementName;
 				errorMsg += "\"";
 				V3D_THROW(VKernelIniException, errorMsg.c_str());
 			}
 		} break;
 	case ServiceElementState:
 		{
-			if(ElementName == "Service")
+			if(sElementName == "Service")
 			{
-				std::string ServiceName = pElement->GetFirstAttribute()->GetValue().AsCString();
-				std::string ServiceDesc = pElement->NextAttribute()->GetValue().AsCString();
-				std::string ServiceFile = pElement->NextAttribute()->GetValue().AsCString();
-				vout << "Service Name: " << ServiceName << vendl;
-				vout << "Service Description: " << ServiceDesc << vendl;
-				vout << "Service Filename: " << ServiceFile << vendl;
+				std::string sServiceName =
+					pElement->GetFirstAttribute()->GetValue().AsCString();
+				std::string sServiceDesc =
+					pElement->NextAttribute()->GetValue().AsCString();
+				std::string sServiceFile =
+					pElement->NextAttribute()->GetValue().AsCString();
+				vout << "Service Name: " << sServiceName << vendl;
+				vout << "Service Description: " << sServiceDesc << vendl;
+				vout << "Service Filename: " << sServiceFile << vendl;
 				
-				m_pServiceList->push_back(ServicePointer(new VServiceProxy(ServiceFile)));
+				m_pServiceList->push_back(ServicePointer(new VServiceProxy(sServiceFile)));
 				
 			}
 		} break;
 	case MainState:
 		{
-			if(ElementName == "Main")
+			if(sElementName == "Main")
 			{
 				m_AppName = pElement->GetAttribute("id")->GetValue().AsCString();
 				if(m_AppName.length() == 0)
