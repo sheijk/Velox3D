@@ -3,8 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="InputLib"
-	ProjectGUID="{556A30B2-22CB-47C8-A073-CDCD6D561337}"
-	RootNamespace="GRaphicsService"
+	ProjectGUID="{E3F08ECE-2639-498D-962C-C5E2C78BA5D8}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -13,15 +12,15 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs;../Local/ExternalLibs/gmtl"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				AdditionalIncludeDirectories="../API"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIBWIN32;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -34,8 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="dinput8.lib dxguid.lib"
-				AdditionalLibraryDirectories=""/>
+				AdditionalDependencies="dinput8.lib dxguid.lib"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -57,16 +55,14 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="4"
+			OutputDirectory="Release"
+			IntermediateDirectory="Release"
+			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs;../Local/ExternalLibs/gmtl"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
-				RuntimeLibrary="1"
-				RuntimeTypeInfo="TRUE"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;INPUT_EXPORTS"
+				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -74,9 +70,15 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"
-				AdditionalDependencies="dinput8.lib dxguid.lib"
-				AdditionalLibraryDirectories=""/>
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)/input.dll"
+				LinkIncremental="1"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)/input.lib"
+				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -92,6 +94,8 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
@@ -101,8 +105,9 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Interfaces"
-			Filter="">
+			Name="Interface"
+			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
 				RelativePath="..\Api\V3d\Input\IVAbsoluteAxis.h">
 			</File>
@@ -118,10 +123,23 @@
 			<File
 				RelativePath="..\Api\V3d\Input\IVRelativeAxis.h">
 			</File>
+			<File
+				RelativePath="..\Api\V3d\Input\VInputException.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
-			Filter="">
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath="..\Source\InputLib\InputServiceDLL.cpp">
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
 			<File
 				RelativePath="..\Source\InputLib\VDIAbsoluteAxis.cpp">
 			</File>
@@ -170,6 +188,11 @@
 			<File
 				RelativePath="..\Source\InputLib\VDIRelativeAxis.h">
 			</File>
+		</Filter>
+		<Filter
+			Name="Ressourcendateien"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
 		</Filter>
 	</Files>
 	<Globals>

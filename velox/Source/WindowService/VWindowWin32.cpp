@@ -217,7 +217,7 @@ IVDevice& VWindowWin32::QueryGraphicsDevice()
 	if(m_DisplaySettings.m_sAPIType == "OpenGL")
 	{
 		vout << "Using OpenGL API..." << vendl;
-		m_Device = new VOpenGLDevice(&m_DisplaySettings, hWnd);
+		//m_Device = new VOpenGLDevice(&m_DisplaySettings, hWnd);
 	}
 
 	else if(m_DisplaySettings.m_sAPIType == "Direct3D")
@@ -237,16 +237,8 @@ input::IVInputManager& VWindowWin32::QueryInputManager()
 		return *m_pInputManager;
 
 	vout << "Using DirectInput..." << vendl;
-	input::VDIInputManager* pTemp = new input::VDIInputManager(hWnd);
-
-	if ( pTemp->Create() == true )
-	{
-		m_pInputManager = pTemp;
-		pTemp = NULL;
-	}
-	else
-		m_pInputManager = NULL;
-
+	m_pInputManager = new input::VDIInputManager(hWnd);
+	
 	vout << "---------------------------" << vendl;
 
 	return *m_pInputManager;	
