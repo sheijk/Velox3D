@@ -3,52 +3,51 @@
 #include <windows.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
-	namespace input {
-		//-----------------------------------------------------------------------------
+namespace input {
+//-----------------------------------------------------------------------------
 
-		/**
-		* Constructor
-		* @param in_pAxis Points to a member of DIMOUSESTATE2 or DIJOYSTATE2
-		* @param in_strName Name of this axis
-		*/
-		VDIAbsoluteAxis::VDIAbsoluteAxis(DIDEVICEOBJECTINSTANCE in_diDeviceObject, LPDIRECTINPUTDEVICE8	in_pdiDevice )
-		{
-			m_diDeviceObject = in_diDeviceObject;
-			m_pdiDevice = in_pdiDevice;
-		}
+/**
+ * Constructor
+ * @param in_pAxis Points to a member of DIMOUSESTATE2 or DIJOYSTATE2
+ * @param in_strName Name of this axis
+ */
+VDIAbsoluteAxis::VDIAbsoluteAxis( VStringParam in_strName )
+{
+    m_strName = in_strName;
+	m_fPos = 0.0f;
+}
 
-		/**
-		* Destructor
-		*/
-		VDIAbsoluteAxis::~VDIAbsoluteAxis()
-		{
-			m_pdiDevice = 0;
-		}
+/**
+ * Destructor
+ */
+VDIAbsoluteAxis::~VDIAbsoluteAxis()
+{
+}
 
-		/**
-		* Returns axis name
-		* @return The name.
-		*/
-		VStringRetVal VDIAbsoluteAxis::GetName()
-		{
-			return m_diDeviceObject.tszName;
-		}
+/**
+ * Returns axis name
+ * @return The name.
+ */
+VStringRetVal VDIAbsoluteAxis::GetName()
+{
+    return m_strName;
+}
 
-		/**
-		* Returns postion
-		*/
-		vfloat32 VDIAbsoluteAxis::GetPosition()
-		{
-			DIDEVICEOBJECTINSTANCE ObjectInstance;
-			ZeroMemory(&ObjectInstance, sizeof(ObjectInstance));
-			ObjectInstance.dwSize = sizeof(ObjectInstance);
+/**
+ * Returns postion
+ */
+vfloat32 VDIAbsoluteAxis::GetPosition()
+{
+    return m_fPos;
+}
 
-			m_pdiDevice->GetObjectInfo( &ObjectInstance, m_diDeviceObject.dwType, DIPH_BYID);
+void VDIAbsoluteAxis::Set( vfloat32 in_fPos )
+{
+    m_fPos = in_fPos;
+}
 
-			return (ObjectInstance.dwOfs & 0x80);
-		}
 
-		//-----------------------------------------------------------------------------
-	} // namespace input
+//-----------------------------------------------------------------------------
+} // namespace input
 } // namespace v3d
 //-----------------------------------------------------------------------------

@@ -3,10 +3,12 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Input/IVInputManager.h>
+
 #include <windows.h>
 #include <dinput.h>
 
 #include <list>
+
 
 #include "VDIInputDevice.h"
 #include "VDIKeyboardButton.h"
@@ -48,15 +50,17 @@ protected:
 	vbool					InitStandardKeyboardDevice();
 	vbool					InitStandardMouseDevice();
 
-	vbool			EnumDevicesCallback( const DIDEVICEINSTANCE* in_pdiDeviceInstance);
+	vbool					EnumDevicesCallback( const DIDEVICEINSTANCE* in_pdiDeviceInstance);
 	vbool					EnumerateDevices();
+
+	VStringRetVal			GetKeyboardButtonName( vlong in_Index );
 
 public:
 							VDIInputManager();
 							VDIInputManager( HWND in_hWnd );				
 	virtual					~VDIInputManager();
 
-	virtual vbool			Create();
+	virtual void			Create();
 	virtual void			Release();
 	void					Update(vfloat32 in_fSeconds);
 
@@ -69,10 +73,8 @@ public:
 	virtual DeviceIterator	DeviceBegin();
 	virtual DeviceIterator	DeviceEnd();
 
-	//TODO: virtuelle funktionen inlinen ist nicht soo sauber
-	// und kann bei dummen compilern afair zu probs fuehren -- sheijk
-	virtual void			Activate() {;};
-	virtual void			Deactivate() {;};
+	virtual void			Activate();
+	virtual void			Deactivate();
 
 private:
 	static BOOL CALLBACK	EnumDevicesStaticCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef );

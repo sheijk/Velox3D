@@ -15,22 +15,26 @@ namespace v3d {
 /**
  * DirectInput implementation of a button
  * @author AcrylSword
- * @version 1.1
+ * @version 1.2
  */
-		class VDIButton : public IVButton
-		{
-            VDIButton();
 
-            DIDEVICEOBJECTINSTANCE	m_diDeviceObject;
-			LPDIRECTINPUTDEVICE8	m_pdiDevice;
+class VDIButton : public IVButton
+{
+	//VDIButton();
+    VString					m_strName;
+	vbool					m_bState;
 
-		public:
-            			VDIButton(DIDEVICEOBJECTINSTANCE in_diDeviceObject, LPDIRECTINPUTDEVICE8 in_pdiDevice);
-			virtual		~VDIButton();
 
-			virtual VStringRetVal	GetName();
-			virtual vbool			IsDown();
-		};
+    public:
+
+								VDIButton(VStringParam in_strName);
+		virtual					~VDIButton();
+
+        virtual VStringRetVal	GetName();
+        virtual vbool			IsDown();
+
+        void					Set( vbool in_bState );
+};
 
 //-----------------------------------------------------------------------------
 } // namespace input

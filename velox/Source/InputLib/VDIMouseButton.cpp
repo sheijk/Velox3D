@@ -1,6 +1,5 @@
 #include "VDIMouseButton.h"
 #include <v3d/Core/VAssert.h>
-#include <windows.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
@@ -13,18 +12,17 @@ namespace input {
  */
 VDIMouseButton::VDIMouseButton( VStringParam in_strName, vbyte* in_pPointer )
 {
-	// sowas sollten wir oefter machen, gut -- sheijk
-	V3D_ASSERT( in_pPointer != NULL);
+	V3D_ASSERT( in_pPointer != 0);
 	m_pPointer = in_pPointer;
 	m_strName = in_strName;
 }
 
 /**
- * Destructor. Sets m_pButtonByte to NULL
+ * Destructor. Sets m_pButtonByte to 0
  */
 VDIMouseButton::~VDIMouseButton()
 {
-	m_pPointer = NULL;
+	m_pPointer = 0;
 }
 
 /* Returns the button's name
@@ -41,7 +39,7 @@ VStringRetVal VDIMouseButton::GetName()
  */
 vbool VDIMouseButton::IsDown()
 {
-	return (*m_pPointer & 0x80);
+	return static_cast<vbool>(*m_pPointer & 0x80);
 }
 
 

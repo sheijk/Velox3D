@@ -44,7 +44,6 @@ class IVInputManager : public updater::IVUpdateable //: public VNamedObject
 		CursorDown,
 	};
 
-	//typedef VPointer<IVInputDevice>::SharedPtr		InputDevicePtr;
 	typedef VForwardIterator<IVInputDevice>		DeviceIterator;
 
 	virtual						~IVInputManager() {};

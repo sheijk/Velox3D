@@ -6,15 +6,19 @@ namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
 
+VDIRelativeAxis::VDIRelativeAxis()
+{
+
+}
+
 /**
  * Constructor
- * @param in_pAxis Points to a member of DIMOUSESTATE2 or DIJOYSTATE2
  * @param in_strName Name of this axis
  */
-VDIRelativeAxis::VDIRelativeAxis( DIDEVICEOBJECTINSTANCE in_diDeviceObject, LPDIRECTINPUTDEVICE8 in_lpdiDevice )
+VDIRelativeAxis::VDIRelativeAxis( VStringParam in_strName )
 {
-	m_diDeviceObject = in_diDeviceObject;
-	m_pdiDevice = m_pdiDevice;
+	m_strName = in_strName;
+	m_fMovement = 666.0f;
 }
 
 /**
@@ -22,7 +26,7 @@ VDIRelativeAxis::VDIRelativeAxis( DIDEVICEOBJECTINSTANCE in_diDeviceObject, LPDI
  */
 VDIRelativeAxis::~VDIRelativeAxis()
 {
-	m_pdiDevice = 0;
+	
 }
 
 /**
@@ -31,21 +35,22 @@ VDIRelativeAxis::~VDIRelativeAxis()
  */
 VStringRetVal VDIRelativeAxis::GetName()
 {
-	return m_diDeviceObject.tszName;
+	return m_strName;
+}
+
+
+void VDIRelativeAxis::Set( vfloat32 in_fMovement )
+{
+	m_fMovement = in_fMovement;
 }
 
 /**
  * Returns relative change since last update
+ * @return Last axis movement
  */
 vfloat32 VDIRelativeAxis::GetLastMovement()
 {
-	DIDEVICEOBJECTINSTANCE ObjectInstance;
-	ZeroMemory(&ObjectInstance, sizeof(ObjectInstance));
-	ObjectInstance.dwSize = sizeof(ObjectInstance);
-
-	m_pdiDevice->GetObjectInfo( &ObjectInstance, m_diDeviceObject.dwType, DIPH_BYID);
-
-	return (ObjectInstance.dwOfs & 0x80);
+	return m_fMovement;
 }
 
 //-----------------------------------------------------------------------------

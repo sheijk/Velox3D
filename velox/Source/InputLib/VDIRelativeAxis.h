@@ -5,7 +5,6 @@
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/Input/IVRelativeAxis.h>
 
-#include <dinput.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -15,22 +14,26 @@ namespace input {
 /**
  * DirectInput implementation of IVRelativeAxis
  * @author AcrylSword
- * @version 1.1
+ * @version 1.2
  */
 
-		class VDIRelativeAxis : public IVRelativeAxis
-		{
-            DIDEVICEOBJECTINSTANCE	m_diDeviceObject;
-            LPDIRECTINPUTDEVICE8	m_pdiDevice;
+class VDIRelativeAxis : public IVRelativeAxis
+{
+	VString		m_strName;
+	vfloat32	m_fMovement;
 
-            public:
-								VDIRelativeAxis() {;};
-                                VDIRelativeAxis(DIDEVICEOBJECTINSTANCE in_diDeviceObject, LPDIRECTINPUTDEVICE8 in_lpdiDevice );
-				virtual			~VDIRelativeAxis();
+	public:
+        
+								VDIRelativeAxis();
+								VDIRelativeAxis( VStringParam in_strName );
 
-				virtual VStringRetVal	GetName();
-				virtual vfloat32		GetLastMovement();
-		};
+        virtual					~VDIRelativeAxis();
+
+        virtual VStringRetVal	GetName();
+		virtual vfloat32		GetLastMovement();
+
+		void					Set( vfloat32 in_fMovement );
+};
 
 //-----------------------------------------------------------------------------
 } // namespace input

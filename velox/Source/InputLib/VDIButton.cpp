@@ -1,26 +1,26 @@
 #include "VDIButton.h"
 #include <v3d/Core/VAssert.h>
+#include <v3d/Core/VIOStream.h>
 #include <windows.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
 
-/* Constructor. Initializes to a DIDEVICEOBJECTINSTANCE instance
- * @param in_DeviceObject "physical" part of a device.
+/* Constructor. Initializes the name and buttons state
+ * @param in_strName Button's name.
  */
-VDIButton::VDIButton(DIDEVICEOBJECTINSTANCE in_diDeviceObject, LPDIRECTINPUTDEVICE8 in_pdiDevice)
+VDIButton::VDIButton(VStringParam in_strName)
 {
-	m_diDeviceObject = in_diDeviceObject;
-	m_pdiDevice = in_pdiDevice;
+	m_strName = in_strName;
+	m_bState = false;
 }
 
 /**
- * Destructor. Sets m_pDeviceObject to NULL
+ * Destructor. 
  */
 VDIButton::~VDIButton()
 {
-	m_pdiDevice = 0;
 }
 
 /* Returns the button's name
@@ -28,7 +28,7 @@ VDIButton::~VDIButton()
  */
 VStringRetVal VDIButton::GetName()
 {
-	return m_diDeviceObject.tszName;
+	return m_strName;
 }
 
 /*
@@ -37,15 +37,13 @@ VStringRetVal VDIButton::GetName()
  */
 vbool VDIButton::IsDown()
 {
-	DIDEVICEOBJECTINSTANCE ObjectInstance;
-	ZeroMemory(&ObjectInstance, sizeof(ObjectInstance));
-	ObjectInstance.dwSize = sizeof(ObjectInstance);
-
-	m_pdiDevice->GetObjectInfo( &ObjectInstance, m_diDeviceObject.dwType, DIPH_BYID);
-
-	return (ObjectInstance.dwOfs & 0x80);
+	return m_bState;
 }
 
+void VDIButton::Set( vbool in_bState )
+{
+    m_bState = in_bState;
+}
 
 
 //-----------------------------------------------------------------------------

@@ -8,31 +8,32 @@
 #include <dinput.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
-	namespace input {
+namespace input {
 //-----------------------------------------------------------------------------
 		
 /**
  * DirectInput implementation of IVRelativeAxis
  * @author AcrylSword
- * @version 1.1
+ * @version 1.2
  */
-		class VDIAbsoluteAxis : public IVAbsoluteAxis
-        {
-			VDIAbsoluteAxis();
-		
-			DIDEVICEOBJECTINSTANCE	m_diDeviceObject;
-			LPDIRECTINPUTDEVICE8	m_pdiDevice;
+class VDIAbsoluteAxis : public IVAbsoluteAxis
+{
+    VDIAbsoluteAxis();
 
-		public:
-            VDIAbsoluteAxis( DIDEVICEOBJECTINSTANCE in_diDeviceObject, LPDIRECTINPUTDEVICE8 in_lpdiDevice );
-			virtual					~VDIAbsoluteAxis();
+    VString					m_strName;		
+    vfloat32				m_fPos;
 
-			virtual VStringRetVal	GetName();
-			virtual vfloat32		GetPosition();
-		};
+    public:
+								VDIAbsoluteAxis( VStringParam in_strName );
+		virtual					~VDIAbsoluteAxis();
+        
+        virtual VStringRetVal	GetName();
+        virtual vfloat32		GetPosition();
+        void					Set( vfloat32 in_fPos );
+};
 
 //-----------------------------------------------------------------------------
-	} // namespace input
+} // namespace input
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VDIABSOLUTEAXIS_H
