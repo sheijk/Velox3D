@@ -59,6 +59,9 @@ Doku:
 
 log:
 
+12.11.2003
+VFileStream.SetSize() implementiert
+
 09.11.2003
 Module Klasse entworfen, damit die .dll Sourcen leichter auf andere Systeme
 portiert werden koennen

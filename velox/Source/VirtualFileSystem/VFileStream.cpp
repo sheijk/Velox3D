@@ -277,8 +277,16 @@ IVStream::ByteCount VFileStream::GetSize()
 
 void VFileStream::SetSize(ByteCount in_nNewSize)
 {
-	//TODO: implementieren
-	V3D_DEBUGMSG("warning: using unimplemented function");
+	// store file pos
+	StreamPos oldPos = this->GetPos();
+
+	// set pos
+	this->SetPos(Begin, in_nNewSize);
+
+	SetEndOfFile(m_hFile);
+
+	// reset pos
+	this->SetPos(Begin, oldPos);
 }
 
 //-----------------------------------------------------------------------------
