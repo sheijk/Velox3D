@@ -121,33 +121,33 @@ VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
 	return meshDesc;
 }
 
-VMaterialDescription BuildTextureMaterial(
-	IVDevice* in_pDevice,
-	VStringParam in_pcTextureFile)
-{
-	IVImageFactory* pFactory = QueryObject<IVImageFactory>("image.service");
-
-	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(in_pcTextureFile);
-
-	VMaterialDescription texMat;
-
-	VMaterialDescription::TextureRef* pTexRef =
-		new VMaterialDescription::TextureRef();
-
-	IVDevice::BufferHandle hTextureBuffer = in_pDevice->CreateBuffer(
-		IVDevice::Texture,
-		myImage->pData,
-		IVDevice::Buffer::DropData
-		);
-
-	pTexRef->nWidth = myImage->iWidth;
-	pTexRef->nHeight = myImage->iHeight;
-	pTexRef->hData = hTextureBuffer;
-
-	texMat.AddTexture(pTexRef);
-
-	return texMat;
-}
+//VMaterialDescription BuildTextureMaterial(
+//	IVDevice* in_pDevice,
+//	VStringParam in_pcTextureFile)
+//{
+//	IVImageFactory* pFactory = QueryObject<IVImageFactory>("image.service");
+//
+//	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(in_pcTextureFile);
+//
+//	VMaterialDescription texMat;
+//
+//	VMaterialDescription::TextureRef* pTexRef =
+//		new VMaterialDescription::TextureRef();
+//
+//	IVDevice::BufferHandle hTextureBuffer = in_pDevice->CreateBuffer(
+//		IVDevice::Texture,
+//		myImage->pData,
+//		IVDevice::Buffer::DropData
+//		);
+//
+//	pTexRef->nWidth = myImage->iWidth;
+//	pTexRef->nHeight = myImage->iHeight;
+//	pTexRef->hData = hTextureBuffer;
+//
+//	texMat.AddTexture(pTexRef);
+//
+//	return texMat;
+//}
 
 void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 {
@@ -244,14 +244,30 @@ VVertexDataLayout ColoredVertex::layout;
 #include <Windows.h>
 #include <gl/GL.h>
 
+void OnConsoleCommand(VStringParam in_strCommand)
+{
+	if( std::string("exit") == in_strCommand )
+	{
+		VServicePtr<IVSystemManager>()->SetStatus(false);
+	}
+		
+	vout << "Cmd: \"" << in_strCommand << "\"" << vendl;
+}
+
 vint VExampleApp::Main()
 {
 	V3D_DEBUGMSG("Velox Main app says hi!");
 
 	// get services
+	VServicePtr<IVSystemManager> pSystemManager;
+	VServicePtr<IVWindowManager> pWindowManager;
+	VServicePtr<IVConsoleService> pConsole;
+
+	pConsole->RegisterCommandListener(&OnConsoleCommand);
+
 	m_pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
-	IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
-	IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
+	//IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
+	//IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
 
 	IVWindowManager::IVWindowPtr pWindow;
 	pWindow = pWindowManager->QueryWindow("v3d window");

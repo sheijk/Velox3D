@@ -19,7 +19,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -33,6 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib"
 				OutputFile="$(OutDir)/ExampleApp.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -69,7 +70,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -81,6 +82,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib"
 				OutputFile="$(OutDir)/ExampleApp.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"

@@ -6,6 +6,8 @@
 #include <V3d/Utils/IVStringStream.h>
 
 #include <V3dLib/BoostSignals.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace console {
@@ -43,5 +45,11 @@ protected:
 //-----------------------------------------------------------------------------
 } // namespace console
 } // namespace v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::console::IVConsoleService* v3d::QueryService<v3d::console::IVConsoleService>()
+{
+	return QueryObject<v3d::console::IVConsoleService>("console.service");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVCONSOLESERVICE_H

@@ -32,7 +32,7 @@ private:
 	graphics::IVDevice* m_pDevice;
 	updater::IVUpdateManager* m_pUpdateManager;
 
-	console::IVConsoleSerivce* m_Console;
+	console::IVConsoleService* m_Console;
 
 	input::IVButton* m_pEscapeButton;
 	input::IVButton* m_pUpButton;
