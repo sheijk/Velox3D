@@ -20,7 +20,7 @@ namespace updater {
 		 * Updates the object.
 		 * @param in_fSeconds Seconds since last update
 		 */
-		virtual void Update(float in_fSeconds) = 0;
+		virtual void Update(vfloat32 in_fSeconds) = 0;
 
 		/**
 		 * Tells the object that the mainloop has been entered

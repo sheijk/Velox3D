@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="CommonServices"
-	ProjectGUID="{586E10B2-24CB-27C7-A973-CDCD6D563659}"
-	RootNamespace="CommonServices"
+	Name="GraphicsLib"
+	ProjectGUID="{556E10B2-22CB-47C7-A973-CDCD6D561337}"
+	RootNamespace="GRaphicsService"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -15,7 +15,7 @@
 			Name="Debug|Win32"
 			OutputDirectory="Local/$(ConfigurationName)"
 			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
@@ -33,14 +33,8 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/CommonServices.dll"
-				LinkIncremental="2"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/CommonServices.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/CommonServices.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				AdditionalDependencies="opengl32.lib glu32.lib"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -55,8 +49,6 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -82,13 +74,14 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/CommonServices.dll"
+				AdditionalDependencies="opengl32.lib glu32.lib"
+				OutputFile="$(OutDir)/GraphicsService.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/CommonServices.lib"
+				ImportLibrary="$(OutDir)/GraphicsService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -116,53 +109,34 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Config Service"
+			Name="Implementation"
 			Filter="">
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Config\IVConfigProvider.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\ConfigFiles\VConfigProvider.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\ConfigFiles\VConfigProvider.h">
-				</File>
-			</Filter>
+			<File
+				RelativePath="..\Source\Graphics\VDisplaySettings.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Graphics\VOpenGLDevice.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Graphics\VOpenGLDevice.h">
+			</File>
 		</Filter>
 		<Filter
-			Name="Update Manager"
+			Name="Interfaces"
 			Filter="">
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateable.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateManager.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\UpdateManager\VUpdateManager.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\UpdateManager\VUpdateManager.h">
-				</File>
-			</Filter>
+			<File
+				RelativePath="..\Api\V3d\Graphics\IVDevice.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Graphics\IVMaterial.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Graphics\IVMesh.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
+			</File>
 		</Filter>
-		<File
-			RelativePath="..\Source\ConfigFiles\CommonServicesDLL.cpp">
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

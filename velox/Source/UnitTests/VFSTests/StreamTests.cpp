@@ -97,8 +97,8 @@ void TestStreamOps(IVStream& stream)
 		V3D_UNITTEST_ERROR_STATIC("op<</>>(IVStream,int*) failed");
 	}
 
-	vfloat32 f32 = 32.32, f32_2 = 0;
-	vfloat64 f64 = 64.64, f64_2 = 0;
+	vfloat32 f32 = 32.32f, f32_2 = 0;
+	vfloat64 f64 = 64.64f, f64_2 = 0;
 	
 	stream.SetPos(IVStream::Begin, pos);
 	stream << f32 << f64;
@@ -126,7 +126,7 @@ void TestStreamOps(IVStream& stream)
 void TestStreamRW(IVUnitTest* in_pTest, vfs::IVStream* in_pStream)
 {
 	vchar* pTestData = "Dies sind einige dusselig Testdaten";
-	const vuint nTestDataLen = strlen(pTestData);
+	const vuint nTestDataLen = (vuint)strlen(pTestData);
 	array_ptr<vchar> pTestRes = new vchar[nTestDataLen];
 
 	// save stream pos

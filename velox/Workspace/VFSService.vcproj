@@ -13,8 +13,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/$(ConfigurationName)"
+			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -65,8 +65,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/$(ConfigurationName)"
+			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -287,16 +287,16 @@
 			Name="boost fs"
 			Filter="">
 			<File
-				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\convenience.cpp">
+				RelativePath=".\Local\boost_1_30_0\libs\filesystem\src\convenience.cpp">
 			</File>
 			<File
-				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\exception.cpp">
+				RelativePath=".\Local\boost_1_30_0\libs\filesystem\src\exception.cpp">
 			</File>
 			<File
-				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\operations_posix_windows.cpp">
+				RelativePath=".\Local\boost_1_30_0\libs\filesystem\src\operations_posix_windows.cpp">
 			</File>
 			<File
-				RelativePath=".\Lokal\boost_1_30_0\libs\filesystem\src\path_posix_windows.cpp">
+				RelativePath=".\Local\boost_1_30_0\libs\filesystem\src\path_posix_windows.cpp">
 			</File>
 		</Filter>
 	</Files>

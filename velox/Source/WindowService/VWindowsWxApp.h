@@ -1,40 +1,47 @@
-#ifndef V3D_VCONSOLESERVICE_H
-#define V3D_VCONSOLESERVICE_H
+#ifndef V3D_VWINDOWSWXAPP_H
+#define V3D_VWINDOWSWXAPP_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/IVErrorService.h>
-#include <V3d/Console/IVConsoleService.h>
 #include <v3d/Updater/IVUpdateable.h>
 //-----------------------------------------------------------------------------
 #include <wx/wx.h>
 //-----------------------------------------------------------------------------
-
-#include "VConsoleWindow.h"
 namespace v3d {
-namespace console {
+namespace window {
 //-----------------------------------------------------------------------------
 
-
-class VConsoleService 
-	: public IVConsoleSerivce, 
-	  public v3d::updater::IVUpdateable
+class VWindowsWxApp : public wxApp, public updater::IVUpdateable
 {
 public:
-	VConsoleService();
-	virtual void Update();
-	virtual ~VConsoleService();
-	virtual void Flush() {};
-	virtual void Write(VStringParam in_strString);
+	VWindowsWxApp();
+	virtual ~VWindowsWxApp();
 
+	/**
+	 * IVUpdateable members	
+	 */
 	virtual void Update(vfloat32 in_fSeconds);
 	virtual void Activate();
 	virtual void Deactivate();
+
+	/**
+	 * virtual wxApp members	
+	 */
+	
+	virtual bool OnInit();
+	virtual int MainLoop();
+	virtual int OnExit();
+
+//	virtual void Register(VWindowFrame* in_pFrame);
+
 private:
-	error::IVErrorService& GetErrorService();
+
+	//std::list<VWindowFrame*> m_FrameList;
+
+//	VEditorMainFrame* m_MainFrame;
 };
 
 //-----------------------------------------------------------------------------
-} // namespace console
+} // namespace window
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VCONSOLESERVICE_H
+#endif // V3D_VWindowsWxApp_H

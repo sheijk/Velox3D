@@ -5,13 +5,18 @@
 #include <v3d/Core/VLogging.h>
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Updater/IVUpdateManager.h>
-
+#include <v3d/Window/IVWindow.h>
+#include <v3d/Window/IVWindowManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
 //-----------------------------------------------------------------------------
 using namespace v3d::console;
 using v3d::updater::IVUpdateManager;
+using namespace v3d::graphics;
+using namespace v3d::window;
+
+
 
 VExampleApp::VExampleApp(VStringParam in_strName) 
 	: VNamedObject(in_strName, 0)
@@ -40,12 +45,26 @@ vint VExampleApp::Main()
 		return -1;
 	}*/
 
-	Initialize();
+	
+	//m_Console = QueryObject<IVConsoleSerivce>("console.service");
+
+	/*if(!m_Console)
+		V3D_THROW(VException, "console service not found");*/
 	
 	V3D_DEBUGMSG("Velox Main app says hi!");
 
 	// get update manager
 	IVUpdateManager& updater = * QueryObject<IVUpdateManager>("updater.service");
+	
+	IVWindowManager* winmanager = QueryObject<IVWindowManager>("window.manager");
+	
+	typedef VPointer<IVWindow>::SharedPtr IVWindowInterface;
+	IVWindowInterface win, win1;
+	
+	
+
+	win = winmanager->CreateWindow("v3d window");
+	win1 = winmanager->CreateWindow("v3d window 2");
 	
 	// main loop
 	bool bActive = true;
@@ -60,15 +79,6 @@ vint VExampleApp::Main()
 	updater.Stop();
 
 	return 0;
-}
-
-void VExampleApp::Initialize()
-{
-
-	m_Console = QueryObject<IVConsoleSerivce>("console.service");
-
-	if(!m_Console)
-		V3D_THROW(VException, "console service not found");
 }
 
 //-----------------------------------------------------------------------------

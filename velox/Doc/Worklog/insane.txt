@@ -9,6 +9,12 @@ Current assigned tasks:
 --------------------------------------------------------------------------------
 
 TODO List:
+
+24.09.03
+- Added WindowService
+- Added OpenGL device
+
+
 07.09.03
 - Added VIOStream class
 - included VIOStream classes to kernel main and all other cout calls

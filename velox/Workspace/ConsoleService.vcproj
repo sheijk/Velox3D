@@ -12,8 +12,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/$(ConfigurationName)"
+			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw24d.lib"
+				AdditionalDependencies="Local/ExternalLibs/wxWindows/wxmsw24d.lib"
 				OutputFile="$(OutDir)/ConsoleService.dll"
 				LinkIncremental="2"
 				IgnoreDefaultLibraryNames="libcd.lib;libcid.lib;msvcrt.lib;comctl32.lib;Ws2_32.lib"
@@ -65,15 +65,16 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/$(ConfigurationName)"
+			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;CONSOLESERVICE_EXPORTS"
-				RuntimeLibrary="0"
+				PreprocessorDefinitions="_USRDLL;EDITORSERVICE_EXPORTS;NDEBUG;WIN32;_WINDOWS;__WINDOWS__;__WXMSW__;__WIN95__;__WIN32__;WINVER=0x0400;STRICT"
+				RuntimeLibrary="1"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -82,8 +83,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Local/ExternalLibs/wxWindows/wxmsw24.lib"
 				OutputFile="$(OutDir)/ConsoleService.dll"
 				LinkIncremental="1"
+				IgnoreDefaultLibraryNames="libcd.lib;libcid.lib;msvcrt.lib;comctl32.lib;Ws2_32.lib"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"

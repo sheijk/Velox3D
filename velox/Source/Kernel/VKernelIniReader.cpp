@@ -51,8 +51,8 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 			if(ElementName == "Config")
 			{
 				m_State = ServiceState;
-				vout << "Parsing configuration of ini file" << vendl;
-				vout << "-------------------------------------------" << vendl;
+				vout << "Parsing configuration of ini file:" << vendl;
+				vout << "-------------------------------------------------------" << vendl;
 			}
 			else
 			{			
@@ -104,8 +104,9 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 
 void VKernelIniReader::OnFileEnd()
 {
+	vout << "-------------------------------------------------------" << vendl;
 	vout << "Parsing configuration file done" << vendl;
-	vout << "-------------------------------------------" << vendl;
+	vout << "-------------------------------------------------------" << vendl;
 }
 
 void VKernelIniReader::OnText(VStringParam pText)

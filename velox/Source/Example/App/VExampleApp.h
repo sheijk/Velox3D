@@ -18,7 +18,6 @@ public:
 	VExampleApp(VStringParam in_strName);
 	virtual ~VExampleApp();
 
-	void Initialize();
 	virtual int Main();
 
 private:

@@ -7,7 +7,6 @@
 #include <v3d/Core/VException.h>
 #include <v3d/Core/IVApplication.h>
 #include <v3d/Core/VIOStream.h>
-//#include <v3d/ExampleService/IVExampleService.h>
 #include "VKernelIniReader.h"
 
 
@@ -50,7 +49,12 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 	// load and init services
 	LoadServices();
 
+	vout << "Dumping registered objects:" << vendl;
+	vout << "-------------------------------------------------------" << vendl;
 	vout << VObjectRegistry::GetInstance()->GetObjectDump();
+	vout << "-------------------------------------------------------" << vendl;
+	vout << "Dumping registered objects done" << vendl;
+	vout << "-------------------------------------------------------" << vendl;
 
 	// delegate control to app service
 	DelegateControl();

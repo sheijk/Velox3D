@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="XmlService"
 	ProjectGUID="{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}"
+	RootNamespace="XmlService"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -12,14 +13,14 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/$(ConfigurationName)"
+			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;/Local/ExternalLibs/tinyxml"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XMLSERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -63,8 +64,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Lokal/$(ConfigurationName)"
-			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="Local/$(ConfigurationName)"
+			IntermediateDirectory="Local/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -184,24 +185,25 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="TinyXML">
+			Name="NewFolder1"
+			Filter="">
 			<File
-				RelativePath="..\Source\XMLService\tinyxml\tinystr.cpp">
+				RelativePath="..\Source\XMLService\TinyXML\tinystr.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\XMLService\tinyxml\tinystr.h">
+				RelativePath="..\Source\XMLService\TinyXML\tinystr.h">
 			</File>
 			<File
-				RelativePath="..\Source\XMLService\tinyxml\tinyxml.cpp">
+				RelativePath="..\Source\XMLService\TinyXML\tinyxml.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\XMLService\tinyxml\tinyxml.h">
+				RelativePath="..\Source\XMLService\TinyXML\tinyxml.h">
 			</File>
 			<File
-				RelativePath="..\Source\XMLService\tinyxml\tinyxmlerror.cpp">
+				RelativePath="..\Source\XMLService\TinyXML\tinyxmlerror.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\XMLService\tinyxml\tinyxmlparser.cpp">
+				RelativePath="..\Source\XMLService\TinyXML\tinyxmlparser.cpp">
 			</File>
 		</Filter>
 	</Files>

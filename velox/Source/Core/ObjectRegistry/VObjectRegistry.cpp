@@ -171,7 +171,7 @@ VStringRetVal VObjectRegistry::GetObjectDump() const
 
 	for( ; objIter != m_Objects.end(); ++objIter)
 	{
-		strObjList += "<" + objIter->first.ToString() + ">, ";
+		strObjList += "<" + objIter->first.ToString() + ">\n";
 	}
 
 	return strObjList.c_str();

@@ -25,7 +25,8 @@ VErrorService::~VErrorService()
 	VNamedObject::UnregisterFromObjectRegistry();		
 }
 
-vbool VErrorService::RegisterListener( IVErrorListener* in_pListener, IVErrorFilter* in_pFilter )
+vbool VErrorService::RegisterListener(IVErrorListener* in_pListener,
+									  IVErrorFilter* in_pFilter )
 {
 	V3D_ASSERT( (in_pListener != NULL) );
 	V3D_ASSERT( (in_pFilter != NULL) );

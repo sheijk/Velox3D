@@ -46,8 +46,8 @@ public:
 	/** sets the string to the value of a c style string */
 	virtual void Set(const vchar* in_pCStr);
 
-	void operator=(const char* in_pCStr);
-	bool operator<(const VString& in_Other) const;
+	void operator=(const vchar* in_pCStr);
+	vbool operator<(const VString& in_Other) const;
 
 	operator const char*() const;
 
@@ -55,8 +55,8 @@ public:
 	vuint Length() const;
 };
 
-VString operator+(const char* in_pcChar, const VString& in_VStr);
-VString operator+(const VString& in_VStr, const char* in_pcChar);
+VString operator+(const vchar* in_pcChar, const VString& in_VStr);
+VString operator+(const VString& in_VStr, const vchar* in_pcChar);
 
 vbool operator==(const VString& left, const VString& right);
 vbool operator!=(const VString& left, const VString& right);

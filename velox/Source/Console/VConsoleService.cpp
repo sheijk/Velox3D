@@ -1,11 +1,10 @@
-//TODO: insert header file name
 #include <v3d/Core/VObjectRegistry.h>
-#include "VConsoleService.h"
-#include "VConsoleWindow.h"
-#include <wx/app.h>
 #include <v3d/Utils/VAllFilter.h>
 //-----------------------------------------------------------------------------
-
+#include "VConsoleService.h"
+#include "VConsoleWindow.h"
+//-----------------------------------------------------------------------------
+#include <wx/app.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace console {
@@ -42,7 +41,6 @@ VConsoleService::~VConsoleService()
 void VConsoleService::Update()
 {
 	wxTheApp->MainLoop();
-//	wxTheApp->ExitMainLoop();
 }
 
 void VConsoleService::Write(VStringParam in_strString)
@@ -51,7 +49,7 @@ void VConsoleService::Write(VStringParam in_strString)
 	app.Write(in_strString);
 }
 
-void VConsoleService::Update(float in_fSeconds)
+void VConsoleService::Update(vfloat32 in_fSeconds)
 {
 	Update();
 }

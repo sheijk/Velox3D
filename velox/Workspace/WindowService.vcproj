@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="CommonServices"
-	ProjectGUID="{586E10B2-24CB-27C7-A973-CDCD6D563659}"
-	RootNamespace="CommonServices"
+	Name="WindowService"
+	ProjectGUID="{C2E15749-4341-4E4B-1337-07F8B0522B91}"
+	RootNamespace="WindowService"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -21,7 +21,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;WINDOWSERVICE_EXPORTS;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXDEBUG=1;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -34,12 +34,14 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/CommonServices.dll"
+				AdditionalDependencies="Local/ExternalLibs/wxWindows/wxmsw24d.lib"
+				OutputFile="$(OutDir)/WindowService.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/CommonServices.pdb"
+				ProgramDatabaseFile="$(OutDir)/WindowService.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/CommonServices.lib"
+				ImportLibrary="$(OutDir)/WindowService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -71,7 +73,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;WINDOWSERVICE_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -82,13 +84,14 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/CommonServices.dll"
+				OutputFile="$(OutDir)/WindowService.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/CommonServices.lib"
+				ImportLibrary="$(OutDir)/WindowService.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -116,53 +119,52 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Config Service"
+			Name="Interface"
 			Filter="">
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Config\IVConfigProvider.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\ConfigFiles\VConfigProvider.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\ConfigFiles\VConfigProvider.h">
-				</File>
-			</Filter>
+			<File
+				RelativePath="..\Api\V3d\Window\IVWindow.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Window\IVWindowManager.h">
+			</File>
 		</Filter>
 		<Filter
-			Name="Update Manager"
+			Name="Implementation"
 			Filter="">
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateable.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateManager.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\UpdateManager\VUpdateManager.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\UpdateManager\VUpdateManager.h">
-				</File>
-			</Filter>
+			<File
+				RelativePath="..\Source\WindowService\VWindowBase.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowBase.h">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowManagerBase.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowManagerBase.h">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowManagerWin32.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowManagerWin32.h">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowsWxApp.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowsWxApp.h">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowWin32.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\VWindowWin32.h">
+			</File>
+			<File
+				RelativePath="..\Source\WindowService\WindowServiceDLL.cpp">
+			</File>
 		</Filter>
-		<File
-			RelativePath="..\Source\ConfigFiles\CommonServicesDLL.cpp">
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
