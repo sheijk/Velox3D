@@ -16,22 +16,24 @@ namespace graphics {
 
 VBSPRenderer::VBSPRenderer(IVDevice* in_pDevice, VMultipassDrawList& in_DrawList)
 {
-	m_iNumFaceElements = 0;
-	m_pDevice = in_pDevice;   
-	m_pDrawList = &in_DrawList;
+	m_iNumFaceElements				= 0;
+	m_iNumSortedLightmapElements	= 0;
+	m_pDevice						= in_pDevice;   
+	m_pDrawList						= &in_DrawList;
+	m_pLightmapCoordsSorted			= 0;
+	m_bModelAdded					= false;
+}
 
-	//TODO: FIX LEVEL LOADING
-	m_Level.LoadQ3Level("/data/Level.bsp");
+void VBSPRenderer::CreateMap(VStringParam in_sName)
+{
+	m_Level.LoadQ3Level(in_sName);
     GetFaceElements();
 	CreateTextures();
 	CreateLightmaps();
-    
 
-	BuildCell();
+ 	BuildCell();
+	SortLightmapCoords();
 	BuildModelList();
-	
-
-	m_bModelAdded = false;
 }
 
 VBSPRenderer::~VBSPRenderer()
@@ -103,29 +105,44 @@ void VBSPRenderer::BuildCell()
 
 	cell.ResizeVertexBuffer(m_Level.m_iNumVertices);
 	cell.SetGeometryType(VMeshDescription::GeometryType::TriangleFan);
-
+	
+	m_pLightmapCoords = new vfloat32[2 * m_Level.m_iNumVertices];
+		
+	//write all geometry data from the importer to a device usale format
 	for (int i=0; i < m_Level.m_iNumVertices; i++)
 	{
 		cell.GetVertexBuffer()[i].position.x = m_Level.m_pVertices[i].Vertex.x;
 		cell.GetVertexBuffer()[i].position.y = m_Level.m_pVertices[i].Vertex.y;
 		cell.GetVertexBuffer()[i].position.z = m_Level.m_pVertices[i].Vertex.z;
-		//cell.GetVertexBuffer()[i].texCoords.u = m_Level.m_pVertices[i].TextureCoord.u;
-		//cell.GetVertexBuffer()[i].texCoords.v = m_Level.m_pVertices[i].TextureCoord.v;
-		cell.GetVertexBuffer()[i].texCoords.u  = m_Level.m_pVertices[i].LightmapCoord.u;
-		cell.GetVertexBuffer()[i].texCoords.v  = m_Level.m_pVertices[i].LightmapCoord.v;
+
+		cell.GetVertexBuffer()[i].texCoords.u = m_Level.m_pVertices[i].TextureCoord.u;
+		cell.GetVertexBuffer()[i].texCoords.v = m_Level.m_pVertices[i].TextureCoord.v;
+
+		m_pLightmapCoords[i*2]    = m_Level.m_pVertices[i].LightmapCoord.u;
+		m_pLightmapCoords[i*2+1]  = m_Level.m_pVertices[i].LightmapCoord.v;
 	}
 }
 
 void VBSPRenderer::BuildModelList()
 {
-	VMeshDescription meshD = 
+	VMeshDescription meshTextured = 
 		BuildMeshDescription<VTexturedVertex>(
 		*m_pDevice,
 		cell.GetVertexBuffer().GetDataAddress(),
 		m_Level.m_iNumVertices
 		);
 
-	VMaterialDescription matDescs;
+
+	// create lightmap buffer
+	IVDevice::Buffer lightCoords(
+		reinterpret_cast<vbyte*>(m_pLightmapCoordsSorted),
+		sizeof(vfloat32)*m_iNumSortedLightmapElements*2);
+	
+	IVDevice::BufferHandle lightbuffer =  m_pDevice->CreateBuffer(
+		IVDevice::VertexBuffer,
+		&lightCoords,
+		IVDevice::Buffer::CopyData);
+
 
 	MatrixPtr translate;
 
@@ -134,15 +151,14 @@ void VBSPRenderer::BuildModelList()
 
 	math::SetTranslate(*translate, 0.0f,0.0f, 0.0f);
 
-
-
+	//build our index list thus we know how to render the faces
 	for(int i = 0; i<m_Level.m_iNumFaces; i++)
 	{
 		vuint count = 0;
 		utils::VQ3BspImporter::BSPFace* face = &m_Level.m_pFaces[i];
 
 		cell.ResizeIndexBuffer(face->iNumVertices);
-		
+
 		for(vint32 j = face->iVertexIndexStart;
 			j < face->iNumVertices + face->iVertexIndexStart;
 			j++
@@ -152,9 +168,6 @@ void VBSPRenderer::BuildModelList()
 			count++;
 		}
 
-		// assign our vertex buffer to this handle //TODO: fix, unclean
-		VMeshDescription md = meshD;
-
 		const vuint cnIndexBufferSize = face->iNumVertices * sizeof(vuint);
 		VByteBuffer indexBuffer(new vbyte[cnIndexBufferSize], cnIndexBufferSize);
 		memcpy(indexBuffer.GetDataAddress()
@@ -163,7 +176,7 @@ void VBSPRenderer::BuildModelList()
 			);
 
 		// add indices
-		md.triangleIndices = VMeshDescription::ByteDataRef
+		meshTextured.triangleIndices = VMeshDescription::ByteDataRef
 			(
 				m_pDevice->CreateBuffer
 				(
@@ -176,29 +189,40 @@ void VBSPRenderer::BuildModelList()
 				1
 			);
 		
-			md.geometryType = cell.GetGeometryType();
-            
-			IVDevice::MeshHandle handle = m_pDevice->CreateMesh(
-				md,
-				*m_MaterialList[face->iTextureID]
+			meshTextured.geometryType = cell.GetGeometryType();
+
+			VMeshDescription m2 = meshTextured;
+
+			// build up finished...
+
+			// textured polygons were build. now let us assign lightmap coords
+			
+			m2.triangleTexCoords = VMeshDescription::ByteDataRef(
+				lightbuffer,
+				0,
+				face->iNumVertices,
+				2
 				);
 
+			IVDevice::MeshHandle handle = m_pDevice->CreateMesh(
+				m2,
+				*m_LightMaterialList[face->iLightmapID]
+				);
 
 			VModel* model = new VModel(handle, translate);
 
 			IVDevice::MeshHandle handle2 = m_pDevice->CreateMesh(
-				md,
-				*m_LightMaterialList[face->iLightmapID]
+				meshTextured,
+				*m_MaterialList[face->iTextureID]
 				);
 
 			VModel* model2 = new VModel(handle2, translate);
 
 			// first lightmaps
-			m_pModelList.push_back(model2);
+			m_pModelList.push_back(model);
 
 			// now the textures with blending
-			m_pModelList.push_back(model);
-			
+			m_pModelList.push_back(model2);
 	}
 }
 
@@ -315,6 +339,7 @@ void VBSPRenderer::CreateLightmaps()
 	
 		mat->sourceBlendFactor = VMaterialDescription::BlendDestColor;
 		mat->destBlendFactor =  VMaterialDescription::BlendSourceColor;
+		//mat->enableBlending = true;
 
 		mat->depthWriteMask = VMaterialDescription::DepthReadOnly;
 		
@@ -323,10 +348,46 @@ void VBSPRenderer::CreateLightmaps()
 	}
 }
 
+void VBSPRenderer::SortLightmapCoords()
+{
+	
+	vuint nCount = 0;
+
+	utils::VQ3BspImporter::BSPFace* face;
+
+	// count how many coords we need
+	for(int i = 0; i<m_Level.m_iNumFaces; i++)
+	{
+		face = &m_Level.m_pFaces[i];
+		nCount += face->iNumVertices;
+	}
+
+	m_pLightmapCoordsSorted = new vfloat32[nCount*2];
+	m_iNumSortedLightmapElements = nCount;
+
+	nCount = 0;
+
+	//traversal faces and sort Lightmapscoords
+
+	for(vint32 i = 0; i<m_Level.m_iNumFaces; i++)
+	{
+		face = &m_Level.m_pFaces[i];
+
+		for(vint32 j = face->iVertexIndexStart;
+			j < face->iNumVertices + face->iVertexIndexStart;
+			j++
+			)
+		{
+			m_pLightmapCoordsSorted[nCount*2]   = m_pLightmapCoords[j*2];
+			m_pLightmapCoordsSorted[nCount*2+1] = m_pLightmapCoords[j*2+1];
+
+			nCount++;
+		}
+	}
+}
+
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-
-

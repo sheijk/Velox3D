@@ -33,6 +33,10 @@ public:
 
 	//void AddCell(IVCell* in_pCell);
 
+	// own
+
+	void CreateMap(VStringParam in_sName);
+
 private:
 
 	typedef VPointer<VMatrix44f>::SharedPtr MatrixPtr;
@@ -43,10 +47,15 @@ private:
 	void GetFaceElements();
 	void CreateTextures();
 	void CreateLightmaps();
+
+	void SortLightmapCoords();
 	
 	
 	vuint m_iNumFaceElements;
 	utils::VQ3BspImporter m_Level;
+
+	//our list we are connecting this cell to another
+	std::list<IVCell*> m_CellList;
 
 	//flag indicating model is added to drawlist
 	vbool m_bModelAdded;
@@ -56,16 +65,13 @@ private:
 	v3d::graphics::VMultipassDrawList* m_pDrawList;
 
 	VResizeableGeometryData<VTexturedVertex> cell;
+	vfloat32*  m_pLightmapCoords;
+	vfloat32*  m_pLightmapCoordsSorted;
+	vuint32    m_iNumSortedLightmapElements;
 
 	std::list<VModel*> m_pModelList;
 	std::vector<VMaterialDescription*> m_MaterialList;
 	std::vector<VMaterialDescription*> m_LightMaterialList;
-
-
-	//our list we are connecting this cell to another
-	std::list<IVCell*> m_CellList;
-	
-
 };
 //-----------------------------------------------------------------------------
 } // namespace graphics

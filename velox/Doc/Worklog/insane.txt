@@ -30,16 +30,14 @@ low:
 
 medium:
 
+- add multiple window ogl context sharing support
 - include DevIL
 - fix WxConnector and old non needed wx stuff + make it clean an safe
 - commit cleaned example app
 - remove old importer files out of cvs
 
 high:
-- build mesh with 2 texture coords
 - wrap bsp renderer out of IVCell to make it more robust
-- get multiple texturecoords working
-- apply multitexturing mechansim to renderer
 
 
 -------------------------------------------------------------------------------
@@ -54,6 +52,12 @@ Questions:
 
 
 Done List:
+
+12.06.04
+- fixed texcoord buffer bug after several hours debugging.......
+
+08.06.04
+- added 2 texture coord set to bsp renderer
 
 07.06.04
 - added blending to bsp renderer
