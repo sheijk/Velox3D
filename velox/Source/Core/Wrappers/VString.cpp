@@ -11,12 +11,14 @@ VString::VString()
 	vchar* pChr = new vchar[1];
 	pChr[0] = '\0';
 
-	m_pCStr.Reset(pChr);
+	m_pCStr = pChr;
+//	m_pCStr.Reset(pChr);
 	m_nLength = 0;
 }
 
 VString::VString(const vchar *in_pCStr)
 {
+	m_pCStr = 0;
 	Set(in_pCStr);
 }
 
@@ -25,13 +27,29 @@ VString::~VString()
 	m_nLength = 0;
 }
 
+/** copy c'tor */
+VString::VString(const VString& in_Source)
+{
+	m_pCStr = 0;
+	this->operator=(in_Source);
+}
+
+/** assignment operator */
+void VString::operator=(const VString& in_Source)
+{
+	this->Set(in_Source.AsCString());
+}
+
 const vchar* VString::AsCString() const
 {
-	return m_pCStr.Get();
+	return m_pCStr;
 }
 
 void VString::Set(const vchar* in_pCStr)
 {
+	delete[] m_pCStr;
+	m_pCStr = 0;
+
 	m_nLength = (vuint) strlen(in_pCStr);
 	vchar* pChr = new char[m_nLength+1];
 
@@ -39,7 +57,8 @@ void VString::Set(const vchar* in_pCStr)
 
 	pChr[m_nLength] = '\0';
 
-	m_pCStr.Reset(pChr);
+	m_pCStr = pChr;
+//	m_pCStr.Reset(pChr);
 }
 
 void VString::operator=(const char* in_pCStr)

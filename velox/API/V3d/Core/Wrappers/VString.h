@@ -19,12 +19,19 @@ class VString
 {
 private:
 	//TODO: einen deep copy ptr verwenden
-	VArrayPtr<vchar>::SharedPtr m_pCStr;
+	//VArrayPtr<vchar>::SharedPtr m_pCStr;
+	vchar* m_pCStr;
 	vuint m_nLength;
 
 public:
 	/** standard constructor */
 	VString();
+
+	/** copy c'tor */
+	VString(const VString& in_Source);
+
+	/** assignment operator */
+	void operator=(const VString& in_Source);
 
 	/** sets value to the one of the c string */
 	VString(const vchar* in_pCStr);
@@ -36,7 +43,7 @@ public:
 	const vchar* AsCString() const;
 
 	/** sets the string to the value of a c style string */
-	void Set(const vchar* in_pCStr);
+	virtual void Set(const vchar* in_pCStr);
 
 	void operator=(const char* in_pCStr);
 	bool operator<(const VString& in_Other) const;

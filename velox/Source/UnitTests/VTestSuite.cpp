@@ -129,6 +129,11 @@ int VTestSuite::Main()
 	// generate test list and print it
 	GenerateTestList();
 
+	// print "header"
+	cout << "-----------------------------------------------------------------------------"
+		<< endl << "-- UnitTest Suite: starting tests" << endl;
+
+	// print list of tests
 	cout << "list of unit tests" << endl << endl;
 
 	PrintList();
