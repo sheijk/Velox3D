@@ -4,27 +4,14 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/IVDevice.h>
 #include <v3d/Graphics/VBuffer.h>
-#include <v3d/Image/IVImageFactory.h>
 #include <V3dLib/Graphics/Geometry.h>
 #include <V3dLib/Graphics/Generators.h>
-#include "IVSkyBody.h"
-/*
-#include <V3dLib/Utils/Graphics/VTexCoord2f.h>
-#include <V3dLib/Utils/Graphics/VVertexDataLayout.h>
-#include <V3dLib/Utils/Graphics/VGeometryData.h>
-*/
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
-namespace sky {
-	
-using namespace v3d;
-using namespace v3d::graphics;
-using namespace v3d::graphics::sky;
-using namespace v3d::image;
-	
+
 //-----------------------------------------------------------------------------
-class VSkyDomeBody : public IVSkyBody
+class VSkyDome
 {
 	struct SkyVertex
 	{
@@ -43,9 +30,6 @@ class VSkyDomeBody : public IVSkyBody
 	vfloat32 m_fRadius;
 	vfloat32 m_fScale;
 
-	NodePointer				m_pNode;
-	VMeshNode*				m_pMeshNode;
-
 	VPolarSphere<SkyVertex> m_HalfSphere;
 	
 	IVDevice::MeshHandle	m_pMesh;
@@ -55,24 +39,22 @@ class VSkyDomeBody : public IVSkyBody
 
 	void					InverseIndexBuffer();
 	void					CreateMesh(IVDevice& in_Device);
-	void					CreateNode();
 
 public:
 
-	VSkyDomeBody(IVDevice& in_Device,
+	VSkyDome(IVDevice& in_Device,
 		 vfloat32 in_fRadius,
 		 vfloat32 in_fScale,
 		 vuint in_nDetail,
 		 VStringParam in_strImage);
 
-	~VSkyDomeBody();
+	~VSkyDome();
 
-	virtual IVNode* GetNode();
+	virtual IVDevice::MeshHandle GetMesh();
 };
 
 
 //-----------------------------------------------------------------------------
-} // namespace sky
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
