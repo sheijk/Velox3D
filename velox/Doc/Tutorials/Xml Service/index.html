@@ -1,77 +1,100 @@
 <html>
-<head>
- <title>Using Xml Service</title>
- <link rel=stylesheet type="text/css" href="../../veloxdoc.css">
-</head>
-<body>
- <h1>Using the Xml Service</h1>
- <h2>Loading the XML Service</h2>
- <p>To use the XML service you first need an instance of it. This can be achieved by the following code snippet:<br>
- <p>IVXMLService* m_XmlService;</p>
- <p>Now that you have a pointer to the xml interface you need to query for it by the kernel routine. The QueryObject template method needs to know two things:<br></p>
- <p>First what kind of object you are going to query for. In our case we would like to get the interface for the XML Service. Thus we write IVXMLService.<br>
-    Secondly you need to pass a VObjectKey with a string value of the service because the kernel can only figure out the exact interface by string values defined in the DLL you are going to use.<br>
-    The XML service assigned "XmlService" as object key in the DLL thus we have two further lines of code:<br>
- <p>VObjectKey key("XmlService");<br>
-    m_XmlService = QueryObject&ltIVXMLService&gt(key);<br></p>
- <p>So far by now we can use the interface to get things working.<br></p>
- <h2>The interface</h2>
- <p>The service interface provides two methods for reading and writing xml files.<br>
-    First we are going to discuss how to write a xml file to disk</p>
- <h2>Writing a XML file</h2>
- <p>The xml services provides an writer interface. To get use of it you need an instance of the writer implementation:</p>
- <p>IVXMLWriter* m_Writer;<br>
-    m_Writer = m_XmlService->CreateXMLWriter();</p>
- <p>Now you are ready writing a xml file. The following example illustrates the usage:</p>
- <p>m_Writer->WriteDeclaration("MyXMLFile.xml");<br>
-    m_Writer->OpenElement("First Element");<br>
-    m_Writer->OpenElement("Names");<br>
-    m_Writer->AddAttribute("Name", "My Name is not Hannibal");<br>
-    m_Writer->CloseElement("Names");<br>
-    m_Writer->AddComment("What for a nonsense xml file");<br>
-    m_Writer->CloseElement("First Element");<br>
-    m_Writer->Close();</p>
- <p>The AddAttribute() method works like the well known printf(). This means you can add an abitrary number of attributes that are written into the file.<br>
-    The above example creates this xml file:</p>
- <p>&lt?xml version="1.0" ?&gt<br>
-    &ltFirst Element&gt<br>
-    &ltNames Name="My Name is not Hannibal"/&gt<br>
-    &lt!-- What for a nonsense xml file --!&gt<br>
-    &lt/First Element&gt<br></p>
- <p>You should ever close an element that you have opened. The writer does not check if your input is valid thus you are responsible for the correctness of the created file.<br></p>
- <h2>Reading a XML file</h2>
- <p>The xml service reads in the file and parses it for you. The only possibility to get the content of the file is by creating a visitor derived from IVXMLVisitor.<br>
-    This class will be passed to the service. The visitor implements the OnElementOpen(), OnElementClose() and OnFileClose() methods specified in the interface.<br>
-    Those methods will be invoked automatically when the service is finding any elements or gets to the file end.<br>
-    To get the name in our above example you must override the OnElementOpen() method like this:</p>
- <p>void XMLVisitor::OnElementOpen(IVXMLElement* Element)<br>
-    {<br>
-        string MyName;<br>
-        string NameCheck = Element->GetName();<br>
-	if(NameCheck == "Names")<br>
-        {<br>
-             IVXMLAttribute* att = Element->GetFirstAttribute();<br>
-             MyName = att->GetValue();<br>
-        }<br>
-     }<br></p>
- <p>Because of the reason that all attribute values are stored in the xml file as characters you need to convert types if your value of interest is for example an integer. See the atoi() function for more details.<br>
-    If you have stored more than one attribute to an element you can easily traversal them by Element->NextAttribute(). If there is no further attribute in the list the method returns NULL.<br></p>
- <p>The only thing to do now is to call the service to read the file. This can be done with one line of code:</p>
- <p>m_XmlService->ParseXMLFile("MyXMLFile.xml",&m_Visitor);</p>
- <p>Now you should have all information needed to use the xml service.</p>
- <h2>Acknowledgements</h2>
- <p>The serivce is currently not designed to read comments on the xml file.</p>
- 
-             
-
-
-    
- 
-   
- 
-    
- 
- 
- 
- 
-</body>
+	<head>
+		<title>Using Xml Service</title>
+		<link rel="stylesheet" type="text/css" href="../../veloxdoc.css">
+	</head>
+	<body>
+		<h1>Using the Xml Service</h1>
+		<h2>Loading the XML Service</h2>
+		<p>To use the XML service you first need an instance of it. This can be achieved by 
+			the following code snippet:<br>
+		<p>
+			<div id="cpp">IVXMLService* m_XmlService;</div>
+		</p>
+		<p>Now that you have a pointer to the xml interface you need to query for it by the 
+			kernel routine. The QueryObject template method needs to know two things:<br>
+		</p>
+		<p>First what kind of object you are going to query for. In our case we would like 
+			to get the interface for the XML Service. Thus we write IVXMLService.<br>
+			Secondly you need to pass a VObjectKey with a string value of the service 
+			because the kernel can only figure out the exact interface by string values 
+			defined in the DLL you are going to use.<br>
+			The XML service assigned "XmlService" as object key in the DLL thus we have two 
+			further lines of code:<br>
+			<div id="cpp">
+				VObjectKey key("XmlService");<br>
+				m_XmlService = QueryObject&ltIVXMLService&gt(key);
+			</div>
+		</p>
+		<p>So far by now we can use the interface to get things working.<br>
+		</p>
+		<h2>The interface</h2>
+		<p>The service interface provides two methods for reading and writing xml files.<br>
+			First we are going to discuss how to write a xml file to disk</p>
+		<h2>Writing a XML file</h2>
+		<p>The xml services provides an writer interface. To get use of it you need an 
+			instance of the writer implementation:</p>
+		<p>
+			<div id="cpp">IVXMLWriter* m_Writer;<br>
+				m_Writer = m_XmlService->CreateXMLWriter();
+			</div>
+		<p>Now you are ready writing a xml file. The following example illustrates the 
+			usage:</p>
+		<div id="cpp">
+			m_Writer->WriteDeclaration("MyXMLFile.xml");<br>
+			m_Writer->OpenElement("First Element");<br>
+			m_Writer->OpenElement("Names");<br>
+			m_Writer->AddAttribute("Name", "My Name is not Hannibal");<br>
+			m_Writer->CloseElement("Names");<br>
+			m_Writer->AddComment("What for a nonsense xml file");<br>
+			m_Writer->CloseElement("First Element");<br>
+			m_Writer->Close();
+		</div>
+		<p>The AddAttribute() method works like the well known printf(). This means you can 
+			add an abitrary number of attributes that are written into the file.<br>
+			The above example creates this xml file:</p>
+		<p>&lt?xml version="1.0" ?&gt<br>
+			&ltFirst Element&gt<br>
+			&ltNames Name="My Name is not Hannibal"/&gt<br>
+			&lt!-- What for a nonsense xml file --!&gt<br>
+			&lt/First Element&gt<br>
+		</p>
+		<p>You should ever close an element that you have opened. The writer does not check 
+			if your input is valid thus you are responsible for the correctness of the 
+			created file.<br>
+		</p>
+		<h2>Reading a XML file</h2>
+		<p>The xml service reads in the file and parses it for you. The only possibility to 
+			get the content of the file is by creating a visitor derived from IVXMLVisitor.<br>
+			This class will be passed to the service. The visitor implements the 
+			OnElementOpen(), OnElementClose() and OnFileClose() methods specified in the 
+			interface.<br>
+			Those methods will be invoked automatically when the service is finding any 
+			elements or gets to the file end.<br>
+			To get the name in our above example you must override the OnElementOpen() 
+			method like this:</p>
+		<div id="cpp">void XMLVisitor::OnElementOpen(IVXMLElement* Element)<br>
+			{<br>
+			string MyName;<br>
+			string NameCheck = Element->GetName();<br>
+			if(NameCheck == "Names")<br>
+			{<br>
+			IVXMLAttribute* att = Element->GetFirstAttribute();<br>
+			MyName = att->GetValue();<br>
+			}<br>
+			}<br>
+		</div>
+		<p>Because of the reason that all attribute values are stored in the xml file as 
+			characters you need to convert types if your value of interest is for example 
+			an integer. See the atoi() function for more details.<br>
+			If you have stored more than one attribute to an element you can easily 
+			traversal them by Element->NextAttribute(). If there is no further attribute in 
+			the list the method returns NULL.<br>
+		</p>
+		<p>The only thing to do now is to call the service to read the file. This can be 
+			done with one line of code:</p>
+		<p>m_XmlService->ParseXMLFile("MyXMLFile.xml",&m_Visitor);</p>
+		<p>Now you should have all information needed to use the xml service.</p>
+		<h2>Acknowledgements</h2>
+		<p>The serivce is currently not designed to read comments on the xml file.</p>
+	</body>
