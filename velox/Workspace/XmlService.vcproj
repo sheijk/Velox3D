@@ -131,19 +131,31 @@
 				RelativePath="..\Api\V3d\Xml\IVXMLAttribute.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Xml\IVXMLComment.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Xml\IVXMLElement.h">
 			</File>
 			<File
-				RelativePath="..\API\V3d\XML\IVXMLService.h">
+				RelativePath="..\Api\V3d\Xml\IVXMLNode.h">
 			</File>
 			<File
-				RelativePath="..\API\V3d\XML\IVXMLVisitor.h">
+				RelativePath="..\Api\V3d\Xml\IVXMLService.h">
 			</File>
 			<File
-				RelativePath="..\API\V3d\XML\IVXMLWriter.h">
+				RelativePath="..\Api\V3d\Xml\IVXMLText.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Xml\IVXMLVisitor.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Xml\IVXMLWriter.h">
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Xml\VXMLException.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Xml\VXMLExceptions.h">
 			</File>
 		</Filter>
 		<Filter
@@ -171,6 +183,12 @@
 				RelativePath="..\Source\XMLService\VXMLAttribute.h">
 			</File>
 			<File
+				RelativePath="..\Source\XMLService\VXMLComment.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VXMLComment.h">
+			</File>
+			<File
 				RelativePath="..\Source\XMLService\VXMLElement.cpp">
 			</File>
 			<File
@@ -181,6 +199,12 @@
 			</File>
 			<File
 				RelativePath="..\Source\XMLService\VXMLService.h">
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VXMLText.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VXMLText.h">
 			</File>
 			<File
 				RelativePath="..\Source\XMLService\VXMLWriter.cpp">
