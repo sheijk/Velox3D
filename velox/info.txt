@@ -1,9 +1,10 @@
-Neues Velox3D Repository
+Neues Velox3D Repository 
 --------------------------------------------------------------------------------
 
 API Header:		API/V3D/..		(alles was Clients von Velox/Services kennen muessen)
 Implementation:		Source/..		(Implementation von Velox und Services)
 Coding Style Guides: 	Doc/Information/StyleGuidelines.html
 Issues:			Doc/Worklog/Issues.html
+Goals:			Doc/Information/GoalDefinitions.html
 Pers.Files:		Doc/Worklog/Name.txt	(Nachrichten an Entwickler, Informationen ueber aktuellen Aufgaben, .plan, usw.)
 Dokumentation:		Doc/Index.html
