@@ -117,6 +117,9 @@
 				RelativePath="..\Api\V3d\Core\VException.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Core\VLogging.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Core\VNamedObject.h">
 			</File>
 			<File
@@ -191,6 +194,9 @@
 		<Filter
 			Name="Implementation"
 			Filter="">
+			<File
+				RelativePath="..\Source\Core\VLogging.cpp">
+			</File>
 			<Filter
 				Name="Object Registry"
 				Filter="">

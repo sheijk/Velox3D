@@ -1,5 +1,5 @@
-#ifndef V3D_IVLEGALOPERATION_H
-#define V3D_IVLEGALOPERATION_H
+#ifndef V3D_IVLEGALOPERATIONS_H
+#define V3D_IVLEGALOPERATIONS_H
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -25,5 +25,5 @@ public:
 } // namespace vfs
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVLEGALOPERATION_H
+#endif // V3D_IVLEGALOPERATIONS_H
 

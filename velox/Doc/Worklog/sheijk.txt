@@ -19,6 +19,7 @@ todo:
 <v3d/Core/VCoreLib.h> in jedem Header includen
 Vfs als Service
 UnitTests als Service
+Makros fuer DebugMessages welche den ErrorService verwenden in den Kernel
 Netzwerk, Scripting
 Welt erobern
 
