@@ -59,6 +59,10 @@ Header and Source files which are part of the implementation and thus shall not 
 
 <br>
 
+<b>Rule</b>: typedefs and enums inside a class are named according to the following style: typedef ... MyIterator, enum AccessMode { WriteOnly, ReadOnly };<br>
+
+<br>
+
 <b>Rule</b>: Never specifiy public member data inside a class. Use access functions (inline if performance is critical) instead.<br>
 <b>Reason</b>:	If this rule is applied then the internal data storage of a class can still be changed without modifying the interface. Giving direct access to member variables forbids you to change any variable in the class in the future.
 
