@@ -61,7 +61,13 @@ Doku:
 
 log:
 
-04.04.2004
+10.02.2004
+VIteratorBases: benutzung von smart pointern, damit hoffentlich mem leak behoben
+
+09.02.2004
+VString Fehler behoben + Mem Leak beseitigt
+
+04.02.2004
 Etwas javadoc Kommantare ergaenzt
 
 02.02.2004

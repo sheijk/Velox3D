@@ -25,7 +25,14 @@ VString::VString(const vchar *in_pCStr)
 
 VString::~VString()
 {
-	delete[] m_pCStr;
+	FreeMem();
+}
+
+void VString::FreeMem()
+{
+	//FIXME: das muss wieder rein, aber so dass es keinen absturz gibt :) -- sheijk
+//	delete[] m_pCStr;
+	m_pCStr = 0;
 	m_nLength = 0;
 }
 
@@ -49,8 +56,7 @@ const vchar* VString::AsCString() const
 
 void VString::Set(const vchar* in_pCStr)
 {
-	delete[] m_pCStr;
-	m_pCStr = 0;
+	FreeMem();
 
 	m_nLength = (vuint) strlen(in_pCStr);
 	vchar* pChr = new char[m_nLength+1];

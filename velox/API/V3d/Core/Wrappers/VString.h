@@ -20,6 +20,7 @@ private:
 	vchar* m_pCStr;
 	vuint m_nLength;
 
+	virtual void FreeMem();
 public:
 	/** standard constructor */
 	VString();
@@ -31,7 +32,7 @@ public:
 	void operator=(const VString& in_Source);
 
 	/** sets value to the one of the c string */
-	VString(const vchar* in_pCStr);
+	explicit VString(const vchar* in_pCStr);
 
 	/** destructor, frees memory */
 	virtual ~VString();
