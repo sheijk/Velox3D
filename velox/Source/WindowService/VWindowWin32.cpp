@@ -243,6 +243,12 @@ input::IVInputManager& VWindowWin32::QueryInputManager()
 
 	return *m_pInputManager;	
 }
+//-----------------------------------------------------------------------------
+
+void VWindowWin32::SetTitle(VStringParam in_sName)
+{
+	SetWindowText(hWnd, in_sName);
+}
 
 //-----------------------------------------------------------------------------
 } // namespace window

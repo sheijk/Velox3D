@@ -50,8 +50,6 @@ void VSimpleDrawList::ApplyMaterial(IVMaterial* in_pRenderStates)
 		m_Device.ApplyState(in_pRenderStates->GetState(prio));
 	}
 }
-
-
 //-----------------------------------------------------------------------------
 } // namespace drawlist
 } // namespace graphics

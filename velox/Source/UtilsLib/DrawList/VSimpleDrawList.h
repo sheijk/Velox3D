@@ -30,7 +30,7 @@ public:
 
 private:
 	typedef std::list<VModel*> ModelList;
-
+	
 	ModelList m_Models;
 	IVDevice& m_Device;
 };

@@ -28,6 +28,7 @@ public:
 	virtual void ChangeDisplay(graphics::VDisplaySettings* in_pInfo);
 	virtual graphics::IVDevice& QueryGraphicsDevice();
 	virtual input::IVInputManager& QueryInputManager();
+	virtual void SetTitle(VStringParam in_sName);
 
 private:
 

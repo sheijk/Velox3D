@@ -29,6 +29,9 @@ public:
 
 	/* Returns the display settings of this window */
 	virtual graphics::VDisplaySettings GetDisplaySettings() = 0;
+
+	/* Set the current title for the window */
+	virtual void SetTitle(VStringParam in_sTitle) = 0;
 	
 	
 
