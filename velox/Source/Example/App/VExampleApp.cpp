@@ -60,64 +60,64 @@ void ApplyMaterial(IVDevice* in_m_pDevice, IVMaterial* in_pRenderStates)
 
 VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
 {
-	utils::importer::VModel3D Model;
-	utils::importer::VOBJModelImporter Importer;
-	utils::importer::VQuake2BspImporter bspImporter;
-
-	Importer.Create(in_pcFileName, &Model);
-	//bspImporter.Create("/data/test.bsp", "none");
-
-	IVDevice::Buffer VertexData(
-		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_VerticesList),
-		Model.m_Objects[0]->m_iNumVertices * 3 * sizeof(float));
-
-	IVDevice::Buffer VertexIndex(
-		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_pVertexIndex),
-		Model.m_Objects[0]->m_iNumFaces * 3 * sizeof(int));
-
-	IVDevice::Buffer TexData(
-		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_TextureCoordsList),
-		Model.m_Objects[0]->m_iNumTexCoords2f * 2 * sizeof(float));
-
-	IVDevice::BufferHandle VertexHandle;
-	IVDevice::BufferHandle VertexIndexHandle;
-	IVDevice::BufferHandle TexHandle;
-
-	//assign handles
-	VertexHandle = in_pDevice->CreateBuffer(
-		IVDevice::VertexBuffer,
-		&VertexData,
-		IVDevice::Buffer::CopyData
-		);
-	VertexIndexHandle = in_pDevice->CreateBuffer(
-		IVDevice::VertexBuffer,
-		&VertexIndex,
-		IVDevice::Buffer::CopyData
-		);
-	TexHandle = in_pDevice->CreateBuffer(
-		IVDevice::VertexBuffer,
-		&TexData,
-		IVDevice::Buffer::CopyData);
-
+//	utils::importer::VModel3D Model;
+//	utils::importer::VOBJModelImporter Importer;
+//	//utils::importer::VQuake2BspImporter bspImporter;
+//
+//	Importer.Create(in_pcFileName, &Model);
+//	//bspImporter.Create("/data/test.bsp", "none");
+//
+//	IVDevice::Buffer VertexData(
+//		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_VerticesList),
+//		Model.m_Objects[0]->m_iNumVertices * 3 * sizeof(float));
+//
+//	IVDevice::Buffer VertexIndex(
+//		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_pVertexIndex),
+//		Model.m_Objects[0]->m_iNumFaces * 3 * sizeof(int));
+//
+//	IVDevice::Buffer TexData(
+//		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_TextureCoordsList),
+//		Model.m_Objects[0]->m_iNumTexCoords2f * 2 * sizeof(float));
+//
+//	IVDevice::BufferHandle VertexHandle;
+//	IVDevice::BufferHandle VertexIndexHandle;
+//	IVDevice::BufferHandle TexHandle;
+//
+//	//assign handles
+//	VertexHandle = in_pDevice->CreateBuffer(
+//		IVDevice::VertexBuffer,
+//		&VertexData,
+//		IVDevice::Buffer::CopyData
+//		);
+//	VertexIndexHandle = in_pDevice->CreateBuffer(
+//		IVDevice::VertexBuffer,
+//		&VertexIndex,
+//		IVDevice::Buffer::CopyData
+//		);
+//	TexHandle = in_pDevice->CreateBuffer(
+//		IVDevice::VertexBuffer,
+//		&TexData,
+//		IVDevice::Buffer::CopyData);
+//
 	VMeshDescription meshDesc;
-
-	meshDesc.geometryType = VMeshDescription::TriangleStrip;
-	meshDesc.triangleVertices = VMeshDescription::ByteDataRef(
-		VertexHandle,
-		0,
-		Model.m_Objects[0]->m_iNumVertices * 3,
-		0
-		);
-	meshDesc.triangleIndices = VMeshDescription::ByteDataRef(VertexIndexHandle,
-		0, Model.m_Objects[0]->m_iNumFaces * 3,
-		0);
-
-	meshDesc.triangleTexCoords = VMeshDescription::ByteDataRef(TexHandle,
-		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
-		0);
-
-	//meshDesc.geometryType = VMeshDescription::TriangleStrip;
-
+//
+//	meshDesc.geometryType = VMeshDescription::TriangleStrip;
+//	meshDesc.triangleVertices = VMeshDescription::ByteDataRef(
+//		VertexHandle,
+//		0,
+//		Model.m_Objects[0]->m_iNumVertices * 3,
+//		0
+//		);
+//	meshDesc.triangleIndices = VMeshDescription::ByteDataRef(VertexIndexHandle,
+//		0, Model.m_Objects[0]->m_iNumFaces * 3,
+//		0);
+//
+//	meshDesc.triangleTexCoords = VMeshDescription::ByteDataRef(TexHandle,
+//		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
+//		0);
+//
+//	//meshDesc.geometryType = VMeshDescription::TriangleStrip;
+//
 	return meshDesc;
 }
 

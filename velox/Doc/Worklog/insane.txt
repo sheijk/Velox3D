@@ -25,6 +25,8 @@ TODO List:
 - Console is closeable with alt f4
 - Indoor Rendering
 
+low:
+- remove VDisplaySettings.cpp
 
 medium:
 
