@@ -72,6 +72,12 @@ int main(int argv, char* argc[])
 		std::string msg = ostr.str();
 
 		vout << pcMessage;
+
+		// force a breakpoint
+		__asm
+		{ 
+			int 3; 
+		}
 	}
 
 	// delete kernel

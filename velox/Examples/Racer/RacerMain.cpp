@@ -175,7 +175,7 @@ IVEntityManager::EntityPtr VRacerApp::CreateHeightmapEntity()
 
 	VImageServicePtr pImageService;
 	VImage image(2048, 2048, 24);
-	pImageService->CreateImage("/data/rocks2048.tga", image);
+	pImageService->CreateImage("/data/rocks2048.jpg", image);
 
 	IVDevice::BufferHandle hTexBuffer = GetDevice().CreateBuffer(
 		IVDevice::Texture,

@@ -605,6 +605,57 @@
 				RelativePath="..\Api\V3d\Entity\VEntityManager.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="Resource"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\Resource\VResource.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceData.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceData.h">
+				</File>
+				<File
+					RelativePath="..\Source\Resource\VResourceId.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Resource\VResourceManager.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Resource\VResourceManager.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VTypedResourceData.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Resource\IVResourceManager.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\IVResourceType.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\ResourceExceptions.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResource.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceDataPtr.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceId.h">
+				</File>
+			</Filter>
+		</Filter>
 		<File
 			RelativePath="..\Api\V3dLib\BoostSignals.h">
 		</File>

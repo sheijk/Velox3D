@@ -28,7 +28,12 @@ void VSharedPtr<T>::Release()
 		T* t = reinterpret_cast<T*>(m_pStore->pSubject);
 		delete t;
 
+		m_pStore->pSubject = 0;
+		m_pStore->nReferenceCount = 0;
+
 		delete m_pStore;
+
+		m_pStore = 0;
 	}
 	
 	m_pStore = new SharedStorage();
@@ -39,7 +44,7 @@ void VSharedPtr<T>::Assign(T* in_pSubject)
 {
 	Release();
 
-	m_pStore = new SharedStorage();
+	//m_pStore = new SharedStorage();
 	m_pStore->pSubject = in_pSubject;
 	m_pStore->nReferenceCount = 1;
 }

@@ -18,6 +18,8 @@
 // thank you, windows.h -- it's a feature, not a bug :P -ins
 #undef NO_ERROR
 
+#include "Resource/VResourceManager.h"
+
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VDevILLoader.h"
 #include "ImageService/VDevILSaver.h"
@@ -44,6 +46,7 @@ using namespace v3d::error;
 using v3d::utils::VAllFilter;
 using namespace v3d::property;
 using namespace v3d::entity;
+using namespace v3d::resource;
 //-----------------------------------------------------------------------------
 
 class VVeloxModules : public v3d::VModuleBase
@@ -57,6 +60,9 @@ class VVeloxModules : public v3d::VModuleBase
 
 	// config
 	VPointer<VConfigProvider>::AutoPtr g_pConfigProvider;
+
+	// resources
+	VPointer<IVResourceManager>::AutoPtr g_pResourceManager;
 
 	// updater
 	VPointer<VUpdateManager>::AutoPtr g_pUpdater;
@@ -112,9 +118,13 @@ void VVeloxModules::Initialize()
 	g_pFileSys.Assign(new VSimpleVfs("vfs.fs", "vfs.xml"));
 	g_pTempDataProv.Assign(new VTempDataProvider());
 
+	// misc
 	g_pConfigProvider.Assign(new VConfigProvider("config.provider"));
 	g_pUpdater.Assign(new VUpdateManager("updater.service"));
 	g_pSystemManager.Assign(new system::VSystemManager("system.service"));
+
+	// resource manager
+	g_pResourceManager.Assign(new VResourceManager("resource.manager"));
 
 	// image
 	g_pImageFactory.Assign(new VImageFactory());
@@ -167,6 +177,10 @@ void VVeloxModules::Shutdown()
 	// image
 	g_pImageFactory.Release();
 
+	// resource
+	g_pResourceManager.Release();
+
+	// misc
 	g_pUpdater.Release();
 	g_pConfigProvider.Release();
 	g_pSystemManager.Release();

@@ -5,6 +5,11 @@
 #include "VSetterPart.h"
 #include "VReaderPart.h"
 
+
+#include "../../Source/Resource/VResourceManager.h"
+#include <V3d/Resource/VTypedResourceData.h>
+#include <V3d/Resource/VResourceDataPtr.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -21,6 +26,37 @@ class VEntityDemoApp : public VVeloxApp
 {
 public:
 	virtual vint Main(std::vector<std::string> args);
+};
+
+class Blub
+{
+public:
+	Blub(vint v) : val(v)
+	{}
+
+	vint GetVal() const { return val; }
+
+private:
+	vint val;
+};
+
+class BlubType : public resource::IVResourceType
+{
+public:
+	virtual resource::VResourceData::TypeId GetTypeId() const
+	{
+		return resource::VResource::GetTypeId<Blub>();
+	}
+
+	virtual vbool Generate(resource::VResource* in_pResource)
+	{
+		resource::VResourceDataPtr<const vint> pIntData = in_pResource->GetData<vint>();
+
+        Blub* pBlub = new Blub(*pIntData);
+		in_pResource->AddData(pBlub);
+
+		return true;
+	}
 };
 
 /**
@@ -69,6 +105,36 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 	pReader->PrintValue();
 
 	ent.Deactivate();
+
+	//---
+	using namespace resource;
+
+	VResourceManagerPtr pResourceManager;
+
+	pResourceManager->CreateResource("/dir0/dir1/dir2/dir3");
+	pResourceManager->CreateResource("/dira/dirb/dirc/dird/");
+	pResourceManager->CreateResource("/dir0/dir1/dir2a/dirc");
+
+	VResourceId res = pResourceManager->GetResourceByName("/dir0/dir1");
+	res->AddData(new int(5));
+	res->AddData(new VEntity());
+
+	pResourceManager->DumpResourceInfo();
+
+	VResourceDataPtr<const int> pResInt = res->GetData<int>();
+	VResourceDataPtr<const VEntity> pResEntity = res->GetData<VEntity>();
+
+	V3D_ASSERT(*pResInt == 5);
+
+	VSharedPtr<BlubType> pBlubType(new BlubType());
+	pResourceManager->RegisterResourceType(pBlubType);
+
+	VResourceDataPtr<const Blub> pBlub = res->GetData<Blub>();
+
+	V3D_ASSERT(pBlub->GetVal() == 5);
+
+	pResourceManager->DumpResourceInfo();
+
 	
 	return 0;
 }

@@ -1,25 +1,27 @@
-//TODO: add file creation date to file guard
-#ifndef V3D_%%filename%%_H
-#define V3D_%%filename%%_H
+#include "VResourceData.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
-namespace v3d { namespace %%namespace%% {
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indenting
+namespace v3d { namespace resource {
+//-----------------------------------------------------------------------------
+using namespace v3d;
 
-/**
-//TODO: insert documentation here
- */
-class %%classname%%
+VResourceData::VResourceData()
 {
-public:
-	%%classname%%();
-	virtual ~%%classname%%();
-};
+	m_nReferenceCount = 0;
+}
+
+VResourceData::~VResourceData()
+{
+}
+
+vuint VResourceData::GetReferenceCount() const
+{
+	return m_nReferenceCount;
+}
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::%%namespace%%
+}} // namespace v3d::resource
 //-----------------------------------------------------------------------------
-#endif // V3D_%%filename%%_H

@@ -38,6 +38,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+06.11.2004
+- Resource Manager
+
+05.11.2004
+- perl skripts zum erzeugen von erstellen von klassen/interfaces (by seb)
+
 17.10.2004
 - VSharedPtr. (sollte statt VPointer<T>::SharedPtr benutzt werden, bzw ist das
   selbe)

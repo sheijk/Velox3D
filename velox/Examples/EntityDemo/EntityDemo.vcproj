@@ -36,7 +36,7 @@
 				OutputFile="$(OutDir)/EntityDemo.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/GraphicsDemo.pdb"
+				ProgramDatabaseFile="$(OutDir)/EntityDemo.pdb"
 				SubSystem="1"
 				ImportLibrary="$(OutDir)/GraphicsDemo.lib"
 				TargetMachine="1"/>
