@@ -17,7 +17,11 @@ import java.io.OutputStream;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 
+import de.janrehders.gse2.accounts.Account;
+import de.janrehders.gse2.accounts.AccountVisitor;
 import de.janrehders.gse2.accounts.Giro;
+import de.janrehders.gse2.accounts.Savings;
+import de.janrehders.gse2.accounts.StudentGiro;
 import de.janrehders.gse2.controller.Controller;
 import de.janrehders.gse2.model.Model;
 import de.janrehders.gse2.model.ModelImpl;
@@ -56,7 +60,7 @@ public class MainWindow extends JFrame {
         myDocumentMenu = new Menu("Windows");
         
         // add a menu
-        this.setMenuBar(createMenuBar());
+        setMenuBar(createMenuBar());
 
         myController = inController;
 
@@ -197,18 +201,38 @@ public class MainWindow extends JFrame {
         });
         
         Menu accountMenu = new Menu("Accounts");
+
         MenuItem newGiroItem = new MenuItem("New Giro");
         newGiroItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent out_e) {
                 Giro giro = new Giro();
                 myController.getModel().insert(giro);
-                new AccountEditWindow(myController, giro, true, MainWindow.this);
+                createAccountEditWindow(myController, giro, true, MainWindow.this);
+            }
+        });
+        
+        MenuItem newSavingsItem = new MenuItem("New savings");
+        newSavingsItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                Savings savings = new Savings();
+                myController.getModel().insert(savings);
+                createAccountEditWindow(myController, savings, true, MainWindow.this);
+            }
+        });
+        
+        MenuItem newStudentGiroItem = new MenuItem("New student giro");
+        newStudentGiroItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                StudentGiro studentGiro = new StudentGiro();
+                myController.getModel().insert(studentGiro);
+                createAccountEditWindow(myController, studentGiro, true, MainWindow.this);
             }
         });
         
         accountMenu.add(newGiroItem);
-//        accountMenu.add(new MenuItem("New StudentGiro"));
-//        accountMenu.add(new MenuItem("New Savings"));
+        accountMenu.add(newStudentGiroItem);
+        accountMenu.add(newSavingsItem);
+        
         accountMenu.addSeparator();
         accountMenu.add(listAccountItem);
         
@@ -347,6 +371,38 @@ public class MainWindow extends JFrame {
         return myCurrentFileName;
     }
 
+    public static AccountEditWindow createAccountEditWindow(
+            final Controller inController, 
+            final Account inAccount, 
+            final boolean inAllowEditing, 
+            final MainWindow inMainWindow
+    ) {
+        assert inAccount != null;
+        
+        return (AccountEditWindow) inAccount.visit(new AccountVisitor() {
+            /* (non-Javadoc)
+             * @see de.janrehders.gse2.accounts.AccountVisitor#onGiro(de.janrehders.gse2.accounts.Giro)
+             */
+            public Object onGiro(Giro inGiro) {
+                return new GiroEditWindow(inController, inAccount, inAllowEditing, inMainWindow);
+            }
+
+            /* (non-Javadoc)
+             * @see de.janrehders.gse2.accounts.AccountVisitor#onStudentGiro(de.janrehders.gse2.accounts.StudentGiro)
+             */
+            public Object onStudentGiro(StudentGiro inGiro) {
+                return new StudentGiroEditWindow(inController, inAccount, inAllowEditing, inMainWindow);
+            }
+
+            /* (non-Javadoc)
+             * @see de.janrehders.gse2.accounts.AccountVisitor#onSavings(de.janrehders.gse2.accounts.Savings)
+             */
+            public Object onSavings(Savings inSavings) {
+                return new SavingsEditWindow(inController, inAccount, inAllowEditing, inMainWindow);
+            }
+        });
+    }
+    
     private final class GSEFileFilter extends FileFilter {
         public boolean accept(File inFile) {
             return

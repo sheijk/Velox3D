@@ -6,6 +6,7 @@
  */
 package de.janrehders.gse2.accounts;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -17,6 +18,8 @@ public class Giro extends Account {
     private float myDispoCreditLine;
     private int myECNo;
     private Date myECExpirationDate;
+    
+    private static int ourLastECCardNo = 0;
 
     /** default c'tor */
     public Giro()
@@ -52,12 +55,6 @@ public class Giro extends Account {
 		myECExpirationDate = (Date)inSource.myECExpirationDate.clone();
 	}
 	
-	/** clones an object */
-	public Account Generate()
-	{
-	    return new Giro();
-	}
-
 	/** checks the classes invariant */
 	public boolean classInvariant()
 	{
@@ -111,14 +108,43 @@ public class Giro extends Account {
 	
 	/** renews the ec card */
 	public void renewECCard(int inNewECNo, Date inNewECDate) {
-		myECNo = inNewECNo;
+	    // if an invalid number is given, generate a new unused one
+	    if( inNewECNo >= 0 )
+	    {
+	        myECNo = inNewECNo;
+	    }
+	    else
+	    {
+	        myECNo = ++ourLastECCardNo;
+	    }
+
+	    // if no date is specified, renew for one year
+	    if( inNewECDate == null )
+	    {
+	        inNewECDate = datePlusOneYear(myECExpirationDate);        
+	    }
+	    
 		// kopieren damit keine unbeabsichtigten veranderungen moeglich sind
 		// durch manipilieren des arguments nach dem aufruf des c'tors von
 		// ausserhalb
 		myECExpirationDate = (Date)inNewECDate.clone();
 	}
 
-	/** return the dispo credit line */
+	/**
+     * @param inDate
+	 * @return
+     */
+    protected static Date datePlusOneYear(Date inDate) {
+        Date inNewECDate;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(inDate);
+        cal.add(Calendar.YEAR, 1);
+        
+        inNewECDate = cal.getTime();
+        return inNewECDate;
+    }
+
+    /** return the dispo credit line */
 	public float getDispoCreditLine() {
 		return myDispoCreditLine;
 	}

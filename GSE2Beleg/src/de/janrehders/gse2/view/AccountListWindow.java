@@ -60,7 +60,7 @@ public class AccountListWindow extends Document {
             public void actionPerformed(ActionEvent out_e) {
                 Account account = getSelectedAccount();
                 
-                new AccountEditWindow(myController, account, true, inMainWindow);
+                MainWindow.createAccountEditWindow(myController, account, true, inMainWindow);
             }
         });
         
@@ -69,7 +69,7 @@ public class AccountListWindow extends Document {
             public void actionPerformed(ActionEvent out_e) {
                 Account account = getSelectedAccount();
                 
-                new AccountEditWindow(myController, account, false, inMainWindow);
+                MainWindow.createAccountEditWindow(myController, account, false, inMainWindow);
             }
         });
 
@@ -129,7 +129,7 @@ public class AccountListWindow extends Document {
             System.out.println(i);
             
             // open it for editing
-            new AccountEditWindow(myController, giro, true, getMainWindow());
+            MainWindow.createAccountEditWindow(myController, giro, true, getMainWindow());
         }
     }
 }

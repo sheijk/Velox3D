@@ -14,6 +14,10 @@ import java.util.Observer;
 import javax.swing.*;
 
 import de.janrehders.gse2.accounts.Account;
+import de.janrehders.gse2.accounts.AccountVisitor;
+import de.janrehders.gse2.accounts.Giro;
+import de.janrehders.gse2.accounts.Savings;
+import de.janrehders.gse2.accounts.StudentGiro;
 import de.janrehders.gse2.controller.Controller;
 
 /**
@@ -22,8 +26,7 @@ import de.janrehders.gse2.controller.Controller;
  * To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-public class AccountEditWindow extends Document {
-//    private final Account myAccount;
+public abstract class AccountEditWindow extends Document {
     private final Controller myController;
     private final int myAccountId;
     
@@ -31,7 +34,7 @@ public class AccountEditWindow extends Document {
     private JTextField myBalanceTextField;
     private JLabel myDateOfCreationLabel;
 
-    public AccountEditWindow(
+    protected AccountEditWindow(
             Controller inController, 
             Account inAccount,
             boolean inAllowEditing,
@@ -43,7 +46,6 @@ public class AccountEditWindow extends Document {
         assert inController != null;
         assert inAccount != null;
         
-//        myAccount = inAccount;
         myAccountId = inAccount.getAccountNo();
         myController = inController;
         
@@ -58,8 +60,7 @@ public class AccountEditWindow extends Document {
         // if editing is disabled, deactivate all edit controls
         if( inAllowEditing == false )
         {
-            myOwnerTextField.setEnabled(false);
-            myBalanceTextField.setEnabled(false);
+            disableEditing();
         }
         // if editing is enabled, add editing functionality
         else
@@ -67,17 +68,10 @@ public class AccountEditWindow extends Document {
             JButton btn = new JButton("Apply");
             btn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent out_e) {
-                    // apply changes
-                    Account account = getAccount();
-                    try {
-                        account.setBalance(Float.parseFloat(myBalanceTextField.getText()));
-                        account.setOwner(myOwnerTextField.getText());
-                        // notify controller
-                        myController.getModel().update(getAccount().getAccountNo(), getAccount());
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(AccountEditWindow.this,
-                                "Enter a valid floating point number for balance");
-                    }
+                    applyChanges();
+
+                    // notify controller
+                    myController.getModel().update(getAccount().getAccountNo(), getAccount());
                 }
             });
             
@@ -96,7 +90,15 @@ public class AccountEditWindow extends Document {
         show();
     }
 
-    private JPanel horPanel(Component inLeft, Component inRight)
+    /**
+     * 
+     */
+    protected void disableEditing() {
+        myOwnerTextField.setEnabled(false);
+        myBalanceTextField.setEnabled(false);
+    }
+
+    protected static JPanel horPanel(Component inLeft, Component inRight)
     {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
@@ -107,44 +109,36 @@ public class AccountEditWindow extends Document {
         return panel;
     }
     
-    private void buildUI(Container inParent)
+    protected void buildUI(final Container inParent)
     {
         inParent.add(horPanel(
-                new Label("Account no."), 
-                new Label("" + getAccount().getAccountNo())
+                new JLabel("Account no."), 
+                new JLabel("" + getAccount().getAccountNo())
                 ));
         
         myOwnerTextField = new JTextField();
         inParent.add(horPanel(
-                new Label("Owner"),
+                new JLabel("Owner"),
                 myOwnerTextField
                 ));
 
         myBalanceTextField = new JTextField();
-        myBalanceTextField.setInputVerifier(new InputVerifier() {
-            public boolean verify(JComponent input) {
-                try {
-                    Float.parseFloat(((JTextField)input).getText());
-                    return true;
-                } catch (NumberFormatException e) {
-                    return false;
-                }
-            }
-        });
+        myBalanceTextField.setInputVerifier(new FloatInputVerifier());
         
         inParent.add(horPanel(
-                new Label("Balance"),
+                new JLabel("Balance"),
                 myBalanceTextField));
         
         myDateOfCreationLabel = new JLabel(getAccount().getDateOfCreation().toLocaleString());
         inParent.add(horPanel(
-                new Label("Date of creation"),
+                new JLabel("Date of creation"),
                 myDateOfCreationLabel));
         
         //TODO: combobox for type
+        
     }
-            
-    private void updateFromAccount()
+    
+    protected void updateFromAccount()
     {
         // close if account does not exist anymore
         if( getAccount() == null )
@@ -175,7 +169,30 @@ public class AccountEditWindow extends Document {
     /**
      * @return Returns the account.
      */
-    private Account getAccount() {
+    protected Account getAccount() {
         return myController.getModel().getById(myAccountId);
+    }
+
+    protected void applyChanges() {
+        // apply changes
+        Account account = getAccount();
+        try {
+            account.setBalance(Float.parseFloat(myBalanceTextField.getText()));
+            account.setOwner(myOwnerTextField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(AccountEditWindow.this,
+                    "Enter a valid floating point number for balance");
+        }
+    }
+
+    protected static final class FloatInputVerifier extends InputVerifier {
+        public boolean verify(JComponent input) {
+            try {
+                Float.parseFloat(((JTextField)input).getText());
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
     }
 }

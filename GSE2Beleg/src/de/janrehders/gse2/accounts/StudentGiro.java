@@ -112,6 +112,11 @@ public class StudentGiro extends Giro {
 	 * VB: inNewExpirationDate != null und gueltig
 	 */
 	public void renewStudentID(Date inNewExpirationDate) {
+	    if( inNewExpirationDate == null )
+	    {
+	        inNewExpirationDate = datePlusOneYear(myStudentIdExpirationDate);
+	    }
+	    
 		myStudentIdExpirationDate = (Date)inNewExpirationDate.clone();
 	}
 	
