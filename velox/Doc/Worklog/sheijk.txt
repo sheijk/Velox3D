@@ -15,9 +15,7 @@ Worklog von sheijk
 ----- personal todo:
 
 todo:
-UnitTests portieren
 <v3d/Core/VCoreLib.h> in jedem Header includen
-x Coding Guidelines ergaenzen
 Vfs als Service
 Netzwerk, Scripting
 Welt erobern
@@ -28,10 +26,15 @@ Welt erobern
 log:
 
 17.05.2003
-Velox an VS.Net 2003 angepasst, Datei fuer Ziel Definition von Velox angelegt (Doc/Information/GoalDefinition.html), Projektfiles ins CVS aufgenommen
+UnitTest Framework ins neue CVS portiert
+
+16.05.2003
+Velox an VS.Net 2003 angepasst, Datei fuer Ziel Definition von Velox angelegt 
+(Doc/Information/GoalDefinition.html), Projektfiles ins CVS aufgenommen
 
 14.05.2003
-Vfs Interface erstellt, Vfs Xml Configdatei erzeugt, String Wrapper geschrieben (VString)
+Vfs Interface erstellt, Vfs Xml Configdatei erzeugt, String Wrapper 
+geschrieben (VString)
 
 07.05.2003
 Neues CVS Modul angelegt

@@ -6,7 +6,7 @@
 #include <v3d/Core/smartptr/VGuards.h>
 #include <v3d/Core/VException.h>
 #include <v3d/Core/IVApplication.h>
-#include <v3d/ExampleService/IVExampleService.h>
+//#include <v3d/ExampleService/IVExampleService.h>
 
 #include "tinyxml/tinyxml.h"
 
@@ -16,7 +16,7 @@
 using std::string;
 using std::cout;
 using std::endl;
-using v3d::example::IVExampleService;
+//using v3d::example::IVExampleService;
 
 namespace v3d {
 namespace kernel {
@@ -185,8 +185,8 @@ void VKernel::DelegateControl()
 	VObjectKey key("main");
 	IVApplication* pApp = QueryObject<IVApplication>(key);
 
-	VObjectKey servKey("exService");
-	IVExampleService* pServ = QueryObject<IVExampleService>(servKey);
+//	VObjectKey servKey("exService");
+//	IVExampleService* pServ = QueryObject<IVExampleService>(servKey);
 
 	// start it
 	if( 0 != pApp )
