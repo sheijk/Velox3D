@@ -34,6 +34,10 @@ TODO List:
   Should we use vfs for loading model?? <- das sollte fuer alle daten benutzt werden, sonst verlieren wir den nutzen des vfs (zugriff auf daten unabhaengig vom speicherort, archive, ..)
 
 Done List:
+
+30.01.04
+- added small plane class
+
 29.01.04
 - Added a small camera and movement
 

@@ -16,6 +16,7 @@
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
 #include <v3d/Graphics/VCamera.h>
+#include "../../UtilsLib/Importer/VQuake2BspImporter.h"
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -61,12 +62,16 @@ vint VExampleApp::Main()
 	IVButton* pDownButton;
 	IVButton* pLeftButton;
 	IVButton* pRightButton;
+	
+	IVButton* pLeftMouseButton;
+	IVButton* pRightMouseButton;
 
 	IVDevice::FloatBufferHandle VertexHandle;
 	IVDevice::IntBufferHandle VertexIndexHandle;
 
 	util::importer::VModel3D Model;
 	util::importer::VOBJModelImporter Importer;
+	util::importer::VQuake2BspImporter bspImporter;
 
 	VMeshDescription MeshDesc;
 	IVDevice::MeshHandle Mesh;
@@ -87,19 +92,35 @@ vint VExampleApp::Main()
 	pDownButton = &pInputManager->GetStandardKey(IVInputManager::CursorDown);
 	pLeftButton = &pInputManager->GetStandardKey(IVInputManager::CursorLeft);
 	pRightButton = &pInputManager->GetStandardKey(IVInputManager::CursorRight);
+
+	pLeftMouseButton = &pInputManager->GetMouseButton(1);
+	pRightMouseButton = &pInputManager->GetMouseButton(0);
+
 	
 	pCamera = new VCamera();
+	pCamera->SetZ(-10.0f);
 	pDevice->SetCamera(pCamera);
 
-	Importer.Create("/data/test.obj", &Model);
+	//TODO: changed back cos of missing workdir -ins
+	Importer.Create("ObjFile", &Model);
+	bspImporter.Create("BspFile", "none");
+
+//	Importer.Create("/data/test.obj", &Model);
+//	bspImporter.Create("/data/test.bsp", "none");
 
 	// create a test mesh
     
-	VFloatBuffer VertexData(Model.m_Objects[0]->m_VerticesList,
+	/*VFloatBuffer VertexData(Model.m_Objects[0]->m_VerticesList,
 		Model.m_Objects[0]->m_iNumVertices*3);
 
 	VIntBuffer VertexIndex(Model.m_Objects[0]->m_pVertexIndex,
-		Model.m_Objects[0]->m_iNumFaces *3);
+	Model.m_Objects[0]->m_iNumFaces *3); */
+
+	
+	VFloatBuffer VertexData((vfloat32*)bspImporter.m_pVertices,bspImporter.m_iNumVertices *3);
+	VIntBuffer VertexIndex(bspImporter.m_pIndexList, bspImporter.m_iNumFaceElements);
+
+
 
 	//assign handles
 	VertexHandle = pDevice->CreateBuffer(&VertexData, VFloatBuffer::CopyData);
@@ -107,10 +128,10 @@ vint VExampleApp::Main()
 
 	
 	MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
-		0, Model.m_Objects[0]->m_iNumVertices,
+		0, bspImporter.m_iNumVertices *3,
 		1);
 	MeshDesc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle,
-		0, Model.m_Objects[0]->m_iNumFaces *3,
+		0, bspImporter.m_iNumFaceElements,
 		1);
 
 	Mesh = pDevice->CreateMesh(MeshDesc);
@@ -145,6 +166,11 @@ vint VExampleApp::Main()
 
 		if(pRightButton->IsDown() == true)
 			pCamera->AddX(-0.2f);
+		
+		if(pRightMouseButton->IsDown() == true)
+			pCamera->AddY(-.3f);
+		if(pLeftMouseButton->IsDown() == true)
+			pCamera->AddY(.3f);
 	}
 
 	pUpdateManager->Stop();

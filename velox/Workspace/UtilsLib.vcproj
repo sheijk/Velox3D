@@ -173,8 +173,7 @@
 			<File
 				RelativePath="..\Source\UtilsLib\Importer\VQuake2BspImporter.cpp">
 				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="TRUE">
+					Name="Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"/>
 				</FileConfiguration>

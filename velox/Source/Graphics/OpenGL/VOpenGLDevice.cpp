@@ -317,8 +317,8 @@ void VOpenGLDevice::BeginScene()
 	else 
 		glTranslatef(0,0,0);
 
-	rotZ += 0.3f;
-	glRotatef(rotZ,0.0f,1.0f,0.0f);
+	//rotZ += 0.3f;
+	//glRotatef(rotZ,0.0f,1.0f,0.0f);
 
 }
 

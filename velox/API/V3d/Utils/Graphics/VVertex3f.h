@@ -12,20 +12,18 @@ namespace graphics {
 // um cross, etc fkten zu implementiern?
 struct VVertex3f
 {
-	float x;
-	float y;
-	float z;
+	vfloat32 v[3];
 
 	VVertex3f()
 	{
-		x = y = z = 0;
+		v[0] = v[1] = v[2] = 0;
 	}
 
 	VVertex3f(float in_X, float in_Y, float in_Z)
 	{
-		x = in_X;
-		y = in_Y;
-		z = in_Z;
+		v[0] = in_X;
+		v[1] = in_Y;
+		v[2] = in_Z;
 	}
 };
 

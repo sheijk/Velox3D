@@ -25,9 +25,9 @@ struct VPlane3f
 
 	VPlane3f(vfloat32 in_X, vfloat32 in_Y, vfloat32 in_Z, vfloat32 in_Distance)
 	{
-		m_Normal.x = in_X;
-		m_Normal.y = in_Y;
-		m_Normal.z = in_Z;
+		m_Normal.v[0] = in_X;
+		m_Normal.v[1] = in_Y;
+		m_Normal.v[2] = in_Z;
 
 		m_fDistance = in_Distance;
 	}
