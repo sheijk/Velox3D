@@ -23,6 +23,8 @@ hehe :) -- ins
 -------------------------------------------------------------------------------
 Personal Notes:
 
+make physic states non copyable and assignable
+
 TODO List:
 - Console is closeable with alt f4
 
