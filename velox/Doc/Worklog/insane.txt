@@ -1,0 +1,14 @@
+Worklog von insane:
+--------------------------------------------------------------------------------
+
+
+Current assigned tasks:
+-developing editor framework
+-creating rendering methods and implementing gfx service
+
+
+--------------------------------------------------------------------------------
+
+TODO List:
+-writing editor goaldefinitions
+-generating apiu documentatoin with doxygen
