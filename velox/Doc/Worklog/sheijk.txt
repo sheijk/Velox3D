@@ -5,9 +5,8 @@ TODO: Einige typedefs sollte einfacher zugaenglcher sein z.b. Vertex
 TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
 zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
 die gleichen services stehen -[ins]
-
-Bitte comitte keine verstuemellte sln (console service + corelib hat gefehlt...
-sehr aufwaendig die projekte wieder kompilerfaehig zu machen....)
+<ins>Bitte postet am ende dieser Datei eure ogl extensions damit ich sehe, mit
+as wir arbeiten koennen (siehe console fuer extensions)
 
 mein iterator crasht mit dem neuem source im opengldevice...
 
