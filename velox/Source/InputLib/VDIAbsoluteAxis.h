@@ -5,7 +5,6 @@
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/Input/IVAbsoluteAxis.h>
 
-#include <dinput.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {

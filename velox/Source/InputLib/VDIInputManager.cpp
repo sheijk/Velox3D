@@ -162,7 +162,14 @@ vbool VDIInputManager::EnumDevicesCallback(const DIDEVICEINSTANCE* in_pdiDeviceI
 
 	try
 	{
-        Temp = new VDIInputDevice( *in_pdiDeviceInstance, m_pDI, m_hWnd );
+        switch ( GET_DIDEVICE_TYPE( in_pdiDeviceInstance->dwDevType ) )
+		{
+            case DI8DEVTYPE_JOYSTICK:	
+            case DI8DEVTYPE_GAMEPAD:	
+            case DI8DEVTYPE_KEYBOARD:	
+            case DI8DEVTYPE_MOUSE:	Temp = new VDIInputDevice( *in_pdiDeviceInstance, m_pDI, m_hWnd );
+									break;
+		}
 	}
 	catch(VException e)
 	{
@@ -170,7 +177,9 @@ vbool VDIInputManager::EnumDevicesCallback(const DIDEVICEINSTANCE* in_pdiDeviceI
 		return true;
 	}
 
-	m_DeviceList.push_back( *Temp );
+	if (Temp)
+        m_DeviceList.push_back( *Temp );
+
 	return true;
 }
 

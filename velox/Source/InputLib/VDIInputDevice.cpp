@@ -62,6 +62,8 @@ vbool VDIInputDevice::Create(LPDIRECTINPUT8 in_pDI, HWND in_hWnd)
 		return false;
 	}
 
+	hr = DI_OK;
+
 	switch ( GET_DIDEVICE_TYPE( m_diDeviceInstance.dwDevType ) )
 	{
 		case DI8DEVTYPE_JOYSTICK:	hr = m_pdiDevice->SetDataFormat(&c_dfDIJoystick2);
@@ -73,10 +75,6 @@ vbool VDIInputDevice::Create(LPDIRECTINPUT8 in_pDI, HWND in_hWnd)
 		case DI8DEVTYPE_MOUSE:		hr = m_pdiDevice->SetDataFormat(&c_dfDIMouse2);
 									break;
 	}
-
-	// was soll das hier sein? stuerzt bei mir ab weil hr nicht initialisert
-	// wurde.. -- sheijk
-	hr = DI_OK; // fix, s.o.
 	if ( DI_OK != hr )
 	{
 		vout << "DI: ::SetDataFormat failed" << vendl;
@@ -159,13 +157,10 @@ void VDIInputDevice::Update()
 	
 	DIDEVICEOBJECTDATA DeviceData[16];
 	DWORD   Items = 16;
-	HRESULT hr;
 
 	m_pdiDevice->Acquire();  
 	m_pdiDevice->Poll();
 	m_pdiDevice->GetDeviceData( sizeof(DIDEVICEOBJECTDATA), DeviceData, &Items, 0 );
-
-
 
 	for ( DWORD i=0; i<Items; i++ )
 	{
@@ -193,7 +188,7 @@ void VDIInputDevice::Update()
 			for ( Iter = m_RelativeAxisList.begin(); Iter != m_RelativeAxisList.end(); Iter++ )
 				if ( (*Iter).GetName() == Name )
 					//vout << DeviceData[i].dwData << vendl;
-					(*Iter).Set( DeviceData[i].dwData );
+					(*Iter).Set( static_cast<float>(DeviceData[i].dwData) );
 				//else
 				//	(*Iter).Set(0.0f);
 		}
@@ -204,7 +199,7 @@ void VDIInputDevice::Update()
 
 			for ( Iter = m_ButtonList.begin(); Iter != m_ButtonList.end(); Iter++ )
 				if ( (*Iter).GetName() == Name )
-					(*Iter).Set( static_cast<vbool>(DeviceData[i].dwData & 0x80) );
+					(*Iter).Set( (DeviceData[i].dwData & 0x80) != 0 );
 		}
 	}
 	

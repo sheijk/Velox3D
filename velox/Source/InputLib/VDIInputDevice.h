@@ -9,6 +9,7 @@
 #include <v3d/Input/IVAbsoluteAxis.h>
 
 #include <windows.h>
+#define DIRECTINPUT_VERSION 0x800
 #include <dinput.h>
 #include <list>
 

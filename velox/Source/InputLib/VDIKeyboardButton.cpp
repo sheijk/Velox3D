@@ -23,7 +23,7 @@ VStringRetVal VDIKeyboardButton::GetName()
 
 vbool VDIKeyboardButton::IsDown()
 {
-	return (*m_pButton & 0x80);
+	return (*m_pButton & 0x80) != 0;
 }
 //-----------------------------------------------------------------------------
 } // namespace input

@@ -5,6 +5,7 @@
 #include <v3d/Input/IVInputManager.h>
 
 #include <windows.h>
+#define DIRECTINPUT_VERSION 0x800
 #include <dinput.h>
 
 #include <list>

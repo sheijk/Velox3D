@@ -39,7 +39,7 @@ VStringRetVal VDIMouseButton::GetName()
  */
 vbool VDIMouseButton::IsDown()
 {
-	return static_cast<vbool>(*m_pPointer & 0x80);
+	return (*m_pPointer & 0x80) != 0;
 }
 
 
