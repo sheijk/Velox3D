@@ -9,7 +9,8 @@
 #include <V3dLib/Math/VQuaternion.h>
 #include <ode/ode.h>
 
-#include "../../../Examples/Racer/Shared/VRigidBodyPart.h"
+//TODO: change to lib rigid
+#include "../../../Examples/CommonSource/Shared/VRigidBodyPart.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

@@ -140,35 +140,35 @@
 			Name="Shared Entities"
 			Filter="">
 			<File
-				RelativePath=".\Shared\VEntityUpdater.h">
+				RelativePath="..\CommonSource\Shared\VEntityUpdater.h">
 			</File>
 			<File
-				RelativePath=".\Shared\VRigidBodyPart.cpp">
+				RelativePath="..\CommonSource\Shared\VRigidBodyPart.cpp">
 			</File>
 			<File
-				RelativePath=".\Shared\VRigidBodyPart.h">
+				RelativePath="..\CommonSource\Shared\VRigidBodyPart.h">
 			</File>
 			<File
-				RelativePath=".\Shared\VUpdateablePart.cpp">
+				RelativePath="..\CommonSource\Shared\VUpdateablePart.cpp">
 			</File>
 			<File
-				RelativePath=".\Shared\VUpdateablePart.h">
+				RelativePath="..\CommonSource\Shared\VUpdateablePart.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Graphic Entities"
 			Filter="">
 			<File
-				RelativePath=".\Graphics\VCameraPosPart.cpp">
+				RelativePath="..\CommonSource\Graphics\VCameraPosPart.cpp">
 			</File>
 			<File
-				RelativePath=".\Graphics\VCameraPosPart.h">
+				RelativePath="..\CommonSource\Graphics\VCameraPosPart.h">
 			</File>
 			<File
-				RelativePath=".\Graphics\VMeshPart.cpp">
+				RelativePath="..\CommonSource\Graphics\VMeshPart.cpp">
 			</File>
 			<File
-				RelativePath=".\Graphics\VMeshPart.h">
+				RelativePath="..\CommonSource\Graphics\VMeshPart.h">
 			</File>
 		</Filter>
 	</Files>

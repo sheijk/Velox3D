@@ -158,7 +158,7 @@
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VTexturedVertex.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Geometry\VVector3f.h">
+					RelativePath="..\Api\V3dLib\Graphics\Geometry\VVertex3f.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VVertexDataLayout.h">
@@ -196,6 +196,12 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VPlaneMesh.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VPlaneMesh.inl">
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.h">
@@ -488,6 +494,12 @@
 				RelativePath="..\Api\V3d\Math\VMatrixOps.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3dLib\Math\VQuaternion.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Math\VQuaternionOps.h">
+			</File>
+			<File
 				RelativePath="..\Source\Math\VRBTransform.cpp">
 			</File>
 			<File
@@ -495,6 +507,12 @@
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Math\VVector.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Math\VVectorBase.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Math\VVectorOps.h">
 			</File>
 		</Filter>
 		<Filter
@@ -706,6 +724,114 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Resource\VResourceId.h">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Physics"
+			Filter="">
+			<Filter
+				Name="Include"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicBody.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicBoxMassState.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicGeometry.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicGeometryBox.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicGeometryPlane.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicGeometrySphere.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicJoint.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicJointGroup.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicJointHinge2State.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicMass.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicObject.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicPositionState.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicSpace.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicSphereMassState.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicState.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Physics\VPhysicWorld.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\Physics\VPhysicBody.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicBoxMassState.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicGeometry.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicGeometryBox.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicGeometryPlane.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicGeometrySphere.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicJoint.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicJointGroup.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicJointHinge2State.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicMass.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicObject.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicPositionState.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicSpace.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicSphereMassState.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicState.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Physics\VPhysicWorld.cpp">
 				</File>
 			</Filter>
 		</Filter>
