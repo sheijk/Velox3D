@@ -5,6 +5,7 @@
 #include <v3d/Graphics/IVDevice.h>
 #include <v3d/Graphics/VDisplaySettings.h>
 #include <windows.h>
+#include <extgl/extgl.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
 //-----------------------------------------------------------------------------
@@ -57,7 +58,7 @@ private:
 	void DestroyContext();
 	void SetScreenSize();
 	void SetBackgroundColor();
-		
+	void InitializeExtensions(); // using extgl
 
 	/**
 	 * Device dependant variables:
@@ -67,6 +68,10 @@ private:
 	HWND hWnd;
 	HDC hDC;
 	HGLRC hRC;
+
+	vchar		*m_pVendor;
+	vchar		*m_pRenderer;
+	vchar		*m_pVersion;
 
 };
 

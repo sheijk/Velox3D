@@ -48,6 +48,7 @@ vint VExampleApp::Main()
 	IVWindowInterface win;
 
 
+	system->GetCPU(); // just for testing...
 	win = winmanager->CreateWindow("v3d window");
 
 	IVDevice* m_Device;
@@ -56,7 +57,7 @@ vint VExampleApp::Main()
 	VCubeMeshDescr test(1);
 	IVMesh* testMesh;
 
-	testMesh = m_Device->CreateMesh(&test);
+//	testMesh = m_Device->CreateMesh(&test);
 
 	
 	// main loop
@@ -66,7 +67,7 @@ vint VExampleApp::Main()
 	while(system->GetStatus())
 	{
 		m_Device->BeginScene();
-		m_Device->RenderMesh(testMesh);
+//		m_Device->RenderMesh(testMesh);
 		updater.StartNextFrame();
 		m_Device->EndScene();
 	}

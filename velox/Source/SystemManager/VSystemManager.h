@@ -21,6 +21,7 @@ public:
 
 	virtual void SetStatus(vbool in_Param); //true for running false for quit
 	virtual vbool GetStatus(); //returs true for running false for quit
+	virtual void GetCPU(); // vout's cpu info
 
 private:
 

@@ -140,6 +140,16 @@
 				RelativePath="..\Api\V3d\Utils\Graphics\VCubeMeshDescr.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="CPUDetect"
+			Filter="">
+			<File
+				RelativePath="..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\CPUDetect\VDetectProcessor.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

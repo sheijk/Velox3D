@@ -6,6 +6,11 @@ TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht we
 zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
 die gleichen services stehen -[ins]
 
+Bitte comitte keine verstuemellte sln (console service + corelib hat gefehlt...
+sehr aufwaendig die projekte wieder kompilerfaehig zu machen....)
+
+mein iterator crasht mit dem neuem source im opengldevice...
+
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:

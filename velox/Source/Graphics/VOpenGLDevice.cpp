@@ -3,7 +3,6 @@
 #include <v3d/Graphics/OpenGL/VOpenGLVertexMesh.h>
 #include <v3d/Core/Wrappers/VIterator.h>
 //-----------------------------------------------------------------------------
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -107,6 +106,7 @@ void VOpenGLDevice::SetDisplay()
 	}
 	SetPixFormat();
 	CreateContext();
+	InitializeExtensions();
 	SetScreenSize();
 	SetBackgroundColor();
 }
@@ -225,6 +225,27 @@ void VOpenGLDevice::SetBackgroundColor()
 				 m_DisplaySettings->m_fBackgroundAlpha);
 }
 //-----------------------------------------------------------------------------
+
+void VOpenGLDevice::InitializeExtensions()
+{
+	m_pVendor	= (vchar *)glGetString(GL_VENDOR);
+	m_pRenderer	= (vchar *)glGetString(GL_RENDERER);
+	m_pVersion	= (vchar *)glGetString(GL_VERSION);
+
+	vout << "-------------------------------------------------------" << vendl;
+	vout << "OpenGL vendor: " << m_pVendor << vendl;
+	vout << "OpenGL renderer: " << m_pRenderer << vendl;
+	vout << "OpenGL version: " << m_pVersion << vendl;
+
+	if(extgl_Initialize() != 0)
+		vout << "Initializing extensions failed!" << vendl;
+	else
+		vout << "Initializing extensions done..." << vendl;
+	
+}
+
+//-----------------------------------------------------------------------------
+
 
 void VOpenGLDevice::BeginScene()
 {

@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl;Local/ExternalLibs"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,7 +34,8 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="opengl32.lib glu32.lib"/>
+				AdditionalDependencies="opengl32.lib glu32.lib extgld.lib"
+				AdditionalLibraryDirectories="Local/ExternalLibs/extgl"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool

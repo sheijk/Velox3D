@@ -1,13 +1,4 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleService", "ConsoleService.vcproj", "{92902254-17EE-444A-83C6-F062C52B9122}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "CoreLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49029}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicsLib", "GraphicsLib.vcproj", "{556E10B2-22CB-47C7-A973-CDCD6D561337}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -62,6 +53,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonServices", "CommonServices.vcproj", "{586E10B2-24CB-27C7-A973-CDCD6D563659}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
+		{BB57F1C9-0039-40BC-8188-02F384F49322} = {BB57F1C9-0039-40BC-8188-02F384F49322}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EditorService", "EditorService.vcproj", "{C2E15749-4341-4E4B-9019-07F8B0522B91}"
@@ -86,6 +78,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExampleApp", "ExampleApp.vc
 		{BB57F1C9-0039-40BC-8188-02F384F49322} = {BB57F1C9-0039-40BC-8188-02F384F49322}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "CoreLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49029}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleService", "ConsoleService.vcproj", "{92902254-17EE-444A-83C6-F062C52B9122}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -93,18 +94,6 @@ Global
 		UnitTests = UnitTests
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
-		{92902254-17EE-444A-83C6-F062C52B9122}.Debug.ActiveCfg = Debug|Win32
-		{92902254-17EE-444A-83C6-F062C52B9122}.Debug.Build.0 = Debug|Win32
-		{92902254-17EE-444A-83C6-F062C52B9122}.Release.ActiveCfg = Release|Win32
-		{92902254-17EE-444A-83C6-F062C52B9122}.Release.Build.0 = Release|Win32
-		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.ActiveCfg = Release|Win32
-		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.Build.0 = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.ActiveCfg = Debug|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.Build.0 = Debug|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.Release.ActiveCfg = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.Release.Build.0 = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.ActiveCfg = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.Build.0 = Release|Win32
 		{556E10B2-22CB-47C7-A973-CDCD6D561337}.Debug.ActiveCfg = Debug|Win32
 		{556E10B2-22CB-47C7-A973-CDCD6D561337}.Debug.Build.0 = Debug|Win32
 		{556E10B2-22CB-47C7-A973-CDCD6D561337}.Release.ActiveCfg = Release|Win32
@@ -195,6 +184,18 @@ Global
 		{8B1DF56D-2D3D-4AD0-BBF5-C3DECE06B82F}.Release.Build.0 = Release|Win32
 		{8B1DF56D-2D3D-4AD0-BBF5-C3DECE06B82F}.UnitTests.ActiveCfg = Release|Win32
 		{8B1DF56D-2D3D-4AD0-BBF5-C3DECE06B82F}.UnitTests.Build.0 = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.ActiveCfg = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.Build.0 = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.Release.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.Release.Build.0 = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.Build.0 = Release|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.Debug.ActiveCfg = Debug|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.Debug.Build.0 = Debug|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.Release.ActiveCfg = Release|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.Release.Build.0 = Release|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.ActiveCfg = Release|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt

@@ -7,9 +7,9 @@ BUG: Programm stuertzt beim Beenden ab, bzw. es kommt
 im Debug Build von v3dConsole
 Unbehandelte Ausnahme (Zugriffsverletzung in VObjectRegistry.cpp/Z108)
 
-waer praktisch wenn Konsolen + Editor Fenster resizable waeren
-was ist Local/Build/Intermediate?
-(sheijk)
+waer praktisch wenn Konsolen + Editor Fenster resizable waeren 
+- unwichtig im moment + aufwaendig...
+
 
 Current assigned tasks:
 -developing editor framework
@@ -19,9 +19,14 @@ Current assigned tasks:
 
 TODO List:
 -Console is closeable with alt f4
--Console chrashes on some machines
+-Console crashes on some machines
 
 Done List:
+
+06.12.03
+- Added "goody" cpu detect to utilslib cos of santa claus ;)
+- Included extgl to opengl device
+- Added extgl lib for opengl extensions to local/externallibs
 
 30.11.03
 - Added simple graphics stuff
@@ -41,7 +46,7 @@ Done List:
   wx plugins
 - Window Service not dependant of wxWindows anymore
 
-3.10.03
+03.10.03
 - "Common service" must be loaded first
 - Rewriting console to new wx managment - easier to handle now
 
