@@ -6,10 +6,11 @@ Current assigned tasks:
 -developing editor framework
 -creating rendering methods and implementing gfx service
 
-
 --------------------------------------------------------------------------------
 
 TODO List:
+
+- adaptor fuer IVXMLVisitor, welcher alle Methoden leer implementiert (sheijK)
 
 06.08.03
 -bug fixed: visitor call by element close now works correct

@@ -35,6 +35,7 @@ public:
 	virtual void OnElementClose(xml::IVXMLElement* Element);
 	virtual void OnElementOpen(xml::IVXMLElement* Element);
 	virtual void OnFileEnd();
+	virtual void OnComment(VStringParam pText);
 };
 
 //-----------------------------------------------------------------------------

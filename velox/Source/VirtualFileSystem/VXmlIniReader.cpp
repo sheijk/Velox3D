@@ -190,6 +190,11 @@ void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 void VXmlIniReader::OnFileEnd()
 {
 }
+
+void VXmlIniReader::OnComment(VStringParam pText)
+{
+}
+
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

@@ -1,0 +1,116 @@
+<html>
+<head>
+	  <title>Exceptions</title>
+
+	  <link rel=stylesheet type="text/css" href="../../veloxdoc.css">
+</head>
+<body>
+	  <h2>Usage of exceptions</h2>
+	  <p>Exceptions should be used for signaling most errors. Use them when
+	  <ul>
+	  	  <li>an error must not be ignored (lost devices etc.)</li>
+		  <li>initialisation of something failed</li>
+		  <li>resources could not be found/aquired</li>
+		  <li>illegal operations were performed</li>
+		  <li>unless one of the following reasons match</li>
+	  </ul>
+	  Do not use them when
+	  <ul>
+	  	  <li> it would mean (severe) a performance penalty (which is not
+		  	   the case if handling the error is a complex/time consuming
+			   operation</li>
+		  <li>in destructors</li>
+	  </ul>
+	  </p>
+	  
+	  <h2>How to use them</h2>
+	  <p>
+	  All velox exeptions must be derived from VException directly or indirectly.
+	  Each subsystem/service should declare it's own exception hyrarchie with
+	  an exception derived from VException at the top. To declare exceptions the
+	  macro V3D_DECLARE_EXCEPTION(name, parent) from api/v3d/Core/VException.h
+	  can be used. Create an exception class for every distinct error<br>
+	  Example: The virtual file system exception hyrarchie<br>
+	  <ul>
+	  	  <li>
+		  VException
+		  <ul>
+		  	  	  <li>-&gt; VIOException
+		  		      <ul>
+			      	  	  <li>-&gt; VIllegalOperationException</li>
+					   	  <li>-&gt; VElementNotFoundException</li>
+					  </ul>
+		  		  </li>
+		 </ul>
+		 </li>
+	  </ul>  
+	  </p>
+	  
+	  <h2>How to throw an catch them</h2>
+	  Consider this example, where
+	  
+	  <div id="cpp">
+	  V3D_DECLARE_EXCEPTION(VCfgParserException, VException); <br>
+	  V3D_DECLARE_EXCEPTION(VFileNotFoundException, VCfgParserException); <br>
+	  V3D_DECLARE_EXCEPTION(VSyntaxError, VCfgParserException); <br>
+	  <br>
+	  class VConfiguration; <br>
+	  class VCfgParser <br>
+	  { <br>
+	  public: <br>
+	  &nbsp;&nbsp;&nbsp;void parseFile(VStringParam in_strFileName, VConfiguration& io_Cfg); <br>
+	  }; <br>
+	  </div>
+	  
+	  It could be used this way:
+	  
+	  <div id="cpp">
+	  void ReadConfig(string in_strFileName, VConfiguration& io_Cfg, string in_strDefaultFile) <br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;try <br>
+	  &nbsp;&nbsp;&nbsp;{ <br>
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.parseFile(in_strFileName, io_Cfg); <br>
+	  &nbsp;&nbsp;&nbsp;} <br>
+	  &nbsp;&nbsp;&nbsp;catch(VFileNotFoundException e) <br> 
+	  &nbsp;&nbsp;&nbsp;{ <br>
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << "file " << strFileName << " 
+	        not found, using standard config file" << endl; <br>
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.parseFile(in_strDefaultFile, io_Cfg);
+	  &nbsp;&nbsp;&nbsp;} <br>
+	  } <br>
+	  <br> 
+	  // ... <br>
+	  <br>
+	  VCfgParser parser; <br>
+	  string strGfxFileName, strSysFileName, strSoundFileName; <br>
+	  VConfiguration sysConfig, gfxConfig, soundConfig; <br>
+	  <br>
+	  try <br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;cout << "enter system, gfx and sound config file names" << endl; <br>
+	  &nbsp;&nbsp;&nbsp;cin >> strSysFileName >> strGfxFileName >> strSoundFileName; <br>
+	  <br>
+	  &nbsp;&nbsp;&nbsp;ReadConfig(strSysFileName, sysConfig, "sysstd.cfg"); <br>
+	  &nbsp;&nbsp;&nbsp;ReadConfig(strGfxFileName, gfxConfig, "gfxstd.cfg"); <br>
+	  &nbsp;&nbsp;&nbsp;ReadConfig(strSoundFileName, soundConfig, "soundstd.cfg"); <br>
+	  } <br>
+	  catch(VSyntaxErrorException e) <br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;cout << "syntax error in file: " << strFileName << endl; <br>
+	  &nbsp;&nbsp;&nbsp;cout << "in line: " << e.GetSyntaxErrorLine() << endl; <br>
+	  &nbsp;&nbsp;&nbsp;cout << "reason: " << e.GetErrorString() << endl; <br>
+	  } <br>
+	  catch(VParserException e) <br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;cout << "unknow error occured: " << e.GetErrorString() << endl; <br>
+	  } <br>
+	  <br>	  
+	  </div>
+	  
+	  To throw an exception, V3D_THROW(exceptionName, errorMessage); should be ok
+	  for all "trivial" exceptions (those declared with the V3D_DECLARE_EXCEPTION macro).
+	  If your exceptions classes c'tor has different parameters write your own
+	  throw macro. (see the unit test framework's exceptions for an example)
+	  </p>
+				  
+</body>

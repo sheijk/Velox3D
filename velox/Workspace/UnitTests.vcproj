@@ -177,6 +177,12 @@
 			<File
 				RelativePath="..\Source\UnitTests\XMLTests\VXMLTests.h">
 			</File>
+			<File
+				RelativePath="..\Source\UnitTests\XMLTests\VXMLVisitor.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\XMLTests\VXMLVisitor.h">
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\Source\UnitTests\TestsDLL.cpp">

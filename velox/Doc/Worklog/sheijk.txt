@@ -20,15 +20,15 @@ template member konvertiert?
 ----- personal todo:
 
 	Klasse zum Laden einer DLL (fuer Kernel, und sonstiges)
-	VException: Standard c'tor entfernen
 Vfs:
 	Archive
 	Dokumentation
 
 Doku:
 	Tutorials fuer
-		SmartPointer erweitern
-		Iteratoren schreiben
+		Exceptions
+		Iteratoren verbessern
+		SmartPointer erweitern (erzeugen eigener Policies)
 		Virtual File System
 			benutzen (laden/schreiben von Daten)
 			erweitern (DataProvider)

@@ -38,11 +38,21 @@ public:
 	virtual VStringRetVal GetExtendedErrorString() const;
 };
 
-//! Eine Exception werfen mit "normalen" Parametern
-#define V3D_THROW(excep, cause)				throw excep(cause, __FILE__, __LINE__)
+/** Throw an exception and send file and line */
+#define V3D_THROW(excep, cause) throw excep(cause, __FILE__, __LINE__)
 
-//! Eine Exception mit einem Extra Parameter werfen
+/** Throw an exception with an extra parameter */
 #define V3D_THROWX(excep, cause, xparam)	throw excep(cause, __FILE__, __LINE__, xparam)
+
+/**
+ * Macro for declaring a new, trivial exception type
+ */
+#define V3D_DECLARE_EXCEPTION(name, parent) class name : public parent\
+{\
+public:\
+	name(VStringParam error, VStringParam file, vuint line)\
+		: parent(error, file, line) {}\
+};\
 
 // Start of documentation
 

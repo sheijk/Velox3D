@@ -9,40 +9,46 @@ namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
 
+	V3D_DECLARE_EXCEPTION(VIOException, VException);
+
+	V3D_DECLARE_EXCEPTION(VIllegalOperationException, VIOException);
+
+	V3D_DECLARE_EXCEPTION(VElementNotFoundException, VIOException);
+
 /**
  * Base exception class for all virtual file system exceptions
  */
-class VIOException : public VException
-{
-public:
-	VIOException(
-		VStringParam errorMsg, 
-		VStringParam fileName, 
-		vuint lineNumber)
-		: VException(errorMsg, fileName, lineNumber) {};
-
-	virtual ~VIOException() {};
-};
-
-class VIllegalOperationException : public VIOException
-{
-public:
-	VIllegalOperationException(
-		VStringParam errorMsg, 
-		VStringParam fileName, 
-		vuint lineNumber)
-		: VIOException(errorMsg, fileName, lineNumber) {};
-};
-
-class VElementNotFoundException : public VIOException
-{
-public:
-	VElementNotFoundException(
-		VStringParam errorMsg,
-		VStringParam fileName,
-		vuint lineNumber)
-		: VIOException(errorMsg, fileName, lineNumber) {};
-};
+//class VIOException : public VException
+//{
+//public:
+//	VIOException(
+//		VStringParam errorMsg, 
+//		VStringParam fileName, 
+//		vuint lineNumber)
+//		: VException(errorMsg, fileName, lineNumber) {};
+//
+//	virtual ~VIOException() {};
+//};
+//
+//class VIllegalOperationException : public VIOException
+//{
+//public:
+//	VIllegalOperationException(
+//		VStringParam errorMsg, 
+//		VStringParam fileName, 
+//		vuint lineNumber)
+//		: VIOException(errorMsg, fileName, lineNumber) {};
+//};
+//
+//class VElementNotFoundException : public VIOException
+//{
+//public:
+//	VElementNotFoundException(
+//		VStringParam errorMsg,
+//		VStringParam fileName,
+//		vuint lineNumber)
+//		: VIOException(errorMsg, fileName, lineNumber) {};
+//};
 
 //-----------------------------------------------------------------------------
 } // namespace vfs
