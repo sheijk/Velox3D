@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/IVIteratorPol.h>
+#include <v3d/Core/SmartPtr/VGuards.h>
 
 //FIXME: unterstuetzung fuer const_iterator einbaun
 //-----------------------------------------------------------------------------
@@ -33,7 +34,7 @@ namespace iterutil {
 
 		IterImplType* GetIterImpl() const
 		{
-			return m_pIterImpl;
+			return m_pIterImpl.Get();
 		}
 	protected:
 		typedef IterImplType* IterPointer;
@@ -44,7 +45,7 @@ namespace iterutil {
 		 */
 		void Assign(IterPointer pIterImpl)
 		{
-			m_pIterImpl = pIterImpl;
+			m_pIterImpl.Assign(pIterImpl);
 		}
 
 		//TODO: 2te variante mit T& wg effizienz?
@@ -84,7 +85,7 @@ namespace iterutil {
 
 		VIteratorBase& operator=(const VIteratorBase& o)
 		{
-			m_pIterImpl = o.m_pIterImpl->CreateCopy();
+			m_pIterImpl.Assign(o.m_pIterImpl->CreateCopy());
 
 			return *this;
 		}
@@ -110,7 +111,8 @@ namespace iterutil {
 	{
 		//TODO: AutoPtr verwenden
 		//TODO: als Default fuer SmartPtr nehmen
-		typedef IVIteratorPol<T>* SmartPtr;
+		//typedef IVIteratorPol<T>* SmartPtr;
+		typedef typename VPointer< IVIteratorPol<T> >::SharedPtr SmartPtr;
 	};
 
 	/**

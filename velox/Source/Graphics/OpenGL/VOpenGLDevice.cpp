@@ -11,14 +11,24 @@ namespace graphics {
 using namespace graphics;
 //-----------------------------------------------------------------------------
 
-IVDevice::MeshHandle MakeMeshHandle(IVMesh* pMesh)
-{
-	return pMesh;
-}
+namespace {
+	/**
+	 * Converts a pointer to a mesh to a mesh handle
+	 * Use this to enable changing the exact type of MeshHandle
+	 */
+	IVDevice::MeshHandle MakeMeshHandle(IVMesh* pMesh)
+	{
+		return pMesh;
+	}
 
-IVMesh* MakeMeshPointer(IVDevice::MeshHandle handle)
-{
-	return handle;
+	/**
+	 * Converts a MeshHandle to a pointer to a mesh
+	 * Use this to enable changing the exact type of MeshHandle
+	 */
+	IVMesh* MakeMeshPointer(IVDevice::MeshHandle handle)
+	{
+		return handle;
+	}
 }
 
 VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
