@@ -61,9 +61,6 @@ vint VExampleApp::Main()
 	VFloatBuffer vertexData(new float[cnVertexCount], cnVertexCount);
 	VFloatBuffer colorData(new float[cnVertexCount], cnVertexCount);
 
-	std::vector<vfloat32[3]> theVertexList;
-
-	theVertexList.push_back()
 
 
 	colorData[0]  = 0.0f;
