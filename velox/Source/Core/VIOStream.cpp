@@ -24,8 +24,8 @@ namespace v3d {
 namespace {
 	void SendBootupMessage(VStringParam in_strMessage)
 	{
-		OutputDebugString(in_strMessage);
-		cout << in_strMessage;
+		//OutputDebugString(in_strMessage);
+		//cout << in_strMessage;
 
 		ofstream file("init.log", ios_base::app);
 		file << in_strMessage;
@@ -45,6 +45,7 @@ namespace {
 		virtual void Flush() {};
 
 	private:
+		void SendToVeloxConsole(VStringParam in_pcMessage);
 
 		console::IVConsoleSerivce* m_Console;
 		typedef std::list<std::string> StringList;
@@ -61,8 +62,19 @@ namespace {
 	{
 	}
 
+	void VConsoleRedirector::SendToVeloxConsole(VStringParam in_pcMessage)
+	{
+		//cout << in_pcMessage;
+		m_Console->Write(in_pcMessage);
+	}
+
 	void VConsoleRedirector::Write(VStringParam in_strString)
 	{
+		cout << in_strString;
+		cout.flush();
+
+		OutputDebugString(in_strString);
+
 		if(m_Console)
 			m_Console->Write(in_strString);
 		else
@@ -74,9 +86,11 @@ namespace {
 				StringList::iterator iter = m_StringList.begin();
 				for(; iter != m_StringList.end(); iter++)
 				{
-					m_Console->Write(iter->c_str());
+					SendToVeloxConsole(iter->c_str());
+					// m_Console->Write(iter->c_str());
 				}
-				m_Console->Write(in_strString);
+				SendToVeloxConsole(in_strString);
+				//m_Console->Write(in_strString);
 			}
 			catch (VException ex)
 			{
@@ -92,7 +106,7 @@ namespace {
 	VConsoleRedirector Redirector;
 }
 
-util::IVStringStream& vout = Redirector;
+util::IVStringStream& vout(Redirector);
 const char* vendl = "\n";
 
 //-----------------------------------------------------------------------------

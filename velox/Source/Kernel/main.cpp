@@ -1,7 +1,7 @@
 #include "VKernel.h"
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Core/VIOStream.h>
-//#include <iostream>
+#include <sstream>
 
 //-----------------------------------------------------------------------------
 using namespace v3d;
@@ -47,15 +47,23 @@ int main(int argv, char* argc[])
 	}
 	catch(VException& exc)
 	{
+		std::ostringstream ostr;
 	
-		vout << "\n\nException while processing \"" << pcXmlFileName << "\":\n"
-			<< "\"" << exc.GetErrorString() << "\"\n"
-			<< "file \"" << exc.GetErrorFile() << "\"\n"
-			<< "line \"" << exc.GetErrorLine() << "\"\n"
-			<< "extended error string: "
-			<< "\"" << exc.GetExtendedErrorString() << "\"";
+		ostr 
+			<< "\n\n----------------------------------------\n"
+			<< "Exception while processing \"" << pcXmlFileName << "\":\n"
+			<< "Message: \"" << exc.GetErrorString() << "\"\n"
+			<< "File:    \"" << exc.GetErrorFile() << "\"\n"
+			<< "Line:    \"" << exc.GetErrorLine() << "\"\n"
+			<< "XErr:    \"" << exc.GetExtendedErrorString() << "\"\n"
+			<< "\n";
 			//<< endl << endl;
-		
+        
+		const char* pcMessage = ostr.str().c_str();
+
+		std::string msg = ostr.str();
+
+		vout << pcMessage;
 	}
 
 	// delete kernel
