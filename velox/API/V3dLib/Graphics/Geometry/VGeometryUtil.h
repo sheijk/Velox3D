@@ -59,7 +59,7 @@ v3d::graphics::IVDevice::MeshHandle BuildMesh(
  *
  * @author sheijk
  */
-inline v3d::graphics::VMaterialDescription::TextureRef* CreateTextureRef(
+v3d::graphics::VMaterialDescription::TextureRef* CreateTextureRef(
 	v3d::graphics::IVDevice& device, 
 	v3d::image::VImage& image);
 

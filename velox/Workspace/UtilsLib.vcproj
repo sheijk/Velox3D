@@ -134,6 +134,9 @@
 					RelativePath="..\Source\Graphics\Lib\DefaultVertexStructures.cpp">
 				</File>
 				<File
+					RelativePath="..\Source\Graphics\Lib\GeometryUtils.cpp">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VColor4f.h">
 				</File>
 				<File
@@ -312,6 +315,9 @@
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Math\Numerics.h">
+			</File>
+			<File
+				RelativePath="..\Source\Math\TransformationOps.cpp">
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Math\TransformationOps.h">
