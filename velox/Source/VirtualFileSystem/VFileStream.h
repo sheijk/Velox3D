@@ -4,6 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/VFS/IVOfflineStream.h>
+#include <v3d/VFS/VFlags.h>
 
 #include "VLegalOperations.h"
 
@@ -32,20 +33,11 @@ private:
 	VPointer<VLegalOperations>::AutoPtr m_pLegalOps;
 
 public:
-	//! modes for creation:
-	enum 
-	{
-		CreateNew = 1, CreateAlways, OpenExisting, OpenAlways, Truncate
-	};
-
-	//! modes for access
-	enum
-	{
-		ReadAccess = 1, WriteAccess = 2, ReadWriteAccess = 3
-	};
-
 	//! opens a file
-	VFileStream(VStringParam in_strFileName, vuint in_nMode, vuint in_nCreation);
+	VFileStream(
+		VStringParam in_strFileName, 
+		VAccessModeFlags in_nMode, 
+		VCreationFlags in_nCreation);
 
 	//! destructor, automatically closes opened file
 	virtual ~VFileStream();
@@ -56,30 +48,30 @@ public:
 	// from IVStream:
 
 	/** write data to stream */
-	virtual void Write(void* in_pSource, ByteCount in_nByteCount) = 0;
+	virtual void Write(void* in_pSource, ByteCount in_nByteCount);
 
 	/** read data from stream */
-	virtual void Read(void* out_pDest, ByteCount in_pBytesToRead) = 0;
+	virtual void Read(void* out_pDest, ByteCount in_pBytesToRead);
 
 	/** reset r/w position */
-	virtual void SetPos(Anchor in_Anchor, ByteCount in_nDistance) = 0;
+	virtual void SetPos(Anchor in_Anchor, ByteCount in_nDistance);
 
 	/** get r/w position */
-	virtual StreamPos GetPos() const = 0;
+	virtual StreamPos GetPos() const;
 
 	/** get a list of legal operations */
-	virtual LegalOpsPtr GetLegalOps() const = 0;
+	virtual LegalOpsPtr GetLegalOps() const;
 
 	// from IVOfflineStream:
 
 	/** disconnect the stream */
-	virtual void Disconnect() = 0;
+	virtual void Disconnect();
 
 	/** (re-)connect the stream */
-	virtual void Connect() = 0;
+	virtual void Connect();
 
 	/** true -> read, write, set/get pos possible */
-	virtual vbool IsConnected() const  = 0;
+	virtual vbool IsConnected() const;
 };
 
 //-----------------------------------------------------------------------------

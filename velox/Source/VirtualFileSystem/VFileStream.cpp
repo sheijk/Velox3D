@@ -21,8 +21,8 @@ namespace vfs {
 */
 VFileStream::VFileStream(
 	VStringParam in_strFileName, 
-	vuint in_nAccess, 
-	vuint in_nCreation )
+	VAccessModeFlags in_nAccess, 
+	VCreationFlags in_nCreation )
 {
 	m_hFile = INVALID_HANDLE_VALUE;
 	m_nAccessMode = 0;
@@ -35,25 +35,25 @@ VFileStream::VFileStream(
 	if( in_nAccess == 0 ) V3D_THROW( VException, "invalid file open mode" );
 
 	// set acces flags
-	if( in_nAccess & ReadAccess ) m_nAccessMode |= GENERIC_READ;
-	if( in_nAccess & WriteAccess ) m_nAccessMode |= GENERIC_WRITE;
+	if( in_nAccess & VReadAccess ) m_nAccessMode |= GENERIC_READ;
+	if( in_nAccess & VWriteAccess ) m_nAccessMode |= GENERIC_WRITE;
 
 	// set creation mode
 	switch( in_nCreation )
 	{
-	case CreateNew:
+	case VCreateNew:
 		m_nCreationMode = CREATE_NEW;
 		break;
-	case CreateAlways:
+	case VCreateAlways:
 		m_nCreationMode = CREATE_ALWAYS;
 		break;
-	case OpenExisting:
+	case VOpenExisting:
 		m_nCreationMode = OPEN_EXISTING;
 		break;
-	case OpenAlways:
+	case VOpenAlways:
 		m_nCreationMode = OPEN_ALWAYS;
 		break;
-	case Truncate:
+	case VTruncate:
 		m_nCreationMode = TRUNCATE_EXISTING;
 		break;
 	default:
@@ -68,8 +68,8 @@ VFileStream::VFileStream(
 	}
 
 	// create legal op class
-	vbool bReadAccess = in_nAccess & ReadAccess;
-	vbool bWriteAccess = in_nAccess & WriteAccess;
+	vbool bReadAccess = in_nAccess & VReadAccess;
+	vbool bWriteAccess = in_nAccess & VWriteAccess;
 
 	m_pLegalOps.Reset(new VLegalOperations(
 		bReadAccess, bWriteAccess, true, true));
