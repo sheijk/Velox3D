@@ -164,7 +164,7 @@
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VPlane3f.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Geometry\VResizableGeometryData.h">
+					RelativePath="..\Api\V3dLib\Graphics\Geometry\VResizeableGeometryData.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Geometry\VSimpleVertex.h">

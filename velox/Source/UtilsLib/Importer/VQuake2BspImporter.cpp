@@ -476,9 +476,17 @@ void VQuake2BspImporter::GetFaceElements()
 {
 	m_iNumFaceElements = 0;
 
-	for (vint i = 0; i < m_iNumFaces; i++)
+	for(int i = 0; i < m_iNumLeaves; i++)
 	{
-		m_iNumFaceElements += m_pFaces[i].m_iNumEdges;
+		Leaf* l;
+		l = &m_pLeaves[i];
+		for(int j = l->m_iFirstLeaf; j < (l->m_iNumLeafFaces + l->m_iFirstLeaf); j++)
+		{
+			Face* face = &m_pFaces[m_pFaceList[j]];
+
+			for(int k = face->m_iFirstEdge; k < face->m_iFirstEdge + face->m_iNumEdges; k++)
+				m_iNumFaceElements++;
+		}
 	}
 }
 //-----------------------------------------------------------------------------
@@ -488,7 +496,7 @@ void VQuake2BspImporter::CreateIndexListBuffer()
 	m_pIndexList = new vuint[m_iNumFaceElements];
 	vuint iCount = 0;
 	
-	for (vint i = 0; i < m_iNumFaces; i++)
+	/*for (vint i = 0; i < m_iNumFaces; i++)
 	{
 		for(vint y = m_pFaces[i].m_iFirstEdge;
 			y < m_pFaces[i].m_iFirstEdge + m_pFaces[i].m_iNumEdges;
@@ -502,6 +510,40 @@ void VQuake2BspImporter::CreateIndexListBuffer()
 			iCount++;
 		}
 
+	}*/
+
+
+
+
+	for(int i = 0; i < m_iNumLeaves; i++)
+	{
+		Leaf* l;
+		l = &m_pLeaves[i];
+		for(int j = l->m_iFirstLeaf; j < (l->m_iNumLeafFaces + l->m_iFirstLeaf); j++)
+		{
+			Face* face = &m_pFaces[m_pFaceList[j]];
+	
+			//indexoffset added
+
+	
+			for(int k = face->m_iFirstEdge; k < face->m_iFirstEdge + face->m_iNumEdges; k++)
+			{
+
+
+
+				int vertex = -1; // no valid index
+
+				if(m_pEdgeList[k] < 0)
+					vertex = m_pEdges[abs(m_pEdgeList[k])].v[1];			
+				else
+					vertex = m_pEdges[abs(m_pEdgeList[k])].v[0];
+
+	
+
+				m_pIndexList[iCount] = vertex;
+				iCount++;
+			}
+		}
 	}
 }
 

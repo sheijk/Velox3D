@@ -22,7 +22,7 @@ public:
 
 	void ResizeIndexBuffer(vuint in_nSize)
 	{
-		VDynamicGeometryData::<VertexStructure>ResizeIndexBuffer(in_nSize);
+		VDynamicGeometryData<VertexStructure>::ResizeIndexBuffer(in_nSize);
 	}
 };
 
