@@ -19,7 +19,8 @@ VStreamMesh::VStreamMesh(
 	) :
 	VMeshBase(in_Materials),
 	m_nPrimitiveCount(in_MeshDescription.GetCoordinateFormat().GetCount()),
-	m_PrimitiveType(GetGeometryMode(in_MeshDescription.GetGeometryType()))
+	m_PrimitiveType(GetGeometryMode(in_MeshDescription.GetGeometryType())),
+	m_pIndexStream(0)
 {
 	//TODO: check if mesh descr format matches vertex buffer format
 
@@ -30,6 +31,15 @@ VStreamMesh::VStreamMesh(
 		IVVertexStream::Colors);
 	AddVertexBuffer(in_MeshDescription.GetTexCoordResource(0),
 		IVVertexStream::TexCoords);
+
+	if( in_MeshDescription.GetIndexResource() != "" )
+	{
+		VResourceId pIndexResource = VResourceManagerPtr()->GetResourceByName(
+			in_MeshDescription.GetIndexResource().c_str());
+		m_pIndexStream.reset(new StreamRes(pIndexResource->GetData<VImmediateVertexStream>()));
+
+		m_nPrimitiveCount = in_MeshDescription.GetIndexFormat().GetCount();
+	}
 }
 
 /**
@@ -62,12 +72,25 @@ void VStreamMesh::Render()
 	// bind all streams
 	for(vuint i = 0; i < m_Streams.size(); ++i)
 	{
+		BufferInfo& current(m_Streams[i]);
 		m_Streams[i].pStream->Bind(m_Streams[i].dataTypeFlag);
 	}
 
 	// send vertices
 	//TODO: handle index meshes
-	glDrawArrays(m_PrimitiveType, 0, m_nPrimitiveCount);
+	if( m_pIndexStream.get() != 0 )
+	{
+		const void* pIndexAddress = (*m_pIndexStream)->GetIndexAddress();
+
+		glDrawElements(
+			m_PrimitiveType, m_nPrimitiveCount, 
+			GL_UNSIGNED_INT, 
+			pIndexAddress);
+	}
+	else
+	{
+		glDrawArrays(m_PrimitiveType, 0, m_nPrimitiveCount);
+	}
 
 	// unbind all streams
 	for(vuint i = 0; i < m_Streams.size(); ++i)

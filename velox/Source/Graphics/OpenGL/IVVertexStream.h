@@ -22,13 +22,15 @@ public:
 		Coordinates	= 1,
 		Colors		= 2,
 		Indices		= 4,
-		TexCoords	= 8,
+		TexCoords	= 8
 	};
 
 	virtual ~IVVertexStream() {};
 
 	virtual vbool Bind(DataTypes in_StreamTypes) const = 0;
 	virtual void UnbindAll() const = 0;
+
+	virtual const void* GetIndexAddress() const = 0;
 };
 
 inline IVVertexStream::DataTypes operator|(

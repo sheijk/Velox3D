@@ -31,11 +31,9 @@ public:
 	void SetIndexFormat(VDataFormat in_Format);
 
 	vuint GetTexCoordCount() const;
+	virtual void SetTexCoordCount(vuint in_nNewCount);
 	VDataFormat GetTexCoordFormat(vuint in_nCoord) const;
 	void SetTexCoordFormat(vuint in_nCoord, VDataFormat in_Format);
-
-protected:
-	virtual void SetTexCoordCount(vuint in_nNewCount);
 
 private:
 	VDataFormat m_CoordinateFormat;

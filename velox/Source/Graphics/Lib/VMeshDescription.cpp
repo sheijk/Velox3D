@@ -9,6 +9,32 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d::resource;
 
+VMeshDescription::VMeshDescription()
+	:
+	m_GeometryType(Triangles) 
+{
+	SetTexCoordCount(1);
+}
+
+VMeshDescription::VMeshDescription(const VVertexFormat& in_Format)
+	: 
+	VVertexFormat(in_Format),
+	m_GeometryType(Triangles)
+{
+	SetTexCoordCount(in_Format.GetTexCoordCount());
+}
+
+VMeshDescription::VMeshDescription(const VMeshDescription& in_Source)
+	: VVertexFormat(in_Source)
+{
+	m_Vertices = in_Source.m_Vertices;
+	m_Colors = in_Source.m_Colors;
+	m_Indices = in_Source.m_Indices;
+	m_TexCoords = in_Source.m_TexCoords;
+
+	m_GeometryType = in_Source.m_GeometryType;
+}
+
 VMeshDescription::GeometryType VMeshDescription::GetGeometryType() const
 {
 	return m_GeometryType;

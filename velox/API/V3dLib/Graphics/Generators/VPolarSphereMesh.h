@@ -44,8 +44,10 @@ public:
 	void GenerateCoordinates();
 	void GenerateTexCoords();
 
-	v3d::graphics::VMeshDescription::GeometryType GetGeometryType();
+	v3d::graphics::VMeshDescription::GeometryType GetGeometryType() const;
+	const VertexBuffer& GetVertexBuffer() const;
 	VertexBuffer& GetVertexBuffer();
+	const IndexBuffer& GetIndexBuffer() const;
 	IndexBuffer& GetIndexBuffer();
 };
 

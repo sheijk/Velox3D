@@ -20,6 +20,10 @@ public:
 //	VVertexBuffer(vuint m_nSizeInBytes, VVertexFormat in_Format);
 	VVertexBuffer(const VByteBuffer& in_Data, VVertexFormat in_Format);
 	VVertexBuffer(const vfloat32* in_pData, vuint in_nFloatCount, VVertexFormat in_Format);
+	VVertexBuffer(const vuint* in_pData, vuint in_nIntCount, VVertexFormat in_Format);
+
+	template<typename DataType>
+	VVertexBuffer(const VBuffer<DataType>& in_Data, VVertexFormat in_Format);
 
 	virtual ~VVertexBuffer();
 
@@ -31,6 +35,18 @@ private:
 	VVertexFormat m_Format;
 	VByteBuffer m_VertexData;
 };
+
+//-----------------------------------------------------------------------------
+
+template<typename DataType>
+VVertexBuffer::VVertexBuffer(
+	const VBuffer<DataType>& in_Data, 
+	VVertexFormat in_Format)
+	:
+	m_Format(in_Format),
+	m_VertexData(in_Data)
+{
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

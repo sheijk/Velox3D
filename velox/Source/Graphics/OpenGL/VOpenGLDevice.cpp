@@ -7,6 +7,8 @@
 #include <V3d/Graphics/VEffectDescription.h>
 #include <V3d/Graphics/VMaterialDescription.h>
 
+#include <V3dLib/Graphics/Materials/EffectUtils.h>
+
 #include <v3d/Graphics/VDeviceMatrix.h>
 #include <v3d/Math/VMatrixOps.h>
 
@@ -199,21 +201,22 @@ void VOpenGLDevice::OverwriteBuffer(
 		);
 }
 
-IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
-	VStringParam in_strMeshDescrResName,
-	VStringParam in_strEffectDescrResName
-	)
+IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 {
 	using namespace resource;
 	resource::VResourceManagerPtr pResManager;
 
-	VResourceId mdRes = pResManager->GetResourceByName(in_strMeshDescrResName);
+	VResourceId mdRes = pResManager->GetResourceByName(in_strResource);
 	resource::VResourceDataPtr<const VMeshDescription> in_pMeshDescription
 		= mdRes->GetData<VMeshDescription>();
 
-	VResourceId edRes = pResManager->GetResourceByName(in_strEffectDescrResName);
+	VResourceId edRes = pResManager->GetResourceByName(in_strResource);
 	resource::VResourceDataPtr<const VEffectDescription> in_pEffectDescription
 		= mdRes->GetData<VEffectDescription>();
+
+	vout << "creating mesh with material:\n";
+	PrintEffectDescription(*in_pEffectDescription);
+	vout << "---\n";
 
 	// create materials
 	std::vector<VRenderStateList*> statelists

@@ -105,6 +105,10 @@ void VState::SetParameter(VStringParam in_strName, T in_Value)
 class VRenderPass
 {
 public:
+	VRenderPass();
+	VRenderPass(const VRenderPass& in_Source);
+	void operator=(const VRenderPass& in_Source);
+
 	vuint GetStateCount() const;
 
 	VState& State(vuint in_nIndex);
@@ -127,6 +131,10 @@ private:
 class VShaderPath
 {
 public:
+	VShaderPath();
+	VShaderPath(const VShaderPath& in_Source);
+	void operator=(const VShaderPath& in_Source);
+
 	vuint GetRenderPassCount() const;
 	
 	VRenderPass& RenderPass(vuint in_nIndex);
@@ -145,6 +153,10 @@ private:
 class VEffectDescription
 {
 public:
+	VEffectDescription();
+	VEffectDescription(const VEffectDescription& in_Source);
+	void operator=(const VEffectDescription& in_Source);
+
 	vuint GetShaderPathCount() const;
 
 	VShaderPath& ShaderPath(vuint in_nIndex);

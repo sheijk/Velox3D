@@ -142,6 +142,15 @@ void InverseZ(VertexStructure& vertex);
 template<typename VertexStructure>
 void SwitchYZ(VertexStructure& vertex);
 
+template<typename VertexStructure>
+void MirrorTexCoordU(VertexStructure& vertex);
+
+template<typename VertexStructure>
+void MirrorTexCoordV(VertexStructure& vertex);
+
+template<typename VertexStructure>
+void SwitchTextCoordUV(VertexStructure& vertex);
+
 //-----------------------------------------------------------------------------
 #include "BufferManipulation.inl"
 //-----------------------------------------------------------------------------

@@ -286,7 +286,7 @@ VResourceData* VResource::GetData(VResourceData::TypeId in_Type)
 		std::stringstream message;
 		message << "Could not find data of type '(TODO;)";
 		//message << typeid(VTypedResourceData<DataType>).name() << "'";
-		message << "' in resource '" << GetName() << "'";
+		message << "' in resource '" << GetQualifiedName() << "'";
 
 		V3D_THROW(VDataNotFoundException, message.str().c_str());
 	}

@@ -97,7 +97,11 @@ vbool VImmediateVertexStream::Bind(DataTypes in_StreamTypes) const
 			);
 	}
 
-	if( TypeSetIn(TexCoords, in_StreamTypes) && format.GetColorFormat().GetCount() > 0 )
+	if( 
+		TypeSetIn(TexCoords, in_StreamTypes) && 
+		format.GetTexCoordCount() >= 1 &&
+		format.GetTexCoordFormat(0).GetCount() > 0 
+		)
 	{
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glTexCoordPointer(
@@ -116,6 +120,18 @@ void VImmediateVertexStream::UnbindAll() const
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+const void* VImmediateVertexStream::GetIndexAddress() const
+{
+	if( CanProvideStream(IVVertexStream::Indices) )
+	{
+		return m_pVertexData->GetBufferAddress() + m_pVertexData->GetFormat().GetIndexFormat().GetFirstIndex();
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 //-----------------------------------------------------------------------------

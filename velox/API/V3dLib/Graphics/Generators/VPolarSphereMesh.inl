@@ -133,10 +133,24 @@ void VPolarSphereMesh<VertexStructure>::GenerateIndices()
 }
 
 template<typename VertexStructure>
+const typename VPolarSphereMesh<VertexStructure>::VertexBuffer&
+VPolarSphereMesh<VertexStructure>::GetVertexBuffer() const
+{
+	return geometry.GetVertexBuffer();
+}
+
+template<typename VertexStructure>
 typename VPolarSphereMesh<VertexStructure>::VertexBuffer&
 VPolarSphereMesh<VertexStructure>::GetVertexBuffer()
 {
 	return geometry.GetVertexBuffer();
+}
+
+template<typename VertexStructure>
+const typename VPolarSphereMesh<VertexStructure>::IndexBuffer&
+VPolarSphereMesh<VertexStructure>::GetIndexBuffer() const
+{
+	return geometry.GetIndexBuffer();
 }
 
 template<typename VertexStructure>
@@ -148,7 +162,7 @@ VPolarSphereMesh<VertexStructure>::GetIndexBuffer()
 
 template<typename VertexStructure>
 v3d::graphics::VMeshDescription::GeometryType
-VPolarSphereMesh<VertexStructure>::GetGeometryType()
+VPolarSphereMesh<VertexStructure>::GetGeometryType() const
 {
 	return geometry.GetGeometryType();
 }

@@ -11,6 +11,8 @@
 #include "VImmediateVertexStream.h"
 #include "../DeviceBase/VMeshBase.h"
 
+#include <memory>
+
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -47,7 +49,8 @@ private:
 		IVVertexStream::DataTypes in_Types);
 
 	std::vector<BufferInfo> m_Streams;
-	const vuint m_nPrimitiveCount;
+	std::auto_ptr<StreamRes> m_pIndexStream;
+	vuint m_nPrimitiveCount;
 	const GLint m_PrimitiveType;
 };
 

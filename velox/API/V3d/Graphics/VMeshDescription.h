@@ -38,10 +38,10 @@ public:
 		Points
 	};
 
-	VMeshDescription() : m_GeometryType(Triangles) 
-	{
-		SetTexCoordCount(1);
-	}
+	VMeshDescription();
+
+	VMeshDescription(const VVertexFormat& in_Format);
+	VMeshDescription(const VMeshDescription& in_Source);
 
 	GeometryType GetGeometryType() const;
 	void SetGeometryType(GeometryType in_GeometryType);

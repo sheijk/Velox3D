@@ -35,4 +35,23 @@ void SwitchYZ(VertexStructure& vertex)
 	vertex.position.y = temp;
 }
 
+template<typename VertexStructure>
+void MirrorTexCoordU(VertexStructure& vertex)
+{
+	vertex.texCoords.u = 1 - vertex.texCoords.u;
+}
+
+template<typename VertexStructure>
+void MirrorTexCoordV(VertexStructure& vertex)
+{
+	vertex.texCoords.v = 1 - vertex.texCoords.v;
+}
+
+template<typename VertexStructure>
+void SwitchTextCoordUV(VertexStructure& vertex)
+{
+	vfloat32 u = vertex.texCoords.u;
+	vertex.texCoords.u = vertex.texCoords.v;
+	vertex.texCoords.v = u;
+}
 

@@ -180,6 +180,95 @@ v3d::graphics::IVDevice::MeshHandle BuildMesh(
 	return device.CreateMesh(meshDescr, effect);
 }
 
+template<typename GeometryProvider>
+VVertexFormat BuildFormat(GeometryProvider& in_Geometry)
+{
+	VVertexDataLayout layout = in_Geometry.GetVertexBuffer()[0].layout;
+	vuint cnVertexCount = in_Geometry.GetVertexBuffer().GetSize();
+
+	VVertexFormat format;
+
+	// set vertex coord info
+	if( VVertexDataLayout::IsValidOffset(layout.positionOffset) )
+	{
+		VDataFormat coordFormat;
+		coordFormat.SetFirstIndex(vuint(layout.positionOffset));
+		coordFormat.SetCount(cnVertexCount);
+		coordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+
+		format.SetCoordinateFormat(coordFormat);
+	}
+
+	// set color info, if contained
+	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
+	{
+		VDataFormat colorFormat;
+		colorFormat.SetFirstIndex(vuint(layout.colorOffset));
+		colorFormat.SetCount(cnVertexCount);
+		colorFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+
+		format.SetColorFormat(colorFormat);
+	}
+
+	// set tex coord if contained
+	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
+	{
+		VDataFormat texCoordFormat;
+		texCoordFormat.SetFirstIndex(vuint(layout.texCoordOffset));
+		texCoordFormat.SetCount(cnVertexCount);
+		texCoordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+
+		format.SetTexCoordCount(1);
+		format.SetTexCoordFormat(0, texCoordFormat);
+	}
+
+	return format;
+}
+
+template<typename GeometryProvider>
+resource::VResourceId BuildResource(
+						  const std::string& in_strResourceName,
+						  const GeometryProvider& in_Geometry
+						  )
+{
+	// create resource
+	resource::VResourceId res = 
+		resource::VResourceManagerPtr()->CreateResource(
+			in_strResourceName.c_str());
+
+	// add vertex buffer to resource manager
+	VVertexFormat vertexFormat = BuildFormat(in_Geometry);
+	res->AddData(new VVertexBuffer(in_Geometry.GetVertexBuffer(), vertexFormat));
+
+	// add mesh description
+	VMeshDescription* pMoonMD = new VMeshDescription(vertexFormat);
+	pMoonMD->SetGeometryType(in_Geometry.GetGeometryType());
+	pMoonMD->SetCoordinateResource(res->GetQualifiedName());
+	pMoonMD->SetTexCoordResource(0, res->GetQualifiedName());
+
+	// if indices are present, create a subresource called indices,
+	// add index buffer to them and adjust the mesh descr format
+	if( in_Geometry.GetIndexBuffer().GetSize() > 0 &&
+		in_Geometry.GetIndexBuffer().GetDataAddress() != 0 )
+	{
+		// create index format and add index informatio to mesh description
+		VVertexFormat indexFormat;
+		indexFormat.SetIndexFormat(
+			VDataFormat(0, in_Geometry.GetIndexBuffer().GetSize(), 0));
+		pMoonMD->SetIndexFormat(indexFormat.GetIndexFormat());
+		pMoonMD->SetIndexResource(in_strResourceName + "/indices");
+
+		// add index buffer to sub resource
+		resource::VResourceId indexres = res->AddSubResource("indices");
+		indexres->AddData(
+			new VVertexBuffer(in_Geometry.GetIndexBuffer(), indexFormat));
+	}
+
+	res->AddData(pMoonMD);
+
+	return res;
+}
+
 template<typename VertexStructure>
 void GenerateInterpolatedTexCoords(
 	v3d::graphics::VBuffer<VertexStructure>& buffer,

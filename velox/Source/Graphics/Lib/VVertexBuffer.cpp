@@ -33,11 +33,26 @@ namespace
 
 		return pNew;
 	}
+
+	vuint* CreateCopy(const vuint* in_pSource, vuint in_nSize)
+	{
+		vuint* pNew = new vuint[in_nSize];
+		memcpy(pNew, in_pSource, in_nSize * sizeof(vfloat32));
+
+		return pNew;
+	}
 }
 
 VVertexBuffer::VVertexBuffer(const vfloat32* in_pData, vuint in_nFloatCount, VVertexFormat in_Format)
 	: 
 	m_VertexData(reinterpret_cast<vbyte*>(CreateCopy(in_pData, in_nFloatCount)), in_nFloatCount * sizeof(vfloat32)),
+	m_Format(in_Format)
+{
+}
+
+VVertexBuffer::VVertexBuffer(const vuint* in_pData, vuint in_nIntCount, VVertexFormat in_Format)
+	:
+	m_VertexData(reinterpret_cast<vbyte*>(CreateCopy(in_pData, in_nIntCount)), in_nIntCount * sizeof(vuint)),
 	m_Format(in_Format)
 {
 }

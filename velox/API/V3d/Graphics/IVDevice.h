@@ -50,10 +50,13 @@ public:
 	 * Returns a mesh handle to render the given geometry using the effect
 	 * description's materials. Mesh must be deleted using DeleteMesh
 	 * before end of program
+	 *
+	 * @param in_strResource Name and path of the resource containing a
+	 *		VEffectDescription and a VMeshDescription
+	 * @return A handle which can be used to render the mesh
 	 */
 	virtual MeshHandle CreateMesh(
-		VStringParam in_strMeshDescrResName,
-		VStringParam in_strEffectDescrResName
+		VStringParam in_strResource
 		) = 0;
 
 	/**

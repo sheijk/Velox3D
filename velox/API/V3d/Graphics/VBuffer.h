@@ -140,6 +140,33 @@ public:
 	}
 
 	/**
+	 * Behaves like VBuffer(&in_Source, CopyData)
+	 */
+	template<typename OldDataType>
+	explicit VBuffer(const VBuffer<OldDataType>& in_Source)
+	{
+		// calc source size in bytes
+		const vuint nSizeInBytes = in_Source.GetSize() * sizeof(OldDataType);
+
+		// calc new size in number of elements
+		const vuint nDestSize = nSizeInBytes / sizeof(DataType);
+
+		// buffer sizes in bytes must match
+		if( nDestSize * sizeof(DataType) != nSizeInBytes )
+		{
+			V3D_THROW(VException, "type size mismatch");
+		}
+
+		// create a copy of the data
+		vbyte* pNewData = new vbyte[nSizeInBytes];
+		//memcpy(pNewData, in_pSource->m_pBuffer, nSizeInBytes);
+		memcpy(pNewData, in_Source.GetDataAddress(), nSizeInBytes);
+
+		m_pBuffer = reinterpret_cast<DataType*>(pNewData);
+		m_nSize = nDestSize;
+	}
+
+	/**
 	 * Delete's its assosiated memory region
 	 */
 	virtual ~VBuffer()

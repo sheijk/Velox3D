@@ -65,19 +65,16 @@ private:
 
 	/** Adds the day time pass for the earth to the effect description of the earth */
 	static void AddDayPass(
-		IVDevice& device,
 		VEffectDescription& effect, 
 		std::string daylightId);
 
 	/** Adds a rendering pass for the clounds to the effect description */
 	static void AddCloudPass(
-		IVDevice& device,
 		VEffectDescription& effect, 
 		std::string textmatPropName);
 
 	/** Adds a rendering pass for the night to the effect description */
 	void AddNightPass(
-		IVDevice& device,
 		VEffectDescription& effect,
 		std::string daytimeId);
 };
@@ -95,8 +92,8 @@ const int DETAIL_EARTH = 40;
 const int DETAIL_BACKGROUND = 10;
 const int DETAIL_MOON = 30;
 
-const int WINDOW_WIDTH = 200;
-const int WINDOW_HEIGHT = 150;
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
 
 /** The main function. Will be called by the kernel when the application starts */
 vint VGraphicsDemoApp::Main()
@@ -130,18 +127,25 @@ vint VGraphicsDemoApp::Main()
 
 	// create a three pass effect description
 	VEffectDescription effect;
-	AddDayPass(device, effect, "@daytime");
-	AddNightPass(device, effect, "@nighttime");
-	AddCloudPass(device, effect, skyTexMatrix.GetRefId());
+	AddDayPass(effect, "@daytime");
+	AddNightPass(effect, "@nighttime");
+	AddCloudPass(effect, skyTexMatrix.GetRefId());
 
 	PrintEffectDescription(effect);
 
-	// create meshes for the earth, moon and background
-	IVDevice::MeshHandle hSphereMesh = CreateSphereMesh(device, effect);
-	IVDevice::MeshHandle hSkyMesh = CreateBackgroundMesh(device);
-	IVDevice::MeshHandle hMoonMesh = CreateMoonMesh(device);
+	VResourceId earthres = VResourceManagerPtr()->GetResourceByName(
+		"/data/earth");
+	earthres->AddData(new VEffectDescription(effect));
 
-	IVDevice::MeshHandle hTriangle = device.CreateMesh("/test", "/test");
+	// create meshes for the earth, moon and background
+	//IVDevice::MeshHandle hSphereMesh = CreateSphereMesh(device, effect);
+	//IVDevice::MeshHandle hSkyMesh = CreateBackgroundMesh(device);
+	//IVDevice::MeshHandle hMoonMesh = CreateMoonMesh(device);
+	IVDevice::MeshHandle hSphereMesh = device.CreateMesh("/data/earth");
+	IVDevice::MeshHandle hSkyMesh = device.CreateMesh("/data/sky");
+	IVDevice::MeshHandle hMoonMesh = device.CreateMesh("/data/moon");
+
+	IVDevice::MeshHandle hTriangle = device.CreateMesh("/test");
 
 	// setup camera, and apply it's matrix to the device
 	VCamera cam;
@@ -203,11 +207,11 @@ vint VGraphicsDemoApp::Main()
 
 		// render the mesh (with 2 passes)
 		device.SetMatrix(IVDevice::ModelMatrix, modelmat);
-//		RenderMesh(device, hSphereMesh);
+		RenderMesh(device, hSphereMesh);
 
 		// render the sky
 		device.SetMatrix(IVDevice::ModelMatrix, skyMatrix);
-//		RenderMesh(device, hSkyMesh);
+		RenderMesh(device, hSkyMesh);
 
 		// setup matrix for moon to move it, then render moon
 		Identity(	moonMatrix);
@@ -221,7 +225,7 @@ vint VGraphicsDemoApp::Main()
 		device.SetMatrix(IVDevice::ModelMatrix, moonMatrix);
 
 		RenderMesh(device, hMoonMesh);
-		RenderMesh(device, hTriangle);
+		//RenderMesh(device, hTriangle);
 
 		// end the scene (flip buffers etc)
 		device.EndScene();
@@ -254,60 +258,159 @@ void AddFileNameResource(VResourceId in_Parent,
 	res->AddData<VFileName>(new VFileName(in_strFileName));
 }
 
-//TODO: unbedingt aendern bevor das committet wird_!_
-#include "../../Source/Graphics/OpenGL/VImmediateVertexStream.h"
+VEffectDescription CreateMoonEffect()
+{
+	// create an effect description for the mesh
+	VEffectDescription effect;
+	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
+
+	pass.AddState(DefaultColorState(VColor4f(1, 1, 1, 1)));
+	pass.AddState(PolygonModeState(PMFilled, PMFilled));
+	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
+	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
+	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
+	
+	// add resource info
+
+	VState textureState = TextureState("/textures/moon");
+
+	pass.AddState(textureState);
+
+	return effect;
+}
+
+VEffectDescription CreateBackgroundEffect()
+{
+	VEffectDescription effect;
+	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
+
+	// setup some default states
+	pass.AddState(DefaultColorState(VColor4f(1, 1, 1, 1)));
+	pass.AddState(PolygonModeState(PMFilled, PMFilled));
+	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
+	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
+	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
+
+	pass.AddState(TextureState("/textures/sky"));
+
+	return effect;
+}
+
 void VGraphicsDemoApp::CreateResources()
 {
 	resource::VResourceManagerPtr pResourceManager;
 
 	VResourceId datares = pResourceManager->CreateResource("/data");
 
-	// add texture resources
+	// add clouds, day and night texture for earth
 	AddFileNameResource(datares, "sky", "/data/sky.jpg");
 	AddFileNameResource(datares, "day", "/data/day.jpg");
 	AddFileNameResource(datares, "night", "/data/night.jpg");
 
-	// add mesh resources for earth, moon and background
+	VResourceId textureRes = VResourceManagerPtr()->CreateResource("/textures/sky");
+	textureRes->AddData(new VFileName("/data/stars.jpg"));
 
+	// add test triangle resources
+	{
+		// add a test mesh
+		VResourceId testres = pResourceManager->CreateResource("/test");
+		
+		VMeshDescription* pMD = new VMeshDescription();
+		pMD->SetCoordinateResource("/test");
+		VDataFormat format;
+		format.SetCount(4);
+		format.SetFirstIndex(0);
+		format.SetStride(3);
+		pMD->SetCoordinateFormat(format);
 
-	// add a test mesh
-	VResourceId testres = pResourceManager->CreateResource("/test");
-	
-	VMeshDescription* pMD = new VMeshDescription();
-	pMD->SetCoordinateResource("/test");
-	VDataFormat format;
-	format.SetCount(3);
-	format.SetFirstIndex(0);
-	format.SetStride(3);
-	pMD->SetCoordinateFormat(format);
-	testres->AddData(pMD);
+		pMD->SetIndexResource("/test/indices");
+		pMD->SetIndexFormat(VDataFormat(0, 3, 0));
+		testres->AddData(pMD);
 
-	vfloat32 vertices[9] = {
-		.0f, 1.0f, .0f,
-		1.0f, -1.0f, .0f,
-		-1.0f, -1.0f, .0f
-	};
+		vfloat32 vertices[12] = {
+			.0f, 1.0f, .0f,
+			1.0f, -1.0f, .0f,
+			.0f, .0f, .0f,
+			-1.0f, -1.0f, .0f
+		};
 
-	VVertexBuffer* pVB = new VVertexBuffer(
-		vertices,
-		9, 
-		*pMD);
-	testres->AddData(pVB);
+		VVertexBuffer* pVB = new VVertexBuffer(
+			vertices,
+			12,
+			*pMD);
+		testres->AddData(pVB);
 
-	VEffectDescription* pED = new VEffectDescription();
-	VRenderPass& pass(pED->AddShaderPath().AddRenderPass());
-	pass.AddState(DefaultColorState(VColor4f(1, 0, 0, 1)));
-	pass.AddState(PolygonModeState(PMFilled, PMFilled));
-	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
-	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
-	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
+		vuint indices[3] = {
+			0, 1, 3
+		};
 
-	testres->AddData(pED);
+		VVertexFormat indexFormat;
+		testres->AddSubResource("indices")->AddData(new VVertexBuffer(indices, 3, *pMD));
+
+		VEffectDescription* pED = new VEffectDescription();
+		VRenderPass& pass(pED->AddShaderPath().AddRenderPass());
+		pass.AddState(DefaultColorState(VColor4f(1, 0, 0, 1)));
+		pass.AddState(PolygonModeState(PMFilled, PMFilled));
+		pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
+		pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
+		pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
+
+		testres->AddData(pED);
+	}
+    
+	// create moon mesh and material
+	{
+		// add moon texture
+		VResourceManagerPtr pResMan;
+		VResourceId pRes = pResMan->CreateResource("/textures/moon");
+		pRes->AddData(new VFileName("/data/moon.jpg"));
+
+		//VResourceId moonres = datares->AddSubResource("moon");
+		VPolarSphereMesh<VTexturedVertex> moon(DETAIL_MOON, DETAIL_MOON);
+		moon.GenerateCoordinates();
+		moon.GenerateTexCoords();
+		ForEachVertex(moon.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(0.175f, 0.175f, 0.175f));
+
+		VResourceId moonres = BuildResource("/data/moon", moon);
+		moonres->AddData(new VEffectDescription(CreateMoonEffect()));
+	}
+
+	// create sky mesh and material
+	{
+		// create a sphere mesh (see BuildSphereMesh)
+		VPolarSphereMesh<VTexturedVertex> sky(DETAIL_BACKGROUND, DETAIL_BACKGROUND);
+		sky.GenerateCoordinates();
+		sky.GenerateTexCoords();
+		// scale it by factor 10 by scaling each vertex of the sphere
+		// see BuildSphereMesh
+		ForEachVertex(sky.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(10, 10, 10));
+
+		VResourceId skyres = BuildResource("/data/sky", sky);
+		skyres->AddData(new VEffectDescription(CreateBackgroundEffect()));
+
+		//// load mesh into the device
+		//return BuildMesh(device, sky, effect);
+	}
+
+	// create earth mesh and material
+	{
+		// create the geometry. note that you need to call the correct Generate..
+		// methods depending on your vertex structure. see VPolarSphere's definition
+		// for a list of supported generating functions
+		VPolarSphereMesh<VTexturedVertex> sphere(DETAIL_EARTH, DETAIL_EARTH);
+		sphere.GenerateCoordinates();
+		sphere.GenerateTexCoords();
+		// apply the given operation to every vertex of the mesh:
+		ForEachVertex(sphere.GetVertexBuffer(), ScaleRandom<VTexturedVertex>(1.975f, 2.0f));
+		ForEachVertex(sphere.GetVertexBuffer(), MirrorTexCoordV<VTexturedVertex>);
+
+		VResourceId earthres = BuildResource("/data/earth", sphere);
+		// effect description will be added in the Main function
+	}
 }
 
 /** Adds the render pass for the daylight earth */
 void VGraphicsDemoApp::AddDayPass(
-	IVDevice& device,
 	VEffectDescription& effect, 
 	std::string daylightId)
 {
@@ -351,7 +454,6 @@ void VGraphicsDemoApp::AddDayPass(
 
 /** create the pass for the night planet */
 void VGraphicsDemoApp::AddNightPass(
-	IVDevice& device,
 	VEffectDescription& effect,
 	std::string daytimeId)
 {
@@ -380,7 +482,6 @@ void VGraphicsDemoApp::AddNightPass(
 
 /** Adds a rendering pass for the cloud layer */
 void VGraphicsDemoApp::AddCloudPass(
-	IVDevice& device,
 	VEffectDescription& effect, 
 	std::string textmatPropName)
 {
@@ -411,211 +512,87 @@ void VGraphicsDemoApp::AddCloudPass(
 	pass.AddState(textureState);
 }
 
-template<typename VertexStructure>
-void MirrorTexCoordU(VertexStructure& vertex)
-{
-	vertex.texCoords.u = 1 - vertex.texCoords.u;
-}
-
-template<typename VertexStructure>
-void MirrorTexCoordV(VertexStructure& vertex)
-{
-	vertex.texCoords.v = 1 - vertex.texCoords.v;
-}
-
-template<typename VertexStructure>
-void SwitchTextCoordUV(VertexStructure& vertex)
-{
-	vfloat32 u = vertex.texCoords.u;
-	vertex.texCoords.u = vertex.texCoords.v;
-	vertex.texCoords.v = u;
-}
-
-/** creates sphere geometry and loads it into the device */
-IVDevice::MeshHandle VGraphicsDemoApp::CreateSphereMesh(
-	IVDevice& device,
-	const VEffectDescription& effect
-	)
-{
-	// create the geometry. note that you need to call the correct Generate..
-	// methods depending on your vertex structure. see VPolarSphere's definition
-	// for a list of supported generating functions
-	VPolarSphereMesh<VTexturedVertex> sphere(DETAIL_EARTH, DETAIL_EARTH);
-	sphere.GenerateCoordinates();
-	sphere.GenerateTexCoords();
-	// apply the given operation to every vertex of the mesh:
-	ForEachVertex(sphere.GetVertexBuffer(), ScaleRandom<VTexturedVertex>(1.975f, 2.0f));
-	ForEachVertex(sphere.GetVertexBuffer(), MirrorTexCoordV<VTexturedVertex>);
-
-	// and finally load the mesh into the device
-	IVDevice::MeshHandle hSphereMesh = 
-		BuildMesh(device, sphere, effect);
-
-	return hSphereMesh;
-}
-
-/** Creates the mesh for the background space */
-IVDevice::MeshHandle VGraphicsDemoApp::CreateBackgroundMesh(IVDevice& device)
-{
-	VEffectDescription effect;
-	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
-
-	// setup some default states
-	pass.AddState(DefaultColorState(VColor4f(1, 1, 1, 1)));
-	pass.AddState(PolygonModeState(PMFilled, PMFilled));
-	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
-	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
-	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
-	
-	// create texture from file and load it into the device
-	image::VImageServicePtr pImageService;
-	image::VImage image(1024, 512, 24);
-	pImageService->CreateImage("/data/stars.jpg", image);
-
-	IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
-		IVDevice::Texture,
-		&image.GetData(),
-		VBufferBase::DropData);
-
-	VState textureState = TextureState(
-		hTexBuffer,
-		image.GetWidth(), image.GetHeight(),
-		FilterLinear, FilterLinear,
-		TextureRepeat, TextureRepeat);
-
-	pass.AddState(textureState);
-
-	// create a sphere mesh (see BuildSphereMesh)
-	VPolarSphereMesh<VTexturedVertex> sky(DETAIL_BACKGROUND, DETAIL_BACKGROUND);
-	sky.GenerateCoordinates();
-	sky.GenerateTexCoords();
-	// scale it by factor 10 by scaling each vertex of the sphere
-	// see BuildSphereMesh
-	ForEachVertex(sky.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(10, 10, 10));
-
-	// load mesh into the device
-	return BuildMesh(device, sky, effect);
-}
-
-/**
- * Returns the layout of the given vertex type. Use this function if you need
- * to resolve the type of a vertex without knowing it (in templates)
- */
-template<typename VertexStructure>
-VVertexDataLayout GetVertexLayout(VertexStructure&)
-{
-	return VertexStructure::layout;
-}
-
-template<typename GeometryProvider>
-VResourceId MakeResource(
-	GeometryProvider& in_Geom, 
-	VStringParam in_strResName,
-	VBufferBase::CopyMode in_CopyMode = VBufferBase::CopyData
-	)
-{
-	const std::string strResName(in_strResName);
-	const std::string vertexResName = strResName + "/vertices";
-	const std::string indexResName = strResName + "/indices";
-
-	// add vertices
-	VResourceId vertexRes = VResourceManagerPtr()->CreateResource(vertexResName);
-	vertexRes->AddData(new VByteBuffer(&in_Geom.GetVertexBuffer(), in_CopyMode));
-
-	// add indices
-	if( in_Geom.GetIndexBuffer().GetSize() > 0 )
-	{
-		VResourceId indexRes = VResourceManagerPtr()->CreateResource(indexResName);
-        indexRes->AddData(new VByteBuffer(&in_Geom.GetIndexBuffer(), in_CopyMode));
-	}
-
-	// create and add mesh description
-	VMeshDescription meshDescr;
-	VVertexDataLayout layout = GetVertexLayout(in_Geom.GetVertexBuffer()[0]);
-	VMeshDescription* io_pMeshDescr = &meshDescr;
-
-	// set vertex coord info
-	VDataFormat coordFormat;
-	coordFormat.SetFirstIndex(vuint(layout.positionOffset));
-	coordFormat.SetCount(cnVertexCount);
-	coordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
-	io_pMeshDescr->SetCoordinateFormat(coordFormat);
-	io_pMeshDescr->SetCoordinateResource(vertexResName);
-
-	// set color info, if contained
-	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
-	{
-		VDataFormat colorFormat;
-		colorFormat.SetFirstIndex(vuint(layout.colorOffset));
-		colorFormat.SetCount(cnVertexCount);
-		colorFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
-		io_pMeshDescr->SetColorFormat(colorFormat);
-		io_pMeshDescr->SetColorResource(vertexResName);
-	}
-
-	// set tex coord if contained
-	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
-	{
-		VDataFormat texCoordFormat;
-		texCoordFormat.SetFirstIndex(vuint(layout.texCoordOffset));
-		texCoordFormat.SetCount(cnVertexCount);
-		texCoordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
-		io_pMeshDescr->SetTexCoordFormat(0, texCoordFormat);
-		io_pMeshDescr->SetTexCoordFormat(0, vertexResName);
-	}
-
-	// set index info if contained
-	if( in_Geom.GetIndexBuffer().GetSize() > 0 )
-	{
-		io_pMeshDescr->SetIndexFormat(
-			VDataFormat(0, in_Geom.GetIndexBuffer().GetSize(), 1));
-		io_pMeshDescr->SetIndexResource(indexResName);
-	}
-
-	// add mesh descr to resource
-	VResourceId meshRes = VResourceManagerPtr()->GetResourceByName(strResName);
-	meshRes->AddData(new VMeshDescription(meshDescr));
-
-	return VResourceManagerPtr()->GetResourceByName(strResName);
-}
-
-/** creates a mesh for the moon */
-IVDevice::MeshHandle VGraphicsDemoApp::CreateMoonMesh(IVDevice& device)
-{
-	// create an effect description for the mesh
-	VEffectDescription effect;
-	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
-
-	pass.AddState(DefaultColorState(VColor4f(1, 1, 1, 1)));
-	pass.AddState(PolygonModeState(PMFilled, PMFilled));
-	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
-	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
-	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
-	
-	// add resource info
-	using namespace resource;
-
-	VResourceManagerPtr pResMan;
-	VResourceId pRes = pResMan->CreateResource("/textures/moon");
-    pRes->AddData(new VFileName("/data/moon.jpg"));
-
-	pResMan->DumpResourceInfo();
-
-	VState textureState = TextureState(pRes->GetQualifiedName().c_str());
-
-	pass.AddState(textureState);
-
-	VPolarSphereMesh<VTexturedVertex> moon(DETAIL_MOON, DETAIL_MOON);
-	moon.GenerateCoordinates();
-	moon.GenerateTexCoords();
-	ForEachVertex(moon.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(0.175f, 0.175f, 0.175f));
-
-	// add mesh to resource manager
-	//VResourceManagerPtr pResMan;
-	//pResMan->CreateResource("/meshes/moon/buffer")->AddData(new VByteBuffer(
-
-	return BuildMesh(device, moon, effect);
-}
+///**
+// * Returns the layout of the given vertex type. Use this function if you need
+// * to resolve the type of a vertex without knowing it (in templates)
+// */
+//template<typename VertexStructure>
+//VVertexDataLayout GetVertexLayout(VertexStructure&)
+//{
+//	return VertexStructure::layout;
+//}
+//
+//template<typename GeometryProvider>
+//VResourceId MakeResource(
+//	GeometryProvider& in_Geom, 
+//	VStringParam in_strResName,
+//	VBufferBase::CopyMode in_CopyMode = VBufferBase::CopyData
+//	)
+//{
+//	const std::string strResName(in_strResName);
+//	const std::string vertexResName = strResName + "/vertices";
+//	const std::string indexResName = strResName + "/indices";
+//
+//	// add vertices
+//	VResourceId vertexRes = VResourceManagerPtr()->CreateResource(vertexResName);
+//	vertexRes->AddData(new VByteBuffer(&in_Geom.GetVertexBuffer(), in_CopyMode));
+//
+//	// add indices
+//	if( in_Geom.GetIndexBuffer().GetSize() > 0 )
+//	{
+//		VResourceId indexRes = VResourceManagerPtr()->CreateResource(indexResName);
+//        indexRes->AddData(new VByteBuffer(&in_Geom.GetIndexBuffer(), in_CopyMode));
+//	}
+//
+//	// create and add mesh description
+//	VMeshDescription meshDescr;
+//	VVertexDataLayout layout = GetVertexLayout(in_Geom.GetVertexBuffer()[0]);
+//	VMeshDescription* io_pMeshDescr = &meshDescr;
+//
+//	// set vertex coord info
+//	VDataFormat coordFormat;
+//	coordFormat.SetFirstIndex(vuint(layout.positionOffset));
+//	coordFormat.SetCount(cnVertexCount);
+//	coordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+//	io_pMeshDescr->SetCoordinateFormat(coordFormat);
+//	io_pMeshDescr->SetCoordinateResource(vertexResName);
+//
+//	// set color info, if contained
+//	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
+//	{
+//		VDataFormat colorFormat;
+//		colorFormat.SetFirstIndex(vuint(layout.colorOffset));
+//		colorFormat.SetCount(cnVertexCount);
+//		colorFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+//		io_pMeshDescr->SetColorFormat(colorFormat);
+//		io_pMeshDescr->SetColorResource(vertexResName);
+//	}
+//
+//	// set tex coord if contained
+//	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
+//	{
+//		VDataFormat texCoordFormat;
+//		texCoordFormat.SetFirstIndex(vuint(layout.texCoordOffset));
+//		texCoordFormat.SetCount(cnVertexCount);
+//		texCoordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+//		io_pMeshDescr->SetTexCoordFormat(0, texCoordFormat);
+//		io_pMeshDescr->SetTexCoordFormat(0, vertexResName);
+//	}
+//
+//	// set index info if contained
+//	if( in_Geom.GetIndexBuffer().GetSize() > 0 )
+//	{
+//		io_pMeshDescr->SetIndexFormat(
+//			VDataFormat(0, in_Geom.GetIndexBuffer().GetSize(), 1));
+//		io_pMeshDescr->SetIndexResource(indexResName);
+//	}
+//
+//	// add mesh descr to resource
+//	VResourceId meshRes = VResourceManagerPtr()->GetResourceByName(strResName);
+//	meshRes->AddData(new VMeshDescription(meshDescr));
+//
+//	return VResourceManagerPtr()->GetResourceByName(strResName);
+//}
 
 //-----------------------------------------------------------------------------
 //TODO: explain module setup. (once it's final :)

@@ -43,10 +43,7 @@ public:
 	VOpenGLDevice(const graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
 	virtual ~VOpenGLDevice();
 
-	virtual MeshHandle CreateMesh(
-		VStringParam in_strMeshDescrResName,
-		VStringParam in_strEffectDescrResName
-		);
+	virtual MeshHandle CreateMesh(VStringParam in_strResource);
 
 	virtual BufferHandle CreateBuffer(
 		BufferType in_Type,

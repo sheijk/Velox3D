@@ -238,12 +238,6 @@
 					RelativePath="..\Api\V3dLib\Graphics\Misc\VCamera.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\Lib\VDisplaySettings.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\Lib\VEffectDescription.cpp">
-				</File>
-				<File
 					RelativePath="..\Source\UtilsLib\Camera\VKeyboardCamera.cpp">
 				</File>
 				<File
@@ -440,6 +434,12 @@
 			<Filter
 				Name="Service/Device"
 				Filter="">
+				<File
+					RelativePath="..\Source\Graphics\Lib\VDisplaySettings.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\Lib\VEffectDescription.cpp">
+				</File>
 				<File
 					RelativePath="..\Source\Graphics\Lib\VMeshDescription.cpp">
 				</File>

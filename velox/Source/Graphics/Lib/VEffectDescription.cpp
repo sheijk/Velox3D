@@ -84,6 +84,26 @@ vuint VState::GetIndexOfNamedParam(const VString& in_strName) const
 
 //-----------------------------------------------------------------------------
 
+VRenderPass::VRenderPass()
+{
+}
+
+VRenderPass::VRenderPass(const VRenderPass& in_Source)
+{
+	*this = in_Source;
+}
+
+void VRenderPass::operator=(const VRenderPass& in_Source)
+{
+	m_States.clear();
+	m_States.reserve(in_Source.GetStateCount());
+
+	for(int i = 0; i < in_Source.GetStateCount(); ++i)
+	{
+		m_States.push_back(StatePtr(new VState(in_Source.State(i))));
+	}
+}
+
 vuint VRenderPass::GetStateCount() const
 {
 	return vuint(m_States.size());
@@ -143,6 +163,26 @@ void VRenderPass::Clear()
 
 //-----------------------------------------------------------------------------
 
+VShaderPath::VShaderPath()
+{
+}
+
+VShaderPath::VShaderPath(const VShaderPath& in_Source)
+{
+	*this = in_Source;
+}
+
+void VShaderPath::operator=(const VShaderPath& in_Source)
+{
+	m_RenderPasses.clear();
+	m_RenderPasses.reserve(in_Source.GetRenderPassCount());
+
+	for(int i = 0; i < in_Source.GetRenderPassCount(); ++i)
+	{
+		m_RenderPasses.push_back(RenderPassPtr(new VRenderPass(in_Source.RenderPass(i))));
+	}
+}
+
 vuint VShaderPath::GetRenderPassCount() const
 {
 	return vuint(m_RenderPasses.size());
@@ -181,6 +221,26 @@ void VShaderPath::Clear()
 }
 
 //-----------------------------------------------------------------------------
+
+VEffectDescription::VEffectDescription()
+{
+}
+
+VEffectDescription::VEffectDescription(const VEffectDescription& in_Source)
+{
+	*this = in_Source;
+}
+
+void VEffectDescription::operator=(const VEffectDescription& in_Source)
+{
+	m_ShaderPaths.clear();
+	m_ShaderPaths.reserve(in_Source.GetShaderPathCount());
+
+	for(int i = 0; i < in_Source.GetShaderPathCount(); ++i)
+	{
+		m_ShaderPaths.push_back(ShaderPathPtr(new VShaderPath(in_Source.ShaderPath(i))));
+	}
+}
 
 vuint VEffectDescription::GetShaderPathCount() const
 {

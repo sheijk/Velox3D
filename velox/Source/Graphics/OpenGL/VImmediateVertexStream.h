@@ -26,6 +26,7 @@ public:
 	virtual vbool Bind(DataTypes in_StreamTypes) const;
 	virtual void UnbindAll() const;
 
+	virtual const void* GetIndexAddress() const;
 private:
 	/** 
 	 * Returns true iff the associated vertex buffer contains
