@@ -1,4 +1,4 @@
-#include <V3d/Graphics/VMeshHandle.h>
+#include "VMeshHandle.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -11,9 +11,9 @@ using namespace v3d; // anti auto indent
 /**
  * standard c'tor
  */
-VMeshHandle::VMeshHandle(IVDevice::MeshHandle in_hMesh)
+VMeshHandle::VMeshHandle(VMeshBase* in_hBuffer)
 {
-	m_hMesh = in_hMesh;
+	m_pMesh = in_hBuffer;
 }
 
 /**
@@ -23,9 +23,9 @@ VMeshHandle::~VMeshHandle()
 {
 }
 
-IVDevice::MeshHandle VMeshHandle::GetMeshHandle() const
+VMeshBase* VMeshHandle::GetGLMesh() const
 {
-	return m_hMesh;
+	return m_pMesh;
 }
 
 //-----------------------------------------------------------------------------
