@@ -30,7 +30,7 @@ public:
 	virtual void Shutdown();
 };
 
-VExampleAppModule::VExampleAppModule() : VModuleBase("app")
+VExampleAppModule::VExampleAppModule()
 {
 }
 
@@ -45,6 +45,11 @@ void VExampleAppModule::Shutdown()
 {
 	// destroy the application instance
 	g_pService.Release();
+}
+
+const char* v3d::GetModuleName()
+{
+	return "example_app";
 }
 
 //-----------------------------------------------------------------------------

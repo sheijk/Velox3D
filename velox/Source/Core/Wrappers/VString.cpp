@@ -33,7 +33,7 @@ VString::~VString()
 void VString::FreeMem()
 {
 	//FIXME: das muss wieder rein, aber so dass es keinen absturz gibt :) -- sheijk
-//	delete[] m_pCStr;
+	delete[] m_pCStr;
 	m_pCStr = 0;
 	m_nLength = 0;
 }

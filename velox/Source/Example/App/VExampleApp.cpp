@@ -19,8 +19,6 @@
 //#include <windows.h>
 //#include <gl/gl.h>
 //#include <gl/glu.h>
-#include "../../UtilsLib/Importer/VObjModelImporter.h"
-#include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
 //#include "../../UtilsLib/Importer/VQuake2BspImporter.h"
 
@@ -58,8 +56,8 @@ void ApplyMaterial(IVDevice* in_m_pDevice, IVMaterial* in_pRenderStates)
 	}
 }
 
-VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
-{
+//VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
+//{
 //	utils::importer::VModel3D Model;
 //	utils::importer::VOBJModelImporter Importer;
 //	//utils::importer::VQuake2BspImporter bspImporter;
@@ -99,7 +97,7 @@ VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
 //		&TexData,
 //		IVDevice::Buffer::CopyData);
 //
-	VMeshDescription meshDesc;
+	//VMeshDescription meshDesc;
 //
 //	meshDesc.geometryType = VMeshDescription::TriangleStrip;
 //	meshDesc.triangleVertices = VMeshDescription::ByteDataRef(
@@ -118,8 +116,8 @@ VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
 //
 //	//meshDesc.geometryType = VMeshDescription::TriangleStrip;
 //
-	return meshDesc;
-}
+//	return meshDesc;
+//}
 
 void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 {
@@ -267,23 +265,23 @@ vint VExampleApp::Main()
 	pRootNode.Assign(new VTransformNode(identity));
 
 	// create textured mesh and add it to SG
-	{
-		VMeshDescription meshDesc = BuildModel(m_pDevice, "/data/test.obj");
-		VMaterialDescription texMat = BuildTextureMaterial(
-			m_pDevice, "/data/fuss.jpg");
+	//{
+	//	VMeshDescription meshDesc = BuildModel(m_pDevice, "/data/test.obj");
+	//	VMaterialDescription texMat = BuildTextureMaterial(
+	//		m_pDevice, "/data/fuss.jpg");
 
-		IVDevice::MeshHandle pMesh = m_pDevice->CreateMesh(meshDesc, texMat);
+	//	IVDevice::MeshHandle pMesh = m_pDevice->CreateMesh(meshDesc, texMat);
 
-		VMatrix44f transform;
-		Identity(transform);
-		// change x value
-		transform.Set(0, 3, 3);
-		VTransformNode* pTransformNode = new VTransformNode(transform);
-		pRootNode->AddChild(pTransformNode);
+	//	VMatrix44f transform;
+	//	Identity(transform);
+	//	// change x value
+	//	transform.Set(0, 3, 3);
+	//	VTransformNode* pTransformNode = new VTransformNode(transform);
+	//	pRootNode->AddChild(pTransformNode);
 
-        VMeshNode* pMeshNode = new VMeshNode(pMesh);
-		pTransformNode->AddChild(pMeshNode);
-	}
+ //       VMeshNode* pMeshNode = new VMeshNode(pMesh);
+	//	pTransformNode->AddChild(pMeshNode);
+	//}
 
 	{
 		VBoxMesh<ColoredVertex> box(1);
@@ -342,7 +340,7 @@ vint VExampleApp::Main()
 	m_pUpdateManager->Stop();
 
 	//exiting...
-	return 0;
+	return 404;
 }
 
 //-----------------------------------------------------------------------------

@@ -20,10 +20,10 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS;BOOST_SIGNALS_STATIC_LINK"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib"
+				AdditionalDependencies="../Local/ExternalLibs/boost/boostd.lib"
 				OutputFile="$(OutDir)/ExampleApp.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"

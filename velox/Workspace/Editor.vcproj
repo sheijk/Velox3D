@@ -21,10 +21,10 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\wxWindows\include;../Local\ExternalLibs\wxWindows\contrib\include;../Local/ExternalLibs/gmtl;../Local\ExternalLibs\wxWindows\lib\mswdlld;../Local\ExternalLibs/boost"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;Editor_EXPORTS;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXDEBUG=1;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;Editor_EXPORTS;BOOST_SIGNALS_STATIC_LINK;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXDEBUG=1;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/wxWindows/lib/wxmsw24d.lib ../Local/ExternalLibs/boost/boost_fs.lib"
+				AdditionalDependencies="../Local/ExternalLibs/boost/boostd.lib ../Local/ExternalLibs/wxWindows/lib/wxmsw24d.lib"
 				OutputFile="$(OutDir)/Editor.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""

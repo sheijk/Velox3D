@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 // some defines to change the behaviour of the memory manager
 
+// enable memory logging
+#define V3D_MEM_ENABLE_LOGGING
+
 // show every allocation/release
 //#define V3D_MEM_SHOW_ALLOCRELEASE
 
@@ -476,6 +479,7 @@ void SendDebugMessage(const char*);
 
 void VMemLogger::PrintLeakReport()
 {
+#ifdef V3D_MEM_ENABLE_LOGGING
 	char buffer[1000];
 
 	std::sprintf(buffer, "Leak report\n");
@@ -515,6 +519,9 @@ void VMemLogger::PrintLeakReport()
 		nLeakSize, nLeakCount);
 	std::printf("%s", buffer);
 	SendDebugMessage(buffer);
+#else // no logging enabled
+	SendDebugMessage("\n\nNo memory logging information available\n\n");
+#endif // V3D_MEM_ENABLE_LOGGING
 }
 
 namespace v3d {
@@ -524,25 +531,24 @@ namespace v3d {
 		v3d::VStringParam in_sFunction
 		)
 	{
+#ifdef V3D_MEM_ENABLE_LOGGING
 		currentMemOp.pFileName = in_sFile;
 		currentMemOp.nLine = in_iLine;
 		//currentMemOp.pFunction = in_sFunction;
+#endif
 	}
 
 	void* AllocMem(size_t size)
 	{
-		//g_nTotalAllocations++;
-		//g_nTotalAllocatedMem += size;
-		//g_nCurrentUsedMem += size;
-
+		// allocate the memory
 		void* addr = malloc(size);
 
+#ifdef V3D_MEM_ENABLE_LOGGING
+		// store logging info
 		currentMemOp.pAddress = addr;
 		currentMemOp.nSize = size;
 
 		LogMemAlloc(currentMemOp);
-		currentMemOp.Clear();
-		//LogMemAlloc(addr, size);
 
 #ifdef V3D_MEM_SHOW_ALLOCRELEASE
 		printf("Allocation: %s[%d] %d bytes @ %p\n",
@@ -551,20 +557,20 @@ namespace v3d {
 #else
 #ifdef V3D_MEM_SHOW_SHORTALLOCRELEASE
 		printf(".a.");
-#endif
+#endif // V3D_MEM_SHOW_SHORTALLOCRELEASE
 #endif // V3D_MEM_SHOW_ALLOCRELEASE
-		
+
+		currentMemOp.Clear();
+#endif // V3D_MEM_ENABLE_LOGGING
 		return addr;
 	}
 
 	void FreeMem(void* addr)
 	{
-		//g_nTotalReleases++;
-
+#ifdef V3D_MEM_ENABLE_LOGGING
+		// log release of memory
 		currentMemOp.pAddress = addr;
 		LogMemRelease(currentMemOp);
-		currentMemOp.Clear();
-		//RemoveMemLog(addr);
 
 #ifdef V3D_MEM_SHOW_ALLOCRELEASE
 		printf("Release:    %s[%d] @ %p\n",
@@ -574,7 +580,11 @@ namespace v3d {
 		printf(".r.");
 #endif
 #endif // V3D_MEM_SHOW_ALLOCRELEASE
-		
+
+		currentMemOp.Clear();
+#endif // V3D_MEM_ENABLE_LOGGING
+
+		// release memory
 		free(addr);
 	}
 } // namespace v3d
@@ -585,37 +595,58 @@ namespace v3d {
 namespace v3d { namespace mem {
 	vulong GetTotalAllocationCalls() 
 	{
-		return pMemLogger->GetTotalAllocations();
+		if( pMemLogger != 0 )
+			return pMemLogger->GetTotalAllocations();
+		else
+			return 0;
 	}
 
 	vulong GetTotalReleaseCalls()
 	{
-		return pMemLogger->GetTotalReleases();
+		if( pMemLogger != 0 )
+			return pMemLogger->GetTotalReleases();
+		else
+			return 0;
 	}
 
 	size_t GetTotalAllocatedMemory()
 	{
-		return pMemLogger->GetTotalAllocatedMem();
+		if( pMemLogger != 0 )
+			return pMemLogger->GetTotalAllocatedMem();
+		else
+			return 0;
 	}
 
 	size_t GetTotalReleasedMemory()
 	{
-		return pMemLogger->GetTotalReleasedMem();
+		if( pMemLogger != 0 )
+			return pMemLogger->GetTotalReleasedMem();
+		else
+			return 0;
 	}
 
 	size_t GetCurrentUsedMemory()
 	{
-		return pMemLogger->GetCurrentUsedMem();
+		if( pMemLogger != 0 )
+			return pMemLogger->GetCurrentUsedMem();
+		else
+			return 0;
 	}
 
 	void PrintLeakReport()
 	{
-		pMemLogger->PrintLeakReport();
+		if( pMemLogger != 0 )
+			pMemLogger->PrintLeakReport();
+		else
+		{
+			SendDebugMessage("no memory logger available");
+		}
 	}
 
 	void EnableLogging()
 	{
-		pMemLogger->EnableLogging();
+		if( pMemLogger != 0 )
+			GetLocalMemLogger()->EnableLogging();
 	}
 
 }} // namespace v3d::mem
