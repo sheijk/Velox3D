@@ -47,7 +47,7 @@ namespace iterutil {
 			m_pIterImpl = pIterImpl;
 		}
 
-		//TODO: 2te variante wg effizienz?
+		//TODO: 2te variante mit T& wg effizienz?
 		/** returns the object the iterator points to */
 		inline T* GetTarget() const
 		{
@@ -66,6 +66,11 @@ namespace iterutil {
 		int Compare(const VIteratorBase& other) const
 		{
 			return m_pIterImpl->Compare(* other.m_pIterImpl);
+		}
+
+		vbool IsEqual(const VIteratorBase& other) const
+		{
+			return m_pIterImpl->IsEqual(* other.m_pIterImpl);
 		}
 
 		VIteratorBase()
@@ -98,8 +103,8 @@ namespace iterutil {
 	};
 
 	/**
-	* some default types for iterators
-	*/
+	 * some default types for iterators
+	 */
 	template<typename T>
 	struct VIteratorDefault
 	{
@@ -109,8 +114,8 @@ namespace iterutil {
 	};
 
 	/**
-	* Provides compare operators
-	*/
+	 * Provides compare operators for equality checks
+	 */
 	template<typename T, typename Parent>
 	struct VEqCompIterInterface : public Parent
 	{
@@ -118,7 +123,7 @@ namespace iterutil {
 
 		bool operator==(const VEqCompIterInterface& o) const
 		{
-			return (Compare(o) == 0);
+			return IsEqual(o);
 			//return GetIter()->IsEqual(*(o.GetIter()));
 		}
 

@@ -13,10 +13,10 @@ VXMLWriter::VXMLWriter(VStringParam in_strFileName)
 	m_bOpenTwice = false;
 	m_Filename = in_strFileName;
 	
+	//TODO: zu datei erzeugung umwandeln
 	vfs::IVFileSystem::FileStreamPtr ptr = 
 		QueryObject<vfs::IVFileSystem>("vfs.fs")->OpenFile(in_strFileName,
 															vfs::VWriteAccess);
-	
 	// "type conversion"
 	m_pSmartPtr.Assign(ptr.DropOwnership());
 

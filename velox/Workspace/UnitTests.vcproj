@@ -119,6 +119,12 @@
 			Name="CoreLib Tests"
 			Filter="">
 			<File
+				RelativePath="..\Source\UnitTests\CoreLibTests\VContainerTests.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\CoreLibTests\VContainerTests.h">
+			</File>
+			<File
 				RelativePath="..\Source\UnitTests\CoreLibTests\VDestructTest.h">
 			</File>
 			<File

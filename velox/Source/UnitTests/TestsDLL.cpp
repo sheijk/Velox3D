@@ -13,9 +13,12 @@
 #include "CoreLibTests/VStringTests.h"
 #include "CoreLibTests/VSmartPointerTests.h"
 #include "CoreLibTests/VIteratorTests.h"
+#include "CoreLibTests/VContainerTests.h"
+
 #include "VFSTests/VFileStreamTest.h"
 #include "VFSTests/VMemoryStreamTest.h"
 #include "VFSTests/VFileSysTest.h"
+
 #include "XMLTests/VXMLTests.h"
 
 #define WIN32_LEAN_AND_MEAN
@@ -31,11 +34,15 @@ using namespace unittests;
 VPointer<VStringTests>::AutoPtr g_pStringTests;
 VPointer<VSmartPointerTest>::AutoPtr g_pSmartPtrTest;
 VPointer<VIteratorTests>::AutoPtr g_pIterTests;
+VPointer<VContainerTests>::AutoPtr g_pContainerTests;
+
 VPointer<VFileStreamTest>::AutoPtr g_pFileStreamTest;
 VPointer<VMemoryStreamTest>::AutoPtr g_pMemStreamTest;
 VPointer<VFileSysTest>::AutoPtr g_pFileSysTest;
+
 VPointer<VXMLTest>::AutoPtr g_pXmlTest;
 
+//TODO: verfahren um die tests automatisch hinzuzufuegen
 
 TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -46,22 +53,28 @@ TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 	g_pStringTests.Assign(new VStringTests());
 	g_pSmartPtrTest.Assign(new VSmartPointerTest());
 	g_pIterTests.Assign(new VIteratorTests());
+	g_pContainerTests.Assign(new VContainerTests());
+
 	g_pFileStreamTest.Assign(new VFileStreamTest());
 	g_pMemStreamTest.Assign(new VMemoryStreamTest());
 	g_pFileSysTest.Assign(new VFileSysTest());
+
 	g_pXmlTest.Assign(new VXMLTest());
 }
 
 TESTSDLL_API void Shutdown()
 {
-	// delete all tests
+	// delete all tests (is this really neccessary? - sheijk)
+	g_pXmlTest.Release();
+
 	g_pFileSysTest.Release();
 	g_pMemStreamTest.Release();
 	g_pFileStreamTest.Release();
+
+	g_pContainerTests.Release();
 	g_pIterTests.Release();
 	g_pSmartPtrTest.Release();
 	g_pStringTests.Release();
-	g_pXmlTest.Release();
 }
 
 /**

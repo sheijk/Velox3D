@@ -81,6 +81,18 @@ void VTestSuite::ExecuteTests()
 	{
 		try
 		{
+			vout << "----------------------------------------"
+				 << "---------------------------------------"
+				 << vendl;
+
+			vout << "Starting test " << iter->strName 
+				 << " testing " << iter->strSubject
+				 << vendl;
+
+			vout << "----------------------------------------"
+				<< "----------------------------------------"
+				<< vendl;
+
 			iter->pUnitTest->ExecuteTest();
 		}
 		catch(VUnitTestException exc)

@@ -27,8 +27,6 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 
-	VFileStream.SetSize() implementieren
-
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
 	Objekts auf 0 gesetzt)
 	Service Abhaengigkeiten Dokumentieren
@@ -63,6 +61,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+12.12.2003
+STL Wrapper Iteratoren Policies ueberarbeitet, </> Vergleiche funktionieren jetzt mit
+random_access_iteratoren (und auch nur damit, wies sein soll)
 
 05.12.2003
 Iteratoren ueberarbeitet. Anstatt von IVIteratorPol abgeleiteter Klassen koennen jetzt auch 

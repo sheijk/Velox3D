@@ -124,7 +124,11 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 
 	if( fileIter == pDir->Files().End )
 	{
-		V3D_THROW(VIOException, "file does not exist");
+		std::string errorMsg = "file \"";
+		errorMsg += strFileName;
+		errorMsg += "\" does not exist";
+
+		V3D_THROW(VIOException, errorMsg.c_str());
 	}
 
 	IVFile::FileStreamPtr pFileStream = fileIter->Open(in_Access);

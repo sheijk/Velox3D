@@ -28,11 +28,14 @@ namespace v3d {
 
 		// overload these functions to implement a custom iterator
 
+		/** test for equality */
+		virtual vbool IsEqual(const IVIteratorPol& in_Other) const = 0;
+
 		/**
 		* Comparison:
 		* @return < 0 smaller than other, 0 equal, > 0 bigger than other
 		*/
-		virtual int Compare(const IVIteratorPol& in_Other) const = 0;
+		virtual vint Compare(const IVIteratorPol& in_Other) const = 0;
 
 		/** creates a copy of itself */
 		virtual IVIteratorPol* CreateCopy() const = 0;

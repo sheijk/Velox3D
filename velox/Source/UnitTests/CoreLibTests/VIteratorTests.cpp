@@ -8,13 +8,16 @@
 #include <iterator>
 #include <algorithm>
 #include <list>
+#include <vector>
 
 #include <v3d/Core/Wrappers/VIterator.h>
 #include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h>
+#include <v3d/Core/Wrappers/VSTLIteratorPol.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace unittests {
 //-----------------------------------------------------------------------------
+using namespace std;
 
 VIteratorTests::VIteratorTests()
 {
@@ -55,10 +58,10 @@ class VArrayIterImpl : public IVIteratorPol<T>
 public:
 	VArrayIterImpl(T* pos) : m_pPos(pos) {};
 
-	//virtual vbool IsEqual(const IVIteratorPol<T>& in_Other) const 
-	//{
-	//	return m_pPos == in_Other.Get();
-	//}
+	virtual vbool IsEqual(const IVIteratorPol<T>& in_Other) const 
+	{
+		return m_pPos == in_Other.Get();
+	}
 
 	virtual IVIteratorPol<T>* CreateCopy() const
 	{
@@ -70,20 +73,10 @@ public:
 		return m_pPos - in_Other.Get();
 	}
 
-	//virtual void Proceed() 
-	//{
-	//	MoveBy(1);
-	//}
-
 	virtual void MoveBy(vint in_nDistance) 
 	{
 		m_pPos += in_nDistance;
 	}
-
-	//virtual void MoveBack() 
-	//{
-	//	MoveBy(-1);
-	//}
 
 	virtual Pointer Get() const
 	{
@@ -517,8 +510,62 @@ void testWithList()
 
 //-----------------------------------------------------------------------------
 
+template<typename Container>
+void TestVSTLIteratorPolWC()
+{
+	using namespace std;
+
+	typedef Container::iterator InternalIter;
+	typedef VSTLIteratorPol<InternalIter> STLIterPol;
+
+	Container mylist;
+	mylist.push_back(int(3));
+	
+	STLIterPol iter = mylist.begin();
+
+	int val = *(iter.Get());
+}
+
+void TestVSTLIteratorPol()
+{
+	using namespace std;
+
+	TestVSTLIteratorPolWC< list<int> >();
+	TestVSTLIteratorPolWC< vector<int> >();
+}
+
+template<typename Container, typename Pointer>
+void TestVSTLDerefIteratorPolWC()
+{
+	using namespace std;
+
+	//typedef list<int*> Container;
+	typedef Container::iterator InternalIter;
+	typedef VSTLDerefIteratorPol<InternalIter, int> STLIterPol;
+
+	Container mylist;
+	mylist.push_back(Pointer(new int(5)));
+
+	STLIterPol iter = mylist.begin();
+
+	int val = *(iter.Get());
+}
+
+void TestVSTLDerefIteratorPol()
+{
+	TestVSTLDerefIteratorPolWC< list<int*>, int* >();
+	TestVSTLDerefIteratorPolWC< vector<int*>, int* >();
+
+	typedef VPointer<int>::SharedPtr IntSmartPtr;
+	
+	TestVSTLDerefIteratorPolWC< list<IntSmartPtr>, IntSmartPtr >();
+}
+
 void VIteratorTests::ExecuteTest()
 {
+	TestVSTLIteratorPol();
+	TestVSTLDerefIteratorPol();
+
 	typedef VOutputIterator<int> IntOI;
 	typedef VInputIterator<int> IntII;
 	typedef VForwardIterator<int> IntFI;

@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/VFS/IVAccessRights.h>
-#include <v3d/Core/Wrappers/VSTLDerefSPIteratorPol.h>
+#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h>
 #include <v3d/VFS/VIOException.h>
 #include <v3d/VFS/IVDataProviderPool.h>
 #include <v3d/Core/VObjectRegistry.h>
@@ -60,7 +60,7 @@ IVFileSystemObject::AccessRightsPtr VDirectory::GetAccessRights() const
 
 IVDirectory::DirIterRange VDirectory::SubDirs()
 {
-	typedef VSTLDerefSPIteratorPol<
+	typedef VSTLDerefIteratorPol<
 		DirList::iterator, 
 		IVDirectory> DirIterPol;
 
@@ -71,7 +71,7 @@ IVDirectory::DirIterRange VDirectory::SubDirs()
 
 IVDirectory::ConstDirIterRange VDirectory::SubDirs() const
 {
-	typedef VSTLDerefSPIteratorPol<
+	typedef VSTLDerefIteratorPol<
 		DirList::const_iterator, 
 		const IVDirectory
 	> DirIterPol;
@@ -83,7 +83,7 @@ IVDirectory::ConstDirIterRange VDirectory::SubDirs() const
 
 IVDirectory::FileIterRange VDirectory::Files()
 {
-	typedef VSTLDerefSPIteratorPol<
+	typedef VSTLDerefIteratorPol<
 		FileList::iterator, 
 		IVFile
 	> FileIterPol;
@@ -95,7 +95,7 @@ IVDirectory::FileIterRange VDirectory::Files()
 
 IVDirectory::ConstFileIterRange VDirectory::Files() const
 {
-	typedef VSTLDerefSPIteratorPol<
+	typedef VSTLDerefIteratorPol<
 		FileList::const_iterator, 
 		const IVFile
 	> FileIterPol;

@@ -257,12 +257,12 @@ struct VIterTraitsBase
  * template specialisations for iterator_traits for velox iterators
  */
 
-#define V3D_DECLARE_ITER_TRAITS(IterType, IterCategory)\
-	template<typename T, typename SmartPtr>\
-	struct std::iterator_traits< IterType <T, SmartPtr> >\
-		: public v3d::VIterTraitsBase< IterType<T, SmartPtr> >\
-	{\
-		typedef std::IterCategory iterator_category;\
+#define V3D_DECLARE_ITER_TRAITS(IterType, IterCategory)			\
+	template<typename T, typename SmartPtr>						\
+	struct std::iterator_traits< IterType <T, SmartPtr> >		\
+		: public v3d::VIterTraitsBase< IterType<T, SmartPtr> >	\
+	{															\
+		typedef std::IterCategory iterator_category;			\
 	};
 
 V3D_DECLARE_ITER_TRAITS(v3d::VOutputIterator, output_iterator_tag)

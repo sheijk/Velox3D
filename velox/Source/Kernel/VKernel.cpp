@@ -139,7 +139,7 @@ void VKernel::DelegateControl()
 	{
 		int ret = pApp->Main();
 
-	vout << "Return value of main service:\n";
+		vout << "Return value of main service:\n";
 	}
 	else
 	{

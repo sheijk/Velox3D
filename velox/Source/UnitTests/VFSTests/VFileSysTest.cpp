@@ -247,7 +247,7 @@ void CheckCreateDelete()
 	
 	// check whether it exists
 
-	OutputFSDirStructure();
+//	OutputFSDirStructure();
 
 	// delete it
 	pDir->DeleteSubdir("testCreateDir");
@@ -260,18 +260,18 @@ void CheckCreateDelete()
 
 	pDir->CreateFile("createTest.file", accFlags);
 
-	OutputFSDirStructure();
+//	OutputFSDirStructure();
 
 	// delete file
 	pDir->DeleteFile("createTest.file");
 
-	OutputFSDirStructure();
+//	OutputFSDirStructure();
 }
 
 void VFileSysTest::ExecuteTest()
 {
 	// output all mounted files and dirs
-	OutputFSDirStructure();
+//	OutputFSDirStructure();
 
 	//TODO: test file mounting
 

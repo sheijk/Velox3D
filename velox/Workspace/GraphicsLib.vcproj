@@ -63,7 +63,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;Local/ExternalLibs/gmtl"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
@@ -147,6 +147,9 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Graphics\Descriptions\VTriangle.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Graphics\Descriptions\VVertexList.h">
 				</File>
 			</Filter>
 		</Filter>

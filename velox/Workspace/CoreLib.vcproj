@@ -135,6 +135,9 @@
 					RelativePath="..\Api\V3d\Core\Wrappers\IVIteratorPol.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\VGenericUtils.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\VIterator.h">
 				</File>
 				<File
@@ -144,13 +147,13 @@
 					RelativePath="..\Api\V3d\Core\Wrappers\VSTLDerefIteratorPol.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\Wrappers\VSTLDerefSPIteratorPol.h">
-				</File>
-				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\VSTLIteratorPol.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\VString.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\VWrapIteratorPolBase.h">
 				</File>
 			</Filter>
 			<Filter
@@ -194,6 +197,13 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\VTypes.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Containers"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Core\Container\VList.h">
 				</File>
 			</Filter>
 		</Filter>

@@ -7,7 +7,7 @@
 		<Service id="window" desc="Window Manager" filename="WindowService.dll"/>
 		<Service id="wxwindows" desc="WxWindows Manager" filename="WxWindowsService.dll"/>
 		<Service id="console" desc="Console" filename="ConsoleService.dll"/>
-		<Service id="editor" desc="Editor service" filename="EditorService.dll"/>
+		<!-- Service id="editor" desc="Editor service" filename="EditorService.dll"/ -->
 		<Service id="vfs" desc="Virtual File System" filename="VirtualFileSystem.dll"/>
 		<Service id="app" desc="The main program" filename="ExampleApp.dll"/>
 	</Services>
