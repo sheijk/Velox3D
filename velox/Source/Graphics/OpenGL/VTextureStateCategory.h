@@ -22,6 +22,9 @@ namespace graphics {
  */
 class VTextureStateCategory : public IVStateCategory
 {
+	typedef VMaterialDescription::TextureFilter TextureFilter;
+	typedef VMaterialDescription::TextureWrapMode TextureWrapMode;
+
 	typedef std::map<VMaterialDescription::ByteBufferHandle, VTextureState*> 
 		TextureMap;
 
@@ -30,6 +33,9 @@ class VTextureStateCategory : public IVStateCategory
 
 	VTextureState* CreateTextureState(const VMaterialDescription::TextureRef& in_Ref);
 	VTextureState* GetTextureState(const VMaterialDescription::TextureRef& in_Ref);
+
+	static vuint GetGLModeNum(const TextureWrapMode in_WrapMode);
+	static vuint GetGLModeNum(const TextureFilter in_Filer);
 
 public:
 	VTextureStateCategory();

@@ -58,10 +58,22 @@ VTextureState* VTextureStateCategory::CreateTextureState(
 	glBindTexture(GL_TEXTURE_2D, id);
 
 	glPixelStorei  (GL_UNPACK_ALIGNMENT, 1);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,  GL_LINEAR);
+	glTexParameteri(
+		GL_TEXTURE_2D,
+		GL_TEXTURE_WRAP_S,
+		GetGLModeNum(in_Ref.wrapTexCoordU) );
+    glTexParameteri(
+		GL_TEXTURE_2D,
+		GL_TEXTURE_WRAP_T,
+		GetGLModeNum(in_Ref.wrapTexCoordV) );
+	glTexParameteri(
+		GL_TEXTURE_2D,
+		GL_TEXTURE_MIN_FILTER,
+		GetGLModeNum(in_Ref.minificationFilter) );
+	glTexParameteri(
+		GL_TEXTURE_2D,
+		GL_TEXTURE_MAG_FILTER,
+		GetGLModeNum(in_Ref.magnificationFilter) );
 	glTexEnvi	   (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,  GL_MODULATE);
 
 	gluBuild2DMipmaps(
@@ -100,6 +112,32 @@ VTextureState* VTextureStateCategory::CreateState(const VMaterialDescription& in
 
 		return GetTextureState(*in_Descr.pTextureList);
 	}
+}
+
+vuint VTextureStateCategory::GetGLModeNum(const TextureFilter in_Filer)
+{
+	switch( in_Filer )
+	{
+	case VMaterialDescription::FilterNearest:				return GL_NEAREST;
+	case VMaterialDescription::FilterLinear:				return GL_LINEAR;
+	case VMaterialDescription::FilterNearestMipmapNearest:	return GL_NEAREST_MIPMAP_NEAREST;
+	case VMaterialDescription::FilterLinearMipmapNearest:	return GL_LINEAR_MIPMAP_NEAREST;
+	case VMaterialDescription::FilterNearestMipmapLinear:	return GL_NEAREST_MIPMAP_LINEAR;  
+	case VMaterialDescription::FilterLinearMipmapLinear:	return GL_LINEAR_MIPMAP_LINEAR;
+	};
+
+	V3D_THROW(VException, "illegal texture filter");
+}
+
+vuint VTextureStateCategory::GetGLModeNum(const TextureWrapMode  in_WrapMode)
+{
+	switch( in_WrapMode )
+	{
+	case VMaterialDescription::TextureRepeat:	return GL_REPEAT;
+	case VMaterialDescription::TextureClamp:	return GL_CLAMP;
+	}
+
+	V3D_THROW(VException, "illegal texture wrapping mode");
 }
 
 
