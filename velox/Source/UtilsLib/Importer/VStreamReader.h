@@ -7,7 +7,7 @@
 #include <list>
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace util {
+namespace utils {
 namespace importer {
 //-----------------------------------------------------------------------------
 //using namespace v3d::vfs;

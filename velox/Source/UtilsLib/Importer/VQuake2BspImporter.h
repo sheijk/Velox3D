@@ -5,9 +5,12 @@
 #include <v3d/utils/Graphics/VPlane3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
-namespace util{
+namespace utils{
 namespace importer{
 //-----------------------------------------------------------------------------
+
+using v3d::utils::graphics::VPlane3f;
+using v3d::utils::graphics::VVector3f;
 
 #define BSPVERSION	38
 
@@ -60,8 +63,6 @@ namespace importer{
 #define min(a, b)  (((a) < (b)) ? (a) : (b))
 #define max(a, b)  (((a) > (b)) ? (a) : (b))
 
-
-using namespace v3d::graphics;
 
 /*
  * A bsp importer currently not loading textures
@@ -313,7 +314,7 @@ public:
 	Area*			m_pAreas;
 	PortalArea*		m_pAreaPortals;
 	Portal*			m_pPortals;
-	VVertex3f*      m_pVertices;
+	VVector3f*      m_pVertices;
 	Edge* 			m_pEdges;
 	Face*			m_pFaces;
 	TextureInfo*	m_pTextureInfo;

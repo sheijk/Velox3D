@@ -1,7 +1,7 @@
 #include "VModelFace.h"
 //-----------------------------------------------------------------------------
 namespace v3d{
-namespace util{
+namespace utils{
 namespace importer{
 //-----------------------------------------------------------------------------
 VModelFace::VModelFace()

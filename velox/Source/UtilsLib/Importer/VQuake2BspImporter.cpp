@@ -7,7 +7,7 @@
 
 //-----------------------------------------------------------------------------
 namespace v3d{
-namespace util{
+namespace utils{
 namespace importer{
 //-----------------------------------------------------------------------------
 
@@ -83,8 +83,8 @@ vbool VQuake2BspImporter::Create(VStringParam sFilename, VStringParam sTexturePa
 	//create all neccassary pointers
 
 	lump			= &header->m_pLumps[LUMP_VERTICES];
-	m_pVertices		= (VVertex3f*)(m_pRawData + lump->m_iFileOffset);
-	m_iNumVertices	= lump->m_iFileLength / sizeof(VVertex3f);
+	m_pVertices		= (VVector3f*)(m_pRawData + lump->m_iFileOffset);
+	m_iNumVertices	= lump->m_iFileLength / sizeof(VVector3f);
 
 	lump			= &header->m_pLumps[LUMP_EDGES];
 	m_pEdges		= (Edge*)(m_pRawData + lump->m_iFileOffset);

@@ -1,7 +1,7 @@
 #include "VModelObject3D.h"
 //-----------------------------------------------------------------------------
 namespace v3d{
-namespace util{
+namespace utils{
 namespace importer{
 //-----------------------------------------------------------------------------
 VModelObject3D::VModelObject3D()

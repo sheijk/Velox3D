@@ -5,7 +5,7 @@
 #include <v3d/Core/VTypes.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
-namespace util{
+namespace utils{
 namespace importer{
 //-----------------------------------------------------------------------------
 class VModelFace

@@ -6,7 +6,7 @@
 #include "VStreamReader.h"
 //-----------------------------------------------------------------------------
 namespace v3d{
-namespace util{
+namespace utils{
 namespace importer{
 //-----------------------------------------------------------------------------
 VOBJModelImporter::VOBJModelImporter()
