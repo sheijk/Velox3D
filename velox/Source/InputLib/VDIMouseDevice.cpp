@@ -130,7 +130,7 @@ vbool VDIMouseDevice::CreateDeviceObjects()
  */
 vuint VDIMouseDevice::GetButtonCount()
 {
-	return m_InputHelper.m_ButtonList.size();
+	return (vuint)m_InputHelper.m_ButtonList.size();
 }
 
 /**
@@ -230,14 +230,29 @@ void VDIMouseDevice::Update()
 				V3D_THROW(VUpdateException, "Input update error");
 		}
 
-	m_LeftButton->Set( mouseState.rgbButtons[0] & 0x80 );
-	m_RightButton->Set( mouseState.rgbButtons[1] & 0x80 );
+		if(mouseState.rgbButtons[0] & 0x80)
+			m_LeftButton->Set(true);
+		else
+			m_LeftButton->Set(false);
+
+		if(mouseState.rgbButtons[1] & 0x80)
+		{
+			m_RightButton->Set(true);
+		}
+		else
+			m_RightButton->Set(false);
+
+
+
+	//@note: changed cos of compiler warning, check working -ins
+	/*m_LeftButton->Set( mouseState.rgbButtons[0] & 0x80 );
+	  m_RightButton->Set( mouseState.rgbButtons[1] & 0x80 )*/;
 
 	//vout << mouseState.lX << vendl;
 	
-	m_XAxis->Set( mouseState.lX );
-	m_YAxis->Set( mouseState.lY );
-	m_Wheel->Set( mouseState.lZ );
+	m_XAxis->Set( (vfloat32)mouseState.lX );
+	m_YAxis->Set( (vfloat32)mouseState.lY );
+	m_Wheel->Set( (vfloat32)mouseState.lZ );
 }
 
 /**
