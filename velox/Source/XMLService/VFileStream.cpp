@@ -89,7 +89,8 @@ VFileStream::~VFileStream()
 	}
 	catch(VException e)
 	{
-		cout << "Warning: error while closing file" << endl;
+		//TODO: debug message senden
+		//vout << "Warning: error while closing file" << endl;
 	}
 }
 

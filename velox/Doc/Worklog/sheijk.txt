@@ -57,6 +57,7 @@ SafeDelete + SafeDeleteArray Fkten
 Project Files gefixt (falsche Ausgabe Dateinamen von UtilsLib + CommonServices)
 Vorlagen fuer Service + Lib Projekte in Workspace/Templates
 Templates fuer Velox Files ueberarbeitet
+cout durch vout ersetzt
 
 06.09.2003
 Shutdown Bug gefixt

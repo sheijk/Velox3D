@@ -4,6 +4,7 @@
 #include <v3d/Core/VException.h>
 #include <v3d/UnitTests/IVTestManager.h>
 #include <v3d/UnitTests/VUnitTestException.h>
+#include <v3d/Core/VIOStream.h>
 
 #include <v3d/VFS/IVFileSystem.h>
 #include <v3d/VFS/IVDirectory.h>
@@ -78,7 +79,7 @@ void PrintDirInfo(const IVDirectory& in_Dir, vuint in_prefWS)
 	// access rights
 
 	// output info
-	cout << "[" << GetARInfo(in_Dir.GetAccessRights()) << "]" << strOut << "\n";
+	vout << "[" << GetARInfo(in_Dir.GetAccessRights()) << "]" << strOut << "\n";
 }
 
 void PrintFileInfo(const IVFile& in_File, vuint in_prefWS)
@@ -93,7 +94,7 @@ void PrintFileInfo(const IVFile& in_File, vuint in_prefWS)
 	// access rights
 	
 	// output info
-	cout << "[" << GetARInfo(in_File.GetAccessRights()) << "]" << strOut << "\n";
+	vout << "[" << GetARInfo(in_File.GetAccessRights()) << "]" << strOut << "\n";
 }
 
 template<typename T>
@@ -139,12 +140,9 @@ void OutputFSDirStructure()
 	vuint fileCount = 0;
 	vuint dirCount = 0;
 	
-	// used to easily be able output somewhere else
-	ostream& out = cout;
-
 	// print header
-	out << "--------------------------------------------------\n";
-	out << "Virtual File System Structure:                    \n\n";
+	vout << "--------------------------------------------------\n";
+	vout << "Virtual File System Structure:                    \n\n";
 
 	// print dir structure:
 	try
@@ -162,8 +160,7 @@ void OutputFSDirStructure()
 	}
 
 	// print footer
-	out << "--------------------------------------------------\n";
-	out << fileCount << " files in " << dirCount << " dirs" << endl;
+	vout << "--------------------------------------------------\n";
 }
 
 void CheckStreamContent(
@@ -177,7 +174,7 @@ void CheckStreamContent(
 
 	while(readPos < in_nMaxSize && in_Stream.Read(&testChar, 1) == 1)
 	{
-		cout << in_pContent[readPos];
+		vout << in_pContent[readPos];
 
 		if( testChar != in_pContent[readPos++] )
 		{
@@ -185,7 +182,7 @@ void CheckStreamContent(
 		}
 	}
 
-	cout << endl;
+	vout << vendl;
 }
 
 void CheckTestFile()

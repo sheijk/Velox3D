@@ -4,8 +4,8 @@
 #include <v3d/UnitTests/IVUnitTest.h>
 #include <v3d/UnitTests/IVTestManager.h>
 #include <v3d/UnitTests/VUnitTestException.h>
+#include <v3d/Core/VIOStream.h>
 
-#include <iostream>
 #include <string>
 #include <list>
 #include <algorithm>
@@ -14,9 +14,6 @@
 //TODO: write documentation for VTestSuite
 
 //-----------------------------------------------------------------------------
-using std::cout;
-using std::endl;
-
 namespace v3d {
 namespace unittests {
 //-----------------------------------------------------------------------------
@@ -70,8 +67,8 @@ void VTestSuite::PrintList() const
 
 	for( ; iter != m_UnitTests.end(); ++iter)
 	{
-		cout << "\"" << iter->strName<< "\" tests \"" 
-			<< iter->strSubject << "\"" << endl;
+		vout << "\"" << iter->strName<< "\" tests \"" 
+			<< iter->strSubject << "\"" << vendl;
 	}
 }
 
@@ -88,40 +85,40 @@ void VTestSuite::ExecuteTests()
 		}
 		catch(VUnitTestException exc)
 		{
-			cout << "Error detected:" << endl
-				<< "Test name:     " << iter->strName << endl
+			vout << "Error detected:" << vendl
+				<< "Test name:     " << iter->strName << vendl
 				<< "Error message: " << "\"" << exc.GetErrorString() 
-				<< "\"" << endl
-				<< "Line:          " << exc.GetErrorLine() << endl
-				<< "File:          " << exc.GetErrorFile() << endl
-				<< endl;
+				<< "\"" << vendl
+				<< "Line:          " << exc.GetErrorLine() << vendl
+				<< "File:          " << exc.GetErrorFile() << vendl
+				<< vendl;
 
 			bErrors = true;
-//			cout << "Test \"" + iter->strName + "\" detected an error in"
+//			vout << "Test \"" + iter->strName + "\" detected an error in"
 //				+ iter->strSubject << "Line nr. " << exc.GetErrorLine()
-//				<< " File \"" << exc.GetErrorFile() << endl;
-//			cout << "  Error message: \"" + exc.GetExtendedErrorString()
+//				<< " File \"" << exc.GetErrorFile() << vendl;
+//			vout << "  Error message: \"" + exc.GetExtendedErrorString()
 //				+ "\"";
 		}
 		catch(VException exc)
 		{
-			cout << "A Velox non UnitTest Exception occured while testing "
-				<< "test may be corrupt." << endl
-				<< "Test name:     " << iter->strName << endl
+			vout << "A Velox non UnitTest Exception occured while testing "
+				<< "test may be corrupt." << vendl
+				<< "Test name:     " << iter->strName << vendl
 				<< "Error message: " << "\"" << exc.GetErrorString() 
-				<< "\"" << endl
-				<< "Line:          " << exc.GetErrorLine() << endl
-				<< "File:          " << exc.GetErrorFile() << endl
-				<< endl;
+				<< "\"" << vendl
+				<< "Line:          " << exc.GetErrorLine() << vendl
+				<< "File:          " << exc.GetErrorFile() << vendl
+				<< vendl;
 
 			bErrors = true;
 		}
 		//catch(...)
 		//{
-		//	cout << "Unknown error occured in test " << endl
-		//		<< "<" << iter->strName << ">" << endl
-		//		<< "Unit test might be corrupt or incomplete" << endl
-		//		<< endl;
+		//	vout << "Unknown error occured in test " << vendl
+		//		<< "<" << iter->strName << ">" << vendl
+		//		<< "Unit test might be corrupt or incomplete" << vendl
+		//		<< vendl;
 
 		//	bErrors = true;
 		//}
@@ -129,26 +126,25 @@ void VTestSuite::ExecuteTests()
 
 	if( !bErrors )
 	{
-		cout << "no errors detected" << endl;
+		vout << "no errors detected" << vendl;
 	}
 }
 
 int VTestSuite::Main()
-
 {
 	// generate test list and print it
 	GenerateTestList();
 
 	// print "header"
-	cout << "-----------------------------------------------------------------------------"
-		<< endl << "-- UnitTest Suite: starting tests" << endl;
+	vout << "-----------------------------------------------------------------------------"
+		<< vendl << "-- UnitTest Suite: starting tests" << vendl;
 
 	// print list of tests
-	cout << "list of unit tests" << endl << endl;
+	vout << "list of unit tests" << vendl << vendl;
 
 	PrintList();
 
-	cout << endl << endl << "executing tests" << endl << endl;
+	vout << vendl << vendl << "executing tests" << vendl << vendl;
 
 	// do tests
 	ExecuteTests();

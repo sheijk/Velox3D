@@ -15,12 +15,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#include <iostream>
-
 //-----------------------------------------------------------------------------
-using std::cout;
-using std::endl;
-
 using namespace v3d;
 //-----------------------------------------------------------------------------
 

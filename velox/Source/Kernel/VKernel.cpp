@@ -15,10 +15,6 @@
 
 //-----------------------------------------------------------------------------
 using std::string;
-//using std::cout;
-//using std::endl;
-
-//using v3d::example::IVExampleService;
 
 using namespace v3d::xml;
 
