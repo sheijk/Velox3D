@@ -19,7 +19,10 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 
+	operator T*() aus SmartPointern entfernen, wg. Fehlertraechtigkeit
 Vfs:
+	IVAccessRights: gegen einfache konkrete Klasse austauschen (?)
+	.xml MountTable parsen
 	Archive
 	Dateien + Verzeichnisse erzeugen und loeschen
 	Zugriffsrechte einhalten bei
