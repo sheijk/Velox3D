@@ -30,11 +30,12 @@ public:
 	{
 	}
 
-	//VBoxMesh( vfloat32 in_fHeight, vfloat32 in_fWidth, vfloat32 in_fDepth )
-	//	: m_fHeight(in_fHeight), m_fWidth(in_fWidth), m_fDepth(in_fDepth), 
-	//	//GetVertexBuffer()(new VertexStructure[36], 36)
-	//{
-	//}
+	VBoxMesh( vfloat32 in_fHeight, vfloat32 in_fWidth, vfloat32 in_fDepth )
+		: m_fHeight(in_fHeight), m_fWidth(in_fWidth), m_fDepth(in_fDepth),
+		VGeometryData<VertexStructure>(VMeshDescription::Triangles, 36)
+		//GetVertexBuffer()(new VertexStructure[36], 36)
+	{
+	}
 
 	~VBoxMesh() {};
 

@@ -26,22 +26,23 @@ Personal Notes:
 make physic states non copyable and assignable
 
 TODO List:
+- FIX the memleak in VPhyicWorld DeleteBodyPairList()
+
 - Console is closeable with alt f4
 
 
 - Indoor Rendering
 
 
-low:
-- remove VDisplaySettings.cpp
-
 medium:
-
 - add multiple window ogl context sharing support
 - fix WxConnector and old non needed wx stuff + make it clean and safe
 
 high:
-- wrap bsp renderer out of IVCell to make it more robust
+
+-TODO check external libs for correct debug information
+-TODO rewrite Velocity2 into Hinge2 instead of Joint!
+
 - build in vfs saving for image saving
 
 -------------------------------------------------------------------------------
@@ -62,6 +63,15 @@ req
 
 
 Done List:
+
+07.01 - 9.01.05
+- fixed a compiler error im gmtl log (atan to aTan)
+- written a wrapper around gmtl quaternion
+- fixed several bugs in ode implementation
+ 
+
+05.11 - 18.11.04
+- implemented several physic classes
 
 29.09.04
 - fixed todos in collision system
