@@ -21,6 +21,9 @@ TODO List:
 -------------------------------------------------------------------------------
 Done List:
 
+12.03.04
+- added matrix rotation methods (VMatrixRotationOps.h in api/math)
+
 10.03.04
 - added camera
 - cleaned device

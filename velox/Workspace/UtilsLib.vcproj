@@ -120,6 +120,9 @@
 				RelativePath="..\Api\V3d\Math\VMatrixOps.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Math\VMatrixRotationOps.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Math\VVector.h">
 			</File>
 		</Filter>
