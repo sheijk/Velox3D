@@ -29,6 +29,10 @@ Auf die Langnese Insel ziehen
 
 log:
 
+03.07.2003
+SmartPointer Tutorial liegt in Doc/Tutorials/SmartPointers
+Doc/veloxdoc.css: StyleSheet fuer die Dokumentation, in alle .html eingebunden
+
 01.07.2003
 Neue SmartPointer sind einsatzbereit
 

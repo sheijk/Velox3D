@@ -1,0 +1,149 @@
+<html>
+<head>
+	  <title>SmartPointers</title>
+	  <link rel=stylesheet type="text/css" href="../../veloxdoc.css">
+</head>
+<body>
+	  <h1>SmartPointer Tutorial</h1>
+	  <h2>Simple usage</h2>
+	  <p>
+	  SmartPointers are small utility classes which act exactly like normal
+	  pointers and provide some extra functionality like guarantueing that 
+	  the object they point to will be deleted.<br>
+	  Velox's smart pointers can be used exactly like any common pointer. So
+	  instead of writing <br>
+	  <div id="cpp">
+	  MyClass* pInstance = new MyClass(); <br>
+	  if( pInstance == 0 ) alert("krawae!"); <br>
+	  pInstance->foo(3); <br>
+	  delete pInstance; <br>
+	  pInstance = 0; <br>
+	  </div>
+	  you can write <br>
+	  <div id="cpp">
+	  VPointer<MyClass>::AutoPtr pInstance = new MyClass(); <br>
+	  if( pInstance == 0 ) alert("krawae!"); <br>
+	  pInstance->foo(3);<br>
+	  </div>
+	  The SmartPointer will delete his subject once he is destroyed himself.
+	  Use a smart pointer exactly like a normal pointer. You can assign values,
+	  other smart pointers of the same type (or of compatible types if supported
+	  by the smart pointer class), compare two smart pointers, compare smart 
+	  pointer and normal pointers, etc. <br>
+	  Additionally, smart pointers provide the following functions:
+	  <div id="cpp">
+	  // get a pointer to the target <br> 
+	  T* Get(); <br>
+	  const T* Get() const; <br>
+	  // assign new target <br> 	  
+	  void Assign(T*); <br>
+	  // release it (reset to 0) <br>
+	  void Release(); <br>
+	  </div>
+	  </p>
+	  
+	  <h2>Important techniques</h2>
+	  
+	  <h3>Resource aquisition is intialization</h3>
+	  <p>
+	  Use smart pointers for the "resource aquisition is intialization" idiom.
+	  Instead of using pure pointers use a smart pointer when working with 
+	  dynamically allocated memory. <br>
+	  Might the following code cause memory leaks?
+	  <div id="cpp">
+	  MyClass* pInstance = new MyClass(); <br>
+	  foo(pInstance); <br>
+	  delete pInstance; <br>
+	  </div>
+	  Yes! Imaging the function foo to throw an exception. If an exception is thrown
+	  the delete statement will never be reached and the memory won't be released.
+	  Thus this litte innocent piece of code introduced a mean memory leak to
+	  our program. <br>
+	  Now consider this version:
+	  <div id="cpp">
+	  VPointer<MyClass>::AutoPtr pSaveInstance = new MyClass(); <br>
+	  foo(pSaveInstance.Get()); <br>
+	  </div>
+	  Now if foo throws an exception the stack will be unrolled an the AutoPtr
+	  instance will be destroyed and delete it's target. Now we have code which 
+	  is both shorter and won't cause any surprising problems.
+	  </p> 
+	  
+	  <h3>Don't trust the user</h3>
+	  Imagine a simple file class which wraps the FILE handle and guarantees
+	  the file to be closed. Let it be created by a factory method which returns
+	  a pointer to the file class. Look at this code:
+	  <div id="cpp">
+	  File* pFile = FileManager::Open("testfile.dat"); <br>
+	  pFile->WriteInt(3); <br>
+	  </div>
+	  Obviously, the user forgot to delete the File object after he used it. Thus
+	  the file will never be closed leaving an open file handle which forces the
+	  user to restart his machine if he wants to use the file again. Quite an awkward
+	  result of a simple error. Using a smart pointer this problem can be completely
+	  eliminated. We change the definition of our FileManger class:
+	  <div id="cpp">
+	  class FileManager { <br>
+	  &nbsp;&nbsp;&nbsp;// use a typedef for ease of use an to be able to change the used
+	  smart pointer class easily <br>
+	  &nbsp;&nbsp;&nbsp;typedef VPointer<File>::AutoPtr FilePtr; <br>
+	  &nbsp;&nbsp;&nbsp;FilePtr Open(string); <br>
+	  }; <br>
+	  </div>
+	  Now the code is as simple as before, but protects the user from tedious errors:
+	  <div id="cpp">
+	  FileManager::FilePtr pFile = FileManager::Open("testfile.dat"); <br>
+	  pFile->WriteInt(3);
+	  </div> 
+	  Always use this technique when adding a factory method to a service.
+	  
+	  <h2>Standard SmartPointer Types</h2>
+	  <p>
+	  There are several smart pointer types defined in &lt;v3d/Core/SmartPtr/VGuards.h&gt;:
+	  </p>
+	  
+	  <h3>AutoPtr</h3>
+	  <p>
+	  A pointer with an "exclusive owner" policy. This means, that only one smart
+	  pointer can own and point to one subject at a time. When the smart pointer
+	  is copied, the source is reset to 0. Thus, the AutoPtr cannot be used in
+	  STL collections. (see std::auto_ptr for more info, AutoPtr models it's
+	  behaviour). <br>
+	  Example:
+	  <div id="cpp">
+	  VPointer<MyClass>::AutoPtr pAutoPtr = new MyClass(); <br>
+	  VPointer<MyClass>::AutoPtr pSecondPtr; <br>
+	  pSecondPtr = pAutoPtr; <br>
+	  // pSecondPtr assumed the ownership of the MyClass target instance
+	  if( pAutoPtr != 0 || pSecondPtr == 0 ) throw AnException("AutoPtr malfunction"); <br>
+	  </div>
+	  </p>
+	  
+	  <h3>SharedPtr</h3>
+	  <p>
+	  A smart pointer class which implements a simple reference counting strategy.
+	  For each target a reference count is maintained which keeps track how many
+	  pointers use the target. Once a target is not used by any pointer any more
+	  it is deleted. <br>
+	  Each smart pointer has a pointer to a shared storage which stores a pointer
+	  to the target and the reference count. When a pointer is assigned to a value
+	  a new shared storage is created with it's ref count initialized to 1. When 
+	  a pointer is copied/assigned to another smart pointer it's shared storage's 
+	  ref count is increased. When a SharedPtr is assigned a new value it's old 
+	  target's ref count is decreased. When the ref counts reaches zero the
+	  target will be deleted. <br>
+	  A SharedPtr can safely be used in STL containers like std::list. <br>
+	  Example:
+	  <div id="cpp">
+	  VPointer<MyClass>::SharedPtr pSharedPtr, pSharedPtr2, pSharedPtr3; <br>
+	  pSharedPtr = new MyClass(); <br>
+	  pSharedPtr2 = pSharedPtr; <br>
+	  // now both smart pointer refer to the same object, it's ref count is 2 <br>
+	  pSharedPtr = 0;
+	  // only pSharedPtr2 points to the target, it's ref count is 1 <br>
+	  pSharedPtr2 = pSharedPtr3;
+	  // no more pointers point to the target, it is deleted <br>
+	  </div> 
+	  </p>
+	  
+</body>
