@@ -66,6 +66,17 @@ void ApplyMaterial(IVDevice& in_Device,
 	}
 }
 
+void RenderMesh(IVDevice& in_Device, IVDevice::MeshHandle in_hMesh)
+{
+	for(vuint matid = 0; matid < in_hMesh->GetMaterialCount(); ++matid)
+	{
+		IVMaterial* pMaterial = & in_hMesh->GetMaterial(matid);
+
+		ApplyMaterial(in_Device, pMaterial);
+		in_Device.RenderMesh(in_hMesh);
+	}
+}
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

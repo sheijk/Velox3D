@@ -7,6 +7,8 @@
 #include <V3dLib/Graphics/Renderers/Terrain/VTerrainLodChunk.h>
 #include <V3dLib/Math.h>
 
+#include <V3dLib/Graphics/Misc/IVCamera.h>
+
 #include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { 

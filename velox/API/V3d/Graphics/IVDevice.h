@@ -2,22 +2,19 @@
 #define V3D_IVDEVICE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Graphics/IVMesh.h>
-#include <v3d/Graphics/IVMaterial.h>
 #include <v3d/Graphics/VBuffer.h>
-#include <v3d/Graphics/VMeshDescription.h>
-#include <v3d/Graphics/VMaterialDescription.h>
-#include <v3d/Graphics/VEffectDescription.h>
-#include <v3d/Graphics/IVRenderState.h>
 
-#include <v3d/Math/VMatrix.h>
-
-#include <V3dLib/Graphics/Misc/VCamera.h>
-
+#include <V3d/Math/VMatrix.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
+class VMeshDescription;
+class VEffectDescription;
+struct VMaterialDescription;
+class IVRenderState;
+class IVMesh;
+class IVMaterial;
 
 /**
  * A graphical device. Abstraction of DirectGraphics/OpenGL/..
@@ -29,14 +26,10 @@ class IVDevice
 {
 public:
 	/** a handle to a device buffer */
-	typedef VMeshDescription::BufferHandle BufferHandle;
-
+	typedef IVBuffer<vbyte>* BufferHandle;
 	typedef VBufferBase::CopyMode BufferCopyMode;
-
 	typedef VBuffer<vbyte> Buffer;
-
 	typedef IVMesh* MeshHandle;
-
 	typedef IVMaterial* MaterialHandle;
 
 	enum BufferType

@@ -3,8 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/input.h>
-#include <v3d/graphics.h>
+#include <v3d/Input.h>
+#include <v3d/Graphics.h>
+#include <V3dLib/Graphics/Misc/VCamera.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

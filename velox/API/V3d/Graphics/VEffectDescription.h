@@ -5,6 +5,7 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/Core/VException.h>
+#include <V3dLib/Utils/VStringValue.h>
 
 #include <vector>
 #include <string>
@@ -13,41 +14,6 @@
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
-
-class VStringValue
-{
-public:
-	template<typename T>
-	void Set(const T val)
-	{
-		std::stringstream str;
-		str << val;
-		m_strValue = str.str();
-	}
-
-	template<> void Set(const vbool val)
-	{
-		m_strValue = val ? "true" : "false";
-	}
-
-	template<typename T>
-	T Get() const
-	{
-		std::stringstream str;
-		str << m_strValue;
-		T t;
-		str >> t;
-		return t;
-	}
-
-	template<> vbool Get() const
-	{
-		return m_strValue == std::string("true");
-	}
-
-private:
-	std::string m_strValue;
-};
 
 class VStateParameter
 {
@@ -78,7 +44,7 @@ public:
 
 private:
 	VString m_strName;
-	VStringValue m_Value;
+	utils::VStringValue m_Value;
 };
 
 class VState

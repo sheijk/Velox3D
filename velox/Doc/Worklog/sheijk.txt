@@ -20,8 +20,6 @@ werden soll [ins] gar nicht wahr --sheijk
 -------------------------------------------------------------------------------
 ----- random thoughts:
 eine map fuer xml files? (config.services.vfs.filename = "vfs.dll" etc.),
-dafuer ein any objekt, was strings speichert und in bel. datentypen mittels
-template member konvertiert?
 
 Mem manager: fuer erzwungene Haltepunkte bei bestimmten Allokationen:
 ForceBreakpointOnMemAlloc(int num, string module); Funktion, die zu jeder Zeit
@@ -43,15 +41,17 @@ Doku:
 	  Services
 
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 ----- last things sheijk finished:
-
-log:
-
-TODO:
 
 25.09.2004
 - VDisplaySettings
+- Property Manager
+- Abhaengigkeiten von IVDevice.h reduziert (nur noch noetiges includen,
+  forward deklarationen etc)
+- Mechanismus zum animieren von States (bisher nur der Gruenanteil der Default
+  Color)
+- Animieren der Default Farbe und der Textur Matrix moeglich
 
 24.09.2004
 - Multipass Effekte
@@ -65,7 +65,7 @@ TODO:
   (siehe V3dLib/Graphics/Materials StateTypes.h, EffectUtils.h, VModeTypeInfo.h)
 - Vertex Buffer im Device verwenden Reference Counting und werden automatisch
   freigegeben
-- Texturen koennen ueber Effect Description gesetzt werden (erstmal nur per 
+- Texturen koennen ueber Effect Description gesetzt werden (erstmal nur per
   Buffer Referenz)
 - Fehler im Window Service (doppeltes Input Manager loeschen) gefixt
 

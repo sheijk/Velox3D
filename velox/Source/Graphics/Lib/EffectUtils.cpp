@@ -41,7 +41,8 @@ VState TextureState(
 	IVBuffer<vbyte>* hBuffer,
 	vuint width, vuint height,
 	VTextureFilter magnificationFilter, VTextureFilter minificationFilter,
-	VTextureWrapMode texCoordWrapU, VTextureWrapMode texCoordWrapV
+	VTextureWrapMode texCoordWrapU, VTextureWrapMode texCoordWrapV,
+	const VMatrix44f* pTextureMatrix
 	)
 {
 	VState textureState("texture");
@@ -53,6 +54,11 @@ VState TextureState(
 	textureState.SetParameter("wrapv", texCoordWrapV);
 	textureState.SetParameter("magnification.filter", magnificationFilter);
 	textureState.SetParameter("minification.filter", minificationFilter);
+
+	if( pTextureMatrix != 0 )
+	{
+		textureState.SetParameter("matrix", *pTextureMatrix);
+	}
 	
 	return textureState;
 }

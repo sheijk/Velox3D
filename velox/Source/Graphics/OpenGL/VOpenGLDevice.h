@@ -3,7 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/IVDevice.h>
+
 #include <v3d/Graphics/VDisplaySettings.h>
+#include <V3d/Math/VMatrix.h>
 
 #include <windows.h>
 #include <extgl/extgl.h>

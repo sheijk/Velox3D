@@ -13,6 +13,8 @@
 #include "UpdateManager/VUpdateManager.h"
 #include "SystemManager/VSystemManager.h"
 
+#include <V3dLib/Property/VPropertyManager.h>
+
 // thank you, windows.h -- it's a feature, not a bug :P -ins
 #undef NO_ERROR
 
@@ -37,6 +39,7 @@ using namespace v3d::image;
 using namespace v3d::window;
 using namespace v3d::error;
 using v3d::utils::VAllFilter;
+using namespace v3d::property;
 //-----------------------------------------------------------------------------
 
 class VVeloxModules : public v3d::VModuleBase
@@ -70,6 +73,9 @@ class VVeloxModules : public v3d::VModuleBase
 	// error
 	VPointer<VErrorService>::AutoPtr g_pErrorService;
 	VPointer<VErrorConsoleListener>::AutoPtr g_pConsoleListener;
+
+	// property
+	VPointer<VPropertyManager>::AutoPtr g_pPropertyManager;
 
 public:
 	VVeloxModules()
@@ -122,10 +128,16 @@ void VVeloxModules::Initialize()
 	// register standard listener
 	//TODO: hack entfernen
 	g_pErrorService->RegisterListener( g_pConsoleListener.Get(), new VAllFilter()  );
+
+	// property service
+	g_pPropertyManager.Assign(new VPropertyManager("property.manager"));
 }
 
 void VVeloxModules::Shutdown()
 {
+	// property
+	g_pPropertyManager.Release();
+
 	// error
 	//unregister debug loggers
 	g_pErrorService->UnregisterListener( g_pConsoleListener.Get() );

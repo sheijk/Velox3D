@@ -4,6 +4,8 @@
 
 #include <V3dLib/Graphics/Materials/VModeTypeInfo.h>
 
+#include "VOpenGLUtils.h"
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -21,30 +23,45 @@ VMiscState::VMiscState(const VMaterialDescription& in_Mat)
 	m_bDepthWrite = in_Mat.depthWriteMask == VMaterialDescription::DepthWrite;
 	m_bDepthTestEnabled = true;
 
-	m_DefaultColor = in_Mat.defaultColor;
+	//m_DefaultColor = in_Mat.defaultColor;
+	m_Red.Set(in_Mat.defaultColor.red);
+	m_Green.Set(in_Mat.defaultColor.green);
+	m_Blue.Set(in_Mat.defaultColor.blue);
+	m_Alpha.Set(in_Mat.defaultColor.alpha);
 
 	m_ColorMask = in_Mat.colorMask;
 
 	m_SourceFactor		= GetGLModeNum(in_Mat.sourceBlendFactor);
 	m_DestFactor		= GetGLModeNum(in_Mat.destBlendFactor);
 	m_bBlendingEnabled	= in_Mat.enableBlending;
+
+	VMatrix44f identity;
+	Identity(identity);
+	m_TextureMatrix.Set(identity);
 }
 
-VColor4f VMiscState::GetColor(const VRenderPass& in_Pass)
+void VMiscState::ReadColor(const VRenderPass& in_Pass)
 {
-	VColor4f color(0, 0, 0, 1);
-
 	VState const* pColorState(in_Pass.GetStateByName("color"));
-	
+
 	if( pColorState != 0 )
 	{
-		pColorState->GetParameter<vfloat32>("red", color.red);
-		pColorState->GetParameter<vfloat32>("green", color.green);
-		pColorState->GetParameter("blue", color.blue);
-		pColorState->GetParameter("alpha", color.alpha);
-	}
+		std::string value;
 
-	return color;
+		pColorState->GetParameter("red", value);
+		m_Red.Connect(value);
+		pColorState->GetParameter("green", value);
+		m_Green.Connect(value);
+		pColorState->GetParameter("blue", value);
+		m_Blue.Connect(value);
+		pColorState->GetParameter("alpha", value);
+		m_Alpha.Connect(value);
+
+		//pColorState->GetParameter<vfloat32>("red", color.red);
+		//pColorState->GetParameter<vfloat32>("green", color.green);
+		//pColorState->GetParameter("blue", color.blue);
+		//pColorState->GetParameter("alpha", color.alpha);
+	}
 }
 
 vuint VMiscState::GetPolygonMode(const std::string& in_strMode)
@@ -72,7 +89,7 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 	m_bDepthWrite = true;
 	m_bDepthTestEnabled = true;
 
-	m_DefaultColor = VColor4f(0, 0, 0, 1);
+	//m_DefaultColor = VColor4f(0, 0, 0, 1);
 
 	m_ColorMask.writeRed = true;
 	m_ColorMask.writeGreen = true;
@@ -82,6 +99,10 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 	m_SourceFactor = GetGLModeNum(VMaterialDescription::BlendSourceAlpha);
 	m_DestFactor = GetGLModeNum(VMaterialDescription::BlendOneMinusSourceAlpha);
 	m_bBlendingEnabled = false;
+
+	VMatrix44f identity;
+	Identity(identity);
+	m_TextureMatrix.Set(identity);
 
 	// overwrite with options from render pass
 
@@ -138,7 +159,17 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 		m_DestFactor = GetBlendFunction(blendDest);
 	}
 
-	m_DefaultColor = GetColor(in_Pass);
+	const VState* texmatState = in_Pass.GetStateByName("texture");
+	if( texmatState != 0 )
+	{
+		std::string value;
+		texmatState->GetParameter("matrix", value);
+
+		m_TextureMatrix.Connect(value);
+	}
+
+	ReadColor(in_Pass);
+	//m_DefaultColor = GetColor(in_Pass);
 }
 
 void VMiscState::Apply() const
@@ -157,12 +188,11 @@ void VMiscState::Apply() const
 	glDepthFunc(m_DepthFunction);
 	glDepthMask(m_bDepthWrite);
 
-	glColor4f(
-		m_DefaultColor.red,
-		m_DefaultColor.green,
-		m_DefaultColor.blue,
-		m_DefaultColor.alpha
-		);
+	glColor4f(m_Red.Get(), m_Green.Get(), m_Blue.Get(), m_Alpha.Get());
+		//m_DefaultColor.red,
+		//m_DefaultColor.green,
+		//m_DefaultColor.blue,
+		//m_DefaultColor.alpha);
 
 	glColorMask(
 		m_ColorMask.writeRed,
@@ -181,6 +211,8 @@ void VMiscState::Apply() const
 	{
 		glDisable(GL_BLEND);
 	}
+
+	SetGLMatrix(GL_TEXTURE, m_TextureMatrix.Get());
 }
 
 vuint VMiscState::GetGLModeNum(const PolygonMode in_Mode)

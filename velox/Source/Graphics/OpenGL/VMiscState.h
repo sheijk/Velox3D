@@ -8,14 +8,57 @@
 
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
 
+#include <V3dLib/Property.h>
+
 #include "IVOpenGLRenderState.h"
+#include <V3dLib/Math.h>
 
 #include <Windows.h>
 #include <gl/GL.h>
+#include <memory>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
+
+template<typename T>
+class VPropertyConnection
+{
+	mutable T m_Value;
+	std::auto_ptr< property::VProperty<T> > m_pProperty;
+
+public:
+	void Connect(std::string value)
+	{
+		if( value[0] == '@' )
+		{
+			std::string propertyName(++value.begin(), value.end());
+			m_pProperty.reset(new property::VProperty<T>(propertyName));
+		}
+		else
+		{
+			m_pProperty.reset(0);
+			utils::VStringValue v(value.c_str());
+			m_Value = v.Get<T>();
+		}
+	}
+
+	void Set(T val)
+	{
+		m_pProperty.reset(0);
+		m_Value = val;
+	}
+
+	T Get() const
+	{
+		if( m_pProperty.get() != 0 )
+		{
+			m_Value = m_pProperty->Get();
+		}
+
+		return m_Value;
+	}
+};
 
 /**
  * @author sheijk
@@ -33,6 +76,9 @@ private:
 	typedef VMaterialDescription::DepthTest DepthTest;
 	typedef VMaterialDescription::BlendFactor BlendMode;
 
+	// texture matrix state
+	VPropertyConnection<VMatrix44f> m_TextureMatrix;
+
 	// alpha blending
 	vuint m_SourceFactor;
 	vuint m_DestFactor;
@@ -49,13 +95,17 @@ private:
 
 	VMaterialDescription::ColorBufferMask m_ColorMask;
 
-	v3d::graphics::VColor4f m_DefaultColor;
+	VPropertyConnection<vfloat32> m_Red;
+	VPropertyConnection<vfloat32> m_Green;
+	VPropertyConnection<vfloat32> m_Blue;
+	VPropertyConnection<vfloat32> m_Alpha;
+	//v3d::graphics::VColor4f m_DefaultColor;
 
 	static vuint GetGLModeNum(const DepthTest in_Test);
 	static vuint GetGLModeNum(const PolygonMode in_Mode);
 	static vuint GetGLModeNum(BlendMode in_Mode);
 
-	static VColor4f GetColor(const VRenderPass& in_Pass);
+	void ReadColor(const VRenderPass& in_Pass);
 	static vuint GetPolygonMode(const std::string& in_strMode);
 	static vuint GetDepthFunction(const std::string& in_strFunction);
 	static vuint GetBlendFunction(const std::string& in_strFunction);

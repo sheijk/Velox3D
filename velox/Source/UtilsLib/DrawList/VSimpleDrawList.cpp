@@ -1,6 +1,6 @@
 #include <V3dLib/Graphics/Misc/VSimpleDrawList.h>
 //-----------------------------------------------------------------------------
-
+#include <V3d/Graphics.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

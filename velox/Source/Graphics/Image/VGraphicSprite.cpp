@@ -1,6 +1,8 @@
 #include <V3dLib/Graphics/Geometry/VGeometryUtil.h>
 #include <v3dlib/Graphics/Misc/MiscUtils.h>
 #include <v3dLib/Graphics/Image/VGraphicSprite.h>
+#include <V3d/Graphics/IVMesh.h>
+
 #include <stdlib.h>
 
 //-----------------------------------------------------------------------------

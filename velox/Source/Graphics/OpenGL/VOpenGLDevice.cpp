@@ -3,6 +3,9 @@
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/Wrappers/VIterator.h>
 #include <v3d/Core/VLogging.h>
+#include <V3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/VEffectDescription.h>
+#include <V3d/Graphics/VMaterialDescription.h>
 
 #include <v3d/Graphics/VDeviceMatrix.h>
 #include <v3d/Math/VMatrixOps.h>

@@ -558,6 +558,19 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="Property"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3dLib\Property\VProperty.h">
+			</File>
+			<File
+				RelativePath="..\Source\Property\VPropertyManager.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Property\VPropertyManager.h">
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\Api\V3dLib\BoostSignals.h">
 		</File>

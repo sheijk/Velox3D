@@ -3,12 +3,19 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <v3d/Math/VMatrix.h>
+
 #include <iostream>
 
 //-----------------------------------------------------------------------------
-namespace v3d { namespace graphics {
+namespace v3d { 
+std::ostream& operator<<(std::ostream& str, const VMatrix44f& matrix);
+std::istream& operator>>(std::istream& str, VMatrix44f& matrix);
+
+namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
+
 
 /**
  * The polygon mode for rendering.

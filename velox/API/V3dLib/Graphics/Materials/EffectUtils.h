@@ -26,7 +26,8 @@ VState TextureState(
 	IVBuffer<vbyte>* hBuffer,
 	vuint width, vuint height,
 	VTextureFilter magnificationFilter, VTextureFilter minificationFilter,
-	VTextureWrapMode texCoordWrapU, VTextureWrapMode texCoordWrapV
+	VTextureWrapMode texCoordWrapU, VTextureWrapMode texCoordWrapV,
+	const VMatrix44f* pTextureMatrix = 0
 	);
 
 /** creates a state for polygon mode */

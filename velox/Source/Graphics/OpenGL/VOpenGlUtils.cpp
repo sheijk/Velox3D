@@ -34,6 +34,22 @@ GLint GetGeometryMode(VMeshDescription::GeometryType in_eType)
 	}
 }
 
+void SetGLMatrix(int mode, const VMatrix44f& mat)
+{
+	vfloat32 glmat[16];
+
+	int index = 0;
+	for(int col = 0; col < 4; ++col)
+	for(int row = 0; row < 4; ++row)
+	{
+		glmat[index] = mat.Get(row, col);
+		++index;            
+	}
+
+	glMatrixMode(mode);
+	glLoadMatrixf(glmat);	
+}
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
