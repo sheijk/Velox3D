@@ -7,7 +7,7 @@
 	<title>Velox3D Coding Conventions</title>
 	<subtitle>Naming conventions and recommendes practices</subtitle>
 	<author>Jan Rehders, Christian Nowke</author>
-	<version>009</version>
+	<version>009.1</version>
 
 	<section name="Naming">
 		<rule>
@@ -23,7 +23,7 @@
 		</rule>
 		<rule>
 			All velox class, struct, enum and function names start with upper case letters. Use an upper case for each
-			'sub word' inside the identifier. Example: <br/>
+			'sub word' inside the identifier. Example: <br></br>
 			<code>
 class VEditorSuite;
 void PrintSomeLine();
@@ -31,7 +31,7 @@ void PrintSomeLine();
 		</rule>
 		<rule>
 			All velox classes, structs and enums which are not nested inside another class have to be prefixed with an 
-			upper case 'V'. Interface classes are prefixed with 'IV'. Nested types don't have a prefix. <br/>
+			upper case 'V'. Interface classes are prefixed with 'IV'. Nested types don't have a prefix. <br></br>
 			Examples:
 			<code>
 class VTopLevel
@@ -93,7 +93,8 @@ vlong m_nValue;
 		</rule>
 		<rule>
 			Do not use the C++ standard types. Instead use the velox typedef versions. (vint instead of int, etc)
-			<reason>Historical nonsense passed into habit ;)</reason>
+			<reason>Increased portability. Types may have different size on different compilers
+and/or platforms</reason>
 		</rule>
 		<rule>
 			Only use system dependent typed like DWORD, HWND etc where absolutely required (= system dependent code)
@@ -109,7 +110,7 @@ vlong m_nValue;
 		</rule>
 		<rule>
 			Prefer speaking identifiers over javadoc annotations over a seperate documentation but do not skip anyone of 
-			them when they are necessary for understanding.
+			them if they are necessary for understanding.
 		</rule>
 		<rule type="recommended">
 			Namespace declarations should have the following form:
@@ -179,6 +180,12 @@ const std::string msg("i can only be passed to Print");
 			<reason>
 				The function's client should know when he can trust a parameter not being modified. Const variables could not
 				be passed when a non const reference is expected
+			</reason>
+		</rule>
+		<rule>
+			All files must end with a line break
+			<reason>
+				Some Compilers (gcc) complain if this is not the case
 			</reason>
 		</rule>
 	</section>
