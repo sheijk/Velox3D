@@ -10,6 +10,21 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 // iterator classes
 
+template<
+	typename T,
+	typename IterBase
+>
+class VOutputIteratorCustomBase
+	: public iterutil::VProceedIterInterface<T, VOutputIteratorCustomBase,
+	iterutil::VWriteOnlyIterInterface<
+		T, 
+		IterBase
+	>	>,
+	// allow iterator type based template specialisations
+	std::output_iterator_tag
+{
+};
+
 /**
  * output iterator
  * parents: VProceedIterInterface -> VMutableIterInterface -> VIteratorBase
@@ -35,6 +50,22 @@ public:
 	{
 		Assign(in_pIter);
 	}
+};
+
+template<
+	typename T, 
+	typename IterBase
+>
+class VInputIteratorCustomBase
+	: public
+	iterutil::VProceedIterInterface<T, VInputIteratorCustomBase,
+		iterutil::VReadOnlyIterInterface<T,
+			iterutil::VEqCompIterInterface<T,
+				IterBase
+	>	>	>,
+	// allow iterator type based template specialisations
+	std::input_iterator_tag
+{
 };
 
 /**
@@ -66,6 +97,22 @@ public:
 	}
 };
 
+template<
+	typename T, 
+	typename IterBase
+>
+class VForwardIteratorCustomBase
+	: public 
+	iterutil::VProceedIterInterface<T, VForwardIteratorCustomBase,
+		iterutil::VMutableIterInterface<T,
+			iterutil::VEqCompIterInterface<T,
+				IterBase
+	>	>	>,
+	// allow iterator type based template specialisations
+	std::forward_iterator_tag
+{
+};
+
 /**
  * a forward iterator
  * parents: VProceedIterInterface -> VMutableIterInterface -> VIteratorBase
@@ -95,6 +142,22 @@ public:
 	}
 };
 
+template<
+	typename T,
+	typename IterBase
+>
+class VBidirectionalIteratorCustumBase
+	: public
+	iterutil::VMoveBackIterInterface<T,	VBidirectionalIteratorCustumBase,
+		iterutil::VProceedIterInterface<T, VBidirectionalIteratorCustumBase,
+			iterutil::VMutableIterInterface<T,
+				iterutil::VEqCompIterInterface<T,
+					IterBase
+	>	>	>	>,
+	std::bidirectional_iterator_tag
+{
+};
+
 /**
  * A bidirectional iterator
  */
@@ -122,6 +185,24 @@ public:
 	{
 		Assign(in_pIter);
 	}
+};
+
+template<
+	typename T, 
+	typename IterBase
+>
+class VRandomAccessIteratorCustomBase
+	: public
+	iterutil::VMoveBackIterInterface<T, VRandomAccessIteratorCustomBase,
+		iterutil::VProceedIterInterface<T, VRandomAccessIteratorCustomBase,
+			iterutil::VRandomMoveIterInterface<T, VRandomAccessIteratorCustomBase,
+				iterutil::VMutableIterInterface<T,
+					iterutil::VEqCompIterInterface<T,
+						IterBase
+	>	>	>	>	>,
+	// allow iterator type based template specialisations
+	std::random_access_iterator_tag
+{
 };
 
 //TODO: doku
@@ -176,39 +257,26 @@ struct VIterTraitsBase
  * template specialisations for iterator_traits for velox iterators
  */
 
-template<typename T, typename SmartPtr>
-struct std::iterator_traits< v3d::VOutputIterator<T, SmartPtr> > 
-	: public v3d::VIterTraitsBase< v3d::VOutputIterator<T, SmartPtr> >
-{
-	typedef std::output_iterator_tag iterator_category;
-};
+#define V3D_DECLARE_ITER_TRAITS(IterType, IterCategory)\
+	template<typename T, typename SmartPtr>\
+	struct std::iterator_traits< IterType <T, SmartPtr> >\
+		: public v3d::VIterTraitsBase< IterType<T, SmartPtr> >\
+	{\
+		typedef std::IterCategory iterator_category;\
+	};
 
-template<typename T, typename SmartPtr>
-struct std::iterator_traits< v3d::VInputIterator<T, SmartPtr> > 
-	: public v3d::VIterTraitsBase< v3d::VInputIterator<T, SmartPtr> >
-{
-	typedef std::input_iterator_tag iterator_category;
-};
+V3D_DECLARE_ITER_TRAITS(v3d::VOutputIterator, output_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VInputIterator, input_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VForwardIterator, forward_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VBidirectionalIterator, bidirectional_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VRandomAccessIterator, random_access_iterator_tag)
 
-template<typename T, typename SmartPtr>
-struct std::iterator_traits< v3d::VForwardIterator<T, SmartPtr> > 
-	: public v3d::VIterTraitsBase< v3d::VForwardIterator<T, SmartPtr> >
-{
-	typedef std::forward_iterator_tag iterator_category;
-};
+V3D_DECLARE_ITER_TRAITS(v3d::VOutputIteratorCustomBase, output_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VInputIteratorCustomBase, input_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VForwardIteratorCustomBase, forward_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VBidirectionalIteratorCustumBase, bidirectional_iterator_tag)
+V3D_DECLARE_ITER_TRAITS(v3d::VRandomAccessIteratorCustomBase, random_access_iterator_tag)
 
-template<typename T, typename SmartPtr>
-struct std::iterator_traits< v3d::VBidirectionalIterator<T, SmartPtr> > 
-	: public v3d::VIterTraitsBase< v3d::VBidirectionalIterator<T, SmartPtr> >
-{
-	typedef std::bidirectional_iterator_tag iterator_category;
-};
-
-template<typename T, typename SmartPtr>
-struct std::iterator_traits< v3d::VRandomAccessIterator<T, SmartPtr> > 
-	: public v3d::VIterTraitsBase< v3d::VRandomAccessIterator<T, SmartPtr> >
-{
-	typedef std::random_access_iterator_tag iterator_category;
-};
+#undef V3D_DECLARE_ITER_TRAITS
 //-----------------------------------------------------------------------------
 #endif // V3D_VITERATOR_H

@@ -60,6 +60,12 @@ Doku:
 
 log:
 
+05.12.2003
+Iteratoren ueberarbeitet. Anstatt von IVIteratorPol abgeleiteter Klassen koennen jetzt auch 
+eigene Versionen abgeleitet werden, muessen gleiche public Signatur haben wie VIteratorBase
+ins VIteratorBase.h. Damit bekommt man dann STL konforme Iteratoren durch Implementation von
+4 Funktionen
+
 19.11.2003
 Erste Mesh Description Version implementiert
 

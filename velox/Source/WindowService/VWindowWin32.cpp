@@ -11,7 +11,7 @@ using namespace v3d::graphics;
 //-----------------------------------------------------------------------------
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
-	
+
 	switch(iMsg)
 	{
 		case WM_CLOSE:
@@ -41,7 +41,7 @@ void VWindowWin32::Register()
 {
 	vout << "Registering window..." << vendl;
 	hInstance = GetModuleHandle(NULL);
-	
+
 	WNDCLASS Register;
 	Register.style =         CS_DBLCLKS | CS_OWNDC |
 			                 CS_HREDRAW | CS_VREDRAW;
@@ -55,7 +55,7 @@ void VWindowWin32::Register()
 	Register.hbrBackground = NULL;
 	Register.lpszMenuName =  NULL;
 	Register.lpszClassName = m_Name.c_str();
-		
+
 	if(!RegisterClass(&Register))
 	{
 		// TODO: fix
@@ -98,7 +98,7 @@ void VWindowWin32::Destroy()
 void VWindowWin32::CreateWindow()
 {
 	RECT WindowRect;
-	
+
 	WindowRect.left		= 0;
 	WindowRect.top		= 0;
 	WindowRect.right	= m_DisplaySettings.m_iWidth;
@@ -111,8 +111,8 @@ void VWindowWin32::CreateWindow()
 		hWnd = CreateWindowEx(WS_EX_APPWINDOW,
 									m_Name.c_str(),
 									m_Name.c_str(),
-									WS_POPUP | 
-									WS_CLIPSIBLINGS | 
+									WS_POPUP |
+									WS_CLIPSIBLINGS |
 									WS_CLIPCHILDREN,
 									0,
 									0,
@@ -122,21 +122,21 @@ void VWindowWin32::CreateWindow()
 									NULL,
 									hInstance,
 								    NULL);
-		
+
 			ShowCursor(FALSE);
 	}
 
 	else
 	{
-		AdjustWindowRectEx(&WindowRect, WS_OVERLAPPEDWINDOW, TRUE, 
+		AdjustWindowRectEx(&WindowRect, WS_OVERLAPPEDWINDOW, TRUE,
 							WS_EX_APPWINDOW | WS_EX_WINDOWEDGE);
 
-		hWnd = CreateWindowEx(WS_EX_APPWINDOW | 
+		hWnd = CreateWindowEx(WS_EX_APPWINDOW |
 								WS_EX_WINDOWEDGE,
 								m_Name.c_str(),
 								m_Name.c_str(),
-								//WS_OVERLAPPEDWINDOW | 
-								WS_CLIPSIBLINGS | 
+								//WS_OVERLAPPEDWINDOW |
+								WS_CLIPSIBLINGS |
 								WS_CLIPCHILDREN,
 								CW_USEDEFAULT,
 								CW_USEDEFAULT,
@@ -159,17 +159,18 @@ void VWindowWin32::CreateWindow()
 void VWindowWin32::Create(VStringParam in_pName)
 {
 	m_Name = in_pName;
+	//TODO: error service fuer sowas benutzen (sheijk)
 	vout << "Creating window: \"" << in_pName << "\"" << vendl;
 	Register();
 	CreateWindow();
-				
+
 	QueryGraphicsDevice();
 }
 //-----------------------------------------------------------------------------
 
 void VWindowWin32::ChangeDisplay(graphics::VDisplaySettings* in_pInfo)
 {
-	
+
 	m_DisplaySettings.Assign(in_pInfo);
 	vout << "Changing display settings..." << vendl;
 	Destroy();
@@ -206,8 +207,10 @@ IVDevice& VWindowWin32::QueryGraphicsDevice()
 		return *m_Device;
 
 	/**
-	 * Insert API dependant device implementation here	
+	 * Insert API dependant device implementation here
 	 */
+
+	//REMINDER: in einen system abhaengigen factory service auslagern (sheijk)
 
 	if(m_DisplaySettings.m_sAPIType == "OpenGL")
 	{

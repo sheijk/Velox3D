@@ -4,8 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/IVIteratorPol.h>
 
-#include <memory>
-
+//FIXME: unterstuetzung fuer const_iterator einbaun
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace iterutil {
@@ -31,25 +30,42 @@ namespace iterutil {
 
 		/** a pointer to the iterator implementation class */
 		SmartPointer m_pIterImpl;
+
+		IterImplType* GetIterImpl() const
+		{
+			return m_pIterImpl;
+		}
 	protected:
 		typedef IterImplType* IterPointer;
 
-		/** assigns a new iterator implementation */
+		/**
+		 * assigns a new iterator implementation, 
+		 * only for IVIteratorImpl based iters
+		 */
 		void Assign(IterPointer pIterImpl)
 		{
 			m_pIterImpl = pIterImpl;
 		}
 
+		//TODO: 2te variante wg effizienz?
 		/** returns the object the iterator points to */
-		T* GetTarget() const
+		inline T* GetTarget() const
 		{
 			return m_pIterImpl->Get();
 		}
 
-		/** returns a pointer to the iterator */
-		IterImplType* GetIter() const
+		inline void MoveBy(int dist)
 		{
-			return &(*m_pIterImpl);
+			m_pIterImpl->MoveBy(dist);
+		}
+
+		/**
+		 * Comparison:
+		 * @return < 0 smaller than other, 0 equal, > 0 bigger than other
+		 */
+		int Compare(const VIteratorBase& other) const
+		{
+			return m_pIterImpl->Compare(* other.m_pIterImpl);
 		}
 
 		VIteratorBase()
@@ -57,13 +73,13 @@ namespace iterutil {
 		}
 
 		VIteratorBase(const VIteratorBase& o) : 
-			m_pIterImpl(o.GetIter()->CreateCopy())
+			m_pIterImpl( o.GetIterImpl()->CreateCopy() )
 		{
 		}
 
 		VIteratorBase& operator=(const VIteratorBase& o)
 		{
-			m_pIterImpl = o.GetIter()->CreateCopy();
+			m_pIterImpl = o.m_pIterImpl->CreateCopy();
 
 			return *this;
 		}
@@ -77,7 +93,8 @@ namespace iterutil {
 		typedef const T* ConstPointer;
 		typedef const T& ConstReference;
 
-		typedef vint DifferenceType;
+		//FIXME: vint
+		typedef int DifferenceType;
 	};
 
 	/**
@@ -97,9 +114,12 @@ namespace iterutil {
 	template<typename T, typename Parent>
 	struct VEqCompIterInterface : public Parent
 	{
+		V3D_ITERTYPEDEFS;
+
 		bool operator==(const VEqCompIterInterface& o) const
 		{
-			return GetIter()->IsEqual(*(o.GetIter()));
+			return (Compare(o) == 0);
+			//return GetIter()->IsEqual(*(o.GetIter()));
 		}
 
 		bool operator!=(const VEqCompIterInterface& o) const
@@ -128,8 +148,11 @@ namespace iterutil {
 	};
 
 	/**
-	* provides write only access ( *it = x geht, aber nicht x = *it )
-	*/
+	 * provides write only access ( *it = x works, but x = *it doesn't )
+	 *
+	 * makes a write only iterator by resolving the expression *it = val
+	 * to it.operator=(val)
+	 */
 	template<typename T, typename Parent>
 	struct VWriteOnlyIterInterface : public Parent
 	{
@@ -175,17 +198,19 @@ namespace iterutil {
 
 		RetType& operator++()
 		{
-			GetIter()->Proceed();
+			MoveBy(1);
 
 			return (RetType&)*this;
 		}
 
 		RetType operator++(int)
 		{
-			// create a new iter with a copy of the iter impl
-			RetType old(GetIter()->CreateCopy());
+			// create a new iter with a copy of the iter
+			//TODO: elegantere moeglichkeit?
+			RetType old(* reinterpret_cast<RetType*>(this));
+			//RetType old(GetIter()->CreateCopy());
 
-			GetIter()->Proceed();
+			MoveBy(1);
 
 			return old;
 		}
@@ -201,16 +226,16 @@ namespace iterutil {
 
 		RetType& operator--()
 		{
-			GetIter()->MoveBack();
+			MoveBy(-1);
 
 			return (RetType&)*this;
 		}
 
 		RetType operator--(int)
 		{
-			RetType old(GetIter()->CreateCopy());
+			RetType old(* reinterpret_cast<RetType*>(this));
 
-			GetIter()->MoveBack();
+			MoveBy(-1);
 
 			return old;
 		}
@@ -225,6 +250,7 @@ namespace iterutil {
 		V3D_ITERTYPEDEFS;
 
 		// subscripting
+		//FIXME: rausschmeissen oder aendern?
 		Reference operator[](int n) 
 		{
 			return *(GetTarget() + n);
@@ -233,14 +259,14 @@ namespace iterutil {
 		// addition + substraction
 		RetType operator+(int dist) const
 		{
-			RetType res(GetIter()->CreateCopy());
+			RetType res(* reinterpret_cast<const RetType*>(this));
 			res += dist;
 			return res;
 		}
 
 		RetType operator-(int dist) const
 		{
-			RetType res(GetIter()->CreateCopy());
+			RetType res(* reinterpret_cast<const RetType*>(this));
 			res -= dist;
 			return res;
 		}
@@ -256,13 +282,15 @@ namespace iterutil {
 
 		RetType& operator+=(int dist)
 		{
-			GetIter()->MoveBy(dist);
+			//GetIter()->MoveBy(dist);
+			MoveBy(dist);
 			return (RetType&)*this;
 		}
 
 		RetType& operator-=(int dist)
 		{
-			GetIter()->MoveBy(- dist);
+			//GetIter()->MoveBy(- dist);
+			MoveBy(- dist);
 			return (RetType&)*this;
 		}
 
@@ -272,22 +300,26 @@ namespace iterutil {
 		// ordering
 		bool operator<(const RetType& o) const 
 		{
-			return GetTarget() < o.GetTarget();
+			return (Compare(o) < 0);
+			//return GetTarget() < o.GetTarget();
 		}
 
 		bool operator>(const RetType& o) const 
 		{
-			return GetTarget() > o.GetTarget();
+			return (Compare(o) > 0);
+			//return GetTarget() > o.GetTarget();
 		}
 
 		bool operator<=(const RetType& o) const 
 		{
-			return GetTarget() <= o.GetTarget();
+			return (Compare(o) <= 0);
+			//return GetTarget() <= o.GetTarget();
 		}
 
 		bool operator>=(const RetType& o) const
 		{
-			return GetTarget() >= o.GetTarget();
+			return (Compare(o) >= 0);
+			//return GetTarget() >= o.GetTarget();
 		}
 	};
 

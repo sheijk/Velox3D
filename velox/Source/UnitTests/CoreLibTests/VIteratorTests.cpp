@@ -55,30 +55,35 @@ class VArrayIterImpl : public IVIteratorPol<T>
 public:
 	VArrayIterImpl(T* pos) : m_pPos(pos) {};
 
-	virtual vbool IsEqual(const IVIteratorPol<T>& in_Other) const 
-	{
-		return m_pPos == in_Other.Get();
-	}
+	//virtual vbool IsEqual(const IVIteratorPol<T>& in_Other) const 
+	//{
+	//	return m_pPos == in_Other.Get();
+	//}
 
 	virtual IVIteratorPol<T>* CreateCopy() const
 	{
 		return new VArrayIterImpl(m_pPos);
 	}
 
-	virtual void Proceed() 
+	int Compare(const IVIteratorPol<T>& in_Other) const
 	{
-		MoveBy(1);
+		return m_pPos - in_Other.Get();
 	}
+
+	//virtual void Proceed() 
+	//{
+	//	MoveBy(1);
+	//}
 
 	virtual void MoveBy(vint in_nDistance) 
 	{
 		m_pPos += in_nDistance;
 	}
 
-	virtual void MoveBack() 
-	{
-		MoveBy(-1);
-	}
+	//virtual void MoveBack() 
+	//{
+	//	MoveBy(-1);
+	//}
 
 	virtual Pointer Get() const
 	{
