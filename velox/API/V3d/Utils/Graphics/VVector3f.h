@@ -13,7 +13,14 @@ namespace graphics {
 // um cross, etc fkten zu implementiern?
 struct VVector3f
 {
-	vfloat32 v[3];
+	union
+	{
+		vfloat32 v[3];
+		struct 
+		{
+			vfloat32 x, y, z;
+		};
+	};
 
 	VVector3f()
 	{

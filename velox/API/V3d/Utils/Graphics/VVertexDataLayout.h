@@ -10,13 +10,37 @@ namespace graphics {
 
 /**
  * Describes the layout of a VertexData structure in memory.
+ *
+ * Interpretation of offset values: An offset gives the number of floats to be
+ * added to convert the address of the vertex structure to it's 
+ * position/color/.. member.
+ *
+ * struct ExampleVertex
+ * {
+ *    ExampleVertex();
+ *
+ *    VVector3f position;
+ *    VColor4f color;
+ *    static VVertexDataLayout layout;
+ * }
+ *
+ * ExampleVertex::ExampleVertex()
+ * {
+ *    VVertexDataLayout<ExampleVertex>::SetPositionOffset();
+ *    VVertexDataLayout<ExampleVertex>::SetColorOffset();
+ * }
+ *
+ * Would result in layout.positionOffset = 0 and layout.colorOffset = 3
+ * 
  * VertexData structures must follow the following rules:
  * - public static member VVertexDataLayout layout.
  * - reserved members: VVertex3f position, VColor4f color, VTexCoord2f texCoords
+ *
+ * @author sheijk
  */
 struct VVertexDataLayout
 {
-	typedef vint Offset;
+	typedef vint64 Offset;
 
 	Offset positionOffset;
 	Offset colorOffset;
@@ -29,14 +53,27 @@ struct VVertexDataLayout
 		texCoordOffset = -1;
 	}
 
+	/** 
+	 * Returns true if the given value is a possible offset. Does not hint
+	 * whether the offset is correct
+	 */
 	static vbool IsValidOffset(Offset offs);
 
+	/**
+	 * Sets VertexData::layout.positionOffset to the correct value
+	 */
 	template<typename VertexData>
 	static void SetPositionOffset();
 
+	/**
+	* Sets VertexData::layout.colorOffset to the correct value
+	*/
 	template<typename VertexData>
 	static void SetColorOffset();
 
+	/**
+	* Sets VertexData::layout.texCoordOffset to the correct value
+	*/
 	template<typename VertexData>
 	static void SetTexCoordOffset();
 };

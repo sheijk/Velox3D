@@ -11,6 +11,7 @@ namespace graphics {
 
 /**
  * Describes which data to use for a mesh and how to interprete it
+ * Requires that all used data is already loaded into the mesh
  *
  * @author sheijk
  */
@@ -30,6 +31,9 @@ struct VMeshDescription
 		Points
 	};
 
+	/**
+	 * References which buffer to be used and how data is aligned in buffer
+	 */
 	template<typename Buffer>
 	struct DataRef
 	{
@@ -42,14 +46,22 @@ struct VMeshDescription
 			vuint in_nStride
 			);
 
+		/** The device's buffer handle of the loaded buffer */
 		Buffer hBuffer;
+		/** index of first element of buffer to be used */
 		vuint nStart;
+		/** number of elements to be used */
 		vuint nCount;
+		/** number of floats(!) between the beginning of two structs */
         vuint nStride;
 	};
 
+	/** references data inside a buffer of bytes */
 	typedef DataRef<ByteBufferHandle> ByteDataRef;
 
+	/** 
+	 * The type of primitives to be used for rendering
+	 */
 	GeometryType geometryType;
 
 	ByteDataRef triangleVertices;

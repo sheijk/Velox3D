@@ -36,7 +36,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	// set vertex coord info
 	descr.triangleVertices = VMeshDescription::ByteDataRef(
 		bufHandle, 
-		layout.positionOffset, 
+		vuint(layout.positionOffset), 
 		in_cnVertexCount, 
 		sizeof(VertexStructure) / sizeof(float)
 		);
@@ -46,7 +46,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	{
 		descr.triangleColors = VMeshDescription::ByteDataRef(
 			bufHandle,
-			layout.colorOffset,
+			vuint(layout.colorOffset),
 			in_cnVertexCount,
 			sizeof(VertexStructure) / sizeof(float)
 			);
@@ -57,7 +57,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	{
 		descr.triangleTexCoords = VMeshDescription::ByteDataRef(
 			bufHandle,
-			layout.texCoordOffset,
+			vuint(layout.texCoordOffset),
 			in_cnVertexCount,
 			sizeof(VertexStructure) / sizeof(float)
 			);
@@ -66,4 +66,42 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	//TODO: set tex coord, etc
 
 	return descr;
+}
+
+template<typename VertexStructure>
+v3d::graphics::VMeshDescription BuildMeshDescription(
+	v3d::graphics::IVDevice& in_Device,
+	VertexStructure in_pVertices[],
+	vuint in_nVertexCount,
+	vuint in_pIndices[],
+	vuint in_nIndexCount
+	)
+{
+	using namespace v3d::graphics;
+
+	// build mesh without indices
+	VMeshDescription md = 
+		v3d::utils::graphics::BuildMeshDescription(
+		in_Device, in_pVertices, in_nVertexCount);
+
+	const vuint cnIndexBufferSize = in_nIndexCount * sizeof(vuint);
+	VByteBuffer indexBuffer(new vbyte[cnIndexBufferSize], cnIndexBufferSize);
+	memcpy(indexBuffer.GetDataAddress(), in_pIndices, cnIndexBufferSize);
+
+	// add indices
+	if( in_pIndices && in_nIndexCount > 0 )
+	{
+		md.triangleIndices = VMeshDescription::ByteDataRef(
+			in_Device.CreateBuffer(
+			IVDevice::VertexBuffer,
+			&indexBuffer,
+			VByteBuffer::DropData
+			),
+			0,
+			in_nIndexCount,
+			1
+			);
+	}
+
+	return md;
 }

@@ -29,15 +29,17 @@ VOpenGLIndexMesh::~VOpenGLIndexMesh()
 
 void VOpenGLIndexMesh::Render()
 {
-	//TODO: vertex formate beachten (stride, offset, start..)
-
 	const vuint iNumElements = m_IndexData.nCount;
 
 	const vfloat32* pBuffer = reinterpret_cast<vfloat32*>(
 		m_TriangleData.hBuffer->GetDataAddress());
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, pBuffer);
+	glVertexPointer(
+		3, 
+		GL_FLOAT, 
+		m_TriangleData.nStride * sizeof(vfloat32), 
+		pBuffer + m_TriangleData.nStart);
 
     if( m_TexCoordData.hBuffer != 0 )
 	{
@@ -45,7 +47,11 @@ void VOpenGLIndexMesh::Render()
 			m_TexCoordData.hBuffer->GetDataAddress());
 
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_FLOAT, 0, pTexBuffer);
+		glTexCoordPointer(
+			2, 
+			GL_FLOAT, 
+			m_TexCoordData.nStride * sizeof(vfloat32), 
+			pTexBuffer + m_TexCoordData.nStart);
 	}
 
 	if( m_ColorData.hBuffer != 0 )
@@ -53,7 +59,11 @@ void VOpenGLIndexMesh::Render()
 		const vfloat32* pColorBuffer = reinterpret_cast<vfloat32*>(
 			m_ColorData.hBuffer->GetDataAddress());
 		glEnableClientState(GL_COLOR_ARRAY);
-		glColorPointer(4, GL_FLOAT, 0, pColorBuffer);
+		glColorPointer(
+			4, 
+			GL_FLOAT, 
+			m_ColorData.nStride * sizeof(vfloat32), 
+			pColorBuffer + m_ColorData.nStart);
 	}
 
 	const vint32* pIndexBuffer = reinterpret_cast<vint32*>(m_IndexData.hBuffer->GetDataAddress());
@@ -61,6 +71,7 @@ void VOpenGLIndexMesh::Render()
 	glDrawElements(m_PrimitiveType, iNumElements, GL_UNSIGNED_INT, pIndexBuffer);
 	
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 

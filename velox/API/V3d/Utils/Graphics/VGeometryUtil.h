@@ -26,6 +26,15 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	const vuint in_cnVertexCount
 	);
 
+template<typename VertexStructure>
+v3d::graphics::VMeshDescription BuildMeshDescription(
+	v3d::graphics::IVDevice& in_Device,
+	VertexStructure in_pVertices[],
+	vuint in_nVertexCount,
+	vuint in_pIndices[],
+	vuint in_nIndexCount
+	);
+
 //-----------------------------------------------------------------------------
 #include "VGeometryUtil.inl"
 //-----------------------------------------------------------------------------

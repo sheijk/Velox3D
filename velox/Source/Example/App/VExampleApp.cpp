@@ -116,15 +116,17 @@ VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
 		VertexHandle,
 		0,
 		Model.m_Objects[0]->m_iNumVertices * 3,
-		1
+		0
 		);
 	meshDesc.triangleIndices = VMeshDescription::ByteDataRef(VertexIndexHandle,
-		0, Model.m_Objects[0]->m_iNumFaces *3,
-		1);
+		0, Model.m_Objects[0]->m_iNumFaces * 3,
+		0);
 
 	meshDesc.triangleTexCoords = VMeshDescription::ByteDataRef(TexHandle,
 		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
-		1);
+		0);
+
+	//meshDesc.geometryType = VMeshDescription::TriangleStrip;
 
 	return meshDesc;
 }
@@ -332,14 +334,14 @@ vint VExampleApp::Main()
 		//	CreateMeshTransformNode(hMesh, BuildTranslateMatrix(0, 0, -6))
 		//	);
 
-		for(int xpos = -15; xpos < 15; xpos += 3)
-		for(int ypos = -15; ypos < 15; ypos += 3)
-		for(int zpos = -15; zpos < 15; zpos += 3)
-		{
-			pRootNode->AddChild(
-				CreateMeshTransformNode(hMesh, BuildTranslateMatrix(xpos, ypos, zpos))
-				);
-		}
+		//for(int xpos = -15; xpos < 15; xpos += 3)
+		//for(int ypos = -15; ypos < 15; ypos += 3)
+		//for(int zpos = -15; zpos < 15; zpos += 3)
+		//{
+		//	pRootNode->AddChild(
+		//		CreateMeshTransformNode(hMesh, BuildTranslateMatrix(xpos, ypos, zpos))
+		//		);
+		//}
 	}
 
 	VSimpleDrawList drawList(*m_pDevice);
@@ -354,8 +356,6 @@ vint VExampleApp::Main()
 	m_pUpdateManager->Start();
 	pSystemManager->SetStatus(true);
 	pWindow->SetActive();
-
-	glDisable(GL_TEXTURE_2D);
 
 	while(pSystemManager->GetStatus())
 	{
