@@ -11,6 +11,7 @@ namespace window {
 //-----------------------------------------------------------------------------
 class IVWindowFrame;
 
+
 /**
  *	Manages all IVConnectable classes
  */

@@ -17,9 +17,10 @@ BEGIN_EVENT_TABLE(VTextControl, wxTextCtrl)
 EVT_TEXT_ENTER(-1,VTextControl::OnEnter)
 END_EVENT_TABLE()
 
-VTextControl::VTextControl(VConsoleFrame *parent, wxWindowID id, const wxString &value,
-							const wxPoint &pos, const wxSize &size, int style)
-						 : wxTextCtrl(parent, id, value, pos, size, style)
+VTextControl::VTextControl(VConsoleFrame *parent, wxWindowID id, const wxString
+						   &value, const wxPoint &pos, const wxSize &size,
+						   int style)
+						   : wxTextCtrl(parent, id, value, pos, size, style)
 {
 	m_parent = parent;
 
@@ -38,7 +39,7 @@ void VTextControl::OnEnter(wxKeyEvent& event)
 
 VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
 										  "Velox Console",wxPoint(100, 100),
-										  wxSize(400, 700), wxCAPTION, "frame")
+										  wxSize(250, 700), wxCAPTION, "frame")
 {
 	Register();
 
@@ -51,11 +52,11 @@ VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
 
 
 	m_TextControl = new  wxTextCtrl(this, -1, _T(""),
-		wxPoint(0,0), wxSize(395,650),
+		wxPoint(0,0), wxSize(245,650),
 		wxTE_MULTILINE | wxTE_READONLY );
 
 	m_InputControl = new  VTextControl(this, -1, _T(""),
-		wxPoint(0,650), wxSize(400,25),
+		wxPoint(0,650), wxSize(250,25),
 		wxTE_LEFT);
 
 }

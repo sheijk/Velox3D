@@ -134,6 +134,9 @@
 				RelativePath="..\Source\Example\App\VExampleApp.h">
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\game\Workspace\Local\Build\debug\GameLib.lib">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

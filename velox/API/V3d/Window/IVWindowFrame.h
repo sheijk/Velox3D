@@ -17,8 +17,8 @@ public:
 	virtual void Register()
 	{
 
-		window::IVWxConnector* WinConnect;
-		WinConnect = QueryObject<window::IVWxConnector>("wx.connector");
+		IVWxConnector* WinConnect;
+		WinConnect = QueryObject<IVWxConnector>("wx.connector");
 		WinConnect->Register(this);
 	};
 	virtual ~IVWindowFrame(){};

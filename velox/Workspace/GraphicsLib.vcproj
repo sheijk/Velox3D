@@ -108,7 +108,7 @@
 				RelativePath="..\Source\Graphics\VOpenGLDevice.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Graphics\VOpenGLDevice.h">
+				RelativePath="..\Api\V3d\Graphics\VOpenGLDevice.h">
 			</File>
 		</Filter>
 		<Filter

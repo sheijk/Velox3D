@@ -196,9 +196,6 @@ void VWindowWin32::Update(vfloat32 in_fSeconds)
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-
-	m_Device->BeginScene();
-	m_Device->EndScene();
 }
 //-----------------------------------------------------------------------------
 
