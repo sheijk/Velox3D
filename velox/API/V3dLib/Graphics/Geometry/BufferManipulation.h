@@ -27,7 +27,7 @@ class SetColor
 	VColor4f color;
 public:
 	SetColor(const VColor4f col) : color(col) {}
-	SetColor(float red, float green, float blue, float alpha = 1.0f)
+	SetColor(vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha = 1.0f)
 		: color(VColor4f(red, green, blue, alpha))
 	{}
 
@@ -36,10 +36,31 @@ public:
 		vertex.color = color;
 	}    
 };
+ /**
+  * @author: ins
+  */
+
+template<typename VertexStructure>
+class SetTexCoords
+{
+	VTexCoord2f tex;
+public:
+	SetTexCoords(vfloat32 u, vfloat32 v = 1.0f)
+		: tex(VTexCoord2f(u, v)) {}
+
+	SetTexCoords(const VTexCoord2f t) : tex(t) {}
+
+	void operator()(VertexStructure& vertex)
+	{
+		vertex.texCoords = tex;
+	}
+};
+
 
 /**
  * @author sheijk
  */
+
 #define V3D_DECLARE_BUFFER_OP(opName, opLine) \
 	template<typename VertexStructure>\
 	class opName\

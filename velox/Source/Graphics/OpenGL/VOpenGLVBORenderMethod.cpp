@@ -21,6 +21,7 @@ VMeshBase* VOpenGLVBORenderMethod::CreateMesh(
 	
 	if( in_MeshDescr.triangleVertices.hBuffer != 0 )
 	{
+
 		pMesh = new VOpenGLVBOMesh(in_MeshDescr, in_pMaterial);
 	}
 

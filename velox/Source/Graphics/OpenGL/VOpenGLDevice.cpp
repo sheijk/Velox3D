@@ -41,8 +41,9 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	SetDisplay();
 
-	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
-	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
+
+	//m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
+	m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
 
 	m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	m_StateCategories.RegisterCategory(m_MiscStateCategory);
@@ -58,18 +59,6 @@ VOpenGLDevice::~VOpenGLDevice()
 {
 	DestroyContext();
 }
-//-----------------------------------------------------------------------------
-
-//void VOpenGLDevice::ApplyMaterial(IVMaterial* in_pMaterial)
-//{
-//}
-//-----------------------------------------------------------------------------
-
-//IVMaterial* VOpenGLDevice::CreateMaterial()
-//{
-//	return NULL;
-//}
-//-----------------------------------------------------------------------------
 
 IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 	BufferType in_Type,

@@ -47,7 +47,6 @@ public:
 
 	virtual void DeleteBuffer(BufferHandle& in_Buffer);
 
-//	virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc);
 	virtual MeshHandle CreateMesh(
 		const VMeshDescription& in_pMeshDesc,
 		const VMaterialDescription& in_pMaterialDesc
@@ -80,7 +79,7 @@ private:
 	VRenderMethodRegistry m_RenderMethods;
 
 	VImmediateRenderMethod m_ImmediateRenderMethod;
-	//VOpenGLVBORenderMethod m_VBORenderMethod;
+	VOpenGLVBORenderMethod m_VBORenderMethod;
 
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;

@@ -17,7 +17,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	VertexStructure* cv = (VertexStructure*)vertexData;
 
 	//VFloatBuffer floatBuf(vertexData, floatBufSize);
-	IVDevice::Buffer geomBuf(reinterpret_cast<vbyte*>(vertexData), 4 * floatBufSize);
+	IVDevice::Buffer geomBuf(reinterpret_cast<vbyte*>(vertexData), floatBufSize);
 
 	IVDevice::BufferHandle bufHandle = in_Device.CreateBuffer(
 		IVDevice::VertexBuffer, 
