@@ -4,6 +4,26 @@ template<typename VertexStructure>
 VPolarSphere<VertexStructure>::VPolarSphere(
 	vuint in_nRings, 
 	vuint in_nSectors) :
+m_cfTop(1.0f),
+m_cfBottom(-1.0f),
+m_nRings(in_nRings), 
+m_nSectors(in_nSectors),
+m_nVertexCount(CalculateVertexCount()),
+geometry(
+		 v3d::graphics::VMeshDescription::TriangleStrip, 
+		 CalculateVertexCount(), CalculateIndexCount()
+		 )
+{
+	GenerateIndices();
+}
+
+template<typename VertexStructure>
+VPolarSphere<VertexStructure>::VPolarSphere(
+	vuint in_nRings, vuint in_nSectors, 
+	vfloat32 in_fBottom, vfloat32 in_fTop
+	) :
+m_cfTop(in_fTop),
+m_cfBottom(in_fBottom),
 m_nRings(in_nRings), 
 m_nSectors(in_nSectors),
 m_nVertexCount(CalculateVertexCount()),
@@ -35,10 +55,8 @@ void VPolarSphere<VertexStructure>::GenerateCoordinates()
 	const float pi = 3.141592654f;
 
 	const float deltaAngle = 2 * pi / m_nSectors;
-	const float deltaY = 2.0f / (m_nRings-1);
-
-	float color = 0;
-	const float deltaColor = 1.0f / CalculateVertexCount();
+	const float height = m_cfTop - m_cfBottom;
+	const float deltaY = height / (m_nRings-1);
 
 	float angle = 0;
 	for(vuint sector = 0; sector < m_nSectors; ++sector, angle += deltaAngle)
@@ -46,7 +64,7 @@ void VPolarSphere<VertexStructure>::GenerateCoordinates()
 		const float xpos = cos(angle);
 		const float zpos = sin(angle);
 
-		float ypos = -1;
+		float ypos = m_cfBottom;
 		int ring = 0;
 		for(vuint ring = 0; ring < m_nRings; ++ring, ypos += deltaY)
 		{
@@ -54,9 +72,27 @@ void VPolarSphere<VertexStructure>::GenerateCoordinates()
 			geometry.vertices[GetVertexNum(sector, ring)].position.x = xpos * scale;
 			geometry.vertices[GetVertexNum(sector, ring)].position.y = ypos;
 			geometry.vertices[GetVertexNum(sector, ring)].position.z = zpos * scale;
+		}
+	}
+}
 
-			geometry.vertices[ring * m_nSectors + sector].color.red = color;
-			color += deltaColor;
+template<typename VertexStructure>
+void VPolarSphere<VertexStructure>::GenerateTexCoords()
+{
+	const vfloat32 deltaRing =  1.0f / m_nRings;
+	const vfloat32 deltaSector = 1.0f / m_nSectors;
+
+	// for each ring
+	for(vuint ring = 0; ring < m_nRings; ++ring)
+	{
+		// for each sector
+		for(vuint sector = 0; sector < m_nSectors; ++sector)
+		{
+			VertexStructure& vertex =
+				geometry.vertices[GetVertexNum(sector, ring)];
+
+            vertex.texCoords.u = deltaSector * sector;
+			vertex.texCoords.v = deltaRing * ring;
 		}
 	}
 }

@@ -681,6 +681,9 @@
 							RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
 						</File>
 						<File
+							RelativePath="..\Source\Graphics\OpenGL\VMiscState.cpp">
+						</File>
+						<File
 							RelativePath="..\Source\Graphics\OpenGL\VMiscState.h">
 						</File>
 						<File
@@ -807,5 +810,8 @@
 		</File>
 	</Files>
 	<Globals>
+		<Global
+			Name="DevPartner_IsInstrumented"
+			Value="1"/>
 	</Globals>
 </VisualStudioProject>

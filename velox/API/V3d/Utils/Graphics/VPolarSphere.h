@@ -20,6 +20,8 @@ using namespace v3d; // anti indent task force was here ;)
 template<typename VertexStructure>
 class VPolarSphere
 {
+	const vfloat32 m_cfTop;
+	const vfloat32 m_cfBottom;
 	const vuint m_nRings;
 	const vuint m_nSectors;
 	const vuint m_nVertexCount;
@@ -35,8 +37,13 @@ public:
 	typedef v3d::graphics::VBuffer<vuint> IndexBuffer;
 
 	VPolarSphere(vuint in_nRings, vuint in_nSectors);
+	VPolarSphere(
+		vuint in_nRings, vuint in_nSectors, 
+		vfloat32 in_fBottom, vfloat32 in_fTop
+		);
 
 	void GenerateCoordinates();
+	void GenerateTexCoords();
 
 	v3d::graphics::VMeshDescription::GeometryType GetGeometryType();
 	VertexBuffer& GetVertexBuffer();

@@ -62,8 +62,10 @@ template member konvertiert?
 	nach states sortieren
 
 	.gfx device:
-	texturen: nur eine textur pro buffer anlegen..
+	./texturen: nur eine textur pro buffer anlegen..
 	mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
+	mat descr. durch alternativ system ersetzen? (default mat zurueckgeben, 
+	und dass dann mit effekten veraendern?)
 	./buffer aendern
 	./indexed/non indexed geometry auto auswahl
 	./render states anwenden
@@ -79,7 +81,7 @@ template member konvertiert?
 	./render state categories ins device
 	./materials erzeugen
 	./mesh: render state list liefern
-	default color in die mat descr aufnehmen
+	./default color in die mat descr aufnehmen
 
 	.scene graph
 	./interfaces schreiben (basierend auf ins code)
@@ -91,6 +93,7 @@ template member konvertiert?
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
 	Objekts auf 0 gesetzt)
+	alternativ: "reset" funktion fuer Shared Pointer
 	Service Abhaengigkeiten Dokumentieren
 	Klasse zum Laden einer DLL (fuer Kernel, und sonstiges)
 
@@ -124,6 +127,10 @@ Doku:
 
 log:
 
+07.04.2004
+VPolarSphere: Halb/Teilkugeln (oben/unten angabe), Textur Koordinaten
+default Color fuer mat. desc eingestellt
+
 04.04.2004
 alle Services zu einem project file zusammengefasst
 example app aufgeraeumt
@@ -134,7 +141,7 @@ VTextureStateCategory.cpp erzeugt
 angefangen mit Sprite Tests
 
 01.04.2004
-Console + WxWindows Services auf neues Modul System umgestellt
+Console + WxWindows Services auf neues wx Modul System umgestellt
 
 31.03.2004
 Alle Services bis auf xml in einem Project File zusammengefasst

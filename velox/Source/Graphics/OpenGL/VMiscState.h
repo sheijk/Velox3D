@@ -2,6 +2,14 @@
 #define V3D_VMISCSTATE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+
+#include <v3d/Graphics/VMaterialDescription.h>
+#include <v3d/Utils/Graphics/VColor4f.h>
+
+#include "IVOpenGLRenderState.h"
+
+#include <Windows.h>
+#include <gl/GL.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -12,33 +20,16 @@ class VMiscState : public IVOpenGLRenderState
 public:
 	typedef VMaterialDescription::PolygonMode PolygonMode;
 
-	VMiscState(const VMaterialDescription& in_Mat)
-	{
-		m_nFrontPolygonMode = GetGLModeNum(in_Mat.frontPolyMode);
-		m_nBackPolygonMode = GetGLModeNum(in_Mat.backPolyMode);
-	}
+	VMiscState(const VMaterialDescription& in_Mat);
 
-	virtual void Apply() const
-	{
-		glPolygonMode(GL_FRONT, m_nFrontPolygonMode);
-		glPolygonMode(GL_BACK, m_nBackPolygonMode);
-	}
+	virtual void Apply() const;
 
 private:
 	int m_nFrontPolygonMode;
 	int m_nBackPolygonMode;
+	v3d::utils::graphics::VColor4f m_DefaultColor;
 
-	int GetGLModeNum(PolygonMode in_Mode)
-	{
-		switch(in_Mode)
-		{
-		case VMaterialDescription::Point: return GL_POINT;
-		case VMaterialDescription::Filled: return GL_FILL;
-		case VMaterialDescription::Line: return GL_LINE;
-		}
-
-		V3D_THROW(VException, "illegal polygon mode");
-	}
+	vuint GetGLModeNum(const PolygonMode in_Mode);
 };
 
 //-----------------------------------------------------------------------------

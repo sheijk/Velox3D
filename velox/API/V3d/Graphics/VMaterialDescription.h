@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/VMeshDescription.h>
+#include <v3d/Utils/Graphics/VColor4f.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -70,13 +71,16 @@ struct VMaterialDescription
 
 	TextureRef* pTextureList;
 
+	v3d::utils::graphics::VColor4f defaultColor;
+
 	// functions
 
 	// setting sensible default values
 	VMaterialDescription() :
 		frontPolyMode(Filled),
 		backPolyMode(Filled),
-		pTextureList(0)
+		pTextureList(0),
+		defaultColor(1, 1, 1, 1)
 	{
 	}
 
