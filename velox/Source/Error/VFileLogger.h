@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Error/IVErrorListener.h>
+#include <fstream>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -17,13 +18,26 @@ namespace error {
 class VFileLogger :	public IVErrorListener
 {
 public:
-	void	OnMessage( VStringParam in_strMessage, VMessageType in_MessageType );
+			VFileLogger( VStringParam in_strFileName );
+			~VFileLogger();
+
+	void OnMessage( VStringParam in_strStreamName, 
+					VStringParam in_strMessage,
+					VMessageType in_MessageType,
+					VStringParam in_strFile,
+					vuint in_nLine );
 
 	void	OnProgressbarBegin();
 	void	OnProgressbarUpdate(const vfloat32 in_fIndex);
 	void	OnProgressbarEnd();
 
-	void	OnStateUpdate( VStringParam in_Text );
+	void	OnStateUpdate( VStringParam in_strStreamName, VStringParam in_strText );
+
+protected:
+
+	VFileLogger() {};
+	std::ofstream m_File;
+	
 };
 
 //-----------------------------------------------------------------------------
