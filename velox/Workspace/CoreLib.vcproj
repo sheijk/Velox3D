@@ -103,6 +103,9 @@
 		<Filter
 			Name="Interface"
 			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Core.h">
+			</File>
 			<Filter
 				Name="SmartPointer"
 				Filter="">

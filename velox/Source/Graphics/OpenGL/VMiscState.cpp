@@ -47,13 +47,20 @@ void VMiscState::ReadColor(const VRenderPass& in_Pass)
 	if( pColorState != 0 )
 	{
 		std::string value;
+		value = "1";
 
 		pColorState->GetParameter("red", value);
 		m_Red.Connect(value);
+
+		value = "1";
 		pColorState->GetParameter("green", value);
 		m_Green.Connect(value);
+
+		value = "1";
 		pColorState->GetParameter("blue", value);
 		m_Blue.Connect(value);
+
+		value = "1";
 		pColorState->GetParameter("alpha", value);
 		m_Alpha.Connect(value);
 

@@ -44,6 +44,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+26.09.2004
+- ExternalLibs Struktur umgestellt
+- GraphicsDemo geschrieben
+- Bugfixing
+
 25.09.2004
 - VDisplaySettings
 - Property Manager

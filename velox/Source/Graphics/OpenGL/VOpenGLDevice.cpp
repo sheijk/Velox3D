@@ -445,7 +445,7 @@ void VOpenGLDevice::SetScreenSize()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(90.0f, 
+	gluPerspective(45.0f, 
 					((vfloat32)m_DisplaySettings.GetWidth() /
 					m_DisplaySettings.GetHeight()),
 					1.0f,

@@ -69,6 +69,7 @@ void VPolarSphereMesh<VertexStructure>::GenerateCoordinates()
 		for(vuint ring = 0; ring < m_nRings; ++ring, ypos += deltaY)
 		{
 			const float scale = sqrt(1 - ypos*ypos);
+			//const float scale = 1.0f;
 			geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.x = xpos * scale;
 			geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.y = ypos;
 			geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.z = zpos * scale;
@@ -79,7 +80,9 @@ void VPolarSphereMesh<VertexStructure>::GenerateCoordinates()
 template<typename VertexStructure>
 void VPolarSphereMesh<VertexStructure>::GenerateTexCoords()
 {
-	const vfloat32 deltaRing =  1.0f / m_nRings;
+	//const float pi = 3.141592654f;
+
+	const vfloat32 deltaRing = 1.0f / m_nRings;
 	const vfloat32 deltaSector = 1.0f / m_nSectors;
 
 	// for each ring

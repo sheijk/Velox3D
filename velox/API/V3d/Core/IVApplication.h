@@ -19,6 +19,8 @@ public:
 	 * The main function. Will be called by the kernel after initialisation
 	 */
 	virtual int Main() = 0;
+
+	virtual ~IVApplication() {}
 };
 
 //-----------------------------------------------------------------------------

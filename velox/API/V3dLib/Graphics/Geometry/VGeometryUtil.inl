@@ -165,7 +165,7 @@ template<typename GeometryProvider>
 v3d::graphics::IVDevice::MeshHandle BuildMesh(
 	v3d::graphics::IVDevice& device,
 	GeometryProvider& provider, 
-	v3d::graphics::VEffectDescription& effect)
+	const v3d::graphics::VEffectDescription& effect)
 {
 	v3d::graphics::VMeshDescription meshDescr = BuildMeshDescription(
 		device,

@@ -396,6 +396,9 @@
 					RelativePath="..\Api\V3dLib\Graphics\Importer.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3dLib\Graphics\Materials.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Misc.h">
 				</File>
 				<File

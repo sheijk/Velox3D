@@ -164,7 +164,6 @@ IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
 
 		// find it in current directory
 		VDirectory::DirIter nextDir = pCurrDir->SubDirs().Begin;
-		VDirectory* tmp = (VDirectory*)&(*nextDir);
 		VCompareFSOName fsoCmp(currDirName);
 		while( nextDir != pCurrDir->SubDirs().End )
 		{

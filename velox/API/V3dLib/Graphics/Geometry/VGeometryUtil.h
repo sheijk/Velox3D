@@ -65,7 +65,7 @@ template<typename GeometryProvider>
 v3d::graphics::IVDevice::MeshHandle BuildMesh(
 	v3d::graphics::IVDevice& device,
 	GeometryProvider& provider, 
-	v3d::graphics::VEffectDescription& effect);
+	const v3d::graphics::VEffectDescription& effect);
 
 /**
  * Creates a texture reference from a loaded image. Creates a texture
