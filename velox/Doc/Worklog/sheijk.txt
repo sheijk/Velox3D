@@ -48,6 +48,10 @@ Auf die Langnese Insel ziehen
 
 log:
 
+28.07.2003
+Ueberpruefung der Zugriffsrechte von Dateien und Dateistreams
+Problem mit SmartPointer beseitigt (operator=(T*) war unsinnig/fehlertraechtig)
+
 25.07.2003
 Virtual File System geaddet. Verzeichnisse koennen gemounted werden, und Dateien
 zum lesen/schreiben geoeffnet werden
