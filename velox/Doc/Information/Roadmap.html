@@ -15,6 +15,7 @@ eintragen, am bestem mit (nick) markiert -(sheijk)</p>
         <li>Kernel</li>
         <li>VirtualFileSystem Service</li>
         <li>Error/Logging Service</li>
+	  <li>XML Parsing Service</li>
         <li>Grafik Pipeline</li>
 		<li>Scene Graph</li>
 	  </ul>
@@ -71,4 +72,51 @@ eintragen, am bestem mit (nick) markiert -(sheijk)</p>
 	  </ul>
 	</li>
  </ol>
+<h1>Velox Editor</h1>
+<ol>
+	<li>Implementierung des Editor Frameworks:</li>
+	<ul>
+		<li>Laden von Texturen in jpg im Texture Frame</li>
+		<li>Zugriff auf Fenster des Gfx Services</li>
+		<li>Erstellung des Grid Frames und Bearbeitungsfunktionen für Brushes</li>
+		<li>Import Modul für 3ds Dateien</li>
+		<li>Entwicklung eines Plugin Systems für den Editor</li>
+		<li>Serializer für Konfigurationseinstellung und Speicherung der Szene im XML Format</li>
+		<li>Erstellung eines Scenegraph Tree und Bearbeitungsfunktionen innerhalb der Scene View</li>
+	</ul>
+
+	<li>Plugins:</li>
+	<ul>
+		<li>Geometrie Compiler</li>
+		<ul>
+			<li>Portal Compiler</li>
+			<li>Bsp Tree Compiler (additional)</li>
+			<li>Outdoor Quadtree Compiler (additional)</li>
+		</ul>
+		<li>Light & Radioscity Calculator</li>
+		<li>Animation Controlling</li>
+	</ul>
+	<li>Aufbau:</li>
+	<ul>
+		<li>Grid Frame - Die Benutzeroberfläche für die Erstellung der Level Geometrie</li>
+		<li>Editor Frame: - Stellt die erstellte Geometrie (vorwiegend Brushes) aus dem Scenegraph dar</li>
+		<li>Texture Frame: - Stellt Texturen als kleines Thubnail dar. Einzelne Texturen können via Drag & Drop auf die Geometrie im Editor Frame gezogen werden</li>
+		<li>Scene Frame: - Zeigt ein Abbild des aktuellen Scenegraphs und bietet Bearbeitungsmöglichkeiten</li>
+		<li>Log Frame: - Text Ausgabe für Logging Zwecke</li>
+		<li>Gfx Window: - Wird je nach Gebrauch eingeblendet und zeigt den aktuellen Scenegraph. Separate Ausführungsmöglichkeiten wie Gravity, Game Logik, Collision Detecting werden verfügbar sein.</li>
+	</ul>
+	<li>Features:</li>
+	<ul>
+		<li>Fenster sind frei anzuordnen</li>
+		<li>Hotkeys konfigurierbar um Frames einzublenden</li>
+		<li>Szene kann vom Editor durch die Engine "realtime" gezeigt werden</li>
+		<li>Geometrie kann nach XML konvertiert werden und ist somit frei austauschbar. Entwickler können bestimmt Elemente speichern und in verschiedenen Szenen einbinden</li>
+	</ul>
+
+</ol>
+	
+
+
+
+
 <body>

@@ -11,4 +11,4 @@ Current assigned tasks:
 
 TODO List:
 -writing editor goaldefinitions
--generating apiu documentatoin with doxygen
+-generating api documentatoin with doxygen
