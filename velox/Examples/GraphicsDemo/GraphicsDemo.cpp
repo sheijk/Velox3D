@@ -345,7 +345,8 @@ void VGraphicsDemoApp::CreateResources()
 		};
 
 		VVertexFormat indexFormat;
-		testres->AddSubResource("indices")->AddData(new VVertexBuffer(indices, 3, *pMD));
+		indexFormat.SetIndexFormat(pMD->GetIndexFormat());
+		testres->AddSubResource("indices")->AddData(new VVertexBuffer(indices, 3, indexFormat));
 
 		VEffectDescription* pED = new VEffectDescription();
 		VRenderPass& pass(pED->AddShaderPath().AddRenderPass());

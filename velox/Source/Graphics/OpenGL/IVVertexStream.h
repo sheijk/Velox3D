@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <V3d/Graphics/VVertexFormat.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -17,27 +18,14 @@ using namespace v3d; // anti auto indenting
 class IVVertexStream
 {
 public:
-	enum DataTypes
-	{
-		Coordinates	= 1,
-		Colors		= 2,
-		Indices		= 4,
-		TexCoords	= 8
-	};
-
 	virtual ~IVVertexStream() {};
 
-	virtual vbool Bind(DataTypes in_StreamTypes) const = 0;
+	virtual vbool Bind(VVertexFormat::DataTypes in_StreamTypes) const = 0;
 	virtual void UnbindAll() const = 0;
 
 	virtual const void* GetIndexAddress() const = 0;
 };
 
-inline IVVertexStream::DataTypes operator|(
-	IVVertexStream::DataTypes l, IVVertexStream::DataTypes r)
-{
-	return IVVertexStream::DataTypes(int(l) | int(r));
-}
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

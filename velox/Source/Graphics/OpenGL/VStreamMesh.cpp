@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 #include "VOpenGLUtils.h"
 
+#include <V3dLib/Graphics/Geometry.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -26,40 +27,43 @@ VStreamMesh::VStreamMesh(
 
 	// create data streams
 	AddVertexBuffer(in_MeshDescription.GetCoordinateResource(), 
-		IVVertexStream::Coordinates);
+		VVertexFormat::Coordinates);
+	AddVertexBuffer(in_MeshDescription.GetNormalResource(),
+		VVertexFormat::Normals);
 	AddVertexBuffer(in_MeshDescription.GetColorResource(),
-		IVVertexStream::Colors);
+		VVertexFormat::Colors);
 
-	for(int texCoordId = 0; 
+	for(vuint texCoordId = 0; 
 		texCoordId < in_MeshDescription.GetTexCoordCount();
 		++texCoordId)
 	{
 		AddVertexBuffer(in_MeshDescription.GetTexCoordResource(texCoordId),
-			IVVertexStream::TexCoords);
+			VVertexFormat::TexCoords);
 	}
 
 	if( in_MeshDescription.GetIndexResource() != "" )
 	{
 		VResourceId pIndexResource = VResourceManagerPtr()->GetResourceByName(
 			in_MeshDescription.GetIndexResource().c_str());
-		m_pIndexStream.reset(new StreamRes(pIndexResource->GetData<VImmediateVertexStream>()));
+		m_pIndexStream.reset(new StreamRes(pIndexResource->GetData<IVVertexStream>()));
 
 		m_nPrimitiveCount = in_MeshDescription.GetIndexFormat().GetCount();
-
-//#ifdef V3D_DEBUG
-//		VImmediateVertexStream* pIndexStream = pIndexResource->GetData<VImmediateVertexStream>();
-//		V3D_ASSERT(pIndexStream != 0);
-//
-//		const vuint* pIndexAddress = pIndexStream->GetIndexAddress();
-//		V3D_ASSERT(pIndexAddress != 0);
-//
-//		// check for invalid indices
-//		for(vuint index = 0; index < m_nPrimitiveCount; ++index)
-//		{
-//            V3D_ASSERT(pIndexAddress[index] < 
-//		}
-//#endif
 	}
+
+	if( in_MeshDescription.GetCoordinateResource() != "" )
+	{
+		m_CoordBuffer = VResourceManagerPtr()->GetResourceByName(
+			in_MeshDescription.GetCoordinateResource().c_str())->GetData<VVertexBuffer>();
+	}
+	if( in_MeshDescription.GetNormalResource() != "" )
+	{
+		m_NormalBuffer = VResourceManagerPtr()->GetResourceByName(
+			in_MeshDescription.GetNormalResource().c_str())->GetData<VVertexBuffer>();
+
+		m_bShowNormal = true;
+	}
+	else
+		m_bShowNormal = false;
 }
 
 /**
@@ -71,13 +75,13 @@ VStreamMesh::~VStreamMesh()
 
 void VStreamMesh::AddVertexBuffer(
 	std::string in_strResourceName, 
-	IVVertexStream::DataTypes in_Types)
+	VVertexFormat::DataTypes in_Types)
 {
 	if( in_strResourceName != "" )
 	{
 		VResourceId pResource = VResourceManagerPtr()->GetResourceByName(
 			in_strResourceName.c_str());
-		StreamRes pVertexStream = pResource->GetData<VImmediateVertexStream>();
+		StreamRes pVertexStream = pResource->GetData<IVVertexStream>();
 
 		BufferInfo info;
 		info.pStream = pVertexStream;
@@ -111,6 +115,23 @@ void VStreamMesh::Render()
 	{
 		glDrawArrays(m_PrimitiveType, 0, m_nPrimitiveCount);
 	}
+
+	//// show normals
+	//if( m_bShowNormal )
+	//{
+	//	glBegin(GL_LINES);
+	//	const vuint vertexCount = m_CoordBuffer->GetFormat().GetCoordinateFormat().GetCount();
+	//	for(vuint v = 0; v < vertexCount; ++v)
+	//	{
+	//		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	//		VVertex3f pos = m_CoordBuffer->GetCoordinate(v);
+	//		VNormal3f normal = m_NormalBuffer->GetNormal(v);
+	//		glVertex3d(pos.x, pos.y, pos.z);
+	//		//glVertex3d(pos.x + pos.x, pos.y + pos.y, pos.z + pos.z);
+	//		glVertex3d(pos.x + normal.x, pos.y + normal.y, pos.z + normal.z);
+	//	}
+	//	glEnd();
+	//}
 
 	// unbind all streams
 	for(vuint i = 0; i < m_Streams.size(); ++i)

@@ -7,8 +7,8 @@
 
 #include <V3d/OpenGL.h>
 
+#include <V3d/Graphics/VVertexBuffer.h>
 #include "IVVertexStream.h"
-#include "VImmediateVertexStream.h"
 #include "../DeviceBase/VMeshBase.h"
 
 #include <memory>
@@ -36,22 +36,26 @@ public:
 	virtual void Render();
 
 private:
-	typedef resource::VResourceDataPtr<const VImmediateVertexStream> StreamRes;
+	typedef resource::VResourceDataPtr<const IVVertexStream> StreamRes;
 
 	struct BufferInfo
 	{
 		StreamRes pStream;
-		IVVertexStream::DataTypes dataTypeFlag;
+		VVertexFormat::DataTypes dataTypeFlag;
 	};
 
 	void AddVertexBuffer(
 		std::string in_strResourceName, 
-		IVVertexStream::DataTypes in_Types);
+		VVertexFormat::DataTypes in_Types);
 
 	std::vector<BufferInfo> m_Streams;
 	std::auto_ptr<StreamRes> m_pIndexStream;
 	vuint m_nPrimitiveCount;
 	const GLint m_PrimitiveType;
+
+	vbool m_bShowNormal;
+	resource::VResourceDataPtr<const VVertexBuffer> m_CoordBuffer;
+	resource::VResourceDataPtr<const VVertexBuffer> m_NormalBuffer;
 };
 
 //-----------------------------------------------------------------------------

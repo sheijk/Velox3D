@@ -19,13 +19,15 @@ class VResource;
 class VResourceId
 {
 public:
+	explicit VResourceId(VStringParam in_pResName);
 	VResourceId(VResource*);
 
 	VResource* operator->();
 	VResource& operator*();
 
 private:
-	VResource* m_pResource;
+	// const pointer to resource
+	VResource* const m_pResource;
 };
 
 //-----------------------------------------------------------------------------

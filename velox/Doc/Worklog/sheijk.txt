@@ -2,7 +2,7 @@ Worklog von sheijk
 -------------------------------------------------------------------------------
 ----- messages to sheijk:
 
-TODO: Einige typedefs sollte einfacher zugaenglcher sein z.b. Vertex
+TODO: Einige typedefs sollte einfacher zugaenglicher sein z.b. Vertex
 
 -------------------------------------------------------------------------------
 ----- current assigned tasks:
@@ -21,23 +21,32 @@ aufgerufen werden kann (kann dann im entsprechenden modul, oder an beliebiger
 Stelle aufgerufen werden)
 
 Doku:
-	Doku System
 	Tutorials fuer
-	  Exceptions
-	  Iteratoren verbessern
-	  SmartPointer erweitern (erzeugen eigener Policies)
-	  Virtual File System
-	    benutzen (laden/schreiben von Daten)
-	    erweitern (DataProvider)
+		Exceptions
+		RangeIteratoren
 		Schreiben von Services
 	Infos ueber
-	  Velox Architektur
-	  Services
-
+		Velox Architektur
 
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+05.03.2004
+- Alle OpenGL includes auf V3d/OpenGL umgestellt
+- CubeMap Support (u.a. nicht nicht korrekt, mangels normalen)
+- Normalen Support
+- Zugriffs Funktionen fuer VVertexBuffer
+- GetX usw Funktionen in VVector<3,..>, const correctness
+- Skybox fuer Resource Manager
+- Resource Manager kann Daten auch per RTTI einordnen
+- VKeyboardCamera erweitert, kann jetzt komplett per Tastatur bedient werden
+
+20.02.2005
+- Resource Manager erweitert: Durch spezialisieren von GetTypeIdName in
+	VResourceData.h koennen Klassen andere Typ Ids als die Standardmaessige
+	haben. Sinnvoll vor allem, damit Klassen die TypeId des Interfaces was sie
+	implementieren benutzen koennen
+	
 19.02.2005
 - Exceptions durch vout und fehlenden Konsolen Service entfernt, beim Werfen
   neuer Exceptions wird eine Meldung per OutputDebugString gesendet
@@ -59,6 +68,7 @@ Doku:
 13.02.2005
 - erste version vom model loader
 - kleinere xml service extras
+- VertexBuffer etc Klassen
 
 12.02.2005
 - Application Templates

@@ -117,14 +117,14 @@ CreateIterator(STLIterator begin, STLIterator end)
 
 template<typename STLContainer>
 VRangeIterator<typename STLContainer::value_type>
-CreateBeginIterator(const STLContainer& in_Container)
+CreateBeginIterator(STLContainer& in_Container)
 {
 	return CreateIterator(in_Container.begin(), in_Container.end());
 }
 
 template<typename STLContainer>
 VRangeIterator<typename STLContainer::value_type>
-CreateEndIterator(const STLContainer& in_Container)
+CreateEndIterator(STLContainer& in_Container)
 {
 	return CreateIterator(in_Container.end(), in_Container.end());
 }

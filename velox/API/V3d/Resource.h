@@ -7,6 +7,7 @@
 #include <V3d/Resource/IVResourceManager.h>
 #include <V3d/Resource/IVResourceType.h>
 #include <V3d/Resource/VResourceDataPtr.h>
+#include <V3d/Resource/VResourceData.h>
 #include <V3d/Resource/Types/VFileName.h>
 
 //-----------------------------------------------------------------------------

@@ -22,6 +22,13 @@ class VStateCategoryList
 public:
 	typedef VRenderStateList::RenderStateList RenderStateList;
 
+	void RegisterCategory(IVStateCategory& in_Category);
+
+	std::vector<VRenderStateList*> CreateMaterialList(
+		const VEffectDescription& in_Effect);
+
+	const VRenderStateList& GetDefaultMaterial();
+
 private:
 	typedef std::set<IVStateCategory*> CategoryContainer;
 
@@ -32,15 +39,6 @@ private:
 	VRenderStateList* CreateMaterialForPass(const VRenderPass& in_Pass);
 	std::vector<VRenderStateList*> CreateMaterialsForPath(
 		const VShaderPath& in_Path);
-
-public:
-	void RegisterCategory(IVStateCategory& in_Category);
-
-	VRenderStateList* CreateRenderStateList(const VMaterialDescription& in_Mat);
-	std::vector<VRenderStateList*> CreateMaterialList(
-		const VEffectDescription& in_Effect);
-
-	const VRenderStateList& GetDefaultMaterial();
 };
 
 //-----------------------------------------------------------------------------

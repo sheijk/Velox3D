@@ -25,9 +25,14 @@ public:
 		template<typename T>
 		static inline TypeId Create();
 
+		template<typename T>
+		TypeId(T*);
+
 		vbool operator<(const TypeId& other) const;
 		vbool operator==(const TypeId& other) const;
 		vbool operator!=(const TypeId& other) const;
+		
+		const vchar* ToString() const;
 
 	private:
 		TypeId(const vchar* in_strName);
@@ -59,6 +64,19 @@ private:
 	VResource* m_pResource;
 };
 
+typedef VResourceData::TypeId VTypeId;
+
+
+/**
+ * Specialize this function for any type which shall use a non standard
+ * type id
+ */
+template<typename DataType>
+VStringParam GetTypeIdName(const DataType* in_pData = 0)
+{
+	return typeid(DataType).name();
+}
+
 //-----------------------------------------------------------------------------
 
 template<typename T>
@@ -68,9 +86,15 @@ VResourceData::TypeId VResourceData::GetTypeId()
 }
 
 template<typename T>
+VResourceData::TypeId::TypeId(T* t)
+{
+	m_strName = typeid(*t).name();
+}
+
+template<typename T>
 static VResourceData::TypeId VResourceData::TypeId::Create()
 {
-	return TypeId(typeid(T).name());
+	return GetTypeIdName<T>();
 }
 
 //-----------------------------------------------------------------------------

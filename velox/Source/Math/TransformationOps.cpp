@@ -76,6 +76,13 @@ VMatrix44f RotationZMatrix(float angle)
 	return rot;
 }
 
+VMatrix44f ScaleMatrix(vfloat32 sx)
+{
+	VMatrix44f scale;
+	SetScale(scale, sx);
+	return scale;
+}
+
 VPointer<VMatrix44f>::SharedPtr IdentityPtr()
 {
 	VPointer<VMatrix44f>::SharedPtr pMatrix(new VMatrix44f());

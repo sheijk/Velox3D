@@ -49,6 +49,7 @@ namespace {
 
 			g_TextureWrapModeInfo.AddModeInfo(TextureRepeat,	"repeat",	GL_REPEAT);
 			g_TextureWrapModeInfo.AddModeInfo(TextureClamp,		"clamp",	GL_CLAMP);
+			g_TextureWrapModeInfo.AddModeInfo(TextureClampToEdge, "clamp.to.edge", GL_CLAMP_TO_EDGE);
 
 			g_TextureFilterInfo.AddModeInfo(FilterNearest,				"nearest",					GL_NEAREST);
 			g_TextureFilterInfo.AddModeInfo(FilterLinear,				"linear",					GL_LINEAR);

@@ -209,7 +209,7 @@ operator+(
 		  const VVector<Scalar, 3>& b
 		  )
 {
-	VVector<Scalar> res;
+	VVector<Scalar, 3> res;
 	Add(res, a, b);
 	return res;
 }

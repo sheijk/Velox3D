@@ -1,24 +1,30 @@
 //TODO: add file creation date to file guard
-#ifndef V3D_VGLVERTEXSTREAMRESTYPE_2005_02_03_H
-#define V3D_VGLVERTEXSTREAMRESTYPE_2005_02_03_H
+#ifndef V3D_VFILENAMERESTYPE_2005_02_25_H
+#define V3D_VFILENAMERESTYPE_2005_02_25_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <V3d/Resource.h>
+#include <V3d/Resource/IVResourceType.h>
+
+#include <vector>
 //-----------------------------------------------------------------------------
-namespace v3d { namespace graphics {
+namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
 /**
-//TODO: insert documentation here
+ * Establishes a link between the virtual file system and the resource manager
+ * If a file exists in the vfs with a name which is the same as the resource
+ * a VFileName will be created for it
+ *
+ * @author sheijk
  */
-class VGLVertexStreamResType : public resource::IVResourceType
+class VFileNameResType : public IVResourceType
 {
 	std::vector<resource::VTypeId> m_ManagedTypes;
 public:
-	VGLVertexStreamResType();
-	virtual ~VGLVertexStreamResType();
+	VFileNameResType();
+	virtual ~VFileNameResType();
 
 	virtual VRangeIterator<resource::VTypeId> CreatedTypes();
 
@@ -28,6 +34,6 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::graphics
+}} // namespace v3d::resource
 //-----------------------------------------------------------------------------
-#endif // V3D_VGLVERTEXSTREAMRESTYPE_2005_02_03_H
+#endif // V3D_VFILENAMERESTYPE_2005_02_25_H

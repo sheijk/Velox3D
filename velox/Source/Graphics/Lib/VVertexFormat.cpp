@@ -8,6 +8,65 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
+VVertexFormat::VVertexFormat()
+{
+}
+
+VVertexFormat::VVertexFormat(
+	DataTypes in_DataTypes, 
+	vuint in_nVertexCount, 
+	vuint in_nIndexCount)
+{
+	// iff index count > 0 there must be indices in the data format
+	V3D_ASSERT(
+		in_nIndexCount > 0 ? 
+			(in_DataTypes & Indices) != 0 : 
+			(in_DataTypes & Indices) == 0);
+
+	vuint firstFreeIndex = 0;
+
+	if( in_DataTypes & Coordinates )
+	{
+		m_CoordinateFormat.SetFirstIndex(firstFreeIndex);
+		m_CoordinateFormat.SetCount(in_nVertexCount);
+		m_CoordinateFormat.SetStride(3);
+		firstFreeIndex += 3 * in_nVertexCount;
+	}
+
+	if( in_DataTypes & Colors )
+	{
+		m_ColorFormat.SetFirstIndex(firstFreeIndex);
+		m_ColorFormat.SetCount(in_nVertexCount);
+		m_ColorFormat.SetStride(4);
+		firstFreeIndex += 4 * in_nVertexCount;
+	}
+
+	if( in_DataTypes & Normals )
+	{
+		m_NormalFormat.SetFirstIndex(firstFreeIndex);
+		m_NormalFormat.SetCount(in_nVertexCount);
+		m_NormalFormat.SetStride(3);
+		firstFreeIndex += 3 * in_nVertexCount;
+	}
+
+	if( in_DataTypes & Indices )
+	{
+		m_IndexFormat.SetFirstIndex(firstFreeIndex);
+		m_IndexFormat.SetCount(in_nIndexCount);
+		m_IndexFormat.SetStride(1);
+		firstFreeIndex += in_nIndexCount;
+	}
+
+	if( in_DataTypes & TexCoords )
+	{
+        SetTexCoordCount(1);
+		m_TexCoordFormats[0].SetFirstIndex(firstFreeIndex);
+		m_TexCoordFormats[0].SetCount(in_nVertexCount);
+		m_TexCoordFormats[0].SetStride(2);
+		firstFreeIndex += 2 * sizeof(vfloat32);
+	}
+}
+
 VDataFormat VVertexFormat::GetCoordinateFormat() const
 {
 	return m_CoordinateFormat;
@@ -26,6 +85,16 @@ VDataFormat VVertexFormat::GetColorFormat() const
 void VVertexFormat::SetColorFormat(VDataFormat in_Format)
 {
 	m_ColorFormat = in_Format;
+}
+
+VDataFormat VVertexFormat::GetNormalFormat() const
+{
+	return m_NormalFormat;
+}
+
+void VVertexFormat::SetNormalFormat(VDataFormat in_Format)
+{
+	m_NormalFormat = in_Format;
 }
 
 VDataFormat VVertexFormat::GetIndexFormat() const

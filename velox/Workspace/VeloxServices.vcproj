@@ -599,6 +599,12 @@
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.h">
 					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.h">
+					</File>
 				</Filter>
 				<Filter
 					Name="Meshes"
@@ -630,18 +636,18 @@
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.h">
 					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.h">
-					</File>
 				</Filter>
 				<Filter
 					Name="States"
 					Filter="">
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VCubemapTextureState.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VCubemapTextureState.h">
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VMiscState.cpp">
@@ -813,6 +819,12 @@
 		<Filter
 			Name="Resource Types"
 			Filter="">
+			<File
+				RelativePath="..\Source\Resource\Types\VFileNameResType.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Resource\Types\VFileNameResType.h">
+			</File>
 			<File
 				RelativePath="..\Source\Resource\Types\VGLVertexStreamResType.cpp">
 			</File>

@@ -24,7 +24,7 @@ namespace v3d {
 		VMatrix<Scalar, RowCount, ColumnCount>& result
 		)
 	{
-		gmtl::makeInverse(result.m_Mat);
+		result.m_Mat = gmtl::makeInverse(result.m_Mat);
 	}
 
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
@@ -32,7 +32,7 @@ namespace v3d {
 		VMatrix<Scalar, RowCount, ColumnCount>& result
 		)
 	{
-		result = gmtl::makeTranspose(result.m_Mat);
+		result.m_Mat = gmtl::makeTranspose(result.m_Mat);
 	}
 
 	// matrix operations:

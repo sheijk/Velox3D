@@ -1,39 +1,42 @@
-#ifndef V3D_VMISCSTATECATEGORY_H
-#define V3D_VMISCSTATECATEGORY_H
+#ifndef V3D_VNORMAL3F_2005_02_26_H
+#define V3D_VNORMAL3F_2005_02_26_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include "VMiscState.h"
-
+#include <V3d/Math/VVector.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-class VMiscStateCategory : public IVStateCategory
+struct VNormal3f
 {
-	VMiscState m_Default;
-
-public:
-	VMiscStateCategory() :
-		m_Default(VMaterialDescription())
+	union
 	{
+		vfloat32 v[3];
+		struct 
+		{
+			vfloat32 x, y, z;
+		};
+	};
+
+	VNormal3f()
+	{
+		v[0] = v[1] = v[2] = 0;
 	}
 
-	virtual vfloat32 GetPriority() const
+	VNormal3f(float in_X, float in_Y, float in_Z)
 	{
-		return .1f;
+		v[0] = in_X;
+		v[1] = in_Y;
+		v[2] = in_Z;
 	}
 
-	virtual const IVRenderState& GetDefault() const
+	explicit VNormal3f(const VVector3f& vec)
 	{
-		return m_Default;
-	}
-
-	VMiscState* CreateState(const VRenderPass& in_Pass)
-	{
-		VMiscState* pState = new VMiscState(in_Pass);
-		return pState;
+		v[0] = vec[0];
+		v[1] = vec[1];
+		v[2] = vec[2];
 	}
 };
 
@@ -41,4 +44,4 @@ public:
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VMISCSTATECATEGORY_H
+#endif // V3D_VNORMAL3F_2005_02_26_H

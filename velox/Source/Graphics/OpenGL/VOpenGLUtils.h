@@ -6,8 +6,7 @@
 
 #include <v3d/Math/VMatrix.h>
 
-#include <windows.h>
-#include <gl/GL.h>
+#include <V3d/OpenGL.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

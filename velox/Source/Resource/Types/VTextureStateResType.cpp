@@ -4,11 +4,10 @@
 #include <v3d/Image/VImage.h>
 
 #include <V3dLib/Graphics/Materials/StateTypes.h>
+#include <V3dLib/Graphics/Materials/VModeTypeInfo.h>
 #include "../../Graphics/OpenGL/VTextureState.h"
 
-#include <windows.h>
-#include <GL/GL.h>
-#include <GL/GLU.h>
+#include <V3d/OpenGL.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -112,18 +111,36 @@ namespace {
 
 	vuint GetGLModeNum(const VTextureWrapMode in_WrapMode)
 	{
-		switch( in_WrapMode )
-		{
-		case TextureRepeat:	return GL_REPEAT;
-		case TextureClamp:	return GL_CLAMP;
-		}
+		return GetTextureWrapModeInfo().GetGLEnum(in_WrapMode);
+		//switch( in_WrapMode )
+		//{
+		//case TextureRepeat:	return GL_REPEAT;
+		//case TextureClamp:	return GL_CLAMP;
+		//}
 
-		V3D_THROW(VException, "illegal texture wrapping mode");
+		//V3D_THROW(VException, "illegal texture wrapping mode");
 	}
 
-	VTextureState* CreateTextureState(
+	IVRenderState* CreateTextureState(GLenum in_TextureTarget, GLuint in_TextureId)
+	{
+		switch(in_TextureTarget)
+		{
+		case GL_TEXTURE_2D: return new VTextureState2D(in_TextureId);
+		case GL_TEXTURE_CUBE_MAP_POSITIVE_X: return new VTextureStatePosX(in_TextureId);
+		case GL_TEXTURE_CUBE_MAP_NEGATIVE_X: return new VTextureStateNegX(in_TextureId);
+		case GL_TEXTURE_CUBE_MAP_POSITIVE_Y: return new VTextureStatePosY(in_TextureId);
+		case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: return new VTextureStateNegY(in_TextureId);
+		case GL_TEXTURE_CUBE_MAP_POSITIVE_Z: return new VTextureStatePosZ(in_TextureId);
+		case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: return new VTextureStateNegZ(in_TextureId);
+		}
+
+		V3D_THROW(VException, "invalid texture mode");
+	}
+
+	IVRenderState* CreateTextureState(
 		const image::VImage& image,
-        const VTextureOptions& in_Options
+        const VTextureOptions& in_Options,
+		const GLenum in_TextureTarget
 		)
 	{
 		V3D_ASSERT(image.GetWidth() > 0);
@@ -134,31 +151,36 @@ namespace {
 
 		GLuint id;
 		glGenTextures(1, &id);
-		glBindTexture(GL_TEXTURE_2D, id);
+		glBindTexture(in_TextureTarget, id);
 
 		//TODO: optionen fuer texturen.. muessen pro textur unterschiedlich
+		// deshalb wird wrap mode etc ignoriert
 		// sein, anstatt pro bild...
 		glPixelStorei  (GL_UNPACK_ALIGNMENT, 1);
 		glTexParameteri(
-			GL_TEXTURE_2D,
+			in_TextureTarget,
 			GL_TEXTURE_WRAP_S,
-			GetGLModeNum(in_Options.GetTextureWrapModeU()) );
+			//GL_CLAMP_TO_EDGE
+			GetGLModeNum(in_Options.GetTextureWrapModeU()) 
+			);
 		glTexParameteri(
-			GL_TEXTURE_2D,
+			in_TextureTarget,
 			GL_TEXTURE_WRAP_T,
-			GetGLModeNum(in_Options.GetTextureWrapModeV()) );
+			//GL_CLAMP_TO_EDGE
+			GetGLModeNum(in_Options.GetTextureWrapModeV()) 
+			);
 		glTexParameteri(
-			GL_TEXTURE_2D,
+			in_TextureTarget,
 			GL_TEXTURE_MIN_FILTER,
 			GetGLModeNum(in_Options.GetMinificationFilter()) );
 		glTexParameteri(
-			GL_TEXTURE_2D,
+			in_TextureTarget,
 			GL_TEXTURE_MAG_FILTER,
 			GetGLModeNum(in_Options.GetMagnificationFilter()) );
 		glTexEnvi	   (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,  GL_MODULATE);
 
 		gluBuild2DMipmaps(
-			GL_TEXTURE_2D, 
+			in_TextureTarget, 
 			GL_RGB, 
 			image.GetWidth(), 
 			image.GetHeight(),
@@ -167,7 +189,8 @@ namespace {
 			image.GetPixelData()
 			);
 
-		VTextureState* pTexState = new VTextureState(id);
+		IVRenderState* pTexState = CreateTextureState(in_TextureTarget, id);
+		//VTextureState2D* pTexState = new VTextureState2D(id);
 
 		return pTexState;
 	}
@@ -178,6 +201,20 @@ namespace {
  */
 VTextureStateResType::VTextureStateResType()
 {
+	m_TextureTargets[VTypeId::Create<VTextureState2D>()] = GL_TEXTURE_2D;
+	m_TextureTargets[VTypeId::Create<VTextureStatePosX>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+	m_TextureTargets[VTypeId::Create<VTextureStateNegX>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
+	m_TextureTargets[VTypeId::Create<VTextureStatePosY>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
+	m_TextureTargets[VTypeId::Create<VTextureStateNegY>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
+	m_TextureTargets[VTypeId::Create<VTextureStatePosZ>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
+	m_TextureTargets[VTypeId::Create<VTextureStateNegZ>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
+
+	for(TextureTargetMap::iterator it = m_TextureTargets.begin();
+		it != m_TextureTargets.end();
+		++it)
+	{
+		m_ManagedTypes.push_back(it->first);
+	}
 }
 
 /**
@@ -187,22 +224,38 @@ VTextureStateResType::~VTextureStateResType()
 {
 }
 
-resource::VResourceData::TypeId VTextureStateResType::GetTypeId() const
+GLenum VTextureStateResType::GetTextureTarget(resource::VTypeId in_Type) const
 {
-	return resource::VResource::GetTypeId<VTextureState>();
+	std::map<resource::VTypeId, GLenum>::const_iterator it;
+	it = m_TextureTargets.find(in_Type);
+	V3D_ASSERT(it != m_TextureTargets.end());
+	return it->second;
 }
 
-vbool VTextureStateResType::Generate(resource::VResource* in_pResource)
+VRangeIterator<VTypeId> VTextureStateResType::CreatedTypes()
 {
+	return CreateBeginIterator< std::vector<resource::VTypeId> >(m_ManagedTypes);
+}
+
+vbool VTextureStateResType::Generate(
+	resource::VResource* in_pResource,
+	resource::VTypeId in_Type)
+{
+	V3D_ASSERT(std::find(m_ManagedTypes.begin(), m_ManagedTypes.end(), in_Type) 
+		!= m_ManagedTypes.end());
+//	V3D_ASSERT(resource::VTypeId::Create<VTextureState2D>() == in_Type);
+
 	// if texture state does not exist, yet
-	if( ! in_pResource->ContainsData<VTextureState>() )
+
+	if( ! in_pResource->ContainsData(in_Type) )
+	//if( ! in_pResource->ContainsData<VTextureState>() )
 	{
 		VResourceDataPtr<const VImage> pImage;
 
 		// get VImage for resource
 		try
 		{
-			 pImage = in_pResource->GetData<VImage>();
+			pImage = in_pResource->GetData<VImage>();
 		}
 		catch(resource::VDataNotFoundException&)
 		{
@@ -223,8 +276,13 @@ vbool VTextureStateResType::Generate(resource::VResource* in_pResource)
 		{
 		}
 
+		// determine texture target
+		GLenum target = GetTextureTarget(in_Type);
+
 		// create opengl texture state from it
-		in_pResource->AddData(CreateTextureState(*pImage, options));
+		in_pResource->AddDynamicTypedData(CreateTextureState(*pImage, options, target));
+
+		//in_pResource->DumpInfo(":::");
 	}
 
 	return true;

@@ -19,12 +19,16 @@ using namespace v3d; // anti auto indenting
  */
 class VImageResourceType : public resource::IVResourceType
 {
+	std::vector<resource::VTypeId> m_ManagedTypes;
 public:
 	VImageResourceType();
 	virtual ~VImageResourceType();
 
-	virtual resource::VResourceData::TypeId GetTypeId() const;
-    virtual vbool Generate(resource::VResource* in_pResource);
+	virtual VRangeIterator<resource::VTypeId> CreatedTypes();
+
+	virtual vbool Generate(
+		resource::VResource* in_pResource, 
+		resource::VTypeId in_Type);
 };
 
 //-----------------------------------------------------------------------------

@@ -244,24 +244,10 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	const VMaterialDescription& in_MaterialDesc
 	)
 {
-	vout << "warning: using deprecation function v3d::graphics::IVDevice::Crea"
+	V3D_THROW(VException, 
+		"warning: using deprecation function v3d::graphics::IVDevice::Crea"
 		"teMesh(VMeshDescription&, VMaterialDescription&). Use an effect "
-		"description instead" << vendl;
-
-	IVMaterial* pMaterial = CreateMaterial(in_MaterialDesc);
-
-	VMeshDescription descr = in_MeshDesc;
-
-	// add buffers to device, if they are external
-	InternalizeBuffers(descr);
-
-	std::vector<IVMaterial*> material;
-	material.push_back(pMaterial);
-	VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, material);
-
-	m_Meshes.push_back(pMesh);
-
-	return MakeMeshHandle(pMesh);
+		"description instead");
 }
 
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
@@ -291,12 +277,6 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	{
 		return 0;
 	}
-}
-
-VOpenGLDevice::MaterialHandle VOpenGLDevice::CreateMaterial(
-	const VMaterialDescription& in_MatDesc)
-{
-	return m_StateCategories.CreateRenderStateList(in_MatDesc);
 }
 
 void VOpenGLDevice::DeleteMaterial(MaterialHandle& in_Material)
@@ -341,16 +321,7 @@ void VOpenGLDevice::RenderImmediate(
 	VMaterialDescription in_Material
 	)
 {
-	MaterialHandle pMaterial = CreateMaterial(in_Material);
-	std::vector<IVMaterial*> material;
-	material.push_back(pMaterial);
-	MeshHandle pMesh = m_ImmediateRenderMethod.CreateMesh(
-		in_Mesh, 0, material);
-
-	RenderMesh(pMesh);
-
-	DeleteMesh(pMesh);
-	DeleteMaterial(pMaterial);
+	V3D_THROW(VException, "IVDevice::RenderImmediate not supported anymore");
 }
 
 //-----------------------------------------------------------------------------

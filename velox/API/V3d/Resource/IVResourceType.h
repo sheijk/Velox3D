@@ -5,6 +5,8 @@
 
 #include <V3d/Resource/VResourceData.h>
 #include <V3d/Resource/VResourceId.h>
+
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
@@ -19,8 +21,8 @@ using namespace v3d; // anti auto indenting
 class IVResourceType
 {
 public:
-	virtual VResourceData::TypeId GetTypeId() const = 0;
-    virtual vbool Generate(VResource* in_pResource) = 0;
+	virtual VRangeIterator<VTypeId> CreatedTypes() = 0;
+    virtual vbool Generate(VResource* in_pResource, VTypeId in_Type) = 0;
 };
 
 //-----------------------------------------------------------------------------

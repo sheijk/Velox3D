@@ -40,7 +40,7 @@ public:
 		m_Vec[in_Pos] = in_Val;
 	}
 
-	Scalar Get(vuint in_Pos)
+	Scalar Get(vuint in_Pos) const
 	{
 		return m_Vec[in_Pos];
 	}
@@ -55,7 +55,7 @@ public:
 		return m_Vec[in_Pos];
 	}
 
-	vuint GetDimension()
+	static vuint GetDimension()
 	{
 		return Dimension;
 	}
@@ -96,10 +96,18 @@ public:
 		m_Vec[in_Pos] = in_Val;
 	}
 
-	Scalar Get(vuint in_Pos)
+	Scalar Get(vuint in_Pos) const
 	{
 		return m_Vec[in_Pos];
 	}
+
+	Scalar GetX() const { return m_Vec[0]; }
+	Scalar GetY() const { return m_Vec[1]; }
+	Scalar GetZ() const { return m_Vec[2]; }
+
+	void SetX(Scalar x) { m_Vec[0] = x; }
+	void SetY(Scalar y) { m_Vec[1] = y; }
+	void SetZ(Scalar z) { m_Vec[2] = z; }
 
 	Scalar& operator[](vuint in_Pos)
 	{
@@ -111,7 +119,7 @@ public:
 		return m_Vec[in_Pos];
 	}
 
-	vuint GetDimension()
+	static vuint GetDimension()
 	{
 		return 3;
 	}

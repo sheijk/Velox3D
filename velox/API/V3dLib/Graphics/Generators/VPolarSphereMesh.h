@@ -31,6 +31,7 @@ class VPolarSphereMesh
 	vuint CalculateVertexCount();
 	vuint CalculateIndexCount();
 	void GenerateIndices();
+
 public:
 	typedef v3d::graphics::VBuffer<VertexStructure> VertexBuffer;
 	typedef v3d::graphics::VBuffer<vuint> IndexBuffer;

@@ -7,6 +7,10 @@
 
 #include <iostream>
 
+/*
+Name-Type-GLenum Zuordnungen werden in VModeTypeInfo.cpp festgelegt
+*/
+
 //-----------------------------------------------------------------------------
 namespace v3d { 
 std::ostream& operator<<(std::ostream& str, const VMatrix44f& matrix);
@@ -109,7 +113,8 @@ std::ostream& operator<<(std::ostream& str, VBlendEnable enable);
 enum VTextureWrapMode
 {
 	TextureRepeat,
-	TextureClamp
+	TextureClamp,
+	TextureClampToEdge
 };
 
 std::ostream& operator<<(std::ostream& str, VTextureWrapMode wrapMode);

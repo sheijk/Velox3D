@@ -159,6 +159,16 @@ VResource* VResource::GetSubResource(const std::string& in_strSubResource)
 	return 0;
 }
 
+VRangeIterator<VResource> VResource::ChildIterator()
+{
+	return CreateDerefBeginIterator<VResource>(m_SubResources);
+}
+
+VRangeIterator<const VResource> VResource::ChildIterator() const
+{
+	return CreateDerefBeginIterator<const VResource>(m_SubResources);
+}
+
 VResource* VResource::GetResourceByPath(const std::string& in_strChildName)
 {
     // parse string to get all elements seperated by '/'
@@ -220,7 +230,7 @@ void VResource::DumpInfo(const std::string& in_strPrefix) const
 		VResourceData* pData = data->second.Get();
 
 		vout << in_strPrefix << "Data of type '";
-		vout << typeid(*pData).name() << "'" << vendl;
+		vout << data->first.ToString() << "'" << vendl;
 	}
 
 	// print info about subdirectories    
@@ -258,7 +268,7 @@ VResourceData* VResource::GetData(VResourceData::TypeId in_Type)
 			try
 			{
 				// try to generate data
-				(*resType)->Generate(this);
+				(*resType)->Generate(this, in_Type);
 
 				// try to get data again
 				data = m_Data.find(in_Type);
@@ -284,7 +294,7 @@ VResourceData* VResource::GetData(VResourceData::TypeId in_Type)
 	else
 	{
 		std::stringstream message;
-		message << "Could not find data of type '(TODO;)";
+		message << "Could not find data of type '" << in_Type.ToString();
 		//message << typeid(VTypedResourceData<DataType>).name() << "'";
 		message << "' in resource '" << GetQualifiedName() << "'";
 

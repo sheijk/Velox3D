@@ -166,8 +166,16 @@ VResourceId VResourceManager::GetResourceByName(VStringParam in_strName)
 
 void VResourceManager::RegisterResourceType(VSharedPtr<IVResourceType> in_pResType)
 {
-	m_ManagedTypes.insert(
-		TypeMap::value_type(in_pResType->GetTypeId(), in_pResType));
+	VRangeIterator<VTypeId> typeIter = in_pResType->CreatedTypes();
+
+	while(typeIter.HasNext())
+	{
+		m_ManagedTypes.insert(TypeMap::value_type(*typeIter, in_pResType));
+		typeIter++;
+	}
+
+	//m_ManagedTypes.insert(
+	//	TypeMap::value_type(in_pResType->GetTypeId(), in_pResType));
 }
 
 std::vector<IVResourceType*> VResourceManager::GetResourceTypes(

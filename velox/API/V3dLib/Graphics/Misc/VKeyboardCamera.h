@@ -42,6 +42,7 @@ public:
 	vfloat32 GetRotationSpeedY() const;
 	void SetRotationSpeedZ(vfloat32 in_fNewSpeedX);
 	vfloat32 GetRotationSpeedZ() const;
+
 private:
 	void QueryButtons(input::IVInputManager& in_pInputManager);
 
@@ -49,15 +50,27 @@ private:
 	vfloat32 m_fRotationSpeedX;
 	vfloat32 m_fRotationSpeedY;
 	vfloat32 m_fRotationSpeedZ;
+	vfloat32 m_fKeyRotationFactor;
 
-	input::IVButton* m_pEscapeButton;
-	input::IVButton* m_pUpButton;
-	input::IVButton* m_pDownButton;
+	input::IVButton* m_pForwardButton;
+	input::IVButton* m_pBackwardButton;
 	input::IVButton* m_pLeftButton;
 	input::IVButton* m_pRightButton;
 
-	input::IVButton* m_pLeftMouseButton;
-	input::IVButton* m_pRightMouseButton;
+	input::IVButton* m_pUpButton;
+	input::IVButton* m_pDownButton;
+
+	input::IVButton* m_pRotateLeftButton;
+	input::IVButton* m_pRotateRightButton;
+	input::IVButton* m_pRotateUpButton;
+	input::IVButton* m_pRotateDownButton;
+
+	input::IVButton* m_pFastTriggerButton;
+
+	input::IVButton* m_pRollLeftButton;
+	input::IVButton* m_pRollRightButton;
+	input::IVButton* m_pRollLeftButton2;
+	input::IVButton* m_pRollRightButton2;
 	input::IVRelativeAxis* m_pMouseXAxis;
 	input::IVRelativeAxis* m_pMouseYAxis;
 

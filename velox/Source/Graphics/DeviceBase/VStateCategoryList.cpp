@@ -11,22 +11,22 @@ void VStateCategoryList::RegisterCategory(IVStateCategory& in_Category)
 	m_Categories.insert(&in_Category);
 }
 
-VRenderStateList* VStateCategoryList::CreateRenderStateList(
-	const VMaterialDescription& in_Mat)
-{
-	CategoryContainer::iterator cat = m_Categories.begin();
-
-	RenderStateList states;
-	IVRenderState* pState;
-
-	for( ; cat != m_Categories.end(); ++cat)
-	{
-		pState = (*cat)->CreateState(in_Mat);
-		states.push_back(pState);
-	}
-
-	return new VRenderStateList(states);
-}
+//VRenderStateList* VStateCategoryList::CreateRenderStateList(
+//	const VMaterialDescription& in_Mat)
+//{
+//	CategoryContainer::iterator cat = m_Categories.begin();
+//
+//	RenderStateList states;
+//	IVRenderState* pState;
+//
+//	for( ; cat != m_Categories.end(); ++cat)
+//	{
+//		pState = (*cat)->CreateState(in_Mat);
+//		states.push_back(pState);
+//	}
+//
+//	return new VRenderStateList(states);
+//}
 
 VRenderStateList* VStateCategoryList::CreateMaterialForPass(
 	const VRenderPass& in_Pass)

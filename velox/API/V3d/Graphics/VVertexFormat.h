@@ -21,11 +21,29 @@ using namespace v3d; // anti auto indenting
 class VVertexFormat
 {
 public:
+	enum DataTypes
+	{
+		Coordinates	= 1,
+		Colors		= 2,
+		Normals		= 4,
+		Indices		= 8,
+		TexCoords	= 16
+	};
+
+	VVertexFormat();
+	VVertexFormat(
+		DataTypes in_DataTypes, 
+		vuint in_nVertexCount, 
+		vuint in_nIndexCount);
+
 	VDataFormat GetCoordinateFormat() const;
 	void SetCoordinateFormat(VDataFormat in_Format);
 
 	VDataFormat GetColorFormat() const;
 	void SetColorFormat(VDataFormat in_Format);
+
+	VDataFormat GetNormalFormat() const;
+	void SetNormalFormat(VDataFormat in_Format);
 
 	VDataFormat GetIndexFormat() const;
 	void SetIndexFormat(VDataFormat in_Format);
@@ -38,9 +56,19 @@ public:
 private:
 	VDataFormat m_CoordinateFormat;
 	VDataFormat m_ColorFormat;
+	VDataFormat m_NormalFormat;
 	VDataFormat m_IndexFormat;
 	std::vector<VDataFormat> m_TexCoordFormats;
 };
+
+/**
+ * Provide a 'clean' way to or-combine several data type flags
+ */
+inline VVertexFormat::DataTypes operator|(
+	VVertexFormat::DataTypes l, VVertexFormat::DataTypes r)
+{
+	return VVertexFormat::DataTypes(int(l) | int(r));
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

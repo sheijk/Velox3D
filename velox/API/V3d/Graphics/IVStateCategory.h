@@ -15,7 +15,6 @@ class IVRenderState;
 class IVStateCategory
 {
 public:
-	virtual IVRenderState* CreateState(const VMaterialDescription& in_Mat) = 0;
 	virtual IVRenderState* CreateState(const VRenderPass& in_Pass) = 0;
 };
 

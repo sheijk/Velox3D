@@ -122,6 +122,15 @@ VColor4f ReadColor(IVXMLElement* in_pElement)
 		);
 }
 
+VNormal3f ReadNormal(IVXMLElement* in_pElement)
+{
+	return VNormal3f(
+		in_pElement->GetAttributeValue<vfloat32>("nx"),
+		in_pElement->GetAttributeValue<vfloat32>("ny"),
+		in_pElement->GetAttributeValue<vfloat32>("nz")
+		);
+}
+
 VTexCoord2f ReadTexCoord(IVXMLElement* in_pElement, vuint in_nTexCoordNum)
 {
 	std::stringstream name;
@@ -224,6 +233,8 @@ void VModelLoader::CreateMeshNode(
 		in_pMeshNode, "coords", "yes");
 	const vbool bColors = HasAttributeWithValue<std::string>(
 		in_pMeshNode, "colors", "yes");
+	const vbool bNormals = HasAttributeWithValue<std::string>(
+		in_pMeshNode, "normals", "yes");
 	const vuint nTexCoordCount = 
 		in_pMeshNode->GetAttributeValue<vuint>("texCoords");
 
@@ -232,6 +243,7 @@ void VModelLoader::CreateMeshNode(
 
 	const vuint coordSize = sizeof(VVertex3f) / sizeof(vfloat32);
 	const vuint colorSize = sizeof(VColor4f) / sizeof(vfloat32);
+	const vuint normalSize = sizeof(VNormal3f) / sizeof(vfloat32);
 	const vuint texCoordSize = sizeof(VTexCoord2f) / sizeof(vfloat32);
 
 	if( bCoordinates )
@@ -239,6 +251,9 @@ void VModelLoader::CreateMeshNode(
 
 	if( bColors )
 		vertexSize += colorSize;
+
+	if( bNormals )
+		vertexSize += normalSize;
 
 	vertexSize += nTexCoordCount * texCoordSize;
 
@@ -260,6 +275,13 @@ void VModelLoader::CreateMeshNode(
 		dataEnd += colorSize * vertexCount;
 	}
 
+	if( bNormals )
+	{
+		format.SetNormalFormat(
+			VDataFormat(dataEnd, vertexCount, normalSize));
+		dataEnd += normalSize * vertexCount;
+	}
+
 	format.SetTexCoordCount(nTexCoordCount);
 	for(vuint i = 0; i < nTexCoordCount; ++i)
 	{
@@ -270,8 +292,10 @@ void VModelLoader::CreateMeshNode(
 	V3D_ASSERT(dataEnd == vertexSize * vertexCount);
 
 	// create buffer
-	const bufferSize = vertexSize * vertexCount * sizeof(vfloat32);
-	VByteBuffer vertices(new vbyte[bufferSize], bufferSize);
+	//const bufferSize = vertexSize * vertexCount * sizeof(vfloat32);
+	//VByteBuffer vertices(new vbyte[bufferSize], bufferSize);
+	VVertexBuffer* vertices = new VVertexBuffer(format);
+	V3D_ASSERT(vertices->GetBufferSize() == vertexSize * vertexCount * sizeof(vfloat32));
 
 	IVXMLElement::NodeIter meshChildNode = in_pMeshNode->ChildBegin();
 
@@ -291,20 +315,29 @@ void VModelLoader::CreateMeshNode(
 			if( bCoordinates )
 			{
 				VVertex3f v = ReadCoordinate(pVertexNode);
-				SetCoordinate(vertices, nVertexId, format, v);
+				//SetCoordinate(vertices, nVertexId, format, v);
+				vertices->SetCoordinate(v, nVertexId);
 			}
 
 			if( bColors )
 			{
 				VColor4f color = ReadColor(pVertexNode);
 				//VColor4f color(1, 0, 0, 1);
-				SetColor(vertices, nVertexId, format, color);
+				//SetColor(vertices, nVertexId, format, color);
+				vertices->SetColor(color, nVertexId);
+			}
+
+			if( bNormals )
+			{
+				VNormal3f normal = ReadNormal(pVertexNode);
+				vertices->SetNormal(normal, nVertexId);
 			}
 
 			for(vuint i = 0; i < nTexCoordCount; ++i)
 			{
 				VTexCoord2f texCoord = ReadTexCoord(pVertexNode, i);
-				SetTexCoord(i, vertices, nVertexId, format, texCoord);
+				//SetTexCoord(i, vertices, nVertexId, format, texCoord);
+				vertices->SetTexCoord(0, nVertexId, texCoord);
 			}
 
 			++nVertexId;
@@ -317,7 +350,8 @@ void VModelLoader::CreateMeshNode(
 	}
 
 	// add vertex buffer and mesh description to resource
-	in_pResource->AddData(new VVertexBuffer(vertices, format));
+	//in_pResource->AddData(new VVertexBuffer(vertices, format));
+	in_pResource->AddData(vertices);
 	VMeshDescription* pMeshDescription = 
 		new VMeshDescription(format);
 	
@@ -331,6 +365,8 @@ void VModelLoader::CreateMeshNode(
 		pMeshDescription->SetCoordinateResource(in_pResource->GetQualifiedName());
 	if( bColors )
 		pMeshDescription->SetColorResource(in_pResource->GetQualifiedName());
+	if( bNormals )
+		pMeshDescription->SetNormalResource(in_pResource->GetQualifiedName());
 	for(vuint i = 0; i < nTexCoordCount; ++i)
 		pMeshDescription->SetTexCoordResource(i, in_pResource->GetQualifiedName());
 
@@ -383,7 +419,7 @@ void VModelLoader::CreateMeshNode(
 
 	in_pResource->AddData(pMeshDescription);
 
-	VFloatBuffer v(vertices);
+	//VFloatBuffer v(vertices);
 }
 
 VMeshDescription::GeometryType VModelLoader::GetGeometryType(

@@ -6,10 +6,7 @@
 #include "VReaderPart.h"
 
 
-#include "../../Source/Resource/VResourceManager.h"
-#include <V3d/Resource/VTypedResourceData.h>
-#include <V3d/Resource/VResourceDataPtr.h>
-#include <V3d/Resource/Types/VFileName.h>
+#include <V3d/Resource.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -43,13 +40,24 @@ private:
 
 class BlubType : public resource::IVResourceType
 {
+	std::vector<resource::VTypeId> m_CreatedTypes;
 public:
-	virtual resource::VResourceData::TypeId GetTypeId() const
+	BlubType() 
 	{
-		return resource::VResource::GetTypeId<Blub>();
+		m_CreatedTypes.push_back(resource::VTypeId::Create<Blub>());
 	}
 
-	virtual vbool Generate(resource::VResource* in_pResource)
+	virtual VRangeIterator<resource::VTypeId> CreatedTypes()
+	{
+		return CreateIterator(m_CreatedTypes.begin(), m_CreatedTypes.end());
+	}
+
+	virtual resource::VResourceData::TypeId GetTypeId() const
+	{
+		return resource::VTypeId::Create<Blub>();
+	}
+
+	virtual vbool Generate(resource::VResource* in_pResource, resource::VTypeId)
 	{
 		resource::VResourceDataPtr<const vint> pIntData = in_pResource->GetData<vint>();
 

@@ -12,8 +12,8 @@ using namespace v3d; // anti auto indent
 namespace 
 {
 	vbool TypeSetIn(
-		IVVertexStream::DataTypes type, 
-		IVVertexStream::DataTypes flags)
+		VVertexFormat::DataTypes type, 
+		VVertexFormat::DataTypes flags)
 	{
 		return (int(type) & int(flags)) != 0;
 	}
@@ -28,27 +28,33 @@ VImmediateVertexStream::~VImmediateVertexStream()
 {
 }
 
-vbool VImmediateVertexStream::CanProvideStream(DataTypes in_DataTypes) const
+vbool VImmediateVertexStream::CanProvideStream(VVertexFormat::DataTypes in_DataTypes) const
 {
-	if( TypeSetIn(Coordinates, in_DataTypes) &&
+	if( TypeSetIn(VVertexFormat::Coordinates, in_DataTypes) &&
 		m_pVertexData->GetFormat().GetCoordinateFormat().GetCount() <= 0 )
 	{
 		return false;
 	}
 
-	if( TypeSetIn(Colors, in_DataTypes) &&
+	if( TypeSetIn(VVertexFormat::Colors, in_DataTypes) &&
 		m_pVertexData->GetFormat().GetColorFormat().GetCount() <= 0 )
 	{
 		return false;
 	}
 
-	if( TypeSetIn(Indices, in_DataTypes) &&
+	if( TypeSetIn(VVertexFormat::Normals, in_DataTypes) &&
+		m_pVertexData->GetFormat().GetNormalFormat().GetCount() <= 0 )
+	{
+		return false;
+	}
+
+	if( TypeSetIn(VVertexFormat::Indices, in_DataTypes) &&
 		m_pVertexData->GetFormat().GetIndexFormat().GetCount() <= 0 )
 	{
 		return false;
 	}
 
-	if( TypeSetIn(TexCoords, in_DataTypes) )
+	if( TypeSetIn(VVertexFormat::TexCoords, in_DataTypes) )
 	if(
 		m_pVertexData->GetFormat().GetTexCoordCount() < 1 &&
 		m_pVertexData->GetFormat().GetTexCoordFormat(0).GetCount() <= 0
@@ -60,7 +66,7 @@ vbool VImmediateVertexStream::CanProvideStream(DataTypes in_DataTypes) const
 	return true;
 }
 
-vbool VImmediateVertexStream::Bind(DataTypes in_StreamTypes) const
+vbool VImmediateVertexStream::Bind(VVertexFormat::DataTypes in_StreamTypes) const
 {
 	const VVertexFormat& format(m_pVertexData->GetFormat());
 
@@ -75,7 +81,8 @@ vbool VImmediateVertexStream::Bind(DataTypes in_StreamTypes) const
 	const vfloat32* pBuffer = 
 		reinterpret_cast<const vfloat32*>(m_pVertexData->GetBufferAddress());
 
-	if( TypeSetIn(Coordinates, in_StreamTypes) && format.GetCoordinateFormat().GetCount() > 0 )
+	if( TypeSetIn(VVertexFormat::Coordinates, in_StreamTypes) && 
+		format.GetCoordinateFormat().GetCount() > 0 )
 	{
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(
@@ -86,7 +93,8 @@ vbool VImmediateVertexStream::Bind(DataTypes in_StreamTypes) const
 			);
 	}
 
-	if( TypeSetIn(Colors, in_StreamTypes) && format.GetColorFormat().GetCount() > 0 )
+	if( TypeSetIn(VVertexFormat::Colors, in_StreamTypes) && 
+		format.GetColorFormat().GetCount() > 0 )
 	{
 		glEnableClientState(GL_COLOR_ARRAY);
 		glColorPointer(
@@ -97,8 +105,19 @@ vbool VImmediateVertexStream::Bind(DataTypes in_StreamTypes) const
 			);
 	}
 
+	if( TypeSetIn(VVertexFormat::Normals, in_StreamTypes) &&
+		format.GetNormalFormat().GetCount() > 0 )
+	{
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glNormalPointer(
+			GL_FLOAT,
+			format.GetNormalFormat().GetStride() * sizeof(vfloat32),
+			pBuffer + format.GetNormalFormat().GetFirstIndex()
+			);
+	}
+
 	if( 
-		TypeSetIn(TexCoords, in_StreamTypes) && 
+		TypeSetIn(VVertexFormat::TexCoords, in_StreamTypes) && 
 		format.GetTexCoordCount() >= 1 &&
 		format.GetTexCoordFormat(0).GetCount() > 0 
 		)
@@ -119,14 +138,17 @@ void VImmediateVertexStream::UnbindAll() const
 {
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 const void* VImmediateVertexStream::GetIndexAddress() const
 {
-	if( CanProvideStream(IVVertexStream::Indices) )
+	if( CanProvideStream(VVertexFormat::Indices) )
 	{
-		return m_pVertexData->GetBufferAddress() + m_pVertexData->GetFormat().GetIndexFormat().GetFirstIndex();
+		return m_pVertexData->GetBufferAddress() + 
+//			m_pVertexData->GetFormat().GetIndexFormat().GetFirstIndex();
+			(m_pVertexData->GetFormat().GetIndexFormat().GetFirstIndex() * 4);
 	}
 	else
 	{

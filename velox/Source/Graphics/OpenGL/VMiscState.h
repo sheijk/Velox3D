@@ -13,8 +13,8 @@
 #include "IVOpenGLRenderState.h"
 #include <V3dLib/Math.h>
 
-#include <Windows.h>
-#include <gl/GL.h>
+#include <V3d/OpenGL.h>
+
 #include <memory>
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -185,6 +185,11 @@ VMatrix44f RotationZMatrix(float angle);
 /**
  * @author sheijk
  */
+VMatrix44f ScaleMatrix(vfloat32 sx);
+
+/**
+ * @author sheijk
+ */
 VPointer<VMatrix44f>::SharedPtr IdentityPtr();
 
 //-----------------------------------------------------------------------------

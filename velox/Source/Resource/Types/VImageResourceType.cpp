@@ -13,6 +13,7 @@ using namespace v3d; // anti auto indent
  */
 VImageResourceType::VImageResourceType()
 {
+	m_ManagedTypes.push_back(resource::VTypeId::Create<VImage>());
 }
 
 /**
@@ -22,13 +23,17 @@ VImageResourceType::~VImageResourceType()
 {
 }
 
-resource::VResourceData::TypeId VImageResourceType::GetTypeId() const
+VRangeIterator<resource::VTypeId> VImageResourceType::CreatedTypes()
 {
-	return resource::VResource::GetTypeId<VImage>();
+	return CreateBeginIterator(m_ManagedTypes);
 }
 
-vbool VImageResourceType::Generate(resource::VResource* in_pResource)
+vbool VImageResourceType::Generate(
+	resource::VResource* in_pResource,
+	resource::VTypeId in_Type)
 {
+	V3D_ASSERT(resource::VTypeId::Create<VImage>() == in_Type);
+
 	// if a file name is present
 	const resource::VFileName* pFileName = &*in_pResource->GetData<resource::VFileName>();
 

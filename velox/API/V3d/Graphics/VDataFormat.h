@@ -9,7 +9,6 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-//TODO: move into VVertexFormat
 /**
  * Specifies the data format of some data within an interleaved buffer
  * At FirstIndex-th byte come Count element every Stride bytes
@@ -35,6 +34,11 @@ public:
 	void SetFirstIndex(vuint f)	{ m_nFirstIndex = f; }
 	void SetCount(vuint c)		{ m_nCount = c; }
 	void SetStride(vuint s)		{ m_nStride = s; }
+
+	vuint GetOffset(vuint in_nNum) const
+	{
+		return m_nFirstIndex + (m_nStride * in_nNum);
+	}
 };
 
 //-----------------------------------------------------------------------------

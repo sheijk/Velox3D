@@ -7,10 +7,7 @@
 #include <v3d/Graphics/VDisplaySettings.h>
 #include <V3d/Math/VMatrix.h>
 
-#include <windows.h>
-#include <extgl/extgl.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include <V3d/OpenGL.h>
 
 #include "../DeviceBase/VBufferManager.h"
 #include "../DeviceBase/VRenderMethodRegistry.h"
@@ -72,7 +69,6 @@ public:
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 
-	virtual MaterialHandle CreateMaterial(const VMaterialDescription& in_MatDesc);
 	virtual void DeleteMaterial(MaterialHandle& in_Material);
 
 	virtual void RenderMesh(MeshHandle in_Mesh);

@@ -70,6 +70,17 @@ std::string VMeshDescription::GetColorResource() const
 	return m_Colors.resource;
 }
 
+//--- normals
+void VMeshDescription::SetNormalResource(const std::string& in_Id)
+{
+	m_Normals.resource = in_Id;
+}
+
+std::string VMeshDescription::GetNormalResource() const
+{
+	return m_Normals.resource;
+}
+
 //--- indices
 void VMeshDescription::SetIndexResource(const std::string& in_Id)
 {

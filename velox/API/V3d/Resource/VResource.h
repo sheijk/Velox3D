@@ -8,6 +8,7 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Resource/ResourceExceptions.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 
 #include <vector>
 #include <string>
@@ -45,6 +46,11 @@ public:
 	/** Find a sub resource with the given name, 0 if no one found */
 	VResource* GetSubResource(const std::string& in_strChildName);
 
+	/** Get an iterator to access all child resources */
+	VRangeIterator<VResource> ChildIterator();
+
+	VRangeIterator<const VResource> ChildIterator() const;
+
 	/** 
 	 * Find a resource by it's (relative) path
 	 * Paths starting with '/' will be treated as absolute paths. All other paths
@@ -66,6 +72,9 @@ public:
 	template<typename DataType>
 	void AddData(DataType* in_pData);
 
+	template<typename DataType>
+	void AddDynamicTypedData(DataType* in_pData);
+
 	/**
 	 * Returns the data of type DataType attached to the resource if it exists.
 	 * Will throw an exception if the data does not exist
@@ -81,11 +90,7 @@ public:
 	template<typename DataType>
 	vbool ContainsData();
 
-	/**
-	 * Returns the type id object for DataType
-	 */
-	template<typename DataType>
-	static VResourceData::TypeId GetTypeId();
+	vbool ContainsData(VResourceData::TypeId in_Type);
 
 private:
 	typedef std::vector< VSharedPtr<VResource> > ResourceContainer;
@@ -98,7 +103,6 @@ private:
 	VResource* GetRootResource();
 
 	VResourceData* GetData(VResourceData::TypeId in_Type);
-	vbool ContainsData(VResourceData::TypeId in_Type);
 
 	void AddData(
 		VResourceData::TypeId in_Type, 
@@ -112,10 +116,24 @@ private:
 
 //-----------------------------------------------------------------------------
 template<typename DataType>
+void VResource::AddDynamicTypedData(DataType* in_pData)
+{
+	// get type id
+	VResourceData::TypeId type = VResourceData::TypeId(in_pData);
+
+	// create container
+	VSharedPtr< VTypedResourceData<DataType> > pContainer(
+		new VTypedResourceData<DataType>(VSharedPtr<DataType>(in_pData), this));
+
+	// and store it
+	AddData(type, pContainer);
+}
+
+template<typename DataType>
 void VResource::AddData(DataType* in_pData)
 {
 	// get type id
-	VResourceData::TypeId type = GetTypeId<DataType>();
+	VResourceData::TypeId type = VResourceData::TypeId::Create<DataType>();
 
 	// create container
 	VSharedPtr< VTypedResourceData<DataType> > pContainer(
@@ -129,7 +147,7 @@ template<typename DataType>
 VResourceDataPtr<const DataType> VResource::GetData()
 {
 	// get type id
-	VResourceData::TypeId type = GetTypeId<DataType>();
+	VResourceData::TypeId type = VTypeId::Create<DataType>();
 
 	VResourceData* pUntypedData = GetData(type);
 
@@ -143,90 +161,16 @@ template<typename DataType>
 vbool VResource::ContainsData()
 {
 	// get type id
-	VResourceData::TypeId type = GetTypeId<DataType>();
+	VResourceData::TypeId type = VTypeId::Create<DataType>();
 
 	// look for type id
 	return ContainsData(type);
 }
 
-template<typename DataType>
-VResourceData::TypeId VResource::GetTypeId()
-{
-	return VResourceData::TypeId::Create<DataType>();
-	//typedef VTypedResourceData<DataType> Container;
-	//
-	//return reinterpret_cast<VResourceData::TypeId>(typeid(Container).name());
-}
-
-// old AddData
-	//// get type id
-	//VResourceData::TypeId type = GetTypeId<DataType>();
-
-	//// if no data of same type exists, yet
-	//if( m_Data.find(type) == m_Data.end() )
-	//{
-	//	// create container
-	//	VSharedPtr< VTypedResourceData<DataType> > pContainer(
-	//		new VTypedResourceData<DataType>(VSharedPtr<DataType>(in_pData)));
-
-	//	// and store it
-	//	m_Data.insert(DataMap::value_type(type, pContainer));
-	//}
-	//// if data already existed, throw exception
-	//else
-	//{
-	//	std::stringstream message;
-	//	message << "Could not attach data of type '";
-	//	message << typeid(VTypedResourceData<DataType>).name();
-	//	message << "' to resource '" << GetName();
-	//	message << " because such data already existed";
-
-	//	V3D_THROW(VDataAlreadyAttachedException, message.str().c_str());
-	//}
-
-// old GetData
-	//// if such data exists, return it
-	//DataMap::const_iterator data = m_Data.find(type);
-
-	//if( data != m_Data.end() )
-	//{
-	//	VResourceData* pUntypedData = data->second.Get();
-	//	VTypedResourceData<const DataType>* pResData = 
-	//		reinterpret_cast< VTypedResourceData<const DataType>* >(pUntypedData);
-
-	//	return VResourceDataPtr<const DataType>(pResData);
-	//}
-	//// if it doesn't exist, throw error
-	//else
-	//{
-	//	std::stringstream message;
-	//	message << "Could not find data of type '";
-	//	message << typeid(VTypedResourceData<DataType>).name() << "'";
-	//	message << " in resource '" << GetName() << "'";
-
-	//	V3D_THROW(VDataNotFoundException, message.str().c_str());
-	//}
-
 //template<typename DataType>
-//VSharedPtr< VTypedResourceData<DataType> > VResource::GetData() const
+//VResourceData::TypeId VResource::GetTypeId()
 //{
-//	// if data of given type is present
-//	VResourceData::TypeId type = VResourceData::GetTypeId<DataType>();
-//
-//	if((DataMap::iterator data = m_Data.find(type)) != m_Data.end())
-//	{
-//		// convert and return it
-//		return data->second;
-//	}
-//	else
-//	{
-//		return VSharedPtr< VTypedResourceData<DataType> >(0);
-//	}
-//}
-//
-//template<typename DataType>
-//VSharedPtr< VTypedResourceData<DataType> > VResource::AddData()
-//{
+//	return VResourceData::TypeId::Create<DataType>();
 //}
 
 //-----------------------------------------------------------------------------

@@ -8,9 +8,7 @@
 
 #include <map>
 
-#include <windows.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
+#include <V3d/OpenGL.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -29,17 +27,20 @@ class VTextureStateCategory : public IVStateCategory
 	typedef VMaterialDescription::TextureFilter TextureFilter;
 	typedef VMaterialDescription::TextureWrapMode TextureWrapMode;
 
-	typedef std::map<VMaterialDescription::ByteBufferHandle, VTextureState*> 
+	typedef std::map<VMaterialDescription::ByteBufferHandle, VTextureState2D*> 
 		TextureMap;
 
-	VTextureState m_DefaultState;
+	VTextureStateUntextured m_DefaultState;
 	TextureMap m_Textures;
 
-	VTextureState* CreateTextureState(const VMaterialDescription::TextureRef& in_Ref);
-	VTextureState* GetTextureState(const VMaterialDescription::TextureRef& in_Ref);
+	VTextureState2D* CreateTextureState(const VMaterialDescription::TextureRef& in_Ref);
+	VTextureState2D* GetTextureState(const VMaterialDescription::TextureRef& in_Ref);
 
 	static vuint GetGLModeNum(const TextureWrapMode in_WrapMode);
 	static vuint GetGLModeNum(const TextureFilter in_Filer);
+
+	VTextureState2D* Create2DState(const VState* in_pTextureState);
+	IVRenderState* CreateCubeMapState(const VState* in_pTextureState);
 
 public:
 	VTextureStateCategory();
@@ -48,8 +49,7 @@ public:
 
 	virtual const IVRenderState& GetDefault() const;
 
-	virtual VTextureState* CreateState(const VMaterialDescription& in_Descr);
-	virtual VTextureState* CreateState(const VRenderPass& in_Pass);
+	virtual IVRenderState* CreateState(const VRenderPass& in_Pass);
 };
 
 //-----------------------------------------------------------------------------

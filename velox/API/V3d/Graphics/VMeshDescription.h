@@ -52,6 +52,9 @@ public:
 	void SetColorResource(const std::string& in_Id);
 	std::string GetColorResource() const;
 
+	void SetNormalResource(const std::string& in_Id);
+	std::string GetNormalResource() const;
+
 	void SetIndexResource(const std::string& in_Id);
 	std::string GetIndexResource() const;
 
@@ -102,6 +105,7 @@ private:
 
 	DataRef m_Vertices;
 	DataRef m_Colors;
+	DataRef m_Normals;
 	DataRef m_Indices;
 	std::vector<DataRef> m_TexCoords;
 

@@ -15,6 +15,7 @@ using namespace v3d::resource;
  */
 VGLVertexStreamResType::VGLVertexStreamResType()
 {
+	m_ManagedTypes.push_back(resource::VTypeId::Create<IVVertexStream>());
 }
 
 /**
@@ -24,13 +25,17 @@ VGLVertexStreamResType::~VGLVertexStreamResType()
 {
 }
 
-resource::VResourceData::TypeId VGLVertexStreamResType::GetTypeId() const
+VRangeIterator<resource::VTypeId> VGLVertexStreamResType::CreatedTypes()
 {
-	return resource::VResource::GetTypeId<VImmediateVertexStream>();
+	return CreateBeginIterator(m_ManagedTypes);
 }
 
-vbool VGLVertexStreamResType::Generate(resource::VResource* in_pResource)
+vbool VGLVertexStreamResType::Generate(
+	resource::VResource* in_pResource,
+	resource::VTypeId in_Type)
 {
+	V3D_ASSERT(resource::VTypeId::Create<VImmediateVertexStream>() == in_Type);
+
 	vbool success = false;
 
 	try

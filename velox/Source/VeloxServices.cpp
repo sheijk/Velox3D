@@ -22,6 +22,7 @@
 #include "Resource/Types/VImageResourceType.h"
 #include "Resource/Types/VTextureStateResType.h"
 #include "Resource/Types/VGLVertexStreamResType.h"
+#include "Resource/Types/VFileNameResType.h"
 
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VDevILLoader.h"
@@ -136,6 +137,8 @@ void VVeloxModules::Initialize()
 		VSharedPtr<IVResourceType>(new VTextureStateResType()));
 	g_pResourceManager->RegisterResourceType(
 		VSharedPtr<IVResourceType>(new VGLVertexStreamResType()));
+	g_pResourceManager->RegisterResourceType(
+		VSharedPtr<IVResourceType>(new VFileNameResType()));
 
 	// image
 	g_pImageFactory.Assign(new VImageFactory());
