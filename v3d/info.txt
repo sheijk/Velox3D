@@ -1,0 +1,1 @@
+Dies ist das alte Repository, die aktuelle Version ist im Modul "velox", alle anderen Zugangsdaten bleiben gleich. Die Sources werden nach und nach auf Services umgeschrieben und ins neue CVS integriert.
