@@ -7,9 +7,6 @@ TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht we
 zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
 die gleichen services stehen -[ins]
 
-<ins>: vfs bug:wenn ich eine date mit VReadAccess oeffnen will bekomme ich eine
-exception: vfs does not allow writeacess! <- stimmt gar nicht! ;) -- sheijk
-
 -------------------------------------------------------------------------------
 ----- current assigned tasks:
 
@@ -105,6 +102,9 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+01.05.2004
+v3dlib/math/arrayops.h
 
 24.04.2004
 boost signal lib eingebaut

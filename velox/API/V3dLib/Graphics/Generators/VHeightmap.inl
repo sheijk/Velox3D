@@ -32,16 +32,16 @@ VHeightmap<VertexStructure>::GetVertex(vuint x, vuint y) const
 template <typename VertexStructure>
 vfloat32 VHeightmap<VertexStructure>::GetHeight(vuint x, vuint y) const
 {
-	return vfloat32(m_pHeightmap->GetData()[y * m_nWidth + x]) / 30.0f;
+	return vfloat32(m_pHeightmap->GetData()[y * m_nWidth + x]);
 }
 
 template <typename VertexStructure>
 void VHeightmap<VertexStructure>::GenerateCoordinatesAtZ(vfloat32 in_nZ)
 {
-	vfloat32 left = -15;
-	vfloat32 right = 15;
-	vfloat32 top = -15;
-	vfloat32 bottom = 15;
+	vfloat32 left = -1;
+	vfloat32 right = 1;
+	vfloat32 top = -1;
+	vfloat32 bottom = 1;
 
 	const vfloat32 xdelta = (right - left) / m_nWidth;
 	const vfloat32 ydelta = (bottom - top) / m_nHeight;

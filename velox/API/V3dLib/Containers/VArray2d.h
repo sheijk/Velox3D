@@ -18,9 +18,9 @@ namespace v3d {
  *    - typedef VArray2d< std::string, unsigned vint > StringTable
  *    StringTable table;
  *    table.Resize( 10, 5 );
- *    table.SetElement( 3, 4, "bla" );
+ *    table.Set( 3, 4, "bla" );
  *    table.Resize( 4, 7, StringTable::KeepData );
- *    if( table.GetElement(3,4) != "bla" ) MeldeBug();
+ *    if( table.Get(3,4) != "bla" ) MeldeBug();
  *
  * @author sheijk
  */
@@ -63,12 +63,12 @@ public:
 	 * Sets an element to a new value. If (x,y) is outside bounds nothing
 	 * will be done
 	 */
-	inline void SetElement(const TIndex x, const TIndex y, const TElement val);
+	inline void Set(const TIndex x, const TIndex y, const TElement val);
 
 	/**
 	 * Returns the value of the elements at pos (x,y)
 	 */
-	inline TElement GetElement(const TIndex x, const TIndex y) const;
+	inline TElement Get(const TIndex x, const TIndex y) const;
 
 	inline ElementType& operator()(IndexType x, IndexType y);
 	inline const ElementType& operator()(IndexType x, IndexType y) const;
@@ -212,7 +212,7 @@ template <class TElement, class TIndex> vbool VArray2d<TElement, TIndex>::
    {
       for(y = 0; y < m_Height; y++)
        for(x = 0; x < m_Width; x++)
-         SetElement( x, y, TElement() );
+         Set( x, y, TElement() );
    }
    // if old data shall be saved, copy old data
    else if( flags == KeepData )
@@ -227,15 +227,15 @@ template <class TElement, class TIndex> vbool VArray2d<TElement, TIndex>::
       {
          for(x = 0; x < w; x++)
          {
-            SetElement(x,y, bak->GetElement(x,y) );
+            Set(x,y, bak->Get(x,y) );
          }
          for(x = w; x < m_Width; x++)
-            SetElement(x,y, TElement());
+            Set(x,y, TElement());
       }
 
       for(y = h; y < m_Height; y++)
        for(x = 0; x < m_Width; x++)
-         SetElement( x,y, TElement() );
+         Set( x,y, TElement() );
 
       delete bak;
    }
@@ -266,7 +266,7 @@ template <class TElement, class TIndex> vbool VArray2d<TElement, TIndex>::
 }
 
 template <class TElement, class TIndex> void VArray2d<TElement, TIndex>::
-   SetElement(const TIndex x, const TIndex y, const TElement val)
+   Set(const TIndex x, const TIndex y, const TElement val)
 {
 	V3D_ASSERT(x >= 0 && x < m_Width);
 	V3D_ASSERT(y >= 0 && y < m_Height);
@@ -275,7 +275,7 @@ template <class TElement, class TIndex> void VArray2d<TElement, TIndex>::
 }
 
 template <class TElement, class TIndex> TElement VArray2d<TElement, TIndex>::
-   GetElement(const TIndex x, const TIndex y) const
+   Get(const TIndex x, const TIndex y) const
 {
 	V3D_ASSERT(x >= 0 && x < m_Width);
 	V3D_ASSERT(y >= 0 && y < m_Height);

@@ -330,6 +330,12 @@
 			Name="Math"
 			Filter="">
 			<File
+				RelativePath="..\Api\V3dLib\Math\ArrayOps.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Math\ArrayOps.inl">
+			</File>
+			<File
 				RelativePath="..\Api\V3dLib\Math.h">
 			</File>
 			<File
