@@ -10,8 +10,11 @@ using namespace v3d;
 using namespace v3d::kernel;
 //-----------------------------------------------------------------------------
 
-// global kernel instance
-VPointer<VKernel>::AutoPtr g_pKernel;
+namespace
+{
+	// global kernel instance
+	VPointer<VKernel>::AutoPtr g_pKernel;
+}
 
 //-----------------------------------------------------------------------------
 

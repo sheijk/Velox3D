@@ -19,7 +19,13 @@ IVErrorService* GetLogDevice()
 {
 	if(0 == g_pErrorService)
 	{
-		g_pErrorService = QueryObject<IVErrorService>("error.service");
+		try 
+		{
+			g_pErrorService = QueryObject<IVErrorService>("error.service");
+		}
+		catch(VObjectRegistryException& e)
+		{
+		}
 	}
 
 	return g_pErrorService;
