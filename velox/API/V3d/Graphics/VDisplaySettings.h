@@ -9,27 +9,52 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
- * This class holds a complete set of display variables
+ * Settings for the window and graphics device
  *
- * @author insane
+ * @author sheijk/insane
  */
-class VDisplaySettings  
+class VDisplaySettings
 {
 public:
+	VDisplaySettings();
 
-	//TODO: problematisch, klasse kann nur von gfx service selbst gesetzt werden,
-	// sonst gibts linker fehler (sheijk)
-	inline VDisplaySettings();
+	void SetFullscreen(vbool f);
+	vbool IsFullscreen() const;
 
+	void SetSize(vuint width, vuint height);
+	void SetWidth(vuint w);
+	vuint GetWidth() const;
+	void SetHeight(vuint h);
+	vuint GetHeight() const;
+
+	void SetPosition(vuint x, vuint y);
+	void SetX(vuint x);
+	vuint GetX() const;
+	void SetY(vuint y);
+	vuint GetY() const;
+
+	void SetBitsPerPixel(vuint bpp);
+	vuint GetBitsPerPixel() const;
+
+	void SetDepthBits(vuint depth);
+	vuint GetDepthBits() const;
+
+	vuint GetStencilBits() const;
+	vuint GetAccumulationBits() const;
+
+	std::string GetAPI() const;
+	void SetAPI(const std::string& api);
+
+private:
 	vbool m_bFullscreen;
-	vuint m_iWidth;
-	vuint m_iHeight;
-	vuint m_iWinCoordX;
-	vuint m_iWinCoordY;
-	vuint m_iBitsPerPixel;
-	vuint m_iAccumulationBuffer;
-	vuint m_iDepthBits;
-	vuint m_iStencilBits;
+	vuint m_nWidth;
+	vuint m_nHeight;
+	vuint m_nWinCoordX;
+	vuint m_nWinCoordY;
+	vuint m_nBitsPerPixel;
+	vuint m_nAccumulationBuffer;
+	vuint m_nDepthBits;
+	vuint m_nStencilBits;
 	std::string m_sAPIType;
 	
 	vfloat32 m_fFieldOfView;
@@ -44,28 +69,6 @@ public:
 
 	
 };
-
-VDisplaySettings::VDisplaySettings()
-{
-	m_bFullscreen   = false;
-	m_iWidth	    = 800;
-	m_iHeight	    = 600;
-	m_iWinCoordX    = 300;
-	m_iWinCoordY    = 10;
-	m_iBitsPerPixel = 16;
-	m_iAccumulationBuffer = 0;
-	m_iDepthBits = 16;
-	m_iStencilBits = 0;
-	m_fFieldOfView = 90;
-	m_fNearClippingPlane = 1.0f;
-	m_fFarClippingPlane = 900000.0f;
-    m_fBackgroundRed = 0.235f;
-	m_fBackgroundGreen = 0.39f;
-	m_fBackgroundBlue = 0.627f;
-	m_fBackgroundAlpha = 1.0f;
-	m_sAPIType = "OpenGL";
-	m_fClearDepth = 1.0f;
-}
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

@@ -7,6 +7,7 @@
 #include "VMeshBase.h"
 
 #include <list>
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -29,7 +30,7 @@ struct IVRenderMethod
 	 virtual VMeshBase* CreateMesh(
 		 const VMeshDescription& in_MeshDescr,
 		 MeshCreationFlags in_Flags,
-		 IVMaterial* in_pMaterial
+		 std::vector<IVMaterial*> in_Materials
 		 ) = 0;
 };
 
@@ -65,7 +66,7 @@ public:
 	VMeshBase* CreateMesh(
 		const VMeshDescription& in_MeshDescr, 
 		MeshCreationFlags in_Flags,
-		IVMaterial* in_pMaterial
+		std::vector<IVMaterial*> in_Materials
 		);
 
 	// frage: wie wird entschieden, welche render methode benutzt wird? (wer?)

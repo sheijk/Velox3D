@@ -50,11 +50,14 @@ log:
 
 TODO:
 
+25.09.2004
+- VDisplaySettings
+
+24.09.2004
+- Multipass Effekte
+
 23.09.2004
-todo: 
-	VDisplaySettings
-	VImage
-	
+- Bug im Update Manager gefixt:	falsche frame duration bei erstem aufruf
 - weitere Hilfsfunktionen + Typen um Effect Descriptions bequem zu erstellen
 
 22.09.2004

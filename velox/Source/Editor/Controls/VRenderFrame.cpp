@@ -20,10 +20,10 @@ VRenderFrame::VRenderFrame(wxWindow* in_pParent) :
 	VServicePtr<window::IVWindowManager> pWinManager;
 
 	graphics::VDisplaySettings settings;
-	settings.m_bFullscreen = false;
-	settings.m_sAPIType = "OpenGL";
-	settings.m_iWidth = GetSize().GetWidth();
-	settings.m_iHeight = GetSize().GetHeight();
+	settings.SetFullscreen(false);
+	settings.SetAPI("OpenGL");
+	settings.SetWidth(GetSize().GetWidth());
+	settings.SetHeight(GetSize().GetHeight());
 
 	m_pDevice = pWinManager->CreateGraphicsDevice(settings, (void*)GetHandle());
 }

@@ -648,12 +648,6 @@
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.h">
 					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.h">
-					</File>
 				</Filter>
 				<Filter
 					Name="Meshes"
@@ -669,12 +663,6 @@
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVBOMesh.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVBOMesh.h">
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.cpp">

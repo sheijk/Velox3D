@@ -14,9 +14,9 @@ namespace graphics {
 
 VOpenGLVertexMesh::VOpenGLVertexMesh(
 	const VMeshDescription& in_Descr,
-	IVMaterial* in_pMaterial
+	std::vector<IVMaterial*> in_Materials
 	) :
-	VMeshBase(in_pMaterial)	
+	VMeshBase(in_Materials)
 {
 	V3D_VERIFY(in_Descr.GetTexCoordCount() == 1);
 
@@ -27,9 +27,6 @@ VOpenGLVertexMesh::VOpenGLVertexMesh(
 	m_CoordinateFormat = in_Descr.GetCoordinateFormat();
 	m_ColorFormat = in_Descr.GetColorFormat();
 	m_TexCoordFormat = in_Descr.GetTexCoordFormat(0);
-	//m_TriangleData = in_Descr.triangleVertices;
-	//m_ColorData = in_Descr.triangleColors;
-	//m_TexCoordData = in_Descr.triangleTexCoords;
 
 	m_bColors = (m_hColorBuffer != 0);
 	m_bTexCoords = (m_hTexCoordBuffer != 0);

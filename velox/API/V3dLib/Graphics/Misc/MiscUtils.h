@@ -32,7 +32,7 @@ VMaterialDescription::ColorBufferMask NoColorWrites();
  */
 
 void ApplyMaterial(IVDevice& in_Device,
-				   IVMaterial* in_pMaterial);
+				   const IVMaterial* in_pMaterial);
 
 
 

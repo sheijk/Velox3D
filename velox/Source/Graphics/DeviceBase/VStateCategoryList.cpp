@@ -96,6 +96,18 @@ std::vector<VRenderStateList*> VStateCategoryList::CreateMaterialList(
 	return std::vector<VRenderStateList*>();
 }
 
+const VRenderStateList& VStateCategoryList::GetDefaultMaterial()
+{
+	if( m_pDefaultMaterial.get() == 0 )
+	{
+		VRenderPass pass;
+
+		m_pDefaultMaterial.reset(CreateMaterialForPass(pass));
+	}
+
+	return *m_pDefaultMaterial;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

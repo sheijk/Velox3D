@@ -27,16 +27,19 @@ void VRenderMethodRegistry::RegisterRenderMethod(
 VMeshBase* VRenderMethodRegistry::CreateMesh(
 	const VMeshDescription& in_MeshDescr, 
 	MeshCreationFlags in_Flags,
-	IVMaterial* in_pMaterial
+	std::vector<IVMaterial*> in_Materials
 	)
 {
-	V3D_ASSERT(in_pMaterial != 0);
+	for(vuint matid = 0; matid < in_Materials.size(); ++matid)
+	{
+		V3D_ASSERT(in_Materials[matid] != 0);
+	}
 
 	// select appropriate rendering method
 	IVRenderMethod& renderMethod = * m_RenderMethods.front();
 
 	// create mesh for it
-	VMeshBase* pMesh = renderMethod.CreateMesh(in_MeshDescr, in_Flags, in_pMaterial);
+	VMeshBase* pMesh = renderMethod.CreateMesh(in_MeshDescr, in_Flags, in_Materials);
 	pMesh->SetBuffers(in_MeshDescr.GetAllBuffers());
 
 	return pMesh;

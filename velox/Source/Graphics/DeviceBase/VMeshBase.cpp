@@ -8,14 +8,21 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-VMeshBase::VMeshBase(IVMaterial* in_pMaterial) : 
-	m_pMaterial(in_pMaterial)
+VMeshBase::VMeshBase(std::vector<IVMaterial*> in_Materials) : 
+	m_Materials(in_Materials)
 {
 }
 
-IVMaterial& VMeshBase::GetMaterial()
+IVMaterial& VMeshBase::GetMaterial(vuint in_nMaterialId)
 {
-	return *m_pMaterial;
+	V3D_ASSERT(in_nMaterialId < m_Materials.size());
+
+	return *m_Materials[in_nMaterialId];
+}
+
+vuint VMeshBase::GetMaterialCount() const
+{
+	return vuint(m_Materials.size());
 }
 
 void VMeshBase::SetBuffers(std::vector<VMeshDescription::BufferHandle> in_Buffers)

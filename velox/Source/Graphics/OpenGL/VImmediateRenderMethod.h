@@ -13,14 +13,13 @@ namespace graphics {
  *
  * @author sheijk
  */
-
 class VImmediateRenderMethod : public IVRenderMethod
 {
 public:
 	virtual VMeshBase* CreateMesh(
 		const VMeshDescription& in_MeshDescr,
 		MeshCreationFlags in_Flags,
-		IVMaterial* in_pMaterial
+		std::vector<IVMaterial*> in_Materials
 		);
 };
 

@@ -58,7 +58,7 @@ VMaterialDescription::ColorBufferMask NoColorWrites()
 }
 
 void ApplyMaterial(IVDevice& in_Device,
-				   IVMaterial* in_pMaterial)
+				   const IVMaterial* in_pMaterial)
 {
 	for(vuint prio = 0; prio < in_pMaterial->StateCount(); ++prio)
 	{

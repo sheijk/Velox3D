@@ -19,6 +19,8 @@ VPerformanceCounter::VPerformanceCounter()
 
 	QueryPerformanceFrequency((LARGE_INTEGER*)&(m_iFrequency));
 	QueryPerformanceCounter((LARGE_INTEGER*)&m_iLastTick);
+
+	m_fFrameDuration = 0;
 }
 
 /**

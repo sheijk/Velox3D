@@ -38,11 +38,15 @@ void VSimpleDrawList::Render()
 		VModel& model = *modelIter;
 		MeshHandle hMesh = (*modelIter).hMesh;
 		TransformMatrixPtr pTransform = model.pTransformation;
-		MaterialHandle hMaterial = &(hMesh->GetMaterial());
 
 		m_Device.SetMatrix(IVDevice::ModelMatrix, *pTransform);
-		ApplyMaterial(hMaterial);
-		m_Device.RenderMesh(hMesh);
+
+		for(vuint matid = 0; matid < hMesh->GetMaterialCount(); ++matid)
+		{
+			MaterialHandle hMaterial = &(hMesh->GetMaterial(matid));
+			ApplyMaterial(hMaterial);
+			m_Device.RenderMesh(hMesh);
+		}
 	}
 }
 //-----------------------------------------------------------------------------

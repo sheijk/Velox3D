@@ -56,11 +56,28 @@ public:
 	}
 };
 
+template<typename VertexStructure>
+class ScaleRandom
+{
+	vfloat32 m_fMin;
+	vfloat32 m_fMax;
+
+public:
+	ScaleRandom(vfloat32 min, vfloat32 max) : m_fMin(min), m_fMax(max) {}
+
+	void operator()(VertexStructure& vertex)
+	{
+		static int lastid = 0;
+
+		vertex.position.x *= math::PseudoRandom(++lastid, m_fMin, m_fMax);
+		vertex.position.y *= math::PseudoRandom(++lastid, m_fMin, m_fMax);
+		vertex.position.z *= math::PseudoRandom(++lastid, m_fMin, m_fMax);
+	}
+};
 
 /**
  * @author sheijk
  */
-
 #define V3D_DECLARE_BUFFER_OP(opName, opLine) \
 	template<typename VertexStructure>\
 	class opName\

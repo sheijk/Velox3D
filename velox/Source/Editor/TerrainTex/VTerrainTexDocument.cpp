@@ -96,12 +96,15 @@ VRenderPanel::VRenderPanel(
 	VServicePtr<window::IVWindowManager> pWinManager;
 
 	graphics::VDisplaySettings settings;
-	settings.m_bFullscreen = false;
-	settings.m_sAPIType = "OpenGL";
+	settings.SetFullscreen(false);
+	settings.SetAPI("OpenGL");
+	//settings.m_bFullscreen = false;
+	//settings.m_sAPIType = "OpenGL";
 	//settings.m_iWinCoordX = in_Pos.x;
 	//settings.m_iWinCoordY = in_Pos.y;
-	settings.m_iWidth = GetSize().GetWidth();
-	settings.m_iHeight = GetSize().GetHeight();
+	settings.SetSize(GetSize().GetWidth(), GetSize().GetHeight());
+	//settings.m_iWidth = GetSize().GetWidth();
+	//settings.m_iHeight = GetSize().GetHeight();
 
 	m_pDevice = pWinManager->CreateGraphicsDevice(settings, (void*)GetHandle());
 }

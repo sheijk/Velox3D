@@ -10,6 +10,7 @@
 #include "IVOpenGLRenderState.h"
 
 #include <v3d/Graphics/GraphicsExceptions.h>
+#include <V3dLib/Graphics/Misc/MiscUtils.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -189,7 +190,9 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	//	m_Buffers.Add(static_cast<VByteBuffer*>(buffers[bufid]));
 	//}
 
-	VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, pMaterial);
+	std::vector<IVMaterial*> material;
+	material.push_back(pMaterial);
+	VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, material);
 
 	m_Meshes.push_back(pMesh);
 
@@ -201,13 +204,13 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	const VEffectDescription& in_EffectDescr
 	)
 {
-	std::vector<VRenderStateList*> materials
+	std::vector<VRenderStateList*> statelists
 		= m_StateCategories.CreateMaterialList(in_EffectDescr);
+
+	std::vector<IVMaterial*> materials(statelists.begin(), statelists.end());
 
 	if( materials.size() > 0 )
 	{
-		V3D_ASSERT(materials.size() == 1);
-
 		VMeshDescription descr = in_MeshDescr;
 
 		// add buffers to device, if they are external
@@ -219,7 +222,7 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 		//	m_Buffers.Add(static_cast<VByteBuffer*>(buffers[bufid]));
 		//}
 
-		VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, materials[0]);
+		VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, materials);
 
 		m_Meshes.push_back(pMesh);
 
@@ -277,8 +280,10 @@ void VOpenGLDevice::RenderImmediate(
 	)
 {
 	MaterialHandle pMaterial = CreateMaterial(in_Material);
+	std::vector<IVMaterial*> material;
+	material.push_back(pMaterial);
 	MeshHandle pMesh = m_ImmediateRenderMethod.CreateMesh(
-		in_Mesh, 0, pMaterial);
+		in_Mesh, 0, material);
 
 	RenderMesh(pMesh);
 
@@ -302,7 +307,7 @@ void VOpenGLDevice::SetDisplay()
 {
 	// setup fullscreen if needed
     if( !(hDC=GetDC(hWnd)) )
-	if(m_DisplaySettings.m_bFullscreen)
+	if(m_DisplaySettings.IsFullscreen())
 	{
 		V3D_THROW(VIllegalDisplayException, "Fullscreen mode currently not supported");
 
@@ -331,7 +336,8 @@ void VOpenGLDevice::SetDisplay()
 	SetScreenSize();
 	SetBackgroundColor();
 
-	glClearDepth(m_DisplaySettings.m_fClearDepth);
+	glClearDepth(1.0f);
+	//glClearDepth(m_DisplaySettings.m_fClearDepth);
 	glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);
 }
@@ -363,10 +369,11 @@ void VOpenGLDevice::SetPixFormat()
 		0, 0, 0
 	};
 
-	PixelFormatDesc.cAccumBits		= m_DisplaySettings.m_iAccumulationBuffer;
-	PixelFormatDesc.cDepthBits		= m_DisplaySettings.m_iDepthBits;
-	PixelFormatDesc.cStencilBits	= m_DisplaySettings.m_iStencilBits;
-	PixelFormatDesc.cColorBits		= m_DisplaySettings.m_iBitsPerPixel;
+	//PixelFormatDesc.cAccumBits		= m_DisplaySettings.m_iAccumulationBuffer;
+	PixelFormatDesc.cAccumBits		= m_DisplaySettings.GetAccumulationBits();
+	PixelFormatDesc.cDepthBits		= m_DisplaySettings.GetDepthBits();
+	PixelFormatDesc.cStencilBits	= m_DisplaySettings.GetStencilBits();
+	PixelFormatDesc.cColorBits		= m_DisplaySettings.GetBitsPerPixel();
 
 	if (!(PixelFormat=ChoosePixelFormat(hDC,&PixelFormatDesc)))
 	{
@@ -427,27 +434,35 @@ void VOpenGLDevice::DestroyContext()
 
 void VOpenGLDevice::SetScreenSize()
 {
-	if(m_DisplaySettings.m_iHeight <= 0) m_DisplaySettings.m_iHeight = 1;
-	glViewport(0, 0, m_DisplaySettings.m_iWidth, m_DisplaySettings.m_iHeight);
+	V3D_ASSERT(m_DisplaySettings.GetHeight() > 0);
+	//if(m_DisplaySettings.m_iHeight <= 0) m_DisplaySettings.m_iHeight = 1;
+	glViewport(0, 0, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
+	//glViewport(0, 0, m_DisplaySettings.m_iWidth, m_DisplaySettings.m_iHeight);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(m_DisplaySettings.m_fFieldOfView,
-					((vfloat32)m_DisplaySettings.m_iWidth /
-					m_DisplaySettings.m_iHeight),
-					m_DisplaySettings.m_fNearClippingPlane,
-					m_DisplaySettings.m_fFarClippingPlane);
+	gluPerspective(90.0f, 
+					((vfloat32)m_DisplaySettings.GetWidth() /
+					m_DisplaySettings.GetHeight()),
+					1.0f,
+					900000.0f);
+	//gluPerspective(m_DisplaySettings.m_fFieldOfView,
+	//				((vfloat32)m_DisplaySettings.m_iWidth /
+	//				m_DisplaySettings.m_iHeight),
+	//				m_DisplaySettings.m_fNearClippingPlane,
+	//				m_DisplaySettings.m_fFarClippingPlane);
 	glMatrixMode(GL_MODELVIEW);
 }
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::SetBackgroundColor()
 {
-	glClearColor(m_DisplaySettings.m_fBackgroundRed,
-				 m_DisplaySettings.m_fBackgroundGreen,
-				 m_DisplaySettings.m_fBackgroundBlue,
-				 m_DisplaySettings.m_fBackgroundAlpha);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	//glClearColor(m_DisplaySettings.m_fBackgroundRed,
+	//			 m_DisplaySettings.m_fBackgroundGreen,
+	//			 m_DisplaySettings.m_fBackgroundBlue,
+	//			 m_DisplaySettings.m_fBackgroundAlpha);
 }
 //-----------------------------------------------------------------------------
 
@@ -495,6 +510,8 @@ void VOpenGLDevice::InitializeExtensions()
 void VOpenGLDevice::BeginScene()
 {
 	wglMakeCurrent(hDC, hRC);
+
+	ApplyMaterial(*this, &m_StateCategories.GetDefaultMaterial());
 
 	// fuer sowas solltes noch fkten geben -ins
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

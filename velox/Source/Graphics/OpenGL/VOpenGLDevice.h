@@ -101,7 +101,7 @@ private:
 	VRenderMethodRegistry m_RenderMethods;
 
 	VImmediateRenderMethod m_ImmediateRenderMethod;
-	VOpenGLVBORenderMethod m_VBORenderMethod;
+	//VOpenGLVBORenderMethod m_VBORenderMethod;
 
 	// render state categories
 	VStateCategoryList m_StateCategories;

@@ -128,7 +128,7 @@ void VWindowWin32::Unregister()
 
 void VWindowWin32::Destroy()
 {
-	if(m_DisplaySettings.m_bFullscreen)
+	if(m_DisplaySettings.IsFullscreen())
 	{
 		ChangeDisplaySettings(NULL,0);
 		ShowCursor(TRUE);
@@ -144,10 +144,10 @@ void VWindowWin32::CreateWindow()
 
 	WindowRect.left		= 0;
 	WindowRect.top		= 0;
-	WindowRect.right	= m_DisplaySettings.m_iWidth;
-	WindowRect.bottom	= m_DisplaySettings.m_iHeight;
+	WindowRect.right	= m_DisplaySettings.GetWidth();
+	WindowRect.bottom	= m_DisplaySettings.GetHeight();
 
-	if(m_DisplaySettings.m_bFullscreen)
+	if(m_DisplaySettings.IsFullscreen())
 	{
 		AdjustWindowRectEx(&WindowRect, WS_POPUP, FALSE, WS_EX_APPWINDOW);
 
@@ -181,8 +181,8 @@ void VWindowWin32::CreateWindow()
 								//WS_CLIPSIBLINGS |
 								//WS_CLIPCHILDREN,
 								0,
-								m_DisplaySettings.m_iWinCoordX,
-								m_DisplaySettings.m_iWinCoordY,
+								m_DisplaySettings.GetX(),
+								m_DisplaySettings.GetY(),
 								WindowRect.right-WindowRect.left,
 								WindowRect.bottom-WindowRect.top,
 								NULL,
@@ -260,7 +260,7 @@ IVDevice& VWindowWin32::QueryGraphicsDevice()
 	if(!m_pDeviceFactory)
 	{
 
-		if(m_DisplaySettings.m_sAPIType == "OpenGL")
+		if(m_DisplaySettings.GetAPI() == "OpenGL")
 		{
 			vout << "Using OpenGL API..." << vendl;
 			m_pDeviceFactory = new VOpenGLDeviceFactory(&m_DisplaySettings, hWnd);

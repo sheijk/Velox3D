@@ -33,9 +33,8 @@ void VGraphicSprite::Render(vuint in_iFrameNum, vfloat32 x, vfloat32 y, vfloat32
 
 	CreateMesh(in_iFrameNum, x,y,z);
 
-	ApplyMaterial(m_Device, &m_MeshHandle->GetMaterial());
+	ApplyMaterial(m_Device, &m_MeshHandle->GetMaterial(0));
 	m_Device.RenderMesh(m_MeshHandle);
-	
 }
 
 void VGraphicSprite::Render(vuint in_iFrameNum, vfloat32 x, vfloat32 y)

@@ -34,7 +34,7 @@ class VOpenGLIndexMesh : public VMeshBase
 public:
 	VOpenGLIndexMesh(
 		const VMeshDescription& in_Descr,
-		IVMaterial* in_pMaterial
+		std::vector<IVMaterial*> in_Materials
 		);
 
 	virtual ~VOpenGLIndexMesh();

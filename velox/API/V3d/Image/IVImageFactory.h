@@ -69,6 +69,8 @@ protected:
 	IVImageFactory(VStringParam in_strName, VNamedObject* in_pParent)
 		: VNamedObject(in_strName, in_pParent){}
 };
+
+typedef VServicePtr<IVImageFactory> VImageServicePtr;
 //-----------------------------------------------------------------------------
 } // namespace image
 } // namespace v3d

@@ -43,7 +43,7 @@ class VOpenGLVertexMesh : public VMeshBase
 public:
 	VOpenGLVertexMesh(
 		const VMeshDescription& in_Descr,
-		IVMaterial* in_pMaterial
+		std::vector<IVMaterial*> in_Materials
 		);
 
 	virtual ~VOpenGLVertexMesh();

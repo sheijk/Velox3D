@@ -17,12 +17,16 @@ using namespace v3d;
 class VMeshBase : public IVMesh
 {
 	std::vector<VMeshDescription::BufferHandle> m_Buffers;
-	IVMaterial* const m_pMaterial;
+
+	const std::vector<IVMaterial*> m_Materials;
+	//IVMaterial* const m_pMaterial;
 
 public:
-	VMeshBase(IVMaterial* in_pMaterial);
+	VMeshBase(std::vector<IVMaterial*> in_Materials);
 
-	virtual IVMaterial& GetMaterial();
+	virtual vuint GetMaterialCount() const;
+	virtual IVMaterial& GetMaterial(vuint in_nMaterialId);
+
 	virtual void Render() = 0;
 
 	void SetBuffers(std::vector<VMeshDescription::BufferHandle> in_Buffers);

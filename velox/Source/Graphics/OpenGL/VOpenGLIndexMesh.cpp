@@ -11,9 +11,9 @@ namespace graphics {
 
 VOpenGLIndexMesh::VOpenGLIndexMesh(
 	const VMeshDescription& in_Descr,
-	IVMaterial* in_pMaterial
+	std::vector<IVMaterial*> in_Materials
 	) :
-	VMeshBase(in_pMaterial)
+	VMeshBase(in_Materials)
 {
 	V3D_ASSERT(in_Descr.GetCoordinateBuffer() != 0);
 	//V3D_ASSERT(in_Descr.triangleVertices.hBuffer != 0);

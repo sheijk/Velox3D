@@ -13,10 +13,14 @@ namespace graphics {
 VMeshBase* VImmediateRenderMethod::CreateMesh(
 	const VMeshDescription& in_MeshDescr,
 	MeshCreationFlags in_Flags,
-	IVMaterial* in_pMaterial
+	std::vector<IVMaterial*> in_Materials
 	)
 {
-	V3D_ASSERT(in_pMaterial != 0);
+	for(vuint matid = 0; matid < in_Materials.size(); ++matid)
+	{
+		V3D_ASSERT(in_Materials[matid] != 0);
+	}
+
 	V3D_ASSERT(&in_MeshDescr != 0);
 
 	VMeshBase* pMesh = 0;
@@ -25,12 +29,12 @@ VMeshBase* VImmediateRenderMethod::CreateMesh(
 	if( in_MeshDescr.GetIndexBuffer() != 0)
 	//if( in_MeshDescr.triangleIndices.hBuffer != 0 )
 	{
-		pMesh = new VOpenGLIndexMesh(in_MeshDescr, in_pMaterial);
+		pMesh = new VOpenGLIndexMesh(in_MeshDescr, in_Materials);
 	}
 	// on non indexed mode
 	else
 	{
-		pMesh = new VOpenGLVertexMesh(in_MeshDescr, in_pMaterial);
+		pMesh = new VOpenGLVertexMesh(in_MeshDescr, in_Materials);
 	}
 
 	V3D_ASSERT(pMesh != 0);

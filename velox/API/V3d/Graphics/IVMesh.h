@@ -12,14 +12,15 @@ class IVMaterial;
 /**
  * A handle for a mesh loaded in the device
  *
- * @author sheijk/insane
+ * @author sheijk
  */
 class IVMesh
 {
 public:
 	virtual ~IVMesh() {};
 
-	virtual IVMaterial& GetMaterial() = 0;
+	virtual vuint GetMaterialCount() const = 0;
+	virtual IVMaterial& GetMaterial(vuint in_nMaterialId) = 0;
 };
 
 //-----------------------------------------------------------------------------
