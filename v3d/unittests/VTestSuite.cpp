@@ -167,6 +167,17 @@ void VTestSuite::ExecuteTests()
 //			cout << "  Error message: \"" + exc.GetExtendedErrorString()
 //				+ "\"";
 		}
+		catch(VException exc)
+		{
+			cout << "A Velox non UnitTest Exception occured while testing "
+				<< "test may be corrupt. Error message:"
+				<< "\"" << exc.GetErrorString() << "\""
+				<< " in line " << exc.GetErrorLine()
+				<< " in file " << exc.GetErrorFile()
+				<< endl;
+
+			bErrors = true;
+		}
 		catch(...)
 		{
 			cout << "\nunknown error occured in test" << iter->strName << endl
