@@ -12,14 +12,14 @@ void VGeoSphereMesh<VertexStructure>::CreateCoordinates()
 
 	Triangle octahedron[] =
 	{
-		( Triangle(VVector3f(+1.0f, +0.0f, +0.0f), VVector3f(+0.0f, +1.0f, +0.0f), VVector3f(+0.0f, +0.0f, -1.0f) )),
-		( Triangle(VVector3f(+1.0f, +0.0f, +0.0f), VVector3f(+0.0f, +0.0f, +1.0f), VVector3f(+0.0f, +1.0f, +0.0f) )),
-		( Triangle(VVector3f(+0.0f, -1.0f, +0.0f), VVector3f(+1.0f, +0.0f, +0.0f), VVector3f(+0.0f, +0.0f, -1.0f) )),
-		( Triangle(VVector3f(+0.0f, -1.0f, +0.0f), VVector3f(+0.0f, +0.0f, +1.0f), VVector3f(+1.0f, +0.0f, +0.0f) )),
-		( Triangle(VVector3f(-1.0f, +0.0f, +0.0f), VVector3f(+0.0f, -1.0f, +0.0f), VVector3f(+0.0f, +0.0f, -1.0f) )),
-		( Triangle(VVector3f(+0.0f, +1.0f, +0.0f), VVector3f(+0.0f, +0.0f, +1.0f), VVector3f(-1.0f, +0.0f, +0.0f) )),
-		( Triangle(VVector3f(-1.0f, +0.0f, +0.0f), VVector3f(+0.0f, +0.0f, +1.0f), VVector3f(+0.0f, -1.0f, +0.0f) )),
-		( Triangle(VVector3f(+0.0f, +1.0f, +0.0f), VVector3f(-1.0f, +0.0f, +0.0f), VVector3f(+0.0f, +0.0f, -1.0f) )),
+		( Triangle(VVertex3f(+1.0f, +0.0f, +0.0f), VVertex3f(+0.0f, +1.0f, +0.0f), VVertex3f(+0.0f, +0.0f, -1.0f) )),
+		( Triangle(VVertex3f(+1.0f, +0.0f, +0.0f), VVertex3f(+0.0f, +0.0f, +1.0f), VVertex3f(+0.0f, +1.0f, +0.0f) )),
+		( Triangle(VVertex3f(+0.0f, -1.0f, +0.0f), VVertex3f(+1.0f, +0.0f, +0.0f), VVertex3f(+0.0f, +0.0f, -1.0f) )),
+		( Triangle(VVertex3f(+0.0f, -1.0f, +0.0f), VVertex3f(+0.0f, +0.0f, +1.0f), VVertex3f(+1.0f, +0.0f, +0.0f) )),
+		( Triangle(VVertex3f(-1.0f, +0.0f, +0.0f), VVertex3f(+0.0f, -1.0f, +0.0f), VVertex3f(+0.0f, +0.0f, -1.0f) )),
+		( Triangle(VVertex3f(+0.0f, +1.0f, +0.0f), VVertex3f(+0.0f, +0.0f, +1.0f), VVertex3f(-1.0f, +0.0f, +0.0f) )),
+		( Triangle(VVertex3f(-1.0f, +0.0f, +0.0f), VVertex3f(+0.0f, +0.0f, +1.0f), VVertex3f(+0.0f, -1.0f, +0.0f) )),
+		( Triangle(VVertex3f(+0.0f, +1.0f, +0.0f), VVertex3f(-1.0f, +0.0f, +0.0f), VVertex3f(+0.0f, +0.0f, -1.0f) )),
 		
         
 	};
@@ -42,9 +42,9 @@ void VGeoSphereMesh<VertexStructure>::CreateCoordinates()
 			Triangle* pOldTriangle = &pStart[i];
 			Triangle* pNewTriangle = &pEnd[i*4];
 
-			VVector3f a = Normalize( GetMidPoint(pOldTriangle->tri[0], pOldTriangle->tri[2]) );
-			VVector3f b = Normalize( GetMidPoint(pOldTriangle->tri[0], pOldTriangle->tri[1]) );
-			VVector3f c = Normalize( GetMidPoint(pOldTriangle->tri[1], pOldTriangle->tri[2]) );
+			VVertex3f a = Normalize( GetMidPoint(pOldTriangle->tri[0], pOldTriangle->tri[2]) );
+			VVertex3f b = Normalize( GetMidPoint(pOldTriangle->tri[0], pOldTriangle->tri[1]) );
+			VVertex3f c = Normalize( GetMidPoint(pOldTriangle->tri[1], pOldTriangle->tri[2]) );
 
 			pNewTriangle[0].tri[0] = pOldTriangle->tri[0];
 			pNewTriangle[0].tri[1] = b;
@@ -205,7 +205,7 @@ void VGeoSphereMesh<VertexStructure>::CreateColor(
 }
 
 template <typename VertexStructure> 
-VVector3f VGeoSphereMesh<VertexStructure>::Normalize( VVector3f in_Vector)
+VVertex3f VGeoSphereMesh<VertexStructure>::Normalize( VVertex3f in_Vector)
 {
 	vfloat32 fMagnitude = in_Vector.v[0] * in_Vector.v[0]
 						  + in_Vector.v[1] * in_Vector.v[1]
@@ -213,7 +213,7 @@ VVector3f VGeoSphereMesh<VertexStructure>::Normalize( VVector3f in_Vector)
 	if ( fMagnitude != 0.0 )
 	{
 		vfloat32 fInverseMagnitude = 1.0f / sqrt(fMagnitude);
-		return VVector3f( in_Vector.v[0] * fInverseMagnitude,
+		return VVertex3f( in_Vector.v[0] * fInverseMagnitude,
 						  in_Vector.v[1] * fInverseMagnitude,
 						  in_Vector.v[2] * fInverseMagnitude );
 	}
@@ -223,9 +223,9 @@ VVector3f VGeoSphereMesh<VertexStructure>::Normalize( VVector3f in_Vector)
 
 /* Return the average of two points */
 template <typename VertexStructure>
-VVector3f VGeoSphereMesh<VertexStructure>::GetMidPoint( VVector3f in_vecA, VVector3f in_vecB)
+VVertex3f VGeoSphereMesh<VertexStructure>::GetMidPoint( VVertex3f in_vecA, VVertex3f in_vecB)
 {
-	return VVector3f( (in_vecA.v[0] + in_vecB.v[0]) * 0.5,
+	return VVertex3f( (in_vecA.v[0] + in_vecB.v[0]) * 0.5,
 					  (in_vecA.v[1] + in_vecB.v[1]) * 0.5,
                       (in_vecA.v[2] + in_vecB.v[2]) * 0.5 );
 }

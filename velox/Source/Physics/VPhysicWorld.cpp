@@ -27,7 +27,7 @@ VPhysicWorld::~VPhysicWorld()
 {
 }
 
-void VPhysicWorld::SetGravity(graphics::VVector3f in_Gravity)
+void VPhysicWorld::SetGravity(graphics::VVertex3f in_Gravity)
 {
 	m_Gravity = in_Gravity;
 	dWorldSetGravity(m_WorldID ,m_Gravity.x,m_Gravity.y,m_Gravity.z);

@@ -2,7 +2,7 @@
 #define V3D_VPHYSICPOSITIONSTATE_27_10_04_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Physics/VPhysicState.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -23,13 +23,13 @@ public:
 	virtual ~VPhysicPositionState();
 
 	void SetPosition(vfloat32 x, vfloat32 y, vfloat32 z);
-	void SetPosition(graphics::VVector3f in_Position);
-	graphics::VVector3f GetPositon();
+	void SetPosition(graphics::VVertex3f in_Position);
+	graphics::VVertex3f GetPositon();
 
 private:
 
 	virtual void Apply();
-	graphics::VVector3f m_Position;
+	graphics::VVertex3f m_Position;
 };
 
 //-----------------------------------------------------------------------------

@@ -146,7 +146,7 @@ struct ColoredVertex
 		VVertexDataLayout::SetTexCoordOffset<ColoredVertex>();
 	}
 
-	VVector3f position;
+	graphics::VVertex3f position;
 	VColor4f color;
 	VTexCoord2f texCoords;
 

@@ -33,7 +33,7 @@ public:
 
 	}
 
-	VTriangleMesh(VVector3f a, VVector3f b, VVector3f c) :VGeometryData<VertexStructure>(VMeshDescription::Triangles, 3, 0)
+	VTriangleMesh(VVertex3f a, VVertex3f b, VVertex3f c) :VGeometryData<VertexStructure>(VMeshDescription::Triangles, 3, 0)
 	{
 		// point a
 		GetVertexBuffer()[0].position.x = a.x;

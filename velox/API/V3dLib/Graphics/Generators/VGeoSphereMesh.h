@@ -2,7 +2,7 @@
 #define V3D_VGEOSPHERE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
 #include <v3d/Graphics/VBuffer.h>
@@ -19,7 +19,7 @@ class VGeoSphereMesh
 {
 	struct Triangle
 	{
-        VVector3f tri[3];
+        VVertex3f tri[3];
 
 		Triangle()
 		{
@@ -28,7 +28,7 @@ class VGeoSphereMesh
 			tri[2] = VVector3f(0.0f, 0.0f, 0.0f);
 		}
 
-		Triangle( VVector3f a, VVector3f b, VVector3f c)
+		Triangle( VVertex3f a, VVertex3f b, VVertex3f c)
 		{
 			tri[0]=a;
 			tri[1]=b;
@@ -62,8 +62,8 @@ class VGeoSphereMesh
 
 	static vuint	CalculateVertexNumber( vuint in_nLevel );
 
-	VVector3f		Normalize(VVector3f in_Vector);
-	VVector3f		GetMidPoint(VVector3f in_vecA, VVector3f in_vecB );
+	VVertex3f		Normalize(VVertex3f in_Vector);
+	VVertex3f		GetMidPoint(VVertex3f in_vecA, VVertex3f in_vecB );
 public:
     
 	v3d::graphics::VBuffer<VertexStructure>	buffer;

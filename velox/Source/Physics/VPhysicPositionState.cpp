@@ -19,7 +19,7 @@ VPhysicPositionState::~VPhysicPositionState()
 {
 }
 
-void VPhysicPositionState::SetPosition(graphics::VVector3f in_Position)
+void VPhysicPositionState::SetPosition(graphics::VVertex3f in_Position)
 {
 	m_Position = in_Position;
 	//UpdateState();
@@ -40,7 +40,7 @@ void VPhysicPositionState::Apply()
     dBodySetPosition(*(obj->GetBodyID()),m_Position.x, m_Position.y, m_Position.z);
 }
 
-graphics::VVector3f VPhysicPositionState::GetPositon()
+graphics::VVertex3f VPhysicPositionState::GetPositon()
 {
 	return m_Position;
 }

@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Geometry/VVertexDataLayout.h>
 
 //-----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ using namespace v3d;
  */
 struct VSimpleVertex
 {
-	typedef v3d::graphics::VVector3f VVector3f;
+	typedef v3d::graphics::VVertex3f VVertex3f;
 	typedef v3d::graphics::VVertexDataLayout VVertexDataLayout;
 
 	VSimpleVertex()
@@ -27,7 +27,7 @@ struct VSimpleVertex
 		VVertexDataLayout::SetPositionOffset<VSimpleVertex>();
 	}
 
-	VVector3f position;
+	VVertex3f position;
 
 	static VVertexDataLayout layout;
 };

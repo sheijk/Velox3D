@@ -2,7 +2,7 @@
 #define V3D_VBOX_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
 #include <v3d/Graphics/VBuffer.h>
 #include <V3dLib/Graphics/Geometry/VGeometryData.h>

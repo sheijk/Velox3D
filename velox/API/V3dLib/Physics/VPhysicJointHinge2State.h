@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3dLib/Physics/VPhysicJoint.h>
 #include <V3dLib/Physics/VPhysicState.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
@@ -28,11 +28,11 @@ public:
 	void Create(VPhysicWorld* in_PhysicWorld);
 	void AddBody(VPhysicBody* in_pBody1, VPhysicBody* in_pBody2);
 
-	void SetAxis1(graphics::VVector3f in_Axis);
+	void SetAxis1(graphics::VVertex3f in_Axis);
 	void SetAxis1(vfloat32 x, vfloat32 y, vfloat32 z);
-	void SetAxis2(graphics::VVector3f in_Axis);
+	void SetAxis2(graphics::VVertex3f in_Axis);
 	void SetAxis2(vfloat32 x, vfloat32 y, vfloat32 z);
-	void SetAnchor(graphics::VVector3f in_Anchor);
+	void SetAnchor(graphics::VVertex3f in_Anchor);
 	void SetAnchor(vfloat32 x, vfloat32 y, vfloat32 z);
 	void SetMaxForce2(vfloat32 in_fMaxForce2);
 
@@ -41,9 +41,9 @@ public:
 
 	vfloat32 GetAnchorAngle1();
 
-	graphics::VVector3f  GetAxis1();
-	graphics::VVector3f  GetAxis2();
-	graphics::VVector3f  GetAnchor();
+	graphics::VVertex3f  GetAxis1();
+	graphics::VVertex3f  GetAxis2();
+	graphics::VVertex3f  GetAnchor();
 	virtual void Apply();
 
 private:
@@ -57,9 +57,9 @@ private:
 
 	vfloat32 m_fMaxForce2;
 
-	graphics::VVector3f m_Axis1;
-	graphics::VVector3f m_Axis2;
-	graphics::VVector3f m_Anchor;
+	graphics::VVertex3f m_Axis1;
+	graphics::VVertex3f m_Axis2;
+	graphics::VVertex3f m_Anchor;
 
 };
 

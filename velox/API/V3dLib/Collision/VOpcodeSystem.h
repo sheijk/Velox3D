@@ -2,7 +2,7 @@
 #define V3D_VOPOCODESYSTEM_09_10_04_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 
 #include "VContactReport.h"
 #include "VCollisionException.h"
@@ -95,8 +95,8 @@ public:
 	//TODO: optimize ContactReport to not allocate mem each frame
 	
 	vbool CollideRay(
-		graphics::VVector3f in_Direction,
-		graphics::VVector3f in_Origin,
+		graphics::VVertex3f in_Direction,
+		graphics::VVertex3f in_Origin,
 		VCollisionObject* in_pObject,
 		VContactReport* out_pReport
 		);
@@ -112,7 +112,7 @@ public:
 	 */
 
 	vbool CollideSphere(
-		graphics::VVector3f in_Origin,
+		graphics::VVertex3f in_Origin,
 		vfloat32 in_fRadius,
 		VMatrix44f* in_pWorldMatrix,
 		VCollisionObject* in_pObject,
@@ -147,8 +147,8 @@ public:
 
 
 	vbool CollideAABB(
-		graphics::VVector3f in_MinPoint,
-		graphics::VVector3f in_MaxPoint,
+		graphics::VVertex3f in_MinPoint,
+		graphics::VVertex3f in_MaxPoint,
 		VCollisionObject* in_pObject,
 		VContactReport* out_pReort
 		);

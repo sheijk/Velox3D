@@ -20,7 +20,7 @@ void VPhysicGeometryPlane::CreatePlane(VPhysicSpace* in_SpaceState)
 	m_GeomID = dCreatePlane (*in_SpaceState->GetSpaceID(), m_Normal.x, m_Normal.y, m_Normal.z, m_fDistance);
 }
 
-void VPhysicGeometryPlane::SetPlane(graphics::VVector3f in_Normal,
+void VPhysicGeometryPlane::SetPlane(graphics::VVertex3f in_Normal,
 								   vfloat32 in_fDistance)
 {
 	m_Normal = in_Normal;
@@ -32,7 +32,7 @@ vfloat32 VPhysicGeometryPlane::GetPlaneDistance()
 	return m_fDistance;
 }
 
-graphics::VVector3f VPhysicGeometryPlane::GetPlaneNormal()
+graphics::VVertex3f VPhysicGeometryPlane::GetPlaneNormal()
 {
 	return m_Normal;
 }

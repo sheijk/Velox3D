@@ -84,7 +84,7 @@ void VPhysicBody::UpdatePositionFromBody()
 //	m_PositionState.SetPosition(pPos[0], pPos[1], pPos[2]);
 }
 
-graphics::VVector3f VPhysicBody::GetPosition()
+graphics::VVertex3f VPhysicBody::GetPosition()
 {
 	return m_PositionState.GetPositon();
 }

@@ -2,7 +2,7 @@
 #define V3D_VPLANE3F_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -15,7 +15,7 @@ namespace graphics {
 
 struct VPlane3f
 {
-	VVector3f m_Normal;
+	VVertex3f m_Normal;
 	vfloat32 m_fDistance;
 
 	VPlane3f()

@@ -2,7 +2,7 @@
 #define V3D_VPHYSICWORLD_05_11_04_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3dLib//Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Physics/VPhysicSpace.h>
 #include <V3dLib/Physics/VPhysicJointGroup.h>
 #include <V3dLib/Physics/VPhysicBody.h>
@@ -30,7 +30,7 @@ public:
 	 */
 	void Destroy();
 
-    void SetGravity(graphics::VVector3f in_Gravity);
+    void SetGravity(graphics::VVertex3f in_Gravity);
 	void SetGravity(vfloat32 x, vfloat32 y, vfloat32 z);
 
 	void Update();
@@ -65,7 +65,7 @@ private:
 
 	dWorldID m_WorldID;
 	vfloat32 m_fWorldStep;
-	graphics::VVector3f m_Gravity;
+	graphics::VVertex3f m_Gravity;
 	VPhysicSpace m_Space; // a world without space does not make sense
 	VPhysicJointGroup m_JointGroup;
 

@@ -5,7 +5,7 @@
 #include <V3dLib/Physics/VPhysicObject.h>
 #include <V3d/Entity.h>
 #include <V3dLib/Physics/VPhysicPositionState.h>
-#include <v3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Math/VQuaternion.h>
 #include <ode/ode.h>
 
@@ -45,7 +45,7 @@ public:
 	 * Returns the current position of the body
 	 */
 
-	graphics::VVector3f GetPosition();
+	graphics::VVertex3f GetPosition();
 			
 	void Update();
 	

@@ -71,7 +71,7 @@ struct SphereCoords
 	vfloat32 fRadius;
 };
 
-inline SphereCoords CarthesicToSpherical( const VVector3f& in_vec )
+inline SphereCoords CarthesicToSpherical( const VVertex3f& in_vec )
 {
 	SphereCoords coords;
 

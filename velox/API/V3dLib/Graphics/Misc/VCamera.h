@@ -5,7 +5,7 @@
 #include <v3d/Math/VMatrix.h>
 #include <v3d/Math/VVector.h>
 #include <V3dLib/Math/VVectorOps.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Misc/IVCamera.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -63,7 +63,7 @@ private:
 	Vector m_RotationVector;
 	Vector m_ViewVector;
 
-	v3d::graphics::VVector3f m_PositionVector;
+	v3d::graphics::VVertex3f m_PositionVector;
 
 };
 

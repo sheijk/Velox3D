@@ -19,9 +19,9 @@ VPhysicJoint::VPhysicJoint()
 	m_fMaxForce			= 0.0f;
 	m_fFudgeFactor		= 1.0f;
 	m_fBounce			= 0.0f;
-	m_fCFM				= 1.0000000e-010;
+	m_fCFM				= (vfloat32)1.0000000e-010;
 	m_fStopERP			= 0.2f;
-	m_fStopCFM			= 1.0000000e-010;
+	m_fStopCFM			= (vfloat32)1.0000000e-010;
 	m_fSuspensionCFM	= 1.0f;
 	m_fSuspensionERP	= 1.0f;
 }
@@ -37,7 +37,7 @@ void VPhysicJoint::Destroy()
 
 void VPhysicJoint::AddWorld(VPhysicWorld* in_pPhysicWorld)
 {
-	V3D_ASSERT(in_pPhysicWorld);
+	V3D_ASSERT(in_pPhysicWorld != 0);
 
 	m_pPhysicWorld = in_pPhysicWorld;
 	m_pJointGroup  = 0;

@@ -2,7 +2,7 @@
 #define V3D_VQ3BSPIMPORTER_05_17_2004_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <v3dLib/Graphics/Geometry/VTexCoord2f.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -73,10 +73,10 @@ public:
 
 	struct BSPVertex
 	{
-		graphics::VVector3f Vertex;
+		graphics::VVertex3f Vertex;
 		graphics::VTexCoord2f TextureCoord;
 		graphics::VTexCoord2f LightmapCoord;
-		graphics::VVector3f Normal;
+		graphics::VVertex3f Normal;
 		vbyte ColorData[4];
 	};
 
@@ -112,9 +112,9 @@ public:
 		int LightmapSize[2];
 		int LightmapCorner[2];
 
-		graphics::VVector3f LightmapOrigin;
-		graphics::VVector3f Normal;
-		graphics::VVector3f LightmapVectors[2]; //the u v unit vectors
+		graphics::VVertex3f LightmapOrigin;
+		graphics::VVertex3f Normal;
+		graphics::VVertex3f LightmapVectors[2]; //the u v unit vectors
 		int BezierSize[2];
 	};
 	
@@ -154,7 +154,7 @@ public:
 
 	struct BSPPlane
 	{
-		graphics::VVector3f Normal;
+		graphics::VVertex3f Normal;
 		vfloat32 fDistance;
 	};
 

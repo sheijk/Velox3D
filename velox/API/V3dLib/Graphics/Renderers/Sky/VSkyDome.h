@@ -16,7 +16,7 @@ class VSkyDome
 {
 	struct SkyVertex
 	{
-		VVector3f position;
+		VVertex3f position;
 		VColor4f color;
 		VTexCoord2f texCoords;
 

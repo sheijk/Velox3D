@@ -4,7 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3dLib/Graphics/Geometry/VVertexDataLayout.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
 
 //-----------------------------------------------------------------------------
@@ -20,7 +20,7 @@ using namespace v3d;
  */
 struct VColoredVertex
 {
-	typedef v3d::graphics::VVector3f VVector3f;
+	typedef v3d::graphics::VVertex3f VVector3f;
 	typedef v3d::graphics::VColor4f VColor4f;
 	typedef v3d::graphics::VVertexDataLayout VVertexDataLayout;
 

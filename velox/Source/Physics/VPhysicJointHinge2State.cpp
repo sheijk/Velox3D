@@ -72,7 +72,7 @@ void VPhysicJointHinge2State::SetAnchor(vfloat32 x, vfloat32 y, vfloat32 z)
 	dJointSetHinge2Anchor(m_JointID, m_Anchor.x, m_Anchor.y, m_Anchor.z);
 }
 
-void VPhysicJointHinge2State::SetAnchor(graphics::VVector3f in_Anchor)
+void VPhysicJointHinge2State::SetAnchor(graphics::VVertex3f in_Anchor)
 {
 	m_Anchor = in_Anchor;
 	
@@ -89,7 +89,7 @@ void VPhysicJointHinge2State::SetAxis1(vfloat32 x, vfloat32 y, vfloat32 z)
 	dJointSetHinge2Axis1(m_JointID, m_Axis1.x, m_Axis1.y, m_Axis1.z);
 }
 
-void VPhysicJointHinge2State::SetAxis1(graphics::VVector3f in_Axis)
+void VPhysicJointHinge2State::SetAxis1(graphics::VVertex3f in_Axis)
 {
 	m_Axis1 = in_Axis;
 	V3D_ASSERT(m_JointID != 0);
@@ -106,7 +106,7 @@ void VPhysicJointHinge2State::SetAxis2(vfloat32 x, vfloat32 y, vfloat32 z)
 	dJointSetHinge2Axis2(m_JointID, m_Axis2.x, m_Axis2.y, m_Axis2.z);
 }
 
-void VPhysicJointHinge2State::SetAxis2(graphics::VVector3f in_Axis)
+void VPhysicJointHinge2State::SetAxis2(graphics::VVertex3f in_Axis)
 {
 	m_Axis2 = in_Axis;
 	
@@ -114,17 +114,17 @@ void VPhysicJointHinge2State::SetAxis2(graphics::VVector3f in_Axis)
 	dJointSetHinge2Axis2(m_JointID, m_Axis2.x, m_Axis2.y, m_Axis2.z);
 }
 
-graphics::VVector3f VPhysicJointHinge2State::GetAnchor()
+graphics::VVertex3f VPhysicJointHinge2State::GetAnchor()
 {
 	return m_Anchor;
 }
 
-graphics::VVector3f VPhysicJointHinge2State::GetAxis1()
+graphics::VVertex3f VPhysicJointHinge2State::GetAxis1()
 {
 	return m_Axis1;
 }
 
-graphics::VVector3f VPhysicJointHinge2State::GetAxis2()
+graphics::VVertex3f VPhysicJointHinge2State::GetAxis2()
 {
 	return m_Axis2;
 }

@@ -4,7 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <V3dLib/Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
 #include <V3dLib/Graphics/Geometry/VPlane3f.h>
 

@@ -2,7 +2,7 @@
 #define V3D_VPHYSICGEOMETRYPLANE_2004_11_07_H
 //-----------------------------------------------------------------------------
 #include <V3dLib/Physics/VPhysicGeometry.h>
-#include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <v3dLib//Graphics/Geometry/VVertex3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
@@ -25,16 +25,16 @@ public:
 	virtual ~VPhysicGeometryPlane();
 
 	void CreatePlane(VPhysicSpace* in_SpaceState);
-	void SetPlane(graphics::VVector3f in_Normal, vfloat32 in_fDistance);
+	void SetPlane(graphics::VVertex3f in_Normal, vfloat32 in_fDistance);
 	vfloat32 GetPlaneDistance();
-	graphics::VVector3f GetPlaneNormal();
+	graphics::VVertex3f GetPlaneNormal();
 
 private:
 
 	VPhysicGeometryPlane(const VPhysicGeometryPlane&);
 	VPhysicGeometryPlane& operator=(const VPhysicGeometryPlane&);
 	
-	graphics::VVector3f m_Normal;
+	graphics::VVertex3f m_Normal;
 	vfloat32 m_fDistance;
 };
 
