@@ -7,7 +7,7 @@
 #include "VNoCheckPol.h"
 //#include "VNullCheckPol.h"
 #include "VPointerStorage.h"
-
+#include "VArrayStorage.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -43,27 +43,27 @@ struct VPointer
 		VNoCheckPol<T*>,
 		VNoCheckPol<T*>
 		> SharedPtr;
+};
 
-	///**
-	// * behaves like AutoPtr but must not be assigned a 0 pointer
-	// */
-	//typedef VSmartPointer<
-	//	T,
-	//	VExclusiveOwnerPol< VPointerStorage<T> >,
-	//	VNoCheckPol<T*>,
-	//	VNullCheckPol<T*>
-	//	> AutoPtrNonNull;
+/**
+ * the same for arrays
+ */
+template<typename T>
+struct VArrayPtr
+{
+	typedef VSmartPointer<
+		T,
+		VExclusiveOwnerPol< VArrayStorage<T> >,
+		VNoCheckPol<T*>,
+		VNoCheckPol<T*>
+		> AutoPtr;
 
-	///**
-	// * behaves like SharedPtr but throws a VNullPointerException
-	// * when trying to set it to 0
-	// */
-	//typedef VSmartPointer<
-	//	T,
-	//	VRefCountPol< VPointerStorage<T> >,
-	//	VNoCheckPol<T*>,
-	//	VNullCheckPol<T*>
-	//	> SharedPtrNonNull;
+	typedef VSmartPointer<
+		T,
+		VRefCountPol< VArrayStorage<T> >,
+		VNoCheckPol<T*>,
+		VNoCheckPol<T*>
+		> SharedPtr;
 };
 
 //-----------------------------------------------------------------------------

@@ -25,7 +25,7 @@ VRefCountPol<StoragePolicy>::
  */
 template<class StoragePolicy> 
 typename VRefCountPol<StoragePolicy>::TargetType VRefCountPol<StoragePolicy>::
-	Get()
+	Get() const
 {
 	return m_pSharedStorage->Get();
 }

@@ -75,21 +75,21 @@ void VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
  */
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
 T* VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
-	Get()
+	Get() const
 {
 	return m_Handle.GetTarget();
 }
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
 T* VSmartPointer<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy>::
-	operator->()
+	operator->() const
 {
 	return Get();
 }
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
 T& VSmartPointer<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy>::
-	operator*()
+	operator*() const
 {
 	return *Get();
 }

@@ -1,5 +1,5 @@
-#ifndef V3D_VPOINTERSTORAGE_H
-#define V3D_VPOINTERSTORAGE_H
+#ifndef V3D_VARRAYSTORAGE_H
+#define V3D_VARRAYSTORAGE_H
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -10,16 +10,16 @@ namespace v3d {
 #pragma warning( disable : 4786)
 
 /**
- * Smart pointer storage policy for pointers
+ * Smart Pointer Storage class for arrays
  */
 template<typename T>
-class VPointerStorage
+class VArrayStorage
 {
 public:
 	typedef T* TargetType;
 
-	VPointerStorage();
-	~VPointerStorage();
+	VArrayStorage();
+	~VArrayStorage();
 
 	void Set(TargetType in_pNewTarget);
 	TargetType Get() const;
@@ -31,9 +31,9 @@ private:
 
 //-----------------------------------------------------------------------------
 // include implementation file
-#include "VPointerStorage.inl"
+#include "VArrayStorage.inl"
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VPOINTERSTORAGE_H
+#endif // V3D_VARRAYSTORAGE_H

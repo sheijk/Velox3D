@@ -26,7 +26,7 @@ public:
 	typedef VSmartHandleBase<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy> 
 		SmartHandleBaseType;
 
-	T GetTarget();
+	T GetTarget() const;
 	void SetTarget(T in_NewTarget);
 	void Clone(const SmartHandleBaseType& in_Other);
 	void ReleaseTarget();

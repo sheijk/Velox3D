@@ -33,7 +33,7 @@ public:
 	VRefCountPol();
 	~VRefCountPol();
 
-	typename TargetType Get();
+	typename TargetType Get() const;
 	void Set(TargetType in_NewVal);
 	void Release();
 	void Clone(const Type& in_Other);

@@ -18,7 +18,7 @@ public:
 	typedef VRefCountSharedStorage<StoragePolicy> MyType;
 
 private:
-	int m_nRefCount;
+	mutable int m_nRefCount;
 	StoragePolicy m_Storage;
 
 	/** object may only be constructed via CreateNew */
@@ -53,7 +53,7 @@ public:
 	void AddRef();
 
 	/** returns the subject */
-	typename StoragePolicy::TargetType Get()
+	typename StoragePolicy::TargetType Get() const
 	{
 		return m_Storage.Get();
 	}

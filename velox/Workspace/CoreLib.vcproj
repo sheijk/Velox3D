@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.0"
+	Version="7.10"
 	Name="CoreLib"
 	ProjectGUID="{BB57F1C9-0039-40BC-8188-02F384F49029}"
 	RootNamespace="CoreLib"
@@ -140,10 +140,10 @@
 				Name="SmartPointer"
 				Filter="">
 				<File
-					RelativePath="..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.h">
+					RelativePath="..\Api\V3d\Core\SmartPtr\VArrayStorage.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.inl">
+					RelativePath="..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\SmartPtr\VGuards.h">
@@ -158,31 +158,16 @@
 					RelativePath="..\Api\V3d\Core\SmartPtr\VPointerStorage.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\SmartPtr\VPointerStorage.inl">
-				</File>
-				<File
 					RelativePath="..\Api\V3d\Core\SmartPtr\VRefCountPol.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Core\SmartPtr\VRefCountPol.inl">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.inl">
-				</File>
-				<File
 					RelativePath="..\Api\V3d\Core\SmartPtr\VSmartHandleBase.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\SmartPtr\VSmartHandleBase.inl">
-				</File>
-				<File
 					RelativePath="..\Api\V3d\Core\SmartPtr\VSmartPointer.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Core\SmartPtr\VSmartPointer.inl">
 				</File>
 			</Filter>
 			<Filter
@@ -193,6 +178,12 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\IVIterator.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\VSTLIteratorAdaptor.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\VSTLIterDerefAdaptor.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\Wrappers\VString.h">
@@ -235,7 +226,41 @@
 				Name="Wrapper"
 				Filter="">
 				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\IVIterator.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\VSTLIteratorAdaptor.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\Wrappers\VSTLIterDerefAdaptor.inl">
+				</File>
+				<File
 					RelativePath="..\Source\Core\Wrappers\VString.cpp">
+				</File>
+			</Filter>
+			<Filter
+				Name="SmartPointer"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VArrayStorage.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VPointerStorage.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VRefCountPol.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VSmartHandleBase.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VSmartPointer.inl">
 				</File>
 			</Filter>
 		</Filter>

@@ -33,9 +33,11 @@ const vchar* VString::AsCString() const
 void VString::Set(const vchar* in_pCStr)
 {
 	m_nLength = (vuint) strlen(in_pCStr);
-	vchar* pChr = new char[m_nLength];
+	vchar* pChr = new char[m_nLength+1];
 
 	strcpy(pChr, in_pCStr);
+
+	pChr[m_nLength] = '\0';
 
 	m_pCStr.Reset(pChr);
 }

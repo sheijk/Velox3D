@@ -19,7 +19,7 @@ class VString
 {
 private:
 	//TODO: array pointer verwenden, und AutoPtr
-	mutable VPointer<vchar>::SharedPtr m_pCStr;
+	VArrayPtr<vchar>::AutoPtr m_pCStr;
 	vuint m_nLength;
 
 public:

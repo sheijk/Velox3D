@@ -22,12 +22,12 @@ public:
 	VExclusiveOwnerPol();
 	~VExclusiveOwnerPol();
 
-	TargetType Get();
+	TargetType Get() const;
 	void Set(TargetType in_NewVal);
 	void Release();
-	void Clone(VExclusiveOwnerPol<StoragePolicy>& in_Other);
+	void Clone(const VExclusiveOwnerPol<StoragePolicy>& in_Other);
 private:
-	StoragePolicy m_Storage;
+	mutable StoragePolicy m_Storage;
 
 	// um Fehler durch automatisch generierte Fkten zu vermeiden:
 	VExclusiveOwnerPol(const VExclusiveOwnerPol<StoragePolicy>& x);

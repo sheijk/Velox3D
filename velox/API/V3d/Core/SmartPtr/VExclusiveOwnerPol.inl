@@ -21,7 +21,9 @@ VExclusiveOwnerPol<StoragePolicy>::~VExclusiveOwnerPol()
 	Zugriffsmethode
 */
 template<class StoragePolicy> 
-typename VExclusiveOwnerPol<StoragePolicy>::TargetType VExclusiveOwnerPol<StoragePolicy>::Get()
+typename VExclusiveOwnerPol<StoragePolicy>::TargetType 
+	VExclusiveOwnerPol<StoragePolicy>
+	::Get() const
 {
 	return m_Storage.Get();
 }
@@ -50,7 +52,8 @@ void VExclusiveOwnerPol<StoragePolicy>::Release()
 	erstellt eine Kopie
 */
 template<class StoragePolicy> 
-void VExclusiveOwnerPol<StoragePolicy>::Clone(VExclusiveOwnerPol<StoragePolicy>& in_Other)
+void VExclusiveOwnerPol<StoragePolicy>
+	::Clone(const VExclusiveOwnerPol<StoragePolicy>& in_Other)
 {
 	m_Storage.Set(in_Other.m_Storage.Get());
 	in_Other.m_Storage.Set(0);

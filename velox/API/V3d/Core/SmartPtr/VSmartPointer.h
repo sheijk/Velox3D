@@ -32,13 +32,14 @@ public:
 	VSmartPointer(const PtrType& in_Other);
 	~VSmartPointer();
 
+	//TODO: == operatoren
 	void operator=(T* in_pTarget);
 	void operator=(const PtrType& in_Other);
 	void Release();
 	void Reset(T* in_pNewTarget);
-	T* Get();
-	T* operator->();
-	T& operator*();
+	T* Get() const;
+	T* operator->() const;
+	T& operator*() const;
 };
 
 //-----------------------------------------------------------------------------

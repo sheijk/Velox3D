@@ -14,7 +14,7 @@ VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy> 
 T VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>
-	::GetTarget()
+	::GetTarget() const
 {
 	// get value
 	T t = m_Owner.Get();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.0"
+	Version="7.10"
 	Name="Velox"
 	ProjectGUID="{594DBDEA-14ED-4A95-B219-98A18432E8E7}"
 	Keyword="Win32Proj">
@@ -112,8 +112,8 @@
 		</Configuration>
 		<Configuration
 			Name="UnitTests|Win32"
-			OutputDirectory="Lokal/Debug"
-			IntermediateDirectory="Lokal/$(ProjectName)/Debug"
+			OutputDirectory="Lokal/debug"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
@@ -133,7 +133,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/VeloxExe.exe"
+				OutputFile="$(OutDir)/UnitTests.exe"
 				LinkIncremental="2"
 				IgnoreAllDefaultLibraries="FALSE"
 				GenerateDebugInformation="TRUE"
@@ -165,47 +165,6 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="kernel"
-			Filter="">
-			<File
-				RelativePath="..\Source\Kernel\VKernel.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VKernel.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VKernelException.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VServiceProxy.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\VServiceProxy.h">
-			</File>
-			<Filter
-				Name="xml"
-				Filter="">
-				<File
-					RelativePath="..\Source\Kernel\tinyxml\tinystr.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Kernel\tinyxml\tinystr.h">
-				</File>
-				<File
-					RelativePath="..\Source\Kernel\tinyxml\tinyxml.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Kernel\tinyxml\tinyxml.h">
-				</File>
-				<File
-					RelativePath="..\Source\Kernel\tinyxml\tinyxmlerror.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Kernel\tinyxml\tinyxmlparser.cpp">
-				</File>
-			</Filter>
-		</Filter>
 		<File
 			RelativePath="..\Source\Kernel\main.cpp">
 		</File>
