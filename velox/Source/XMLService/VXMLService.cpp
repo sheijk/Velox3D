@@ -179,6 +179,7 @@ void VXMLService::ParseLocalXMLFile(
 
     //skip the decleration
 	node = Doc.FirstChild();
+
 	node = node->NextSibling();
 
 	m_bRecursionFirstCall = true;
