@@ -23,7 +23,7 @@ public:
 
 	void Set(TargetType in_pNewTarget);
 	TargetType Get() const;
-	void Release();
+	virtual void Release();
 
 private:
 	TargetType m_pTarget;
