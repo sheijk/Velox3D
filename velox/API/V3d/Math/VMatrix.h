@@ -69,48 +69,15 @@ namespace v3d {
 			Set(1,3, in_Y);
 			Set(2,3, in_Z);
 		}
-
-		/*void SetRotate(RotationAxis in_Axis, Scalar in_RotAngle)
-		{
-			SetIdentity();
-
-			Scalar sinus   = sin(in_RotAngle);
-			Scalar cosinus = cos(in_RotAngle);
-
-
-			switch(in_Axis)
-			{
-				case X_AXIS:
-				{
-			
-					Set(1,2, sinus);	
-					Set(1,1, cosinus);
-					Set(2,1, -sinus);
-					Set(2,2, cosinus);
-					break;
-				}
-				case Y_AXIS:
-				{
-					Set(0,0, cosinus);
-					Set(0,2, -sinus);
-					Set(2,0, sinus);
-					Set(2,2, cosinus);
-					break;
-				}
-				case Z_AXIS:
-				{
-					
-					Set(0,0, cosinus);
-					Set(0,1, sinus);
-					Set(1,0, -sinus);
-					Set(1,1, cosinus);
-					break;
-				}
-			}
-		}*/
-
 };
-typedef VMatrix<float, 4, 4> VMatrix44f;
+
+typedef VMatrix<vfloat32, 2, 2> VMatrix22f;
+typedef VMatrix<vfloat32, 3, 3> VMatrix33f;
+typedef VMatrix<vfloat32, 4, 4> VMatrix44f;
+
+typedef VMatrix<vfloat64, 2, 2> VMatrix22d;
+typedef VMatrix<vfloat64, 3, 3> VMatrix33d;
+typedef VMatrix<vfloat64, 4, 4> VMatrix44d;
 
 
 	

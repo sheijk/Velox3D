@@ -8,6 +8,9 @@
 
 //-----------------------------------------------------------------------------
 namespace v3d {
+
+//typedefs are at end of file
+ 
 //-----------------------------------------------------------------------------
 	
 	template<typename Scalar, vuint RowCount, vuint ColumnCount>
@@ -467,31 +470,14 @@ namespace v3d {
 	{
 		return vec * fac;
 	}
-/*
-	template<typename Scalar>
-		void Normalize(
-		VVector<Scalar, 3>& vec
-		)
-	{
-		gmtl::normalize(vec.m_Vec);
-	}
+		
+typedef VVector<vfloat32, 2> VVector2f;
+typedef VVector<vfloat32, 3> VVector3f;
+typedef VVector<vfloat32, 4> VVector4f;
 
-	template<typename Scalar>
-		Scalar Length(
-		const VVector<Scalar, 3>& vec
-		)
-	{
-		return gmtl::length(vec.m_Vec);
-	}
-
-	template<typename Scalar>
-		inline Scalar LengthSquared(
-		const VVector<Scalar, 3>& vec
-		)
-	{
-		return gmtl::lengthSquared(vec.m_Vec);
-	}
-*/		
+typedef VVector<vfloat64, 2> VVector2d;
+typedef VVector<vfloat64, 3> VVector3d;
+typedef VVector<vfloat64, 4> VVector4d;
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
