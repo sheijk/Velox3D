@@ -6,6 +6,7 @@
 #include <v3d/Graphics/VBuffer.h>
 #include <V3dLib/Graphics/Geometry.h>
 #include <V3dLib/Graphics/Generators.h>
+#include <v3dLib/Graphics/Renderers/Sky/VDaylightSkyColorizer.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -16,11 +17,13 @@ class VSkyDome
 	struct SkyVertex
 	{
 		VVector3f position;
+		VColor4f color;
 		VTexCoord2f texCoords;
 
 		SkyVertex()
 		{
 			VVertexDataLayout::SetPositionOffset<SkyVertex>();
+			VVertexDataLayout::SetColorOffset<SkyVertex>();
 			VVertexDataLayout::SetTexCoordOffset<SkyVertex>();
 		};
 
@@ -29,16 +32,28 @@ class VSkyDome
 
 	vfloat32 m_fRadius;
 	vfloat32 m_fScale;
+    vuint	m_nDetail;
 
-	VPolarSphere<SkyVertex> m_HalfSphere;
+	VPolarSphereMesh<SkyVertex> m_HalfSphere;
+
+	VDaylightSkyColorizer m_Colorizer;
+
+	//VGeometryData<SkyVertex> m_Geometry;
+
+	vfloat32 m_fZenith;
 	
 	IVDevice::MeshHandle	m_pMesh;
 	VMaterialDescription	m_MaterialDescription;
+	VMaterialDescription::TextureRef* m_pTexRef;
 	
 	VStringParam			m_strImage;
 
 	void					InverseIndexBuffer();
+	vuint					GetVertexNum(vuint sector, vuint ring);
+	void 					CreateTextureRef(IVDevice& in_Device);
 	void					CreateMesh(IVDevice& in_Device);
+	void		Colorize();
+	void		Texturize();
 
 public:
 
