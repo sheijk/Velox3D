@@ -4,6 +4,7 @@ Worklog von ins:
 
 >>
 hast aber ordentlich platz fuer notizen gelassen ;) -- sheijk
+hehe :) -- ins
 
 
 
@@ -59,6 +60,9 @@ req
 
 
 Done List:
+
+25.09.04
+- added collision system to cvs
 
 03.09.04
 - fixed several memleaks in my implemententions

@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost;../Local/ExternalLibs/Opcode"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -524,6 +524,39 @@
 			<File
 				RelativePath="..\Api\V3dLib\Containers\VArray2d.h">
 			</File>
+		</Filter>
+		<Filter
+			Name="Collision"
+			Filter="">
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3dLib\Collision\VCollisionException.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Collision\VCollisionObject.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Collision\VContactReport.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Collision\VOpcodeSystem.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\Collision\VCollisionObject.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Collision\VContactReport.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Collision\VOpcodeSystem.cpp">
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\Api\V3dLib\BoostSignals.h">
