@@ -49,6 +49,7 @@ Auf die Langnese Insel ziehen
 log:
 
 28.07.2003
+Iteratoren Tutorial
 Ueberpruefung der Zugriffsrechte von Dateien und Dateistreams
 Problem mit SmartPointer beseitigt (operator=(T*) war unsinnig/fehlertraechtig)
 

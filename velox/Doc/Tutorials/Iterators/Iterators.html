@@ -1,0 +1,93 @@
+<html>
+<head>
+	  <title>Iterators</title>
+	  <link rel=stylesheet type="text/css" href="../../veloxdoc.css">
+</head>
+<body>
+	  <h1>Iterators</h1>
+	  <h2>Purpose</h2>
+	  <p>
+	  Iterators are small util objects which are used to iterate through
+	  sequences of data elements. For example, to print all elements of
+	  a STL list write something like this:
+	  <div id="cpp">
+	  template<typename Iter>
+	  void printAll(Iter begin, Iter end)<br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;for( ; begin != end; ++begin) begin->print(); <br>
+	  } <br>
+	  //... <br>
+	  std::list<Printable> printables; <br>
+	  printAll(printables.begin(), printables.end(); <br>
+	  </div>
+	  </p>
+	  <p>
+	  To write your own iterators just write a small class with fullfills
+	  the iterators requirements. There are different iterator categories,
+	  output, input, forward, bidirectional and random access iterators.
+	  Consult your STL documentation for more information.
+	  </p>
+	  <p>
+	  Velox comes with some predefines iterator classes which make it easier
+	  to write iterators for velox services. They directly map to the
+	  iterator concepts and can be found in &lt;v3d/Core/Wrappers/VIterator.h&gt;
+	  Because of the velox architecture and services beeing distributed over 
+	  different DLLs velox iterators have some special requirements:
+	  <ul>
+	  	  <li>SmartPointer behaviour: iterators are created dynamically
+		  and need to be released automatically</li>
+		  <li>Hide the implementation from the user to reduce dependencies</li>
+	  </ul> 	  
+	  </p>
+	  
+	  <h2>Architecture</h2>
+	  <p>
+	  Velox provides some classes which provide the interfaces for the
+	  corresponding iterator categories:
+	  <ul>
+	  	  <li>VOutputIterator</li>
+		  <li>VInputIterator</li>
+		  <li>VForwardIterator</li>
+		  <li>VBidirectionalIterator</li>
+		  <li>VRandomIterator</li>
+	  </ul>
+	  Each iterator holds a pointer to IVIteratorPol class. They use this 
+	  class as the actual implementation. To implement your own iterators,
+	  derive a class from IVIteratorPol and implement it's methods.
+	  </p>
+	  
+	  <h2>Predefines iterator policies</h2>
+	  <p>
+	  <h3>VSTLDerefIterator</h3>
+	  Use this for providing iterators for STL containers which hold
+	  pointers, iterators or smart pointers. (Everything which can be
+	  dereferenced using the * operator, and can be used like an STL iterator)
+	  
+	  <div id="cpp">
+	  #include&lt;v3d/Core/Wrappers/VSTLDerefIteratorPol.h&gt; <br>
+	  <br>
+	  class VStupidService <br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;std::list&lt;Blah*&gt; myList; <br>
+	  &nbsp;&nbsp;&nbsp;typedef VSTLDerefIteratorPol&lt;<br>
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::&lt;Blah*&gt;::iterator, <br>
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blah&gt; IterPol; <br>
+	  public: <br>
+	  &nbsp;&nbsp;&nbsp;typedef VBirectionalIterator&lt;Blah&gt; BlahIterator; <br>
+	  <br>
+	  &nbsp;&nbsp;&nbsp;BlahIterator Begin() const; <br>
+	  &nbsp;&nbsp;&nbsp;BlahIterator End() const; <br>
+	  } <br>
+	  <br>
+	  VStupidService::BlahIterator VStupidService::Begin() const <br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;return BlahIterator(new IterPol(myList.begin()));<br>
+	  } <br>
+	  VStupidService::BlahIterator VStupidService::End() const <br>
+	  { <br>
+	  &nbsp;&nbsp;&nbsp;return BlahIterator(new IterPol(myList.end())); <br>
+	  } <br>
+	  </div>
+	  
+	  
+</body>
