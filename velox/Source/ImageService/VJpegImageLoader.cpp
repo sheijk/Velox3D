@@ -2,10 +2,12 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Image/IVImageFactory.h>
 #include <v3d/Image/VImage.h>
+#include <v3d/vfs/IVTempDataProvider.h>
 #include <fstream>
 #include <iostream>
 #include "VJpegImageLoader.h"
 
+#undef CreateFile
 #pragma warning (disable : 4244)
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -27,27 +29,16 @@ VImage* VJpegImageLoader::Create(vfs::IVStream* in_pStream)
 {
 	VImage* pImage;
 
-	vulong theByteCount = 0;
-	vulong theCurrentPosition = in_pStream->GetPos();
+	vfs::IVTempDataProvider* pTempManager =
+		QueryObject<vfs::IVTempDataProvider>("tempfile.service");
 
-	in_pStream->SetPos(vfs::IVStream::Anchor::End,0);
-	theByteCount = in_pStream->GetPos();
-
-	in_pStream->SetPos(vfs::IVStream::Anchor::Begin, theCurrentPosition);
-
-	vuchar* theDataBuffer = new vuchar[theByteCount]; //TODO error checking
-	in_pStream->Read(theDataBuffer, theByteCount);
-
-	StreamToFile(theDataBuffer, theByteCount);
-	
-	delete [] theDataBuffer;
-
+	VStringParam theFile = pTempManager->CreateFile(in_pStream);
 
 	struct jpeg_decompress_struct cinfo;
 
 	FILE *pFile;
 
-	pFile = fopen("systemcache.bin", "rb");
+	pFile = fopen(theFile, "rb");
 	
 	// Create an error handler
 	jpeg_error_mgr jerr;
@@ -126,31 +117,31 @@ void VJpegImageLoader::DecodeJPG(jpeg_decompress_struct* cinfo, tImageJPG *pImag
 
 //-----------------------------------------------------------------------------
 
-void VJpegImageLoader::StreamToFile(vuchar* in_pBuffer, vuint in_nByte)
-{
-	VStringParam theFilename = "systemcache.bin";
-	std::ofstream theFile;
-
-	theFile.open(theFilename, std::ios::out | std::ios::binary);
-
-	if(theFile.is_open())
-	{
-		for (int i = 0; i < in_nByte; i++)
-		{
-			vuchar ab = in_pBuffer[i];
-			vchar ac = in_pBuffer[i];
-			theFile << ab;
-
-		}
-		//may the error be here??
-		//theFile.write((const vuchar*)in_pBuffer, sizeof(vuchar) * in_nByte);
-	}
-
-	theFile.close();
-
-
-}
-
+//void VJpegImageLoader::StreamToFile(vuchar* in_pBuffer, vuint in_nByte)
+//{
+//	VStringParam theFilename = "systemcache.bin";
+//	std::ofstream theFile;
+//
+//	theFile.open(theFilename, std::ios::out | std::ios::binary);
+//
+//	if(theFile.is_open())
+//	{
+//		for (int i = 0; i < in_nByte; i++)
+//		{
+//			vuchar ab = in_pBuffer[i];
+//			vchar ac = in_pBuffer[i];
+//			theFile << ab;
+//
+//		}
+//		//may the error be here??
+//		//theFile.write((const vuchar*)in_pBuffer, sizeof(vuchar) * in_nByte);
+//	}
+//
+//	theFile.close();
+//
+//
+//}
+//
 //-----------------------------------------------------------------------------
 
 void VJpegImageLoader::Register()

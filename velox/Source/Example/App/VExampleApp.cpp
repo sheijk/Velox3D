@@ -1,6 +1,5 @@
 #include "VExampleApp.h"
 //-----------------------------------------------------------------------------
-#include <v3d/ExampleService/IVExampleService.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/VLogging.h>
 #include <v3d/Core/VIOStream.h>

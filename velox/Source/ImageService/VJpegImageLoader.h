@@ -30,9 +30,8 @@ protected:
 	
 	void DecodeJPG(jpeg_decompress_struct* cinfo, tImageJPG *pImageData);
 	
-	// Uglz hack but i wanna have jpeg decoding...
-	void StreamToFile(vuchar* in_pBuffer, vuint in_nByte);
-	void DeleteFile();
+	
+	//void DeleteFile();
 
 	virtual void Register();
 };

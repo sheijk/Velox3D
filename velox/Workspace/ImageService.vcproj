@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
+				AdditionalIncludeDirectories="../API;../Local\ExternalLibs/jpeglib/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;IMAGESERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -34,6 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="../Local/ExternalLibs/jpeglib/jpeg.lib"
 				OutputFile="$(OutDir)/ImageService.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
@@ -141,6 +142,12 @@
 			</File>
 			<File
 				RelativePath="..\Source\ImageService\VImageFactory.h">
+			</File>
+			<File
+				RelativePath="..\Source\ImageService\VJpegImageLoader.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\ImageService\VJpegImageLoader.h">
 			</File>
 			<File
 				RelativePath="..\Source\ImageService\VTgaImageLoader.cpp">

@@ -1,5 +1,5 @@
-#ifndef V3D_VFileDataProvider_H
-#define V3D_VFileDataProvider_H
+#ifndef V3D_VFILEDATAPROVIDER_H
+#define V3D_VFILEDATAPROVIDER_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/VFS/IVDataProvider.h>
@@ -53,4 +53,4 @@ public:
 } // namespace vfs
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VFileDataProvider_H
+#endif // V3D_VFILEDATAPROVIDER

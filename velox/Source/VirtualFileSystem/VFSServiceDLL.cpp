@@ -17,6 +17,7 @@
 #include "VSimpleVfs.h"
 #include "VDataProviderPool.h"
 #include "VFileDataProvider.h"
+#include "VTempDataProvider.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -35,6 +36,7 @@ VPointer<VStreamFactory>::AutoPtr g_pStreamFac;
 VPointer<VSimpleVfs>::AutoPtr g_pFileSys;
 VPointer<VDataProviderPool>::AutoPtr g_pDataProvPool;
 VPointer<VFileDataProvider>::AutoPtr g_pFileDataProv;
+VPointer<VTempDataProvider>::AutoPtr g_pTempDataProv;
 
 
 VFSSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
@@ -48,6 +50,7 @@ VFSSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	g_pFileDataProv.Assign(new VFileDataProvider());
 	g_pDataProvPool->RegisterDataProvider(g_pFileDataProv.Get());
 	g_pFileSys.Assign(new VSimpleVfs("vfs.fs", "vfs.xml"));
+	g_pTempDataProv.Assign(new VTempDataProvider());
 }
 
 VFSSERVICE_API void Shutdown()
