@@ -1,25 +1,19 @@
-/*
- *
- *	created:	2003/06/26
- *	created:	26:6:2003   17:18
- *	filename: 	IVXMLElement.h
- *	author:		insane
- *	
- *	purpose:	Interface for a xml element
- */
-
-
-#ifndef IVXMLELEMNT_H
-#define IVXMLELEMNT_H
-
+#ifndef V3D_IVXMLELEMNT_H
+#define V3D_IVXMLELEMNT_H
+//-----------------------------------------------------------------------------
 #include <V3d/Core/VTypes.h>
 #include <V3d/XML/IVXMLAttribute.h>
-
+//-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
+//-----------------------------------------------------------------------------
 
+/**
+ * The XML Element interface
+ * @author insane
+ * @version 1.0
+ */
 
-//TODO: doku (sheijk)
 class IVXMLElement
 {
 public:
@@ -34,10 +28,8 @@ public:
 
 };
 
-}
-}
-
-
-
-
-#endif
+//-----------------------------------------------------------------------------
+} //xml
+} //v3d
+//-----------------------------------------------------------------------------
+#endif //V3D_IVXMLELEMNT_H

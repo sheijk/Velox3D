@@ -1,16 +1,22 @@
-#ifndef IVXMLSERVICE_H
-#define IVXMLSERVICE_H
-
+#ifndef V3D_IVXMLSERVICE_H
+#define V3D_IVXMLSERVICE_H
+//-----------------------------------------------------------------------------
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/Vfs/IVStream.h>
 #include <v3d/XML/IVXMLWriter.h>
 #include <V3d/XML/IVXMLVisitor.h>
-
+//-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
-
+//-----------------------------------------------------------------------------
 using namespace v3d::vfs;
+//-----------------------------------------------------------------------------
 
+/**
+ * The interface for the XML service
+ * @author insane
+ * @version 1.0
+ */
 
 class IVXMLService : public VNamedObject
 {
@@ -39,8 +45,8 @@ public:
 	virtual IVXMLWriter* CreateXMLWriter() = 0;
 };
 
-//TODO: } // namespace ..., ist besser lesbar (sheijk)
-}
-}
-
-#endif
+//-----------------------------------------------------------------------------
+} //xml
+} //v3d
+//-----------------------------------------------------------------------------
+#endif //V3D_IVXMLSERVICE_H

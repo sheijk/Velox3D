@@ -1,23 +1,18 @@
-/*
- *
- *	created:	2003/06/24
- *	created:	24:6:2003   18:04
- *	filename: 	IVXMLAttribute.h
- *	author:		insane
- *	
- *	purpose:	Maps an xml attribute
- */
-
-#ifndef IVXMLATTRIBUTE_H
-#define IVXMLATTRIBUTE_H
-
+#ifndef V3D_IVXMLATTRIBUTE_H
+#define V3D_IVXMLATTRIBUTE_H
+//-----------------------------------------------------------------------------
 #include <V3d/Core/VTypes.h>
-
+//-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
+//-----------------------------------------------------------------------------
 
-//TODO: stil an den restlichen velox source anpassen, vor allem die doku
-// im javadoc style (sheijk)
+/**
+ * The XML Attribute interface
+ * @author insane
+ * @version 1.0
+ */
+
 class IVXMLAttribute
 {
 public:
@@ -27,12 +22,8 @@ public:
 
 };
 
-//TODO: hier unbedingt // namespace xml hinterschreiben, sonst sieht
-//man nicht wozu die schliessende klammer gehoert
-}
-}
-
-
-
-#endif
-
+//-----------------------------------------------------------------------------
+} //xml
+} //v3d
+//-----------------------------------------------------------------------------
+#endif //V3D_IVXMLATTRIBUTE_H

@@ -1,35 +1,18 @@
-///////////////////////////////////////////////////////////
-//
-//  IVXMLVisitor.h
-//  Implementation of the Interface IVXMLVisitor
-//  
-///////////////////////////////////////////////////////////
-//  Modification history:
-//  
-//
-///////////////////////////////////////////////////////////
-
-#ifndef IVXMLVISITOR_H
-#define IVXMLVISITOR_H
-
-/**
-* An interface used by IVXMLDocument.
-* Use a class implementing this interface for parsing XML files. IVXMLDocument
-* does not store the data for you. Instead use IVXMLVisitor to generate the data
-* you need.
-* @version 1.0
-* @generator Enterprise Architect
-* @created 18-Jun-2003 01:33:08
-*/
-
+#ifndef V3D_IVXMLVISITOR_H
+#define V3D_IVXMLVISITOR_H
+//-----------------------------------------------------------------------------
 #include <V3d/XML/IVXMLAttribute.h>
 #include <V3d/XML/IVXMLElement.h>
+//-----------------------------------------------------------------------------
+namespace v3d{
+namespace xml{
+//-----------------------------------------------------------------------------
 
-namespace v3d
-{
-namespace xml
-{
-
+/**
+ * The interface for a XML visitor
+ * @author insane
+ * @version 1.0
+ */
 
 class IVXMLVisitor
 {
@@ -43,8 +26,8 @@ public:
 	
 	
 };
-
-}
-}
-
-#endif
+//-----------------------------------------------------------------------------
+} //xml
+} //v3d
+//-----------------------------------------------------------------------------
+#endif //V3D_IVXMLVISITOR_H
