@@ -24,6 +24,8 @@ public class Document extends JDialog {
     {
         super(inMainWindow, inTitle);
         
+        setDefaultLookAndFeelDecorated(false);
+        
         myMainWindow = inMainWindow;
         
         // place at center of parent
@@ -45,11 +47,18 @@ public class Document extends JDialog {
     {
         return myMainWindow;
     }
+    
+    protected void close()
+    {
+        setEnabled(false);
+        setVisible(false);
+        myMainWindow.unregisterDocument(Document.this);
+        System.out.println("Document \"" + getTitle() + "\" closed");
+    }
 
     private final class CloseListener extends WindowAdapter {
         public void windowClosing(WindowEvent out_e) {
-            myMainWindow.unregisterDocument(Document.this);
-            System.out.println("Document \"" + getTitle() + "\" closed");
+            close();
         }
     }
 }

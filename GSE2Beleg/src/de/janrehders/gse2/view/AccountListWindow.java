@@ -48,6 +48,12 @@ public class AccountListWindow extends Document {
         giroAddButton.addActionListener(new AddGiroAction());
         
         JButton removeAccountButton = new JButton("remove");
+        removeAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent out_e) {
+                Account account = getSelectedAccount();
+                myController.getModel().remove(account);
+            }
+        });
         
         JButton editAccountButton = new JButton("edit");
         editAccountButton.addActionListener(new ActionListener() {

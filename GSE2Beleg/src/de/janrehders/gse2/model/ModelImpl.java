@@ -46,7 +46,15 @@ public class ModelImpl implements Model {
      */
     public boolean update(int inAccountId, Account inAccount) {
         Account account = this.getById(inAccountId);
-        return account.copy(inAccount);
+        
+        if( account != null )
+        {
+            return account.copy(inAccount);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /* (non-Javadoc)

@@ -6,6 +6,8 @@
  */
 package de.janrehders.gse2.accounts;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -147,6 +149,8 @@ public abstract class Account implements Comparable, Serializable {
     public void setOwner(String inOwner) { myOwner = inOwner; }
     /** return the account's balance */
     public float getBalance() { return myBalance; }
+    /** set accounts balance */
+    public void setBalance(float inBalance) { myBalance = inBalance; }
     
     /** deposits money to the account */
     public boolean deposit(float inAmount) {
@@ -189,6 +193,15 @@ public abstract class Account implements Comparable, Serializable {
         });
     }
 
+    private void readObject(ObjectInputStream in)
+    	throws IOException, ClassNotFoundException
+    {
+        in.defaultReadObject();
+        
+        // assign a new, unused account id
+        myAccountNo = Account.getNewAccountId();
+    }
+    
     /** print's the accounts fields to the standard output stream */
     public void show() {
         System.out.println("Account no.: " + myAccountNo);

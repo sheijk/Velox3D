@@ -23,10 +23,13 @@ import de.janrehders.gse2.controller.Controller;
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class AccountEditWindow extends Document {
-    private final Account myAccount;
+//    private final Account myAccount;
     private final Controller myController;
+    private final int myAccountId;
     
-    private TextField myOwnerTextField;
+    private JTextField myOwnerTextField;
+    private JTextField myBalanceTextField;
+    private JLabel myDateOfCreationLabel;
 
     public AccountEditWindow(
             Controller inController, 
@@ -40,7 +43,8 @@ public class AccountEditWindow extends Document {
         assert inController != null;
         assert inAccount != null;
         
-        myAccount = inAccount;
+//        myAccount = inAccount;
+        myAccountId = inAccount.getAccountNo();
         myController = inController;
         
         // setup ui
@@ -55,6 +59,7 @@ public class AccountEditWindow extends Document {
         if( inAllowEditing == false )
         {
             myOwnerTextField.setEnabled(false);
+            myBalanceTextField.setEnabled(false);
         }
         // if editing is enabled, add editing functionality
         else
@@ -63,10 +68,16 @@ public class AccountEditWindow extends Document {
             btn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent out_e) {
                     // apply changes
-                    myAccount.setOwner(myOwnerTextField.getText());
-                    
-                    // notify controller
-                    myController.getModel().update(myAccount.getAccountNo(), myAccount);
+                    Account account = getAccount();
+                    try {
+                        account.setBalance(Float.parseFloat(myBalanceTextField.getText()));
+                        account.setOwner(myOwnerTextField.getText());
+                        // notify controller
+                        myController.getModel().update(getAccount().getAccountNo(), getAccount());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(AccountEditWindow.this,
+                                "Enter a valid floating point number for balance");
+                    }
                 }
             });
             
@@ -100,27 +111,71 @@ public class AccountEditWindow extends Document {
     {
         inParent.add(horPanel(
                 new Label("Account no."), 
-                new Label("" + myAccount.getAccountNo())
+                new Label("" + getAccount().getAccountNo())
                 ));
         
-        myOwnerTextField = new TextField();
+        myOwnerTextField = new JTextField();
         inParent.add(horPanel(
                 new Label("Owner"),
                 myOwnerTextField
                 ));
+
+        myBalanceTextField = new JTextField();
+        myBalanceTextField.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                try {
+                    Float.parseFloat(((JTextField)input).getText());
+                    return true;
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
+        });
+        
+        inParent.add(horPanel(
+                new Label("Balance"),
+                myBalanceTextField));
+        
+        myDateOfCreationLabel = new JLabel(getAccount().getDateOfCreation().toLocaleString());
+        inParent.add(horPanel(
+                new Label("Date of creation"),
+                myDateOfCreationLabel));
+        
+        //TODO: combobox for type
     }
             
     private void updateFromAccount()
     {
-        myOwnerTextField.setText(myAccount.getOwner());
+        // close if account does not exist anymore
+        if( getAccount() == null )
+        {
+            System.out.println("closing");
+            
+            close();            
+        }
+        else
+        {
+            Account account = getAccount();
+            
+            myOwnerTextField.setText(account.getOwner());
+            myBalanceTextField.setText(Float.toString(account.getBalance()));
+            myDateOfCreationLabel.setText(account.getDateOfCreation().toLocaleString());
+        }
     }
     
     private static String getHeader(Account inAccount, boolean inAllowEditing)
     {
         assert inAccount != null;
-        String title = inAllowEditing ? "Edit " : "View "
-        	+ inAccount.getTypeString() + " nr. " + inAccount.getAccountNo();
+        String title = inAllowEditing ? "Edit " : "View ";
+        title += inAccount.getTypeString() + " nr. " + inAccount.getAccountNo();
         
         return title;        	
+    }
+
+    /**
+     * @return Returns the account.
+     */
+    private Account getAccount() {
+        return myController.getModel().getById(myAccountId);
     }
 }
