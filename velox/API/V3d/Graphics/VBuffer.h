@@ -19,6 +19,14 @@ public:
 		DropData
 	};
 
+	virtual ~VBufferBase() {};
+
+protected:
+	virtual void ResetToZero() = 0;
+	void ResetOther(VBufferBase* pOther)
+	{
+		pOther->ResetToZero();
+	}
 };
 
 template<typename T>
@@ -41,7 +49,6 @@ struct IVBuffer : public VBufferBase
 template<typename DataType>
 class VBuffer : public IVBuffer<DataType>
 {
-public:
 	/** the buffer's content */
 	DataType* m_pBuffer;
 
@@ -52,6 +59,14 @@ public:
 	void operator=(const VBuffer&);
 	VBuffer(const VBuffer&);
 
+protected:
+	virtual void ResetToZero()
+	{
+		m_nSize = 0;
+		m_pBuffer = 0;
+	}
+
+public:
 	/**
 	 * Takes ownership of the given memory region
 	 */
@@ -80,7 +95,8 @@ public:
 		V3D_ASSERT(in_pSource != 0);
 
 		// calc source size in bytes
-		const vuint nSizeInBytes = in_pSource->m_nSize * sizeof(OldDataType);
+		//const vuint nSizeInBytes = in_pSource->m_nSize * sizeof(OldDataType);
+		const vuint nSizeInBytes = in_pSource->GetSize() * sizeof(OldDataType);
 
 		// calc new size in number of elements
 		const vuint nDestSize = nSizeInBytes / sizeof(DataType);
@@ -94,18 +110,23 @@ public:
 		if( in_CopyMode == DropData )
 		{
 			// take ownership of buffer
-			m_pBuffer = reinterpret_cast<DataType*>(m_pBuffer);
+			m_pBuffer = reinterpret_cast<DataType*>(
+				in_pSource->GetDataAddress());
 			m_nSize = nDestSize;
 
 			// empty source buffer
-			in_pSource->m_pBuffer = 0;
-			in_pSource->m_nSize = 0;
+			VBufferBase* pBase = in_pSource;
+			ResetOther(pBase);
+			//pBase->ResetToZero();
+			//in_pSource->m_pBuffer = 0;
+			//in_pSource->m_nSize = 0;
 		}
 		else if( in_CopyMode == CopyData )
 		{
 			// create a copy of the data
 			vbyte* pNewData = new vbyte[nSizeInBytes];
-			memcpy(pNewData, in_pSource->m_pBuffer, nSizeInBytes);
+			//memcpy(pNewData, in_pSource->m_pBuffer, nSizeInBytes);
+			memcpy(pNewData, in_pSource->GetDataAddress(), nSizeInBytes);
 
 			m_pBuffer = reinterpret_cast<DataType*>(pNewData);
 			m_nSize = nDestSize;

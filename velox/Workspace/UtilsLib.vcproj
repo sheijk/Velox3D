@@ -321,6 +321,10 @@
 					RelativePath="..\Api\V3dLib\Graphics\Portal\VTerrainCell.h">
 				</File>
 			</Filter>
+			<Filter
+				Name="Renderers"
+				Filter="">
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Math"
@@ -404,6 +408,16 @@
 			</File>
 			<File
 				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Containers"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3dLib\Containers.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Containers\VArray2d.h">
 			</File>
 		</Filter>
 	</Files>
