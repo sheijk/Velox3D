@@ -8,8 +8,6 @@ die gleichen services stehen -[ins]
 <ins>Bitte postet am ende dieser Datei eure ogl extensions damit ich sehe, mit
 as wir arbeiten koennen (siehe console fuer extensions)
 
-mein iterator crasht mit dem neuem source im opengldevice...
-
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:
@@ -61,6 +59,9 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+19.12.2003
+Grundgeruest fuer das Graphics Device implementiert
 
 15.12.2003
 VList samt kleinem Test fertig implementiert, es fehlen nur noch ein paar kleinere Hilfsfunktionen

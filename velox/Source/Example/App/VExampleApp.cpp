@@ -9,7 +9,7 @@
 #include <v3d/Window/IVWindowManager.h>
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Graphics/IVDevice.h>
-#include <v3d/Utils/Graphics/VCubeMeshDescr.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
@@ -43,22 +43,43 @@ vint VExampleApp::Main()
 	IVSystemManager* system = QueryObject<IVSystemManager>("system.service");
 	IVWindowManager* winmanager = QueryObject<IVWindowManager>("window.manager");
 	
-	// warum nicht typedef IVWindowManager::WindowPtr ... oder so? waere leichter "wartbar" (sheijk)
-	typedef VPointer<IVWindow>::SharedPtr IVWindowInterface;
-	IVWindowInterface win;
+	// warum nicht typedef IVWindowManager::WindowPtr ... oder so? 
+	// waere leichter "wartbar" (sheijk)
+	typedef VPointer<IVWindow>::SharedPtr WindowInterface;
+	WindowInterface win;
 
 
 	system->GetCPU(); // just for testing...
 	win = winmanager->CreateWindow("v3d window");
 
-	IVDevice* m_Device;
-	m_Device = &(win->QueryGraphicsDevice());
+	IVDevice* pDevice;
+	pDevice = &(win->QueryGraphicsDevice());
 
-	VCubeMeshDescr test(1);
-	IVMesh* testMesh;
+	// create a test mesh
+    // dafuer brauchen wir spaeter hilfsklassen...
+	const cnVertexCount = 9;
+	VFloatBuffer vertexData(new float[cnVertexCount], cnVertexCount);
 
-//	testMesh = m_Device->CreateMesh(&test);
+	vertexData[0] = 1.0f;
+	vertexData[1] = 0.0f;
+	vertexData[2] = 0.0f;
 
+	vertexData[3] = 0.0f;
+	vertexData[4] = 1.0f;
+	vertexData[5] = 0.0f;
+
+	vertexData[6] = -1.0f;
+	vertexData[7] = 0.0f;
+	vertexData[8] = 0.0f;
+
+	IVDevice::FloatBufferHandle bufHandle;
+
+	bufHandle = pDevice->CreateBuffer(&vertexData, VFloatBuffer::CopyData);
+
+	VMeshDescription desc;
+	desc.triangleVertices = VMeshDescription::FloatDataRef(bufHandle, 0, 9, 1);
+
+	IVMesh& mesh( pDevice->CreateMesh(desc) );
 	
 	// main loop
 	updater.Start();
@@ -66,10 +87,10 @@ vint VExampleApp::Main()
 
 	while(system->GetStatus())
 	{
-		m_Device->BeginScene();
-//		m_Device->RenderMesh(testMesh);
+		pDevice->BeginScene();
+		pDevice->RenderMesh(mesh);
 		updater.StartNextFrame();
-		m_Device->EndScene();
+		pDevice->EndScene();
 	}
 
 	updater.Stop();

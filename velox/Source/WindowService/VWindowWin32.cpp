@@ -1,9 +1,9 @@
 #include "VWindowWin32.h"
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Graphics/VOpenGLDevice.h>
-#include <v3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
+#include <v3d/Core/VIOStream.h>
+#include <v3d/Core/VIOStream.h>
 
+#include "../Graphics/OpenGL/VOpenGLDevice.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {

@@ -10,8 +10,9 @@ namespace graphics {
 
 /**
  * This class holds a complete set of display varables
+ *
+ * @author insane
  */
-
 class VDisplaySettings  
 {
 public:

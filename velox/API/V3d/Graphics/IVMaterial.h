@@ -9,6 +9,8 @@ namespace graphics {
 
 /**
  * Client visible material controlling
+ *
+ * @author sheijk
  */
 class IVMaterial
 {

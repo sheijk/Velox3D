@@ -1,39 +1,38 @@
-/**
-*  VOpenGLVertexMesh
-*  Implementation of the class VOpenGLVertexMesh
-*  Created on:      25-Nov-2003 23:12:05
-*  Original author: insane
-*/
 //-----------------------------------------------------------------------------
 #ifndef V3D_VOPENGLVERTEXMESH_H
 #define V3D_VOPENGLVERTEXMESH_H
 //-----------------------------------------------------------------------------
-#include <v3d/Graphics/OpenGL/VOpenGLMesh.h>
 #include <v3d/Math/VVector.h>
-//-----------------------------------------------------------------------------
-#include <vector>
+#include <v3d/Graphics/VMeshDescription.h>
+
+#include "../DeviceBase/VRenderMethodRegistry.h"
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-class VOpenGLVertexMesh : public VOpenGLMesh
+/**
+ * Simplest rendering method. Renders using glBegin, glVertex.. etc
+ *
+ * @author sheijk
+ */
+class VOpenGLVertexMesh : public VBaseMesh
 {
-private:
-
-	
-
-public:
-	
 	typedef VVector<vfloat32, 3> Vertex;
 
-	VOpenGLVertexMesh();
+	VMeshDescription::FloatDataRef m_TriangleData;
+
+public:
+	VOpenGLVertexMesh(VMeshDescription in_Descr);
 	virtual ~VOpenGLVertexMesh();
 
-	std::vector<Vertex> m_VertexList;
+	virtual void Render();	
+};
 
-
-
+class VStupidRenderMethod : public IVRenderMethod
+{
+	virtual VOpenGLVertexMesh* CreateMesh(VMeshDescription& in_MeshDescr);
 };
 
 //-----------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
-//TODO: kommentar schreiben!!!!!!!!1111111111111eins
+//TODO: kommentare schreiben!!!!!!!!1111111111111eins
 
 /** declare an exception for accessing an out of bounds element */
 V3D_DECLARE_EXCEPTION(VListOutOfBoundsAccess, VException);
@@ -407,6 +407,11 @@ public:
 		}
 
 		return nSize;
+	}
+
+	vbool empty() 
+	{
+		return (m_pHead == 0);
 	}
 };
 

@@ -2,13 +2,16 @@
 #define V3D_IVMESH_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
- * IVMesh is the client visible mesh control
+ * A handle for a mesh loaded in the device
+ *
+ * @author sheijk/insane
  */
 class IVMesh
 {

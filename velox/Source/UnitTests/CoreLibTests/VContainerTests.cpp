@@ -100,6 +100,14 @@ void TestContainer(const std::string& name)
 			);
 	}
 
+	if( ! cont.empty() )
+	{
+		V3D_UNITTEST_ERROR_STATIC(
+			(name + "::empty() does not return true after clearing the "
+			"container.").c_str()
+			);
+	}
+
 	// "complex" test:
 	const int cnTestDataCount = 10;
 	int naTestData[cnTestDataCount];
@@ -137,10 +145,10 @@ void TestContainer(const std::string& name)
 	}
 
 
-	cout << cont.size() << ": ";
-	for( Container::iterator iter = cont.begin(); iter != cont.end(); ++ iter)
-		cout << *iter << ",";
-	cout << endl;
+	//cout << cont.size() << ": ";
+	//for( Container::iterator iter = cont.begin(); iter != cont.end(); ++ iter)
+	//	cout << *iter << ",";
+	//cout << endl;
 
 	// test insert
 	it = cont.begin();
@@ -158,10 +166,10 @@ void TestContainer(const std::string& name)
 			);
 	}
 
-	cout << cont.size() << ": ";
-	for( Container::iterator iter = cont.begin(); iter != cont.end(); ++ iter)
-		cout << *iter << ",";
-	cout << endl;
+	//cout << cont.size() << ": ";
+	//for( Container::iterator iter = cont.begin(); iter != cont.end(); ++ iter)
+	//	cout << *iter << ",";
+	//cout << endl;
 
 	if( ! std::equal(cont.begin(), cont.end(), naTestData) )
 	{

@@ -100,31 +100,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Implementation"
-			Filter="">
-			<File
-				RelativePath="..\Source\Graphics\VDisplaySettings.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Graphics\VOpenGLDevice.cpp">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\VOpenGLDevice.h">
-			</File>
-			<File
-				RelativePath="..\Source\Graphics\OpenGL\VOpenGLMesh.cpp">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\OpenGL\VOpenGLMesh.h">
-			</File>
-			<File
-				RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.cpp">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Graphics\OpenGL\VOpenGLVertexMesh.h">
-			</File>
-		</Filter>
-		<Filter
 			Name="Interfaces"
 			Filter="">
 			<File
@@ -137,19 +112,51 @@
 				RelativePath="..\Api\V3d\Graphics\IVMesh.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Graphics\VBuffer.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
 			</File>
+			<File
+				RelativePath="..\Api\V3d\Graphics\VMeshDescription.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Implementation"
+			Filter="">
+			<File
+				RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.h">
+			</File>
 			<Filter
-				Name="Descriptions"
+				Name="Utils"
 				Filter="">
 				<File
-					RelativePath="..\Api\V3d\Graphics\Descriptions\IVMeshDescription.h">
+					RelativePath="..\Source\Graphics\DeviceBase\VBaseMesh.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Graphics\Descriptions\VTriangle.h">
+					RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Graphics\Descriptions\VVertexList.h">
+					RelativePath="..\Source\Graphics\VDisplaySettings.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Render Methods"
+				Filter="">
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.h">
 				</File>
 			</Filter>
 		</Filter>
