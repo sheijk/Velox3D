@@ -1,5 +1,5 @@
-#ifndef V3D_VINPUTEXCEPTION_H
-#define V3D_VINPUTEXCEPTION_H
+#ifndef V3D_VINPUTEXCEPTIONS_H
+#define V3D_VINPUTEXCEPTIONS_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VException.h>
@@ -20,4 +20,4 @@ V3D_DECLARE_EXCEPTION(VIllegalKeyException, VIllegalDevicePartException)
 } // namespace input
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif //V3D_VINPUTEXCEPTION_H
+#endif //V3D_VINPUTEXCEPTIONS_H
