@@ -22,26 +22,17 @@ struct VModel
 	typedef VMatrix44f TransformMatrix;
 	typedef VPointer<TransformMatrix>::SharedPtr TransformMatrixPtr;
 
+	VModel(IVDevice::MeshHandle in_hMesh, TransformMatrixPtr in_pTransform);
+	VModel(IVDevice::MeshHandle in_hMesh);
+
 	/** the mesh to be rendered */
 	IVDevice::MeshHandle hMesh;
 
 	/** it's associated transformation (position, rotation,..) */
 	TransformMatrixPtr pTransformation;
 
-	VModel(
-		IVDevice::MeshHandle in_hMesh,
-		TransformMatrixPtr in_pTransform
-		):
-		hMesh(in_hMesh),
-		pTransformation(in_pTransform)
-	{
-	}
-
-	vbool operator==(const VModel& other)
-	{
-		return (hMesh == other.hMesh);
-	}
-};
+	vbool operator==(const VModel& other);
+	};
 
 /**
  * Holds a list of meshes and renders them. Should sort meshes by their

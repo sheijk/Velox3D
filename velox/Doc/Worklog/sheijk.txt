@@ -3,13 +3,6 @@ Worklog von sheijk
 ----- messages to sheijk:
 
 TODO: Einige typedefs sollte einfacher zugaenglcher sein z.b. Vertex
-TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
-zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
-die gleichen services stehen -[ins] schmiert ab, oder wirft ne exception?
-
-VFS stuertzt ab, wenn eine Datei in einem nicht existierenden Verzeichniss geladen]
-werden soll [ins] gar nicht wahr --sheijk
-den punkt kannste auch wieder loeschen :P --ins
 
 -------------------------------------------------------------------------------
 ----- current assigned tasks:
@@ -44,6 +37,15 @@ Doku:
 
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
+
+14.10.2004
+- Erste Version der Racer App fertig
+- Einige Entity Part Typen fuer Meshes, Festkoerper(Position,etc), Kamera usw
+
+11.10.2004
+- Racer App angefangen
+- Bugfixing im Device
+- Application Template fixed
 
 10.10.2004
 - Entity System Example incl. Doku

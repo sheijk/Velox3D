@@ -297,25 +297,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Portals"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\Portal\IVCell.h">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\Portals\VIndoorCell .cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\Portal\VIndoorCell.h">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\Portals\VTerrainCell.cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\Portal\VTerrainCell.h">
-				</File>
-			</Filter>
-			<Filter
 				Name="Importer"
 				Filter="">
 				<File
@@ -324,6 +305,25 @@
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h">
 				</File>
+				<Filter
+					Name="Portals"
+					Filter="">
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Portal\IVCell.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Portals\VIndoorCell .cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Portal\VIndoorCell.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\Portals\VTerrainCell.cpp">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\Portal\VTerrainCell.h">
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Renderers"
@@ -583,6 +583,9 @@
 		<Filter
 			Name="Entity"
 			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Entity.h">
+			</File>
 			<File
 				RelativePath="..\Api\V3d\Entity\IVPart.h">
 			</File>

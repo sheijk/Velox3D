@@ -134,6 +134,11 @@ VState& VRenderPass::AddState(VStringParam in_strName)
 {
 	const vuint stateIndex = AddState(VState(in_strName));
 	return *m_States[stateIndex].Get();
+}			  
+
+void VRenderPass::Clear()
+{
+	m_States.clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -169,6 +174,12 @@ VRenderPass& VShaderPath::AddRenderPass()
 	return *m_RenderPasses.back();
 }
 
+
+void VShaderPath::Clear()
+{
+	m_RenderPasses.clear();
+}
+
 //-----------------------------------------------------------------------------
 
 vuint VEffectDescription::GetShaderPathCount() const
@@ -202,6 +213,10 @@ VShaderPath& VEffectDescription::AddShaderPath()
 	return *m_ShaderPaths.back();
 }
 
+void VEffectDescription::Clear()
+{
+	m_ShaderPaths.clear();
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

@@ -24,6 +24,32 @@ using namespace v3d; // ...
  */
 class VKeyboardCamera
 {
+public:
+	VKeyboardCamera(input::IVInputManager& in_InputDevice);
+
+	void Move(float in_fSeconds);
+
+	graphics::VCamera& GetCamera();
+	const graphics::VCamera& GetCamera() const;
+
+	virtual const VMatrix44f& GetTransform() const;
+
+	void SetMovementSpeed(vfloat32 m_fMovementSpeed);
+	vfloat32 GetMovementSpeed() const;
+	void SetRotationSpeedX(vfloat32 in_fNewSpeedX);
+	vfloat32 GetRotationSpeedX() const;
+	void SetRotationSpeedY(vfloat32 in_fNewSpeedX);
+	vfloat32 GetRotationSpeedY() const;
+	void SetRotationSpeedZ(vfloat32 in_fNewSpeedX);
+	vfloat32 GetRotationSpeedZ() const;
+private:
+	void QueryButtons(input::IVInputManager& in_pInputManager);
+
+	vfloat32 m_fMovementSpeed;
+	vfloat32 m_fRotationSpeedX;
+	vfloat32 m_fRotationSpeedY;
+	vfloat32 m_fRotationSpeedZ;
+
 	input::IVButton* m_pEscapeButton;
 	input::IVButton* m_pUpButton;
 	input::IVButton* m_pDownButton;
@@ -36,19 +62,6 @@ class VKeyboardCamera
 	input::IVRelativeAxis* m_pMouseYAxis;
 
 	graphics::VCamera m_Camera;
-
-	void QueryButtons(input::IVInputManager& in_pInputManager);
-public:
-	VKeyboardCamera(input::IVInputManager& in_InputDevice);
-
-	void Move(float in_fSeconds);
-
-	graphics::VCamera& GetCamera()
-	{
-		return m_Camera;
-	}
-
-	virtual const VMatrix44f& GetTransform();
 };
 
 //-----------------------------------------------------------------------------

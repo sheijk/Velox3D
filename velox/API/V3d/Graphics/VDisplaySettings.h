@@ -8,6 +8,24 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
+struct VSize
+{
+	VSize();
+	VSize(vuint w, vuint h);
+
+	vuint width;
+	vuint height;
+};
+
+struct VPosition
+{
+	VPosition();
+	VPosition(vuint xpos, vuint ypos);
+
+	vuint x;
+	vuint y;
+};
+
 /**
  * Settings for the window and graphics device
  *
@@ -17,17 +35,20 @@ class VDisplaySettings
 {
 public:
 	VDisplaySettings();
+	VDisplaySettings(VSize size, VPosition pos);
 
 	void SetFullscreen(vbool f);
 	vbool IsFullscreen() const;
 
 	void SetSize(vuint width, vuint height);
+	void SetSize(VSize size);
 	void SetWidth(vuint w);
 	vuint GetWidth() const;
 	void SetHeight(vuint h);
 	vuint GetHeight() const;
 
 	void SetPosition(vuint x, vuint y);
+	void SetPosition(VPosition pos);
 	void SetX(vuint x);
 	vuint GetX() const;
 	void SetY(vuint y);
@@ -46,6 +67,8 @@ public:
 	void SetAPI(const std::string& api);
 
 private:
+	void SetDefaultValues();
+
 	vbool m_bFullscreen;
 	vuint m_nWidth;
 	vuint m_nHeight;

@@ -41,13 +41,6 @@ public:
 	virtual void Deactivate() = 0;
 
 	/**
-	 * If the part depends on any other parts, this function should return
-	 * whether all required parts where found
-	 */
-//	virtual vbool AllRequiredPartsPresent() const
-//	{}
-
-	/**
 	 * Tells the part about other parts belonging to the same entity
 	 */
 	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)

@@ -27,22 +27,23 @@ VTerrainRenderer::VTerrainRenderer(
 	vuint in_nPatchCount, 
 	IVDevice& in_Device,
 	VStringParam in_strTextureFile,
-	math::VRect<vfloat32> in_BoundingRect
+	math::VRect<vfloat32> in_BoundingRect,
+	vfloat32 in_fHeightScale
 	)
 	:
 	m_nPatchCount(in_nPatchCount),
-	m_fChunkModelSize(200.0f),
+	m_fChunkModelSize(in_BoundingRect.GetWidth()),
 	m_DrawList(in_Device),
 	m_DetailDrawList(in_Device),
 	m_bShowWireFrame(true),
-	m_Device(in_Device)
+	m_Device(in_Device),
+	m_fMaxDist(1000.0f),
+	m_fMinDist(5.0f)
 {
 	// load texture
 	m_TextureMat = BuildTextureMaterial(&in_Device, in_strTextureFile);
 	m_TextureMat.pTextureList->magnificationFilter = VMaterialDescription::FilterLinear;
 	m_TextureMat.pTextureList->minificationFilter = VMaterialDescription::FilterLinear;
-
-	//m_TextureMat.defaultColor = VColor4f(1.0f, .5f, .5f, 1.0f);
 
 	detailMat = BuildTextureMaterial(&in_Device, "/data/dusmdetail.jpg");
 	detailMat.pTextureList->magnificationFilter = VMaterialDescription::FilterLinear;
@@ -78,14 +79,7 @@ VTerrainRenderer::VTerrainRenderer(
 				LodCount, 
 				m_fChunkModelSize, 
 				math::VRect<vfloat32>(left, top, right, bottom),
-				math::VRect<vfloat32>(
-					0, 0, 100, 100
-					//left * in_BoundingRect.GetWidth() - in_BoundingRect.GetLeft(),
-					//top * in_BoundingRect.GetHeight() - in_BoundingRect.GetTop(),
-					//right * in_BoundingRect.GetWidth() - in_BoundingRect.GetLeft(),
-					//bottom * in_BoundingRect.GetHeight() - in_BoundingRect.GetTop()
-					),
-				200.0f,
+				in_fHeightScale,
 				in_Device 
 				//m_TextureMat
 				));
@@ -99,9 +93,10 @@ VTerrainRenderer::VTerrainRenderer(
 
 VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
 	VStringParam in_strFileName, 
+	VStringParam in_strTextureFile,
 	IVDevice& in_Device,
 	math::VRect<vfloat32> in_BoundingRect,
-	VStringParam in_strTextureFile
+	vfloat32 in_fHeightScale
 	)
 {
 	std::string rawfile(in_strFileName);
@@ -135,19 +130,21 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
 	// load data
 	return CreateFromStream(
 		*pStream, 
+		in_strTextureFile,
 		nSizeLen, 
 		in_Device, 
 		in_BoundingRect,
-		in_strTextureFile
+		in_fHeightScale
 		);
 }
 
 VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 	vfs::IVStream& in_Stream,
+	VStringParam in_strTextureFile,
 	vuint in_nSize,
 	IVDevice& in_Device,
 	math::VRect<vfloat32> in_BoundingRect,
-	VStringParam in_strTextureFile
+	vfloat32 in_fHeightScale
 	)
 {
 	// calc patch nr. for terrain
@@ -162,7 +159,7 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 
 	// create terrain
 	TerrainRendererPtr pTerrain(new VTerrainRenderer(
-		nPatchCount, in_Device, in_strTextureFile, in_BoundingRect));
+		nPatchCount, in_Device, in_strTextureFile, in_BoundingRect, in_fHeightScale));
 
 	vuint nTerrainSize = pTerrain->GetWidth();
 	V3D_ASSERT(nPatchSize <= nTerrainSize);
@@ -171,16 +168,26 @@ VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
 	vbyte heightValue = 0;
 	vfloat32 height = 0.0f;
 
+	vfloat32 maxh = -100.0f;
+	vfloat32 minh = 100.0f;
+
 	for(vuint y = 0; y < in_nSize; ++y)
 	for(vuint x = 0; x < in_nSize; ++x)
 	{
 		in_Stream >> heightValue;
 
-		//TODO: scale to [0,1] or [-1,1] ?
-		height = vfloat32(heightValue) / 128.0f * 3 - 1.0f;
+		// scale to [0,1]
+		height = vfloat32(heightValue) / 256.0f;
+		height = 1 - height;
+
+		maxh = std::max(maxh, height);
+		minh = std::min(minh, height);
         
 		pTerrain->Set(x, y, height);
 	}
+
+	V3D_ASSERT(maxh <= 1);
+	V3D_ASSERT(minh >= 0);
 
 	return pTerrain;
 }
@@ -557,10 +564,9 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 
 	// smallest detail >= maxdist distance, greatest detail at <= 10 distance,
 	// linear interpolation in between
-
 	vuint lod = 0;
-	const vfloat32 maxdist = 100.0f;
-	const vfloat32 mindist = 5.0f;
+	const vfloat32 maxdist = m_fMaxDist;
+	const vfloat32 mindist = m_fMinDist;
 
 	if( in_fDistance > mindist )
 	{
@@ -572,6 +578,12 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 	}
 
 	return lod;
+}
+
+void VTerrainRenderer::SetLodOptions(vfloat32 in_fMinDist, vfloat32 in_fMaxDist)
+{
+	m_fMinDist = in_fMinDist;
+	m_fMaxDist = in_fMaxDist;
 }
 
 //-----------------------------------------------------------------------------

@@ -45,6 +45,30 @@ VState BlendingState(
 	VBlendFactor source,
 	VBlendFactor dest);
 
+//-----------------------------------------------------------------------------
+
+/**
+ * Returns a render pass with the default values for all attributes which will
+ * be used if they are not explicitly set
+ */
+void MakeDefaultMaterial(VRenderPass& pass);
+
+/** Creates a colored wire frame material */
+void MakeWireFrameMaterial(VRenderPass& pass);
+
+/**
+ * Returns a material which will be used if no shader path could be found which
+ * can be rendered on the device
+ */
+//void MakeErrorMaterial(VRenderPass& pass);
+
+
+/**
+ * Returns a render pass which will render a wireframe
+ */
+
+//-----------------------------------------------------------------------------
+
 /** prints an effect description to the velox console */
 void PrintEffectDescription(const VEffectDescription& effect);
 

@@ -18,6 +18,13 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
+/**
+ * Stores triples of gl enums, names and a user defined type
+ * The corresponding name, gl enum or user type can be retrieved from each of
+ * the two other types.
+ * 
+ * @author sheijk
+ */
 template<typename ModeType>
 class VModeTypeInfo
 {

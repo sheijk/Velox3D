@@ -115,6 +115,9 @@ public:
 	vuint AddState(const VState& in_State);
 	VState& AddState(VStringParam in_strName);
 
+	/** Removes all states */
+	void Clear();
+
 private:
 	typedef VPointer<VState>::SharedPtr StatePtr;
 
@@ -131,6 +134,8 @@ public:
 
 	VRenderPass& AddRenderPass();
 
+	/** Removes all render passes */
+	void Clear();
 private:
 	typedef VPointer<VRenderPass>::SharedPtr RenderPassPtr;
 
@@ -146,6 +151,9 @@ public:
 	const VShaderPath& ShaderPath(vuint in_nIndex) const;
 
 	VShaderPath& AddShaderPath();
+
+	/** Removes all paths */
+	void Clear();
 
 private:
 	typedef VPointer<VShaderPath>::SharedPtr ShaderPathPtr;

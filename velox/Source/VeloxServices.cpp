@@ -28,6 +28,9 @@
 #include "Error/VErrorConsoleListener.h"
 #include "Error/VErrorService.h"
 #include <v3d/Utils/VAllFilter.h>
+
+#include <V3d/Entity/VEntityManager.h>
+//-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d;
@@ -40,6 +43,7 @@ using namespace v3d::window;
 using namespace v3d::error;
 using v3d::utils::VAllFilter;
 using namespace v3d::property;
+using namespace v3d::entity;
 //-----------------------------------------------------------------------------
 
 class VVeloxModules : public v3d::VModuleBase
@@ -76,6 +80,9 @@ class VVeloxModules : public v3d::VModuleBase
 
 	// property
 	VPointer<VPropertyManager>::AutoPtr g_pPropertyManager;
+
+	// entity
+	VPointer<VEntityManager>::AutoPtr g_pEntityManager;
 
 public:
 	VVeloxModules()
@@ -131,10 +138,16 @@ void VVeloxModules::Initialize()
 
 	// property service
 	g_pPropertyManager.Assign(new VPropertyManager("property.manager"));
+
+	// entity service
+	g_pEntityManager.Assign(new VEntityManager());
 }
 
 void VVeloxModules::Shutdown()
 {
+	// entity
+	g_pEntityManager.Release();
+
 	// property
 	g_pPropertyManager.Release();
 

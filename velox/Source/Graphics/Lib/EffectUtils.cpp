@@ -99,6 +99,19 @@ VState BlendingState(
 }
 
 //-----------------------------------------------------------------------------
+void MakeDefaultMaterial(VRenderPass& pass)
+{
+	pass.Clear();
+}
+
+void MakeWireFrameMaterial(VRenderPass& pass)
+{
+	pass.Clear();
+
+	pass.AddState(PolygonModeState(PMLine, PMLine));
+}
+
+//-----------------------------------------------------------------------------
 
 void PrintEffectDescription(const VEffectDescription& effect)
 {

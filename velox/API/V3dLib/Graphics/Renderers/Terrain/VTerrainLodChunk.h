@@ -38,7 +38,6 @@ public:
 		vuint in_nLodCount, 
 		vfloat32 in_fMeshSize, 
 		math::VRect<vfloat32> in_TexCoords,
-		math::VRect<vfloat32> in_Area,
 		vfloat32 in_fHeightScale,
 		IVDevice& in_Device
 		);
@@ -96,7 +95,6 @@ private:
 	vuint m_nCurrentLod;
 
 	const math::VRect<vfloat32> m_TexCoords;
-	const math::VRect<vfloat32> m_Area;
 	const vfloat32 m_fHeightScale;
 
 	//const VMaterialDescription& m_Material;

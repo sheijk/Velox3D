@@ -10,7 +10,6 @@ VTerrainLodChunk::VTerrainLodChunk(
 		vuint in_nLodCount,
 		vfloat32 in_fMeshSize,
 		math::VRect<vfloat32> in_TexCoords,
-		math::VRect<vfloat32> in_Area,
 		vfloat32 in_fHeightScale,
 		IVDevice& in_Device
 		//const VMaterialDescription& in_Material
@@ -26,7 +25,6 @@ VTerrainLodChunk::VTerrainLodChunk(
 	m_hIndexBuffer(0),
 	m_hVertexBuffer(0),
 	m_TexCoords(in_TexCoords),
-	m_Area(in_Area),
 	m_fHeightScale(in_fHeightScale)
 {
 	SetLod(0);

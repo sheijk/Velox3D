@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="/*name*/"
-	ProjectGUID="{YYYYMMDD-04E0-47C5-B84B-8E9DE2BE6843}" /*replace YYYYMMDD by creation data (and remove this comment)*/
+	Name="Racer"
+	ProjectGUID="{20041011-04E0-47C5-B84B-8E9DE2BE6843}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -33,12 +33,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)//*name*/.exe"
+				OutputFile="$(OutDir)/Racer.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)//*name*/.pdb"
+				ProgramDatabaseFile="$(OutDir)/Racer.pdb"
 				SubSystem="1"
-				ImportLibrary="$(OutDir)//*name*/.lib"
+				ImportLibrary="$(OutDir)/Racer.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -81,13 +81,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)//*name*/.exe"
+				OutputFile="$(OutDir)/Racer.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)//*name*/.lib"
+				ImportLibrary="$(OutDir)/Racer.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -117,6 +117,12 @@
 		<Filter
 			Name="Implementation"
 			Filter="cpp;h">
+			<File
+				RelativePath=".\RacerMain.cpp">
+			</File>
+			<File
+				RelativePath=".\RacerUtils.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="ModuleImpl"
@@ -126,6 +132,35 @@
 			</File>
 			<File
 				RelativePath="..\..\Source\Module\VeloxModule.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Shared Entities"
+			Filter="">
+			<File
+				RelativePath=".\Shared\VEntityUpdater.h">
+			</File>
+			<File
+				RelativePath=".\Shared\VRigidBodyPart.cpp">
+			</File>
+			<File
+				RelativePath=".\Shared\VRigidBodyPart.h">
+			</File>
+			<File
+				RelativePath=".\Shared\VUpdateablePart.cpp">
+			</File>
+			<File
+				RelativePath=".\Shared\VUpdateablePart.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Graphic Entities"
+			Filter="">
+			<File
+				RelativePath=".\Graphics\VMeshPart.cpp">
+			</File>
+			<File
+				RelativePath=".\Graphics\VMeshPart.h">
 			</File>
 		</Filter>
 	</Files>

@@ -12,7 +12,7 @@
 #include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { 
-namespace vfs { class IVStream; } // forward declaration for v3d::vfs::IVStream //das haet ich jetzt nicht gedacht btw: forward dec. OF ...:)))
+namespace vfs { class IVStream; }
 namespace graphics {
 //-----------------------------------------------------------------------------
 
@@ -33,7 +33,8 @@ public:
 		vuint in_nPatchCount, 
 		IVDevice& in_Device,
 		VStringParam in_strTextureFile,
-		math::VRect<vfloat32> in_BoundingRect
+		math::VRect<vfloat32> in_BoundingRect,
+		vfloat32 m_fHeightScale
 		);
 
 	virtual ~VTerrainRenderer();
@@ -42,17 +43,19 @@ public:
 	
 	static TerrainRendererPtr CreateFromRawFile(
 		VStringParam in_strFileName, 
+		VStringParam in_strTextureFile,
 		IVDevice& in_Device,
 		math::VRect<vfloat32> in_BoundingRect,
-		VStringParam in_strTextureFile = 0
+		vfloat32 m_fHeightScale
 		);
 
 	static TerrainRendererPtr CreateFromStream(
 		vfs::IVStream& in_Stream,
+		VStringParam in_strTextureFile,
 		vuint in_nSize,
 		IVDevice& in_Device,
 		math::VRect<vfloat32> in_BoundingRect,
-		VStringParam in_strTextureFile
+		vfloat32 m_fHeightScale
 		);
 
 	static vuint SizeWithNChunks(vuint in_nChunkCount);
@@ -82,6 +85,8 @@ public:
 	vuint GetLodSteps() const;
 
 	void ApplyHeightData(const VArray2d<vfloat32, vuint>& hf);
+
+	void SetLodOptions(vfloat32 in_fMinDist, vfloat32 in_fMaxDist);
 
 private:
 	typedef VLodHeightmap::Heightmap Heightmap;
@@ -129,6 +134,9 @@ private:
 	IVDevice& m_Device;
 	VSimpleDrawList m_DrawList;
 	VSimpleDrawList m_DetailDrawList;
+
+	vfloat32 m_fMinDist;
+	vfloat32 m_fMaxDist;
 
 	vbool m_bShowWireFrame;
 

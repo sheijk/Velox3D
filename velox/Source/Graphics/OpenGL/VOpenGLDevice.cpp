@@ -253,19 +253,22 @@ void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 {
 	VMeshBase* pMesh = MakeMeshPointer(in_Mesh);
 
-	// release buffers
-	std::vector<VMeshDescription::BufferHandle> buffers = pMesh->GetBuffers();
-
-	for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
+	if( pMesh != 0 )
 	{
-		VByteBuffer* pByteBuffer = static_cast<VByteBuffer*>(buffers[bufid]);
-		m_Buffers.Delete(pByteBuffer);
+		// release buffers
+		std::vector<VMeshDescription::BufferHandle> buffers = pMesh->GetBuffers();
+
+		for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
+		{
+			VByteBuffer* pByteBuffer = static_cast<VByteBuffer*>(buffers[bufid]);
+			m_Buffers.Delete(pByteBuffer);
+		}
+
+		m_Meshes.remove(pMesh);
+
+		delete pMesh;
+		in_Mesh = 0;
 	}
-
-	m_Meshes.remove(pMesh);
-
-	delete pMesh;
-	in_Mesh = 0;
 }
 
 //-----------------------------------------------------------------------------

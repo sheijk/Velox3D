@@ -49,6 +49,7 @@ void VEntity::Deactivate()
 
 void VEntity::AddPart(const utils::VFourCC& in_Id, PartPtr in_pPart)
 {
+	// if part is not contained, yet
 	if( m_Parts.find(in_Id) == m_Parts.end() )
 	{
 		// tell all parts about new part		 

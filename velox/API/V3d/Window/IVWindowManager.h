@@ -25,7 +25,9 @@ class IVWindowManager
 public:
 	typedef VPointer<graphics::IVDevice>::SharedPtr GraphicsDevicePtr;
 	typedef void* PlatformWindowHandle;
-	typedef VPointer<IVWindow>::SharedPtr IVWindowPtr;
+	//TODO: replace IVWindowPtr by WindowPtr --sheijk
+	typedef VPointer<IVWindow>::SharedPtr IVWindowPtr; 
+	typedef IVWindowPtr WindowPtr;
 
 	/* Returns a pointer to the window created by this manager */
 	virtual IVWindowPtr QueryWindow(VStringParam in_pName) = 0;
