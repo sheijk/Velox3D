@@ -16,6 +16,9 @@
 #if !defined(VNoCheckPol_9FFE1BA4_3B69_45f7_8C74_369A85370189__INCLUDED_)
 #define VNoCheckPol_9FFE1BA4_3B69_45f7_8C74_369A85370189__INCLUDED_
 
+// Warnung fuer gekappte Template Methoden Namen ausschalten
+#pragma warning( disable : 4786)
+
 /*!
 	Checking Policy fuer SmartHandle/SmartPointers
 	fuehrt keine Ueberpruefung aus

@@ -12,6 +12,8 @@
 //
 ///////////////////////////////////////////////////////////
 
+// Warnung fuer gekappte Template Methoden Namen ausschalten
+#pragma warning( disable : 4786)
 
 #if !defined(VNullCheckPol_2D1E555E_9F72_45d4_B7F5_777D635403AD__INCLUDED_)
 #define VNullCheckPol_2D1E555E_9F72_45d4_B7F5_777D635403AD__INCLUDED_

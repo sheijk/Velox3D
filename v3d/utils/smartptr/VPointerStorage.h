@@ -16,6 +16,9 @@
 #if !defined(VPointerStorage_038F7800_9B5D_4a82_8095_2326379D0025__INCLUDED_)
 #define VPointerStorage_038F7800_9B5D_4a82_8095_2326379D0025__INCLUDED_
 
+// Warnung fuer gekappte Template Methoden Namen ausschalten
+#pragma warning( disable : 4786)
+
 /*!
 	StoragePolicy fuer SmartHandle/SmartPointer
 	speichert einen Zeiger

@@ -16,6 +16,9 @@
 #if !defined(VExclusiveOwnerPol_2846BEDC_9FF0_487a_8844_F6DD70E9050F__INCLUDED_)
 #define VExclusiveOwnerPol_2846BEDC_9FF0_487a_8844_F6DD70E9050F__INCLUDED_
 
+// Warnung fuer gekappte Template Methoden Namen ausschalten
+#pragma warning( disable : 4786)
+
 /*!
 	exclusive owner policy
 	Policy fuer VSmartHandle/Pointer, welche sich wie std::auto_ptr verhaelt
