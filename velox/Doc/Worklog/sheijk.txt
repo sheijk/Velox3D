@@ -13,6 +13,12 @@ Worklog von sheijk
 - UnitTestFramework als Service, damit andere Services benutzt werden koennen
 
 --------------------------------------------------------------------------------
+----- random thoughts:
+eine map fuer xml files? (confing.services.vfs.filename = "vfs.dll" etc.),
+dafuer ein any objekt, was strings speichert und in bel. datentypen mittels
+template member konvertiert?
+
+--------------------------------------------------------------------------------
 ----- personal todo:
 
 Kernel: Fkten virtual machen, damit der Editor einen angepasste Version ableiten
@@ -27,6 +33,9 @@ Auf die Langnese Insel ziehen
 ----- last things sheijk finished:
 
 log:
+
+01.07.2003
+Neue SmartPointer sind einsatzbereit
 
 17.06.2003
 IVStreamFactory: wird als "vfs.strfact" registriert, zum erzeugen von Streams
