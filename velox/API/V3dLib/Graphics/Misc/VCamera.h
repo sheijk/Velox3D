@@ -5,17 +5,20 @@
 #include <v3d/Math/VMatrix.h>
 #include <v3d/Math/VVector.h>
 #include <V3dLib/Graphics/Geometry/VVector3f.h>
+#include <V3dLib/Graphics/Misc/IVCamera.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
 /**
-* A first person camera implementation
+ * A first person camera implementation
  *
  * @author ins
  */
-class VCamera
+//TODO: vereinheitlichen.. + fkten eindeutige benennen 
+// (Move->MoveTo, Strafe Left oder Right?)
+class VCamera : public IVCamera
 {
 public:
 
@@ -37,16 +40,22 @@ public:
 	/** Retruns current view matrix */
 	VMatrix<vfloat32, 4,4>* GetMatrix();
 
+	// dervided from IVCamera:
+	virtual VMatrix44f& TransformMatrix();
+	virtual const VMatrix44f& TransformMatrix() const;
+	virtual Vector GetPosition() const;
+	virtual Vector GetViewDirection() const;
+	virtual Vector GetUpVector() const;
+
 private:
 
 	typedef VMatrix<vfloat32, 4,4> Matrix4f;
-	typedef VVector<vfloat32, 3> Vector;
 
-	void CalculateMatrix();
+	void CalculateMatrix() const;
 
 	const vfloat32 m_fPiDiv180;
 
-	Matrix4f m_ViewMatrix;
+	mutable Matrix4f m_ViewMatrix;
 
 	Vector m_UpVector;
 	Vector m_RightVector;

@@ -55,8 +55,23 @@ void Stretch(
 template<typename Array2d>
 void Add2dArray(Array2d& io_Array, const Array2d& in_Summand);
 
+/**
+ * Will fill the given array with perlin noise in the range of 
+ * +- 2-(1/(in_fPersistent^in_nSteps))
+ *
+ * @author sheijk
+ */
 template<typename Array2d>
-void GeneratePerlinNoisePow2(Array2d& out_Array, vuint in_nSteps);
+void GeneratePerlinNoisePow2(
+	Array2d& out_Array, 
+	vuint in_nSteps,
+	vfloat32 in_fPersistance = 2.0f);
+
+template<typename Array2d>
+void GeneratePerlinNoise(
+	Array2d& out_Array,
+	vfloat32 in_fPersistance = 2.0f
+	);
 
 /**
  * Generates a smaller version of the source array

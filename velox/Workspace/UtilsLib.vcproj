@@ -238,6 +238,9 @@
 				Name="Misc"
 				Filter="">
 				<File
+					RelativePath="..\Api\V3dLib\Graphics\Misc\IVCamera.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3dLib\Graphics\Misc\IVDrawList.h">
 				</File>
 				<File

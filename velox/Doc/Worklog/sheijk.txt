@@ -99,13 +99,17 @@ Doku:
 
 log:
 
-10.04.2004
+15.05.2004
+IVCamera + VCamera angepasst
+Terrain Renderer berechnet + zeigt passende Lod Stufen
+
+10.05.2004
 terrain: mehrere chunks koennen zu einer map zusammen gefuegt werden
 
-09.04.2004
+09.05.2004
 Terrain: wechseln zwischen lod stufen fuer chunks
 
-02.04.2004
+02.05.2004
 VBox an Geometry Generater Konvention (s.o.) angepasst
 
 01.05.2004

@@ -15,7 +15,14 @@ class VTerrainRenderer
 {
 	typedef VLodHeightmap::Heightmap Heightmap;
 	typedef VPointer<VTerrainLodChunk>::AutoPtr TerrainLodChunkPtr;
-	typedef VArray2d<TerrainLodChunkPtr, vuint> ChunkMap;
+
+	struct ChunkInfo
+	{
+		TerrainLodChunkPtr pChunk;
+		vuint lod;
+	};
+
+	typedef VArray2d<ChunkInfo, vuint> ChunkMap;
 
 	enum Constants
 	{
@@ -23,6 +30,15 @@ class VTerrainRenderer
 	};
 
 	Heightmap& GetHeightmap(vuint chunkx, vuint chunky);
+	void CalculatePatchAndOffset(
+		vuint x, vuint y,
+		vuint& patchX, vuint& patchY, vuint& offsetX, vuint& offsetY
+		);
+
+	vfloat32 GetChunkUnitWidth() const;
+	vfloat32 GetChunkUnitHeight() const;
+
+	vuint CalcDetail(vfloat32 in_fDistance) const;
 
 	const vuint m_nPatchCount;
 	/** the terrain chunks */
@@ -36,13 +52,7 @@ public:
 	vuint GetWidth();
 	vuint GetHeight();
 
-	void CalculatePatchAndOffset(
-		vuint x, vuint y,
-		vuint& patchX, vuint& patchY, vuint& offsetX, vuint& offsetY
-		);
-
 	void Set(vuint x, vuint y, vfloat32 in_fHeight);
-
 	vfloat32 Get(vuint x, vuint y);
 
 	/**
@@ -55,7 +65,7 @@ public:
 	 * Changes lods of chunks depending on distance to camera 
 	 * [todo]and culls away invisible chunks [/todo]
 	 */
-	//void Update(VCamera& cam)
+	void Update(const IVCamera& in_Camera);
 
 	void CreateMeshes();
 

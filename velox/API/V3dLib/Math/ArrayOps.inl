@@ -95,7 +95,10 @@ void Add2dArray(Array2d& io_Array, const Array2d& in_Summand)
 }
 
 template<typename Array2d>
-void GeneratePerlinNoisePow2(Array2d& out_Array, vuint in_nSteps)
+void GeneratePerlinNoisePow2(
+	Array2d& out_Array, 
+	vuint in_nSteps, 
+	vfloat32 in_fPersistence)
 {
 	Array2d temp1;
 	Array2d temp2;
@@ -122,7 +125,7 @@ void GeneratePerlinNoisePow2(Array2d& out_Array, vuint in_nSteps)
 
 		std::swap(pNoise, pStretched);
 
-		scale /= 2;
+		scale /= in_fPersistence;
 	}
 
 	// copy to dest array
@@ -132,6 +135,35 @@ void GeneratePerlinNoisePow2(Array2d& out_Array, vuint in_nSteps)
 	for(vuint x = 0; x < out_Array.GetWidth(); ++x)
 	{
 		out_Array(x,y) = (*pNoise)(x,y);
+	}
+}
+
+template<typename Array2d>
+void GeneratePerlinNoise(Array2d& io_Array, vfloat32 in_fPersistence)
+{
+	vuint height = io_Array.GetWidth();
+	vuint width = io_Array.GetHeight();
+
+	// calculate param for other noise gen func
+	vuint steps = 2;
+	vuint size = 2;
+	while(size < std::max(height, width))
+	{
+		size = 2 * size - 1;
+		steps++;
+	}
+
+	VArray2d<vfloat32, vuint> temp;
+	GeneratePerlinNoisePow2(temp, steps, in_fPersistence);
+
+	V3D_ASSERT(temp.GetWidth() >= io_Array.GetWidth());
+	V3D_ASSERT(temp.GetHeight() >= io_Array.GetHeight());
+
+    // copy data
+	for(vuint y = 0; y < height; ++y)
+	for(vuint x = 0; x < width; ++x)
+	{
+		io_Array.Set(x,y, temp(x,y));
 	}
 }
 

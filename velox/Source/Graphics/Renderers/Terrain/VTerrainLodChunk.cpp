@@ -40,7 +40,7 @@ VTerrainLodChunk::MeshHandle VTerrainLodChunk::CreateMesh(vuint in_nLod)
 
 		// create a mesh from the model	and store it
 		VMaterialDescription mat;
-		mat.frontPolyMode = VMaterialDescription::Line;
+		//mat.frontPolyMode = VMaterialDescription::Line;
 		mat.backPolyMode = VMaterialDescription::Line;
 
 		ApplyHeightValues(model, m_LodHeightmap.GetLod(in_nLod));

@@ -199,7 +199,7 @@ void VCamera::RotateZ(vfloat32 in_fAngle)
 }
 //-----------------------------------------------------------------------------
 
-void VCamera::CalculateMatrix()
+void VCamera::CalculateMatrix() const
 {
 	Vector f = m_ViewVector;
 	Normalize(f);
@@ -242,6 +242,38 @@ void VCamera::CalculateMatrix()
 
 	m_ViewMatrix = r;
 
+}
+
+VMatrix44f& VCamera::TransformMatrix()
+{
+	return *GetMatrix();
+}
+
+const VMatrix44f& VCamera::TransformMatrix() const
+{
+	CalculateMatrix();
+	return m_ViewMatrix;
+}
+
+IVCamera::Vector VCamera::GetPosition() const
+{
+	// warum auch immer m_PositionVector ein VVector3f ist... -> konvertieren
+	Vector pos;
+	pos.Set(0, m_PositionVector.x);
+	pos.Set(1, m_PositionVector.y);
+	pos.Set(2, m_PositionVector.z);
+
+	return pos;
+}
+
+IVCamera::Vector VCamera::GetViewDirection() const
+{
+	return m_ViewVector;
+}
+
+IVCamera::Vector VCamera::GetUpVector() const
+{
+	return m_UpVector;
 }
 
 //-----------------------------------------------------------------------------
