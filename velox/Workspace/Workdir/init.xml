@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- Velox3D services load info -->
+<Config>
+	<Services>
+		<Service id="example" desc="An example service" filename="ExampleService.dll"/>
+		<Service id="app" desc="The main program" filename="ExampleApp.dll"/>
+	</Services>
+	<Main id="main"/>
+</Config>

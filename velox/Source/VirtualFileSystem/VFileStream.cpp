@@ -1,0 +1,242 @@
+#include "VFileStream.h"
+//-----------------------------------------------------------------------------
+#include <v3d/Core/VException.h>
+
+#include <sstream>
+
+//-----------------------------------------------------------------------------
+using namespace std;
+
+//-----------------------------------------------------------------------------
+namespace v3d {
+namespace vfs {
+//-----------------------------------------------------------------------------
+
+/*!
+	\param strFileName name of file to be opened
+	\param nAccess write_access for writing, read_access for reading
+	\param nCreation createion mode. createnew, createalways, openexisting, openalways, truncate
+
+	Creates the stream and opens a file
+*/
+VFileStream::VFileStream(
+	string in_strFileName, 
+	vuint in_nAccess, 
+	vuint in_nCreation )
+{
+	m_hFile = INVALID_HANDLE_VALUE;
+	m_nAccessMode = 0;
+	m_nCreationMode = 0;
+	m_nFilePos = 0;
+	m_bConnected = false;
+	m_strFileName = in_strFileName;
+		
+	//TODO: vfs exception klasse benutzen
+	if( in_nAccess == 0 ) V3D_THROW( VException, "invalid file open mode" );
+
+	// set acces flags
+	if( in_nAccess & ReadAccess ) m_nAccessMode |= GENERIC_READ;
+	if( in_nAccess & WriteAccess ) m_nAccessMode |= GENERIC_WRITE;
+
+	// set creation mode
+	switch( in_nCreation )
+	{
+	case CreateNew:
+		m_nCreationMode = CREATE_NEW;
+		break;
+	case CreateAlways:
+		m_nCreationMode = CREATE_ALWAYS;
+		break;
+	case OpenExisting:
+		m_nCreationMode = OPEN_EXISTING;
+		break;
+	case OpenAlways:
+		m_nCreationMode = OPEN_ALWAYS;
+		break;
+	case Truncate:
+		m_nCreationMode = TRUNCATE_EXISTING;
+		break;
+	default:
+		ostringstream str;
+		str << "invalid file creation mode for file \"";
+		str << in_strFileName;
+		str << "\" :";
+		str << in_nCreation << endl;
+
+		//TODO: durch vfs exception ersetzen
+		V3D_THROW( VException, str.str() )
+	}
+
+	// create legal op class
+	vbool bReadAccess = in_nAccess & ReadAccess;
+	vbool bWriteAccess = in_nAccess & WriteAccess;
+
+	m_pLegalOps.Reset(new VLegalOperations(
+		bReadAccess, bWriteAccess, true, true));
+
+	// open file
+	Connect();
+
+	DWORD filesize = GetFileSize( m_hFile, 0 );
+}
+
+/*!
+	automatically closes file if opened
+*/
+VFileStream::~VFileStream()
+{
+	// no exception should escape a destructor
+	try
+	{
+		Close();
+	}
+	catch(VException e)
+	{
+	}
+}
+
+
+void VFileStream::Read(void* out_pDest, ByteCount in_pBytesToRead)
+{
+	DWORD dwBytesRead = 0;
+
+	// if file not opened, fail
+	if( !IsConnected() || m_hFile == INVALID_HANDLE_VALUE ) 
+	{
+		V3D_THROW(VException, "file not opened");
+	}
+
+	// read data
+	ReadFile( m_hFile, out_pDest, in_pBytesToRead, &dwBytesRead, 0 );
+
+	if( dwBytesRead != in_pBytesToRead )
+	{
+		V3D_THROW(VException, "read error");
+	}
+}
+
+
+void VFileStream::Write(void* in_pSource, ByteCount in_nBytesToWrite)
+{
+	DWORD dwBytesWritten = 0;
+
+	WriteFile( m_hFile, in_pSource, in_nBytesToWrite, &dwBytesWritten, 0 );
+
+	// if write failed
+	if( dwBytesWritten != in_nBytesToWrite )
+	{
+		//TODO: vfs exc.
+		V3D_THROW(VException, "could not write");
+	}
+}
+
+void VFileStream::SetPos(Anchor in_Anchor, ByteCount in_nDistance)
+{	
+	DWORD dwMethod = 0;
+
+	switch( in_Anchor )
+	{
+	case Begin:
+		dwMethod = FILE_BEGIN;
+		break;
+	case End:
+		dwMethod = FILE_END;
+		break;
+	case CurrentPos:
+		dwMethod = FILE_CURRENT;
+		break;
+	default:
+		return;
+	}
+
+	SetFilePointer( m_hFile, in_nDistance, 0, dwMethod );
+}
+
+IVStream::StreamPos VFileStream::GetPos() const
+{
+	return SetFilePointer(m_hFile, 0, 0, FILE_CURRENT);
+}
+
+IVStream::LegalOpsPtr VFileStream::GetLegalOps() const
+{
+	//TODO: schoener machen :)
+	return const_cast<VPointer<VLegalOperations>::AutoPtr*>(&m_pLegalOps)->Get();
+}
+
+void VFileStream::Close()
+{
+	// close file
+	Disconnect();
+
+	// forget which file we opened
+	m_strFileName.clear();
+	m_nAccessMode = 0;
+	m_nCreationMode = 0;
+	m_nFilePos = 0;
+	m_bConnected = true;
+}
+
+void VFileStream::Disconnect()
+{
+	if( IsConnected() )
+	{
+		// if a file is opened
+		if( m_hFile != INVALID_HANDLE_VALUE )
+		{
+			// save file position
+			m_nFilePos = GetPos();
+
+			// close it
+			if( !CloseHandle( m_hFile ) )
+			{
+				// throw error
+				//TODO: vfs exc.
+				V3D_THROW(VException, "could not close file");
+			}
+
+			m_hFile = INVALID_HANDLE_VALUE;
+		}
+	}
+
+	m_bConnected = false;
+}
+
+void VFileStream::Connect()
+{
+	if( !m_bConnected )
+	{
+		// open the file
+		m_hFile = CreateFile( 
+			m_strFileName.c_str(), 
+			m_nAccessMode,
+			0, 
+			0, 
+			m_nCreationMode, 
+			FILE_ATTRIBUTE_NORMAL, 
+			0 );
+
+		// if file could not be opened
+		if( m_hFile == INVALID_HANDLE_VALUE )
+		{
+			// throw error
+			//TODO: vfs exc.
+			V3D_THROW( VException, 
+				string("could not open file: \"") 
+				+ m_strFileName + string( "\"" ) );
+		}	
+
+		SetFilePointer( m_hFile, m_nFilePos, 0, FILE_BEGIN );
+	}
+
+	m_bConnected = true;
+}
+
+vbool VFileStream::IsConnected() const
+{
+	return m_bConnected;
+}
+
+//-----------------------------------------------------------------------------
+} // namespace vfs
+} // namespace v3d
+//-----------------------------------------------------------------------------

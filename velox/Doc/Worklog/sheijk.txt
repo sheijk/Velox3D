@@ -10,6 +10,7 @@ Worklog von sheijk
 - vfs service
 - velox design
 - netzwerk + scripting planen
+- UnitTestFramework als Service, damit andere Services benutzt werden koennen
 
 --------------------------------------------------------------------------------
 ----- personal todo:
@@ -17,6 +18,7 @@ Worklog von sheijk
 todo:
 <v3d/Core/VCoreLib.h> in jedem Header includen
 Vfs als Service
+UnitTests als Service
 Netzwerk, Scripting
 Welt erobern
 
@@ -24,6 +26,15 @@ Welt erobern
 ----- last things sheijk finished:
 
 log:
+
+27.05.2003
+VFileStream und VLegalOperations in der Implementation des VFS, koennen als vorlauefiger
+VFS Ersatz benutzt werden (ins eigene Projekt kopieren)
+Kernel geaendert: in der xml datei steht jetzt nur noch, wie die main app heisst, sie muss
+zusaetzlich als service geladen werden. Dadurch kann beeinflusst werden wann die Main App 
+geladen wird (siehe Workspace/Workdir/init.xml)
+Projektfiles geaendert, neues Arbeitsverzeichnis, uebersichtlichere Ausgabe Verzeichnisse
+und Verwendung von Project File Makros
 
 25.05.2003
 Den Error Service "verhunzt", ein paar Kommentare im Source verteilt

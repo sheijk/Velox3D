@@ -13,8 +13,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Lokal/CoreLibDebug"
-			IntermediateDirectory="Lokal/CoreLibDebug"
+			OutputDirectory="Lokal/$(ConfigurationName)"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
@@ -56,8 +56,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Lokal/CoreLibRelease"
-			IntermediateDirectory="Lokal/CoreLibRelease"
+			OutputDirectory="Lokal/$(ConfigurationName)"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool

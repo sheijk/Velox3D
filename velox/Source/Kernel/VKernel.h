@@ -34,7 +34,8 @@ private:
 	typedef std::list<ServicePointer> ServiceList;
 
 	ServiceList m_Services;
-	ServicePointer m_App;
+	std::string m_strAppName;
+//	ServicePointer m_App;
 public:
 	VKernel();
 	virtual ~VKernel();

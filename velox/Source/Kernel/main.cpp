@@ -18,17 +18,32 @@ VPointer<VKernel>::AutoPtr g_pKernel;
 /** the main function */
 int main(int argv, char* argc[])
 {
+	char* pcXmlFileName = 0;
+
 	// create the kernel
 	g_pKernel.Reset(new VKernel());
+
+	// get name of xml config file
+
+	if( argv > 1 )
+	{
+		pcXmlFileName = argc[1];
+	}
+	else
+	{
+		pcXmlFileName = "init.xml";
+	}
+
+	cout << "Using xml config file <" << pcXmlFileName << ">\n" << endl;
 
 	try
 	{
 		// load and init
-		g_pKernel->ProcessIniFile("init.xml");
+		g_pKernel->ProcessIniFile(pcXmlFileName);
 	}
 	catch(VException exc)
 	{
-		cout << "Exception while processing init.xml: "
+		cout << "Exception while processing \"" << pcXmlFileName << "\":"
 			<< "\"" << exc.GetErrorString() << "\""
 			<< " in file \"" << exc.GetErrorFile() << "\""
 			<< ", line \"" << exc.GetErrorLine() << "\""

@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="ExampleService"
 	ProjectGUID="{586E10B2-24CB-47C7-A973-CDCD6D563659}"
+	RootNamespace="ExampleService"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -12,8 +13,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Lokal/BinDebug"
-			IntermediateDirectory="Lokal/ExampleAppDebug"
+			OutputDirectory="Lokal/$(ConfigurationName)"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -63,8 +64,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Lokal/BinRelease"
-			IntermediateDirectory="Lokal/ExampleAppRelease"
+			OutputDirectory="Lokal/$(ConfigurationName)"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool

@@ -12,8 +12,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="Lokal/BinDebug"
-			IntermediateDirectory="Lokal/ExampleAppDebug"
+			OutputDirectory="Lokal/$(ConfigurationName)"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
@@ -63,8 +63,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Lokal/BinRelease"
-			IntermediateDirectory="Lokal/ExampleAppRelease"
+			OutputDirectory="Lokal/$(ConfigurationName)"
+			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool

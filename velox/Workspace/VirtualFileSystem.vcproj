@@ -2,9 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="UnitTests"
-	ProjectGUID="{9794A618-FFF9-4292-BCFE-0BEC25A77F21}"
-	RootNamespace="UnitTests"
+	Name="VirtualFileSystem"
+	ProjectGUID="{C2E15749-4341-4E4B-9019-07F8B0522B91}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -15,16 +14,16 @@
 			Name="Debug|Win32"
 			OutputDirectory="Lokal/$(ConfigurationName)"
 			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API/"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="../API"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;VIRTUALFILESYSTEM_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="5"
+				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -34,11 +33,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/UnitTests.exe"
+				OutputFile="$(OutDir)/VirtualFileSystem.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/UnitTests.pdb"
-				SubSystem="1"
+				ProgramDatabaseFile="$(OutDir)/VirtualFileSystem.pdb"
+				SubSystem="2"
+				ImportLibrary="$(OutDir)/VirtualFileSystem.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -65,13 +65,13 @@
 			Name="Release|Win32"
 			OutputDirectory="Lokal/$(ConfigurationName)"
 			IntermediateDirectory="Lokal/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API/"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
-				RuntimeLibrary="4"
+				AdditionalIncludeDirectories="../API"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;VIRTUALFILESYSTEM_EXPORTS"
+				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -81,12 +81,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/UnitTests.exe"
+				OutputFile="$(OutDir)/VirtualFileSystem.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)/VirtualFileSystem.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -114,52 +115,39 @@
 	</References>
 	<Files>
 		<Filter
-			Name="FrameWork"
+			Name="Interface"
 			Filter="">
 			<File
-				RelativePath="..\Source\UnitTests\IVUnitTest.cpp">
+				RelativePath="..\Api\V3d\Vfs\IVAccessRights.h">
 			</File>
 			<File
-				RelativePath="..\Source\UnitTests\IVUnitTest.h">
+				RelativePath="..\Api\V3d\Vfs\IVFileSystem.h">
 			</File>
 			<File
-				RelativePath="..\Source\UnitTests\VCommonTestBase.cpp">
+				RelativePath="..\Api\V3d\Vfs\IVLegalOperations.h">
 			</File>
 			<File
-				RelativePath="..\Source\UnitTests\VCommonTestBase.h">
+				RelativePath="..\Api\V3d\Vfs\IVOfflineStream.h">
 			</File>
 			<File
-				RelativePath="..\Source\UnitTests\VTestManager.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VTestManager.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VTestSuite.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VTestSuite.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VUnitTestExample.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VUnitTestExample.h">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VUnitTestException.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\UnitTests\VUnitTestException.h">
+				RelativePath="..\Api\V3d\Vfs\IVStream.h">
 			</File>
 		</Filter>
 		<Filter
-			Name="Tests"
+			Name="Implementation"
 			Filter="">
-			<Filter
-				Name="Xml"
-				Filter="">
-			</Filter>
+			<File
+				RelativePath="..\Source\VirtualFileSystem\VFileStream.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\VirtualFileSystem\VFileStream.h">
+			</File>
+			<File
+				RelativePath="..\Source\VirtualFileSystem\VLegalOperations.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\VirtualFileSystem\VLegalOperations.h">
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

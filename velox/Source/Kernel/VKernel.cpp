@@ -148,11 +148,19 @@ void VKernel::ParseFile(const string &in_strFileName)
 
 	cout << "main service: \"" << pMainNode->Value() << "\"" << endl;
 
+	// get name of main method
+	m_strAppName = pMainNode->Attribute("id");
+
+	if( m_strAppName.length() == 0 )
+	{
+		V3D_THROW(VKernelException, "main app id is invalid");
+	}
+
 	// parse main service info
-	serviceInfo.Parse(pMainNode);
+	//serviceInfo.Parse(pMainNode);
 
 	// create app service DLL info
-	m_App.Reset(new VServiceProxy(serviceInfo.strFileName));
+	//m_App.Reset(new VServiceProxy(serviceInfo.strFileName));
 }
 
 /**
@@ -176,17 +184,14 @@ void VKernel::LoadServices()
 	}
 
 	// load the application
-	m_App->Initialize(VObjectRegistry::GetInstance());
+	//m_App->Initialize(VObjectRegistry::GetInstance());
 }
 
 void VKernel::DelegateControl()
 {
 	// get application service
-	VObjectKey key("main");
+	VObjectKey key(m_strAppName);
 	IVApplication* pApp = QueryObject<IVApplication>(key);
-
-//	VObjectKey servKey("exService");
-//	IVExampleService* pServ = QueryObject<IVExampleService>(servKey);
 
 	// start it
 	if( 0 != pApp )
@@ -204,7 +209,7 @@ void VKernel::DelegateControl()
 void VKernel::Shutdown()
 {
 	// deinitialize app
-	m_App->Shutdown();	
+	//m_App->Shutdown();	
 
 	// deinitialize all services
 	ServiceList::iterator serviceIter = m_Services.begin();
