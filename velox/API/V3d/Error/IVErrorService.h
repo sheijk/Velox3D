@@ -2,6 +2,8 @@
 #define V3D_IVERRORSERVICE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VNamedObject.h>
+#include <v3d/Error/IVLogDevice.h>
+#include <v3d/Error/VLogModeEnum.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -20,22 +22,18 @@ public:
 	{
 	}
 
-	enum LogMode
-	{
-		OK,
-		Warning,
-		Error
-	};
+	virtual vbool RegisterLogDevice( IVLogDevice* in_pLogDevice ) = 0;
+	virtual vbool UnregisterLogDevice( IVLogDevice* in_pLogDevice ) = ;
 
-	virtual void Message( const std::string& in_Message, LogMode in_LogMode = OK ) = 0;
+	virtual void Message( const VString& in_Message, LogMode in_LogMode = OK ) = 0;
 	
 	virtual void BeginProgressbar() = 0;
 	virtual void UpdateProgressbar( const vfloat32 in_fIndex ) = 0;
 	virtual void EndProgressbar() = 0;
 
-	virtual void CreateState( const std::string& in_Name, const std::string& in_Text ) = 0;
-	virtual void UpdateState( const std::string& in_Name, const std::string& in_State ) = 0;
-	virtual void DeleteState( const std::string& in_Name ) = 0;
+	virtual void CreateState( const VString& in_Name, const VString& in_Text ) = 0;
+	virtual void UpdateState( const VString& in_Name, const VString& in_State ) = 0;
+	virtual void DeleteState( const VString& in_Name ) = 0;
 };
 
 //-----------------------------------------------------------------------------

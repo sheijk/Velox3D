@@ -1,6 +1,6 @@
 #include "VDebugMonitor.h"
 #include "VDebugMonitorEnum.h"
-//#include <Core/VBuild.h>
+
 namespace v3d {
 	namespace error {
 
@@ -25,7 +25,7 @@ VDebugMonitor::~VDebugMonitor()
 	m_bIsAvaible = false;
 }
 
-void VDebugMonitor::OnMessage( const std::string& Message, const LogMode LogMode )
+void VDebugMonitor::OnMessage( const VString& Message, const LogMode LogMode )
 {
 	// Prepare struct
 	switch (LogMode)
@@ -44,7 +44,7 @@ void VDebugMonitor::OnMessage( const std::string& Message, const LogMode LogMode
 		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
 }
 
-void VDebugMonitor::OnStateCreate( const std::string& in_Name, const std::string& in_Text )
+void VDebugMonitor::OnStateCreate( const VString& in_Name, const VString& in_Text )
 {
 	// First send a StateAdd message with the state name
 	m_MyCopyData.dwData = StateCreate;
@@ -63,7 +63,7 @@ void VDebugMonitor::OnStateCreate( const std::string& in_Name, const std::string
 		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
 }
 
-void VDebugMonitor::OnStateUpdate( const std::string& in_Name, const std::string& in_Text )
+void VDebugMonitor::OnStateUpdate( const VString& in_Name, const VString& in_Text )
 {
 	m_MyCopyData.dwData = StateUpdate;
 	m_MyCopyData.cbData = in_Name.length()+1;
@@ -80,7 +80,7 @@ void VDebugMonitor::OnStateUpdate( const std::string& in_Name, const std::string
 		SendMessage( m_DebugMonitorHWND, WM_COPYDATA, (UINT) NULL, (long) &m_MyCopyData) ;
 }
 
-void VDebugMonitor::OnStateDelete( const std::string& in_Name )
+void VDebugMonitor::OnStateDelete( const VString& in_Name )
 {
 	m_MyCopyData.dwData = StateDelete;
 	m_MyCopyData.cbData = in_Name.length()+1;

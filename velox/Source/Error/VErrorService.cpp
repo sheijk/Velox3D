@@ -1,5 +1,5 @@
 #include "VErrorService.h"
-#include "IVLogDevice.h"
+
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -40,7 +40,7 @@ vbool VErrorService::RegisterLogDevice( IVLogDevice* in_LogDevice )
 	return true;
 }
 
-void VErrorService::Message( const std::string& in_Message, LogMode in_LogMode )
+void VErrorService::Message( const VString& in_Message, LogMode in_LogMode )
 {
 	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
 		(*m_Iter)->OnMessage( in_Message, static_cast<v3d::error::LogMode>(in_LogMode) );
@@ -64,19 +64,19 @@ void VErrorService::EndProgressbar()
 		(*m_Iter)->OnProgressbarEnd();
 }
 
-void VErrorService::CreateState( const std::string& in_Name, const std::string& in_Text )
+void VErrorService::CreateState( const VString& in_Name, const VString& in_Text )
 {
 	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
 		(*m_Iter)->OnStateCreate(in_Name, in_Text);
 }
 
-void VErrorService::UpdateState( const std::string& in_Name, const std::string& in_Text )
+void VErrorService::UpdateState( const VString& in_Name, const VString& in_Text )
 {
 	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
 		(*m_Iter)->OnStateUpdate(in_Name, in_Text);
 }
 
-void VErrorService::DeleteState( const std::string& in_Name )
+void VErrorService::DeleteState( const VString& in_Name )
 {
 	for ( m_Iter = m_LogDevices.begin(); m_Iter != m_LogDevices.end(); m_Iter++)
 		(*m_Iter)->OnStateDelete(in_Name);
