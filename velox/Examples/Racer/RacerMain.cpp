@@ -14,9 +14,9 @@
 #include <V3d/Image.h>
 #include <V3d/Entity.h>
 
-#include "Graphics/VMeshPart.h"
-#include "Shared/VUpdateablePart.h"
-#include "Graphics/VCameraPosPart.h"
+#include "../CommonSource/Graphics/VMeshPart.h"
+#include "../CommonSource/Shared/VUpdateablePart.h"
+#include "../CommonSource/Graphics/VCameraPosPart.h"
 
 using namespace v3d;
 using namespace window;
