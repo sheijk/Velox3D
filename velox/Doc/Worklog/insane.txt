@@ -28,10 +28,14 @@ high:
 - build in vfs saving for image saving
 
 - reorganizate VVector to use VVectorOps
+- ODE indepenadnt frame movement
 
 //-----------------------------------------------------------------------------
 
 Done List:
+
+22.01.05
+- moved VVector<Scalar, Dimension> template functions to VVectorOps.h
 
 21.01.05
 - implemented VVectorBase utility class

@@ -5,7 +5,7 @@
 #include <v3dLib/Graphics.h>
 #include <v3dLib/Utils/VStreamReader.h>
 #include <v3dLib/Graphics/Importer/VQ3BspImporter.h>
-#include <V3d/Math/VVector.h>
+#include <V3dLib/Math.h>
 #include <list>
 #include <vector>
 
