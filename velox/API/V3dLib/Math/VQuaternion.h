@@ -31,7 +31,8 @@ public:
 
 	Scalar& operator[] (const vuint8 index)
 	{
-		return m_Data.mData[index]; //gmtl throws exception here
+		//gmtl throws exception here if out of bounds
+		return m_Data.mData[index]; 
 	}
 
 	VQuaternion()

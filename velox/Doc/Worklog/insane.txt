@@ -2,23 +2,6 @@ Worklog von ins:
 
 //notes to ins here...
 
->>
-hast aber ordentlich platz fuer notizen gelassen ;) -- sheijk
-hehe :) -- ins
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 -------------------------------------------------------------------------------
 Personal Notes:
@@ -40,29 +23,19 @@ medium:
 
 high:
 
--TODO check external libs for correct debug information
--TODO rewrite Velocity2 into Hinge2 instead of Joint!
-
+- TODO check external libs for correct debug information
+- TODO rewrite Velocity2 into Hinge2 instead of Joint!
 - build in vfs saving for image saving
 
--------------------------------------------------------------------------------
-Questions:
--------------------------------------------------------------------------------
+- reorganizate VVector to use VVectorOps
 
-Font Design:
-
-req
-1. device independant font rendering
-2. support for font regions (with clipping to correct size to match region)
-3. coloring support for font
-
--additional:
-4. additional font management for multiple font usage inbetween a scene
-5. font delay manager for drawing in advanced modes (text stays for a given period of time e.g.)
-
-
+//-----------------------------------------------------------------------------
 
 Done List:
+
+21.01.05
+- implemented VVectorBase utility class
+- added IsNormalized to VVector.h
 
 07.01 - 9.01.05
 - fixed a compiler error im gmtl log (atan to aTan)
