@@ -13,6 +13,10 @@
 
 class VObjRegTest : public VCommonTestBase  
 {
+private:
+	void ObjRegTest();
+	void NameGeneratorTest();
+	
 public:
 	VObjRegTest();
 	virtual ~VObjRegTest();

@@ -22,7 +22,7 @@ public:
 	virtual ~VObjectKey();
 
 	/** convert to string */
-	const std::string& toString() const;
+	const std::string& ToString() const;
 
 	bool operator<(const VObjectKey& in_Other) const
 	{

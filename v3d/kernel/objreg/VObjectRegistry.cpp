@@ -1,9 +1,13 @@
 #include "VObjectRegistry.h"
 //------------------------------------------------------------------------
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 
 using std::cout;
 using std::endl;
+//using std::strstream;
+using std::ostringstream;
 
 using std::pair;
 
@@ -11,7 +15,9 @@ VObjectRegistry* VObjectRegistry::m_pInstance = 0;
 
 VObjectRegistry::VObjectRegistry()
 {
-}
+	m_nLastKeyNum = 0;
+	m_strLastGeneratedName = "0";
+}	
 
 VObjectRegistry::~VObjectRegistry()
 {
@@ -84,12 +90,40 @@ VNamedObject& VObjectRegistry::GetObject(const VObjectKey& in_Key)
 
 VObjectKey VObjectRegistry::GetKey(const VNamedObject& obj)
 {
-	return VObjectKey("invalid");
+	// find the object
+	ObjectKeyMap::iterator iter = m_Objects.begin();
+
+	for(; iter != m_Objects.end(); ++iter)
+	{
+		// abort of object has been found
+		if( &obj == iter->second ) break;
+	}
+
+	// throw error if object could not be found
+	if( m_Objects.end() == iter ) 
+	{
+		V3D_THROW(VObjectRegistryException, "object could not be found");
+	}
+
+	// return it's key
+	return iter->first;
 }
 
 VObjectKey VObjectRegistry::GenerateKey()
 {
-	return VObjectKey("lalala");
+	ostringstream str;
+
+	// generate an usused key
+	while( m_Objects.find(m_strLastGeneratedName) != m_Objects.end() )
+	{
+		m_nLastKeyNum++;
+		
+		str << std::hex << m_nLastKeyNum;
+
+		m_strLastGeneratedName = str.str();
+	}
+
+	return VObjectKey(m_strLastGeneratedName);
 }
 
 

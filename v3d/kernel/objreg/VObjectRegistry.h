@@ -38,6 +38,8 @@ private:
 	typedef std::map<VObjectKey, VNamedObject*> ObjectKeyMap;
 
 	ObjectKeyMap m_Objects;
+	std::string m_strLastGeneratedName;
+	vint64 m_nLastKeyNum;
 public:
 	/** in case a smart pointer might be used in future */
 	typedef VObjectRegistry* Pointer;

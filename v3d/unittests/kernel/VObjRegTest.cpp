@@ -1,6 +1,9 @@
 #include "VObjRegTest.h"
 //-----------------------------------------------------------------------
 #include <kernel/objreg/VObjectRegistry.h>
+#include <iostream>
+
+using std::cout;
 
 V3D_REGISTER_UNIT_TEST(VObjRegTest);
 
@@ -28,7 +31,7 @@ public:
 	}
 };
 
-void VObjRegTest::ExecuteTest()
+void VObjRegTest::ObjRegTest()
 {
 	// create an object
 	VNamedObject* pObj = new VNamedObject(0);
@@ -40,6 +43,15 @@ void VObjRegTest::ExecuteTest()
 			"VObjectRegistry::GetObject returned wrong value", 
 			VError);
 	}
+
+	// check whether it's key can be retrieved
+	if( VObjectRegistry::GetInstance()->GetKey(*pObj).ToString() 
+		!= pObj->GetKey().ToString() )
+	{
+		V3D_THROW_UNITTEST_ERROR(
+			"VObjectRegistry::GetKey returned wrong key for object",
+			VError);
+		}
 
 	// delete it
 	delete pObj;
@@ -81,4 +93,61 @@ void VObjRegTest::ExecuteTest()
 		V3D_THROW_UNITTEST_ERROR(
 			"QueryObject returned illegal object", VError);
 	}
+}
+
+void VObjRegTest::NameGeneratorTest()
+{
+	// try to create a named object
+	try 
+	{
+		VNamedObject theObj("testobj", 0);
+	} 
+	catch( VObjectRegistryException exc )
+	{
+		V3D_THROW_UNITTEST_ERROR(
+			"VNamedObject(string, ...) could not be created", VError);
+	}
+
+	const int cnObjCount = 12;
+	VNamedObject* pObjects[cnObjCount];
+	VObjectKey* pKeys[cnObjCount];
+	int i = 0, n = 0;
+
+	for(i = 0; i < cnObjCount; ++i)
+	{
+		pKeys[i] = new VObjectKey(VObjectRegistry::GetInstance()->GenerateKey());
+
+		// check if key already exists
+		for(n = 0; n < i; ++n)
+		{
+			if( pKeys[i]->ToString() == pKeys[n]->ToString() )
+			{
+				V3D_THROW_UNITTEST_ERROR(
+					"VObjectRegistry.GenerateKey returned a key already in use",
+					VError);
+			}
+		}
+
+		cout << pKeys[i]->ToString() << std::endl;
+
+		try
+		{
+			pObjects[i] = new VNamedObject(pKeys[i]->ToString(), 0);
+		}
+		catch( VObjectRegistryException e )
+		{
+		}
+	}
+
+	for(i = 0; i < cnObjCount; ++i)
+	{
+		delete pKeys[i];
+		delete pObjects[i];
+	}
+}
+
+void VObjRegTest::ExecuteTest()
+{
+	NameGeneratorTest();
+	ObjRegTest();
 }

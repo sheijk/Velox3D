@@ -2,6 +2,17 @@
 //------------------------------------------------------------------------
 #include "VObjectRegistry.h"
 
+VNamedObject::VNamedObject(
+	const std::string &in_strName, 
+	const VNamedObject *in_Parent)
+	:
+	// save name
+	m_Key(in_strName)
+{
+	// register object
+	VObjectRegistry::GetInstance()->RegisterObject(m_Key, *this);
+}
+
 VNamedObject::VNamedObject(const VNamedObject *in_Parent) :
 	// get a name
 	m_Key(VObjectRegistry::GetInstance()->GenerateKey())
@@ -20,3 +31,4 @@ const VObjectKey& VNamedObject::GetKey() const
 {
 	return m_Key;
 }
+

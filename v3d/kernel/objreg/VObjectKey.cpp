@@ -14,7 +14,7 @@ VObjectKey::~VObjectKey()
 {
 }
 
-const std::string& VObjectKey::toString() const
+const std::string& VObjectKey::ToString() const
 {
 	return m_strName;
 }
