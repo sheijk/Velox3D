@@ -23,6 +23,9 @@ TODO List:
 -------------------------------------------------------------------------------
 Done List:
 
+11.04.04
+- added vertex buffer objects
+
 09.04.04
 Du hast die VCamera.MoveForward Methode geaendert.. (hab ich in den letzten
 30 min rausgefunden *grml* -- sheijk

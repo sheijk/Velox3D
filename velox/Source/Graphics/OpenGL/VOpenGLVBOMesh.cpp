@@ -6,6 +6,8 @@
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
+//disable cast warning
+#pragma warning (disable : 4312)
 
 VOpenGLVBOMesh::HandleVBOMap VOpenGLVBOMesh::s_VBOMap;
 
@@ -149,6 +151,7 @@ GLuint VOpenGLVBOMesh::GetVertexBuffer(VMeshDescription::ByteBufferHandle in_hHa
 	}
 
 }
+#pragma warning (default : 4312)
 
 //-----------------------------------------------------------------------------
 } //namespace graphics

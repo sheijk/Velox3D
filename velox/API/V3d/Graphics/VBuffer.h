@@ -29,6 +29,7 @@ struct IVBuffer : public VBufferBase
 	 * aligned linearly starting at this address (like an array)
 	 */
 	virtual T* GetDataAddress() = 0;
+	virtual vuint GetSize() const = 0;
 };
 
 /**
