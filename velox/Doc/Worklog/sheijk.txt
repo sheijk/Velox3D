@@ -25,6 +25,10 @@ Welt erobern
 
 log:
 
+19.05.2003
+XML Service Header ins CVS committet, Implementation fehlt noch, kann daher noch
+nicht benutzt werden
+
 17.05.2003
 UnitTest Framework ins neue CVS portiert
 
