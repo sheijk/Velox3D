@@ -38,7 +38,7 @@ public:
 
 	T GetTarget();
 	void SetTarget(T in_NewTarget);
-	void Clone(SmartHandleBaseType& in_Other);
+	void Clone(const SmartHandleBaseType& in_Other);
 	void ReleaseTarget();
 
 private:

@@ -46,7 +46,7 @@ VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy>
 VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>
-	::VSmartPointer(PtrType& in_Other)
+	::VSmartPointer(const PtrType& in_Other)
 {
 	*this = in_Other;
 }
@@ -60,7 +60,7 @@ void VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy> 
 void VSmartPointer<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>
-	::operator=(PtrType& in_Other)
+	::operator=(const PtrType& in_Other)
 {
 	m_Handle.Clone(in_Other.m_Handle);
 }

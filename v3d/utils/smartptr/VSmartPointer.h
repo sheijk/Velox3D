@@ -38,11 +38,11 @@ public:
 
 	VSmartPointer();
 	VSmartPointer(T* in_pTarget);
-	VSmartPointer(PtrType& in_Other);
+	VSmartPointer(const PtrType& in_Other);
 	~VSmartPointer();
 
 	void operator=(T* in_pTarget);
-	void operator=(PtrType& in_Other);
+	void operator=(const PtrType& in_Other);
 	void Release();
 	void Reset(T* in_pNewTarget);
 	T* Get();

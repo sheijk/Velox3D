@@ -52,7 +52,7 @@ void VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy> 
 void VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>
-	::Clone(SmartHandleBaseType& in_Other)
+	::Clone(const SmartHandleBaseType& in_Other)
 {
 	// clone owner strategy object
 	m_Owner.Clone(in_Other.m_Owner);

@@ -3,9 +3,13 @@
 //------------------------------------------------------------------------
 #include <Core/VCoreLib.h>
 
-//#include "VServiceProxy.h"
+#include <Utils/SmartPtr/VGuards.h>
+
+#include "VKernelException.h"
+#include "VServiceProxy.h"
 
 #include <string>
+#include <list>
 
 /**
  * The kernel
@@ -14,13 +18,16 @@
 class VKernel
 {
 private:
-	void LoadDLLs();
 	void ParseFile(const std::string& in_strFileName);
 	void GenerateInitSequence();
 	void LoadServices();
 	void DelegateControl();
 	void Shutdown();
 
+	typedef VPointer<VServiceProxy>::SharedPtr ServicePointer;
+	typedef std::list<ServicePointer> ServiceList;
+
+	ServiceList m_Services;
 public:
 	VKernel();
 	virtual ~VKernel();

@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 #include <Utils/smartptr/VGuards.h>
 #include <Error/VException.h>
+#include <Kernel/ObjReg/VObjectRegistry.h>
 
 #include "tinyxml/tinyxml.h"
 
@@ -11,18 +12,6 @@ using std::string;
 using std::cout;
 using std::endl;
 //-----------------------------------------------------------------------------
-
-class VKernelException : public VException
-{
-public:
-	VKernelException(
-		std::string in_Error, 
-		std::string in_File, 
-		int in_nLine)
-		: VException(in_Error, in_File, in_nLine)
-	{
-	}
-};
 
 //-----------------------------------------------------------------------------
 
@@ -42,9 +31,6 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 {
 	// parse file
 	ParseFile(in_strFileName);
-
-	// load dlls
-	LoadDLLs();
 
 	// generate init sequence
 	GenerateInitSequence();
@@ -70,70 +56,113 @@ struct VServiceInfo
 	string strFileName;
 };
 
+/**
+ * Parses the xml file and creates a list of service info entries
+ */
 void VKernel::ParseFile(const string &in_strFileName)
 {
+	TiXmlElement* pRootNode = 0;
+	TiXmlElement* pServiceSectionNode = 0;
+	TiXmlElement* pServiceNode = 0;
+	TiXmlElement* pMainNode = 0;
+	VServiceInfo serviceInfo;
+	
 	// load xml file
 	TiXmlDocument iniDoc(in_strFileName.c_str());
 	iniDoc.LoadFile();
 
+	if( iniDoc.Error() )
+	{
+		V3D_THROW(VKernelException, 
+			string("could not load file <") + in_strFileName + string(">"));
+	}
 
-	// get "Config Section
-	TiXmlElement* pRoot = iniDoc.RootElement();
+	// remove all services
+	m_Services.clear();
 
-	if( pRoot == 0 ) V3D_THROW(VKernelException, "no root element");
+	// get "Config" Section
+	pRootNode = iniDoc.RootElement();
 
-	cout << "pRoot: " << pRoot->Value() << endl;
+	if( pRootNode == 0 ) V3D_THROW(VKernelException, "no root element");
+
+	cout << "pRootNode: " << pRootNode->Value() << endl;
 
 	// get "Services" Section
-	TiXmlElement* pServiceSection = pRoot->FirstChildElement();
+	pServiceSectionNode = pRootNode->FirstChildElement();
 
-	if( pServiceSection == 0 ) V3D_THROW(VKernelException, "no \"Config\" section");
+	if( pServiceSectionNode == 0 ) 
+	{
+		V3D_THROW(VKernelException, "no \"Config\" section");
+	}
 
-	cout << "pServiceSection: " << pServiceSection->Value() << endl;
+	cout << "pServiceSectionNode: " << pServiceSectionNode->Value() << endl;
 
 	// parse all services
-	TiXmlElement* pService = pServiceSection->FirstChildElement();
+	pServiceNode = pServiceSectionNode->FirstChildElement();
 
-	VServiceInfo serviceInfo;
-
-	while( pService != 0 )
+	while( pServiceNode != 0 )
 	{
 		// parse service
-		serviceInfo.Parse(pService);
+		serviceInfo.Parse(pServiceNode);
 
+		/*
 		cout << "service:"
 			<< "id=\"" << serviceInfo.strId << "\" "
 			<< "desc=\"" << serviceInfo.strDesc << "\" "
 			<< "filename=\"" << serviceInfo.strFileName << "\""
 			<< endl;
+		*/
 
-		pService = pService->NextSiblingElement();
+		// add service info to list
+		m_Services.push_back(
+			ServicePointer(new VServiceProxy(serviceInfo.strFileName)) );
+
+		// get next service info xml element
+		pServiceNode = pServiceNode->NextSiblingElement();
 	}
 
 	// get "Main" Section
-	TiXmlElement* pMain = pServiceSection->NextSiblingElement();
+	pMainNode = pServiceSectionNode->NextSiblingElement();
 
-	if( pMain == 0 ) V3D_THROW(VKernelException, "main service not found");
+	if( pMainNode == 0 ) V3D_THROW(VKernelException, "main service not found");
 
-	cout << "main service: \"" << pMain->Value() << "\"" << endl;
+	cout << "main service: \"" << pMainNode->Value() << "\"" << endl;
+
+	// parse main service info
 
 	// create service DLL info
 }
 
-void VKernel::LoadDLLs()
-{
-}
-
+/**
+ * Does nothing so far
+ */
 void VKernel::GenerateInitSequence()
 {
 	// get dependencies for all DLLs
-
 	// sort
 }
 
 void VKernel::LoadServices()
 {
 	// intialize services
+	ServiceList::iterator serviceIter = m_Services.begin();
+
+	try
+	{
+		for( ; serviceIter != m_Services.end(); ++serviceIter )
+		{
+			(*serviceIter)->Initialize(VObjectRegistry::GetInstance());
+		}
+	}
+	catch(VKernelException exc)
+	{
+		cout << "Error loading service in file <" 
+			 << exc.GetErrorFile() 
+			 << ">" << endl
+			 << "Error information: \""
+			 << exc.GetErrorString()
+			 << "\"" << endl;
+	}
 }
 
 void VKernel::DelegateControl()
