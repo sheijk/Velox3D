@@ -6,15 +6,17 @@
 #include <v3d/Core/smartptr/VGuards.h>
 #include <v3d/Core/VException.h>
 #include <v3d/Core/IVApplication.h>
+#include <v3d/Core/VIOStream.h>
 //#include <v3d/ExampleService/IVExampleService.h>
 #include "VKernelIniReader.h"
 
-#include <iostream>
+
+//#include <iostream>
 
 //-----------------------------------------------------------------------------
 using std::string;
-using std::cout;
-using std::endl;
+//using std::cout;
+//using std::endl;
 
 //using v3d::example::IVExampleService;
 
@@ -52,7 +54,7 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 	// load and init services
 	LoadServices();
 
-	cout << endl << endl << VObjectRegistry::GetInstance()->GetObjectDump() << endl;
+	vout << VObjectRegistry::GetInstance()->GetObjectDump();
 
 	// delegate control to app service
 	DelegateControl();
@@ -137,11 +139,11 @@ void VKernel::DelegateControl()
 	{
 		int ret = pApp->Main();
 
-		cout << "Return value of main service: " << ret << endl;
+	vout << "Return value of main service:\n";
 	}
 	else
 	{
-		cout << "Error: \"main\" service could not be found" << endl;
+		vout << "Error: \"main\" service could not be found\n";
 	}
 }
 

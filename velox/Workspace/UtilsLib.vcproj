@@ -111,9 +111,8 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Implementation"
+			Name="Math"
 			Filter="">
-
 			<File
 				RelativePath="..\Api\V3d\Math\VMatrix.h">
 			</File>
@@ -123,7 +122,6 @@
 			<File
 				RelativePath="..\Api\V3d\Math\VVector.h">
 			</File>
-
 		</Filter>
 		<Filter
 			Name="System"

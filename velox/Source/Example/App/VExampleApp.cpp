@@ -3,6 +3,7 @@
 #include <v3d/ExampleService/IVExampleService.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/VLogging.h>
+#include <v3d/Core/VIOStream.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -41,21 +42,18 @@ vint VExampleApp::Main()
 	
 	V3D_DEBUGMSG("Velox Main app says hi!");
 	
-	while(!Idle())
+	while(Idle())
 	{   
 		m_Console->Update();
-		
-	
-		
 	}
 	
 
 	return 0;
 }
 
-vint VExampleApp::Idle()
+vbool VExampleApp::Idle()
 {
-	return 0;
+	return true;
 }
 
 void VExampleApp::Initialize()

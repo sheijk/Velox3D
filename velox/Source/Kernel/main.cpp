@@ -1,11 +1,11 @@
 #include "VKernel.h"
 #include <v3d/Core/SmartPtr/VGuards.h>
-
-#include <iostream>
+#include <v3d/Core/VIOStream.h>
+//#include <iostream>
 
 //-----------------------------------------------------------------------------
-using std::cout;
-using std::endl;
+//using std::cout;
+//using std::endl;
 using namespace v3d;
 using namespace v3d::kernel;
 //-----------------------------------------------------------------------------
@@ -18,7 +18,8 @@ VPointer<VKernel>::AutoPtr g_pKernel;
 /** the main function */
 int main(int argv, char* argc[])
 {
-	char* pcXmlFileName = 0;
+
+	vchar* pcXmlFileName = 0;
 
 	// create the kernel
 	g_pKernel.Assign(new VKernel());
@@ -34,29 +35,29 @@ int main(int argv, char* argc[])
 		pcXmlFileName = "init.xml";
 	}
 
-	cout << "Using xml config file <" << pcXmlFileName << ">\n" << endl;
-
+	vout << "Using xml config file <" << pcXmlFileName << ">\n";// << endl;
+	
 	try
 	{
 		// load and init
 		g_pKernel->ProcessIniFile(pcXmlFileName);
 	}
+
 	catch(VException& exc)
 	{
-		cout << "\n\nException while processing \"" << pcXmlFileName << "\":\n"
+	
+		vout << "\n\nException while processing \"" << pcXmlFileName << "\":\n"
 			<< "\"" << exc.GetErrorString() << "\"\n"
 			<< "file \"" << exc.GetErrorFile() << "\"\n"
 			<< "line \"" << exc.GetErrorLine() << "\"\n"
 			<< "extended error string: "
-			<< "\"" << exc.GetExtendedErrorString() << "\""
-			<< endl << endl;
-		throw exc;
+			<< "\"" << exc.GetExtendedErrorString() << "\"";
+			//<< endl << endl;
+		
 	}
 
 	// delete kernel
 	g_pKernel.Release();
-
-	throw std::string("let's shutdown :)");
 
 	// exit program
 	return 0;

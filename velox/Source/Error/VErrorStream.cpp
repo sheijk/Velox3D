@@ -59,7 +59,7 @@ void VErrorStream::SetMessageType( VMessageType in_MessageType )
 
 void VErrorStream::Write( VStringParam in_strString )
 {
-	m_oStream << in_strString ;//<< std::ends;
+	m_oStream << in_strString << std::ends;
 }
 
 void VErrorStream::Flush()

@@ -40,6 +40,16 @@ public:
 	virtual void Flush() = 0;
 };
 //-----------------------------------------------------------------------------
+template <typename T> IVErrorStream& operator<<(IVErrorStream& in_Stream, T in_Val)
+{
+	std::ostringstream oStream;
+	oStream << std::flush << in_Val;
+	in_Stream.Write( oStream.str().c_str() );
+	oStream.str("");
+	return in_Stream;
+}
+
+
 inline IVErrorStream& operator<<( IVErrorStream& in_Stream, VMessageType in_MessageType )
 {
 	in_Stream.SetMessageType( in_MessageType );
@@ -60,6 +70,7 @@ inline IVErrorStream& operator<< ( IVErrorStream& in_Stream, VEndDbgMsg in_EndDb
 
 #define V3D_DBGMSGEND v3d::error::VEndDbgMsg( __FILE__, __LINE__ )
 //-----------------------------------------------------------------------------
+
 
 
 

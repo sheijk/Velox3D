@@ -9,7 +9,13 @@ Current assigned tasks:
 --------------------------------------------------------------------------------
 
 TODO List:
+07.09.03
+- Added VIOStream class
+- included VIOStream classes to kernel main and all other cout calls
 
+05.09.03
+- ConsoleService added
+- wx api working
 
 - adaptor fuer IVXMLVisitor, welcher alle Methoden leer implementiert (sheijK)
   Brauchen utils workspace ! [!!!!!]

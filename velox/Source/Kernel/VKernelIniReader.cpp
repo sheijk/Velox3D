@@ -1,9 +1,10 @@
+#include <v3d/Core/VIOStream.h>
 #include "VKernelIniReader.h"
 #include "VKernelException.h"
-#include <iostream>
+//#include <iostream>
 //-----------------------------------------------------------------------------
 using namespace v3d::xml;
-using namespace std;
+//using namespace std;
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace kernel{
@@ -50,8 +51,8 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 			if(ElementName == "Config")
 			{
 				m_State = ServiceState;
-				cout << "Parsing configuration of ini file" << endl;
-				cout << "-------------------------------------------" << endl;
+				vout << "Parsing configuration of ini file" << vendl;
+				vout << "-------------------------------------------" << vendl;
 			}
 			else
 			{			
@@ -80,10 +81,10 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 				std::string ServiceName = pElement->GetFirstAttribute()->GetValue().AsCString();
 				std::string ServiceDesc = pElement->NextAttribute()->GetValue().AsCString();
 				std::string ServiceFile = pElement->NextAttribute()->GetValue().AsCString();
-				cout << "Service Name: " << ServiceName << endl;
-				cout << "Service Description: " << ServiceDesc << endl;
-				cout << "Service Filename: " << ServiceFile << endl;
-
+				vout << "Service Name: " << ServiceName << vendl;
+				vout << "Service Description: " << ServiceDesc << vendl;
+				vout << "Service Filename: " << ServiceFile << vendl;
+				
 				m_pServiceList->push_back(ServicePointer(new VServiceProxy(ServiceFile)));
 				
 			}
@@ -103,8 +104,8 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 
 void VKernelIniReader::OnFileEnd()
 {
-	cout << "Parsing configuration file done" << endl;
-	cout << "-------------------------------------------" << endl;
+	vout << "Parsing configuration file done" << vendl;
+	vout << "-------------------------------------------" << vendl;
 }
 
 void VKernelIniReader::OnText(VStringParam pText)

@@ -4,7 +4,6 @@
 #include <v3d/Core/VCoreLib.h>
 //#include <v3d/Error/IVErrorService.h>
 #include "VErrorService.h"
-#include <string>
 #include <sstream>
 //-----------------------------------------------------------------------------
 namespace v3d {

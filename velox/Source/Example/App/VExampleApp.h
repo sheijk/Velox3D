@@ -20,7 +20,7 @@ public:
 
 	void Initialize();
 	virtual int Main();
-	vint Idle();
+	vbool Idle();
 
 private:
 

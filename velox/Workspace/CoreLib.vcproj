@@ -166,10 +166,10 @@
 					RelativePath="..\Api\V3d\Core\VCoreLib.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\VEnforce.h">
+					RelativePath="..\Api\V3d\Core\VException.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Core\VException.h">
+					RelativePath="..\Api\V3d\Core\VIOStream.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Core\VLogging.h">
@@ -195,7 +195,7 @@
 			Name="Implementation"
 			Filter="">
 			<File
-				RelativePath="..\Source\Core\VLogging.cpp">
+				RelativePath="..\Source\Core\VIOStream.cpp">
 			</File>
 			<Filter
 				Name="Object Registry"
@@ -221,6 +221,9 @@
 				</File>
 				<File
 					RelativePath="..\Source\Core\Error\VException.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Core\VLogging.cpp">
 				</File>
 			</Filter>
 			<Filter

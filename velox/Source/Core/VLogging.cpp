@@ -31,7 +31,7 @@ void SendDebugMessage(VStringParam in_pcMessage)
 	if( 0 != GetLogDevice() )
 	{
 		// send message to log device
-		*(GetLogDevice()->GetGlobalErrorStream()) << v3d::error::Normal << in_pcMessage << V3D_DBGMSGEND;
+		*(GetLogDevice()->GetGlobalErrorStream()) << v3d::error::Normal << in_pcMessage;// << V3D_DBGMSGEND;
 	}
 }
 
