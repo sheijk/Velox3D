@@ -7,6 +7,8 @@
 #include <v3d/VFS/IVBufferStream.h>
 #include <v3d/VFS/IVDirectory.h>
 #include <v3d/VFS/IVFile.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -43,5 +45,11 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::vfs::IVFileSystem* v3d::QueryService<v3d::vfs::IVFileSystem>()
+{
+	return QueryObject<v3d::vfs::IVFileSystem>("vfs.fs");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVFILESYSTEM_H

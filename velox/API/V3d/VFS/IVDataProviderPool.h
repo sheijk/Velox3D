@@ -4,7 +4,8 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/VFS/IVDataProvider.h>
-
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
@@ -39,5 +40,11 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::vfs::IVDataProviderPool* v3d::QueryService<v3d::vfs::IVDataProviderPool>()
+{
+	return QueryObject<v3d::vfs::IVDataProviderPool>("vfs.dpp");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVDataProviderPool_H

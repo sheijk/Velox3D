@@ -110,6 +110,7 @@ log:
 boost signal lib eingebaut
 callback fuer befehle in konsolen service aufgenommen
 ftp: sheijk/boost update.rar nach Local/ExternalLibs/boost entzippen
+VServicePtr geschrieben + policies fuer alle services erstellt
 
 19.04.2004
 v3dlib/containers/varray2d aus altem cvs geholt + aufpoliert

@@ -21,7 +21,7 @@ class IVConsoleService : public VNamedObject, public utils::IVStringStream
 public:
 	typedef boost::signal<void (VStringParam)> CommandSignal;
 	typedef CommandSignal::slot_type CommandSlot;
-	typedef void CommandConnection;
+	typedef boost::signals::connection CommandConnection;
 
 	virtual ~IVConsoleService() {} ;
 

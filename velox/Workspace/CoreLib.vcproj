@@ -122,6 +122,9 @@
 					RelativePath="..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Core\SmartPtr\VServicePtr.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Core\SmartPtr\VSmartPtr.h">
 				</File>
 			</Filter>

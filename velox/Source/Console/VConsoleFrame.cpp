@@ -166,7 +166,7 @@ VConsoleFrame::~VConsoleFrame()
 IVConsoleService::CommandConnection 
 VConsoleFrame::RegisterCommandListener(const CommandSlot& slot)
 {
-	m_CommandSignal.connect(slot);
+	return m_CommandSignal.connect(slot);
 }
 
 //-----------------------------------------------------------------------------

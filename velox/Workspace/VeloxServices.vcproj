@@ -448,6 +448,9 @@
 		<Filter
 			Name="Window Service"
 			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Window.h">
+			</File>
 			<Filter
 				Name="Interface"
 				Filter="">
@@ -797,9 +800,6 @@
 		</File>
 		<File
 			RelativePath="..\Source\VeloxServices.cpp">
-		</File>
-		<File
-			RelativePath="..\Api\V3d\Window.h">
 		</File>
 	</Files>
 	<Globals>

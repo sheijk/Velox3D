@@ -51,7 +51,7 @@ public:
 	 * FillZero constructs all values using their default c'tor
 	 * Nothing does not intialize the elements
 	 */
-	enum ResizeFlags { KeepData, FillZero, Nothing };
+	enum ResizeFlags { KeepData, FillZero, Uninitialized };
 
 	VArray2d();
 	VArray2d(const VArray2d<TElement,TIndex>& cSourceArray);

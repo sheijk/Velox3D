@@ -6,6 +6,10 @@
 
 #include <v3d/XML/IVXMLVisitor.h>
 #include <v3d/XML/IVXMLWriter.h>
+
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace config {
@@ -54,5 +58,11 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace config
 } // namespace v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::config::IVConfigProvider* v3d::QueryService<v3d::config::IVConfigProvider>()
+{
+	return QueryObject<v3d::config::IVConfigProvider>("config.provider");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVConfigProvider_H

@@ -4,6 +4,9 @@
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/Image/VImage.h>
 #include <v3d/Image/IVImageLoader.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace image{
@@ -38,5 +41,11 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace image
 } // namespace v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::image::IVImageFactory* v3d::QueryService<v3d::image::IVImageFactory>()
+{
+	return QueryObject<v3d::image::IVImageFactory>("image.service");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVIMAGEFACTORY_H

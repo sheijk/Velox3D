@@ -8,6 +8,8 @@
 #include <v3d/Error/IVErrorListener.h>
 #include <v3d/Error/IVErrorStream.h>
 #include <v3d/Error/IVErrorFilter.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {
@@ -61,5 +63,11 @@ public:
 //-----------------------------------------------------------------------------
 } // error
 } // v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::error::IVErrorService* v3d::QueryService<v3d::error::IVErrorService>()
+{
+	return QueryObject<v3d::error::IVErrorService>("error.service");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVERRORSERVICE_H

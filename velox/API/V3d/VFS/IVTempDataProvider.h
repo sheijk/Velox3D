@@ -4,6 +4,8 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/Vfs/IVStream.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
@@ -46,5 +48,11 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::vfs::IVTempDataProvider* v3d::QueryService<v3d::vfs::IVTempDataProvider>()
+{
+	return QueryObject<v3d::vfs::IVTempDataProvider>("tempfile.service");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVTEMPDATAPROVIDER_H

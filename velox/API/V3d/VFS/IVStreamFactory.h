@@ -6,6 +6,8 @@
 #include <v3d/VFS/IVBufferStream.h>
 #include <v3d/VFS/VFlags.h>
 #include <v3d/Core/VNamedObject.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -49,5 +51,11 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
+//-----------------------------------------------------------------------------
+template<>
+inline v3d::vfs::IVStreamFactory* v3d::QueryService<v3d::vfs::IVStreamFactory>()
+{
+	return QueryObject<v3d::vfs::IVStreamFactory>("vfs.strfact");
+}
 //-----------------------------------------------------------------------------
 #endif // V3D_IVStreamFactory_H
