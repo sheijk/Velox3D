@@ -13,16 +13,16 @@ VKeyboardCamera::VKeyboardCamera(input::IVInputManager& in_InputDevice)
 
 void VKeyboardCamera::QueryButtons(input::IVInputManager& in_InputManager)
 {
-	m_pEscapeButton		= &in_InputManager.GetStandardKey(input::IVInputManager::Escape);
-	m_pUpButton			= &in_InputManager.GetStandardKey(input::IVInputManager::CursorUp);
-	m_pDownButton		= &in_InputManager.GetStandardKey(input::IVInputManager::CursorDown);
-	m_pLeftButton		= &in_InputManager.GetStandardKey(input::IVInputManager::CursorLeft);
-	m_pRightButton		= &in_InputManager.GetStandardKey(input::IVInputManager::CursorRight);
+	m_pEscapeButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Escape);
+	m_pUpButton			= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Up);
+	m_pDownButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Down);
+	m_pLeftButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Left);
+	m_pRightButton		= &in_InputManager.GetStandardKeyboard().GetKey(input::Key_Right);
 
-	m_pLeftMouseButton	= &in_InputManager.GetMouseButton(1);
-	m_pRightMouseButton	= &in_InputManager.GetMouseButton(0);
-	m_pMouseXAxis		= &in_InputManager.GetMouseXAxis();
-	m_pMouseYAxis		= &in_InputManager.GetMouseYAxis();
+	m_pLeftMouseButton	= &in_InputManager.GetStandardMouse().GetLeftButton();
+	m_pRightMouseButton	= &in_InputManager.GetStandardMouse().GetRightButton();
+	m_pMouseXAxis		= &in_InputManager.GetStandardMouse().GetXAxis();
+	m_pMouseYAxis		= &in_InputManager.GetStandardMouse().GetYAxis();
 }
 
 void VKeyboardCamera::Move(vfloat32 in_fSeconds)

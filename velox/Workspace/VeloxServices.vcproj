@@ -115,6 +115,9 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{BB57F1C9-0039-40BC-8188-02F384F49322}"
+			Name="VeloxLib"/>
 	</References>
 	<Files>
 		<Filter
@@ -765,7 +768,16 @@
 					RelativePath="..\Api\V3d\Input\IVInputManager.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Input\IVKeyboardDevice.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Input\IVMouseDevice.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Input\IVRelativeAxis.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Input\KeyEnumeration.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Input\VInputException.h">
@@ -776,53 +788,75 @@
 				Filter="h;hpp;hxx;hm;inl;inc;xsd"
 				UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 				<File
-					RelativePath="..\Source\InputLib\VDIAbsoluteAxis.cpp">
+					RelativePath="..\Source\InputLib\VInputDeviceHelper.cpp">
 				</File>
 				<File
-					RelativePath="..\Source\InputLib\VDIAbsoluteAxis.h">
+					RelativePath="..\Source\InputLib\VInputDeviceHelper.h">
 				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIButton.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIButton.h">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIInputDevice.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIInputDevice.h">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIInputManager.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIInputManager.h">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIKeyboardButton.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIKeyboardButton.h">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIMouseAxis.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIMouseAxis.h">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIMouseButton.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIMouseButton.h">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIRelativeAxis.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\InputLib\VDIRelativeAxis.h">
-				</File>
+				<Filter
+					Name="DirectInput8"
+					Filter="">
+					<Filter
+						Name="Manager"
+						Filter="">
+						<File
+							RelativePath="..\Source\InputLib\VDIInputManager.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIInputManager.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Devices"
+						Filter="">
+						<File
+							RelativePath="..\Source\InputLib\VDIInputDevice.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIInputDevice.h">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIKeyboardDevice.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIKeyboardDevice.h">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIMouseDevice.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIMouseDevice.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Objects"
+						Filter="">
+						<File
+							RelativePath="..\Source\InputLib\VDIAbsoluteAxis.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIAbsoluteAxis.h">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIButton.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIButton.h">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIKeyboardButton.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIKeyboardButton.h">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIRelativeAxis.cpp">
+						</File>
+						<File
+							RelativePath="..\Source\InputLib\VDIRelativeAxis.h">
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 		</Filter>
 		<File

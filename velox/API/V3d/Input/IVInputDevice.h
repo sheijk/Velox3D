@@ -21,13 +21,23 @@ namespace input {
 class IVInputDevice
 {
 public:
-	typedef VForwardIterator<IVButton>			ButtonIterator;
+
+	enum DeviceType
+	{
+		Keyboard,
+		Mouse,
+		Joystick,
+		Undefined
+	};
+
+	typedef VForwardIterator<IVButton>		 ButtonIterator;
 	typedef VForwardIterator<IVRelativeAxis> RelativeAxisIterator;
 	typedef VForwardIterator<IVAbsoluteAxis> AbsoluteAxisIterator;
     
 	virtual							~IVInputDevice() {};
 
 	virtual VStringRetVal			GetName() = 0;
+	virtual DeviceType				GetType() = 0;
 
 	virtual ButtonIterator			ButtonBegin() = 0;
 	virtual ButtonIterator			ButtonEnd() = 0;
@@ -43,4 +53,4 @@ public:
 } // namespace input
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVDEVICE_H
+#endif // V3D_IVINPUTDEVICE_H

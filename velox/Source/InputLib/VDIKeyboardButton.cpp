@@ -1,5 +1,7 @@
 #include "VDIKeyboardButton.h"
 #include <v3d/Core/VAssert.h>
+#include <v3d/Core/VIOStream.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {

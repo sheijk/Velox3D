@@ -1,69 +1,79 @@
-#ifndef V3D_VDIINPUTDEVICE_H
-#define V3D_VDIINPUTDEVICE_H
+#ifndef V3D_VDIINPUTDEVICE_2004_08_09_H
+#define V3D_VDIINPUTDEVICE_2004_08_09_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Wrappers/VIterator.h>
 #include <v3d/Input/IVInputDevice.h>
-#include <v3d/Input/IVButton.h>
-#include <v3d/Input/IVRelativeAxis.h>
-#include <v3d/Input/IVAbsoluteAxis.h>
+#include "VInputDeviceHelper.h"
 
 #include <windows.h>
 #define DIRECTINPUT_VERSION 0x800
 #include <dinput.h>
-#include <list>
-
-#include "VDIButton.h"
-#include "VDIRelativeAxis.h"
-#include "VDIAbsoluteAxis.h"
 
 //-----------------------------------------------------------------------------
 namespace v3d {
-	namespace input {
+namespace input {
 //-----------------------------------------------------------------------------
 
 /**
- * DirectInput implementation of a mouse device
+ * VDIInputDevice is the DirectInput8 implementation of the 
+ * IVInputDevice interface. 
+ * It is basicly a wrapper for the IDirectInputDevice8 COM-object.
+ * The DIDEVICEINSTANCE structure ( received during enumeration in
+ * the manager) contains all information about an input device and
+ * is used to create the DirectInput device. 
+ * After the device was created, the device objects are enumerated 
+ * and put in the appropriate std::list. 
+ * The lists for buttons and axis and access functionality comes from 
+ * VInputDevice.
+ * 
+ * @author AcrylSword
+ * @see IVInputDevice
+ * @see VInputDevice
+ * @see DirectInput8 documentation
  */
+class VDIInputDevice : public IVInputDevice
+{
+	friend class VDIMouseDevice;
+	friend class VDIKeyboardDevice;
 
-		class VDIInputDevice : public IVInputDevice
-		{
-		public:
-											VDIInputDevice();
-											VDIInputDevice( DIDEVICEINSTANCE in_diDeviceStructure, LPDIRECTINPUT8 in_pDI, HWND in_hWnd );
-			virtual							~VDIInputDevice();
+protected:
+	VInputDeviceHelper		m_InputHelper;
 
-			virtual VStringRetVal			GetName();
+	DeviceType				m_DeviceType;
 
-			virtual ButtonIterator			ButtonBegin();
-			virtual ButtonIterator			ButtonEnd();
+	LPDIRECTINPUTDEVICE8	m_pDevice;
+	DIDEVICEINSTANCE		m_DeviceInstance;
+	DIDEVCAPS				m_DevCaps;
 
-			virtual AbsoluteAxisIterator	AbsoluteAxisBegin();
-			virtual AbsoluteAxisIterator	AbsoluteAxisEnd();
+							VDIInputDevice();
+	void					EnumerateDeviceObjects();
+	virtual vbool			EnumDeviceObjectCallback(const DIDEVICEOBJECTINSTANCE* in_pDOI);
+	static BOOL CALLBACK	StaticDIEnumDeviceObjectsCallback(LPCDIDEVICEOBJECTINSTANCE lpddoi,
+															  LPVOID pvRef);
+public:
+							VDIInputDevice( const DIDEVICEINSTANCE in_DeviceStructure,
+											const LPDIRECTINPUT8 in_pDI,
+											const HWND in_hWnd,
+											const DeviceType in_DeviceType);
+	virtual					~VDIInputDevice();
 
-			virtual RelativeAxisIterator	RelativeAxisBegin();
-			virtual RelativeAxisIterator	RelativeAxisEnd();
+	void					Update();
+	virtual vbool			Create(const LPDIRECTINPUT8 in_pDI, const HWND in_hWnd);
 
-			void							Update();
-			vbool							Create(LPDIRECTINPUT8 in_pDI, HWND in_hWnd);
-			
+	virtual VStringRetVal			GetName();
+	virtual DeviceType				GetType();
 
-		protected:
-			void							EnumerateDeviceObjects();
-			static BOOL CALLBACK			StaticDIEnumDeviceObjectsCallback(LPCDIDEVICEOBJECTINSTANCE lpddoi, LPVOID pvRef);
-			virtual vbool				    EnumDeviceObjectCallback(const DIDEVICEOBJECTINSTANCE* in_pdiDOI);
-				
-			LPDIRECTINPUTDEVICE8			m_pdiDevice;
-			DIDEVICEINSTANCE				m_diDeviceInstance;
-			DIDEVCAPS						m_diDevCaps;
+	virtual ButtonIterator			ButtonBegin();
+	virtual ButtonIterator			ButtonEnd();
 
-			std::list<VDIButton>			m_ButtonList;
-			std::list<VDIRelativeAxis>		m_RelativeAxisList;
-			std::list<VDIAbsoluteAxis>		m_AbsoluteAxisList;
-		};
+	virtual AbsoluteAxisIterator	AbsoluteAxisBegin();
+	virtual AbsoluteAxisIterator	AbsoluteAxisEnd();
 
-		//-----------------------------------------------------------------------------
-	} // namespace input
+	virtual RelativeAxisIterator	RelativeAxisBegin();
+	virtual RelativeAxisIterator	RelativeAxisEnd();
+};
+//-----------------------------------------------------------------------------
+} // namespace input
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VDIMOUSEDEVICE_H
+#endif //V3D_VDIINPUTDEVICE_2004_08_09_H

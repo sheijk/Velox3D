@@ -1,89 +1,133 @@
 #include "VDIInputDevice.h"
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/VAssert.h>
-#include <v3d/Core/Wrappers/VSTLIteratorPol.h>
-
-//#include "Memory/mmgr.h"
+#include <v3d/Input/VInputException.h>
+#include "VDIButton.h"
+#include "VDIRelativeAxis.h"
+#include "VDIAbsoluteAxis.h"
+#include <v3d/Core/MemManager.h>
+//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
-
-VDIInputDevice::~VDIInputDevice()
-{
-	m_ButtonList.clear();
-	m_RelativeAxisList.clear();
-	m_AbsoluteAxisList.clear();
-
-	if (m_pdiDevice)
-	{
-		m_pdiDevice->Unacquire();
-        m_pdiDevice->Release();
-        m_pdiDevice = 0;
-	}
-}
-
+//-----------------------------------------------------------------------------
+/**
+ * Standard constructor. Justs sets the device pointer to 0;
+ * This constructor is protected, so it doesn't make any sense.
+ * @author AcrylSword
+ */
 VDIInputDevice::VDIInputDevice()
 {
-	m_pdiDevice = 0;
+	m_pDevice = 0;
 }
 
-VDIInputDevice::VDIInputDevice( DIDEVICEINSTANCE in_diDeviceInstance, LPDIRECTINPUT8 in_pDI, HWND in_hWnd )
+/**
+ * This constructor create the DirectInputDevice8 object that is 
+ * described by the DIDEVICEINSTANCE structure and starts enumeration
+ * of all device objects. A VCreationException is thrown if an error 
+ * occures during device creation.
+ *
+ * @param in_DeviceInstance Describtion of the DirectInput device that 
+ *                          is to be created.
+ * @param in_pDI			Pointer to a valid IDirectInput8 object. 
+ *                          Cannot be 0;
+ * @param in_hWnd			Pointer to the windows that is associated
+ *                          with the input manager. Cannot be 0
+ *
+ * @execption VCreationException VCreationException is thrown on an 
+ *                               error during device creation.                        
+ * @author AcrylSword
+ */
+VDIInputDevice::VDIInputDevice( const DIDEVICEINSTANCE in_DeviceInstance,
+								const LPDIRECTINPUT8 in_pDI,
+								const HWND in_hWnd,
+								DeviceType in_DeviceType = Undefined )
+								: m_DeviceInstance(in_DeviceInstance),
+								  m_pDevice(0),
+								  m_DeviceType(in_DeviceType)
 {
-	m_pdiDevice = 0;
-	V3D_ASSERT( in_pDI != NULL );
+	V3D_ASSERT( in_pDI != 0 );
+	V3D_ASSERT( in_hWnd != 0);
 
 	//init DI structures
-	//ZeroMemory(&m_diDeviceInstance, sizeof(m_diDeviceInstance));
-	//m_diDeviceInstance.dwSize = sizeof(m_diDeviceInstance);
+	ZeroMemory(&m_DevCaps, sizeof(m_DevCaps));
+	m_DevCaps.dwSize = sizeof(m_DevCaps);
 
-	ZeroMemory(&m_diDevCaps, sizeof(m_diDevCaps));
-	m_diDevCaps.dwSize = sizeof(m_diDevCaps);
-
-	m_diDeviceInstance = in_diDeviceInstance;
-	
 	// lets create a device
-	if ( !Create( in_pDI, in_hWnd) )
-		V3D_THROW(VException, "Could not create DI device");
+	vout << "Init input device: " << m_DeviceInstance.tszInstanceName << "...";
 
-    EnumerateDeviceObjects();
+	if ( !Create( in_pDI, in_hWnd) )
+		V3D_THROW(VCreationException, "Could not create DI device");
+
+	EnumerateDeviceObjects();
+
+	vout << " sucessful" << vendl;
 }
 
+/**
+ * The destructor deletes all device objects in the lists, sets its pointers
+ * to zero, clears the list and finaly releases the IDirectInputDevice8 object
+ *
+ * @author AcrylSword
+ */
+VDIInputDevice::~VDIInputDevice()
+{	
+	m_InputHelper.Release();
+
+	m_pDevice->Unacquire();
+	m_pDevice->Release();
+	m_pDevice = 0;
+}
+
+/**
+ * This method creates the DirectInput device, sets the appropriate
+ * data format and cooperative level. After that the device is pre-
+ * pared for retrivial of buffered data.
+ * 
+ * @param in_DI	Pointer to a valid IDirectInput8 object
+ * @param in_hWnd Pointer to the windows that is associated
+ *                          with the input manager. 
+ *
+ * @name AcrylSword
+ */
 vbool VDIInputDevice::Create(LPDIRECTINPUT8 in_pDI, HWND in_hWnd)
 {
-
-	vout << "Init input device: " << m_diDeviceInstance.tszInstanceName << "...";
-
 	HRESULT hr;
 
-	if ( DI_OK != in_pDI->CreateDevice(m_diDeviceInstance.guidInstance, &m_pdiDevice, NULL)  )
+	if ( DI_OK != ( hr = in_pDI->CreateDevice(m_DeviceInstance.guidInstance, &m_pDevice, NULL) ) )
 	{
-		vout << "DI: Cannot create device" << vendl;
+		vout << "failed: IDirectInput8::CreateDevice() says:" << hr << vendl;
 		return false;
 	}
 
-	hr = DI_OK;
-
-	switch ( GET_DIDEVICE_TYPE( m_diDeviceInstance.dwDevType ) )
+	switch ( GET_DIDEVICE_TYPE( m_DeviceInstance.dwDevType ) )
 	{
-		case DI8DEVTYPE_JOYSTICK:	hr = m_pdiDevice->SetDataFormat(&c_dfDIJoystick2);
+		case DI8DEVTYPE_JOYSTICK:	hr = m_pDevice->SetDataFormat(&c_dfDIJoystick2);
+									//m_DeviceType = IVInputDevice::Joystick;
 									break;
-		case DI8DEVTYPE_GAMEPAD:	hr = m_pdiDevice->SetDataFormat(&c_dfDIJoystick2);
+		case DI8DEVTYPE_GAMEPAD:	hr = m_pDevice->SetDataFormat(&c_dfDIJoystick2);
+									//m_DeviceType = IVInputDevice::Joystick;
 									break;
-		case DI8DEVTYPE_KEYBOARD:	hr = m_pdiDevice->SetDataFormat(&c_dfDIKeyboard);
+		case DI8DEVTYPE_KEYBOARD:	hr = m_pDevice->SetDataFormat(&c_dfDIKeyboard);
+									//m_DeviceType = IVInputDevice::Keyboard;
 									break;
-		case DI8DEVTYPE_MOUSE:		hr = m_pdiDevice->SetDataFormat(&c_dfDIMouse2);
+		case DI8DEVTYPE_MOUSE:		hr = m_pDevice->SetDataFormat(&c_dfDIMouse2);
+									//m_DeviceType = IVInputDevice::Mouse;
+									break;
+		default:					hr = DIERR_INVALIDPARAM;
 									break;
 	}
+
 	if ( DI_OK != hr )
 	{
-		vout << "DI: ::SetDataFormat failed" << vendl;
+		vout << "failed: IDirectInputDevice8::SetDataFormat() says: " <<hr << vendl;
 		return false;
 	}
 
-	if ( DI_OK != m_pdiDevice->SetCooperativeLevel( in_hWnd, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND) )
+	if ( DI_OK != (hr = m_pDevice->SetCooperativeLevel( in_hWnd, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND)) )
 	{
-		vout << "DI: ::SetCooperativeLevel failed" << vendl;
+		vout << "failed: IDirectInputDevice8::SetCooperativeLevel() says: " << hr << vendl;
 		return false;
 	}
 
@@ -95,72 +139,96 @@ vbool VDIInputDevice::Create(LPDIRECTINPUT8 in_pDI, HWND in_hWnd)
 	Properties.dwData = 16;
 
 	// Allocate a buffer for input events
-	if ( DI_OK != m_pdiDevice->SetProperty( DIPROP_BUFFERSIZE, &Properties.diph ) )
+	if ( DI_OK != (hr=m_pDevice->SetProperty( DIPROP_BUFFERSIZE, &Properties.diph)) )
 	{
-		vout << "DI: ::SetProperty failed" << vendl;
+		vout << "failed: IDirectInputDevice8::SetProperty() says: " << hr << vendl;
 	}
 
-	if ( DI_OK != m_pdiDevice->Acquire() )
+	if ( DI_OK != (hr = m_pDevice->Acquire()) )
 	{
-		vout << " DI: Cannot acquire device" << vendl;
+		vout << "failed: IDirectInputDevice8::Acquire() says: " << hr << vendl;
 		return false;
 	}
 
-	m_pdiDevice->GetCapabilities(&m_diDevCaps);
-
-	vout << " sucessful" << vendl;
-
+	m_pDevice->GetCapabilities(&m_DevCaps);
 	return true;
 }
 
+/**
+ * The method starts the DirectInput enumeration of device objects.
+ * For each device object the EnumDeviceObjectCallback method is 
+ * called. For more detailed information about the callback see
+ * StaticDIEnumDeviceObjectsCallback().
+ *
+ * @author AcrylSword
+ */
 void VDIInputDevice::EnumerateDeviceObjects()
 {
 	HRESULT hr;
 
-	hr = m_pdiDevice->EnumObjects(&StaticDIEnumDeviceObjectsCallback, this, DIDFT_ALL);
+	hr = m_pDevice->EnumObjects(&StaticDIEnumDeviceObjectsCallback, this, DIDFT_ALL);
 }
 
-vbool VDIInputDevice::EnumDeviceObjectCallback(const DIDEVICEOBJECTINSTANCE* in_pdiDOI)
+/**
+ * This method examines a device objects, creates the matching velox 
+ * device object (IVButton, IVRelativeAxis or IVAbsoluteAxis) and 
+ * puts them into the appropriate lists.
+ *
+ * @param in_pDOI The device object that is currently progressed.
+ *
+ * @author AcrylSword
+ */
+vbool VDIInputDevice::EnumDeviceObjectCallback(const DIDEVICEOBJECTINSTANCE* in_pDOI)
 {
-	if ( in_pdiDOI->dwType & DIDFT_ABSAXIS )
+	if ( in_pDOI->dwType & DIDFT_ABSAXIS )
 	{
-	    m_AbsoluteAxisList.push_back( VDIAbsoluteAxis(in_pdiDOI->tszName) );
+	    m_InputHelper.m_AbsoluteAxisList.push_back( new VDIAbsoluteAxis(in_pDOI->tszName) );
 		return true;
 	}
 	
-	if ( in_pdiDOI->dwType & DIDFT_RELAXIS )
+	if ( in_pDOI->dwType & DIDFT_RELAXIS )
 	{
-		m_RelativeAxisList.push_back( VDIRelativeAxis(in_pdiDOI->tszName) );
+		m_InputHelper.m_RelativeAxisList.push_back( new VDIRelativeAxis(in_pDOI->tszName) );
 		return true;
 	}
 	
-	if ( in_pdiDOI->dwType & DIDFT_BUTTON )
+	if ( in_pDOI->dwType & DIDFT_BUTTON )
     {
-        m_ButtonList.push_back( VDIButton(in_pdiDOI->tszName) );
-        //vout << "Added button: " << in_pdiDOI->tszName << vendl;
+        m_InputHelper.m_ButtonList.push_back( new VDIButton(in_pDOI->tszName) );
 		return true;
     }
 	
-    vout << "Found some unkown device objects: " << in_pdiDOI->tszName << vendl;
+    vout << "Found a unkown device object: " << in_pDOI->tszName << vendl;
 	
     return true;
 }
 
-
+/**
+ * Returns the name of this device
+ * 
+ * @return The name of this device
+ * @author AcrylSword
+ */
 VStringRetVal VDIInputDevice::GetName()
 {
-	return m_diDeviceInstance.tszInstanceName;
+	return m_DeviceInstance.tszInstanceName;
 }
 
+/**
+ * !!!THIS FUNCTION IS HIGHLY UNPERFORMANT!!!
+ * 
+ *
+ * @author AcrylSword
+ */
 void VDIInputDevice::Update()
 {
 	
 	DIDEVICEOBJECTDATA DeviceData[16];
 	DWORD   Items = 16;
 
-	m_pdiDevice->Acquire();  
-	m_pdiDevice->Poll();
-	m_pdiDevice->GetDeviceData( sizeof(DIDEVICEOBJECTDATA), DeviceData, &Items, 0 );
+	m_pDevice->Acquire();  
+	m_pDevice->Poll();
+	m_pDevice->GetDeviceData( sizeof(DIDEVICEOBJECTDATA), DeviceData, &Items, 0 );
 
 	for ( DWORD i=0; i<Items; i++ )
 	{
@@ -168,101 +236,130 @@ void VDIInputDevice::Update()
 		DIDEVICEOBJECTINSTANCE ObjectInstance = {0};
 		ObjectInstance.dwSize = sizeof(DIDEVICEOBJECTINSTANCE);
 
-		m_pdiDevice->GetObjectInfo( &ObjectInstance, DeviceData[i].dwOfs, DIPH_BYOFFSET );
+		m_pDevice->GetObjectInfo( &ObjectInstance, DeviceData[i].dwOfs, DIPH_BYOFFSET );
 		Name = ObjectInstance.tszName;
 
 		if (ObjectInstance.dwType & DIDFT_ABSAXIS)
 		{
-			std::list<VDIAbsoluteAxis>::iterator Iter;
+			VInputDeviceHelper::STLAbsoluteIter Iter;
 			
-			for ( Iter = m_AbsoluteAxisList.begin(); Iter != m_AbsoluteAxisList.end(); Iter++ )
-				if ( (*Iter).GetName() == Name )
-					(*Iter).Set( static_cast<vfloat32>(DeviceData[i].dwData) );
+			for ( Iter = m_InputHelper.m_AbsoluteAxisList.begin();
+				  Iter != m_InputHelper.m_AbsoluteAxisList.end();
+				  ++Iter )
+				if ( (*Iter)->GetName() == Name )
+					 (*Iter)->Set( static_cast<vfloat32>(DeviceData[i].dwData) );
 		}
 
 		if (ObjectInstance.dwType & DIDFT_RELAXIS)
 		{
-
-			std::list<VDIRelativeAxis>::iterator Iter;
+			VInputDeviceHelper::STLRelativeIter Iter;
 			
-			for ( Iter = m_RelativeAxisList.begin(); Iter != m_RelativeAxisList.end(); Iter++ )
-				if ( (*Iter).GetName() == Name )
-					//vout << DeviceData[i].dwData << vendl;
-					(*Iter).Set( static_cast<float>(DeviceData[i].dwData) );
-				//else
-				//	(*Iter).Set(0.0f);
+			for ( Iter = m_InputHelper.m_RelativeAxisList.begin();
+				  Iter != m_InputHelper.m_RelativeAxisList.end();
+				  ++Iter )
+				if ( (*Iter)->GetName() == Name )
+					 (*Iter)->Set( static_cast<vfloat32>(DeviceData[i].dwData) );
 		}
 
 		if ( ObjectInstance.dwType & DIDFT_BUTTON )
 		{
-			std::list<VDIButton>::iterator Iter;
+			VInputDeviceHelper::STLButtonIter Iter;
 
-			for ( Iter = m_ButtonList.begin(); Iter != m_ButtonList.end(); Iter++ )
-				if ( (*Iter).GetName() == Name )
-					(*Iter).Set( (DeviceData[i].dwData & 0x80) != 0 );
+			for ( Iter = m_InputHelper.m_ButtonList.begin();
+				  Iter != m_InputHelper.m_ButtonList.end();
+				  ++Iter )
+				if ( (*Iter)->GetName() == Name )
+					 (*Iter)->Set( (DeviceData[i].dwData & 0x80) != 0 );
 		}
 	}
-	
 }
 
+/**
+ * Non-static callback methods does not work. This static callback
+ * function redirects a method call to the EnumDeviceObjectCallback()
+ * method.
+ *
+ * @param lpddoi The device object that is enumerated
+ * @param pvRef	 Pointer to user data. In this case pvRef is the this
+ *               pointer of the class that performs the enumeration
+ * @author AcrylSword
+ */
 BOOL VDIInputDevice::StaticDIEnumDeviceObjectsCallback(LPCDIDEVICEOBJECTINSTANCE lpddoi, LPVOID pvRef)
 {
 	return ((VDIInputDevice*) pvRef)->EnumDeviceObjectCallback(lpddoi);
 }
 
+/**
+* Returns the type of this device. 
+* The default value is 'Undefined'
+*
+* @see IVInputDevice::DeviceType
+* @return The device type
+* @author AcrylSword
+*/
+IVInputDevice::DeviceType VDIInputDevice::GetType()
+{
+	return m_DeviceType;
+}
+
+/**
+* Delegates method call to VInputDeviceHelper::ButtonBegin()
+*
+* @author AcrylSword
+*/
 IVInputDevice::ButtonIterator VDIInputDevice::ButtonBegin()
 {
-	typedef VSTLIteratorPol<std::list<VDIButton>::iterator, IVButton> ButtonIterPol;
-
-	return ButtonIterator( new ButtonIterPol(m_ButtonList.begin()) );
+	return m_InputHelper.ButtonBegin();
 }
-
+/**
+* Delegates method call to VInputDeviceHelper::ButtonEnd()
+*
+* @author AcrylSword
+*/
 IVInputDevice::ButtonIterator VDIInputDevice::ButtonEnd()
 {
-	typedef VSTLIteratorPol<std::list<VDIButton>::iterator, IVButton> ButtonIterPol;
-
-	return ButtonIterator( new ButtonIterPol(m_ButtonList.end()) );
+	return m_InputHelper.ButtonEnd();
 }
 
+/**
+* Delegates method call to VInputDeviceHelper::AbsoluteAxisBegin() 
+*
+* @author AcrylSword
+*/
 IVInputDevice::AbsoluteAxisIterator VDIInputDevice::AbsoluteAxisBegin()
 {
-	typedef VSTLIteratorPol<std::list<VDIAbsoluteAxis>::iterator, IVAbsoluteAxis> AbsoluteAxisIterPol;
-
-	return AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.begin()));
+	return m_InputHelper.AbsoluteAxisBegin();
 }
-
-IVInputDevice::AbsoluteAxisIterator VDIInputDevice::AbsoluteAxisEnd()
-{
-	typedef VSTLIteratorPol<std::list<VDIAbsoluteAxis>::iterator, IVAbsoluteAxis> AbsoluteAxisIterPol;
-
-	return AbsoluteAxisIterator( new AbsoluteAxisIterPol(m_AbsoluteAxisList.end()));
-}
-
-IVInputDevice::RelativeAxisIterator VDIInputDevice::RelativeAxisBegin()
-{
-	typedef VSTLIteratorPol<std::list<VDIRelativeAxis>::iterator, IVRelativeAxis> RelativeAxisIterPol;
-
-	return RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.begin() ));
-}
-
-
-IVInputDevice::RelativeAxisIterator VDIInputDevice::RelativeAxisEnd()
-{
-	typedef VSTLIteratorPol<std::list<VDIRelativeAxis>::iterator, IVRelativeAxis> RelativeAxisIterPol;
-
-	return RelativeAxisIterator( new RelativeAxisIterPol(m_RelativeAxisList.end()));
-}
-
-
-}
-}
-/*
-switch (hr)
-{
-case DIERR_INPUTLOST:		vout << "InputLost" << vendl; break;
-case DIERR_INVALIDPARAM:	vout << "Invalid Param" << vendl; break;
-case DIERR_NOTACQUIRED:		vout << "Not acquired" << vendl; break;
-case DIERR_NOTBUFFERED:		vout << "Not bufferd" << vendl; break;
-case DIERR_NOTINITIALIZED: vout << "Not init" << vendl; break;
-}
+/**
+* Delegates method call to VInputDeviceHelper::AbsoluteAxisEnd()
+*
+* @author AcrylSword
 */
+IVInputDevice::AbsoluteAxisIterator	VDIInputDevice::AbsoluteAxisEnd()
+{
+	return m_InputHelper.AbsoluteAxisEnd();
+}
+
+/**
+* Delegates method call to VInputDeviceHelper::RelativeAxisBegin()
+*
+* @author AcrylSword
+*/
+IVInputDevice::RelativeAxisIterator	VDIInputDevice::RelativeAxisBegin()
+{
+	return m_InputHelper.RelativeAxisBegin();
+}
+
+/**
+* Delegates method call to VInputDeviceHelper::RelativeAxisEnd()
+*
+* @author AcrylSword
+*/
+IVInputDevice::RelativeAxisIterator	VDIInputDevice::RelativeAxisEnd()
+{
+	return m_InputHelper.RelativeAxisEnd();
+}
+//-----------------------------------------------------------------------------
+} // namespace input
+} // namespace v3d
+//-----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 #include "VDIButton.h"
-#include <v3d/Core/VAssert.h>
 #include <v3d/Core/VIOStream.h>
 #include <windows.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
@@ -44,8 +44,6 @@ void VDIButton::Set( vbool in_bState )
 {
     m_bState = in_bState;
 }
-
-
 //-----------------------------------------------------------------------------
 } // namespace input
 } // namespace v3d

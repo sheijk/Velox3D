@@ -10,8 +10,11 @@ namespace input {
 //-----------------------------------------------------------------------------
 V3D_DECLARE_EXCEPTION(VInputException, VException);
 V3D_DECLARE_EXCEPTION(VCreationException, VInputException);
-V3D_DECLARE_EXCEPTION(VIllegalKeyIdentifierException, VInputException);
 V3D_DECLARE_EXCEPTION(VUpdateException, VInputException);
+V3D_DECLARE_EXCEPTION(VIllegalDevicePartException, VInputException);
+V3D_DECLARE_EXCEPTION(VIllegalButtonException, VIllegalDevicePartException);
+V3D_DECLARE_EXCEPTION(VIllegalAxisException, VIllegalDevicePartException);
+V3D_DECLARE_EXCEPTION(VIllegalKeyException, VIllegalDevicePartException)
 
 //-----------------------------------------------------------------------------
 } // namespace input

@@ -1,53 +1,92 @@
 #include "VDIInputManager.h"
 #include <v3d/Core/VIOStream.h>
-#include <v3d/Core/Wrappers/VSTLIteratorPol.h>
+#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h> 
 #include <v3d/Input/VInputException.h>
-
-//#include "Memory/mmgr.h"
+#include <v3d/Core/MemManager.h>
+//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
-//TODO add construction values here if not to be surprised by call std const [ins]
 VDIInputManager::VDIInputManager()
+: m_hWnd(0), m_pDI(0), m_bRegistered(false), m_pStandardMouse(0),
+  m_pStandardKeyboard(0)
 {
 
 }
 
 VDIInputManager::VDIInputManager( HWND in_hWnd )
+: m_hWnd(in_hWnd), m_pDI(0), m_bRegistered(false), m_pStandardMouse(0),
+  m_pStandardKeyboard(0)
 {
-	m_hWnd = in_hWnd;
+	V3D_ASSERT(in_hWnd != 0);
 	
-	m_pDI = 0;
-	m_pDIStandardKeyboard = 0;
-	m_pDIStandardMouse = 0;
-	m_bRegistered = false;
-
+	// Create the DirectInput8 object
 	Create();
+}
+
+/**
+ * The destructor just releases the IDirectInput8 object. All other work
+ * is done by other classes
+ *
+ * @author AcrylSword
+ */
+template<class Iter> void deleteAll(Iter begin, Iter end)
+{ 
+	for( ; begin != end; ++begin)
+	{
+		delete *begin;
+		*begin = 0;
+	}
 }
 
 VDIInputManager::~VDIInputManager()
 {
-	Release();
-}
+	//Only release objects if *this is valid
+	if (m_pDI)
+	{
+		//delete standard mouse        
+		delete m_pStandardMouse;
+	    m_pStandardMouse = 0;
 
+		//delete standard keyboard
+		delete m_pStandardKeyboard;
+		m_pStandardKeyboard = 0;
+
+		//Call DeleteAll to make sure that all 
+		//IDirectInputDevice8 objects are release before we delete
+		// the parent object.
+		deleteAll(m_DeviceList.begin(), m_DeviceList.end());
+		m_DeviceList.clear();
+		m_InputDeviceList.clear();
+		m_KeyboardList.clear();
+		m_MouseList.clear();
+		
+		//Now we can release m_pDI safely
+		m_pDI->Release();
+		m_pDI = 0;
+	}
+}
 
 void VDIInputManager::Create()
 {
+	HRESULT hr;
+
     // Create DirectInput interface
-	vout << "Init DirectInput..." << vendl;
-	if ( DI_OK != DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pDI, NULL) )
+	vout << "Init DirectInput8..." << vendl;
+	if ( DI_OK != (hr=DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pDI, NULL)) )
 	{
-		vout << "DI: could not create DI8 interface" << vendl;
+		vout << "failed: DirectInput8Create() says: " << hr << vendl;
 		V3D_THROW( VCreationException, "Could not create DirectInput8" );
 	}
 
-	vout << "Create standard keyboard and mouse acess" << vendl;
+	vout << "Create standard keyboard device..." << vendl;
 	// Create standard keyboard and mouse device
 	if ( !InitStandardKeyboardDevice() )
 		V3D_THROW( VCreationException, "Could not create standard keyboard device");
 
+	vout << "Create standard mouse device..." << vendl;
 	if ( !InitStandardMouseDevice() )
 		V3D_THROW( VCreationException, "Could not create standard mouse device" );
 
@@ -57,139 +96,98 @@ void VDIInputManager::Create()
 	if ( !EnumerateDevices() )
 		V3D_THROW( VCreationException, "Could not enumerate devices");
 }
-
+/**
+ * The creation of the standard keyboard device is a small hack.
+ * The standard keyboard is represented through a VDIKeyboardDevice 
+ * object. Under DirectInput the standard device are represented trough
+ * a special GUID. So we have to set up the DIDEVICEINSTANCE structure by
+ * ourself.
+ *
+ * @author AcrylSword
+ */
 vbool VDIInputManager::InitStandardKeyboardDevice()
 {
-	// create standard keyboard device
-	vout << "DI: Init standard keyboard..." ;
+	//Set up the DIDEVICEINSTANCE structure
+	DIDEVICEINSTANCE deviceInstance;
+	ZeroMemory( &deviceInstance, sizeof(DIDEVICEINSTANCE) );
+	deviceInstance.dwSize = sizeof(DIDEVICEINSTANCE);
+	//We only need to set to attributes
+	//TODO:
+	//deviceInstance.tszInstanceName = "Standard DirectInput Keyboard Device";
+	deviceInstance.guidInstance = GUID_SysKeyboard;
 
-	if ( DI_OK != m_pDI->CreateDevice(GUID_SysKeyboard, &m_pDIStandardKeyboard, NULL) )
+	try {
+		m_pStandardKeyboard = new VDIKeyboardDevice(deviceInstance, m_pDI, m_hWnd);
+	}
+	catch (VInputException& e)
 	{
-		vout << "failed" << vendl;
 		return false;
 	}
-
-	if ( DI_OK != m_pDIStandardKeyboard->SetDataFormat(&c_dfDIKeyboard) )
-	{
-		vout << "failed" << vendl;
-		return false;
-	}
-
-	if ( DI_OK != m_pDIStandardKeyboard->SetCooperativeLevel(m_hWnd, DISCL_BACKGROUND | DISCL_NONEXCLUSIVE)  )
-	{
-		vout << "failed" << vendl;
-		return false;
-	}
-
-	if ( DI_OK != m_pDIStandardKeyboard->Acquire() )
-	{ 
-		vout << "failed" << vendl;
-		return false;
-	} 
-
-	vout << "sucessful" << vendl;
-
-	// name keys
-	m_StandardKeys[0] = VDIKeyboardButton( "Escape", &m_KeyboardBuffer[DIK_ESCAPE] );
-    m_StandardKeys[1] = VDIKeyboardButton( "Enter", &m_KeyboardBuffer[DIK_RETURN] );
-	m_StandardKeys[2] = VDIKeyboardButton( "Space", &m_KeyboardBuffer[DIK_SPACE] );
-	m_StandardKeys[3] = VDIKeyboardButton( "Cursor Left", &m_KeyboardBuffer[DIK_LEFT] );
-	m_StandardKeys[4] = VDIKeyboardButton( "Cursor Right", &m_KeyboardBuffer[DIK_RIGHT] );
-	m_StandardKeys[5] = VDIKeyboardButton( "Cursor Up", &m_KeyboardBuffer[DIK_UP] );
-	m_StandardKeys[6] = VDIKeyboardButton( "Cursor Down", &m_KeyboardBuffer[DIK_DOWN] );
 
 	return true;
 }
-
-VStringRetVal VDIInputManager::GetKeyboardButtonName( vlong in_Index )
-{
-	DIDEVICEOBJECTINSTANCE DeviceObject;
-	
-	ZeroMemory( &DeviceObject, sizeof( DIDEVICEOBJECTINSTANCE) );
-	DeviceObject.dwSize = sizeof(DIDEVICEOBJECTINSTANCE);
-
-	if ( DI_OK != m_pDIStandardKeyboard->GetObjectInfo(&DeviceObject, in_Index, DIPH_BYOFFSET) )
-		V3D_THROW( VInputException, "Cannot get keyboard button names");
-	
-	return DeviceObject.tszName;
-}
-
+/**
+* The creation of the standard mouse device is a small hack.
+* The standard mouse is represented through a VDIMouseDevice 
+* object. Under DirectInput the standard device are represented trough
+* a special GUID. So we have to set up the DIDEVICEINSTANCE structure by
+* ourself.
+*
+* @author AcrylSword
+*/
 vbool VDIInputManager::InitStandardMouseDevice()
 {
-	// create standard mouse device
-	vout << "DI: Init standard mouse...";
+	//Set up the DIDEVICEINSTANCE structure
+	DIDEVICEINSTANCE deviceInstance;
+	ZeroMemory( &deviceInstance, sizeof(DIDEVICEINSTANCE) );
+	deviceInstance.dwSize = sizeof(DIDEVICEINSTANCE);
+	//We only need to set to attributes
+//	deviceInstance.tszInstanceName = "Standard DirectInput Mouse Device";
+	deviceInstance.guidInstance = GUID_SysMouse;
 
-	if ( DI_OK != m_pDI->CreateDevice(GUID_SysMouse, &m_pDIStandardMouse, NULL) )
+	try {
+		m_pStandardMouse = new VDIMouseDevice(deviceInstance, m_pDI, m_hWnd);
+	}
+	catch (VInputException& e)
 	{
-		vout << "failed" << vendl;
 		return false;
 	}
-
-	if ( DI_OK != m_pDIStandardMouse->SetDataFormat(&c_dfDIMouse) )
-	{
-		vout << "failed" << vendl;
-		return false;
-	}
-
-	if ( DI_OK != m_pDIStandardMouse->SetCooperativeLevel( m_hWnd, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND) )
-	{
-		vout << "failed" << vendl;
-		return false;
-	}
-
-	if ( DI_OK != m_pDIStandardMouse->Acquire() )
-	{ 
-		vout << "failed" << vendl;
-		return false;
-	} 
-
-	vout << "sucessful" << vendl;
-
-	m_MouseButtons[0] = VDIMouseButton( "Mousebutton 0", &m_MouseState.rgbButtons[0] );
-	m_MouseButtons[1] = VDIMouseButton( "Mousebutton 1", &m_MouseState.rgbButtons[1] );
-	m_MouseButtons[2] = VDIMouseButton( "Mousebutton 2", &m_MouseState.rgbButtons[2] );
-	m_MouseButtons[3] = VDIMouseButton( "Mousebutton 3", &m_MouseState.rgbButtons[3] );
-
-	m_MouseXAxis = VDIMouseAxis("Mouse X-Axis", &m_MouseState.lX);
-	m_MouseYAxis = VDIMouseAxis("Mouse Y-Axis", &m_MouseState.lY);
-
-	return true; 
-}
-
-
-
-vbool VDIInputManager::EnumDevicesCallback(const DIDEVICEINSTANCE* in_pdiDeviceInstance)
-{
-	VDIInputDevice *Temp = 0;
-
-	try
-	{
-        switch ( GET_DIDEVICE_TYPE( in_pdiDeviceInstance->dwDevType ) )
-		{
-            case DI8DEVTYPE_JOYSTICK:	
-            case DI8DEVTYPE_GAMEPAD:	
-            case DI8DEVTYPE_KEYBOARD:	
-            case DI8DEVTYPE_MOUSE:	Temp = new VDIInputDevice( *in_pdiDeviceInstance, m_pDI, m_hWnd );
-									break;
-		}
-	}
-	catch(VException e)
-	{
-		delete Temp;
-		return true;
-	}
-
-	if (Temp)
-        m_DeviceList.push_back( *Temp );
 
 	return true;
 }
 
+/**
+ * Returns the standard keyboard device
+ *
+ * @return The standard keyboard device
+ * @auhtor AcrylSword
+ */
+IVKeyboardDevice& VDIInputManager::GetStandardKeyboard()
+{
+	return *m_pStandardKeyboard;
+}
+
+/**
+* Returns the standard mouse device
+*
+* @return The standard mouse device
+* @auhtor AcrylSword
+*/
+IVMouseDevice& VDIInputManager::GetStandardMouse()
+{
+	return *m_pStandardMouse;
+}
+/**
+ * This method starts enumeration of all kinds of attatched input devices
+ * For each device the method EnumDevicesCallback() is called.
+ *
+ * @author AcrylSword
+ */
 vbool VDIInputManager::EnumerateDevices()
 {
 	// enumerate all devices with 
 	if ( DI_OK != m_pDI->EnumDevices( DI8DEVCLASS_ALL,
-		EnumDevicesStaticCallback,
+		StaticDIEnumDevicesCallback,
 		(LPVOID) this,
 		DIEDFL_ATTACHEDONLY ) )
 	{
@@ -199,102 +197,66 @@ vbool VDIInputManager::EnumerateDevices()
 
 	return true;
 }
-										   
-IVButton& VDIInputManager::GetStandardKey( KeyCode in_myKey )
+
+vbool VDIInputManager::EnumDevicesCallback(const DIDEVICEINSTANCE* in_pdiDeviceInstance)
 {
-	switch ( in_myKey )
-	{
-        case Escape:		return m_StandardKeys[Escape];
-		case Enter:			return m_StandardKeys[Enter];
-		case Space:			return m_StandardKeys[Space];
-		case CursorLeft:	return m_StandardKeys[CursorLeft];
-		case CursorRight:	return m_StandardKeys[CursorRight];
-		case CursorUp:		return m_StandardKeys[CursorUp];
-		case CursorDown:	return m_StandardKeys[CursorDown];
-		default:			V3D_THROW( VIllegalKeyIdentifierException, "Illegal key identifier");
-	}
-}
+	IVInputDevice* device = 0;
 
-IVButton& VDIInputManager::GetMouseButton(vuint in_iButton)
-{
-	if ( in_iButton > 3 )
-		V3D_THROW( VException, "VDIInputManager::GetMouseButton(): in_iButton out of range" );
-
-	return m_MouseButtons[in_iButton];
-}
-
-IVRelativeAxis& VDIInputManager::GetMouseXAxis()
-{
-	return m_MouseXAxis;
-}
-
-IVRelativeAxis&	VDIInputManager::GetMouseYAxis()
-{
-	return m_MouseYAxis;
-}
-
-
-void VDIInputManager::Release()
-{
-	if (m_pDI)
-	{
-		if (m_pDIStandardMouse)
+	try {
+		switch ( GET_DIDEVICE_TYPE(in_pdiDeviceInstance->dwDevType) )
 		{
-			m_pDIStandardMouse->Release();
-			m_pDIStandardMouse = 0;
+            case DI8DEVTYPE_JOYSTICK:	
+			case DI8DEVTYPE_GAMEPAD:
+				device = new VDIInputDevice(*in_pdiDeviceInstance, m_pDI, m_hWnd, IVInputDevice::Undefined);
+				break;
+            case DI8DEVTYPE_KEYBOARD:
+				device = new VDIKeyboardDevice(*in_pdiDeviceInstance, m_pDI, m_hWnd);
+				break;
+			case DI8DEVTYPE_MOUSE:
+				device = new VDIMouseDevice(*in_pdiDeviceInstance, m_pDI, m_hWnd);
+				break;
 		}
-
-		if (m_pDIStandardKeyboard)
-		{
-			m_pDIStandardKeyboard->Release();
-			m_pDIStandardKeyboard = 0;
-		}
-
-		m_DeviceList.clear();
-
-		m_pDI->Release();
-		m_pDI = NULL;
 	}
+	catch(VCreationException& e) {
+		vout << "Bong" << vendl;
+		return true;
+	}
+
+	V3D_ASSERT(device != 0);
+	m_DeviceList.push_back(device);
+
+	return true;
 }
 
 // from IVUpdateable
 void VDIInputManager::Update(vfloat32 in_fSeconds)
 {
-
-	HRESULT hr;
 	// update standard devices
-	hr = m_pDIStandardKeyboard->GetDeviceState( sizeof(m_KeyboardBuffer),
-												(LPVOID)&m_KeyboardBuffer);
-	if ( hr != DI_OK )
+	m_pStandardKeyboard->Update();
+    m_pStandardMouse->Update();
+
+	// update mouse devices
+	for ( std::list<VDIMouseDevice*>::iterator Iter = m_MouseList.begin();
+		  Iter != m_MouseList.end();
+		  ++Iter)
 	{
-		vout << "Error" << hr;
-		if ( hr == DIERR_NOTACQUIRED )
-		{
-			m_pDIStandardKeyboard->Acquire();
-			m_pDIStandardKeyboard->GetDeviceState( sizeof(m_KeyboardBuffer),
-												   (LPVOID)&m_KeyboardBuffer);
-			if ( hr != DI_OK )
-				V3D_THROW(VUpdateException, "Input update error");
-		}
+		(*Iter)->Update();
 	}
 
-    hr = m_pDIStandardMouse->GetDeviceState( sizeof(DIMOUSESTATE),
-											 (LPVOID) &m_MouseState );
-		if ( hr != DI_OK )
-			if ( hr == DIERR_NOTACQUIRED )
-			{
-				m_pDIStandardMouse->Acquire();
-				m_pDIStandardMouse->GetDeviceState( sizeof(DIMOUSESTATE),
-													(LPVOID) &m_MouseState );
-				if ( hr != DI_OK )
-					V3D_THROW(VUpdateException, "Input update error");
-			}
-
-	std::list<VDIInputDevice>::iterator Iter;
-
-	for ( Iter = m_DeviceList.begin(); Iter != m_DeviceList.end(); Iter++ )
+	// update keyboard devices
+	for ( std::list<VDIKeyboardDevice*>::iterator Iter = m_KeyboardList.begin();
+		  Iter != m_KeyboardList.end();
+		  ++Iter)
 	{
-		(*Iter).Update();
+		(*Iter)->Update();
+	}
+
+	// update other devices
+	for ( std::list<VDIInputDevice*>::iterator Iter = m_InputDeviceList.begin();
+		  Iter != m_InputDeviceList.end();
+		  ++Iter )
+	{
+		(*Iter)->Update();
 	}
 }
 
@@ -323,39 +285,44 @@ void VDIInputManager::SetActive(vbool in_bStatus)
 			
 			IVUpdateable::Unregister();
 			m_bRegistered = false;
-			ClearInputData();
-	
+//			ClearInputData();
 		}
 	}
-
 }
 
-void VDIInputManager::ClearInputData()
-{
-	ZeroMemory(m_KeyboardBuffer, sizeof(vchar) *256);
-	m_MouseState.rgbButtons[0] = 0;
-	m_MouseState.rgbButtons[1] = 0;
-	m_MouseState.rgbButtons[2] = 0;
-	m_MouseState.rgbButtons[3] = 0;
-	m_MouseState.lX  = 0;
-	m_MouseState.lY	 = 0;
-}
-
+/**
+* Returns a VForwardIterator pointing to the beginning of the device list
+*
+* @return A iterator pointing to the beginning of the device list
+* @author AcrylSword
+*/
 IVInputManager::DeviceIterator VDIInputManager::DeviceBegin()
 {
-	typedef VSTLIteratorPol<std::list<VDIInputDevice>::iterator, IVInputDevice> DeviceIterPol;
-
-	return IVInputManager::DeviceIterator( new DeviceIterPol(m_DeviceList.begin()));
+	typedef VSTLDerefIteratorPol<std::list<IVInputDevice*>::iterator, IVInputDevice> DeviceIterPol;
+	return DeviceIterator( new DeviceIterPol(m_DeviceList.begin()));
 }
-
+/**
+* Returns a VForwardIterator pointing to the end of the device list
+* @return A iterator pointing to the end of the device list
+* @author AcrylSword
+*/
 IVInputManager::DeviceIterator VDIInputManager::DeviceEnd()
 {
-	typedef VSTLIteratorPol<std::list<VDIInputDevice>::iterator, IVInputDevice> DeviceIterPol;
-
+	typedef VSTLDerefIteratorPol<std::list<IVInputDevice*>::iterator, IVInputDevice> DeviceIterPol;
 	return DeviceIterator( new DeviceIterPol(m_DeviceList.end()));
 }
 
-BOOL CALLBACK VDIInputManager::EnumDevicesStaticCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef )
+/**
+* Non-static callback methods does not work. This static callback
+* function redirects a method call to the EnumDevicesCallback()
+* method.
+*
+* @param lpddi The device that is enumerated
+* @param pvRef	 Pointer to user data. In this case pvRef is the this
+*               pointer of the class that performs the enumeration
+* @author AcrylSword
+*/
+BOOL CALLBACK VDIInputManager::StaticDIEnumDevicesCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef )
 {
 	return ((VDIInputManager*) pvRef)->EnumDevicesCallback(lpddi);
 }

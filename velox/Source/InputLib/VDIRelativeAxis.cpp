@@ -1,6 +1,6 @@
 #include "VDIRelativeAxis.h"
-#include <v3d/Core/VAssert.h>
 #include <windows.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {
@@ -8,7 +8,6 @@ namespace input {
 
 VDIRelativeAxis::VDIRelativeAxis()
 {
-
 }
 
 /**
