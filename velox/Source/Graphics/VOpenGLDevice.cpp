@@ -232,10 +232,31 @@ void VOpenGLDevice::InitializeExtensions()
 	m_pRenderer	= (vchar *)glGetString(GL_RENDERER);
 	m_pVersion	= (vchar *)glGetString(GL_VERSION);
 
-	vout << "-------------------------------------------------------" << vendl;
+	vchar* Extensions = (vchar*)glGetString(GL_EXTENSIONS);
+	vchar  ExtensionName[64];
+	vuint Length = strlen(Extensions);
+	vuint y = 0;
+
+    vout << "-------------------------------------------------------" << vendl;
 	vout << "OpenGL vendor: " << m_pVendor << vendl;
 	vout << "OpenGL renderer: " << m_pRenderer << vendl;
 	vout << "OpenGL version: " << m_pVersion << vendl;
+
+	vout << "OpenGL extensions: " << vendl;
+
+	for (vuint i=0; i<Length; i++)
+	{
+
+		ExtensionName[y] = Extensions[i];
+		y++;
+		if (Extensions[i]==' ')
+		{
+			ExtensionName[y-1] = '\0';
+			y=0;
+			vout << ExtensionName << vendl;
+		}
+		
+	}
 
 	if(extgl_Initialize() != 0)
 		vout << "Initializing extensions failed!" << vendl;
