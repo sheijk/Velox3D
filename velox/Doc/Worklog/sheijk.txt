@@ -60,6 +60,10 @@ Doku:
 
 log:
 
+20.12.2003
+Dokumentationen mit Author Tags versehn
+Wer hat nen geilen Einfall fuer das Design vom USG? :\
+
 22.12.2003
 VConsoleFrame: groesse geaendert, damit das ding auf meinen kleinen desktop passt :)
 und die fkt zum erstellen des frames umgeschrieben, so dass man nicht mehr 25 minuten

@@ -7,7 +7,7 @@
  <h1>Creating a Velox Service</h1>
  (erstmal auf deutsch, sollte spaeter noch uebersetzt werden)
  <h2>The Object Registry</h2>
- <p> 
+ <p>
  Die Object Registry verwaltet eine Zuordnung von eindeutigen Schluesseln zu Objekten.
  Die Schluessel/Objektpaare koennen dabei in einer Baumstruktur hyrarchisch angeordnet
  werden, indem beim Registrieren eines Objekts ein Parent Objekt angegeben wird.
@@ -15,13 +15,13 @@
  das zugehoerige Objekt ermittelt werden und zu einem Objekt kann der Schluessel
  ermittelt werden. Ein Objekt muss sich spaetestens wenn es geloescht wird bei der
  Objekt Registry wieder abmelden. <br><br>
- Objekte welche in der Object Registry registriert werden sollen muessen von 
+ Objekte welche in der Object Registry registriert werden sollen muessen von
  VNamedObject abgeleitet werden. Schluessel sind vom Typ VObjectKey, und koennen von
  und nach std::string Konvertiert werden.<br><br>
  Mit Hilfe der Template Funktion QueryObject kann
  ein Objekt typensicher von der Object Registry bekommen werden.
  </p>
- 
+
  <h2>Aufbau eines Services</h2>
  <p>
  Ein Service ist ein Stueck Software welche dem System eine genau spezifizierte
@@ -66,7 +66,7 @@
  } </br>
  <br>
  VWindowFactory* g_pWndFac = 0;<br>
- VWindowManager* g_pWndMngr = 0;<br> 
+ VWindowManager* g_pWndMngr = 0;<br>
  // Initialisierung, muss irgendwann aufgerufen werden (z.Bsp. in der DLL Init.. Fktn) <br>
  void InitializeService() <br>
  { <br>
@@ -82,10 +82,11 @@
  &nbsp;&nbsp;delete g_pWndMngr; <br>
  } <br>
  <br>
- 
+
  <h2>Abschliessende Bemerkungen</h2>
  Wenn Objekte durch eine Service Funktion erzeugt werden muessen SmartPointer zurueckgegeben werden
  um Speicherlecks zu vermeiden. Das ganze ist noch nicht ganz fertig, im Moment muessen z.B. die
- Services noch in eine .lib getan werden. 
- 
+ Services noch in eine .lib getan werden.
+
+ <p>- Jan Rehders</p>
 </body>

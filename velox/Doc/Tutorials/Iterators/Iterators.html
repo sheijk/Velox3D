@@ -31,15 +31,15 @@
 	  Velox comes with some predefines iterator classes which make it easier
 	  to write iterators for velox services. They directly map to the
 	  iterator concepts and can be found in &lt;v3d/Core/Wrappers/VIterator.h&gt;
-	  Because of the velox architecture and services beeing distributed over 
+	  Because of the velox architecture and services beeing distributed over
 	  different DLLs velox iterators have some special requirements:
 	  <ul>
 	  	  <li>SmartPointer behaviour: iterators are created dynamically
 		  and need to be released automatically</li>
 		  <li>Hide the implementation from the user to reduce dependencies</li>
-	  </ul> 	  
+	  </ul>
 	  </p>
-	  
+
 	  <h2>Architecture</h2>
 	  <p>
 	  Velox provides some classes which provide the interfaces for the
@@ -51,18 +51,18 @@
 		  <li>VBidirectionalIterator</li>
 		  <li>VRandomIterator</li>
 	  </ul>
-	  Each iterator holds a pointer to IVIteratorPol class. They use this 
+	  Each iterator holds a pointer to IVIteratorPol class. They use this
 	  class as the actual implementation. To implement your own iterators,
 	  derive a class from IVIteratorPol and implement it's methods.
 	  </p>
-	  
+
 	  <h2>Predefines iterator policies</h2>
 	  <p>
 	  <h3>VSTLDerefIterator</h3>
 	  Use this for providing iterators for STL containers which hold
 	  pointers, iterators or smart pointers. (Everything which can be
 	  dereferenced using the * operator, and can be used like an STL iterator)
-	  
+
 	  <div id="cpp">
 	  #include&lt;v3d/Core/Wrappers/VSTLDerefIteratorPol.h&gt; <br>
 	  <br>
@@ -88,6 +88,7 @@
 	  &nbsp;&nbsp;&nbsp;return BlahIterator(new IterPol(myList.end())); <br>
 	  } <br>
 	  </div>
-	  
-	  
+
+
+	<p>- Jan Rehders</p>
 </body>

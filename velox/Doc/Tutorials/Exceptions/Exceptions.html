@@ -22,7 +22,7 @@
 		  <li>in destructors</li>
 	  </ul>
 	  </p>
-	  
+
 	  <h2>How to use them</h2>
 	  <p>
 	  All velox exeptions must be derived from VException directly or indirectly.
@@ -43,12 +43,12 @@
 		  		  </li>
 		 </ul>
 		 </li>
-	  </ul>  
+	  </ul>
 	  </p>
-	  
+
 	  <h2>How to throw an catch them</h2>
 	  Consider this example, where
-	  
+
 	  <div id="cpp">
 	  V3D_DECLARE_EXCEPTION(VCfgParserException, VException); <br>
 	  V3D_DECLARE_EXCEPTION(VFileNotFoundException, VCfgParserException); <br>
@@ -61,9 +61,9 @@
 	  &nbsp;&nbsp;&nbsp;void parseFile(VStringParam in_strFileName, VConfiguration& io_Cfg); <br>
 	  }; <br>
 	  </div>
-	  
+
 	  It could be used this way:
-	  
+
 	  <div id="cpp">
 	  void ReadConfig(string in_strFileName, VConfiguration& io_Cfg, string in_strDefaultFile) <br>
 	  { <br>
@@ -71,14 +71,14 @@
 	  &nbsp;&nbsp;&nbsp;{ <br>
 	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.parseFile(in_strFileName, io_Cfg); <br>
 	  &nbsp;&nbsp;&nbsp;} <br>
-	  &nbsp;&nbsp;&nbsp;catch(VFileNotFoundException e) <br> 
+	  &nbsp;&nbsp;&nbsp;catch(VFileNotFoundException e) <br>
 	  &nbsp;&nbsp;&nbsp;{ <br>
-	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << "file " << strFileName << " 
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << "file " << strFileName << "
 	        not found, using standard config file" << endl; <br>
 	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parser.parseFile(in_strDefaultFile, io_Cfg);
 	  &nbsp;&nbsp;&nbsp;} <br>
 	  } <br>
-	  <br> 
+	  <br>
 	  // ... <br>
 	  <br>
 	  VCfgParser parser; <br>
@@ -104,13 +104,14 @@
 	  { <br>
 	  &nbsp;&nbsp;&nbsp;cout << "unknow error occured: " << e.GetErrorString() << endl; <br>
 	  } <br>
-	  <br>	  
+	  <br>
 	  </div>
-	  
+
 	  To throw an exception, V3D_THROW(exceptionName, errorMessage); should be ok
 	  for all "trivial" exceptions (those declared with the V3D_DECLARE_EXCEPTION macro).
 	  If your exceptions classes c'tor has different parameters write your own
 	  throw macro. (see the unit test framework's exceptions for an example)
 	  </p>
-				  
+
+      <p>- Jan Rehders</p>
 </body>

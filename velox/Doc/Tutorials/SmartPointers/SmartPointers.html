@@ -8,7 +8,7 @@
 	  <h2>Simple usage</h2>
 	  <p>
 	  SmartPointers are small utility classes which act exactly like normal
-	  pointers and provide some extra functionality like guarantueing that 
+	  pointers and provide some extra functionality like guarantueing that
 	  the object they point to will be deleted.<br>
 	  Velox's smart pointers can be used exactly like any common pointer. So
 	  instead of writing <br>
@@ -28,26 +28,26 @@
 	  The SmartPointer will delete his subject once it is destroyed itself.
 	  Use a smart pointer exactly like a normal pointer. You can assign values,
 	  other smart pointers of the same type (or of compatible types if supported
-	  by the smart pointer class), compare two smart pointers, compare smart 
+	  by the smart pointer class), compare two smart pointers, compare smart
 	  pointer and normal pointers, etc. <br>
 	  Additionally, smart pointers provide the following functions:
 	  <div id="cpp">
-	  // get a pointer to the target <br> 
+	  // get a pointer to the target <br>
 	  T* Get(); <br>
 	  const T* Get() const; <br>
-	  // assign new target <br> 	  
+	  // assign new target <br>
 	  void Assign(T*); <br>
 	  // release it (reset to 0) <br>
 	  void Release(); <br>
 	  </div>
 	  </p>
-	  
+
 	  <h2>Important techniques</h2>
-	  
+
 	  <h3>Resource aquisition is intialization</h3>
 	  <p>
 	  Use smart pointers for the "resource aquisition is intialization" idiom.
-	  Instead of using pure pointers use a smart pointer when working with 
+	  Instead of using pure pointers use a smart pointer when working with
 	  dynamically allocated memory. <br>
 	  Might the following code cause memory leaks?
 	  <div id="cpp">
@@ -65,10 +65,10 @@
 	  foo(pSaveInstance.Get()); <br>
 	  </div>
 	  Now if foo throws an exception the stack will be unrolled an the AutoPtr
-	  instance will be destroyed and delete it's target. Now we have code which 
+	  instance will be destroyed and delete it's target. Now we have code which
 	  is both shorter and won't cause any surprising problems.
-	  </p> 
-	  
+	  </p>
+
 	  <h3>Don't trust the user</h3>
 	  Imagine a simple file class which wraps the FILE handle and guarantees
 	  the file to be closed. Let it be created by a factory method which returns
@@ -94,14 +94,14 @@
 	  <div id="cpp">
 	  FileManager::FilePtr pFile = FileManager::Open("testfile.dat"); <br>
 	  pFile->WriteInt(3);
-	  </div> 
+	  </div>
 	  Always use this technique when adding a factory method to a service.
-	  
+
 	  <h2>Standard SmartPointer Types</h2>
 	  <p>
 	  There are several smart pointer types defined in &lt;v3d/Core/SmartPtr/VGuards.h&gt;:
 	  </p>
-	  
+
 	  <h3>AutoPtr</h3>
 	  <p>
 	  A pointer with an "exclusive owner" policy. This means, that only one smart
@@ -118,7 +118,7 @@
 	  if( pAutoPtr != 0 || pSecondPtr == 0 ) throw AnException("AutoPtr malfunction"); <br>
 	  </div>
 	  </p>
-	  
+
 	  <h3>SharedPtr</h3>
 	  <p>
 	  A smart pointer class which implements a simple reference counting strategy.
@@ -127,9 +127,9 @@
 	  it is deleted. <br>
 	  Each smart pointer has a pointer to a shared storage which stores a pointer
 	  to the target and the reference count. When a pointer is assigned to a value
-	  a new shared storage is created with it's ref count initialized to 1. When 
-	  a pointer is copied/assigned to another smart pointer it's shared storage's 
-	  ref count is increased. When a SharedPtr is assigned a new value it's old 
+	  a new shared storage is created with it's ref count initialized to 1. When
+	  a pointer is copied/assigned to another smart pointer it's shared storage's
+	  ref count is increased. When a SharedPtr is assigned a new value it's old
 	  target's ref count is decreased. When the ref counts reaches zero the
 	  target will be deleted. <br>
 	  A SharedPtr can safely be used in STL containers like std::list. <br>
@@ -143,9 +143,9 @@
 	  // only pSharedPtr2 points to the target, it's ref count is 1 <br>
 	  pSharedPtr2 = pSharedPtr3;
 	  // no more pointers point to the target, it is deleted <br>
-	  </div> 
+	  </div>
 	  </p>
-	  
+
 	  <h3>AutoPtr and SharedPtr for arrays</h3>
 	  <p>
 	  <div id="cpp">
@@ -155,5 +155,6 @@
 	  myAutoArray[4].foo(); <br>
 	  mySharedArray[2].foo(); <br>
 	  </div>
-	  
+
+	<p>- Jan Rehders</p>
 </body>
