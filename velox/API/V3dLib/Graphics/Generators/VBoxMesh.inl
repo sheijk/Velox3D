@@ -1,9 +1,8 @@
-
-using namespace v3d::graphics;
-
 template <typename VertexStructure> 
-void VBoxMesh<VertexStructure>::CreateCoordinates()
+void VBoxMesh<VertexStructure>::GenerateCoordinates()
 {
+	using namespace v3d::graphics;
+
 	vfloat32 fHeightHalf = m_fHeight / 2.0f;
 	vfloat32 fWidthHalf = m_fWidth / 2.0f;
 	vfloat32 fDepthHalf = m_fDepth / 2.0f;
@@ -68,8 +67,10 @@ void VBoxMesh<VertexStructure>::CreateCoordinates()
 }
 
 template <typename VertexStructure>
-void VBoxMesh<VertexStructure>::CreateTextureCoordinates()
+void VBoxMesh<VertexStructure>::GenerateTexCoords()
 {
+	using namespace v3d::graphics;
+
 	//front face
 	buffer[0].texCoords = VTexCoord2f(0.0f, 0.0f);
 	buffer[1].texCoords = VTexCoord2f(1.0f, 0.0f);
@@ -124,11 +125,4 @@ void VBoxMesh<VertexStructure>::CreateTextureCoordinates()
 	buffer[33].texCoords = VTexCoord2f(0.0f, 0.0f);
 	buffer[34].texCoords = VTexCoord2f(1.0f, 0.0f);
 	buffer[35].texCoords = VTexCoord2f(1.0f, 1.0f);
-}
-
-template <typename VertexStructure>
-VBuffer<VertexStructure>* VBoxMesh<VertexStructure>::GetVertexBuffer()
-{
-	return &buffer;
-
 }
