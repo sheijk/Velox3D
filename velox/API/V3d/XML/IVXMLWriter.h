@@ -16,6 +16,8 @@
 #ifndef IVXMLWRITER_H
 #define IVXMLWRITER_H
 
+#include <V3d/Core/VTypes.h>
+
 namespace v3d{
 namespace xml{
 
@@ -24,24 +26,24 @@ class IVXMLWriter
 {
 
 public:
-	virtual void WriteDeclaration(const char* text) =0;
+	virtual void WriteDeclaration(VStringParam FileName) =0;
 	/*
 	* Creates a new xml element (<Name)
 	*/
-	virtual void OpenElement(char* name) =0;
+	virtual void OpenElement(VStringParam name) =0;
 	/*
 	* Closes the last opened element. (/> oder </Name>)
 	*/
-	virtual void CloseElement(char* name) =0;
+	virtual void CloseElement(VStringParam name) =0;
 	/*
 	* Adds an attribute to the current element. May only be called directly after
 	* OpenElement
 	*/
-	virtual void AddAttribute(const char* name, const char* value,...) =0;
+	virtual void AddAttribute(VStringParam name, VStringParam value,...) =0;
 	/*
 	* Adds a comment
 	*/
-	virtual void AddComment(char* text) =0;
+	virtual void AddComment(VStringParam text) =0;
 	/*
 	* Adds a text
 	*/

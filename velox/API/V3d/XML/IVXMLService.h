@@ -3,7 +3,8 @@
 
 #include <v3d/Core/VNamedObject.h>
 #include <v3d/Vfs/IVStream.h>
-#include <v3d/Xml/IVXMLWriter.h>
+#include <v3d/XML/IVXMLWriter.h>
+#include <V3d/XML/IVXMLVisitor.h>
 
 namespace v3d{
 namespace xml{
@@ -26,7 +27,7 @@ protected:
 public:
         
 //	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor) = 0;
-//	virtual void ParseXMLFile(char* in_pcName, IVXMLVisitor* in_pVisitor) = 0;
+	virtual void ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor) = 0;
 	//virtual IVXMLWriter* CreateXMLWriter(IVStream* in_pStream) = 0;
 	virtual IVXMLWriter* CreateXMLWriter() = 0;
 };
