@@ -7,20 +7,16 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
-//TODO: SmartPointer oder sowas benutzen
 
 /**
  * Simply wraps a C-Style string to guarantee memory release
+ *
  * @author sheijk
- * @version 1.0
- * @generator Enterprise Architect
  * @created 14-May-2003 12:40:39
  */
 class VString
 {
 private:
-	//TODO: einen deep copy ptr verwenden
-	//VArrayPtr<vchar>::SharedPtr m_pCStr;
 	vchar* m_pCStr;
 	vuint m_nLength;
 

@@ -25,6 +25,7 @@ VString::VString(const vchar *in_pCStr)
 
 VString::~VString()
 {
+	delete[] m_pCStr;
 	m_nLength = 0;
 }
 
@@ -95,7 +96,7 @@ VString operator+(const char* in_pcChar, const VString& in_VStr)
 	pChars[nVStrLen+nCStrLen] = '\0';
 
 	VString vstr(pChars);
-	
+
 	delete[] pChars;
 
 	return vstr;
@@ -122,9 +123,18 @@ VString operator+(const VString& in_VStr, const char* in_pcChar)
 
 vbool operator==(const VString& left, const VString& right)
 {
-	return std::equal(
-		left.AsCString(), left.AsCString() + left.Length(),
-		right.AsCString() );
+	if( left.Length() != right.Length() )
+	{
+		return false;
+	}
+	else
+	{
+		return std::equal(
+				left.AsCString(),
+				left.AsCString() + left.Length(),
+				right.AsCString()
+				);
+	}
 }
 
 vbool operator!=(const VString& left, const VString& right)
