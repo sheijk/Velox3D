@@ -40,7 +40,7 @@ public:
 	 *
 	 * @return The current rigid body transformation
 	 */
-	VRBTransform* GetTransform();
+	VRBTransform GetTransform();
 
 	/**
 	 * Sets the rigid body transformation of this part

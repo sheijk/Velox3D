@@ -34,6 +34,7 @@ high:
 - klaeren, warum es 2 VRBTransforms in /Math und /EntityParts gibt
 	- namespace in math rbtransform aendern
 
+- SetTrasnform RigidBody zurueckfuehren
 
 //-----------------------------------------------------------------------------
 

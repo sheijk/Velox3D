@@ -79,7 +79,7 @@ void VPhysicBody::SetTransformation()
 	VMatrix<vfloat32, 3, 3> axis;
 	VMatrix<vfloat32, 4, 4> trans; //TODO: rbtransform accessmethoden aendern
 
-	pBodyPart->GetTransform()->GetAxis(x1,y1,z1);
+	pBodyPart->GetTransform().GetAxis(x1,y1,z1);
 
 	axis.Set(0,0, x1.Get(0)); 
 	axis.Set(1,0, x1.Get(1));
@@ -118,7 +118,7 @@ void VPhysicBody::SetTransformation()
 	trans.Set(3,2, 0);
 	trans.Set(3,3, 1);
 	
-	pBodyPart->GetTransform()->Set(trans);
+	pBodyPart->SetTransform(VRBTransform(trans));
 }
 
 void VPhysicBody::SetCollisionBody(VPhysicGeometry* in_CollisionBodyState)
