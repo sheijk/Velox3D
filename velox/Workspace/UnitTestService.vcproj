@@ -146,6 +146,16 @@
 				RelativePath="..\Source\UnitTests\VTestSuite.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="Example"
+			Filter="">
+			<File
+				RelativePath="..\Source\UnitTests\VUnitTestExample.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\UnitTests\VUnitTestExample.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
