@@ -26,17 +26,17 @@
     m_Writer->OpenElement("First Element");<br>
     m_Writer->OpenElement("Names");<br>
     m_Writer->AddAttribute("Name", "My Name is not Hannibal");<br>
-    m_Writer->AddComment("What for a nonsense xml file");<br>
     m_Writer->CloseElement("Names");<br>
+    m_Writer->AddComment("What for a nonsense xml file");<br>
     m_Writer->CloseElement("First Element");<br>
     m_Writer->Close();</p>
  <p>The AddAttribute() method works like the well known printf(). This means you can add an abitrary number of attributes that are written into the file.<br>
     The above example creates this xml file:</p>
  <p>&lt?xml version="1.0" ?&gt<br>
     &ltFirst Element&gt<br>
-    &ltNames Name="My Name is not Hannibal"&gt<br>
+    &ltNames Name="My Name is not Hannibal"/&gt<br>
     &lt!-- What for a nonsense xml file --!&gt<br>
-    &ltFirst Element&gt<br></p>
+    &lt/First Element&gt<br></p>
  <p>You should ever close an element that you have opened. The writer does not check if your input is valid thus you are responsible for the correctness of the created file.<br></p>
  <h2>Reading a XML file</h2>
  <p>The xml service reads in the file and parses it for you. The only possibility to get the content of the file is by creating a visitor derived from IVXMLVisitor.<br>
