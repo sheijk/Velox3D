@@ -9,28 +9,23 @@
 #include <wx/wx.h>
 //-----------------------------------------------------------------------------
 
-#include "VConsoleWindow.h"
+#include "VConsoleFrame.h"
 namespace v3d {
 namespace console {
 //-----------------------------------------------------------------------------
 
 
-class VConsoleService 
-	: public IVConsoleSerivce, 
-	  public v3d::updater::IVUpdateable
+class VConsoleService : public IVConsoleSerivce
 {
 public:
 	VConsoleService();
-	virtual void Update();
 	virtual ~VConsoleService();
 	virtual void Flush() {};
 	virtual void Write(VStringParam in_strString);
 
-	virtual void Update(vfloat32 in_fSeconds);
-	virtual void Activate();
-	virtual void Deactivate();
 private:
 	error::IVErrorService& GetErrorService();
+	VConsoleFrame m_Frame;
 };
 
 //-----------------------------------------------------------------------------

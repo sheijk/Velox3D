@@ -10,9 +10,13 @@ Current assigned tasks:
 
 TODO List:
 
+3.10.03
+- "Common service" must be loaded first
+- Rewriting console to new wx managment - easier to handle now
+
 29.09.03
 - Added a win32 project and renamend older ones
-- Added win32 spefic classes (VCommandLineParser, VWinDialogBox)
+- Added win32 specific classes (VCommandLineParser, VWinDialogBox)
 
 25.09.03
 - Templates need update!!

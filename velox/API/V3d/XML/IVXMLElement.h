@@ -19,7 +19,8 @@ namespace xml{
 class IVXMLElement
 {
 public:
-typedef VBirectionalIterator<IVXMLAttribute> AttributeIter;
+
+	typedef VBirectionalIterator<IVXMLAttribute> AttributeIter;
 
 	virtual VStringRetVal GetName() = 0;
 	virtual IVXMLAttribute* GetFirstAttribute() = 0;

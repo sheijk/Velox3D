@@ -1,45 +1,39 @@
-#ifndef V3D_VWINDOWSWXAPP_H
-#define V3D_VWINDOWSWXAPP_H
+#ifndef V3D_IVWXCONNECTOR_H
+#define V3D_IVWXCONNECTOR_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/Updater/IVUpdateable.h>
+#include <V3d/Core/Wrappers/VIterator.h>
 //-----------------------------------------------------------------------------
-#include <wx/wx.h>
-#include <list>
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {
 //-----------------------------------------------------------------------------
+class IVWindowFrame;
 
 /**
- * Dummy wx app	
+ *	Manages all IVConnectable classes
  */
 
-class VWindowsWxApp : public wxApp, public updater::IVUpdateable
+class IVWxConnector
 {
 public:
-	VWindowsWxApp();
-	virtual ~VWindowsWxApp();
 
-	/**
-	 * IVUpdateable members	
-	 */
-	virtual void Update(vfloat32 in_fSeconds);
-	virtual void Activate();
-	virtual void Deactivate();
+	typedef std::vector<IVWindowFrame*> VFrameList;
 
-	/**
-	 * virtual wxApp members	
-	 */
-	
-	virtual bool OnInit();
-	virtual int MainLoop();
-	virtual int OnExit();
+	virtual void Register(IVWindowFrame* in_pFrame) = 0;
+	virtual void Unregister(IVWindowFrame* in_pFrame) = 0;
 
+	//Test
+	virtual IVWindowFrame* GetCurrentFrame() = 0;
+	virtual vuint GetNumElements() = 0;
+
+			
+	virtual ~IVWxConnector(){};
 };
 
 //-----------------------------------------------------------------------------
 } // namespace window
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VWindowsWxApp_H
+#endif // V3D_IVWXCONNECTOR_H

@@ -32,7 +32,6 @@ void VUpdateManager::Register(IVUpdateable* in_pObject)
 
 void VUpdateManager::Unregister(IVUpdateable* in_pObject)
 {
-//	UpdateList::iterator iter = find(my_Subjects.begin(), my_Subjects.end(), in_pObject);
 	my_Subjects.remove(in_pObject);
 }
 

@@ -17,8 +17,7 @@ class IVConsoleSerivce : public VNamedObject, public util::IVStringStream
 public:
 
 	virtual ~IVConsoleSerivce() {} ;
-	virtual void Update() = 0;
-				
+	
 
 protected:
 	/**

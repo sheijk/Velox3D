@@ -21,7 +21,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;COMMONSERVICES_API"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -159,6 +159,16 @@
 					RelativePath="..\Source\UpdateManager\VUpdateManager.h">
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Wx Connector"
+			Filter="">
+			<File
+				RelativePath="..\Source\WxConnector\VWxConnector.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\WxConnector\VWxConnector.h">
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\Source\ConfigFiles\CommonServicesDLL.cpp">

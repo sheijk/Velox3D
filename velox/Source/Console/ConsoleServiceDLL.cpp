@@ -36,6 +36,8 @@ CONSOLE_API void Initialize(VObjectRegistry* in_pObjReg)
 
 	// create service object and register it
 	g_pConsoleService.Assign(new VConsoleService());
+
+	//VConsoleFrame* frame = new VConsoleFrame();
 }
 
 CONSOLE_API void Shutdown()
@@ -49,10 +51,6 @@ CONSOLE_API void Shutdown()
  * aber meist nichts tun
  */
 
-void WXDLLEXPORT wxEntryCleanup();
-int __cdecl wxEntry(void *,void *,char *,int,bool);
-int __cdecl wxEntry(WXHINSTANCE *);
-
 BOOL WINAPI DllMain( HINSTANCE hInstance, 
                        DWORD  ul_reason_for_call, 
                        LPVOID lpReserved )
@@ -60,17 +58,11 @@ BOOL WINAPI DllMain( HINSTANCE hInstance,
     switch (ul_reason_for_call)
 	{
 		case DLL_PROCESS_ATTACH:
-			
-			wxEntry(hInstance);
-			wxSetInstance(hInstance);
-			DisableThreadLibraryCalls (hInstance);
 			break;
 		case DLL_THREAD_ATTACH:
 		case DLL_THREAD_DETACH:
 		case DLL_PROCESS_DETACH:
-			wxEntryCleanup();
 			break;
-			
     }
     return TRUE;
 }

@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="WindowService"
-	ProjectGUID="{C2E15749-4341-4E4B-1337-07F8B0522B91}"
+	ProjectGUID="{C2E15749-4341-4E4B-1337-07F8B0112B91}"
 	RootNamespace="WindowService"
 	Keyword="Win32Proj">
 	<Platforms>
@@ -126,7 +126,13 @@
 				RelativePath="..\Api\V3d\Window\IVWindow.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Window\IVWindowManager.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Window\IVWxConnector.h">
 			</File>
 		</Filter>
 		<Filter
@@ -166,6 +172,12 @@
 				RelativePath="..\Source\WindowService\WindowServiceDLL.cpp">
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\Source\WindowService\VConsoleFrame.cpp">
+		</File>
+		<File
+			RelativePath="..\Source\WindowService\VConsoleFrame.h">
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -81,13 +81,17 @@ void VXMLElement::SetName(VStringParam Name)
 
 IVXMLElement::AttributeIter VXMLElement::AttributeBegin()
 {
-typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator, IVXMLAttribute> IterPol;
+typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
+		IVXMLAttribute> IterPol;
+
 	return AttributeIter(new IterPol(m_AttributeList.begin()));
 }
 
 IVXMLElement::AttributeIter VXMLElement::AttributeEnd()
 {
-typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator, IVXMLAttribute> IterPol;
+typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
+		IVXMLAttribute> IterPol;
+
 	return AttributeIter(new IterPol(m_AttributeList.end()));
 }
 

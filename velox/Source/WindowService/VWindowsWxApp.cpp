@@ -1,6 +1,9 @@
+#include <v3d/Window/IVWxConnector.h>
+#include <v3d/Core/VObjectRegistry.h>
 #include "VWindowsWxApp.h"
 //-----------------------------------------------------------------------------
-
+#include "VConsoleFrame.h"
+#include <v3d/Window/IVWindowFrame.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {
@@ -11,7 +14,7 @@ namespace window {
  */
 VWindowsWxApp::VWindowsWxApp()
 {
-	//this->Register();
+	IVUpdateable::Register();
 }
 
 /**
@@ -29,8 +32,22 @@ int VWindowsWxApp::MainLoop()
 	DoMessage();
 
 	//return s_currentMsg.wParam;
-	return 0;
 
+
+	window::IVWxConnector* WinConnect;
+	WinConnect = QueryObject<IVWxConnector>("wx.connector");
+
+
+	IVWindowFrame* frame = WinConnect->GetCurrentFrame();
+	
+	vuint i;
+	for(i = 0; i!= WinConnect->GetNumElements(); i++)
+	{
+		IVWindowFrame* frame = WinConnect->GetCurrentFrame();
+		frame->ShowFrame(true);
+	} 
+
+	return 0;
 }
 
 void VWindowsWxApp::Activate()
@@ -53,12 +70,6 @@ int VWindowsWxApp::OnExit()
 
 bool VWindowsWxApp::OnInit()
 {
-	/*m_MainFrame = new VEditorMainFrame("Editor", 100, 100, 400, 700,
-											wxCAPTION);
-
-	m_MainFrame->Show(TRUE);
-	SetTopWindow(m_MainFrame);*/
-
 	return TRUE;	
 }
 

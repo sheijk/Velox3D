@@ -134,16 +134,16 @@
 				RelativePath="..\Source\Console\ConsoleServiceDLL.cpp">
 			</File>
 			<File
+				RelativePath="..\Source\Console\VConsoleFrame.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Console\VConsoleFrame.h">
+			</File>
+			<File
 				RelativePath="..\Source\Console\VConsoleService.cpp">
 			</File>
 			<File
 				RelativePath="..\Source\Console\VConsoleService.h">
-			</File>
-			<File
-				RelativePath="..\Source\Console\VConsoleWindow.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Console\VConsoleWindow.h">
 			</File>
 		</Filter>
 	</Files>
