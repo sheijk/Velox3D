@@ -101,12 +101,8 @@ vint VExampleApp::Main()
 	pCamera->SetZ(-10.0f);
 	pDevice->SetCamera(pCamera);
 
-	//TODO: changed back cos of missing workdir -ins
-	Importer.Create("ObjFile", &Model);
-	bspImporter.Create("BspFile", "none");
-
-//	Importer.Create("/data/test.obj", &Model);
-//	bspImporter.Create("/data/test.bsp", "none");
+	Importer.Create("/data/test.obj", &Model);
+	bspImporter.Create("/data/test.bsp", "none");
 
 	// create a test mesh
     
