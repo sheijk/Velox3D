@@ -8,6 +8,8 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <algorithm>
+#include <functional>
 
 //TODO: write documentation for VTestSuite
 
@@ -41,20 +43,19 @@ VTestSuite::~VTestSuite()
 void VTestSuite::GenerateTestList()
 {
 	// get all test from the test manager
-	IVTestManager::TestIteratorPtr iter;
-	IVTestManager* pTestManager = QueryObject<IVTestManager>("testmngr");
-	iter = pTestManager->CommonTestsBegin();
+
 	VUnitTestInfo info;
+	IVTestManager* pTestManager = QueryObject<IVTestManager>("testmngr");
 
-	//(*(iter.Get())).Get()->ExecuteTest();
+	IVTestManager::TestIterator testIt(pTestManager->CommonTestsBegin());
 
-	for( ; 
-		*iter != *(pTestManager->CommonTestsEnd());
-		iter->Proceed())
+	for( ;
+		testIt != pTestManager->CommonTestsEnd();
+		++testIt )
 	{
 		// generate test info
-		(*iter)->GetTestInfo(info.strName, info.strSubject);
-		info.pUnitTest = iter->Get();
+		testIt->GetTestInfo(info.strName, info.strSubject);
+		info.pUnitTest = &(*testIt);
 
 		// add to list
 		m_UnitTests.insert(info);

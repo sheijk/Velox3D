@@ -81,7 +81,7 @@ void TestStreamRW(IVUnitTest* in_pTest, vfs::IVStream* in_pStream)
 	// compare data
 	if( memcmp(pTestData, pTestRes.addr(), nTestDataLen) != 0 )
 	{
-		V3D_THROW_UNITTEST_ERROR_STATIC("IVStream read/write test failed", 
+		V3D_UNITTEST_FAILURE_STATIC("IVStream read/write test failed", 
 			VUnitTestException::CriticalError);
 	}
 }

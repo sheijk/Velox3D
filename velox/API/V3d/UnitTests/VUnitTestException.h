@@ -64,12 +64,28 @@ private:
 };
 
 /** use this macro to throw a unit test exception */
-#define V3D_THROW_UNITTEST_ERROR(error_string, error_type) \
+#define V3D_UNITTEST_FAILURE(error_string, error_type) \
 	throw VUnitTestException(error_string, __FILE__, __LINE__, this, error_type);
 
+/** 
+ * signal an unit test error 
+ * (= V3D_UNITTEST_ERROR(errorString, VUnitTestException::Error)
+ */
+#define V3D_UNITTEST_ERROR(error_string) \
+	throw VUnitTestException(error_string, __FILE__, __LINE__, \
+	this, VUnitTestException::Error);
+
 /** use this macro to throw an unit test exception from a static function */
-#define V3D_THROW_UNITTEST_ERROR_STATIC(errorString, errorType) \
+#define V3D_UNITTEST_FAILURE_STATIC(errorString, errorType) \
 	throw VUnitTestException(errorString, __FILE__, __LINE__, 0, errorType);
+
+/** 
+ * signal an unit test error from a static function 
+ * (= V3D_UNITTEST_ERROR(errorString, VUnitTestException::Error)
+ */
+#define V3D_UNITTEST_ERROR_STATIC(errorString) \
+	throw VUnitTestException(errorString, __FILE__, __LINE__, 0, \
+	VUnitTestException::Error);
 //-----------------------------------------------------------------------------
 } // namespace unittests
 } // namespace v3d

@@ -3,8 +3,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VNamedObject.h>
-#include <v3d/Core/Wrappers/IVIterator.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
+#include <v3d/Core/Wrappers/VIterator.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -47,18 +47,17 @@ public:
 	//void OutputDebugMessage(VMessageLevel in_eLevel, const char* in_pszMessage);
 
 	/** enumeration of tests: */
-	typedef IVIterator<IVUnitTest*> TestIterator;
-	typedef VPointer<TestIterator>::AutoPtr TestIteratorPtr;
+	typedef VForwardIterator<IVUnitTest> TestIterator;
 
 	/**
 	 * get iterator to first common test
 	 */
-	virtual TestIteratorPtr CommonTestsBegin() = 0;
+	virtual TestIterator CommonTestsBegin() = 0;
 
 	/**
 	 * get iterator to last common test
 	 */
-	virtual TestIteratorPtr CommonTestsEnd() = 0;
+	virtual TestIterator CommonTestsEnd() = 0;
 };
 
 //-----------------------------------------------------------------------------

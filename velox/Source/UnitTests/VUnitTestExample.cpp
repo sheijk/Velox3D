@@ -54,13 +54,13 @@ void VUnitTestExample::ExecuteTest()
 	// bad weather, return a warning ;)
 	if( Sun != theWeather )
 	{
-		V3D_THROW_UNITTEST_ERROR("bad weather detected", VUnitTestException::Warning);
+		V3D_UNITTEST_FAILURE("bad weather detected", VUnitTestException::Warning);
 	}
 
 	// cpu is broken, return an error
 	if( 1 + 1 != 2 ) 
 	{
-		V3D_THROW_UNITTEST_ERROR("cpu broken", VUnitTestException::CriticalError);
+		V3D_UNITTEST_FAILURE("cpu broken", VUnitTestException::CriticalError);
 	}
 }
 

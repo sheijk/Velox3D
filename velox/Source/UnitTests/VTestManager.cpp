@@ -1,7 +1,5 @@
 #include "VTestManager.h"
 //-----------------------------------------------------------------------------
-//#include <V3d/Core/Wrappers/VSTLIterDerefAdaptor.h>
-#include <V3d/Core/Wrappers/VSTLIteratorAdaptor.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -37,24 +35,55 @@ void VTestManager::AddCommonTest(IVUnitTest* in_pTest)
 //		// output message
 //}
 
-VTestManager::TestIteratorPtr VTestManager::CommonTestsBegin()
+template<
+	typename Iter,
+	typename T
+>
+class VSTLDerefIteratorPol : public IVIteratorPol<T>
 {
-	TestIteratorPtr theIter;
-	theIter.Assign(new 
-		VSTLIteratorAdaptor<UnitTestList::iterator>(
-//		VSTLIterDerefAdaptor<IVUnitTest, UnitTestList::iterator>(
-		m_CommonTests.begin()));
+private:
+	Iter m_Iter;
+
+public:
+	typedef T Value;
+	typedef T* Pointer;
+
+	VSTLDerefIteratorPol(Iter in_Iter) : m_Iter(in_Iter) {}
+
+	virtual vbool IsEqual(const IVIteratorPol<T>& in_Other) const
+	{ return *m_Iter == in_Other.Get(); }
+
+	virtual VSTLDerefIteratorPol* CreateCopy() const
+	{ return new VSTLDerefIteratorPol(m_Iter); }
+
+	virtual void MoveBy(vint in_nDistance)
+	{
+		advance(m_Iter, in_nDistance);
+	}
+
+	virtual Pointer Get() const
+	{
+		return *m_Iter;
+	}
+
+	virtual void Proceed() { MoveBy(1); }
+	virtual void MoveBack() { MoveBy(-1); }
+};
+
+VTestManager::TestIterator VTestManager::CommonTestsBegin()
+{
+	typedef VSTLDerefIteratorPol<UnitTestList::iterator, IVUnitTest> IterPol;
+
+	TestIterator theIter(new IterPol(m_CommonTests.begin()));
 
 	return theIter;
 }
 
-VTestManager::TestIteratorPtr VTestManager::CommonTestsEnd()
+VTestManager::TestIterator VTestManager::CommonTestsEnd()
 {
-	TestIteratorPtr theIter;
-	theIter.Assign(new 
-		VSTLIteratorAdaptor<UnitTestList::iterator>(
-//		VSTLIterDerefAdaptor<IVUnitTest, UnitTestList::iterator>(
-		m_CommonTests.end()));
+	typedef VSTLDerefIteratorPol<UnitTestList::iterator, IVUnitTest> IterPol;
+
+	TestIterator theIter(new IterPol(m_CommonTests.end()));
 
 	return theIter;
 }

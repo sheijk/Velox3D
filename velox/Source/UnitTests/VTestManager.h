@@ -40,10 +40,10 @@ public:
 	//TODO: den doxygen Verweis richtig machen
 
 	/** @see IVTestManager#CommonTestsBegin */
-	virtual TestIteratorPtr CommonTestsBegin();
+	virtual TestIterator CommonTestsBegin();
 
 	/** @see IVTestManager#CommonTestsEnd */
-	virtual TestIteratorPtr CommonTestsEnd();
+	virtual TestIterator CommonTestsEnd();
 };
 
 //-----------------------------------------------------------------------------

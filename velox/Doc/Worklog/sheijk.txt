@@ -29,6 +29,11 @@ Auf die Langnese Insel ziehen
 
 log:
 
+20.07.2003
+Iteratoren (mit SmartPointer aehnlichem Verhalten zum Zurueckgeben von Iteratoren
+aus DLLs), und ueberarbeitete Version der SmartPointer sowie Tests dafuer 
+fertig gestellt und committet
+
 06.07.2003
 VArray erstellt
 VMemoryStream erstellt + Factory Methode zu IVStreamFactory hinzugefuegt

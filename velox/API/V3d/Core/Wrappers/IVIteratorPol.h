@@ -1,5 +1,5 @@
-#ifndef V3D_IVITERATOR_H
-#define V3D_IVITERATOR_H
+#ifndef V3D_IVITERATORPOL_H
+#define V3D_IVITERATORPOL_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
@@ -16,31 +16,35 @@ namespace v3d {
  * @author sheijk
  */
 template<typename TargetType>
-class IVIterator
+class IVIteratorPol
 {
 public:
-	typedef typename TargetType ValueType;
+	typedef typename TargetType Value;
+	typedef typename TargetType* Pointer;
 
-	virtual ~IVIterator() {};
+	virtual ~IVIteratorPol() {};
 
 	// overload these functions to implement a custom iterator
-	virtual vbool Proceed() = 0;
-	virtual vbool MoveBack() = 0;
-	virtual vbool HasSubject() = 0;
-	virtual ValueType& Get() const = 0;
+	/** checks if both iterators are equal */
+	virtual vbool IsEqual(const IVIteratorPol& in_Other) const = 0;
 
-	// operators, etc. for convenience
-	ValueType& operator->() const;
-	ValueType* operator*() const;
-	vbool operator==(const IVIterator<ValueType>& in_Other);
-	vbool operator!=(const IVIterator<ValueType>& in_Other);
-	vbool operator==(const ValueType* in_pVal);
-	vbool operator!=(const ValueType* in_pVal);
+	/** creates a copy of itself */
+	virtual IVIteratorPol* CreateCopy() const = 0;
+	
+	/** proceed to next element in sequence */
+	virtual void Proceed() = 0;
+
+	/** move n elements forward or backward */
+	virtual void MoveBy(vint in_nDistance) = 0;
+
+	/** moves to previous element in sequence */
+	virtual void MoveBack() = 0;
+
+	/** returns a pointer to the element it points to */
+	virtual Pointer Get() const = 0;
 };
 
 //-----------------------------------------------------------------------------
-#include "IVIterator.inl"
-//-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVITERATOR_H
+#endif // V3D_IVITERATORPOL_H

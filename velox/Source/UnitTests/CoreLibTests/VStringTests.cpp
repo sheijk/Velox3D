@@ -58,7 +58,7 @@ void VStringTests::AssignAndGetTest()
 
 	if( ! StringsAreEqual(subj.AsCString(), pTestString) )
 	{
-		V3D_THROW_UNITTEST_ERROR(
+		V3D_UNITTEST_FAILURE(
 			"VString did not store string correctly",
 			VUnitTestException::CriticalError);
 	}
@@ -79,7 +79,7 @@ void VStringTests::CopyTest()
 
 	if( ! StringsAreEqual(pTestString, subj2.AsCString()) )
 	{
-		V3D_THROW_UNITTEST_ERROR(
+		V3D_UNITTEST_FAILURE(
 			"VString.op= failed", VUnitTestException::CriticalError);
 	}
 
@@ -88,14 +88,14 @@ void VStringTests::CopyTest()
 
 	if( ! StringsAreEqual(pTestString, subj3.AsCString()) )
 	{
-		V3D_THROW_UNITTEST_ERROR(
+		V3D_UNITTEST_FAILURE(
 			"VString.op= failed", VUnitTestException::CriticalError);
 	}
 
 	// check if original string is still valid
 	if( ! StringsAreEqual(pTestString, subj.AsCString()) )
 	{
-		V3D_THROW_UNITTEST_ERROR(
+		V3D_UNITTEST_FAILURE(
 			"VString.op= failed", VUnitTestException::CriticalError);
 	}
 }

@@ -54,7 +54,7 @@ void VMemoryStreamTest::ExecuteTest()
         IVStreamFactory* 
 			pStreamFac = QueryObject<IVStreamFactory>("vfs.strfact");
 
-		IVStreamFactory::OfflineStreamPtr pMemStream
+		IVStreamFactory::StreamPtr pMemStream
 			= pStreamFac->CreateMemoryStream();
 
 		// test basic functionality

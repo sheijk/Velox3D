@@ -1,5 +1,5 @@
-#ifndef V3D_VSmartPointerTest_H
-#define V3D_VSmartPointerTest_H
+#ifndef V3D_VIteratorTests_H
+#define V3D_VIteratorTests_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/UnitTests/IVUnitTest.h>
@@ -11,12 +11,12 @@ namespace unittests {
 
 /**
 //TODO: insert documentation here
-*/
-class VSmartPointerTest : public IVUnitTest
+ */
+class VIteratorTests : public IVUnitTest
 {
 public:
-	VSmartPointerTest();
-	virtual ~VSmartPointerTest();
+	VIteratorTests();
+	virtual ~VIteratorTests();
 
 	/*! @see IVUnitTest#GetTestInfo(VStringParam, VStringParam) */
 	virtual void GetTestInfo(
@@ -25,17 +25,10 @@ public:
 
 	/*! @see IVUnitTest#Execute() */
 	virtual void ExecuteTest();
-
-private:
-	void TestAutoPtr();
-	void TestRefCountPtr();
-	void TestAutoArray();
-	void TestIteratorPtr();
-	void TestIterator();
 };
 
 //-----------------------------------------------------------------------------
 } // namespace unittests
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VSmartPointerTest_H
+#endif // V3D_VIteratorTests_H

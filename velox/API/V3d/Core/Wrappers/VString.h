@@ -7,6 +7,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
+//TODO: SmartPointer oder sowas benutzen
 
 /**
  * Simply wraps a C-Style string to guarantee memory release

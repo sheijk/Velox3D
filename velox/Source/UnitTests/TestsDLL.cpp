@@ -12,6 +12,7 @@
 
 #include "CoreLibTests/VStringTests.h"
 #include "CoreLibTests/VSmartPointerTests.h"
+#include "CoreLibTests/VIteratorTests.h"
 #include "VFSTests/VFileStreamTest.h"
 #include "VFSTests/VMemoryStreamTest.h"
 
@@ -32,6 +33,7 @@ using namespace unittests;
 // add all tests here
 VPointer<VStringTests>::AutoPtr g_pStringTests;
 VPointer<VSmartPointerTest>::AutoPtr g_pSmartPtrTest;
+VPointer<VIteratorTests>::AutoPtr g_pIterTests;
 VPointer<VFileStreamTest>::AutoPtr g_pFileStreamTest;
 VPointer<VMemoryStreamTest>::AutoPtr g_pMemStreamTest;
 
@@ -43,8 +45,9 @@ TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 	// create tests and register them
 	g_pStringTests.Assign(new VStringTests());
 	g_pSmartPtrTest.Assign(new VSmartPointerTest());
-	g_pFileStreamTest.Assign(new VFileStreamTest());
-	g_pMemStreamTest.Assign(new VMemoryStreamTest());
+	g_pIterTests.Assign(new VIteratorTests());
+	//g_pFileStreamTest.Assign(new VFileStreamTest());
+	//g_pMemStreamTest.Assign(new VMemoryStreamTest());
 }
 
 TESTSDLL_API void Shutdown()
@@ -52,6 +55,7 @@ TESTSDLL_API void Shutdown()
 	// delete all tests
 	g_pMemStreamTest.Release();
 	g_pFileStreamTest.Release();
+	g_pIterTests.Release();
 	g_pSmartPtrTest.Release();
 	g_pStringTests.Release();
 }

@@ -6,13 +6,14 @@
 #include <v3d/UnitTests/IVTestManager.h>
 #include <v3d/UnitTests/VUnitTestException.h>
 
+#include <v3d/Core/SmartPtr/VGuards.h>
+
 #include "VDestructTest.h"
 
-#include <v3d/Core/NewSmartPtr/VSmartPtr.h>
-#include <v3d/Core/NewSmartPtr/VExclusiveOwnerPol.h>
-#include <v3d/Core/NewSmartPtr/VPointerStorage.h>
-
+#include <list>
+#include <string>
 //-----------------------------------------------------------------------------
+using std::string;
 namespace v3d {
 namespace unittests {
 //-----------------------------------------------------------------------------
@@ -55,142 +56,351 @@ void VSmartPointerTest::ExecuteTest()
 	TestRefCountPtr();
 }
 
+//-----------------------------------------------------------------------------
+template<typename SmartPtr>
+void testSmartPtrInterface(SmartPtr& in_SmarPtr, const VString& in_strPtrName)
+{
+	Value val, val2;
+
+	// tests assign, get and release
+	in_SmartPtr.Assign(&val);
+
+	if( in_SmartPtr.Get() != &val || !( in_SmartPtr.Get() == &val) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(in_strPtrName + ": Assign()/Get() failure");
+	}
+
+	in_SmarPtr.Release();
+
+	if( in_SmartPtr.Get() != 0 || !( in_SmartPtr.Get() == 0) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(in_strPtrName + ": Release() failure");
+	}
+}
+
+template<typename SmartPtr>
+void testZeroInit(const VString& strPtrName)
+{
+	SmartPtr ptr;
+	typename SmartPtr::Pointer pVal = 0;
+
+	string str("abc");
+	str += "def";
+
+	if( ptr != pVal )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
+			": default c'tor did not initialize with 0");
+	}
+}
+
+template<typename SmartPtr>
+void testAssignment(const VString& strPtrName)
+{
+	typedef typename SmartPtr::Value Value;
+	typedef typename SmartPtr::Pointer Pointer;
+
+	Pointer pVal = new Value();
+
+	SmartPtr ptr;
+
+	ptr = pVal;
+
+	if( ptr != pVal )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + ": op= / get failure");
+	}
+}
+
+template<typename SmartPtr>
+void testDeleteOnRelease(const VString& strPtrName)
+{
+	vbool bCheck;
+	VDestructTest* pDestTst = new VDestructTest(bCheck);
+	SmartPtr ptr(pDestTst);
+
+	ptr.Release();
+
+	if( ptr.Get() != 0 )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + ": Release() did not release");
+	}
+
+	if( bCheck != false )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
+			": Release() did not delete subject");
+	}
+}
+
+template<typename SmartPtr>
+void testDeleteOnNewVal(const VString& strPtrName)
+{
+	vbool bCheck, bDummy;
+	VDestructTest* pDestTest = new VDestructTest(bCheck);
+	VDestructTest* pNewVal = new VDestructTest(bDummy);
+
+	SmartPtr ptr(pDestTest);
+
+	ptr = pNewVal;
+
+	if( bCheck != false )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
+			": did not release old target when assigning new target");
+	}
+}
+
+template<typename SmartPtr>
+void testDeleteOnDestructor(const VString& strPtrName)
+{
+	vbool bCheck;
+	VDestructTest* pDestrTest = new VDestructTest(bCheck);
+
+	{
+		SmartPtr ptr(pDestrTest);
+	}
+
+	if( bCheck != false )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
+			": d'tor did not delete subject");
+	}
+}
+
+template<typename SmartPtr>
+void testEqCmp(const VString& strPtrName)
+{
+	typedef typename SmartPtr::Pointer Pointer;
+	typedef typename SmartPtr::Value Value;
+
+	Pointer pVal = 0;
+
+	SmartPtr a, b;
+
+	// test for equal smart ptrs
+	a = pVal;
+	b = pVal;
+
+	if( a != b )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + 
+			": op!= returned true for equal objects");
+	}
+
+	if( !(a == b) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName +
+			": op== returned false for equal objects");
+	}
+
+	if( a != pVal || pVal != a )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName +
+			": op!=(T*) returned true for 'equal' smart pointer and pointer");
+	}
+
+	if( !(a == pVal) || !(pVal == a) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName +
+			": op==(T*) returned false for 'equal' smart ptr and pointer");
+	}
+
+	// test for different smart ptrs
+	b = new Value();
+
+	if( !(a != b) || !(b != a) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName +
+			": op!= returned false for distinct objects");
+	}
+
+	if( a == b || b == a )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName +
+			": op== returned true for distinct objects");
+	}
+
+	if( !(b != pVal) || !(pVal != b) )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName +	": op!=(pointer) returned"
+			" false for 'distinct' pointer and smart ptr ");
+	}
+
+	if( b == pVal || pVal == b )
+	{
+		V3D_UNITTEST_ERROR_STATIC(strPtrName + ": op==(pointer) returned"
+			" true for 'distinct' pointer and smart pointer");
+	}
+}
+
+//-----------------------------------------------------------------------------
 
 void VSmartPointerTest::TestAutoPtr()
 {
 	typedef VDestructTest MySubject;
-
 	typedef VPointer<MySubject>::AutoPtr MyAutoPtr;
 
-	// create an auto ptr
-	MyAutoPtr myPtr;
-	MySubject* pSubject;
+	const VString& ptrName("AutoPtr");
 
 	// check if it is correcly initialized
-	if( myPtr.Get() != 0 )
-	{
-		V3D_THROW_UNITTEST_ERROR("VSmartPtr, AutoPtr did not init with 0",
-			VUnitTestException::Error);
-	}
+	testZeroInit<MyAutoPtr>(ptrName);
+
+	// test assigment op and get
+	testAssignment<MyAutoPtr>(ptrName);
 
 	// test release fct
-	vbool bCheck1;
-	pSubject = new MySubject(bCheck1);
-
-	myPtr.Assign(pSubject);
-	myPtr.Release();
-
-	if( bCheck1 != false )
-	{
-		V3D_THROW_UNITTEST_ERROR(
-			"VSmartPtr, AutoPtr did not delete object on Release()",
-			VUnitTestException::Error);
-	}
+	testDeleteOnRelease<MyAutoPtr>(ptrName);
 
 	// test release on new value
-	vbool bCheck2;
-	pSubject = new MySubject(bCheck2);
-	
-	myPtr = pSubject;
-	myPtr = 0;
-
-	if( bCheck1 != false )
-	{
-		V3D_THROW_UNITTEST_ERROR(
-			"VSmartPtr, AutoPtr did not delete object when assigning new target",
-			VUnitTestException::Error);
-	}
+	testDeleteOnNewVal<MyAutoPtr>(ptrName);
 
 	// test release on destruction
-	vbool bCheck3;
-	pSubject = new MySubject(bCheck3);
+	testDeleteOnDestructor<MyAutoPtr>(ptrName);
 
-	{
-		MyAutoPtr ptr;
-		ptr = pSubject;
-	}
+	// test eq compare (==/!=)
+	testEqCmp<MyAutoPtr>(ptrName);
 
-	if( bCheck1 != false )
-	{
-		V3D_THROW_UNITTEST_ERROR(
-			"VSmartPtr, AutoPtr did not delete object on d'tor",
-			VUnitTestException::Error);
-	}
+	// test rel compare (</>/<=/>=) - not yet implemented for smart pointers
+
+	// test copy semantic (a = b -> b.Get() == 0)
 
 	//TODO: more to test
-		
 }
 
 void VSmartPointerTest::TestRefCountPtr()
 {
-	typedef VDestructTest MySubject;
-	typedef VPointer<MySubject>::SharedPtr MySharedPtr;
+	typedef VPointer<VDestructTest>::SharedPtr TestPtr;
 
-	// test basic functionality:
-	vbool bAlive;
-	MySubject* pSubject = new VDestructTest(bAlive);
-	MySharedPtr myPtr;
+	const VString& ptrName("SharedPtr");
 
-	//TODO: more tests for SharedPtr
+	// check if it is correcly initialized
+	testZeroInit<TestPtr>(ptrName);
 
-	// assign, retrieve
-	// release
-	// cloning
+	// test assigment op and get
+	testAssignment<TestPtr>(ptrName);
 
-	// test operators:
-	
-	// compare ==, !=
-	// assignment
+	// test release fct
+	testDeleteOnRelease<TestPtr>(ptrName);
 
-	// test c'tors and d'tor:
-	// standard c'tor
-	// copy c'tor
-	// conversion c'tor from ptr
-	// check scope / auto release / d'tor
+	// test release on new value
+	testDeleteOnNewVal<TestPtr>(ptrName);
+
+	// test release on destruction
+	testDeleteOnDestructor<TestPtr>(ptrName);
+
+	// test eq compare (==/!=)
+	testEqCmp<TestPtr>(ptrName);
+
+	// test rel compare (</>/<=/>=) - not yet implemented for smart pointers
+
+	//TODO: more to test
+
+	// test copying
+
+	// test ref counting
 }
 
-void VSmartPointerTest::TestAutoArray()
-{
-	const int nArraySize = 5;
+///**
+//* Tests IVIterator and IVSTLIteratorAdaptor
+//*/
+//void VSmartPointerTest::TestIterator()
+//{
+//	int vals[] = { 1, 2, 3, 4, 5 };
+//	std::list<int> intList(vals, vals + 5);
+//	int i = 0;
+//
+//	VSTLIteratorAdaptor<std::list<int>::iterator> adaptIter(intList.begin());
+//	VSTLIteratorAdaptor<std::list<int>::iterator> endIter(intList.end());
+//
+//	// test dereferencing, and ++ operator
+//	while( adaptIter != endIter )
+//	{
+//		if( vals[i] != *adaptIter )
+//		{
+//			V3D_UNITTEST_ERROR("VSTLIteratorAdaptor returned wrong argument");
+//		}
+//		++i;
+//		++adaptIter;
+//	}
+//}
+//
+//void VSmartPointerTest::TestAutoArray()
+//{
+//	const int nArraySize = 5;
+//
+//	vbool bAlive[nArraySize];
+//	VDestructTest* pSubjects[5];
+//
+//	for(int i = 0; i < nArraySize; ++i)
+//	{
+//		pSubjects[i] = new VDestructTest(bAlive[i]);
+//	}
+//
+//	{
+//		// create
+//		VArrayPtr<VDestructTest>::AutoPtr myAutoArrays;
+//
+//		myAutoArrays = pSubjects[0];		
+//
+//		// access element
+//		VDestructTest& tmp = myAutoArrays[2];
+//	}
+//
+//	// check if all deleted
+//	if( bAlive[0] )
+//	{
+//		V3D_UNITTEST_FAILURE(
+//			"VArray<T>::AutoPtr did not release it's targets",
+//			VUnitTestException::Error);		
+//	}
+//
+//	for(int i = 1; i < nArraySize; ++i)
+//	{
+//		if( bAlive[i] )
+//		{
+//			V3D_UNITTEST_FAILURE(
+//				"VArrayPtr<T>::AutoPtr did not release all it's elements",
+//				VUnitTestException::Error);
+//		}
+//	}
+//
+//	//TODO: more tests for AutoArray, see TestAutoPtr
+//}
+//
+///**
+// * tests the iterator storage policy
+// */
+//void VSmartPointerTest::TestIteratorPtr()
+//{
+//	typedef std::list<int> IntList;
+//	typedef VSTLIteratorAdaptor<IntList::iterator> IterType;
+//
+//	// test policy
+//	VIteratorStorage<int, IVIterator<int> > theStorage;
+//	int vals[] = { 0, 3, 6, 9 };
+//	IntList theList(vals, vals + 4);
+//
+//	theStorage.Assign(new IterType(theList.begin()));
+//
+//	for(int i = 0; i < 4; ++i)
+//	{
+//		if( *(theStorage.Get()) != vals[i] )
+//		{
+//			V3D_UNITTEST_ERROR("IteratorStorage malfunction");
+//		}
+//
+//		theStorage++;
+//	}
+//
+//	// test ptr with policy
+//}
 
-	vbool bAlive[nArraySize];
-	VDestructTest* pSubjects[5];
-
-	for(int i = 0; i < nArraySize; ++i)
-	{
-		pSubjects[i] = new VDestructTest(bAlive[i]);
-	}
-
-	{
-		// create
-		VArrayPtr<VDestructTest>::AutoPtr myAutoArrays;
-
-		myAutoArrays = pSubjects[0];		
-
-		// access element
-		VDestructTest& tmp = myAutoArrays[2];
-	}
-
-	// check if all deleted
-	if( bAlive[0] )
-	{
-		V3D_THROW_UNITTEST_ERROR(
-			"VArray<T>::AutoPtr did not release it's targets",
-			VUnitTestException::Error);		
-	}
-
-	for(int i = 1; i < nArraySize; ++i)
-	{
-		if( bAlive[i] )
-		{
-			V3D_THROW_UNITTEST_ERROR(
-				"VArrayPtr<T>::AutoPtr did not release all it's elements",
-				VUnitTestException::Error);
-		}
-	}
-
-	//TODO: more tests for AutoArray, see TestAutoPtr
-}
+//TODO: iteratoren test schreiben
+//TODO: eigenen unit test fuer iteratoren
+//TODO: IVIterator als StoragePolicy von VSmartPtr?
+//TODO: iteratoren an STL konzepte anpassen
+//TODO: iteratoren op++, op--, Proceed, MoveBack anpassen
 
 //-----------------------------------------------------------------------------
 } // namespace unittests
