@@ -27,6 +27,7 @@ public:
 	virtual void Destroy();
 	virtual void ChangeDisplay(graphics::VDisplaySettings* in_pInfo);
 	virtual graphics::IVDevice& QueryGraphicsDevice();
+	virtual input::IVInputManager& QueryInputManager();
 
 private:
 

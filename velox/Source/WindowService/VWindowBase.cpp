@@ -38,6 +38,7 @@ void VWindowBase::Deactivate()
 VWindowBase::VWindowBase()
 {
 	m_Device = NULL;
+	m_pInputManager = NULL;
 }
 //-----------------------------------------------------------------------------
 

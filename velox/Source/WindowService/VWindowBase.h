@@ -32,6 +32,8 @@ class VWindowBase : public IVWindow, public updater::IVUpdateable
 		
 
 	protected:
+
+		input::IVInputManager* m_pInputManager;
 	
 		graphics::IVDevice* m_Device;
 		std::string m_Name;

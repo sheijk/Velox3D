@@ -4,10 +4,11 @@
 #include <v3d/Core/VIOStream.h>
 
 #include "../Graphics/OpenGL/VOpenGLDevice.h"
+#include "../InputLib/VDIInputManager.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {
-using namespace v3d::graphics;
+using namespace graphics;
 //-----------------------------------------------------------------------------
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -164,6 +165,7 @@ void VWindowWin32::Create(VStringParam in_pName)
 	Register();
 	CreateWindow();
 
+	QueryInputManager();
 	QueryGraphicsDevice();
 }
 //-----------------------------------------------------------------------------
@@ -224,6 +226,30 @@ IVDevice& VWindowWin32::QueryGraphicsDevice()
 	}
 
 	return *m_Device;
+}
+
+input::IVInputManager& VWindowWin32::QueryInputManager()
+{
+	vout << "---------------------------" << vendl;
+	vout << "Query input manager..." << vendl;
+
+	if (m_pInputManager)
+		return *m_pInputManager;
+
+	vout << "Using DirectInput..." << vendl;
+	input::VDIInputManager* pTemp = new input::VDIInputManager(hWnd);
+
+	if ( pTemp->Create() == true )
+	{
+		m_pInputManager = pTemp;
+		pTemp = NULL;
+	}
+	else
+		m_pInputManager = NULL;
+
+	vout << "---------------------------" << vendl;
+
+	return *m_pInputManager;	
 }
 
 //-----------------------------------------------------------------------------
