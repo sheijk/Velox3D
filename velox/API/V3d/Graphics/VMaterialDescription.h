@@ -53,6 +53,24 @@ struct VMaterialDescription
 	};
 
 	/**
+	 * Blending factors
+	 */
+	enum BlendFactor
+	{
+		BlendZero,
+		BlendOne,
+		BlendSourceColor,
+		BlendOneMinusSourceColor,
+		BlendDestColor,
+		BlendOneMinusDestColor,
+		BlendSourceAlpha,
+		BlendOneMinusSourceAlpha,
+		BlendDestAlpha,
+		BlendOneMinusDepthAlpha,
+		BlendSourceAlphaSaturate
+	};
+
+	/**
 	 * Enable or disable any color channel for writing
 	 */
 	struct ColorBufferMask
@@ -91,7 +109,9 @@ struct VMaterialDescription
 
 	ColorBufferMask colorMask;
 
-	// mask the different buffers
+	vbool enableBlending;
+	BlendFactor sourceBlendFactor;
+	BlendFactor destBlendFactor;
 
 	// functions
 
@@ -108,7 +128,10 @@ VMaterialDescription::VMaterialDescription()  :
 	depthWriteMask(DepthWrite),
 	pTextureList(0),
 	defaultColor(1, 1, 1, 1),
-	colorMask()
+	colorMask(),
+	enableBlending(false),
+	sourceBlendFactor(BlendSourceAlpha),
+	destBlendFactor(BlendOneMinusSourceAlpha)
 {
 }
 
