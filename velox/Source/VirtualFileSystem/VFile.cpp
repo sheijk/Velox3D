@@ -5,7 +5,7 @@
 #include <v3d/VFS/IVDataProviderPool.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/VFS/VIOException.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

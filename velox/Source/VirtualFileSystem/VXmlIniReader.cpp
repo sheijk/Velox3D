@@ -11,6 +11,7 @@
 #include "VFile.h"
 
 #include <string>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

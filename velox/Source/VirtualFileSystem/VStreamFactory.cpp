@@ -3,7 +3,7 @@
 #include "VFileStream.h"
 #include "VMemoryStream.h"
 #include "VBufferStreamGuard.h"
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

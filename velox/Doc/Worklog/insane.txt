@@ -65,6 +65,7 @@ req
 Done List:
 
 30.08.04
+- added memmanger to several services
 - fixed example app to compile
 - added memmanger to window service
 - rearranged some implementation details in window service

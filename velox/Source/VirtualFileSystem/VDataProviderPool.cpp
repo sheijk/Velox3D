@@ -3,7 +3,7 @@
 #include <v3d/vfs/VIOException.h>
 
 #include <algorithm>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

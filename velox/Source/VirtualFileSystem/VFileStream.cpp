@@ -5,6 +5,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace std;
 

@@ -13,6 +13,7 @@
 #include <boost/filesystem/exception.hpp>
 
 #include <fstream>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

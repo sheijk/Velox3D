@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 #include "VLegalOperations.h"
 #include <v3d/VFS/VIOException.h>
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
