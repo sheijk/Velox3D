@@ -10,8 +10,7 @@
 #include <v3d/Math/VVector.h>
 #include <v3d/Math/VMatrixOps.h>
 
-//removed -missing part [ins]
-//#include <V3dLib/Math/ArrayOps.h>
+#include <V3dLib/Math/ArrayOps.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_MATH_2004_04_09_H

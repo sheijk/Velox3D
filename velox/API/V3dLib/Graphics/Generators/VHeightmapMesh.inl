@@ -38,17 +38,17 @@ vfloat32 VHeightmapMesh<VertexStructure>::GetHeight(vuint x, vuint y) const
 template <typename VertexStructure>
 void VHeightmapMesh<VertexStructure>::GenerateCoordinatesAtZ(vfloat32 in_nZ)
 {
-	vfloat32 left = -15;
-	vfloat32 right = 15;
-	vfloat32 top = -15;
-	vfloat32 bottom = 15;
+	vfloat32 left = -1;
+	vfloat32 right = 1;
+	vfloat32 top = -1;
+	vfloat32 bottom = 1;
 
-	const vfloat32 xdelta = (right - left) / m_nWidth;
-	const vfloat32 ydelta = (bottom - top) / m_nHeight;
+	const vfloat32 xdelta = (right - left) / (m_nWidth-1);
+	const vfloat32 ydelta = (bottom - top) / (m_nHeight-1);
     
-	for(vint x = 0; x < m_nWidth; ++x)
+	for(vuint x = 0; x < m_nWidth; ++x)
 	{
-		for(vint y = 0; y < m_nHeight; ++y)
+		for(vuint y = 0; y < m_nHeight; ++y)
 		{
             GetVertex(x, y).position.x = x * xdelta + left;
 			GetVertex(x, y).position.y = y * ydelta + top;
@@ -72,7 +72,7 @@ void VHeightmapMesh<VertexStructure>::GenerateIndices()
 	for(vuint y = 0; y < m_nHeight - 1; ++y)
 	{
 		// create strip
-		for(vint x = 0; x < m_nWidth; ++x)
+		for(vuint x = 0; x < m_nWidth; ++x)
 		{
 			GetIndexBuffer()[num] = GetVertexNum(x, y);
 			++num;

@@ -1,12 +1,12 @@
 template<typename Array2d>
-void GenerateNoise(Array2d& out_Area)
+void GenerateNoise(Array2d& out_Area, vfloat32 in_fMin, vfloat32 in_fMax)
 {
 	vint randomIndex = 0;
 
 	for(vuint y = 0; y < out_Area.GetHeight(); ++y)
 	for(vuint x = 0; x < out_Area.GetWidth(); ++x)
 	{
-		out_Area(x,y) = PseudoRandom(randomIndex);
+		out_Area(x,y) = PseudoRandom(randomIndex, in_fMin, in_fMax);
 		++randomIndex;
 	}
 }
@@ -15,7 +15,7 @@ template<typename Array2d>
 void Interpolate2nm1(Array2d& out_Smooth, const Array2d& in_Source)
 {
 	V3D_ASSERT(2 * in_Source.GetWidth() - 1 == out_Smooth.GetWidth());
-	V3D_ASSERT(2 * in_Source.GetHeight() - 1 == out_Smooth.GetHeight()):
+	V3D_ASSERT(2 * in_Source.GetHeight() - 1 == out_Smooth.GetHeight());
 
 	// a---b---a--
 	// |   |   |  
@@ -38,7 +38,27 @@ void Interpolate2nm1(Array2d& out_Smooth, const Array2d& in_Source)
 		typename Array2d::ElementType a = in_Source(x, y);
 		typename Array2d::ElementType b = in_Source(x+1, y);
 
+		out_Smooth(2*x+1, 2*y) = (a+b)/2;
+	}
 
+	// set all c's
+	for(vuint y = 0; y < in_Source.GetHeight()-1; ++y)
+	for(vuint x = 0; x < in_Source.GetWidth(); ++x)
+	{
+		typename Array2d::ElementType a = in_Source(x,y);
+		typename Array2d::ElementType b = in_Source(x,y+1);
+
+		out_Smooth(2*x, 2*y+1) = (a+b)/2;
+	}
+
+	// set all d's
+	for(vuint y = 0; y < in_Source.GetHeight()-1; ++y)
+	for(vuint x = 0; x < in_Source.GetWidth()-1; ++x)
+	{
+		typename Array2d::ElementType a = in_Source(x+1, y);
+		typename Array2d::ElementType b = in_Source(x, y+1);
+
+		out_Smooth(2*x+1, 2*y+1) = (a+b)/2;
 	}
 }
 
@@ -77,6 +97,42 @@ void Add2dArray(Array2d& io_Array, const Array2d& in_Summand)
 template<typename Array2d>
 void GeneratePerlinNoisePow2(Array2d& out_Array, vuint in_nSteps)
 {
+	Array2d temp1;
+	Array2d temp2;
+	Array2d* pNoise = &temp1;
+	Array2d* pStretched = &temp2;
+
+	pNoise->Resize(3, 3, Array2d::FillZero);
+	
+	vfloat32 scale = 1.0f;
+
+	// while size <= dest size
+	for(vuint step = 0; step < in_nSteps; ++step)
+	{
+		// increase resolution of noise
+		pStretched->Resize(2*pNoise->GetWidth()-1, 2*pNoise->GetHeight()-1);
+		Interpolate2nm1(*pStretched, *pNoise);
+
+		// create new noise layer
+		pNoise->Resize(pStretched->GetWidth(), pStretched->GetHeight());
+		GenerateNoise(*pNoise, -scale, scale);
+
+		// add new noise layer
+		Add2dArray(*pStretched, *pNoise);
+
+		std::swap(pNoise, pStretched);
+
+		scale /= 2;
+	}
+
+	// copy to dest array
+	out_Array.Resize(pStretched->GetWidth(), pStretched->GetHeight());
+
+	for(vuint y = 0; y < out_Array.GetHeight(); ++y)
+	for(vuint x = 0; x < out_Array.GetWidth(); ++x)
+	{
+		out_Array(x,y) = (*pNoise)(x,y);
+	}
 }
 
 /**

@@ -1,6 +1,8 @@
 #ifndef V3D_ARRAYOPS_H_H
 #define V3D_ARRAYOPS_H_H
 //-----------------------------------------------------------------------------
+#include <algorithm>
+
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3dLib/Containers/VArray2d.h>
@@ -17,11 +19,20 @@ namespace math {
  * @author sheijk
  */
 template<typename Array2d>
-void GenerateNoise(Array2d& out_Area);
+void GenerateNoise(
+	Array2d& out_Area, 
+	vfloat32 in_fMin = -1.0f, 
+	vfloat32 in_fMax = 1.0f);
 
+/**
+ * Interpolates. smooth.size must be 2 * source.size + 1
+ */
 template<typename Array2d>
 void Interpolate2nm1(Array2d& out_Smooth, const Array2d& in_Source);
 
+/**
+ * Creates a new heightmap of greater size.
+ */
 template<typename Array2d>
 void Stretch(
 	Array2d& out_Stretched, 
