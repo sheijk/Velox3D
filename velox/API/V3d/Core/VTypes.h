@@ -34,7 +34,7 @@ typedef bool vbool;
 /**
  * Conventions for VStringParam and VStringRetVal:
  * const char* c = param [VStringParam param] is valid
- * VStringRetVal v = c [const char* c] ist valid
+ * VStringRetVal v = c [const char* c] is valid
  *
  * thus, VStringParam and VStringRetVal can be used like const char*
  */
@@ -46,9 +46,6 @@ class VString;
 
 /** use this when returning a string */
 typedef VString VStringRetVal;
-
-//TODO: wozu wird das gebraucht? - sheijk
-#define V3D_MULTITHREADING_SUPPORT
 
 //-----------------------------------------------------------------------------
 } // namespace v3d

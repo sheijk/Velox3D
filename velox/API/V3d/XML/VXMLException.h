@@ -1,20 +1,21 @@
-#ifndef V3D_VKERNELEXCEPTION_H
-#define V3D_VKERNELEXCEPTION_H
+#ifndef V3D_VXMLEXCEPTION_H
+#define V3D_VXMLEXCEPTION_H
 //-----------------------------------------------------------------------------
+#include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VException.h>
-
-#include <string>
-
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace kernel {
+namespace xml {
 //-----------------------------------------------------------------------------
 
-	V3D_DECLARE_EXCEPTION(VKernelException, VException);
-	V3D_DECLARE_EXCEPTION(VKernelIniException, VKernelException);
+	V3D_DECLARE_EXCEPTION(VXMLException, VException);
+	V3D_DECLARE_EXCEPTION(VXMLAttributeException, VXMLException);
+	V3D_DECLARE_EXCEPTION(VXMLVistorException, VXMLException);
+	V3D_DECLARE_EXCEPTION(VXMLTinyXMLException, VXMLException);
+
 
 //-----------------------------------------------------------------------------
-} // namespace kernel
+} // namespace xml
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VKERNELEXCEPTION_H
+#endif // V3D_VXMLEXCEPTION_H

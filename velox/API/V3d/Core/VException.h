@@ -12,7 +12,7 @@ namespace v3d {
 
 /**
  * Base class for all Velox exceptions
- * Dervice your own velox related exceptions from this class
+ * Derive your own velox related exceptions from this class
  */
 class VException
 {

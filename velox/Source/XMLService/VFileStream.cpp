@@ -68,7 +68,7 @@ VFileStream::VFileStream(
 	}
 
 	// create legal op class
-	vbool bReadAccess = in_nAccess & VReadAccess;
+	vbool bReadAccess =  in_nAccess & VReadAccess;
 	vbool bWriteAccess = in_nAccess & VWriteAccess;
 
 	// open file

@@ -4,13 +4,11 @@
 #include <V3d/Core/VTypes.h>
 #include <V3d/XML/IVXMLAttribute.h>
 #include <V3d/Core/Wrappers/VIterator.h>
-#include <V3d/Core/VException.h>
+#include <V3d/XML/VXMLException.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
-
-	typedef VException VXMLException;
 
 /**
  * The XML Element interface

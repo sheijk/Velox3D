@@ -18,6 +18,7 @@ public:
 	virtual void OnElementOpen(xml::IVXMLElement* pElement);
 	virtual void OnFileEnd();
 	virtual void OnComment(VStringParam pText);
+	virtual void OnText(VStringParam pText);
 };
 
 //-----------------------------------------------------------------------------

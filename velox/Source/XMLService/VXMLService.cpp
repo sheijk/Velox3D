@@ -90,7 +90,6 @@ void VXMLService::TraversalNodes(TiXmlNode* node)
 			std::string sName = NewElement->GetName();
 			m_LastElementNameList.push(sName);
 			bCloseElement = true;
-//			m_Vistor->OnElementClose(NewElement);
 			
 			delete NewElement;
 			m_bRecursionFirstCall = false;
@@ -101,6 +100,9 @@ void VXMLService::TraversalNodes(TiXmlNode* node)
 			m_Vistor->OnComment(node->Value());
 			m_bRecursionFirstCall = false;
 		}
+
+		if(node->Type() == TiXmlNode::TEXT)
+				m_Vistor->OnText(node->Value());
 	}
 
 	for(child = node->FirstChild(); child; child = child->NextSibling())
@@ -124,8 +126,13 @@ void VXMLService::TraversalNodes(TiXmlNode* node)
 		}
 		if(child->Type() == TiXmlNode::COMMENT)
  				m_Vistor->OnComment(child->Value());
+		
+		if(child->Type() == TiXmlNode::TEXT)
+				m_Vistor->OnText(child->Value());
+		
 			
 		TraversalNodes(child);
+		
 		if(bElementOpen)
 		{
 			VXMLElement ClosedElement;
@@ -155,7 +162,7 @@ void VXMLService::ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor
         m_Vistor = in_pVisitor;
 	else
 	{
-		V3D_THROW(VXMLException, "Vistor not vaild!");
+		V3D_THROW(VXMLVistorException, "Vistor not vaild!");
 		return;
 	}
 
@@ -163,7 +170,7 @@ void VXMLService::ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor
 	Doc.LoadFile();
 
 	if( Doc.Error())
-		V3D_THROW(VXMLException, "Document could not be parsed!");
+		V3D_THROW(VXMLTinyXMLException, "Document could not be parsed!");
 
 	TiXmlNode* node;
 
@@ -189,7 +196,7 @@ void VXMLService::ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor)
 		m_Vistor = in_pVisitor;
 	else
 	{
-		V3D_THROW(VXMLException, "Vistor not vaild!");
+		V3D_THROW(VXMLVistorException, "Vistor not vaild!");
 		return;
 	}
 

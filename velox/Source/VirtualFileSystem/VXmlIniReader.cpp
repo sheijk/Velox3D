@@ -195,6 +195,12 @@ void VXmlIniReader::OnComment(VStringParam pText)
 {
 }
 
+void VXmlIniReader::OnText(VStringParam pText)
+{
+}
+
+
+
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

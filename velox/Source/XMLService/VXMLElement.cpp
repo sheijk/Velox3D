@@ -38,7 +38,7 @@ IVXMLAttribute* VXMLElement::GetFirstAttribute()
 IVXMLAttribute* VXMLElement::GetAttribute(VStringParam Name)
 {
 	if(m_AttributeList.empty())
-		V3D_THROW(VXMLException, "Attribute cannot be found. List empty");
+		V3D_THROW(VXMLAttributeException, "Attribute cannot be found. List empty");
 	else
 	{
 		std::string NameCheck = Name;
@@ -52,7 +52,7 @@ IVXMLAttribute* VXMLElement::GetAttribute(VStringParam Name)
 
 		}
 	}
-	V3D_THROW(VXMLException, "Attribute cannot be found. Not in list");
+	V3D_THROW(VXMLAttributeException, "Attribute cannot be found. Not in list");
 }
 
 void VXMLElement::AddAttribute(VXMLAttribute* p_Attribute)

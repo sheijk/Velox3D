@@ -10,21 +10,31 @@ Current assigned tasks:
 
 TODO List:
 
+
 - adaptor fuer IVXMLVisitor, welcher alle Methoden leer implementiert (sheijK)
+  Brauchen utils workspace ! [!!!!!]
+- Cannot step into exception thrower
+- Exception throw cannot be relocated (says what throws exception but not who 
+  called service and tried to handle unspecified request)
+- IVLogging requests error service in corelib, shouldn't kernel handle this
+
+21.08.03
+- fix some warnings [done]
+- XML service modified to use exception macros [done]
+
 
 06.08.03
--bug fixed: visitor call by element close now works correct
--include comments reading to xml service- done
--bug: call to visitor by element closed are wrong -do we really need to know when element is closed?
--test files should be written in seperated dir to workdir
--deteced bug in xml service while writing comments to an open element.
- changing requiremtns for xml service! -No comment writing due writing elements!!!
--fixed the 1. element bug
--include comments reading to xml service
--include text reading to xml service
--commit changes to cvs and edit unresolved conflicts
+- bug fixed: visitor call by element close now works correct [done]
+- include comments reading to xml service- [done]
+- bug: call to visitor by element closed are wrong -do we really need to know when element is closed? [done]
+- test files should be written in seperated dir to workdir
+- deteced bug in xml service while writing comments to an open element. [done]
+  changing requiremtns for xml service! -No comment writing due writing elements!!! [done]
+- fixed the 1. element bug [done]
+- include text reading to xml service [done]
+- commit changes to cvs and edit unresolved conflicts [done]
 
 04.08.03:
--fix the 1. element bug in xml service
--rewrite the kernel to use xml service
--VStreamReader now working correct
+- fix the 1. element bug in xml service [done]
+- rewrite the kernel to use xml service [!!!!!!!!!]
+- VStreamReader now working correct [done]

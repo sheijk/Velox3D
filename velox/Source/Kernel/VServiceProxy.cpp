@@ -18,6 +18,7 @@ VServiceProxy::VServiceProxy(const string &in_strDLL)
 	m_pDeInitFunction = 0;
 
 	m_hDllInstance = NULL;
+	m_bIsLoaded = false;
 }
 
 VServiceProxy::~VServiceProxy()
@@ -27,7 +28,8 @@ VServiceProxy::~VServiceProxy()
 void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 {
 	// abort if already initialized
-
+	if(m_bIsLoaded)
+		return;
 
 	// load the dll file
 	m_hDllInstance = LoadLibraryEx(m_strDLL.c_str(), 0, 0);
@@ -58,6 +60,7 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	
 	// call the init function
 	m_pInitFunction(in_pObjectRegistry);
+	m_bIsLoaded = true;
 }
 
 void VServiceProxy::Shutdown()

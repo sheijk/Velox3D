@@ -31,7 +31,7 @@ VStreamReader::VStreamReader(IVStream* in_pStream)
 		else
 		{
 			//alloc buffer in full size	+1 for "\0" terminating
-			vuint iNumParts = m_BufferPartList.size();
+			vuint iNumParts = (vuint) m_BufferPartList.size();
 			m_Buffer = new vchar[(iSizeOfBuffer+1) + iNumParts * BufferSize];
 			
 			

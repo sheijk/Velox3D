@@ -2,15 +2,14 @@
 #define V3D_VKERNEL_H
 //------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-
 #include <v3d/Core/SmartPtr/VGuards.h>
-
+#include <V3d/XML/IVXMLService.h>
+//------------------------------------------------------------------------
 #include "VKernelException.h"
 #include "VServiceProxy.h"
-
+//------------------------------------------------------------------------
 #include <string>
 #include <list>
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace kernel {
@@ -29,6 +28,7 @@ protected:
 	virtual void LoadServices();
 	virtual void DelegateControl();
 	virtual void Shutdown();
+	virtual void LoadXMLService();
 
 private:
 	typedef VPointer<VServiceProxy>::SharedPtr ServicePointer;
@@ -36,6 +36,7 @@ private:
 
 	ServiceList m_Services;
 	std::string m_strAppName;
+	xml::IVXMLService* m_XmlService;
 
 public:
 	VKernel();

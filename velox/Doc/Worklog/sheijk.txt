@@ -16,6 +16,10 @@ eine map fuer xml files? (config.services.vfs.filename = "vfs.dll" etc.),
 dafuer ein any objekt, was strings speichert und in bel. datentypen mittels
 template member konvertiert?
 
+TODO: Die ObjectRegistry schmiert ab, wenn 2 services gleichen types versucht werden
+zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
+die gleichen services stehen -[ins]
+
 --------------------------------------------------------------------------------
 ----- personal todo:
 

@@ -13,7 +13,8 @@ VXMLWriter::VXMLWriter(VStringParam Filename)
 	m_Filename = Filename;
 	m_pStreamInterface = NULL;
 	
-	m_pSmartPtr.Assign(new VFileStream(m_Filename.c_str(), VRWAccess, VCreateAlways));			m_pStreamInterface = m_pSmartPtr.Get();
+	m_pSmartPtr.Assign(new VFileStream(m_Filename.c_str(), VRWAccess, VCreateAlways));
+	m_pStreamInterface = m_pSmartPtr.Get();
 	
 	WriteDeclaration();
 	
@@ -33,7 +34,7 @@ VXMLWriter::VXMLWriter(IVStream* pStream)
 VXMLWriter::~VXMLWriter()
 {
 	vuint i;
-	vuint j = m_ElementOpenStack.size();
+	vuint j = (vuint)m_ElementOpenStack.size();
 	for(i = 0; i < j; i++)
 		CloseElement();
 		

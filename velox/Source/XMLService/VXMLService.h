@@ -4,7 +4,7 @@
 #include <V3d/XML/IVXMLService.h>
 //-----------------------------------------------------------------------------
 #include "VXMLWriter.h"
-#include "tinyxml/tinyxml.h" //TODO [ins]
+#include "tinyxml/tinyxml.h"
 #include "VXMLAttribute.h"
 #include "VXMLElement.h"
 #include "VStreamReader.h"

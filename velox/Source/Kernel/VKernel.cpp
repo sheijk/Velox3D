@@ -7,8 +7,7 @@
 #include <v3d/Core/VException.h>
 #include <v3d/Core/IVApplication.h>
 //#include <v3d/ExampleService/IVExampleService.h>
-
-#include "tinyxml/tinyxml.h"
+#include "VKernelIniReader.h"
 
 #include <iostream>
 
@@ -16,7 +15,10 @@
 using std::string;
 using std::cout;
 using std::endl;
+
 //using v3d::example::IVExampleService;
+
+using namespace v3d::xml;
 
 namespace v3d {
 namespace kernel {
@@ -24,6 +26,7 @@ namespace kernel {
 
 VKernel::VKernel()
 {
+	m_XmlService = NULL;
 }
 
 VKernel::~VKernel()
@@ -56,17 +59,24 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 
 struct VServiceInfo
 {
-	void Parse(TiXmlElement* in_pElement)
-	{
-		strId = in_pElement->Attribute("id");
-		strDesc = in_pElement->Attribute("desc");
-		strFileName = in_pElement->Attribute("filename");
-	}
-
 	string strId;
 	string strDesc;
 	string strFileName;
 };
+
+/**
+* Push the xml service into the list an immedeatly  load it
+*/
+void VKernel::LoadXMLService()
+{
+	m_Services.push_back(
+		ServicePointer(new VServiceProxy("XMLService.dll")));
+	ServicePointer XmlServiceProxy = m_Services.front();
+	XmlServiceProxy->Initialize(VObjectRegistry::GetInstance());
+
+	m_XmlService = QueryObject<IVXMLService>("xml.service");
+
+}
 
 /**
  * Creates the single instance of the object registry
@@ -81,84 +91,14 @@ void VKernel::CreateObjectRegistry()
  */
 void VKernel::ParseFile(const string &in_strFileName)
 {
-	TiXmlElement* pRootNode = 0;
-	TiXmlElement* pServiceSectionNode = 0;
-	TiXmlElement* pServiceNode = 0;
-	TiXmlElement* pMainNode = 0;
-	VServiceInfo serviceInfo;
-	
-	// load xml file
-	TiXmlDocument iniDoc(in_strFileName.c_str());
-	iniDoc.LoadFile();
-
-	if( iniDoc.Error() )
-	{
-		V3D_THROW(VKernelException, 
-			VString("could not load file <") + in_strFileName.c_str() + ">");
-	}
-
-	// remove all services
 	m_Services.clear();
 
-	// get "Config" Section
-	pRootNode = iniDoc.RootElement();
+	LoadXMLService();
 
-	if( pRootNode == 0 ) V3D_THROW(VKernelException, "no root element");
+	VKernelIniReader IniReader(&m_Services);
+	m_XmlService->ParseXMLFile(in_strFileName.c_str(), &IniReader);
 
-	cout << "pRootNode: " << pRootNode->Value() << endl;
-
-	// get "Services" Section
-	pServiceSectionNode = pRootNode->FirstChildElement();
-
-	if( pServiceSectionNode == 0 ) 
-	{
-		V3D_THROW(VKernelException, "no \"Config\" section");
-	}
-
-	cout << "pServiceSectionNode: " << pServiceSectionNode->Value() << endl;
-
-	// parse all services
-	pServiceNode = pServiceSectionNode->FirstChildElement();
-
-	while( pServiceNode != 0 )
-	{
-		// parse service
-		serviceInfo.Parse(pServiceNode);
-
-		cout << "service:"
-			<< "id=\"" << serviceInfo.strId << "\" "
-			<< "desc=\"" << serviceInfo.strDesc << "\" "
-			<< "filename=\"" << serviceInfo.strFileName << "\""
-			<< endl;
-
-		// add service info to list
-		m_Services.push_back(
-			ServicePointer(new VServiceProxy(serviceInfo.strFileName)) );
-
-		// get next service info xml element
-		pServiceNode = pServiceNode->NextSiblingElement();
-	}
-
-	// get "Main" Section
-	pMainNode = pServiceSectionNode->NextSiblingElement();
-
-	if( pMainNode == 0 ) V3D_THROW(VKernelException, "main service not found");
-
-	cout << "main service: \"" << pMainNode->Value() << "\"" << endl;
-
-	// get name of main method
-	m_strAppName = pMainNode->Attribute("id");
-
-	if( m_strAppName.length() == 0 )
-	{
-		V3D_THROW(VKernelException, "main app id is invalid");
-	}
-
-	// parse main service info
-	//serviceInfo.Parse(pMainNode);
-
-	// create app service DLL info
-	//m_App.Reset(new VServiceProxy(serviceInfo.strFileName));
+	m_strAppName = IniReader.GetAppName();
 }
 
 /**

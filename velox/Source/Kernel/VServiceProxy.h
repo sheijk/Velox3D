@@ -36,6 +36,7 @@ private:
 	ShutdownFunction m_pDeInitFunction;
 
 	HINSTANCE m_hDllInstance;
+	vbool m_bIsLoaded;
 public:
 	VServiceProxy(const std::string& in_strDLL);
 

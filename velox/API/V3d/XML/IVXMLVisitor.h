@@ -22,6 +22,7 @@ public:
 	virtual void OnElementOpen(IVXMLElement* pElement) = 0;
 	virtual void OnFileEnd() = 0;
 	virtual void OnComment(VStringParam pText) = 0;
+	virtual void OnText(VStringParam pText) = 0;
 	
 };
 //-----------------------------------------------------------------------------

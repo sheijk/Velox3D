@@ -34,6 +34,9 @@ void VXMLVisitor::OnFileEnd()
 void VXMLVisitor::OnComment(VStringParam pText)
 {
 }
+void VXMLVisitor::OnText(VStringParam pText)
+{
+}
 
 //-----------------------------------------------------------------------------
 } // v3d

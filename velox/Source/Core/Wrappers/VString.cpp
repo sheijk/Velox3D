@@ -103,7 +103,7 @@ VString operator+(const char* in_pcChar, const VString& in_VStr)
 
 VString operator+(const VString& in_VStr, const char* in_pcChar)
 {
-	vuint nCStrLen = strlen(in_pcChar);
+	vuint nCStrLen =  (vuint)strlen(in_pcChar);
 	vuint nVStrLen = in_VStr.Length();
 
 	char* pChars = new char[nVStrLen + nCStrLen + 1];

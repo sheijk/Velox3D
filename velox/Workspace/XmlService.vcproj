@@ -136,6 +136,9 @@
 			<File
 				RelativePath="..\API\V3d\XML\IVXMLWriter.h">
 			</File>
+			<File
+				RelativePath="..\Api\V3d\Xml\VXMLException.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
@@ -148,11 +151,6 @@
 			</File>
 			<File
 				RelativePath="..\Source\XMLService\VStreamReader.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\Source\XMLService\VStreamReader.h">

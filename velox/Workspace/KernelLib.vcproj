@@ -112,32 +112,16 @@
 				RelativePath="..\Source\Kernel\VKernelException.h">
 			</File>
 			<File
+				RelativePath="..\Source\Kernel\VKernelIniReader.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Kernel\VKernelIniReader.h">
+			</File>
+			<File
 				RelativePath="..\Source\Kernel\VServiceProxy.cpp">
 			</File>
 			<File
 				RelativePath="..\Source\Kernel\VServiceProxy.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="TinyXML"
-			Filter="">
-			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinystr.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinystr.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxml.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxml.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxmlerror.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\tinyxml\tinyxmlparser.cpp">
 			</File>
 		</Filter>
 	</Files>
