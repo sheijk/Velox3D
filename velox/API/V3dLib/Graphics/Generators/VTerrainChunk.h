@@ -3,8 +3,12 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/Image/IVImageFactory.h>
+#include <V3d/Core/VObjectRegistry.h>
+
+#include <V3d/Image.h>
+
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3dLib/Graphics/Geometry.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

@@ -2,7 +2,10 @@
 #define V3D_TRANSFORMATIONOPS_2004_04_09_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+
 #include <v3d/Math/VMatrix.h>
+#include <v3d/Core/SmartPtr/VGuards.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace math {
@@ -146,10 +149,16 @@ VMatrix44f RotationXMatrix(float angle);
  * @author: sheijk
  */
 VMatrix44f RotationYMatrix(float angle);
+
 /**
  * @author: sheijk
  */
 VMatrix44f RotationZMatrix(float angle);
+
+/**
+ * @author sheijk
+ */
+VPointer<VMatrix44f>::SharedPtr IdentityPtr();
 
 //-----------------------------------------------------------------------------
 } // namespace math

@@ -222,10 +222,10 @@
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VPolarSphere.inl">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunk.h">
+					RelativePath="..\Source\Graphics\Lib\VTerrainChunk.cpp">
 				</File>
 				<File
-					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunk.inl">
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunk.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangle.h">
@@ -313,6 +313,12 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Portal\VIndoorCell.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\Portals\VTerrainCell.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Portal\VTerrainCell.h">
 				</File>
 			</Filter>
 		</Filter>

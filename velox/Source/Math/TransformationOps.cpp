@@ -76,6 +76,14 @@ VMatrix44f RotationZMatrix(float angle)
 	return rot;
 }
 
+VPointer<VMatrix44f>::SharedPtr IdentityPtr()
+{
+	VPointer<VMatrix44f>::SharedPtr pMatrix(new VMatrix44f());
+	Identity(*pMatrix);
+
+	return pMatrix;
+}
+
 //-----------------------------------------------------------------------------
 } // namespace math
 } // namespace v3d

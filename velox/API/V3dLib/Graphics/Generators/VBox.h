@@ -21,9 +21,9 @@ class VBox
 	vfloat32	m_fWidth;
 	vfloat32	m_fDepth;
 
-	VBuffer<VertexStructure>	buffer;
 
 public:
+	VBuffer<VertexStructure>	buffer;
 
 	VBuffer<VertexStructure>* GetVertexBuffer();
 	

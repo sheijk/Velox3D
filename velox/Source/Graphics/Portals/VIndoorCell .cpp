@@ -6,6 +6,7 @@
 #include <v3d/Image/IVImageFactory.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3dlib/Graphics/Misc/MiscUtils.h>
+#include <V3dLib/Graphics/Geometry.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -99,6 +100,14 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 	box.GetIndexBuffer()[18] = 7;
 	box.GetIndexBuffer()[19] = 0;
 	
+	ForEachVertex(box.GetVertexBuffer(), SwitchYZ<VTexturedVertex>);
+	ForEachVertex(box.GetVertexBuffer(), 
+		ScaleVertex<VTexturedVertex>(.2f, .2f, .1f));
+	ForEachVertex(box.GetVertexBuffer(),
+		AddVertex<VTexturedVertex>(0, 0, -2.0f));
+
+
+
 	VMeshDescription meshDescs;
 
 	meshDescs =	BuildMeshDescription<VTexturedVertex>(
@@ -118,7 +127,7 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 
 
 	matDescs.backPolyMode = VMaterialDescription::Filled;
-	matDescs.frontPolyMode = VMaterialDescription::Point;
+	matDescs.frontPolyMode = VMaterialDescription::Filled;
 
 	IVDevice::MeshHandle BoxHandle = m_pDevice->CreateMesh(meshDescs, matDescs);
 
@@ -128,7 +137,7 @@ VIndoorCell::VIndoorCell(IVDevice* in_pDevice)
 
 	Identity(*translate);
 
-	math::SetTranslate(*translate, 0.0f,0.0f, -10.0f);
+//	math::SetTranslate(*translate, 0.0f,0.0f, -10.0f);
 
 	m_pModel = new VModel(BoxHandle, translate);
 }

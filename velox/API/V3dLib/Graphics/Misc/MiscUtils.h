@@ -25,6 +25,8 @@ VMaterialDescription BuildTextureMaterial(
 	IVDevice* in_pDevice,
 	VStringParam in_pcTextureFile);
 
+VMaterialDescription::ColorBufferMask NoColorWrites();
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

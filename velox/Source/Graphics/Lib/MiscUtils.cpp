@@ -40,6 +40,18 @@ VMaterialDescription BuildTextureMaterial(
 	return texMat;
 }
 
+VMaterialDescription::ColorBufferMask NoColorWrites()
+{
+	VMaterialDescription::ColorBufferMask mask;
+
+	mask.writeRed = false;
+	mask.writeGreen = false;
+	mask.writeBlue = false;
+	mask.writeAlpha = false;
+
+	return mask;
+}
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
