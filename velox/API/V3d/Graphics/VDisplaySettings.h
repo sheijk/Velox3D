@@ -25,6 +25,8 @@ public:
 	vbool m_bFullscreen;
 	vuint m_iWidth;
 	vuint m_iHeight;
+	vuint m_iWinCoordX;
+	vuint m_iWinCoordY;
 	vuint m_iBitsPerPixel;
 	vuint m_iAccumulationBuffer;
 	vuint m_iDepthBits;

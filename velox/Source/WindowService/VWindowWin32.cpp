@@ -139,8 +139,8 @@ void VWindowWin32::CreateWindow()
 								//WS_OVERLAPPEDWINDOW |
 								WS_CLIPSIBLINGS |
 								WS_CLIPCHILDREN,
-								CW_USEDEFAULT,
-								CW_USEDEFAULT,
+								m_DisplaySettings.m_iWinCoordX,
+								m_DisplaySettings.m_iWinCoordY,
 								WindowRect.right-WindowRect.left,
 								WindowRect.bottom-WindowRect.top,
 								NULL,

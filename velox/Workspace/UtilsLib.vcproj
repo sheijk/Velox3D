@@ -217,6 +217,9 @@
 				RelativePath="..\Api\V3d\Utils\Graphics\VVector3f.h">
 			</File>
 			<File
+				RelativePath="..\Source\UtilsLib\GraphicsDescriptions\VVertexDataLayout.cpp">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VVertexDataLayout.h">
 			</File>
 		</Filter>

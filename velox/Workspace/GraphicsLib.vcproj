@@ -107,7 +107,7 @@
 				Name="Interface"
 				Filter="">
 				<File
-					RelativePath="..\Api\V3d\DrawList\IVDrawList.h">
+					RelativePath="..\Api\V3d\Graphics\DrawList\IVDrawList.h">
 				</File>
 			</Filter>
 		</Filter>

@@ -2,7 +2,6 @@
 #define V3D_VVERTEXDATALAYOUT_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -40,11 +39,6 @@ struct VVertexDataLayout
 	template<typename VertexData>
 	static void SetTexCoordOffset();
 };
-
-vbool VVertexDataLayout::IsValidOffset(Offset offs)
-{
-	return offs >= 0;
-}
 
 template<typename VertexData>
 void VVertexDataLayout::SetPositionOffset()

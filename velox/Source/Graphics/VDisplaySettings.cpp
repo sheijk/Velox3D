@@ -10,6 +10,8 @@ VDisplaySettings::VDisplaySettings()
 	m_bFullscreen   = false;
 	m_iWidth	    = 640;
 	m_iHeight	    = 480;
+	m_iWinCoordX    = 300;
+	m_iWinCoordY    = 100;
 	m_iBitsPerPixel = 16;
 	m_iAccumulationBuffer = 0;
 	m_iDepthBits = 16;
@@ -32,6 +34,8 @@ void VDisplaySettings::Assign(VDisplaySettings* in_pInfo)
 	m_bFullscreen   = in_pInfo->m_bFullscreen;
 	m_iWidth	    = in_pInfo->m_iWidth;
 	m_iHeight	    = in_pInfo->m_iHeight;
+	m_iWinCoordX    = in_pInfo->m_iWinCoordX;
+	m_iWinCoordY    = in_pInfo->m_iWinCoordY;
 	m_iBitsPerPixel = in_pInfo->m_iBitsPerPixel;
 	m_iAccumulationBuffer = in_pInfo->m_iAccumulationBuffer;
 	m_iDepthBits = in_pInfo->m_iDepthBits;
