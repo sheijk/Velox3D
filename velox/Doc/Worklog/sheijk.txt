@@ -44,6 +44,9 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+27.09.2004
+- GraphicsDemo ausfuehrlich dokumentiert/kommentiert
+
 26.09.2004
 - ExternalLibs Struktur umgestellt
 - GraphicsDemo geschrieben
