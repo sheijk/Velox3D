@@ -242,9 +242,21 @@ resource::VResourceId BuildResource(
 
 	// add mesh description
 	VMeshDescription* pMoonMD = new VMeshDescription(vertexFormat);
+
 	pMoonMD->SetGeometryType(in_Geometry.GetGeometryType());
-	pMoonMD->SetCoordinateResource(res->GetQualifiedName());
-	pMoonMD->SetTexCoordResource(0, res->GetQualifiedName());
+
+	if( vertexFormat.GetCoordinateFormat().GetCount() > 0 )
+		pMoonMD->SetCoordinateResource(res->GetQualifiedName());
+
+	if( vertexFormat.GetColorFormat().GetCount() > 0 )
+		pMoonMD->SetColorResource(res->GetQualifiedName());
+
+	for(int texCoordId = 0; 
+		texCoordId < vertexFormat.GetTexCoordCount(); 
+		++texCoordId)
+	{
+		pMoonMD->SetTexCoordResource(texCoordId, res->GetQualifiedName());
+	}
 
 	// if indices are present, create a subresource called indices,
 	// add index buffer to them and adjust the mesh descr format

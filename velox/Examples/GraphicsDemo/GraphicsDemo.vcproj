@@ -126,9 +126,6 @@
 				RelativePath="..\..\Source\Module\VeloxModule.cpp">
 			</File>
 			<File
-				RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.cpp">
-			</File>
-			<File
 				RelativePath=".\VSwingFunction.h">
 			</File>
 		</Filter>

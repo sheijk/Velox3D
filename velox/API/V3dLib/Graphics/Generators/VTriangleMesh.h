@@ -19,17 +19,17 @@ public:
 
 	VTriangleMesh() : VGeometryData<VertexStructure>(VMeshDescription::Triangles, 3,0)
 	{
-		GetVertexBuffer()[0].position.x = -10.0f;
+		GetVertexBuffer()[0].position.x = -1.0f;
 		GetVertexBuffer()[0].position.y = 0.0f;
-		GetVertexBuffer()[0].position.z  = -10.0f;
+		GetVertexBuffer()[0].position.z  = -1.0f;
 
-		GetVertexBuffer()[1].position.x = +10.0f;
+		GetVertexBuffer()[1].position.x = +1.0f;
 		GetVertexBuffer()[1].position.y = 0.0f;
-		GetVertexBuffer()[1].position.z = -10.0f;
+		GetVertexBuffer()[1].position.z = -1.0f;
 
 		GetVertexBuffer()[2].position.x = 0.0f;
-		GetVertexBuffer()[2].position.y = 10.0f;
-		GetVertexBuffer()[2].position.z = -10.0f;
+		GetVertexBuffer()[2].position.y = 1.0f;
+		GetVertexBuffer()[2].position.z = -1.0f;
 
 	}
 

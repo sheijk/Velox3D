@@ -61,10 +61,16 @@ VState BlendingState(
 /**
  * Returns a render pass with the default values for all attributes which will
  * be used if they are not explicitly set
+ *
+ * @author sheijk
  */
 void MakeDefaultMaterial(VRenderPass& pass);
 
-/** Creates a colored wire frame material */
+/** 
+ * Creates a colored wire frame material 
+ *
+ * @author sheijk
+ */
 void MakeWireFrameMaterial(VRenderPass& pass);
 
 /**
@@ -72,6 +78,13 @@ void MakeWireFrameMaterial(VRenderPass& pass);
  * can be rendered on the device
  */
 //void MakeErrorMaterial(VRenderPass& pass);
+
+/**
+ * Returns a simple colored material with no lighting
+ *
+ * @author sheijk
+ */
+VEffectDescription ColorEffect(const VColor4f& in_Color);
 
 
 /**

@@ -29,8 +29,14 @@ VStreamMesh::VStreamMesh(
 		IVVertexStream::Coordinates);
 	AddVertexBuffer(in_MeshDescription.GetColorResource(),
 		IVVertexStream::Colors);
-	AddVertexBuffer(in_MeshDescription.GetTexCoordResource(0),
-		IVVertexStream::TexCoords);
+
+	for(int texCoordId = 0; 
+		texCoordId < in_MeshDescription.GetTexCoordCount();
+		++texCoordId)
+	{
+		AddVertexBuffer(in_MeshDescription.GetTexCoordResource(texCoordId),
+			IVVertexStream::TexCoords);
+	}
 
 	if( in_MeshDescription.GetIndexResource() != "" )
 	{

@@ -143,6 +143,20 @@ void MakeWireFrameMaterial(VRenderPass& pass)
 	pass.AddState(PolygonModeState(PMLine, PMLine));
 }
 
+VEffectDescription ColorEffect(const VColor4f& in_Color)
+{
+	VEffectDescription effect;
+
+	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
+	pass.AddState(DefaultColorState(in_Color));
+	pass.AddState(PolygonModeState(PMFilled, PMFilled));
+	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
+	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
+	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
+
+	return effect;
+}
+
 //-----------------------------------------------------------------------------
 
 void PrintEffectDescription(const VEffectDescription& effect)

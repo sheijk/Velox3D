@@ -35,12 +35,14 @@ class VServicePtr
 public:
 	VServicePtr()
 	{
-		// query service
-		m_pService = QueryService<ServiceType>();
+		m_pService = 0;
 	}
 
 	ServiceType* Get()
 	{
+		if( m_pService == 0 )
+			m_pService = QueryService<ServiceType>();
+
 		return m_pService;
 	}
 
@@ -61,12 +63,12 @@ public:
 
 	ServiceType* operator->()
 	{
-		return m_pService;
+		return Get();
 	}
 
 	const ServiceType* operator->() const
 	{
-		return m_pService;
+		return Get();
 	}	
 };
 
