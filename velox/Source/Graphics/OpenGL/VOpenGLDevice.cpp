@@ -3,7 +3,7 @@
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/Wrappers/VIterator.h>
 
-#include "VOpenGLVertexMesh.h"
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -42,7 +42,8 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	//m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
 	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
-	m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
+	//m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
+	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
 }
 //-----------------------------------------------------------------------------
 

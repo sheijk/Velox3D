@@ -16,6 +16,7 @@ namespace graphics {
 
 /**
  * A graphical device. Abstraction of DirectGraphics/OpenGL/..
+ * Unsuitable for children 3 years or younger ;)
  *
  * @author sheijk / ins
  */

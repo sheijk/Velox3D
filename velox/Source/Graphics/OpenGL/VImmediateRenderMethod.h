@@ -1,8 +1,7 @@
 //-----------------------------------------------------------------------------
-#ifndef V3D_VOPENGLPLAINRENDERMETHOD_H
-#define V3D_VOPENGLPLAINRENDERMETHOD_H
+#ifndef V3D_VIMMEDIATERENDERMETHOD_H
+#define V3D_VIMMEDIATERENDERMETHOD_H
 //-----------------------------------------------------------------------------
-#include "VOpenGLVertexMesh.h"
 #include "../DeviceBase/VRenderMethodRegistry.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -15,9 +14,9 @@ namespace graphics {
  * @author sheijk
  */
 
-class VOpenGLPlainRenderMethod : public IVRenderMethod
+class VImmediateRenderMethod : public IVRenderMethod
 {
-	virtual VOpenGLVertexMesh* CreateMesh(VMeshDescription& in_MeshDescr);
+	virtual VBaseMesh* CreateMesh(VMeshDescription& in_MeshDescr);
 };
 
 //-----------------------------------------------------------------------------
@@ -25,4 +24,4 @@ class VOpenGLPlainRenderMethod : public IVRenderMethod
 } //namespace v3d
 //-----------------------------------------------------------------------------
 
-#endif //V3D_VOPENGLPLAINRENDERMETHOD_H
+#endif //V3D_VIMMEDIATERENDERMETHOD_H

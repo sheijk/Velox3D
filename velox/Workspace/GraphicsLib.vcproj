@@ -160,16 +160,10 @@
 				Name="Render Methods"
 				Filter="">
 				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexRenderMethod.cpp">
+					RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.cpp">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexRenderMethod.h">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLPlainRenderMethod.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\Graphics\OpenGL\VOpenGLPlainRenderMethod.h">
+					RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.h">
 				</File>
 			</Filter>
 			<Filter

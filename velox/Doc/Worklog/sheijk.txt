@@ -26,7 +26,8 @@ template member konvertiert?
 --------------------------------------------------------------------------------
 ----- personal todo:
 	.gfx device:
-	buffer aendern
+	./buffer aendern
+	./indexed/non indexed geometry auto auswahl
 	render states anwenden
 	render state category
 	materials erzeugen
@@ -70,6 +71,8 @@ log:
 
 18.02.2004
 Int/Float Buffer durch "generische" Buffer ersetzt
+indexed und non indexed rendering methods zu einer kombiniert die beides nach
+badarf kann (fuer ogl immediate mode)
 
 15.02.2004
 Den Code aus dem CVS gefixt.. (input manager und window service)
