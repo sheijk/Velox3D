@@ -23,7 +23,6 @@
 #include "VMiscStateCategory.h"
 #include "../DeviceBase/VMeshBase.h"
 
-#include <v3d/Resource/VResourceId.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -43,6 +42,11 @@ public:
 	/** Contructor for adding a window */
 	VOpenGLDevice(const graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
 	virtual ~VOpenGLDevice();
+
+	virtual MeshHandle CreateMesh(
+		VStringParam in_strMeshDescrResName,
+		VStringParam in_strEffectDescrResName
+		);
 
 	virtual BufferHandle CreateBuffer(
 		BufferType in_Type,
@@ -68,10 +72,6 @@ public:
 		const VMeshDescription& in_MeshDescr,
 		const VEffectDescription& in_EffectDescr
 		);
-
-	virtual MeshHandle CreateMesh(
-		resource::VResourceId in_Mesh, 
-		resource::VResourceId in_Material);
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 

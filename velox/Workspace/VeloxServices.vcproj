@@ -557,6 +557,9 @@
 					RelativePath="..\Api\V3d\Graphics\VBuffer.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Graphics\VDataFormat.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Graphics\VDeviceMatrix.h">
 				</File>
 				<File
@@ -570,6 +573,12 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Graphics\VMeshDescription.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Graphics\VVertexBuffer.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Graphics\VVertexFormat.h">
 				</File>
 			</Filter>
 			<Filter
@@ -595,6 +604,15 @@
 					Name="Meshes"
 					Filter="">
 					<File
+						RelativePath="..\Source\Graphics\OpenGL\IVVertexStream.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VImmediateVertexStream.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VImmediateVertexStream.h">
+					</File>
+					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.cpp">
 					</File>
 					<File
@@ -611,6 +629,12 @@
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.h">
 					</File>
 				</Filter>
 				<Filter
@@ -789,6 +813,12 @@
 		<Filter
 			Name="Resource Types"
 			Filter="">
+			<File
+				RelativePath="..\Source\Resource\Types\VGLVertexStreamResType.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Resource\Types\VGLVertexStreamResType.h">
+			</File>
 			<File
 				RelativePath="..\Source\Resource\Types\VImageResourceType.cpp">
 			</File>

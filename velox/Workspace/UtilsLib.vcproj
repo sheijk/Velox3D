@@ -449,6 +449,12 @@
 				<File
 					RelativePath="..\Source\Graphics\OpenGL\VMeshHandle.h">
 				</File>
+				<File
+					RelativePath="..\Source\Graphics\Lib\VVertexBuffer.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\Lib\VVertexFormat.cpp">
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -705,6 +711,9 @@
 		</Filter>
 		<File
 			RelativePath="..\Api\V3dLib\BoostSignals.h">
+		</File>
+		<File
+			RelativePath="..\Api\V3d\OpenGL.h">
 		</File>
 	</Files>
 	<Globals>

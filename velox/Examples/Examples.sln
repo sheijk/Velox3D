@@ -5,16 +5,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicsDemo", "GraphicsDem
 		{BB57F1C9-0039-40BC-8188-02F384F49322} = {BB57F1C9-0039-40BC-8188-02F384F49322}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxLib", "..\Workspace\UtilsLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49322}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxServices", "..\Workspace\VeloxServices.vcproj", "{946E10B2-24CB-27C7-1337-CDCD6D563659}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "..\Workspace\CoreLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49029}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -48,6 +38,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlService", "..\Workspace\
 		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxServices", "..\Workspace\VeloxServices.vcproj", "{946E10B2-24CB-27C7-1337-CDCD6D563659}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxLib", "..\Workspace\UtilsLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49322}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -61,18 +60,6 @@ Global
 		{2DADAA67-04E0-47C5-B84B-8E9DF2BE6843}.Release.Build.0 = Release|Win32
 		{2DADAA67-04E0-47C5-B84B-8E9DF2BE6843}.UnitTests.ActiveCfg = Release|Win32
 		{2DADAA67-04E0-47C5-B84B-8E9DF2BE6843}.UnitTests.Build.0 = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.ActiveCfg = Debug|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.Build.0 = Debug|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.ActiveCfg = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.Build.0 = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.ActiveCfg = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.Build.0 = Release|Win32
-		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Debug.ActiveCfg = Debug|Win32
-		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Debug.Build.0 = Debug|Win32
-		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Release.ActiveCfg = Release|Win32
-		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Release.Build.0 = Release|Win32
-		{946E10B2-24CB-27C7-1337-CDCD6D563659}.UnitTests.ActiveCfg = Release|Win32
-		{946E10B2-24CB-27C7-1337-CDCD6D563659}.UnitTests.Build.0 = Release|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.ActiveCfg = Debug|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.Build.0 = Debug|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49029}.Release.ActiveCfg = Release|Win32
@@ -109,6 +96,18 @@ Global
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Release.Build.0 = Release|Win32
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.ActiveCfg = Release|Win32
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.Build.0 = Release|Win32
+		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Debug.ActiveCfg = Debug|Win32
+		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Debug.Build.0 = Debug|Win32
+		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Release.ActiveCfg = Release|Win32
+		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Release.Build.0 = Release|Win32
+		{946E10B2-24CB-27C7-1337-CDCD6D563659}.UnitTests.ActiveCfg = Release|Win32
+		{946E10B2-24CB-27C7-1337-CDCD6D563659}.UnitTests.Build.0 = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.ActiveCfg = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.Build.0 = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.Build.0 = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt

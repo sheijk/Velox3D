@@ -39,8 +39,20 @@ public:
 	/** Creates a new sub resource if no one with the same name exist yet */
 	VResource* AddSubResource(const std::string& in_strChildName);
 
+	/** Creates a sub resource generating an unused name */
+	VResource* AddRandomNamedSubResource();
+
 	/** Find a sub resource with the given name, 0 if no one found */
 	VResource* GetSubResource(const std::string& in_strChildName);
+
+	/** 
+	 * Find a resource by it's (relative) path
+	 * Paths starting with '/' will be treated as absolute paths. All other paths
+	 * will be treated as relative to the current element. You may use '..' to
+	 * refer to the parent element.
+	 * Path example: /absolute/path/resname or relative/path/../res
+	 */
+	VResource* GetResourceByPath(const std::string& in_strChildName);
 
 	/** Print debug info about content to v3d::vout */
 	void DumpInfo(const std::string& in_strPrefix) const;
@@ -83,6 +95,7 @@ private:
 	void SetParent(VResource* in_pParent);
 	const VResource* GetParent() const;
 	VResource* GetParent();
+	VResource* GetRootResource();
 
 	VResourceData* GetData(VResourceData::TypeId in_Type);
 	vbool ContainsData(VResourceData::TypeId in_Type);
@@ -106,7 +119,7 @@ void VResource::AddData(DataType* in_pData)
 
 	// create container
 	VSharedPtr< VTypedResourceData<DataType> > pContainer(
-		new VTypedResourceData<DataType>(VSharedPtr<DataType>(in_pData)));
+		new VTypedResourceData<DataType>(VSharedPtr<DataType>(in_pData), this));
 
 	// and store it
 	AddData(type, pContainer);

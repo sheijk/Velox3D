@@ -3,8 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/VBuffer.h>
-
+#include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Math/VMatrix.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -46,6 +47,21 @@ public:
 	};
 
 	/**
+	 * Returns a mesh handle to render the given geometry using the effect
+	 * description's materials. Mesh must be deleted using DeleteMesh
+	 * before end of program
+	 */
+	virtual MeshHandle CreateMesh(
+		VStringParam in_strMeshDescrResName,
+		VStringParam in_strEffectDescrResName
+		) = 0;
+
+	/**
+	 * Deletes a previously created mesh
+	 */
+	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;
+
+	/**
 	 * creates a buffer inside the device which can be referred to using
 	 * the given handle
 	 *
@@ -54,6 +70,7 @@ public:
 	 * @param in_pBuffer the address of the data
 	 * @param in_CopyMode copy the data or transfer ownership to device
 	 */
+//weg
 	virtual BufferHandle CreateBuffer(
 		BufferType in_Type,
         const Buffer* in_Buffer,
@@ -61,6 +78,7 @@ public:
 		) = 0;
 
 	/** deletes the buffer and sets the handle to 0 */
+//weg
 	virtual void DeleteBuffer(BufferHandle& in_Buffer) = 0;
 
 	/**
@@ -68,6 +86,7 @@ public:
 	 * data. Can not change the buffers size. Take care not to write over the
 	 * end of the buffer
 	 */
+//weg
 	virtual void OverwriteBuffer(
 		BufferHandle& in_hBuffer,
 		vuint in_nFirstElement,
@@ -75,6 +94,7 @@ public:
 		const vbyte* in_pBuffer
 		) = 0;
 
+//weg
 	/** create a mesh ins the device */
 	//virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc) = 0;
 	virtual MeshHandle CreateMesh(
@@ -82,16 +102,16 @@ public:
 		const VMaterialDescription& in_pMaterialDesc
 		) = 0;
 
+//weg
 	virtual MeshHandle CreateMesh(
 		const VMeshDescription& in_MeshDescr,
 		const VEffectDescription& in_EffectDescr
 		) = 0;
 
-	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;
-
 	//virtual MaterialHandle CreateMaterial(
 	//	const VMaterialDescription& in_MatDesc) = 0;
 
+//weg
 	virtual void DeleteMaterial(MaterialHandle& in_Material) = 0;
 
 	/** sends the vertices of a mesh to the device */

@@ -8,7 +8,13 @@ namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
+class VResource;
+
 /**
+ * Represents data containend within a resource
+ * Abstract base class fuer VTypedResource which contains the concrete data
+ *
+ * @author sheijk
  */
 class VResourceData
 {
@@ -17,10 +23,7 @@ public:
 	{
 	public:
 		template<typename T>
-		static TypeId Create()
-		{
-			return TypeId(typeid(T).name());
-		}
+		static inline TypeId Create();
 
 		vbool operator<(const TypeId& other) const;
 		vbool operator==(const TypeId& other) const;
@@ -31,22 +34,29 @@ public:
 
 		const vchar* m_strName;
 	};
-	//typedef const void* TypeId;
 
 	virtual ~VResourceData();
 
+	/** Returns an id representing the resource data's type */
 	virtual TypeId GetTypeId() const = 0;
 
+	/** Get the resource this data is contained in */
+	VResource* GetEnclosingResource() const;
+
+	/** Returns the type id for a resource of the type T */
 	template<typename T>
 	static TypeId GetTypeId();
 
 protected:
-	VResourceData();
+	VResourceData(VResource* in_pResource);
 
 	vuint GetReferenceCount() const;
 
 private:
+	/** Number of references to date */
 	vuint m_nReferenceCount;
+	/** The resource the data is contained in */
+	VResource* m_pResource;
 };
 
 //-----------------------------------------------------------------------------
@@ -55,6 +65,12 @@ template<typename T>
 VResourceData::TypeId VResourceData::GetTypeId()
 {
 	return TypeId::Create<T>();
+}
+
+template<typename T>
+static VResourceData::TypeId VResourceData::TypeId::Create()
+{
+	return TypeId(typeid(T).name());
 }
 
 //-----------------------------------------------------------------------------

@@ -8,12 +8,36 @@
 #include "VResourceManager.h"
 
 #include <iostream>
+#include <list>
+#include <sstream>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+
+//TODO: dieses uebelste gehacke beseitigen indem VSimpleTokenizer von hier
+// und aus VResourceManager in eine eigene datei kopieren -- sheijk
+/**
+* A simple tokenizer class. Takes a string and a delimeter character
+* and parses the string into a list of tokens
+*
+* @author sheijk
+*/
+class VSimpleTokenizer
+{
+public:
+	typedef std::list<std::string>::iterator Iterator;
+
+	VSimpleTokenizer(const std::string& in_strString, char in_cDelimeter);
+
+	Iterator TokenBegin();
+	Iterator TokenEnd();
+
+private:
+	std::list<std::string> m_Tokens;
+};
 
 /**
  * standard c'tor
@@ -45,7 +69,7 @@ std::string VResource::GetQualifiedName() const
 	}
 	// exit, when pCurrent is a direct child of root 
 	// (= when it has no grandparent)
-	while( pCurrent->GetParent() != 0 );
+	while( pCurrent != 0 && pCurrent->GetParent() != 0 );
 
 	// return qualified name
 	return qualifiedName;
@@ -71,6 +95,18 @@ VResource* VResource::GetParent()
 	return m_pParent;
 }
 
+VResource* VResource::GetRootResource()
+{
+	VResource* pCurrent = this;
+
+	while( pCurrent->GetParent() != 0 )
+	{
+		pCurrent = pCurrent->GetParent();
+	}
+	
+	return pCurrent;
+}
+
 VResource* VResource::AddSubResource(const std::string& in_strChildName)
 {
 	// if the given sub resource does not exist, yet
@@ -85,9 +121,26 @@ VResource* VResource::AddSubResource(const std::string& in_strChildName)
 	}
 	else
 	{
-		//TODO: warum 0, wenn resource schon existierte?
-		return 0;
+		return GetSubResource(in_strChildName);
 	}
+}
+
+VResource* VResource::AddRandomNamedSubResource()
+{
+	// get an unused name
+	std::stringstream name;
+
+	vuint id = 0;
+
+	do
+	{
+		name.clear();
+		name << "res" << id;
+	}
+	while( GetSubResource(name.str()) != 0 );
+
+	// add sub resource
+	return AddSubResource(name.str());
 }
 
 VResource* VResource::GetSubResource(const std::string& in_strSubResource)
@@ -104,6 +157,53 @@ VResource* VResource::GetSubResource(const std::string& in_strSubResource)
 
 	// not found
 	return 0;
+}
+
+VResource* VResource::GetResourceByPath(const std::string& in_strChildName)
+{
+    // parse string to get all elements seperated by '/'
+	VSimpleTokenizer tokens(in_strChildName, '/');
+	VSimpleTokenizer::Iterator currentRes = tokens.TokenBegin();
+
+	VResource* pCurrentResource = this;
+
+	// select initial resource: root for absolute and this for relative paths
+	if(in_strChildName.size() > 0 && in_strChildName[0] == '/' )
+	{
+		pCurrentResource = GetRootResource();
+
+		// first string in path will be "", skip it
+		++currentRes;
+	}
+
+	// as long as we have a valid resource and have not reached the paths end
+	while( pCurrentResource != 0 && currentRes != tokens.TokenEnd() )
+	{
+		const std::string currentResName = *currentRes;
+
+		// on '..' navigate to parent
+		if( *currentRes == ".." )
+			pCurrentResource = pCurrentResource->GetParent();
+		// on '.' stay in same resource
+		else if( *currentRes == "." )
+			pCurrentResource = pCurrentResource;
+		// else navigate to child
+		else
+			pCurrentResource = pCurrentResource->GetSubResource(*currentRes);
+
+		++currentRes;
+	}
+
+	if( 0 == pCurrentResource )
+	{
+		std::stringstream message;
+		message << "Could not find resource '" << in_strChildName  
+			<< "' from resource '" << GetQualifiedName() << "'";
+
+		V3D_THROW(VResourceNotFoundException, message.str().c_str());
+	}
+
+	return pCurrentResource;
 }
 
 void VResource::DumpInfo(const std::string& in_strPrefix) const

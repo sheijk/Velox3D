@@ -33,6 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="opengl32.lib"
 				OutputFile="$(OutDir)/GraphicsDemo.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -123,6 +124,12 @@
 			</File>
 			<File
 				RelativePath="..\..\Source\Module\VeloxModule.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.cpp">
+			</File>
+			<File
+				RelativePath=".\VSwingFunction.h">
 			</File>
 		</Filter>
 		<Filter

@@ -145,21 +145,23 @@ VResourceId VResourceManager::GetResourceByName(VStringParam in_strName)
 {
 	CheckResourceName(in_strName);
 
-	// get directories of path
-	VSimpleTokenizer tokens(std::string(in_strName+1), '/');
+	return VResourceId(m_RootResource.GetResourceByPath(std::string(in_strName)));
 
-	// find resource
-	VResource* pCurrentRes = &m_RootResource;
-	VSimpleTokenizer::Iterator currentDir = tokens.TokenBegin();
+	//// get directories of path
+	//VSimpleTokenizer tokens(std::string(in_strName+1), '/');
 
-	// until end of name list reached, or a (sub) resource has not been found
-	while(currentDir != tokens.TokenEnd() && 0 != pCurrentRes )
-	{
-		pCurrentRes = pCurrentRes->GetSubResource(*currentDir);
-		++currentDir;
-	}
+	//// find resource
+	//VResource* pCurrentRes = &m_RootResource;
+	//VSimpleTokenizer::Iterator currentDir = tokens.TokenBegin();
 
-	return VResourceId(pCurrentRes);
+	//// until end of name list reached, or a (sub) resource has not been found
+	//while(currentDir != tokens.TokenEnd() && 0 != pCurrentRes )
+	//{
+	//	pCurrentRes = pCurrentRes->GetSubResource(*currentDir);
+	//	++currentDir;
+	//}
+
+	//return VResourceId(pCurrentRes);
 }
 
 void VResourceManager::RegisterResourceType(VSharedPtr<IVResourceType> in_pResType)

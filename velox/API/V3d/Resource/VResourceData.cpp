@@ -9,13 +9,19 @@ namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
 using namespace v3d;
 
-VResourceData::VResourceData()
+VResourceData::VResourceData(VResource* in_pResource)
 {
 	m_nReferenceCount = 0;
+	m_pResource = in_pResource;
 }
 
 VResourceData::~VResourceData()
 {
+}
+
+VResource* VResourceData::GetEnclosingResource() const
+{
+	return m_pResource;
 }
 
 vuint VResourceData::GetReferenceCount() const

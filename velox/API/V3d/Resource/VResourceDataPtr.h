@@ -26,9 +26,9 @@ public:
 	VResourceDataPtr();
 	VResourceDataPtr(TypedDataPtr in_pData);
 
-	DataType* operator->();
+	DataType* operator->() const;
 
-	DataType& operator*();
+	DataType& operator*() const;
 
 private:
 	TypedDataPtr m_pData;
@@ -55,13 +55,13 @@ VResourceDataPtr<DataType>::VResourceDataPtr(TypedDataPtr in_pData)
 }
 
 template<typename DataType>
-DataType* VResourceDataPtr<DataType>::operator->()
+DataType* VResourceDataPtr<DataType>::operator->() const
 {
 	return m_pData->GetData();
 }
 
 template<typename DataType>
-DataType& VResourceDataPtr<DataType>::operator*()
+DataType& VResourceDataPtr<DataType>::operator*() const
 {
 	return * m_pData->GetData();
 }

@@ -9,19 +9,6 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d::resource;
 
-namespace {
-	//VMeshDescription::BufferHandle GetHandleFromResource(
-	//	const std::string& in_strResName)
-	//{
-	//	// get resource
-	//	VResourceId res = VResourceManagerPtr()->GetResourceByName(in_strResName.c_str());
-
-	//	// get data
- //       VResourceDataPtr pBuffer = res->GetData< IVBuffer<vbyte> >();
-	//	return &*pBuffer;
-	//}
-} // anonymous namespace
-
 VMeshDescription::GeometryType VMeshDescription::GetGeometryType() const
 {
 	return m_GeometryType;
@@ -35,15 +22,6 @@ void VMeshDescription::SetGeometryType(GeometryType in_GeometryType)
 //-----------------------------------------------------------------------------
 //--- coordinates
 
-VDataFormat VMeshDescription::GetCoordinateFormat() const
-{
-	return m_Vertices.format;
-}
-
-void VMeshDescription::SetCoordinateFormat(VDataFormat in_Format)
-{
-	m_Vertices.format = in_Format;
-}
 
 void VMeshDescription::SetCoordinateResource(const std::string& in_Id)
 {
@@ -56,16 +34,6 @@ std::string VMeshDescription::GetCoordinateResource() const
 }
 
 //--- colors
-VDataFormat VMeshDescription::GetColorFormat() const
-{
-	return m_Colors.format;
-}
-
-void VMeshDescription::SetColorFormat(VDataFormat in_Format)
-{
-	m_Colors.format = in_Format;
-}
-
 void VMeshDescription::SetColorResource(const std::string& in_Id)
 {
 	m_Colors.resource = in_Id;
@@ -77,16 +45,6 @@ std::string VMeshDescription::GetColorResource() const
 }
 
 //--- indices
-VDataFormat VMeshDescription::GetIndexFormat() const
-{
-	return m_Indices.format;
-}
-
-void VMeshDescription::SetIndexFormat(VDataFormat in_Format)
-{
-	m_Indices.format = in_Format;
-}
-
 void VMeshDescription::SetIndexResource(const std::string& in_Id)
 {
 	m_Indices.resource = in_Id;
@@ -98,25 +56,6 @@ std::string VMeshDescription::GetIndexResource() const
 }
 
 //--- tex coords
-vuint VMeshDescription::GetTexCoordCount() const
-{
-	return vuint(m_TexCoords.size());
-}
-
-VDataFormat VMeshDescription::GetTexCoordFormat(vuint in_nCoord) const
-{
-	V3D_VERIFY(in_nCoord < GetTexCoordCount());
-
-	return m_TexCoords[in_nCoord].format;
-}
-
-void VMeshDescription::SetTexCoordFormat(vuint in_nCoord, VDataFormat in_Format)
-{
-	V3D_ASSERT(in_nCoord < GetTexCoordCount());
-
-	m_TexCoords[in_nCoord].format = in_Format;
-}
-
 void VMeshDescription::SetTexCoordResource(vuint in_nIndex, const std::string& in_Id)
 {
 	V3D_ASSERT(in_nIndex < GetTexCoordCount());
@@ -129,13 +68,18 @@ std::string VMeshDescription::GetTexCoordResource(vuint in_nIndex) const
 	return m_TexCoords[in_nIndex].resource;
 }
 
+void VMeshDescription::SetTexCoordCount(vuint in_nNewCount)
+{
+	VVertexFormat::SetTexCoordCount(in_nNewCount);
+	m_TexCoords.resize(in_nNewCount);
+}
 
 //-----------------------------------------------------------------------------
 void VMeshDescription::SetCoordinateData(
 	BufferHandle in_hBuffer, 
 	VDataFormat in_Format)
 {
-	m_Vertices.format = in_Format;
+	SetCoordinateFormat(in_Format);
 	m_Vertices.hBuffer = in_hBuffer;
 }
 
@@ -148,7 +92,7 @@ void VMeshDescription::SetColorData(
 	BufferHandle in_hBuffer, 
 	VDataFormat in_Format)
 {
-	m_Colors.format = in_Format;
+	SetColorFormat(in_Format);
 	m_Colors.hBuffer = in_hBuffer;
 }
 
@@ -161,7 +105,7 @@ void VMeshDescription::SetIndexData(
 	BufferHandle in_hBuffer, 
 	VDataFormat in_Format)
 {
-	m_Indices.format = in_Format;
+	SetIndexFormat(in_Format);
 	m_Indices.hBuffer = in_hBuffer;
 }
 
@@ -178,7 +122,7 @@ void VMeshDescription::SetTexCoordData(
 {
 	SetMinTexCoords(in_nCoord + 1);
 
-    m_TexCoords[in_nCoord].format = in_Format;
+	SetTexCoordFormat(in_nCoord, in_Format);
 	m_TexCoords[in_nCoord].hBuffer = in_hBuffer;
 }
 
@@ -194,7 +138,8 @@ void VMeshDescription::SetMinTexCoords(vuint in_nCoordCount)
 {
 	if( GetTexCoordCount() < in_nCoordCount )
 	{
-		m_TexCoords.resize(in_nCoordCount);
+		SetTexCoordCount(in_nCoordCount);
+//		m_TexCoords.resize(in_nCoordCount);
 	}
 }
 

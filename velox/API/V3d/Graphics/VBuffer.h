@@ -38,6 +38,7 @@ public:
 	 * aligned linearly starting at this address (like an array)
 	 */
 	virtual T* GetDataAddress() = 0;
+	virtual const T* GetDataAddress() const = 0;
 	virtual vuint GetSize() const = 0;
 };
 
@@ -204,6 +205,11 @@ public:
 
 	/** @see VBufferBase::GetDataAddress */
 	virtual DataType* GetDataAddress()
+	{
+		return m_pBuffer;
+	}
+
+	virtual const DataType* GetDataAddress() const
 	{
 		return m_pBuffer;
 	}

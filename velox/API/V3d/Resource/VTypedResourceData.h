@@ -12,12 +12,18 @@ namespace v3d { namespace resource {
 using namespace v3d; // anti auto indenting
 
 /**
+ * Represents typed resource data. Is contained within an enclosing resource
+ * and provides type safe access to it's data
+ *
+ * @author sheijk
  */
 template<typename DataType>
 class VTypedResourceData : public VResourceData
 {
 public:
-	VTypedResourceData(VSharedPtr<DataType> in_pData);
+	VTypedResourceData(
+		VSharedPtr<DataType> in_pData, 
+		VResource* in_pEnclosingResource);
 	virtual ~VTypedResourceData();
 
 	DataType* GetData();
@@ -31,7 +37,11 @@ private:
 //-----------------------------------------------------------------------------
 
 template<typename DataType>
-VTypedResourceData<DataType>::VTypedResourceData(VSharedPtr<DataType> in_pData)
+VTypedResourceData<DataType>::VTypedResourceData(
+	VSharedPtr<DataType> in_pData, 
+	VResource* in_pEnclosingResource)
+	: 
+	VResourceData(in_pEnclosingResource)
 {
 	m_pData = in_pData;
 }

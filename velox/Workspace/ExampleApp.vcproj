@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/lib/boostd.lib"
+				AdditionalDependencies="../Local/ExternalLibs/Lib/boostd.lib"
 				OutputFile="$(OutDir)/ExampleApp.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"

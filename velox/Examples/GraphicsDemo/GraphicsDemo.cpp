@@ -9,6 +9,8 @@
 #include <V3d/Input.h>
 #include <V3d/Resource.h>
 
+#include "VSwingFunction.h"
+
 using namespace v3d;
 using namespace v3d::system;
 using namespace v3d::updater;
@@ -30,6 +32,10 @@ using namespace v3d::image;
  * - usage of model and view matrices to move models and camera around
  * - usage of system and update manager to create a mainloop and make animations'
  *   speed machine independent
+ *
+ * Note that this sample does not demonstrate the most convient way to write
+ * a velox application. See the entity demo to see how to create an application
+ * without the need for an extra module class
  * 
  * @author sheijk
  */
@@ -39,9 +45,41 @@ public:
 	VGraphicsDemoApp();
 	virtual ~VGraphicsDemoApp();
 
+	/** The program's entry point */
 	virtual vint Main();
 
 private:
+	static void CreateResources();
+
+	/** Creates a mesh for the moon */
+	static IVDevice::MeshHandle CreateMoonMesh(IVDevice& device);
+
+	/** Creates the mesh for the background stars */
+	static IVDevice::MeshHandle CreateBackgroundMesh(IVDevice& device);
+
+	/** Creates the mesh for the earth */
+	IVDevice::MeshHandle CreateSphereMesh(
+		IVDevice& device,
+		const VEffectDescription& effect
+		);
+
+	/** Adds the day time pass for the earth to the effect description of the earth */
+	static void AddDayPass(
+		IVDevice& device,
+		VEffectDescription& effect, 
+		std::string daylightId);
+
+	/** Adds a rendering pass for the clounds to the effect description */
+	static void AddCloudPass(
+		IVDevice& device,
+		VEffectDescription& effect, 
+		std::string textmatPropName);
+
+	/** Adds a rendering pass for the night to the effect description */
+	void AddNightPass(
+		IVDevice& device,
+		VEffectDescription& effect,
+		std::string daytimeId);
 };
 
 VGraphicsDemoApp::VGraphicsDemoApp() : VNamedObject("main", 0)
@@ -52,16 +90,223 @@ VGraphicsDemoApp::~VGraphicsDemoApp()
 {
 }
 
-// constants for controlling the detail level
+// constants to control the detail level
 const int DETAIL_EARTH = 40;
 const int DETAIL_BACKGROUND = 10;
 const int DETAIL_MOON = 30;
 
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
+const int WINDOW_WIDTH = 200;
+const int WINDOW_HEIGHT = 150;
+
+/** The main function. Will be called by the kernel when the application starts */
+vint VGraphicsDemoApp::Main()
+{
+	vout << "This is the velox demo application" << vendl;
+
+	// create window
+	VServicePtr<window::IVWindowManager> pWindowManager;
+
+	VDisplaySettings displaySettings;
+	displaySettings.SetSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	window::IVWindowManager::IVWindowPtr pWindow = 
+		pWindowManager->QueryWindow(".v3d graphics demo", &displaySettings);
+	IVDevice& device(pWindow->QueryGraphicsDevice());
+
+	// create all resources. this step is not necessary in real world
+	// applications because resources should be loaded using a resource file
+	// (which is not implemented, yet ;))
+	CreateResources();
+
+	// create properties. they are needed for animated material states
+	// a state of a material can reference a property so the state will
+	// be kept in sync with the value of the property. this way, material
+	// states can be animated
+	property::VProperty<VMatrix44f> skyTexMatrix("skytexmatrix");
+	skyTexMatrix.Set(IdentityMatrix());
+	VProperty<vfloat32> daytimeProperty("daytime");
+	VProperty<vfloat32> nighttimProperty("nighttime");
+	VProperty<vfloat32> cloudAlphaProperty("cloud.alpha");
+
+	// create a three pass effect description
+	VEffectDescription effect;
+	AddDayPass(device, effect, "@daytime");
+	AddNightPass(device, effect, "@nighttime");
+	AddCloudPass(device, effect, skyTexMatrix.GetRefId());
+
+	PrintEffectDescription(effect);
+
+	// create meshes for the earth, moon and background
+	IVDevice::MeshHandle hSphereMesh = CreateSphereMesh(device, effect);
+	IVDevice::MeshHandle hSkyMesh = CreateBackgroundMesh(device);
+	IVDevice::MeshHandle hMoonMesh = CreateMoonMesh(device);
+
+	IVDevice::MeshHandle hTriangle = device.CreateMesh("/test", "/test");
+
+	// setup camera, and apply it's matrix to the device
+	VCamera cam;
+	cam.MoveForward(-7);
+	device.SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+
+	// get the escape key
+	input::IVButton& escapeKey(pWindow->QueryInputManager().GetStandardKey(KeyEscape));
+
+	// setup some matrices and values used in the render loop
+	VMatrix44f texmat;
+	Identity(texmat);
+	vfloat32 angle = 0;
+
+	VMatrix44f modelmat;
+	Identity(modelmat);
+	math::Translate(modelmat, 1.0f, 0.3f, 0.0f);
+	math::RotateX(modelmat, DegreeToRadian(-20));
+	math::RotateY(modelmat, DegreeToRadian(-30));
+
+	VMatrix44f skyMatrix;
+	Identity(skyMatrix);
+	RotateZ(skyMatrix, DegreeToRadian(-30));
+	RotateY(skyMatrix, DegreeToRadian(90));
+	
+	VMatrix44f moonMatrix;
+
+	VSwingFunction daytimeVal(.5f, -3.0f, 4.0f);
+
+	// init system and updater service
+	VServicePtr<updater::IVUpdateManager> pUpdater;
+	VServicePtr<system::IVSystemManager> pSystem;
+	pSystem->SetStatus(true);
+
+	pUpdater->Start();
+	while(pSystem->GetStatus())
+	{
+		// prepare device for rendering (make gl context current etc)
+		device.BeginScene();
+
+		// update texture matrix and change property to update the clouds
+		// texture matrix (animating the clouds)
+		angle += (vfloat32)pUpdater->GetFrameDuration() * 2;
+		while(angle >= 360.0f)
+			angle -= 360.0f;
+		texmat.Set(0, 3, angle / 360.0f);
+		skyTexMatrix.Set(texmat);
+
+		// update the daytime function
+		daytimeVal.Update((vfloat32)pUpdater->GetFrameDuration());
+
+		// calc daytime by clamping it to [0,1]
+		vfloat32 daytime = daytimeVal.GetValue();
+		if( daytime < 0 ) daytime = 0;
+		if( daytime > 1 ) daytime = 1;
+		daytimeProperty.Set(daytime);
+		nighttimProperty.Set(1.0f - daytime);
+		cloudAlphaProperty.Set(0.1f + .9f*daytime);
+
+		// render the mesh (with 2 passes)
+		device.SetMatrix(IVDevice::ModelMatrix, modelmat);
+//		RenderMesh(device, hSphereMesh);
+
+		// render the sky
+		device.SetMatrix(IVDevice::ModelMatrix, skyMatrix);
+//		RenderMesh(device, hSkyMesh);
+
+		// setup matrix for moon to move it, then render moon
+		Identity(	moonMatrix);
+		Translate(	moonMatrix, 1.0f, 0.3f, 0.0f);
+		RotateX(	moonMatrix, DegreeToRadian(-15));
+		RotateZ(	moonMatrix, DegreeToRadian(20));
+		RotateY(	moonMatrix, DegreeToRadian(angle * 5));
+		Translate(	moonMatrix, 0, 0, 3);
+		RotateY(	moonMatrix, DegreeToRadian(-angle * 5));
+
+		device.SetMatrix(IVDevice::ModelMatrix, moonMatrix);
+
+		RenderMesh(device, hMoonMesh);
+		RenderMesh(device, hTriangle);
+
+		// end the scene (flip buffers etc)
+		device.EndScene();
+
+		// update object registered at update manager, calc duration of frame etc
+		pUpdater->StartNextFrame();
+
+		// exit if escape is pressed
+		if( escapeKey.IsDown() )
+		{
+			pSystem->SetStatus(false);
+		}
+	}
+	pUpdater->Stop();
+
+	// release resources
+	device.DeleteMesh(hSphereMesh);
+	device.DeleteMesh(hSkyMesh);
+	device.DeleteMesh(hMoonMesh);
+
+	vout << "Have a nice day" << vendl;
+	return 0;
+}
+
+void AddFileNameResource(VResourceId in_Parent, 
+						 VStringParam in_strResName, 
+						 VStringParam in_strFileName)
+{
+	VResourceId res = in_Parent->AddSubResource(in_strResName);
+	res->AddData<VFileName>(new VFileName(in_strFileName));
+}
+
+//TODO: unbedingt aendern bevor das committet wird_!_
+#include "../../Source/Graphics/OpenGL/VImmediateVertexStream.h"
+void VGraphicsDemoApp::CreateResources()
+{
+	resource::VResourceManagerPtr pResourceManager;
+
+	VResourceId datares = pResourceManager->CreateResource("/data");
+
+	// add texture resources
+	AddFileNameResource(datares, "sky", "/data/sky.jpg");
+	AddFileNameResource(datares, "day", "/data/day.jpg");
+	AddFileNameResource(datares, "night", "/data/night.jpg");
+
+	// add mesh resources for earth, moon and background
+
+
+	// add a test mesh
+	VResourceId testres = pResourceManager->CreateResource("/test");
+	
+	VMeshDescription* pMD = new VMeshDescription();
+	pMD->SetCoordinateResource("/test");
+	VDataFormat format;
+	format.SetCount(3);
+	format.SetFirstIndex(0);
+	format.SetStride(3);
+	pMD->SetCoordinateFormat(format);
+	testres->AddData(pMD);
+
+	vfloat32 vertices[9] = {
+		.0f, 1.0f, .0f,
+		1.0f, -1.0f, .0f,
+		-1.0f, -1.0f, .0f
+	};
+
+	VVertexBuffer* pVB = new VVertexBuffer(
+		vertices,
+		9, 
+		*pMD);
+	testres->AddData(pVB);
+
+	VEffectDescription* pED = new VEffectDescription();
+	VRenderPass& pass(pED->AddShaderPath().AddRenderPass());
+	pass.AddState(DefaultColorState(VColor4f(1, 0, 0, 1)));
+	pass.AddState(PolygonModeState(PMFilled, PMFilled));
+	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
+	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
+	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
+
+	testres->AddData(pED);
+}
 
 /** Adds the render pass for the daylight earth */
-void AddDayPass(
+void VGraphicsDemoApp::AddDayPass(
 	IVDevice& device,
 	VEffectDescription& effect, 
 	std::string daylightId)
@@ -90,21 +335,9 @@ void AddDayPass(
 	// alpha blending settings. disable blending, source and dest factors
 	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
 
-	// load an image which will be converted to size 1024x512@24bit depth
-	image::VImageServicePtr pImageService;
-	image::VImage image(1024, 512, 24);
-	pImageService->CreateImage("/data/day.jpg", image);
-
-	// load it into the device
-	IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
-		IVDevice::Texture,
-		&image.GetData(),
-		VBufferBase::CopyData);
-
-	// create a state which references the created texture buffer
 	VState textureState = TextureState(
-		hTexBuffer,
-		image.GetWidth(), image.GetHeight(),
+		// just to demonstrate the ".." and "." operators
+		"/data/../data/./day",
 		FilterLinear, FilterLinear,
 		TextureRepeat, TextureRepeat);
 
@@ -117,7 +350,7 @@ void AddDayPass(
 }
 
 /** create the pass for the night planet */
-void AddNightPass(
+void VGraphicsDemoApp::AddNightPass(
 	IVDevice& device,
 	VEffectDescription& effect,
 	std::string daytimeId)
@@ -137,26 +370,16 @@ void AddNightPass(
 	// render if <= z value, enable depth test, don't write new values
 	pass.AddState(DepthBufferState(DepthOnLessEqual, DepthTestEnabled, DepthReadOnly));
 
-	// load image and create texture and state (see AddDayState)
-	image::VImageServicePtr pImageService;
-	image::VImage image(1024, 512, 24);
-	pImageService->CreateImage("/data/night.jpg", image);
-
-	IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
-		IVDevice::Texture,
-		&image.GetData(),
-		VBufferBase::DropData);
-
 	VState textureState = TextureState(
-		hTexBuffer,
-		image.GetWidth(), image.GetHeight(),
+		"/data/night",
 		FilterLinear, FilterLinear,
 		TextureRepeat, TextureRepeat);
+    
 	pass.AddState(textureState);
 }
 
 /** Adds a rendering pass for the cloud layer */
-void AddCloudPass(
+void VGraphicsDemoApp::AddCloudPass(
 	IVDevice& device,
 	VEffectDescription& effect, 
 	std::string textmatPropName)
@@ -176,30 +399,9 @@ void AddCloudPass(
 	pass.AddState(BlendingState(BlendEnabled, BlendSourceAlpha, BlendDestAlpha));
 	pass.AddState(DepthBufferState(DepthOnLessEqual, DepthTestEnabled, DepthReadOnly));
 
-	// create texture from image and add state, see AddDayPass
-	VResourceManagerPtr pResMan;
-	VResourceId texRes = pResMan->CreateResource("/textures/sky");
-	texRes->AddData(new VFileName("/data/sky.jpg"));
-
-	const VImage* pImage = &*texRes->GetData<VImage>();
-
-	//image::VImageServicePtr pImageService;
-	//image::VImage image(1024, 512, 24);
-	//pImageService->CreateImage("/data/sky.jpg", image);
-
-	IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
-		IVDevice::Texture,
-		&(pImage->GetData()),
-		VBufferBase::DropData);
-
-	//VState textureState = TextureState(
-	//	"/textures/sky",
-	//	FilterLinear, FilterLinear,
-	//	TextureRepeat, TextureRepeat);
-
+	// create a texture state refering to the texture's resource name
 	VState textureState = TextureState(
-		hTexBuffer,
-		pImage->GetWidth(), pImage->GetHeight(),
+		"/data/sky",
 		FilterLinear, FilterLinear,
 		TextureRepeat, TextureRepeat);
 
@@ -230,7 +432,7 @@ void SwitchTextCoordUV(VertexStructure& vertex)
 }
 
 /** creates sphere geometry and loads it into the device */
-IVDevice::MeshHandle CreateSphereMesh(
+IVDevice::MeshHandle VGraphicsDemoApp::CreateSphereMesh(
 	IVDevice& device,
 	const VEffectDescription& effect
 	)
@@ -253,7 +455,7 @@ IVDevice::MeshHandle CreateSphereMesh(
 }
 
 /** Creates the mesh for the background space */
-IVDevice::MeshHandle CreateBackgroundMesh(IVDevice& device)
+IVDevice::MeshHandle VGraphicsDemoApp::CreateBackgroundMesh(IVDevice& device)
 {
 	VEffectDescription effect;
 	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
@@ -304,40 +506,6 @@ VVertexDataLayout GetVertexLayout(VertexStructure&)
 {
 	return VertexStructure::layout;
 }
-
-//void SetupFormat(
-//	VMeshDescription* io_pMeshDescr, 
-//	VVertexDataLayout in_Layout,
-//	vuint cnVertexCount
-//	)
-//{
-//	// set vertex coord info
-//	VDataFormat coordFormat;
-//	coordFormat.SetFirstIndex(vuint(layout.positionOffset));
-//	coordFormat.SetCount(cnVertexCount);
-//	coordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
-//	io_pMeshDescr->SetCoordinateFormat(coordFormat);
-//
-//	// set color info, if contained
-//	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
-//	{
-//		VDataFormat colorFormat;
-//		colorFormat.SetFirstIndex(vuint(layout.colorOffset));
-//		colorFormat.SetCount(cnVertexCount);
-//		colorFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
-//		io_pMeshDescr->SetColorFormat(colorFormat);
-//	}
-//
-//	// set tex coord if contained
-//	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
-//	{
-//		VDataFormat texCoordFormat;
-//		texCoordFormat.SetFirstIndex(vuint(layout.texCoordOffset));
-//		texCoordFormat.SetCount(cnVertexCount);
-//		texCoordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
-//		io_pMeshDescr->SetTexCoordFormat(texCoordFormat);
-//	}
-//}
 
 template<typename GeometryProvider>
 VResourceId MakeResource(
@@ -412,8 +580,9 @@ VResourceId MakeResource(
 }
 
 /** creates a mesh for the moon */
-IVDevice::MeshHandle CreateMoonMesh(IVDevice& device)
+IVDevice::MeshHandle VGraphicsDemoApp::CreateMoonMesh(IVDevice& device)
 {
+	// create an effect description for the mesh
 	VEffectDescription effect;
 	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
 
@@ -423,21 +592,6 @@ IVDevice::MeshHandle CreateMoonMesh(IVDevice& device)
 	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
 	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
 	
-	//image::VImageServicePtr pImageService;
-	//image::VImage image(512, 256, 24);
-	//pImageService->CreateImage("/data/moon.jpg", image);
-
-	//IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
-	//	IVDevice::Texture,
-	//	&image.GetData(),
-	//	VBufferBase::DropData);
-
-	//VState textureState = TextureState(
-	//	hTexBuffer,
-	//	image.GetWidth(), image.GetHeight(),
-	//	FilterLinear, FilterLinear,
-	//	TextureRepeat, TextureRepeat);
-
 	// add resource info
 	using namespace resource;
 
@@ -461,190 +615,6 @@ IVDevice::MeshHandle CreateMoonMesh(IVDevice& device)
 	//pResMan->CreateResource("/meshes/moon/buffer")->AddData(new VByteBuffer(
 
 	return BuildMesh(device, moon, effect);
-}
-
-/**
- * A simple function. The value will move between min and max, each time it
- * is update it will change by diff * in_amout
- */
-class VSwingFunction
-{
-	vfloat32 m_fValue;
-	vfloat32 m_fDifference;
-
-	const vfloat32 m_fMin;
-	const vfloat32 m_fMax;
-
-public:
-	VSwingFunction(vfloat32 diff, vfloat32 minval, vfloat32 maxval)
-		: m_fDifference(diff), m_fMin(minval), m_fMax(maxval)
-	{
-		m_fValue = (m_fMax+m_fMin)/2.0f;
-
-		V3D_ASSERT(m_fMin <= m_fValue);
-		V3D_ASSERT(m_fValue <= m_fMax);
-	}
-
-	vfloat32 GetValue() const { return m_fValue; }
-
-	void Update(vfloat32 in_fAmount)
-	{
-		m_fValue += in_fAmount * m_fDifference;
-
-		if( m_fMax < m_fValue )
-		{
-			m_fDifference = - m_fDifference;
-			m_fValue = m_fMax;
-		}
-		else if( m_fValue < m_fMin ) 
-		{
-			m_fDifference = - m_fDifference;
-			m_fValue = m_fMin;
-		}
-
-		V3D_ASSERT(m_fMin <= m_fValue);
-		V3D_ASSERT(m_fValue <= m_fMax);
-	}
-};
-
-/** The main function. Will be called by the kernel when the application starts */
-vint VGraphicsDemoApp::Main()
-{
-	vout << "This is the velox demo application" << vendl;
-
-	// create window
-	VServicePtr<window::IVWindowManager> pWindowManager;
-
-	VDisplaySettings displaySettings;
-	displaySettings.SetSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	window::IVWindowManager::IVWindowPtr pWindow = 
-		pWindowManager->QueryWindow(".v3d graphics demo", &displaySettings);
-	IVDevice& device(pWindow->QueryGraphicsDevice());
-
-	// create properties. they are needed for animated material states
-	// a state of a material can reference a property so the state will
-	// be kept in sync with the value of the property. this way, material
-	// states can be animated
-	property::VProperty<VMatrix44f> skyTexMatrix("skytexmatrix");
-	skyTexMatrix.Set(IdentityMatrix());
-	VProperty<vfloat32> daytimeProperty("daytime");
-	VProperty<vfloat32> nighttimProperty("nighttime");
-	VProperty<vfloat32> cloudAlphaProperty("cloud.alpha");
-
-	// create a three pass effect description
-	VEffectDescription effect;
-	AddDayPass(device, effect, "@daytime");
-	AddNightPass(device, effect, "@nighttime");
-	AddCloudPass(device, effect, skyTexMatrix.GetRefId());
-
-	PrintEffectDescription(effect);
-
-	// create meshes for the earth, moon and background
-	IVDevice::MeshHandle hSphereMesh = CreateSphereMesh(device, effect);
-	IVDevice::MeshHandle hSkyMesh = CreateBackgroundMesh(device);
-	IVDevice::MeshHandle hMoonMesh = CreateMoonMesh(device);
-
-	// setup camera, and apply it's matrix to the device
-	VCamera cam;
-	cam.MoveForward(-7);
-	device.SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
-
-	// get the escape key
-	input::IVButton& escapeKey(pWindow->QueryInputManager().GetStandardKey(KeyEscape));
-
-	// setup some matrices and values used in the render loop
-	VMatrix44f texmat;
-	Identity(texmat);
-	vfloat32 angle = 0;
-
-	VMatrix44f modelmat;
-	Identity(modelmat);
-	math::Translate(modelmat, 1.0f, 0.3f, 0.0f);
-	math::RotateX(modelmat, DegreeToRadian(-20));
-	math::RotateY(modelmat, DegreeToRadian(-30));
-
-	VMatrix44f skyMatrix;
-	Identity(skyMatrix);
-	RotateZ(skyMatrix, DegreeToRadian(-30));
-	RotateY(skyMatrix, DegreeToRadian(90));
-	
-	VMatrix44f moonMatrix;
-
-	VSwingFunction daytimeVal(.5f, -3.0f, 4.0f);
-
-	// init system and updater service
-	VServicePtr<updater::IVUpdateManager> pUpdater;
-	VServicePtr<system::IVSystemManager> pSystem;
-	pSystem->SetStatus(true);
-
-	pUpdater->Start();
-	while(pSystem->GetStatus())
-	{
-		// prepare device for rendering (make gl context current etc)
-		device.BeginScene();
-
-		// update texture matrix and change property to update the clouds
-		// texture matrix (animating the clouds)
-		angle += (vfloat32)pUpdater->GetFrameDuration() * 2;
-		while(angle >= 360.0f)
-			angle -= 360.0f;
-		texmat.Set(0, 3, angle / 360.0f);
-		skyTexMatrix.Set(texmat);
-
-		// update the daytime function
-		daytimeVal.Update((vfloat32)pUpdater->GetFrameDuration());
-
-		// calc daytime by clamping it to [0,1]
-		vfloat32 daytime = daytimeVal.GetValue();
-		if( daytime < 0 ) daytime = 0;
-		if( daytime > 1 ) daytime = 1;
-		daytimeProperty.Set(daytime);
-		nighttimProperty.Set(1.0f - daytime);
-		cloudAlphaProperty.Set(0.1f + .9f*daytime);
-
-		// render the mesh (with 2 passes)
-		device.SetMatrix(IVDevice::ModelMatrix, modelmat);
-		RenderMesh(device, hSphereMesh);
-
-		// render the sky
-		device.SetMatrix(IVDevice::ModelMatrix, skyMatrix);
-		RenderMesh(device, hSkyMesh);
-
-		// setup matrix for moon to move it, then render moon
-		Identity(	moonMatrix);
-		Translate(	moonMatrix, 1.0f, 0.3f, 0.0f);
-		RotateX(	moonMatrix, DegreeToRadian(-15));
-		RotateZ(	moonMatrix, DegreeToRadian(20));
-		RotateY(	moonMatrix, DegreeToRadian(angle * 5));
-		Translate(	moonMatrix, 0, 0, 3);
-		RotateY(	moonMatrix, DegreeToRadian(-angle * 5));
-
-		device.SetMatrix(IVDevice::ModelMatrix, moonMatrix);
-
-		RenderMesh(device, hMoonMesh);
-
-		// end the scene (flip buffers etc)
-		device.EndScene();
-
-		// update object registered at update manager, calc duration of frame etc
-		pUpdater->StartNextFrame();
-
-		// exit if escape is pressed
-		if( escapeKey.IsDown() )
-		{
-			pSystem->SetStatus(false);
-		}
-	}
-	pUpdater->Stop();
-
-	// release resources
-	device.DeleteMesh(hSphereMesh);
-	device.DeleteMesh(hSkyMesh);
-	device.DeleteMesh(hMoonMesh);
-
-	vout << "Have a nice day" << vendl;
-	return 0;
 }
 
 //-----------------------------------------------------------------------------

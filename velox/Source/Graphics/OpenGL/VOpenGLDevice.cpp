@@ -16,6 +16,7 @@
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
 
 #include "VMeshHandle.h"
+#include "VStreamMesh.h"
 
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
@@ -198,6 +199,47 @@ void VOpenGLDevice::OverwriteBuffer(
 		);
 }
 
+IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
+	VStringParam in_strMeshDescrResName,
+	VStringParam in_strEffectDescrResName
+	)
+{
+	using namespace resource;
+	resource::VResourceManagerPtr pResManager;
+
+	VResourceId mdRes = pResManager->GetResourceByName(in_strMeshDescrResName);
+	resource::VResourceDataPtr<const VMeshDescription> in_pMeshDescription
+		= mdRes->GetData<VMeshDescription>();
+
+	VResourceId edRes = pResManager->GetResourceByName(in_strEffectDescrResName);
+	resource::VResourceDataPtr<const VEffectDescription> in_pEffectDescription
+		= mdRes->GetData<VEffectDescription>();
+
+	// create materials
+	std::vector<VRenderStateList*> statelists
+		= m_StateCategories.CreateMaterialList(*in_pEffectDescription);
+
+	std::vector<IVMaterial*> materials(statelists.begin(), statelists.end());
+
+	if( materials.size() > 0 )
+	{
+		// create mesh
+		VMeshDescription descr = *in_pMeshDescription;
+
+		// add buffers to device, if they are external
+		InternalizeBuffers(descr);
+
+		VMeshBase* pMesh = new VStreamMesh(materials, *in_pMeshDescription);
+
+		m_Meshes.push_back(pMesh);
+
+		return MakeMeshHandle(pMesh);
+	}
+	else
+	{
+		return 0;
+	}
+}
 
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	const VMeshDescription& in_MeshDesc,
@@ -214,12 +256,6 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 
 	// add buffers to device, if they are external
 	InternalizeBuffers(descr);
-	
-	//std::vector<BufferHandle> buffers = descr.GetAllBuffers();
-	//for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
-	//{
-	//	m_Buffers.Add(static_cast<VByteBuffer*>(buffers[bufid]));
-	//}
 
 	std::vector<IVMaterial*> material;
 	material.push_back(pMaterial);
@@ -247,12 +283,6 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 		// add buffers to device, if they are external
 		InternalizeBuffers(descr);
 
-		//std::vector<BufferHandle> buffers = descr.GetAllBuffers();
-		//for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
-		//{
-		//	m_Buffers.Add(static_cast<VByteBuffer*>(buffers[bufid]));
-		//}
-
 		VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, materials);
 
 		m_Meshes.push_back(pMesh);
@@ -263,26 +293,6 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	{
 		return 0;
 	}
-}
-
-IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
-	resource::VResourceId in_MeshRes, 
-	resource::VResourceId in_MaterialRes
-	)
-{
-	return 0;
-	//// get effect description and create material handles
-	//VEffectDescription* pEffectDescr = 
-	//	in_MeshRes->GetData<VEffectDescription>();
-
-	//std::vector<VRenderStateList*> statelists =
-	//	m_StateCategories.CreateMaterialList(*pEffectDescr);
-
-	//// get mesh handle
-	//VMeshBase* mesh = in_MeshRes->GetData<VMeshHandle>()->GetGLMesh();
-
-	//// return mesh
-	//return pMesh;
 }
 
 VOpenGLDevice::MaterialHandle VOpenGLDevice::CreateMaterial(

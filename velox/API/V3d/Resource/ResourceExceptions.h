@@ -18,6 +18,9 @@ V3D_DECLARE_EXCEPTION(VDataAlreadyAttachedException, VResourceException);
 // resource data does not exist
 V3D_DECLARE_EXCEPTION(VDataNotFoundException, VResourceException);
 
+// resource could not be found
+V3D_DECLARE_EXCEPTION(VResourceNotFoundException, VResourceException);
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::resource
 //-----------------------------------------------------------------------------
