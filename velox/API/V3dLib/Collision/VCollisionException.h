@@ -7,6 +7,7 @@ namespace v3d {
 namespace collision {
 //-----------------------------------------------------------------------------
 
+//TODO: sollte CollisionExceptions.h heissen (einheitlichkeit)
 V3D_DECLARE_EXCEPTION(VCollisionException, VException)
 
 //-----------------------------------------------------------------------------
