@@ -132,6 +132,12 @@
 			<File
 				RelativePath="..\Api\V3d\Vfs\IVStream.h">
 			</File>
+			<File
+				RelativePath="..\Api\V3d\Vfs\IVStreamFactory.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Vfs\VFlags.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
@@ -143,10 +149,19 @@
 				RelativePath="..\Source\VirtualFileSystem\VFileStream.h">
 			</File>
 			<File
+				RelativePath="..\Source\VirtualFileSystem\VFSServiceDLL.cpp">
+			</File>
+			<File
 				RelativePath="..\Source\VirtualFileSystem\VLegalOperations.cpp">
 			</File>
 			<File
 				RelativePath="..\Source\VirtualFileSystem\VLegalOperations.h">
+			</File>
+			<File
+				RelativePath="..\Source\VirtualFileSystem\VStreamFactory.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\VirtualFileSystem\VStreamFactory.h">
 			</File>
 		</Filter>
 	</Files>
