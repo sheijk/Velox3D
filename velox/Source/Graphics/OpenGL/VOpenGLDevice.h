@@ -47,6 +47,13 @@ public:
 
 	virtual void DeleteBuffer(BufferHandle& in_Buffer);
 
+	virtual void OverwriteBuffer(
+		BufferHandle& in_hBuffer,
+		vuint in_nFirstElement,
+		vuint in_nCount,
+		const vbyte* in_pBuffer
+		);
+
 	virtual MeshHandle CreateMesh(
 		const VMeshDescription& in_pMeshDesc,
 		const VMaterialDescription& in_pMaterialDesc
@@ -58,6 +65,11 @@ public:
 	virtual void DeleteMaterial(MaterialHandle& in_Material);
 
 	virtual void RenderMesh(MeshHandle in_Mesh);
+
+	virtual void RenderImmediate(
+		VMeshDescription in_Mesh,
+		VMaterialDescription in_Material
+		);
 
 	virtual void ApplyState(const IVRenderState& in_State);
 

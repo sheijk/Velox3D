@@ -70,6 +70,14 @@ public:
 	/** deletes the buffer and sets the handle to 0 */
 	virtual void DeleteBuffer(BufferHandle& in_Buffer) = 0;
 
+	/** Overwrites a part of a buffer with new data */
+	virtual void OverwriteBuffer(
+		BufferHandle& in_hBuffer,
+		vuint in_nFirstElement,
+		vuint in_nCount,
+		const vbyte* in_pBuffer
+		) = 0;
+
 	/** create a mesh ins the device */
 	//virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc) = 0;
 	virtual MeshHandle CreateMesh(
@@ -86,6 +94,15 @@ public:
 
 	/** sends the vertices of a mesh to the device */
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
+
+	/** 
+	 * creates mesh and material on the fly and renders them. mesh and 
+	 * material will only be created temporarily
+	 */
+	virtual void RenderImmediate(
+		VMeshDescription in_Mesh,
+		VMaterialDescription in_Material
+		) = 0;
 
 	/** applys a render state */
 	virtual void ApplyState(const IVRenderState& in_State) = 0;

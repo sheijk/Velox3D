@@ -65,7 +65,7 @@ template member konvertiert?
 	.gfx device:
 	mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
 	mat descr. durch alternativ system ersetzen? (default mat zurueckgeben,
-	und dass dann mit effekten veraendern?)
+	und dass dann mit effekten veraendern?) <- effekte als ergaenzung der md
 	konzept fuer material effekte
 
 	.scene graph
@@ -105,6 +105,12 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+13.04.2004
+IVDevice: buffer ueberschreibbar 
+(achtung: geht nur mit immediate render method)
+ueberschreibbare buffer im device
+direktes rendern von buffern welche nicht im device sind
 
 12.04.2004
 neue VHeightmap implementation

@@ -1,3 +1,44 @@
+VMeshDescription BuildMeshDescription(
+	IVBuffer<vbyte>* bufHandle,
+	VVertexDataLayout layout,
+	vuint cnVertexCount
+	)
+{
+	VMeshDescription descr;
+
+	// set vertex coord info
+	descr.triangleVertices = VMeshDescription::ByteDataRef(
+		bufHandle, 
+		vuint(layout.positionOffset), 
+		cnVertexCount, 
+		layout.vertexSize / sizeof(vfloat32)
+		);
+
+	// set color info, if contained
+	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
+	{
+		descr.triangleColors = VMeshDescription::ByteDataRef(
+			bufHandle,
+			vuint(layout.colorOffset),
+			cnVertexCount,
+			layout.vertexSize / sizeof(vfloat32)
+			);
+	}
+
+	// set tex coord if contained
+	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
+	{
+		descr.triangleTexCoords = VMeshDescription::ByteDataRef(
+			bufHandle,
+			vuint(layout.texCoordOffset),
+			cnVertexCount,
+			layout.vertexSize / sizeof(vfloat32)
+			);
+	}
+
+	return descr;
+}
+
 template<typename VertexStructure>
 v3d::graphics::VMeshDescription BuildMeshDescription(
 	v3d::graphics::IVDevice& in_Device,
@@ -28,40 +69,13 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	//IVDevice::FloatBufferHandle bufHandle
 	//	= in_Device.CreateBuffer(&floatBuf, VFloatBuffer::DropData);
 
-	// create mesh description
-	VMeshDescription descr;
-
 	const VVertexDataLayout& layout(VertexStructure::layout);
 
-	// set vertex coord info
-	descr.triangleVertices = VMeshDescription::ByteDataRef(
+	// create mesh description
+	VMeshDescription descr = BuildMeshDescription(
 		bufHandle, 
-		vuint(layout.positionOffset), 
-		in_cnVertexCount, 
-		sizeof(VertexStructure) / sizeof(float)
-		);
-
-	// set color info, if contained
-	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
-	{
-		descr.triangleColors = VMeshDescription::ByteDataRef(
-			bufHandle,
-			vuint(layout.colorOffset),
-			in_cnVertexCount,
-			sizeof(VertexStructure) / sizeof(float)
-			);
-	}
-
-	// set tex coord if contained
-	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
-	{
-		descr.triangleTexCoords = VMeshDescription::ByteDataRef(
-			bufHandle,
-			vuint(layout.texCoordOffset),
-			in_cnVertexCount,
-			sizeof(VertexStructure) / sizeof(float)
-			);
-	}
+		layout, 
+		in_cnVertexCount);
 
 	//TODO: set tex coord, etc
 

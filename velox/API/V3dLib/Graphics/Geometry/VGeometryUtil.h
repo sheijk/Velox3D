@@ -14,6 +14,12 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
+inline VMeshDescription BuildMeshDescription(
+	IVBuffer<vbyte>* in_Buffer,
+	VVertexDataLayout in_Layout,
+	vuint in_cnVertexCount
+	);
+
 /**
  * Takes an array of vertices and builds a mesh description of it.
  * Loads the data of the mesh into the device

@@ -41,6 +41,7 @@ struct IVBuffer : public VBufferBase
 template<typename DataType>
 class VBuffer : public IVBuffer<DataType>
 {
+public:
 	/** the buffer's content */
 	DataType* m_pBuffer;
 
@@ -51,7 +52,6 @@ class VBuffer : public IVBuffer<DataType>
 	void operator=(const VBuffer&);
 	VBuffer(const VBuffer&);
 
-public:
 	/**
 	 * Takes ownership of the given memory region
 	 */

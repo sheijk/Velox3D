@@ -16,6 +16,7 @@ namespace graphics {
 
 class VImmediateRenderMethod : public IVRenderMethod
 {
+public:
 	virtual VMeshBase* CreateMesh(
 		const VMeshDescription& in_MeshDescr,
 		MeshCreationFlags in_Flags,

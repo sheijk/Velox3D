@@ -44,6 +44,7 @@ struct VVertexDataLayout
 	Offset positionOffset;
 	Offset colorOffset;
 	Offset texCoordOffset;
+	Offset vertexSize;
 
 	VVertexDataLayout()
 	{
@@ -57,6 +58,12 @@ struct VVertexDataLayout
 	 * whether the offset is correct
 	 */
 	inline static vbool IsValidOffset(Offset offs);
+
+	/**
+	 * Sets VertexData::layout.vertexSize to sizeof(VertexData)
+	 */
+	template<typename VertexData>
+	static void SetVertexSize();
 
 	/**
 	 * Sets VertexData::layout.positionOffset to the correct value
@@ -83,6 +90,12 @@ vbool VVertexDataLayout::IsValidOffset(Offset offs)
 }
 
 template<typename VertexData>
+void VVertexDataLayout::SetVertexSize()
+{
+	VertexData::layout.vertexSize = sizeof(VertexData);
+}
+
+template<typename VertexData>
 void VVertexDataLayout::SetPositionOffset()
 {
 	VertexData* zero = 0;
@@ -91,6 +104,8 @@ void VVertexDataLayout::SetPositionOffset()
 
 	VertexData::layout.positionOffset = 
 		reinterpret_cast<Offset>(&(zero->position)) / sizeof(vfloat32);
+
+	SetVertexSize<VertexData>();
 }
 
 template<typename VertexData>
@@ -102,6 +117,8 @@ void VVertexDataLayout::SetColorOffset()
 
 	VertexData::layout.colorOffset = 
 		reinterpret_cast<Offset>(&(zero->color)) / sizeof(vfloat32);
+
+	SetVertexSize<VertexData>();
 }
 
 template<typename VertexData>
@@ -111,6 +128,8 @@ void VVertexDataLayout::SetTexCoordOffset()
 
 	VertexData::layout.texCoordOffset =
 		reinterpret_cast<Offset>(&(zero->texCoords)) / sizeof(vfloat32);
+
+	SetVertexSize<VertexData>();
 }
 
 

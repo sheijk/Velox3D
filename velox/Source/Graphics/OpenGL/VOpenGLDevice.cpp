@@ -42,8 +42,8 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 	SetDisplay();
 
 
-	//m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
-	m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
+	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
+	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
 
 	m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	m_StateCategories.RegisterCategory(m_MiscStateCategory);
@@ -99,6 +99,22 @@ void VOpenGLDevice::DeleteBuffer(BufferHandle& in_Buffer)
 	//in_Buffer = t;
 }
 
+void VOpenGLDevice::OverwriteBuffer(
+	BufferHandle& in_hBuffer,
+	vuint in_nFirstElement,
+	vuint in_nCount,
+	const vbyte* in_pData
+	)
+{
+	// get buffer
+	// write data
+	memcpy(
+		in_hBuffer->GetDataAddress() + in_nFirstElement, 
+		in_pData,
+		in_nCount
+		);
+}
+
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	const VMeshDescription& in_pMeshDesc,
 	const VMaterialDescription& in_pMaterialDesc
@@ -143,6 +159,22 @@ void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 
 	pMesh->Render();
 }
+
+void VOpenGLDevice::RenderImmediate(
+	VMeshDescription in_Mesh,
+	VMaterialDescription in_Material
+	)
+{
+	MaterialHandle pMaterial = CreateMaterial(in_Material);
+	MeshHandle pMesh = m_ImmediateRenderMethod.CreateMesh(
+		in_Mesh, 0, pMaterial);
+
+	RenderMesh(pMesh);
+
+	DeleteMesh(pMesh);
+	DeleteMaterial(pMaterial);
+}
+
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::ApplyState(const IVRenderState& in_State)
