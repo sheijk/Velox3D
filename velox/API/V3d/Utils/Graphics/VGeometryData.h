@@ -28,12 +28,8 @@ public:
 	VGeometryData(
 		GeometryType in_GeometryType,
 		vuint in_nVertexCount,
-		int in_nIndexCount = 0
+		vuint in_nIndexCount = 0
 		);
-
-	const GeometryType type;
-	v3d::graphics::VBuffer<VertexStructure> vertices;
-	v3d::graphics::VBuffer<vuint> indices;
 
 	GeometryType GetGeometryType() const
 	{
@@ -50,15 +46,20 @@ public:
 		return vertices;
 	}
 
-	IndexBuffer& GetIndices()
+	IndexBuffer& GetIndexBuffer()
 	{
 		return indices;
 	}
 
-	const IndexBuffer& GetIndices() const
+	const IndexBuffer& GetIndexBuffer() const
 	{
 		return indices;
 	}
+
+private:
+	const GeometryType type;
+	v3d::graphics::VBuffer<VertexStructure> vertices;
+	v3d::graphics::VBuffer<vuint> indices;
 };
 
 //-----------------------------------------------------------------------------

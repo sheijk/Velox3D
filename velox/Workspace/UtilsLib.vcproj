@@ -107,6 +107,9 @@
 				Name="SceneGraph"
 				Filter="">
 				<File
+					RelativePath="..\Api\V3dLib\SimpleSG.h">
+				</File>
+				<File
 					RelativePath="..\Source\UtilsLib\SimpleSG\VMeshNode.cpp">
 				</File>
 				<File
@@ -164,6 +167,15 @@
 			<Filter
 				Name="Geometry"
 				Filter="">
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\BufferManipulation.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\BufferManipulation.inl">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Geometry.h">
+				</File>
 				<File
 					RelativePath="..\Api\V3d\Utils\Graphics\VGeometryUtil.h">
 				</File>

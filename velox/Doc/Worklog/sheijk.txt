@@ -29,6 +29,20 @@ template member konvertiert?
 
 -------------------------------------------------------------------------------
 ----- personal todo:
+
+	geometry generation:
+	concept GeometryProvider
+		void GenerateCoordinates()
+		void GenerateTexCoords()
+		MD.GeometryType GetGeometryType()
+		VertexBuffer GetVertexBuffer()
+		IndexBuffer GetIndexBuffer()
+		VBuffer<VertexStructure> VertexBuffer
+		VBuffer<vuint> IndexBuffer
+
+
+
+
 	roadmap:
 	drawlist state sortierung
 	design der engine: entity system + zusammenarbeit der einzelnen engine teile
@@ -52,6 +66,7 @@ template member konvertiert?
 
 	.geometry
 	./design fuer im speicher gehaltene geometry (ausserhalb des devices)
+	alle geometrie generatoren vereinheitlichen
 	interface
 	einfache geometry klasse fuer dynamische geometrie
 
@@ -64,7 +79,7 @@ template member konvertiert?
 	.gfx device:
 	./texturen: nur eine textur pro buffer anlegen..
 	mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
-	mat descr. durch alternativ system ersetzen? (default mat zurueckgeben, 
+	mat descr. durch alternativ system ersetzen? (default mat zurueckgeben,
 	und dass dann mit effekten veraendern?)
 	./buffer aendern
 	./indexed/non indexed geometry auto auswahl
@@ -126,6 +141,9 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+09.04.2004
+Buffer Operationen (BufferManipulations.h)
 
 07.04.2004
 VPolarSphere: Halb/Teilkugeln (oben/unten angabe), Textur Koordinaten

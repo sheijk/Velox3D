@@ -1,6 +1,8 @@
 Worklog von insane:
 -------------------------------------------------------------------------------
 messages to insane:
+der .jpg Loader kann keine 8bit Bilder.. -- sheijk
+
 BUG: Programm stuertzt beim Beenden ab, bzw. es kommt 
 "22:42:36: Debug: .\msw\app.cpp(439): 'UnregisterClass(canvas)' failed with error
  0x00000584 (diese Klasse hat noch ge÷ffnete Fenster.)."
@@ -20,6 +22,10 @@ TODO List:
 
 -------------------------------------------------------------------------------
 Done List:
+
+09.04.04
+Du hast die VCamera.MoveForward Methode geaendert.. (hab ich in den letzten
+30 min rausgefunden *grml* -- sheijk
 
 12.03.04
 - added matrix rotation methods (VMatrixRotationOps.h in api/math)

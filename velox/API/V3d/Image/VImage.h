@@ -16,7 +16,10 @@ namespace image{
  */
 struct VImage
 {
-	VImage(){};
+	typedef graphics::VBuffer<vuchar> ImageData;
+
+	VImage() {};
+
 	~VImage()
 	{
 		//TODO: ich fass es nicht.. -- sheijk
@@ -24,11 +27,31 @@ struct VImage
 		// ja foermlich nach speicherfehlern
 		pData->~VBuffer();
 	}
+
+	vuint GetWidth() const
+	{
+		return iWidth;
+	}
+
+	vuint GetHeight() const
+	{
+		return iHeight;
+	}
+
+	vuint GetBPP() const
+	{
+		return iBPP;
+	}
+
+	ImageData& GetData()
+	{
+		return *pData;
+	}
+
 	vuint iHeight;
 	vuint iWidth;
 	vuint iBPP;
 
-	typedef graphics::VBuffer<vuchar> ImageData;
 	ImageData* pData;
 };
 //-----------------------------------------------------------------------------

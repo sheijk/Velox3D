@@ -28,6 +28,10 @@ public:
 	virtual void ApplyTransformation(Matrix44f* io_pMatrix);
 	virtual void SetAbsoluteTransformation(const Matrix44f& in_Matrix);
 
+	Matrix44f& GetTransformation()
+	{
+		return m_Transform;
+	}
 protected:
 	virtual void RemoveThis(drawlist::IVDrawList* in_pDrawList);
 	virtual void CullThis(drawlist::IVDrawList* in_pDrawList, IVCamera*);

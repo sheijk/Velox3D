@@ -76,14 +76,16 @@ public:
 	template<typename OldDataType>
 	VBuffer(VBuffer<OldDataType>* in_pSource, CopyMode in_CopyMode)
 	{
+		V3D_ASSERT(in_pSource != 0);
+
 		// calc source size in bytes
-		const vuint nSizeInBytes = m_nSize * sizeof(DataType);
+		const vuint nSizeInBytes = in_pSource->m_nSize * sizeof(OldDataType);
 
 		// calc new size in number of elements
-		const vuint nDestSize = nSizeInBytes / sizeof(DestType);
+		const vuint nDestSize = nSizeInBytes / sizeof(DataType);
 
 		// buffer sizes in bytes must match
-		if( nDestSize * sizeof(DestType) != nSizeInBytes )
+		if( nDestSize * sizeof(DataType) != nSizeInBytes )
 		{
 			V3D_THROW(VException, "type size mismatch");
 		}
@@ -91,7 +93,7 @@ public:
 		if( in_CopyMode == DropData )
 		{
 			// take ownership of buffer
-			m_pBuffer = reinterpret_cast<DestType*>(m_pBuffer);
+			m_pBuffer = reinterpret_cast<DataType*>(m_pBuffer);
 			m_nSize = nDestSize;
 
 			// empty source buffer
@@ -102,9 +104,9 @@ public:
 		{
 			// create a copy of the data
 			vbyte* pNewData = new vbyte[nSizeInBytes];
-			memcpy(pNewData, m_pBuffer, nSizeInBytes);
+			memcpy(pNewData, in_pSource->m_pBuffer, nSizeInBytes);
 
-			m_pBuffer = reinterpret_cast<DataType>(pNewData);
+			m_pBuffer = reinterpret_cast<DataType*>(pNewData);
 			m_nSize = nDestSize;
 		}
 		else

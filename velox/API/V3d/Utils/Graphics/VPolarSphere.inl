@@ -69,9 +69,9 @@ void VPolarSphere<VertexStructure>::GenerateCoordinates()
 		for(vuint ring = 0; ring < m_nRings; ++ring, ypos += deltaY)
 		{
 			const float scale = sqrt(1 - ypos*ypos);
-			geometry.vertices[GetVertexNum(sector, ring)].position.x = xpos * scale;
-			geometry.vertices[GetVertexNum(sector, ring)].position.y = ypos;
-			geometry.vertices[GetVertexNum(sector, ring)].position.z = zpos * scale;
+			geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.x = xpos * scale;
+			geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.y = ypos;
+			geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.z = zpos * scale;
 		}
 	}
 }
@@ -89,7 +89,7 @@ void VPolarSphere<VertexStructure>::GenerateTexCoords()
 		for(vuint sector = 0; sector < m_nSectors; ++sector)
 		{
 			VertexStructure& vertex =
-				geometry.vertices[GetVertexNum(sector, ring)];
+				geometry.GetVertexBuffer()[GetVertexNum(sector, ring)];
 
             vertex.texCoords.u = deltaSector * sector;
 			vertex.texCoords.v = deltaRing * ring;
@@ -106,9 +106,9 @@ vuint VPolarSphere<VertexStructure>::GetVertexNum(vuint sector, vuint ring)
 template<typename VertexStructure>
 void VPolarSphere<VertexStructure>::GenerateIndices()
 {
-	for(vuint index = 0; index < geometry.indices.GetSize(); ++index)
+	for(vuint index = 0; index < geometry.GetIndexBuffer().GetSize(); ++index)
 	{
-		geometry.indices[index] = 0;
+		geometry.GetIndexBuffer()[index] = 0;
 	}
 
 	vuint indexNum = 0;
@@ -117,14 +117,14 @@ void VPolarSphere<VertexStructure>::GenerateIndices()
 	{
 		for(vuint sector = 0; sector < m_nSectors; ++sector)
 		{
-			geometry.indices[indexNum] = GetVertexNum(sector, ring);
+			geometry.GetIndexBuffer()[indexNum] = GetVertexNum(sector, ring);
 			++indexNum;
-			geometry.indices[indexNum] = GetVertexNum(sector, ring+1);
+			geometry.GetIndexBuffer()[indexNum] = GetVertexNum(sector, ring+1);
 			++indexNum;
 		}
-		geometry.indices[indexNum] = GetVertexNum(0, ring);
+		geometry.GetIndexBuffer()[indexNum] = GetVertexNum(0, ring);
 		++indexNum;
-		geometry.indices[indexNum] = GetVertexNum(0, ring+1);
+		geometry.GetIndexBuffer()[indexNum] = GetVertexNum(0, ring+1);
 		++indexNum;
 	}
 }
@@ -133,19 +133,19 @@ template<typename VertexStructure>
 typename VPolarSphere<VertexStructure>::VertexBuffer&
 VPolarSphere<VertexStructure>::GetVertexBuffer()
 {
-	return geometry.vertices;
+	return geometry.GetVertexBuffer();
 }
 
 template<typename VertexStructure>
 typename VPolarSphere<VertexStructure>::IndexBuffer&
 VPolarSphere<VertexStructure>::GetIndexBuffer()
 {
-	return geometry.indices;
+	return geometry.GetIndexBuffer();
 }
 
 template<typename VertexStructure>
 v3d::graphics::VMeshDescription::GeometryType
 VPolarSphere<VertexStructure>::GetGeometryType()
 {
-	return geometry.type;
+	return geometry.GetGeometryType();
 }

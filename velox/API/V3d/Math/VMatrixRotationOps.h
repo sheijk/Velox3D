@@ -68,6 +68,21 @@ void SetTranslate(
 	result.Set(2, 3, z);
 }
 
+template<typename Scalar, vuint RowColumnCount>
+void SetScale(
+	VMatrix<Scalar, RowColumnCount, RowColumnCount>& mat,
+	vfloat32 factor
+	)
+{
+	Identity(mat);
+
+	for(int i = 0; i < RowColumnCount - 1; ++i)
+	{
+		mat.Set(i, i, factor);
+	}
+}
+
+
 //-----------------------------------------------------------------------------
 } // namespace math
 } // namespace v3d
