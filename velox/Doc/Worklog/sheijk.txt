@@ -130,6 +130,7 @@ log:
 07.04.2004
 VPolarSphere: Halb/Teilkugeln (oben/unten angabe), Textur Koordinaten
 default Color fuer mat. desc eingestellt
+default Vertex structs
 
 04.04.2004
 alle Services zu einem project file zusammengefasst

@@ -177,13 +177,31 @@
 					Name="Types"
 					Filter="">
 					<File
+						RelativePath="..\Source\Graphics\Lib\DefaultVertexStructures.cpp">
+					</File>
+					<File
 						RelativePath="..\Api\V3d\Utils\Graphics\VColor4f.h">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\VColoredTextureVertex.h">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\VColoredVertex.h">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\VertexStructures.h">
 					</File>
 					<File
 						RelativePath="..\Api\V3d\Utils\Graphics\VPlane3f.h">
 					</File>
 					<File
+						RelativePath="..\Api\V3dLib\Graphics\VSimpleVertex.h">
+					</File>
+					<File
 						RelativePath="..\Api\V3d\Utils\Graphics\VTexCoord2f.h">
+					</File>
+					<File
+						RelativePath="..\Api\V3dLib\Graphics\VTexturedVertex.h">
 					</File>
 					<File
 						RelativePath="..\Api\V3d\Utils\Graphics\VVector3f.h">
@@ -272,6 +290,13 @@
 						RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="Portals"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\IVSector.h">
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
