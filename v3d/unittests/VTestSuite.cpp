@@ -209,4 +209,3 @@ void main(int argc, char* args[])
 	// do tests
 	suite.ExecuteTests();
 }
-
