@@ -37,8 +37,12 @@ void main(int argc, char* args[])
 
 	cout << "Listing all registered tests:" << std::endl;
 
+	// print out a list of all tests
 	for( ; VTestManager::GetInstance().CommonTestsEnd() != theIter; ++theIter) 
 	{
+		strTestName = "not specified";
+		strTestInfo = "please implement GetTestInfo properly";
+
 		// get test info
 		(*theIter)->GetTestInfo(strTestName, strTestInfo);
 
@@ -52,6 +56,7 @@ void main(int argc, char* args[])
 	
 	TestList theTestList;
 
+	// create a list of all unit tests
 	for(theIter = VTestManager::GetInstance().CommonTestsBegin();
 		VTestManager::GetInstance().CommonTestsEnd() != theIter;
 		++theIter)
@@ -65,8 +70,12 @@ void main(int argc, char* args[])
 
 	cout << endl << endl;
 	
+	// execute all tests and display results
 	for( ; theTestList.end() != theTestIter; ++theTestIter )
 	{
+		strTestName = "not specified";
+		strTestInfo = "please implement GetTestInfo properly";
+
 		(*theTestIter)->GetTestInfo(strTestName, strTestInfo);
 
 		cout << "executing test " << strTestName << " : "; 
@@ -97,6 +106,4 @@ void main(int argc, char* args[])
 			}
 		}
 	}
-
-	// display results
 }
