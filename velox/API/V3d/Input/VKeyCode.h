@@ -8,7 +8,7 @@ namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
 
-enum KeyCode {
+enum VKeyCode {
 	KeyEscape,
 	KeyReturn,
 	KeyBackSpace,
