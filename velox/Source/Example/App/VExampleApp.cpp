@@ -31,7 +31,7 @@ using namespace v3d::input;
 
 
 
-VExampleApp::VExampleApp(VStringParam in_strName) 
+VExampleApp::VExampleApp(VStringParam in_strName)
 	: VNamedObject(in_strName, 0)
 {
 	V3D_DEBUGMSG("Example app has been created and registered");
@@ -50,11 +50,11 @@ vint VExampleApp::Main()
 	IVUpdateManager* pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
 	IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
 	IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
-	
+
 	//geting later...
 	IVInputManager* pInputManager;
-	
-	
+
+
 	IVWindowManager::IVWindowPtr pWindow;
 	IVDevice* pDevice;
 	IVButton* pEscButton;
@@ -62,7 +62,7 @@ vint VExampleApp::Main()
 	IVButton* pDownButton;
 	IVButton* pLeftButton;
 	IVButton* pRightButton;
-	
+
 	IVButton* pLeftMouseButton;
 	IVButton* pRightMouseButton;
 
@@ -86,7 +86,7 @@ vint VExampleApp::Main()
 	pDevice = &(pWindow->QueryGraphicsDevice());
 
 	pInputManager = &(pWindow->QueryInputManager());
-	
+
 	pEscButton = &pInputManager->GetStandardKey(IVInputManager::Escape);
 	pUpButton = &pInputManager->GetStandardKey(IVInputManager::CursorUp);
 	pDownButton = &pInputManager->GetStandardKey(IVInputManager::CursorDown);
@@ -96,7 +96,7 @@ vint VExampleApp::Main()
 	pLeftMouseButton = &pInputManager->GetMouseButton(1);
 	pRightMouseButton = &pInputManager->GetMouseButton(0);
 
-	
+
 	pCamera = new VCamera();
 	pCamera->SetZ(-10.0f);
 	pDevice->SetCamera(pCamera);
@@ -105,14 +105,14 @@ vint VExampleApp::Main()
 	bspImporter.Create("/data/test.bsp", "none");
 
 	// create a test mesh
-    
+
 	/*VFloatBuffer VertexData(Model.m_Objects[0]->m_VerticesList,
 		Model.m_Objects[0]->m_iNumVertices*3);
 
 	VIntBuffer VertexIndex(Model.m_Objects[0]->m_pVertexIndex,
 	Model.m_Objects[0]->m_iNumFaces *3); */
 
-	
+
 	VFloatBuffer VertexData((vfloat32*)bspImporter.m_pVertices,bspImporter.m_iNumVertices *3);
 	VIntBuffer VertexIndex(bspImporter.m_pIndexList, bspImporter.m_iNumFaceElements);
 
@@ -122,7 +122,7 @@ vint VExampleApp::Main()
 	VertexHandle = pDevice->CreateBuffer(&VertexData, VFloatBuffer::CopyData);
 	VertexIndexHandle = pDevice->CreateBuffer(&VertexIndex, VIntBuffer::CopyData);
 
-	
+
 	MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
 		0, bspImporter.m_iNumVertices *3,
 		1);
@@ -146,11 +146,11 @@ vint VExampleApp::Main()
 
 
 		pUpdateManager->StartNextFrame();
-		
+
 		// input checking
 		if (pEscButton->IsDown() == true)
 			pSystemManager->SetStatus(false);
-		
+
 		if(pUpButton->IsDown() == true)
 			pCamera->AddZ(0.2f);
 
@@ -162,7 +162,7 @@ vint VExampleApp::Main()
 
 		if(pRightButton->IsDown() == true)
 			pCamera->AddX(-0.2f);
-		
+
 		if(pRightMouseButton->IsDown() == true)
 			pCamera->AddY(-.3f);
 		if(pLeftMouseButton->IsDown() == true)
