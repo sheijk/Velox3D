@@ -52,6 +52,14 @@ VGraphicsDemoApp::~VGraphicsDemoApp()
 {
 }
 
+// constants for controlling the detail level
+const int DETAIL_EARTH = 40;
+const int DETAIL_BACKGROUND = 10;
+const int DETAIL_MOON = 30;
+
+const int WINDOW_WIDTH = 800;
+const int WINDOW_HEIGHT = 600;
+
 /** Adds the render pass for the daylight earth */
 void AddDayPass(
 	IVDevice& device,
@@ -230,7 +238,7 @@ IVDevice::MeshHandle CreateSphereMesh(
 	// create the geometry. note that you need to call the correct Generate..
 	// methods depending on your vertex structure. see VPolarSphere's definition
 	// for a list of supported generating functions
-	VPolarSphereMesh<VTexturedVertex> sphere(40, 40);
+	VPolarSphereMesh<VTexturedVertex> sphere(DETAIL_EARTH, DETAIL_EARTH);
 	sphere.GenerateCoordinates();
 	sphere.GenerateTexCoords();
 	// apply the given operation to every vertex of the mesh:
@@ -276,7 +284,7 @@ IVDevice::MeshHandle CreateBackgroundMesh(IVDevice& device)
 	pass.AddState(textureState);
 
 	// create a sphere mesh (see BuildSphereMesh)
-	VPolarSphereMesh<VTexturedVertex> sky(30, 30);
+	VPolarSphereMesh<VTexturedVertex> sky(DETAIL_BACKGROUND, DETAIL_BACKGROUND);
 	sky.GenerateCoordinates();
 	sky.GenerateTexCoords();
 	// scale it by factor 10 by scaling each vertex of the sphere
@@ -443,7 +451,7 @@ IVDevice::MeshHandle CreateMoonMesh(IVDevice& device)
 
 	pass.AddState(textureState);
 
-	VPolarSphereMesh<VTexturedVertex> moon(30, 30);
+	VPolarSphereMesh<VTexturedVertex> moon(DETAIL_MOON, DETAIL_MOON);
 	moon.GenerateCoordinates();
 	moon.GenerateTexCoords();
 	ForEachVertex(moon.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(0.175f, 0.175f, 0.175f));
@@ -507,8 +515,11 @@ vint VGraphicsDemoApp::Main()
 	// create window
 	VServicePtr<window::IVWindowManager> pWindowManager;
 
+	VDisplaySettings displaySettings;
+	displaySettings.SetSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
 	window::IVWindowManager::IVWindowPtr pWindow = 
-		pWindowManager->QueryWindow(".v3d graphics demo");
+		pWindowManager->QueryWindow(".v3d graphics demo", &displaySettings);
 	IVDevice& device(pWindow->QueryGraphicsDevice());
 
 	// create properties. they are needed for animated material states
