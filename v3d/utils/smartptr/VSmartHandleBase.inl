@@ -20,11 +20,11 @@ VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>
 }
 
 
-// template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy> 
-// VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>
-// 	::~VSmartHandleBase()
-// {
-// }
+template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy> 
+VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>::
+	~VSmartHandleBase()
+{
+}
 
 template<typename T,class OwnerPolicy,class ReadCheckPolicy,class WriteCheckPolicy> 
 T VSmartHandleBase<T,OwnerPolicy,ReadCheckPolicy,WriteCheckPolicy>

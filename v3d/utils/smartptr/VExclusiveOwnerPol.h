@@ -31,7 +31,7 @@ class VExclusiveOwnerPol
 public:
 	typedef StoragePolicy::TargetType TargetType;
 	VExclusiveOwnerPol();
-	virtual ~VExclusiveOwnerPol();
+	~VExclusiveOwnerPol();
 
 	TargetType Get();
 	void Set(TargetType in_NewVal);

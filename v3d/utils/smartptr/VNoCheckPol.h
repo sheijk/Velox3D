@@ -29,7 +29,7 @@ class VNoCheckPol
 
 public:
 	VNoCheckPol() {}
-	virtual ~VNoCheckPol() {}
+	~VNoCheckPol() {}
 
 public:
 	/*! every value is fine :) */

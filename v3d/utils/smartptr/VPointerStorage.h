@@ -30,7 +30,7 @@ public:
 	typedef T* TargetType;
 
 	VPointerStorage();
-	virtual ~VPointerStorage();
+	~VPointerStorage();
 
 public:
 	void Set(TargetType in_pNewTarget);

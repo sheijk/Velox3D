@@ -26,7 +26,7 @@ class VNullCheckPol
 
 public:
 	VNullCheckPol() {}
-	virtual ~VNullCheckPol() {}
+	~VNullCheckPol() {}
 
 public:
 	static inline vbool IsValid(T in_Val)

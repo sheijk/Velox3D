@@ -31,7 +31,7 @@ class VSmartHandleBase
 public:
 	VSmartHandleBase();
 	// gefaehrlich, aber wuerde ansonsten platz verschwenden, s.o.
-//	virtual ~VSmartHandleBase();
+	~VSmartHandleBase();
 
 	typedef VSmartHandleBase<T, OwnerPolicy, ReadCheckPolicy, WriteCheckPolicy> 
 		SmartHandleBaseType;
