@@ -49,10 +49,17 @@ IVImageFactory::ImagePtr VImageFactory::CreateImage(VStringParam in_sFilename)
 		fileSys.OpenFile(in_sFilename, vfs::VReadAccess);
 
 	VString theExtension = ParseFileExtension(in_sFilename);
-	theLoader = m_LoaderMap[theExtension.AsCString()];
+	theLoader = m_LoaderMap[theExtension];
 
 	if(theLoader)
+	{
 		theImage = theLoader->Create(fileStream.Get());
+	}
+	else
+	{
+		VString message = "no loader for ." + theExtension + " Format found";
+		V3D_THROW(VException, message.AsCString());
+	}
 	
 	ImagePtr retrunImage;
 	retrunImage.Assign(theImage);

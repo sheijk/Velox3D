@@ -27,7 +27,7 @@ IMAGE_SERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 
 	// create service object and register it
 	g_pImageFactory.Assign(new VImageFactory());
-	//g_pTgaImageLoader.Assign(new VTgaImageLoader());
+	g_pTgaImageLoader.Assign(new VTgaImageLoader());
 	g_pJpgImageLoader.Assign(new VJpegImageLoader());
 }
 

@@ -32,8 +32,6 @@ template member konvertiert?
 	./objekte hinzufuegen
 	./objekte rendern
 	nach states sortieren
-	
-
 
 	.gfx device:
 	./buffer aendern
@@ -52,8 +50,6 @@ template member konvertiert?
 	./materials erzeugen
 	mesh: render state list liefern
  
-	graphic utils nach utils namespace
-	vvertex3f in vvector3f umbenennen
 
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
@@ -90,6 +86,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+22.02.2004
+erste mem manager version (noch nicht im cvs)
+image lib fix: tga loader einkommentiert + exception bei fehlern
 
 21.02.2004
 draw list geschrieben, mit simpelst implementation
