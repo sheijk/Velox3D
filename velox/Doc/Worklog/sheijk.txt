@@ -29,6 +29,7 @@ Auf die Langnese Insel ziehen
 log:
 
 17.06.2003
+IVStreamFactory: wird als "vfs.strfact" registriert, zum erzeugen von Streams
 Bug in SharedPtr behoben
 Tests fuer IVStream und VFileStream geschrieben
 Details am Unittest System geaendert
