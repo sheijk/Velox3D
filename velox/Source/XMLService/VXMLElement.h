@@ -28,6 +28,7 @@ public:
 	virtual VStringRetVal GetName();
 	virtual IVXMLAttribute* GetFirstAttribute();
 	virtual IVXMLAttribute* NextAttribute();
+	virtual IVXMLAttribute* GetAttribute(VStringParam Name);
 
 	void AddAttribute(VXMLAttribute* p_Attribute);
 	void SetName(VStringParam Name);

@@ -33,6 +33,26 @@ IVXMLAttribute* VXMLElement::GetFirstAttribute()
 		return m_AttributeList[0];
 }
 
+IVXMLAttribute* VXMLElement::GetAttribute(VStringParam Name)
+{
+	if(m_AttributeList.empty())
+		return NULL;
+	else
+	{
+		std::string NameCheck = Name;
+		vuint i;
+		for(i = 0; i<m_AttributeList.size(); i++)
+		{
+			IVXMLAttribute* att = m_AttributeList[i];
+			std::string NameCheck2 = att->GetName();
+			if(NameCheck == NameCheck2)
+				return m_AttributeList[i];
+
+		}
+	}
+
+}
+
 void VXMLElement::AddAttribute(VXMLAttribute* p_Attribute)
 {
 	VXMLAttribute* Attribute = new VXMLAttribute;
