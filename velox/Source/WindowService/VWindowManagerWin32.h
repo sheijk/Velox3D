@@ -29,7 +29,9 @@ public:
 	
 	virtual IVWindowPtr QueryWindow(VStringParam in_pName);
 
-
+	virtual GraphicsDevicePtr CreateGraphicsDevice(
+		const graphics::VDisplaySettings& in_Settings,
+		PlatformWindowHandle in_Handle);
 
 };
 

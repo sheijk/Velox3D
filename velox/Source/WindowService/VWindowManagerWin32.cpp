@@ -3,7 +3,10 @@
 //-----------------------------------------------------------------------------
 #include "VWindowManagerWin32.h"
 #include "VWindowWin32.h"
+#include "../Graphics/OpenGL/VOpenGLDevice.h"
+
 #include <stdlib.h>
+
 //windows.h spackt rum
 #undef CreateWindow
 //-----------------------------------------------------------------------------
@@ -39,6 +42,15 @@ IVWindowManager::IVWindowPtr VWindowManagerWin32::QueryWindow(VStringParam in_pN
 	return window;
 }
 
+IVWindowManager::GraphicsDevicePtr VWindowManagerWin32::CreateGraphicsDevice(
+	const graphics::VDisplaySettings& in_Settings,
+	PlatformWindowHandle in_Handle)
+{
+	HWND hwnd = HWND(in_Handle);
+
+	GraphicsDevicePtr pDevice(new graphics::VOpenGLDevice(&in_Settings, hwnd));
+	return pDevice;
+}
 
 //-----------------------------------------------------------------------------
 } // namespace window

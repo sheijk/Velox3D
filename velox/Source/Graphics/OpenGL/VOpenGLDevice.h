@@ -36,7 +36,7 @@ class VOpenGLDevice : public IVDevice
 {
 public:
 	/** Contructor for adding a window */
-	VOpenGLDevice(graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
+	VOpenGLDevice(const graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
 	virtual ~VOpenGLDevice();
 
 	virtual BufferHandle CreateBuffer(

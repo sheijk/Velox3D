@@ -253,11 +253,14 @@ IVDevice& VWindowWin32::QueryGraphicsDevice()
 		vout << "Using OpenGL API..." << vendl;
 		m_Device = new VOpenGLDevice(&m_DisplaySettings, hWnd);
 	}
-
-	else if(m_DisplaySettings.m_sAPIType == "Direct3D")
+	else
 	{
-		m_Device = NULL;
+		V3D_THROW(VException, "only open gl support available");
 	}
+	//else if(m_DisplaySettings.m_sAPIType == "Direct3D")
+	//{
+	//	m_Device = NULL;
+	//}
 
 	return *m_Device;
 }

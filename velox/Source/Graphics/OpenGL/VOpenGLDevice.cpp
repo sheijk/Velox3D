@@ -34,9 +34,9 @@ namespace {
 	}
 }
 
-VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
+VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 {
-	m_DisplaySettings = in_pSettings;
+	m_DisplaySettings = new VDisplaySettings(*in_pSettings);
 	hWnd = in_hWnd;
 
 	SetDisplay();

@@ -112,6 +112,14 @@ Doku:
 
 log:
 
+06.06.2004
+Erste Editor Version. Plugins sind moeglich, Demo Plugin (Text Ausgabe) vorhanden,
+Rendern in Editor moeglich
+
+05.06.2004
+Erste Editor Version: Plugins koennen registriert werden + werden samt ihrer
+Aktionen ins Menu eingetragen
+
 03.06.2004
 V3dLib/Utils/VCommandManager.h
 

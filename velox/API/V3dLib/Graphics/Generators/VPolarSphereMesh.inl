@@ -1,7 +1,7 @@
 #include <cmath>
 
 template<typename VertexStructure>
-VPolarSphereMesh<VertexStructure>::VPolarSphere(
+VPolarSphereMesh<VertexStructure>::VPolarSphereMesh(
 	vuint in_nRings, 
 	vuint in_nSectors) :
 m_cfTop(1.0f),
@@ -18,7 +18,7 @@ geometry(
 }
 
 template<typename VertexStructure>
-VPolarSphereMesh<VertexStructure>::VPolarSphere(
+VPolarSphereMesh<VertexStructure>::VPolarSphereMesh(
 	vuint in_nRings, vuint in_nSectors, 
 	vfloat32 in_fBottom, vfloat32 in_fTop
 	) :

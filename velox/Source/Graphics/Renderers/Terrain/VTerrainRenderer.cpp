@@ -267,13 +267,13 @@ void VTerrainRenderer::CreateMeshes()
 		// create mesh
 		vuint lod = (x == 1 && y == 1)? 1 : 0;
 		m_Chunks(x,y).lod = 0;
-		m_Chunks(x,y).pChunk->SetLod(LodCount-1);
+		m_Chunks(x,y).pChunk->SetLod(0);//LodCount-1);
 		m_Chunks(x,y).pChunk->UpdateCurrentMesh(m_TextureMat);
 		IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->GetCurrentMesh();
 
 		// calculate position
-		vfloat32 xpos = x * vfloat32(m_nChunkSize) * 2;
-		vfloat32 ypos = y * vfloat32(m_nChunkSize) * 2;
+		vfloat32 xpos = x * GetChunkUnitWidth() * 2;
+		vfloat32 ypos = y * GetChunkUnitHeight() * 2;
 
 		VModel::TransformMatrixPtr pTransform(new VModel::TransformMatrix());
 		Identity(*pTransform);
@@ -495,7 +495,7 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 	// linear interpolation in between
 
 	vuint lod = 0;
-	const vfloat32 maxdist = 100.0f;
+	const vfloat32 maxdist = 400.0f;
 	const vfloat32 mindist = 10.0f;
 
 	if( in_fDistance > mindist )

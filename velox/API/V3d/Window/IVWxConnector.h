@@ -13,16 +13,11 @@ class IVWindowFrame;
 
 
 /**
- *	Manages all IVConnectable classes
+ *	Manages all IVConnectable classes <- ?!?
  */
-
 class IVWxConnector
 {
 public:
-
-	//TODO: koennte problematisch sein, wenn stl klassen im interface sind (sheijk)
-	typedef std::vector<IVWindowFrame*> VFrameList;
-
 	virtual void Register(IVWindowFrame* in_pFrame) = 0;
 	virtual void Unregister(IVWindowFrame* in_pFrame) = 0;
 
@@ -30,8 +25,10 @@ public:
 	virtual IVWindowFrame* GetCurrentFrame() = 0;
 	virtual vuint GetNumElements() = 0;
 
-			
 	virtual ~IVWxConnector(){};
+
+	//TODO: koennte problematisch sein, wenn stl klassen im interface sind (sheijk)
+	typedef std::vector<IVWindowFrame*> VFrameList;
 };
 
 //-----------------------------------------------------------------------------

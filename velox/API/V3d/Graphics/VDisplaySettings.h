@@ -19,7 +19,7 @@ public:
 
 	//TODO: problematisch, klasse kann nur von gfx service selbst gesetzt werden,
 	// sonst gibts linker fehler (sheijk)
-	VDisplaySettings();
+	inline VDisplaySettings();
 	void Assign(VDisplaySettings* in_pInfo);
 
 	vbool m_bFullscreen;
@@ -45,6 +45,29 @@ public:
 
 	
 };
+
+VDisplaySettings::VDisplaySettings()
+{
+	m_bFullscreen   = false;
+	m_iWidth	    = 640;
+	m_iHeight	    = 480;
+	m_iWinCoordX    = 300;
+	m_iWinCoordY    = 100;
+	m_iBitsPerPixel = 16;
+	m_iAccumulationBuffer = 0;
+	m_iDepthBits = 16;
+	m_iStencilBits = 0;
+	m_fFieldOfView = 90;
+	m_fNearClippingPlane = 1.0f;
+	m_fFarClippingPlane = 900000.0f;
+    m_fBackgroundRed = 0.235f;
+	m_fBackgroundGreen = 0.39f;
+	m_fBackgroundBlue = 0.627f;
+	m_fBackgroundAlpha = 1.0f;
+	m_sAPIType = "OpenGL";
+	m_fClearDepth = 1.0f;
+}
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
