@@ -23,23 +23,24 @@ VTerrainRenderer::Heightmap&
 VTerrainRenderer::VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device)
 	:
 	m_nPatchCount(in_nPatchCount),
-	m_fChunkModelSize(100.0f),
-	m_DrawList(in_Device)
+	m_fChunkModelSize(10.0f),
+	m_DrawList(in_Device),
+	m_bShowWireFrame(false)
 {
 	// load texture
-	m_TextureMat = BuildTextureMaterial(&in_Device, "/data/saltlake_tex.jpg");
+	m_TextureMat = BuildTextureMaterial(&in_Device, "/data/hills.jpg");
 	//m_TextureMat.frontPolyMode = VMaterialDescription::Line;
 	//m_TextureMat.backPolyMode = VMaterialDescription::Line;
 
 	//m_Chunks.Resize(in_nPatchCount, in_nPatchCount, ChunkMap::Uninitialized);
 	m_Chunks.ResizeUninit(in_nPatchCount, in_nPatchCount);
 
-	vfloat32 left = 0;
+	vfloat32 left = 1.0f;
 	vfloat32 top = 0;
 	vfloat32 right = 0;
 	vfloat32 bottom = 0;
 	const vfloat32 dx = 1.0f / m_Chunks.GetWidth();
-	const vfloat32 dy = 1.0f / m_Chunks.GetHeight();
+	const vfloat32 dy = -1.0f / m_Chunks.GetHeight();
 
 	// create all terrain chunks
 	for(vuint x = 0; x < m_Chunks.GetWidth(); ++x)
@@ -266,7 +267,7 @@ void VTerrainRenderer::CreateMeshes()
 		// create mesh
 		vuint lod = (x == 1 && y == 1)? 1 : 0;
 		m_Chunks(x,y).lod = 0;
-		m_Chunks(x,y).pChunk->SetLod(0);
+		m_Chunks(x,y).pChunk->SetLod(LodCount-1);
 		m_Chunks(x,y).pChunk->UpdateCurrentMesh(m_TextureMat);
 		IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->GetCurrentMesh();
 
@@ -372,21 +373,23 @@ void VTerrainRenderer::MarkLodSwitch(vuint x, vuint y, vuint lod)
 
 void VTerrainRenderer::UpdateChunkMesh(vuint x, vuint y)
 {
-	//vout << "updating chunk at (" << x << "," << y << ") to detail " 
-	//	<< m_Chunks(x,y).pChunk->GetLod() << vendl;
-
 	// remove old model
 	m_DrawList.Remove(VModel(
 		m_Chunks(x,y).pChunk->GetCurrentMesh(),
-		//m_Chunks(x,y).pChunk->CreateMesh(m_Chunks(x,y).lod), 
 		math::IdentityPtr()));
 
+	if( m_bShowWireFrame )
+	{
+		m_DrawList.Remove(VModel(
+			m_Chunks(x,y).pChunk->GetWireFrameMesh(),
+			math::IdentityPtr()));
+	}
+
 	// add new model
-//	m_Chunks(x,y).lod = detail;
-//	m_Chunks(x,y).pChunk->SetLod(detail);
 	m_Chunks(x,y).pChunk->UpdateCurrentMesh(m_TextureMat);
+
 	IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->GetCurrentMesh();
-	//IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->CreateMesh(detail);
+
 	vfloat32 xpos = 2 * x * GetChunkUnitWidth();
 	vfloat32 ypos = 2 * y * GetChunkUnitHeight();
 
@@ -395,6 +398,13 @@ void VTerrainRenderer::UpdateChunkMesh(vuint x, vuint y)
 	math::SetTranslate(*pTransform, xpos, ypos, 0.0f);
 
 	m_DrawList.Add(VModel(hMesh, pTransform));
+
+	if( m_bShowWireFrame )
+	{
+		IVDevice::MeshHandle hWireframeMesh = 
+			m_Chunks(x,y).pChunk->GetWireFrameMesh();
+		m_DrawList.Add(VModel(hWireframeMesh, pTransform));
+	}
 }
 
 void VTerrainRenderer::Update(const IVCamera& in_Camera)
@@ -440,7 +450,13 @@ void VTerrainRenderer::Update(const IVCamera& in_Camera)
 	}
 
 	// for each item in change list
-	for(vuint pos = 0; pos < m_LodChanges.size(); ++pos)
+	vuint updatedChunks = 0;
+	const vuint chunksPerFrameMax = 2;
+
+	for(
+		vuint pos = 0; 
+		pos < m_LodChanges.size() && updatedChunks < chunksPerFrameMax; 
+		++pos)
 	if( m_LodChanges[pos].m_bFree == false )
 	{
 		VTerrainLodChunk& chunk(*m_Chunks(
@@ -451,135 +467,9 @@ void VTerrainRenderer::Update(const IVCamera& in_Camera)
 
 		// clear item
 		m_LodChanges[pos].m_bFree = true;
+
+		++updatedChunks;
 	}
-
-	/*
-	typedef VVector<vfloat32, 3> Position;
-	// for each chunk
-	for(vuint x = 0; x < m_Chunks.GetWidth(); ++x)
-	for(vuint y = 0; y < m_Chunks.GetHeight(); ++y)
-	{
-		// calculate distance from camera
-		Position chunkPos;
-		chunkPos.Set(0, 2 * x * GetChunkUnitWidth());
-		chunkPos.Set(1, 2 * y * GetChunkUnitHeight());
-		chunkPos.Set(2, 0.0f);
-		
-		// calculate appropriate lod
-		chunkPos -= in_Camera.GetPosition();
-		const vfloat32 distance = Length(chunkPos);
-		vuint detail = CalcDetail(distance);
-		if( x == 1 && y == 0 )
-			detail = highDetail;
-		else
-			detail = lowDetail;
-
-		//TODO: das ganze konzept noch mal durchplanen, etc
-		// if lod changed, switch to new lod
-		if( m_Chunks(x,y).pChunk->GetLod() != detail || (x==1&y==0) )
-		{
-			// remove old model
-			m_DrawList.Remove(VModel(
-				m_Chunks(x,y).pChunk->GetCurrentMesh(),
-				//m_Chunks(x,y).pChunk->CreateMesh(m_Chunks(x,y).lod), 
-				math::IdentityPtr()));
-
-			// add new model
-			m_Chunks(x,y).lod = detail;
-			m_Chunks(x,y).pChunk->SetLod(detail);
-			m_Chunks(x,y).pChunk->UpdateCurrentMesh();
-			IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->GetCurrentMesh();
-			//IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->CreateMesh(detail);
-			vfloat32 xpos = 2 * x * GetChunkUnitWidth();
-			vfloat32 ypos = 2 * y * GetChunkUnitHeight();
-
-			VModel::TransformMatrixPtr pTransform(new VModel::TransformMatrix());
-			Identity(*pTransform);
-			math::SetTranslate(*pTransform, xpos, ypos, 0.0f);
-
-			m_DrawList.Add(VModel(hMesh, pTransform));
-		}
-	}
-	*/
-}
-
-/**
- * Adjusts the height values of the high res chunk's left/right border to the
- * (linearly interpolated) heights of the low res chunk
- *
- * @param io_HighChunk The chunks whose left/right border will be adjusted
- * @param in_LowChunk The lower res chunk to which the high res chunk will be
- * adjusted
- * @param in_Border AdjustLeftBorder -> Changes the left border of the high res chunk,
- * AdjustRightBorder will change it's right border
- */
-//TODO: evtl 2 schritte: 1. heightmaps aendern, 2. meshes aktualisieren
-// (auf ebene von VTerrainRenderer::Update, fuer alle zu aendernden meshes
-// zusammen
-void VTerrainRenderer::AdjustVerticalBorder(
-	VTerrainLodChunk& io_HighChunk,
-	const VTerrainLodChunk& in_LowChunk,
-	VBorder in_Border,
-	vuint x, vuint y
-	)
-{
-	V3D_ASSERT(in_Border == AdjustRightBorder || in_Border == AdjustLeftBorder);
-
-	const vuint lowWidth = in_LowChunk.GetCurrentHeightmap().GetWidth();
-	const vuint width = io_HighChunk.GetCurrentHeightmap().GetWidth();
-	const vuint lowHeight = in_LowChunk.GetCurrentHeightmap().GetHeight();
-	const vuint aspect = (width-1) / (lowHeight-1);
-	const vfloat32 stepW = 1.0f / vfloat32(aspect);
-
-	// sorry, this plain sucks, but can't make it more readable...
-	const vuint lowX = 
-		((in_Border == AdjustRightBorder)	? 0			: lowWidth-1);
-	const vuint highX = 
-		((in_Border == AdjustRightBorder)	? width-1	: 0);
-
-	for(vuint vy = 0; vy < lowHeight-1; ++vy)
-	{
-		for(vuint d = 0; d < aspect; ++d)
-		{
-			vfloat32 l = in_LowChunk.GetCurrentHeightmap().Get(lowX, vy);
-			vfloat32 r = in_LowChunk.GetCurrentHeightmap().Get(lowX, vy+1);
-			vfloat32 value = math::Interpolate(l, r, d * stepW);
-
-            io_HighChunk.GetCurrentHeightmap().Set(
-				highX,
-				vy*aspect + d,
-				in_Border == AdjustRightBorder ? 2.0f : -2.0f);
-				//value);
-		}
-	}
-	io_HighChunk.GetCurrentHeightmap().Set(
-		highX, 
-		io_HighChunk.GetCurrentHeightmap().GetHeight()-1,
-		in_LowChunk.GetCurrentHeightmap().Get(lowX, lowHeight-1)
-		);
-
-	// remove old mesh
-	m_DrawList.Remove(VModel(
-		io_HighChunk.GetCurrentMesh(), 
-		math::IdentityPtr()));
-
-	// update mesh
-	io_HighChunk.UpdateCurrentMesh(m_TextureMat);
-
-	// add new mesh
-	VModel::TransformMatrixPtr pTransform(new VModel::TransformMatrix());
-	math::Identity(*pTransform);
-	math::SetTranslate(
-		*pTransform, 
-		2 * (x-1) * GetChunkUnitWidth(),
-		2 * y * GetChunkUnitHeight(),
-		0.0f
-		);
-
-	m_DrawList.Add(VModel(
-		io_HighChunk.GetCurrentMesh(),
-		pTransform					
-		));
 }
 
 VTerrainLodChunk& VTerrainRenderer::GetChunk(vuint x, vuint y)
@@ -605,7 +495,7 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 	// linear interpolation in between
 
 	vuint lod = 0;
-	const vfloat32 maxdist = 1000.0f;
+	const vfloat32 maxdist = 100.0f;
 	const vfloat32 mindist = 10.0f;
 
 	if( in_fDistance > mindist )

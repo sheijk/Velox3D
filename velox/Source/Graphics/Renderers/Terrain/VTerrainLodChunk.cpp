@@ -20,9 +20,9 @@ VTerrainLodChunk::VTerrainLodChunk(
 	m_LodInfos(in_nLodCount),
 	m_Device(in_Device),
 	m_hCurrentMesh(0),
+	m_hWireFrameMesh(0),
 	m_hIndexBuffer(0),
 	m_hVertexBuffer(0),
-	//m_Material(in_Material),
 	m_TexCoords(in_TexCoords)
 {
 	SetLod(0);
@@ -39,42 +39,6 @@ vbool VTerrainLodChunk::IsMeshLoaded(vuint in_nLod) const
 
 	return m_LodInfos[in_nLod].hMesh != 0;
 }
-
-//VTerrainLodChunk::MeshHandle VTerrainLodChunk::CreateMesh(vuint in_nLod)
-//{
-//	in_nLod = std::min(in_nLod, m_nLodCount-1);
-//
-//	MeshHandle hMesh = m_LodInfos[in_nLod].hMesh;
-//
-//	// create the mesh if it does not exist, yet
-//	if( hMesh == 0 )
-//	{
-//		// create a heightmap model from the height values
-//		VHeightmapMesh<MyVertexType> model(
-//			m_LodHeightmap.GetLod(in_nLod).GetWidth(), 
-//			m_LodHeightmap.GetLod(in_nLod).GetHeight()
-//			);
-//		model.GenerateIndices();
-//
-//		// create a mesh from the model	and store it
-//		VMaterialDescription mat;
-//		//mat.frontPolyMode = VMaterialDescription::Line;
-//		//mat.backPolyMode = VMaterialDescription::Line;
-//
-//		ApplyHeightValues(model, m_LodHeightmap.GetLod(in_nLod));
-//		ForEachVertex(
-//			model.GetVertexBuffer(), 
-//			ScaleVertex<VColoredVertex>(m_fMeshSize, m_fMeshSize, 5.0f));
-//
-//		hMesh = BuildMesh(m_Device, model, mat);
-//
-//		m_LodInfos[in_nLod].hMesh = hMesh;
-//	}
-//
-//	V3D_ASSERT(hMesh != 0);
-//
-//	return hMesh;
-//}
 
 void VTerrainLodChunk::SetLod(vuint in_nLod)
 {
@@ -93,6 +57,25 @@ vuint VTerrainLodChunk::GetLod() const
 VTerrainLodChunk::MeshHandle VTerrainLodChunk::GetCurrentMesh() const
 {
 	return m_hCurrentMesh;
+}
+
+VTerrainLodChunk::MeshHandle VTerrainLodChunk::GetWireFrameMesh() const
+{
+	// if wireframe mesh does not exist, yet
+	if( 0 == m_hWireFrameMesh )
+	{
+		// create wire frame mesh
+		VMaterialDescription wfMat;
+		wfMat.frontPolyMode = VMaterialDescription::Line;
+		wfMat.backPolyMode = VMaterialDescription::Line;
+		wfMat.defaultColor = VColor4f(0.0f, 1.0f, 1.0f, 1.0f);
+
+		m_hWireFrameMesh = m_Device.CreateMesh(m_MeshDescription, wfMat);        
+	}
+
+	V3D_ASSERT(0 != m_hWireFrameMesh);
+
+	return m_hWireFrameMesh;
 }
 
 VLodHeightmap::Heightmap& VTerrainLodChunk::GetCurrentHeightmap()
@@ -115,10 +98,15 @@ void VTerrainLodChunk::SetNeighbourLod(Direction in_Dir, vuint in_nLod)
 void VTerrainLodChunk::DeleteDeviceData()
 {
 	m_Device.DeleteMesh(m_hCurrentMesh);
-	m_Device.DeleteBuffer(m_hVertexBuffer);
-	m_Device.DeleteBuffer(m_hIndexBuffer);
 	m_hCurrentMesh = 0;
+
+	m_Device.DeleteMesh(m_hWireFrameMesh);
+	m_hWireFrameMesh = 0;
+
+	m_Device.DeleteBuffer(m_hVertexBuffer);
 	m_hVertexBuffer = 0;
+
+	m_Device.DeleteBuffer(m_hIndexBuffer);
 	m_hIndexBuffer = 0;
 }
 
@@ -217,7 +205,7 @@ void VTerrainLodChunk::UpdateCurrentMesh(const VMaterialDescription& in_Mat)
 
 	ForEachVertex(
 		model.GetVertexBuffer(), 
-		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 50.0f));
+		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 5.0f));
 
 	// move border vertices if the neighbour mesh has a lower detail
 	if( m_NeighbourLod[vint(Left)] > GetLod() )
@@ -246,6 +234,7 @@ void VTerrainLodChunk::UpdateCurrentMesh(const VMaterialDescription& in_Mat)
 		model.GetIndexBuffer().GetDataAddress(),
 		model.GetIndexBuffer().GetSize());
 	meshd.geometryType = model.GetGeometryType();
+	m_MeshDescription = meshd;
 
 	m_hVertexBuffer = meshd.triangleVertices.hBuffer;
 	m_hIndexBuffer = meshd.triangleIndices.hBuffer;

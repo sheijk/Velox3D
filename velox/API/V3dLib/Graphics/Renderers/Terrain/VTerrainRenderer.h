@@ -46,13 +46,6 @@ class VTerrainRenderer
 		vuint& patchX, vuint& patchY, vuint& offsetX, vuint& offsetY
 		);
 
-	void VTerrainRenderer::AdjustVerticalBorder(
-		VTerrainLodChunk& io_HighChunk,
-		const VTerrainLodChunk& in_LowChunk,
-		VBorder in_Border,
-		vuint x, vuint y
-		);
-
 	vfloat32 GetChunkUnitWidth() const;
 	vfloat32 GetChunkUnitHeight() const;
 
@@ -68,6 +61,8 @@ class VTerrainRenderer
 	ChunkMap m_Chunks;
 	vuint m_nChunkSize;
 	VSimpleDrawList m_DrawList;
+
+	vbool m_bShowWireFrame;
 
 	struct LodChangeItem
 	{

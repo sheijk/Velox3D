@@ -32,9 +32,15 @@ template member konvertiert?
 	.terrain: zwischen lod stufen umschalten
 	.terrain: cracks entfernen
 	.terrain: texturen (eine pro chunk, eine total?)
+	.terrain: wireframe + texturierte darstellung
+	editor: message basierte plugin kommunikation?
+	device: meshhandle als klasse? (mit default initialisierung..)
+	terrain: VRectangle aus VTerrainLodChunk.h auslagern
+	terrain: detail texturen
 	terrain: bessere lod wahl heuristik (screen space error basierend?)
 	terrain: sanfte lod ueberblendungen (?)
 	device: info ueber nicht geloeschte buffer
+	terrain: VLodHeightmap entfernen(?) oder umbaun (nicht mehrere arrays)
 
 	geometry generation:
 	das hier dokumentieren:
@@ -105,6 +111,13 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+03.06.2004
+V3dLib/Utils/VCommandManager.h
+
+02.06.2004
+ruckler wg zu vielen lod updates von terrain entfernt
+terrain kann wireframe uebers terrain legen
 
 27.05.2004
 V3dLib/Utils/VFrameCounter

@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -393,6 +393,12 @@
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Utils\VAllFilter.h">
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\VCommandManager.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Utils\VCommandManager.h">
 			</File>
 			<File
 				RelativePath="..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp">

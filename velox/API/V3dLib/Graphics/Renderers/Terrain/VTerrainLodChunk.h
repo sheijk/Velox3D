@@ -58,24 +58,25 @@ public:
 		vfloat32 in_fMeshSize, 
 		VRectangle<vfloat32> in_TexCoords,
 		IVDevice& in_Device
-		//const VMaterialDescription& in_Material
 		);
 
 	virtual ~VTerrainLodChunk();
 	
-	vbool IsMeshLoaded(vuint in_nLod) const;
-	//MeshHandle CreateMesh(vuint in_nLod);
 	VLodHeightmap::Heightmap& GetLodHeights(vuint in_nLod);
 	const VLodHeightmap::Heightmap& GetLodHeights(vuint in_nLod) const;
-	vuint LodCount() const;
-	void InvalidateLodData();
 
+	vuint LodCount() const;
 	void SetLod(vuint in_nLod);
 	vuint GetLod() const;
+	void InvalidateLodData();
+
 	MeshHandle GetCurrentMesh() const;
+	MeshHandle GetWireFrameMesh() const;
+	vbool IsMeshLoaded(vuint in_nLod) const;
+	void UpdateCurrentMesh(const VMaterialDescription& in_Mat);
+
 	VLodHeightmap::Heightmap& GetCurrentHeightmap();
 	const VLodHeightmap::Heightmap& GetCurrentHeightmap() const;
-	void UpdateCurrentMesh(const VMaterialDescription& in_Mat);
 
 	enum Direction
 	{
@@ -104,6 +105,8 @@ private:
 	VLodHeightmap::Heightmap m_CurrentHeightmap;
 
 	MeshHandle m_hCurrentMesh;
+	mutable MeshHandle m_hWireFrameMesh;
+	VMeshDescription m_MeshDescription;
 	IVDevice::BufferHandle m_hVertexBuffer;
 	IVDevice::BufferHandle m_hIndexBuffer;
 
