@@ -122,12 +122,57 @@ public:
 	{
 		return m_pBuffer;
 	}
+
+	template<typename DestType>
+	VBuffer<DestType>* Convert(CopyMode in_CopyMode)
+	{
+		VBuffer<DestType>* pNewBuffer = 0;
+		
+		const vuint nSizeInBytes = m_nSize * sizeof(DataType);
+		const vuint nDestSize = nSizeInBytes / sizeof(DestType);
+
+		// only allow conversion if the size ..[aufgehen]
+		if( nDestSize * sizeof(DestType) != nSizeInBytes )
+		{
+			V3D_THROW(VException, "type size mismatch");
+		}
+		
+		if( in_CopyMode == DropData )
+		{
+			pNewBuffer = new VBuffer<DestType>(
+				reinterpret_cast<DestType*>(m_pBuffer), 
+				nDestSize
+				);
+
+			m_pBuffer = 0;
+			m_nSize = 0;
+		}
+		else if( in_CopyMode == CopyData )
+		{
+			vbyte* pNewData = new vbyte[nSizeInBytes];
+			memcpy(pNewData, m_pBuffer, nSizeInBytes);
+            
+			pNewBuffer = new VBuffer<DestType>(
+				reinterpret_cast<DestType*>(pNewData), 
+				nDestSize
+				);
+		}
+		else
+		{
+			V3D_THROW(VException, "invalid copy mode");
+		}
+		
+		return pNewBuffer;
+	}
 };
 
 /** a buffer of floats */
 typedef VBuffer<vfloat32> VFloatBuffer;
 /** a buffer of ints */
 typedef VBuffer<vuint32> VIntBuffer;
+/** a buffer of bytes */
+typedef VBuffer<vbyte> VByteBuffer;
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
