@@ -224,6 +224,12 @@
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Generators\VTerrainChunk.inl">
 				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangle.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3dLib\Graphics\Generators\VTriangle.inl">
+				</File>
 			</Filter>
 			<Filter
 				Name="Misc"

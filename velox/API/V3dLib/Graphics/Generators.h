@@ -9,6 +9,7 @@
 #include <V3dLib/Graphics/Generators/VHeightmap.h>
 #include <V3dLib/Graphics/Generators/VPolarSphere.h>
 #include <V3dLib/Graphics/Generators/VTerrainChunk.h>
+#include <V3dLib/Graphics/Generators/VTriangle.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_VGENERATORS_2004_04_09_H

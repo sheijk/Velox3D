@@ -2,16 +2,6 @@ Worklog von insane:
 -------------------------------------------------------------------------------
 messages to insane:
 der .jpg Loader kann keine 8bit Bilder.. -- sheijk
-
-BUG: Programm stuertzt beim Beenden ab, bzw. es kommt 
-"22:42:36: Debug: .\msw\app.cpp(439): 'UnregisterClass(canvas)' failed with error
- 0x00000584 (diese Klasse hat noch ge÷ffnete Fenster.)."
-im Debug Build von v3dConsole
-Unbehandelte Ausnahme (Zugriffsverletzung in VObjectRegistry.cpp/Z108)
-
-waer praktisch wenn Konsolen + Editor Fenster resizable waeren 
-- unwichtig im moment + aufwaendig... -ins
-
 -------------------------------------------------------------------------------
 Personal Notes:
 
@@ -19,11 +9,13 @@ TODO List:
 - Console is closeable with alt f4
 - Console crashes on some machines
 - InputManager should be deactivated by loosing focus  
+- xml file for window service and console
 
 -------------------------------------------------------------------------------
 Done List:
 
 11.04.04
+- added VTriangle generator template
 - added vertex buffer objects
 
 09.04.04
