@@ -60,7 +60,7 @@ void VFileStreamTest::ExecuteTest()
 		//TODO: makro/fkt fuer einfacheres querien von objekten?
 
 		pFileStream = pStreamFac->CreateFileStream(
-			"temp/vfilestream_tst", 
+			"vfstestdir/filestream_test", 
 			vfs::VCreateAlways, 
 			vfs::VRWAccess);
 

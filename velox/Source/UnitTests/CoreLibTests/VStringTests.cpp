@@ -11,6 +11,8 @@ namespace v3d {
 namespace unittests {
 //-----------------------------------------------------------------------------
 
+//TODO: test ==, !=
+
 VStringTests::VStringTests()
 {
 	IVTestManager* pTestManager = 0;

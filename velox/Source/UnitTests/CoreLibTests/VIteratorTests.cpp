@@ -7,9 +7,10 @@
 
 #include <iterator>
 #include <algorithm>
+#include <list>
 
 #include <v3d/Core/Wrappers/VIterator.h>
-
+#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace unittests {
@@ -472,6 +473,43 @@ void testRandAccIter()
 	//TODO: test with an STL algorithm
 }
 
+template<typename Iter, typename STLIter>
+Iter listI(STLIter it)
+{
+	typedef typename Iter::Value Value;
+	return Iter(new VSTLDerefIteratorPol<STLIter, Value>(it));
+}
+
+void constructList(int* begin, int* end, std::list<int*>& lst)
+{
+	for( ; begin != end; ++begin)
+	{
+		lst.push_back(begin);
+	}
+}
+
+template<typename Iter>
+void testWithList()
+{
+	typedef typename Iter::Value Value;
+
+	vuint valCount = 6;
+	int vals[] = { 0, 1, 2, 3, 4, 5, 99 };
+
+	std::list<int*> theList;
+	typedef std::list<int*>::iterator ListIter;
+
+	constructList(vals, vals + valCount, theList);
+
+	if( ! std::equal( 
+		listI<Iter, ListIter>(theList.begin()), 
+		listI<Iter, ListIter>(theList.end()),
+		vals ) )
+	{
+		V3D_UNITTEST_ERROR_STATIC("VSTLDerefIterator failure");
+	}
+}
+
 //-----------------------------------------------------------------------------
 
 void VIteratorTests::ExecuteTest()
@@ -500,6 +538,8 @@ void VIteratorTests::ExecuteTest()
 	testFwdIter<IntRI>();
 	testBidirIter<IntRI>();
 	testRandAccIter<IntRI>();
+
+	testWithList<IntBI>();
 }
 
 //-----------------------------------------------------------------------------

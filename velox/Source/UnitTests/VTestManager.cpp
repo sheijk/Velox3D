@@ -1,5 +1,6 @@
 #include "VTestManager.h"
 //-----------------------------------------------------------------------------
+#include <v3d/Core/Wrappers/VSTLDerefIteratorPol.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -34,41 +35,6 @@ void VTestManager::AddCommonTest(IVUnitTest* in_pTest)
 //	// if output level is allowed for output
 //		// output message
 //}
-
-template<
-	typename Iter,
-	typename T
->
-class VSTLDerefIteratorPol : public IVIteratorPol<T>
-{
-private:
-	Iter m_Iter;
-
-public:
-	typedef T Value;
-	typedef T* Pointer;
-
-	VSTLDerefIteratorPol(Iter in_Iter) : m_Iter(in_Iter) {}
-
-	virtual vbool IsEqual(const IVIteratorPol<T>& in_Other) const
-	{ return *m_Iter == in_Other.Get(); }
-
-	virtual VSTLDerefIteratorPol* CreateCopy() const
-	{ return new VSTLDerefIteratorPol(m_Iter); }
-
-	virtual void MoveBy(vint in_nDistance)
-	{
-		advance(m_Iter, in_nDistance);
-	}
-
-	virtual Pointer Get() const
-	{
-		return *m_Iter;
-	}
-
-	virtual void Proceed() { MoveBy(1); }
-	virtual void MoveBack() { MoveBy(-1); }
-};
 
 VTestManager::TestIterator VTestManager::CommonTestsBegin()
 {
