@@ -113,13 +113,19 @@
 				RelativePath="..\Api\V3d\Graphics\IVMesh.h">
 			</File>
 			<File
+				RelativePath="..\Api\V3d\Graphics\IVRenderState.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Graphics\IVStateCategory.h">
+			</File>
+			<File
 				RelativePath="..\Api\V3d\Graphics\VBuffer.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Graphics\VCamera.h">
+				RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Graphics\VDisplaySettings.h">
+				RelativePath="..\Api\V3d\Graphics\VMaterialDescription.h">
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Graphics\VMeshDescription.h">
@@ -155,6 +161,12 @@
 				<File
 					RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.h">
 				</File>
+				<File
+					RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.h">
+				</File>
 			</Filter>
 			<Filter
 				Name="Render Methods"
@@ -180,6 +192,25 @@
 				</File>
 				<File
 					RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="States"
+				Filter="">
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VMiscState.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VMiscStateCategory.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VTextureState.h">
+				</File>
+				<File
+					RelativePath="..\Source\Graphics\OpenGL\VTextureStateCategory.h">
 				</File>
 			</Filter>
 		</Filter>

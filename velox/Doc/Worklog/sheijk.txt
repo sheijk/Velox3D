@@ -28,10 +28,22 @@ template member konvertiert?
 	.gfx device:
 	./buffer aendern
 	./indexed/non indexed geometry auto auswahl
-	render states anwenden
-	render state category
-	materials erzeugen
+	./render states anwenden
+	./render states aus vmaterial descr erzeugen
+	./textur buffer erzeugen
+	./unterstuetzung fuer tex coords in mesh und mesh descr
+	./mesh vor abstuerzen durch fehlende felder sichern
+	./textur in mat desc + tex state
+	./render state categories
+	./category list
+	./device states anwenden lassen
+	./states usw. ins device bewegen
+	./render state categories ins device
+	./materials erzeugen
 	mesh: render state list liefern
+ 
+	graphic utils nach utils namespace
+	vvertex3f in vvector3f umbenennen
 
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
@@ -47,7 +59,7 @@ template member konvertiert?
 	SceneGraph / Engine Architektur
 	Editor Plugin System Design
 	Auf die Langnese Insel ziehen
-	
+
 Doku:
 	Doku System
 	VFS Doku
@@ -59,20 +71,35 @@ Doku:
 			benutzen (laden/schreiben von Daten)
 			erweitern (DataProvider)
 		Schreiben von Services
-	Infos ueber 
+	Infos ueber
 		Velox Architektur
 		Services
-	
+
 
 --------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
 log:
 
+20.02.2004
+texturen + poly mode sind als material umsetzbar
+render state lists
+render state categories und category list
+cat list kann state list aus mat descr erzeugen
+materialien werden vom device erzeugt und geloescht
+device kann states setzen
+
+19.02.2004
+Textur und Polygon Mode States erzeugt, setzen von states durch state objekte
+material description
+textur buffer
+tex coords in meshes unterstuetzt
+renderer stuertzt nicht mehr ab wenn nicht alle vertex daten typen genutzt
+
 18.02.2004
 Int/Float Buffer durch "generische" Buffer ersetzt
 indexed und non indexed rendering methods zu einer kombiniert die beides nach
-badarf kann (fuer ogl immediate mode)
+bedarf kann (fuer ogl immediate mode)
 
 15.02.2004
 Den Code aus dem CVS gefixt.. (input manager und window service)
@@ -131,7 +158,7 @@ STL Wrapper Iteratoren Policies ueberarbeitet, </> Vergleiche funktionieren jetz
 random_access_iteratoren (und auch nur damit, wies sein soll)
 
 05.12.2003
-Iteratoren ueberarbeitet. Anstatt von IVIteratorPol abgeleiteter Klassen koennen jetzt auch 
+Iteratoren ueberarbeitet. Anstatt von IVIteratorPol abgeleiteter Klassen koennen jetzt auch
 eigene Versionen abgeleitet werden, muessen gleiche public Signatur haben wie VIteratorBase
 ins VIteratorBase.h. Damit bekommt man dann STL konforme Iteratoren durch Implementation von
 4 Funktionen
@@ -207,7 +234,7 @@ comittet
 
 20.07.2003
 Iteratoren (mit SmartPointer aehnlichem Verhalten zum Zurueckgeben von Iteratoren
-aus DLLs), und ueberarbeitete Version der SmartPointer sowie Tests dafuer 
+aus DLLs), und ueberarbeitete Version der SmartPointer sowie Tests dafuer
 fertig gestellt und committet
 
 06.07.2003
@@ -271,12 +298,12 @@ V3D_DEBUGMSG Makro in VLogging.h erstellt, zum senden von Debug Nachrichten
 an den Error Service ala OutputDebugString
 
 27.05.2003
-VFileStream und VLegalOperations in der Implementation des VFS, koennen als 
+VFileStream und VLegalOperations in der Implementation des VFS, koennen als
 vorlauefiger VFS Ersatz benutzt werden (ins eigene Projekt kopieren)
-Kernel geaendert: in der xml datei steht jetzt nur noch, wie die main app 
-heisst, sie muss zusaetzlich als service geladen werden. Dadurch kann 
-beeinflusst werden wann die Main App geladen wird (siehe 
-Workspace/Workdir/init.xml) Projektfiles geaendert, neues Arbeitsverzeichnis, 
+Kernel geaendert: in der xml datei steht jetzt nur noch, wie die main app
+heisst, sie muss zusaetzlich als service geladen werden. Dadurch kann
+beeinflusst werden wann die Main App geladen wird (siehe
+Workspace/Workdir/init.xml) Projektfiles geaendert, neues Arbeitsverzeichnis,
 uebersichtlichere Ausgabe Verzeichnisse und Verwendung von Project File Makros
 
 25.05.2003
@@ -290,11 +317,11 @@ nicht benutzt werden
 UnitTest Framework ins neue CVS portiert
 
 16.05.2003
-Velox an VS.Net 2003 angepasst, Datei fuer Ziel Definition von Velox angelegt 
+Velox an VS.Net 2003 angepasst, Datei fuer Ziel Definition von Velox angelegt
 (Doc/Information/GoalDefinition.html), Projektfiles ins CVS aufgenommen
 
 14.05.2003
-Vfs Interface erstellt, Vfs Xml Configdatei erzeugt, String Wrapper 
+Vfs Interface erstellt, Vfs Xml Configdatei erzeugt, String Wrapper
 geschrieben (VString)
 
 07.05.2003
@@ -311,7 +338,7 @@ Entwuerfe fuer den Vfs Service, und den XML Wrapper
 - Code an Coding Guidelines angepasst
 
 01.05.2003
-- Weitere Sources ins neue CVS portiert 
+- Weitere Sources ins neue CVS portiert
 - Geschwindigkeitstest mit Exceptions gemacht
 - Coding Guidelines in Html verwandelt, umgeschrieben und erweitert
 - Issues in issues.html exportiert und neu formatiert

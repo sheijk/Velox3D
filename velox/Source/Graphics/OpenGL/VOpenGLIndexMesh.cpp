@@ -14,7 +14,7 @@ VOpenGLIndexMesh::VOpenGLIndexMesh(const VMeshDescription& in_Descr)
 	m_TriangleData = in_Descr.triangleVertices;
 	m_ColorData = in_Descr.triangleColors;
 	m_IndexData = in_Descr.triangleIndices;
-	m_TexCoordData = in_Descr.triangleCoords;
+	m_TexCoordData = in_Descr.triangleTexCoords;
 }
 
 VOpenGLIndexMesh::~VOpenGLIndexMesh()

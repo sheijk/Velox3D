@@ -53,10 +53,9 @@ struct VMeshDescription
 	typedef DataRef<IntBufferHandle> IntDataRef;
 	typedef DataRef<ByteBufferHandle> ByteDataRef;
 
-	ByteDataRef triangleVertices; // extra felder fuer tris, fans + strips? -wozu?
-	//vertex array hat nichts mit rendering mode zu tun. sollte evtl in IndexBuffer stehen
+	ByteDataRef triangleVertices;
 	ByteDataRef triangleColors;
-	ByteDataRef triangleCoords;
+	ByteDataRef triangleTexCoords;
 	ByteDataRef triangleIndices;
 };
 

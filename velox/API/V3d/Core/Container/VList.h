@@ -3,6 +3,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/Wrappers/VGenericUtils.h>
+#include <v3d/Core/VException.h>
+#include <v3d/Core/Wrappers/VIterator.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -394,7 +396,7 @@ public:
 		m_pHead = 0;
 	}
 
-	vuint size()
+	vuint size() const
 	{
 		int nSize = 0;
 

@@ -1,29 +1,22 @@
-#ifndef V3D_IVMATERIAL_H
-#define V3D_IVMATERIAL_H
+#ifndef V3D_IVSTATECATEGORY_H
+#define V3D_IVSTATECATEGORY_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-//----------------------------------------------------------------------------
-namespace v3d {
+
+//-----------------------------------------------------------------------------
+namespace v3d { 
 namespace graphics {
 //-----------------------------------------------------------------------------
 class IVRenderState;
 
-/**
- * Client visible material controlling
- *
- * @author sheijk
- */
-class IVMaterial
+class IVStateCategory
 {
 public:
-	virtual ~IVMaterial() {};
-
-	virtual vuint StateCount() const = 0;
-	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
+	virtual IVRenderState* CreateState(const VMaterialDescription& in_Mat) = 0;
 };
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVMATERIAL_H
+#endif // V3D_IVSTATECATEGORY_H

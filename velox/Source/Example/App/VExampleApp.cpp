@@ -13,9 +13,9 @@
 
 
 //TODO...
-#include <windows.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+//#include <windows.h>
+//#include <gl/gl.h>
+//#include <gl/glu.h>
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
 #include <v3d/Input/IVInputManager.h>
@@ -34,8 +34,6 @@ using namespace v3d::system;
 using namespace v3d::input;
 using namespace v3d::image;
 
-
-
 VExampleApp::VExampleApp(VStringParam in_strName)
 	: VNamedObject(in_strName, 0)
 {
@@ -45,6 +43,14 @@ VExampleApp::VExampleApp(VStringParam in_strName)
 VExampleApp::~VExampleApp()
 {
 	V3D_DEBUGMSG("Example app has been destroyed and unregistered");
+}
+
+void ApplyMaterial(IVDevice* in_pDevice, IVMaterial* in_pRenderStates)
+{
+	for(vuint prio = 0; prio < in_pRenderStates->StateCount(); ++prio)
+	{
+		in_pDevice->ApplyState(in_pRenderStates->GetState(prio));
+	}
 }
 
 vint VExampleApp::Main()
@@ -80,8 +86,6 @@ vint VExampleApp::Main()
 	IVDevice::MeshHandle Mesh;
 
 	VCamera* pCamera;
-
-	IVImageFactory::ImagePtr myImage = pFactory->CreateImage("/data/tgatest.tga");
 
 	//run system
 
@@ -135,18 +139,18 @@ vint VExampleApp::Main()
 
 	//assign handles
 	VertexHandle = pDevice->CreateBuffer(
-		IVDevice::VertexBuffer, 
-		&VertexData, 
+		IVDevice::VertexBuffer,
+		&VertexData,
 		IVDevice::Buffer::CopyData
 		);
 	VertexIndexHandle = pDevice->CreateBuffer(
 		IVDevice::VertexBuffer,
-		&VertexIndex, 
+		&VertexIndex,
 		IVDevice::Buffer::CopyData
 		);
 	TexHandle = pDevice->CreateBuffer(
 		IVDevice::VertexBuffer,
-		&TexData, 
+		&TexData,
 		IVDevice::Buffer::CopyData);
 
 
@@ -163,7 +167,7 @@ vint VExampleApp::Main()
 
 	MeshDesc.triangleVertices = VMeshDescription::ByteDataRef(
 		VertexHandle,
-		0, 
+		0,
 		Model.m_Objects[0]->m_iNumVertices * 3,
 		1
 		);
@@ -171,7 +175,7 @@ vint VExampleApp::Main()
 		0, Model.m_Objects[0]->m_iNumFaces *3,
 		1);
 
-	MeshDesc.triangleCoords = VMeshDescription::ByteDataRef(TexHandle,
+	MeshDesc.triangleTexCoords = VMeshDescription::ByteDataRef(TexHandle,
 		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
 		1);
 
@@ -184,33 +188,33 @@ vint VExampleApp::Main()
 	pSystemManager->SetStatus(true);
 
 	// main loop...
+	IVImageFactory::ImagePtr myImage = pFactory->CreateImage("/data/tgatest.tga");
 
-	GLuint id;
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id);
+    VMaterialDescription texMat;
 
-	glPixelStorei  (GL_UNPACK_ALIGNMENT, 1);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,  GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,  GL_LINEAR);
-	glTexEnvi	   (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,  GL_MODULATE);
+	VMaterialDescription::TextureRef* pTexRef =
+		new VMaterialDescription::TextureRef();
 
+	IVDevice::BufferHandle hTextureBuffer = pDevice->CreateBuffer(
+		IVDevice::Texture,
+		myImage->pData,
+		IVDevice::Buffer::DropData
+		);
 
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, myImage->iWidth, myImage->iHeight, GL_RGB, GL_UNSIGNED_BYTE, myImage->pData->GetDataAddress());
+	pTexRef->nWidth = myImage->iWidth;
+	pTexRef->nHeight = myImage->iHeight;
+	pTexRef->hData = hTextureBuffer;
+
+	texMat.AddTexture(pTexRef);
+
+	IVDevice::MaterialHandle pTextureMaterial = pDevice->CreateMaterial(texMat);
 
 	while(pSystemManager->GetStatus())
 	{
-	//	glActiveTextureARB(GL_TEXTURE0_ARB);
-		glBindTexture(GL_TEXTURE_2D, id);
-		glEnable(GL_TEXTURE_2D);
-
-		
-
 		pDevice->BeginScene();
+		ApplyMaterial(pDevice, pTextureMaterial);
 		pDevice->RenderMesh(Mesh);
         pDevice->EndScene();
-
 
 		pUpdateManager->StartNextFrame();
 		pUpdateManager->GetFrameDuration();
@@ -235,7 +239,7 @@ vint VExampleApp::Main()
 			pCamera->AddY(-.3f);
 		if(pLeftMouseButton->IsDown() == true)
 			pCamera->AddY(.3f);
-		
+
 	}
 
 	pUpdateManager->Stop();

@@ -3,6 +3,7 @@
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Core/Wrappers/VIterator.h>
 
+#include "IVOpenGLRenderState.h"
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -44,6 +45,9 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
 	//m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
 	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
+
+	m_StateCategories.RegisterCategory(m_TextureStateCategory);
+	m_StateCategories.RegisterCategory(m_MiscStateCategory);
 }
 //-----------------------------------------------------------------------------
 
@@ -70,8 +74,24 @@ IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 	BufferCopyMode in_CopyMode
 	)
 {
+	// irgendwas ist hier faul, wenn CopyData... -- sheijk
 	Buffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
-	m_Buffers.Add(pBuffer);
+
+	switch(in_Type)
+	{
+	case VertexBuffer:
+		{
+			m_Buffers.Add(pBuffer);
+		} break;
+		
+	case Texture:
+		{
+			m_TextureBuffers.Add(pBuffer);
+		} break;
+
+	default:
+		V3D_THROW(VException, "tried to create illegal buffer type");
+	}
 
 	return BufferHandle(pBuffer);
 }
@@ -96,13 +116,26 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VMeshDescription& in_pMeshDesc)
 	return MakeMeshHandle(pMesh);
 }
 
-void VOpenGLDevice::DeleteMesh(MeshHandle in_Mesh)
+VOpenGLDevice::MaterialHandle VOpenGLDevice::CreateMaterial(
+	const VMaterialDescription& in_MatDesc)
+{
+	return m_StateCategories.CreateRenderStateList(in_MatDesc);
+}
+
+void VOpenGLDevice::DeleteMaterial(MaterialHandle& in_Material)
+{
+	delete in_Material;
+	in_Material = 0;
+}
+
+void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 {
 	IVMesh* pMesh = MakeMeshPointer(in_Mesh);
 
 	m_Meshes.remove(pMesh);
 
 	delete pMesh;
+	in_Mesh = 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -113,6 +146,16 @@ void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 
 	pMesh->Render();
 }
+//-----------------------------------------------------------------------------
+
+void VOpenGLDevice::ApplyState(const IVRenderState& in_State)
+{
+	const IVOpenGLRenderState* pState = reinterpret_cast<const IVOpenGLRenderState*>
+		(&in_State);
+
+	pState->Apply();
+}
+
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::SetDisplay()

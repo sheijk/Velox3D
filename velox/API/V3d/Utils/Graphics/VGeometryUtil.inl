@@ -8,38 +8,58 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	using namespace v3d::graphics;
 
 	// create float buffer
-	const floatBufSize = in_cnVertexCount * sizeof(ColoredVertex);
+	const floatBufSize = in_cnVertexCount * sizeof(VertexStructure);
 	const floatCount = floatBufSize / sizeof(vfloat32);
 	vfloat32* vertexData = new vfloat32[floatCount];
 
 	memcpy(vertexData, pVertices, floatBufSize);
 
-	ColoredVertex* cv = (ColoredVertex*)vertexData;
+	VertexStructure* cv = (VertexStructure*)vertexData;
 
-	VFloatBuffer floatBuf(vertexData, floatBufSize);
+	//VFloatBuffer floatBuf(vertexData, floatBufSize);
+	IVDevice::Buffer geomBuf(reinterpret_cast<vbyte*>(vertexData), 4 * floatBufSize);
 
-	IVDevice::FloatBufferHandle bufHandle
-		= in_Device.CreateBuffer(&floatBuf, VFloatBuffer::DropData);
+	IVDevice::BufferHandle bufHandle = in_Device.CreateBuffer(
+		IVDevice::VertexBuffer, 
+		&geomBuf, 
+		IVDevice::Buffer::DropData
+		);
+
+	//IVDevice::FloatBufferHandle bufHandle
+	//	= in_Device.CreateBuffer(&floatBuf, VFloatBuffer::DropData);
 
 	// create mesh description
 	VMeshDescription descr;
 
+	const VVertexDataLayout& layout(VertexStructure::layout);
+
 	// set vertex coord info
-	descr.triangleVertices = VMeshDescription::FloatDataRef(
+	descr.triangleVertices = VMeshDescription::ByteDataRef(
 		bufHandle, 
-		ColoredVertex::layout.vertexOffset, 
+		layout.vertexOffset, 
 		in_cnVertexCount, 
-		sizeof(ColoredVertex) / sizeof(float)
+		sizeof(VertexStructure) / sizeof(float)
 		);
 
 	// set color info, if contained
-	if( VVertexDataLayout::IsValidOffset(VertexStructure::layout.colorOffset) )
+	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
 	{
-		descr.triangleColors = VMeshDescription::FloatDataRef(
+		descr.triangleColors = VMeshDescription::ByteDataRef(
 			bufHandle,
-			ColoredVertex::layout.colorOffset,
+			layout.colorOffset,
 			in_cnVertexCount,
-			sizeof(ColoredVertex) / sizeof(float)
+			sizeof(VertexStructure) / sizeof(float)
+			);
+	}
+
+	// set tex coord if contained
+	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
+	{
+		descr.triangleTexCoords = VMeshDescription::ByteDataRef(
+			bufHandle,
+			layout.texCoordOffset,
+			in_cnVertexCount,
+			sizeof(VertexStructure) / sizeof(float)
 			);
 	}
 

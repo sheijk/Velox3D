@@ -1,29 +1,23 @@
-#ifndef V3D_IVMATERIAL_H
-#define V3D_IVMATERIAL_H
+#ifndef V3D_IVOPENGLRENDERSTATE_H
+#define V3D_IVOPENGLRENDERSTATE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-//----------------------------------------------------------------------------
+
+#include <v3d/Graphics/IVRenderState.h>
+
+//-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
-class IVRenderState;
 
-/**
- * Client visible material controlling
- *
- * @author sheijk
- */
-class IVMaterial
+class IVOpenGLRenderState : public IVRenderState
 {
 public:
-	virtual ~IVMaterial() {};
-
-	virtual vuint StateCount() const = 0;
-	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
+	virtual void Apply() const = 0;
 };
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVMATERIAL_H
+#endif // V3D_IVOPENGLRENDERSTATE_H

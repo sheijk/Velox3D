@@ -20,11 +20,13 @@ struct VVertexDataLayout
 
 	Offset vertexOffset;
 	Offset colorOffset;
+	Offset texCoordOffset;
 
 	VVertexDataLayout()
 	{
 		vertexOffset = -1;
 		colorOffset = -1;
+		texCoordOffset = -1;
 	}
 
 	static vbool IsValidOffset(Offset offs);
@@ -34,6 +36,9 @@ struct VVertexDataLayout
 
 	template<typename VertexData>
 	static void SetColorOffset();
+
+	template<typename VertexData>
+	static void SetTexCoordOffset();
 };
 
 vbool VVertexDataLayout::IsValidOffset(Offset offs)
@@ -62,6 +67,16 @@ void VVertexDataLayout::SetColorOffset()
 	VertexData::layout.colorOffset = 
 		reinterpret_cast<Offset>(&(zero->color)) / sizeof(float);
 }
+
+template<typename VertexData>
+void VVertexDataLayout::SetTexCoordOffset()
+{
+	VertexData* zero = 0;
+
+	VertexData::layout.texCoordOffset =
+		reinterpret_cast<Offset>(&(zero->texCoord)) / sizeof(float);
+}
+
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

@@ -6,6 +6,8 @@
 #include <v3d/Graphics/IVMaterial.h>
 #include <v3d/Graphics/VBuffer.h>
 #include <v3d/Graphics/VMeshDescription.h>
+#include <v3d/Graphics/VMaterialDescription.h>
+#include <v3d/Graphics/IVRenderState.h>
 
 #include <v3d/Graphics/VCamera.h>
 
@@ -38,10 +40,12 @@ public:
 
 	typedef IVMesh* MeshHandle;
 
+	typedef IVMaterial* MaterialHandle;
+
 	enum BufferType
 	{
 		VertexBuffer,
-		IndexBuffer
+		Texture
 	};
 
 	/** 
@@ -59,29 +63,23 @@ public:
 		BufferCopyMode in_CopyMode = VBufferBase::CopyData
 		) = 0;
 
-	/** creates an internal buffer in the device */
-	//virtual FloatBufferHandle CreateBuffer(
-	//	VFloatBuffer* in_pBuffer,
-	//	FloatBufferCopyMode in_CopyMode = VFloatBuffer::CopyData
-	//	) = 0;
-
-	//virtual IntBufferHandle CreateBuffer(
-	//	VIntBuffer* in_pBuffer,
-	//	IntBufferCopyMode in_CopyMode = VIntBuffer::CopyData
-	//	) = 0;
-
 	/** deletes the buffer and sets the handle to 0 */
 	virtual void DeleteBuffer(BufferHandle& in_Buffer) = 0;
 
 	/** create a mesh ins the device */
 	virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc) = 0;
-	virtual void DeleteMesh(MeshHandle in_Mesh) = 0;
+	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;
 
-	//virtual IVMaterial* CreateMaterial() = 0;
-	//virtual void ApplyMaterial(IVMaterial* in_pMatrial) = 0;
+	virtual MaterialHandle CreateMaterial(
+		const VMaterialDescription& in_MatDesc) = 0;
+
+	virtual void DeleteMaterial(MaterialHandle& in_Material) = 0;
 
 	/** sends the vertices of a mesh to the device */
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
+
+	/** applys a render state */
+	virtual void ApplyState(const IVRenderState& in_State) = 0;
 
 	// evil hack :)
 	virtual void SetCamera(VCamera* in_pCamera) = 0;

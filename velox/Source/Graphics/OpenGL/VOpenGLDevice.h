@@ -5,14 +5,20 @@
 #include <v3d/Graphics/IVDevice.h>
 #include <v3d/Graphics/VDisplaySettings.h>
 
-#include "../DeviceBase/VBufferManager.h"
-#include "../DeviceBase/VRenderMethodRegistry.h"
-#include "VImmediateRenderMethod.h"
-
 #include <windows.h>
 #include <extgl/extgl.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
+
+#include "../DeviceBase/VBufferManager.h"
+#include "../DeviceBase/VRenderMethodRegistry.h"
+#include "VImmediateRenderMethod.h"
+
+#include "../DeviceBase/VRenderStateList.h"
+#include "../DeviceBase/VStateCategoryList.h"
+#include "VTextureStateCategory.h"
+#include "VMiscStateCategory.h"
+
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -38,22 +44,17 @@ public:
 		BufferCopyMode in_CopyMode = VBufferBase::CopyData
 		);
 
-	//virtual FloatBufferHandle CreateBuffer(
-	//	VFloatBuffer* in_pBuffer, 
-	//	FloatBufferCopyMode in_CopyMode = VFloatBuffer::CopyData
-	//	);
-
-	//virtual IntBufferHandle CreateBuffer(
-	//	VIntBuffer* in_pBuffer, 
-	//	IntBufferCopyMode in_CopyMode = VIntBuffer::CopyData
-	//	);
-
 	virtual void DeleteBuffer(BufferHandle& in_Buffer);
 
 	virtual MeshHandle CreateMesh(VMeshDescription& in_pMeshDesc);
-	virtual void DeleteMesh(MeshHandle in_Mesh);
+	virtual void DeleteMesh(MeshHandle& in_Mesh);
+
+	virtual MaterialHandle CreateMaterial(const VMaterialDescription& in_MatDesc);
+	virtual void DeleteMaterial(MaterialHandle& in_Material);
 
 	virtual void RenderMesh(MeshHandle in_Mesh);
+
+	virtual void ApplyState(const IVRenderState& in_State);
 
 	virtual void BeginScene();
 	virtual void EndScene();
@@ -61,17 +62,21 @@ public:
 	virtual void SetCamera(VCamera* in_pCamera);
 	
 private:
-	/** the float buffers */
-	VBufferManager<VFloatBuffer> m_FloatBuffer;
-	VBufferManager<VIntBuffer> m_IntBuffer;
-
+	/** vertex buffers */
 	VBufferManager<Buffer> m_Buffers;
+
+	/** texture buffers */
+	VBufferManager<Buffer> m_TextureBuffers;
 
 	/** store all render methods here */
 	VRenderMethodRegistry m_RenderMethods;
 
 	VImmediateRenderMethod m_ImmediateRenderMethod;
 //	VOpenGLVBORenderMethod m_VBORenderMethod;
+
+	VStateCategoryList m_StateCategories;
+	VTextureStateCategory m_TextureStateCategory;
+	VMiscStateCategory m_MiscStateCategory;
 
 	typedef std::list<IVMesh*> MeshList;
 	MeshList m_Meshes;

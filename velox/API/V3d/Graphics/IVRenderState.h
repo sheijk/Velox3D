@@ -1,29 +1,22 @@
-#ifndef V3D_IVMATERIAL_H
-#define V3D_IVMATERIAL_H
+#ifndef V3D_IVRENDERSTATE_H
+#define V3D_IVRENDERSTATE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-//----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
-class IVRenderState;
+using namespace v3d; // stop the f*cking vc editor from auto indenting
 
-/**
- * Client visible material controlling
- *
- * @author sheijk
- */
-class IVMaterial
+class IVRenderState
 {
 public:
-	virtual ~IVMaterial() {};
-
-	virtual vuint StateCount() const = 0;
-	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
+	virtual ~IVRenderState() {}
 };
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_IVMATERIAL_H
+#endif // V3D_IVRENDERSTATE_H

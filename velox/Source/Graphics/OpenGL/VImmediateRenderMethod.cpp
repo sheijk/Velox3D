@@ -10,7 +10,8 @@ namespace graphics {
 VBaseMesh* VImmediateRenderMethod::CreateMesh(
 	VMeshDescription& in_MeshDescr)
 {
-	//TODO: was wenn new scheitert? -ins dann stuertzt es halt ab -- sheijk
+	//TODO: was wenn new scheitert? -ins 
+	// dann stuertzt es halt ab -- sheijk
 
 	VBaseMesh* pMesh = 0;
 

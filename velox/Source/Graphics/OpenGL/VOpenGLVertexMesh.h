@@ -7,6 +7,9 @@
 
 #include "../DeviceBase/VRenderMethodRegistry.h"
 
+#include <windows.h>
+#include <gl/gl.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -23,6 +26,12 @@ class VOpenGLVertexMesh : public VBaseMesh
 
 	VMeshDescription::ByteDataRef m_TriangleData;
 	VMeshDescription::ByteDataRef m_ColorData;
+	VMeshDescription::ByteDataRef m_TexCoordData;
+
+	vbool m_bColors;
+	vbool m_bTexCoords;
+
+	GLint m_PrimitiveType;
 
 public:
 	VOpenGLVertexMesh(const VMeshDescription& in_Descr);
