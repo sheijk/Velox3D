@@ -66,7 +66,9 @@ IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 	BufferCopyMode in_CopyMode
 	)
 {
-	// irgendwas ist hier faul, wenn CopyData... -- sheijk
+	// DropData will cause crashes when deleting the buffer..
+	//in_CopyMode = VBufferBase::CopyData;
+
 	Buffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
 
 	switch(in_Type)
@@ -91,12 +93,17 @@ IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 //-----------------------------------------------------------------------------
 
 //TODO lacks for int support -ins ; lacks for any support ;) -- sheijk
-void VOpenGLDevice::DeleteBuffer(BufferHandle& in_Buffer)
+void VOpenGLDevice::DeleteBuffer(BufferHandle& in_hBuffer)
 {
-	vout << "VOpenGLDevice.DeleteBuffer tut grad nix" << vendl;
-	//VFloatBuffer* t = reinterpret_cast<VFloatBuffer*>(in_Buffer);
-	//m_FloatBuffer.Delete(t);
-	//in_Buffer = t;
+	//vout << "VOpenGLDevice.DeleteBuffer tut grad nix" << vendl;
+
+	VByteBuffer* pByteBuffer = reinterpret_cast<VByteBuffer*>(in_hBuffer);
+
+	// remove from vertex and texture buffers
+	m_TextureBuffers.Delete(pByteBuffer);
+	m_Buffers.Delete(pByteBuffer);
+
+	in_hBuffer = pByteBuffer;
 }
 
 void VOpenGLDevice::OverwriteBuffer(

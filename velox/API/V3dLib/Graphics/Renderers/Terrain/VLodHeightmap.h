@@ -24,6 +24,7 @@ public:
 	vbool LodLoaded(vuint in_nLevel) const;
 
     Heightmap& GetLod(vuint in_nLevel);
+	const Heightmap& GetLod(vuint in_nLevel) const;
 
 	void GenerateLod(vuint in_nLevel);
 

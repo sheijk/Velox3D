@@ -1,5 +1,6 @@
 #include <V3dLib/Graphics/Renderers/Terrain/VLodHeightmap.h>
 //-----------------------------------------------------------------------------
+#include <v3d/Core/VException.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { 
@@ -30,6 +31,20 @@ VLodHeightmap::Heightmap& VLodHeightmap::GetLod(vuint in_nLevel)
 {
 	if( ! LodLoaded(in_nLevel) )
 		GenerateLod(in_nLevel);
+
+	return m_Lods[in_nLevel].lodData;
+}
+
+V3D_DECLARE_EXCEPTION(VLodGenerationException, VException);
+
+const VLodHeightmap::Heightmap& VLodHeightmap::GetLod(vuint in_nLevel) const
+{
+	if( ! LodLoaded(in_nLevel) )
+	{
+		V3D_THROW(VLodGenerationException,
+			VString("accessing lod ") + in_nLevel + 
+				VString(" which has not been loaded, yet from const function"));
+	}
 
 	return m_Lods[in_nLevel].lodData;
 }

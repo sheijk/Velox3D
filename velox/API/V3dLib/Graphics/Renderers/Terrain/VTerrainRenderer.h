@@ -6,6 +6,7 @@
 #include <V3dLib/Graphics/Misc/VSimpleDrawList.h>
 #include <V3dLib/Graphics/Renderers/Terrain/VTerrainLodChunk.h>
 #include <V3dLib/Math.h>
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
@@ -26,7 +27,13 @@ class VTerrainRenderer
 
 	enum Constants
 	{
-		LodCount = 3
+		LodCount = 7
+	};
+
+	enum VBorder
+	{
+		AdjustLeftBorder, 
+		AdjustRightBorder
 	};
 
 	Heightmap& GetHeightmap(vuint chunkx, vuint chunky);
@@ -35,19 +42,53 @@ class VTerrainRenderer
 		vuint& patchX, vuint& patchY, vuint& offsetX, vuint& offsetY
 		);
 
+	void VTerrainRenderer::AdjustVerticalBorder(
+		VTerrainLodChunk& io_HighChunk,
+		const VTerrainLodChunk& in_LowChunk,
+		VBorder in_Border,
+		vuint x, vuint y
+		);
+
 	vfloat32 GetChunkUnitWidth() const;
 	vfloat32 GetChunkUnitHeight() const;
 
+	vuint LodForChunk(vuint x, vuint y, const IVCamera& in_Camera);
 	vuint CalcDetail(vfloat32 in_fDistance) const;
+	VTerrainLodChunk& GetChunk(vuint x, vuint y);
+	void MarkLodSwitch(vuint x, vuint y, vuint lod);
+	void UpdateChunkMesh(vuint x, vuint y);
 
 	const vuint m_nPatchCount;
+	const vfloat32 m_fChunkModelSize;
 	/** the terrain chunks */
 	ChunkMap m_Chunks;
 	vuint m_nChunkSize;
 	VSimpleDrawList m_DrawList;
 
+	struct LodChangeItem
+	{
+		vuint m_nX, m_nY, m_nLod;
+
+		bool m_bFree;
+
+		LodChangeItem() : m_bFree(true)
+		{
+		}
+
+		LodChangeItem(vuint x, vuint y, vuint lod) :
+			m_nX(x), m_nY(y), m_nLod(lod), m_bFree(false)
+		{
+		}
+	};
+
+	typedef std::vector<LodChangeItem> LodChangeList;
+	LodChangeList m_LodChanges;
+
+	VMaterialDescription m_TextureMat;
+
 public:
 	VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device);
+	virtual ~VTerrainRenderer();
 
 	vuint GetWidth();
 	vuint GetHeight();

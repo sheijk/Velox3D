@@ -11,7 +11,7 @@ VMeshDescription BuildMeshDescription(
 		bufHandle, 
 		vuint(layout.positionOffset), 
 		cnVertexCount, 
-		layout.vertexSize / sizeof(vfloat32)
+		vuint(layout.vertexSize / sizeof(vfloat32))
 		);
 
 	// set color info, if contained
@@ -21,7 +21,7 @@ VMeshDescription BuildMeshDescription(
 			bufHandle,
 			vuint(layout.colorOffset),
 			cnVertexCount,
-			layout.vertexSize / sizeof(vfloat32)
+			vuint(layout.vertexSize / sizeof(vfloat32))
 			);
 	}
 
@@ -32,7 +32,7 @@ VMeshDescription BuildMeshDescription(
 			bufHandle,
 			vuint(layout.texCoordOffset),
 			cnVertexCount,
-			layout.vertexSize / sizeof(vfloat32)
+			vuint(layout.vertexSize / sizeof(vfloat32))
 			);
 	}
 
@@ -63,7 +63,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 	IVDevice::BufferHandle bufHandle = in_Device.CreateBuffer(
 		IVDevice::VertexBuffer, 
 		&geomBuf, 
-		IVDevice::Buffer::DropData
+		IVDevice::Buffer::CopyData
 		);
 
 	//IVDevice::FloatBufferHandle bufHandle
@@ -109,7 +109,7 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 			in_Device.CreateBuffer(
 			IVDevice::VertexBuffer,
 			&indexBuffer,
-			VByteBuffer::DropData
+			VByteBuffer::CopyData
 			),
 			0,
 			in_nIndexCount,

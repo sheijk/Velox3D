@@ -145,8 +145,8 @@ void GeneratePerlinNoise(Array2d& io_Array, vfloat32 in_fPersistence)
 	vuint width = io_Array.GetHeight();
 
 	// calculate param for other noise gen func
-	vuint steps = 2;
-	vuint size = 2;
+	vuint steps = 0;
+	vuint size = 3;
 	while(size < std::max(height, width))
 	{
 		size = 2 * size - 1;

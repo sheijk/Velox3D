@@ -22,7 +22,7 @@ T Interpolate(T a, T b, vfloat32 factor)
 inline float PseudoRandom(vuint x)
 {
 	x = (x<<13) ^ x;
-    return ( 1.0 - ( (x * (x * x * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0);
+    return vfloat32( 1.0 - ( (x * (x * x * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0);
 }
 
 inline float PseudoRandom(vuint x, vfloat32 in_fMin, vfloat32 in_fMax)
