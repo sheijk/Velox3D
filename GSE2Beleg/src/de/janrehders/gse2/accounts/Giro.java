@@ -8,9 +8,6 @@ package de.janrehders.gse2.accounts;
 
 import java.util.Date;
 
-import net.rehders.gsebeleg1.accounts.AccountType;
-import net.rehders.gsebeleg1.accounts.Giro.InvarianceException;
-
 /**
  * Class for giro accounts
  * 

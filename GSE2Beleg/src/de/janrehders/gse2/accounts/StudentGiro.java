@@ -9,8 +9,6 @@ package de.janrehders.gse2.accounts;
 import java.util.Calendar;
 import java.util.Date;
 
-import net.rehders.gsebeleg1.accounts.AccountType;
-
 /**
  * Giro account for students
  * 

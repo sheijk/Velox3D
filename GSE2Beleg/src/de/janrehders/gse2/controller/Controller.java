@@ -28,7 +28,7 @@ public class Controller extends Observable {
     /** returns the model */
     public Model getModel()
     {
-        return null;
+        return myModel;
     }
     
     /** notifies all observers of an update */
