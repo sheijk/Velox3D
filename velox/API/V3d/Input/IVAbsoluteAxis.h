@@ -8,7 +8,7 @@ namespace v3d {
 namespace input {
 
 /* The interface for an input controller axis that returns absolute coordinates
- * @author AcrylSword
+ * @author sheijk
  * @version 1.0
  */
 class IVAbsoluteAxis

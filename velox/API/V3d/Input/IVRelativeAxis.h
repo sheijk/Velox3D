@@ -9,7 +9,7 @@ namespace input {
 //-----------------------------------------------------------------------------
 
 /* The interface for an input controller axis that returns relative coordinate
-* @author AcrylSword
+* @author sheijk
 * @version 1.0
 */
 

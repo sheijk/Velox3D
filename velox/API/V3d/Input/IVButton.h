@@ -10,7 +10,7 @@ namespace input {
 
 /**
  * Interface for any input controller button
- * @author AcrylSword
+ * @author sheijk
  * @version 1.0
  */
 class IVButton
