@@ -96,7 +96,8 @@ VFileStream::~VFileStream()
 }
 
 
-void VFileStream::Read(void* out_pDest, ByteCount in_pBytesToRead)
+IVStream::ByteCount VFileStream
+	::Read(void* out_pDest, ByteCount in_pBytesToRead)
 {
 	DWORD dwBytesRead = 0;
 
@@ -109,10 +110,12 @@ void VFileStream::Read(void* out_pDest, ByteCount in_pBytesToRead)
 	// read data
 	ReadFile( m_hFile, out_pDest, in_pBytesToRead, &dwBytesRead, 0 );
 
-	if( dwBytesRead != in_pBytesToRead )
-	{
-		V3D_THROW(VException, "read error");
-	}
+	//if( dwBytesRead != in_pBytesToRead )
+	//{
+	//	V3D_THROW(VException, "read error");
+	//}
+
+	return static_cast<ByteCount>(dwBytesRead);
 }
 
 

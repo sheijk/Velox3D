@@ -248,7 +248,7 @@ namespace iterutil {
 		// substracting two iterators
 		DifferenceType operator-(const RetType& sub) const
 		{
-			return GetTarget() - sub.GetTarget();
+			return (DifferenceType)(GetTarget() - sub.GetTarget());
 		}
 
 		//RetType& operator+(const RetType&) const;

@@ -43,14 +43,14 @@ int main(int argv, char* argc[])
 
 //		V3D_THROW(VException, "lala");
 	}
-	catch(VException exc)
+	catch(VException& exc)
 	{
-		cout << "Exception while processing \"" << pcXmlFileName << "\":"
-			<< "\"" << exc.GetErrorString() << "\""
-			<< " in file \"" << exc.GetErrorFile() << "\""
-			<< ", line \"" << exc.GetErrorLine() << "\""
-			<< " extended error string: \"" 
-			<< exc.GetExtendedErrorString() << "\""
+		cout << "\n\nException while processing \"" << pcXmlFileName << "\":\n"
+			<< "\"" << exc.GetErrorString() << "\"\n"
+			<< "file \"" << exc.GetErrorFile() << "\"\n"
+			<< "line \"" << exc.GetErrorLine() << "\"\n"
+			<< "extended error string: "
+			<< "\"" << exc.GetExtendedErrorString() << "\""
 			<< endl << endl;
 	}
 

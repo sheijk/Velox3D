@@ -1,6 +1,7 @@
 #include <v3d/Core/Wrappers/VString.h>
 //-----------------------------------------------------------------------------
 #include <cstring>
+#include <algorithm>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -117,6 +118,18 @@ VString operator+(const VString& in_VStr, const char* in_pcChar)
 	delete[] pChars;
 
 	return vstr;
+}
+
+vbool operator==(const VString& left, const VString& right)
+{
+	return std::equal(
+		left.AsCString(), left.AsCString() + left.Length(),
+		right.AsCString() );
+}
+
+vbool operator!=(const VString& left, const VString& right)
+{
+	return ! (left == right);
 }
 
 //-----------------------------------------------------------------------------

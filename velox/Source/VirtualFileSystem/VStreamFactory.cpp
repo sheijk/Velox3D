@@ -2,7 +2,6 @@
 //-----------------------------------------------------------------------------
 #include "VFileStream.h"
 #include "VMemoryStream.h"
-#include "VStreamToOfflineStreamWrapper.h"
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -35,16 +34,16 @@ IVStreamFactory::OfflineStreamPtr VStreamFactory::CreateFileStream(
 	return OfflineStreamPtr(pFileStream);
 }
 
-IVStreamFactory::OfflineStreamPtr VStreamFactory::CreateMemoryStream(
+IVStreamFactory::StreamPtr VStreamFactory::CreateMemoryStream(
 	IVStream::ByteCount in_nInitialSize)
 {
 	VMemoryStream* pMemoryStream
 		= new VMemoryStream(in_nInitialSize);
 
-	VStreamToOfflineStreamWrapper* pWrapStream
-		= new VStreamToOfflineStreamWrapper(pMemoryStream);
+	//VStreamToOfflineStreamWrapper* pWrapStream
+	//	= new VStreamToOfflineStreamWrapper(pMemoryStream);
 
-	return OfflineStreamPtr(pWrapStream);
+	return StreamPtr(pMemoryStream);
 }
 
 //-----------------------------------------------------------------------------

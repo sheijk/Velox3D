@@ -1,34 +1,34 @@
-#ifndef V3D_VStreamFactory_H
-#define V3D_VStreamFactory_H
+#ifndef V3D_VFileSysTest_H
+#define V3D_VFileSysTest_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVStreamFactory.h>
+#include <v3d/UnitTests/IVUnitTest.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace vfs {
+namespace unittests {
 //-----------------------------------------------------------------------------
 
 /**
 //TODO: insert documentation here
-*/
-class VStreamFactory : public IVStreamFactory
+ */
+class VFileSysTest : public IVUnitTest
 {
 public:
-	VStreamFactory(VStringParam in_strName);
-	virtual ~VStreamFactory();
+	VFileSysTest();
+	virtual ~VFileSysTest();
 
-	virtual OfflineStreamPtr CreateFileStream(
-		VStringParam in_strName, 
-		VCreationFlags in_OpenMode,
-		VAccessModeFlags in_Access);
+	/*! @see IVUnitTest#GetTestInfo(VStringParam, VStringParam) */
+	virtual void GetTestInfo(
+		VString& out_TestName, 
+		VString& out_SubjectName);
 
-	virtual StreamPtr CreateMemoryStream(
-		IVStream::ByteCount in_nInitialSize = 0);
+	/*! @see IVUnitTest#Execute() */
+	virtual void ExecuteTest();
 };
 
 //-----------------------------------------------------------------------------
-} // namespace vfs
+} // namespace unittests
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VStreamFactory_H
+#endif // V3D_VFileSysTest_H

@@ -51,7 +51,7 @@ public:
 	virtual void Write(void* in_pSource, ByteCount in_nByteCount);
 
 	/** read data from stream */
-	virtual void Read(void* out_pDest, ByteCount in_pBytesToRead);
+	virtual ByteCount Read(void* out_pDest, ByteCount in_pBytesToRead);
 
 	/** reset r/w position */
 	virtual void SetPos(Anchor in_Anchor, ByteCount in_nDistance);

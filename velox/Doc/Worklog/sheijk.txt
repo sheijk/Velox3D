@@ -29,6 +29,12 @@ Auf die Langnese Insel ziehen
 
 log:
 
+25.07.2003
+Virtual File System geaddet. Verzeichnisse koennen gemounted werden, und Dateien
+zum lesen/schreiben geoeffnet werden
+IteratorPolicy fuer STL Container die Zeiger/SmartPointer/Iteratoren enthalten
+comittet
+
 20.07.2003
 Iteratoren (mit SmartPointer aehnlichem Verhalten zum Zurueckgeben von Iteratoren
 aus DLLs), und ueberarbeitete Version der SmartPointer sowie Tests dafuer 

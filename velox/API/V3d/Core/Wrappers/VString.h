@@ -58,6 +58,8 @@ public:
 VString operator+(const char* in_pcChar, const VString& in_VStr);
 VString operator+(const VString& in_VStr, const char* in_pcChar);
 
+vbool operator==(const VString& left, const VString& right);
+vbool operator!=(const VString& left, const VString& right);
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------

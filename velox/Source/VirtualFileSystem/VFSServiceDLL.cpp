@@ -11,7 +11,12 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
 
+#include <v3d/VFS/VMountOptions.h>
+
 #include "VStreamFactory.h"
+#include "VSimpleVfs.h"
+#include "VDataProviderPool.h"
+#include "VFileDataProvider.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -30,19 +35,30 @@ using namespace v3d::vfs;
 //-----------------------------------------------------------------------------
 // use a smart pointer to guarante object destruction
 VPointer<VStreamFactory>::AutoPtr g_pStreamFac;
+VPointer<VSimpleVfs>::AutoPtr g_pFileSys;
+VPointer<VDataProviderPool>::AutoPtr g_pDataProvPool;
+VPointer<VFileDataProvider>::AutoPtr g_pFileDataProv;
+
 
 VFSSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
 	// store the object registry instance
 	VObjectRegistry::SetInstance(in_pObjReg);
 
-	// create service object and register it
+	// create service objects and register it
 	g_pStreamFac.Assign(new VStreamFactory("vfs.strfact"));
+	g_pDataProvPool.Assign(new VDataProviderPool("vfs.dpp"));
+	g_pFileDataProv.Assign(new VFileDataProvider());
+	g_pDataProvPool->RegisterDataProvider(g_pFileDataProv);
+	g_pFileSys.Assign(new VSimpleVfs("vfs.fs"));
 }
 
 VFSSERVICE_API void Shutdown()
 {
+	g_pDataProvPool->UnregisterDataProvider(g_pFileDataProv);
+
 	// delete and unregister service object
+	g_pFileSys.Release();
 	g_pStreamFac.Release();
 }
 

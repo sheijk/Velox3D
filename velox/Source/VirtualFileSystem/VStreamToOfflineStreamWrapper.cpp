@@ -27,12 +27,12 @@ void VStreamToOfflineStreamWrapper
 	}
 }
 
-void VStreamToOfflineStreamWrapper
+IVStream::ByteCount VStreamToOfflineStreamWrapper
 	::Read(void* out_pDest, ByteCount in_pBytesToRead)
 {
 	if( m_bConnected )
 	{
-		m_pStream->Read(out_pDest, in_pBytesToRead);
+		return m_pStream->Read(out_pDest, in_pBytesToRead);
 	}
 	else
 	{

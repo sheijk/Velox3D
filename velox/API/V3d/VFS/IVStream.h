@@ -32,8 +32,8 @@ public:
 	/** write data to stream */
 	virtual void Write(void* in_pSource, ByteCount in_nByteCount) = 0;
 
-	/** read data from stream */
-	virtual void Read(void* out_pDest, ByteCount in_pBytesToRead) = 0;
+	/** read data from stream. returns number of read bytes */
+	virtual ByteCount Read(void* out_pDest, ByteCount in_pBytesToRead) = 0;
 
 	/** reset r/w position */
 	virtual void SetPos(Anchor in_Anchor, ByteCount in_nDistance) = 0;

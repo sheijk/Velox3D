@@ -1,9 +1,10 @@
-#ifndef V3D_VStreamFactory_H
-#define V3D_VStreamFactory_H
+#ifndef V3D_VSimpleVfs_H
+#define V3D_VSimpleVfs_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVStreamFactory.h>
+#include <v3d/VFS/IVFileSystem.h>
 
+#include "VDirectory.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
@@ -11,24 +12,29 @@ namespace vfs {
 
 /**
 //TODO: insert documentation here
-*/
-class VStreamFactory : public IVStreamFactory
+ */
+class VSimpleVfs : public IVFileSystem
 {
-public:
-	VStreamFactory(VStringParam in_strName);
-	virtual ~VStreamFactory();
+	// the file structure tree
+	VDirectory* m_pRootDir;
+	DirectoryPtr m_pRootDirSP;
 
-	virtual OfflineStreamPtr CreateFileStream(
-		VStringParam in_strName, 
-		VCreationFlags in_OpenMode,
+	// the data provider pool
+
+public:
+	VSimpleVfs(VStringParam in_strName, VNamedObject* in_pParent = 0);
+	virtual ~VSimpleVfs();
+
+	virtual FileStreamPtr OpenFile(
+		VStringParam in_strPathAndName,
 		VAccessModeFlags in_Access);
 
-	virtual StreamPtr CreateMemoryStream(
-		IVStream::ByteCount in_nInitialSize = 0);
+	virtual DirectoryPtr GetDir(VStringParam in_strDir);
+
 };
 
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VStreamFactory_H
+#endif // V3D_VSimpleVfs_H

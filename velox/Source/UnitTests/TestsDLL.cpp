@@ -15,6 +15,7 @@
 #include "CoreLibTests/VIteratorTests.h"
 #include "VFSTests/VFileStreamTest.h"
 #include "VFSTests/VMemoryStreamTest.h"
+#include "VFSTests/VFileSysTest.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -36,6 +37,7 @@ VPointer<VSmartPointerTest>::AutoPtr g_pSmartPtrTest;
 VPointer<VIteratorTests>::AutoPtr g_pIterTests;
 VPointer<VFileStreamTest>::AutoPtr g_pFileStreamTest;
 VPointer<VMemoryStreamTest>::AutoPtr g_pMemStreamTest;
+VPointer<VFileSysTest>::AutoPtr g_pFileSysTest;
 
 TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 {
@@ -46,13 +48,15 @@ TESTSDLL_API void Initialize(VObjectRegistry* in_pObjReg)
 	g_pStringTests.Assign(new VStringTests());
 	g_pSmartPtrTest.Assign(new VSmartPointerTest());
 	g_pIterTests.Assign(new VIteratorTests());
-	//g_pFileStreamTest.Assign(new VFileStreamTest());
-	//g_pMemStreamTest.Assign(new VMemoryStreamTest());
+	g_pFileStreamTest.Assign(new VFileStreamTest());
+	g_pMemStreamTest.Assign(new VMemoryStreamTest());
+	g_pFileSysTest.Assign(new VFileSysTest());
 }
 
 TESTSDLL_API void Shutdown()
 {
 	// delete all tests
+	g_pFileSysTest.Release();
 	g_pMemStreamTest.Release();
 	g_pFileStreamTest.Release();
 	g_pIterTests.Release();

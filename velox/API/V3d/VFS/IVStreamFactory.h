@@ -28,6 +28,9 @@ public:
 	/** pointer type for returning offline streams */
 	typedef VPointer<IVOfflineStream>::SharedPtr OfflineStreamPtr;
 
+	/** pointer type for streams */
+	typedef VPointer<IVStream>::SharedPtr StreamPtr;
+
 	/** creates a stream which directly accesses files */
 	virtual OfflineStreamPtr CreateFileStream(
 		VStringParam in_strName, 
@@ -36,7 +39,7 @@ public:
 
 	/** creates a stream which automatically reserves as much data as is
 		required in memory */
-	virtual OfflineStreamPtr CreateMemoryStream(
+	virtual StreamPtr CreateMemoryStream(
 		IVStream::ByteCount in_nInitialSize = 0) = 0;
 };
 
