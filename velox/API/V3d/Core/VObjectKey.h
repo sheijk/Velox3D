@@ -9,7 +9,9 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 
 /**
- * key to identify registered objects in the object registry
+ * Key to identify registered objects in the object registry
+ *
+ * @author sheijk
  */
 class VObjectKey
 {

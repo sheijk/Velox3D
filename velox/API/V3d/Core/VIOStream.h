@@ -8,10 +8,11 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
+/** a std::cout style output stream. outputs to the velox console */
 extern util::IVStringStream& vout;
-extern const char* vendl;
-//util::IVStringStream& vout(VConsoleRedirector());
 
+/** equivalent to std::endl */
+extern const char* vendl;
 
 //-----------------------------------------------------------------------------
 } // namespace v3d

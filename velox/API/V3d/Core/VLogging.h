@@ -7,9 +7,10 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
+/** do not use this directly, use V3D_DEBUGMSG instead */
 void SendDebugMessage(VStringParam in_pcMessage);
 
-/** send a debug message */
+/** send a debug message, only in debug builds */
 #ifdef V3D_DEBUG
 #define V3D_DEBUGMSG(x) SendDebugMessage(x);
 #else

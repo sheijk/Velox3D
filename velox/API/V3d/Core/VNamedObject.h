@@ -4,20 +4,16 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Core/VObjectKey.h>
 
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
 
 /**
- * Registriert sich automatisch beim Objekt Manager
- * Unterstuetzt Persistenz (speichern/laden in Dateien) sowie Replication
- * (abgleichen von Unterschieden zu einer Instanz auf einem entfernten Rechner)
+ * The base class for all objects registered at the object registry.
+ * Automatically registers itself at the registry on construction and
+ * unregisters itself on deletion.
  *
  * @author sheijk
- * @version 1.0
- * @generator Enterprise Architect
- * @created 02-Apr-2003 23:49:20
  */
 class VNamedObject
 {

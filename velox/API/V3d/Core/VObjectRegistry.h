@@ -14,18 +14,18 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 
 /**
+ * Manages a mapping between unique keys and registered objects.
+
  * Verwaltet eine Zuordnung von eindeutigen Schluesseln zu registrierten Objekten.
  * Die Schluessel/Objektpaare koennen dabei in einem Baum angeordnet sein (d.h.,
  * dass ein Objekt beim Registrieren einen Parent angeben kann). Aufloesungen sind
  * in beiden Richtungen moeglich (Schluessel -> Objekt, Objekt -> Schluessel)
- * 
+ *
  * Objekte die zerstoert werden muessen sich abmelden. Es koennen Handler
  * registriert werden, welche beim Entfernen/Hinzufuegen von Objekten
  * benachrichtigt werden
  *
  * @author sheijk
- * @version 1.0
- * @generator Enterprise Architect
  * @created 02-Apr-2003 23:49:31
  */
 class VObjectRegistry
@@ -58,7 +58,7 @@ public:
 	static Pointer CreateInstance();
 
 	/** get the single instance */
-	static Pointer GetInstance();	
+	static Pointer GetInstance();
 
 	/** get a registered object by name */
 	virtual VNamedObject& GetObject(const VObjectKey& Name);

@@ -5,10 +5,11 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 
 /**
- * Interface for a velox service that is an application
+ * Interface for a velox service that is an application. Write a class
+ * inheriting from it and register it as main service in the init.xml
+ * Main will be called after initialisation is done
+ *
  * @author sheijk
- * @version 1.0
- * @generator Enterprise Architect
  * @created 26-Apr-2003 19:30:59
  */
 class IVApplication
