@@ -1,12 +1,10 @@
 //-----------------------------------------------------------------------------
-#include <v3d/Utils/Graphics/VCamera.h>
+#include <V3dLib/Graphics/Misc/VCamera.h>
 #include <v3d/Math/VMatrixOps.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace utils {
 namespace graphics {
 //-----------------------------------------------------------------------------
-using namespace v3d::utils::graphics;
 
 VCamera::VCamera(vfloat32 x, vfloat32 y, vfloat32 z)
 		: m_fPiDiv180((vfloat32) 3.141592654 /(vfloat32) 180)
@@ -248,6 +246,5 @@ void VCamera::CalculateMatrix()
 
 //-----------------------------------------------------------------------------
 } // namespace utils
-} // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------

@@ -5,7 +5,6 @@
 #include "VExclusiveOwnerPol.h"
 #include "VRefCountPol.h"
 #include "VPointerStorage.h"
-//#include "VArrayStorage.h"
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -13,6 +12,8 @@ namespace v3d {
 /**
  * Workaround for lack of templated typedefs (ala typedef ... VPointer<T>).
  * Use VPointer<TypeName>::PointerType
+ *
+ * @author sheijk
  */
 template<typename T>
 struct VPointer 
@@ -45,21 +46,26 @@ private:
 };
 
 /**
- * the same for arrays
+ * Convience function to create a shared pointer.
+ *
+ * @author sheijk
  */
-//template<typename T>
-//struct VArrayPtr
-//{
-//	typedef VSmartPtrMutable<
-//		T,
-//		VExclusiveOwnerPol< VArrayStorage<T> >
-//		> AutoPtr;
-//
-//	typedef VSmartPtr<
-//		T,
-//		VRefCountPol< VArrayStorage<T> >
-//		> SharedPtr;
-//};
+template<typename Subject>
+typename VPointer<Subject>::SharedPtr SharedPtr(Subject* in_pValue)
+{
+	return VPointer<Subject>::SharedPtr(in_pValue);
+}
+
+/**
+ * Convience function to create an auto pointer.
+ *
+ * @author sheijk
+ */
+template<typename Subject>
+typename VPointer<Subject>::AutoPtr AutoPtr(Subject* in_pValue)
+{
+	return VPointer<Subject>::AutoPtr(in_pValue);
+}
 
 //-----------------------------------------------------------------------------
 } // namespace v3d

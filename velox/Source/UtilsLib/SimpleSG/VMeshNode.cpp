@@ -1,8 +1,7 @@
-#include <v3d/Utils/Graphics/SimpleSG/VMeshNode.h>
+#include <V3dLib/Graphics/SimpleSG/VMeshNode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
-namespace simplesg {
 //-----------------------------------------------------------------------------
 VMeshNode::VMeshNode(IVDevice::MeshHandle in_hMesh)
 	:
@@ -27,9 +26,7 @@ void VMeshNode::SetAbsoluteTransformation(const Matrix44f& in_Matrix)
 	//(add a shared ptr to the matrix to drawlist::VModel?)
 }
 
-void VMeshNode::CullThis(
-						  drawlist::IVDrawList* in_pDrawList, 
-						  IVCamera*)
+void VMeshNode::CullThis(IVDrawList* in_pDrawList, IVCamera*)
 {
 	if( !m_bInDrawList )
 	{
@@ -38,7 +35,7 @@ void VMeshNode::CullThis(
 	}
 }
 
-void VMeshNode::RemoveThis(drawlist::IVDrawList* in_pDrawList)
+void VMeshNode::RemoveThis(IVDrawList* in_pDrawList)
 {
 	if( m_bInDrawList )
 	{
@@ -48,7 +45,6 @@ void VMeshNode::RemoveThis(drawlist::IVDrawList* in_pDrawList)
 }
 
 //-----------------------------------------------------------------------------
-} // namespace simplesg
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------

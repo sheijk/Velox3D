@@ -144,6 +144,9 @@ log:
 
 09.04.2004
 Buffer Operationen (BufferManipulations.h)
+einige utilities
+Util Lib zum grossteil nach v3dlib getan, v3dlib organisiert
+namespaces zusammengefasst
 
 07.04.2004
 VPolarSphere: Halb/Teilkugeln (oben/unten angabe), Textur Koordinaten

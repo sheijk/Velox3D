@@ -1,29 +1,25 @@
-#include <V3dLib/Graphics/SimpleSG/VSceneGraphTools.h>
+#ifndef V3D_VSCENEGRAPHTOOLS_H
+#define V3D_VSCENEGRAPHTOOLS_H
 //-----------------------------------------------------------------------------
+#include <v3d/Core/VCoreLib.h>
 
+#include <V3dLib/Graphics/SimpleSG/IVNode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics{
 //-----------------------------------------------------------------------------
-using namespace v3d;
 
+/**
+ * Generates the absolute transformations from the relative transformations
+ * of the node's parents
+ */
 void UpdateLocations(
-					 v3d::graphics::IVNode* in_pNode, 
-					 const VMatrix44f& in_Transform
-					 )
-{
-	v3d::graphics::IVNode::NodeIterator child = in_pNode->ChildsBegin();
-
-	for( ; child != in_pNode->ChildsEnd(); ++child)
-	{
-		VMatrix44f mat = in_Transform;
-		child->ApplyTransformation(&mat);
-		child->SetAbsoluteTransformation(mat);
-		UpdateLocations(&*child, mat);
-	}
-}
+	v3d::graphics::IVNode* in_pNode, 
+	const VMatrix44f& in_Transform
+	);
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
+#endif // V3D_VSCENEGRAPHTOOLS_H

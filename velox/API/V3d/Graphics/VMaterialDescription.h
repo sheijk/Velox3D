@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/VMeshDescription.h>
-#include <v3d/Utils/Graphics/VColor4f.h>
+#include <V3dLib/Graphics/Geometry/VColor4f.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -71,7 +71,7 @@ struct VMaterialDescription
 
 	TextureRef* pTextureList;
 
-	v3d::utils::graphics::VColor4f defaultColor;
+	v3d::graphics::VColor4f defaultColor;
 
 	// functions
 

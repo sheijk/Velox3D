@@ -1,29 +1,31 @@
-#include <V3dLib/Graphics/SimpleSG/VSceneGraphTools.h>
+#ifndef V3D_VTEXCOORD2F_H
+#define V3D_VTEXCOORD2F_H
 //-----------------------------------------------------------------------------
+#include <v3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
-namespace graphics{
+namespace graphics {
 //-----------------------------------------------------------------------------
-using namespace v3d;
 
-void UpdateLocations(
-					 v3d::graphics::IVNode* in_pNode, 
-					 const VMatrix44f& in_Transform
-					 )
+struct VTexCoord2f
 {
-	v3d::graphics::IVNode::NodeIterator child = in_pNode->ChildsBegin();
+	float u, v;
 
-	for( ; child != in_pNode->ChildsEnd(); ++child)
+	VTexCoord2f()
 	{
-		VMatrix44f mat = in_Transform;
-		child->ApplyTransformation(&mat);
-		child->SetAbsoluteTransformation(mat);
-		UpdateLocations(&*child, mat);
+		u = v = 0;
 	}
-}
+
+	VTexCoord2f(float inU, float inV)
+	{
+		u = inU;
+		v = inV;
+	}
+};
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
+#endif // V3D_VTEXCOORD2F_H

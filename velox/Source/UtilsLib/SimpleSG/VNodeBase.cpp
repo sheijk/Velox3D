@@ -1,4 +1,4 @@
-#include <v3d/Utils/Graphics/SimpleSG/VNodeBase.h>
+#include <V3dLib/Graphics/SimpleSG/VNodeBase.h>
 //-----------------------------------------------------------------------------
 #include <functional>
 
@@ -6,7 +6,6 @@ using namespace std;
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
-namespace simplesg {
 //-----------------------------------------------------------------------------
 VNodeBase::VNodeBase(VStringParam in_pcName)
 {
@@ -46,11 +45,11 @@ VNodeBase::NodeIterator VNodeBase::ChildsEnd()
 
 class VCullNode
 {
-	drawlist::IVDrawList* m_pDrawList;
+	IVDrawList* m_pDrawList;
 	IVCamera* m_pCamera;
 
 public:
-	VCullNode(drawlist::IVDrawList* in_pDrawList, IVCamera* in_pCamera) :
+	VCullNode(IVDrawList* in_pDrawList, IVCamera* in_pCamera) :
 		m_pDrawList(in_pDrawList), m_pCamera(in_pCamera)
 	{}
 
@@ -61,7 +60,7 @@ public:
 };
 
 void VNodeBase::ApplyCulling(
-	drawlist::IVDrawList* in_pDrawList, 
+	IVDrawList* in_pDrawList, 
 	IVCamera* in_pCamera)
 {
 	// cull the node
@@ -85,9 +84,9 @@ void VNodeBase::ApplyCulling(
 
 class VRemoveGeometry
 {
-	drawlist::IVDrawList* m_pDrawList;
+	IVDrawList* m_pDrawList;
 public:
-	VRemoveGeometry(drawlist::IVDrawList* in_pDrawList) :
+	VRemoveGeometry(IVDrawList* in_pDrawList) :
 		m_pDrawList(in_pDrawList)
 	{}
 
@@ -97,7 +96,7 @@ public:
 	}
 };
 
-void VNodeBase::Remove(drawlist::IVDrawList* in_pDrawList)
+void VNodeBase::Remove(IVDrawList* in_pDrawList)
 {
 	// remove the node's geometry
 	RemoveThis(in_pDrawList);
@@ -119,7 +118,6 @@ void VNodeBase::Remove(drawlist::IVDrawList* in_pDrawList)
 }
 
 //-----------------------------------------------------------------------------
-} // namespace simplesg
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------

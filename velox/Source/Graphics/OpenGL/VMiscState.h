@@ -4,7 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <v3d/Graphics/VMaterialDescription.h>
-#include <v3d/Utils/Graphics/VColor4f.h>
+#include <V3dLib/Graphics/Geometry/VColor4f.h>
 
 #include "IVOpenGLRenderState.h"
 
@@ -27,7 +27,7 @@ public:
 private:
 	int m_nFrontPolygonMode;
 	int m_nBackPolygonMode;
-	v3d::utils::graphics::VColor4f m_DefaultColor;
+	v3d::graphics::VColor4f m_DefaultColor;
 
 	vuint GetGLModeNum(const PolygonMode in_Mode);
 };
