@@ -19,8 +19,7 @@ namespace kernel {
  * The kernel
  * Initializes the program and loads all libraries
  */
-class VKernel
-{
+class VKernel{
 protected:
 	virtual void CreateObjectRegistry();
 	virtual void ParseFile(const std::string& in_strFileName);

@@ -16,8 +16,9 @@ namespace error {
 class IVErrorListener
 {
 public:
+	//TODO: ieeh ;), wozu wird das gebraucht? (sheijk)
 	friend class	IVErrorService;
-	
+
 			IVErrorListener() {};
 	virtual	~IVErrorListener() {};
 

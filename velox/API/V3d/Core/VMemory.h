@@ -7,6 +7,10 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
+	/**
+	 * Use this instead of delete.
+	 * @author sheijk
+	 */
 	template<typename T> void SafeDelete(T*& ptr)
 	{
 		if( 0 != ptr )
@@ -15,7 +19,11 @@ namespace v3d {
 			ptr = 0;
 		}
 	}
-
+	
+	/**
+	 * Safe deleting arrays. Use this instead of delete[]
+	 * @author sheijk
+	 */
 	template<typename T> void SafeDeleteArray(T*& arr)
 	{
 		if( 0 != arr )

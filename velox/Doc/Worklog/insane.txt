@@ -1,6 +1,15 @@
 Worklog von insane:
 --------------------------------------------------------------------------------
+----- messages to insane:
+BUG: Programm stuertzt beim Beenden ab, bzw. es kommt 
+"22:42:36: Debug: .\msw\app.cpp(439): 'UnregisterClass(canvas)' failed with error
+ 0x00000584 (diese Klasse hat noch ge÷ffnete Fenster.)."
+im Debug Build von v3dConsole
+Unbehandelte Ausnahme (Zugriffsverletzung in VObjectRegistry.cpp/Z108)
 
+waer praktisch wenn Konsolen + Editor Fenster resizable waeren
+was ist Local/Build/Intermediate?
+(sheijk)
 
 Current assigned tasks:
 -developing editor framework

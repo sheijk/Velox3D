@@ -10,7 +10,7 @@
 using namespace v3d;
 using namespace v3d::kernel;
 //-----------------------------------------------------------------------------
-
+ 
 namespace
 {
 	// global kernel instance
@@ -22,6 +22,9 @@ namespace
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,PSTR szCmdLine,
 				   int iCmdShow)
 {
+	//TODO: variablen namen mit grossbuchstaben am anfang verwirren, 
+	// lieber theCommandLine oder so (sheijk)
+
 	win32::VCommandLineParser CmdLn;
 	const vchar* pcXmlFileName = 0;
 
