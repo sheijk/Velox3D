@@ -25,14 +25,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,PSTR szCmdLine,
 	win32::VCommandLineParser CmdLn;
 	const vchar* pcXmlFileName = 0;
 
-	pcXmlFileName = "init.xml";
-
 	// create the kernel
 	g_pKernel.Assign(new VKernel());
 	
 	// get name of xml config file
 	CmdLn.AnalyseCommandLine();
 	pcXmlFileName = CmdLn.GetEntity("init");
+	if(pcXmlFileName == NULL)
+		pcXmlFileName = "init.xml";
+
 
 
 	vout << "-------------------------------------------------------" << vendl;
