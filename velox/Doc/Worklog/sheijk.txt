@@ -28,6 +28,10 @@ Welt erobern
 
 log:
 
+03.06.2003
+IVIterator und IVContainer erstellt
+Altes UnitTest Framework entfernt
+
 02.06.2003
 V3D_DEBUGMSG Makro in VLogging.h erstellt, zum senden von Debug Nachrichten
 an den Error Service ala OutputDebugString

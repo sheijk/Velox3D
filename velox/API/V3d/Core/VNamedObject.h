@@ -31,6 +31,7 @@ public:
 	VNamedObject(const VNamedObject* in_Parent);
 
 	/** create object and register it using the given name */
+	//TODO: std::string hat hier nix zu suchen (sheijk)
 	VNamedObject(const std::string& in_strName, const VNamedObject* in_Parent);
 
 	/** destructor */
