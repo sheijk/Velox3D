@@ -60,6 +60,11 @@ Doku:
 
 log:
 
+22.12.2003
+VConsoleFrame: groesse geaendert, damit das ding auf meinen kleinen desktop passt :)
+und die fkt zum erstellen des frames umgeschrieben, so dass man nicht mehr 25 minuten
+fuer ne groessenaenderung braucht ;)
+
 19.12.2003
 Grundgeruest fuer das Graphics Device implementiert
 

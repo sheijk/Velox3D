@@ -16,7 +16,7 @@ VOpenGLVertexMesh* VStupidRenderMethod
 	return pMesh;
 }
 
-VOpenGLVertexMesh::VOpenGLVertexMesh(VMeshDescription in_Descr)
+VOpenGLVertexMesh::VOpenGLVertexMesh(const VMeshDescription& in_Descr)
 {
 	m_TriangleData = in_Descr.triangleVertices;
 }

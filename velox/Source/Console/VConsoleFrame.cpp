@@ -79,25 +79,55 @@ void VTextControl::OnEnter(wxKeyEvent& event)
 }
 
 VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
-										  "Velox Console",wxPoint(100, 100),
-										  wxSize(250, 750), wxCAPTION, "frame")
+										  "Velox Console",wxPoint(5, 5),
+										  wxSize(250, 700), wxCAPTION, "frame")
 {
 	Register();
+
+	// some constant for easier tweaking of the layout
+	// (a layout manager like in swing would be better, though :)
+	const vuint cnLeft = 0;
+	const vuint cnRight = 245;
+	const vuint cnWidth = cnRight - cnLeft;
+	const vuint cnTextControlTop = 0;
+	const vuint cnInputControlTop = 625;
+	const vuint cnButtonBarTop = 650;
+	const vuint cnBottom = 675;
+	const vuint cnQuitButtonLeft = 0;
+	const vuint cnClearButtonLeft = cnWidth / 2;
 
 	m_TextControl = NULL;
 	m_InputControl = NULL;
 
-	m_TextControl = new  wxTextCtrl(this, -1, _T(""),
-		wxPoint(0,0), wxSize(245,650),
-		wxTE_MULTILINE | wxTE_READONLY );
+	m_TextControl = new  wxTextCtrl(
+		this, 
+		-1, 
+		_T(""),
+		wxPoint(cnLeft, cnTextControlTop), 
+		wxSize(cnWidth, cnInputControlTop - cnTextControlTop),
+		wxTE_MULTILINE | wxTE_READONLY
+		);
 
-	m_InputControl = new  VTextControl(this, -1, _T(""),
-		wxPoint(0,650), wxSize(250,25),
-		wxTE_LEFT);
+	m_InputControl = new  VTextControl(
+		this, 
+		-1, 
+		_T(""),
+		wxPoint(cnLeft, cnInputControlTop), 
+		wxSize(cnWidth + 5, cnButtonBarTop - cnInputControlTop),
+		wxTE_LEFT
+		);
 
-	m_QuitButton = new VQuitButton(this, wxPoint(0,675), wxSize(245,25));
-	m_ClearButton = new VClearButton(this, wxPoint(0,700), wxSize(245,25));
+	m_QuitButton = new VQuitButton(
+		this, 
+		wxPoint(cnQuitButtonLeft, cnButtonBarTop), 
+		wxSize(cnClearButtonLeft - cnQuitButtonLeft, cnBottom - cnButtonBarTop)
+		);
 
+	m_ClearButton = new VClearButton(
+		this, 
+		wxPoint(cnClearButtonLeft, cnButtonBarTop), 
+		wxSize(cnWidth - cnClearButtonLeft, cnBottom - cnButtonBarTop)
+		);
 }
 
 void VConsoleFrame::ShowFrame(vbool in_Param)

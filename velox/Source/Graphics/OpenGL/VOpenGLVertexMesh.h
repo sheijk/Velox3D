@@ -24,7 +24,7 @@ class VOpenGLVertexMesh : public VBaseMesh
 	VMeshDescription::FloatDataRef m_TriangleData;
 
 public:
-	VOpenGLVertexMesh(VMeshDescription in_Descr);
+	VOpenGLVertexMesh(const VMeshDescription& in_Descr);
 	virtual ~VOpenGLVertexMesh();
 
 	virtual void Render();	
