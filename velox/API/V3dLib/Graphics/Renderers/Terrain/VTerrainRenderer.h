@@ -9,8 +9,12 @@
 #include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { 
+namespace vfs { class IVStream; } // forward declaration for v3d::vfs::IVStream
 namespace graphics {
 //-----------------------------------------------------------------------------
+
+V3D_DECLARE_EXCEPTION(VTerrainException, VException);
+V3D_DECLARE_EXCEPTION(VTerrainGenException, VTerrainException);
 
 class VTerrainRenderer
 {
@@ -89,6 +93,19 @@ class VTerrainRenderer
 public:
 	VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device);
 	virtual ~VTerrainRenderer();
+
+	typedef VPointer<VTerrainRenderer>::SharedPtr TerrainRendererPtr;
+	
+	static TerrainRendererPtr CreateFromRawFile(
+		VStringParam in_strFileName, 
+		IVDevice& in_Device);
+
+	static TerrainRendererPtr CreateFromStream(
+		vfs::IVStream& in_Stream,
+		vuint in_nSize,
+		IVDevice& in_Device);
+
+	static vuint SizeWithNChunks(vuint in_nChunkCount);
 
 	vuint GetWidth();
 	vuint GetHeight();

@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <V3d/Core/VIOStream.h>
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Vfs.h>
+#include <cmath>
 
 extern vuint highDetail;
 extern vuint lowDetail;
@@ -25,22 +27,129 @@ VTerrainRenderer::VTerrainRenderer(vuint in_nPatchCount, IVDevice& in_Device)
 	m_DrawList(in_Device)
 {
 	// load texture
-	m_TextureMat = BuildTextureMaterial(&in_Device, "/data/terrain_tex.jpg");
+	m_TextureMat = BuildTextureMaterial(&in_Device, "/data/saltlake_tex.jpg");
 
 	//m_Chunks.Resize(in_nPatchCount, in_nPatchCount, ChunkMap::Uninitialized);
 	m_Chunks.ResizeUninit(in_nPatchCount, in_nPatchCount);
 
+	vfloat32 left = 0;
+	vfloat32 top = 0;
+	vfloat32 right = 0;
+	vfloat32 bottom = 0;
+	const vfloat32 dx = 1.0f / m_Chunks.GetWidth();
+	const vfloat32 dy = 1.0f / m_Chunks.GetHeight();
+
 	// create all terrain chunks
 	for(vuint x = 0; x < m_Chunks.GetWidth(); ++x)
-	for(vuint y = 0; y < m_Chunks.GetHeight(); ++y)
 	{
-		m_Chunks(x,y).pChunk.Assign(new VTerrainLodChunk(
-			LodCount, m_fChunkModelSize, in_Device, m_TextureMat));
+		left = right;
+		right = left + dx;
+
+		for(vuint y = 0; y < m_Chunks.GetHeight(); ++y)
+		{
+			top = bottom;
+			bottom = top + dy;
+
+			m_Chunks(x,y).pChunk.Assign(new VTerrainLodChunk(
+				LodCount, 
+				m_fChunkModelSize, 
+				VRectangle<vfloat32>(left, top, right, bottom),
+				in_Device, 
+				m_TextureMat));
+		}
 	}
 
 	VLodHeightmap::Heightmap& lod0(GetHeightmap(0,0));
 	m_nChunkSize = lod0.GetWidth();
 	V3D_ASSERT(lod0.GetWidth() == lod0.GetHeight());
+}
+
+VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromRawFile(
+	VStringParam in_strFileName, 
+	IVDevice& in_Device)
+{
+	// open file and get size
+	VServicePtr<vfs::IVFileSystem> pFS;
+
+	vfs::IVFileSystem::FileStreamPtr pStream = 
+		pFS->OpenFile(in_strFileName, vfs::VReadAccess);
+
+	const vuint nSize = pStream->GetSize();
+	const vfloat32 fSizeLen = std::sqrt(vfloat32(nSize));
+	const vuint nSizeLen = fSizeLen;
+
+	if( nSizeLen * nSizeLen != nSize )
+	{
+		V3D_THROW(VTerrainGenException, 
+			VString("raw file must have n^2 filesize") +
+			" filename=" + in_strFileName +
+			" size=" + nSize
+			);
+	}
+
+	// load data
+	return CreateFromStream(*pStream, nSizeLen, in_Device);
+}
+
+VTerrainRenderer::TerrainRendererPtr VTerrainRenderer::CreateFromStream(
+	vfs::IVStream& in_Stream,
+	vuint in_nSize,
+	IVDevice& in_Device)
+{
+	// calc patch nr. for terrain
+	vuint nPatchCount = 1;
+	vuint nPatchSize = SizeWithNChunks(nPatchCount);
+
+	while( nPatchSize < in_nSize )
+	{
+		++nPatchCount;
+		nPatchSize = SizeWithNChunks(nPatchCount);
+	}
+
+	// create terrain
+	TerrainRendererPtr pTerrain(new VTerrainRenderer(nPatchCount, in_Device));
+
+	vuint nTerrainSize = pTerrain->GetWidth();
+	V3D_ASSERT(nPatchSize <= nTerrainSize);
+
+	// set heightdata
+	vbyte heightValue = 0;
+	vfloat32 height = 0.0f;
+
+	for(vuint y = 0; y < pTerrain->GetWidth(); ++y)
+	for(vuint x = 0; x < pTerrain->GetHeight(); ++x)
+	{
+		in_Stream >> heightValue;
+
+		//TODO: scale to [0,1] or [-1,1] ?
+		height = vfloat32(heightValue) / 128.0f * 3 - 1.0f;
+        
+		pTerrain->Set(x, y, height);
+	}
+
+	return pTerrain;
+}
+
+vuint Power(vuint base, vuint exp)
+{
+	vuint res = 1;
+
+	for( ; exp > 0; --exp)
+	{
+		res *= base;
+	}
+
+	return res;
+}
+
+vuint GetChunkSize(vuint steps)
+{
+	return (2 << (steps-2)) + 1;
+}
+
+vuint VTerrainRenderer::SizeWithNChunks(vuint in_nChunkCount)
+{
+	return (GetChunkSize(LodCount)-1) * in_nChunkCount + 1;
 }
 
 VTerrainRenderer::~VTerrainRenderer()
@@ -159,8 +268,8 @@ void VTerrainRenderer::CreateMeshes()
 		IVDevice::MeshHandle hMesh = m_Chunks(x,y).pChunk->GetCurrentMesh();
 
 		// calculate position
-		vfloat32 xpos = x * m_nChunkSize * 2;
-		vfloat32 ypos = y * m_nChunkSize * 2;
+		vfloat32 xpos = x * vfloat32(m_nChunkSize) * 2;
+		vfloat32 ypos = y * vfloat32(m_nChunkSize) * 2;
 
 		VModel::TransformMatrixPtr pTransform(new VModel::TransformMatrix());
 		Identity(*pTransform);
@@ -493,11 +602,12 @@ vuint VTerrainRenderer::CalcDetail(vfloat32 in_fDistance) const
 	// linear interpolation in between
 
 	vuint lod = 0;
-	const vfloat32 maxdist = 30.0f;
+	const vfloat32 maxdist = 130.0f;
+	const vfloat32 mindist = 10.0f;
 
-	if( in_fDistance > 10.0f )
+	if( in_fDistance > mindist )
 	{
-		in_fDistance -= 10.0f;
+		in_fDistance -= mindist;
 	
 		lod = in_fDistance / maxdist * GetLodSteps();
 

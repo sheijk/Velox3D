@@ -31,7 +31,8 @@ template member konvertiert?
 	IVCamera
 	.terrain: zwischen lod stufen umschalten
 	.terrain: cracks entfernen
-	terrain: texturen (eine pro chunk, eine total?)
+	.terrain: texturen (eine pro chunk, eine total?)
+	terrain: bessere lod wahl heuristik (screen space error basierend?)
 	terrain: sanfte lod ueberblendungen
 	device: info ueber nicht geloeschte buffer
 
@@ -104,6 +105,10 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+25.05.2004
+Terragen 8-bit Raw Heightmaps werden geladen
+Texturierung
 
 23.05.2004
 Terrain Renderer fuellt Cracks zwischen unterschiedlichen Lod Stufen

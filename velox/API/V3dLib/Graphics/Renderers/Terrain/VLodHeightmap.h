@@ -13,6 +13,8 @@ using namespace v3d;
 /**
  * A Heightmap with multiple levels of detail. Lod 0 is the highest detail
  * and may be changed. All other lod details will be generated on demand
+ *
+ * @author sheijk
  */
 class VLodHeightmap
 {

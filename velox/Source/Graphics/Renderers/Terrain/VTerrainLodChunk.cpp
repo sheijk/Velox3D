@@ -9,6 +9,7 @@ namespace graphics {
 VTerrainLodChunk::VTerrainLodChunk(
 		vuint in_nLodCount,
 		vfloat32 in_fMeshSize,
+		VRectangle<vfloat32> in_TexCoords,
 		IVDevice& in_Device,
 		const VMaterialDescription& in_Material)
 	: 
@@ -20,7 +21,8 @@ VTerrainLodChunk::VTerrainLodChunk(
 	m_hCurrentMesh(0),
 	m_hIndexBuffer(0),
 	m_hVertexBuffer(0),
-	m_Material(in_Material)
+	m_Material(in_Material),
+	m_TexCoords(in_TexCoords)
 {
 	SetLod(0);
 }
@@ -137,8 +139,8 @@ void VTerrainLodChunk::AdjustBorderVertical(
 	{
 		for(vuint dy = 0; dy < factor; ++dy)
 		{
-			model.GetVertex(x, y*factor+dy).position = 
-				model.GetVertex(x, y*factor).position;
+			model.GetVertex(x, y*factor+dy) = 
+				model.GetVertex(x, y*factor);
 		}
 	}
 }
@@ -161,10 +163,31 @@ void VTerrainLodChunk::AdjustBorderHorizontal(
 	{
 		for(vuint dx = 0; dx < factor; ++dx)
 		{
-			model.GetVertex(x*factor+dx, y).position = 
-				model.GetVertex(x*factor, y).position;
+			model.GetVertex(x*factor+dx, y) = 
+				model.GetVertex(x*factor, y);
 		}
 	}
+}
+
+template<typename VertexStructure>
+void GenerateInterpolatedTexCoords(
+	v3d::graphics::VBuffer<VertexStructure>& buffer,
+	vuint width,
+	vuint height,
+	VRectangle<vfloat32> in_Range
+	)
+{
+	V3D_ASSERT(width * height == buffer.GetSize());
+
+	const vfloat32 deltax = (in_Range.right-in_Range.left) / vfloat32(width-1);
+	const vfloat32 deltay = (in_Range.bottom-in_Range.top) / vfloat32(height-1);
+
+	for(vuint x = 0; x < width; ++x)
+	for(vuint y = 0; y < height; ++y)
+	{
+		buffer[x + y*width].texCoords.u = x * deltax + in_Range.left;
+		buffer[x + y*width].texCoords.v = y * deltay + in_Range.top;
+	}    
 }
 
 void VTerrainLodChunk::UpdateCurrentMesh()
@@ -186,6 +209,13 @@ void VTerrainLodChunk::UpdateCurrentMesh()
 	//mat.backPolyMode = VMaterialDescription::Line;
 
 	ApplyHeightValues(model, GetCurrentHeightmap());
+	GenerateInterpolatedTexCoords(
+		model.GetVertexBuffer(),
+		model.GetWidth(),
+		model.GetHeight(),
+		m_TexCoords
+		);
+
 	ForEachVertex(
 		model.GetVertexBuffer(), 
 		ScaleVertex<MyVertexType>(m_fMeshSize, m_fMeshSize, 5.0f));

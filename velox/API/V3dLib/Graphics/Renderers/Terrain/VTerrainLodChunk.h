@@ -23,8 +23,29 @@ void ApplyHeightValues(
 	const Array2d& in_Heights
 	);
 
+template<typename T>
+class VRectangle
+{
+public:
+	typedef T Scalar;
+	
+	Scalar left, top, right, bottom;
+
+	VRectangle() :
+		left(0), top(0), right(0), bottom(0)
+	{
+	}
+
+	VRectangle(Scalar l, Scalar t, Scalar r, Scalar b) :
+		left(l), top(t), right(r), bottom(b)
+	{
+	}
+};
+
 /**
  * Creates meshes from a heightmap and manages the meshes, and geometry data
+ *
+ * @author sheijk
  */
 class VTerrainLodChunk
 {
@@ -35,8 +56,10 @@ public:
 	VTerrainLodChunk(
 		vuint in_nLodCount, 
 		vfloat32 in_fMeshSize, 
+		VRectangle<vfloat32> in_TexCoords,
 		IVDevice& in_Device,
 		const VMaterialDescription& in_Material);
+
 	virtual ~VTerrainLodChunk();
 	
 	vbool IsMeshLoaded(vuint in_nLod) const;
@@ -85,6 +108,8 @@ private:
 
 	vuint m_nCurrentLod;
 
+	VRectangle<vfloat32> m_TexCoords;
+
 	const VMaterialDescription& m_Material;
 
 	void DeleteDeviceData();
@@ -118,11 +143,10 @@ void ApplyHeightValues(
 	{
 		vfloat32 h = in_Heights.Get(x, y);
 		io_Heightmap.GetVertex(x, y).position.z = in_Heights.Get(x,y);
-		io_Heightmap.GetVertex(x, y).texCoords = VTexCoord2f(
-			vfloat32(x) / vfloat32(io_Heightmap.GetWidth()-1),
-			vfloat32(y) / vfloat32(io_Heightmap.GetHeight()-1)
-			);
-			
+		//io_Heightmap.GetVertex(x, y).texCoords = VTexCoord2f(
+		//	vfloat32(x) / vfloat32(io_Heightmap.GetWidth()-1),
+		//	vfloat32(y) / vfloat32(io_Heightmap.GetHeight()-1)
+		//	);
 
 		if( h < minH )
 			minH = h;
