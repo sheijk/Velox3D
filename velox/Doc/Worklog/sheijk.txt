@@ -27,6 +27,9 @@ Welt erobern
 
 log:
 
+14.05.2003
+Vfs Interface erstellt, Vfs Xml Configdatei erzeugt, String Wrapper geschrieben (VString)
+
 07.05.2003
 Neues CVS Modul angelegt
 
