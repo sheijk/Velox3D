@@ -32,7 +32,7 @@ public:
 	void operator=(const VString& in_Source);
 
 	/** sets value to the one of the c string */
-	explicit VString(const vchar* in_pCStr);
+	/*TODO: wieder reinnehmen explicit*/ VString(const vchar* in_pCStr);
 
 	/** destructor, frees memory */
 	virtual ~VString();
