@@ -4,6 +4,9 @@
 
 #include <v3d/Console.h>
 #include <v3d/Core/MemManager.h>
+
+#pragma warning (push)
+#pragma warning (disable : 4355)
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils {
@@ -95,6 +98,7 @@ void VCommandManager::OnCommand(VStringParam in_strCommand)
 		handler->second->Call(command.c_str(), args.c_str());
 	}
 }
+#pragma warning (pop)
 
 //-----------------------------------------------------------------------------
 } // namespace utils

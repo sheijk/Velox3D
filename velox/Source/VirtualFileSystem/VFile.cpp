@@ -51,14 +51,14 @@ IVFileSystemObject::AccessRightsPtr VFile::GetAccessRights() const
 IVFile::FileStreamPtr VFile::Open(VAccessModeFlags in_Access) const
 {
 	// check access rights
-	if( (in_Access & VReadAccess == VReadAccess) 
+	if( ((in_Access & VReadAccess) == VReadAccess) 
 		&& (! m_pAccessRights->AllowReadAccess()) )
 	{
 		V3D_THROW(VIllegalOperationException, 
 			("file \"" + m_strName + "\" does not allow read access").c_str());
 	}
 
-	if( (in_Access & VWriteAccess == VWriteAccess)
+	if( ((in_Access & VWriteAccess) == VWriteAccess)
 		&& (! m_pAccessRights->AllowWriteAccess()) )
 	{
 		V3D_THROW(VIllegalOperationException,

@@ -11,13 +11,14 @@ XYZColor ConvertYxyToXYZ( const YxyColor in_Color )
 
 	color.X = in_Color.x * (in_Color.Y / in_Color.y);
 	color.Y = in_Color.Y;
-	color.Z = (1.0 - in_Color.x - in_Color.y)* (in_Color.Y/in_Color.y);
+	color.Z = (1.0f - in_Color.x - in_Color.y)* (in_Color.Y/in_Color.y);
 
 	return color;
 }
 
 void ScaleXYZLuminanceTORGBRange( XYZColor& inout_Color )
 {
+	//TODO what's going on here?? --ins
 	//inout_Color.Y = 1- e(-1.0f/25.0f)* inout_Color.Y;
 }
 
@@ -25,9 +26,9 @@ RGBColor ConvertXYZToRGB( const XYZColor in_Color )
 {
 	RGBColor color;
 
-	color.r =  3.240479 * in_Color.X  -1.537150 * in_Color.Y  -0.498535 * in_Color.Z;
-	color.g = -0.969256 * in_Color.X  +1.875991 * in_Color.Y  +0.041556 * in_Color.Z;
-	color.b =  0.055648 * in_Color.X  -0.204043 * in_Color.Y  +1.057311 * in_Color.Z;
+	color.r =  3.240479f * in_Color.X  -1.537150f * in_Color.Y  -0.498535f * in_Color.Z;
+	color.g = -0.969256f * in_Color.X  +1.875991f * in_Color.Y  +0.041556f * in_Color.Z;
+	color.b =  0.055648f * in_Color.X  -0.204043f * in_Color.Y  +1.057311f * in_Color.Z;
 
 	return color;
 }
