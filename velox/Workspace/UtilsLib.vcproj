@@ -240,7 +240,7 @@
 				RelativePath="..\Source\UtilsLib\DrawList\VSimpleDrawList.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\UtilsLib\DrawList\VSimpleDrawList.h">
+				RelativePath="..\Api\V3d\Utils\Graphics\VSimpleDrawList.h">
 			</File>
 		</Filter>
 	</Files>
