@@ -26,6 +26,21 @@ void VContactReport::Delete()
 	m_iNumContacts = 0;
 }
 
+vuint32 VContactReport::GetContactCount()
+{
+	return m_iNumContacts;
+}
+
+vuint32* VContactReport::GetTriangleIndices()
+{
+	return m_pContactedTriangleIndices;
+}
+
+void VContactReport::SetContactCount(vuint32 in_nCount)
+{
+	m_iNumContacts = in_nCount;
+}
+
 //-----------------------------------------------------------------------------
 } // namespace collision
 } // namespace v3d

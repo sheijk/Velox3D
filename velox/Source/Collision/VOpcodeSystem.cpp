@@ -22,7 +22,7 @@ vbool VOpcodeSystem::CollideRay(
 								)
 {
 	if(in_pObject == 0)
-		V3D_THROW(VCollisionException, "object is 0!");
+		V3D_THROW(CollisionException, "object is 0!");
 
 	m_RayCollider.SetFirstContact(m_RayColliderProperties.bFirstContact);
 	m_RayCollider.SetTemporalCoherence(
@@ -69,7 +69,7 @@ vbool VOpcodeSystem::CollideRay(
 		if(out_pReport != 0) //do we want extra information?
 		{
 			//avoid memleaks where we can :)
-			if(out_pReport->m_pContactedTriangleIndices != 0)
+			if(out_pReport->GetTriangleIndices() != 0)
 				out_pReport->Delete();
 
 			
@@ -88,25 +88,23 @@ vbool VOpcodeSystem::CollideRay(
 					}
 				}
 
-				out_pReport->m_iNumContacts = 1;
-				out_pReport->m_pContactedTriangleIndices = 
-					new vuint32[1];
+				out_pReport->SetContactCount(1);
+				vuint32* pIndex =  out_pReport->GetTriangleIndices();
+				pIndex = new vuint32[1];
 
-				out_pReport->m_pContactedTriangleIndices[0] = 
-					iLastSmallestIndex;
+				pIndex[0] = iLastSmallestIndex;
 			}
 
 			else
 			{
-				out_pReport->m_iNumContacts = m_CollisionFaces.GetNbFaces();
+				out_pReport->SetContactCount(m_CollisionFaces.GetNbFaces());
 
-				out_pReport->m_pContactedTriangleIndices = 
-					new vuint32[out_pReport->m_iNumContacts];
+				vuint32* pIndex = out_pReport->GetTriangleIndices();
+				pIndex = new vuint32[out_pReport->GetContactCount()];
 
 				for(vuint i = 0; i < m_CollisionFaces.GetNbFaces(); i++)
 				{
-					out_pReport->m_pContactedTriangleIndices[i] = 
-						m_CollisionFaces.GetFaces()[i].mFaceID;
+					pIndex[i] = m_CollisionFaces.GetFaces()[i].mFaceID;
 				}
 
 			}
@@ -126,7 +124,7 @@ vbool VOpcodeSystem::CollideSphere(
 								   VContactReport* out_pReport)
 {
 	if(in_pObject == 0)
-		V3D_THROW(VCollisionException, "object is 0!");
+		V3D_THROW(CollisionException, "object is 0!");
 
 	m_SphereCollider.SetFirstContact(m_SphereColliderProperties.bFirstContact);
 	m_SphereCollider.SetTemporalCoherence(
@@ -163,23 +161,22 @@ vbool VOpcodeSystem::CollideSphere(
 		if(out_pReport != 0)
 		{
 			//avoid memleaks where we can :)
-			if(out_pReport->m_pContactedTriangleIndices != 0)
+			if(out_pReport->GetTriangleIndices() != 0)
 				out_pReport->Delete();
 			
-			out_pReport->m_iNumContacts =
-				m_SphereCollider.GetNbTouchedPrimitives();
+			out_pReport->SetContactCount(m_SphereCollider.GetNbTouchedPrimitives());
 
-			out_pReport->m_pContactedTriangleIndices = 
-				new vuint32[out_pReport->m_iNumContacts];
+			vuint32* pIndex = out_pReport->GetTriangleIndices();
+
+			pIndex = new vuint32[out_pReport->GetContactCount()];
 
 			// our list of touched indices
 			const vuint* pIndexList = m_SphereCollider.GetTouchedPrimitives();
 
 			//copy them to our report
-			for(vuint i = 0; i < out_pReport->m_iNumContacts; i++)
+			for(vuint i = 0; i < out_pReport->GetContactCount(); i++)
 			{
-				out_pReport->m_pContactedTriangleIndices[i] =
-					pIndexList[i];
+				pIndex[i] = pIndexList[i];
 			}
 		}
 
@@ -198,7 +195,7 @@ vbool VOpcodeSystem::CollideObject(
 
 	//perform error check
 	if(in_pObject1 == 0 || in_pObject2 == 0)
-        V3D_THROW(VCollisionException, "objects are 0!");
+        V3D_THROW(CollisionException, "objects are 0!");
 
 	m_AABBTreeCollider.SetFirstContact(m_AABBTreeColliderProperties.bFirstContact);
 	m_AABBTreeCollider.SetFullBoxBoxTest(m_AABBTreeColliderProperties.bFullBoxTest);
@@ -243,30 +240,27 @@ vbool VOpcodeSystem::CollideObject(
 			const Pair* collidingPairs = m_AABBTreeCollider.GetPairs();
 
 			// avoid mem leaks
-			if(out_pReportObject1->m_pContactedTriangleIndices != 0)
+			if(out_pReportObject1->GetTriangleIndices() != 0)
 				out_pReportObject1->Delete();
 
-			if(out_pReportObject2->m_pContactedTriangleIndices != 0)
+			if(out_pReportObject2->GetTriangleIndices() != 0)
 				out_pReportObject2->Delete();
 
 			//reserve memory
-			out_pReportObject1->m_iNumContacts = iNumContacts;
-			out_pReportObject2->m_iNumContacts = iNumContacts;
+			out_pReportObject1->SetContactCount(iNumContacts);
+			out_pReportObject2->SetContactCount(iNumContacts);
 
-			out_pReportObject1->m_pContactedTriangleIndices = 
-				new vuint[iNumContacts];
+			vuint32* pIndex1 = out_pReportObject1->GetTriangleIndices();
+			vuint32* pIndex2 = out_pReportObject2->GetTriangleIndices();
 
-			out_pReportObject2->m_pContactedTriangleIndices = 
-				new vuint[iNumContacts];
+			pIndex1 = new vuint[iNumContacts];
+			pIndex2 = new vuint[iNumContacts];
 
 			//store the face id's collided
 			for(vuint i = 0; i < iNumContacts; i++)
 			{
-				out_pReportObject1->m_pContactedTriangleIndices[i] =
-					collidingPairs[i].id0;
-
-				out_pReportObject2->m_pContactedTriangleIndices[i] =
-					collidingPairs[i].id1;
+				pIndex1[i] = collidingPairs[i].id0;
+				pIndex2[i] = collidingPairs[i].id1;
 			}
 		}
 		return true;
@@ -284,7 +278,7 @@ vbool VOpcodeSystem::CollideAABB(
 {
 	//perform error check
 	if(in_pObject == 0)
-		V3D_THROW(VCollisionException, "object is 0!");
+		V3D_THROW(CollisionException, "object is 0!");
 	
 	m_AABBCollider.SetFirstContact(m_AABBColliderProperties.bFirstContact);
 	m_AABBCollider.SetTemporalCoherence(
@@ -309,19 +303,19 @@ vbool VOpcodeSystem::CollideAABB(
 				= m_AABBCollider.GetTouchedPrimitives();
 
 			//avoid mem leak
-			if(out_pReport->m_pContactedTriangleIndices != 0)
+			if(out_pReport->GetTriangleIndices() != 0)
 				out_pReport->Delete();
 
-			out_pReport->m_iNumContacts = iNumFacesTouched;
+			out_pReport->SetContactCount(iNumFacesTouched);
 
-			out_pReport->m_pContactedTriangleIndices = 
-				new vuint[iNumFacesTouched];
+			vuint32* pIndex = out_pReport->GetTriangleIndices();
+
+			pIndex = new vuint[iNumFacesTouched];
 
 			//copy face id's
 			for(vuint i = 0; i < iNumFacesTouched; i++)
 			{
-				out_pReport->m_pContactedTriangleIndices[i] = 
-					faceIndex[i];
+				pIndex[i] = faceIndex[i];
 			}
 		}
 
@@ -371,7 +365,7 @@ void VOpcodeSystem::SetColliderProperties(enum Mode in_Type,
 		}
 	default:
 		{
-			V3D_THROW(VCollisionException, "invalid mode for collider properties!");
+			V3D_THROW(CollisionException, "invalid mode for collider properties!");
 			break;
 		}
 	}

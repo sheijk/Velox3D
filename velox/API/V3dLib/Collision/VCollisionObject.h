@@ -28,13 +28,11 @@ public:
 	VCollisionObject();
 	virtual ~VCollisionObject();
 	
-	//TODO: bitte in GetVertex/IndexCount aendern (damits velox weit einheitlich ist)
-	vint GetNumVertex();
-	vint GetNumIndices();
+	vint GetVertexCount();
+	vint GetIndexCount();
 	Point* GetVertexPointer();
 	IndexedTriangle* GetIndexPointer();
 	VMatrix44f* GetWorldMatrix();
-	//TODO: ist das noetig? so haengt das ganze komplett an opcode..
 	Opcode::Model& GetOpcodeModel();
 
 	/**

@@ -9,6 +9,7 @@ die gleichen services stehen -[ins] schmiert ab, oder wirft ne exception?
 
 VFS stuertzt ab, wenn eine Datei in einem nicht existierenden Verzeichniss geladen]
 werden soll [ins] gar nicht wahr --sheijk
+den punkt kannste auch wieder loeschen :P --ins
 
 -------------------------------------------------------------------------------
 ----- current assigned tasks:

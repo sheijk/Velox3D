@@ -29,12 +29,12 @@ VCollisionObject::~VCollisionObject()
 	m_pWorldMatrix      = 0;
 }
 
-vint VCollisionObject::GetNumVertex()
+vint VCollisionObject::GetVertexCount()
 {
 	return m_iNumVertices;
 }
 
-vint VCollisionObject::GetNumIndices()
+vint VCollisionObject::GetIndexCount()
 {
 	return m_iNumIndices;
 }
@@ -112,13 +112,13 @@ void VCollisionObject::Initialize()
 
 
 	//TODO: exception header
-	if(( GetNumIndices() / 3) < 1)
+	if(( GetIndexCount() / 3) < 1)
 	{
-		V3D_THROW(VCollisionException, "value must be greater 0!");
+		V3D_THROW(CollisionException, "value must be greater 0!");
 	}
 
-	m_MeshInterface.SetNbTriangles( GetNumIndices() / 3);
-	m_MeshInterface.SetNbVertices(GetNumVertex());
+	m_MeshInterface.SetNbTriangles( GetIndexCount() / 3);
+	m_MeshInterface.SetNbVertices(GetVertexCount());
 	m_MeshInterface.SetPointers(
 		GetIndexPointer(),
 		GetVertexPointer()

@@ -8,6 +8,8 @@
 namespace v3d {
 namespace utils{
 //-----------------------------------------------------------------------------
+//wingdi spack rum....
+#undef PLANES
 
 class VQ3BspImporter
 {

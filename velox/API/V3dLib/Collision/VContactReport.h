@@ -18,19 +18,31 @@ namespace collision {
 class VContactReport
 {
 public:
-	//TODO: bitte private machen, und Accessor Funktionen machen.. das sieht
-	// mir doch etwa sehr fehleranfaellig aus
-	vuint32		m_iNumContacts;
-	vuint32*	m_pContactedTriangleIndices;
-
+	
 	VContactReport();
 	~VContactReport();
 	
 	/**
 	 * deletes gained resources
 	 */
-
+    
 	void Delete();
+
+	/**
+	 * returns number of contacted triangles
+	 */
+
+    vuint32		GetContactCount();
+
+	vuint32*	GetTriangleIndices();
+
+	void		SetContactCount(vuint32 in_nCount);
+
+private:
+
+	vuint32		m_iNumContacts;
+	vuint32*	m_pContactedTriangleIndices;
+
 };
 //-----------------------------------------------------------------------------
 } // namespace collision

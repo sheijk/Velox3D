@@ -61,6 +61,9 @@ req
 
 Done List:
 
+29.09.04
+- fixed todos in collision system
+
 26.09.04
 - removed WxConnecter folder in Source (depricated)
 - added memmanger to missing files
