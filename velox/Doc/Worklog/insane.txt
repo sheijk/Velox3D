@@ -18,6 +18,7 @@ TODO List:
 Done List:
 
 05.05.04
+- renamed VResiz_ableGeometry template and file to VResizeableGeometry
 - made changes to code for new *Mesh classes
 
 04.05.04

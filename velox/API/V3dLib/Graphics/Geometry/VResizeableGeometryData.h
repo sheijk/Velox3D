@@ -12,17 +12,17 @@ namespace graphics {
 using namespace v3d; // anti auto indent
 
 template<typename VertexStructure>
-class VResizableGeometryData : public VDynamicGeometryData<VertexStructure>
+class VResizeableGeometryData : public VDynamicGeometryData<VertexStructure>
 {
 public:
 	void ResizeVertexBuffer(vuint in_nSize)
 	{
-		VDynamicGeometryData::ResizeVertexBuffer(in_nSize);
+		VDynamicGeometryData<VertexStructure>::ResizeVertexBuffer(in_nSize);
 	}
 
 	void ResizeIndexBuffer(vuint in_nSize)
 	{
-		VDynamicGeometryData::ResizeIndexBuffer(in_nSize);
+		VDynamicGeometryData::<VertexStructure>ResizeIndexBuffer(in_nSize);
 	}
 };
 
