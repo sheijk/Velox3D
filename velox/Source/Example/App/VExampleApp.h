@@ -36,6 +36,8 @@ private:
 	updater::IVUpdateManager* m_pUpdateManager;
 
 	console::IVConsoleService* m_Console;
+	input::IVKeyboardDevice* m_pKeyboardDevice;
+	input::IVMouseDevice* m_pMouseDevice;
 
 	input::IVButton* m_pEscapeButton;
 	input::IVButton* m_pUpButton;

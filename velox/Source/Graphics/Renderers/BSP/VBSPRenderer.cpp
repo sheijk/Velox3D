@@ -114,7 +114,7 @@ void VBSPRenderer::BuildCell()
 	
 	m_pLightmapCoords = new vfloat32[2 * m_Level.m_iNumVertices];
 		
-	//write all geometry data from the importer to a device usale format
+	//write all geometry data from the importer to a device usable format
 	for (int i=0; i < m_Level.m_iNumVertices; i++)
 	{
 		cell.GetVertexBuffer()[i].position.x = m_Level.m_pVertices[i].Vertex.x;

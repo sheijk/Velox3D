@@ -18,7 +18,13 @@ class VWindowManagerWin32 : public VWindowManagerBase
 {
 public:
 
+	/**
+	 * -----------------------------------------------------------------------------
+	 */
 	VWindowManagerWin32();
+	/**
+	 * -----------------------------------------------------------------------------
+	 */
 	virtual ~VWindowManagerWin32();
 
 	/**

@@ -5,6 +5,11 @@
 
 #include "../Graphics/OpenGL/VOpenGLDevice.h"
 #include "../InputLib/VDIInputManager.h"
+
+#include "VOpenGLDeviceFactory.h"
+
+#include <v3d/Core/MemManager.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {
@@ -64,6 +69,7 @@ VWindowWin32::~VWindowWin32()
 {
 	// release device
 	delete m_Device;
+	Unregister();
 }
 //-----------------------------------------------------------------------------
 void VWindowWin32::SetActive()
@@ -92,8 +98,7 @@ void VWindowWin32::Register()
 
 	if(!RegisterClass(&Register))
 	{
-		// TODO: fix
-		vout << "registering window failed\n" << vendl;
+		V3D_THROW(VWin32Exception, "registering window failed!");
 	}
 }
 //-----------------------------------------------------------------------------
@@ -103,17 +108,18 @@ void VWindowWin32::Unregister()
 	vout << "Unregistering window..." << vendl;
 	if(hWnd && !DestroyWindow(hWnd))
 	{
-		vout << "destroying window failed\n" << vendl;
+		V3D_THROW(VWin32Exception, "destroying window failed!");
 	}
+	
 
-	hWnd = NULL;
+	hWnd = 0;
 
 	if (!UnregisterClass(m_Name.c_str(), hInstance))
 	{
-		vout << "unregistering window failed\n" << vendl;
+		V3D_THROW(VWin32Exception, "unregistering window failed!");
 	}
 
-	hInstance = NULL;
+	hInstance = 0;
 }
 //-----------------------------------------------------------------------------
 
@@ -248,22 +254,21 @@ IVDevice& VWindowWin32::QueryGraphicsDevice()
 	 * Insert API dependant device implementation here
 	 */
 
-	//REMINDER: in einen system abhaengigen factory service auslagern (sheijk)
-
 	if(m_DisplaySettings.m_sAPIType == "OpenGL")
 	{
 		vout << "Using OpenGL API..." << vendl;
-		m_Device = new VOpenGLDevice(&m_DisplaySettings, hWnd);
+		m_pDeviceFactory = new VOpenGLDeviceFactory(&m_DisplaySettings, hWnd);
 	}
+	
 	else
 	{
-		V3D_THROW(VException, "only open gl support available");
+		V3D_THROW(VWin32Exception, "only open gl support available");
 	}
-	//else if(m_DisplaySettings.m_sAPIType == "Direct3D")
-	//{
-	//	m_Device = NULL;
-	//}
 
+	m_Device = m_pDeviceFactory->CreateDevice();
+	
+	V3D_ASSERT(m_Device != 0);
+	
 	return *m_Device;
 }
 
@@ -279,6 +284,8 @@ input::IVInputManager& VWindowWin32::QueryInputManager()
 	m_pInputManager = new input::VDIInputManager(hWnd);
 	
 	vout << "---------------------------" << vendl;
+
+	V3D_ASSERT(m_pInputManager != 0);
 
 	return *m_pInputManager;	
 }

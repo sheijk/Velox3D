@@ -15,10 +15,16 @@ namespace window {
  * Dummy wx app	
  */
 
-class VWindowsWxApp : public wxApp, public updater::IVUpdateable
+class VWindowsWxApp : public wxApp, public IVUpdateable
 {
 public:
+	/**
+	 * standard c'tor
+	 */
 	VWindowsWxApp();
+	/**
+	 * d'tor
+	 */
 	virtual ~VWindowsWxApp();
 
 	/**

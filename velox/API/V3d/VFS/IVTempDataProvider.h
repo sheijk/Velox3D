@@ -12,7 +12,8 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 
 /**
- * Provides a method to create a temporal file on disc
+ * Provides a method to create a temporal files on disc
+ * @author: ins
  */
 
 class IVTempDataProvider : VNamedObject

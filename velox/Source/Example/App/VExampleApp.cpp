@@ -56,84 +56,27 @@ void ApplyMaterial(IVDevice* in_m_pDevice, IVMaterial* in_pRenderStates)
 	}
 }
 
-//VMeshDescription BuildModel(IVDevice* in_pDevice, VStringParam in_pcFileName)
-//{
-//	utils::importer::VModel3D Model;
-//	utils::importer::VOBJModelImporter Importer;
-//	//utils::importer::VQuake2BspImporter bspImporter;
-//
-//	Importer.Create(in_pcFileName, &Model);
-//	//bspImporter.Create("/data/test.bsp", "none");
-//
-//	IVDevice::Buffer VertexData(
-//		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_VerticesList),
-//		Model.m_Objects[0]->m_iNumVertices * 3 * sizeof(float));
-//
-//	IVDevice::Buffer VertexIndex(
-//		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_pVertexIndex),
-//		Model.m_Objects[0]->m_iNumFaces * 3 * sizeof(int));
-//
-//	IVDevice::Buffer TexData(
-//		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_TextureCoordsList),
-//		Model.m_Objects[0]->m_iNumTexCoords2f * 2 * sizeof(float));
-//
-//	IVDevice::BufferHandle VertexHandle;
-//	IVDevice::BufferHandle VertexIndexHandle;
-//	IVDevice::BufferHandle TexHandle;
-//
-//	//assign handles
-//	VertexHandle = in_pDevice->CreateBuffer(
-//		IVDevice::VertexBuffer,
-//		&VertexData,
-//		IVDevice::Buffer::CopyData
-//		);
-//	VertexIndexHandle = in_pDevice->CreateBuffer(
-//		IVDevice::VertexBuffer,
-//		&VertexIndex,
-//		IVDevice::Buffer::CopyData
-//		);
-//	TexHandle = in_pDevice->CreateBuffer(
-//		IVDevice::VertexBuffer,
-//		&TexData,
-//		IVDevice::Buffer::CopyData);
-//
-	//VMeshDescription meshDesc;
-//
-//	meshDesc.geometryType = VMeshDescription::TriangleStrip;
-//	meshDesc.triangleVertices = VMeshDescription::ByteDataRef(
-//		VertexHandle,
-//		0,
-//		Model.m_Objects[0]->m_iNumVertices * 3,
-//		0
-//		);
-//	meshDesc.triangleIndices = VMeshDescription::ByteDataRef(VertexIndexHandle,
-//		0, Model.m_Objects[0]->m_iNumFaces * 3,
-//		0);
-//
-//	meshDesc.triangleTexCoords = VMeshDescription::ByteDataRef(TexHandle,
-//		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
-//		0);
-//
-//	//meshDesc.geometryType = VMeshDescription::TriangleStrip;
-//
-//	return meshDesc;
-//}
+
 
 void VExampleApp::QueryButtons(IVInputManager* in_pInputManager)
 {
-	m_pEscapeButton		= &in_pInputManager->GetStandardKey(IVInputManager::Escape);
-	m_pUpButton			= &in_pInputManager->GetStandardKey(IVInputManager::CursorUp);
-	m_pDownButton		= &in_pInputManager->GetStandardKey(IVInputManager::CursorDown);
-	m_pLeftButton		= &in_pInputManager->GetStandardKey(IVInputManager::CursorLeft);
-	m_pRightButton		= &in_pInputManager->GetStandardKey(IVInputManager::CursorRight);
+	m_pKeyboardDevice    = &in_pInputManager->GetStandardKeyboard();
+	m_pMouseDevice       = &in_pInputManager->GetStandardMouse();
 
-	m_pLeftMouseButton	= &in_pInputManager->GetMouseButton(1);
-	m_pRightMouseButton	= &in_pInputManager->GetMouseButton(0);
-	m_pMouseXAxis		= &in_pInputManager->GetMouseXAxis();
-	m_pMouseYAxis		= &in_pInputManager->GetMouseYAxis();
+	m_pEscapeButton = &m_pKeyboardDevice->GetKey(Key_Escape);
+	m_pUpButton     = &m_pKeyboardDevice->GetKey(Key_Up);
+	m_pDownButton   = &m_pKeyboardDevice->GetKey(Key_Down);
+	m_pLeftButton   = &m_pKeyboardDevice->GetKey(Key_Left);
+	m_pRightButton  = &m_pKeyboardDevice->GetKey(Key_Right);
 
 
+	m_pLeftMouseButton	= &m_pMouseDevice->GetButton(1);
+	m_pRightMouseButton	= &m_pMouseDevice->GetButton(0);
+
+	m_pMouseXAxis		= &m_pMouseDevice->GetXAxis();
+	m_pMouseYAxis		= &m_pMouseDevice->GetYAxis();
 }
+
 
 void VExampleApp::MoveCamera(VCamera* in_pCamera)
 {

@@ -21,7 +21,13 @@ class VWindowManagerBase : public IVWindowManager, public VNamedObject
 
 public:
 
+	/**
+	 * -----------------------------------------------------------------------------
+	 */
 	VWindowManagerBase();
+	/**
+	 * -----------------------------------------------------------------------------
+	 */
 	virtual ~VWindowManagerBase();
 
 protected:
@@ -32,6 +38,9 @@ protected:
 	std::list<IVWindow*> m_WindowList;
 
 	vuint m_iNumWindows;
+	/**
+	 * -----------------------------------------------------------------------------
+	 */
 	vuint GetNumberOfWindows();
 };
 

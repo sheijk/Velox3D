@@ -14,9 +14,12 @@ namespace v3d {
 namespace win {
 //-----------------------------------------------------------------------------
 
-class VConsoleFrame : public wxFrame, public window::IVWindowFrame
+class VConsoleFrame : public IVWindowFrame, public wxFrame
 {
 public:
+	/**
+	 * -----------------------------------------------------------------------------
+	 */
 	VConsoleFrame();
 	~VConsoleFrame();
 
@@ -30,9 +33,12 @@ private:
 
 };
 
-class VConsoleFrame2 : public wxFrame, public window::IVWindowFrame
+class VConsoleFrame2 : public IVWindowFrame, public wxFrame
 {
 public:
+	/**
+	 * -----------------------------------------------------------------------------
+	 */
 	VConsoleFrame2();
 	~VConsoleFrame2();
 

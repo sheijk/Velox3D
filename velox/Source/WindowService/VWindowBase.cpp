@@ -1,7 +1,6 @@
-//TODO: insert header file name
 #include "VWindowBase.h"
 //-----------------------------------------------------------------------------
-
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {
@@ -37,8 +36,8 @@ void VWindowBase::Deactivate()
 
 VWindowBase::VWindowBase()
 {
-	m_Device = NULL;
-	m_pInputManager = NULL;
+	m_Device = 0;
+	m_pInputManager = 0;
 }
 //-----------------------------------------------------------------------------
 

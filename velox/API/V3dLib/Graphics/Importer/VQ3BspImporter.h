@@ -93,7 +93,7 @@ public:
 
 		graphics::VVector3f LightmapOrigin;
 		graphics::VVector3f Normal;
-		graphics::VVector3f LightmapVectors[2]; //the  u v unit vectors
+		graphics::VVector3f LightmapVectors[2]; //the u v unit vectors
 		int BezierSize[2];
 	};
 	

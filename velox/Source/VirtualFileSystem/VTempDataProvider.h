@@ -29,7 +29,7 @@ public:
 	VStringParam CreateFile(void* in_pBuffer, vuint in_nBytes);
 
 	/**
-	* Writes the stream into a binary flile
+	* Writes the stream into a binary file
 	*/
 	VStringParam CreateFile(IVStream* in_pStream);
 

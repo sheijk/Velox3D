@@ -6,8 +6,7 @@
 #include "../Graphics/OpenGL/VOpenGLDevice.h"
 
 #include <stdlib.h>
-
-//windows.h spackt rum
+#include <v3d/Core/MemManager.h>
 #undef CreateWindow
 //-----------------------------------------------------------------------------
 namespace v3d {

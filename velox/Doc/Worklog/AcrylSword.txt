@@ -25,10 +25,16 @@ FileLogging in den error service hinzufügen
 Quellcode vom Debugmonitor in einen veröffentlichbaren Zustand bringen
 sheijk daran hindern, die Welt zu erobern
 
+- Dieses File aktuell halten! ( --ins)
+
 --------------------------------------------------------------------------------
 ----- last things AcrylSword finished:
 
 log:
+
+20.8.2004
+InputManger aktualisiert
+
 10.2.2004
 InputManager fertig gestellt.
 

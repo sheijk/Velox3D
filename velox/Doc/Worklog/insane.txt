@@ -41,19 +41,33 @@ high:
 - wrap bsp renderer out of IVCell to make it more robust
 - build in vfs saving for image saving
 
-
 -------------------------------------------------------------------------------
 Questions:
 - rendere calls enabled in states should be deactiveted on framebuffer flush
 nein, das ist unnoetig. vor jedem mesh muessen die korrekten render states
-gesetzt werden, ansonsten sind die states undefiniert.
+gesetzt werden, ansonsten sind die states undefiniert. [ack -ins]
+
 -------------------------------------------------------------------------------
 
+Font Design:
 
+req
+1. device independant font rendering
+2. support for font regions (with clipping to correct size to match region)
+3. coloring support for font
+
+-additional:
+4. additional font management for multiple font usage inbetween a scene
+5. font delay manager for drawing in advanced modes (text stays for a given period of time e.g.)
 
 
 
 Done List:
+
+30.08.04
+- fixed example app to compile
+- added memmanger to window service
+- rearranged some implementation details in window service
 
 31.07.04
 - fixed several todos in the image saving functions
