@@ -78,9 +78,9 @@ vint VExampleApp::Main()
 	IVButton* pLeftMouseButton;
 	IVButton* pRightMouseButton;
 
-	util::importer::VModel3D Model;
-	util::importer::VOBJModelImporter Importer;
-	util::importer::VQuake2BspImporter bspImporter;
+	utils::importer::VModel3D Model;
+	utils::importer::VOBJModelImporter Importer;
+	utils::importer::VQuake2BspImporter bspImporter;
 
 	VMeshDescription MeshDesc;
 	IVDevice::MeshHandle Mesh;
