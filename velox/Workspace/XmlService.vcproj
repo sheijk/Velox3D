@@ -141,6 +141,23 @@
 			Name="Implementation"
 			Filter="">
 			<File
+				RelativePath="..\Source\XMLService\VFileStream.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VFileStream.h">
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VStreamReader.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Source\XMLService\VStreamReader.h">
+			</File>
+			<File
 				RelativePath="..\Source\XMLService\VXMLAttribute.cpp">
 			</File>
 			<File

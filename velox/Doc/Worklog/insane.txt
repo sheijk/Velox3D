@@ -10,5 +10,20 @@ Current assigned tasks:
 --------------------------------------------------------------------------------
 
 TODO List:
--writing editor goaldefinitions
--generating api documentatoin with doxygen
+
+06.08.03
+-bug fixed: visitor call by element close now works correct
+-include comments reading to xml service- done
+-bug: call to visitor by element closed are wrong -do we really need to know when element is closed?
+-test files should be written in seperated dir to workdir
+-deteced bug in xml service while writing comments to an open element.
+ changing requiremtns for xml service! -No comment writing due writing elements!!!
+-fixed the 1. element bug
+-include comments reading to xml service
+-include text reading to xml service
+-commit changes to cvs and edit unresolved conflicts
+
+04.08.03:
+-fix the 1. element bug in xml service
+-rewrite the kernel to use xml service
+-VStreamReader now working correct

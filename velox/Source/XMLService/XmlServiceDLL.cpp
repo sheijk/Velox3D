@@ -3,8 +3,7 @@
  *
  */
 
-#define EXAMPLESERVICE_API __declspec(dllexport)
-
+#define XMLSERVICE_API __declspec(dllexport)
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
@@ -12,9 +11,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-
 #include <iostream>
-
 //-----------------------------------------------------------------------------
 using std::cout;
 using std::endl;
@@ -27,7 +24,7 @@ using namespace v3d::xml;
 // use a smart pointer to guarante object destruction
 VPointer<VXMLService>::AutoPtr g_pXMLService;
 
-EXAMPLESERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
+XMLSERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 {
 	// store the object registry instance
 	VObjectRegistry::SetInstance(in_pObjReg);
@@ -38,7 +35,7 @@ EXAMPLESERVICE_API void Initialize(VObjectRegistry* in_pObjReg)
 	g_pXMLService.Assign(new VXMLService());
 }
 
-EXAMPLESERVICE_API void Shutdown()
+XMLSERVICE_API void Shutdown()
 {
 	// delete and unregister service object
 	g_pXMLService.Release();

@@ -1,9 +1,8 @@
 #include "VXmlElement.h"
-
-namespace v3d
-{
-namespace xml
-{
+//-----------------------------------------------------------------------------
+namespace v3d{
+namespace xml{
+//-----------------------------------------------------------------------------
 
 VXMLElement::VXMLElement()
 {
@@ -30,13 +29,16 @@ IVXMLAttribute* VXMLElement::GetFirstAttribute()
 	if(m_AttributeList.empty())
 		return NULL;
 	else 
+	{
+		m_iPos = 0;
 		return m_AttributeList[0];
+	}
 }
 
 IVXMLAttribute* VXMLElement::GetAttribute(VStringParam Name)
 {
 	if(m_AttributeList.empty())
-		return NULL;
+		V3D_THROW(VXMLException, "Attribute cannot be found. List empty");
 	else
 	{
 		std::string NameCheck = Name;
@@ -50,7 +52,7 @@ IVXMLAttribute* VXMLElement::GetAttribute(VStringParam Name)
 
 		}
 	}
-
+	V3D_THROW(VXMLException, "Attribute cannot be found. Not in list");
 }
 
 void VXMLElement::AddAttribute(VXMLAttribute* p_Attribute)
@@ -66,11 +68,10 @@ IVXMLAttribute* VXMLElement::NextAttribute()
 {
 	m_iPos++;
 
-	if(m_AttributeList[m_iPos])
+	if(m_iPos <= m_AttributeList.size())
 		return m_AttributeList[m_iPos];
 	else
 		return NULL;
-
 }
 
 void VXMLElement::SetName(VStringParam Name)
@@ -78,6 +79,19 @@ void VXMLElement::SetName(VStringParam Name)
 	m_Name = Name;
 }
 
+IVXMLElement::AttributeIter VXMLElement::AttributeBegin()
+{
+typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator, IVXMLAttribute> IterPol;
+	return AttributeIter(new IterPol(m_AttributeList.begin()));
+}
 
+IVXMLElement::AttributeIter VXMLElement::AttributeEnd()
+{
+typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator, IVXMLAttribute> IterPol;
+	return AttributeIter(new IterPol(m_AttributeList.end()));
 }
-}
+
+//-----------------------------------------------------------------------------
+} //xml
+} //v3d
+//-----------------------------------------------------------------------------

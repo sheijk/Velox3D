@@ -5,6 +5,7 @@
 #include <v3d/Vfs/IVStream.h>
 #include <v3d/XML/IVXMLWriter.h>
 #include <V3d/XML/IVXMLVisitor.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
@@ -20,6 +21,15 @@ using namespace v3d::vfs;
 
 class IVXMLService : public VNamedObject
 {
+public:
+typedef VPointer<IVXMLWriter>::SharedPtr IVXMLWriterPtr;
+        
+	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor) = 0;
+	virtual void ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor) = 0;
+	virtual IVXMLWriterPtr CreateXMLWriter(VStringParam FileName) = 0;
+	virtual IVXMLWriterPtr CreateXMLWriter(IVStream* pStream) = 0;
+	virtual ~IVXMLService() {};
+	
 protected:
 	/**
 	* a protected constructor is needed to pass the parameters to the 
@@ -27,22 +37,8 @@ protected:
 	*/
 	IVXMLService(VStringParam in_strName, VNamedObject* in_pParent) 
 		: VNamedObject(in_strName, in_pParent)
-	{
-	}
-
-public:
-        
-//	virtual void ParseXMLFile(IVStream* in_pStream, IVXMLVisitor* in_pVisitor) = 0;
-	
-	//TODO: sollte das vfs verwenden, bzw. ganz wegbleiben (sheijk)
-	virtual void ParseXMLFile(VStringParam in_pcName, IVXMLVisitor* in_pVisitor) = 0;
-	
-	//TODO: die ivstream fkt brauchen wir (sheijk)
-	//virtual IVXMLWriter* CreateXMLWriter(IVStream* in_pStream) = 0;
-
-	//TODO: auf keine Fall einfach eine Ptr zurueckgeben, 
-	// sondern einen SmartPointer verwenden, sonst gibts Speicherlecks (sheijk)
-	virtual IVXMLWriter* CreateXMLWriter() = 0;
+		{
+		}
 };
 
 //-----------------------------------------------------------------------------

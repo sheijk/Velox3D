@@ -1,27 +1,21 @@
-/*
- *
- *	created:	2003/06/24
- *	created:	24:6:2003   18:11
- *	filename: 	VXMLAttribute.h
- *	author:		insane
- *	
- *	purpose:	Implements the IVXMLAttribute Interface
- */
-
-
-#ifndef VXMLATTRIBUTE_H
-#define VXMLATTRIBUTE_H
-
+#ifndef V3D_VXMLATTRIBUTE_H
+#define V3D_VXMLATTRIBUTE_H
+//-----------------------------------------------------------------------------
+#include <string>
 #include <V3d/XML/IVXMLAttribute.h>
 #include <V3d/Core/Wrappers/VString.h>
-#include <string>
-
-
-
+//-----------------------------------------------------------------------------
 using namespace v3d;
-
+//-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
+//-----------------------------------------------------------------------------
+
+/**
+ * The XML attribute implementation
+ * @author insane
+ * @version 1.0
+ */
 
 class VXMLAttribute : public IVXMLAttribute
 {
@@ -43,9 +37,8 @@ private:
 	std::string m_Value;
 
 };
-
-}
-}
-
-
-#endif
+//-----------------------------------------------------------------------------
+} //xml
+} //v3d
+//-----------------------------------------------------------------------------
+#endif //V3D_VXMLATTRIBUTE_H

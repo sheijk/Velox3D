@@ -1,65 +1,80 @@
-#ifndef VXMLWRITER_H
-#define VXMLWRITER_H
-
+#ifndef V3D_VXMLWRITER_H
+#define V3D_VXMLWRITER_H
+//-----------------------------------------------------------------------------
 #include <v3d/XML/IVXMLWriter.h>
+#include <v3d/Core/Wrappers/VString.h>
+#include <V3d/VFS/IVStream.h>
+#include <V3d/VFS/IVStreamFactory.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/VFS/VStreamOps.h>
+#include "VFileStream.h"
+//-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <stdarg.h>
-
-#include <v3d/Core/Wrappers/VString.h>
-
+#include <string>
+#include <stack>
+//-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
+using namespace vfs;
+//-----------------------------------------------------------------------------
 
-
+/**
+ * The XML writer implementation
+ * @author insane
+ * @version 1.0
+ */
 
 
 class VXMLWriter :	public IVXMLWriter
 {
 public:
-	VXMLWriter(void);
+	VXMLWriter(VStringParam Filename);
+	VXMLWriter(IVStream* pStream);
+	virtual ~VXMLWriter();
 	
-	virtual void WriteDeclaration(VStringParam FileName);
 	/*
 	* Creates a new xml element (<Name)
 	*/
-	virtual void OpenElement(VStringParam name);
+	virtual void OpenElement(VStringParam Name);
 	/*
-	* Closes the last opened element. (/> oder </Name>)
+	* Closes the last opened element. (/> or </Name>)
 	*/
-	virtual void CloseElement(VStringParam name);
+	virtual void CloseElement();
 	/*
 	* Adds an attribute to the current element. May only be called directly after
 	* OpenElement
 	*/
-	virtual void AddAttribute(VStringParam name, VStringParam value, ...);
+	virtual void AddAttribute(VStringParam Name, VStringParam Value, ...);
 	/*
 	* Adds a comment
 	*/
-	virtual void AddComment(VStringParam text);
+	virtual void AddComment(VStringParam Text);
 	/*
 	* Adds a text
 	*/
-	//virtual void AddText(char* text);
-	/*
-	* Finishes writing. Cache will be written to disk.
-	*/
-	virtual void Close();
+	virtual void AddText(VStringParam Text);
 
-	
 
 private:
 
-	bool m_bIsOpen;
-	bool m_bElementOpen;
-	bool m_bOpenTwice;
-	char m_Buffer[256];
-	FILE* XmlFile;
+	void WriteDeclaration();
+
+	vbool m_bIsOpen;
+	vbool m_bElementOpen;
+	vbool m_bOpenTwice;
+	vchar m_Buffer[256];
+	std::string m_Filename;
+	IVStream* m_pStreamInterface;
+	
+	IVStreamFactory::OfflineStreamPtr m_pSmartPtr;
+	std::stack<std::string> m_ElementOpenStack;
 
 	
 };
 
-
-}
-}
-
-#endif
+//-----------------------------------------------------------------------------
+} //xml
+} //v3d
+//-----------------------------------------------------------------------------
+#endif V3D_VXMLWRITER_H
