@@ -25,7 +25,7 @@ VJpegImageLoader::VJpegImageLoader()
 	Register();
 }
 //----------------------------------------------------------------------------
-VImage* VJpegImageLoader::Create(vfs::IVStream* in_pStream)
+VImage* VJpegImageLoader::Create(vfs::IVStream* in_pStream, VStringParam in_sExt)
 {
 	VImage* pImage;
 
@@ -118,8 +118,8 @@ void VJpegImageLoader::DecodeJPG(jpeg_decompress_struct* cinfo, tImageJPG *pImag
 void VJpegImageLoader::Register()
 {
 	IVImageFactory* Factory = QueryObject<IVImageFactory>("image.service");
-	Factory->Register(this, "jpg");
-	Factory->Register(this, "jpeg");
+	//Factory->Register(this, "jpg");
+	//Factory->Register(this, "jpeg");
 }
 //-----------------------------------------------------------------------------
 #pragma warning (default : 4244)

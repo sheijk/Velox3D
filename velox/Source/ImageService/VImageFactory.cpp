@@ -53,7 +53,7 @@ IVImageFactory::ImagePtr VImageFactory::CreateImage(VStringParam in_sFilename)
 
 	if(theLoader)
 	{
-		theImage = theLoader->Create(fileStream.Get());
+		theImage = theLoader->Create(fileStream.Get(), theExtension);
 	}
 	else
 	{

@@ -21,7 +21,7 @@ VTgaImageLoader::VTgaImageLoader()
 	Register();
 }
 //----------------------------------------------------------------------------
-VImage* VTgaImageLoader::Create(vfs::IVStream* in_pStream)
+VImage* VTgaImageLoader::Create(vfs::IVStream* in_pStream, VStringParam in_sExt)
 {
 	in_pStream->Read(&m_FileHeader.IDLength, sizeof(vchar));
 	in_pStream->Read(&m_FileHeader.ColorMapType, sizeof(vchar));

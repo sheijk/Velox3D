@@ -12,7 +12,7 @@ class VTgaImageLoader : public IVImageLoader
 {
 public:
 	VTgaImageLoader();
-	virtual VImage* Create(vfs::IVStream* in_pStream);
+	virtual VImage* Create(vfs::IVStream* in_pStream, VStringParam in_sExt);
 
 private:
 

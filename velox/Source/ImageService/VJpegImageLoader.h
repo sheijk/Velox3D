@@ -14,7 +14,7 @@ class VJpegImageLoader : public IVImageLoader
 public:
 	VJpegImageLoader();
 	
-	virtual VImage* Create(vfs::IVStream* in_pStream);
+	virtual VImage* Create(vfs::IVStream* in_pStream, VStringParam in_sExt);
 	
 	vuint m_iWidth;
 	vuint m_iHeight;

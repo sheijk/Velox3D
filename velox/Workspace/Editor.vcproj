@@ -145,6 +145,12 @@
 			Name="Implementation"
 			Filter="">
 			<File
+				RelativePath=".\blub.cpp">
+			</File>
+			<File
+				RelativePath=".\blub.h">
+			</File>
+			<File
 				RelativePath="..\Source\Editor\CameraTool.h">
 			</File>
 			<File
