@@ -9,7 +9,7 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
-class GraphicDevice;
+class IVGraphicDevice;
 //class SoundDevice;
 //class InputDevice;
 
@@ -26,9 +26,7 @@ protected:
 	}
 
 public:
-	typedef VPointer<GraphicDevice>::SharedPtr GraphicDevicePtr;
-
-	virtual GraphicDevicePtr QueryGraphicDevice() = 0;
+	virtual IVGraphicDevice& QueryGraphicDevice() = 0;
 };
 
 //-----------------------------------------------------------------------------

@@ -31,6 +31,7 @@ VKernel::VKernel()
 
 VKernel::~VKernel()
 {
+	Shutdown();
 }
 
 /**

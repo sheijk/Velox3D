@@ -51,6 +51,10 @@ Auf die Langnese Insel ziehen
 
 log:
 
+05.09.2003
+ConfigProvider Service
+SharedPtr.DropOwnership
+
 04.09.2003
 erste Mathlib Version fertig
 

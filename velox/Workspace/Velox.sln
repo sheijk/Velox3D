@@ -289,8 +289,8 @@ Global
 		{92902254-17EE-444A-83C6-F062C52B9122}.Release Unicode.Build.0 = Release|Win32
 		{92902254-17EE-444A-83C6-F062C52B9122}.Release Unicode DLL.ActiveCfg = Release|Win32
 		{92902254-17EE-444A-83C6-F062C52B9122}.Release Unicode DLL.Build.0 = Release|Win32
-		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.ActiveCfg = Release|Win32
-		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.Build.0 = Release|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.ActiveCfg = Debug|Win32
+		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.Build.0 = Debug|Win32
 		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug.ActiveCfg = Debug|Win32
 		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug.Build.0 = Debug|Win32
 		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Debug DLL.ActiveCfg = Debug|Win32
@@ -307,8 +307,8 @@ Global
 		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release Unicode.Build.0 = Release|Win32
 		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release Unicode DLL.ActiveCfg = Release|Win32
 		{586E10B2-24CB-27C7-A973-CDCD6D563659}.Release Unicode DLL.Build.0 = Release|Win32
-		{586E10B2-24CB-27C7-A973-CDCD6D563659}.UnitTests.ActiveCfg = Release|Win32
-		{586E10B2-24CB-27C7-A973-CDCD6D563659}.UnitTests.Build.0 = Release|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.UnitTests.ActiveCfg = Debug|Win32
+		{586E10B2-24CB-27C7-A973-CDCD6D563659}.UnitTests.Build.0 = Debug|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt

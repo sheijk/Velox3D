@@ -2,7 +2,7 @@
 <!-- Velox3D services load info for unit tests -->
 <Config>
 	<Services>
-		<Service id="console" desc="Win32 Console" filename="ConsoleService.dll"/>
+		<!-- Service id="console" desc="Win32 Console" filename="ConsoleService.dll"/ -->
 		<Service id="vfs" desc="Virtual File System" filename="VirtualFileSystem.dll"/>
 		<Service id="testsuite" desc="The UnitTest Manager" filename="UnitTestService.dll"/>
 		<Service id="tests" desc="The tests" filename="UnitTests.dll"/>
