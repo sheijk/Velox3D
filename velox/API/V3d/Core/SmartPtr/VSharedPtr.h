@@ -3,35 +3,11 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
+#include <boost/smart_ptr.hpp>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
-
-/**
- * Base class for VSharedPtr. Is required to *** a VSharedPtr<T> to access
- * the data of a VSharedPtr<X>. This is needed for cloning shared pointers
- * of other types (VSharedPtr<Derived> -> VSharedPtr<Base>)
- *
- * @author sheijk
- */
-class VSharedPtrBase
-{
-protected:
-	struct SharedStorage
-	{
-		inline SharedStorage();
-
-		void* pSubject;
-		vint nReferenceCount;
-	};
-
-	SharedStorage* m_pStore;
-
-	inline VSharedPtrBase();
-
-	static inline SharedStorage* GetStore(const VSharedPtrBase& obj);
-};
 
 /**
  * A reference counting smart pointer class. Counts the references to an object
@@ -41,8 +17,12 @@ protected:
  * @author sheijk
  */
 template<typename T>
-class VSharedPtr : public VSharedPtrBase
+class VSharedPtr
 {
+	friend class VSharedPtrFriend;
+
+	boost::shared_ptr<T> m_BoostPtr;
+
 public:
 	// some typedefs provided by all velox smart pointers
 	typedef T* Pointer;
@@ -72,7 +52,7 @@ public:
 	 * pointer refers to the subject. Only use it when you know exactly what
 	 * you are doing - this function is an evil hack(tm)
 	 */
-	T* DropOwnership();
+	//T* DropOwnership();
 
 	/**
 	 * Returns a pure c pointer-to-const-object to the object referenced
@@ -111,6 +91,24 @@ public:
 
 	T& operator*() const;
 	T* operator->() const;
+};
+
+class VSharedPtrFriend
+{
+	VSharedPtrFriend(int) {}
+
+public:
+	template<typename T>
+	static const boost::shared_ptr<T>& GetInternalPtr(const VSharedPtr<T>& ptr)
+	{
+		return ptr.m_BoostPtr;
+	}
+
+	template<typename T>
+	static boost::shared_ptr<T>& GetInternalPtr(VSharedPtr<T>& ptr)
+	{
+		return ptr.m_BoostPtr;
+	}
 };
 
 template<typename T, typename T2>

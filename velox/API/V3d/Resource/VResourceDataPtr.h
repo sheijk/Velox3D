@@ -23,6 +23,7 @@ class VResourceDataPtr
 	typedef VTypedResourceData<DataType>* TypedDataPtr;
 
 public:
+	VResourceDataPtr();
 	VResourceDataPtr(TypedDataPtr in_pData);
 
 	DataType* operator->();
@@ -33,7 +34,19 @@ private:
 	TypedDataPtr m_pData;
 };
 
+template<typename DataType>
+vbool Valid(const VResourceDataPtr<const DataType>& ptr)
+{
+	return (&*ptr) != 0;
+}
+
 //-----------------------------------------------------------------------------
+
+template<typename DataType>
+VResourceDataPtr<DataType>::VResourceDataPtr()
+{
+	m_pData = 0;
+}
 
 template<typename DataType>
 VResourceDataPtr<DataType>::VResourceDataPtr(TypedDataPtr in_pData)

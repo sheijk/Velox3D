@@ -27,11 +27,14 @@ using namespace v3d; // anti auto indenting
 class VResource
 {
 public:
-	VResource(const std::string in_strName);
+	VResource(const std::string in_strName, VResource* in_pParent = 0);
 	virtual ~VResource();
 
-	/** Return the fully qualified name of the resource (including it's path) */
-	const std::string& GetName() const;
+	/** Return the name of the resource (without it's path) */
+	std::string GetName() const;
+
+	/** Return the fully qualified (including it's path) name */
+	std::string GetQualifiedName() const;
 
 	/** Creates a new sub resource if no one with the same name exist yet */
 	VResource* AddSubResource(const std::string& in_strChildName);
@@ -54,10 +57,21 @@ public:
 	/**
 	 * Returns the data of type DataType attached to the resource if it exists.
 	 * Will throw an exception if the data does not exist
+	 *
+	 * @throws v3d::resource::VDataNotFoundException
 	 */
 	template<typename DataType>
 	VResourceDataPtr<const DataType> GetData();
 
+	/*
+	 * Returns true if data of the given type is present
+	 */
+	template<typename DataType>
+	vbool ContainsData();
+
+	/**
+	 * Returns the type id object for DataType
+	 */
 	template<typename DataType>
 	static VResourceData::TypeId GetTypeId();
 
@@ -66,7 +80,13 @@ private:
 	typedef std::map< VResourceData::TypeId, VSharedPtr<VResourceData> >
 		DataMap;
 
+	void SetParent(VResource* in_pParent);
+	const VResource* GetParent() const;
+	VResource* GetParent();
+
 	VResourceData* GetData(VResourceData::TypeId in_Type);
+	vbool ContainsData(VResourceData::TypeId in_Type);
+
 	void AddData(
 		VResourceData::TypeId in_Type, 
 		VSharedPtr<VResourceData> in_pData);
@@ -74,6 +94,7 @@ private:
 	std::string m_strName;
 	ResourceContainer m_SubResources;
 	DataMap m_Data;
+	VResource* m_pParent;
 };
 
 //-----------------------------------------------------------------------------
@@ -106,11 +127,22 @@ VResourceDataPtr<const DataType> VResource::GetData()
 }
 
 template<typename DataType>
+vbool VResource::ContainsData()
+{
+	// get type id
+	VResourceData::TypeId type = GetTypeId<DataType>();
+
+	// look for type id
+	return ContainsData(type);
+}
+
+template<typename DataType>
 VResourceData::TypeId VResource::GetTypeId()
 {
-	typedef VTypedResourceData<DataType> Container;
-	
-	return reinterpret_cast<VResourceData::TypeId>(typeid(Container).name());
+	return VResourceData::TypeId::Create<DataType>();
+	//typedef VTypedResourceData<DataType> Container;
+	//
+	//return reinterpret_cast<VResourceData::TypeId>(typeid(Container).name());
 }
 
 // old AddData

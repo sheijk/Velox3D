@@ -19,6 +19,8 @@
 #undef NO_ERROR
 
 #include "Resource/VResourceManager.h"
+#include "Resource/Types/VImageResourceType.h"
+#include "Resource/Types/VTextureStateResType.h"
 
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VDevILLoader.h"
@@ -47,6 +49,7 @@ using v3d::utils::VAllFilter;
 using namespace v3d::property;
 using namespace v3d::entity;
 using namespace v3d::resource;
+using namespace v3d::graphics;
 //-----------------------------------------------------------------------------
 
 class VVeloxModules : public v3d::VModuleBase
@@ -125,6 +128,11 @@ void VVeloxModules::Initialize()
 
 	// resource manager
 	g_pResourceManager.Assign(new VResourceManager("resource.manager"));
+	// create and add some resource types
+	g_pResourceManager->RegisterResourceType(
+		VSharedPtr<IVResourceType>(new VImageResourceType()));
+	g_pResourceManager->RegisterResourceType(
+		VSharedPtr<IVResourceType>(new VTextureStateResType()));
 
 	// image
 	g_pImageFactory.Assign(new VImageFactory());

@@ -18,8 +18,7 @@ VXMLWriter::VXMLWriter(VStringParam in_strFileName)
 	vfs::IVFileSystem::FileStreamPtr ptr = 
 		QueryObject<vfs::IVFileSystem>("vfs.fs")->OpenFile(in_strFileName,
 															vfs::VWriteAccess);
-	// "type conversion"
-	m_pSmartPtr.Assign(ptr.DropOwnership());
+	m_pSmartPtr = ptr;
 
 	m_pStreamInterface = m_pSmartPtr.Get();
 	

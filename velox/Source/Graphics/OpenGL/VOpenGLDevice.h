@@ -22,6 +22,8 @@
 #include "VTextureStateCategory.h"
 #include "VMiscStateCategory.h"
 #include "../DeviceBase/VMeshBase.h"
+
+#include <v3d/Resource/VResourceId.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -44,7 +46,7 @@ public:
 
 	virtual BufferHandle CreateBuffer(
 		BufferType in_Type,
-		Buffer* in_Buffer,
+		const Buffer* in_Buffer,
 		BufferCopyMode in_CopyMode = VBufferBase::CopyData
 		);
 
@@ -66,6 +68,10 @@ public:
 		const VMeshDescription& in_MeshDescr,
 		const VEffectDescription& in_EffectDescr
 		);
+
+	virtual MeshHandle CreateMesh(
+		resource::VResourceId in_Mesh, 
+		resource::VResourceId in_Material);
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 

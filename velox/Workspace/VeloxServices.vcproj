@@ -463,66 +463,6 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Window Service"
-			Filter="">
-			<File
-				RelativePath="..\Api\V3d\Window.h">
-			</File>
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\Source\WindowService\VDeviceFactory.h">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VOpenGLDeviceFactory.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VOpenGLDeviceFactory.h">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowBase.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowBase.h">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowManagerBase.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowManagerBase.h">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowManagerWin32.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowManagerWin32.h">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowWin32.cpp">
-				</File>
-				<File
-					RelativePath="..\Source\WindowService\VWindowWin32.h">
-				</File>
-			</Filter>
-			<Filter
-				Name="Interface"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3d\Window\IVWindow.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Window\IVWindowManager.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Window\IVWxConnector.h">
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
 			Name="Error Service"
 			Filter="">
 			<Filter
@@ -844,6 +784,82 @@
 						</File>
 					</Filter>
 				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Resource Types"
+			Filter="">
+			<File
+				RelativePath="..\Source\Resource\Types\VImageResourceType.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Resource\Types\VImageResourceType.h">
+			</File>
+			<File
+				RelativePath="..\Source\Resource\Types\VTextureStateResType.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\Resource\Types\VTextureStateResType.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Window Service"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Window.h">
+			</File>
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\WindowService\VDeviceFactory.h">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VOpenGLDeviceFactory.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VOpenGLDeviceFactory.h">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowBase.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowBase.h">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowManagerBase.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowManagerBase.h">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowManagerWin32.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowManagerWin32.h">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowWin32.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\WindowService\VWindowWin32.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Window\IVWindow.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Window\IVWindowManager.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Window\IVWxConnector.h">
+				</File>
 			</Filter>
 		</Filter>
 		<File

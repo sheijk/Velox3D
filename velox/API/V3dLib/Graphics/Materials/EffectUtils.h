@@ -32,6 +32,15 @@ VState TextureState(
 	const VMatrix44f* pTextureMatrix = 0
 	);
 
+VState TextureState(
+	VStringParam in_strResourceName,
+	VTextureFilter magnificationFilter = FilterLinear, 
+	VTextureFilter minificationFilter = FilterLinear,
+	VTextureWrapMode texCoordWrapU = TextureRepeat, 
+	VTextureWrapMode texCoordWrapV = TextureRepeat,
+	const VMatrix44f* pTextureMatrix = 0
+	);
+
 /** creates a state for polygon mode */
 VState PolygonModeState(VPolygonMode frontMode, VPolygonMode backMode);
 

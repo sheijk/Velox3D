@@ -215,7 +215,7 @@ IVEntityManager::EntityPtr VRacerApp::CreateHeightmapEntity()
 	detPass.AddState(DepthBufferState(DepthOnLessEqual, DepthTestEnabled, DepthReadOnly));
 	detPass.AddState(BlendingState(BlendEnabled, BlendSourceColor, BlendDestColor));
 
-	for(int i = 0; i < pHeightmap->GetVertexBuffer().GetSize(); ++i)
+	for(vuint i = 0; i < pHeightmap->GetVertexBuffer().GetSize(); ++i)
 	{
 		pHeightmap->GetVertexBuffer()[i].texCoords.u *= 5;
 		pHeightmap->GetVertexBuffer()[i].texCoords.v *= 5;

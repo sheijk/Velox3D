@@ -25,7 +25,6 @@ class IVMaterial;
 class IVDevice
 {
 public:
-	/** a handle to a device buffer */
 	typedef IVBuffer<vbyte>* BufferHandle;
 	typedef VBufferBase::CopyMode BufferCopyMode;
 	typedef VBuffer<vbyte> Buffer;
@@ -57,7 +56,7 @@ public:
 	 */
 	virtual BufferHandle CreateBuffer(
 		BufferType in_Type,
-        Buffer* in_Buffer,
+        const Buffer* in_Buffer,
 		BufferCopyMode in_CopyMode = VBufferBase::CopyData
 		) = 0;
 

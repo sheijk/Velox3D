@@ -9,6 +9,7 @@
 #include "../../Source/Resource/VResourceManager.h"
 #include <V3d/Resource/VTypedResourceData.h>
 #include <V3d/Resource/VResourceDataPtr.h>
+#include <V3d/Resource/Types/VFileName.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

@@ -7,6 +7,7 @@
 #include <V3dLib/Property.h>
 #include <V3dLib/Math.h>
 #include <V3d/Input.h>
+#include <V3d/Resource.h>
 
 using namespace v3d;
 using namespace v3d::system;
@@ -16,6 +17,8 @@ using namespace v3d::window;
 using namespace v3d::property;
 using namespace v3d::math;
 using namespace v3d::input;
+using namespace v3d::resource;
+using namespace v3d::image;
 
 /**
  * This is the Velox GraphicsDemo Example. 
@@ -166,18 +169,29 @@ void AddCloudPass(
 	pass.AddState(DepthBufferState(DepthOnLessEqual, DepthTestEnabled, DepthReadOnly));
 
 	// create texture from image and add state, see AddDayPass
-	image::VImageServicePtr pImageService;
-	image::VImage image(1024, 512, 24);
-	pImageService->CreateImage("/data/sky.jpg", image);
+	VResourceManagerPtr pResMan;
+	VResourceId texRes = pResMan->CreateResource("/textures/sky");
+	texRes->AddData(new VFileName("/data/sky.jpg"));
+
+	const VImage* pImage = &*texRes->GetData<VImage>();
+
+	//image::VImageServicePtr pImageService;
+	//image::VImage image(1024, 512, 24);
+	//pImageService->CreateImage("/data/sky.jpg", image);
 
 	IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
 		IVDevice::Texture,
-		&image.GetData(),
+		&(pImage->GetData()),
 		VBufferBase::DropData);
+
+	//VState textureState = TextureState(
+	//	"/textures/sky",
+	//	FilterLinear, FilterLinear,
+	//	TextureRepeat, TextureRepeat);
 
 	VState textureState = TextureState(
 		hTexBuffer,
-		image.GetWidth(), image.GetHeight(),
+		pImage->GetWidth(), pImage->GetHeight(),
 		FilterLinear, FilterLinear,
 		TextureRepeat, TextureRepeat);
 
@@ -273,11 +287,125 @@ IVDevice::MeshHandle CreateBackgroundMesh(IVDevice& device)
 	return BuildMesh(device, sky, effect);
 }
 
+/**
+ * Returns the layout of the given vertex type. Use this function if you need
+ * to resolve the type of a vertex without knowing it (in templates)
+ */
+template<typename VertexStructure>
+VVertexDataLayout GetVertexLayout(VertexStructure&)
+{
+	return VertexStructure::layout;
+}
+
+//void SetupFormat(
+//	VMeshDescription* io_pMeshDescr, 
+//	VVertexDataLayout in_Layout,
+//	vuint cnVertexCount
+//	)
+//{
+//	// set vertex coord info
+//	VDataFormat coordFormat;
+//	coordFormat.SetFirstIndex(vuint(layout.positionOffset));
+//	coordFormat.SetCount(cnVertexCount);
+//	coordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+//	io_pMeshDescr->SetCoordinateFormat(coordFormat);
+//
+//	// set color info, if contained
+//	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
+//	{
+//		VDataFormat colorFormat;
+//		colorFormat.SetFirstIndex(vuint(layout.colorOffset));
+//		colorFormat.SetCount(cnVertexCount);
+//		colorFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+//		io_pMeshDescr->SetColorFormat(colorFormat);
+//	}
+//
+//	// set tex coord if contained
+//	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
+//	{
+//		VDataFormat texCoordFormat;
+//		texCoordFormat.SetFirstIndex(vuint(layout.texCoordOffset));
+//		texCoordFormat.SetCount(cnVertexCount);
+//		texCoordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+//		io_pMeshDescr->SetTexCoordFormat(texCoordFormat);
+//	}
+//}
+
+template<typename GeometryProvider>
+VResourceId MakeResource(
+	GeometryProvider& in_Geom, 
+	VStringParam in_strResName,
+	VBufferBase::CopyMode in_CopyMode = VBufferBase::CopyData
+	)
+{
+	const std::string strResName(in_strResName);
+	const std::string vertexResName = strResName + "/vertices";
+	const std::string indexResName = strResName + "/indices";
+
+	// add vertices
+	VResourceId vertexRes = VResourceManagerPtr()->CreateResource(vertexResName);
+	vertexRes->AddData(new VByteBuffer(&in_Geom.GetVertexBuffer(), in_CopyMode));
+
+	// add indices
+	if( in_Geom.GetIndexBuffer().GetSize() > 0 )
+	{
+		VResourceId indexRes = VResourceManagerPtr()->CreateResource(indexResName);
+        indexRes->AddData(new VByteBuffer(&in_Geom.GetIndexBuffer(), in_CopyMode));
+	}
+
+	// create and add mesh description
+	VMeshDescription meshDescr;
+	VVertexDataLayout layout = GetVertexLayout(in_Geom.GetVertexBuffer()[0]);
+	VMeshDescription* io_pMeshDescr = &meshDescr;
+
+	// set vertex coord info
+	VDataFormat coordFormat;
+	coordFormat.SetFirstIndex(vuint(layout.positionOffset));
+	coordFormat.SetCount(cnVertexCount);
+	coordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+	io_pMeshDescr->SetCoordinateFormat(coordFormat);
+	io_pMeshDescr->SetCoordinateResource(vertexResName);
+
+	// set color info, if contained
+	if( VVertexDataLayout::IsValidOffset(layout.colorOffset) )
+	{
+		VDataFormat colorFormat;
+		colorFormat.SetFirstIndex(vuint(layout.colorOffset));
+		colorFormat.SetCount(cnVertexCount);
+		colorFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+		io_pMeshDescr->SetColorFormat(colorFormat);
+		io_pMeshDescr->SetColorResource(vertexResName);
+	}
+
+	// set tex coord if contained
+	if( VVertexDataLayout::IsValidOffset(layout.texCoordOffset) )
+	{
+		VDataFormat texCoordFormat;
+		texCoordFormat.SetFirstIndex(vuint(layout.texCoordOffset));
+		texCoordFormat.SetCount(cnVertexCount);
+		texCoordFormat.SetStride(vuint(layout.vertexSize / sizeof(vfloat32)));
+		io_pMeshDescr->SetTexCoordFormat(0, texCoordFormat);
+		io_pMeshDescr->SetTexCoordFormat(0, vertexResName);
+	}
+
+	// set index info if contained
+	if( in_Geom.GetIndexBuffer().GetSize() > 0 )
+	{
+		io_pMeshDescr->SetIndexFormat(
+			VDataFormat(0, in_Geom.GetIndexBuffer().GetSize(), 1));
+		io_pMeshDescr->SetIndexResource(indexResName);
+	}
+
+	// add mesh descr to resource
+	VResourceId meshRes = VResourceManagerPtr()->GetResourceByName(strResName);
+	meshRes->AddData(new VMeshDescription(meshDescr));
+
+	return VResourceManagerPtr()->GetResourceByName(strResName);
+}
+
 /** creates a mesh for the moon */
 IVDevice::MeshHandle CreateMoonMesh(IVDevice& device)
 {
-	// see BuildSphereMesh
-
 	VEffectDescription effect;
 	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
 
@@ -287,20 +415,31 @@ IVDevice::MeshHandle CreateMoonMesh(IVDevice& device)
 	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
 	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
 	
-	image::VImageServicePtr pImageService;
-	image::VImage image(512, 256, 24);
-	pImageService->CreateImage("/data/moon.jpg", image);
+	//image::VImageServicePtr pImageService;
+	//image::VImage image(512, 256, 24);
+	//pImageService->CreateImage("/data/moon.jpg", image);
 
-	IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
-		IVDevice::Texture,
-		&image.GetData(),
-		VBufferBase::DropData);
+	//IVDevice::BufferHandle hTexBuffer = device.CreateBuffer(
+	//	IVDevice::Texture,
+	//	&image.GetData(),
+	//	VBufferBase::DropData);
 
-	VState textureState = TextureState(
-		hTexBuffer,
-		image.GetWidth(), image.GetHeight(),
-		FilterLinear, FilterLinear,
-		TextureRepeat, TextureRepeat);
+	//VState textureState = TextureState(
+	//	hTexBuffer,
+	//	image.GetWidth(), image.GetHeight(),
+	//	FilterLinear, FilterLinear,
+	//	TextureRepeat, TextureRepeat);
+
+	// add resource info
+	using namespace resource;
+
+	VResourceManagerPtr pResMan;
+	VResourceId pRes = pResMan->CreateResource("/textures/moon");
+    pRes->AddData(new VFileName("/data/moon.jpg"));
+
+	pResMan->DumpResourceInfo();
+
+	VState textureState = TextureState(pRes->GetQualifiedName().c_str());
 
 	pass.AddState(textureState);
 
@@ -308,6 +447,10 @@ IVDevice::MeshHandle CreateMoonMesh(IVDevice& device)
 	moon.GenerateCoordinates();
 	moon.GenerateTexCoords();
 	ForEachVertex(moon.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(0.175f, 0.175f, 0.175f));
+
+	// add mesh to resource manager
+	//VResourceManagerPtr pResMan;
+	//pResMan->CreateResource("/meshes/moon/buffer")->AddData(new VByteBuffer(
 
 	return BuildMesh(device, moon, effect);
 }

@@ -3,6 +3,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/VBuffer.h>
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Resource/VResourceId.h>
 
 #include <vector>
 //-----------------------------------------------------------------------------
@@ -47,7 +49,7 @@ public:
 class VMeshDescription
 {
 public:
-	typedef IVBuffer<vbyte>* BufferHandle;
+	typedef IVDevice::BufferHandle BufferHandle;
 
 	enum GeometryType
 	{
@@ -69,21 +71,39 @@ public:
 	GeometryType GetGeometryType() const;
 	void SetGeometryType(GeometryType in_GeometryType);
 
-	void SetCoordinateData(BufferHandle in_hBuffer, VDataFormat in_Format);
+	// new
 	VDataFormat GetCoordinateFormat() const;
+	void SetCoordinateFormat(VDataFormat in_Format);
+	std::string GetCoordinateResource() const;
+	void SetCoordinateResource(const std::string& in_Id);
+
+	VDataFormat GetColorFormat() const;
+	void SetColorFormat(VDataFormat in_Format);
+	void SetColorResource(const std::string& in_Id);
+	std::string GetColorResource() const;
+
+	VDataFormat GetIndexFormat() const;
+	void SetIndexFormat(VDataFormat in_Format);
+	void SetIndexResource(const std::string& in_Id);
+	std::string GetIndexResource() const;
+
+	vuint GetTexCoordCount() const;
+	VDataFormat GetTexCoordFormat(vuint in_nCoord) const;
+	void SetTexCoordFormat(vuint in_nCoord, VDataFormat in_Format);
+	void SetTexCoordResource(vuint in_nIndex, const std::string& in_Id);
+	std::string GetTexCoordResource(vuint in_nCoord) const;
+
+	// old, to be thrown out
+	void SetCoordinateData(BufferHandle in_hBuffer, VDataFormat in_Format);
 	BufferHandle GetCoordinateBuffer() const;
 
 	void SetColorData(BufferHandle in_hBuffer, VDataFormat in_Format);
-	VDataFormat GetColorFormat() const;
 	BufferHandle GetColorBuffer() const;
 	
 	void SetIndexData(BufferHandle in_hBuffer, VDataFormat in_Format);
-	VDataFormat GetIndexFormat() const;
 	BufferHandle GetIndexBuffer() const;
 
-	vuint GetTexCoordCount() const;
 	void SetTexCoordData(vuint in_nCoord, BufferHandle in_hBuffer, VDataFormat in_Format);
-	VDataFormat GetTexCoordFormat(vuint in_nCoord) const;
 	BufferHandle GetTexCoordBuffer(vuint in_nCoord) const;
 
 	// some util functions
@@ -99,6 +119,7 @@ private:
 	{
 		BufferHandle hBuffer;
 		VDataFormat format;
+		std::string resource;
 
 		DataRef();
 	};

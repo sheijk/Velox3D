@@ -10,9 +10,6 @@ namespace image{
 
 /**
  * Represents a decoded image file as pixel buffer
- waers nicht sinnvoller, die Werte zu kapseln damit sie nicht veraendert
- werden koennen? die buffer groesse kann ja auch nicht mehr geaendert werden
- -- sheijk
  */
 class VImage
 {
@@ -62,8 +59,10 @@ public:
 	vuint GetBPP() const { return iBPP; }
 
 	ImageData& GetData() { return *pData; }
+	const ImageData& GetData() const { return *pData; }
 
 	vbyte* GetPixelData() { return pData->GetDataAddress(); }
+	const vbyte* GetPixelData() const { return pData->GetDataAddress(); }
 
 	vuint GetBitsPerPixel() const {	return iBPP; }
 

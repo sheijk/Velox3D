@@ -38,6 +38,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+16.11.2004
+- VSharedPtr umgestellt, wrappt jetzt einen boost::shared_ptr
+- Managed Resource Types fuer VImage und VTextureState
+- Device kann Texturen aus dem Resource Manager laden
+
 06.11.2004
 - Resource Manager
 

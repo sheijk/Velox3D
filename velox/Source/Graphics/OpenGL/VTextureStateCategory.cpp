@@ -3,6 +3,9 @@
 #include <v3d/Graphics/GraphicsExceptions.h>
 
 #include <V3dLib/Graphics/Materials/StateTypes.h>
+
+#include <V3d/Image/VImage.h>
+#include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -117,25 +120,25 @@ VTextureState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 	VState const* pTextureState = in_Pass.GetStateByName("texture");
 	if( pTextureState != 0 )
 	{
-		// if a texture is referenced by file name, load it using the image service
-		if( pTextureState->ContainsParameter("file") )
+		// if a texture is referenced by resource name
+		if( pTextureState->ContainsParameter("res") )
 		{
-			//// load image
-			//std::string imageFileName;
-			//pTextureState->GetParameter("file", imageFileName);
+			using namespace resource;
 
-			//VServicePtr<image::IVImageFactory> pImageService;
-			//image::IVImageFactory::ImagePtr pImage =
-			//	pImageService->CreateImage(imageFileName.c_str());
+			std::string resName;
+			pTextureState->GetParameter("res", resName);
 
-			//// create buffer
-			vbool notImplementedYet = false;
-			V3D_ASSERT(notImplementedYet);
+			// get texture state
+			VResourceManagerPtr pResMan;
 
-			return 0;
+			VResourceId pRes = pResMan->GetResourceByName(resName.c_str());
+            VResourceDataPtr<const VTextureState> pState = 
+				pRes->GetData<VTextureState>();
+			
+			return const_cast<VTextureState*>(&* pState);
 		}
 		// if a texture is referenced by a buffer id, get and check it
-		else if( pTextureState->ContainsParameter("bufferref") )
+		if( pTextureState->ContainsParameter("bufferref") )
 		{
 			VMaterialDescription::TextureRef texRef;
 			void* hBuffer = 0;

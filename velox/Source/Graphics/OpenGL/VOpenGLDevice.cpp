@@ -15,6 +15,9 @@
 #include <v3d/Graphics/GraphicsExceptions.h>
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
 
+#include "VMeshHandle.h"
+
+#include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -111,13 +114,37 @@ VOpenGLDevice::~VOpenGLDevice()
 	DestroyContext();
 }
 
+std::string GenerateBufferName()
+{
+	static vuint lastBufferId = 0;
+
+	++lastBufferId;
+
+	std::stringstream name;
+	name << "device/buffers/internal" << lastBufferId;
+
+	return name.str();
+}
+
 IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 	BufferType in_Type,
-	Buffer* in_pBuffer,
+	const Buffer* in_pBuffer,
 	BufferCopyMode in_CopyMode
 	)
 {
-	Buffer* pBuffer = new VByteBuffer(in_pBuffer, VBufferBase::CopyData);
+	//using namespace resource;
+
+	//Buffer* pBuffer = new VByteBuffer(const_cast<Buffer*>(in_pBuffer), VBufferBase::CopyData);
+
+	//// neue resource anlegen und daten einhaengen
+	//VResourceManagerPtr pResMan;
+
+	//VResourceId res = pResMan->CreateResource(GenerateBufferName().c_str());
+	//res->AddData(pBuffer);
+
+	//return BufferHandle(pBuffer);
+//TODO: resource id zurueck geben (?)
+	Buffer* pBuffer = new VByteBuffer(const_cast<Buffer*>(in_pBuffer), VBufferBase::CopyData);
 
 	switch(in_Type)
 	{
@@ -136,6 +163,7 @@ IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
 	}
 
 	return BufferHandle(pBuffer);
+
 }
 
 //-----------------------------------------------------------------------------
@@ -235,6 +263,26 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	{
 		return 0;
 	}
+}
+
+IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
+	resource::VResourceId in_MeshRes, 
+	resource::VResourceId in_MaterialRes
+	)
+{
+	return 0;
+	//// get effect description and create material handles
+	//VEffectDescription* pEffectDescr = 
+	//	in_MeshRes->GetData<VEffectDescription>();
+
+	//std::vector<VRenderStateList*> statelists =
+	//	m_StateCategories.CreateMaterialList(*pEffectDescr);
+
+	//// get mesh handle
+	//VMeshBase* mesh = in_MeshRes->GetData<VMeshHandle>()->GetGLMesh();
+
+	//// return mesh
+	//return pMesh;
 }
 
 VOpenGLDevice::MaterialHandle VOpenGLDevice::CreateMaterial(

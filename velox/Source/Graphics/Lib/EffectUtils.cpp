@@ -52,6 +52,7 @@ VState TextureState(
 	)
 {
 	VState textureState("texture");
+
 	void* hData = static_cast<void*>(hBuffer);
 	textureState.SetParameter("bufferref", hData);
 	textureState.SetParameter("width", width);
@@ -66,6 +67,31 @@ VState TextureState(
 		textureState.SetParameter("matrix", *pTextureMatrix);
 	}
 	
+	return textureState;
+}
+
+VState TextureState(
+	VStringParam in_strResourceName,
+	VTextureFilter magnificationFilter, 
+	VTextureFilter minificationFilter,
+	VTextureWrapMode texCoordWrapU, 
+	VTextureWrapMode texCoordWrapV,
+	const VMatrix44f* pTextureMatrix
+	)
+{
+	VState textureState("texture");
+
+	textureState.SetParameter("res", in_strResourceName);
+	textureState.SetParameter("wrapu", texCoordWrapU);
+	textureState.SetParameter("wrapv", texCoordWrapV);
+	textureState.SetParameter("magnification.filter", magnificationFilter);
+	textureState.SetParameter("minification.filter", minificationFilter);
+
+	if( pTextureMatrix != 0 )
+	{
+		textureState.SetParameter("matrix", *pTextureMatrix);
+	}
+
 	return textureState;
 }
 

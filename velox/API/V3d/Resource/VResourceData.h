@@ -13,7 +13,25 @@ using namespace v3d; // anti auto indenting
 class VResourceData
 {
 public:
-	typedef const void* TypeId;
+	class TypeId
+	{
+	public:
+		template<typename T>
+		static TypeId Create()
+		{
+			return TypeId(typeid(T).name());
+		}
+
+		vbool operator<(const TypeId& other) const;
+		vbool operator==(const TypeId& other) const;
+		vbool operator!=(const TypeId& other) const;
+
+	private:
+		TypeId(const vchar* in_strName);
+
+		const vchar* m_strName;
+	};
+	//typedef const void* TypeId;
 
 	virtual ~VResourceData();
 
@@ -36,7 +54,7 @@ private:
 template<typename T>
 VResourceData::TypeId VResourceData::GetTypeId()
 {
-	return reinterpret_cast<TypeId>(typeid(T).name());
+	return TypeId::Create<T>();
 }
 
 //-----------------------------------------------------------------------------

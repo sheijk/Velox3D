@@ -14,6 +14,10 @@
 
 //-----------------------------------------------------------------------------
 namespace v3d {
+	// forward declaration of VImage for CreateImage function
+	namespace image {
+		class VImage;
+	}
 namespace graphics {
 //-----------------------------------------------------------------------------
 
