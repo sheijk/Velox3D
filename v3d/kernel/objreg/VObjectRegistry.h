@@ -33,7 +33,7 @@ private:
 	virtual ~VObjectRegistry();
 	void operator=(const VObjectRegistry&);
 
-	static VObjectRegistry* m_pInstance;
+	static VObjectRegistry* s_pInstance;
 
 	typedef std::map<VObjectKey, VNamedObject*> ObjectKeyMap;
 
@@ -41,26 +41,34 @@ private:
 	std::string m_strLastGeneratedName;
 	vint64 m_nLastKeyNum;
 public:
+	std::string GetObjectDump() const;
+
 	/** in case a smart pointer might be used in future */
 	typedef VObjectRegistry* Pointer;
+
+	/** set the instance. may only be called once */
+	static void SetInstance(Pointer in_pInstance);
+
+	/** creates an instance of the object registry */
+	static Pointer CreateInstance();
 
 	/** get the single instance */
 	static Pointer GetInstance();	
 
 	/** register an object to the manager */
-	void RegisterObject(const VObjectKey& in_Name, VNamedObject& in_Object);
+	virtual void RegisterObject(const VObjectKey& in_Name, VNamedObject& in_Object);
 
 	/** unregister a registered object */
-	void UnregisterObject(VNamedObject& in_Object);
+	virtual void UnregisterObject(VNamedObject& in_Object);
 
 	/** get a registered object by name */
-	VNamedObject& GetObject(const VObjectKey& Name);
+	virtual VNamedObject& GetObject(const VObjectKey& Name);
 
 	/** get the name of a registered object */
-	VObjectKey GetKey(const VNamedObject& obj);
+	virtual VObjectKey GetKey(const VNamedObject& obj);
 
 	/** generate an unused object name */
-	VObjectKey GenerateKey();
+	virtual VObjectKey GenerateKey();
 };
 
 /**

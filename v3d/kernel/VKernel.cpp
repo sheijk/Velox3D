@@ -1,8 +1,12 @@
 #include "VKernel.h"
 //-----------------------------------------------------------------------------
+// workaround, weil GeObject in windows.h als GetObjectA redefiniert wird..
+#undef GetObject 
+#include <Kernel/ObjReg/VObjectRegistry.h>
 #include <Utils/smartptr/VGuards.h>
 #include <Error/VException.h>
-#include <Kernel/ObjReg/VObjectRegistry.h>
+#include <Kernel/IVApplication.h>
+#include "../ExampleService/IVExampleService.h"
 
 #include "tinyxml/tinyxml.h"
 
@@ -11,8 +15,6 @@
 using std::string;
 using std::cout;
 using std::endl;
-//-----------------------------------------------------------------------------
-
 //-----------------------------------------------------------------------------
 
 VKernel::VKernel()
@@ -29,6 +31,9 @@ VKernel::~VKernel()
  */
 void VKernel::ProcessIniFile(std::string in_strFileName)
 {
+	// create the object registry
+	CreateObjectRegistry();
+
 	// parse file
 	ParseFile(in_strFileName);
 
@@ -37,6 +42,8 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 
 	// load and init services
 	LoadServices();
+
+	cout << endl << endl << VObjectRegistry::GetInstance()->GetObjectDump() << endl;
 
 	// delegate control to app service
 	DelegateControl();
@@ -55,6 +62,14 @@ struct VServiceInfo
 	string strDesc;
 	string strFileName;
 };
+
+/**
+ * Creates the single instance of the object registry
+ */
+void VKernel::CreateObjectRegistry()
+{
+	VObjectRegistry::SetInstance(VObjectRegistry::CreateInstance());
+}
 
 /**
  * Parses the xml file and creates a list of service info entries
@@ -129,8 +144,10 @@ void VKernel::ParseFile(const string &in_strFileName)
 	cout << "main service: \"" << pMainNode->Value() << "\"" << endl;
 
 	// parse main service info
+	serviceInfo.Parse(pMainNode);
 
-	// create service DLL info
+	// create app service DLL info
+	m_App.Reset(new VServiceProxy(serviceInfo.strFileName));
 }
 
 /**
@@ -147,36 +164,50 @@ void VKernel::LoadServices()
 	// intialize services
 	ServiceList::iterator serviceIter = m_Services.begin();
 
-	try
+	// load all services
+	for( ; serviceIter != m_Services.end(); ++serviceIter )
 	{
-		for( ; serviceIter != m_Services.end(); ++serviceIter )
-		{
-			(*serviceIter)->Initialize(VObjectRegistry::GetInstance());
-		}
+		(*serviceIter)->Initialize(VObjectRegistry::GetInstance());
 	}
-	catch(VKernelException exc)
-	{
-		cout << "Error loading service in file <" 
-			 << exc.GetErrorFile() 
-			 << ">" << endl
-			 << "Error information: \""
-			 << exc.GetErrorString()
-			 << "\"" << endl;
-	}
+
+	// load the application
+//	m_App->Initialize(VObjectRegistry::GetInstance());
 }
 
 void VKernel::DelegateControl()
 {
 	// get application service
+	VObjectKey key("main");
+	IVApplication* pApp = QueryObject<IVApplication>(key);
+
+	VObjectKey servKey("exService");
+	IVExampleService* pServ = QueryObject<IVExampleService>(servKey);
 
 	// start it
+	if( 0 != pApp )
+	{
+		int ret = pApp->Main();
+
+		cout << "Return value of main service: " << ret << endl;
+	}
+	else
+	{
+		cout << "Error: \"main\" service could not be found" << endl;
+	}
 }
 
 void VKernel::Shutdown()
 {
-	// deinitialize all services
+	// deinitialize app
+	m_App->Shutdown();	
 
-	// unload dlls
+	// deinitialize all services
+	ServiceList::iterator serviceIter = m_Services.begin();
+
+	for( ; serviceIter != m_Services.end(); ++serviceIter )
+	{
+		(*serviceIter)->Shutdown();
+	}
 }
 
 //-----------------------------------------------------------------------------

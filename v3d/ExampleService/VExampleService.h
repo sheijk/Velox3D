@@ -1,26 +1,21 @@
-#ifndef V3D_EXAMPLESERVICE_H
-#define V3D_EXAMPLESERVICE_H
+#ifndef V3D_VEXAMPLESERVICE_H
+#define V3D_VEXAMPLESERVICE_H
 //-----------------------------------------------------------------------------
-#include <Kernel/ObjReg/VNamedObject.h>
-//-----------------------------------------------------------------------------
-#include <string>
+#include "kernel\objreg\VNamedObject.h"
+#include "IVExampleService.h"
 
 /**
- * An example service
+ * A service which implements the example interface
  */
-class VExampleService : public VNamedObject  
+class VExampleService : public IVExampleService
 {
-private:
-	/** The service's identifier */
-	static const std::string s_strId;
-
 public:
 	VExampleService();
 	virtual ~VExampleService();
 
-	/** get the id under which the service can be accessed */
-	static const std::string& GetServiceId();
+public:
+	virtual vint GiveMeFive();
 };
 
 //-----------------------------------------------------------------------------
-#endif // V3D_EXAMPLESERVICE_H
+#endif // V3D_VEXAMPLESERVICE_H

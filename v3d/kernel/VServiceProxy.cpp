@@ -41,7 +41,8 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	if( 0 == m_pInitFunction || 0 == m_pDeInitFunction )
 	{
 		V3D_THROW(VKernelException,
-			"could not get address of Initialize/DeInitialize function");
+			"could not get address of Initialize/DeInitialize function of DLL \""
+			+ m_strDLL + "\"");
 	}
 	
 	// call the init function

@@ -18,6 +18,9 @@ public:
 	/** create with name */
 	VObjectKey(const std::string& in_strName);
 
+	/** create with name */
+	VObjectKey(const char* in_pcName);
+
 	/** destructor.. */
 	virtual ~VObjectKey();
 

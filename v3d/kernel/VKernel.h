@@ -18,6 +18,7 @@
 class VKernel
 {
 private:
+	void CreateObjectRegistry();
 	void ParseFile(const std::string& in_strFileName);
 	void GenerateInitSequence();
 	void LoadServices();
@@ -28,6 +29,7 @@ private:
 	typedef std::list<ServicePointer> ServiceList;
 
 	ServiceList m_Services;
+	ServicePointer m_App;
 public:
 	VKernel();
 	virtual ~VKernel();
