@@ -25,9 +25,9 @@ void VOpenGLIndexMesh::Render()
 {
 	const vuint iNumElements = m_IndexData.nCount;
 
-	const vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
-	const vint32* pIndexBuffer = m_IndexData.hBuffer->GetDataAddress();
-	const vfloat32* pTexBuffer = m_TexCoordData.hBuffer->GetDataAddress();
+	const vfloat32* pBuffer = reinterpret_cast<vfloat32*>(m_TriangleData.hBuffer->GetDataAddress());
+	const vint32* pIndexBuffer = reinterpret_cast<vint32*>(m_IndexData.hBuffer->GetDataAddress());
+	const vfloat32* pTexBuffer = reinterpret_cast<vfloat32*>(m_TexCoordData.hBuffer->GetDataAddress());
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);

@@ -72,10 +72,6 @@ vint VExampleApp::Main()
 	IVButton* pLeftMouseButton;
 	IVButton* pRightMouseButton;
 
-	IVDevice::FloatBufferHandle VertexHandle;
-	IVDevice::IntBufferHandle VertexIndexHandle;
-	IVDevice::FloatBufferHandle TexHandle;
-
 	util::importer::VModel3D Model;
 	util::importer::VOBJModelImporter Importer;
 	util::importer::VQuake2BspImporter bspImporter;
@@ -115,14 +111,17 @@ vint VExampleApp::Main()
 
 	// create a test mesh
 
-	VFloatBuffer VertexData(Model.m_Objects[0]->m_VerticesList,
-		Model.m_Objects[0]->m_iNumVertices*3);
+	IVDevice::Buffer VertexData(
+		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_VerticesList),
+		Model.m_Objects[0]->m_iNumVertices * 3 * sizeof(float));
 
-	VIntBuffer VertexIndex(Model.m_Objects[0]->m_pVertexIndex,
-	Model.m_Objects[0]->m_iNumFaces *3);
+	IVDevice::Buffer VertexIndex(
+		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_pVertexIndex),
+		Model.m_Objects[0]->m_iNumFaces * 3 * sizeof(int));
 
-	VFloatBuffer TexData(Model.m_Objects[0]->m_TextureCoordsList,
-		Model.m_Objects[0]->m_iNumTexCoords2f * 2);
+	IVDevice::Buffer TexData(
+		reinterpret_cast<vbyte*>(Model.m_Objects[0]->m_TextureCoordsList),
+		Model.m_Objects[0]->m_iNumTexCoords2f * 2 * sizeof(float));
 
 
 	//VFloatBuffer VertexData((vfloat32*)bspImporter.m_pVertices,bspImporter.m_iNumVertices *3);
@@ -130,12 +129,25 @@ vint VExampleApp::Main()
 	//VFloatBuffer TexData(bspImporter.m_TextureCoordsList,
 	//	Model.m_Objects[0]->m_iNumTexCoords2f * 2);
 
-
+	IVDevice::BufferHandle VertexHandle;
+	IVDevice::BufferHandle VertexIndexHandle;
+	IVDevice::BufferHandle TexHandle;
 
 	//assign handles
-	VertexHandle = pDevice->CreateBuffer(&VertexData, VFloatBuffer::CopyData);
-	VertexIndexHandle = pDevice->CreateBuffer(&VertexIndex, VIntBuffer::CopyData);
-	TexHandle = pDevice->CreateBuffer(&TexData, VFloatBuffer::CopyData);
+	VertexHandle = pDevice->CreateBuffer(
+		IVDevice::VertexBuffer, 
+		&VertexData, 
+		IVDevice::Buffer::CopyData
+		);
+	VertexIndexHandle = pDevice->CreateBuffer(
+		IVDevice::VertexBuffer,
+		&VertexIndex, 
+		IVDevice::Buffer::CopyData
+		);
+	TexHandle = pDevice->CreateBuffer(
+		IVDevice::VertexBuffer,
+		&TexData, 
+		IVDevice::Buffer::CopyData);
 
 
 	/*MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
@@ -149,14 +161,17 @@ vint VExampleApp::Main()
 		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
 		1);*/
 
-	MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
-		0, Model.m_Objects[0]->m_iNumVertices*3,
-		1);
-	MeshDesc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle,
+	MeshDesc.triangleVertices = VMeshDescription::ByteDataRef(
+		VertexHandle,
+		0, 
+		Model.m_Objects[0]->m_iNumVertices * 3,
+		1
+		);
+	MeshDesc.triangleIndices = VMeshDescription::ByteDataRef(VertexIndexHandle,
 		0, Model.m_Objects[0]->m_iNumFaces *3,
 		1);
 
-	MeshDesc.triangleCoords = VMeshDescription::FloatDataRef(TexHandle,
+	MeshDesc.triangleCoords = VMeshDescription::ByteDataRef(TexHandle,
 		0, Model.m_Objects[0]->m_iNumTexCoords2f *2,
 		1);
 

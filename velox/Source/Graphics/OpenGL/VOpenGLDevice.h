@@ -35,15 +35,21 @@ public:
 	VOpenGLDevice(graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
 	virtual ~VOpenGLDevice();
 
-	virtual FloatBufferHandle CreateBuffer(
-		VFloatBuffer* in_pBuffer, 
-		FloatBufferCopyMode in_CopyMode = VFloatBuffer::CopyData
+	virtual BufferHandle CreateBuffer(
+		BufferType in_Type,
+		Buffer* in_Buffer,
+		BufferCopyMode in_CopyMode = VBufferBase::CopyData
 		);
 
-	virtual IntBufferHandle CreateBuffer(
-		VIntBuffer* in_pBuffer, 
-		IntBufferCopyMode in_CopyMode = VIntBuffer::CopyData
-		);
+	//virtual FloatBufferHandle CreateBuffer(
+	//	VFloatBuffer* in_pBuffer, 
+	//	FloatBufferCopyMode in_CopyMode = VFloatBuffer::CopyData
+	//	);
+
+	//virtual IntBufferHandle CreateBuffer(
+	//	VIntBuffer* in_pBuffer, 
+	//	IntBufferCopyMode in_CopyMode = VIntBuffer::CopyData
+	//	);
 
 	virtual void DeleteBuffer(BufferHandle& in_Buffer);
 
@@ -61,6 +67,8 @@ private:
 	/** the float buffers */
 	VBufferManager<VFloatBuffer> m_FloatBuffer;
 	VBufferManager<VIntBuffer> m_IntBuffer;
+
+	VBufferManager<Buffer> m_Buffers;
 
 	/** store all render methods here */
 	VRenderMethodRegistry m_RenderMethods;

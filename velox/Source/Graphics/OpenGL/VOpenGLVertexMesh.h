@@ -21,8 +21,8 @@ class VOpenGLVertexMesh : public VBaseMesh
 {
 	typedef VVector<vfloat32, 3> Vertex;
 
-	VMeshDescription::FloatDataRef m_TriangleData;
-	VMeshDescription::FloatDataRef m_ColorData;
+	VMeshDescription::ByteDataRef m_TriangleData;
+	VMeshDescription::ByteDataRef m_ColorData;
 
 public:
 	VOpenGLVertexMesh(const VMeshDescription& in_Descr);

@@ -8,7 +8,7 @@ zu laden. Nett wäre es wenn die O.R. das abfangen kann, wenn in den xml files
 die gleichen services stehen -[ins]
 
 <ins>: vfs bug:wenn ich eine date mit VReadAccess oeffnen will bekomme ich eine
-exception: vfs does not allow writeacess!
+exception: vfs does not allow writeacess! <- stimmt gar nicht! ;) -- sheijk
 
 --------------------------------------------------------------------------------
 ----- current assigned tasks:
@@ -25,6 +25,13 @@ template member konvertiert?
 
 --------------------------------------------------------------------------------
 ----- personal todo:
+	.gfx device:
+	buffer aendern
+	render states anwenden
+	render state category
+	materials erzeugen
+	mesh: render state list liefern
+
 
 	SmartPointer Klasse fuer ObjectRegistry (wird beim Loeschen eines
 	Objekts auf 0 gesetzt)
@@ -60,6 +67,9 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+18.02.2004
+Int/Float Buffer durch "generische" Buffer ersetzt
 
 15.02.2004
 Den Code aus dem CVS gefixt.. (input manager und window service)

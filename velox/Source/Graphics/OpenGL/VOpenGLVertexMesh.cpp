@@ -46,10 +46,10 @@ void VOpenGLVertexMesh::Render()
 
 	const vuint cnVertexCount = m_TriangleData.nCount;
 
-	vfloat32* pBuffer = m_TriangleData.hBuffer->GetDataAddress();
+	vfloat32* pBuffer = reinterpret_cast<vfloat32*>(m_TriangleData.hBuffer->GetDataAddress());
 	pBuffer += m_TriangleData.nStart;
 
-	vfloat32* pColorBuffer = m_ColorData.hBuffer->GetDataAddress();
+	vfloat32* pColorBuffer = reinterpret_cast<vfloat32*>(m_ColorData.hBuffer->GetDataAddress());
 	pColorBuffer += m_ColorData.nStart;
 
 	for(vuint nVertex = 0; nVertex < cnVertexCount; nVertex++)

@@ -40,7 +40,7 @@ VOpenGLDevice::VOpenGLDevice(VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	SetDisplay();
 
-	m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
+	//m_RenderMethods.RegisterRenderMethod(m_PlainRenderMethod);
 	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
 	m_RenderMethods.RegisterRenderMethod(m_IndexRenderMethod);
 }
@@ -63,34 +63,27 @@ VOpenGLDevice::~VOpenGLDevice()
 //}
 //-----------------------------------------------------------------------------
 
-IVDevice::FloatBufferHandle VOpenGLDevice::CreateBuffer(
-	VFloatBuffer* in_pBuffer,
-	FloatBufferCopyMode in_CopyMode
+IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
+	BufferType in_Type,
+	Buffer* in_pBuffer,
+	BufferCopyMode in_CopyMode
 	)
 {
-	VFloatBuffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
-	m_FloatBuffer.Add(pBuffer);
+	Buffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
+	m_Buffers.Add(pBuffer);
 
-	return FloatBufferHandle(pBuffer);
+	return BufferHandle(pBuffer);
 }
+
 //-----------------------------------------------------------------------------
 
-IVDevice::IntBufferHandle VOpenGLDevice::CreateBuffer(
-	VIntBuffer* in_pBuffer,
-	IntBufferCopyMode in_CopyMode
-	)
-{
-	VIntBuffer* pBuffer = in_pBuffer->CreateCopy(in_CopyMode);
-	m_IntBuffer.Add(pBuffer);
-
-	return IntBufferHandle(pBuffer);
-}
-//TODO lacks for int support -ins
+//TODO lacks for int support -ins ; lacks for any support ;) -- sheijk
 void VOpenGLDevice::DeleteBuffer(BufferHandle& in_Buffer)
 {
-	VFloatBuffer* t = reinterpret_cast<VFloatBuffer*>(in_Buffer);
-	m_FloatBuffer.Delete(t);
-	in_Buffer = t;
+	vout << "VOpenGLDevice.DeleteBuffer tut grad nix" << vendl;
+	//VFloatBuffer* t = reinterpret_cast<VFloatBuffer*>(in_Buffer);
+	//m_FloatBuffer.Delete(t);
+	//in_Buffer = t;
 }
 
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VMeshDescription& in_pMeshDesc)

@@ -9,7 +9,16 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 
 /** needed for VMeshDescription in some cases */
-class VBufferBase {};
+class VBufferBase
+{
+public:
+	enum CopyMode
+	{
+		CopyData,
+		DropData
+	};
+
+};
 
 template<typename T>
 struct IVBuffer : public VBufferBase
@@ -59,12 +68,6 @@ public:
 		m_pBuffer = 0;
 		m_nSize = 0;
 	}
-
-	enum CopyMode
-	{
-		CopyData,
-		DropData
-	};
 
 	/**
 	 * Creates another buffer containing the same data like the existing one
