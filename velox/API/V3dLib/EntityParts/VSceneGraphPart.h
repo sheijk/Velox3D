@@ -12,20 +12,19 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-//TODO: die childs werden nirgendwo geloescht.. entweder korrekt in destruktor
-// deactivate/remove/.. loeschen, oder intern einfach VSharedPtr<VSceneGraphPart>
-// statt VSceneGraphPart* benutzen. ausserdem copy ctor + assignment operator
-// private machen, weil sonst ploetzlich sg nodes in mehreren anderen nodes
-// childs sein koennen --sheijk
 class VSceneGraphPart
 {
+private:
+	//no copiing
+	void operator=(const VSceneGraphPart&);
+	VSceneGraphPart(const VSceneGraphPart&);
+
 public:
-	typedef VPointer<VSceneGraphPart>::SharedPtr SGPartPtr;
-	
+		
 	VSceneGraphPart();
 	VSceneGraphPart(VSceneGraphPart* in_pParent);
 
-	virtual ~VSceneGraphPart() {}
+	virtual ~VSceneGraphPart();
 
 	/**
 	 * Updates all children and the VRigidBodyParts named "body"
@@ -62,29 +61,30 @@ public:
 
 	/**
 	 * Returns the absolute rigid body transformation.
-	 * The absolute transformation is calculate 
-	 *
 	 */
 	virtual VRBTransform GetAbsoluteTransform();
 
 	/**
-	 * Adds a new child 
+	 * Adds a new child and sets the new parent for this child.
+	 * AddChild does not allow duplicate children. 
 	 *
 	 */
 	virtual void AddChild(VSceneGraphPart* in_pChild);
 
 	/**
-	 * Removes a child
+	 * Removes and deactivates a child.
 	 */
 	virtual void RemoveChild(VSceneGraphPart* in_pChild);
 
 	/** 
-	 * When called, the part registers itself to it's parent. 
+	 * When called, the part registers itself to it's parent and
+	 * activates its children
 	 */
 	virtual void Activate();
 
     /**
-	 * When called, the part unregisters itself from it's parent.
+	 * When called, the part unregisters itself from it's parent and
+	 * deactivates its children
 	 */
 	virtual void Deactivate();
 
