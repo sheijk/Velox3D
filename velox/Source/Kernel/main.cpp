@@ -14,6 +14,12 @@ namespace
 	VPointer<VKernel>::AutoPtr g_pKernel;
 }
 
+namespace v3d {
+	const char* GetModuleName()
+	{
+		return "app";
+	}
+} // namespace v3d
 //-----------------------------------------------------------------------------
 
 /** the main function */

@@ -7,11 +7,13 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 class VObjectRegistry;
-//class IVMemoryManager;
+class IVMemLogger;
 
 struct VModuleParams
 {
 	VObjectRegistry* pObjectRegistry;
+	IVMemLogger* pMemLogger;
+	//vuint moduleId;
 //	IVMemoryManager* pMemoryManager;
 };
 

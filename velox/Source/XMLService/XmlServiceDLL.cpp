@@ -12,13 +12,18 @@ class VXmlModule : public v3d::VModuleBase
 	v3d::VPointer<v3d::xml::VXMLService>::AutoPtr m_pXMLService;
 
 public:
-	VXmlModule() : VModuleBase("xml") 
+	VXmlModule() // : VModuleBase("xml") 
 	{
 	}
 
 	virtual void Initialize();
 	virtual void Shutdown();
 };
+
+const char* v3d::GetModuleName()
+{
+	return "xml";
+}
 
 namespace {
 	VXmlModule g_XMLModule;

@@ -72,13 +72,18 @@ class VVeloxModules : public v3d::VModuleBase
 	VPointer<VErrorConsoleListener>::AutoPtr g_pConsoleListener;
 
 public:
-	VVeloxModules() : VModuleBase("services") 
+	VVeloxModules()
 	{
 	}
 
 	virtual void Initialize();
 	virtual void Shutdown();
 };
+
+const char* v3d::GetModuleName()
+{
+	return "services";
+}
 
 namespace {
 	VVeloxModules g_VeloxModules;

@@ -118,6 +118,8 @@ void VKernel::LoadServices()
 	// load all services
 	for( ; serviceIter != m_Services.end(); ++serviceIter )
 	{
+		VServiceProxy& service(**serviceIter);
+
 		(*serviceIter)->Initialize(VObjectRegistry::GetInstance());
 	}
 

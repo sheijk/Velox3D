@@ -21,6 +21,14 @@ VTextureStage::VTextureStage(VStringParam in_strFileName, graphics::IVDevice& de
 	CreatePreviewMesh(device);
 }
 
+VTextureStage::VTextureStage(image::VImage& in_Image, graphics::IVDevice& device) :
+	m_hPreviewMesh(0)
+{
+	m_pImage = SharedPtr(new image::VImage(in_Image));
+
+	CreatePreviewMesh(device);
+}
+
 VTextureDistributionOptions& VTextureStage::Distribution()
 {
 	return m_Distri;
@@ -34,6 +42,23 @@ const VTextureDistributionOptions& VTextureStage::Distribution() const
 VStringRetVal VTextureStage::GetTextureFileName()
 {
 	return m_TextureFileName;
+}
+
+vbyte VTextureStage::GetPixelContribution(
+	vuint x, vuint y, vfloat32 height, vuint comp
+	)
+{
+	vbyte val = m_pImage->GetPixelData()[(x+y*m_pImage->GetWidth())*3+comp];
+
+	if( height >= Distribution().minHeight &&
+		height <= Distribution().maxHeight )
+	{
+		return val;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 v3d::image::VImage& VTextureStage::Image()
@@ -66,14 +91,21 @@ void VTextureStage::CreatePreviewMesh(graphics::IVDevice& device)
 	quad.GenerateCoordinates();
 	quad.GenerateTexCoords();
 
+	for(vuint vertexNum = 0; vertexNum < quad.GetVertexBuffer().GetSize();
+		++vertexNum)
+	{
+		quad.GetVertexBuffer()[vertexNum].position.z = -1.0f;
+	}
+
 	v3d::graphics::VMeshDescription md = BuildMeshDescription(
 		device, quad);
 	
 	// create a texture material
-	graphics::VMaterialDescription mat = graphics::BuildTextureMaterial(
-		&device,
-		m_TextureFileName);
-	//mat.AddTexture(graphics::CreateTextureRef(device, *m_pImage));
+	graphics::VMaterialDescription mat;
+	//graphics::BuildTextureMaterial(
+	//	&device,
+	//	m_TextureFileName);
+	mat.AddTexture(graphics::CreateTextureRef(device, *m_pImage));
 	
 	// create mesh
     m_hPreviewMesh = device.CreateMesh(md, mat);

@@ -31,34 +31,52 @@ template member konvertiert?
 
 -------------------------------------------------------------------------------
 ----- personal todo:
- glTexParameter
 	.roadmap
-	IVCamera
-	.terrain: zwischen lod stufen umschalten
-	.terrain: cracks entfernen
-	.terrain: texturen (eine pro chunk, eine total?)
-	.terrain: wireframe + texturierte darstellung
-	.editor: message basierte plugin kommunikation?
-	.editor: message system konkret entwerfen
-	IVDevice im window loeschen + dafuer sorgen dass das loeschen geht :)
-	VMaterialDescription.AddTexture: TextureRef selbst anlegen oder kopieren
-	VBuffer(vbyte*,count, Copy);
-	VBuffer(10) -> speicher selber allokieren
-	meshhandle + mat wieder trennen?
-	PolygonMode enums in MatDescr mit PM prefixen
-	?editor: terrain xml format
-	?editor: texturen setzen fuer terrain
-	?editor: heightmap importieren fuer terrain
-	editor: terrain texture generator
-	device: meshhandle als klasse? (mit default initialisierung..)
-	terrain: umbau auf geometry clip maps?
-	terrain: chunks mit konstanter vertex anzahl, aber unterschiedlicher groesse?
-	terrain: VRectangle aus VTerrainLodChunk.h auslagern
-	terrain: detail texturen
-	terrain: bessere lod wahl heuristik (screen space error basierend?)
-	terrain: sanfte lod ueberblendungen (?)
-	device: info ueber nicht geloeschte buffer
-	terrain: VLodHeightmap entfernen(?) oder umbaun (nicht mehrere arrays)
+	memory management
+	refactorings
+		texture manager
+		device buffer management, etc
+	terrain texture editor
+	terrain renderer
+
+	VImage: copy c'tor, usw
+
+	.gfx device
+		device: reference counting + loeschen von unbenutzten buffer
+		verschiedenen bild tiefen unterstuetzen
+		VMaterialDescription.AddTexture: TextureRef selbst anlegen oder kopieren
+		VBuffer(vbyte*,count, Copy);
+		VBuffer(10) -> speicher selber allokieren
+		meshhandle + mat wieder trennen?
+		gfx device: glViewPort setzen, fuer window resize, etc
+		PolygonMode enums in MatDescr mit PM prefixen
+		textur/geometrie manager: zuordnung file-buffer
+		meshhandle als klasse? (mit default initialisierung..)
+		info ueber nicht geloeschte buffer
+
+		mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
+		mat descr. durch alternativ system ersetzen? (default mat zurueckgeben,
+		und dass dann mit effekten veraendern?) <- effekte als ergaenzung der md
+		konzept fuer material effekte
+
+	.math
+		interpolation zwischen 2 VArray2ds, etc
+
+	.editor
+		terrained: preview in 3d
+		IVDevice im window loeschen + dafuer sorgen dass das loeschen geht :)
+
+	.terrain
+		umbau auf geometry clip maps?
+		bessere lod wahl heuristik (screen space error basierend?)
+		sanfte lod ueberblendungen (?)
+		VLodHeightmap entfernen(?) oder umbaun (nicht mehrere arrays)
+
+	image service: schreiben von bildern
+	.later
+		?editor: terrain xml format
+		?editor: texturen setzen fuer terrain
+		?editor: heightmap importieren fuer terrain
 
 	geometry generation:
 	das hier dokumentieren:
@@ -74,32 +92,20 @@ template member konvertiert?
 	.refactorings
 
 	.mem manager
-	mem manager fuer leak reports
-	simple malloc/dealloc version bauen
-	leak finder bauen, evtl flipcode leak finder einbaun?
-	in vfs integrieren
-	in restliche services integrieren
-	managed objects schreiben
-
-	.geometry
-	geometrie welche aus mehreren meshes + models besteht
+		mem manager fuer leak reports
+		simple malloc/dealloc version bauen
+		leak finder bauen, evtl flipcode leak finder einbaun?
+		in vfs integrieren
+		in restliche services integrieren
+		managed objects schreiben
 
 	.drawlist:
-	nach states sortieren
-
-	.gfx device:
-	mesh erzeugung: evtl aendern, und MaterialHandle statt MatDescr als param
-	mat descr. durch alternativ system ersetzen? (default mat zurueckgeben,
-	und dass dann mit effekten veraendern?) <- effekte als ergaenzung der md
-	konzept fuer material effekte
-	textur manager (+ vertex buffer mngr?), der die resourcen verwaltung
-	uebernimmt
+		nach states sortieren
 
 	.scene graph
-	nodes sollten irgendwann auch geloescht werden (shared ptr?)
-	zusammenarbeit mit physik, etc (-> entity system)
+		nodes sollten irgendwann auch geloescht werden (shared ptr?)
+		zusammenarbeit mit physik, etc (-> entity system)
 
-	"reset" funktion fuer Shared Pointer(?)
 	Service Abhaengigkeiten Dokumentieren
 
 	Dokumentation
@@ -107,7 +113,6 @@ template member konvertiert?
 
 	Netzwerk, Scripting planen
 	SceneGraph / Engine Architektur
-	Editor Plugin System Design
 	Auf die Langnese Insel ziehen
 
 Doku:
@@ -129,6 +134,18 @@ Doku:
 ----- last things sheijk finished:
 
 log:
+
+21.07.2004
+Erste Version des Memory Leak Finders ist fertig, bisher nur in der CoreLib
+eingebaut. Kann Mem Leaks in allen Modulen entdecken, und Ausgeben
+
+07.07.2004
+Terrain Texture Generator laedt Heightmap
+einfaches erstellen von terrain texturen
+anzeigen von terrain heightmap + textur
+
+05.07.2004
+Terrain Texture Generator: User Interface zum Grossteil fertig
 
 04.07.2004
 Fehler im Image Service und VImage gefixt

@@ -24,7 +24,7 @@ private:
 	VPointer<VEditorApp>::SharedPtr m_pEditorApp;
 };
 
-VEditorModule::VEditorModule() : VModuleBase("editor")
+VEditorModule::VEditorModule()
 {
 }
 
@@ -38,11 +38,16 @@ void VEditorModule::Shutdown()
 	m_pEditorApp.Release();
 }
 
-namespace
-{
-	VEditorModule g_theEditorModule;
-}
-
 //-----------------------------------------------------------------------------
 }} // namespace v3d::editor
+//-----------------------------------------------------------------------------
+const char* v3d::GetModuleName()
+{
+	return "editor";
+}
+
+namespace
+{
+	v3d::editor::VEditorModule g_theEditorModule;
+}
 //-----------------------------------------------------------------------------

@@ -39,6 +39,14 @@ public:
 		iBPP = bpp;
 	}
 
+	explicit VImage(const VImage& in_Source)
+	{
+		pData = new ImageData(in_Source.pData, ImageData::CopyData);
+		iHeight = in_Source.iHeight;
+		iWidth = in_Source.iWidth;
+		iBPP = in_Source.iBPP;
+	}
+
 	~VImage()
 	{
 		//TODO: ich fass es nicht.. -- sheijk
@@ -53,6 +61,8 @@ public:
 	vuint GetBPP() const { return iBPP; }
 
 	ImageData& GetData() { return *pData; }
+
+	vbyte* GetPixelData() { return pData->GetDataAddress(); }
 
 	vuint GetBitsPerPixel() const {	return iBPP; }
 

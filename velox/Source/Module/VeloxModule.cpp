@@ -20,13 +20,18 @@
 //-----------------------------------------------------------------------------
 using namespace v3d;
 //-----------------------------------------------------------------------------
+namespace v3d {
+	void SetMemLogger(IVMemLogger* in_pMemLogger);
+} // namespace v3d
+//-----------------------------------------------------------------------------
 
-VModuleBase::VModuleBase(VStringParam in_pcModuleName)
+VModuleBase::VModuleBase(/*VStringParam in_pcModuleName*/)
 {
 	if( s_pModule == 0 )
 	{
 		s_pModule = this;
-		s_pcModuleName = in_pcModuleName;
+		s_pcModuleName = v3d::GetModuleName();
+		//s_pcModuleName = in_pcModuleName;
 	}
 	else
 		V3D_THROW(VModuleLoadFailure, "more than on module instances");
@@ -57,6 +62,10 @@ const vchar* VModuleBase::GetModuleName()
 VModuleBase* VModuleBase::s_pModule(0);
 const vchar* VModuleBase::s_pcModuleName(0);
 
+namespace {
+	vuint g_ModuleId = 0;
+};
+
 //-----------------------------------------------------------------------------
 //void SetMemoryManager(
 //	v3d::IVMemoryManager* in_pMemoryManager,
@@ -73,6 +82,9 @@ V3D_MODULE_API void Initialize(VModuleParams* in_pParams)
 
 	// store the object registry instance
 	VObjectRegistry::SetInstance(in_pParams->pObjectRegistry);
+
+	//g_ModuleId = in_pParams->moduleId;
+	SetMemLogger(in_pParams->pMemLogger);
 
 	if( VModuleBase::GetInstance() != 0 )
 		VModuleBase::GetInstance()->Initialize();

@@ -24,6 +24,7 @@ class VTextureStage
 {
 public:
 	VTextureStage(VStringParam in_strFileName, graphics::IVDevice& device);
+	VTextureStage(image::VImage& in_Image, graphics::IVDevice& device);
 
 	VTextureDistributionOptions& Distribution();
 
@@ -35,6 +36,8 @@ public:
 
 	void AddPreviewMesh(graphics::IVDrawList& in_DrawList);
 	void RemovePreviewMesh(graphics::IVDrawList& in_DrawList);
+
+	vbyte GetPixelContribution(vuint x, vuint y, vfloat32 height, vuint comp);
 
 private:
 	// no copy'ing

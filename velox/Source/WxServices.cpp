@@ -30,7 +30,7 @@ class VWxModule : public VModuleBase
 	VPointer<wxwindows::VWxConnector>::AutoPtr m_pWxConnector;
 
 public:
-	VWxModule() : VModuleBase("wx") 
+	VWxModule()// : VModuleBase("wx") 
 	{
 	}
 
@@ -57,6 +57,11 @@ void VWxModule::Shutdown()
 
 	m_pWxConnector.Release();
 	wxEntryCleanup();
+}
+
+const char* v3d::GetModuleName()
+{
+	return "wx";
 }
 
 //-----------------------------------------------------------------------------

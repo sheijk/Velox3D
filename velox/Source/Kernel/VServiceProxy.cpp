@@ -7,9 +7,9 @@ using namespace std;
 //-----------------------------------------------------------------------------
 using std::string;
 
-//extern v3d::IVMemoryManager* GetMemoryManager();
-
 namespace v3d {
+	IVMemLogger* GetMemLogger();
+
 namespace kernel {
 //-----------------------------------------------------------------------------
 
@@ -65,6 +65,7 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	// call the init function
 	VModuleParams modParams;
 	modParams.pObjectRegistry = in_pObjectRegistry;
+	modParams.pMemLogger = GetMemLogger();
 	//modParams.pMemoryManager = GetMemoryManager();
 	m_pInitFunction(&modParams);
 	m_bIsLoaded = true;
