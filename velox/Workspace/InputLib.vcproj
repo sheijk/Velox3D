@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="WindowService"
-	ProjectGUID="{C2E15749-4341-4E4B-1337-07F8B0112B91}"
-	RootNamespace="WindowService"
+	Name="InputLib"
+	ProjectGUID="{556A30B2-22CB-47C8-A073-CDCD6D561337}"
+	RootNamespace="GRaphicsService"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -15,13 +15,13 @@
 			Name="Debug|Win32"
 			OutputDirectory="../Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\wxWindows\include;..\Local\ExternalLibs\wxWindows\contrib\include;../Local\ExternalLibs\wxWindows\lib\mswdlld;../Local/ExternalLibs/gmtl;../Local/ExternalLibs"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;WINDOWSERVICE_EXPORTS"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs;../Local/ExternalLibs/gmtl"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -33,16 +33,9 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/extgl/extgl.lib dinput8.lib dxguid.lib"
-				OutputFile="$(OutDir)/WindowService.dll"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/$(ProjectName).pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/WindowService.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				AdditionalDependencies="dinput8.lib dxguid.lib"
+				AdditionalLibraryDirectories=""/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -57,8 +50,6 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -68,12 +59,12 @@
 			Name="Release|Win32"
 			OutputDirectory="../Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local\ExternalLibs\wxWindows\include;..\Local\ExternalLibs\wxWindows\contrib\include;../Local\ExternalLibs\wxWindows\lib\mswdlld;../Local/ExternalLibs/gmtl;../Local/ExternalLibs"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;__WINDOWS__;__WXMSW__;WINDOWSERVICE_EXPORTS"
+				AdditionalIncludeDirectories="../API;../Local/ExternalLibs;../Local/ExternalLibs/gmtl"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
 				RuntimeLibrary="1"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -83,18 +74,9 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/extgl/extgl.lib"
-				OutputFile="$(OutDir)/WindowService.dll"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories=""
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/$(ProjectName).pdb"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/WindowService.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				AdditionalDependencies="dinput8.lib dxguid.lib"
+				AdditionalLibraryDirectories=""/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -109,8 +91,6 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -121,50 +101,74 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Interface"
+			Name="Interfaces"
 			Filter="">
 			<File
-				RelativePath="..\Api\V3d\Window\IVWindow.h">
+				RelativePath="..\Api\V3d\Input\IVAbsoluteAxis.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Window\IVWindowFrame.h">
+				RelativePath="..\Api\V3d\Input\IVButton.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Window\IVWindowManager.h">
+				RelativePath="..\Api\V3d\Input\IVInputDevice.h">
 			</File>
 			<File
-				RelativePath="..\Api\V3d\Window\IVWxConnector.h">
+				RelativePath="..\Api\V3d\Input\IVInputManager.h">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Input\IVRelativeAxis.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Implementation"
 			Filter="">
 			<File
-				RelativePath="..\Source\WindowService\VWindowBase.cpp">
+				RelativePath="..\Source\InputLib\VDIAbsoluteAxis.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\VWindowBase.h">
+				RelativePath="..\Source\InputLib\VDIAbsoluteAxis.h">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\VWindowManagerBase.cpp">
+				RelativePath="..\Source\InputLib\VDIButton.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\VWindowManagerBase.h">
+				RelativePath="..\Source\InputLib\VDIButton.h">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\VWindowManagerWin32.cpp">
+				RelativePath="..\Source\InputLib\VDIInputDevice.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\VWindowManagerWin32.h">
+				RelativePath="..\Source\InputLib\VDIInputDevice.h">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\VWindowWin32.cpp">
+				RelativePath="..\Source\InputLib\VDIInputManager.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\VWindowWin32.h">
+				RelativePath="..\Source\InputLib\VDIInputManager.h">
 			</File>
 			<File
-				RelativePath="..\Source\WindowService\WindowServiceDLL.cpp">
+				RelativePath="..\Source\InputLib\VDIKeyboardButton.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\InputLib\VDIKeyboardButton.h">
+			</File>
+			<File
+				RelativePath="..\Source\InputLib\VDIMouseAxis.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\InputLib\VDIMouseAxis.h">
+			</File>
+			<File
+				RelativePath="..\Source\InputLib\VDIMouseButton.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\InputLib\VDIMouseButton.h">
+			</File>
+			<File
+				RelativePath="..\Source\InputLib\VDIRelativeAxis.cpp">
+			</File>
+			<File
+				RelativePath="..\Source\InputLib\VDIRelativeAxis.h">
 			</File>
 		</Filter>
 	</Files>

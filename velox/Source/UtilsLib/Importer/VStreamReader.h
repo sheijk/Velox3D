@@ -8,14 +8,15 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace util {
+namespace importer {
 //-----------------------------------------------------------------------------
 //using namespace v3d::vfs;
 
 /**
-* VStreamReader reads out a stream and creates an buffer
-* @author insane
-* @version 1.0
-*/
+ * VStreamReader reads out a stream and creates an buffer
+ * @author insane
+ * @version 1.0
+ */
 
 class VStreamReader
 {
@@ -39,6 +40,7 @@ public:
 };
 
 //-----------------------------------------------------------------------------
+} // namespace importer
 } // v3d
 } // util
 //-----------------------------------------------------------------------------

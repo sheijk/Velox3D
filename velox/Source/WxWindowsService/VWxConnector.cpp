@@ -45,7 +45,7 @@ IVWindowFrame* VWxConnector::GetCurrentFrame()
 
 vuint VWxConnector::GetNumElements()
 {
-	return m_FrameList.size();
+	return (vuint)m_FrameList.size();
 }
 
 //-----------------------------------------------------------------------------

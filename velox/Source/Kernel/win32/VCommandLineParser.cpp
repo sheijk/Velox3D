@@ -135,8 +135,8 @@ void VCommandLineParser::AnalyseCommandLine()
 	vint start=-1;
 
 	// Loop through argument line and search for entities.
-	vuint i;
-	for (i=0; i<args.length(); i++)
+	vint i;
+	for (i=0; i  < (vint)args.length(); i++)
 	{
 
 		// Found new entity.

@@ -19,7 +19,7 @@ public:
 
 	typedef VPointer<IVWindow>::SharedPtr IVWindowPtr;
 
-	virtual IVWindowPtr CreateWindow(VStringParam in_pName) = 0;
+	virtual IVWindowPtr QueryWindow(VStringParam in_pName) = 0;
 	virtual ~IVWindowManager() {};
 
 };

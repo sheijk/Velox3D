@@ -8,16 +8,22 @@ im Debug Build von v3dConsole
 Unbehandelte Ausnahme (Zugriffsverletzung in VObjectRegistry.cpp/Z108)
 
 waer praktisch wenn Konsolen + Editor Fenster resizable waeren 
-- unwichtig im moment + aufwaendig...
+- unwichtig im moment + aufwaendig... -ins
 
 
 Current assigned tasks:
--developing editor framework
 -creating rendering methods and implementing gfx service
 
 
 -------------------------------------------------------------------------------
 Personal Notes:
+
+TODO List:
+- Console is closeable with alt f4
+- Console crashes on some machines
+- InputManager should be deactivated by loosing focus  
+
+
 
 - Cinema4d uses left handed coordinate system.
   On intel machine swap byte order!
@@ -27,11 +33,11 @@ Personal Notes:
   which chunks our app should handle??
   Should we use vfs for loading model??
 
-TODO List:
--Console is closeable with alt f4
--Console crashes on some machines
-
 Done List:
+
+28.01.04
+- Added input manager into workspace and project
+
 
 13.01.04
 - Added glColor to normal VertexMesh rendering

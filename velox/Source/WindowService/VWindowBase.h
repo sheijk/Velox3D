@@ -6,6 +6,7 @@
 #include <v3d/Window/IVWindow.h>
 #include <v3d/Updater/IVUpdateable.h>
 #include <v3d/Graphics/VDisplaySettings.h>
+#include <v3d/Input/IVInputManager.h>
 //-----------------------------------------------------------------------------
 #include <string>
 //-----------------------------------------------------------------------------

@@ -9,17 +9,23 @@
 #include <v3d/Window/IVWindowManager.h>
 #include <v3d/System/IVSystemManager.h>
 #include <v3d/Graphics/IVDevice.h>
+
+
+//TODO...
 #include "../../UtilsLib/Importer/VObjModelImporter.h"
 #include "../../UtilsLib/Importer/VModel3D.h"
+#include <v3d/Input/IVInputManager.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace example{
 //-----------------------------------------------------------------------------
+using namespace v3d::updater::IVUpdateManager;
 using namespace v3d::console;
-using v3d::updater::IVUpdateManager;
 using namespace v3d::graphics;
 using namespace v3d::window;
 using namespace v3d::system;
+using namespace v3d::input;
 
 
 
@@ -38,194 +44,88 @@ vint VExampleApp::Main()
 {
 	V3D_DEBUGMSG("Velox Main app says hi!");
 
-	// get update manager
-	IVUpdateManager* updater = QueryObject<IVUpdateManager>("updater.service");
+	// get services
+	IVUpdateManager* pUpdateManager = QueryObject<IVUpdateManager>("updater.service");
+	IVSystemManager* pSystemManager = QueryObject<IVSystemManager>("system.service");
+	IVWindowManager* pWindowManager = QueryObject<IVWindowManager>("window.manager");
 	
-	IVSystemManager* system = QueryObject<IVSystemManager>("system.service");
-	IVWindowManager* winmanager = QueryObject<IVWindowManager>("window.manager");
+	//geting later...
+	IVInputManager* pInputManager;
 	
-	// warum nicht typedef IVWindowManager::WindowPtr ... oder so? 
-	// waere leichter "wartbar" (sheijk)
-	typedef VPointer<IVWindow>::SharedPtr WindowInterface;
-	WindowInterface win;
-
-
-	system->GetCPU(); // just for testing...
-	win = winmanager->CreateWindow("v3d window");
-
+	
+	IVWindowManager::IVWindowPtr pWindow;
 	IVDevice* pDevice;
-	pDevice = &(win->QueryGraphicsDevice());
-
-
-	util::VModel3D Model;
-	util::VOBJModelImporter Importer;
-
-	Importer.Create("/data/test.obj", &Model);
-
-	// create a test mesh
-    // dafuer brauchen wir spaeter hilfsklassen... -spaeter? jetzt! :)
-	const cnVertexCount = 36;
-	VFloatBuffer vertexData(new float[cnVertexCount], cnVertexCount);
-	VFloatBuffer colorData(new float[cnVertexCount], cnVertexCount);
-
-	VFloatBuffer VertexData(new vfloat32[Model.m_Objects[0]->m_iNumVertices*3],
-		Model.m_Objects[0]->m_iNumVertices*3);
-
-	VIntBuffer VertexIndex(new vint32[Model.m_Objects[0]->m_iNumFaces *3],
-		Model.m_Objects[0]->m_iNumFaces *3);
-
-
-	//wieoft soll man denn noch die  buffer rumkopieren???
-	for(vuint i = 0; i < Model.m_Objects[0]->m_iNumVertices*3; i++)
-	{
-		VertexData[i] = Model.m_Objects[0]->m_VerticesList[i];
-	}
-	
-	for(vuint i = 0; i < Model.m_Objects[0]->m_iNumFaces*3; i++)
-	{
-		VertexIndex[i] = Model.m_Objects[0]->m_pVertexIndex[i];
-	}
-	
-	
-	colorData[0]  = 0.0f;
-	colorData[1]  = 1.0f;
-	colorData[2]  = 0.0f;
-
-	vertexData[0] = 0.0f;
-	vertexData[1] = 1.0f;
-	vertexData[2] = 0.0f;
-
-	colorData[3]  = 0.0f;
-	colorData[4]  = 0.0f;
-	colorData[5]  = 1.0f;
-
-	vertexData[3] = -1.0f;
-	vertexData[4] = -1.0f;
-	vertexData[5] = 1.0f;
-
-	colorData[6]  = 1.0f;
-	colorData[7]  = 0.0f;
-	colorData[8]  = 0.0f;
-
-	vertexData[6] = 1.0f;
-	vertexData[7] = -1.0f;
-	vertexData[8] = 1.0f;
-
-	colorData[9]  = 0.3f;
-	colorData[10]  = 0.4f;
-	colorData[11]  = 0.6f;
-
-	vertexData[9] = 0.0f;
-	vertexData[10] = 1.0f;
-	vertexData[11] = 0.0f;
-
-	colorData[12]  = 0.4f;
-	colorData[13]  = 0.0f;
-	colorData[14]  = 0.7f;
-
-	vertexData[12] = 1.0f;
-	vertexData[13] = -1.0f;
-	vertexData[14] = 1.0f;
-
-	colorData[15]  = 0.0f;
-	colorData[16]  = 0.0f;
-	colorData[17]  = 0.7f;
-
-	vertexData[15] = 1.0f;
-	vertexData[16] = -1.0f;
-	vertexData[17] = -1.0f;
-
-	colorData[18]  = 0.7f;
-	colorData[19]  = 0.0f;
-	colorData[20]  = 0.0f;
-
-	vertexData[18] = 0.0f;
-	vertexData[19] = 1.0f;
-	vertexData[20] = 0.0f;
-
-	colorData[21]  = 0.6f;
-	colorData[22]  = 0.3f;
-	colorData[23]  = 0.4f;
-
-	vertexData[21] = 1.0f;
-	vertexData[22] = -1.0f;
-	vertexData[23] = -1.0f;
-
-	colorData[24]  = 1.0f;
-	colorData[25]  = 1.0f;
-	colorData[26]  = 1.0f;
-
-
-	vertexData[24] = -1.0f;
-	vertexData[25] = -1.0f;
-	vertexData[26] = -1.0f;
-
-	colorData[27]  = 0.1f;
-	colorData[28]  = 0.6f;
-	colorData[29]  = 0.9f;
-
-
-	vertexData[27] = 0.0f;
-	vertexData[28] = 1.0f;
-	vertexData[29] = 0.0f;
-
-	colorData[30]  = 0.0f;
-	colorData[31]  = 1.0f;
-	colorData[32]  = 1.0f;
-
-
-	vertexData[30] = -1.0f;
-	vertexData[31] = -1.0f;
-	vertexData[32] = -1.0f;
-
-	colorData[33]  = 1.0f;
-	colorData[34]  = 0.0f;
-	colorData[35]  = 1.0f;
-
-	vertexData[33] = -1.0f;
-	vertexData[34] = -1.0f;
-	vertexData[35] = 1.0f;
-
-
-
-	IVDevice::FloatBufferHandle bufHandle;
-	IVDevice::FloatBufferHandle colorHandle;
+	IVButton* pEscButton;
 
 	IVDevice::FloatBufferHandle VertexHandle;
 	IVDevice::IntBufferHandle VertexIndexHandle;
 
-	bufHandle = pDevice->CreateBuffer(&vertexData, VFloatBuffer::CopyData);
-	colorHandle = pDevice->CreateBuffer(&colorData, VFloatBuffer::CopyData);
+	util::importer::VModel3D Model;
+	util::importer::VOBJModelImporter Importer;
+
+	VMeshDescription MeshDesc;
+	IVDevice::MeshHandle Mesh;
+
+
+	//run system
+
+	//pSystemManager->GetCPU(); // just for testing...
+
+	pWindow = pWindowManager->QueryWindow("v3d window");
+	pDevice = &(pWindow->QueryGraphicsDevice());
+
+	pInputManager = &(pWindow->QueryInputManager());
+	pEscButton = &pInputManager->GetStandardKey(IVInputManager::Escape);
+
+
+	//TODO: changed back cos of missing workdir -ins
+	Importer.Create("ObjFile", &Model);
+
+	// create a test mesh
+    
+	VFloatBuffer VertexData(Model.m_Objects[0]->m_VerticesList,
+		Model.m_Objects[0]->m_iNumVertices*3);
+
+	VIntBuffer VertexIndex(Model.m_Objects[0]->m_pVertexIndex,
+		Model.m_Objects[0]->m_iNumFaces *3);
+
+	//assign handles
 	VertexHandle = pDevice->CreateBuffer(&VertexData, VFloatBuffer::CopyData);
 	VertexIndexHandle = pDevice->CreateBuffer(&VertexIndex, VIntBuffer::CopyData);
 
-
-	VMeshDescription desc;
-	//desc.triangleVertices = VMeshDescription::FloatDataRef(bufHandle, 0, cnVertexCount, 1);
-	desc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle, 0, Model.m_Objects[0]->m_iNumVertices, 1);
-	desc.triangleColors = VMeshDescription::FloatDataRef(colorHandle, 0, cnVertexCount, 1);
-	desc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle, 0, Model.m_Objects[0]->m_iNumFaces *3, 1);
-
-	// @ins: die typedefs benutzen, statt direkt IVMesh& -sheijk
-	IVDevice::MeshHandle mesh( pDevice->CreateMesh(desc));
-
 	
+	MeshDesc.triangleVertices = VMeshDescription::FloatDataRef(VertexHandle,
+		0, Model.m_Objects[0]->m_iNumVertices,
+		1);
+	MeshDesc.triangleIndices = VMeshDescription::IntDataRef(VertexIndexHandle,
+		0, Model.m_Objects[0]->m_iNumFaces *3,
+		1);
+
+	Mesh = pDevice->CreateMesh(MeshDesc);
 
 	// main loop
-	updater->Start();
-	system->SetStatus(true);
+	pUpdateManager->Start();
+	pSystemManager->SetStatus(true);
 
-	while(system->GetStatus())
+	// main loop...
+	while(pSystemManager->GetStatus())
 	{
 
 		pDevice->BeginScene();
-		pDevice->RenderMesh(mesh);
-		updater->StartNextFrame();
-		pDevice->EndScene();
+		pDevice->RenderMesh(Mesh);
+        pDevice->EndScene();
+
+
+		pUpdateManager->StartNextFrame();
+		
+		// input checking
+		if (pEscButton->IsDown() == true)
+			pSystemManager->SetStatus(false);
 	}
 
-	updater->Stop();
+	pUpdateManager->Stop();
 
+	//exiting...
 	return 0;
 }
 

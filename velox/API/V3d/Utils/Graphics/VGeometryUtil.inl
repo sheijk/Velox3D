@@ -9,8 +9,8 @@ v3d::graphics::VMeshDescription BuildMeshDescription(
 
 	// create float buffer
 	const floatBufSize = in_cnVertexCount * sizeof(ColoredVertex);
-	const floatCount = floatBufSize / sizeof(float);
-	float* vertexData = new float[floatCount];
+	const floatCount = floatBufSize / sizeof(vfloat32);
+	vfloat32* vertexData = new vfloat32[floatCount];
 
 	memcpy(vertexData, pVertices, floatBufSize);
 

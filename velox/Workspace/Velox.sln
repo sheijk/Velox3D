@@ -41,6 +41,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowService", "WindowService.vcproj", "{C2E15749-4341-4E4B-1337-07F8B0112B91}"
 	ProjectSection(ProjectDependencies) = postProject
 		{556E10B2-22CB-47C7-A973-CDCD6D561337} = {556E10B2-22CB-47C7-A973-CDCD6D561337}
+		{556A30B2-22CB-47C8-A073-CDCD6D561337} = {556A30B2-22CB-47C8-A073-CDCD6D561337}
 		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
 		{BB57F1C9-0039-40BC-8188-02F384F49322} = {BB57F1C9-0039-40BC-8188-02F384F49322}
 	EndProjectSection
@@ -85,6 +86,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleService", "ConsoleService.vcproj", "{92902254-17EE-444A-83C6-F062C52B9122}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InputLib", "InputLib.vcproj", "{556A30B2-22CB-47C8-A073-CDCD6D561337}"
+	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
 Global
@@ -196,6 +201,12 @@ Global
 		{92902254-17EE-444A-83C6-F062C52B9122}.Release.Build.0 = Release|Win32
 		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.ActiveCfg = Debug|Win32
 		{92902254-17EE-444A-83C6-F062C52B9122}.UnitTests.Build.0 = Debug|Win32
+		{556A30B2-22CB-47C8-A073-CDCD6D561337}.Debug.ActiveCfg = Debug|Win32
+		{556A30B2-22CB-47C8-A073-CDCD6D561337}.Debug.Build.0 = Debug|Win32
+		{556A30B2-22CB-47C8-A073-CDCD6D561337}.Release.ActiveCfg = Release|Win32
+		{556A30B2-22CB-47C8-A073-CDCD6D561337}.Release.Build.0 = Release|Win32
+		{556A30B2-22CB-47C8-A073-CDCD6D561337}.UnitTests.ActiveCfg = Release|Win32
+		{556A30B2-22CB-47C8-A073-CDCD6D561337}.UnitTests.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt

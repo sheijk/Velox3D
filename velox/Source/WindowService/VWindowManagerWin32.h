@@ -27,7 +27,7 @@ public:
 	 * @note: will be shown as caption under win32
 	 */
 	
-	virtual IVWindowPtr CreateWindow(VStringParam in_pName);
+	virtual IVWindowPtr QueryWindow(VStringParam in_pName);
 
 
 

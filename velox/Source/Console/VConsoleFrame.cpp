@@ -79,7 +79,7 @@ void VTextControl::OnEnter(wxKeyEvent& event)
 }
 
 VConsoleFrame::VConsoleFrame() : wxFrame ((wxFrame *) NULL, -1,
-										  "Velox Console",wxPoint(50, 50),
+										  "Velox Console",wxPoint(20, 20),
 										  wxSize(250, 700), wxCAPTION, "frame")
 {
 	wxFrame::wxFrame();

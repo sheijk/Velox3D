@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace util{
+namespace importer{
 //-----------------------------------------------------------------------------
 using namespace v3d::vfs;
 VStreamReader::VStreamReader(IVStream* in_pStream)
@@ -97,6 +98,7 @@ vulong VStreamReader::GetSizeOfBuffer()
 	return iSizeOfBufferElements;
 }
 //-----------------------------------------------------------------------------
+} // namespace importer
 } // util
 } // v3d
 //-----------------------------------------------------------------------------

@@ -171,7 +171,24 @@
 				RelativePath="..\Source\UtilsLib\Importer\VOBJModelImporter.h">
 			</File>
 			<File
+				RelativePath="..\Source\UtilsLib\Importer\VQuake2BspImporter.cpp">
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="TRUE">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\Importer\VQuake2BspImporter.h">
+			</File>
+			<File
 				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\Source\UtilsLib\Importer\VStreamReader.h">
@@ -182,9 +199,6 @@
 			Filter="">
 			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VColor4f.h">
-			</File>
-			<File
-				RelativePath="..\Api\V3d\Utils\Graphics\VecMathUtil.h">
 			</File>
 			<File
 				RelativePath="..\Api\V3d\Utils\Graphics\VGeometryUtil.h">

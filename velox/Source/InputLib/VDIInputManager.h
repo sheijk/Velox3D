@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Input/IVInputManager.h>
-
 #include <windows.h>
 #include <dinput.h>
 

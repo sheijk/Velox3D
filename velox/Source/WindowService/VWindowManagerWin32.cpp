@@ -24,7 +24,7 @@ VWindowManagerWin32::~VWindowManagerWin32()
 
 //-----------------------------------------------------------------------------
 
-IVWindowManager::IVWindowPtr VWindowManagerWin32::CreateWindow(VStringParam in_pName)
+IVWindowManager::IVWindowPtr VWindowManagerWin32::QueryWindow(VStringParam in_pName)
 {
 	IVWindowManager::IVWindowPtr window;
 	VWindowWin32* window32 = new VWindowWin32;
