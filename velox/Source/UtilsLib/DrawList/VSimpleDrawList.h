@@ -20,8 +20,8 @@ public:
 	VSimpleDrawList(IVDevice& in_Device);
 	~VSimpleDrawList();
 		
-	virtual void Add(VModel* in_pModel);
-	virtual void Remove(VModel* in_pModel);
+	virtual void Add(VModel in_Model);
+	virtual void Remove(VModel in_Model);
 
 	virtual void Render();
 
@@ -29,7 +29,7 @@ public:
 	
 
 private:
-	typedef std::list<VModel*> ModelList;
+	typedef std::list<VModel> ModelList;
 	
 	ModelList m_Models;
 	IVDevice& m_Device;

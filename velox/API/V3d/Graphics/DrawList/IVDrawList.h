@@ -41,8 +41,8 @@ struct IVDrawList
 
 	virtual ~IVDrawList() {}
 
-	virtual void Add(VModel* in_Model) = 0;
-	virtual void Remove(VModel* in_Model) = 0;
+	virtual void Add(VModel in_Model) = 0;
+	virtual void Remove(VModel in_Model) = 0;
 
 	virtual void Render() = 0;
 };

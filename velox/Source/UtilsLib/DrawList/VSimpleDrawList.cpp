@@ -16,15 +16,15 @@ VSimpleDrawList::~VSimpleDrawList()
 }
 //-----------------------------------------------------------------------------
 
-void VSimpleDrawList::Add(VModel* in_pModel)
+void VSimpleDrawList::Add(VModel in_Model)
 {
-	m_Models.push_back(in_pModel);
+	m_Models.push_back(in_Model);
 }
 //-----------------------------------------------------------------------------
 
-void VSimpleDrawList::Remove(VModel* in_pModel)
+void VSimpleDrawList::Remove(VModel in_Model)
 {
-	m_Models.remove(in_pModel);
+	m_Models.remove(in_Model);
 }
 //-----------------------------------------------------------------------------
 
@@ -34,8 +34,9 @@ void VSimpleDrawList::Render()
 
 	for( ; modelIter != m_Models.end(); ++modelIter)
 	{
-		MaterialHandle hMaterial = (*modelIter)->hMaterial;
-		MeshHandle hMesh = (*modelIter)->hMesh;
+		VModel pModel = *modelIter;
+		MaterialHandle hMaterial = (*modelIter).hMaterial;
+		MeshHandle hMesh = (*modelIter).hMesh;
 
 		ApplyMaterial(hMaterial);
 		m_Device.RenderMesh(hMesh);
