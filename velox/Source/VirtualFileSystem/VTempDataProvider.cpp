@@ -39,6 +39,8 @@ void VTempDataProvider::GetWorkDir()
 	std::string sDir = pWorkDir;
 	std::size_t nPos = sDir.rfind('\\');
 	m_sWorkingDir = sDir.substr(0, nPos+1);
+
+	delete pWorkDir;
 }
 //-----------------------------------------------------------------------------
 

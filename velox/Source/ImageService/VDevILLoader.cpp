@@ -54,6 +54,8 @@ VImage* VDevILLoader::Create(vfs::IVStream* in_pStream, VStringParam in_sExt)
 	memcpy(pic->GetData().GetDataAddress(), pData, nWidth*nHeight*nBPP);
 
 	ilDeleteImages(1, &id);
+	delete pRawData;
+
 
 	//VImage* pic = new VImage();
 

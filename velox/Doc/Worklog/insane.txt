@@ -59,6 +59,9 @@ req
 
 Done List:
 
+03.09.04
+- fixed several memleaks in my implemententions
+
 31.08.04
 - implemented VStringValue required for the new xml service
 

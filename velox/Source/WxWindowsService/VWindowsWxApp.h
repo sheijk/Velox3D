@@ -23,6 +23,7 @@ class VDummyFrame : public wxFrame
 public:
 
 	VDummyFrame();
+	//~VDummyFrame();
 
 	virtual void OnTimer();
 

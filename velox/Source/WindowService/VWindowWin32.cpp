@@ -59,6 +59,7 @@ VWindowWin32::VWindowWin32()
 	hInstance = 0;
 	hWnd = 0;
 	bFocus = false;
+	m_pDeviceFactory = 0;
 	IVUpdateable::Register();
 }
 //-----------------------------------------------------------------------------
@@ -67,6 +68,7 @@ VWindowWin32::~VWindowWin32()
 {
 	// release device
 	delete m_Device;
+	delete m_pDeviceFactory;
 	Unregister();
 }
 //-----------------------------------------------------------------------------
@@ -252,15 +254,19 @@ IVDevice& VWindowWin32::QueryGraphicsDevice()
 	 * Insert API dependant device implementation here
 	 */
 
-	if(m_DisplaySettings.m_sAPIType == "OpenGL")
+	if(!m_pDeviceFactory)
 	{
-		vout << "Using OpenGL API..." << vendl;
-		m_pDeviceFactory = new VOpenGLDeviceFactory(&m_DisplaySettings, hWnd);
-	}
-	
-	else
-	{
-		V3D_THROW(VWin32Exception, "only open gl support available");
+
+		if(m_DisplaySettings.m_sAPIType == "OpenGL")
+		{
+			vout << "Using OpenGL API..." << vendl;
+			m_pDeviceFactory = new VOpenGLDeviceFactory(&m_DisplaySettings, hWnd);
+		}
+
+		else
+		{
+			V3D_THROW(VWin32Exception, "only open gl support available");
+		}
 	}
 
 	m_Device = m_pDeviceFactory->CreateDevice();

@@ -30,6 +30,7 @@ VUpdateManager::VUpdateManager(VStringParam in_strId)
  */
 VUpdateManager::~VUpdateManager()
 {
+	//delete m_pTimer;
 }
 
 void VUpdateManager::Register(IVUpdateable* in_pObject)

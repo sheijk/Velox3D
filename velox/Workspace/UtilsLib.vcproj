@@ -486,6 +486,12 @@
 			<File
 				RelativePath="..\Api\V3dLib\Utils\VStreamReader.h">
 			</File>
+			<File
+				RelativePath="..\Source\UtilsLib\VStringValue.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3dLib\Utils\VStringValue.h">
+			</File>
 		</Filter>
 		<Filter
 			Name="Containers"

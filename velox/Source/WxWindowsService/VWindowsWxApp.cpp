@@ -29,6 +29,14 @@ void VDummyFrame::OnTimer()
 	wxWakeUpIdle();
 }
 //-----------------------------------------------------------------------------
+// This destructor is no good idea and will crash by call --(ins)
+//VDummyFrame::~VDummyFrame()
+//{
+//	//delete m_DisplayTimer;
+////	wxFrame::~wxFrame();
+//}
+
+//-----------------------------------------------------------------------------
 
 VWindowsWxApp::VWindowsWxApp()
 {
@@ -39,6 +47,8 @@ VWindowsWxApp::VWindowsWxApp()
 
 VWindowsWxApp::~VWindowsWxApp()
 {
+	// @note: This delete is no good idea and will crash by call --(ins)
+	//delete m_DummyFrame;
 }
 //-----------------------------------------------------------------------------
 
