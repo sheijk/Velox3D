@@ -122,7 +122,7 @@ void VClass::DoSomething(const vfloat32& in_rfValue)
 
 <br>
 
-<b>Rule</b>: Variables which are class members have an additional prefix "m_", global variables have the prefix "g_" and static variables are prefixed with "s_". Use in_, out_ and io_ prefixes for function parameters, and simple type prefixes when sensible<br>
+<b>Rule</b>: Variables which are class members have an additional prefix "m_", global variables have the prefix "g_" and static variables are prefixed with "s_". Use in_, out_ and io_ prefixes for function parameters, and simple type prefixes when sensible. Local variables only get type prefixes. When no prefix makes sence (instances of a class etc) make the first word lower case (vertexColor) to be distinguished from a typename<br>
 <b>Reason</b>:	The variable name now shows the scope of the variable, this is especially good for programmers who did not work on the code previously.<br>
 <b>Example</b>:<br>
 vint m_nNumber;<br>
@@ -212,9 +212,13 @@ const V3D_BUFFERSIZE 16<br>
 
 <br>
 
-<b>Rule</b>: Always assign memory to a pointer pointing to deallocated memory.<br>
+<b>Rule</b>: Always assign 0 to a pointer pointing to deallocated memory. Best use the SafeDelete and SafeDeleteArray functions from v3d/Core/VMemory.h<br>
 <b>Reason</b>: Freeing memory without resetting the pointer is a common reason for a potential crash.<br>
-<b>Example</b>: delete [] pFoo; pFoo = NULL;<br>
+<b>Example</b>: <br>
+delete [] pFoo; pFoo = NULL; <br>
+// or even better: <br>
+SafeDeleteArray(pFoo); <br>
+<br>
 
 <br>
 
@@ -229,13 +233,13 @@ const V3D_BUFFERSIZE 16<br>
 
 <b>Rule</b>: Never put function calls inside a call of the assertion macro<br>
 <b>Reason</b>:	This function will not be called in release mode.<br>
-<b>Example</b>: VASSERT(VClass::DoSomething() == true);<br>
+<b>Example</b>: V3D_ASSERT(VClass::DoSomething() == true);<br>
 
 <br>
 
-<b>Rule</b>: If asserting function results, use the VVERIFY() macro. <br>
+<b>Rule</b>: If asserting function results, use the V3D_VERIFY() macro from v3d/Core/VAssert.h <br>
 <b>Reason</b>: Function calls will still be done in release compiles.<br>
-<b>Example</b>: VVERIFY(VClass::DoSomething());<br>
+<b>Example</b>: V3D_VERIFY(VClass::DoSomething());<br>
 
 <br>
 

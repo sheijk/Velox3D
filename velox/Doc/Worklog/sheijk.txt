@@ -61,6 +61,9 @@ Doku:
 
 log:
 
+02.02.2004
+Kleine Updates der Coding Guidelines
+
 24.01.2004
 Ausgabeverzeichnisse und External Libs von velox/workspace/local nach velox/local
 bewegt
