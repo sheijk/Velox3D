@@ -11,54 +11,6 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-VMaterialDescription BuildTextureMaterial(
-	IVDevice* in_pDevice,
-	VStringParam in_pcTextureFile)
-{
-	using namespace v3d::image;
-	using namespace v3d::graphics;
-
-	IVImageFactory* pFactory = QueryObject<IVImageFactory>("image.service");
-
-	IVImageFactory::ImagePtr myImage = pFactory->CreateImage(in_pcTextureFile);
-
-	//TODO: automatisch auf 2^n Groesse skalieren
-	VImage image(myImage->GetWidth(), myImage->GetHeight(), 24);
-	pFactory->ConvertImage(*myImage, image);
-
-	VMaterialDescription texMat;
-
-	VMaterialDescription::TextureRef* pTexRef =
-		new VMaterialDescription::TextureRef();
-
-	IVDevice::BufferHandle hTextureBuffer = in_pDevice->CreateBuffer(
-		IVDevice::Texture,
-		image.pData,
-		//myImage->pData,
-		IVDevice::Buffer::DropData
-		);
-
-	pTexRef->nWidth = myImage->iWidth;
-	pTexRef->nHeight = myImage->iHeight;
-	pTexRef->hData = hTextureBuffer;
-
-	texMat.AddTexture(pTexRef);
-
-	return texMat;
-}
-
-VMaterialDescription::ColorBufferMask NoColorWrites()
-{
-	VMaterialDescription::ColorBufferMask mask;
-
-	mask.writeRed = false;
-	mask.writeGreen = false;
-	mask.writeBlue = false;
-	mask.writeAlpha = false;
-
-	return mask;
-}
-
 void ApplyMaterial(IVDevice& in_Device,
 				   const IVMaterial* in_pMaterial)
 {

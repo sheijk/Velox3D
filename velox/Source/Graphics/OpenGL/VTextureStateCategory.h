@@ -33,12 +33,6 @@ class VTextureStateCategory : public IVStateCategory
 	VTextureStateUntextured m_DefaultState;
 	TextureMap m_Textures;
 
-	VTextureState2D* CreateTextureState(const VMaterialDescription::TextureRef& in_Ref);
-	VTextureState2D* GetTextureState(const VMaterialDescription::TextureRef& in_Ref);
-
-	static vuint GetGLModeNum(const TextureWrapMode in_WrapMode);
-	static vuint GetGLModeNum(const TextureFilter in_Filer);
-
 	VTextureState2D* Create2DState(const VState* in_pTextureState);
 	IVRenderState* CreateCubeMapState(const VState* in_pTextureState);
 

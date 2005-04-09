@@ -14,22 +14,6 @@ namespace graphics {
 using namespace v3d;
 
 /**
- * achtung: diese funktion erzeugt buffer, welche nicht automatisch wieder
- * freigegeben werden.
- *
- * matDesc = BuildTextureMaterial(device, fileName);
- * ...
- * device.DeleteBuffer(mat.Desc.pTextureList.hData);
- *
- * @author sheijk
- */
-VMaterialDescription BuildTextureMaterial(
-	IVDevice* in_pDevice,
-	VStringParam in_pcTextureFile);
-
-VMaterialDescription::ColorBufferMask NoColorWrites();
-
-/**
  * @author: ins
  */
 

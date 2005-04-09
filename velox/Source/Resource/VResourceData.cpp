@@ -1,4 +1,4 @@
-#include "VResourceData.h"
+#include <V3d/Resource/VResourceData.h>
 //-----------------------------------------------------------------------------
 
 #include <cstring>

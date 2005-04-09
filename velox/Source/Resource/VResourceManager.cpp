@@ -1,16 +1,16 @@
 #include "VResourceManager.h"
 //-----------------------------------------------------------------------------
+#include <V3d/Utils/VSimpleTokenizer.h>
 
 #include <iostream>
-#include <list>
-#include <algorithm>
-#include <string>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace std;
+using utils::VSimpleTokenizer;
 
 /**
  * standard c'tor
@@ -27,61 +27,6 @@ VResourceManager::VResourceManager(VStringParam in_strName) :
 VResourceManager::~VResourceManager()
 {
 }
-
-/**
- * A simple tokenizer class. Takes a string and a delimeter character
- * and parses the string into a list of tokens
- *
- * @author sheijk
- */
-class VSimpleTokenizer
-{
-public:
-	typedef std::list<std::string>::iterator Iterator;
-
-	VSimpleTokenizer(const std::string& in_strString, char in_cDelimeter);
-
-	Iterator TokenBegin();
-	Iterator TokenEnd();
-
-private:
-	std::list<std::string> m_Tokens;
-};
-
-//-----------------------------------------------------------------------------
-VSimpleTokenizer::VSimpleTokenizer(
-	const std::string& in_strString, char in_cDelimeter)
-{
-	std::string::const_iterator tokenStart = in_strString.begin();
-	std::string::const_iterator tokenEnd;
-
-	while( true )
-	{
-		tokenEnd = std::find(tokenStart, in_strString.end(), in_cDelimeter);
-		if( tokenStart == in_strString.end() )
-			break;
-
-		// get token
-		std::string token(tokenStart, tokenEnd);
-		m_Tokens.push_back(token);
-
-		tokenStart = tokenEnd;
-		if( tokenStart != in_strString.end() )
-			++tokenStart;
-	}
-}
-
-VSimpleTokenizer::Iterator VSimpleTokenizer::TokenBegin()
-{
-	return m_Tokens.begin();
-}
-
-VSimpleTokenizer::Iterator VSimpleTokenizer::TokenEnd()
-{
-	return m_Tokens.end();
-}
-//-----------------------------------------------------------------------------
-using namespace std;
 
 namespace {
 	VResource* CreateSubResource(

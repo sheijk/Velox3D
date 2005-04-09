@@ -31,9 +31,23 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
-05.03.2004
+TODO:
+CVS Tag setzen (pre graphics aufraeumaktion)
+evtl einige Dateien aus dem CVS entfernen
+vmaterialdescription
+vrendermethodregistry
+
+09.04.2005
+- Support fuer CG Vertex und Pixelshader
+- Parameter fuer Shader in der Effect Description (bisher nur model-view matrix)
+
+23.03.2005
+- Support fuer Device interne Buffer entfernt
+- Material Description Support entfernt
+
+05.03.2005
 - Alle OpenGL includes auf V3d/OpenGL umgestellt
-- CubeMap Support (u.a. nicht nicht korrekt, mangels normalen)
+- CubeMap Support (u.u. nicht nicht korrekt, mangels normalen)
 - Normalen Support
 - Zugriffs Funktionen fuer VVertexBuffer
 - GetX usw Funktionen in VVector<3,..>, const correctness

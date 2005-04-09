@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model version="1.0">
+	<mesh type="quads" indices="yes" texCoords="0" coords="yes">
+		<vertex x="-1.0" y="-1.0" z="1.0" />
+		<vertex x="-1.0" y="1.0" z="1.0" />
+		<vertex x="1.0" y="1.0" z="1.0" />
+		<vertex x="1.0" y="-1.0" z="1.0" />
+		<vertex x="-1.0" y="-1.0" z="-1.0" />
+		<vertex x="-1.0" y="1.0" z="-1.0" />
+		<vertex x="1.0" y="1.0" z="-1.0" />
+		<vertex x="1.0" y="-1.0" z="-1.0" />
+		
+		<index id="0" />
+		<index id="1" />
+		<index id="5" />
+		<index id="4" />
+
+		<index id="4" />
+		<index id="5" />
+		<index id="6" />
+		<index id="7" />
+
+		<index id="0" />
+		<index id="4" />
+		<index id="7" />
+		<index id="3" />
+
+		<index id="1" />
+		<index id="2" />
+		<index id="6" />
+		<index id="5" />
+
+		<index id="2" />
+		<index id="3" />
+		<index id="7" />
+		<index id="6" />
+
+		<index id="0" />
+		<index id="3" />
+		<index id="2" />
+		<index id="1" />
+	</mesh>
+</model>

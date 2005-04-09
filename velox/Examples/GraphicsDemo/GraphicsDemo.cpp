@@ -39,14 +39,14 @@ using namespace v3d::image;
  * 
  * @author sheijk
  */
-class VGraphicsDemoApp : public IVApplication, public VNamedObject
+class VGraphicsDemoApp : public VVeloxApp
 {
 public:
 	VGraphicsDemoApp();
 	virtual ~VGraphicsDemoApp();
 
 	/** The program's entry point */
-	virtual vint Main();
+	virtual vint Main(std::vector<std::string> args);
 
 private:
 	static void CreateResources();
@@ -79,7 +79,11 @@ private:
 		std::string daytimeId);
 };
 
-VGraphicsDemoApp::VGraphicsDemoApp() : VNamedObject("main", 0)
+namespace {
+	VGraphicsDemoApp g_theApp;
+}
+
+VGraphicsDemoApp::VGraphicsDemoApp()
 {
 }
 
@@ -96,7 +100,7 @@ const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
 
 /** The main function. Will be called by the kernel when the application starts */
-vint VGraphicsDemoApp::Main()
+vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 {
 	vout << "This is the velox demo application" << vendl;
 
@@ -240,11 +244,6 @@ vint VGraphicsDemoApp::Main()
 		}
 	}
 	pUpdater->Stop();
-
-	// release resources
-	device.DeleteMesh(hSphereMesh);
-	device.DeleteMesh(hSkyMesh);
-	device.DeleteMesh(hMoonMesh);
 
 	vout << "Have a nice day" << vendl;
 	return 0;
@@ -598,30 +597,30 @@ void VGraphicsDemoApp::AddCloudPass(
 //-----------------------------------------------------------------------------
 //TODO: explain module setup. (once it's final :)
 
-class VGraphicsDemoModule : public VModuleBase
-{
-	VPointer<VGraphicsDemoApp>::SharedPtr m_pApplication;
-
-public:
-	void Initialize();
-	void Shutdown();
-};
-
-void VGraphicsDemoModule::Initialize()
-{
-	m_pApplication.Assign(new VGraphicsDemoApp());
-}
-
-void VGraphicsDemoModule::Shutdown()
-{
-	m_pApplication.Release();
-}
-
-const char* v3d::GetModuleName()
-{
-	return "GraphicsDemoApp";
-}
-
-namespace {
-	VGraphicsDemoModule g_AppModule;
-}
+//class VGraphicsDemoModule : public VModuleBase
+//{
+//	VPointer<VGraphicsDemoApp>::SharedPtr m_pApplication;
+//
+//public:
+//	void Initialize();
+//	void Shutdown();
+//};
+//
+//void VGraphicsDemoModule::Initialize()
+//{
+//	m_pApplication.Assign(new VGraphicsDemoApp());
+//}
+//
+//void VGraphicsDemoModule::Shutdown()
+//{
+//	m_pApplication.Release();
+//}
+//
+//const char* v3d::GetModuleName()
+//{
+//	return "GraphicsDemoApp";
+//}
+//
+//namespace {
+//	VGraphicsDemoModule g_AppModule;
+//}

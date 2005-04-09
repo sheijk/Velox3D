@@ -2,9 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="GraphicsDemo"
-	ProjectGUID="{2DADAA67-04E0-47C5-B84B-8E9DF2BE6843}"
-	RootNamespace="GraphicsDemo"
+	Name="GraphicsExample"
+	ProjectGUID="{20050220-0000-0000-0000-000876956000}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -34,13 +33,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib"
-				OutputFile="$(OutDir)/GraphicsDemo.exe"
+				OutputFile="$(OutDir)/GraphicsExample.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/GraphicsDemo.pdb"
+				ProgramDatabaseFile="$(OutDir)/GraphicsExample.pdb"
 				SubSystem="1"
-				ImportLibrary="$(OutDir)/GraphicsDemo.lib"
+				ImportLibrary="$(OutDir)/GraphicsExample.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -83,13 +81,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/GraphicsDemo.dll"
+				OutputFile="$(OutDir)/GraphicsExample.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/GraphicsDemo.lib"
+				ImportLibrary="$(OutDir)/GraphicsExample.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -117,23 +115,20 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Quelldateien"
-			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			Name="Implementation"
+			Filter="cpp;h">
 			<File
-				RelativePath=".\GraphicsDemo.cpp">
-			</File>
-			<File
-				RelativePath=".\VSwingFunction.h">
+				RelativePath="GraphicsExample.cpp">
 			</File>
 		</Filter>
 		<Filter
-			Name="ModuleImpl">
+			Name="ModuleImpl"
+			Filter="">
 			<File
-				RelativePath="..\..\Source\Kernel\main.cpp">
+				RelativePath="../..\Source\Kernel\main.cpp">
 			</File>
 			<File
-				RelativePath="..\..\Source\Module\VeloxModule.cpp">
+				RelativePath="../..\Source\Module\VeloxModule.cpp">
 			</File>
 		</Filter>
 	</Files>

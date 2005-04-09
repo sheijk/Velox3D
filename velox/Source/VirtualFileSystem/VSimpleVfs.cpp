@@ -8,6 +8,8 @@
 #include <v3d/VFS/IVDataProviderPool.h>
 #include <v3d/VFS/VMountOptions.h>
 
+#include <V3d/Utils/VSimpleTokenizer.h>
+
 #include <v3d/XML/IVXMLService.h>
 
 #include "VFile.h"
@@ -45,40 +47,11 @@ VSimpleVfs::VSimpleVfs(
 	: IVFileSystem(in_strName, in_pParent)
 {
 	// create root dir
-	m_pRootDir = new VDirectory(
+	m_pRootDirSP.Assign(new VDirectory(
 		"",
 		"",
 		boost::filesystem::current_path().string(),
-		VAccessRights::CreateRODirAR(VAccessRights::DeletingForbidden));
-	m_pRootDirSP.Assign(m_pRootDir);
-
-	// create some dirs/files for testing:
-
-	// add some files
-	//m_pRootDir->AddFile(VDirectory::FilePtr(new VFile("manual.file")));
-	//m_pRootDir->AddFile(VDirectory::FilePtr(new VFile("another.file.here")));
-	//VDirectory* pDir(new VDirectory("a.dir", ""));
-	//pDir->AddFile(VDirectory::FilePtr(new VFile("nested.file")));
-	//pDir->AddFile(VDirectory::FilePtr(new VFile("2nd.nested.file")));
-	//m_pRootDir->AddSubdir(VDirectory::DirPtr(pDir));
-
-
-	// mount a (real) directory:
-
-	// set mount options
-	VMountOptions mountOpt(
-		"mount'd.dir", 
-		"vfstestdir", 
-		"", 
-		"localfs", 
-		VAccessRights::CreateDirAR(VAccessRights::DeletingForbidden)
-		);
-
-	// get localfs data provider and let it create a mounted dir
-	// add dir to vfs dir structure
-	//m_pRootDir->AddSubdir(
-	//	GetDataProvider("localfs").CreateMountedDir(mountOpt)
-	//	);
+		VAccessRights::CreateRODirAR(VAccessRights::DeletingForbidden)));
 
 	// load vfs.xml file
 	ParseInitFile();
@@ -87,7 +60,7 @@ VSimpleVfs::VSimpleVfs(
 void VSimpleVfs::ParseInitFile()
 {
 	// create visitor
-	VXmlIniReader reader(m_pRootDir);
+	VXmlIniReader reader(m_pRootDirSP.Get());
 	
 	// get xml service
 	xml::IVXMLService* pXmlServ = QueryObject<xml::IVXMLService>("xml.service");
@@ -128,11 +101,8 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 		else
 			++fileIter;
 	}
-	//VDirectory::FileIter fileIter = std::find_if(
-	//	pDir->Files().Begin, pDir->Files().End, VCompareFSOName(strFileName));
 
 	if( !fileIter.HasNext() )
-	//if( fileIter == pDir->Files().End )
 	{
 		std::string errorMsg = "file \"";
 		errorMsg += strFileName;
@@ -145,8 +115,6 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 
 	return pFileStream;
 }
-
-//TODO: testen
 
 IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
 {
@@ -196,6 +164,110 @@ IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
 
 	// return dir
 	return pCurrDir;
+}
+
+typedef utils::VSimpleTokenizer::Iterator TokenIter;
+
+namespace {
+	const IVDirectory* GetSubDir(const IVDirectory* in_pDir, const std::string& in_strName)
+	{
+		IVDirectory::ConstDirIter dirIter = in_pDir->SubDirs();
+
+		while(dirIter.HasNext())
+		{
+			if( std::string(dirIter->GetName().AsCString()) == in_strName )
+				return &*dirIter;
+
+			++dirIter;
+		}
+
+		return 0;
+	}
+
+	const IVDirectory* GetDirectory(
+		const IVDirectory* in_pParent, 
+		TokenIter in_RemainingPath, 
+		const TokenIter in_PathEnd)
+	{
+		V3D_ASSERT(in_pParent != 0);
+
+		if( in_PathEnd == in_RemainingPath )
+			return in_pParent;
+
+		std::string nextName = *in_RemainingPath;
+
+		const IVDirectory* pNext = GetSubDir(in_pParent, nextName);
+
+		if( pNext != 0 )
+		{
+			++in_RemainingPath;
+			return GetDirectory(pNext, in_RemainingPath, in_PathEnd);
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	const IVFile* GetFile(const IVDirectory* in_pParent, const std::string& in_strName)
+	{
+		IVDirectory::ConstFileIter fileIter = in_pParent->Files();
+
+		while(fileIter.HasNext())
+		{
+			if( std::string(fileIter->GetName().AsCString()) == in_strName )
+			{
+				return &*fileIter;
+			}
+
+			++fileIter;
+		}
+
+		return 0;
+	}
+} // anonymous namespace
+
+vbool VSimpleVfs::ExistsDir(VStringParam in_strDir)
+{
+	V3D_ASSERT(in_strDir[0] != '\0');
+
+	utils::VSimpleTokenizer tokens(in_strDir+1, '/');
+	
+	const IVDirectory* pDir = GetDirectory(
+		m_pRootDirSP.Get(), 
+		tokens.TokenBegin(), 
+		tokens.TokenEnd());
+
+	return pDir != 0;
+}
+
+vbool VSimpleVfs::ExistsFile(VStringParam in_strFile)
+{
+	V3D_ASSERT(in_strFile[0] != '\0');
+
+	utils::VSimpleTokenizer tokens(in_strFile+1, '/');
+
+	TokenIter lastDir = tokens.TokenEnd();
+	--lastDir;
+
+	const IVDirectory* pDir = GetDirectory(
+		m_pRootDirSP.Get(), 
+		tokens.TokenBegin(), 
+		lastDir);
+
+	if( pDir == 0 )
+		return false;
+
+	const IVFile* pFile = GetFile(pDir, *lastDir);
+
+	return pFile != 0;
+}
+
+vbool VSimpleVfs::Exists(VStringParam in_strFSObject)
+{
+	return 
+		ExistsDir(in_strFSObject) || 
+		ExistsFile(in_strFSObject);
 }
 
 //-----------------------------------------------------------------------------

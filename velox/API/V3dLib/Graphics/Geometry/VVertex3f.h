@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <V3d/Math/VVector.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -31,6 +32,11 @@ struct VVertex3f
 		v[0] = in_X;
 		v[1] = in_Y;
 		v[2] = in_Z;
+	}
+
+	VVector3f AsVector() const
+	{
+		return VVector3f(x, y, z);
 	}
 };
 

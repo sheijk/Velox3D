@@ -160,14 +160,14 @@ namespace {
 		glTexParameteri(
 			in_TextureTarget,
 			GL_TEXTURE_WRAP_S,
-			//GL_CLAMP_TO_EDGE
-			GetGLModeNum(in_Options.GetTextureWrapModeU()) 
+			GL_CLAMP_TO_EDGE
+			//GetGLModeNum(in_Options.GetTextureWrapModeU()) 
 			);
 		glTexParameteri(
 			in_TextureTarget,
 			GL_TEXTURE_WRAP_T,
-			//GL_CLAMP_TO_EDGE
-			GetGLModeNum(in_Options.GetTextureWrapModeV()) 
+			GL_CLAMP_TO_EDGE
+			//GetGLModeNum(in_Options.GetTextureWrapModeV()) 
 			);
 		glTexParameteri(
 			in_TextureTarget,

@@ -18,6 +18,7 @@
 #include "../DeviceBase/VStateCategoryList.h"
 #include "VTextureStateCategory.h"
 #include "VMiscStateCategory.h"
+#include "VVertexShaderCategory.h"
 #include "../DeviceBase/VMeshBase.h"
 
 //-----------------------------------------------------------------------------
@@ -42,26 +43,6 @@ public:
 
 	virtual MeshHandle CreateMesh(VStringParam in_strResource);
 
-	virtual BufferHandle CreateBuffer(
-		BufferType in_Type,
-		const Buffer* in_Buffer,
-		BufferCopyMode in_CopyMode = VBufferBase::CopyData
-		);
-
-	virtual void DeleteBuffer(BufferHandle& in_Buffer);
-
-	virtual void OverwriteBuffer(
-		BufferHandle& in_hBuffer,
-		vuint in_nFirstElement,
-		vuint in_nCount,
-		const vbyte* in_pBuffer
-		);
-
-	virtual MeshHandle CreateMesh(
-		const VMeshDescription& in_pMeshDesc,
-		const VMaterialDescription& in_pMaterialDesc
-		);
-
 	virtual MeshHandle CreateMesh(
 		const VMeshDescription& in_MeshDescr,
 		const VEffectDescription& in_EffectDescr
@@ -69,14 +50,7 @@ public:
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 
-	virtual void DeleteMaterial(MaterialHandle& in_Material);
-
 	virtual void RenderMesh(MeshHandle in_Mesh);
-
-	virtual void RenderImmediate(
-		VMeshDescription in_Mesh,
-		VMaterialDescription in_Material
-		);
 
 	virtual void ApplyState(const IVRenderState& in_State);
 
@@ -89,27 +63,15 @@ public:
 	
 private:
 	void RecalcModelViewMatrix();
-	BufferHandle GetInternalVertexBuffer(BufferHandle in_hBuffer);
-	void InternalizeBuffers(VMeshDescription& in_MeshDescr);
-
-	/** vertex buffers */
-	VBufferManager<Buffer> m_Buffers;
-
-	/** texture buffers */
-	VBufferManager<Buffer> m_TextureBuffers;
-
-	/** store all render methods here */
-	VRenderMethodRegistry m_RenderMethods;
-
-	VImmediateRenderMethod m_ImmediateRenderMethod;
-	//VOpenGLVBORenderMethod m_VBORenderMethod;
 
 	// render state categories
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;
 	VMiscStateCategory m_MiscStateCategory;
+	VVertexShaderCategory m_VertexShaderCategory;
+	VPixelShaderCategory m_PixelShaderCategory;
 
-	// current existing meshes
+	// current existing meshes (not really need anymore)
 	typedef std::list<VMeshBase*> MeshList;
 	MeshList m_Meshes;
 

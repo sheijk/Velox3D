@@ -11,7 +11,7 @@
 #include <vector>
 
 #include <V3d/OpenGL.h>
-
+#include <V3d/CG.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -24,43 +24,43 @@ using namespace v3d; // prevent auto indenting
  * 
  * @author sheijk
  */
-template<typename ModeType>
+template<typename ModeType, typename Enum = GLenum>
 class VModeTypeInfo
 {
 	struct ModeInfo
 	{
 		std::string name;
 		ModeType mode;
-		GLenum glenum;
+		Enum glenum;
 	};
 
 	std::vector<ModeInfo> m_Modes;
 
 public:
-	void AddModeInfo(ModeType mode, const std::string& name, GLenum glmode);
+	void AddModeInfo(ModeType mode, const std::string& name, Enum glmode);
 
 	ModeType GetMode(const std::string& name);
-	ModeType GetMode(GLenum glmode);
+	ModeType GetMode(Enum glmode);
 
-	GLenum GetGLEnum(ModeType mode);
-	GLenum GetGLEnum(const std::string& name);
+	Enum GetGLEnum(ModeType mode);
+	Enum GetGLEnum(const std::string& name);
 
 	std::string GetName(ModeType mode);
-	std::string GetName(GLenum glmode);
+	std::string GetName(Enum glmode);
 };
 
 // info about mode names and gl enums
-VModeTypeInfo<VPolygonMode>	GetPolygonModeInfo();
-VModeTypeInfo<VDepthTest>	GetDepthTestInfo();
-VModeTypeInfo<VBlendFactor>	GetBlendFactorInfo();
+VModeTypeInfo<VPolygonMode> GetPolygonModeInfo();
+VModeTypeInfo<VDepthTest> GetDepthTestInfo();
+VModeTypeInfo<VBlendFactor> GetBlendFactorInfo();
 VModeTypeInfo<VTextureWrapMode> GetTextureWrapModeInfo();
-VModeTypeInfo<VTextureFilter>	GetTextureFilterInfo();
-
+VModeTypeInfo<VTextureFilter> GetTextureFilterInfo();
+VModeTypeInfo<VShaderType, CGprofile> GetShaderTypeInfo();
 //-----------------------------------------------------------------------------
 
-template<typename ModeType>
-void VModeTypeInfo<ModeType>::AddModeInfo(
-	ModeType mode, const std::string& name, GLenum glmode)
+template<typename ModeType, typename Enum>
+void VModeTypeInfo<ModeType, Enum>::AddModeInfo(
+	ModeType mode, const std::string& name, Enum glmode)
 {
 	ModeInfo info;
 	info.name = name;
@@ -70,8 +70,8 @@ void VModeTypeInfo<ModeType>::AddModeInfo(
 	m_Modes.push_back(info);
 }
 
-template<typename ModeType>
-ModeType VModeTypeInfo<ModeType>::GetMode(const std::string& name)
+template<typename ModeType, typename Enum>
+ModeType VModeTypeInfo<ModeType, Enum>::GetMode(const std::string& name)
 {
 	for(vuint i = 0; i < m_Modes.size(); ++i)
 	{
@@ -87,8 +87,8 @@ ModeType VModeTypeInfo<ModeType>::GetMode(const std::string& name)
 	V3D_THROW(VInvalidModeException, str.str().c_str());
 }
 
-template<typename ModeType>
-ModeType VModeTypeInfo<ModeType>::GetMode(GLenum glmode)
+template<typename ModeType, typename Enum>
+ModeType VModeTypeInfo<ModeType, Enum>::GetMode(Enum glmode)
 {
 	for(vuint i = 0; i < m_Modes.size(); ++i)
 	{
@@ -104,8 +104,8 @@ ModeType VModeTypeInfo<ModeType>::GetMode(GLenum glmode)
 	V3D_THROW(VInvalidModeException, str.str().c_str());
 }
 
-template<typename ModeType>
-GLenum VModeTypeInfo<ModeType>::GetGLEnum(const std::string& name)
+template<typename ModeType, typename Enum>
+Enum VModeTypeInfo<ModeType, Enum>::GetGLEnum(const std::string& name)
 {
 	for(vuint i = 0; i < m_Modes.size(); ++i)
 	{
@@ -121,8 +121,8 @@ GLenum VModeTypeInfo<ModeType>::GetGLEnum(const std::string& name)
 	V3D_THROW(VInvalidModeException, str.str().c_str());
 }
 
-template<typename ModeType>
-GLenum VModeTypeInfo<ModeType>::GetGLEnum(ModeType mode)
+template<typename ModeType, typename Enum>
+Enum VModeTypeInfo<ModeType, Enum>::GetGLEnum(ModeType mode)
 {
 	for(vuint i = 0; i < m_Modes.size(); ++i)
 	{
@@ -138,8 +138,8 @@ GLenum VModeTypeInfo<ModeType>::GetGLEnum(ModeType mode)
 	V3D_THROW(VInvalidModeException, str.str().c_str());
 }
 
-template<typename ModeType>
-std::string VModeTypeInfo<ModeType>::GetName(ModeType mode)
+template<typename ModeType, typename Enum>
+std::string VModeTypeInfo<ModeType, Enum>::GetName(ModeType mode)
 {
 	for(vuint i = 0; i < m_Modes.size(); ++i)
 	{
@@ -155,8 +155,8 @@ std::string VModeTypeInfo<ModeType>::GetName(ModeType mode)
 	V3D_THROW(VInvalidModeException, str.str().c_str());
 }
 
-template<typename ModeType>
-std::string VModeTypeInfo<ModeType>::GetName(GLenum glmode)
+template<typename ModeType, typename Enum>
+std::string VModeTypeInfo<ModeType, Enum>::GetName(Enum glmode)
 {
 	for(vuint i = 0; i < m_Modes.size(); ++i)
 	{

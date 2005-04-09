@@ -4,6 +4,9 @@
 #include <V3d/Core/VIOStream.h>
 
 #include <V3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Utils/VSimpleTokenizer.h>
+
+#include <V3d/VFS/IVFileSystem.h>
 
 #include "VResourceManager.h"
 
@@ -16,28 +19,7 @@
 namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
-
-//TODO: dieses uebelste gehacke beseitigen indem VSimpleTokenizer von hier
-// und aus VResourceManager in eine eigene datei kopieren -- sheijk
-/**
-* A simple tokenizer class. Takes a string and a delimeter character
-* and parses the string into a list of tokens
-*
-* @author sheijk
-*/
-class VSimpleTokenizer
-{
-public:
-	typedef std::list<std::string>::iterator Iterator;
-
-	VSimpleTokenizer(const std::string& in_strString, char in_cDelimeter);
-
-	Iterator TokenBegin();
-	Iterator TokenEnd();
-
-private:
-	std::list<std::string> m_Tokens;
-};
+using utils::VSimpleTokenizer;
 
 /**
  * standard c'tor
@@ -155,8 +137,28 @@ VResource* VResource::GetSubResource(const std::string& in_strSubResource)
 			return resIter->Get();
 	}
 
-	// not found
-	return 0;
+	// if the virtual file system contains a directory or file whose name 
+	// matches the resource's name, create a new sub resource for it
+	std::string qualifiedChildName = GetQualifiedName();
+	if( qualifiedChildName.length() > 0 &&
+		qualifiedChildName[qualifiedChildName.length()-1] != '/' )
+	{
+		qualifiedChildName += "/";
+	}
+	qualifiedChildName += in_strSubResource;
+
+	if( vfs::VFileSystemPtr()->Exists(qualifiedChildName.c_str()) )
+	{
+		VResource* newChild = new VResource(in_strSubResource, this);
+		m_SubResources.push_back(VSharedPtr<VResource>(newChild));
+
+		return newChild;
+	}
+	else
+	{
+		// not found
+		return 0;
+	}
 }
 
 VRangeIterator<VResource> VResource::ChildIterator()
@@ -204,6 +206,7 @@ VResource* VResource::GetResourceByPath(const std::string& in_strChildName)
 		++currentRes;
 	}
 
+	// resource could not be found
 	if( 0 == pCurrentResource )
 	{
 		std::stringstream message;
@@ -212,8 +215,11 @@ VResource* VResource::GetResourceByPath(const std::string& in_strChildName)
 
 		V3D_THROW(VResourceNotFoundException, message.str().c_str());
 	}
-
-	return pCurrentResource;
+	// resource could be found
+	else
+	{
+		return pCurrentResource;
+	}
 }
 
 void VResource::DumpInfo(const std::string& in_strPrefix) const

@@ -32,79 +32,6 @@ const IVRenderState& VTextureStateCategory::GetDefault() const
 	return m_DefaultState;
 }
 
-VTextureState2D* VTextureStateCategory::GetTextureState(
-	const VMaterialDescription::TextureRef& in_Ref)
-{
-	TextureMap::iterator texIter = m_Textures.find(in_Ref.hData);
-
-	// if texture already exists
-	if( texIter != m_Textures.end() )
-	{
-		// return it
-		return texIter->second;
-	}
-	// if texture does not exist
-	else
-	{
-		// create it
-		return CreateTextureState(in_Ref);
-	}
-}
-
-VTextureState2D* VTextureStateCategory::CreateTextureState(
-	const VMaterialDescription::TextureRef& in_Ref)
-{
-	V3D_ASSERT(in_Ref.hData != 0);
-	V3D_ASSERT(in_Ref.nWidth > 0);
-	V3D_ASSERT(in_Ref.nHeight > 0);
-	V3D_ASSERT(in_Ref.hData->GetDataAddress() != 0);
-
-	vbyte* temp = in_Ref.hData->GetDataAddress();
-
-	// look if in_Refture already exists
-	// if it doesn't, create it
-
-	GLuint id;
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id);
-
-	glPixelStorei  (GL_UNPACK_ALIGNMENT, 1);
-	glTexParameteri(
-		GL_TEXTURE_2D,
-		GL_TEXTURE_WRAP_S,
-		GetGLModeNum(in_Ref.wrapTexCoordU) );
-    glTexParameteri(
-		GL_TEXTURE_2D,
-		GL_TEXTURE_WRAP_T,
-		GetGLModeNum(in_Ref.wrapTexCoordV) );
-	glTexParameteri(
-		GL_TEXTURE_2D,
-		GL_TEXTURE_MIN_FILTER,
-		GetGLModeNum(in_Ref.minificationFilter) );
-	glTexParameteri(
-		GL_TEXTURE_2D,
-		GL_TEXTURE_MAG_FILTER,
-		GetGLModeNum(in_Ref.magnificationFilter) );
-	glTexEnvi	   (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,  GL_MODULATE);
-
-	gluBuild2DMipmaps(
-		GL_TEXTURE_2D, 
-		GL_RGB, 
-		in_Ref.nWidth, 
-		in_Ref.nHeight,
-		GL_RGB,
-		GL_UNSIGNED_BYTE, 
-		in_Ref.hData->GetDataAddress()
-		);
-
-	VTextureState2D* pTexState = new VTextureState2D(id);
-
-	// store texure
-	m_Textures[in_Ref.hData] = pTexState;
-
-	return pTexState;
-}
-
 VTextureState2D* VTextureStateCategory::Create2DState(const VState* in_pTextureState)
 {
 	// if a texture is referenced by resource name
@@ -123,30 +50,6 @@ VTextureState2D* VTextureStateCategory::Create2DState(const VState* in_pTextureS
 			pRes->GetData<VTextureState2D>();
 
 		return const_cast<VTextureState2D*>(&* pState);
-	}
-	// if a texture is referenced by a buffer id, get and check it
-	if( in_pTextureState->ContainsParameter("bufferref") )
-	{
-		VMaterialDescription::TextureRef texRef;
-		void* hBuffer = 0;
-		in_pTextureState->GetParameter<void*>("bufferref", hBuffer);
-		texRef.hData = static_cast<VMaterialDescription::ByteBufferHandle>(hBuffer);
-		in_pTextureState->GetParameter("width", texRef.nWidth);
-		in_pTextureState->GetParameter("height", texRef.nHeight);
-
-		VTextureFilter magnification, minification;
-		in_pTextureState->GetParameter("magnification.filter", magnification);
-		texRef.magnificationFilter = (VMaterialDescription::TextureFilter)magnification;
-		in_pTextureState->GetParameter("minification.filter", minification);
-		texRef.minificationFilter = (VMaterialDescription::TextureFilter)minification;
-
-		VTextureWrapMode wrapu, wrapv;
-		in_pTextureState->GetParameter("wrapu", wrapu);
-		texRef.wrapTexCoordU = (VMaterialDescription::TextureWrapMode)wrapu;
-		in_pTextureState->GetParameter("wrapv", wrapv);
-		texRef.wrapTexCoordV = (VMaterialDescription::TextureWrapMode)wrapv;
-
-		return GetTextureState(texRef);
 	}
 	// necessary state parameters are missing
 	else
@@ -258,32 +161,6 @@ IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 	{
 		return &m_DefaultState;
 	}
-}
-
-vuint VTextureStateCategory::GetGLModeNum(const TextureFilter in_Filer)
-{
-	switch( in_Filer )
-	{
-	case VMaterialDescription::FilterNearest:				return GL_NEAREST;
-	case VMaterialDescription::FilterLinear:				return GL_LINEAR;
-	case VMaterialDescription::FilterNearestMipmapNearest:	return GL_NEAREST_MIPMAP_NEAREST;
-	case VMaterialDescription::FilterLinearMipmapNearest:	return GL_LINEAR_MIPMAP_NEAREST;
-	case VMaterialDescription::FilterNearestMipmapLinear:	return GL_NEAREST_MIPMAP_LINEAR;  
-	case VMaterialDescription::FilterLinearMipmapLinear:	return GL_LINEAR_MIPMAP_LINEAR;
-	};
-
-	V3D_THROW(VException, "illegal texture filter");
-}
-
-vuint VTextureStateCategory::GetGLModeNum(const TextureWrapMode  in_WrapMode)
-{
-	switch( in_WrapMode )
-	{
-	case VMaterialDescription::TextureRepeat:	return GL_REPEAT;
-	case VMaterialDescription::TextureClamp:	return GL_CLAMP;
-	}
-
-	V3D_THROW(VException, "illegal texture wrapping mode");
 }
 
 //-----------------------------------------------------------------------------

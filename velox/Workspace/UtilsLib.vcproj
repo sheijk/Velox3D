@@ -318,76 +318,6 @@
 			<Filter
 				Name="Renderers"
 				Filter="">
-				<Filter
-					Name="Terrain"
-					Filter="">
-					<File
-						RelativePath="..\Source\Graphics\Renderers\Terrain\VLodHeightmap.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Renderers\Terrain\VLodHeightmap.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Renderers\Terrain\VTerrainLodChunk.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Renderers\Terrain\VTerrainLodChunk.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Renderers\Terrain\VTerrainRenderer.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Renderers\Terrain\VTerrainRenderer.h">
-					</File>
-				</Filter>
-				<Filter
-					Name="BSP"
-					Filter="">
-					<File
-						RelativePath="..\Source\Graphics\Renderers\Bsp\VBSPRenderer.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Renderers\Bsp\VBSPRenderer.h">
-					</File>
-				</Filter>
-				<Filter
-					Name="Sky"
-					Filter="">
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Renderers\Sky\IVSkyColorizer.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Renderers\Sky\VDaylightSkyColorizer.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Renderers\Sky\VDaylightSkyColorizer.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Renderers\Sky\VSkyDome.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Renderers\Sky\VSkyDome.h">
-					</File>
-				</Filter>
-				<Filter
-					Name="Portals"
-					Filter="">
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Portal\IVCell.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Portals\VIndoorCell .cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Portal\VIndoorCell.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\Portals\VTerrainCell.cpp">
-					</File>
-					<File
-						RelativePath="..\Api\V3dLib\Graphics\Portal\VTerrainCell.h">
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="Includes"
@@ -420,12 +350,6 @@
 			<Filter
 				Name="Image"
 				Filter="">
-				<File
-					RelativePath="..\Source\Graphics\Image\VGraphicSprite.cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\Image\VGraphicSprite.h">
-				</File>
 			</Filter>
 			<Filter
 				Name="Materials"
@@ -567,6 +491,12 @@
 				RelativePath="..\Api\V3dLib\Utils\VFrameCounter.h">
 			</File>
 			<File
+				RelativePath="..\Source\UtilsLib\VSimpleTokenizer.cpp">
+			</File>
+			<File
+				RelativePath="..\Api\V3d\Utils\VSimpleTokenizer.h">
+			</File>
+			<File
 				RelativePath="..\Source\UtilsLib\VStreamReader.cpp">
 			</File>
 			<File
@@ -677,66 +607,6 @@
 				<File
 					RelativePath="..\Api\V3dLib\EntityParts\VSceneGraphPart.h">
 				</File>
-				<Filter
-					Name="Resource"
-					Filter="">
-					<Filter
-						Name="Implementation"
-						Filter="">
-						<File
-							RelativePath="..\Source\Resource\Types\VFileName.cpp">
-						</File>
-						<File
-							RelativePath="..\Source\Resource\VResource.cpp">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\VResourceData.cpp">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\VResourceData.h">
-						</File>
-						<File
-							RelativePath="..\Source\Resource\VResourceId.cpp">
-						</File>
-						<File
-							RelativePath="..\Source\Resource\VResourceManager.cpp">
-						</File>
-						<File
-							RelativePath="..\Source\Resource\VResourceManager.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\VTypedResourceData.h">
-						</File>
-					</Filter>
-					<Filter
-						Name="Interface"
-						Filter="">
-						<File
-							RelativePath="..\Api\V3d\Resource\IVResourceManager.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\IVResourceType.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\ResourceExceptions.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\Types\VFileName.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\VResource.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\VResourceDataPtr.h">
-						</File>
-						<File
-							RelativePath="..\Api\V3d\Resource\VResourceId.h">
-						</File>
-					</Filter>
-				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -860,8 +730,71 @@
 				RelativePath="..\Api\V3d\Xml\XMLUtils.inl">
 			</File>
 		</Filter>
+		<Filter
+			Name="Resource"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\Resource\Types\VFileName.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Resource\VResource.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceData.cpp">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceData.h">
+				</File>
+				<File
+					RelativePath="..\Source\Resource\VResourceId.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Resource\VResourceManager.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Resource\VResourceManager.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VTypedResourceData.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Resource\IVResourceManager.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\IVResourceType.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\ResourceExceptions.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\Types\VFileName.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResource.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceDataPtr.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Resource\VResourceId.h">
+				</File>
+			</Filter>
+		</Filter>
 		<File
 			RelativePath="..\Api\V3dLib\BoostSignals.h">
+		</File>
+		<File
+			RelativePath="..\Api\V3d\CG.h">
 		</File>
 		<File
 			RelativePath="..\Api\V3d\OpenGL.h">

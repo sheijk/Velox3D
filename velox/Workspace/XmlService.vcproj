@@ -162,12 +162,6 @@
 				RelativePath="..\Source\Module\VeloxModule.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\XMLService\VFileStream.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\XMLService\VFileStream.h">
-			</File>
-			<File
 				RelativePath="..\Source\XMLService\VStreamReader.cpp">
 			</File>
 			<File

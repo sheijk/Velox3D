@@ -57,12 +57,10 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	SetDisplay();
 
-	m_RenderMethods.RegisterRenderMethod(m_ImmediateRenderMethod);
-	//m_RenderMethods.RegisterRenderMethod(m_VBORenderMethod);
-
 	m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	m_StateCategories.RegisterCategory(m_MiscStateCategory);
-	//m_StateCategories.RegisterCategory(m_BlendingStateCategory);
+	m_StateCategories.RegisterCategory(m_VertexShaderCategory);
+	m_StateCategories.RegisterCategory(m_PixelShaderCategory);
 
 	Identity(m_ModelMatrix);
 	Identity(m_ViewMatrix);
@@ -74,32 +72,32 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 //-----------------------------------------------------------------------------
 VOpenGLDevice::~VOpenGLDevice()
 {
-	// output warnings for unreleased resources
-	const vuint nUnreleasedBufferCount = m_Buffers.GetBufferCount();
+	//// output warnings for unreleased resources
+	//const vuint nUnreleasedBufferCount = m_Buffers.GetBufferCount();
 
-	if( nUnreleasedBufferCount > 0 )
-	{
-		std::stringstream message;
-		message << "Warning: ";
-		message << nUnreleasedBufferCount;
-		message << " gfx device buffers have not been released\n";
+	//if( nUnreleasedBufferCount > 0 )
+	//{
+	//	std::stringstream message;
+	//	message << "Warning: ";
+	//	message << nUnreleasedBufferCount;
+	//	message << " gfx device buffers have not been released\n";
 
-		V3D_DEBUGMSG(message.str().c_str());
-		vout << message.str();
+	//	V3D_DEBUGMSG(message.str().c_str());
+	//	vout << message.str();
 
-		for(vuint bufid = 0; bufid < m_Buffers.GetBufferCount(); ++bufid)
-		{
-			std::stringstream msg;
-			msg << "\tBuffer with " 
-				<< m_Buffers.GetReferenceCount(m_Buffers.GetBuffer(bufid)) 
-				<< " references at address 0x"
-				<< m_Buffers.GetBuffer(bufid)
-				<< "\n";
+	//	for(vuint bufid = 0; bufid < m_Buffers.GetBufferCount(); ++bufid)
+	//	{
+	//		std::stringstream msg;
+	//		msg << "\tBuffer with " 
+	//			<< m_Buffers.GetReferenceCount(m_Buffers.GetBuffer(bufid)) 
+	//			<< " references at address 0x"
+	//			<< m_Buffers.GetBuffer(bufid)
+	//			<< "\n";
 
-			V3D_DEBUGMSG(msg.str().c_str());
-			vout << msg.str();
-		}
-	}
+	//		V3D_DEBUGMSG(msg.str().c_str());
+	//		vout << msg.str();
+	//	}
+	//}
 
 	const vuint nUnreleasedMeshes = vuint(m_Meshes.size());
 	if( nUnreleasedMeshes > 0 )
@@ -128,77 +126,7 @@ std::string GenerateBufferName()
 	return name.str();
 }
 
-IVDevice::BufferHandle VOpenGLDevice::CreateBuffer(
-	BufferType in_Type,
-	const Buffer* in_pBuffer,
-	BufferCopyMode in_CopyMode
-	)
-{
-	//using namespace resource;
-
-	//Buffer* pBuffer = new VByteBuffer(const_cast<Buffer*>(in_pBuffer), VBufferBase::CopyData);
-
-	//// neue resource anlegen und daten einhaengen
-	//VResourceManagerPtr pResMan;
-
-	//VResourceId res = pResMan->CreateResource(GenerateBufferName().c_str());
-	//res->AddData(pBuffer);
-
-	//return BufferHandle(pBuffer);
-//TODO: resource id zurueck geben (?)
-	Buffer* pBuffer = new VByteBuffer(const_cast<Buffer*>(in_pBuffer), VBufferBase::CopyData);
-
-	switch(in_Type)
-	{
-	case VertexBuffer:
-	{
-		m_Buffers.Add(pBuffer);
-	} break;
-
-	case Texture:
-	{
-		m_TextureBuffers.Add(pBuffer);
-	} break;
-
-	default:
-		V3D_THROW(VException, "tried to create illegal buffer type");
-	}
-
-	return BufferHandle(pBuffer);
-
-}
-
 //-----------------------------------------------------------------------------
-
-//TODO lacks for int support -ins ; lacks for any support ;) -- sheijk
-void VOpenGLDevice::DeleteBuffer(BufferHandle& in_hBuffer)
-{
-	//vout << "VOpenGLDevice.DeleteBuffer tut grad nix" << vendl;
-
-	VByteBuffer* pByteBuffer = reinterpret_cast<VByteBuffer*>(in_hBuffer);
-
-	// remove from vertex and texture buffers
-	m_TextureBuffers.Delete(pByteBuffer);
-	m_Buffers.Delete(pByteBuffer);
-
-	in_hBuffer = pByteBuffer;
-}
-
-void VOpenGLDevice::OverwriteBuffer(
-	BufferHandle& in_hBuffer,
-	vuint in_nFirstElement,
-	vuint in_nCount,
-	const vbyte* in_pData
-	)
-{
-	// get buffer
-	// write data
-	memcpy(
-		in_hBuffer->GetDataAddress() + in_nFirstElement, 
-		in_pData,
-		in_nCount
-		);
-}
 
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 {
@@ -224,9 +152,6 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 		// create mesh
 		VMeshDescription descr = *in_pMeshDescription;
 
-		// add buffers to device, if they are external
-		InternalizeBuffers(descr);
-
 		VMeshBase* pMesh = new VStreamMesh(materials, *in_pMeshDescription);
 
 		m_Meshes.push_back(pMesh);
@@ -240,71 +165,37 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 }
 
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
-	const VMeshDescription& in_MeshDesc,
-	const VMaterialDescription& in_MaterialDesc
-	)
-{
-	V3D_THROW(VException, 
-		"warning: using deprecation function v3d::graphics::IVDevice::Crea"
-		"teMesh(VMeshDescription&, VMaterialDescription&). Use an effect "
-		"description instead");
-}
-
-IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
 	const VMeshDescription& in_MeshDescr,
 	const VEffectDescription& in_EffectDescr
 	)
 {
-	std::vector<VRenderStateList*> statelists
-		= m_StateCategories.CreateMaterialList(in_EffectDescr);
-
-	std::vector<IVMaterial*> materials(statelists.begin(), statelists.end());
-
-	if( materials.size() > 0 )
-	{
-		VMeshDescription descr = in_MeshDescr;
-
-		// add buffers to device, if they are external
-		InternalizeBuffers(descr);
-
-		VMeshBase* pMesh = m_RenderMethods.CreateMesh(descr, 0, materials);
-
-		m_Meshes.push_back(pMesh);
-
-		return MakeMeshHandle(pMesh);
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-void VOpenGLDevice::DeleteMaterial(MaterialHandle& in_Material)
-{
-	delete in_Material;
-	in_Material = 0;
+	V3D_THROW(VException, "Warning: using deprecated function v3d::graphics"
+		"::IVDevice::CreateMesh(VMeshDescription&, VEffectDescription&). "
+		"Use the resource manager instead (-> CreateMesh(string))");
 }
 
 void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 {
-	VMeshBase* pMesh = MakeMeshPointer(in_Mesh);
+	V3D_THROW(VException, "Warning: used deprecated method v3d::graphics::"
+		"IVDevice::DeleteMesh(MeshHandle&)");
+	//VMeshBase* pMesh = MakeMeshPointer(in_Mesh);
 
-	if( pMesh != 0 )
-	{
-		// release buffers
-		std::vector<VMeshDescription::BufferHandle> buffers = pMesh->GetBuffers();
+	//if( pMesh != 0 )
+	//{
+	//	// release buffers
+	//	std::vector<VMeshDescription::BufferHandle> buffers = pMesh->GetBuffers();
 
-		for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
-		{
-			VByteBuffer* pByteBuffer = static_cast<VByteBuffer*>(buffers[bufid]);
-			m_Buffers.Delete(pByteBuffer);
-		}
+	//	for(vuint bufid = 0; bufid < buffers.size(); ++bufid)
+	//	{
+	//		VByteBuffer* pByteBuffer = static_cast<VByteBuffer*>(buffers[bufid]);
+	//		m_Buffers.Delete(pByteBuffer);
+	//	}
 
-		m_Meshes.remove(pMesh);
+	//	m_Meshes.remove(pMesh);
 
-		delete pMesh;
-		in_Mesh = 0;
-	}
+	//	delete pMesh;
+	//	in_Mesh = 0;
+	//}
 }
 
 //-----------------------------------------------------------------------------
@@ -314,14 +205,6 @@ void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 	VMeshBase* pMesh = reinterpret_cast<VMeshBase*>(MakeMeshPointer(in_pMesh));
 
 	pMesh->Render();
-}
-
-void VOpenGLDevice::RenderImmediate(
-	VMeshDescription in_Mesh,
-	VMaterialDescription in_Material
-	)
-{
-	V3D_THROW(VException, "IVDevice::RenderImmediate not supported anymore");
 }
 
 //-----------------------------------------------------------------------------
@@ -641,42 +524,6 @@ void VOpenGLDevice::RecalcModelViewMatrix()
 	//Mult(modelView, m_ModelMatrix, m_ViewMatrix);
 
 	SetGLMatrix(GL_MODELVIEW, modelView, this);
-}
-
-IVDevice::BufferHandle VOpenGLDevice::GetInternalVertexBuffer(
-	BufferHandle in_hBuffer)
-{
-	BufferHandle hBuffer = 0;
-	VByteBuffer* const buffer = static_cast<VByteBuffer*>(in_hBuffer);
-
-	if( m_Buffers.Contains( buffer ) )
-	{
-		hBuffer = in_hBuffer;
-
-		m_Buffers.Add(buffer);
-	}
-	else if( buffer != 0 )
-	{
-		hBuffer = CreateBuffer(VertexBuffer, buffer, VBufferBase::CopyData);
-	}
-
-	return hBuffer;
-}
-
-void VOpenGLDevice::InternalizeBuffers(VMeshDescription& io_MeshDescr)
-{
-	std::vector<BufferHandle> buffers = io_MeshDescr.GetAllBuffers();
-
-    // for each buffer
-	for(vuint bufId = 0; bufId < buffers.size(); ++bufId)
-	{
-		// get internal version
-		BufferHandle hInternalBuffer = GetInternalVertexBuffer(buffers[bufId]);
-
-		// replace all buffers in md which are equal to replaced buffer
-		// by internal version
-		io_MeshDescr.ReplaceBuffer(buffers[bufId], hInternalBuffer);
-	}
 }
 
 //-----------------------------------------------------------------------------

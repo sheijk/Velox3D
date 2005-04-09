@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib"
 				OutputFile="$(OutDir)/VeloxServices.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
@@ -594,12 +594,6 @@
 					Name="Render Methods"
 					Filter="">
 					<File
-						RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VImmediateRenderMethod.h">
-					</File>
-					<File
 						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.cpp">
 					</File>
 					<File
@@ -624,24 +618,18 @@
 					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.h">
 					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLIndexMesh.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLVertexMesh.h">
-					</File>
 				</Filter>
 				<Filter
 					Name="States"
 					Filter="">
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\IVOpenGLRenderState.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VCGVertexShaderState.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VCGVertexShaderState.h">
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VCubemapTextureState.cpp">
@@ -667,6 +655,12 @@
 					<File
 						RelativePath="..\Source\Graphics\OpenGL\VTextureStateCategory.h">
 					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VVertexShaderCategory.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\OpenGL\VVertexShaderCategory.h">
+					</File>
 				</Filter>
 				<Filter
 					Name="GL Utils"
@@ -681,15 +675,6 @@
 				<Filter
 					Name="Base Utils"
 					Filter="">
-					<File
-						RelativePath="..\Source\Graphics\DeviceBase\VBufferManager.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\DeviceBase\VRenderMethodRegistry.h">
-					</File>
 					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
 					</File>

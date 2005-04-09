@@ -61,37 +61,13 @@ public:
 	void SetTexCoordResource(vuint in_nIndex, const std::string& in_Id);
 	std::string GetTexCoordResource(vuint in_nCoord) const;
 
-	// old, to be thrown out
-	void SetCoordinateData(BufferHandle in_hBuffer, VDataFormat in_Format);
-	BufferHandle GetCoordinateBuffer() const;
-
-	void SetColorData(BufferHandle in_hBuffer, VDataFormat in_Format);
-	BufferHandle GetColorBuffer() const;
-	
-	void SetIndexData(BufferHandle in_hBuffer, VDataFormat in_Format);
-	BufferHandle GetIndexBuffer() const;
-
-	void SetTexCoordData(vuint in_nCoord, BufferHandle in_hBuffer, VDataFormat in_Format);
-	BufferHandle GetTexCoordBuffer(vuint in_nCoord) const;
-
-	// some util functions
-
-	/** replace each buffer equal to old buffer by new buffer */
-	void ReplaceBuffer(BufferHandle in_hOldBuffer, BufferHandle in_hNewBuffer);
-
-	/** get all buffers (for operations on all buffers) */
-	std::vector<BufferHandle> GetAllBuffers() const;
-
 protected:
 	virtual void SetTexCoordCount(vuint in_nNewCount);
 
 private:
 	struct DataRef
 	{
-		BufferHandle hBuffer;
 		std::string resource;
-
-		DataRef();
 	};
 
 	void SetMinTexCoords(vuint in_nCoordCount);

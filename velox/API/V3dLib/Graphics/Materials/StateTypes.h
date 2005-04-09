@@ -150,6 +150,18 @@ struct VColorBufferMask
 	vbool writeAlpha;
 };
 
+/**
+ * Different shader types
+ */
+enum VShaderType
+{
+	ShaderCGVertex10,
+    ShaderCGVertex20,
+	//ShaderCGVertex30
+	ShaderCGPixel10,
+	ShaderCGPixel20
+};
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

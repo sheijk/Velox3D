@@ -16,8 +16,7 @@ namespace vfs {
 class VSimpleVfs : public IVFileSystem
 {
 	// the file structure tree
-	VDirectory* m_pRootDir;
-	DirectoryPtr m_pRootDirSP;
+	VSharedPtr<VDirectory> m_pRootDirSP;
 
     void ParseInitFile();
 public:
@@ -34,6 +33,9 @@ public:
 
 	virtual IVDirectory* GetDir(VStringParam in_strDir);
 
+	virtual vbool ExistsDir(VStringParam in_strDir);
+	virtual vbool ExistsFile(VStringParam in_strFile);
+	virtual vbool Exists(VStringParam in_strFSObject);
 };
 
 //-----------------------------------------------------------------------------

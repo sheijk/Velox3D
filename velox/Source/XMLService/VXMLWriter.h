@@ -7,7 +7,7 @@
 #include <V3d/VFS/IVStream.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <V3d/VFS/VStreamOps.h>
-#include "VFileStream.h"
+#include "../VirtualFileSystem/VFileStream.h"
 //-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <stdarg.h>

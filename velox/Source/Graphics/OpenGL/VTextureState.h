@@ -48,7 +48,6 @@ public:
 	virtual void Apply() const
 	{
 		glBindTexture(m_nTextureTarget, m_nTextureId);
-//		glEnable(m_nTextureTarget);
 	}
 };
 

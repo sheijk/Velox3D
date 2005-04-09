@@ -37,9 +37,9 @@ public:
 	/** get directory info */
 	virtual IVDirectory* GetDir(VStringParam in_strDir = "/") = 0;
 
-//	virtual void MoveDir() = 0;
-//	virtual void Mount() = 0;
-//	virtual void Unmount() = 0;
+	virtual vbool ExistsDir(VStringParam in_strDir) = 0;
+	virtual vbool ExistsFile(VStringParam in_strFile) = 0;
+	virtual vbool Exists(VStringParam in_strFSObject) = 0;
 };
 
 typedef VServicePtr<IVFileSystem> VFileSystemPtr;
