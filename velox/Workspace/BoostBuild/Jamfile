@@ -1,0 +1,189 @@
+# Boost build script for velox
+
+# settings common to all subprojects
+#-------------------------------------------------------------------------------
+project Velox
+	: # settings
+	requirements
+	<include>../../API
+	<include>../../Local/ExternalLibs/Include
+#	<define>V3D_OSX
+#	<rtti>on
+	;
+
+# external libraries
+#-------------------------------------------------------------------------------
+lib boostFileSystemLib : : 
+	<file>../../Local/ExternalLibs/Lib/boostd.lib <link>static ;
+lib tinyXmlLib : : 
+	<file>../../Local/ExternalLibs/Lib/tinyxmld.lib <link>static ;
+lib extglLib : :
+	<file>../../Local/ExternalLibs/Lib/extgl.lib <link>static ;
+lib devilLib : :
+	<file>../../Local/ExternalLibs/Lib/devil.lib <link>static ;
+lib iluLib : :
+	<file>../../Local/ExternalLibs/Lib/ilu.lib <link>static ;
+lib cgLib : :
+	<file>../../Local/ExternalLibs/Lib/cg.lib <link>static ;
+lib cgglLib : :
+	<file>../../Local/ExternalLibs/Lib/cgGL.lib <link>static ;
+	
+# system libraries
+#-------------------------------------------------------------------------------
+lib user32 ;
+lib dxguid ;
+lib dinput8 ;
+lib opengl32 ;
+lib glu32 ;
+lib gdi32 ;
+            
+# template for new targets
+#lib lala
+#	: # files to compile
+#	: # settings
+#	; # end
+
+# velox projects
+#-------------------------------------------------------------------------------
+lib CoreLib
+	: # files to compile
+	../../Source/Core/Error/VAssert.cpp
+	../../Source/Core/Error/VException.cpp
+	../../Source/Core/MemManager.cpp
+	../../Source/Core/ObjectRegistry/VNamedObject.cpp
+	../../Source/Core/ObjectRegistry/VObjectKey.cpp
+	../../Source/Core/ObjectRegistry/VObjectRegistry.cpp
+	../../Source/Core/ObjectRegistry/VObjectRegistryExceptions.cpp
+	../../Source/Core/VIOStream.cpp
+	../../Source/Core/VLogging.cpp
+	../../Source/Core/VVeloxApp.cpp
+	../../Source/Core/Wrappers/VString.cpp
+	: # settings
+	<link>static
+	; # end                                          
+
+lib KernelLib                                    
+	: # files to compile
+	../../Source/Kernel/VKernel.cpp              
+	../../Source/Kernel/VKernelIniReader.cpp
+	../../Source/Kernel/VServiceProxy.cpp
+#	../../Source/Kernel/main.cpp
+	: # settings
+	<link>static
+	; # end
+
+lib UtilsLib
+	: # files to compile
+	# graphics
+	[ glob ../../Source/Graphics/Lib/*.cpp ]
+	[ glob ../../Source/UtilsLib/Camera/*.cpp ]
+	[ glob ../../Source/UtilsLib/DrawList/*.cpp ]
+	[ glob ../../Source/UtilsLib/SimpleSG/*.cpp ]
+	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
+	# renderers currently not in build
+	# image currently not in build
+	[ glob ../../Source/Math/*.cpp ]
+	[ glob ../../Source/UtilsLib/*.cpp ]
+	[ glob ../../Source/UtilsLib/CPUDetect/*.cpp ]
+	[ glob ../../Source/Collision/*.cpp ]
+	[ glob ../../Source/Entity/*.cpp ]
+	[ glob ../../Source/Entity/EntityParts/*.cpp ]
+	[ glob ../../Source/Physics/*.cpp ]
+	[ glob ../../Source/UtilsLib/XML/*.cpp ]
+	# resource lib + resource types
+	[ glob ../../Source/Resource/*.cpp ]
+	[ glob ../../Source/Resource/Types/*.cpp ]
+	# property service
+	[ glob ../../Source/Property/*.cpp ]
+	: # settings                    
+	<link>static
+	;
+	
+lib VeloxServices
+	: # files to compile
+	# vfs
+	[ glob ../../Source/VirtualFileSystem/*.cpp ]
+	# window service
+	../../Source/WindowService/VOpenGLDeviceFactory.cpp
+	../../Source/WindowService/VWindowBase.cpp
+	../../Source/WindowService/VWindowManagerBase.cpp
+	../../Source/WindowService/VWindowManagerWin32.cpp
+	../../Source/WindowService/VWindowWin32.cpp
+	# input lib
+	[ glob ../../Source/InputLib/*.cpp ]	
+	# graphics lib
+	[ glob ../../Source/Graphics/DeviceBase/*.cpp ] 
+	[ glob ../../Source/Graphics/OpenGL/*.cpp ]	
+	# config service
+	[ glob ../../Source/ConfigFiles/*.cpp ]
+	# update manager
+	[ glob ../../Source/UpdateManager/*.cpp ]
+	# system manager
+	[ glob ../../Source/SystemManager/*.cpp ]
+	# image service
+	[ glob ../../Source/ImageService/*.cpp ]
+	# error service
+	[ glob ../../Source/Error/*.cpp ]
+
+	# dependencies and other files
+	../../Source/Module/VeloxModule.cpp
+	../../Source/VeloxServices.cpp
+	# other velox libs
+	CoreLib
+	UtilsLib
+	# external libs 
+	boostFileSystemLib
+	extglLib
+	devilLib
+	iluLib
+	cgLib
+	cgglLib
+	# system libs
+	user32                                                   
+	dxguid
+	dinput8
+	opengl32
+	glu32 
+	gdi32
+	: # settings
+	<link>shared
+	; # end
+
+lib XmlService
+	: # files to compile	
+	[ glob ../../Source/XMLService/*.cpp ]
+	CoreLib
+	tinyXmlLib
+	../../Source/Module/VeloxModule.cpp
+	user32
+	: # settings
+	<link>shared
+	; # end
+
+# Examples
+#-------------------------------------------------------------------------------
+
+exe MinimalExample
+	: # files to compile
+	../../Examples/Minimal/Minimal.cpp
+	../../Source/Kernel/main.cpp
+	../../Source/Module/VeloxModule.cpp
+	CoreLib
+	UtilsLib
+	KernelLib
+	: # settings
+	;
+
+exe GraphicsDemo
+	: # files to compile
+	../../Examples/GraphicsDemo/GraphicsDemo.cpp
+	../../Source/Kernel/main.cpp
+	../../Source/Module/VeloxModule.cpp
+	CoreLib
+	UtilsLib
+	KernelLib
+	user32
+	: # settings
+	<link>shared
+	;
+

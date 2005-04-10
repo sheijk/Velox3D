@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VException.h>
 
-#include <Cg/cgGL.h>
+//#include <Cg/cgGL.h>
 #include <sstream>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

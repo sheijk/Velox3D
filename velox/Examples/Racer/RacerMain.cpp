@@ -173,40 +173,46 @@ IVEntityManager::EntityPtr VRacerApp::CreateHeightmapEntity()
 	VEffectDescription hmeffect;
 	VRenderPass& pass(hmeffect.AddShaderPath().AddRenderPass());
 
-	VImageServicePtr pImageService;
-	VImage image(2048, 2048, 24);
-	pImageService->CreateImage("/data/rocks2048.jpg", image);
+	//VImageServicePtr pImageService;
+	//VImage image(2048, 2048, 24);
+	//pImageService->CreateImage("/data/rocks2048.jpg", image);
 
-	IVDevice::BufferHandle hTexBuffer = GetDevice().CreateBuffer(
-		IVDevice::Texture,
-		&image.GetData(),
-		VBufferBase::DropData);
+	//IVDevice::BufferHandle hTexBuffer = GetDevice().CreateBuffer(
+	//	IVDevice::Texture,
+	//	&image.GetData(),
+	//	VBufferBase::DropData);
 
-	VState textureState = TextureState(
-		hTexBuffer,
-		image.GetWidth(), image.GetHeight(),
-		FilterLinear, FilterLinear,
-		TextureRepeat, TextureRepeat);
+	//VState textureState = TextureState(
+	//	hTexBuffer,
+	//	image.GetWidth(), image.GetHeight(),
+	//	FilterLinear, FilterLinear,
+	//	TextureRepeat, TextureRepeat);
+	VState textureState = TextureState("/data/rocks2048.jpg");
+
 	pass.AddState(textureState);
 
 	pass.AddState(DefaultColorState(VColor4f(1,1,1,1)));
 
-	pMeshPart->AddMesh(BuildMesh(GetDevice(), *pHeightmap, hmeffect));
+	resource::VResourceId res = BuildResource("/meshes/heightmap", *pHeightmap);
+	res->AddData(new VEffectDescription(hmeffect));
+	pMeshPart->AddMesh(GetDevice().CreateMesh("/meshes/heightmap"));
+	//pMeshPart->AddMesh(BuildMesh(GetDevice(), *pHeightmap, hmeffect));
 
 	// add detail texture
-	VImage detailTex(512, 512, 24);
-	pImageService->CreateImage("/data/detail.jpg", detailTex);
+	//VImage detailTex(512, 512, 24);
+	//pImageService->CreateImage("/data/detail.jpg", detailTex);
 
-	IVDevice::BufferHandle hDetailTexBuffer = GetDevice().CreateBuffer(
-		IVDevice::Texture,
-		&detailTex.GetData(),
-		VBufferBase::DropData);
+	//IVDevice::BufferHandle hDetailTexBuffer = GetDevice().CreateBuffer(
+	//	IVDevice::Texture,
+	//	&detailTex.GetData(),
+	//	VBufferBase::DropData);
 
-	VState detailState = TextureState(
-		hDetailTexBuffer,
-		detailTex.GetWidth(), detailTex.GetHeight(),
-		FilterLinear, FilterLinear,
-		TextureRepeat, TextureRepeat);
+	//VState detailState = TextureState(
+	//	hDetailTexBuffer,
+	//	detailTex.GetWidth(), detailTex.GetHeight(),
+	//	FilterLinear, FilterLinear,
+	//	TextureRepeat, TextureRepeat);
+	VState detailState = TextureState("/data/detail.jpg");
 
 	VEffectDescription detailMat;
 	VRenderPass& detPass = detailMat.AddShaderPath().AddRenderPass();
@@ -221,7 +227,10 @@ IVEntityManager::EntityPtr VRacerApp::CreateHeightmapEntity()
 		pHeightmap->GetVertexBuffer()[i].texCoords.v *= 5;
 	}
 
-	pMeshPart->AddMesh(BuildMesh(GetDevice(), *pHeightmap, detailMat));
+	resource::VResourceId res2 = BuildResource("/meshes/detailmap", *pHeightmap);
+	res2->AddData(new VEffectDescription(detailMat));
+	pMeshPart->AddMesh(GetDevice().CreateMesh("/meshes/detailmap"));
+	//pMeshPart->AddMesh(BuildMesh(GetDevice(), *pHeightmap, detailMat));
 
 	IVEntityManager::EntityPtr pEntity(new VEntity());
 	pEntity->AddPart(VFourCC("mesh"), VEntity::PartPtr(pMeshPart));
@@ -254,7 +263,10 @@ IVEntityManager::EntityPtr VRacerApp::CreateSkyEntity()
 	ForEachVertex(sky.GetVertexBuffer(), ScaleVertex<VColoredVertex>(20.0f, 20.0f, 20.0f));
 
 	VMeshPart* pSkyMeshPart = new VMeshPart(&m_GraphicsManager);
-	pSkyMeshPart->AddMesh(VModel(BuildMesh(GetDevice(), sky, wireFrame)));
+	resource::VResourceId res = BuildResource("/meshes/sky", sky);
+	res->AddData(new VEffectDescription(wireFrame));
+	pSkyMeshPart->AddMesh(GetDevice().CreateMesh("/meshes/sky"));
+	//pSkyMeshPart->AddMesh(VModel(BuildMesh(GetDevice(), sky, wireFrame)));
 
 	IVEntityManager::EntityPtr pSkyEntity(new VEntity());
 	pSkyEntity->AddPart(VFourCC("mesh"), VEntity::PartPtr(pSkyMeshPart));
@@ -277,18 +289,28 @@ void VRacerApp::CreateMeshes()
 
 	// load texture
 	VImage ballTex(64, 64, 24);
-	VImageServicePtr()->CreateImage("/data/ball.tga", ballTex);
-	m_hSphereTexture = m_pDevice->CreateBuffer(IVDevice::Texture, &ballTex.GetData());
+	//VImageServicePtr()->CreateImage("/data/ball.tga", ballTex);
+	//m_hSphereTexture = m_pDevice->CreateBuffer(IVDevice::Texture, &ballTex.GetData());
 
-	pass.AddState(TextureState(
-		m_hSphereTexture, 
-		ballTex.GetWidth(), ballTex.GetHeight(),
-		FilterLinear, FilterLinear,
-		TextureRepeat, TextureRepeat));
+	//pass.AddState(TextureState(
+	//	m_hSphereTexture, 
+	//	ballTex.GetWidth(), ballTex.GetHeight(),
+	//	FilterLinear, FilterLinear,
+	//	TextureRepeat, TextureRepeat));
+
+	pass.AddState(TextureState("/data/ball.tga"));
 
 	pass.AddState(DefaultColorState(1, 1, 1, 1));
 
-    m_hSphereMesh = BuildMesh(*m_pDevice, sphere, sphereSurface);
+	vbool dataExists = vfs::VFileSystemPtr()->Exists("/data");
+	dataExists = vfs::VFileSystemPtr()->ExistsDir("/data");
+	dataExists = vfs::VFileSystemPtr()->ExistsFile("/data/ball.tga");
+
+	resource::VResourceId temtTest = resource::VResourceManagerPtr()->GetResourceByName("/data/ball.tga");
+	resource::VResourceId res = BuildResource("/meshes/sphere", sphere);
+	res->AddData(new VEffectDescription(sphereSurface));
+	m_hSphereMesh = GetDevice().CreateMesh("/meshes/sphere");
+    //m_hSphereMesh = BuildMesh(*m_pDevice, sphere, sphereSurface);
 }
 
 IVEntityManager::EntityPtr VRacerApp::CreateSphereBodyEntity(

@@ -40,6 +40,7 @@ vrendermethodregistry
 09.04.2005
 - Support fuer CG Vertex und Pixelshader
 - Parameter fuer Shader in der Effect Description (bisher nur model-view matrix)
+- Boost Build v2 Buildfiles
 
 23.03.2005
 - Support fuer Device interne Buffer entfernt

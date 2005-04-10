@@ -5,7 +5,7 @@
 
 #include "IVOpenGLRenderState.h"
 
-#include <Cg/cg.h>
+#include <V3d/CG.h>
 
 #include <string>
 #include <list>

@@ -10,9 +10,6 @@
 #include <V3d/OpenGL.h>
 
 #include "../DeviceBase/VBufferManager.h"
-#include "../DeviceBase/VRenderMethodRegistry.h"
-#include "VImmediateRenderMethod.h"
-#include "VOpenGLVBORenderMethod.h"
 
 #include "../DeviceBase/VRenderStateList.h"
 #include "../DeviceBase/VStateCategoryList.h"
