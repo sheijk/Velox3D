@@ -32,10 +32,14 @@ Doku:
 ----- last things sheijk finished:
 
 TODO:
-CVS Tag setzen (pre graphics aufraeumaktion)
 evtl einige Dateien aus dem CVS entfernen
-vmaterialdescription
 vrendermethodregistry
+
+
+- VMaterialDescription entfernt
+
+19.04.2005
+- Mesh und Material getrennt. Interface der DrawList angepasst
 
 09.04.2005
 - Support fuer CG Vertex und Pixelshader

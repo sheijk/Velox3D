@@ -19,8 +19,8 @@ class IVMesh
 public:
 	virtual ~IVMesh() {};
 
-	virtual vuint GetMaterialCount() const = 0;
-	virtual IVMaterial& GetMaterial(vuint in_nMaterialId) = 0;
+	//virtual vuint GetMaterialCount() const = 0;
+	//virtual IVMaterial& GetMaterial(vuint in_nMaterialId) = 0;
 };
 
 //-----------------------------------------------------------------------------

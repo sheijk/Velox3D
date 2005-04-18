@@ -146,8 +146,11 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 	//IVDevice::MeshHandle hSkyMesh = CreateBackgroundMesh(device);
 	//IVDevice::MeshHandle hMoonMesh = CreateMoonMesh(device);
 	IVDevice::MeshHandle hSphereMesh = device.CreateMesh("/data/earth");
+	IVDevice::MaterialHandle hSphereMat = device.CreateMaterial("/data/earth");
 	IVDevice::MeshHandle hSkyMesh = device.CreateMesh("/data/sky");
+	IVDevice::MaterialHandle hSkyMat = device.CreateMaterial("/data/sky");
 	IVDevice::MeshHandle hMoonMesh = device.CreateMesh("/data/moon");
+	IVDevice::MaterialHandle hMoonMat = device.CreateMaterial("/data/moon");
 
 	IVDevice::MeshHandle hTriangle = device.CreateMesh("/test");
 
@@ -211,11 +214,11 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 
 		// render the mesh (with 2 passes)
 		device.SetMatrix(IVDevice::ModelMatrix, modelmat);
-		RenderMesh(device, hSphereMesh);
+		RenderMesh(device, hSphereMesh, hSphereMat);
 
 		// render the sky
 		device.SetMatrix(IVDevice::ModelMatrix, skyMatrix);
-		RenderMesh(device, hSkyMesh);
+		RenderMesh(device, hSkyMesh, hSkyMat);
 
 		// setup matrix for moon to move it, then render moon
 		Identity(	moonMatrix);
@@ -228,7 +231,7 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 
 		device.SetMatrix(IVDevice::ModelMatrix, moonMatrix);
 
-		RenderMesh(device, hMoonMesh);
+		RenderMesh(device, hMoonMesh, hMoonMat);
 		//RenderMesh(device, hTriangle);
 
 		// end the scene (flip buffers etc)

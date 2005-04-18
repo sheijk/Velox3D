@@ -3,12 +3,11 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/VMaterialDescription.h>
 #include <v3d/Graphics/VEffectDescription.h>
 
 #include <v3d/Graphics/IVStateCategory.h>
 
-#include "VRenderStateList.h"
+#include "VMaterial.h"
 
 #include <set>
 #include <memory>

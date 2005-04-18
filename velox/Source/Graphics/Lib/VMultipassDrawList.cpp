@@ -39,27 +39,27 @@ void VMultipassDrawList::ReplacePass(PassId in_nPassId, DrawListPtr in_pNewPass)
 	m_RenderPasses[in_nPassId] = in_pNewPass;
 }
 
-void VMultipassDrawList::Add(VModel in_Model, PassId in_nId)
+void VMultipassDrawList::Add(VModelMesh in_Model, PassId in_nId)
 {
 	GetDrawListForPass(in_nId)->Add(in_Model);
 }
 
-void VMultipassDrawList::Add(VModel in_Model)
+void VMultipassDrawList::Add(VModelMesh in_Model)
 {
 	Add(in_Model, 0);
 }
 
-void VMultipassDrawList::Remove(VModel in_Model)
-{
-	RenderPassList::iterator begin = m_RenderPasses.begin();
-	RenderPassList::iterator end = m_RenderPasses.end();
-
-	// remove from all childs
-	for(RenderPassList::iterator rpi = begin; rpi != end; ++rpi)
-	{
-        rpi->second->Remove(in_Model);
-	}
-}
+//void VMultipassDrawList::Remove(VModelMesh in_Model)
+//{
+//	RenderPassList::iterator begin = m_RenderPasses.begin();
+//	RenderPassList::iterator end = m_RenderPasses.end();
+//
+//	// remove from all childs
+//	for(RenderPassList::iterator rpi = begin; rpi != end; ++rpi)
+//	{
+//        rpi->second->Remove(in_Model);
+//	}
+//}
 
 IVDrawList& VMultipassDrawList::GetPass(PassId in_nPass)
 {

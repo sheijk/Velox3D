@@ -392,6 +392,9 @@
 					RelativePath="..\Source\Graphics\OpenGL\VMeshHandle.h">
 				</File>
 				<File
+					RelativePath="..\Source\Graphics\Lib\VModel.cpp">
+				</File>
+				<File
 					RelativePath="..\Source\Graphics\Lib\VVertexBuffer.cpp">
 				</File>
 				<File
@@ -743,7 +746,7 @@
 					RelativePath="..\Source\Resource\VResource.cpp">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Resource\VResourceData.cpp">
+					RelativePath="..\Source\Resource\VResourceData.cpp">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Resource\VResourceData.h">

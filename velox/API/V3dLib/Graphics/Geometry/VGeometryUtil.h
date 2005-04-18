@@ -6,7 +6,6 @@
 #include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
 #include <V3dLib/Graphics/Geometry/VVertexDataLayout.h>
-#include <V3d/Graphics/VMaterialDescription.h>
 #include <V3d/Graphics/VMeshDescription.h>
 
 #include <V3d/Resource/IVResourceManager.h>

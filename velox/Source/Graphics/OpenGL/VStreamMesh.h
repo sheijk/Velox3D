@@ -10,6 +10,7 @@
 #include <V3d/Graphics/VVertexBuffer.h>
 #include "IVVertexStream.h"
 #include "../DeviceBase/VMeshBase.h"
+#include <v3d/Graphics/VMeshDescription.h>
 
 #include <memory>
 
@@ -27,7 +28,7 @@ class VStreamMesh : public VMeshBase
 {
 public:
 	VStreamMesh(
-		std::vector<IVMaterial*> in_Materials,
+		//std::vector<IVMaterial*> in_Materials,
 		const VMeshDescription& in_MeshDescription
 		);
 

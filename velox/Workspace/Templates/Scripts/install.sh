@@ -5,7 +5,7 @@
 # Call it like this:
 #
 # chmod uga+x install.sh
-# ./install.sh
+# ./install.sh %insert.someDirInPath%
 
 if [ $1 ]
 then

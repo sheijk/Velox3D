@@ -24,14 +24,14 @@ namespace graphics {
  */
 class VTextureStateCategory : public IVStateCategory
 {
-	typedef VMaterialDescription::TextureFilter TextureFilter;
-	typedef VMaterialDescription::TextureWrapMode TextureWrapMode;
+	//typedef VMaterialDescription::TextureFilter TextureFilter;
+	//typedef VMaterialDescription::TextureWrapMode TextureWrapMode;
 
-	typedef std::map<VMaterialDescription::ByteBufferHandle, VTextureState2D*> 
-		TextureMap;
+	//typedef std::map<VMaterialDescription::ByteBufferHandle, VTextureState2D*> 
+		//TextureMap;
 
 	VTextureStateUntextured m_DefaultState;
-	TextureMap m_Textures;
+	//TextureMap m_Textures;
 
 	VTextureState2D* Create2DState(const VState* in_pTextureState);
 	IVRenderState* CreateCubeMapState(const VState* in_pTextureState);

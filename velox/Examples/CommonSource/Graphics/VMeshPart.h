@@ -48,7 +48,7 @@ public:
  */
 class VMeshPart : public entity::IVPart
 {
-	typedef std::list<graphics::VModel> MeshList;
+	typedef std::list<graphics::VModelMesh> MeshList;
 
 	VGraphicsManager* m_pManager;
 	MeshList m_Meshes;
@@ -60,8 +60,9 @@ class VMeshPart : public entity::IVPart
 public:
 	VMeshPart(VGraphicsManager* in_pManager);
 
-	void AddMesh(graphics::IVDevice::MeshHandle in_hMesh);
-	void AddMesh(graphics::VModel in_Model);
+	void AddMesh(graphics::IVDevice::MeshHandle in_hMesh, 
+		graphics::IVDevice::MaterialHandle in_hMaterial);
+	void AddMesh(graphics::VModelMesh in_Model);
 	void RemoveMesh(graphics::IVDevice::MeshHandle in_hMesh);
 
 	void Update();

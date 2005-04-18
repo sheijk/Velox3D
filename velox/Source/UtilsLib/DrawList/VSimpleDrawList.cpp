@@ -18,16 +18,16 @@ VSimpleDrawList::~VSimpleDrawList()
 }
 //-----------------------------------------------------------------------------
 
-void VSimpleDrawList::Add(VModel in_Model)
+void VSimpleDrawList::Add(VModelMesh in_Model)
 {
 	m_Models.push_back(in_Model);
 }
 //-----------------------------------------------------------------------------
 
-void VSimpleDrawList::Remove(VModel in_Model)
-{
-	m_Models.remove(in_Model);
-}
+//void VSimpleDrawList::Remove(VModelMesh in_Model)
+//{
+//	m_Models.remove(in_Model);
+//}
 //-----------------------------------------------------------------------------
 
 void VSimpleDrawList::Render()
@@ -36,16 +36,29 @@ void VSimpleDrawList::Render()
 
 	for( ; modelIter != m_Models.end(); ++modelIter)
 	{
-		VModel& model = *modelIter;
-		MeshHandle hMesh = (*modelIter).hMesh;
-		TransformMatrixPtr pTransform = model.pTransformation;
+		//VModelMesh& model = *modelIter;
+		//MeshHandle hMesh = (*modelIter).hMesh;
+		//TransformMatrixPtr pTransform = model.pTransformation;
+		//m_Device.SetMatrix(IVDevice::ModelMatrix, *pTransform);
 
-		m_Device.SetMatrix(IVDevice::ModelMatrix, *pTransform);
+		//for(vuint matid = 0; matid < hMesh->GetMaterialCount(); ++matid)
+		//{
+		//	MaterialHandle hMaterial = &(hMesh->GetMaterial(matid));
+		//	ApplyMaterial(hMaterial);
+		//	m_Device.RenderMesh(hMesh);
+		//}
 
-		for(vuint matid = 0; matid < hMesh->GetMaterialCount(); ++matid)
+		VModelMesh model = *modelIter;
+		IVMesh* hMesh = model.GetMesh();
+		IVMaterial* hMaterial = model.GetMaterial();
+		VMatrix44f& transform(model.GetTransform());
+
+		m_Device.SetMatrix(IVDevice::ModelMatrix, transform);
+
+		for(vuint matid = 0; matid < hMaterial->PassCount(); ++matid)
 		{
-			MaterialHandle hMaterial = &(hMesh->GetMaterial(matid));
-			ApplyMaterial(hMaterial);
+			const IVPass* hPass = &(hMaterial->GetPass(matid));
+			ApplyMaterial(hPass);
 			m_Device.RenderMesh(hMesh);
 		}
 	}
@@ -58,7 +71,7 @@ IVDevice& VSimpleDrawList::GetDevice()
 }
 //-----------------------------------------------------------------------------
 
-void VSimpleDrawList::ApplyMaterial(IVMaterial* in_pRenderStates)
+void VSimpleDrawList::ApplyMaterial(const IVPass* in_pRenderStates)
 {
 	for(vuint prio = 0; prio < in_pRenderStates->StateCount(); ++prio)
 	{

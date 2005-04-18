@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <V3d/Graphics/VMaterialDescription.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Image.h>
 #include <v3d/Graphics.h>
@@ -16,9 +15,7 @@ using namespace v3d;
 /**
  * @author: ins
  */
-
-void ApplyMaterial(IVDevice& in_Device,
-				   const IVMaterial* in_pMaterial);
+void ApplyMaterial(IVDevice& in_Device, const IVPass* in_pMaterial);
 
 /**
  * Renders the given mesh to the device. All materials will be rendered
@@ -26,9 +23,10 @@ void ApplyMaterial(IVDevice& in_Device,
  *
  * @author sheijk
  */
-void RenderMesh(IVDevice& in_Device, IVDevice::MeshHandle in_hMesh);
-
-
+void RenderMesh(
+	IVDevice& in_Device, 
+	IVDevice::MeshHandle in_hMesh,
+	IVMaterial* in_hMaterial);
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

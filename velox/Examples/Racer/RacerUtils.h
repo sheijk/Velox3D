@@ -73,7 +73,7 @@ typename VPointer< VHeightmapMesh<VertexStructure> >::SharedPtr LoadHeightmap(
 
 	if( nSizeLen * nSizeLen != nSize )
 	{
-		V3D_THROW(VTerrainGenException, 
+		V3D_THROW(VException, 
 			VString("raw file must have n^2 filesize") +
 			" filename=" + in_strFileName +
 			" size=" + nSize

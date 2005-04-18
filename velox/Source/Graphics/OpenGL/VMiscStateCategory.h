@@ -16,7 +16,7 @@ class VMiscStateCategory : public IVStateCategory
 
 public:
 	VMiscStateCategory() :
-		m_Default(VMaterialDescription())
+		m_Default(VRenderPass())
 	{
 	}
 

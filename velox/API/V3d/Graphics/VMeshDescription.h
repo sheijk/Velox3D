@@ -24,7 +24,7 @@ using namespace v3d; // kill auto indent
 class VMeshDescription : public VVertexFormat
 {
 public:
-	typedef IVDevice::BufferHandle BufferHandle;
+	//typedef IVDevice::BufferHandle BufferHandle;
 
 	enum GeometryType
 	{
@@ -71,10 +71,10 @@ private:
 	};
 
 	void SetMinTexCoords(vuint in_nCoordCount);
-	static void Replace(
-		DataRef& io_Ref, 
-		BufferHandle in_hOldBuffer, 
-		BufferHandle in_hNewBuffer);
+	//static void Replace(
+	//	DataRef& io_Ref, 
+	//	BufferHandle in_hOldBuffer, 
+	//	BufferHandle in_hNewBuffer);
 
 	/** The type of primitives to be used for rendering */
 	GeometryType m_GeometryType;

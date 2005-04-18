@@ -9,9 +9,9 @@
 
 #include <V3d/OpenGL.h>
 
-#include "../DeviceBase/VBufferManager.h"
+//#include "../DeviceBase/VBufferManager.h"
 
-#include "../DeviceBase/VRenderStateList.h"
+#include "../DeviceBase/VMaterial.h"
 #include "../DeviceBase/VStateCategoryList.h"
 #include "VTextureStateCategory.h"
 #include "VMiscStateCategory.h"
@@ -39,11 +39,12 @@ public:
 	virtual ~VOpenGLDevice();
 
 	virtual MeshHandle CreateMesh(VStringParam in_strResource);
+	virtual MaterialHandle CreateMaterial(VStringParam in_strResource);
 
-	virtual MeshHandle CreateMesh(
-		const VMeshDescription& in_MeshDescr,
-		const VEffectDescription& in_EffectDescr
-		);
+	//virtual MeshHandle CreateMesh(
+	//	const VMeshDescription& in_MeshDescr,
+	//	const VEffectDescription& in_EffectDescr
+	//	);
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 
@@ -68,7 +69,6 @@ private:
 	VVertexShaderCategory m_VertexShaderCategory;
 	VPixelShaderCategory m_PixelShaderCategory;
 
-	// current existing meshes (not really need anymore)
 	typedef std::list<VMeshBase*> MeshList;
 	MeshList m_Meshes;
 

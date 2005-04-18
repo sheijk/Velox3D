@@ -59,9 +59,9 @@ VCGVertexShaderState::VCGVertexShaderState(
 {
 	if( ! IsKnownProfile(in_Profile) )
 	{
-		std::stringstream msg;
-		msg << "Error: the given profile is not known (" << in_Profile << ")";
-		V3D_THROW(VException, msg.str().c_str());
+		V3D_THROWMSG(VException, "Could not create vertex shader '"
+			<< in_strFileName << "': the profile " << in_Profile
+			<< " is unknown");
 	}
 
 	try {

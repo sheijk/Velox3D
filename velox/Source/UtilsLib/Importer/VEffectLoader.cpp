@@ -16,10 +16,6 @@ using namespace v3d::xml;
 using namespace v3d::resource;
 
 //-----------------------------------------------------------------------------
-#define V3D_THROWMSG(exceptionType, message) \
-{ std::stringstream cause; cause << message; throw exceptionType(cause.str().c_str(), __FILE__, __LINE__); }
-
-//-----------------------------------------------------------------------------
 class VStateParser : public IVXMLVisitor
 {
 	VState m_State;

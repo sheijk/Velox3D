@@ -8,6 +8,14 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 class IVRenderState;
 
+class IVPass
+{
+public:
+	virtual ~IVPass() {};
+	virtual vuint StateCount() const = 0;
+	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
+};
+
 /**
  * Client visible material controlling
  *
@@ -15,11 +23,13 @@ class IVRenderState;
  */
 class IVMaterial
 {
-public:
+public:	
 	virtual ~IVMaterial() {};
 
-	virtual vuint StateCount() const = 0;  // number of states
-	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
+	virtual vuint PassCount() const = 0;
+	virtual const IVPass& GetPass(vuint in_nNum) const = 0;
+//	virtual vuint StateCount() const = 0;  // number of states
+//	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
 };
 
 //-----------------------------------------------------------------------------

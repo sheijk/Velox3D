@@ -2,6 +2,10 @@
 #define V3D_VTYPES_H
 //-----------------------------------------------------------------------------
 
+#ifndef _MSC_VER
+#include <stdint.h>
+#endif
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -9,7 +13,7 @@ namespace v3d {
 /**
  * The velox types. Use these types instead of the standard ones
  */
-
+#ifdef _MSC_VER
 typedef int vint;
 typedef unsigned int vuint;
 typedef __int8 vint8;
@@ -31,6 +35,29 @@ typedef unsigned long vulong;
 typedef float vfloat32;
 typedef double vfloat64;
 typedef bool vbool;
+#else
+typedef int vint;
+typedef unsigned int vuint;
+typedef int8_t vint8;
+typedef uint8_t vuint8;
+typedef int16_t vint16;
+typedef uint16_t vuint16;
+typedef int32_t vint32;
+typedef uint32_t vuint32;
+typedef int64_t vint64;
+typedef uint64_t vuint64;
+typedef short vshort;
+typedef unsigned short vushort;
+typedef unsigned short vword;
+typedef char vchar;
+typedef unsigned char vuchar;
+typedef unsigned char vbyte;
+typedef long vlong;
+typedef unsigned long vulong;
+typedef float vfloat32;
+typedef double vfloat64;
+typedef bool vbool;
+#endif
 
 /**
  * Conventions for VStringParam and VStringRetVal:

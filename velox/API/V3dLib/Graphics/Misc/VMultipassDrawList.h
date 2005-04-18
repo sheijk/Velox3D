@@ -64,17 +64,17 @@ public:
 	 * Adds a new model to pass in_nId. If the pass does not exist yet it
 	 * will be created
 	 */
-	void Add(VModel in_Model, PassId in_nId);
+	void Add(VModelMesh in_Model, PassId in_nId);
 
 	/**
 	 * Adds model to the default pass
 	 */
-	virtual void Add(VModel in_Model);
+	virtual void Add(VModelMesh in_Model);
 
 	/**
 	 * Removes the model from all passes and sub passes
 	 */
-	virtual void Remove(VModel in_Model);
+	//virtual void Remove(VModelMesh in_Model);
 
 	/**
 	 * Returns a drawlist for the given pass. Will be created if it does not

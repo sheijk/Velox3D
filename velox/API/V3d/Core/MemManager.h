@@ -55,6 +55,7 @@ namespace v3d {
 
 //-----------------------------------------------------------------------------
 
+#ifdef _MSC_VER
 static void *operator new(size_t size)
 {
 	return v3d::AllocMem(size);
@@ -74,6 +75,7 @@ static void operator delete[](void* size)
 {
 	v3d::FreeMem(size);
 }
+#endif
 
 //-----------------------------------------------------------------------------
 #define	new	(SetOwnerStatus(__FILE__,__LINE__, "???"),false) ? NULL : new

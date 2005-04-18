@@ -44,6 +44,13 @@ public:
 /** Throw an exception with an extra parameter */
 #define V3D_THROWX(excep, cause, xparam)	throw excep(cause, __FILE__, __LINE__, xparam)
 
+/** 
+ * Throw an exception and generate the error message using a stringstream:
+ * V3D_THROWMSG(VException, "the integer " << i << " is invalid);
+ */
+#define V3D_THROWMSG(exceptionType, message) \
+{ std::stringstream cause; cause << message; throw exceptionType(cause.str().c_str(), __FILE__, __LINE__); }
+
 /**
  * Macro for declaring a new, trivial exception type
  */

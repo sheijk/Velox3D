@@ -11,8 +11,7 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
-void ApplyMaterial(IVDevice& in_Device,
-				   const IVMaterial* in_pMaterial)
+void ApplyMaterial(IVDevice& in_Device, const IVPass* in_pMaterial)
 {
 	for(vuint prio = 0; prio < in_pMaterial->StateCount(); ++prio)
 	{
@@ -20,32 +19,27 @@ void ApplyMaterial(IVDevice& in_Device,
 	}
 }
 
-void RenderMesh(IVDevice& in_Device, IVDevice::MeshHandle in_hMesh)
+void RenderMesh(
+	IVDevice& in_Device, 
+	IVDevice::MeshHandle in_hMesh,
+	IVMaterial* in_hMaterial
+	)
 {
-	for(vuint matid = 0; matid < in_hMesh->GetMaterialCount(); ++matid)
+	for(vuint matid = 0; matid < in_hMaterial->PassCount(); ++matid)
 	{
-		IVMaterial* pMaterial = & in_hMesh->GetMaterial(matid);
+		const IVPass* pPass = & in_hMaterial->GetPass(matid);
 
-		ApplyMaterial(in_Device, pMaterial);
+		ApplyMaterial(in_Device, pPass);
 		in_Device.RenderMesh(in_hMesh);
 	}
-}
 
-VModel::VModel(IVDevice::MeshHandle in_hMesh, TransformMatrixPtr in_pTransform):
-	hMesh(in_hMesh),
-	pTransformation(in_pTransform)
-{
-}
+	//for(vuint matid = 0; matid < in_hMesh->GetMaterialCount(); ++matid)
+	//{
+	//	IVMaterial* pMaterial = & in_hMesh->GetMaterial(matid);
 
-VModel::VModel(IVDevice::MeshHandle in_hMesh) :
-	hMesh(in_hMesh),
-	pTransformation(math::IdentityPtr())
-{
-}
-
-vbool VModel::operator==(const VModel& other)
-{
-	return (hMesh == other.hMesh);
+	//	ApplyMaterial(in_Device, pMaterial);
+	//	in_Device.RenderMesh(in_hMesh);
+	//}
 }
 
 //-----------------------------------------------------------------------------

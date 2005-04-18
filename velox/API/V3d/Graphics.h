@@ -13,7 +13,6 @@
 #include <V3d/Graphics/VDeviceMatrix.h>
 #include <V3d/Graphics/VDisplaySettings.h>
 #include <V3d/Graphics/VEffectDescription.h>
-#include <V3d/Graphics/VMaterialDescription.h>
 #include <V3d/Graphics/VMeshDescription.h>
 #include <V3d/Graphics/VVertexBuffer.h>
 #include <V3d/Graphics/VVertexFormat.h>

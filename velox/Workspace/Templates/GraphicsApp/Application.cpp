@@ -61,6 +61,8 @@ vint %%name%%::Main(std::vector<std::string> args)
 	CreateResources();
 
 	IVDevice::MeshHandle hTriangle = Device().CreateMesh("/triangle");
+	IVDevice::MaterialHandle hTriangleMat = Device().CreateMaterial("/triangle");
+	
 	vfloat32 angle = 0.0f;
 
 	VCamera cam;
@@ -75,7 +77,7 @@ vint %%name%%::Main(std::vector<std::string> args)
 		angle += m_pUpdater->GetFrameDuration() * 360;
 		Device().SetMatrix(IVDevice::ModelMatrix, RotationZMatrix(DegreeToRadian(angle)));
 
-		RenderMesh(Device(), hTriangle);
+		RenderMesh(Device(), hTriangle, hTriangleMat);
 
 		Device().EndScene();
 

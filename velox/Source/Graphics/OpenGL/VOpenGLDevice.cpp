@@ -4,7 +4,6 @@
 #include <v3d/Core/VLogging.h>
 #include <V3d/Graphics/VMeshDescription.h>
 #include <V3d/Graphics/VEffectDescription.h>
-#include <V3d/Graphics/VMaterialDescription.h>
 
 #include <V3dLib/Graphics/Materials/EffectUtils.h>
 
@@ -114,20 +113,21 @@ VOpenGLDevice::~VOpenGLDevice()
 	DestroyContext();
 }
 
-std::string GenerateBufferName()
-{
-	static vuint lastBufferId = 0;
-
-	++lastBufferId;
-
-	std::stringstream name;
-	name << "device/buffers/internal" << lastBufferId;
-
-	return name.str();
-}
+//std::string GenerateBufferName()
+//{
+//	static vuint lastBufferId = 0;
+//
+//	++lastBufferId;
+//
+//	std::stringstream name;
+//	name << "device/buffers/internal" << lastBufferId;
+//
+//	return name.str();
+//}
 
 //-----------------------------------------------------------------------------
 
+/* old 2005-04-17
 IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 {
 	using namespace resource;
@@ -163,16 +163,68 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 		return 0;
 	}
 }
+*/
 
-IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
-	const VMeshDescription& in_MeshDescr,
-	const VEffectDescription& in_EffectDescr
-	)
+IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 {
-	V3D_THROW(VException, "Warning: using deprecated function v3d::graphics"
-		"::IVDevice::CreateMesh(VMeshDescription&, VEffectDescription&). "
-		"Use the resource manager instead (-> CreateMesh(string))");
+	using namespace resource;
+	resource::VResourceManagerPtr pResManager;
+
+	VResourceId mdRes = pResManager->GetResourceByName(in_strResource);
+	resource::VResourceDataPtr<const VMeshDescription> in_pMeshDescription
+		= mdRes->GetData<VMeshDescription>();
+
+	// create mesh
+	VMeshDescription descr = *in_pMeshDescription;
+
+	VMeshBase* pMesh = new VStreamMesh(*in_pMeshDescription);
+
+	return MakeMeshHandle(pMesh);
 }
+
+IVDevice::MaterialHandle VOpenGLDevice::CreateMaterial(VStringParam in_strResource)
+{
+	using namespace resource;
+	resource::VResourceManagerPtr pResManager;
+
+	VResourceId edRes = pResManager->GetResourceByName(in_strResource);
+	resource::VResourceDataPtr<const VEffectDescription> in_pEffectDescription
+		= edRes->GetData<VEffectDescription>();
+
+	// create materials
+	std::vector<VRenderStateList*> statelists
+		= m_StateCategories.CreateMaterialList(*in_pEffectDescription);
+
+	std::vector<VRenderStateList> sl;
+
+	for(vuint i = 0; i < statelists.size(); ++i)
+	{
+		sl.push_back(VRenderStateList(*statelists[i]));
+		delete statelists[i];
+		statelists[i] = 0;
+	}
+
+	VMaterial* pMaterial = new VMaterial(sl);
+
+	if( statelists.size() > 0 )
+	{
+		return pMaterial;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+//IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
+//	const VMeshDescription& in_MeshDescr,
+//	const VEffectDescription& in_EffectDescr
+//	)
+//{
+//	V3D_THROW(VException, "Warning: using deprecated function v3d::graphics"
+//		"::IVDevice::CreateMesh(VMeshDescription&, VEffectDescription&). "
+//		"Use the resource manager instead (-> CreateMesh(string))");
+//}
 
 void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 {

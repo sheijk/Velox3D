@@ -4,15 +4,14 @@
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
-VMeshNode::VMeshNode(IVDevice::MeshHandle in_hMesh)
+VMeshNode::VMeshNode(resource::VResourceDataPtr<IVMesh> in_hMesh)
 	:
 	VNodeBase("mesh"),
 	m_pAbsTransform(new VMatrix44f()),
 	m_Model(in_hMesh, m_pAbsTransform),
-	m_hMesh(in_hMesh),
 	m_bInDrawList(false)
 {
-	V3D_ASSERT(in_hMesh != 0);
+	V3D_ASSERT(&*in_hMesh != 0);
 }
 
 void VMeshNode::ApplyTransformation(Matrix44f* io_pMatrix)
@@ -40,7 +39,8 @@ void VMeshNode::RemoveThis(IVDrawList* in_pDrawList)
 {
 	if( m_bInDrawList )
 	{
-		in_pDrawList->Remove(m_Model);
+		vout << "cannot remove mesh from drawlist in VMeshNode.cpp" << vendl;
+		//in_pDrawList->Remove(m_Model);
 		m_bInDrawList = false;
 	}
 }

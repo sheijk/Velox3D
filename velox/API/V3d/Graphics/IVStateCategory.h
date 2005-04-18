@@ -4,7 +4,6 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <v3d/Graphics/IVRenderState.h>
-#include <v3d/Graphics/VMaterialDescription.h>
 #include <v3d/Graphics/VEffectDescription.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 

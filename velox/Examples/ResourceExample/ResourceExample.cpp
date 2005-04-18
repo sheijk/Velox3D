@@ -138,8 +138,10 @@ void AddAllMeshes(VResourceId in_pResource, IVDrawList& io_DrawList, vuint* out_
 	{
 		IVDevice::MeshHandle hMesh =
 			io_DrawList.GetDevice().CreateMesh(in_pResource->GetQualifiedName().c_str());
+		IVDevice::MaterialHandle hMaterial =
+			io_DrawList.GetDevice().CreateMaterial(in_pResource->GetQualifiedName().c_str());
 
-		io_DrawList.Add(VModel(hMesh));
+		io_DrawList.Add(VModelMesh(hMesh, hMaterial));
 
 		if( out_pCount != 0 )
 			*out_pCount += 1;

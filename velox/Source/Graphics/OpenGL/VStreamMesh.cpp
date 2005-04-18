@@ -15,10 +15,10 @@ using namespace v3d::resource;
  * standard c'tor
  */
 VStreamMesh::VStreamMesh(
-	std::vector<IVMaterial*> in_Materials,
+	//std::vector<IVMaterial*> in_Materials,
 	const VMeshDescription& in_MeshDescription
 	) :
-	VMeshBase(in_Materials),
+	//VMeshBase(in_Materials),
 	m_nPrimitiveCount(in_MeshDescription.GetCoordinateFormat().GetCount()),
 	m_PrimitiveType(GetGeometryMode(in_MeshDescription.GetGeometryType())),
 	m_pIndexStream(0)

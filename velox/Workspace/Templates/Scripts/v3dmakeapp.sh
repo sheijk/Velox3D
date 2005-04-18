@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if ! [ $1 ] || ! [ $2 ]
+then
+	echo "v3dmakeapp.sh AppName AppType"
+	echo
+	echo "For a list of app types see `v3dgetdir.sh`/Workspace/Templates/Scripts/ and look for directories containing an Application.vcproj file. Use the dir name as app type"
+	exit
+fi
+
 # get parameters and generate subsitution strings
 appname=$1
 apptype=$2

@@ -36,12 +36,15 @@ VMeshPart::VMeshPart(VGraphicsManager* in_pManager) :
 	m_pRigidBodyPart = false;
 }
 
-void VMeshPart::AddMesh(graphics::IVDevice::MeshHandle in_hMesh)
+void VMeshPart::AddMesh(
+	graphics::IVDevice::MeshHandle in_hMesh,
+	graphics::IVDevice::MaterialHandle in_hMaterial
+	)
 {
-	AddMesh(graphics::VModel(in_hMesh));
+	AddMesh(graphics::VModelMesh(in_hMesh, in_hMaterial));
 }
 
-void VMeshPart::AddMesh(graphics::VModel in_Model)
+void VMeshPart::AddMesh(graphics::VModelMesh in_Model)
 {
 	m_Meshes.push_back(in_Model);
 
@@ -54,14 +57,15 @@ void VMeshPart::AddMesh(graphics::VModel in_Model)
 
 void VMeshPart::RemoveMesh(graphics::IVDevice::MeshHandle in_hMesh)
 {
-	// if meshes are in drawlist, remove it
-	if( m_bActive && m_pManager != 0 )
-	{
-		GetDrawList().Remove(graphics::VModel(in_hMesh));
-	}
+	V3D_THROW(VException, "VMeshPart::RemoveMesh is deprecated");
+	//// if meshes are in drawlist, remove it
+	//if( m_bActive && m_pManager != 0 )
+	//{
+	//	GetDrawList().Remove(graphics::VModel(in_hMesh));
+	//}
 
-	MeshList::iterator iter = std::find(m_Meshes.begin(), m_Meshes.end(), graphics::VModel(in_hMesh));
-	m_Meshes.erase(iter);
+	//MeshList::iterator iter = std::find(m_Meshes.begin(), m_Meshes.end(), graphics::VModel(in_hMesh));
+	//m_Meshes.erase(iter);
 }
 
 void VMeshPart::Update()
@@ -74,8 +78,7 @@ void VMeshPart::Update()
 		// for all meshes, set position
 		for(MeshList::iterator model = m_Meshes.begin(); model != m_Meshes.end(); ++model)
 		{
-
-			*model->pTransformation = transform;
+			model->GetTransform() = transform;
 			//model->pTransformation->Set(1, 3, pos.Get(1));
 			//model->pTransformation->Set(2, 3, pos.Get(2));
 		}
@@ -101,12 +104,14 @@ void VMeshPart::Deactivate()
 {
 	if( m_pManager != 0 )
 	{
-		m_pManager->Remove(this);
+		//TODO: wieder einbauen --sheijk
+		vout << "Could not remove VMeshPart from draw list" << vendl;
+		//m_pManager->Remove(this);
 
-		for(MeshList::iterator mesh = m_Meshes.begin(); mesh != m_Meshes.end(); ++mesh)
-		{
-			GetDrawList().Remove(*mesh);
-		}
+		//for(MeshList::iterator mesh = m_Meshes.begin(); mesh != m_Meshes.end(); ++mesh)
+		//{
+		//	GetDrawList().Remove(*mesh);
+		//}
 
 		m_bActive = false;
 	}

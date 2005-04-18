@@ -8,7 +8,7 @@
 #include <V3d/System.h>
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics.h>
-#include <V3dLib/Graphics/Renderers/Terrain/VTerrainRenderer.h>
+//#include <V3dLib/Graphics/Renderers/Terrain/VTerrainRenderer.h>
 #include <V3dLib/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Image.h>
@@ -48,7 +48,7 @@ class VRacerApp : public VVeloxApp
 	void CreateMeshes();
 
 	IVDevice::MeshHandle m_hSphereMesh;
-	IVDevice::BufferHandle m_hSphereTexture;
+	IVDevice::MaterialHandle m_hSphereMat;
 
 	VGraphicsManager m_GraphicsManager;
 	IVDevice* m_pDevice;
@@ -63,7 +63,6 @@ public:
 VRacerApp::VRacerApp()
 {
 	m_hSphereMesh = 0;
-	m_hSphereTexture = 0;
 	m_pDevice = 0;
 }
 
@@ -195,7 +194,10 @@ IVEntityManager::EntityPtr VRacerApp::CreateHeightmapEntity()
 
 	resource::VResourceId res = BuildResource("/meshes/heightmap", *pHeightmap);
 	res->AddData(new VEffectDescription(hmeffect));
-	pMeshPart->AddMesh(GetDevice().CreateMesh("/meshes/heightmap"));
+	pMeshPart->AddMesh(
+		GetDevice().CreateMesh("/meshes/heightmap"),
+		GetDevice().CreateMaterial("/meshes/heightmap")
+		);
 	//pMeshPart->AddMesh(BuildMesh(GetDevice(), *pHeightmap, hmeffect));
 
 	// add detail texture
@@ -229,7 +231,10 @@ IVEntityManager::EntityPtr VRacerApp::CreateHeightmapEntity()
 
 	resource::VResourceId res2 = BuildResource("/meshes/detailmap", *pHeightmap);
 	res2->AddData(new VEffectDescription(detailMat));
-	pMeshPart->AddMesh(GetDevice().CreateMesh("/meshes/detailmap"));
+	pMeshPart->AddMesh(
+		GetDevice().CreateMesh("/meshes/detailmap"),
+		GetDevice().CreateMaterial("/meshes/detailmap")
+		);
 	//pMeshPart->AddMesh(BuildMesh(GetDevice(), *pHeightmap, detailMat));
 
 	IVEntityManager::EntityPtr pEntity(new VEntity());
@@ -265,7 +270,8 @@ IVEntityManager::EntityPtr VRacerApp::CreateSkyEntity()
 	VMeshPart* pSkyMeshPart = new VMeshPart(&m_GraphicsManager);
 	resource::VResourceId res = BuildResource("/meshes/sky", sky);
 	res->AddData(new VEffectDescription(wireFrame));
-	pSkyMeshPart->AddMesh(GetDevice().CreateMesh("/meshes/sky"));
+	pSkyMeshPart->AddMesh(GetDevice().CreateMesh("/meshes/sky"),
+		GetDevice().CreateMaterial("/meshes/sky"));
 	//pSkyMeshPart->AddMesh(VModel(BuildMesh(GetDevice(), sky, wireFrame)));
 
 	IVEntityManager::EntityPtr pSkyEntity(new VEntity());
@@ -278,7 +284,6 @@ void VRacerApp::CreateMeshes()
 {
 	V3D_ASSERT(m_pDevice != 0);
 	V3D_ASSERT(m_hSphereMesh == 0);
-	V3D_ASSERT(m_hSphereTexture == 0);
 
 	VPolarSphereMesh<VTexturedVertex> sphere(10, 10);
 	sphere.GenerateCoordinates();
@@ -310,6 +315,7 @@ void VRacerApp::CreateMeshes()
 	resource::VResourceId res = BuildResource("/meshes/sphere", sphere);
 	res->AddData(new VEffectDescription(sphereSurface));
 	m_hSphereMesh = GetDevice().CreateMesh("/meshes/sphere");
+	m_hSphereMat = GetDevice().CreateMaterial("/meshes/sphere");
     //m_hSphereMesh = BuildMesh(*m_pDevice, sphere, sphereSurface);
 }
 
@@ -319,7 +325,7 @@ IVEntityManager::EntityPtr VRacerApp::CreateSphereBodyEntity(
 	IVEntityManager::EntityPtr pBallEntity(new VEntity());
 
 	VMeshPart* pMeshPart = new VMeshPart(&m_GraphicsManager);
-	pMeshPart->AddMesh(m_hSphereMesh);
+	pMeshPart->AddMesh(m_hSphereMesh, m_hSphereMat);
 
 	pBallEntity->AddPart(VFourCC("mesh"), VEntity::PartPtr(pMeshPart));
 	

@@ -26,17 +26,17 @@ class IVMaterial;
 class IVDevice
 {
 public:
-	typedef IVBuffer<vbyte>* BufferHandle;
-	typedef VBufferBase::CopyMode BufferCopyMode;
-	typedef VBuffer<vbyte> Buffer;
+	//typedef IVBuffer<vbyte>* BufferHandle;
+	//typedef VBufferBase::CopyMode BufferCopyMode;
+	//typedef VBuffer<vbyte> Buffer;
 	typedef IVMesh* MeshHandle;
 	typedef IVMaterial* MaterialHandle;
 
-	enum BufferType
-	{
-		VertexBuffer,
-		Texture
-	};
+	//enum BufferType
+	//{
+	//	VertexBuffer,
+	//	Texture
+	//};
 
 	enum MatrixMode
 	{
@@ -59,6 +59,8 @@ public:
 		VStringParam in_strResource
 		) = 0;
 
+	virtual MaterialHandle CreateMaterial(VStringParam in_strResource) = 0;
+
 	/**
 	 * Deletes a previously created mesh
 	 */
@@ -66,10 +68,10 @@ public:
 
 
 //weg
-	virtual MeshHandle CreateMesh(
-		const VMeshDescription& in_MeshDescr,
-		const VEffectDescription& in_EffectDescr
-		) = 0;
+	//virtual MeshHandle CreateMesh(
+	//	const VMeshDescription& in_MeshDescr,
+	//	const VEffectDescription& in_EffectDescr
+	//	) = 0;
 
 	/** sends the vertices of a mesh to the device */
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;

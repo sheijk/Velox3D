@@ -64,6 +64,7 @@ vint GraphicsExample::Main(std::vector<std::string> args)
 	VResourceManagerPtr()->DumpResourceInfo();
 
 	IVDevice::MeshHandle hCube = Device().CreateMesh("/cube");
+	IVDevice::MaterialHandle hCubeMat = Device().CreateMaterial("/cube");
 
 	vfloat32 angle = 0.0f;
 
@@ -80,7 +81,7 @@ vint GraphicsExample::Main(std::vector<std::string> args)
 		angle += vfloat32(m_pUpdater->GetFrameDuration()) * 360;
 		Device().SetMatrix(IVDevice::ModelMatrix, RotationZMatrix(DegreeToRadian(angle)));
 
-		RenderMesh(Device(), hCube);
+		RenderMesh(Device(), hCube, hCubeMat);
 
 		Device().EndScene();
 

@@ -4,6 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 #include <V3dLib/Graphics/Misc/IVDrawList.h>
 #include <list>
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -11,24 +12,23 @@ namespace graphics {
 class VSimpleDrawList : public IVDrawList
 {
 public:
-	typedef v3d::graphics::IVDevice::BufferHandle BufferHandle;
-	typedef v3d::graphics::IVDevice::MeshHandle MeshHandle;
-	typedef v3d::graphics::IVDevice::MaterialHandle MaterialHandle;
+	//typedef v3d::graphics::IVDevice::BufferHandle BufferHandle;
+	//typedef v3d::graphics::IVDevice::MeshHandle MeshHandle;
+	//typedef v3d::graphics::IVDevice::MaterialHandle MaterialHandle;
 
 	VSimpleDrawList(v3d::graphics::IVDevice& in_Device);
 	~VSimpleDrawList();
 		
-	virtual void Add(VModel in_Model);
-	virtual void Remove(VModel in_Model);
+	virtual void Add(VModelMesh in_Model);
+	//virtual void Remove(VModelMesh in_Model);
 
 	virtual void Render();
 	virtual IVDevice& GetDevice();
 
 private:
-	void ApplyMaterial(IVMaterial* in_pRenderStates);
+	void ApplyMaterial(const IVPass* in_pRenderStates);
 
-	typedef VModel::TransformMatrixPtr TransformMatrixPtr;
-	typedef std::list<VModel> ModelList;
+	typedef std::list<VModelMesh> ModelList;
 	
 	ModelList m_Models;
 	IVDevice& m_Device;

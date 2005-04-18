@@ -569,10 +569,10 @@
 					RelativePath="..\Api\V3d\Graphics\VEffectDescription.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Graphics\VMaterialDescription.h">
+					RelativePath="..\Api\V3d\Graphics\VMeshDescription.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Graphics\VMeshDescription.h">
+					RelativePath="..\Api\V3d\Graphics\VModel.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Graphics\VVertexBuffer.h">
@@ -591,16 +591,6 @@
 					RelativePath="..\Source\Graphics\OpenGL\VOpenGLDevice.h">
 				</File>
 				<Filter
-					Name="Render Methods"
-					Filter="">
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.h">
-					</File>
-				</Filter>
-				<Filter
 					Name="Meshes"
 					Filter="">
 					<File
@@ -613,10 +603,10 @@
 						RelativePath="..\Source\Graphics\OpenGL\VImmediateVertexStream.h">
 					</File>
 					<File
-						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.cpp">
+						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.cpp">
 					</File>
 					<File
-						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.h">
+						RelativePath="..\Source\Graphics\OpenGL\VStreamMesh.h">
 					</File>
 				</Filter>
 				<Filter
@@ -676,7 +666,16 @@
 					Name="Base Utils"
 					Filter="">
 					<File
-						RelativePath="..\Source\Graphics\DeviceBase\VRenderStateList.h">
+						RelativePath="..\Source\Graphics\DeviceBase\VMaterial.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VMaterial.h">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.cpp">
+					</File>
+					<File
+						RelativePath="..\Source\Graphics\DeviceBase\VMeshBase.h">
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.cpp">

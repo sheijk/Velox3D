@@ -14,31 +14,6 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // auto unindent
 
-VMiscState::VMiscState(const VMaterialDescription& in_Mat)
-{
-	m_nFrontPolygonMode = GetGLModeNum(in_Mat.frontPolyMode);
-	m_nBackPolygonMode = GetGLModeNum(in_Mat.backPolyMode);
-
-	m_DepthFunction = GetGLModeNum(in_Mat.depthTestFunction);
-	m_bDepthWrite = in_Mat.depthWriteMask == VMaterialDescription::DepthWrite;
-	m_bDepthTestEnabled = true;
-
-	//m_DefaultColor = in_Mat.defaultColor;
-	m_Red.Set(in_Mat.defaultColor.red);
-	m_Green.Set(in_Mat.defaultColor.green);
-	m_Blue.Set(in_Mat.defaultColor.blue);
-	m_Alpha.Set(in_Mat.defaultColor.alpha);
-
-	m_ColorMask = in_Mat.colorMask;
-
-	m_SourceFactor		= GetGLModeNum(in_Mat.sourceBlendFactor);
-	m_DestFactor		= GetGLModeNum(in_Mat.destBlendFactor);
-	m_bBlendingEnabled	= in_Mat.enableBlending;
-
-	VMatrix44f identity;
-	Identity(identity);
-	m_TextureMatrix.Set(identity);
-}
 
 void VMiscState::ReadColor(const VRenderPass& in_Pass)
 {
@@ -103,8 +78,8 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 	m_ColorMask.writeBlue = true;
 	m_ColorMask.writeAlpha = true;
 
-	m_SourceFactor = GetGLModeNum(VMaterialDescription::BlendSourceAlpha);
-	m_DestFactor = GetGLModeNum(VMaterialDescription::BlendOneMinusSourceAlpha);
+	m_SourceFactor = GetGLModeNum(BlendSourceAlpha);
+	m_DestFactor = GetGLModeNum(BlendOneMinusSourceAlpha);
 	m_bBlendingEnabled = false;
 
 	VMatrix44f identity;
@@ -226,9 +201,9 @@ vuint VMiscState::GetGLModeNum(const PolygonMode in_Mode)
 {
 	switch(in_Mode)
 	{
-	case VMaterialDescription::Point:	return GL_POINT;
-	case VMaterialDescription::Filled:	return GL_FILL;
-	case VMaterialDescription::Line:	return GL_LINE;
+	case PMPoint:	return GL_POINT;
+	case PMFilled:	return GL_FILL;
+	case PMLine:	return GL_LINE;
 	}
 
 	V3D_THROW(VException, "illegal polygon mode");
@@ -238,14 +213,14 @@ vuint VMiscState::GetGLModeNum(const DepthTest in_Test)
 {
 	switch(in_Test)
 	{
-	case VMaterialDescription::DepthAlways:			return GL_ALWAYS;
-	case VMaterialDescription::DepthOnLess:			return GL_LESS;
-	case VMaterialDescription::DepthOnLessEqual:	return GL_LEQUAL;
-	case VMaterialDescription::DepthOnGreater:		return GL_GREATER;
-	case VMaterialDescription::DepthOnGreaterEqual: return GL_GEQUAL;
-	case VMaterialDescription::DepthNever:			return GL_NEVER;
-	case VMaterialDescription::DepthOnEqual:		return GL_EQUAL;
-	case VMaterialDescription::DepthOnNotEqual:		return GL_NOTEQUAL;
+	case DepthAlways:			return GL_ALWAYS;
+	case DepthOnLess:			return GL_LESS;
+	case DepthOnLessEqual:	return GL_LEQUAL;
+	case DepthOnGreater:		return GL_GREATER;
+	case DepthOnGreaterEqual: return GL_GEQUAL;
+	case DepthNever:			return GL_NEVER;
+	case DepthOnEqual:		return GL_EQUAL;
+	case DepthOnNotEqual:		return GL_NOTEQUAL;
 	}
 
 	V3D_THROW(VException, "illegal depth test operation");
@@ -255,27 +230,27 @@ vuint VMiscState::GetGLModeNum(BlendMode in_Mode)
 {
 	switch(in_Mode)
 	{
-	case VMaterialDescription::BlendZero:
+	case BlendZero:
 		return GL_ZERO;
-	case VMaterialDescription::BlendOne:
+	case BlendOne:
 		return GL_ONE;
-	case VMaterialDescription::BlendSourceColor:
+	case BlendSourceColor:
 		return GL_SRC_COLOR;
-	case VMaterialDescription::BlendOneMinusSourceColor:
+	case BlendOneMinusSourceColor:
 		return GL_ONE_MINUS_SRC_COLOR;
-	case VMaterialDescription::BlendDestColor:
+	case BlendDestColor:
 		return GL_DST_COLOR;
-	case VMaterialDescription::BlendOneMinusDestColor:
+	case BlendOneMinusDestColor:
 		return GL_ONE_MINUS_DST_COLOR;
-	case VMaterialDescription::BlendSourceAlpha:
+	case BlendSourceAlpha:
 		return GL_SRC_ALPHA;
-	case VMaterialDescription::BlendOneMinusSourceAlpha:
+	case BlendOneMinusSourceAlpha:
 		return GL_ONE_MINUS_SRC_ALPHA;
-	case VMaterialDescription::BlendDestAlpha:
+	case BlendDestAlpha:
 		return GL_DST_ALPHA;
-	case VMaterialDescription::BlendOneMinusDepthAlpha:
+	case BlendOneMinusDestAlpha:
 		return GL_ONE_MINUS_DST_ALPHA;
-	case VMaterialDescription::BlendSourceAlphaSaturate:
+	case BlendSourceAlphaSaturate:
 		return GL_SRC_ALPHA_SATURATE;
 	}
 

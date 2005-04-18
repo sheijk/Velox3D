@@ -3,10 +3,10 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/VMaterialDescription.h>
 #include <v3d/Graphics/VEffectDescription.h>
 
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
+#include <V3dLib/Graphics/Materials/StateTypes.h>
 
 #include <V3dLib/Property.h>
 
@@ -66,15 +66,17 @@ public:
 class VMiscState : public IVOpenGLRenderState
 {
 public:
-	VMiscState(const VMaterialDescription& in_Mat);
 	VMiscState(const VRenderPass& in_Pass);
 
 	virtual void Apply() const;
 
 private:
-	typedef VMaterialDescription::PolygonMode PolygonMode;
-	typedef VMaterialDescription::DepthTest DepthTest;
-	typedef VMaterialDescription::BlendFactor BlendMode;
+	typedef VPolygonMode PolygonMode;
+	typedef VDepthTest DepthTest;
+	typedef VBlendFactor BlendMode;
+	//typedef VMaterialDescription::PolygonMode PolygonMode;
+	//typedef VMaterialDescription::DepthTest DepthTest;
+	//typedef VMaterialDescription::BlendFactor BlendMode;
 
 	// texture matrix state
 	VPropertyConnection<VMatrix44f> m_TextureMatrix;
@@ -93,7 +95,7 @@ private:
 	vbool m_bDepthWrite;
 	vbool m_bDepthTestEnabled;
 
-	VMaterialDescription::ColorBufferMask m_ColorMask;
+	VColorBufferMask m_ColorMask;
 
 	VPropertyConnection<vfloat32> m_Red;
 	VPropertyConnection<vfloat32> m_Green;
