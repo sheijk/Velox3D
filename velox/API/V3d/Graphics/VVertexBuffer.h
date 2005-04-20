@@ -19,6 +19,7 @@ struct VTexCoord2f;
 struct VNormal3f;
 
 /**
+ * @author sheijk
  */
 class VVertexBuffer
 {

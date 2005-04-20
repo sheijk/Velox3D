@@ -250,12 +250,6 @@
 					RelativePath="..\Api\V3dLib\Graphics\Misc\VKeyboardCamera.h">
 				</File>
 				<File
-					RelativePath="..\Source\Graphics\Lib\VMultipassDrawList.cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\Misc\VMultipassDrawList.h">
-				</File>
-				<File
 					RelativePath="..\Source\UtilsLib\DrawList\VSimpleDrawList.cpp">
 				</File>
 				<File
@@ -314,10 +308,6 @@
 				<File
 					RelativePath="..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h">
 				</File>
-			</Filter>
-			<Filter
-				Name="Renderers"
-				Filter="">
 			</Filter>
 			<Filter
 				Name="Includes"

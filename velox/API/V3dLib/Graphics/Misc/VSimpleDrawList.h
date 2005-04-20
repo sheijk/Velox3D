@@ -12,15 +12,11 @@ namespace graphics {
 class VSimpleDrawList : public IVDrawList
 {
 public:
-	//typedef v3d::graphics::IVDevice::BufferHandle BufferHandle;
-	//typedef v3d::graphics::IVDevice::MeshHandle MeshHandle;
-	//typedef v3d::graphics::IVDevice::MaterialHandle MaterialHandle;
-
 	VSimpleDrawList(v3d::graphics::IVDevice& in_Device);
 	~VSimpleDrawList();
 		
-	virtual void Add(VModelMesh in_Model);
-	//virtual void Remove(VModelMesh in_Model);
+	virtual ModelMeshId Add(VModelMesh in_Model);
+	virtual void Remove(ModelMeshId in_Model);
 
 	virtual void Render();
 	virtual IVDevice& GetDevice();
@@ -28,7 +24,10 @@ public:
 private:
 	void ApplyMaterial(const IVPass* in_pRenderStates);
 
-	typedef std::list<VModelMesh> ModelList;
+	typedef std::pair<ModelMeshId, VModelMesh> ModelMeshAndId;
+	typedef std::list<ModelMeshAndId> ModelList;
+
+	ModelMeshId m_nNextFreeId;
 	
 	ModelList m_Models;
 	IVDevice& m_Device;

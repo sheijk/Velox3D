@@ -6,7 +6,6 @@
 #include <V3dLib/Graphics/Generators.h>
 #include <V3dLib/Graphics/Misc.h>
 #include <V3dLib/Graphics/SimpleSG.h>
-#include <V3dLib/Graphics/Portal.h>
 #include <V3dLib/Graphics/Materials.h>
 #include <V3dLib/Graphics/Importer.h>
 

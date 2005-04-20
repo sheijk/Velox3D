@@ -2,8 +2,6 @@ Worklog von sheijk
 -------------------------------------------------------------------------------
 ----- messages to sheijk:
 
-TODO: Einige typedefs sollte einfacher zugaenglicher sein z.b. Vertex
-
 -------------------------------------------------------------------------------
 ----- current assigned tasks:
 
@@ -37,6 +35,9 @@ vrendermethodregistry
 
 
 - VMaterialDescription entfernt
+
+20.04.2005
+- Altlasten entfernt (mulit pass drawlist, portal quatsch)
 
 19.04.2005
 - Mesh und Material getrennt. Interface der DrawList angepasst

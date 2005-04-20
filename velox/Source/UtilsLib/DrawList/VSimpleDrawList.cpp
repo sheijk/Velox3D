@@ -9,6 +9,7 @@ namespace graphics {
 
 VSimpleDrawList::VSimpleDrawList(IVDevice& in_Device) : m_Device(in_Device)
 {
+	m_nNextFreeId = 1;
 }
 //-----------------------------------------------------------------------------
 
@@ -18,16 +19,30 @@ VSimpleDrawList::~VSimpleDrawList()
 }
 //-----------------------------------------------------------------------------
 
-void VSimpleDrawList::Add(VModelMesh in_Model)
+IVDrawList::ModelMeshId VSimpleDrawList::Add(VModelMesh in_Model)
 {
-	m_Models.push_back(in_Model);
+	ModelMeshId id = m_nNextFreeId;
+	++m_nNextFreeId;
+
+	m_Models.push_back(ModelMeshAndId(id, in_Model));
+
+	return id;
 }
 //-----------------------------------------------------------------------------
 
-//void VSimpleDrawList::Remove(VModelMesh in_Model)
-//{
-//	m_Models.remove(in_Model);
-//}
+void VSimpleDrawList::Remove(ModelMeshId in_ModelId)
+{
+	ModelList::iterator delCandidate = m_Models.begin();
+	for( ; delCandidate != m_Models.end(); ++delCandidate)
+	{
+		if( delCandidate->first == in_ModelId )
+		{
+			m_Models.erase(delCandidate);
+		}
+	}
+
+	//m_Models.remove(in_Model);
+}
 //-----------------------------------------------------------------------------
 
 void VSimpleDrawList::Render()
@@ -36,19 +51,7 @@ void VSimpleDrawList::Render()
 
 	for( ; modelIter != m_Models.end(); ++modelIter)
 	{
-		//VModelMesh& model = *modelIter;
-		//MeshHandle hMesh = (*modelIter).hMesh;
-		//TransformMatrixPtr pTransform = model.pTransformation;
-		//m_Device.SetMatrix(IVDevice::ModelMatrix, *pTransform);
-
-		//for(vuint matid = 0; matid < hMesh->GetMaterialCount(); ++matid)
-		//{
-		//	MaterialHandle hMaterial = &(hMesh->GetMaterial(matid));
-		//	ApplyMaterial(hMaterial);
-		//	m_Device.RenderMesh(hMesh);
-		//}
-
-		VModelMesh model = *modelIter;
+		VModelMesh& model = modelIter->second;
 		IVMesh* hMesh = model.GetMesh();
 		IVMaterial* hMaterial = model.GetMaterial();
 		VMatrix44f& transform(model.GetTransform());
