@@ -5,6 +5,7 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
+//TODO: line break nach spaetestens 80 zeilen (-> coding conventions)
 VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* in_pdisplaysettings) : m_devicecontext(0), m_rendercontext(0), m_handle(in_hwnd), m_displaysettings(*in_pdisplaysettings)
 {
 }
@@ -26,12 +27,19 @@ VWin32WindowContext::~VWin32WindowContext()
 
 void VWin32WindowContext::MakeCurrent()
 {
+	//TODO: nicht bei jedem make current das pixel format usw. neu erzeugen,
+	// MakeCurrent wird jedes frame aufgerufen. die initialisierung lieber
+	// in den c'tor oder eine init methode tun --sheijk
+	
 	//create a OpenGL Device Context
 	m_devicecontext = GetDC(m_handle);
 
 	if(m_devicecontext == 0)
 	{
+		//TODO: vgraphicsexception benutzen, oder besser noch eine eigene
+		// exception deklarieren (V3D_DECLARE_EXCEPTION), in IVRenderContext)
 		V3D_THROW(VException, "Error: OpenGL Device Context wasn't created!");
+		//TODO: nach nem throw braucht man kein return mehr ;)
 		return;
 	}
 	else

@@ -12,6 +12,7 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
+//TODO: warum ein template? lass die factory vielleicht erstmal ganz weg
 template <class T>
 class VRenderContextFactory
 {
