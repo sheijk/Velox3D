@@ -117,4 +117,4 @@ const char* vendl = "\n";
 } // namespace v3d
 //-----------------------------------------------------------------------------
 
-#endif V3D_VCONSOLEREDIRECTOR_H
+#endif // V3D_VCONSOLEREDIRECTOR_H

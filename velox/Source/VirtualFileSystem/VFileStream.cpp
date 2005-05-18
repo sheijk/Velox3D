@@ -167,7 +167,7 @@ IVStream::StreamPos VFileStream::GetPos() const
 IVStream::LegalOpsPtr VFileStream::GetLegalOps() const
 {
 	//TODO: schoener machen :)
-	return const_cast<VPointer<VLegalOperations>::AutoPtr*>(&m_pLegalOps)->Get();
+	return const_cast<VSharedPtr<VLegalOperations>*>(&m_pLegalOps)->Get();
 }
 
 void VFileStream::Close()

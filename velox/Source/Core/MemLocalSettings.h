@@ -18,4 +18,4 @@
 //#define V3D_MEM_SHOW_SHORTALLOCRELEASE
 
 //-----------------------------------------------------------------------------
-#endif V3D_MEMLOCALSETTINGS_2004_08_26_H
+#endif // V3D_MEMLOCALSETTINGS_2004_08_26_H

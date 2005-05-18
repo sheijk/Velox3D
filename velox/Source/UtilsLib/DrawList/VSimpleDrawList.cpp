@@ -38,6 +38,7 @@ void VSimpleDrawList::Remove(ModelMeshId in_ModelId)
 		if( delCandidate->first == in_ModelId )
 		{
 			m_Models.erase(delCandidate);
+			break;
 		}
 	}
 

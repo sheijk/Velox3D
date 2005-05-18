@@ -127,6 +127,7 @@ VResource* VResource::AddRandomNamedSubResource()
 
 VResource* VResource::GetSubResource(const std::string& in_strSubResource)
 {
+	// look in loaded sub resources, return if matching sub res found
 	ResourceContainer::iterator resIter = m_SubResources.begin();
 	const ResourceContainer::iterator end = m_SubResources.end();
 

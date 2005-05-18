@@ -36,6 +36,12 @@ vrendermethodregistry
 
 - VMaterialDescription entfernt
 
+18.05.2005
+- Entity System erweitert: Entities koennen eine hyrarchie bilden, Entity Parts
+  werden ueber ihren "Parent" informiert
+- alle Smart Pointer auf VSharedPtr umgestellt, alte Smart Pointer entfernt
+- IVDrawList geaendert, so dass Ids verwendet werden (zum entfernen von objekten)
+
 20.04.2005
 - Altlasten entfernt (mulit pass drawlist, portal quatsch)
 

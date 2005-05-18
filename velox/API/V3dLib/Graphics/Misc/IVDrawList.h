@@ -20,6 +20,7 @@ namespace graphics {
 struct IVDrawList
 {
 	typedef vuint ModelMeshId;
+	static ModelMeshId GetInvalidId() { return 0; }
 
 	virtual ~IVDrawList() {}
 

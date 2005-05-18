@@ -7,6 +7,7 @@
 #include <V3d/Entity/IVPart.h>
 
 #include <map>
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
@@ -22,6 +23,7 @@ using namespace v3d; // prevent auto indenting
 class VEntity
 {
 public:
+	typedef VPointer<VEntity>::SharedPtr EntityPtr;
 	typedef VPointer<IVPart>::SharedPtr PartPtr;
 
 	VEntity();
@@ -36,13 +38,21 @@ public:
 	/** Adds a part to the entity. Entity will delete part */
 	void AddPart(const utils::VFourCC& in_Id, PartPtr in_pPart);
 
+	void AddChild(EntityPtr in_pEntity);
+	void RemoveChild(EntityPtr in_pEntity);
+
 private:
+	typedef std::map<utils::VFourCC, PartPtr> PartContainer;
+	typedef std::vector<EntityPtr> EntityContainer;
+
 	VEntity(const VEntity&);
 	void operator=(const VEntity&);
 
-	typedef std::map<utils::VFourCC, PartPtr> PartContainer;
 	PartContainer m_Parts;
 	vbool m_bActivated;
+
+	VEntity* m_pParent;
+	EntityContainer m_Entities;
 };
 
 //-----------------------------------------------------------------------------

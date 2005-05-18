@@ -15,7 +15,7 @@ class VMemoryStream : public IVStream
 {
 private:
 	/** all memory streams have the same access rights */
-	static VPointer<IVLegalOperations>::AutoPtr s_pLegalOps;
+	static VSharedPtr<IVLegalOperations> s_pLegalOps;
 
 	/** the buffer */
 	std::vector<vchar> m_Data;

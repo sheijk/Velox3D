@@ -30,7 +30,7 @@ private:
 	DWORD m_nCreationMode;
 	LONG m_nFilePos;
 	vbool m_bConnected;
-	VPointer<VLegalOperations>::AutoPtr m_pLegalOps;
+	VSharedPtr<VLegalOperations> m_pLegalOps;
 
 public:
 	//! opens a file

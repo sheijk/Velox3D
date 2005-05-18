@@ -8,7 +8,7 @@ namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
 
-VPointer<IVLegalOperations>::AutoPtr VMemoryStream::s_pLegalOps(
+VSharedPtr<IVLegalOperations> VMemoryStream::s_pLegalOps(
 	new VLegalOperations(true, true, true, true) );
 
 //-----------------------------------------------------------------------------

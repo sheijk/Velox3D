@@ -26,8 +26,8 @@ using namespace v3d::wxwindows;
 
 class VWxModule : public VModuleBase
 {
-	VPointer<VConsoleService>::AutoPtr m_pConsoleService;
-	VPointer<wxwindows::VWxConnector>::AutoPtr m_pWxConnector;
+	VSharedPtr<VConsoleService> m_pConsoleService;
+	VSharedPtr<wxwindows::VWxConnector> m_pWxConnector;
 
 public:
 	VWxModule()// : VModuleBase("wx") 

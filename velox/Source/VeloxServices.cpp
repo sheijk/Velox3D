@@ -57,43 +57,43 @@ using namespace v3d::graphics;
 class VVeloxModules : public v3d::VModuleBase
 {
 	// vfs
-	VPointer<VStreamFactory>::AutoPtr g_pStreamFac;
-	VPointer<VSimpleVfs>::AutoPtr g_pFileSys;
-	VPointer<VDataProviderPool>::AutoPtr g_pDataProvPool;
-	VPointer<VFileDataProvider>::AutoPtr g_pFileDataProv;
-	VPointer<VTempDataProvider>::AutoPtr g_pTempDataProv;
+	VSharedPtr<VStreamFactory> g_pStreamFac;
+	VSharedPtr<VSimpleVfs> g_pFileSys;
+	VSharedPtr<VDataProviderPool> g_pDataProvPool;
+	VSharedPtr<VFileDataProvider> g_pFileDataProv;
+	VSharedPtr<VTempDataProvider> g_pTempDataProv;
 
 	// config
-	VPointer<VConfigProvider>::AutoPtr g_pConfigProvider;
+	VSharedPtr<VConfigProvider> g_pConfigProvider;
 
 	// resources
-	VPointer<IVResourceManager>::AutoPtr g_pResourceManager;
+	VSharedPtr<IVResourceManager> g_pResourceManager;
 
 	// updater
-	VPointer<VUpdateManager>::AutoPtr g_pUpdater;
+	VSharedPtr<VUpdateManager> g_pUpdater;
 
 	// system
-	VPointer<system::VSystemManager>::AutoPtr g_pSystemManager;
+	VSharedPtr<system::VSystemManager> g_pSystemManager;
 
 	// image
-	VPointer<VImageFactory>::AutoPtr g_pImageFactory;
-	VPointer<IVImageLoader>::AutoPtr g_pDevILLoader;
-	VPointer<IVImageSaver>::AutoPtr  g_pDevILSaver;
-	VPointer<IVImageManipulator>::AutoPtr g_pImageManipulator;
+	VSharedPtr<VImageFactory> g_pImageFactory;
+	VSharedPtr<IVImageLoader> g_pDevILLoader;
+	VSharedPtr<IVImageSaver>  g_pDevILSaver;
+	VSharedPtr<IVImageManipulator> g_pImageManipulator;
 	
 
 	// window
-	VPointer<VWindowManagerWin32>::AutoPtr g_pWindowManagerWin;
+	VSharedPtr<VWindowManagerWin32> g_pWindowManagerWin;
 
 	// error
-	VPointer<VErrorService>::AutoPtr g_pErrorService;
-	VPointer<VErrorConsoleListener>::AutoPtr g_pConsoleListener;
+	VSharedPtr<VErrorService> g_pErrorService;
+	VSharedPtr<VErrorConsoleListener> g_pConsoleListener;
 
 	// property
-	VPointer<VPropertyManager>::AutoPtr g_pPropertyManager;
+	VSharedPtr<VPropertyManager> g_pPropertyManager;
 
 	// entity
-	VPointer<VEntityManager>::AutoPtr g_pEntityManager;
+	VSharedPtr<VEntityManager> g_pEntityManager;
 
 public:
 	VVeloxModules()

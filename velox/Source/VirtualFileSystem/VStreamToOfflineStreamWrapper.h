@@ -18,7 +18,7 @@ namespace vfs {
 class VStreamToOfflineStreamWrapper : public IVOfflineStream
 {
 	// the wrapped stream
-	VPointer<IVStream>::AutoPtr m_pStream;
+	VSharedPtr<IVStream> m_pStream;
 
 	// is the stream connected?
 	vbool m_bConnected;

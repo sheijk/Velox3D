@@ -6,7 +6,7 @@
 #include <vector>
 
 #include <V3d/Core/RangeIter/VRangeIterator.h>
-#include <V3d/Core/SmartPtr/VSmartPtr.h>
+#include <V3d/Core/SmartPtr/VSharedPtr.h>
 #include <V3d/Resource.h>
 #include <V3d/Graphics/IVMesh.h>
 #include <V3d/Graphics/IVMaterial.h>

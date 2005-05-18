@@ -11,7 +11,7 @@ using namespace v3d::kernel;
 namespace
 {
 	// global kernel instance
-	VPointer<VKernel>::AutoPtr g_pKernel;
+	VSharedPtr<VKernel> g_pKernel;
 }
 
 namespace v3d {

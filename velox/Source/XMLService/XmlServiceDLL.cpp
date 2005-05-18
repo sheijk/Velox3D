@@ -10,7 +10,7 @@
 
 class VXmlModule : public v3d::VModuleBase
 {
-	v3d::VPointer<v3d::xml::VXMLService>::AutoPtr m_pXMLService;
+	v3d::VSharedPtr<v3d::xml::VXMLService> m_pXMLService;
 
 public:
 	VXmlModule() // : VModuleBase("xml") 

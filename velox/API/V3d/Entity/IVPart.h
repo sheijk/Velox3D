@@ -46,6 +46,12 @@ public:
 	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 	{}
 
+	/**
+	 * Tells the part about the next part with it's id up the entity hierarchy
+	 */
+	virtual void TellParentPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+	{}
+
 	template<typename T>
 	vbool IsOfType() const;
 
