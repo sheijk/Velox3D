@@ -17,7 +17,7 @@ using namespace v3d; // anti auto indenting
 
 /**
  * A rendering context. Used internally by the graphics device to enable
- * it's associated Pixel Buffer opengl context. 
+ * it's associated pixel buffer opengl context. 
  *
  * @author lars
  */
@@ -25,14 +25,17 @@ class VPBufferWindowContext : public IVRenderContext
 {
 public:
 
-	VPBufferWindowContext(const graphics::VDisplaySettings* in_pdisplaysettings = 0);
+	VPBufferWindowContext(const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VPBufferWindowContext();
 
+	/**
+	 * Make the Pixel Buffer rendering Context active
+	*/
 	void MakeCurrent();
 
 private:
 
-	graphics::VDisplaySettings m_displaysettings;
+	graphics::VDisplaySettings m_DisplaySettings;
 	HPBUFFERARB                m_pixelbuffer;
 	HDC                        m_devicecontext;
 	HGLRC                      m_rendercontext;

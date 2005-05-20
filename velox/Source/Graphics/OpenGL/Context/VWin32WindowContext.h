@@ -17,7 +17,7 @@ using namespace v3d; // anti auto indenting
 
 /**
  * A rendering context. Used internally by the graphics device to enable
- * it's associated Win32 opengl context.
+ * it's associated win32 opengl context.
  *
  * @author lars
  */
@@ -25,9 +25,12 @@ class VWin32WindowContext : public IVRenderContext
 {
 public:
 
-	VWin32WindowContext(HWND in_hwnd = 0, const graphics::VDisplaySettings* in_pdisplaysettings = 0);
+	VWin32WindowContext(HWND in_hwnd = 0, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VWin32WindowContext();
 
+	/**
+	 * Make the Win32 OpenGL rendering Context active
+	*/
 	void MakeCurrent();
 
 private:

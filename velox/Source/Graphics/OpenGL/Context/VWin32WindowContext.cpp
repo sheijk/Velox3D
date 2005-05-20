@@ -5,7 +5,7 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* in_pdisplaysettings) : m_devicecontext(0), m_rendercontext(0), m_handle(in_hwnd), m_DisplaySettings(*in_pdisplaysettings)
+VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* in_pDisplaySettings) : m_devicecontext(0), m_rendercontext(0), m_handle(in_hwnd), m_DisplaySettings(*in_pDisplaySettings)
 {
 	//create a OpenGL Device Context
 	m_devicecontext = GetDC(m_handle);
@@ -54,8 +54,6 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 		vout << "OpenGL Render Context was created!" << vendl;
 		break;
 	}
-
-	wglMakeCurrent(m_devicecontext, m_rendercontext);
 }
 
 VWin32WindowContext::~VWin32WindowContext()
@@ -75,6 +73,7 @@ VWin32WindowContext::~VWin32WindowContext()
 
 void VWin32WindowContext::MakeCurrent()
 {
+	wglMakeCurrent(m_devicecontext, m_rendercontext);
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

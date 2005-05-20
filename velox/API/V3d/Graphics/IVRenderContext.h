@@ -22,6 +22,9 @@ public:
 	IVRenderContext() {};
 	virtual ~IVRenderContext() {};
 
+	/**
+	 * Make the rendering Context active
+	*/
 	virtual void MakeCurrent() = 0;
 };
 
