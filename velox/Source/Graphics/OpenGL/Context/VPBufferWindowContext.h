@@ -15,6 +15,12 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
+/**
+ * A rendering context. Used internally by the graphics device to enable
+ * it's associated Pixel Buffer opengl context. 
+ *
+ * @author lars
+ */
 class VPBufferWindowContext : public IVRenderContext
 {
 public:
@@ -23,7 +29,6 @@ public:
 	virtual ~VPBufferWindowContext();
 
 	void MakeCurrent();
-	void Use();
 
 private:
 

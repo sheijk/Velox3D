@@ -9,17 +9,7 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pdisplay
 {
 	m_devicecontext = wglGetCurrentDC();
 	m_rendercontext = wglGetCurrentContext();
-}
 
-VPBufferWindowContext::~VPBufferWindowContext()
-{
-	wglDeleteContext(m_pbufferrendercontext);
-    wglReleasePbufferDCARB(m_pixelbuffer, m_pbufferdevicecontext);
-    wglDestroyPbufferARB(m_pixelbuffer); 
-}
-
-void VPBufferWindowContext::MakeCurrent()
-{
 	const int Attribute[] = {
 	    WGL_SUPPORT_OPENGL_ARB, true,
         WGL_DRAW_TO_PBUFFER_ARB, true,
@@ -34,7 +24,18 @@ void VPBufferWindowContext::MakeCurrent()
 
 	vuint count = 0;
 	vint pixelformat = 0;
-	wglChoosePixelFormatARB(m_devicecontext, reinterpret_cast<const int*>(&Attribute), 0, 1, &pixelformat, &count); <- Hier muss mal einer mal einer Extension von OGL aufschreiben
+	wglChoosePixelFormatARB(m_devicecontext, reinterpret_cast<const int*>(&Attribute), 0, 1, &pixelformat, &count);
+}
+
+VPBufferWindowContext::~VPBufferWindowContext()
+{
+	wglDeleteContext(m_pbufferrendercontext);
+    wglReleasePbufferDCARB(m_pixelbuffer, m_pbufferdevicecontext);
+    wglDestroyPbufferARB(m_pixelbuffer); 
+}
+
+void VPBufferWindowContext::MakeCurrent()
+{
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

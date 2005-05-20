@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="7.00"
 	Name="v3dWin32"
 	ProjectGUID="{C125F830-6341-4D5B-8062-3A6551406920}"
 	RootNamespace="Velox3dWin32"

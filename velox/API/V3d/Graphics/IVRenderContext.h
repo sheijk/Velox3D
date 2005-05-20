@@ -22,12 +22,7 @@ public:
 	IVRenderContext() {};
 	virtual ~IVRenderContext() {};
 
-	//TODO: bitte alle methoden im javadoc stil beschreiben, so dass jemand
-	// der keine ahnung hat wofuer das ganze gut ist die klasse/methode
-	// benutzen kann --sheijk
 	virtual void MakeCurrent() = 0;
-	//TODO: use kann weg, oder?
-	virtual void Use();
 };
 
 //-----------------------------------------------------------------------------

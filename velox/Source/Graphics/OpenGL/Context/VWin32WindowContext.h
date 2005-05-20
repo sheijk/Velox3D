@@ -15,7 +15,12 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-//TODO: doku
+/**
+ * A rendering context. Used internally by the graphics device to enable
+ * it's associated Win32 opengl context.
+ *
+ * @author lars
+ */
 class VWin32WindowContext : public IVRenderContext
 {
 public:
@@ -27,11 +32,7 @@ public:
 
 private:
 
-	//TODO: aendern zu m_DisplaySettings,.. (->coding conventions)
-	//TODO: nicht "huebsch" anordnen, das macht nur viel arbeit wenn eine
-	// variable dazu kommt, weil man dann alles umformatiern muss. einfach
-	// immer ein space zwischen typ und variablen name reicht
-	graphics::VDisplaySettings m_displaysettings;
+	graphics::VDisplaySettings m_DisplaySettings;
 	HDC                        m_devicecontext;
 	HGLRC                      m_rendercontext;
 	HWND                       m_handle;

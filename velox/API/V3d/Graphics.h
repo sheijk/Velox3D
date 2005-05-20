@@ -8,6 +8,7 @@
 #include <V3d/Graphics/IVMesh.h>
 #include <V3d/Graphics/IVRenderState.h>
 #include <V3d/Graphics/IVStateCategory.h>
+#include <V3d/Graphics/IVRenderContext.h>
 #include <V3d/Graphics/VBuffer.h>
 #include <V3d/Graphics/VDataFormat.h>
 #include <V3d/Graphics/VDeviceMatrix.h>

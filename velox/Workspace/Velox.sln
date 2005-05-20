@@ -1,56 +1,39 @@
-Microsoft Visual Studio Solution File, Format Version 8.00
+Microsoft Visual Studio Solution File, Format Version 7.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KernelLib", "KernelLib.vcproj", "{F5A203BC-C39E-43DB-B426-4CC8114C84E6}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxLib", "UtilsLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49322}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v3dConsole", "v3dConsole.vcproj", "{594DBDEA-14ED-4A95-B219-98A18432E8E7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F5A203BC-C39E-43DB-B426-4CC8114C84E6} = {F5A203BC-C39E-43DB-B426-4CC8114C84E6}
-		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlService", "XmlService.vcproj", "{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "CoreLib.vcproj", "{BB57F1C9-0039-40BC-8188-02F384F49029}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxServices", "VeloxServices.vcproj", "{946E10B2-24CB-27C7-1337-CDCD6D563659}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WxWidgetsServices", "WxServices.vcproj", "{C2A12717-4341-4E4B-9019-07F8B0522B91}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BB57F1C9-0039-40BC-8188-02F384F49029} = {BB57F1C9-0039-40BC-8188-02F384F49029}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
-		Debug = Debug
-		Release = Release
-		UnitTests = UnitTests
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+		ConfigName.2 = UnitTests
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
 		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.Debug.ActiveCfg = Debug|Win32
 		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.Debug.Build.0 = Debug|Win32
 		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.Release.ActiveCfg = Release|Win32
 		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.Release.Build.0 = Release|Win32
-		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.UnitTests.ActiveCfg = Debug|Win32
-		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.UnitTests.Build.0 = Debug|Win32
+		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.UnitTests.ActiveCfg = Release|Win32
+		{F5A203BC-C39E-43DB-B426-4CC8114C84E6}.UnitTests.Build.0 = Release|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.ActiveCfg = Debug|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49322}.Debug.Build.0 = Debug|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.ActiveCfg = Release|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49322}.Release.Build.0 = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.ActiveCfg = Debug|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.Build.0 = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49322}.UnitTests.Build.0 = Release|Win32
 		{594DBDEA-14ED-4A95-B219-98A18432E8E7}.Debug.ActiveCfg = Debug|Win32
 		{594DBDEA-14ED-4A95-B219-98A18432E8E7}.Debug.Build.0 = Debug|Win32
 		{594DBDEA-14ED-4A95-B219-98A18432E8E7}.Release.ActiveCfg = Release|Win32
@@ -61,14 +44,14 @@ Global
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Debug.Build.0 = Debug|Win32
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Release.ActiveCfg = Release|Win32
 		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.Release.Build.0 = Release|Win32
-		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.ActiveCfg = Debug|Win32
-		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.Build.0 = Debug|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.ActiveCfg = Release|Win32
+		{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}.UnitTests.Build.0 = Release|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.ActiveCfg = Debug|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49029}.Debug.Build.0 = Debug|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49029}.Release.ActiveCfg = Release|Win32
 		{BB57F1C9-0039-40BC-8188-02F384F49029}.Release.Build.0 = Release|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.ActiveCfg = Debug|Win32
-		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.Build.0 = Debug|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.ActiveCfg = Release|Win32
+		{BB57F1C9-0039-40BC-8188-02F384F49029}.UnitTests.Build.0 = Release|Win32
 		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Debug.ActiveCfg = Debug|Win32
 		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Debug.Build.0 = Debug|Win32
 		{946E10B2-24CB-27C7-1337-CDCD6D563659}.Release.ActiveCfg = Release|Win32
@@ -81,21 +64,6 @@ Global
 		{C2A12717-4341-4E4B-9019-07F8B0522B91}.Release.Build.0 = Release|Win32
 		{C2A12717-4341-4E4B-9019-07F8B0522B91}.UnitTests.ActiveCfg = Release|Win32
 		{C2A12717-4341-4E4B-9019-07F8B0522B91}.UnitTests.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionItems) = postSolution
-		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt
-		..\local\Workdir\default\init.xml = ..\local\Workdir\default\init.xml
-		..\Doc\Worklog\insane.txt = ..\Doc\Worklog\insane.txt
-		Templates\ServiceDLL.cpp = Templates\ServiceDLL.cpp
-		..\Doc\Worklog\sheijk.txt = ..\Doc\Worklog\sheijk.txt
-		Templates\UnitTest.cpp = Templates\UnitTest.cpp
-		Templates\UnitTest.h = Templates\UnitTest.h
-		Workdir\unittests.xml = Workdir\unittests.xml
-		Templates\VeloxClass.cpp = Templates\VeloxClass.cpp
-		Templates\VeloxClass.h = Templates\VeloxClass.h
-		Templates\VeloxDoc.html = Templates\VeloxDoc.html
-		Templates\VeloxFile.cpp = Templates\VeloxFile.cpp
-		Templates\VeloxFile.h = Templates\VeloxFile.h
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
