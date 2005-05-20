@@ -36,6 +36,9 @@ vrendermethodregistry
 
 - VMaterialDescription entfernt
 
+20.05.2005
+- Entity Example um Beispiel fuer hierarchische Entities erweitert
+
 18.05.2005
 - Entity System erweitert: Entities koennen eine hyrarchie bilden, Entity Parts
   werden ueber ihren "Parent" informiert

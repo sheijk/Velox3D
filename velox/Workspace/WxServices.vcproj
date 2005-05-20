@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
+	Version="7.10"
 	Name="WxWidgetsServices"
 	ProjectGUID="{C2A12717-4341-4E4B-9019-07F8B0522B91}"
 	RootNamespace="WxWidgetsServices"

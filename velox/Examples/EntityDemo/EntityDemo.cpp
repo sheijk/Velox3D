@@ -4,9 +4,11 @@
 #include "VDataPart.h"
 #include "VSetterPart.h"
 #include "VReaderPart.h"
-
+#include "VHierarchyPart.h"
 
 #include <V3d/Resource.h>
+
+#include <string>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -14,6 +16,7 @@
 using namespace v3d;
 using namespace v3d::entity;
 using v3d::utils::VFourCC;
+using std::string;
 
 /**
  * Rudimentary demo of the entity system.
@@ -103,6 +106,18 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 		pReader = new VReaderPart();
 		VEntity::PartPtr pReadingPart(pReader);
 		ent.AddPart(VFourCC("read"), pReadingPart);
+
+		VEntity::PartPtr pTestPart(new VHierarchyPart("root"));
+		ent.AddPart(VFourCC("hyra"), pTestPart);
+	}
+
+	VSharedPtr<VEntity> pChild(new VEntity());
+	ent.AddChild(pChild);
+
+	{
+		// demonstrates how to get the 'parent' part (in VHierarchyPart.h)
+		VEntity::PartPtr pChildPart(new VHierarchyPart("child"));
+		pChild->AddPart(VFourCC("hyra"), pChildPart);
 	}
 
 	ent.Activate();
@@ -116,6 +131,7 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 	ent.Deactivate();
 
 	//---
+	// test/demonstrate the resource manager
 	using namespace resource;
 
 	VResourceManagerPtr pResourceManager;
@@ -142,8 +158,7 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 
 	V3D_ASSERT(pBlub->GetVal() == 5);
 
-	pResourceManager->DumpResourceInfo();
-
+	//pResourceManager->DumpResourceInfo();
 	
 	return 0;
 }

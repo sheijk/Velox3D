@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
+	Version="7.10"
 	Name="CoreLib"
 	ProjectGUID="{BB57F1C9-0039-40BC-8188-02F384F49029}"
 	RootNamespace="CoreLib"

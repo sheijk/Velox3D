@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding = "Windows-1252"?>
+<?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
+	Version="7.10"
 	Name="VeloxServices"
 	ProjectGUID="{946E10B2-24CB-27C7-1337-CDCD6D563659}"
 	Keyword="Win32Proj">
@@ -55,7 +55,13 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
@@ -100,9 +106,17 @@
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
 				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
 	</Configurations>
+	<References>
+	</References>
 	<Files>
 		<Filter
 			Name="VirtualFileSystem"
@@ -267,6 +281,9 @@
 						RelativePath="..\Source\VirtualFileSystem\VFileDataProvider.h">
 					</File>
 					<File
+						RelativePath="..\Source\VirtualFileSystem\VfsUtils.h">
+					</File>
+					<File
 						RelativePath="..\Source\VirtualFileSystem\VSimpleVfs.cpp">
 					</File>
 					<File
@@ -283,9 +300,6 @@
 					</File>
 					<File
 						RelativePath="..\Source\VirtualFileSystem\VXmlIniReader.h">
-					</File>
-					<File
-						RelativePath="..\Source\VirtualFileSystem\VfsUtils.h">
 					</File>
 				</Filter>
 				<Filter
@@ -337,10 +351,10 @@
 					RelativePath="..\Api\V3d\Updater\IVTimer.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateManager.h">
+					RelativePath="..\Api\V3d\Updater\IVUpdateable.h">
 				</File>
 				<File
-					RelativePath="..\Api\V3d\Updater\IVUpdateable.h">
+					RelativePath="..\Api\V3d\Updater\IVUpdateManager.h">
 				</File>
 			</Filter>
 			<Filter
@@ -397,6 +411,9 @@
 				Name="Interface"
 				Filter="">
 				<File
+					RelativePath="..\Api\V3d\Image.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Image\IVImageFactory.h">
 				</File>
 				<File
@@ -407,9 +424,6 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Image\IVImageSaver.h">
-				</File>
-				<File
-					RelativePath="..\Api\V3d\Image.h">
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Image\VImage.h">
@@ -641,10 +655,10 @@
 					Name="GL Utils"
 					Filter="">
 					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGLUtils.h">
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGlUtils.cpp">
 					</File>
 					<File
-						RelativePath="..\Source\Graphics\OpenGL\VOpenGlUtils.cpp">
+						RelativePath="..\Source\Graphics\OpenGL\VOpenGLUtils.h">
 					</File>
 				</Filter>
 				<Filter
@@ -667,22 +681,6 @@
 					</File>
 					<File
 						RelativePath="..\Source\Graphics\DeviceBase\VStateCategoryList.h">
-					</File>
-				</Filter>
-				<Filter
-					Name="Context"
-					Filter="">
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.h">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp">
-					</File>
-					<File
-						RelativePath="..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h">
 					</File>
 				</Filter>
 			</Filter>

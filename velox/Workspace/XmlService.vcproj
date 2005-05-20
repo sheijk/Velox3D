@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
+	Version="7.10"
 	Name="XmlService"
 	ProjectGUID="{EDEFD55A-6C5A-481F-8B00-D79EF595B43A}"
 	RootNamespace="XmlService"
