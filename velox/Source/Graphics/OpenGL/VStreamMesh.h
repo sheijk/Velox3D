@@ -54,6 +54,10 @@ private:
 	vuint m_nPrimitiveCount;
 	const GLint m_PrimitiveType;
 
+	//TODO: hacked in indexoffset --ins
+
+	vuint m_nIndexOffset;
+
 	vbool m_bShowNormal;
 	resource::VResourceDataPtr<const VVertexBuffer> m_CoordBuffer;
 	resource::VResourceDataPtr<const VVertexBuffer> m_NormalBuffer;

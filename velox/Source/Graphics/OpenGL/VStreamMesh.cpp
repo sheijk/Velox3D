@@ -21,7 +21,7 @@ VStreamMesh::VStreamMesh(
 	//VMeshBase(in_Materials),
 	m_nPrimitiveCount(in_MeshDescription.GetCoordinateFormat().GetCount()),
 	m_PrimitiveType(GetGeometryMode(in_MeshDescription.GetGeometryType())),
-	m_pIndexStream(0)
+	m_pIndexStream(0), m_nIndexOffset(0)
 {
 	//TODO: check if mesh descr format matches vertex buffer format
 
@@ -48,6 +48,11 @@ VStreamMesh::VStreamMesh(
 		m_pIndexStream.reset(new StreamRes(pIndexResource->GetData<IVVertexStream>()));
 
 		m_nPrimitiveCount = in_MeshDescription.GetIndexFormat().GetCount();
+
+		//TODO: hacked in indexoffset --ins
+		m_nIndexOffset = in_MeshDescription.GetIndexFormat().GetFirstIndex();
+
+
 	}
 
 	if( in_MeshDescription.GetCoordinateResource() != "" )
@@ -104,12 +109,18 @@ void VStreamMesh::Render()
 	//TODO: handle index meshes
 	if( m_pIndexStream.get() != 0 )
 	{
+		//TODO: hacked in indexoffset --ins
 		const void* pIndexAddress = (*m_pIndexStream)->GetIndexAddress();
+			//+ sizeof(vuint) * m_nIndexOffset;
 
+		const vuint* pNewIndexAddress = reinterpret_cast<const vuint*>(pIndexAddress)
+			+ m_nIndexOffset;
+		
+		
 		glDrawElements(
 			m_PrimitiveType, m_nPrimitiveCount, 
 			GL_UNSIGNED_INT, 
-			pIndexAddress);
+			pNewIndexAddress);
 	}
 	else
 	{
