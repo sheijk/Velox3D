@@ -76,10 +76,10 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 
 VPBufferWindowContext::~VPBufferWindowContext()
 {
-/*	wglDeleteContext(m_pbufferrendercontext);
+	wglDeleteContext(m_pbufferrendercontext);
     wglReleasePbufferDCARB(m_pixelbuffer, m_pbufferdevicecontext);
     wglDestroyPbufferARB(m_pixelbuffer); 
-*/}
+}
 
 void VPBufferWindowContext::MakeCurrent()
 {
@@ -88,6 +88,8 @@ void VPBufferWindowContext::MakeCurrent()
 
 	if(flag)
 	{
+		//Destroy the Pixel Buffer
+		//create new Pixel Buffer
 	}
 
 	wglMakeCurrent(m_pbufferdevicecontext, m_pbufferrendercontext);

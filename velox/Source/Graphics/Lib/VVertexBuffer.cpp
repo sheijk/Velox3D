@@ -38,6 +38,8 @@ namespace
 
 	vuint GetRequiredSize(const VVertexFormat& in_Format)
 	{
+		using std::max;
+
 		vuint size = 0;
 
 		size = max(size, GetIndexOfEnd(in_Format.GetCoordinateFormat()));
