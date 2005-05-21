@@ -257,37 +257,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="SimpleSG"
-				Filter="">
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\SimpleSG\IVNode.h">
-				</File>
-				<File
-					RelativePath="..\Source\UtilsLib\SimpleSG\VMeshNode.cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\SimpleSG\VMeshNode.h">
-				</File>
-				<File
-					RelativePath="..\Source\UtilsLib\SimpleSG\VNodeBase.cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\SimpleSG\VNodeBase.h">
-				</File>
-				<File
-					RelativePath="..\Source\UtilsLib\SimpleSG\VSceneGraphTools.cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\SimpleSG\VSceneGraphTools.h">
-				</File>
-				<File
-					RelativePath="..\Source\UtilsLib\SimpleSG\VTransformNode.cpp">
-				</File>
-				<File
-					RelativePath="..\Api\V3dLib\Graphics\SimpleSG\VTransformNode.h">
-				</File>
-			</Filter>
-			<Filter
 				Name="Importer"
 				Filter="">
 				<File
@@ -780,6 +749,63 @@
 				</File>
 				<File
 					RelativePath="..\Api\V3d\Resource\VResourceId.h">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Scene"
+			Filter="">
+			<File
+				RelativePath="..\Api\V3d\Scene.h">
+			</File>
+			<Filter
+				Name="Interface"
+				Filter="">
+				<File
+					RelativePath="..\Api\V3d\Scene\IVRenderAlgorithm.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\IVRenderList.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\IVScene.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\IVShooting.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\VDefaultRenderAlgorithm.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\VRenderList.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\VSceneModelPart.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\VShooting.h">
+				</File>
+				<File
+					RelativePath="..\Api\V3d\Scene\VSimpleScene.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\Source\Scene\VDefaultRenderAlgorithm.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Scene\VRenderList.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Scene\VSceneModelPart.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Scene\VShooting.cpp">
+				</File>
+				<File
+					RelativePath="..\Source\Scene\VSimpleScene.cpp">
 				</File>
 			</Filter>
 		</Filter>

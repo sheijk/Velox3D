@@ -23,8 +23,8 @@ using namespace v3d; // prevent auto indenting
 class VEntity
 {
 public:
-	typedef VPointer<VEntity>::SharedPtr EntityPtr;
-	typedef VPointer<IVPart>::SharedPtr PartPtr;
+	typedef VSharedPtr<VEntity> EntityPtr;
+	typedef VSharedPtr<IVPart> PartPtr;
 
 	VEntity();
 	virtual ~VEntity();

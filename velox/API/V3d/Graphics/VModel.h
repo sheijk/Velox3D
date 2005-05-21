@@ -19,26 +19,22 @@ using namespace v3d; // anti auto indenting
 
 class VModelMesh
 {
-	//resource::VResourceDataPtr<IVMesh> m_hMesh;
-	//resource::VResourceDataPtr<IVMaterial> m_hMaterial;
+	resource::VResourceDataPtr<const IVMesh> m_pMesh;
+	resource::VResourceDataPtr<const IVMaterial> m_pMaterial;
 	VSharedPtr<VMatrix44f> m_pTransform;
 
-	IVMesh* m_pMesh;
-	IVMaterial* m_pMaterial;
 public:
-	VModelMesh(IVMesh* in_pMesh, IVMaterial* in_pMaterial);
-	VModelMesh(resource::VResourceDataPtr<IVMesh> in_hMesh);
-	VModelMesh(
-		resource::VResourceDataPtr<IVMesh> in_hMesh,
-		VSharedPtr<VMatrix44f> in_pTransform);
-	VModelMesh(
-		resource::VResourceDataPtr<IVMesh> in_hMesh,
-		resource::VResourceDataPtr<IVMaterial> in_hMaterial,
-		VSharedPtr<VMatrix44f> in_pTransform);
+	//VModelMesh(IVMesh* in_pMesh, IVMaterial* in_pMaterial);
+	typedef resource::VResourceDataPtr<const IVMesh> MeshPtr;
+	typedef resource::VResourceDataPtr<const IVMaterial> MaterialPtr;
+	typedef VSharedPtr<VMatrix44f> MatrixPtr;
 
-	IVMesh* GetMesh();
-	IVMaterial* GetMaterial();
-	VMatrix44f& GetTransform();
+	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial, MatrixPtr in_pTransform);
+
+	MeshPtr GetMesh() const;
+	MaterialPtr GetMaterial() const;
+	VSharedPtr<VMatrix44f> GetTransform();
+	VSharedPtr<const VMatrix44f> GetTransform() const;
 };
 
 /**
@@ -58,6 +54,7 @@ public:
 
 	vuint GetPartCount() const;
 	VModelMesh& GetPart(vuint in_nNum);
+	const VModelMesh& GetPart(vuint in_nNum) const;
 	//vuint GetMeshCount() const;
 	//VMeshHandle GetMesh(vuint in_nNum) const;
 	//VMaterialHandle GetMaterial(vuint in_nNum) const;

@@ -26,7 +26,14 @@ void ApplyMaterial(IVDevice& in_Device, const IVPass* in_pMaterial);
 void RenderMesh(
 	IVDevice& in_Device, 
 	IVDevice::MeshHandle in_hMesh,
-	IVMaterial* in_hMaterial);
+	IVDevice::MaterialHandle in_hMaterial);
+
+/**
+ * Renders the given mesh to the device
+ *
+ * @author sheijk
+ */
+void RenderMesh(graphics::IVDevice& in_Device, graphics::VModelMesh& in_Mesh);
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

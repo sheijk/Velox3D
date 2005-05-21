@@ -17,6 +17,7 @@
 #include <V3d/Graphics/VMeshDescription.h>
 #include <V3d/Graphics/VVertexBuffer.h>
 #include <V3d/Graphics/VVertexFormat.h>
+#include <V3d/Graphics/VModel.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_GRAPHICS_H

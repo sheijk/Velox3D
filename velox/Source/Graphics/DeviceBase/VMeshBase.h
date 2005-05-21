@@ -27,7 +27,7 @@ public:
 	//virtual vuint GetMaterialCount() const;
 	//virtual IVMaterial& GetMaterial(vuint in_nMaterialId);
 
-	virtual void Render() = 0;
+	virtual void Render() const = 0;
 
 	//void SetBuffers(std::vector<VMeshDescription::BufferHandle> in_Buffers);
 	//std::vector<VMeshDescription::BufferHandle> GetBuffers() const;

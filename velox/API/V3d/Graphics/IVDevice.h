@@ -29,8 +29,8 @@ public:
 	//typedef IVBuffer<vbyte>* BufferHandle;
 	//typedef VBufferBase::CopyMode BufferCopyMode;
 	//typedef VBuffer<vbyte> Buffer;
-	typedef IVMesh* MeshHandle;
-	typedef IVMaterial* MaterialHandle;
+	typedef const IVMesh* MeshHandle;
+	typedef const IVMaterial* MaterialHandle;
 
 	//enum BufferType
 	//{

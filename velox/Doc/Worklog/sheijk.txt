@@ -36,6 +36,18 @@ vrendermethodregistry
 
 - VMaterialDescription entfernt
 
+22.05.2005
+- erst Rohversion der Rendering Architecture (V3d/Scene)
+- VSTLAccessorRangePolicy
+
+21.05.2005
+- neue range iterator policy (um z.bsp. einen iterator zu erzeugen der ueber
+  die values einer std::map laeuft, usw.). Ist durch policies fuer beliebige
+  objekt "manipulationen" adaptierbar (it->second zurueckgeben, (*it)+1 zurueck
+  geben, typ konvertierungen usw.
+- VModelMesh auf Resource Manager umgestellt + daraus resultierende Aenderung
+  am Grafikzeug vorgenommen (const correctness issues)
+
 20.05.2005
 - Entity Example um Beispiel fuer hierarchische Entities erweitert
 

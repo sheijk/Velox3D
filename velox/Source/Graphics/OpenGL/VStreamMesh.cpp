@@ -96,12 +96,12 @@ void VStreamMesh::AddVertexBuffer(
 	}
 }
 
-void VStreamMesh::Render()
+void VStreamMesh::Render() const
 {
 	// bind all streams
 	for(vuint i = 0; i < m_Streams.size(); ++i)
 	{
-		BufferInfo& current(m_Streams[i]);
+		const BufferInfo& current(m_Streams[i]);
 		m_Streams[i].pStream->Bind(m_Streams[i].dataTypeFlag);
 	}
 

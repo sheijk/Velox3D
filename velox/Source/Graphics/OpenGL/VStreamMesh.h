@@ -34,7 +34,7 @@ public:
 
 	virtual ~VStreamMesh();
 
-	virtual void Render();
+	virtual void Render() const;
 
 private:
 	typedef resource::VResourceDataPtr<const IVVertexStream> StreamRes;

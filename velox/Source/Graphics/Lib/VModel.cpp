@@ -8,57 +8,43 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
-VModelMesh::VModelMesh(IVMesh* in_pMesh, IVMaterial* in_pMaterial)
+//VModelMesh::VModelMesh(IVMesh* in_pMesh, IVMaterial* in_pMaterial)
+//{
+//	m_pMesh = in_pMesh;
+//	m_pMaterial = in_pMaterial;
+//	m_pTransform = math::IdentityPtr();
+//}
+
+VModelMesh::VModelMesh(
+	MeshPtr in_pMesh,
+	MaterialPtr in_pMaterial,
+	MatrixPtr in_pTransform)
 {
 	m_pMesh = in_pMesh;
 	m_pMaterial = in_pMaterial;
-	m_pTransform = math::IdentityPtr();
+	m_pTransform = in_pTransform;
 }
 
-VModelMesh::VModelMesh(resource::VResourceDataPtr<IVMesh> in_hMesh)
-{
-	V3D_THROW(VException, "not implemented");
-	//m_hMesh = in_hMesh;
-	//m_hMaterial = 0;
-	//m_pTransform = math::IdentityPtr();
-}
-
-VModelMesh::VModelMesh(
-		   resource::VResourceDataPtr<IVMesh> in_hMesh,
-		   VSharedPtr<VMatrix44f> in_pTransform)
-{
-	V3D_THROW(VException, "not implemented");
-	//m_hMesh = in_hMesh;
-	//m_pTransform = in_pTransform;
-	//m_hMaterial = 0;
-}
-
-VModelMesh::VModelMesh(
-		   resource::VResourceDataPtr<IVMesh> in_hMesh,
-		   resource::VResourceDataPtr<IVMaterial> in_hMaterial,
-		   VSharedPtr<VMatrix44f> in_pTransform)
-{
-	V3D_THROW(VException, "not implemented");
-	//m_hMesh = in_hMesh;
-	//m_hMaterial = in_hMaterial;
-	//m_pTransform = in_pTransform;
-}
-
-IVMesh* VModelMesh::GetMesh() 
+VModelMesh::MeshPtr VModelMesh::GetMesh() const
 {
 	return m_pMesh;
 	//return &*m_hMesh;
 }
 
-IVMaterial* VModelMesh::GetMaterial()
+VModelMesh::MaterialPtr VModelMesh::GetMaterial() const
 {
 	return m_pMaterial;
 	//return &*m_hMaterial;
 }
 
-VMatrix44f& VModelMesh::GetTransform()
+VSharedPtr<VMatrix44f> VModelMesh::GetTransform()
 {
-	return *m_pTransform;
+	return m_pTransform;
+}
+
+VSharedPtr<const VMatrix44f> VModelMesh::GetTransform() const
+{
+	return m_pTransform;
 }
 
 //-----------------------------------------------------------------------------
@@ -88,6 +74,11 @@ vuint VModel::GetPartCount() const
 }
 
 VModelMesh& VModel::GetPart(vuint in_nNum)
+{
+	return m_Parts[in_nNum];
+}
+
+const VModelMesh& VModel::GetPart(vuint in_nNum) const
 {
 	return m_Parts[in_nNum];
 }

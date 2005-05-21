@@ -53,9 +53,9 @@ void VSimpleDrawList::Render()
 	for( ; modelIter != m_Models.end(); ++modelIter)
 	{
 		VModelMesh& model = modelIter->second;
-		IVMesh* hMesh = model.GetMesh();
-		IVMaterial* hMaterial = model.GetMaterial();
-		VMatrix44f& transform(model.GetTransform());
+		VModelMesh::MeshPtr hMesh = model.GetMesh();
+		VModelMesh::MaterialPtr hMaterial = model.GetMaterial();
+		VMatrix44f& transform(*model.GetTransform());
 
 		m_Device.SetMatrix(IVDevice::ModelMatrix, transform);
 
@@ -63,7 +63,7 @@ void VSimpleDrawList::Render()
 		{
 			const IVPass* hPass = &(hMaterial->GetPass(matid));
 			ApplyMaterial(hPass);
-			m_Device.RenderMesh(hMesh);
+			m_Device.RenderMesh(&*hMesh);
 		}
 	}
 }

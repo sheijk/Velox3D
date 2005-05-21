@@ -42,9 +42,9 @@ namespace {
 	 * Converts a MeshHandle to a pointer to a mesh
 	 * Use this to enable changing the exact type of MeshHandle
 	 */
-	VMeshBase* MakeMeshPointer(IVDevice::MeshHandle handle)
+	const VMeshBase* MakeMeshPointer(IVDevice::MeshHandle handle)
 	{
-		return static_cast<VMeshBase*>(handle);
+		return static_cast<const VMeshBase*>(handle);
 	}
 }
 
@@ -179,6 +179,8 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 
 	VMeshBase* pMesh = new VStreamMesh(*in_pMeshDescription);
 
+	mdRes->AddData<IVMesh>(pMesh);
+
 	return MakeMeshHandle(pMesh);
 }
 
@@ -208,6 +210,7 @@ IVDevice::MaterialHandle VOpenGLDevice::CreateMaterial(VStringParam in_strResour
 
 	if( statelists.size() > 0 )
 	{
+		edRes->AddData<IVMaterial>(pMaterial);
 		return pMaterial;
 	}
 	else
@@ -254,7 +257,7 @@ void VOpenGLDevice::DeleteMesh(MeshHandle& in_Mesh)
 
 void VOpenGLDevice::RenderMesh(MeshHandle in_pMesh)
 {
-	VMeshBase* pMesh = reinterpret_cast<VMeshBase*>(MakeMeshPointer(in_pMesh));
+	const VMeshBase* pMesh = reinterpret_cast<const VMeshBase*>(MakeMeshPointer(in_pMesh));
 
 	pMesh->Render();
 }

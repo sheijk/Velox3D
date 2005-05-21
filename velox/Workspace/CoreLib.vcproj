@@ -230,6 +230,9 @@
 					RelativePath="..\Api\V3d\Core\RangeIter\VRangeIterator.h">
 				</File>
 				<File
+					RelativePath="..\Api\V3d\Core\RangeIter\VSTLAccessorRangePolicy.h">
+				</File>
+				<File
 					RelativePath="..\Api\V3d\Core\RangeIter\VSTLRangeDerefPolicy.h">
 				</File>
 				<File

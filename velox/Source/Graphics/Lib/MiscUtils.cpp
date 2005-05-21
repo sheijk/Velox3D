@@ -22,7 +22,7 @@ void ApplyMaterial(IVDevice& in_Device, const IVPass* in_pMaterial)
 void RenderMesh(
 	IVDevice& in_Device, 
 	IVDevice::MeshHandle in_hMesh,
-	IVMaterial* in_hMaterial
+	IVDevice::MaterialHandle in_hMaterial
 	)
 {
 	for(vuint matid = 0; matid < in_hMaterial->PassCount(); ++matid)
@@ -40,6 +40,12 @@ void RenderMesh(
 	//	ApplyMaterial(in_Device, pMaterial);
 	//	in_Device.RenderMesh(in_hMesh);
 	//}
+}
+
+void RenderMesh(graphics::IVDevice& in_Device, graphics::VModelMesh& in_Mesh)
+{
+	in_Device.SetMatrix(IVDevice::ModelMatrix, *in_Mesh.GetTransform());
+	RenderMesh(in_Device, &*in_Mesh.GetMesh(), &*in_Mesh.GetMaterial());
 }
 
 //-----------------------------------------------------------------------------
