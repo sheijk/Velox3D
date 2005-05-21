@@ -17,8 +17,9 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
         WGL_GREEN_BITS_ARB, 16,
         WGL_BLUE_BITS_ARB, 16,
         WGL_ALPHA_BITS_ARB, 16,
-		WGL_DEPTH_BITS_ARB, m_displaysettings.GetDepthBits(),
-        WGL_DOUBLE_BUFFER_ARB, false,
+		WGL_DEPTH_BITS_ARB, m_DisplaySettings.GetDepthBits(),
+		WGL_STENCIL_BITS_ARB, m_DisplaySettings.GetStencilBits(),
+        WGL_DOUBLE_BUFFER_ARB, true,
 		0
 	};
 
