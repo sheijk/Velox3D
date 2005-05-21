@@ -17,7 +17,6 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	else
 	{
 		vout << "OpenGL Device Context was created!" << vendl;
-		break;
 	}
 
 	//create Pixel Format
@@ -39,7 +38,6 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	else
 	{
 		vout << "OpenGL Pixel Format was selected!" << vendl;
-		break;
 	}
 
 	//create a OpenGL Render Context
@@ -52,7 +50,6 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	else
 	{
 		vout << "OpenGL Render Context was created!" << vendl;
-		break;
 	}
 }
 

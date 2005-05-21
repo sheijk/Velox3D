@@ -4,6 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 #include <v3d/Core/VException.h>
 #include <v3d/Core/VIOStream.h>
+#include <v3d/Graphics/GraphicsExceptions.h>
 #include <v3d/Graphics/VDisplaySettings.h>
 #include <v3d/Graphics/IVRenderContext.h>
 

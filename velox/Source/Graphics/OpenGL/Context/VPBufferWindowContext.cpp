@@ -31,12 +31,12 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 
 	int Attribute[] = 
 	{
-		WGL_PUFFER_LARGEST_ARB, true
+		WGL_PBUFFER_LARGEST_ARB, true,
         0, 0 
 	};
 
 	//create Pixel Buffer
-	m_pixelbuffer = wglCreatePbufferARB(m_devicecontext, pixleformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
+	m_pixelbuffer = wglCreatePbufferARB(m_devicecontext, pixelformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
 
 	if(m_pixelbuffer == 0)
 	{
@@ -45,7 +45,6 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 	else
 	{
 		vout << "OpenGL Pixel Buffer was created!" << vendl;
-		break;
 	}
 
 	//get Pixel Buffer Device Context
@@ -58,7 +57,6 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 	else
 	{
 		vout << "OpenGL Pixel Buffer Device Context was created!" << vendl;
-		break;
 	}
 
 	//get Pixel Buffer Render Context
@@ -71,7 +69,6 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 	else
 	{
 		vout << "OpenGL Pixel Buffer Render Context was created!" << vendl;
-		break;
 	}
 
 	wglShareLists(m_rendercontext, m_pbufferrendercontext);
@@ -79,10 +76,10 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 
 VPBufferWindowContext::~VPBufferWindowContext()
 {
-	wglDeleteContext(m_pbufferrendercontext);
+/*	wglDeleteContext(m_pbufferrendercontext);
     wglReleasePbufferDCARB(m_pixelbuffer, m_pbufferdevicecontext);
     wglDestroyPbufferARB(m_pixelbuffer); 
-}
+*/}
 
 void VPBufferWindowContext::MakeCurrent()
 {
@@ -91,13 +88,11 @@ void VPBufferWindowContext::MakeCurrent()
 
 	if(flag)
 	{
-		~VPBufferWindowContext();
-		VPBufferWindowContext(&m_DisplaySettings);
 	}
 
 	wglMakeCurrent(m_pbufferdevicecontext, m_pbufferrendercontext);
 
-	glViewport(m_DisplaySettings.GetX(), m_DisplaySettings.GetY(), m_DisplaySettings.GetWidth(), m_DispaySettings.GetHeight());
+	glViewport(m_DisplaySettings.GetX(), m_DisplaySettings.GetY(), m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
 
     glDrawBuffer(GL_FRONT);
     glReadBuffer(GL_FRONT); 

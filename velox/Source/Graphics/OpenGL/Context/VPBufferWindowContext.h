@@ -4,11 +4,13 @@
 #include <V3d/Core/VCoreLib.h>
 #include <v3d/Core/VException.h>
 #include <v3d/Core/VIOStream.h>
+#include <v3d/Graphics/GraphicsExceptions.h>
 #include <v3d/Graphics/VDisplaySettings.h>
 #include <v3d/Graphics/IVRenderContext.h>
 
 #define WIN32_LEAN_AND_MEAN
-#include <v3d/OpenGL.h>
+#include <windows.h>
+#include <V3d/OpenGL.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
