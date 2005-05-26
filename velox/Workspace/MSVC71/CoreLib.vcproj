@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<VisualStudioProject ProjectType="Visual C++" Version="7.10" Name="CoreLib" ProjectGUID="{20050526-0000-0000-0000-000757427000}" RootNamespace="CoreLib" Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration Name="Debug|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="4" CharacterSet="2">
+      <Tool Name="VCCLCompilerTool" Optimization="0" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;_DEBUG;_LIB" MinimalRebuild="TRUE" BasicRuntimeChecks="3" RuntimeLibrary="3" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="4"/>
+      <Tool Name="VCCustomBuildTool"/>
+      <Tool Name="VCLibrarianTool" OutputFile="$(OutDir)/CoreLib.lib" IgnoreAllDefaultLibraries="FALSE"/>
+      <Tool Name="VCMIDLTool"/>
+      <Tool Name="VCPostBuildEventTool"/>
+      <Tool Name="VCPreBuildEventTool"/>
+      <Tool Name="VCPreLinkEventTool"/>
+      <Tool Name="VCResourceCompilerTool"/>
+      <Tool Name="VCWebServiceProxyGeneratorTool"/>
+      <Tool Name="VCXMLDataGeneratorTool"/>
+      <Tool Name="VCManagedWrapperGeneratorTool"/>
+      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+    </Configuration>
+    <Configuration Name="Release|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="4" CharacterSet="2">
+      <Tool Name="VCCLCompilerTool" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;NDEBUG;_LIB" RuntimeLibrary="0" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="3"/>
+      <Tool Name="VCCustomBuildTool"/>
+      <Tool Name="VCLibrarianTool" OutputFile="$(OutDir)/CoreLib.lib" IgnoreAllDefaultLibraries="TRUE"/>
+      <Tool Name="VCMIDLTool"/>
+      <Tool Name="VCPostBuildEventTool"/>
+      <Tool Name="VCPreBuildEventTool"/>
+      <Tool Name="VCPreLinkEventTool"/>
+      <Tool Name="VCResourceCompilerTool"/>
+      <Tool Name="VCWebServiceProxyGeneratorTool"/>
+      <Tool Name="VCXMLDataGeneratorTool"/>
+      <Tool Name="VCManagedWrapperGeneratorTool"/>
+      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+    </Configuration>
+  </Configurations>
+  <References>
+	</References>
+  <Files xmlns:exsl="http://exslt.org/common">
+    <Filter Name="Api" Filter="">
+      <Filter Name="V3d" Filter="">
+        <Filter Name="Core" Filter="">
+          <Filter Name="Container" Filter="">
+            <File RelativePath="..\..\Api\V3d\Core\Container\VList.h"/>
+          </Filter>
+          <Filter Name="Modules" Filter="">
+            <File RelativePath="..\..\Api\V3d\Core\Modules\VModuleBase.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\Modules\VModuleParams.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\Modules\VVeloxApp.h"/>
+          </Filter>
+          <Filter Name="RangeIter" Filter="">
+            <File RelativePath="..\..\Api\V3d\Core\RangeIter\IVRangeIteratorPolicy.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\RangeIter\VRangeIterator.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\RangeIter\VSTLAccessorRangePolicy.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\RangeIter\VSTLRangeDerefPolicy.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\RangeIter\VSTLRangePolicy.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\RangeIter\VSTLRangePolicyBase.h"/>
+          </Filter>
+          <Filter Name="SmartPtr" Filter="">
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.inl"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VGuards.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VPointerStorage.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VPointerStorage.inl"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountPol.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountPol.inl"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.inl"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VServicePtr.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VSharedPtr.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VSharedPtr.inl"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VSmartPtr.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\SmartPtr\VSmartPtr.inl"/>
+          </Filter>
+          <Filter Name="Wrappers" Filter="">
+            <File RelativePath="..\..\Api\V3d\Core\Wrappers\VGenericUtils.h"/>
+            <File RelativePath="..\..\Api\V3d\Core\Wrappers\VString.h"/>
+          </Filter>
+          <File RelativePath="..\..\Api\V3d\Core\IVApplication.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\IVMemoryManager.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\MemManager.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VAssert.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VBuild.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VCoreLib.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VException.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VIOStream.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VLogging.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VMemory.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VNamedObject.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VObjectKey.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VObjectRegistry.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VObjectRegistryExceptions.h"/>
+          <File RelativePath="..\..\Api\V3d\Core\VTypes.h"/>
+        </Filter>
+        <File RelativePath="..\..\Api\V3d\Core.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="Core" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <Filter Name="Error" Filter="">
+          <File RelativePath="..\..\Source\Core\Error\VAssert.cpp"/>
+          <File RelativePath="..\..\Source\Core\Error\VException.cpp"/>
+        </Filter>
+        <Filter Name="ObjectRegistry" Filter="">
+          <File RelativePath="..\..\Source\Core\ObjectRegistry\VNamedObject.cpp"/>
+          <File RelativePath="..\..\Source\Core\ObjectRegistry\VObjectKey.cpp"/>
+          <File RelativePath="..\..\Source\Core\ObjectRegistry\VObjectRegistry.cpp"/>
+          <File RelativePath="..\..\Source\Core\ObjectRegistry\VObjectRegistryExceptions.cpp"/>
+        </Filter>
+        <Filter Name="Wrappers" Filter="">
+          <File RelativePath="..\..\Source\Core\Wrappers\VString.cpp"/>
+        </Filter>
+        <File RelativePath="..\..\Source\Core\MemLocalSettings.h"/>
+        <File RelativePath="..\..\Source\Core\MemManager.cpp"/>
+        <File RelativePath="..\..\Source\Core\VIOStream.cpp"/>
+        <File RelativePath="..\..\Source\Core\VLogging.cpp"/>
+        <File RelativePath="..\..\Source\Core\VVeloxApp.cpp"/>
+      </Filter>
+    </Filter>
+  </Files>
+  <Globals>
+	</Globals>
+</VisualStudioProject>

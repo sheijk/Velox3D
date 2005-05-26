@@ -60,8 +60,10 @@ class VMeshPart : public entity::IVPart
 public:
 	VMeshPart(VGraphicsManager* in_pManager);
 
-	void AddMesh(graphics::IVDevice::MeshHandle in_hMesh, 
-		graphics::IVDevice::MaterialHandle in_hMaterial);
+	//void AddMesh(graphics::IVDevice::MeshHandle in_hMesh, 
+	//	graphics::IVDevice::MaterialHandle in_hMaterial);
+	void AddMesh(graphics::VModelMesh::MeshPtr in_hMesh, 
+		graphics::VModelMesh::MaterialPtr in_hMaterial);
 	void AddMesh(graphics::VModelMesh in_Model);
 	void RemoveMesh(graphics::IVDevice::MeshHandle in_hMesh);
 

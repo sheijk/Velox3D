@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="Windows-1252"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="WxWidgetsServices"
-	ProjectGUID="{C2A12717-4341-4E4B-9019-07F8B0522B91}"
-	RootNamespace="WxWidgetsServices"
+	Name="WxServiceDLL"
+	ProjectGUID="{20050526-0000-0000-0000-000359796000}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -13,15 +12,15 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;WXWIDGETSSERVICES_EXPORTS;BOOST_SIGNALS_STATIC_LINK;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXDEBUG=1;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;WXWIDGETSSERVICES_EXPORTS;BOOST_SIGNALS_STATIC_LINK;__WINDOWS__;__WXMSW__;__WXDEBUG__;WXDEBUG=1;WINVER=0x0400;STRICT;WXUSINGDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -35,13 +34,13 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="wxmsw24d.lib boostd.lib"
-				OutputFile="$(OutDir)/WxWidgetsServices.dll"
+				OutputFile="$(OutDir)/WxServiceDLL.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
+				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/WxWidgetsServices.pdb"
+				ProgramDatabaseFile="$(OutDir)/WxServiceDLL.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/WxWidgetsServices.lib"
+				ImportLibrary="$(OutDir)/WxServiceDLL.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -66,13 +65,13 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;WXWIDGETSSERVICES_EXPORTS;__WINDOWS__;__WXMSW__;WXDEBUG=0;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;WXUSINGDLL"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -84,15 +83,14 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/wxWindows/lib/wxmsw24.lib"
-				OutputFile="$(OutDir)/WxWidgetsServices.dll"
+				OutputFile="$(OutDir)/WxServiceDLL.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="../Local/ExternalLibs/Lib"
+				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/WxWidgetsServices.lib"
+				ImportLibrary="$(OutDir)/WxServiceDLL.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -120,52 +118,78 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Console Service"
+			Name="Api"
 			Filter="">
 			<Filter
-				Name="Interface">
-				<File
-					RelativePath="..\Api\V3d\Console\IVConsoleService.h">
-				</File>
+				Name="V3d"
+				Filter="">
+				<Filter
+					Name="Console"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Console\IVConsoleService.h">
+					</File>
+				</Filter>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Console"
+			Filter="">
 			<Filter
-				Name="Implementation">
+				Name="Implementation"
+				Filter="">
 				<File
-					RelativePath="..\Source\Console\VConsoleFrame.cpp">
+					RelativePath="..\..\Source\Console\VConsoleFrame.cpp">
 				</File>
 				<File
-					RelativePath="..\Source\Console\VConsoleFrame.h">
+					RelativePath="..\..\Source\Console\VConsoleFrame.h">
 				</File>
 				<File
-					RelativePath="..\Source\Console\VConsoleService.cpp">
+					RelativePath="..\..\Source\Console\VConsoleService.cpp">
 				</File>
 				<File
-					RelativePath="..\Source\Console\VConsoleService.h">
+					RelativePath="..\..\Source\Console\VConsoleService.h">
 				</File>
 			</Filter>
 		</Filter>
 		<Filter
-			Name="wxWidgets"
+			Name="Implementation"
 			Filter="">
 			<File
-				RelativePath="..\Source\WxWindowsService\VWindowsWxApp.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\WxWindowsService\VWindowsWxApp.h">
-			</File>
-			<File
-				RelativePath="..\Source\WxWindowsService\VWxConnector.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\WxWindowsService\VWxConnector.h">
+				RelativePath="..\..\Source\WxServices.cpp">
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\Source\Module\VeloxModule.cpp">
-		</File>
-		<File
-			RelativePath="..\Source\WxServices.cpp">
-		</File>
+		<Filter
+			Name="Module"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Module\VeloxModule.cpp">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="WxWindowsService"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\WxWindowsService\VWindowsWxApp.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\WxWindowsService\VWindowsWxApp.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\WxWindowsService\VWxConnector.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\WxWindowsService\VWxConnector.h">
+				</File>
+			</Filter>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

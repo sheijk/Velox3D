@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
-	Name="v3dWin32"
-	ProjectGUID="{C125F830-6341-4D5B-8062-3A6551406920}"
-	RootNamespace="Velox3dWin32"
+	Version="7.10"
+	Name="%%name%%"
+	ProjectGUID="{%%projectid%%}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -13,18 +12,19 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="1"
+			OutputDirectory="%%relpath%%/Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="%%relpath%%/Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -33,11 +33,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/v3dWin32D.exe"
+				OutputFile="$(OutDir)/%%name%%.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="%%relpath%%/Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/Velox3dWin32.pdb"
+				ProgramDatabaseFile="$(OutDir)/%%name%%.pdb"
 				SubSystem="2"
+				ImportLibrary="$(OutDir)/%%name%%.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -62,15 +64,16 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="1"
+			OutputDirectory="%%relpath%%/Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="%%relpath%%/Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
-				RuntimeLibrary="1"
+				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				RuntimeLibrary="0"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -79,12 +82,14 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/v3dWin32.exe"
+				OutputFile="$(OutDir)/%%name%%.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="%%relpath%%/Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)/%%name%%.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -111,31 +116,5 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Implementation"
-			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
-			<File
-				RelativePath="..\Source\Kernel\win32\main32.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\win32\VCommandLineParser.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\win32\VCommandLineParser.h">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\win32\VWinDialogBox.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Kernel\win32\VWinDialogBox.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Interface"
-			Filter="">
-		</Filter>
 	</Files>
-	<Globals>
-	</Globals>
 </VisualStudioProject>

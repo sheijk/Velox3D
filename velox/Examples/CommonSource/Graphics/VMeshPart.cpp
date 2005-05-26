@@ -36,12 +36,19 @@ VMeshPart::VMeshPart(VGraphicsManager* in_pManager) :
 	m_pRigidBodyPart = false;
 }
 
+//void VMeshPart::AddMesh(
+//	graphics::IVDevice::MeshHandle in_hMesh,
+//	graphics::IVDevice::MaterialHandle in_hMaterial
+//	)
+//{
+//	AddMesh(graphics::VModelMesh(in_hMesh, in_hMaterial));
+//}
+
 void VMeshPart::AddMesh(
-	graphics::IVDevice::MeshHandle in_hMesh,
-	graphics::IVDevice::MaterialHandle in_hMaterial
-	)
+	graphics::VModelMesh::MeshPtr in_hMesh, 
+	graphics::VModelMesh::MaterialPtr in_hMaterial)
 {
-	AddMesh(graphics::VModelMesh(in_hMesh, in_hMaterial));
+	AddMesh(graphics::VModelMesh(in_hMesh, in_hMaterial, math::IdentityPtr()));
 }
 
 void VMeshPart::AddMesh(graphics::VModelMesh in_Model)
@@ -78,7 +85,7 @@ void VMeshPart::Update()
 		// for all meshes, set position
 		for(MeshList::iterator model = m_Meshes.begin(); model != m_Meshes.end(); ++model)
 		{
-			model->GetTransform() = transform;
+			*model->GetTransform() = transform;
 			//model->pTransformation->Set(1, 3, pos.Get(1));
 			//model->pTransformation->Set(2, 3, pos.Get(2));
 		}

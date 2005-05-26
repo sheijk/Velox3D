@@ -1,6 +1,7 @@
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
+#include <V3d/Core/SmartPtr/VSharedPtr.h>
 #include "../VKernel.h"
 #include "VCommandLineParser.h"
 #include "VWinDialogBox.h"
@@ -14,7 +15,7 @@ using namespace v3d::kernel;
 namespace
 {
 	// global kernel instance
-	VPointer<VKernel>::AutoPtr g_pKernel;
+	VSharedPtr<VKernel> g_pKernel;
 }
 
 //-----------------------------------------------------------------------------

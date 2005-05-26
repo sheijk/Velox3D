@@ -75,7 +75,7 @@ vint ResourceExample::Main(std::vector<std::string> args)
 	while(m_pSystem->GetStatus())
 	{
 		// update
-		angle += m_pUpdater->GetFrameDuration() * 360;
+		angle += vfloat32(m_pUpdater->GetFrameDuration()) * 360;
 
 		// render
 		Device().BeginScene();
@@ -141,7 +141,10 @@ void AddAllMeshes(VResourceId in_pResource, IVDrawList& io_DrawList, vuint* out_
 		IVDevice::MaterialHandle hMaterial =
 			io_DrawList.GetDevice().CreateMaterial(in_pResource->GetQualifiedName().c_str());
 
-		io_DrawList.Add(VModelMesh(hMesh, hMaterial));
+		io_DrawList.Add(VModelMesh(
+			in_pResource->GetData<IVMesh>(),
+			in_pResource->GetData<IVMaterial>(),
+			math::IdentityPtr()));
 
 		if( out_pCount != 0 )
 			*out_pCount += 1;

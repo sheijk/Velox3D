@@ -6,8 +6,9 @@ Worklog von sheijk
 ----- current assigned tasks:
 
 - velox design
-- entity system / world planen
-- netzwerk + scripting planen
+- skripting moeglichkeiten erforschen (www.swigs.org, etc)
+- editor planung
+- graphics system erweitern + ueberarbeiten
 
 -------------------------------------------------------------------------------
 ----- random thoughts:
@@ -29,12 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
-TODO:
-evtl einige Dateien aus dem CVS entfernen
-vrendermethodregistry
-
-
-- VMaterialDescription entfernt
+25.05.2005
+- mbuild.xml erstellt
+- .vcproj Files umgestellt: nach MSVC71 verschoben, mit mbuild.xml abgeglichen
+- alte Projekte entfernt
+- Examples an veraenderte Graphics API angepasst
+- mbuild .vcproj Templates fuer lib und dll aktualisiert/gefixt
 
 22.05.2005
 - erst Rohversion der Rendering Architecture (V3d/Scene)
@@ -71,6 +72,7 @@ vrendermethodregistry
 23.03.2005
 - Support fuer Device interne Buffer entfernt
 - Material Description Support entfernt
+- VMaterialDescription entfernt (? oder irgendwann vorher/nachher)
 
 05.03.2005
 - Alle OpenGL includes auf V3d/OpenGL umgestellt

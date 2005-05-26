@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.00"
-	Name="ExampleApp"
-	ProjectGUID="{8B1DF56D-2D3D-4AD0-BBF5-C3DECE06B82F}"
+	Version="7.10"
+	Name="%%name%%"
+	ProjectGUID="{%%projectid%%}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -12,15 +12,15 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			OutputDirectory="%%relpath%%/Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="%%relpath%%/Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS;BOOST_SIGNALS_STATIC_LINK"
+				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -33,13 +33,12 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/Lib/boostd.lib"
-				OutputFile="$(OutDir)/ExampleApp.dll"
+				OutputFile="$(OutDir)/%%name%%.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/ExampleApp.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/ExampleApp.lib"
+				ProgramDatabaseFile="$(OutDir)/%%name%%.pdb"
+				SubSystem="1"
+				ImportLibrary="$(OutDir)/%%name%%.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -64,14 +63,14 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="%%relpath%%/Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="%%relpath%%/Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../API;../Local/ExternalLibs/gmtl;../Local/ExternalLibs/boost"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLEAPP_EXPORTS"
+				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -82,14 +81,13 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="../Local/ExternalLibs/boost/boost_fs.lib"
-				OutputFile="$(OutDir)/ExampleApp.dll"
+				OutputFile="$(OutDir)/%%name%%.exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/ExampleApp.lib"
+				ImportLibrary="$(OutDir)/%%name%%.lib"
 				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -117,26 +115,20 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Interface"
-			Filter="">
+			Name="Implementation"
+			Filter="cpp;h">
 			<File
-				RelativePath="..\Api\V3d\Core\IVApplication.h">
+				RelativePath="%%name%%.cpp">
 			</File>
 		</Filter>
 		<Filter
-			Name="Implementation"
+			Name="ModuleImpl"
 			Filter="">
 			<File
-				RelativePath="..\Source\Example\App\ExampleAppDLL.cpp">
+				RelativePath="%%relpath%%\Source\Kernel\main.cpp">
 			</File>
 			<File
-				RelativePath="..\Source\Module\VeloxModule.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Example\App\VExampleApp.cpp">
-			</File>
-			<File
-				RelativePath="..\Source\Example\App\VExampleApp.h">
+				RelativePath="%%relpath%%\Source\Module\VeloxModule.cpp">
 			</File>
 		</Filter>
 	</Files>
