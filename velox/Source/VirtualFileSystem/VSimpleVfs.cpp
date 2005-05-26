@@ -13,7 +13,6 @@
 #include <v3d/XML/IVXMLService.h>
 
 #include "VFile.h"
-#include "VDirectory.h"
 #include "VAccessRights.h"
 #include "VfsUtils.h"
 #include "VxmlIniReader.h"

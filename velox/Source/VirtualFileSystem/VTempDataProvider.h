@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Vfs/IVTempDataProvider.h>
+#include <fstream>
 #include <string>
 #include <list>
 //-----------------------------------------------------------------------------
