@@ -30,6 +30,14 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+02.07.2005
+- DLL Exports korrigiert: DLLExports.def Datei, Symbole heissen jetzt
+  Initialize/Shutdown statt #@Initialize@!#fassad23.. usw.
+- Workdirs geaendert: alle Workdirs fuer Examples in Workdir/Examples
+  kombiniert (-> ftp/def_workdir). Workdir Einstellungen in Projekten waren 
+  verloren gegangen
+- Changes aus dem Trunk in den gccport gemergt
+
 25.05.2005
 - mbuild.xml erstellt
 - .vcproj Files umgestellt: nach MSVC71 verschoben, mit mbuild.xml abgeglichen
@@ -655,3 +663,4 @@ Entwuerfe fuer den Vfs Service, und den XML Wrapper
 - Neue Velox Verzeichnisstruktur erstellt
 - neue Velox Aufteilung nach den Services begonnen
 - Kernel sowie ObjectRegistry, SmartPointer und ExampleService portiert.
+

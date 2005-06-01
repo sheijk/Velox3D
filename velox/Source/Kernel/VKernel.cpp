@@ -2,15 +2,15 @@
 //-----------------------------------------------------------------------------
 // workaround, weil GeObject in windows.h als GetObjectA redefiniert wird..
 #undef GetObject 
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/smartptr/VGuards.h>
-#include <v3d/Core/VException.h>
-#include <v3d/Core/IVApplication.h>
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Core/Modules/VModuleBase.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VException.h>
+#include <V3d/Core/IVApplication.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Core/Modules/VModuleBase.h>
 #include "VKernelIniReader.h"
 
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using std::string;
 
@@ -88,7 +88,7 @@ struct VServiceInfo
 void VKernel::LoadXMLService()
 {
 	m_Services.push_back(
-		ServicePointer(new VServiceProxy("XMLService.dll")));
+		ServicePointer(new VServiceProxy("XMLServiceDLL.dll")));
 	ServicePointer XmlServiceProxy = m_Services.back();
 	XmlServiceProxy->Initialize(VObjectRegistry::GetInstance());
 
