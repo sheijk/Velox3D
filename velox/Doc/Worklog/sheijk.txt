@@ -30,6 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+03.07.2005
+- DLL Exports nochmal gefixt
+- Den VWindow32Context von Lars eingebaut. Damit sollten pbuffer auch recht
+  schnell einbaubar sein, sobald die Implementation steht
+- IVRenderContext um SwapBuffers methode erweitert
+
 02.07.2005
 - DLL Exports korrigiert: DLLExports.def Datei, Symbole heissen jetzt
   Initialize/Shutdown statt #@Initialize@!#fassad23.. usw.

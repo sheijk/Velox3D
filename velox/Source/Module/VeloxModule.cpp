@@ -73,7 +73,8 @@ namespace {
 //	const char* in_pcModuleName
 //	);
 
-V3D_MODULE_API void Initialize(VModuleParams* in_pParams)
+extern "C" {
+void Initialize(VModuleParams* in_pParams)
 {
 	// set the memory manager
 	//SetMemoryManager(
@@ -91,10 +92,11 @@ V3D_MODULE_API void Initialize(VModuleParams* in_pParams)
 		VModuleBase::GetInstance()->Initialize();
 }
 
-V3D_MODULE_API void Shutdown()
+void Shutdown()
 {
 	if( VModuleBase::GetInstance() != 0 )
 		VModuleBase::GetInstance()->Shutdown();
+}
 }
 
 /**

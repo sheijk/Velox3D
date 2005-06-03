@@ -22,10 +22,11 @@ public:
 	IVRenderContext() {};
 	virtual ~IVRenderContext() {};
 
-	/**
-	 * Make the rendering Context active
-	*/
+	/** Make the rendering Context active */
 	virtual void MakeCurrent() = 0;
+
+	/** Swap back and front buffer */
+	virtual void SwapBuffers() = 0;
 };
 
 //-----------------------------------------------------------------------------

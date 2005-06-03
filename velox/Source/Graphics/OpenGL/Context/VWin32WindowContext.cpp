@@ -1,5 +1,6 @@
 #include "VWin32WindowContext.h"
 
+#include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -72,6 +73,12 @@ void VWin32WindowContext::MakeCurrent()
 {
 	wglMakeCurrent(m_devicecontext, m_rendercontext);
 }
+
+void VWin32WindowContext::SwapBuffers()
+{
+	::SwapBuffers(m_devicecontext);
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

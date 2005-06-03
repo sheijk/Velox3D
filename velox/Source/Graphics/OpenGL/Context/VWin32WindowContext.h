@@ -29,10 +29,11 @@ public:
 	VWin32WindowContext(HWND in_hwnd = 0, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VWin32WindowContext();
 
-	/**
-	 * Make the Win32 OpenGL rendering Context active
-	*/
+	/** @see v3d::graphics::IVRenderContext::MakeCurrent */
 	void MakeCurrent();
+
+	/** @see v3d::graphics::IVRenderContext::SwapBuffers */
+	void SwapBuffers();
 
 private:
 

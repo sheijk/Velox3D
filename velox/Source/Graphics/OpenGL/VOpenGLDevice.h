@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/IVRenderContext.h>
 
 #include <v3d/Graphics/VDisplaySettings.h>
 #include <V3d/Math/VMatrix.h>
@@ -35,7 +36,9 @@ class VOpenGLDevice : public IVDevice
 {
 public:
 	/** Contructor for adding a window */
-	VOpenGLDevice(const graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
+	//VOpenGLDevice(const graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
+	VOpenGLDevice(const graphics::VDisplaySettings& in_Settings,
+		VSharedPtr<IVRenderContext> in_pContext);
 	virtual ~VOpenGLDevice();
 
 	virtual MeshHandle CreateMesh(VStringParam in_strResource);
@@ -79,9 +82,9 @@ private:
 	VMatrix44f m_TextureMatrix;
 
 	void SetDisplay();
-	void SetPixFormat();
-	void CreateContext();
-	void DestroyContext();
+	//void SetPixFormat();
+	//void CreateContext();
+	//void DestroyContext();
 	void SetScreenSize();
 	void SetBackgroundColor();
 	void InitializeExtensions(); // using extgl
@@ -90,9 +93,12 @@ private:
 	 * Device dependant variables:
 	 */
 	graphics::VDisplaySettings m_DisplaySettings;
-	HWND hWnd;
-	HDC hDC;
-	HGLRC hRC;
+
+	VSharedPtr<IVRenderContext> m_pContext;
+
+	//HWND hWnd;
+	//HDC hDC;
+	//HGLRC hRC;
 
 	vchar* m_pVendor;
 	vchar* m_pRenderer;

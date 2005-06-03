@@ -48,6 +48,7 @@ namespace {
 	}
 }
 
+/*
 VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 	:
 	m_DisplaySettings(*in_pSettings)
@@ -68,6 +69,30 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 	RecalcModelViewMatrix();
 }
+*/
+
+VOpenGLDevice::VOpenGLDevice(
+	const graphics::VDisplaySettings& in_Settings,
+	VSharedPtr<IVRenderContext> in_pContext)
+	:
+	m_pContext(in_pContext),
+	m_DisplaySettings(in_Settings)
+{
+	SetDisplay();
+
+	m_StateCategories.RegisterCategory(m_TextureStateCategory);
+	m_StateCategories.RegisterCategory(m_MiscStateCategory);
+	m_StateCategories.RegisterCategory(m_VertexShaderCategory);
+	m_StateCategories.RegisterCategory(m_PixelShaderCategory);
+
+	Identity(m_ModelMatrix);
+	Identity(m_ViewMatrix);
+	Identity(m_ProjectionMatrix);
+	Identity(m_TextureMatrix);
+
+	RecalcModelViewMatrix();
+}
+
 //-----------------------------------------------------------------------------
 VOpenGLDevice::~VOpenGLDevice()
 {
@@ -110,7 +135,7 @@ VOpenGLDevice::~VOpenGLDevice()
 		vout << message.str();
 	}
 
-	DestroyContext();
+	//DestroyContext();
 }
 
 //std::string GenerateBufferName()
@@ -276,6 +301,7 @@ void VOpenGLDevice::ApplyState(const IVRenderState& in_State)
 
 void VOpenGLDevice::SetDisplay()
 {
+	/*
 	// setup fullscreen if needed
     if( !(hDC=GetDC(hWnd)) )
 	if(m_DisplaySettings.IsFullscreen())
@@ -298,11 +324,14 @@ void VOpenGLDevice::SetDisplay()
 			vout << "requesting fullscreen mode failed!" << vendl;
 			m_DisplaySettings.m_bFullscreen = false;
 		}
-		*/
+		* /
 	}
 
 	SetPixFormat();
 	CreateContext();
+	*/
+
+	m_pContext->MakeCurrent();
 	InitializeExtensions();
 	SetScreenSize();
 	SetBackgroundColor();
@@ -313,7 +342,7 @@ void VOpenGLDevice::SetDisplay()
 	glDepthFunc(GL_LEQUAL);
 }
 //-----------------------------------------------------------------------------
-
+/*
 void VOpenGLDevice::SetPixFormat()
 {
 	GLuint PixelFormat = 0;
@@ -359,8 +388,9 @@ void VOpenGLDevice::SetPixFormat()
 		vout << "requesting pixelformat failed!" << vendl;
 	}
 }
+*/
 //-----------------------------------------------------------------------------
-
+/*
 void VOpenGLDevice::CreateContext()
 {
 	if(!(hRC = wglCreateContext(hDC)))
@@ -373,8 +403,9 @@ void VOpenGLDevice::CreateContext()
 		vout << "activating rendering context failed!" << vendl;
 	}
 }
+*/
 //-----------------------------------------------------------------------------
-
+/*
 void VOpenGLDevice::DestroyContext()
 {
 	if(hDC)
@@ -401,6 +432,7 @@ void VOpenGLDevice::DestroyContext()
 		vout << "releasing device context failed!" << vendl;
 	}
 }
+*/
 //-----------------------------------------------------------------------------
 
 void VOpenGLDevice::SetScreenSize()
@@ -480,7 +512,8 @@ void VOpenGLDevice::InitializeExtensions()
 
 void VOpenGLDevice::BeginScene()
 {
-	wglMakeCurrent(hDC, hRC);
+//	wglMakeCurrent(hDC, hRC);
+	m_pContext->MakeCurrent();
 
 	ApplyMaterial(*this, &m_StateCategories.GetDefaultMaterial());
 
@@ -496,8 +529,10 @@ void VOpenGLDevice::BeginScene()
 //-----------------------------------------------------------------------------
 void VOpenGLDevice::EndScene()
 {
-	wglMakeCurrent(hDC, hRC);
-	SwapBuffers(hDC);
+	m_pContext->MakeCurrent();
+	m_pContext->SwapBuffers();
+//	wglMakeCurrent(hDC, hRC);
+//	SwapBuffers(hDC);
 }
 
 //-----------------------------------------------------------------------------

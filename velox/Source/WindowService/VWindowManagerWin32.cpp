@@ -4,10 +4,13 @@
 #include "VWindowManagerWin32.h"
 #include "VWindowWin32.h"
 #include "../Graphics/OpenGL/VOpenGLDevice.h"
+#include "../Graphics/OpenGL/Context/VWin32WindowContext.h"
 
 #include <stdlib.h>
-#include <v3d/Core/MemManager.h>
 #undef CreateWindow
+
+//-----------------------------------------------------------------------------
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {
@@ -67,9 +70,18 @@ IVWindowManager::GraphicsDevicePtr VWindowManagerWin32::CreateGraphicsDevice(
 	const graphics::VDisplaySettings& in_Settings,
 	PlatformWindowHandle in_Handle)
 {
+	using graphics::VWin32WindowContext;
+	using graphics::VOpenGLDevice;
+
 	HWND hwnd = HWND(in_Handle);
 
-	GraphicsDevicePtr pDevice(new graphics::VOpenGLDevice(&in_Settings, hwnd));
+//	GraphicsDevicePtr pDevice(new graphics::VOpenGLDevice(&in_Settings, hwnd));
+	VSharedPtr<VWin32WindowContext> pContext(new VWin32WindowContext(
+		hwnd, &in_Settings));
+
+	// create device
+	GraphicsDevicePtr pDevice(new VOpenGLDevice(in_Settings, pContext));
+
 	return pDevice;
 }
 

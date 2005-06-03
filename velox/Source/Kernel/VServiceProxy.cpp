@@ -50,11 +50,11 @@ void VServiceProxy::Initialize(VObjectRegistry* in_pObjectRegistry)
 	m_pInitFunction = (InitFunction) GetProcAddress(
 		m_hDllInstance, 
 		//"?Initialize@@YAXPAVVObjectRegistry@v3d@@@Z");
-		"?Initialize@@YAXPAUVModuleParams@v3d@@@Z");
+		"Initialize");
 
 	m_pDeInitFunction = (ShutdownFunction) GetProcAddress(
 		m_hDllInstance, 
-		"?Shutdown@@YAXXZ");
+		"Shutdown");
 
 	if( 0 == m_pInitFunction || 0 == m_pDeInitFunction )
 	{
