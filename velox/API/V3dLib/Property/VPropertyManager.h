@@ -19,6 +19,12 @@ using namespace v3d; // prevent auto indenting
 V3D_DECLARE_EXCEPTION(VPropertyException, VException);
 V3D_DECLARE_EXCEPTION(VPropertyNotFoundException, VPropertyException);
 
+template<typename T>
+T GetProperty(VStringParam in_strName);
+
+template<typename T>
+void SetProperty(VStringParam in_strName, const T& in_Value);
+
 class VPropertyManager : public VNamedObject
 {
 public:
@@ -34,6 +40,23 @@ private:
 };
 
 typedef VServicePtr<VPropertyManager> VPropertyManagerPtr;
+
+//-----------------------------------------------------------------------------
+template<typename T>
+T GetProperty(VStringParam in_strName)
+{
+	static VServicePtr<VPropertyManager> propertyManager;
+	return propertyManager->GetValue(in_strName).Get<T>();
+}
+
+template<typename T>
+void SetProperty(VStringParam in_strName, const T& in_Value)
+{
+	static VServicePtr<VPropertyManager> propertyManager;
+	utils::VStringValue value;
+	value.Set(in_Value);
+	propertyManager->SetValue(in_strName, value);
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::property

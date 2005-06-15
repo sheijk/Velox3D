@@ -56,6 +56,7 @@ namespace
 
 		return size;
 	}
+
 }
 
 //-----------------------------------------------------------------------------
@@ -65,7 +66,8 @@ VVertexBuffer::VVertexBuffer(const VByteBuffer& in_Data, VVertexFormat in_Format
 	// we can safely cast to non const because the VByteBuffer c'tor will not
 	// change it's source buffer if called with CopyData
 	m_VertexData(const_cast<VByteBuffer*>(&in_Data), VByteBuffer::CopyData),
-	m_Format(in_Format)
+	m_Format(in_Format),
+	m_nVertexCount(GetVertexCount(in_Format))
 {
 	V3D_ASSERT(GetRequiredSize(in_Format) <= m_VertexData.GetSize());
 }
@@ -73,7 +75,8 @@ VVertexBuffer::VVertexBuffer(const VByteBuffer& in_Data, VVertexFormat in_Format
 VVertexBuffer::VVertexBuffer(const vfloat32* in_pData, vuint in_nFloatCount, VVertexFormat in_Format)
 	: 
 	m_VertexData(reinterpret_cast<vbyte*>(CreateCopy(in_pData, in_nFloatCount)), in_nFloatCount * sizeof(vfloat32)),
-	m_Format(in_Format)
+	m_Format(in_Format),
+	m_nVertexCount(GetVertexCount(in_Format))
 {
 	V3D_ASSERT(GetRequiredSize(in_Format) <= m_VertexData.GetSize());
 }
@@ -81,7 +84,8 @@ VVertexBuffer::VVertexBuffer(const vfloat32* in_pData, vuint in_nFloatCount, VVe
 VVertexBuffer::VVertexBuffer(const vuint* in_pData, vuint in_nIntCount, VVertexFormat in_Format)
 	:
 	m_VertexData(reinterpret_cast<vbyte*>(CreateCopy(in_pData, in_nIntCount)), in_nIntCount * sizeof(vuint)),
-	m_Format(in_Format)
+	m_Format(in_Format),
+	m_nVertexCount(GetVertexCount(in_Format))
 {
 	V3D_ASSERT(GetRequiredSize(in_Format) <= m_VertexData.GetSize());
 }
@@ -89,7 +93,8 @@ VVertexBuffer::VVertexBuffer(const vuint* in_pData, vuint in_nIntCount, VVertexF
 VVertexBuffer::VVertexBuffer(const VVertexFormat& in_Format)
 	:
 	m_Format(in_Format),
-	m_VertexData(new vbyte[GetRequiredSize(in_Format)], GetRequiredSize(in_Format))
+	m_VertexData(new vbyte[GetRequiredSize(in_Format)], GetRequiredSize(in_Format)),
+	m_nVertexCount(GetVertexCount(in_Format))
 {
 	V3D_ASSERT(GetRequiredSize(in_Format) <= m_VertexData.GetSize());
 }
@@ -207,7 +212,22 @@ vuint VVertexBuffer::GetIndex(vuint in_nIndexNum) const
 
 void VVertexBuffer::SetIndex(vuint in_nIndex, vuint in_nIndexNum)
 {
+	V3D_ASSERT(in_nIndex < m_nVertexCount);
 	SetElement(m_VertexData, m_Format.GetIndexFormat(), in_nIndexNum, in_nIndex);
+}
+
+vuint VVertexBuffer::GetVertexCount(const VVertexFormat& in_Format)
+{
+	vuint size = in_Format.GetCoordinateFormat().GetCount();
+	size = max(size, in_Format.GetColorFormat().GetCount());
+	size = max(size, in_Format.GetNormalFormat().GetCount());
+
+	for(int texCoordNum = 0; texCoordNum < in_Format.GetTexCoordCount(); ++texCoordNum)
+	{
+		size = max(size, in_Format.GetTexCoordFormat(texCoordNum).GetCount());
+	}
+
+	return size;
 }
 
 //-----------------------------------------------------------------------------

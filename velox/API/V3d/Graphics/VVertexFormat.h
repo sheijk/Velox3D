@@ -70,6 +70,15 @@ inline VVertexFormat::DataTypes operator|(
 	return VVertexFormat::DataTypes(int(l) | int(r));
 }
 
+/**
+ * Provides a 'clean' way to and-combine several data type flags
+ */
+inline VVertexFormat::DataTypes operator&(
+	VVertexFormat::DataTypes l, VVertexFormat::DataTypes r)
+{
+	return VVertexFormat::DataTypes(int(l) & int(r));
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

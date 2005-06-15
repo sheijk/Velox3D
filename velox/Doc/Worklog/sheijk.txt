@@ -30,6 +30,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+15.07.2005
+- v3dgengetset.sh, Fixes an den Skripts
+- erste Unterstuetzung fuer Beleuchtung, Beispiel in Graphics Demo
+
 03.07.2005
 - DLL Exports nochmal gefixt
 - Den VWindow32Context von Lars eingebaut. Damit sollten pbuffer auch recht

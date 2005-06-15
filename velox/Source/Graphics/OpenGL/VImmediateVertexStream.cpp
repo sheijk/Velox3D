@@ -30,6 +30,7 @@ VImmediateVertexStream::~VImmediateVertexStream()
 
 vbool VImmediateVertexStream::CanProvideStream(VVertexFormat::DataTypes in_DataTypes) const
 {
+	//TODO: evtl eine passende util funktion in VVertexFormat einbauen --sheijk
 	if( TypeSetIn(VVertexFormat::Coordinates, in_DataTypes) &&
 		m_pVertexData->GetFormat().GetCoordinateFormat().GetCount() <= 0 )
 	{

@@ -16,6 +16,7 @@ struct VMaterialDescription;
 class IVRenderState;
 class IVMesh;
 class IVMaterial;
+class VPointLight;
 
 /**
  * A graphical device. Abstraction of DirectGraphics/OpenGL/..
@@ -26,17 +27,8 @@ class IVMaterial;
 class IVDevice
 {
 public:
-	//typedef IVBuffer<vbyte>* BufferHandle;
-	//typedef VBufferBase::CopyMode BufferCopyMode;
-	//typedef VBuffer<vbyte> Buffer;
 	typedef const IVMesh* MeshHandle;
 	typedef const IVMaterial* MaterialHandle;
-
-	//enum BufferType
-	//{
-	//	VertexBuffer,
-	//	Texture
-	//};
 
 	enum MatrixMode
 	{
@@ -66,13 +58,6 @@ public:
 	 */
 	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;
 
-
-//weg
-	//virtual MeshHandle CreateMesh(
-	//	const VMeshDescription& in_MeshDescr,
-	//	const VEffectDescription& in_EffectDescr
-	//	) = 0;
-
 	/** sends the vertices of a mesh to the device */
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
 
@@ -82,10 +67,31 @@ public:
 	/** set the projection, view, model and texture matrices */
 	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix) = 0;
 
+	/** Returns the current matrix */
 	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode) = 0;
 
+	/**
+	 * Begin rendering to the render target. All render calls and state settings
+	 * must occur between BeginScene and EndScene
+	 */
 	virtual void BeginScene() = 0;
+
+	/**
+	 * End rendering to the render target and flip buffer. Other render targets
+	 * may not begin their scene before EndScene has been called
+	 */
 	virtual void EndScene() = 0;
+
+	/** Id's of the lights */
+	enum LightId
+	{
+		Light0, Light1, Light2, Light3, Light4, Light5, Light6, Light7
+	};
+
+	/**
+	 * Set a point light. Pass a zero pointer to disable light
+	 */
+	virtual void ApplyLight(LightId in_Number, const VPointLight* in_pLight) = 0;
 
 	virtual ~IVDevice() {};
 };

@@ -3,6 +3,14 @@
 #include "VOpenGLUtils.h"
 
 #include <V3dLib/Graphics/Geometry.h>
+
+// to display normals
+#ifdef V3D_DEBUG
+#include <V3dLib/Property/VPropertyManager.h>
+namespace {
+	const VStringParam NORMAL_PROPERTY_FLAG = "v3d.graphics.showNormals";
+}
+#endif
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -69,6 +77,17 @@ VStreamMesh::VStreamMesh(
 	}
 	else
 		m_bShowNormal = false;
+
+#ifdef V3D_DEBUG
+	try
+	{
+		property::GetProperty<vbool>(NORMAL_PROPERTY_FLAG);
+	}
+	catch(property::VPropertyNotFoundException&)
+	{
+		property::SetProperty(NORMAL_PROPERTY_FLAG, false);
+	}
+#endif
 }
 
 /**
@@ -113,8 +132,8 @@ void VStreamMesh::Render() const
 		const void* pIndexAddress = (*m_pIndexStream)->GetIndexAddress();
 			//+ sizeof(vuint) * m_nIndexOffset;
 
-		const vuint* pNewIndexAddress = reinterpret_cast<const vuint*>(pIndexAddress)
-			+ m_nIndexOffset;
+		const vuint* pNewIndexAddress = reinterpret_cast<const vuint*>(pIndexAddress);
+			//+ m_nIndexOffset;
 		
 		
 		glDrawElements(
@@ -127,22 +146,24 @@ void VStreamMesh::Render() const
 		glDrawArrays(m_PrimitiveType, 0, m_nPrimitiveCount);
 	}
 
-	//// show normals
-	//if( m_bShowNormal )
-	//{
-	//	glBegin(GL_LINES);
-	//	const vuint vertexCount = m_CoordBuffer->GetFormat().GetCoordinateFormat().GetCount();
-	//	for(vuint v = 0; v < vertexCount; ++v)
-	//	{
-	//		glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	//		VVertex3f pos = m_CoordBuffer->GetCoordinate(v);
-	//		VNormal3f normal = m_NormalBuffer->GetNormal(v);
-	//		glVertex3d(pos.x, pos.y, pos.z);
-	//		//glVertex3d(pos.x + pos.x, pos.y + pos.y, pos.z + pos.z);
-	//		glVertex3d(pos.x + normal.x, pos.y + normal.y, pos.z + normal.z);
-	//	}
-	//	glEnd();
-	//}
+#ifdef V3D_DEBUG
+	// show normals
+	if( m_bShowNormal && property::GetProperty<vbool>(NORMAL_PROPERTY_FLAG) )
+	{
+		glBegin(GL_LINES);
+		const vuint vertexCount = m_CoordBuffer->GetFormat().GetCoordinateFormat().GetCount();
+		for(vuint v = 0; v < vertexCount; ++v)
+		{
+			glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+			VVertex3f pos = m_CoordBuffer->GetCoordinate(v);
+			VNormal3f normal = m_NormalBuffer->GetNormal(v);
+			glVertex3d(pos.x, pos.y, pos.z);
+			//glVertex3d(pos.x + pos.x, pos.y + pos.y, pos.z + pos.z);
+			glVertex3d(pos.x + normal.x, pos.y + normal.y, pos.z + normal.z);
+		}
+		glEnd();
+	}
+#endif
 
 	// unbind all streams
 	for(vuint i = 0; i < m_Streams.size(); ++i)

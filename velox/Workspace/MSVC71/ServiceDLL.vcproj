@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="ServiceDLL"
 	ProjectGUID="{20050526-0000-0000-0000-000587248000}"
+	RootNamespace="ServiceDLL"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -216,6 +217,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VModel.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Graphics\VPointLight.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VVertexBuffer.h">

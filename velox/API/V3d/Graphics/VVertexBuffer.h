@@ -56,9 +56,12 @@ public:
 		const VTexCoord2f& in_TexCoord);
 
 	vuint GetIndex(vuint in_nIndexNum) const;
-	void SetIndex(vuint in_nIndex, vuint in_nIndexNum);
+	void SetIndex(vuint in_nVertexIndex, vuint in_nIndexNum);
 
 private:
+	vuint GetVertexCount(const VVertexFormat& in_Format);
+
+	const vuint m_nVertexCount;
 	VVertexFormat m_Format;
 	VByteBuffer m_VertexData;
 };
@@ -71,7 +74,8 @@ VVertexBuffer::VVertexBuffer(
 	VVertexFormat in_Format)
 	:
 	m_Format(in_Format),
-	m_VertexData(in_Data)
+	m_VertexData(in_Data),
+	m_nVertexCount(GetVertexCount(in_Format))
 {
 }
 

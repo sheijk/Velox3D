@@ -187,11 +187,20 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 	VServicePtr<system::IVSystemManager> pSystem;
 	pSystem->SetStatus(true);
 
+	VPointLight pointLight;
+	pointLight.SetAmbient(VColor4f(.5f, .5f, .5f, 1.0f));
+	pointLight.SetDiffuse(VColor4f(1.0f, 1.0f, .0f, 1.0f));
+	pointLight.SetSpecular(VColor4f(.0f, 1.0f, .0f, 1.0f));
+	pointLight.SetPosition(VVector3f(.0f, 1.0f, 3.0f));
+
 	pUpdater->Start();
 	while(pSystem->GetStatus())
 	{
 		// prepare device for rendering (make gl context current etc)
 		device.BeginScene();
+
+		device.SetMatrix(IVDevice::ModelMatrix, math::IdentityMatrix());
+		device.ApplyLight(IVDevice::Light0, &pointLight);
 
 		// update texture matrix and change property to update the clouds
 		// texture matrix (animating the clouds)

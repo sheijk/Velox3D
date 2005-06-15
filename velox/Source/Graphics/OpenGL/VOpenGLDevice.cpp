@@ -14,6 +14,7 @@
 
 #include <v3d/Graphics/GraphicsExceptions.h>
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Graphics/VPointLight.h>
 
 #include "VMeshHandle.h"
 #include "VStreamMesh.h"
@@ -614,6 +615,53 @@ void VOpenGLDevice::RecalcModelViewMatrix()
 	//Mult(modelView, m_ModelMatrix, m_ViewMatrix);
 
 	SetGLMatrix(GL_MODELVIEW, modelView, this);
+}
+
+//-----------------------------------------------------------------------------
+
+void VOpenGLDevice::ApplyLight(LightId in_Number, const VPointLight* in_pLight)
+{
+	if( int(in_Number) > int(Light7) ) 
+	{
+		V3D_THROWMSG(VGraphicException, 
+			"Tried to set invalid light "
+			<< in_Number 
+			<< " (only 0-8 are allowed");
+	}
+
+	GLenum lightnum = GL_LIGHT0 + int(in_Number);
+
+	if( in_pLight != 0 ) 
+	{
+		static float white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+		static float black[] = { .0f, .0f, .0f, 1.0f };
+
+		glMaterialfv(GL_FRONT, GL_AMBIENT, white);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, white);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, white);
+		glMaterialf(GL_FRONT, GL_SHININESS, 10.0f);
+
+		glMaterialfv(GL_BACK, GL_AMBIENT, black);
+		glMaterialfv(GL_BACK, GL_SPECULAR, black);
+		glMaterialfv(GL_BACK, GL_DIFFUSE, black);
+
+		glLightfv(lightnum, GL_AMBIENT, (float*)&(in_pLight->GetAmbient()));
+		glLightfv(lightnum, GL_SPECULAR, (float*)&(in_pLight->GetSpecular()));
+		glLightfv(lightnum, GL_DIFFUSE, (float*)&(in_pLight->GetDiffuse()));
+
+		VVector3f& lpos(in_pLight->GetPosition());
+		float pos[] = { lpos.GetX(), lpos.GetY(), lpos.GetZ(), 1.0f };
+		glLightfv(lightnum, GL_POSITION, pos);
+
+		glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+
+		glEnable(GL_LIGHTING);
+		glEnable(lightnum);
+	}
+	else
+	{
+		glDisable(lightnum);
+	}
 }
 
 //-----------------------------------------------------------------------------

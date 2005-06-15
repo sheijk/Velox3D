@@ -36,18 +36,13 @@ class VOpenGLDevice : public IVDevice
 {
 public:
 	/** Contructor for adding a window */
-	//VOpenGLDevice(const graphics::VDisplaySettings* in_pSettings, HWND in_hWnd);
-	VOpenGLDevice(const graphics::VDisplaySettings& in_Settings,
+	VOpenGLDevice(
+		const graphics::VDisplaySettings& in_Settings,
 		VSharedPtr<IVRenderContext> in_pContext);
 	virtual ~VOpenGLDevice();
 
 	virtual MeshHandle CreateMesh(VStringParam in_strResource);
 	virtual MaterialHandle CreateMaterial(VStringParam in_strResource);
-
-	//virtual MeshHandle CreateMesh(
-	//	const VMeshDescription& in_MeshDescr,
-	//	const VEffectDescription& in_EffectDescr
-	//	);
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 
@@ -62,6 +57,7 @@ public:
 
 	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode);
 	
+	void ApplyLight(LightId in_Number, const VPointLight* in_pLight);
 private:
 	void RecalcModelViewMatrix();
 
