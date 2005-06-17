@@ -33,10 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib VeloxLib.lib CoreLib.lib KernelLib.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib"
 				OutputFile="$(OutDir)/ServiceDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/ServiceDLL.pdb"
 				SubSystem="2"
@@ -80,6 +81,7 @@
 				OutputFile="$(OutDir)/ServiceDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -179,6 +181,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\IVStateCategory.h">
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\IVTexture.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VBuffer.h">
@@ -447,6 +452,12 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\IVVertexStream.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VBaseTexture.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VBaseTexture.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VCGVertexShaderState.cpp">
 					</File>
 					<File
@@ -486,12 +497,6 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGlUtils.cpp">
 					</File>
 					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.h">
-					</File>
-					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.cpp">
 					</File>
 					<File
@@ -512,12 +517,16 @@
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.h">
 					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h">
-					</File>
+					<Filter
+						Name="Context"
+						Filter="">
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h">
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
