@@ -17,18 +17,38 @@ namespace graphics {
  */
 class VTextureState : public IVOpenGLRenderState
 {
+protected:
+	const GLint m_nTextureId;
+	const GLenum m_nTextureTarget;
+
+public:
+	/** create a state disabling texturing like follows: noTexState = VTextureState(NoTexture); */
+	enum NoTex { NoTexture };
+
+protected:
+	///**
+	// * Erzeugt eine Textur State zum ausschalten von Texturing
+	// */
+	//VTextureState(NoTex) : 
+	//	m_nTextureId(0), 
+	//	m_nTextureTarget(-1)
+	//{
+	//}
+
+	/**
+	 * Erzeugt einen Texture State der die gegebene Textur bindet
+	 */
+	VTextureState(GLint in_nTextureId, GLenum in_nTextureTarget) :
+		m_nTextureId(in_nTextureId),
+		m_nTextureTarget(in_nTextureTarget)
+	{
+	}
+
 public:
 	virtual void Apply() const
 	{
-		m_lastTexture.Unbind();
-		m_texture.Bind();
-		m_lastTexture = m_texture;
+		glBindTexture(m_nTextureTarget, m_nTextureId);
 	}
-
-private:
-
-	IVTexture        m_texture;
-	static IVTexture m_lastTexture;
 };
 
 class VTextureState2D : public VTextureState

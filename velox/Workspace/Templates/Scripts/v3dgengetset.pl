@@ -24,7 +24,7 @@ while(1) {
 		$pureName =~ s/^([a-z])/uc($1)/xe;
 #		print("ws = #$whitespace# type = $type\t name = $name\t purename= $pureName \tin $line");
 		# create getter
-		print("${whitespace}${type} Get${pureName}()\n");
+		print("${whitespace}${type} Get${pureName}() const\n");
 		print("${whitespace}\{\n");
 		print("${whitespace}\treturn ${name};\n");
 		print("${whitespace}\}\n\n");

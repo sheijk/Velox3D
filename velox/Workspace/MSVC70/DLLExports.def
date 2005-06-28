@@ -1,5 +1,0 @@
-LIBRARY	JavaTest
-
-EXPORTS
-	Initialize
-	Shutdown
