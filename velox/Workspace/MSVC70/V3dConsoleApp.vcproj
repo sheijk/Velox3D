@@ -1,119 +1,49 @@
-<?xml version="1.0" encoding = "iso-8859-1"?>
-<VisualStudioProject
-	ProjectType="Visual C++"
-	Version="7.00"
-	Name="V3dConsoleApp"
-	ProjectGUID="{20050526-0000-0000-0000-000633000000}"
-	Keyword="Win32Proj">
-	<Platforms>
-		<Platform
-			Name="Win32"/>
-	</Platforms>
-	<Configurations>
-		<Configuration
-			Name="Debug|Win32"
-			OutputDirectory="../../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="1"
-			CharacterSet="2">
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
-				MinimalRebuild="TRUE"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="VeloxLib.lib CoreLib.lib KernelLib.lib"
-				OutputFile="$(OutDir)/V3dConsoleApp.exe"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/V3dConsoleApp.pdb"
-				SubSystem="1"
-				ImportLibrary="$(OutDir)/V3dConsoleApp.lib"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-		</Configuration>
-		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="../../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
-			CharacterSet="2">
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
-				RuntimeLibrary="0"
-				RuntimeTypeInfo="TRUE"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="3"/>
-			<Tool
-				Name="VCCustomBuildTool"/>
-			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/V3dConsoleApp.exe"
-				LinkIncremental="1"
-				GenerateDebugInformation="TRUE"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/V3dConsoleApp.lib"
-				TargetMachine="1"/>
-			<Tool
-				Name="VCMIDLTool"/>
-			<Tool
-				Name="VCPostBuildEventTool"/>
-			<Tool
-				Name="VCPreBuildEventTool"/>
-			<Tool
-				Name="VCPreLinkEventTool"/>
-			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
-		</Configuration>
-	</Configurations>
-	<Files>
-		<Filter
-			Name="Kernel"
-			Filter="">
-			<Filter
-				Name="Implementation"
-				Filter="">
-				<File
-					RelativePath="..\..\Source\Kernel\main.cpp">
-				</File>
-			</Filter>
-		</Filter>
-	</Files>
-	<Globals>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<VisualStudioProject ProjectType="Visual C++" Version="7.00" Name="V3dConsoleApp" ProjectGUID="{20050526-0000-0000-0000-000633000000}" Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <Configurations>
+    <Configuration Name="Debug|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="1" CharacterSet="2">
+      <Tool Name="VCCLCompilerTool" Optimization="0" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS" MinimalRebuild="TRUE" BasicRuntimeChecks="3" RuntimeLibrary="3" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="4"/>
+      <Tool Name="VCCustomBuildTool"/>
+      <Tool Name="VCLinkerTool" OutputFile="$(OutDir)/V3dConsoleApp.exe" LinkIncremental="2" GenerateDebugInformation="TRUE" ProgramDatabaseFile="$(OutDir)/V3dConsoleApp.pdb" SubSystem="1" ImportLibrary="$(OutDir)/V3dConsoleApp.lib" TargetMachine="1"/>
+      <Tool Name="VCMIDLTool"/>
+      <Tool Name="VCPostBuildEventTool"/>
+      <Tool Name="VCPreBuildEventTool"/>
+      <Tool Name="VCPreLinkEventTool"/>
+      <Tool Name="VCResourceCompilerTool"/>
+      <Tool Name="VCWebServiceProxyGeneratorTool"/>
+      <Tool Name="VCXMLDataGeneratorTool"/>
+      <Tool Name="VCWebDeploymentTool"/>
+      <Tool Name="VCManagedWrapperGeneratorTool"/>
+      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+    </Configuration>
+    <Configuration Name="Release|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="2" CharacterSet="2">
+      <Tool Name="VCCLCompilerTool" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS" RuntimeLibrary="0" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="3"/>
+      <Tool Name="VCCustomBuildTool"/>
+      <Tool Name="VCLinkerTool" OutputFile="$(OutDir)/V3dConsoleApp.exe" LinkIncremental="1" GenerateDebugInformation="TRUE" SubSystem="2" OptimizeReferences="2" EnableCOMDATFolding="2" ImportLibrary="$(OutDir)/V3dConsoleApp.lib" TargetMachine="1"/>
+      <Tool Name="VCMIDLTool"/>
+      <Tool Name="VCPostBuildEventTool"/>
+      <Tool Name="VCPreBuildEventTool"/>
+      <Tool Name="VCPreLinkEventTool"/>
+      <Tool Name="VCResourceCompilerTool"/>
+      <Tool Name="VCWebServiceProxyGeneratorTool"/>
+      <Tool Name="VCXMLDataGeneratorTool"/>
+      <Tool Name="VCWebDeploymentTool"/>
+      <Tool Name="VCManagedWrapperGeneratorTool"/>
+      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+    </Configuration>
+  </Configurations>
+  <References>
+	</References>
+  <Files xmlns:exsl="http://exslt.org/common">
+    <Filter Name="Kernel" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\Kernel\main.cpp"/>
+      </Filter>
+    </Filter>
+  </Files>
+  <Globals>
 	</Globals>
 </VisualStudioProject>

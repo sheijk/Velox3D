@@ -18,7 +18,6 @@ using namespace v3d::resource;
 V3D_DECLARE_EXCEPTION(VInvalidEffectDescriptionException, VGraphicException);
 
 VTextureStateCategory::VTextureStateCategory()
-	: m_DefaultState()
 {
 }
 
@@ -27,12 +26,12 @@ vfloat32 VTextureStateCategory::GetPriority() const
 	return .9f;
 }
 
-const IVRenderState& VTextureStateCategory::GetDefault() const
+/*const IVRenderState& VTextureStateCategory::GetDefault() const
 {
-	return m_DefaultState;
-}
+	return 0;
+}*/
 
-VTextureState2D* VTextureStateCategory::Create2DState(const VState* in_pTextureState)
+VTexture2D* VTextureStateCategory::Create2DState(const VState* in_pTextureState)
 {
 	// if a texture is referenced by resource name
 	if( in_pTextureState->ContainsParameter("res") )
@@ -46,10 +45,10 @@ VTextureState2D* VTextureStateCategory::Create2DState(const VState* in_pTextureS
 		VResourceManagerPtr pResMan;
 
 		VResourceId pRes = pResMan->GetResourceByName(resName.c_str());
-		VResourceDataPtr<const VTextureState2D> pState = 
-			pRes->GetData<VTextureState2D>();
+		VResourceDataPtr<const VTexture2D> pState = 
+			pRes->GetData<VTexture2D>();
 
-		return const_cast<VTextureState2D*>(&* pState);
+		return const_cast<VTexture2D*>(&* pState);
 	}
 	// necessary state parameters are missing
 	else
@@ -85,33 +84,33 @@ IVRenderState* VTextureStateCategory::CreateCubeMapState(
 		// get states and state names for each side from resource manager
 		string posxRes;
 		in_pTextureState->GetParameter("posx", posxRes);
-		VResourceDataPtr<const VTextureStatePosX> pPosXState = 
-			GetDataFromResource<VTextureStatePosX>(posxRes.c_str());
+		VResourceDataPtr<const VCubemapPosX> pPosXState = 
+			GetDataFromResource<VCubemapPosX>(posxRes.c_str());
 
 		string posyRes;
 		in_pTextureState->GetParameter("posy", posyRes);
-		VResourceDataPtr<const VTextureStatePosY> pPosYState = 
-			GetDataFromResource<VTextureStatePosY>(posyRes.c_str());
+		VResourceDataPtr<const VCubemapPosY> pPosYState = 
+			GetDataFromResource<VCubemapPosY>(posyRes.c_str());
 
 		string poszRes;
 		in_pTextureState->GetParameter("posz", poszRes);
-		VResourceDataPtr<const VTextureStatePosZ> pPosZState = 
-			GetDataFromResource<VTextureStatePosZ>(poszRes.c_str());
+		VResourceDataPtr<const VCubemapPosZ> pPosZState = 
+			GetDataFromResource<VCubemapPosZ>(poszRes.c_str());
 
 		string negxRes;
 		in_pTextureState->GetParameter("negx", negxRes);
-		VResourceDataPtr<const VTextureStateNegX> pNegXState = 
-			GetDataFromResource<VTextureStateNegX>(negxRes.c_str());
+		VResourceDataPtr<const VCubemapNegX> pNegXState = 
+			GetDataFromResource<VCubemapNegX>(negxRes.c_str());
 
 		string negyRes;
 		in_pTextureState->GetParameter("negy", negyRes);
-		VResourceDataPtr<const VTextureStateNegY> pNegYState = 
-			GetDataFromResource<VTextureStateNegY>(negyRes.c_str());
+		VResourceDataPtr<const VCubemapNegY> pNegYState = 
+			GetDataFromResource<VCubemapNegY>(negyRes.c_str());
 
 		string negzRes;
 		in_pTextureState->GetParameter("negz", negzRes);
-		VResourceDataPtr<const VTextureStateNegZ> pNegZState = 
-			GetDataFromResource<VTextureStateNegZ>(negzRes.c_str());
+		VResourceDataPtr<const VCubemapNegZ> pNegZState = 
+			GetDataFromResource<VCubemapNegZ>(negzRes.c_str());
 
 		// create a new state for the cube map
 		pCubemapState = new VCubemapTextureState(
@@ -145,7 +144,7 @@ IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 
 		if( textureType == "2d" )
 		{
-			return Create2DState(pTextureState);
+			return reinterpret_cast<IVRenderState*>(Create2DState(pTextureState));
 		}
 		if( textureType == "cubeMap" )
 		{
@@ -159,7 +158,7 @@ IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 	}
 	else
 	{
-		return &m_DefaultState;
+		return 0;//reinterpret_cast<IVRenderState*>(&m_DefaultState);
 	}
 }
 

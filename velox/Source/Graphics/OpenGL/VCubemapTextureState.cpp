@@ -9,12 +9,12 @@ namespace v3d { namespace graphics {
 using namespace v3d; // anti auto indent
 
 VCubemapTextureState::VCubemapTextureState(
-	resource::VResourceDataPtr<const VTextureStatePosX> in_nPosXTextureId,
-	resource::VResourceDataPtr<const VTextureStatePosY> in_nPosYTextureId,
-	resource::VResourceDataPtr<const VTextureStatePosZ> in_nPosZTextureId,
-	resource::VResourceDataPtr<const VTextureStateNegX> in_nNegXTextureId,
-	resource::VResourceDataPtr<const VTextureStateNegY> in_nNegYTextureId,
-	resource::VResourceDataPtr<const VTextureStateNegZ> in_nNegZTextureId
+	resource::VResourceDataPtr<const VCubemapPosX> in_nPosXTextureId,
+	resource::VResourceDataPtr<const VCubemapPosY> in_nPosYTextureId,
+	resource::VResourceDataPtr<const VCubemapPosZ> in_nPosZTextureId,
+	resource::VResourceDataPtr<const VCubemapNegX> in_nNegXTextureId,
+	resource::VResourceDataPtr<const VCubemapNegY> in_nNegYTextureId,
+	resource::VResourceDataPtr<const VCubemapNegZ> in_nNegZTextureId
 	) :
 	m_nPosXTextureId(in_nPosXTextureId),
 	m_nPosYTextureId(in_nPosYTextureId),
@@ -28,12 +28,12 @@ VCubemapTextureState::VCubemapTextureState(
 void VCubemapTextureState::Apply() const
 {
 	// bind textures
-	m_nPosXTextureId->Apply();
-	m_nNegXTextureId->Apply();
-	m_nPosYTextureId->Apply();
-	m_nNegYTextureId->Apply();
-	m_nPosZTextureId->Apply();
-	m_nNegYTextureId->Apply();
+	/*m_nPosXTextureId->Bind();
+	m_nNegXTextureId->Bind();
+	m_nPosYTextureId->Bind();
+	m_nNegYTextureId->Bind();
+	m_nPosZTextureId->Bind();
+	m_nNegYTextureId->Bind();*/
 
 	// enable texture coordinate auto generation
 	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);

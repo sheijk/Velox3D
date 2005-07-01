@@ -6,6 +6,7 @@
 #include <V3d/Image/VImage.h>
 #include <V3d/Resource.h>
 #include "../../Graphics/OpenGL/VTextureState.h"
+#include "../../Graphics/OpenGL/VBaseTexture.h"
 
 #include <vector>
 #include <map>

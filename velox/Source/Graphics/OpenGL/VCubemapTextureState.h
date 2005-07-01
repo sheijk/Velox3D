@@ -6,7 +6,7 @@
 #include "IVOpenGLRenderState.h"
 
 #include <V3d/Resource/VResourceDataPtr.h>
-#include "VTextureState.h"
+#include "VBaseTexture.h"
 
 #include <V3d/OpenGL.h>
 
@@ -22,12 +22,12 @@ class VCubemapTextureState : public IVOpenGLRenderState
 {
 public:
 	VCubemapTextureState(
-		resource::VResourceDataPtr<const VTextureStatePosX> in_nPosXTextureId,
-		resource::VResourceDataPtr<const VTextureStatePosY> in_nPosYTextureId,
-		resource::VResourceDataPtr<const VTextureStatePosZ> in_nPosZTextureId,
-		resource::VResourceDataPtr<const VTextureStateNegX> in_nNegXTextureId,
-		resource::VResourceDataPtr<const VTextureStateNegY> in_nNegYTextureId,
-		resource::VResourceDataPtr<const VTextureStateNegZ> in_nNegZTextureId
+		resource::VResourceDataPtr<const VCubemapPosX> in_nPosXTextureId,
+		resource::VResourceDataPtr<const VCubemapPosY> in_nPosYTextureId,
+		resource::VResourceDataPtr<const VCubemapPosZ> in_nPosZTextureId,
+		resource::VResourceDataPtr<const VCubemapNegX> in_nNegXTextureId,
+		resource::VResourceDataPtr<const VCubemapNegY> in_nNegYTextureId,
+		resource::VResourceDataPtr<const VCubemapNegZ> in_nNegZTextureId
 		);
 
 	virtual ~VCubemapTextureState();
@@ -35,12 +35,12 @@ public:
 	virtual void Apply() const;
 
 private:
-	const resource::VResourceDataPtr<const VTextureStatePosX> m_nPosXTextureId;
-	const resource::VResourceDataPtr<const VTextureStatePosY> m_nPosYTextureId;
-	const resource::VResourceDataPtr<const VTextureStatePosZ> m_nPosZTextureId;
-	const resource::VResourceDataPtr<const VTextureStateNegX> m_nNegXTextureId;
-	const resource::VResourceDataPtr<const VTextureStateNegY> m_nNegYTextureId;
-	const resource::VResourceDataPtr<const VTextureStateNegZ> m_nNegZTextureId;
+	const resource::VResourceDataPtr<const VCubemapPosX> m_nPosXTextureId;
+	const resource::VResourceDataPtr<const VCubemapPosY> m_nPosYTextureId;
+	const resource::VResourceDataPtr<const VCubemapPosZ> m_nPosZTextureId;
+	const resource::VResourceDataPtr<const VCubemapNegX> m_nNegXTextureId;
+	const resource::VResourceDataPtr<const VCubemapNegY> m_nNegYTextureId;
+	const resource::VResourceDataPtr<const VCubemapNegZ> m_nNegZTextureId;
 };
 
 //-----------------------------------------------------------------------------

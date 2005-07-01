@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include "VTextureState.h"
+#include "VBaseTexture.h"
 #include <v3d/Graphics/IVStateCategory.h>
 
 #include <map>
@@ -30,10 +30,9 @@ class VTextureStateCategory : public IVStateCategory
 	//typedef std::map<VMaterialDescription::ByteBufferHandle, VTextureState2D*> 
 		//TextureMap;
 
-	VTextureStateUntextured m_DefaultState;
 	//TextureMap m_Textures;
 
-	VTextureState2D* Create2DState(const VState* in_pTextureState);
+	VTexture2D* Create2DState(const VState* in_pTextureState);
 	IVRenderState* CreateCubeMapState(const VState* in_pTextureState);
 
 public:
@@ -41,7 +40,7 @@ public:
 
 	virtual vfloat32 GetPriority() const;
 
-	virtual const IVRenderState& GetDefault() const;
+	//virtual const IVRenderState& GetDefault() const;
 
 	virtual IVRenderState* CreateState(const VRenderPass& in_Pass);
 };
