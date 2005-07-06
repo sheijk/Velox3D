@@ -15,3 +15,6 @@ Worklog von Lars
 ----- last things Lars finished:
 
 log:
+
+06.07.2005
+- neues Texture Interface erstellt und alte Texture Klassen geupdatet
