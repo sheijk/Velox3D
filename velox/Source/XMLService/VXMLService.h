@@ -7,7 +7,6 @@
 #include <tinyxml/tinyxml.h>
 #include "VXMLAttribute.h"
 #include "VXMLElement.h"
-#include "VStreamReader.h"
 //-----------------------------------------------------------------------------
 #include <string.h>
 #include <stdarg.h>

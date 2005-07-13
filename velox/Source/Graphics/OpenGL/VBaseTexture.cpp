@@ -35,15 +35,16 @@ VTexture2D::VTexture2D(const image::VImage& in_Image, int in_TextureID) :  VBase
 
 VTexture2D::~VTexture2D()
 {
+	glDeleteTextures(1, &m_iTextureID);
 }
 
 void VTexture2D::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_GEN_S);
+	//glDisable(GL_TEXTURE_GEN_T);
+	//glDisable(GL_TEXTURE_GEN_R);
+	//glDisable(GL_TEXTURE_CUBE_MAP);
+	//glDisable(GL_TEXTURE_2D);
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
@@ -51,7 +52,7 @@ void VTexture2D::Bind()
 
 void VTexture2D::Unbind()
 {
-	glDeleteTextures(1, &m_iTextureID);
+	glDisable(GL_TEXTURE_2D);
 }
 
 VUntextured::VUntextured()
@@ -70,17 +71,18 @@ VUntextured::~VUntextured()
 
 void VUntextured::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_GEN_S);
+	//glDisable(GL_TEXTURE_GEN_T);
+	//glDisable(GL_TEXTURE_GEN_R);
+	//glDisable(GL_TEXTURE_CUBE_MAP);
+	//glDisable(GL_TEXTURE_2D);
 }
 
 void VUntextured::Unbind()
 {
 }
 
+/*
 VCubemapPosX::VCubemapPosX(const image::VImage& in_Image, int in_TextureID) :  VBaseTexture(in_Image, GL_TEXTURE_CUBE_MAP_POSITIVE_X)
 {
 	m_iTextureID = in_TextureID;
@@ -237,41 +239,33 @@ void VCubemapNegZ::Unbind()
 	glDeleteTextures(1, &m_iTextureID);
 }
 
-VPBufferTexture::VPBufferTexture(const image::VImage& in_Image, int in_TextureID) : VBaseTexture(in_Image, GL_TEXTURE_2D)
+/*
+
+/ *
+class VPBufferTexture : public VBaseTexture
 {
-	m_iTextureID = in_TextureID;
+public:
 
-	graphics::VDisplaySettings Settings;
-	Settings.SetWidth(in_Image.GetWidth());
-	Settings.SetHeight(in_Image.GetHeight());
-	Settings.SetBitsPerPixel(in_Image.GetBPP());
-	m_pContext = new VPBufferWindowContext(&Settings); Muss das hier noch fertig machen!!!!
-}
+	VPBufferTexture(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VPBufferTexture();
 
-VPBufferTexture::~VPBufferTexture()
-{
-	if(m_pContext != 0)
-	{
-		delete m_pContext;
-		m_pContext = 0;
-	}
-}
+	/ **
+	 * @see v3d::graphics::IVTexture::Bind
+	 * /
+	void Bind();
 
-void VPBufferTexture::Bind()
-{
-	//make Pixel Buffer actived
-	m_pContext -> MakeCurrent();
+	/ **
+	 * @see v3d::graphics::IVTexture::Unbind
+	 * /
+	void Unbind();
 
-	//bind Texture
-	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
-	wglBindTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
-}
+private:
 
-void VPBufferTexture::Unbind()
-{
-	//unbind Texture
-	wglReleaseTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
-}
+	VPBufferWindowContext* m_pContext;
+};
+* /
+*/
+
 //-----------------------------------------------------------------------------
 }}// namespace v3d::graphics
 //-----------------------------------------------------------------------------

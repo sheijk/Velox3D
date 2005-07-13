@@ -20,15 +20,15 @@ public:
 	{
 	}
 
-	virtual vfloat32 GetPriority() const
-	{
-		return .1f;
-	}
+	//virtual vfloat32 GetPriority() const
+	//{
+	//	return .1f;
+	//}
 
-	virtual const IVRenderState& GetDefault() const
-	{
-		return m_Default;
-	}
+	//virtual const IVRenderState& GetDefault() const
+	//{
+	//	return m_Default;
+	//}
 
 	VMiscState* CreateState(const VRenderPass& in_Pass)
 	{

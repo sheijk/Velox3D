@@ -4,6 +4,8 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include "VBaseTexture.h"
+#include "VTextureState.h"
+
 #include <v3d/Graphics/IVStateCategory.h>
 
 #include <map>
@@ -33,15 +35,15 @@ class VTextureStateCategory : public IVStateCategory
 	//TextureMap m_Textures;
 	VUntextured m_DefaultState;
 
-	VTexture2D* Create2DState(const VState* in_pTextureState);
+	IVRenderState* Create2DState(const VState* in_pTextureState);
 	IVRenderState* CreateCubeMapState(const VState* in_pTextureState);
 
 public:
 	VTextureStateCategory();
 
-	virtual vfloat32 GetPriority() const;
+	//virtual vfloat32 GetPriority() const;
 
-	virtual const IVRenderState& GetDefault() const;
+	//virtual const IVRenderState& GetDefault() const;
 
 	virtual IVRenderState* CreateState(const VRenderPass& in_Pass);
 };

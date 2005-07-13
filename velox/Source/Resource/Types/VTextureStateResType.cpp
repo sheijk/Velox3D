@@ -173,15 +173,29 @@ namespace {
 			image.GetPixelData()
 			);
 
+		IVTexture* pTexture = 0;
+
 		switch(in_TextureTarget)
 		{
-			case GL_TEXTURE_2D: return reinterpret_cast<IVRenderState*>(new VTexture2D(image, id));
-			case GL_TEXTURE_CUBE_MAP_POSITIVE_X: return reinterpret_cast<IVRenderState*>(new VCubemapPosX(image, id));
-			case GL_TEXTURE_CUBE_MAP_NEGATIVE_X: return reinterpret_cast<IVRenderState*>(new VCubemapNegX(image, id));
-			case GL_TEXTURE_CUBE_MAP_POSITIVE_Y: return reinterpret_cast<IVRenderState*>(new VCubemapPosY(image, id));
-			case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: return reinterpret_cast<IVRenderState*>(new VCubemapNegY(image, id));
-			case GL_TEXTURE_CUBE_MAP_POSITIVE_Z: return reinterpret_cast<IVRenderState*>(new VCubemapPosZ(image, id));
-			case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: return reinterpret_cast<IVRenderState*>(new VCubemapNegZ(image, id));
+			case GL_TEXTURE_2D: pTexture = new VTexture2D(image, id);
+			//case GL_TEXTURE_CUBE_MAP_POSITIVE_X: pTexture = new VCubemapPosX(image, id);
+			//case GL_TEXTURE_CUBE_MAP_NEGATIVE_X: pTexture = new VCubemapNegX(image, id);
+			//case GL_TEXTURE_CUBE_MAP_POSITIVE_Y: pTexture = new VCubemapPosY(image, id);
+			//case GL_TEXTURE_CUBE_MAP_NEGATIVE_Y: pTexture = new VCubemapNegY(image, id);
+			//case GL_TEXTURE_CUBE_MAP_POSITIVE_Z: pTexture = new VCubemapPosZ(image, id);
+			//case GL_TEXTURE_CUBE_MAP_NEGATIVE_Z: pTexture = new VCubemapNegZ(image, id);
+		}
+
+		if( pTexture != 0 )
+		{
+			//TODO: VTexture2D anstatt IVRenderState in der resource speichern
+			return new VTextureState(pTexture);
+		}
+		else
+		{
+			V3D_THROWMSG(VGraphicException, 
+				"Could not create texture state of type " << in_TextureTarget
+				<< ": invalid target type");
 		}
 	}
 } // anomymous namespace
@@ -191,13 +205,13 @@ namespace {
  */
 VTextureStateResType::VTextureStateResType()
 {
-	m_TextureTargets[VTypeId::Create<VTexture2D>()] = GL_TEXTURE_2D;
-	m_TextureTargets[VTypeId::Create<VCubemapPosX>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-	m_TextureTargets[VTypeId::Create<VCubemapNegX>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
-	m_TextureTargets[VTypeId::Create<VCubemapPosY>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
-	m_TextureTargets[VTypeId::Create<VCubemapNegY>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
-	m_TextureTargets[VTypeId::Create<VCubemapPosZ>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
-	m_TextureTargets[VTypeId::Create<VCubemapNegZ>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
+	m_TextureTargets[VTypeId::Create<VTextureState>()] = GL_TEXTURE_2D;
+	//m_TextureTargets[VTypeId::Create<VCubemapPosX>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+	//m_TextureTargets[VTypeId::Create<VCubemapNegX>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
+	//m_TextureTargets[VTypeId::Create<VCubemapPosY>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
+	//m_TextureTargets[VTypeId::Create<VCubemapNegY>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y;
+	//m_TextureTargets[VTypeId::Create<VCubemapPosZ>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_Z;
+	//m_TextureTargets[VTypeId::Create<VCubemapNegZ>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z;
 
 	for(TextureTargetMap::iterator it = m_TextureTargets.begin();
 		it != m_TextureTargets.end();

@@ -5,10 +5,12 @@
 #include "VXMLComment.h"
 #include "VXMLText.h"
 #include <v3d/Core/MemManager.h>
+#include <V3dLib/Utils/VStreamReader.h>
 
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
+using ::v3d::utils::VStreamReader;
 
 /**
  * The constructor registers the service with unique string ID 

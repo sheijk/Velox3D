@@ -5,6 +5,7 @@
 #include <v3d/VFS/VIOException.h>
 #include <v3d/VFS/IVDataProviderPool.h>
 #include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Core/VIOStream.h>
 
 #include "VAccessRights.h"
 #include "VDirectory.h"
@@ -18,6 +19,9 @@ namespace vfs {
 //-----------------------------------------------------------------------------
 using namespace xml;
 using namespace std;
+
+#define V3D_LOGMSG(x) vout << "vfsxml: " << x << vendl;
+//#define V3D_LOGSMG(x)
 
 /**
  * standard c'tor
@@ -70,6 +74,8 @@ VMountOptions::AccessRightsPtr CreateAccessRights(const string& flagStr)
 
 void VXmlIniReader::OnElementClose(IVXMLElement* pElement)
 {
+	V3D_LOGMSG("close: " << pElement->GetName().AsCString());
+	
 	string elementName = pElement->GetName().AsCString();
 
 	switch(m_State) {
@@ -86,6 +92,8 @@ void VXmlIniReader::OnElementClose(IVXMLElement* pElement)
 
 void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 {
+	V3D_LOGMSG("open: " << pElement->GetName().AsCString());
+	
 	string elementName = pElement->GetName().AsCString();
 
 	strToLower(elementName);
@@ -190,14 +198,17 @@ void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 
 void VXmlIniReader::OnFileEnd()
 {
+	V3D_LOGMSG("file end");
 }
 
 void VXmlIniReader::OnComment(VStringParam pText)
 {
+	V3D_LOGMSG("comment: " << pText);
 }
 
 void VXmlIniReader::OnText(VStringParam pText)
 {
+	V3D_LOGMSG("text: " << pText);
 }
 
 

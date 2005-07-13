@@ -1,6 +1,8 @@
 #include <V3dLib/Property/VPropertyManager.h>
 //-----------------------------------------------------------------------------
 
+#include <V3d/Core/RangeIter/VSTLAccessorRangePolicy.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -28,6 +30,12 @@ const utils::VStringValue& VPropertyManager::GetValue(VStringParam in_strName)
 
 		V3D_THROW(VPropertyNotFoundException, message.str().c_str());
 	}
+}
+
+VRangeIterator<const std::string> VPropertyManager::GetPropertyNames() const
+{
+	return CreateAccesssorIterator<VPair1stAccessor, const std::string>(
+		m_Properties.begin(), m_Properties.end());
 }
 
 //-----------------------------------------------------------------------------

@@ -467,6 +467,12 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\IVVertexStream.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VBaseTexture.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VBaseTexture.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VCGVertexShaderState.cpp">
 					</File>
 					<File
@@ -512,6 +518,9 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.cpp">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.h">
 					</File>
 					<File
@@ -543,6 +552,9 @@
 				Filter="">
 				<File
 					RelativePath="..\..\API\V3d\Graphics\IVRenderContext.h">
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Graphics\IVTexture.h">
 				</File>
 			</Filter>
 		</Filter>

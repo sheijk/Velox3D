@@ -21,7 +21,7 @@ public:
 	virtual ~IVFile() {};
 
 	/** a (smart) pointer to a file stream */
-	typedef VPointer<IVBufferStream>::SharedPtr FileStreamPtr;
+	typedef VSharedPtr<IVBufferStream> FileStreamPtr;
 
 	/** opens the file with the given access mode */
 	virtual FileStreamPtr Open(VAccessModeFlags in_Access) const = 0;

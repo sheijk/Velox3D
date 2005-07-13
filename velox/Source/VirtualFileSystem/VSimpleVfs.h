@@ -18,7 +18,8 @@ class VSimpleVfs : public IVFileSystem
 	// the file structure tree
 	VSharedPtr<VDirectory> m_pRootDirSP;
 
-    void ParseInitFile();
+	virtual void MountFromXML(VStringParam in_strFileName);
+    
 public:
 	VSimpleVfs(
 		VStringParam in_strName, 

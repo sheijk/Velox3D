@@ -79,6 +79,7 @@ VStreamMesh::VStreamMesh(
 		m_bShowNormal = false;
 
 #ifdef V3D_DEBUG
+	// access property one time to assure it exists
 	try
 	{
 		property::GetProperty<vbool>(NORMAL_PROPERTY_FLAG);

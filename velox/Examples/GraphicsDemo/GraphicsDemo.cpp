@@ -193,6 +193,9 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 	pointLight.SetSpecular(VColor4f(.0f, 1.0f, .0f, 1.0f));
 	pointLight.SetPosition(VVector3f(.0f, 1.0f, 3.0f));
 
+	// generate opengl error to check glinterceptor
+	glGetFloatv(GL_TRIANGLES, 0);
+
 	pUpdater->Start();
 	while(pSystem->GetStatus())
 	{

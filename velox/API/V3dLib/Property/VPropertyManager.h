@@ -8,6 +8,7 @@
 #include <V3d/Core/VNamedObject.h>
 #include <V3d/Core/VObjectRegistry.h>
 #include <V3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 
 #include <map>
 #include <string>
@@ -32,6 +33,8 @@ public:
 
 	void SetValue(VStringParam in_strName, const utils::VStringValue& in_strValue);
 	const utils::VStringValue& GetValue(VStringParam in_strName);
+	
+	VRangeIterator<const std::string> GetPropertyNames() const;
 
 private:
 	typedef std::map<std::string, utils::VStringValue> PropertyTable;

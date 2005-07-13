@@ -12,6 +12,8 @@
 
 #include <v3d/XML/IVXMLService.h>
 
+#include <V3d/Core/VIOStream.h>
+
 #include "VFile.h"
 #include "VAccessRights.h"
 #include "VfsUtils.h"
@@ -53,19 +55,35 @@ VSimpleVfs::VSimpleVfs(
 		VAccessRights::CreateRODirAR(VAccessRights::DeletingForbidden)));
 
 	// load vfs.xml file
-	ParseInitFile();
+	try
+	{
+		MountFromXML("vfs.xml");
+	}
+	catch(VException&)
+	{
+		vout << "Warning: no vfs.xml file found, no directories mounted" << vendl;
+	}
 }
 
-void VSimpleVfs::ParseInitFile()
+void VSimpleVfs::MountFromXML(VStringParam in_strFileName)
 {
+	//vout << "parsing file " << in_strFileName << vendl;
+	//vout << "creating xml reader" << vendl;
+	
 	// create visitor
 	VXmlIniReader reader(m_pRootDirSP.Get());
+	
+	//vout << "getting xml service" << vendl;
 	
 	// get xml service
 	xml::IVXMLService* pXmlServ = QueryObject<xml::IVXMLService>("xml.service");
 
+	//vout << "parsing file" << vendl;
+	
 	// let it parse the ini file
-	pXmlServ->Visit(reader, "vfs.xml");
+	pXmlServ->Visit(reader, in_strFileName);
+	
+	//vout << "done" << vendl;
 }
 
 /**

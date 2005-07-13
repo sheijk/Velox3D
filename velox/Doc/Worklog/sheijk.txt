@@ -30,17 +30,25 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
-15.07.2005
+14.07.05
+- Texturkram von Lars gefixt
+- erste Version des Velox Editors
+- Property Service gibt Liste aller Properties raus
+- VFS geht auch ohne vfs.xml (mountet dann aber nichts)
+- doppelten VStreamReader aus XML Service entfernt
+- kleinere Fixes fuer den Editor
+
+15.06.2005
 - v3dgengetset.sh, Fixes an den Skripts
 - erste Unterstuetzung fuer Beleuchtung, Beispiel in Graphics Demo
 
-03.07.2005
+03.06.2005
 - DLL Exports nochmal gefixt
 - Den VWindow32Context von Lars eingebaut. Damit sollten pbuffer auch recht
   schnell einbaubar sein, sobald die Implementation steht
 - IVRenderContext um SwapBuffers methode erweitert
 
-02.07.2005
+02.06.2005
 - DLL Exports korrigiert: DLLExports.def Datei, Symbole heissen jetzt
   Initialize/Shutdown statt #@Initialize@!#fassad23.. usw.
 - Workdirs geaendert: alle Workdirs fuer Examples in Workdir/Examples

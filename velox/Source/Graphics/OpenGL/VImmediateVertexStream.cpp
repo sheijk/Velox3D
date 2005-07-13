@@ -55,6 +55,7 @@ vbool VImmediateVertexStream::CanProvideStream(VVertexFormat::DataTypes in_DataT
 		return false;
 	}
 
+	//TODO: bug? muesste das nicht || sein? --sheijk
 	if( TypeSetIn(VVertexFormat::TexCoords, in_DataTypes) )
 	if(
 		m_pVertexData->GetFormat().GetTexCoordCount() < 1 &&

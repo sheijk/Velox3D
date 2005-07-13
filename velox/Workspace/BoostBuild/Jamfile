@@ -124,6 +124,7 @@ lib VeloxServices
 	[ glob ../../Source/ImageService/*.cpp ]
 	# error service
 	[ glob ../../Source/Error/*.cpp ]
+	
 
 	# dependencies and other files
 	../../Source/Module/VeloxModule.cpp

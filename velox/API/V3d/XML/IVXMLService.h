@@ -8,6 +8,7 @@
 #include <V3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/SmartPtr/VSharedPtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{
@@ -21,9 +22,9 @@ namespace xml{
 class IVXMLService : public VNamedObject
 {
 public:
-	typedef VPointer<IVXMLWriter>::SharedPtr IVXMLWriterPtr;
-	typedef VPointer<vfs::IVStream>::SharedPtr IVStreamPtr;
-	typedef VPointer<IVXMLElement>::SharedPtr IVXMLElementPtr;
+	typedef VSharedPtr<v3d::xml::IVXMLWriter> IVXMLWriterPtr;
+	typedef VSharedPtr<v3d::vfs::IVStream> IVStreamPtr;
+	typedef VSharedPtr<v3d::xml::IVXMLElement> IVXMLElementPtr;
 
 	/**
 	 * Parses an xml file through an IVStream. Returns the root node of
@@ -32,7 +33,7 @@ public:
 	 * @param in_pStream A vfs data stream that represents a xml file
 	 * @author acrylsword
 	 */
-	virtual IVXMLElementPtr GetRootElement(vfs::IVStream* in_pStream) = 0; 
+	virtual VSharedPtr<IVXMLElement> GetRootElement(vfs::IVStream* in_pStream) = 0; 
 
 	/**
 	* Parses an xml file through the local file system. Returns the root
@@ -41,7 +42,7 @@ public:
 	* @param in_strName The file to open
 	* @author acrylsword
 	*/
-	virtual IVXMLElementPtr GetRootElement(VStringParam in_strName) = 0; 
+	virtual VSharedPtr<IVXMLElement> GetRootElement(VStringParam in_strName) = 0; 
 
 	/**
 	 * Loads a xml file from the virtual file system an uses the visitor

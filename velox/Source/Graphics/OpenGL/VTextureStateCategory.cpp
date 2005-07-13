@@ -3,7 +3,7 @@
 #include <v3d/Graphics/GraphicsExceptions.h>
 
 #include <V3dLib/Graphics/Materials/StateTypes.h>
-#include "VCubemapTextureState.h"
+//#include "VCubemapTextureState.h"
 
 #include <V3d/Image/VImage.h>
 #include <V3d/Resource.h>
@@ -21,17 +21,17 @@ VTextureStateCategory::VTextureStateCategory()
 {
 }
 
-vfloat32 VTextureStateCategory::GetPriority() const
-{
-	return .9f;
-}
+//vfloat32 VTextureStateCategory::GetPriority() const
+//{
+//	return .9f;
+//}
+//
+//const IVRenderState& VTextureStateCategory::GetDefault() const
+//{
+//	return (IVRenderState&)m_DefaultState;
+//}
 
-const IVRenderState& VTextureStateCategory::GetDefault() const
-{
-	return (IVRenderState&)m_DefaultState;
-}
-
-VTexture2D* VTextureStateCategory::Create2DState(const VState* in_pTextureState)
+IVRenderState* VTextureStateCategory::Create2DState(const VState* in_pTextureState)
 {
 	// if a texture is referenced by resource name
 	if( in_pTextureState->ContainsParameter("res") )
@@ -45,10 +45,10 @@ VTexture2D* VTextureStateCategory::Create2DState(const VState* in_pTextureState)
 		VResourceManagerPtr pResMan;
 
 		VResourceId pRes = pResMan->GetResourceByName(resName.c_str());
-		VResourceDataPtr<const VTexture2D> pState = 
-			pRes->GetData<VTexture2D>();
+		VResourceDataPtr<const VTextureState> pState = 
+			pRes->GetData<VTextureState>();
 
-		return const_cast<VTexture2D*>(&* pState);
+		return const_cast<VTextureState*>(&* pState);
 	}
 	// necessary state parameters are missing
 	else
@@ -68,6 +68,7 @@ VResourceDataPtr<const DataType> GetDataFromResource(VStringParam in_strResName)
 	return data;
 }
 
+/*
 IVRenderState* VTextureStateCategory::CreateCubeMapState(
 	const VState* in_pTextureState)
 {
@@ -128,6 +129,7 @@ IVRenderState* VTextureStateCategory::CreateCubeMapState(
 	V3D_ASSERT(0 != pCubemapState);
 	return pCubemapState;
 }
+*/
 
 IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 {
@@ -144,16 +146,16 @@ IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 
 		if( textureType == "2d" )
 		{
-			return reinterpret_cast<IVRenderState*>(Create2DState(pTextureState));
+			return Create2DState(pTextureState);
 		}
-		if( textureType == "cubeMap" )
-		{
-			return CreateCubeMapState(pTextureState);			
-		}
+		//if( textureType == "cubeMap" )
+		//{
+		//	return CreateCubeMapState(pTextureState);			
+		//}
 		else
 		{
-			V3D_THROW(VInvalidEffectDescriptionException,
-				"Type 'TODO' is an invalid texture type");
+			V3D_THROWMSG(VInvalidEffectDescriptionException,
+				"Type '" << textureType << "' is an invalid texture type");
 		}
 	}
 	else

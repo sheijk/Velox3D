@@ -22,6 +22,8 @@ public:
 	class TypeId
 	{
 	public:
+		TypeId() { m_strName = "invalid"; }
+		
 		template<typename T>
 		static inline TypeId Create();
 

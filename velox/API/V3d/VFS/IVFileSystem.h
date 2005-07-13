@@ -24,8 +24,8 @@ namespace vfs {
 class IVFileSystem : public VNamedObject
 {
 public:
-	typedef VPointer<IVBufferStream>::SharedPtr FileStreamPtr;
-	typedef VPointer<IVDirectory>::SharedPtr DirectoryPtr;
+	typedef VSharedPtr<IVBufferStream> FileStreamPtr;
+	typedef VSharedPtr<IVDirectory> DirectoryPtr;
 	
 	IVFileSystem(VStringParam in_strName, VNamedObject* in_pParent) 
 		: VNamedObject(in_strName, in_pParent) {};
@@ -40,6 +40,9 @@ public:
 	virtual vbool ExistsDir(VStringParam in_strDir) = 0;
 	virtual vbool ExistsFile(VStringParam in_strFile) = 0;
 	virtual vbool Exists(VStringParam in_strFSObject) = 0;
+
+	/** mount resources as described inside the xml file */
+	virtual void MountFromXML(VStringParam in_strFileName) = 0;
 };
 
 typedef VServicePtr<IVFileSystem> VFileSystemPtr;

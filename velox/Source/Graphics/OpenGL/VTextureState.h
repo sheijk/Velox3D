@@ -19,12 +19,9 @@ namespace graphics {
 class VTextureState : public IVOpenGLRenderState
 {
 public:
-	virtual void Apply() const
-	{
-		m_pLastTexture -> Unbind();
-		m_pTexture -> Bind();
-		m_pLastTexture = m_pTexture;
-	}
+	VTextureState(IVTexture* in_pTexture);
+
+	virtual void Apply() const;
 
 private:
 
