@@ -13,10 +13,11 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 	const int Format[] = {
 	    WGL_SUPPORT_OPENGL_ARB, true,
         WGL_DRAW_TO_PBUFFER_ARB, true,
-        WGL_RED_BITS_ARB, 16,
-        WGL_GREEN_BITS_ARB, 16,
-        WGL_BLUE_BITS_ARB, 16,
-        WGL_ALPHA_BITS_ARB, 16,
+		WGL_BIND_TO_TEXTURE_RGBA_ARB, true,
+        WGL_RED_BITS_ARB, 8,
+        WGL_GREEN_BITS_ARB, 8,
+        WGL_BLUE_BITS_ARB, 8,
+        WGL_ALPHA_BITS_ARB, 8,
 		WGL_DEPTH_BITS_ARB, m_DisplaySettings.GetDepthBits(),
 		WGL_STENCIL_BITS_ARB, m_DisplaySettings.GetStencilBits(),
         WGL_DOUBLE_BUFFER_ARB, true,
@@ -31,7 +32,8 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 
 	int Attribute[] = 
 	{
-		WGL_PBUFFER_LARGEST_ARB, true,
+		WGL_TEXTURE_FORMAT_ARB, WGL_TEXTURE_RGBA_ARB,
+		WGL_TEXTURE_TARGET_ARB, WGL_TEXTURE_2D_ARB,
         0, 0 
 	};
 
@@ -70,8 +72,6 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 	{
 		vout << "OpenGL Pixel Buffer Render Context was created!" << vendl;
 	}
-
-	wglShareLists(m_rendercontext, m_pbufferrendercontext);
 }
 
 VPBufferWindowContext::~VPBufferWindowContext()
@@ -95,9 +95,6 @@ void VPBufferWindowContext::MakeCurrent()
 	wglMakeCurrent(m_pbufferdevicecontext, m_pbufferrendercontext);
 
 	glViewport(m_DisplaySettings.GetX(), m_DisplaySettings.GetY(), m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
-
-    glDrawBuffer(GL_FRONT);
-    glReadBuffer(GL_FRONT); 
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

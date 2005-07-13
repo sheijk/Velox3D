@@ -5,6 +5,7 @@
 
 #include <V3d/OpenGL.h>
 
+//#include "../../Graphics/OpenGL/Context/VPBufferWindowContext.h"
 #include <V3d/Graphics/IVTexture.h>
 #include <V3d/Image/VImage.h>
 
@@ -24,6 +25,7 @@ class VBaseTexture : public IVTexture
 {
 public:
 
+	VBaseTexture();
 	VBaseTexture(const image::VImage& in_Image, GLenum in_TextureTarget);
 	virtual ~VBaseTexture();
 
@@ -54,6 +56,30 @@ public:
 
 	VTexture2D(const image::VImage& in_Image, int in_TextureID);
 	virtual ~VTexture2D();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+};
+
+/**
+ * Untextured Interface
+ *
+ * @author lars
+ */
+class VUntextured : public VBaseTexture
+{
+public:
+
+	VUntextured();
+	VUntextured(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VUntextured();
 
 	/**
 	 * @see v3d::graphics::IVTexture::Bind
@@ -174,6 +200,27 @@ public:
 	void Unbind();
 };
 
+class VPBufferTexture : public VBaseTexture
+{
+public:
+
+	VPBufferTexture(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VPBufferTexture();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+
+private:
+
+	VPBufferWindowContext* m_pContext;
+};
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

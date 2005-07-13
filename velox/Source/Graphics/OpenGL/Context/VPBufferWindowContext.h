@@ -31,6 +31,14 @@ public:
 	virtual ~VPBufferWindowContext();
 
 	/**
+	 * Get the Pixel Buffer Object
+	*/
+	inline HPBUFFERARB GetPixelBuffer()
+	{
+		return m_pixelbuffer;
+	}
+
+	/**
 	 * Make the Pixel Buffer rendering Context active
 	*/
 	void MakeCurrent();

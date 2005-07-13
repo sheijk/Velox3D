@@ -5,6 +5,11 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
+VBaseTexture::VBaseTexture()
+{
+	//Dummy
+}
+
 VBaseTexture::VBaseTexture(const image::VImage& in_Image, GLenum in_TextureTarget) : m_iTextureTarget(in_TextureTarget)
 {
 }
@@ -47,6 +52,33 @@ void VTexture2D::Bind()
 void VTexture2D::Unbind()
 {
 	glDeleteTextures(1, &m_iTextureID);
+}
+
+VUntextured::VUntextured()
+{
+	//Dummy
+}
+
+VUntextured::VUntextured(const image::VImage& in_Image, int in_TextureID) :  VBaseTexture(in_Image, 0)
+{
+	m_iTextureID = in_TextureID;
+}
+
+VUntextured::~VUntextured()
+{
+}
+
+void VUntextured::Bind()
+{
+	glDisable(GL_TEXTURE_GEN_S);
+	glDisable(GL_TEXTURE_GEN_T);
+	glDisable(GL_TEXTURE_GEN_R);
+	glDisable(GL_TEXTURE_CUBE_MAP);
+	glDisable(GL_TEXTURE_2D);
+}
+
+void VUntextured::Unbind()
+{
 }
 
 VCubemapPosX::VCubemapPosX(const image::VImage& in_Image, int in_TextureID) :  VBaseTexture(in_Image, GL_TEXTURE_CUBE_MAP_POSITIVE_X)
@@ -203,6 +235,42 @@ void VCubemapNegZ::Bind()
 void VCubemapNegZ::Unbind()
 {
 	glDeleteTextures(1, &m_iTextureID);
+}
+
+VPBufferTexture::VPBufferTexture(const image::VImage& in_Image, int in_TextureID) : VBaseTexture(in_Image, GL_TEXTURE_2D)
+{
+	m_iTextureID = in_TextureID;
+
+	graphics::VDisplaySettings Settings;
+	Settings.SetWidth(in_Image.GetWidth());
+	Settings.SetHeight(in_Image.GetHeight());
+	Settings.SetBitsPerPixel(in_Image.GetBPP());
+	m_pContext = new VPBufferWindowContext(&Settings); Muss das hier noch fertig machen!!!!
+}
+
+VPBufferTexture::~VPBufferTexture()
+{
+	if(m_pContext != 0)
+	{
+		delete m_pContext;
+		m_pContext = 0;
+	}
+}
+
+void VPBufferTexture::Bind()
+{
+	//make Pixel Buffer actived
+	m_pContext -> MakeCurrent();
+
+	//bind Texture
+	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
+	wglBindTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
+}
+
+void VPBufferTexture::Unbind()
+{
+	//unbind Texture
+	wglReleaseTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
 }
 //-----------------------------------------------------------------------------
 }}// namespace v3d::graphics

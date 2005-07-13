@@ -26,10 +26,10 @@ vfloat32 VTextureStateCategory::GetPriority() const
 	return .9f;
 }
 
-/*const IVRenderState& VTextureStateCategory::GetDefault() const
+const IVRenderState& VTextureStateCategory::GetDefault() const
 {
-	return 0;
-}*/
+	return (IVRenderState&)m_DefaultState;
+}
 
 VTexture2D* VTextureStateCategory::Create2DState(const VState* in_pTextureState)
 {
@@ -158,7 +158,7 @@ IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 	}
 	else
 	{
-		return 0;//reinterpret_cast<IVRenderState*>(&m_DefaultState);
+		return reinterpret_cast<IVRenderState*>(&m_DefaultState);
 	}
 }
 
