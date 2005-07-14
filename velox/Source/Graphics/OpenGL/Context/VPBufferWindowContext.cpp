@@ -72,6 +72,10 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 	{
 		vout << "OpenGL Pixel Buffer Render Context was created!" << vendl;
 	}
+
+	//clear Pixel Buffer
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glViewport(m_DisplaySettings.GetX(), m_DisplaySettings.GetY(), m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
 }
 
 VPBufferWindowContext::~VPBufferWindowContext()
@@ -94,7 +98,7 @@ void VPBufferWindowContext::MakeCurrent()
 
 	wglMakeCurrent(m_pbufferdevicecontext, m_pbufferrendercontext);
 
-	glViewport(m_DisplaySettings.GetX(), m_DisplaySettings.GetY(), m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
