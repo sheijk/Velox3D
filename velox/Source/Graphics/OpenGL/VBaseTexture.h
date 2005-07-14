@@ -92,136 +92,156 @@ public:
 	void Unbind();
 };
 
-//class VCubemapPosX : public VBaseTexture
-//{
-//public:
-//
-//	VCubemapPosX(const image::VImage& in_Image, int in_TextureID);
-//	virtual ~VCubemapPosX();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Bind
-//	 */
-//	void Bind();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Unbind
-//	 */
-//	void Unbind();
-//};
-//
-//class VCubemapNegX : public VBaseTexture
-//{
-//public:
-//
-//	VCubemapNegX(const image::VImage& in_Image, int in_TextureID);
-//	virtual ~VCubemapNegX();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Bind
-//	 */
-//	void Bind();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Unbind
-//	 */
-//	void Unbind();
-//};
-//
-//class VCubemapPosY : public VBaseTexture
-//{
-//public:
-//
-//	VCubemapPosY(const image::VImage& in_Image, int in_TextureID);
-//	virtual ~VCubemapPosY();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Bind
-//	 */
-//	void Bind();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Unbind
-//	 */
-//	void Unbind();
-//};
-//
-//class VCubemapNegY : public VBaseTexture
-//{
-//public:
-//
-//	VCubemapNegY(const image::VImage& in_Image, int in_TextureID);
-//	virtual ~VCubemapNegY();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Bind
-//	 */
-//	void Bind();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Unbind
-//	 */
-//	void Unbind();
-//};
-//
-//class VCubemapPosZ : public VBaseTexture
-//{
-//public:
-//
-//	VCubemapPosZ(const image::VImage& in_Image, int in_TextureID);
-//	virtual ~VCubemapPosZ();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Bind
-//	 */
-//	void Bind();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Unbind
-//	 */
-//	void Unbind();
-//};
-//
-//class VCubemapNegZ : public VBaseTexture
-//{
-//public:
-//
-//	VCubemapNegZ(const image::VImage& in_Image, int in_TextureID);
-//	virtual ~VCubemapNegZ();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Bind
-//	 */
-//	void Bind();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Unbind
-//	 */
-//	void Unbind();
-//};
-//
-//class VPBufferTexture : public VBaseTexture
-//{
-//public:
-//
-//	VPBufferTexture(const image::VImage& in_Image, int in_TextureID);
-//	virtual ~VPBufferTexture();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Bind
-//	 */
-//	void Bind();
-//
-//	/**
-//	 * @see v3d::graphics::IVTexture::Unbind
-//	 */
-//	void Unbind();
-//
-//private:
-//
-//	VPBufferWindowContext* m_pContext;
-//};
+class VCubemapPosX : public VBaseTexture
+{
+	VCubemapPosX(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VCubemapPosX();
 
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+};
+
+class VCubemapNegX : public VBaseTexture
+{
+public:
+
+	VCubemapNegX(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VCubemapNegX();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+};
+
+class VCubemapPosY : public VBaseTexture
+{
+public:
+
+	VCubemapPosY(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VCubemapPosY();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+};
+
+class VCubemapNegY : public VBaseTexture
+{
+public:
+
+	VCubemapNegY(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VCubemapNegY();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+};
+
+class VCubemapPosZ : public VBaseTexture
+{
+public:
+
+	VCubemapPosZ(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VCubemapPosZ();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+};
+
+class VCubemapNegZ : public VBaseTexture
+{
+public:
+
+	VCubemapNegZ(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VCubemapNegZ();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+};
+
+class VPBufferTexture : public VBaseTexture
+{
+public:
+
+	VPBufferTexture(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VPBufferTexture();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	void Unbind();
+
+private:
+
+	VPBufferWindowContext* m_pContext;
+};
+
+/*class VFramebufferTexture : public VBaseTexture
+{
+public:
+
+	VFramebufferTexture(const image::VImage& in_Image, int in_TextureID);
+	virtual ~VFramebufferTexture();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Bind
+	 */
+	/*void Bind();
+
+	/**
+	 * @see v3d::graphics::IVTexture::Unbind
+	 */
+	/*void Unbind();
+
+private:
+
+	GLuint m_iFramebuffer;
+	GLuint m_iRenderbuffer;
+};*/
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

@@ -40,12 +40,6 @@ VTexture2D::~VTexture2D()
 
 void VTexture2D::Bind()
 {
-	//glDisable(GL_TEXTURE_GEN_S);
-	//glDisable(GL_TEXTURE_GEN_T);
-	//glDisable(GL_TEXTURE_GEN_R);
-	//glDisable(GL_TEXTURE_CUBE_MAP);
-	//glDisable(GL_TEXTURE_2D);
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
 }
@@ -71,18 +65,13 @@ VUntextured::~VUntextured()
 
 void VUntextured::Bind()
 {
-	//glDisable(GL_TEXTURE_GEN_S);
-	//glDisable(GL_TEXTURE_GEN_T);
-	//glDisable(GL_TEXTURE_GEN_R);
-	//glDisable(GL_TEXTURE_CUBE_MAP);
-	//glDisable(GL_TEXTURE_2D);
 }
 
 void VUntextured::Unbind()
 {
 }
 
-/*
+
 VCubemapPosX::VCubemapPosX(const image::VImage& in_Image, int in_TextureID) :  VBaseTexture(in_Image, GL_TEXTURE_CUBE_MAP_POSITIVE_X)
 {
 	m_iTextureID = in_TextureID;
@@ -94,12 +83,6 @@ VCubemapPosX::~VCubemapPosX()
 
 void VCubemapPosX::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
-
 	glEnable(GL_TEXTURE_CUBE_MAP_POSITIVE_X);
 	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X, m_iTextureID);
 }
@@ -120,12 +103,6 @@ VCubemapNegX::~VCubemapNegX()
 
 void VCubemapNegX::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
-
 	glEnable(GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
 	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, m_iTextureID);
 }
@@ -146,12 +123,6 @@ VCubemapPosY::~VCubemapPosY()
 
 void VCubemapPosY::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
-
 	glEnable(GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
 	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, m_iTextureID);
 }
@@ -172,12 +143,6 @@ VCubemapNegY::~VCubemapNegY()
 
 void VCubemapNegY::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
-
 	glEnable(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
 	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, m_iTextureID);
 }
@@ -198,12 +163,6 @@ VCubemapPosZ::~VCubemapPosZ()
 
 void VCubemapPosZ::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
-
 	glEnable(GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
 	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, m_iTextureID);
 }
@@ -224,12 +183,6 @@ VCubemapNegZ::~VCubemapNegZ()
 
 void VCubemapNegZ::Bind()
 {
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
-	glDisable(GL_TEXTURE_GEN_R);
-	glDisable(GL_TEXTURE_CUBE_MAP);
-	glDisable(GL_TEXTURE_2D);
-
 	glEnable(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, m_iTextureID);
 }
@@ -239,33 +192,78 @@ void VCubemapNegZ::Unbind()
 	glDeleteTextures(1, &m_iTextureID);
 }
 
-/*
-
-/ *
-class VPBufferTexture : public VBaseTexture
+VPBufferTexture::VPBufferTexture(const image::VImage& in_Image, int in_TextureID) : m_pContext(0), VBaseTexture(in_Image, GL_TEXTURE_2D)
 {
-public:
+	//create Pixel Buffer
+	graphics::VDisplaySettings Settings;
+	Settings.SetWidth(in_Image.GetWidth());
+	Settings.SetHeight(in_Image.GetHeight());
+	m_pContext = new VPBufferWindowContext(&Settings);
+}
 
-	VPBufferTexture(const image::VImage& in_Image, int in_TextureID);
-	virtual ~VPBufferTexture();
+VPBufferTexture::~VPBufferTexture()
+{
+	if(m_pContext != 0)
+	{
+		delete m_pContext;
+		m_pContext = 0;
+	}
+}
 
-	/ **
-	 * @see v3d::graphics::IVTexture::Bind
-	 * /
-	void Bind();
+void VPBufferTexture::Bind()
+{
+	//make Pixel Buffer actived
+	m_pContext -> MakeCurrent();
 
-	/ **
-	 * @see v3d::graphics::IVTexture::Unbind
-	 * /
-	void Unbind();
+	//bind Texture
+	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
+	wglBindTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
+}
 
-private:
-
-	VPBufferWindowContext* m_pContext;
+void VPBufferTexture::Unbind()
+{
+	//unbind Texture
+	wglReleaseTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
 };
-* /
-*/
 
+/*VFramebufferTexture::VFramebufferTexture(const image::VImage& in_Image, int in_TextureID) : m_pContext(0), VBaseTexture(in_Image, GL_TEXTURE_2D)
+{
+	//TODO: check Framebuffer Support
+
+	//create Frame Buffer and the Render Buffer
+	glGenFramebuffersEXT(1, &m_iFramebuffer);
+	glGenRenderbuffersEXT(1, &m_iRenderbuffer);
+
+	//bind the Buffers
+	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, m_iRenderbuffer);
+	glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT24, in_Image.GetWidth(), in_Image.GetHeight());
+	
+	//TODO: Framebuffer States einbauen
+
+	//clear Framebuffer
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glViewport(0, 0, in_Image.GetWidth(), in_Image.GetHeight());
+}
+
+VFramebufferTexture::~VFramebufferTexture()
+{
+}
+
+void VFramebufferTexture::Bind()
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_iFramebuffer);
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_iTextureID, 0);
+	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, m_iRenderbuffer);
+	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
+}
+
+void VFramebufferTexture::Unbind()
+{
+	//unbind Framebuffer and Render Buffer
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT,0);
+	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
+};*/
 //-----------------------------------------------------------------------------
 }}// namespace v3d::graphics
 //-----------------------------------------------------------------------------
