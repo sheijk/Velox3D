@@ -39,9 +39,14 @@ public:
 	}
 
 	/**
-	 * Make the Pixel Buffer rendering Context active
+	 * @see v3d::graphics::IVRenderContext::MakeCurrent
 	*/
 	void MakeCurrent();
+
+	/**
+	 * @see v3d::graphics::IVRenderContext::SwapBuffers
+	*/
+	void SwapBuffers();
 
 private:
 

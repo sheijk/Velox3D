@@ -5,7 +5,12 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplaySettings) : m_devicecontext(0), m_rendercontext(0), m_pbufferdevicecontext(0), m_pbufferrendercontext(0), m_DisplaySettings(*in_pDisplaySettings)
+VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplaySettings) : 
+	m_devicecontext(0), 
+	m_rendercontext(0),
+	m_pbufferdevicecontext(0), 
+	m_pbufferrendercontext(0), 
+	m_DisplaySettings(*in_pDisplaySettings)
 {
 	m_devicecontext = wglGetCurrentDC();
 	m_rendercontext = wglGetCurrentContext();
@@ -99,6 +104,11 @@ void VPBufferWindowContext::MakeCurrent()
 	wglMakeCurrent(m_pbufferdevicecontext, m_pbufferrendercontext);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void VPBufferWindowContext::SwapBuffers()
+{
+	//TODO: SwapBuffer Funktion machen
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
