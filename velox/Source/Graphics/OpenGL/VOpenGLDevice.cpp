@@ -502,10 +502,11 @@ void VOpenGLDevice::InitializeExtensions()
 
 	}
 
-	if(extgl_Initialize() != 0)
+	//TODO: Kann weg da wir ja später auf glew umstellen müssen
+	/*if(extgl_Initialize() != 0)
 		vout << "Initializing extensions failed!" << vendl;
 	else
-		vout << "Initializing extensions done..." << vendl;
+		vout << "Initializing extensions done..." << vendl;*/
 
 }
 
