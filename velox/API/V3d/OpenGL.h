@@ -3,7 +3,8 @@
 //-----------------------------------------------------------------------------
 
 #include <windows.h>
-#include <extgl/extgl.h>
+#include <glew/glew.h>
+#include <glew/wglew.h>
 #include <GL/gl.h>
 #include <GL/GLU.h>
 
