@@ -22,8 +22,9 @@ class VXMLAttribute : public IVXMLAttribute
 public:
 	VXMLAttribute(VStringParam Name, VStringParam Value);
 
-	virtual VStringRetVal GetName();
-	virtual v3d::utils::VStringValue GetValue();
+	virtual VStringRetVal GetName() const;
+	virtual v3d::utils::VStringValue GetValue() const;
+	virtual void SetValue(const v3d::utils::VStringValue& in_NewValue);
 	
 	void SetName(VStringParam Name);
 	void SetValue(VStringParam Value);

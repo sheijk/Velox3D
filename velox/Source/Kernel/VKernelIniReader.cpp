@@ -79,12 +79,17 @@ void VKernelIniReader::OnElementOpen(IVXMLElement* pElement)
 		{
 			if(sElementName == "Service")
 			{
+				IVXMLElement::AttributeIter attribIter = pElement->AttributeBegin();
+
 				std::string sServiceName =
-					pElement->GetFirstAttribute()->GetValue().GetSafe<std::string>();
+					attribIter->GetValue().GetSafe<std::string>();
+				++attribIter;
 				std::string sServiceDesc =
-					pElement->NextAttribute()->GetValue().GetSafe<std::string>();
+					attribIter->GetValue().GetSafe<std::string>();
+				++attribIter;
 				std::string sServiceFile =
-					pElement->NextAttribute()->GetValue().GetSafe<std::string>();
+					attribIter->GetValue().GetSafe<std::string>();
+				++attribIter;
 				vout << "Service Name: " << sServiceName << vendl;
 				vout << "Service Description: " << sServiceDesc << vendl;
 				vout << "Service Filename: " << sServiceFile << vendl;

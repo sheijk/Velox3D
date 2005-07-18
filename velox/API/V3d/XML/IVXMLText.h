@@ -16,7 +16,14 @@ class IVXMLText : public IVXMLNode
 {
 public:
 	/** Returns the text */
-	virtual VStringRetVal GetText() = 0;
+	virtual VStringRetVal GetText() const = 0;
+
+	/** Change the text */
+	virtual void SetText(VStringParam in_strText) = 0;
+
+	virtual	IVXMLElement* ToElement() { return 0; }
+	virtual IVXMLComment* ToComment() { return 0; }
+	virtual IVXMLText* ToText() { return this; }
 };
 
 //-----------------------------------------------------------------------------

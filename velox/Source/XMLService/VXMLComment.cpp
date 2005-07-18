@@ -19,10 +19,15 @@ IVXMLNode::NodeType VXMLComment::GetType()
 	return Comment;
 }
 
-VStringRetVal VXMLComment::GetComment()
+VStringRetVal VXMLComment::GetComment() const
 {
 	return m_strComment;
 };
+
+void VXMLComment::SetComment(VStringParam in_strComment)
+{
+	m_strComment = in_strComment;
+}
 
 void VXMLComment::Visit(IVXMLVisitor& in_Visitor)
 {

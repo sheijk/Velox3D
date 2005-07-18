@@ -15,6 +15,7 @@ using namespace v3d; // anti auto indenting
  *
  * @author sheijk
  */
+#pragma deprecated(ToElement)
 IVXMLElement* ToElement(IVXMLNode* in_pNode);
 
 /**

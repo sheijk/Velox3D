@@ -30,6 +30,7 @@ public:
 	typedef VSharedPtr<VMatrix44f> MatrixPtr;
 
 	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial, MatrixPtr in_pTransform);
+	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial);
 
 	MeshPtr GetMesh() const;
 	MaterialPtr GetMaterial() const;
@@ -48,6 +49,8 @@ public:
 	typedef VSharedPtr<VMatrix44f> MatrixPtr;
 
 	VModel();
+	VModel(const VModelMesh& in_Part);
+	
 	virtual ~VModel();
 
 	void Add(const VModelMesh& in_Part);

@@ -7,6 +7,7 @@
 namespace v3d{
 namespace xml{
 //-----------------------------------------------------------------------------
+
 /**
  * The IVXMLText implementation
  * @author AcrylSword
@@ -24,9 +25,11 @@ public:
 
 	virtual void Visit(IVXMLVisitor& in_Visitor);
 
-	VStringRetVal GetText();
-	NodeType GetType();
+	virtual VStringRetVal GetText() const;
+	virtual void SetText(VStringParam in_strText);
+	virtual NodeType GetType();
 };
+
 //-----------------------------------------------------------------------------
 } //xml
 } //v3d

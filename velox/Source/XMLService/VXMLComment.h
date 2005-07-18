@@ -22,7 +22,9 @@ private:
 public:
 	VXMLComment(VStringParam in_strComment);
 
-	virtual VStringRetVal GetComment();
+	virtual VStringRetVal GetComment() const;
+	virtual void SetComment(VStringParam in_strComment);
+
 	virtual void Visit(IVXMLVisitor& in_Visitor);
 	virtual NodeType GetType();
 };

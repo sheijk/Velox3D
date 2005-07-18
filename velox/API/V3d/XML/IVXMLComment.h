@@ -16,7 +16,12 @@ class IVXMLComment : public IVXMLNode
 {
 public:
 	/** Returns the Comment */
-	virtual VStringRetVal GetComment() = 0;
+	virtual VStringRetVal GetComment() const = 0;
+	virtual void SetComment(VStringParam in_strComment) = 0;
+
+	virtual	IVXMLElement* ToElement() { return 0; }
+	virtual IVXMLComment* ToComment() { return this; }
+	virtual IVXMLText* ToText() { return 0; }
 };
 //-----------------------------------------------------------------------------
 } // namespace xml

@@ -30,6 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+18.07.05
+- XML Service Objekte koennen geaendert werden (nodes hinzufuegen, ...)
+- erste Editorversion
+- VFS, Resource, Properties View
+- Scene Edit View mit Preview
+
 14.07.05
 - Texturkram von Lars gefixt
 - erste Version des Velox Editors

@@ -25,6 +25,15 @@ VModelMesh::VModelMesh(
 	m_pTransform = in_pTransform;
 }
 
+VModelMesh::VModelMesh(
+	MeshPtr in_pMesh,
+	MaterialPtr in_pMaterial)
+{
+	m_pMesh = in_pMesh;
+	m_pMaterial = in_pMaterial;
+	m_pTransform = math::IdentityPtr();
+}
+
 VModelMesh::MeshPtr VModelMesh::GetMesh() const
 {
 	return m_pMesh;
@@ -54,6 +63,11 @@ VSharedPtr<const VMatrix44f> VModelMesh::GetTransform() const
  */
 VModel::VModel()
 {
+}
+
+VModel::VModel(const VModelMesh& in_Part)
+{
+	Add(in_Part);
 }
 
 /**

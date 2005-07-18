@@ -1,5 +1,6 @@
 #include <V3d/Scene/VShooting.h>
 //-----------------------------------------------------------------------------
+#include <V3d/Core/VIOStream.h>
 
 #include <V3d/Scene/VSimpleScene.h>
 //-----------------------------------------------------------------------------
@@ -19,17 +20,23 @@ VShooting::VShooting(graphics::IVDevice* in_pDevice, IVRenderAlgorithm* in_pAlgo
 
 void VShooting::Cull()
 {
-	V3D_ASSERT(m_pScene != 0);
+//	V3D_ASSERT(m_pScene != 0);
 
-	m_pScene->UpdateVisibleObjects();
+	if( m_pScene != 0 )
+		m_pScene->UpdateVisibleObjects();
+	else
+		vout << "error in cull" << vendl;
 }
 
 void VShooting::Render()
 {
-	V3D_ASSERT(m_pRenderList != 0);
-	V3D_ASSERT(m_pRenderTarget != 0);
+//	V3D_ASSERT(m_pRenderList != 0);
+//	V3D_ASSERT(m_pRenderTarget != 0);
 
-	m_pRenderAlgorithm->Render(*m_pRenderTarget, *m_pRenderList);
+	if( m_pRenderTarget != 0 && m_pRenderAlgorithm.Get() != 0 && m_pRenderList != 0 )
+		m_pRenderAlgorithm->Render(*m_pRenderTarget, *m_pRenderList);
+	else
+		vout << "error in render" << vendl;
 }
 
 void VShooting::Activate()

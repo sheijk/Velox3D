@@ -71,7 +71,7 @@ void VUntextured::Unbind()
 {
 }
 
-
+/*
 VCubemapPosX::VCubemapPosX(const image::VImage& in_Image, int in_TextureID) :  VBaseTexture(in_Image, GL_TEXTURE_CUBE_MAP_POSITIVE_X)
 {
 	m_iTextureID = in_TextureID;

@@ -24,16 +24,24 @@ public:
 	VXMLElement(VStringParam in_strName);
 	~VXMLElement();
 	virtual VStringRetVal GetName();
-	virtual IVXMLAttribute* GetFirstAttribute();
-	virtual IVXMLAttribute* NextAttribute();
-	virtual IVXMLAttribute* GetAttribute(VStringParam Name);
+	virtual void SetName(VStringParam in_strName);
+	//virtual IVXMLAttribute* GetFirstAttribute();
+	//virtual IVXMLAttribute* NextAttribute();
+	virtual IVXMLAttribute* GetAttribute(VStringParam Name) const;
 	virtual AttributeIter AttributeBegin();
 	virtual AttributeIter AttributeEnd();
 
 	void AddAttribute(VXMLAttribute* p_Attribute);
-	void SetName(VStringParam Name);
+
+	virtual void AddAttribute(
+		VStringParam in_strName, const v3d::utils::VStringValue& in_Name);
+	virtual void RemoveAttribute(VStringParam in_strName);
 
 	void AddChild(IVXMLNode* in_pChild);
+
+	virtual IVXMLElement* AddElement(VStringParam in_strName);
+	virtual void RemoveChild(NodeIter in_Node);
+
 	virtual NodeIter ChildBegin();
 	virtual NodeIter ChildEnd();
 
@@ -46,9 +54,9 @@ public:
 private:
 
 	VString m_strName;
-	std::vector <VXMLAttribute*> m_AttributeList;
+	std::list<IVXMLAttribute*> m_AttributeList;
 	std::list<IVXMLNode*> m_Childs;
-	vuint m_iPos;
+	//vuint m_iPos;
 };
 //-----------------------------------------------------------------------------
 } //xml

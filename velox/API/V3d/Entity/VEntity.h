@@ -34,6 +34,8 @@ public:
 
 	/** Will deactivate all parts */
 	void Deactivate();
+	
+	vbool IsActive() const;
 
 	/** Adds a part to the entity. Entity will delete part */
 	void AddPart(const utils::VFourCC& in_Id, PartPtr in_pPart);

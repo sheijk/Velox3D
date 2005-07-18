@@ -36,7 +36,7 @@ VXMLAttribute::VXMLAttribute(VStringParam in_strName, VStringParam in_strValue)
  * @return The name of the attribute.
  * @author ins/acrylsword
  */
-VStringRetVal VXMLAttribute::GetName()
+VStringRetVal VXMLAttribute::GetName() const
 {
 	return m_strName;
 }
@@ -50,9 +50,14 @@ VStringRetVal VXMLAttribute::GetName()
  * @see VStringValue#GetSafe()
  * @author acrylsword
  */
-v3d::utils::VStringValue VXMLAttribute::GetValue()
+v3d::utils::VStringValue VXMLAttribute::GetValue() const
 {
 	return m_Value;
+}
+
+void VXMLAttribute::SetValue(const v3d::utils::VStringValue& in_NewValue)
+{
+	m_Value = in_NewValue;
 }
 
 /**

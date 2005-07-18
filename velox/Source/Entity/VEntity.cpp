@@ -1,5 +1,6 @@
 #include <V3d/Entity/VEntity.h>
 //-----------------------------------------------------------------------------
+#include <V3d/Core/VIOStream.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------
@@ -9,10 +10,15 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
+//int g_nEntityCount = 0;
+
 VEntity::VEntity()
 {
 	m_pParent = 0;
 	m_bActivated = false;
+	
+//	++g_nEntityCount;
+//	vout << g_nEntityCount << " entities existing" << vendl;
 }
 
 VEntity::~VEntity()
@@ -25,54 +31,64 @@ VEntity::~VEntity()
 	{
 		part->second.Release();
 	}
+	
+//	--g_nEntityCount;
+//	vout << g_nEntityCount << " entities remaining" << vendl;
 }
 
 void VEntity::Activate()
 {
-	V3D_ASSERT(m_bActivated == false);
-
-	// activate all parts
-	for(
-		PartContainer::iterator part = m_Parts.begin();
-		part != m_Parts.end();
-		++part)
+	if( ! m_bActivated )
 	{
-		part->second->Activate();
+		// activate all parts
+		for(
+			PartContainer::iterator part = m_Parts.begin();
+			part != m_Parts.end();
+			++part)
+		{
+			part->second->Activate();
+		}
+	
+		// activate all childs
+		for(EntityContainer::iterator child = m_Entities.begin();
+			child != m_Entities.end();
+			++child)
+		{
+			(*child)->Activate();
+		}
+	
+		m_bActivated = true;
 	}
-
-	// activate all childs
-	for(EntityContainer::iterator child = m_Entities.begin();
-		child != m_Entities.end();
-		++child)
-	{
-		(*child)->Activate();
-	}
-
-	m_bActivated = true;
 }
 
 void VEntity::Deactivate()
 {
-	V3D_ASSERT(m_bActivated == true);
-
-	// deactivate all childs
-	for(EntityContainer::iterator child = m_Entities.begin();
-		child != m_Entities.end();
-		++child)
+	if( m_bActivated )
 	{
-		(*child)->Deactivate();
+		// deactivate all childs
+		for(EntityContainer::iterator child = m_Entities.begin();
+			child != m_Entities.end();
+			++child)
+		{
+			(*child)->Deactivate();
+		}
+	
+		// deactivate all parts
+		for(
+			PartContainer::iterator part = m_Parts.begin();
+			part != m_Parts.end();
+			++part)
+		{
+			part->second->Deactivate();
+		}
+	
+		m_bActivated = false;
 	}
+}
 
-	// deactivate all parts
-	for(
-		PartContainer::iterator part = m_Parts.begin();
-		part != m_Parts.end();
-		++part)
-	{
-		part->second->Deactivate();
-	}
-
-	m_bActivated = false;
+vbool VEntity::IsActive() const
+{
+	return m_bActivated;
 }
 
 void VEntity::AddPart(const utils::VFourCC& in_Id, PartPtr in_pPart)

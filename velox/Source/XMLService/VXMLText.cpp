@@ -19,9 +19,14 @@ IVXMLNode::NodeType VXMLText::GetType()
 	return Text;
 }
 
-VStringRetVal VXMLText::GetText()
+VStringRetVal VXMLText::GetText() const
 {
 	return m_strText;
+}
+
+void VXMLText::SetText(VStringParam in_strText)
+{
+	m_strText = in_strText;
 }
 
 void VXMLText::Visit(IVXMLVisitor& in_Visitor)

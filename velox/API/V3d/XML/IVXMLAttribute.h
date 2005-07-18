@@ -15,12 +15,14 @@ namespace xml{
 class IVXMLAttribute
 {
 public:
-
 	/** Returns the name of the xml attribute*/
-    virtual VStringRetVal GetName() = 0;
-	
+    virtual VStringRetVal GetName() const = 0;
+
 	/** Returns the value of this xml attribute */
-	virtual v3d::utils::VStringValue GetValue() = 0;
+	virtual v3d::utils::VStringValue GetValue() const = 0;
+
+	/** Change the attribute's value */
+	virtual void SetValue(const v3d::utils::VStringValue& in_NewValue) = 0;
 };
 //-----------------------------------------------------------------------------
 } //xml

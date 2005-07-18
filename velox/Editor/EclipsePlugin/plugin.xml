@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="VeloxEditor"
+   name="VeloxEditor Plug-in"
+   version="0.1"
+   provider-name="Sechsta Sinn"
+   class="de.velox.editor.VeloxEditorPlugin">
+
+   <runtime>
+      <library name="VeloxEditor.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+   </requires>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Velox Editor"
+            id="VeloxEditor">
+      </category>
+      <view
+            name="Properties"
+            icon="icons/sample.gif"
+            category="VeloxEditor"
+            class="de.velox.editor.views.PropertiesView"
+            id="de.velox.views.editor.PropertiesView">
+      </view>
+      <view
+            category="VeloxEditor"
+            class="de.velox.editor.views.RenderView"
+            icon="icons/sample.gif"
+            id="veloxEditor.views.editor.RenderView"
+            name="Rendering"/>
+      <view
+            category="VeloxEditor"
+            class="de.velox.editor.views.ResourceView"
+            icon="icons/sample.gif"
+            id="de.velox.editor.views.ResourceView"
+            name="Resources"/>
+      <view
+            category="VeloxEditor"
+            class="de.velox.editor.views.SceneView"
+            icon="icons/sample.gif"
+            id="de.velox.editor.views.SceneView"
+            name="Scene"/>
+      <view
+            category="VeloxEditor"
+            class="de.velox.editor.views.VFSView"
+            icon="icons/sample.gif"
+            id="de.velox.editor.views.VFSView"
+            name="VFS"/>
+   </extension>
+
+</plugin>

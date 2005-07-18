@@ -1,5 +1,6 @@
 #include <V3d/Scene/VSceneModelPart.h>
 //-----------------------------------------------------------------------------
+#include <V3d/Core/VIOStream.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -33,7 +34,11 @@ void VSceneModelPart::Deactivate()
 
 void VSceneModelPart::TellParentPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 {
-	m_pParent =  in_Part.Convert<VSimpleScene>();
+	vout << "parent " << in_Id.AsStdString();
+	
+	m_pParent = in_Part.Convert<VSimpleScene>();
+	
+	vout << (m_pParent ? " ok" : " failed") << vendl;
 }
 
 //-----------------------------------------------------------------------------

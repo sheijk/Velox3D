@@ -11,21 +11,28 @@ namespace xml{
 VXMLElement::VXMLElement()
 {
 	m_strName = "NoName";
-	m_iPos = 0;
+	//m_iPos = 0;
 }
 
 VXMLElement::VXMLElement(VStringParam in_strName)
 {
 	m_strName = in_strName;
-	m_iPos = 0;
+	//m_iPos = 0;
 }
 
 VXMLElement::~VXMLElement()
 {
-	vuint i;
-	for(i=0; i<m_AttributeList.size(); i++)
-		delete m_AttributeList[i];
+	std::list<IVXMLAttribute*>::iterator attribIter = m_AttributeList.begin();
+	for( ; attribIter != m_AttributeList.end(); ++attribIter)
+	{
+		delete *attribIter;
+	}
+	
+	//TODO: nodes loeschen(?)
 
+	//vuint i;
+	//for(i=0; i<m_AttributeList.size(); i++)
+	//	delete m_AttributeList[i];
 }
 
 VStringRetVal VXMLElement::GetName()
@@ -33,25 +40,30 @@ VStringRetVal VXMLElement::GetName()
 	return m_strName;
 }
 
-IVXMLAttribute* VXMLElement::GetFirstAttribute()
-{
-	if(m_AttributeList.empty())
-		return NULL;
-	else 
-	{
-		m_iPos = 0;
-		return m_AttributeList[0];
-	}
-}
+//IVXMLAttribute* VXMLElement::GetFirstAttribute()
+//{
+//	if(m_AttributeList.empty())
+//		return NULL;
+//	else 
+//	{
+//		m_iPos = 0;
+//		return m_AttributeList[0];
+//	}
+//}
 
-IVXMLAttribute* VXMLElement::GetAttribute(VStringParam in_strName)
+IVXMLAttribute* VXMLElement::GetAttribute(VStringParam in_strName) const
 {
 	VString name(in_strName);
 
-	for(vuint i = 0; i<m_AttributeList.size(); i++)
+	for(std::list<IVXMLAttribute*>::const_iterator attribIter = m_AttributeList.begin();
+		attribIter != m_AttributeList.end();
+		++attribIter)
+		//vuint i = 0; i<m_AttributeList.size(); i++)
 	{
-		if(name == m_AttributeList[i]->GetName() )
-			return m_AttributeList[i];
+		if( name == (*attribIter)->GetName() )
+			return *attribIter;
+		//if(name == m_AttributeList[i]->GetName() )
+		//	return m_AttributeList[i];
 	}
 
 	std::stringstream message;
@@ -78,15 +90,30 @@ void VXMLElement::AddAttribute(VXMLAttribute* in_pAttribute)
 	m_AttributeList.push_back(in_pAttribute);
 }
 
-IVXMLAttribute* VXMLElement::NextAttribute()
+void VXMLElement::AddAttribute(VStringParam in_strName,
+	const v3d::utils::VStringValue& in_Value)
 {
-	m_iPos++;
+	VXMLAttribute* pAttribute = 
+		new VXMLAttribute(in_strName, in_Value.Get<std::string>().c_str());
 
-	if(m_iPos <= m_AttributeList.size())
-		return m_AttributeList[m_iPos];
-	else
-		return NULL;
+	AddAttribute(pAttribute);
 }
+
+void VXMLElement::RemoveAttribute(VStringParam in_strName)
+{
+	IVXMLAttribute* pAttribute = GetAttribute(in_strName);
+	m_AttributeList.remove(pAttribute);
+}
+
+//IVXMLAttribute* VXMLElement::NextAttribute()
+//{
+//	m_iPos++;
+//
+//	if(m_iPos <= m_AttributeList.size())
+//		return m_AttributeList[m_iPos];
+//	else
+//		return NULL;
+//}
 
 void VXMLElement::SetName(const VStringParam in_strName)
 {
@@ -120,6 +147,21 @@ void VXMLElement::AddChild(IVXMLNode* in_pChild)
 	V3D_ASSERT(in_pChild != 0);
 
 	m_Childs.push_back(in_pChild);
+}
+
+IVXMLElement* VXMLElement::AddElement(VStringParam in_strName)
+{
+    VXMLElement* pElement = new VXMLElement(in_strName);
+
+	AddChild(pElement);
+
+	return pElement;
+}
+
+void VXMLElement::RemoveChild(NodeIter in_Node)
+{
+	IVXMLNode* pNode = &*in_Node;
+	m_Childs.remove(pNode);
 }
 
 IVXMLElement::NodeIter VXMLElement::ChildBegin()
