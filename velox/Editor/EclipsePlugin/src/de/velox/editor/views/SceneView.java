@@ -97,7 +97,6 @@ public class SceneView extends VeloxViewBase {
 		public Object[] getElements(Object parent) {
 			if (parent.equals(getViewSite())) {
 				return new Object[] { root };
-//				return getChildren(root);
 			}
 			else {
 				return getChildren(parent);
@@ -149,6 +148,10 @@ public class SceneView extends VeloxViewBase {
 					childs.add(settingIter.next());
 				}				
 			}
+//			else if( parent instanceof Setting ) {
+//				Setting setting = (Setting)parent;
+//				childs.addAll(setting.getChildSettings());
+//			}
 			
 			return childs.toArray();				
 		}

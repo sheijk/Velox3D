@@ -13,7 +13,6 @@ import de.velox.*;
 public class Part implements XMLSerializable {
 	private String type;
 	
-//	private TreeMap<String, String> settings = new TreeMap<String, String>();
 	private LinkedList<Setting> settings = new LinkedList<Setting>();
 	
 	private VPartPtr impl = null;
@@ -65,7 +64,7 @@ public class Part implements XMLSerializable {
 	public void SetType(String out_type) {
 		type = out_type;
 	}
-	
+
 	public void ToXML(IVXMLElement outElement) {
 		outElement.SetName("part");
 		

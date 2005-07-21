@@ -1,5 +1,6 @@
 #include "VImageResourceType.h"
 //-----------------------------------------------------------------------------
+#include <V3d/Core/VTypeInfo.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -13,7 +14,7 @@ using namespace v3d; // anti auto indent
  */
 VImageResourceType::VImageResourceType()
 {
-	m_ManagedTypes.push_back(resource::VTypeId::Create<VImage>());
+	m_ManagedTypes.push_back(GetTypeInfo<VImage>());
 }
 
 /**
@@ -23,16 +24,16 @@ VImageResourceType::~VImageResourceType()
 {
 }
 
-VRangeIterator<resource::VTypeId> VImageResourceType::CreatedTypes()
+VRangeIterator<VTypeInfo> VImageResourceType::CreatedTypes()
 {
 	return CreateBeginIterator(m_ManagedTypes);
 }
 
 vbool VImageResourceType::Generate(
 	resource::VResource* in_pResource,
-	resource::VTypeId in_Type)
+	VTypeInfo in_Type)
 {
-	V3D_ASSERT(resource::VTypeId::Create<VImage>() == in_Type);
+	V3D_ASSERT(GetTypeInfo<VImage>() == in_Type);
 
 	// if a file name is present
 	const resource::VFileName* pFileName = &*in_pResource->GetData<resource::VFileName>();

@@ -2,6 +2,8 @@
 #define V3D_VIMAGE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
+
 #include <v3d/Graphics/VBuffer.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
@@ -150,6 +152,9 @@ public: // ja, das soll mal private werden
 //-----------------------------------------------------------------------------
 } // namespace image
 } // namespace v3d
+
+V3D_TYPEINFO(v3d::image::VImage);
+
 //-----------------------------------------------------------------------------
 
 #endif // V3D_VIMAGE_H

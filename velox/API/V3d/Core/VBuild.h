@@ -15,6 +15,11 @@
 #define V3D_WIN32
 #endif
 
+// compiler constants
+#ifdef _MSC_VER
+#define V3D_MSVC
+#endif
+
 // turn debugging-code on/off
 #ifdef _DEBUG
 #define V3D_DEBUG

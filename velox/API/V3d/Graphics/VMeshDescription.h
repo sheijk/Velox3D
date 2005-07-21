@@ -2,6 +2,8 @@
 #define V3D_VMESHDESCRIPTION_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
+
 #include <v3d/Graphics/VBuffer.h>
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Graphics/VVertexFormat.h>
@@ -91,5 +93,7 @@ private:
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
+
+V3D_TYPEINFO(v3d::graphics::VMeshDescription);
 //-----------------------------------------------------------------------------
 #endif // V3D_VMESHDESCRIPTION_H

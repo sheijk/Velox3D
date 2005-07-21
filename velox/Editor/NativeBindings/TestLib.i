@@ -184,5 +184,26 @@ namespace v3d {
 %include "../../API/V3d/Entity/IVPart.h"
 %include "../../API/V3d/Entity/VEntity.h"
 
+%javaexception("Exception") v3d::entity::IVSceneParser::ParsePart {
+	try {
+		$action
+	}
+	catch(VException& e) {
+		jclass clazz = jenv->FindClass("java/lang/RuntimeException");
+		std::string msgString = e.ToString();
+		jenv->ThrowNew(clazz, msgString.c_str());
+		return $null;
+	}
+	catch(...) {
+		jclass clazz = jenv->FindClass("java/lang/RuntimeException");
+		jenv->ThrowNew(clazz, "Unknown exception occured");
+		return $null;
+	}
+}
+
+%ignore v3d::entity::IVSceneParser::Register;
+%ignore v3d::entity::IVSceneParser::Unregister;
+%include "../../API/V3d/Entity/IVSceneParser.h"
+
 //-----------------------------------------------------------------------------
 %include "TestLib.h"

@@ -51,5 +51,16 @@ VStringRetVal VException::GetExtendedErrorString() const
 	return "No extended error string avaible\n";
 }
 
+VStringRetVal VException::ToString() const
+{
+	std::stringstream report;
+	report << "[" << GetErrorFile() << "|" << GetErrorLine() << "] "
+		<< GetErrorString();
+
+	std::string reportmsg = report.str();
+
+	return VString(reportmsg.c_str());
+}
+
 //-----------------------------------------------------------------------------
 } // namespace v3d

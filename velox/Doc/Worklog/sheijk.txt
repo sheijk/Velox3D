@@ -30,6 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+- V3D_DEPRECATED makro (VDeprecated.h)
+- VTypeInfo
+- Resource System nutzt VTypeInfo, so dass Derived resource daten auch als
+  Base daten angefordert werden koennen 
+  (AddData<Derived>(..); .. GetData<Base>() geht)
+
 18.07.05
 - XML Service Objekte koennen geaendert werden (nodes hinzufuegen, ...)
 - erste Editorversion

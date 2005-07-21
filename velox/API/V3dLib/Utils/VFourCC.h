@@ -38,7 +38,7 @@ private:
 	union
 	{
 		vuint32 m_Val;
-		vchar m_Chars[4];
+		vchar m_Chars[Length];
 	};
 };
 

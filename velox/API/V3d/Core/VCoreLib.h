@@ -2,9 +2,11 @@
 #define V3D_VCORELIB_H
 //-----------------------------------------------------------------------------
 
-#include <v3d/Core/VBuild.h>
-#include <v3d/Core/VTypes.h>
-#include <v3d/Core/VMemory.h>
-#include <v3d/Core/VAssert.h>
+#include <V3d/Core/VBuild.h>
+#include <V3d/Core/VTypes.h>
+#include <V3d/Core/VMemory.h>
+#include <V3d/Core/VAssert.h>
+#include <V3d/Core/VDeprecated.h>
+
 //-----------------------------------------------------------------------------
 #endif // V3D_VCORELIB_H

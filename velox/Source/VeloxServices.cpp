@@ -36,6 +36,10 @@
 #include <v3d/Utils/VAllFilter.h>
 
 #include <V3d/Entity/VEntityManager.h>
+
+#include "Entity/VSceneParser.h"
+#include "Entity/Parsers/VSceneModelParser.h"
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -94,6 +98,9 @@ class VVeloxModules : public v3d::VModuleBase
 
 	// entity
 	VSharedPtr<VEntityManager> g_pEntityManager;
+
+	VSharedPtr<VSceneParser> g_pSceneParser;
+	VSharedPtr<VSceneModelParser> g_pSceneModelParser;
 
 public:
 	VVeloxModules()
@@ -165,11 +172,19 @@ void VVeloxModules::Initialize()
 
 	// entity service
 	g_pEntityManager.Assign(new VEntityManager());
+
+    g_pSceneParser.Assign(new VSceneParser());
+	g_pSceneModelParser.Assign(new VSceneModelParser());
+	g_pSceneParser->Register(&*g_pSceneModelParser);
 }
 
 void VVeloxModules::Shutdown()
 {
 	// entity
+	g_pSceneParser->Unregister(g_pSceneModelParser->GetType());
+	g_pSceneModelParser.Release();
+	g_pSceneParser.Release();
+
 	g_pEntityManager.Release();
 
 	// property

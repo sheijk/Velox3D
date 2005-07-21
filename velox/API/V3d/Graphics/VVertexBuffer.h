@@ -2,6 +2,7 @@
 #define V3D_VVERTEXBUFFER_2005_02_02_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 
 #include <V3d/Math/VVector.h>
 #include <V3d/Graphics/VVertexFormat.h>
@@ -81,5 +82,8 @@ VVertexBuffer::VVertexBuffer(
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
+
+V3D_TYPEINFO(v3d::graphics::VVertexBuffer);
+
 //-----------------------------------------------------------------------------
 #endif // V3D_VVERTEXBUFFER_2005_02_02_H

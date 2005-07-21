@@ -36,6 +36,9 @@ public:
 
 	/** returns an extended error description */
 	virtual VStringRetVal GetExtendedErrorString() const;
+
+	/** Creates a short report from file, line and error message */
+	VStringRetVal ToString() const;
 };
 
 /** Throw an exception and send file and line */

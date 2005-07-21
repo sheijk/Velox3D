@@ -19,21 +19,21 @@ using namespace v3d; // anti auto indenting
  */
 class VTextureStateResType : public resource::IVResourceType
 {
-	typedef std::map<resource::VTypeId, GLenum> TextureTargetMap;
+	typedef std::map<VTypeInfo, GLenum> TextureTargetMap;
 
-	std::vector<resource::VTypeId> m_ManagedTypes;
+	std::vector<VTypeInfo> m_ManagedTypes;
 	TextureTargetMap m_TextureTargets;
 
-	GLenum GetTextureTarget(resource::VTypeId in_Type) const;
+	GLenum GetTextureTarget(VTypeInfo in_Type) const;
 public:
 	VTextureStateResType();
 	virtual ~VTextureStateResType();
 
-	virtual VRangeIterator<resource::VTypeId> CreatedTypes();
+	virtual VRangeIterator<VTypeInfo> CreatedTypes();
 
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
-		resource::VTypeId in_Type);
+		VTypeInfo in_Type);
 };
 
 //-----------------------------------------------------------------------------

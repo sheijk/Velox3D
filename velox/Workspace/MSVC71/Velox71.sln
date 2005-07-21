@@ -70,6 +70,12 @@ Global
 		{20050526-0000-0000-0000-000633000000}.Release.ActiveCfg = Release|Win32
 		{20050526-0000-0000-0000-000633000000}.Release.Build.0 = Release|Win32
 	EndGlobalSection
+	GlobalSection(SolutionItems) = postSolution
+		..\..\Doc\Worklog\AcrylSword.txt = ..\..\Doc\Worklog\AcrylSword.txt
+		..\..\Doc\Worklog\insane.txt = ..\..\Doc\Worklog\insane.txt
+		..\..\Doc\Worklog\Lars.txt = ..\..\Doc\Worklog\Lars.txt
+		..\..\Doc\Worklog\sheijk.txt = ..\..\Doc\Worklog\sheijk.txt
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
 	GlobalSection(ExtensibilityAddIns) = postSolution

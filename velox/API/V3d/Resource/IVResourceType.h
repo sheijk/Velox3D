@@ -16,13 +16,18 @@ using namespace v3d; // anti auto indenting
  * A managed resource type. Provides functionality to create resource data
  * of a specific type on request and to decide when to unload it.
  *
+ * Needs to be registered to the resource manager: 
+ * <code>
+ * VServicePtr<IVResourceManager>()->RegisterResourceType(..)
+ * </code>
+ *
  * @author sheijk
  */
 class IVResourceType
 {
 public:
-	virtual VRangeIterator<VTypeId> CreatedTypes() = 0;
-    virtual vbool Generate(VResource* in_pResource, VTypeId in_Type) = 0;
+	virtual VRangeIterator<VTypeInfo> CreatedTypes() = 0;
+    virtual vbool Generate(VResource* in_pResource, VTypeInfo in_Type) = 0;
 };
 
 //-----------------------------------------------------------------------------

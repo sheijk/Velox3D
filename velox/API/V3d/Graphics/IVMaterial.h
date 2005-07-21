@@ -1,7 +1,9 @@
 #ifndef V3D_IVMATERIAL_H
 #define V3D_IVMATERIAL_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
+
 //----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -35,5 +37,7 @@ public:
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
+
+V3D_TYPEINFO(v3d::graphics::IVMaterial);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVMATERIAL_H

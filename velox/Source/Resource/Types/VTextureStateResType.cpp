@@ -50,6 +50,10 @@ private:
 	VTextureWrapMode m_TextureWrapModeV;
 };
 
+}} // namespace v3d::graphics
+V3D_TYPEINFO(v3d::graphics::VTextureOptions);
+namespace v3d { namespace graphics {
+
 VTextureOptions::VTextureOptions()
 {
 	m_MagnificationFilter = FilterLinear;
@@ -121,7 +125,7 @@ namespace {
 		//V3D_THROW(VException, "illegal texture wrapping mode");
 	}
 
-	IVRenderState* CreateTextureState(
+	VTextureState* CreateTextureState(
 		const image::VImage& image,
         const VTextureOptions& in_Options,
 		const GLenum in_TextureTarget
@@ -205,7 +209,8 @@ namespace {
  */
 VTextureStateResType::VTextureStateResType()
 {
-	m_TextureTargets[VTypeId::Create<VTextureState>()] = GL_TEXTURE_2D;
+	m_TextureTargets[GetTypeInfo<VTextureState>()] = GL_TEXTURE_2D;
+
 	//m_TextureTargets[VTypeId::Create<VCubemapPosX>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 	//m_TextureTargets[VTypeId::Create<VCubemapNegX>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
 	//m_TextureTargets[VTypeId::Create<VCubemapPosY>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_Y;
@@ -228,22 +233,22 @@ VTextureStateResType::~VTextureStateResType()
 {
 }
 
-GLenum VTextureStateResType::GetTextureTarget(resource::VTypeId in_Type) const
+GLenum VTextureStateResType::GetTextureTarget(VTypeInfo in_Type) const
 {
-	std::map<resource::VTypeId, GLenum>::const_iterator it;
+	std::map<VTypeInfo, GLenum>::const_iterator it;
 	it = m_TextureTargets.find(in_Type);
 	V3D_ASSERT(it != m_TextureTargets.end());
 	return it->second;
 }
 
-VRangeIterator<VTypeId> VTextureStateResType::CreatedTypes()
+VRangeIterator<VTypeInfo> VTextureStateResType::CreatedTypes()
 {
-	return CreateBeginIterator< std::vector<resource::VTypeId> >(m_ManagedTypes);
+	return CreateBeginIterator< std::vector<VTypeInfo> >(m_ManagedTypes);
 }
 
 vbool VTextureStateResType::Generate(
 	resource::VResource* in_pResource,
-	resource::VTypeId in_Type)
+	VTypeInfo in_Type)
 {
 	V3D_ASSERT(std::find(m_ManagedTypes.begin(), m_ManagedTypes.end(), in_Type) 
 		!= m_ManagedTypes.end());
@@ -284,7 +289,7 @@ vbool VTextureStateResType::Generate(
 		GLenum target = GetTextureTarget(in_Type);
 
 		// create opengl texture state from it
-		in_pResource->AddDynamicTypedData(CreateTextureState(*pImage, options, target));
+		in_pResource->AddData<VTextureState>(CreateTextureState(*pImage, options, target));
 
 		//in_pResource->DumpInfo(":::");
 	}

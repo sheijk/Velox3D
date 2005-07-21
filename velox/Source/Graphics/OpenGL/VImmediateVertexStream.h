@@ -2,6 +2,7 @@
 #define V3D_VIMMEDIATEVERTEXSTREAM_2005_02_03_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 
 #include <V3d/Resource.h>
 #include <V3d/Graphics/VVertexBuffer.h>
@@ -41,12 +42,7 @@ private:
 //-----------------------------------------------------------------------------
 } // namespace graphics
 
-template<>
-inline v3d::VStringParam resource::GetTypeIdName<graphics::VImmediateVertexStream>(
-	const graphics::VImmediateVertexStream* in_pData)
-{
-	return resource::GetTypeIdName<graphics::IVVertexStream>();
-}
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VImmediateVertexStream, v3d::graphics::IVVertexStream);
 
 } // namespace v3d
 //-----------------------------------------------------------------------------

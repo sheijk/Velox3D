@@ -11,12 +11,13 @@ using namespace v3d; // anti auto indenting
 
 /**
  * Returns the given node as IVXMLELement if it is a valid IVXMLElement
- * Else 0 is returned
+ * Else 0 is returned. (Use IVXMLNode::ToElement instead)
+ *
+ * @deprecated
  *
  * @author sheijk
  */
-#pragma deprecated(ToElement)
-IVXMLElement* ToElement(IVXMLNode* in_pNode);
+V3D_DEPRECATED IVXMLElement* ToElement(IVXMLNode* in_pNode);
 
 /**
  * Returns true iff the given element has an attribute with the given

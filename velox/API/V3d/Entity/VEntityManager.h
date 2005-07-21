@@ -32,12 +32,14 @@ using namespace v3d; // prevent auto indenting
  * through jointly used parts. For example a position part might be written to 
  * by the physics system and be read by the graphics system for display.
  *
+ * Use an entity directly, instead
+ *
  * @see v3d::entity::VEntity
  * @see v3d::entity::IVPart
  *
  * @author sheijk
  */
-class VEntityManager : public VNamedObject
+V3D_DEPRECATED class VEntityManager : public VNamedObject
 {
 public:
 	typedef VPointer<VEntity>::SharedPtr EntityPtr;

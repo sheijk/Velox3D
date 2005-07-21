@@ -41,26 +41,29 @@ private:
 	vint val;
 };
 
+V3D_TYPEINFO(Blub);
+V3D_TYPEINFO(int);
+
 class BlubType : public resource::IVResourceType
 {
-	std::vector<resource::VTypeId> m_CreatedTypes;
+	std::vector<VTypeInfo> m_CreatedTypes;
 public:
 	BlubType() 
 	{
-		m_CreatedTypes.push_back(resource::VTypeId::Create<Blub>());
+		m_CreatedTypes.push_back(GetTypeInfo<Blub>());
 	}
 
-	virtual VRangeIterator<resource::VTypeId> CreatedTypes()
+	virtual VRangeIterator<VTypeInfo> CreatedTypes()
 	{
 		return CreateIterator(m_CreatedTypes.begin(), m_CreatedTypes.end());
 	}
 
-	virtual resource::VResourceData::TypeId GetTypeId() const
+	virtual VTypeInfo GetTypeId() const
 	{
-		return resource::VTypeId::Create<Blub>();
+		return GetTypeInfo<Blub>();
 	}
 
-	virtual vbool Generate(resource::VResource* in_pResource, resource::VTypeId)
+	virtual vbool Generate(resource::VResource* in_pResource, VTypeInfo)
 	{
 		resource::VResourceDataPtr<const vint> pIntData = in_pResource->GetData<vint>();
 
@@ -142,12 +145,12 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 
 	VResourceId res = pResourceManager->GetResourceByName("/dir0/dir1");
 	res->AddData(new int(5));
-	res->AddData(new VEntity());
+	//res->AddData(new VEntity());
 
 	pResourceManager->DumpResourceInfo();
 
 	VResourceDataPtr<const int> pResInt = res->GetData<int>();
-	VResourceDataPtr<const VEntity> pResEntity = res->GetData<VEntity>();
+	//VResourceDataPtr<const VEntity> pResEntity = res->GetData<VEntity>();
 
 	V3D_ASSERT(*pResInt == 5);
 

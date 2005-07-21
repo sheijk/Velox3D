@@ -2,6 +2,7 @@
 #define V3D_VTYPEDRESOURCEDATA_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 
 #include <v3d/Core/SmartPtr/VGuards.h>
 
@@ -28,7 +29,7 @@ public:
 
 	DataType* GetData();
 
-	virtual TypeId GetTypeId() const;
+	virtual VTypeInfo GetTypeId() const;
 
 private:
 	VSharedPtr<DataType> m_pData;
@@ -58,9 +59,9 @@ DataType* VTypedResourceData<DataType>::GetData()
 }
 
 template<typename DataType>
-VResourceData::TypeId VTypedResourceData<DataType>::GetTypeId() const
+VTypeInfo VTypedResourceData<DataType>::GetTypeId() const
 {
-	return VResourceData::GetTypeId<DataType>();
+	return GetTypeInfo<DataType>();
 }
 
 //-----------------------------------------------------------------------------

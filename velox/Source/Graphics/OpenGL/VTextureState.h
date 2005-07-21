@@ -2,6 +2,7 @@
 #define V3D_VTEXTURESTATE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 
 #include "IVOpenGLRenderState.h"
 
@@ -32,5 +33,11 @@ private:
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
+
+//TODO: remove as soon as new material system stores IVTexture instead of
+// VTextureState inside a resource
+V3D_TYPEINFO(v3d::graphics::IVRenderState);
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VTextureState, v3d::graphics::IVRenderState);
+
 //-----------------------------------------------------------------------------
 #endif // V3D_VTEXTURESTATE_H

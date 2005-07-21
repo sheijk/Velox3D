@@ -15,16 +15,16 @@ using namespace v3d; // anti auto indenting
  */
 class VGLVertexStreamResType : public resource::IVResourceType
 {
-	std::vector<resource::VTypeId> m_ManagedTypes;
+	std::vector<VTypeInfo> m_ManagedTypes;
 public:
 	VGLVertexStreamResType();
 	virtual ~VGLVertexStreamResType();
 
-	virtual VRangeIterator<resource::VTypeId> CreatedTypes();
+	virtual VRangeIterator<VTypeInfo> CreatedTypes();
 
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
-		resource::VTypeId in_Type);
+		VTypeInfo in_Type);
 };
 
 //-----------------------------------------------------------------------------

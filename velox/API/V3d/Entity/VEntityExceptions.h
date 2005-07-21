@@ -13,6 +13,11 @@ V3D_DECLARE_EXCEPTION(VEntityException, VException);
 V3D_DECLARE_EXCEPTION(VMissingPartException, VEntityException);
 V3D_DECLARE_EXCEPTION(VPartAlreadyPresentException, VEntityException);
 
+V3D_DECLARE_EXCEPTION(VSceneParserException, VEntityException);
+V3D_DECLARE_EXCEPTION(VNoParserForTypeException, VSceneParserException);
+V3D_DECLARE_EXCEPTION(VTypeAlreadyRegisteredException, VSceneParserException);
+V3D_DECLARE_EXCEPTION(VPartParseException, VSceneParserException);
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d:entity
 //-----------------------------------------------------------------------------

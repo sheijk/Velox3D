@@ -18,10 +18,23 @@ class VSceneModelPart : public entity::IVPart
 public:
 	VSceneModelPart(const graphics::VModel& in_Model);
 
+	void AddModelMesh(
+		VStringParam in_strMeshResource, 
+		VStringParam in_strMaterialResource);
+
+	void RemoveAllMeshes();
+
+	//void RemoveModelMesh(
+	//	VStringParam in_strMeshResource, 
+	//	VStringParam in_strMaterialResource);
+
+    // dervicd from IVPart:
 	virtual void Activate();
 	virtual void Deactivate();
 
 	virtual void TellParentPart(const utils::VFourCC& in_Id, IVPart& in_Part);
+
+	static utils::VFourCC GetDefaultId();
 private:
 	graphics::VModel m_Model;
 	VSimpleScene::Id m_Id;

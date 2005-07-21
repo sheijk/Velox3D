@@ -185,7 +185,7 @@ void VModelLoader::LoadMesh(
 		node != pRootNode->ChildEnd();
 		++node)
 	{
-		IVXMLElement* pMeshNode = ToElement(&*node);
+		IVXMLElement* pMeshNode = node->ToElement();
 
 		if( pMeshNode != 0 && pMeshNode->GetName() == VString("mesh") )
 		{
@@ -206,7 +206,7 @@ vuint CountNodesWithName(
 
 	for(IVXMLElement::NodeIter node = in_Begin; node != in_End; ++node)
 	{
-		IVXMLElement* pNode = ToElement(&*node);
+		IVXMLElement* pNode = node->ToElement();
 
 		if( pNode != 0 && pNode->GetName() == countedName )
 		{
@@ -307,7 +307,7 @@ void VModelLoader::CreateMeshNode(
 	//	++meshChildNode)
 	while( bReadingVertices && meshChildNode != in_pMeshNode->ChildEnd() )
 	{
-		IVXMLElement* pVertexNode = ToElement(&*meshChildNode);
+		IVXMLElement* pVertexNode = meshChildNode->ToElement();
 
 		if( pVertexNode != 0 && pVertexNode->GetName() == VString("vertex") )
 		{
@@ -383,7 +383,7 @@ void VModelLoader::CreateMeshNode(
 		vuint indexNum = 0;
 		for( ; meshChildNode != in_pMeshNode->ChildEnd(); ++meshChildNode)
 		{
-			IVXMLElement* pIndexNode = ToElement(&*meshChildNode);
+			IVXMLElement* pIndexNode = meshChildNode->ToElement();
 
 			if( pIndexNode != 0 )
 			{

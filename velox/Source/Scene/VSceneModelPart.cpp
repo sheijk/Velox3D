@@ -8,11 +8,27 @@
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace v3d::resource;
 
 VSceneModelPart::VSceneModelPart(const graphics::VModel& in_Model) :
 	m_Model(in_Model)
 {
 	m_pParent = 0;
+}
+
+void VSceneModelPart::AddModelMesh(
+	VStringParam in_strMeshResource, 
+	VStringParam in_strMaterialResource)
+{
+	m_Model.Add(graphics::VModelMesh(
+		GetResourceData<graphics::IVMesh>(in_strMeshResource),
+		GetResourceData<graphics::IVMaterial>(in_strMaterialResource)
+		));
+}
+
+void VSceneModelPart::RemoveAllMeshes()
+{
+	m_Model = graphics::VModel();
 }
 
 void VSceneModelPart::Activate()
@@ -39,6 +55,11 @@ void VSceneModelPart::TellParentPart(const utils::VFourCC& in_Id, IVPart& in_Par
 	m_pParent = in_Part.Convert<VSimpleScene>();
 	
 	vout << (m_pParent ? " ok" : " failed") << vendl;
+}
+
+utils::VFourCC VSceneModelPart::GetDefaultId()
+{
+	return "gfxp";
 }
 
 //-----------------------------------------------------------------------------

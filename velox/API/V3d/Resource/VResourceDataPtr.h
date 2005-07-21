@@ -2,6 +2,7 @@
 #define V3D_VRESOURCEDATAPTR_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 
 #include <V3d/Resource/VTypedResourceData.h>
 
@@ -33,6 +34,12 @@ public:
 private:
 	TypedDataPtr m_pData;
 };
+
+template<typename T>
+VResourceDataPtr<const T> GetResourceData(VStringParam in_strResourceName)
+{
+	return VResourceId(in_strResourceName)->GetData<T>();
+}
 
 template<typename DataType>
 vbool Valid(const VResourceDataPtr<const DataType>& ptr)

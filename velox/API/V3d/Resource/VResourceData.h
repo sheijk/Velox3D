@@ -2,6 +2,7 @@
 #define V3D_VRESOURCEDATA_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {
@@ -19,40 +20,13 @@ class VResource;
 class VResourceData
 {
 public:
-	class TypeId
-	{
-	public:
-		TypeId() { m_strName = "invalid"; }
-		
-		template<typename T>
-		static inline TypeId Create();
-
-		template<typename T>
-		TypeId(T*);
-
-		vbool operator<(const TypeId& other) const;
-		vbool operator==(const TypeId& other) const;
-		vbool operator!=(const TypeId& other) const;
-		
-		const vchar* ToString() const;
-
-	private:
-		TypeId(const vchar* in_strName);
-
-		const vchar* m_strName;
-	};
-
 	virtual ~VResourceData();
 
 	/** Returns an id representing the resource data's type */
-	virtual TypeId GetTypeId() const = 0;
+	virtual VTypeInfo GetTypeId() const = 0;
 
 	/** Get the resource this data is contained in */
 	VResource* GetEnclosingResource() const;
-
-	/** Returns the type id for a resource of the type T */
-	template<typename T>
-	static TypeId GetTypeId();
 
 protected:
 	VResourceData(VResource* in_pResource);
@@ -65,39 +39,6 @@ private:
 	/** The resource the data is contained in */
 	VResource* m_pResource;
 };
-
-typedef VResourceData::TypeId VTypeId;
-
-
-/**
- * Specialize this function for any type which shall use a non standard
- * type id
- */
-template<typename DataType>
-VStringParam GetTypeIdName(const DataType* in_pData = 0)
-{
-	return typeid(DataType).name();
-}
-
-//-----------------------------------------------------------------------------
-
-template<typename T>
-VResourceData::TypeId VResourceData::GetTypeId()
-{
-	return TypeId::Create<T>();
-}
-
-template<typename T>
-VResourceData::TypeId::TypeId(T* t)
-{
-	m_strName = typeid(*t).name();
-}
-
-template<typename T>
-static VResourceData::TypeId VResourceData::TypeId::Create()
-{
-	return GetTypeIdName<T>();
-}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::resource

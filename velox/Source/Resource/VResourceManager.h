@@ -29,11 +29,10 @@ public:
 	virtual void DumpResourceInfo() const;
 
 	/** Get a list of registered resource types for the given type */
-	std::vector<IVResourceType*> GetResourceTypes(VResourceData::TypeId in_Type);
+	std::vector<IVResourceType*> GetResourceTypes(VTypeInfo in_Type);
 
 private:
-	typedef std::multimap<VResourceData::TypeId, VSharedPtr<IVResourceType> >
-		TypeMap;
+	typedef std::multimap<VTypeInfo, VSharedPtr<IVResourceType> > TypeMap;
 
 	VResource m_RootResource;
 	TypeMap m_ManagedTypes;

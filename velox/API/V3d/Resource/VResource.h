@@ -72,9 +72,6 @@ public:
 	template<typename DataType>
 	void AddData(DataType* in_pData);
 
-	template<typename DataType>
-	void AddDynamicTypedData(DataType* in_pData);
-
 	/**
 	 * Returns the data of type DataType attached to the resource if it exists.
 	 * Will throw an exception if the data does not exist
@@ -90,23 +87,21 @@ public:
 	template<typename DataType>
 	vbool ContainsData();
 
-	vbool ContainsData(VResourceData::TypeId in_Type);
+	vbool ContainsData(VTypeInfo in_Type);
 
 private:
 	typedef std::vector< VSharedPtr<VResource> > ResourceContainer;
-	typedef std::map< VResourceData::TypeId, VSharedPtr<VResourceData> >
-		DataMap;
+	typedef std::map< VTypeInfo, VSharedPtr<VResourceData> > DataMap;
 
 	void SetParent(VResource* in_pParent);
 	const VResource* GetParent() const;
 	VResource* GetParent();
 	VResource* GetRootResource();
 
-	VResourceData* GetData(VResourceData::TypeId in_Type);
+	VResourceData* FindInstanceOf(VTypeInfo in_Info);
+	VResourceData* GetData(VTypeInfo in_Type);
 
-	void AddData(
-		VResourceData::TypeId in_Type, 
-		VSharedPtr<VResourceData> in_pData);
+	void AddData(VTypeInfo in_Type, VSharedPtr<VResourceData> in_pData);
 
 	std::string m_strName;
 	ResourceContainer m_SubResources;
@@ -116,24 +111,10 @@ private:
 
 //-----------------------------------------------------------------------------
 template<typename DataType>
-void VResource::AddDynamicTypedData(DataType* in_pData)
-{
-	// get type id
-	VResourceData::TypeId type = VResourceData::TypeId(in_pData);
-
-	// create container
-	VSharedPtr< VTypedResourceData<DataType> > pContainer(
-		new VTypedResourceData<DataType>(VSharedPtr<DataType>(in_pData), this));
-
-	// and store it
-	AddData(type, pContainer);
-}
-
-template<typename DataType>
 void VResource::AddData(DataType* in_pData)
 {
 	// get type id
-	VResourceData::TypeId type = VResourceData::TypeId::Create<DataType>();
+	VTypeInfo type = GetTypeInfo<DataType>();
 
 	// create container
 	VSharedPtr< VTypedResourceData<DataType> > pContainer(
@@ -147,7 +128,7 @@ template<typename DataType>
 VResourceDataPtr<const DataType> VResource::GetData()
 {
 	// get type id
-	VResourceData::TypeId type = VTypeId::Create<DataType>();
+	VTypeInfo type = GetTypeInfo<DataType>();
 
 	VResourceData* pUntypedData = GetData(type);
 
@@ -161,17 +142,11 @@ template<typename DataType>
 vbool VResource::ContainsData()
 {
 	// get type id
-	VResourceData::TypeId type = VTypeId::Create<DataType>();
+	VTypeInfo type = GetTypeInfo<DataType>();
 
 	// look for type id
 	return ContainsData(type);
 }
-
-//template<typename DataType>
-//VResourceData::TypeId VResource::GetTypeId()
-//{
-//	return VResourceData::TypeId::Create<DataType>();
-//}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::resource

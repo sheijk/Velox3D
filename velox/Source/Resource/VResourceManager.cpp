@@ -91,40 +91,20 @@ VResourceId VResourceManager::GetResourceByName(VStringParam in_strName)
 	CheckResourceName(in_strName);
 
 	return VResourceId(m_RootResource.GetResourceByPath(std::string(in_strName)));
-
-	//// get directories of path
-	//VSimpleTokenizer tokens(std::string(in_strName+1), '/');
-
-	//// find resource
-	//VResource* pCurrentRes = &m_RootResource;
-	//VSimpleTokenizer::Iterator currentDir = tokens.TokenBegin();
-
-	//// until end of name list reached, or a (sub) resource has not been found
-	//while(currentDir != tokens.TokenEnd() && 0 != pCurrentRes )
-	//{
-	//	pCurrentRes = pCurrentRes->GetSubResource(*currentDir);
-	//	++currentDir;
-	//}
-
-	//return VResourceId(pCurrentRes);
 }
 
 void VResourceManager::RegisterResourceType(VSharedPtr<IVResourceType> in_pResType)
 {
-	VRangeIterator<VTypeId> typeIter = in_pResType->CreatedTypes();
+	VRangeIterator<VTypeInfo> typeIter = in_pResType->CreatedTypes();
 
 	while(typeIter.HasNext())
 	{
 		m_ManagedTypes.insert(TypeMap::value_type(*typeIter, in_pResType));
 		typeIter++;
 	}
-
-	//m_ManagedTypes.insert(
-	//	TypeMap::value_type(in_pResType->GetTypeId(), in_pResType));
 }
 
-std::vector<IVResourceType*> VResourceManager::GetResourceTypes(
-	VResourceData::TypeId in_Type)
+std::vector<IVResourceType*> VResourceManager::GetResourceTypes(VTypeInfo in_Type)
 {
 	std::vector<IVResourceType*> types;
 

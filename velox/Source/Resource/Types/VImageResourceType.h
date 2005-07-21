@@ -1,4 +1,3 @@
-//TODO: add file creation date to file guard
 #ifndef V3D_VIMAGERESOURCETYPE_H
 #define V3D_VIMAGERESOURCETYPE_H
 //-----------------------------------------------------------------------------
@@ -19,16 +18,16 @@ using namespace v3d; // anti auto indenting
  */
 class VImageResourceType : public resource::IVResourceType
 {
-	std::vector<resource::VTypeId> m_ManagedTypes;
+	std::vector<VTypeInfo> m_ManagedTypes;
 public:
 	VImageResourceType();
 	virtual ~VImageResourceType();
 
-	virtual VRangeIterator<resource::VTypeId> CreatedTypes();
+	virtual VRangeIterator<VTypeInfo> CreatedTypes();
 
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
-		resource::VTypeId in_Type);
+		VTypeInfo in_Type);
 };
 
 //-----------------------------------------------------------------------------

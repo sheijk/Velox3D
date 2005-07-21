@@ -2,6 +2,8 @@
 #define V3D_VEFFECTDESCRIPTION_2004_08_28_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
+
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Core/Wrappers/VString.h>
 #include <v3d/Core/VException.h>
@@ -175,5 +177,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
+
+V3D_TYPEINFO(v3d::graphics::VEffectDescription);
 //-----------------------------------------------------------------------------
 #endif // V3D_VEFFECTDESCRIPTION_2004_08_28_H

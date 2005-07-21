@@ -29,31 +29,6 @@ vuint VResourceData::GetReferenceCount() const
 	return m_nReferenceCount;
 }
 
-VResourceData::TypeId::TypeId(const vchar* in_strName)
-{
-	m_strName = in_strName;
-}
-
-vbool VResourceData::TypeId::operator <(const VResourceData::TypeId& in_Other) const
-{
-	return std::strncmp(m_strName, in_Other.m_strName, 1000) < 0;
-}
-
-vbool VResourceData::TypeId::operator==(const VResourceData::TypeId& in_Other) const
-{
-	return std::strncmp(m_strName, in_Other.m_strName, 1000) == 0;
-}
-
-vbool VResourceData::TypeId::operator!=(const VResourceData::TypeId& in_Other) const
-{
-	return std::strncmp(m_strName, in_Other.m_strName, 1000) != 0;
-}
-
-const vchar* VResourceData::TypeId::ToString() const
-{
-	return m_strName;
-}
-
 //-----------------------------------------------------------------------------
 }} // namespace v3d::resource
 //-----------------------------------------------------------------------------

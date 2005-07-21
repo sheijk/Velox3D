@@ -3,6 +3,7 @@
 
 #include <V3d/VFS/IVFileSystem.h>
 
+#include <V3d/Vfs.h>
 #include <V3d/Resource/Types/VFileName.h>
 #include <V3d/Resource/VResource.h>
 //-----------------------------------------------------------------------------
@@ -18,7 +19,7 @@ using namespace v3d::vfs;
  */
 VFileNameResType::VFileNameResType()
 {
-	m_ManagedTypes.push_back(VTypeId::Create<VFileName>());
+	m_ManagedTypes.push_back(GetTypeInfo<VFileName>());
 }
 
 /**
@@ -28,28 +29,37 @@ VFileNameResType::~VFileNameResType()
 {
 }
 
-VRangeIterator<VTypeId> VFileNameResType::CreatedTypes()
+VRangeIterator<VTypeInfo> VFileNameResType::CreatedTypes()
 {
-	return CreateBeginIterator< std::vector<VTypeId> >(m_ManagedTypes);
+	return CreateBeginIterator< std::vector<VTypeInfo> >(m_ManagedTypes);
 }
 
 vbool VFileNameResType::Generate(
 	resource::VResource* in_pResource, 
-	resource::VTypeId in_Type)
+	VTypeInfo in_Type)
 {
-	V3D_ASSERT(VTypeId::Create<VFileName>() == in_Type);
+	V3D_ASSERT(GetTypeInfo<VFileName>() == in_Type);
 
 	if( ! in_pResource->ContainsData<VFileName>() )
 	{
-		in_pResource->AddData(new VFileName(in_pResource->GetQualifiedName().c_str()));
+		VServicePtr<IVFileSystem> pFS;
+		std::string fileName = in_pResource->GetQualifiedName();
+
+		if( pFS->Exists(fileName.c_str()) )
+		{
+			in_pResource->AddData(new VFileName(fileName.c_str()));
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
-
-	//TODO:
-	// get vfs
-	// check if file exists
-		// add vfilename
-
-	return true;
+	else
+	{
+		return true;
+	}
 }
 
 //-----------------------------------------------------------------------------

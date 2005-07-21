@@ -173,19 +173,6 @@ using namespace v3d::entity;
 using namespace v3d::graphics;
 using namespace v3d::scene;
 
-VResourceId GetResource(const std::string& in_Name)
-{
-	static VServicePtr<IVResourceManager> pResMngr;
-	
-	return pResMngr->GetResourceByName(in_Name.c_str());
-}
-
-template<typename T>
-VResourceDataPtr<const T> GetResourceData(const std::string& in_strResourceName)
-{
-	return GetResource(in_strResourceName)->GetData<T>();
-}
-
 v3d::VSharedPtr<IVPart> CreateModelPart(IVXMLElement* in_pElement)
 {
 	VModel model;

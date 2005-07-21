@@ -222,7 +222,7 @@ vuint VVertexBuffer::GetVertexCount(const VVertexFormat& in_Format)
 	size = max(size, in_Format.GetColorFormat().GetCount());
 	size = max(size, in_Format.GetNormalFormat().GetCount());
 
-	for(int texCoordNum = 0; texCoordNum < in_Format.GetTexCoordCount(); ++texCoordNum)
+	for(vuint texCoordNum = 0; texCoordNum < in_Format.GetTexCoordCount(); ++texCoordNum)
 	{
 		size = max(size, in_Format.GetTexCoordFormat(texCoordNum).GetCount());
 	}

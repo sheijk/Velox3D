@@ -237,7 +237,7 @@ void VResource::DumpInfo(const std::string& in_strPrefix) const
 		VResourceData* pData = data->second.Get();
 
 		vout << in_strPrefix << "Data of type '";
-		vout << data->first.ToString() << "'" << vendl;
+		vout << data->first.GetName() << "'" << vendl;
 	}
 
 	// print info about subdirectories    
@@ -249,19 +249,33 @@ void VResource::DumpInfo(const std::string& in_strPrefix) const
 	}
 }
 
-vbool VResource::ContainsData(VResourceData::TypeId in_Type)
+vbool VResource::ContainsData(VTypeInfo in_Type)
 {
 	DataMap::const_iterator data = m_Data.find(in_Type);
 	return data != m_Data.end();
 }
 
-VResourceData* VResource::GetData(VResourceData::TypeId in_Type)
+VResourceData* VResource::FindInstanceOf(VTypeInfo in_Type)
+{
+	DataMap::const_iterator data = m_Data.begin();
+	for( ; data != m_Data.end(); ++data)
+	{
+		VTypeInfo type = data->first;
+		if( type.CanBeCastedTo(in_Type) ) {
+			return data->second.Get();
+		}
+	}
+
+	return 0;
+}
+
+VResourceData* VResource::GetData(VTypeInfo in_Type)
 {
 	// if such data exists, return it
-	DataMap::const_iterator data = m_Data.find(in_Type);
+	VResourceData* pData = FindInstanceOf(in_Type);
 
 	// if data does not exist, try to create it
-	if( data == m_Data.end() )
+	if( pData == 0 )
 	{
 		// get managers for type
 		VServicePtr<VResourceManager> pResManager;
@@ -278,7 +292,7 @@ VResourceData* VResource::GetData(VResourceData::TypeId in_Type)
 				(*resType)->Generate(this, in_Type);
 
 				// try to get data again
-				data = m_Data.find(in_Type);
+				pData = FindInstanceOf(in_Type);
 			}
 			// if the resource type tried to get data which does not exists
 			// just continue the generation process
@@ -286,22 +300,20 @@ VResourceData* VResource::GetData(VResourceData::TypeId in_Type)
 			{}
 
 			// if data could be generated, break
-			if( data != m_Data.end() )
+			if( pData != 0 )
 				break;
 		}
 	}
 
-	if( data != m_Data.end() )
+	if( pData != 0 )
 	{
-		VResourceData* pUntypedData = data->second.Get();
-
-		return pUntypedData;
+		return pData;
 	}
 	// if it doesn't exist, throw error
 	else
 	{
 		std::stringstream message;
-		message << "Could not find data of type '" << in_Type.ToString();
+		message << "Could not find data of type '" << in_Type.GetName();
 		//message << typeid(VTypedResourceData<DataType>).name() << "'";
 		message << "' in resource '" << GetQualifiedName() << "'";
 
@@ -309,8 +321,7 @@ VResourceData* VResource::GetData(VResourceData::TypeId in_Type)
 	}
 }
 
-void VResource::AddData(
-	VResourceData::TypeId in_Type, VSharedPtr<VResourceData> in_pData)
+void VResource::AddData(VTypeInfo in_Type, VSharedPtr<VResourceData> in_pData)
 {
 	// if no data of same type exists, yet
 	if( m_Data.find(in_Type) == m_Data.end() )
