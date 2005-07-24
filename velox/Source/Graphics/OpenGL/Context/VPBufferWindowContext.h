@@ -39,6 +39,22 @@ public:
 	}
 
 	/**
+	* Get the Pixel Buffer Width
+	*/
+	inline HPBUFFERARB GetWidth()
+	{
+		return m_DisplaySettings.GetWidth();
+	}
+
+	/**
+	* Get the Pixel Buffer Height
+	*/
+	inline HPBUFFERARB GetHeight()
+	{
+		return m_DisplaySettings.GetHeight();
+	}
+
+	/**
 	 * @see v3d::graphics::IVRenderContext::MakeCurrent
 	*/
 	void MakeCurrent();
@@ -61,5 +77,4 @@ private:
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
-
 #endif //V3D_VPBUFFERWINDOWCONTEXT_H

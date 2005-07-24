@@ -68,8 +68,7 @@ VResourceDataPtr<const DataType> GetDataFromResource(VStringParam in_strResName)
 	return data;
 }
 
-/*
-IVRenderState* VTextureStateCategory::CreateCubeMapState(
+/*IVRenderState* VTextureStateCategory::CreateCubeMapState(
 	const VState* in_pTextureState)
 {
 	using std::string;
@@ -128,8 +127,8 @@ IVRenderState* VTextureStateCategory::CreateCubeMapState(
 
 	V3D_ASSERT(0 != pCubemapState);
 	return pCubemapState;
-}
-*/
+}*/
+
 
 IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 {

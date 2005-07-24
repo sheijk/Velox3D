@@ -108,7 +108,7 @@ void VPBufferWindowContext::MakeCurrent()
 
 void VPBufferWindowContext::SwapBuffers()
 {
-	//TODO: SwapBuffer Funktion machen
+	//Dummy
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

@@ -18,7 +18,7 @@ using namespace v3d; // anti auto indenting
 /**
 //TODO: insert documentation here
  */
-class VCubemapTextureState : public IVOpenGLRenderState
+/*class VCubemapTextureState : public IVOpenGLRenderState
 {
 public:
 	VCubemapTextureState(
@@ -41,7 +41,7 @@ private:
 	const resource::VResourceDataPtr<const VCubemapNegX> m_nNegXTextureId;
 	const resource::VResourceDataPtr<const VCubemapNegY> m_nNegYTextureId;
 	const resource::VResourceDataPtr<const VCubemapNegZ> m_nNegZTextureId;
-};
+};*/
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

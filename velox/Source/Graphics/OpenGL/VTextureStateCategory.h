@@ -5,6 +5,8 @@
 
 #include "VBaseTexture.h"
 #include "VTextureState.h"
+#include "VCubemapTextureState.h"
+#include "VUntextured.h"
 
 #include <v3d/Graphics/IVStateCategory.h>
 
