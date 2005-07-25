@@ -5,8 +5,12 @@
 
 #include <V3d/Image/VImage.h>
 #include <V3d/Resource.h>
+#include <V3d/Graphics/IVRenderContext.h>
+#include "../../Graphics/OpenGL/Context/VPBufferWindowContext.h"
 #include "../../Graphics/OpenGL/VTextureState.h"
 #include "../../Graphics/OpenGL/VBaseTexture.h"
+#include "../../Graphics/OpenGL/VTexture2D.h"
+#include "../../Graphics/OpenGL/VPBufferTexture.h"
 
 #include <vector>
 #include <map>

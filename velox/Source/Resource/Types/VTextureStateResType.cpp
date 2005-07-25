@@ -293,6 +293,23 @@ vbool VTextureStateResType::Generate(
 
 		//in_pResource->DumpInfo(":::");
 	}
+	else if(!in_pResource->ContainsData<IVRenderContext>())
+	{
+		VResourceDataPtr<const IVRenderContext> pContext;
+
+		try
+		{
+			//get Pixel Buffer Context
+			pContext = in_pResource->GetData<IVRenderContext>();
+		}
+		catch(resource::VDataNotFoundException&) 
+		{
+			return false;
+		}
+
+		/*in_pResource->AddData<VTextureState>(new VTextureState(
+			new VPBufferTexture(reinterpret_cast<VPBufferWindowContext*>(&pContext))));*/
+	}
 
 	return true;
 }

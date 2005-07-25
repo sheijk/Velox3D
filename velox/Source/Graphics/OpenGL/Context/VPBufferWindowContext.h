@@ -41,7 +41,7 @@ public:
 	/**
 	* Get the Pixel Buffer Width
 	*/
-	inline HPBUFFERARB GetWidth()
+	inline vuint GetWidth()
 	{
 		return m_DisplaySettings.GetWidth();
 	}
@@ -49,7 +49,7 @@ public:
 	/**
 	* Get the Pixel Buffer Height
 	*/
-	inline HPBUFFERARB GetHeight()
+	inline vuint GetHeight()
 	{
 		return m_DisplaySettings.GetHeight();
 	}
