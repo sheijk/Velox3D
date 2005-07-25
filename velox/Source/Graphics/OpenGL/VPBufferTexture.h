@@ -40,7 +40,7 @@ public:
 private:
 
 	VPBufferWindowContext* m_pContext;
-	vint                   m_iTextureID;
+	vuint                  m_iTextureID;
 };
 
 //-----------------------------------------------------------------------------
