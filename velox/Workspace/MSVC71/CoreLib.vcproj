@@ -131,9 +131,6 @@
 						RelativePath="..\..\Api\V3d\Core\VCoreLib.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Core\VDeprecated.h">
-					</File>
-					<File
 						RelativePath="..\..\Api\V3d\Core\VException.h">
 					</File>
 					<File

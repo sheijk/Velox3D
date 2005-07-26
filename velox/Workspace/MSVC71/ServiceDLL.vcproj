@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib"
 				OutputFile="$(OutDir)/ServiceDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
@@ -85,6 +85,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib"
 				OutputFile="$(OutDir)/ServiceDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
@@ -491,6 +492,12 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VMiscState.cpp">
 					</File>
 					<File
@@ -512,10 +519,34 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLUtils.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBOMesh.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBOMesh.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VPBufferTexture.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VPBufferTexture.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.cpp">
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VTexture2D.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VTexture2D.h">
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.cpp">
@@ -528,6 +559,12 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VTextureStateCategory.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VUntextured.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VUntextured.h">
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.cpp">
