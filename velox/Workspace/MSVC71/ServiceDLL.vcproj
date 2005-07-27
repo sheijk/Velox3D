@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib lib3ds-120d.lib"
 				OutputFile="$(OutDir)/ServiceDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
@@ -733,6 +733,24 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Resource\Types\VImageResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.h">
 					</File>
 					<File
 						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.cpp">

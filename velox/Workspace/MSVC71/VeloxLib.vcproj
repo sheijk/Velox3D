@@ -1,346 +1,944 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<VisualStudioProject ProjectType="Visual C++" Version="7.10" Name="VeloxLib" ProjectGUID="{20050526-0000-0000-0000-000560019000}" RootNamespace="VeloxLib" Keyword="Win32Proj">
-  <Platforms>
-    <Platform Name="Win32"/>
-  </Platforms>
-  <Configurations>
-    <Configuration Name="Debug|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="4" CharacterSet="2">
-      <Tool Name="VCCLCompilerTool" Optimization="0" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;_DEBUG;_LIB" MinimalRebuild="TRUE" BasicRuntimeChecks="3" RuntimeLibrary="3" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="4"/>
-      <Tool Name="VCCustomBuildTool"/>
-      <Tool Name="VCLibrarianTool" OutputFile="$(OutDir)/VeloxLib.lib" IgnoreAllDefaultLibraries="FALSE"/>
-      <Tool Name="VCMIDLTool"/>
-      <Tool Name="VCPostBuildEventTool"/>
-      <Tool Name="VCPreBuildEventTool"/>
-      <Tool Name="VCPreLinkEventTool"/>
-      <Tool Name="VCResourceCompilerTool"/>
-      <Tool Name="VCWebServiceProxyGeneratorTool"/>
-      <Tool Name="VCXMLDataGeneratorTool"/>
-      <Tool Name="VCManagedWrapperGeneratorTool"/>
-      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-    </Configuration>
-    <Configuration Name="Release|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="4" CharacterSet="2">
-      <Tool Name="VCCLCompilerTool" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;NDEBUG;_LIB" RuntimeLibrary="0" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="3"/>
-      <Tool Name="VCCustomBuildTool"/>
-      <Tool Name="VCLibrarianTool" OutputFile="$(OutDir)/VeloxLib.lib" IgnoreAllDefaultLibraries="TRUE"/>
-      <Tool Name="VCMIDLTool"/>
-      <Tool Name="VCPostBuildEventTool"/>
-      <Tool Name="VCPreBuildEventTool"/>
-      <Tool Name="VCPreLinkEventTool"/>
-      <Tool Name="VCResourceCompilerTool"/>
-      <Tool Name="VCWebServiceProxyGeneratorTool"/>
-      <Tool Name="VCXMLDataGeneratorTool"/>
-      <Tool Name="VCManagedWrapperGeneratorTool"/>
-      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-    </Configuration>
-  </Configurations>
-  <References>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="VeloxLib"
+	ProjectGUID="{20050526-0000-0000-0000-000560019000}"
+	RootNamespace="VeloxLib"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/VeloxLib.lib"
+				IgnoreAllDefaultLibraries="FALSE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				RuntimeLibrary="0"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/VeloxLib.lib"
+				IgnoreAllDefaultLibraries="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
 	</References>
-  <Files xmlns:exsl="http://exslt.org/common">
-    <Filter Name="Api" Filter="">
-      <Filter Name="V3d" Filter="">
-        <Filter Name="Entity" Filter="">
-          <File RelativePath="..\..\Api\V3d\Entity\IVPart.h"/>
-          <File RelativePath="..\..\Api\V3d\Entity\VEntity.h"/>
-          <File RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h"/>
-          <File RelativePath="..\..\Api\V3d\Entity\VEntityManager.h"/>
-        </Filter>
-        <Filter Name="Math" Filter="">
-          <File RelativePath="..\..\Api\V3d\Math\Numerics.h"/>
-          <File RelativePath="..\..\Api\V3d\Math\Numerics.inl"/>
-          <File RelativePath="..\..\Api\V3d\Math\TransformationOps.h"/>
-          <File RelativePath="..\..\Api\V3d\Math\VMatrix.h"/>
-          <File RelativePath="..\..\Api\V3d\Math\VMatrixOps.h"/>
-          <File RelativePath="..\..\Api\V3d\Math\VVector.h"/>
-        </Filter>
-        <Filter Name="Resource" Filter="">
-          <Filter Name="Types" Filter="">
-            <File RelativePath="..\..\Api\V3d\Resource\Types\VFileName.h"/>
-          </Filter>
-          <File RelativePath="..\..\Api\V3d\Resource\IVResourceManager.h"/>
-          <File RelativePath="..\..\Api\V3d\Resource\IVResourceType.h"/>
-          <File RelativePath="..\..\Api\V3d\Resource\ResourceExceptions.h"/>
-          <File RelativePath="..\..\Api\V3d\Resource\VResource.h"/>
-          <File RelativePath="..\..\Api\V3d\Resource\VResourceData.h"/>
-          <File RelativePath="..\..\Api\V3d\Resource\VResourceDataPtr.h"/>
-          <File RelativePath="..\..\Api\V3d\Resource\VResourceId.h"/>
-          <File RelativePath="..\..\Api\V3d\Resource\VTypedResourceData.h"/>
-        </Filter>
-        <Filter Name="Scene" Filter="">
-          <File RelativePath="..\..\Api\V3d\Scene\IVRenderAlgorithm.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\IVRenderList.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\IVScene.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\IVShooting.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\VDefaultRenderAlgorithm.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\VRenderList.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\VSceneModelPart.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\VShooting.h"/>
-          <File RelativePath="..\..\Api\V3d\Scene\VSimpleScene.h"/>
-        </Filter>
-        <Filter Name="Utils" Filter="">
-          <File RelativePath="..\..\Api\V3d\Utils\IVStringStream.h"/>
-          <File RelativePath="..\..\Api\V3d\Utils\VAllFilter.h"/>
-          <File RelativePath="..\..\Api\V3d\Utils\VSimpleTokenizer.h"/>
-        </Filter>
-        <Filter Name="Xml" Filter="">
-          <File RelativePath="..\..\Api\V3d\Xml\XMLUtils.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\XMLUtils.inl"/>
-        </Filter>
-        <File RelativePath="..\..\Api\V3d\CG.h"/>
-        <File RelativePath="..\..\Api\V3d\Entity.h"/>
-        <File RelativePath="..\..\Api\V3d\OpenGL.h"/>
-        <File RelativePath="..\..\Api\V3d\Resource.h"/>
-        <File RelativePath="..\..\Api\V3d\Scene.h"/>
-      </Filter>
-      <Filter Name="V3dLib" Filter="">
-        <Filter Name="Collision" Filter="">
-          <File RelativePath="..\..\Api\V3dLib\Collision\VCollisionException.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Collision\VCollisionObject.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Collision\VContactReport.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Collision\VOpcodeSystem.h"/>
-        </Filter>
-        <Filter Name="Containers" Filter="">
-          <File RelativePath="..\..\Api\V3dLib\Containers\VArray2d.h"/>
-        </Filter>
-        <Filter Name="EntityParts" Filter="">
-          <File RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h"/>
-          <File RelativePath="..\..\Api\V3dLib\EntityParts\VRootNodePart.h"/>
-          <File RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h"/>
-        </Filter>
-        <Filter Name="Graphics" Filter="">
-          <Filter Name="Generators" Filter="">
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCircleMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCircleMesh.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCylinderMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCylinderMesh.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VQuadMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTriangleMesh.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTriangleMesh.inl"/>
-          </Filter>
-          <Filter Name="Geometry" Filter="">
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColor4f.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColoredTextureVertex.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColoredVertex.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VDynamicGeometryData.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryData.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryData.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.inl"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VNormal3f.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VPlane3f.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VResizeableGeometryData.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VSimpleVertex.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VTexCoord2f.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VTexturedVertex.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VVertex3f.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VVertexDataLayout.h"/>
-          </Filter>
-          <Filter Name="Importer" Filter="">
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Importer\VEffectLoader.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Importer\VModelLoader.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h"/>
-          </Filter>
-          <Filter Name="Materials" Filter="">
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Materials\EffectUtils.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Materials\StateTypes.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Materials\VModeTypeInfo.h"/>
-          </Filter>
-          <Filter Name="Misc" Filter="">
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Misc\IVCamera.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Misc\IVDrawList.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Misc\MiscUtils.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Misc\VCamera.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Misc\VKeyboardCamera.h"/>
-            <File RelativePath="..\..\Api\V3dLib\Graphics\Misc\VSimpleDrawList.h"/>
-          </Filter>
-          <File RelativePath="..\..\Api\V3dLib\Graphics\Generators.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Graphics\Importer.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Graphics\Materials.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Graphics\Misc.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Graphics\Portal.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Graphics\SimpleSG.h"/>
-        </Filter>
-        <Filter Name="Math" Filter="">
-          <File RelativePath="..\..\Api\V3dLib\Math\ArrayOps.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Math\ArrayOps.inl"/>
-          <File RelativePath="..\..\Api\V3dLib\Math\VQuaternion.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Math\VQuaternionOps.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Math\VRBTransform.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Math\VVectorBase.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Math\VVectorOps.h"/>
-        </Filter>
-        <Filter Name="Physics" Filter="">
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicBody.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicBoxMassState.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometry.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometryBox.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometryPlane.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometrySphere.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicJoint.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointGroup.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointHinge2State.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicMass.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicObject.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicPositionState.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicSpace.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicSphereMassState.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicState.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Physics\VPhysicWorld.h"/>
-        </Filter>
-        <Filter Name="Property" Filter="">
-          <File RelativePath="..\..\Api\V3dLib\Property\VProperty.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Property\VPropertyManager.h"/>
-        </Filter>
-        <Filter Name="Utils" Filter="">
-          <File RelativePath="..\..\Api\V3dLib\Utils\ColorConversion.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Utils\VCommandManager.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Utils\VFourCC.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Utils\VFrameCounter.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Utils\VStreamReader.h"/>
-          <File RelativePath="..\..\Api\V3dLib\Utils\VStringValue.h"/>
-        </Filter>
-        <File RelativePath="..\..\Api\V3dLib\BoostSignals.h"/>
-        <File RelativePath="..\..\Api\V3dLib\Containers.h"/>
-        <File RelativePath="..\..\Api\V3dLib\Graphics.h"/>
-        <File RelativePath="..\..\Api\V3dLib\Math.h"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Collision" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <File RelativePath="..\..\Source\Collision\VCollisionObject.cpp"/>
-        <File RelativePath="..\..\Source\Collision\VContactReport.cpp"/>
-        <File RelativePath="..\..\Source\Collision\VOpcodeSystem.cpp"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Entity" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <Filter Name="EntityParts" Filter="">
-          <File RelativePath="..\..\Source\Entity\EntityParts\VRigidBodyPart.cpp"/>
-          <File RelativePath="..\..\Source\Entity\EntityParts\VRootNodePart.cpp"/>
-          <File RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp"/>
-        </Filter>
-        <File RelativePath="..\..\Source\Entity\VEntity.cpp"/>
-        <File RelativePath="..\..\Source\Entity\VEntityManager.cpp"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Graphics" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <Filter Name="Lib" Filter="">
-          <File RelativePath="..\..\Source\Graphics\Lib\DefaultVertexStructures.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\EffectUtils.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\GeometryUtils.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\MiscUtils.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\StateTypes.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VDisplaySettings.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VEffectDescription.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VMeshDescription.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VModeTypeInfo.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VModel.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VPointLight.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VVertexBuffer.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\Lib\VVertexFormat.cpp"/>
-        </Filter>
-        <Filter Name="OpenGL" Filter="">
-          <File RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.cpp"/>
-          <File RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.h"/>
-        </Filter>
-      </Filter>
-    </Filter>
-    <Filter Name="Math" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <File RelativePath="..\..\Source\Math\TransformationOps.cpp"/>
-        <File RelativePath="..\..\Source\Math\VRBTransform.cpp"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Physics" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <File RelativePath="..\..\Source\Physics\VPhysicBody.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicBoxMassState.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicGeometry.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicGeometryBox.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicGeometryPlane.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicGeometrySphere.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicJoint.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicJointGroup.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicJointHinge2State.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicMass.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicObject.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicPositionState.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicSpace.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicSphereMassState.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicState.cpp"/>
-        <File RelativePath="..\..\Source\Physics\VPhysicWorld.cpp"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Property" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <File RelativePath="..\..\Source\Property\VPropertyManager.cpp"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Resource" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <Filter Name="Types" Filter="">
-          <File RelativePath="..\..\Source\Resource\Types\VFileName.cpp"/>
-        </Filter>
-        <File RelativePath="..\..\Source\Resource\VResource.cpp"/>
-        <File RelativePath="..\..\Source\Resource\VResourceData.cpp"/>
-        <File RelativePath="..\..\Source\Resource\VResourceId.cpp"/>
-        <File RelativePath="..\..\Source\Resource\VResourceManager.cpp"/>
-        <File RelativePath="..\..\Source\Resource\VResourceManager.h"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Scene" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <File RelativePath="..\..\Source\Scene\VDefaultRenderAlgorithm.cpp"/>
-        <File RelativePath="..\..\Source\Scene\VRenderList.cpp"/>
-        <File RelativePath="..\..\Source\Scene\VSceneModelPart.cpp"/>
-        <File RelativePath="..\..\Source\Scene\VShooting.cpp"/>
-        <File RelativePath="..\..\Source\Scene\VSimpleScene.cpp"/>
-      </Filter>
-    </Filter>
-    <Filter Name="UtilsLib" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <Filter Name="CPUDetect" Filter="">
-          <File RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp"/>
-          <File RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.h"/>
-        </Filter>
-        <Filter Name="Camera" Filter="">
-          <File RelativePath="..\..\Source\UtilsLib\Camera\VCamera.cpp"/>
-          <File RelativePath="..\..\Source\UtilsLib\Camera\VKeyboardCamera.cpp"/>
-        </Filter>
-        <Filter Name="DrawList" Filter="">
-          <File RelativePath="..\..\Source\UtilsLib\DrawList\VSimpleDrawList.cpp"/>
-        </Filter>
-        <Filter Name="Importer" Filter="">
-          <File RelativePath="..\..\Source\UtilsLib\Importer\VEffectLoader.cpp"/>
-          <File RelativePath="..\..\Source\UtilsLib\Importer\VModelLoader.cpp"/>
-          <File RelativePath="..\..\Source\UtilsLib\Importer\VQ3BspImporter.cpp"/>
-        </Filter>
-        <Filter Name="Xml" Filter="">
-          <File RelativePath="..\..\Source\UtilsLib\Xml\XMLUtils.cpp"/>
-        </Filter>
-        <File RelativePath="..\..\Source\UtilsLib\ColorConversion.cpp"/>
-        <File RelativePath="..\..\Source\UtilsLib\VCommandManager.cpp"/>
-        <File RelativePath="..\..\Source\UtilsLib\VFourCC.cpp"/>
-        <File RelativePath="..\..\Source\UtilsLib\VFrameCounter.cpp"/>
-        <File RelativePath="..\..\Source\UtilsLib\VSimpleTokenizer.cpp"/>
-        <File RelativePath="..\..\Source\UtilsLib\VStreamReader.cpp"/>
-      </Filter>
-    </Filter>
-  </Files>
-  <Globals>
+	<Files>
+		<Filter
+			Name="Api"
+			Filter="">
+			<Filter
+				Name="V3d"
+				Filter="">
+				<File
+					RelativePath="..\..\Api\V3d\CG.h">
+				</File>
+				<File
+					RelativePath="..\..\Api\V3d\Entity.h">
+				</File>
+				<File
+					RelativePath="..\..\Api\V3d\OpenGL.h">
+				</File>
+				<File
+					RelativePath="..\..\Api\V3d\Resource.h">
+				</File>
+				<File
+					RelativePath="..\..\Api\V3d\Scene.h">
+				</File>
+				<Filter
+					Name="Entity"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntity.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Math"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Math\Numerics.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Math\Numerics.inl">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Math\TransformationOps.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Math\VMatrix.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Math\VMatrixOps.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Math\VVector.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Resource"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Resource\IVResourceManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Resource\IVResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Resource\ResourceExceptions.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Resource\VResource.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Resource\VResourceData.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Resource\VResourceDataPtr.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Resource\VResourceId.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Resource\VTypedResourceData.h">
+					</File>
+					<Filter
+						Name="Types"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3d\Resource\Types\VFileName.h">
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="Scene"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Scene\IVRenderAlgorithm.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\IVRenderList.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\IVScene.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\IVShooting.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\VDefaultRenderAlgorithm.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\VRenderList.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\VSceneModelPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\VShooting.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\VSimpleScene.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Utils"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Utils\IVStringStream.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Utils\VAllFilter.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Utils\VSimpleTokenizer.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Xml"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Xml\XMLUtils.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\XMLUtils.inl">
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="V3dLib"
+				Filter="">
+				<File
+					RelativePath="..\..\Api\V3dLib\BoostSignals.h">
+				</File>
+				<File
+					RelativePath="..\..\Api\V3dLib\Containers.h">
+				</File>
+				<File
+					RelativePath="..\..\Api\V3dLib\Graphics.h">
+				</File>
+				<File
+					RelativePath="..\..\Api\V3dLib\Math.h">
+				</File>
+				<Filter
+					Name="Collision"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\Collision\VCollisionException.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Collision\VCollisionObject.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Collision\VContactReport.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Collision\VOpcodeSystem.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Containers"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\Containers\VArray2d.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="EntityParts"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VRootNodePart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Graphics"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\Graphics\Generators.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Graphics\Geometry.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Graphics\Importer.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Graphics\Materials.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Graphics\Misc.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Graphics\Portal.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Graphics\SimpleSG.h">
+					</File>
+					<Filter
+						Name="Generators"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCircleMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCircleMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCylinderMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCylinderMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VQuadMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTriangleMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTriangleMesh.inl">
+						</File>
+					</Filter>
+					<Filter
+						Name="Geometry"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColor4f.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColoredTextureVertex.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColoredVertex.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VDynamicGeometryData.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryData.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryData.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VNormal3f.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VPlane3f.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VResizeableGeometryData.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VSimpleVertex.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VTexCoord2f.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VTexturedVertex.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VVertex3f.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VVertexDataLayout.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Importer"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VEffectLoader.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VModelLoader.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Materials"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Materials\EffectUtils.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Materials\StateTypes.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Materials\VModeTypeInfo.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Misc"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Misc\IVCamera.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Misc\IVDrawList.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Misc\MiscUtils.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Misc\VCamera.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Misc\VKeyboardCamera.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Misc\VSimpleDrawList.h">
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="Math"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\ArrayOps.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\ArrayOps.inl">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VQuaternion.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VQuaternionOps.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VRBTransform.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VVectorBase.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VVectorOps.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Physics"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicBody.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicBoxMassState.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometry.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometryBox.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometryPlane.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometrySphere.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJoint.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointGroup.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointHinge2State.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicMass.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicObject.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicPositionState.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicSpace.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicSphereMassState.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicState.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicWorld.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Property"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\Property\VProperty.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Property\VPropertyManager.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Utils"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\Utils\ColorConversion.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VCommandManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VFourCC.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VFrameCounter.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VStreamReader.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VStringValue.h">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Collision"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Collision\VCollisionObject.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Collision\VContactReport.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Collision\VOpcodeSystem.cpp">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Entity"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Entity\VEntity.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\VEntityManager.cpp">
+				</File>
+				<Filter
+					Name="EntityParts"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\Entity\EntityParts\VRigidBodyPart.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Entity\EntityParts\VRootNodePart.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Graphics"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<Filter
+					Name="Lib"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\DefaultVertexStructures.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\EffectUtils.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\GeometryUtils.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\MiscUtils.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\StateTypes.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VDisplaySettings.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VEffectDescription.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VMeshDescription.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VModel.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VModeTypeInfo.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VPointLight.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VVertexBuffer.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\VVertexFormat.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="OpenGL"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.h">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Math"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Math\TransformationOps.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Math\VRBTransform.cpp">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Physics"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicBody.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicBoxMassState.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicGeometry.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicGeometryBox.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicGeometryPlane.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicGeometrySphere.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicJoint.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicJointGroup.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicJointHinge2State.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicMass.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicObject.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicPositionState.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicSpace.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicSphereMassState.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicState.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicWorld.cpp">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Property"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Property\VPropertyManager.cpp">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Resource"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Resource\VResource.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Resource\VResourceData.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Resource\VResourceId.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Resource\VResourceManager.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Resource\VResourceManager.h">
+				</File>
+				<Filter
+					Name="Types"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\Resource\Types\VFileName.cpp">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Scene"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Scene\VDefaultRenderAlgorithm.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VRenderList.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VSceneModelPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VShooting.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VSimpleScene.cpp">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="UtilsLib"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\UtilsLib\ColorConversion.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VCommandManager.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VFourCC.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VFrameCounter.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VSimpleTokenizer.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VStreamReader.cpp">
+				</File>
+				<Filter
+					Name="CPUDetect"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Camera"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\UtilsLib\Camera\VCamera.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\UtilsLib\Camera\VKeyboardCamera.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="DrawList"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\UtilsLib\DrawList\VSimpleDrawList.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="Importer"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\UtilsLib\Importer\VEffectLoader.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\UtilsLib\Importer\VModelLoader.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\UtilsLib\Importer\VQ3BspImporter.cpp">
+					</File>
+					<Filter
+						Name="Base"
+						Filter="">
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\Base\VImportedBufferDescription.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\Base\VImportedFaceContainer.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\Base\VImportedFaceDescription.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\Base\VImportedMaterialContainer.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\Base\VImportedMaterialDescription.cpp">
+						</File>
+					</Filter>
+					<Filter
+						Name="3DS"
+						Filter="">
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\3ds\VImported3DS.cpp">
+						</File>
+					</Filter>
+				</Filter>
+				<Filter
+					Name="Xml"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\UtilsLib\Xml\XMLUtils.cpp">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+	</Files>
+	<Globals>
 	</Globals>
 </VisualStudioProject>

@@ -2,6 +2,8 @@ Worklog von sheijk
 -------------------------------------------------------------------------------
 ----- messages to sheijk:
 
+Das Feature VOpenGLDevice::ApplyMaterial() fixen --ins :)
+
 -------------------------------------------------------------------------------
 ----- current assigned tasks:
 

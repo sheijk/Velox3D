@@ -30,6 +30,9 @@ public:
 	typedef VSharedPtr<VMatrix44f> MatrixPtr;
 
 	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial, MatrixPtr in_pTransform);
+	/*
+	 * using default identity matrix
+	 */
 	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial);
 
 	MeshPtr GetMesh() const;

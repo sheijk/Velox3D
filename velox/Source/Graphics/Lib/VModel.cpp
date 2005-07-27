@@ -26,13 +26,24 @@ VModelMesh::VModelMesh(
 }
 
 VModelMesh::VModelMesh(
+					   MeshPtr in_pMesh,
+					   MaterialPtr in_pMaterial)
+{
+	m_pMesh = in_pMesh;
+	m_pMaterial = in_pMaterial;
+
+		
+	m_pTransform.Assign(new VMatrix44f(math::IdentityMatrix()));
+}
+//TODO: eine war falsch und produziert nen heap fehler -ins
+/*VModelMesh::VModelMesh(
 	MeshPtr in_pMesh,
 	MaterialPtr in_pMaterial)
 {
 	m_pMesh = in_pMesh;
 	m_pMaterial = in_pMaterial;
 	m_pTransform = math::IdentityPtr();
-}
+}*/
 
 VModelMesh::MeshPtr VModelMesh::GetMesh() const
 {

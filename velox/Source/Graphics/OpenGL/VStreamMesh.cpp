@@ -133,8 +133,8 @@ void VStreamMesh::Render() const
 		const void* pIndexAddress = (*m_pIndexStream)->GetIndexAddress();
 			//+ sizeof(vuint) * m_nIndexOffset;
 
-		const vuint* pNewIndexAddress = reinterpret_cast<const vuint*>(pIndexAddress);
-			//+ m_nIndexOffset;
+		const vuint* pNewIndexAddress = reinterpret_cast<const vuint*>(pIndexAddress)
+			+ m_nIndexOffset;
 		
 		
 		glDrawElements(

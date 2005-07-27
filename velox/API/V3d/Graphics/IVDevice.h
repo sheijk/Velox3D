@@ -58,8 +58,11 @@ public:
 	 */
 	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;
 
-	/** sends the vertices of a mesh to the device */
+	//////////////////DEPRICATED! DO NOT USE/////////////////////
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
+
+	/** sends the vertices of a mesh to the device */
+	//virtual void SendGeometry(MeshHandle in_Mesh) = 0;
 
 	/** applys a render state */
 	virtual void ApplyState(const IVRenderState& in_State) = 0;

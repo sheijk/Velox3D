@@ -73,7 +73,7 @@ VResourceId VResourceManager::CreateResource(VStringParam in_strName)
 {
 	CheckResourceName(in_strName);
 
-	cout << sizeof(vfloat64) << endl;
+	//cout << sizeof(vfloat64) << endl; //TODO: no need here for this --ins
 
 	// get sub names of name (ignoring the leading '/')
 	VSimpleTokenizer tokens(std::string(in_strName+1), '/');

@@ -54,6 +54,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxLib", "..\Workspace\MSVC71\VeloxLib.vcproj", "{20050526-0000-0000-0000-000560019000}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WxServiceDLL", "..\Workspace\MSVC71\WxServiceDLL.vcproj", "{20050526-0000-0000-0000-000359796000}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -63,11 +65,20 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WxServiceDLL", "..\Workspac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlServiceDLL", "..\Workspace\MSVC71\XmlServiceDLL.vcproj", "{20050526-0000-0000-0000-000170963000}"
 	ProjectSection(ProjectDependencies) = postProject
+		{20050526-0000-0000-0000-000560019000} = {20050526-0000-0000-0000-000560019000}
 		{20050526-0000-0000-0000-000757427000} = {20050526-0000-0000-0000-000757427000}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KernelLib", "..\Workspace\MSVC71\KernelLib.vcproj", "{20050526-0000-0000-0000-000768881000}"
 	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImporterDemo", "ImporterDemo\ImporterDemo.vcproj", "{22041311-04E1-47C5-B84B-000000000000}"
+	ProjectSection(ProjectDependencies) = postProject
+		{20050526-0000-0000-0000-000560019000} = {20050526-0000-0000-0000-000560019000}
+		{20050526-0000-0000-0000-000587248000} = {20050526-0000-0000-0000-000587248000}
+		{20050526-0000-0000-0000-000757427000} = {20050526-0000-0000-0000-000757427000}
+		{20050526-0000-0000-0000-000768881000} = {20050526-0000-0000-0000-000768881000}
 	EndProjectSection
 EndProject
 Global
@@ -149,6 +160,12 @@ Global
 		{20050526-0000-0000-0000-000768881000}.Release.Build.0 = Release|Win32
 		{20050526-0000-0000-0000-000768881000}.UnitTests.ActiveCfg = Release|Win32
 		{20050526-0000-0000-0000-000768881000}.UnitTests.Build.0 = Release|Win32
+		{22041311-04E1-47C5-B84B-000000000000}.Debug.ActiveCfg = Debug|Win32
+		{22041311-04E1-47C5-B84B-000000000000}.Debug.Build.0 = Debug|Win32
+		{22041311-04E1-47C5-B84B-000000000000}.Release.ActiveCfg = Release|Win32
+		{22041311-04E1-47C5-B84B-000000000000}.Release.Build.0 = Release|Win32
+		{22041311-04E1-47C5-B84B-000000000000}.UnitTests.ActiveCfg = Release|Win32
+		{22041311-04E1-47C5-B84B-000000000000}.UnitTests.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionItems) = postSolution
 		..\Doc\Worklog\AcrylSword.txt = ..\Doc\Worklog\AcrylSword.txt

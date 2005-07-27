@@ -6,6 +6,8 @@ Worklog von ins:
 -------------------------------------------------------------------------------
 Personal Notes:
 
+TODO: write VCOlor3f and use it in VImportedMaterialDescription
+
 make physic states non copyable and assignable
 
 TODO List:
@@ -39,6 +41,21 @@ high:
 //-----------------------------------------------------------------------------
 
 Done List:
+
+27.07.05
+- adopted resource types to new VTypeInfo mechanism
+
+21.7.05
+- added VMeshMaterialResourceType
+- added VMaterialResourceType
+- added VImported3DSMaterialType
+- device->CreateMaterial/CreateMesh now depreicated. dont use!
+- added new default constructor to VModelMesh taking default identity matrix
+- rehacked indexoffset into VStreamMesh.cpp
+- debug info deleted in VResourceManager.cpp
+
+14.07.05.
+- finished 3ds importer. took a long long time...
 
 22.02.05
 - added a stuff to QuaternionOps
