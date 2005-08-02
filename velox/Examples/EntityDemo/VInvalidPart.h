@@ -1,5 +1,5 @@
-#ifndef V3D_VDATAPART_2004_10_10_H
-#define V3D_VDATAPART_2004_10_10_H
+#ifndef V3D_VINVALIDPART_2005_08_01_H
+#define V3D_VINVALIDPART_2005_08_01_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VIOStream.h>
@@ -9,34 +9,31 @@
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
-using namespace v3d; // prevent auto indenting
+using namespace v3d; // anti auto indenting
 
-class VDataPart : public entity::VUnconnectedPart
+/**
+ * @author sheijk
+ */
+class VInvalidPart : public entity::VUnconnectedPart
 {
-	vint data;
 public:
-	VDataPart(vint d) { data = d; }
-
-	void Activate()
+	virtual void Activate()
 	{
-		vout << "activating VDataPart, " << data << vendl;
+		vout << "Error: invalid part activated" << vendl;
 	}
 
-	void Deactivate()
+	virtual void Deactivate()
 	{
-		vout << "deactivating VDataPart, " << data << vendl;
+		vout << "Error: invalid part deactivated" << vendl;
 	}
 
-	vint GetData() { return data; }
-	void SetData(int d) { data = d; }
-
-	static utils::VFourCC GetDefaultId()
+	virtual vbool IsReady() const
 	{
-		return utils::VFourCC("data");
+		return false;
 	}
 };
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VDATAPART_2004_10_10_H
+#endif // V3D_VINVALIDPART_2005_08_01_H

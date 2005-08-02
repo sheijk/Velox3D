@@ -6,10 +6,11 @@
 #include <V3d/Entity/VEntityExceptions.h>
 #include <V3dLib/Utils/VFourCC.h>
 
+#include <V3d/Messaging/VMessage.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
-//-----------------------------------------------------------------------------
-using namespace v3d; // prevent auto indenting
+	//-----------------------------------------------------------------------------
+	using namespace v3d; // prevent auto indenting
 
 /**
  * A part is an independent part of an entity. Derive classes from IVPart to
@@ -28,49 +29,80 @@ using namespace v3d; // prevent auto indenting
 class IVPart
 {
 public:
+	/** The location of a dependency: where the required part is located */
+	enum Location { Neighbour, Ancestor };
+
+	/** Dependency to another part placed in the same or an (in)direct parent */
+	struct Dependency
+	{
+		Location location;
+		utils::VFourCC id;
+	};
+
 	virtual ~IVPart() {}
 
 	/** 
-	 * When called, the part has to register itself to it's subsystem 
-	 */
+	* When called, the part has to register itself to it's subsystem 
+	*/
 	virtual void Activate() = 0;
 
 	/**
-	 * When called, the part has to unregister itself from it's subsystem
-	 */
+	* When called, the part has to unregister itself from it's subsystem
+	*/
 	virtual void Deactivate() = 0;
 
-	/**
-	 * Tells the part about other parts belonging to the same entity
-	 */
-	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+	/** Connect to another entity part */
+	virtual void Connect(
+		Location in_Location, 
+		const utils::VFourCC& in_Id, 
+		IVPart& in_Part)
 	{}
 
-	/**
-	 * Tells the part about the next part with it's id up the entity hierarchy
-	 */
-	virtual void TellParentPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+	/** 
+	* Notify the part that another connected part has been removed 
+	* The disconnected part might be deleted right after this call. Thus all
+	* references to it must be reset to null
+	*/
+	virtual void Disconnect(
+		Location in_Location,
+		const utils::VFourCC& in_Id,
+		IVPart& in_Part)
+	{}
+
+	/** 
+	* The part can activated and used if this function returns true. (all
+	* dependencies must be fulfilled etc.)
+	*/
+	virtual vbool IsReady() const = 0;
+
+	/** Return the number of dependencies */
+	virtual vuint DependencyCount() const = 0;
+
+	/** Return information about the n-th dependency */
+	virtual Dependency GetDependencyInfo(vuint in_nIndex) const = 0;
+
+	virtual void Send(const messaging::VMessage& in_Message)
 	{}
 
 	template<typename T>
-	vbool IsOfType() const;
+		vbool IsOfType() const;
 
 	template<typename T>
-	const T* Convert() const;
+		const T* Convert() const;
 
 	template<typename T>
-	T* Convert();
+		T* Convert();
 };
 
 //-----------------------------------------------------------------------------
 template<typename T>
-vbool IVPart::IsOfType() const
+	vbool IVPart::IsOfType() const
 {
 	return (typeid(*this) == typeid(T)) != 0;
 }
 
 template<typename T>
-const T* IVPart::Convert() const
+	const T* IVPart::Convert() const
 {
 	if( IsOfType<T>() )
 		return dynamic_cast<const T*>(this);
@@ -79,7 +111,7 @@ const T* IVPart::Convert() const
 }
 
 template<typename T>
-T* IVPart::Convert()
+	T* IVPart::Convert()
 {
 	if( IsOfType<T>() )
 		return dynamic_cast<T*>(this);

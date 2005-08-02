@@ -60,6 +60,10 @@ public class Part implements XMLSerializable {
 	public String GetType() {
 		return type;
 	}
+	
+	public VFourCC GetId() {
+		return new VFourCC(type);
+	}
 
 	public void SetType(String out_type) {
 		type = out_type;

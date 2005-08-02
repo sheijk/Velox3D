@@ -66,6 +66,9 @@ public class Entity implements XMLSerializable {
 	}
 	
 	public void Add(Part newPart) {
+//		if( impl != null )
+//			impl.AddPart(newPart.GetId(), newPart.GetPart());
+		
 		parts.add(newPart);
 	}
 	

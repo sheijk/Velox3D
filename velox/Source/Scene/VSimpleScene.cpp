@@ -8,6 +8,7 @@
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace v3d::entity;
 
 VSimpleScene::VSimpleScene()
 {
@@ -50,6 +51,21 @@ void VSimpleScene::Activate()
 
 void VSimpleScene::Deactivate()
 {
+}
+
+vbool VSimpleScene::IsReady() const
+{
+	return true;
+}
+
+vuint VSimpleScene::DependencyCount() const
+{
+	return 0;
+}
+
+IVPart::Dependency VSimpleScene::GetDependencyInfo(vuint in_nIndex) const
+{
+	V3D_THROW(VException, "No dependencies");
 }
 
 //-----------------------------------------------------------------------------

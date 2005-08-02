@@ -21,7 +21,13 @@ public:
 
 	virtual void Activate();
 	virtual void Deactivate();
-	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part);
+	virtual void Connect(
+		Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part);
+	virtual void Disconnect(
+		Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part);
+	virtual vbool IsReady() const;
+	virtual vuint DependencyCount() const;
+	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
 
 	void Cull();
 	void Render();

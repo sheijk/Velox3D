@@ -33,6 +33,8 @@ lib glfwLib : :
 	<file>../../Local/ExternalLibs/Lib/glfw.lib <link>static ;
 lib glewLib : :
 	<file>../../Local/ExternalLibs/Lib/glew32.lib <link>static ;
+lib 3dsLib : :
+	<file>../../Local/ExternalLibs/Lib/lib3ds-120d.lib <link>static ;
 	
 # system libraries
 #-------------------------------------------------------------------------------
@@ -67,6 +69,7 @@ lib CoreLib
 	../../Source/Core/VLogging.cpp
 	../../Source/Core/VVeloxApp.cpp
 	../../Source/Core/Wrappers/VString.cpp
+	../../Source/Core/VTypeInfo.cpp
 	: # settings
 	<link>static
 	; # end                                          
@@ -95,6 +98,10 @@ lib VeloxLib
 	[ glob ../../Source/Collision/*.cpp ]
 	[ glob ../../Source/Entity/*.cpp ]
 	[ glob ../../Source/Entity/EntityParts/*.cpp ]
+	[ glob ../../Source/Entity/Parsers/*.cpp ]
+
+	[ glob ../../Source/Messaging/*.cpp ]
+
 	[ glob ../../Source/Physics/*.cpp ]
 	[ glob ../../Source/UtilsLib/XML/*.cpp ]
 	# resource lib + resource types
@@ -107,16 +114,6 @@ lib VeloxLib
 	;
 
 lib ScriptingDLL :
-#	../../Source/Property/VPropertyManager.cpp
-#	../../Source/UtilsLib/VSimpleTokenizer.cpp
-#	../../Source/Resource/VResourceData.cpp
-#	[ glob ../../Source/Resource/*.cpp ]
-#	[ glob ../../Source/Resource/Types/*.cpp ]
-#	[ glob ../../Source/Graphics/Lib/*.cpp ]
-#	[ glob ../../Source/Graphics/DeviceBase/*.cpp ] 
-#	[ glob ../../Source/Graphics/OpenGL/*.cpp ]
-#	../../Source/Graphics/OpenGL/Context/VWin32WindowContext.cpp
-#	../../Source/Graphics/Lib/VDisplaySettings.cpp
 	# vfs
 	[ glob ../../Source/VirtualFileSystem/*.cpp ]
 	# window service
@@ -131,6 +128,11 @@ lib ScriptingDLL :
 	[ glob ../../Source/Graphics/DeviceBase/*.cpp ] 
 	[ glob ../../Source/Graphics/OpenGL/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/Context/*.cpp ]	
+
+	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
+	[ glob ../../Source/UtilsLib/Importer/Base/*.cpp ]
+	[ glob ../../Source/UtilsLib/Importer/3DS/*.cpp ]
+
 	# config service
 	[ glob ../../Source/ConfigFiles/*.cpp ]
 	# update manager
@@ -168,6 +170,7 @@ lib ScriptingDLL :
 	tinyXmlLib
 	glfwLib
 	glewLib
+	3dsLib
 	
 	# dependencies and other files
 	../../Source/Module/VeloxModule.cpp

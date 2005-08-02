@@ -26,6 +26,9 @@ public:
 	explicit VStringValue(VStringParam in_Value) { m_sValue = in_Value; }
 	VStringValue(const VStringValue& in_Source) { m_sValue = in_Source.m_sValue; }
 
+	template<typename T>
+	explicit VStringValue(const T& in_Value) { Set<T>(in_Value); }
+
 	/**
 	 * Assigns a new value to the object. The given type will be converted to
 	 * a string using a stringstream. Thus you need to provide an operator
@@ -36,7 +39,7 @@ public:
 	 * See V3dLib/Graphics/Materials/StateTypes.h for some examples
 	 */
 	template<typename T>
-		void Set(const T val);
+		void Set(const T& val);
 
     /**
      * Converts the value stored in the object to the given type T. If the
@@ -77,7 +80,7 @@ private:
 
 //-----------------------------------------------------------------------------
 template<typename T>
-void VStringValue::Set(const T val)
+void VStringValue::Set(const T& val)
 {
 	std::stringstream str;
 	str << val;
@@ -85,7 +88,7 @@ void VStringValue::Set(const T val)
 }
 
 template<>
-inline void VStringValue::Set(const vbool val)
+inline void VStringValue::Set(const vbool& val)
 {
 	m_sValue = (val ? "true" : "false");
 }

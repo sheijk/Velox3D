@@ -64,6 +64,7 @@ public class SceneView extends VeloxViewBase {
 	private Composite myParent = null;
 	
 	private VView renderView = null;
+	
 
 	class ViewContentProvider implements IStructuredContentProvider, 
 										   ITreeContentProvider 
@@ -178,7 +179,7 @@ public class SceneView extends VeloxViewBase {
 			}
 		}
 	}
-	
+
 	class ViewLabelProvider extends LabelProvider {
 
 		public String getText(Object obj) {

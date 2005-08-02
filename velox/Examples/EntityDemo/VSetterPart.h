@@ -3,20 +3,27 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/IVPart.h>
+#include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity/VEntityExceptions.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-class VSettingPart : public entity::IVPart
+class VSettingPart : public entity::VPartBase
 {
-	VDataPart* pData;
+	entity::VPartConnection<VDataPart> pData;
+	//VDataPart* pData;
 public:
+	VSettingPart() :
+		// create connection + make it known to parent
+		pData(IVPart::Neighbour, VDataPart::GetDefaultId(), this)
+	{
+	}
+
 	void Activate()
 	{
-		if( pData == 0 )
+		if( pData.Get() == 0 )
 			V3D_THROW(entity::VMissingPartException, "missing part 'data'");
 
 		vout << "activating setter part" << vendl;
@@ -28,15 +35,21 @@ public:
 		vout << "deactivating setter part" << vendl;
 	}
 
-	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+	virtual vbool IsReady() const
 	{
-		if( in_Part.IsOfType<VDataPart>() )
-			pData = in_Part.Convert<VDataPart>();
+		return pData.Get() != 0;
 	}
 
 	void SetValue(int v)
 	{
+		V3D_ASSERT(pData.Get() != 0);
+
 		pData->SetData(v);
+	}
+
+	static utils::VFourCC GetDefaultId()
+	{
+		return utils::VFourCC("setr");
 	}
 };
 

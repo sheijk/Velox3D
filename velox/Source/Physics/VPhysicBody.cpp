@@ -11,6 +11,7 @@
 namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
+using namespace entity;
 
 VPhysicBody::VPhysicBody()
 {
@@ -50,11 +51,60 @@ void VPhysicBody::Deactivate()
 	vout << "deactivating setter part" << vendl;
 }
 
-void VPhysicBody::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+vuint VPhysicBody::DependencyCount() const
 {
-	if( in_Part.IsOfType<entity::VRigidBodyPart>() )
-		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
+	return 1;
 }
+
+IVPart::Dependency VPhysicBody::GetDependencyInfo(vuint in_nIndex) const
+{
+	V3D_THROW(VException, "TODO: port VPhysicsBody to refactored entity system");
+
+	IVPart::Dependency dependency;
+	dependency.location = IVPart::Ancestor;
+
+	//TODO: vrigidbodypart::GetDefaultId
+	dependency.id == utils::VFourCC("phys");
+
+	return dependency;
+}
+
+void VPhysicBody::Connect(IVPart::Location in_Location, 
+	const utils::VFourCC& in_Id, entity::IVPart& in_Part)
+{
+	if( in_Location == IVPart::Ancestor && 
+		in_Part.IsOfType<entity::VRigidBodyPart>() )
+	{
+		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
+	}
+}
+
+void VPhysicBody::Disconnect(
+	IVPart::Location in_Location,
+	const utils::VFourCC& in_Id,
+	IVPart& in_Part)
+{
+	if( &in_Part == pBodyPart )
+		pBodyPart = 0;
+}
+
+vbool VPhysicBody::IsReady() const
+{
+	// we need a body part to operate
+	return pBodyPart != 0;
+}
+
+utils::VFourCC VPhysicBody::GetDefaultId()
+{
+	return utils::VFourCC("phbd");
+}
+
+
+//void VPhysicBody::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+//{
+//	if( in_Part.IsOfType<entity::VRigidBodyPart>() )
+//		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
+//}
 
 void VPhysicBody::SetPosition(vfloat32 x, vfloat32 y, vfloat32 z)
 {

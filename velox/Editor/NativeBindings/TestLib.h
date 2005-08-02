@@ -9,6 +9,8 @@
 #include <V3d/Vfs.h>
 
 #include <V3d/Entity.h>
+#include <V3d/Entity/IVSceneParser.h>
+#include <V3d/Messaging/VProtocol.h>
 
 #include <string>
 #include <V3d/OpenGL.h>

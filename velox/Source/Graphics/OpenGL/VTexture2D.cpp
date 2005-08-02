@@ -18,6 +18,7 @@ VTexture2D::~VTexture2D()
 
 void VTexture2D::Bind()
 {
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
 }
 

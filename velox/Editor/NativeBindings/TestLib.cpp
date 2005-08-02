@@ -185,8 +185,8 @@ v3d::VSharedPtr<IVPart> CreateModelPart(IVXMLElement* in_pElement)
 		std::string materialResource = attribIter->GetValue().Get<std::string>();
 
 		VModelMesh part(
-			GetResourceData<IVMesh>(meshResource),
-			GetResourceData<IVMaterial>(materialResource)
+			GetResourceData<IVMesh>(meshResource.c_str()),
+			GetResourceData<IVMaterial>(materialResource.c_str())
 			);
 		
 		model.Add(part);

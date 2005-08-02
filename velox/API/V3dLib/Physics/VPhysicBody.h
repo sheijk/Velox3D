@@ -31,9 +31,21 @@ public:
 	void Create(VPhysicWorld* in_PhysicWorld);
 	void SetTransformation();
 	void SetPosition(vfloat32 x, vfloat32 y, vfloat32 z);
+
+	// IVPart derived
 	void Activate();
     void Deactivate();
-	void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part);
+
+	virtual vuint DependencyCount() const;
+	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
+	virtual void Connect(IVPart::Location in_Location, 
+		const utils::VFourCC& in_Id, entity::IVPart& in_Part);
+	virtual void Disconnect(IVPart::Location in_Location, 
+		const utils::VFourCC& in_Id, entity::IVPart& in_Part);
+	virtual vbool IsReady() const;
+	
+	static utils::VFourCC GetDefaultId();
+
 	void SetCollisionBody(VPhysicGeometry* in_CollisionBodyState);
 	
 	/**
@@ -44,7 +56,6 @@ public:
 	/**
 	 * Returns the current position of the body
 	 */
-
 	graphics::VVertex3f GetPosition();
 			
 	void Update();

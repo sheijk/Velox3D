@@ -9,6 +9,7 @@
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace v3d::entity;
 
 VShooting::VShooting(graphics::IVDevice* in_pDevice, IVRenderAlgorithm* in_pAlgorithm)
 {
@@ -47,7 +48,8 @@ void VShooting::Deactivate()
 {
 }
 
-void VShooting::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+void VShooting::Connect(
+	Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part)
 {
 	m_pScene = in_Part.Convert<VSimpleScene>();
 	if( m_pScene )
@@ -55,6 +57,41 @@ void VShooting::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 		m_pRenderList = &m_pScene->GetRenderList();
 	}
 }
+
+void VShooting::Disconnect(
+	Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part)
+{
+}
+
+vbool VShooting::IsReady() const
+{
+	return m_pScene != 0;
+}
+
+vuint VShooting::DependencyCount() const
+{
+	return 1;
+}
+
+IVPart::Dependency VShooting::GetDependencyInfo(vuint in_nIndex) const
+{
+	V3D_ASSERT(in_nIndex == 0);
+
+	Dependency dependency;
+	dependency.id = "scen";
+	dependency.location = IVPart::Neighbour;
+
+	return dependency;
+}
+
+//void VShooting::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+//{
+//	m_pScene = in_Part.Convert<VSimpleScene>();
+//	if( m_pScene )
+//	{
+//		m_pRenderList = &m_pScene->GetRenderList();
+//	}
+//}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene

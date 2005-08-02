@@ -38,6 +38,11 @@ Doku:
   Base daten angefordert werden koennen 
   (AddData<Derived>(..); .. GetData<Base>() geht)
 
+02.08.05
+- Entity System ueberarbeitet
+- Messaging System
+- Scene Parser
+
 18.07.05
 - XML Service Objekte koennen geaendert werden (nodes hinzufuegen, ...)
 - erste Editorversion

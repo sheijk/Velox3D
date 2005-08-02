@@ -1,24 +1,29 @@
-#ifndef V3D_%%filename%%_H
-#define V3D_%%filename%%_H
+#ifndef V3D_VUNCONNECTEDPART_2005_08_01_H
+#define V3D_VUNCONNECTEDPART_2005_08_01_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
+#include <V3d/Entity/IVPart.h>
+
 //-----------------------------------------------------------------------------
-namespace v3d { namespace %%namespace%% {
+namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
 /**
-//TODO: insert documentation here
+ * Base class for parts which don't need any connections to other parts
+ *
+ * @author sheijk
  */
-class %%classname%%
+class VUnconnectedPart : public IVPart
 {
 public:
-	%%classname%%();
-	virtual ~%%classname%%();
+	virtual vbool IsReady() const;
+	virtual vuint DependencyCount() const;
+	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::%%namespace%%
+}} // namespace v3d::entity
 //-----------------------------------------------------------------------------
-#endif // V3D_%%filename%%_H
+#endif // V3D_VUNCONNECTEDPART_2005_08_01_H

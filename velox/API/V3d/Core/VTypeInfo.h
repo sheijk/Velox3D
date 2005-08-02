@@ -71,6 +71,15 @@ const VTypeInfo& GetTypeInfo();
 	class GrandChild : public Child {};
  } // namespace v3d
 
+ // simples way (must be in global namespace!)
+ V3D_TYPEINFO(v3d::Parent);
+ V3D_TYPEINFO_WITHPARENT(v3d::Child, v3d::Parent);
+ V3D_TYPEINFO_WITHPARENT(v3d::GrandChild, v3d::Child);
+
+ // 'manual' way, use this if you need to provide more information than a name
+ // and one parent type (for instance for types which inherit from multiple
+ // other classes):
+
  template<>
  void InitTypeInfo<v3d::Parent>(VTypeInfo* out_pTypeInfo)
  {
@@ -164,7 +173,7 @@ void InitTypeInfo<T>::operator()(VTypeInfo* out_pTypeInfo)
 {
 	// in order for a type T to be used with velox's simple type info there
 	// must be a specialization of InitTypeInfo<T> which constructs the 
-	// VTypeInfo object. See example in declaration
+	// VTypeInfo object. See example in declaration above (~ line 62ff)
 	typeLacksGetTypeInfoSpecialization();
 }
 

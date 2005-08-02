@@ -107,6 +107,22 @@ struct VPair1stAccessor
 };
 
 /**
+ * map<T1, T2*> -> VRangeIterator<T2>
+ *
+ * @author sheijk
+ */
+template<typename STLIterator, typename T>
+struct VPair2ndDerefAccessor
+{
+	typedef T Type;
+
+	static Type* Convert(const STLIterator& iter)
+	{
+		return &*(iter->second);
+	}
+};
+
+/**
  * Creates a VRangeIterator<T> from an stl iterator and an accessor
  *
  * Example:

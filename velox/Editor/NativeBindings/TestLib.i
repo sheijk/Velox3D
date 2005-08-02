@@ -7,6 +7,7 @@ using namespace v3d::xml;
 using namespace v3d::utils;
 using namespace v3d::vfs;
 using namespace v3d::entity;
+using namespace v3d::messaging;
 
 #undef CreateFile
 #undef DeleteFile
@@ -176,11 +177,19 @@ namespace v3d {
 %template(VXMLElementPtr) v3d::VSharedPtr<v3d::xml::IVXMLElement>;
 %include "../../API/V3d/XML/IVXMLService.h"
 
+// messaging
+//-----------------------------------------------------------------------------
+
+%include "../../API/V3d/Messaging/VMessage.h"
+%include "../../API/V3d/Messaging/VProtocol.h"
+
 // entity system
 //-----------------------------------------------------------------------------
 
 %template(VEntityPtr) v3d::VSharedPtr<v3d::entity::VEntity>;
 %template(VPartPtr) v3d::VSharedPtr<v3d::entity::IVPart>;
+%template(VEntityIterator) v3d::VRangeIterator<v3d::entity::VEntity>;
+%template(VPartIterator) v3d::VRangeIterator<v3d::entity::IVPart>;
 %include "../../API/V3d/Entity/IVPart.h"
 %include "../../API/V3d/Entity/VEntity.h"
 

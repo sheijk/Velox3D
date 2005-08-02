@@ -5,6 +5,7 @@
 
 #include <V3d/Entity/VEntityExceptions.h>
 #include <V3d/Entity/IVPart.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 
 #include <map>
 #include <vector>
@@ -13,11 +14,12 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
+class VEntityHelper;
+
 /**
  * An entity is a container of entity parts. It owns it's parts once they are added.
  * Parts are told about each other when they are added.
  *
- * @see v3d::entity::IVEntityManager
  * @author sheijk
  */
 class VEntity
@@ -43,6 +45,9 @@ public:
 	void AddChild(EntityPtr in_pEntity);
 	void RemoveChild(EntityPtr in_pEntity);
 
+	VRangeIterator<VEntity> ChildIterator();
+	VRangeIterator<IVPart> PartIterator();
+
 private:
 	typedef std::map<utils::VFourCC, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;
@@ -50,11 +55,17 @@ private:
 	VEntity(const VEntity&);
 	void operator=(const VEntity&);
 
+	void ReconnectAllParts();
+	void ConnectPart(PartPtr in_pPart, utils::VFourCC in_Id);
+
 	PartContainer m_Parts;
 	vbool m_bActivated;
 
 	VEntity* m_pParent;
 	EntityContainer m_Entities;
+
+	// put util functions in helper class to keep changes local to VEntity.cpp
+	friend class ::v3d::entity::VEntityHelper;
 };
 
 //-----------------------------------------------------------------------------

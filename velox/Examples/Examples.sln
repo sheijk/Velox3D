@@ -1,11 +1,4 @@
 Microsoft Visual Studio Solution File, Format Version 8.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Racer", "Racer\Racer.vcproj", "{20041011-04E0-47C5-B84B-8E9DE2BE6843}"
-	ProjectSection(ProjectDependencies) = postProject
-		{20050526-0000-0000-0000-000560019000} = {20050526-0000-0000-0000-000560019000}
-		{20050526-0000-0000-0000-000757427000} = {20050526-0000-0000-0000-000757427000}
-		{20050526-0000-0000-0000-000768881000} = {20050526-0000-0000-0000-000768881000}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EntityDemo", "EntityDemo\EntityDemo.vcproj", "{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20050526-0000-0000-0000-000560019000} = {20050526-0000-0000-0000-000560019000}
@@ -54,8 +47,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VeloxLib", "..\Workspace\MSVC71\VeloxLib.vcproj", "{20050526-0000-0000-0000-000560019000}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WxServiceDLL", "..\Workspace\MSVC71\WxServiceDLL.vcproj", "{20050526-0000-0000-0000-000359796000}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -88,12 +79,6 @@ Global
 		UnitTests = UnitTests
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
-		{20041011-04E0-47C5-B84B-8E9DE2BE6843}.Debug.ActiveCfg = Debug|Win32
-		{20041011-04E0-47C5-B84B-8E9DE2BE6843}.Debug.Build.0 = Debug|Win32
-		{20041011-04E0-47C5-B84B-8E9DE2BE6843}.Release.ActiveCfg = Release|Win32
-		{20041011-04E0-47C5-B84B-8E9DE2BE6843}.Release.Build.0 = Release|Win32
-		{20041011-04E0-47C5-B84B-8E9DE2BE6843}.UnitTests.ActiveCfg = Release|Win32
-		{20041011-04E0-47C5-B84B-8E9DE2BE6843}.UnitTests.Build.0 = Release|Win32
 		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.Debug.ActiveCfg = Debug|Win32
 		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.Debug.Build.0 = Debug|Win32
 		{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}.Release.ActiveCfg = Release|Win32

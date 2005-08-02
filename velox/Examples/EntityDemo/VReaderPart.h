@@ -3,40 +3,68 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/IVPart.h>
+#include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity/VEntityExceptions.h>
+
+#include "VDataPart.h"
+#include "VManagerPart.h"
+
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-class VReaderPart : public entity::IVPart
+class VReaderPart : public entity::VPartBase
 {
-	VDataPart* pData;
+	entity::VPartConnection<VDataPart> pData;
+	entity::VPartConnection<VManagerPart> pManager;
+	//VDataPart* pData;
 
 public:
+	VReaderPart() :
+		pData(IVPart::Neighbour, VDataPart::GetDefaultId(), this),
+		pManager(IVPart::Ancestor, VManagerPart::GetDefaultId(), this)
+	{
+	}
+
 	void Activate()
 	{
-		if( pData == 0 )
+		if( pData.Get() == 0 )
 			V3D_THROW(entity::VMissingPartException, "missing part 'data'");
 
 		vout << "activating VReaderPart" << vendl;
+
+		pManager->Register(this);
 	}
 
 	void Deactivate()
 	{
 		vout << "deactivating VReaderPart" << vendl;
+		pManager->Unregister(this);
 	}
 
-	void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+	virtual vbool IsReady() const
 	{
-		if( in_Part.IsOfType<VDataPart>() )
-			pData = in_Part.Convert<VDataPart>();
+		return pData.Get() != 0 &&
+			pManager.Get() != 0;
 	}
+
+	//void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+	//{
+	//	if( in_Part.IsOfType<VDataPart>() )
+	//		pData = in_Part.Convert<VDataPart>();
+	//}
 
 	void PrintValue()
 	{
+		V3D_ASSERT(pData.Get() != 0);
+
 		vout << "value = " << pData->GetData() << vendl;
+	}
+
+	static utils::VFourCC GetDefaultId()
+	{
+		return utils::VFourCC("read");
 	}
 };
 
