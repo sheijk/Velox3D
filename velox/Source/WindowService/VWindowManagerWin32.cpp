@@ -76,7 +76,7 @@ IVWindowManager::GraphicsDevicePtr VWindowManagerWin32::CreateGraphicsDevice(
 	HWND hwnd = HWND(in_Handle);
 
 //	GraphicsDevicePtr pDevice(new graphics::VOpenGLDevice(&in_Settings, hwnd));
-	VSharedPtr<VWin32WindowContext> pContext(new VWin32WindowContext(
+	VWin32WindowContext* pContext(new VWin32WindowContext(
 		hwnd, &in_Settings));
 
 	// create device

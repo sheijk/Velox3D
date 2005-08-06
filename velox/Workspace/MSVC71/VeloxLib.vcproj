@@ -316,9 +316,6 @@
 						RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VRootNodePart.h">
-					</File>
-					<File
 						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h">
 					</File>
 				</Filter>
@@ -678,9 +675,6 @@
 					Filter="">
 					<File
 						RelativePath="..\..\Source\Entity\EntityParts\VRigidBodyPart.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Entity\EntityParts\VRootNodePart.cpp">
 					</File>
 					<File
 						RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp">

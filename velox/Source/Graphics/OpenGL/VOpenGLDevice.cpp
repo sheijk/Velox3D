@@ -74,7 +74,7 @@ VOpenGLDevice::VOpenGLDevice(const VDisplaySettings* in_pSettings, HWND in_hWnd)
 
 VOpenGLDevice::VOpenGLDevice(
 	const graphics::VDisplaySettings& in_Settings,
-	VSharedPtr<IVRenderContext> in_pContext)
+	IVRenderContext* in_pContext)
 	:
 	m_pContext(in_pContext),
 	m_DisplaySettings(in_Settings)

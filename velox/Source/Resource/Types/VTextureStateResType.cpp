@@ -307,13 +307,12 @@ vbool VTextureStateResType::Generate(
 			return false;
 		}
 
-		/*in_pResource->AddData<VTextureState>(new VTextureState(
-			new VPBufferTexture(reinterpret_cast<VPBufferWindowContext*>(&pContext))));*/
+		in_pResource->AddData<VTextureState>(new VTextureState(
+			new VPBufferTexture(reinterpret_cast<VPBufferWindowContext*>(&pContext))));
 	}
 
 	return true;
 }
-
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

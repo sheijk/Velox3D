@@ -2,6 +2,7 @@
 #define V3D_IVRENDERCONTEXT_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 #include <V3d/Graphics/IVRenderContext.h>
 #include <V3d/Core/VTypeInfo.h>
 
@@ -33,7 +34,7 @@ public:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
-
-V3D_TYPEINFO(v3d::graphics::IVRenderContext);
 //-----------------------------------------------------------------------------
+V3D_TYPEINFO(v3d::graphics::IVRenderContext);
+
 #endif //V3D_IVRENDERCONTEXT_H

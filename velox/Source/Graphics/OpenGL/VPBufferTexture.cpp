@@ -13,8 +13,9 @@ VPBufferTexture::VPBufferTexture(VPBufferWindowContext* in_pContext) :
 	glEnable(GL_TEXTURE_2D);
 	glGenTextures(1, &m_iTextureID);
 	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, m_pContext->GetWidth(), 
-		m_pContext->GetHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, pPixelData);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, m_pContext->GetWidth(), 
+		m_pContext->GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, 
+		pPixelData);
 
 	if(pPixelData != 0)
 	{

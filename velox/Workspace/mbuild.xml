@@ -1,3 +1,5 @@
+<<<<<<< .mine
+=======
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE workspace SYSTEM "mbuild.dtd">
 <workspace name="Velox" rootdir="">
@@ -549,3 +551,4 @@
     </project>
   </projects>
 </workspace>
+>>>>>>> .r481

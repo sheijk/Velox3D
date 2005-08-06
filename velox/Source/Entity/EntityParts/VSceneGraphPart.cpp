@@ -8,16 +8,14 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
-VSceneGraphPart::VSceneGraphPart()
+VSceneGraphPart::VSceneGraphPart() : m_bActive(false),
+	m_pParent(0)
 {
-	m_bActive = false;
-	m_pParent = 0;
 }
 
-VSceneGraphPart::VSceneGraphPart(VSceneGraphPart* in_pParent)
+VSceneGraphPart::VSceneGraphPart(VSceneGraphPart* in_pParent) :
+	m_bActive(false), m_pParent(in_pParent)
 {
-	m_bActive = false;
-	m_pParent = in_pParent;
 }
 
 VSceneGraphPart::~VSceneGraphPart()
@@ -36,7 +34,8 @@ VSceneGraphPart::~VSceneGraphPart()
 
 void VSceneGraphPart::Update()
 {
-	m_pRigidBodyPart->SetTransform(m_pParent->GetAbsoluteTransform()*m_Transform);
+	if(m_pParent != 0)
+		m_pRigidBodyPart->SetTransform(m_pParent->GetAbsoluteTransform() * m_Transform);
 
 	for(std::list<VSceneGraphPart*>::iterator iter = m_pChilds.begin();
 		iter != m_pChilds.end();
@@ -50,7 +49,7 @@ void VSceneGraphPart::SetParent(VSceneGraphPart* in_pParent)
 {
 	V3D_ASSERT(in_pParent != 0);
 
-	if (m_bActive)
+	if(m_bActive)
 	{
 		m_pParent->RemoveChild(this);
 		in_pParent->AddChild(this);
@@ -64,8 +63,8 @@ void VSceneGraphPart::AddChild(VSceneGraphPart* in_pChild)
 	V3D_ASSERT(in_pChild != 0);
 	
 	//Falls das Kind noch nicht da ist hinzuügen und neue Eltern setzen
-	if ( std::find(m_pChilds.begin(), m_pChilds.end(), in_pChild)
-		== m_pChilds.end() )
+	if(std::find(m_pChilds.begin(), m_pChilds.end(), in_pChild)
+		== m_pChilds.end())
 	{
         m_pChilds.push_back(in_pChild);
 		in_pChild->SetParent(this);
@@ -74,10 +73,12 @@ void VSceneGraphPart::AddChild(VSceneGraphPart* in_pChild)
 
 void VSceneGraphPart::RemoveChild(VSceneGraphPart* in_pChild)
 {
+	V3D_ASSERT(in_pChild != 0);
+
 	std::list<VSceneGraphPart*>::iterator iter = 
 		std::find(m_pChilds.begin(), m_pChilds.end(), in_pChild);
 	
-	if ( iter != m_pChilds.end() )
+	if(iter != m_pChilds.end())
 	{
 		(*iter)->Deactivate();
         m_pChilds.erase(iter);
@@ -86,7 +87,7 @@ void VSceneGraphPart::RemoveChild(VSceneGraphPart* in_pChild)
 
 void VSceneGraphPart::Activate()
 {
-	if (!m_bActive)
+	if(!m_bActive)
 	{
         if (m_pParent != 0)
 			m_pParent->AddChild(this);
@@ -104,7 +105,7 @@ void VSceneGraphPart::Activate()
 
 void VSceneGraphPart::Deactivate()
 {
-	if (m_bActive)
+	if(m_bActive)
 	{
         if (m_pParent != 0)
             m_pParent->RemoveChild(this);
@@ -122,7 +123,7 @@ void VSceneGraphPart::Deactivate()
 void VSceneGraphPart::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 {
 	if (in_Part.IsOfType<VRigidBodyPart>())
-		if ( in_Id == utils::VFourCC("body") )
+		if(in_Id == utils::VFourCC("body"))
 			m_pRigidBodyPart = in_Part.Convert<VRigidBodyPart>();
 }
 
@@ -140,7 +141,6 @@ VRBTransform VSceneGraphPart::GetAbsoluteTransform()
 {
 	return m_pRigidBodyPart->GetTransform();
 }
-
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

@@ -2,6 +2,7 @@
 #define V3D_VOPENGLDEVICE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
+#include <v3d/Core/VTypeInfo.h>
 #include <v3d/Graphics/IVDevice.h>
 #include <V3d/Graphics/IVRenderContext.h>
 
@@ -38,7 +39,7 @@ public:
 	/** Contructor for adding a window */
 	VOpenGLDevice(
 		const graphics::VDisplaySettings& in_Settings,
-		VSharedPtr<IVRenderContext> in_pContext);
+		IVRenderContext* in_pContext);
 	virtual ~VOpenGLDevice();
 
 	virtual MeshHandle CreateMesh(VStringParam in_strResource);
@@ -90,7 +91,7 @@ private:
 	 */
 	graphics::VDisplaySettings m_DisplaySettings;
 
-	VSharedPtr<IVRenderContext> m_pContext;
+	IVRenderContext* m_pContext;
 
 	//HWND hWnd;
 	//HDC hDC;
@@ -105,4 +106,7 @@ private:
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
+V3D_TYPEINFO(v3d::graphics::IVDevice);
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VOpenGLDevice, v3d::graphics::IVDevice);
+
 #endif // V3D_VOPENGLDEVICE_H

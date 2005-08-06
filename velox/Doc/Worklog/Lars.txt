@@ -16,5 +16,11 @@ Worklog von Lars
 
 log:
 
+05.08.2005
+- Offscreen Device erstellt, was aus einem Render Context ein Device macht
+
+16.07.2005
+- PBuffer Texture Interface als Ressource defeniert
+
 06.07.2005
 - neues Texture Interface erstellt und alte Texture Klassen geupdatet

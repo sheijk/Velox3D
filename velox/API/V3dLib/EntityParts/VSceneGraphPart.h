@@ -6,6 +6,7 @@
 #include <V3d/Entity.h>
 #include <V3dlib/Math/VRBTransform.h>
 #include <V3dlib/EntityParts/VRigidBodyPart.h>
+
 #include <list>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
@@ -94,14 +95,15 @@ public:
 	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part);
 
 private:
-	vbool	m_bActive;
-	
-	VSceneGraphPart*	m_pParent;
+
+	vbool	                    m_bActive;
+	VSceneGraphPart*	        m_pParent;
 
 protected:
+
 	std::list<VSceneGraphPart*> m_pChilds;
-	VRigidBodyPart* m_pRigidBodyPart;
-	VRBTransform m_Transform;
+	VRigidBodyPart*             m_pRigidBodyPart;
+	VRBTransform                m_Transform;
 };
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
