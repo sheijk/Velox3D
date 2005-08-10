@@ -22,14 +22,13 @@ VSceneGraphPart::~VSceneGraphPart()
 {
 	Deactivate();
 
-	for(std::list<VSceneGraphPart*>::iterator iter = m_pChilds.begin();
-		iter != m_pChilds.end();
-		++iter)
+	// fixed, 10.08.05, never ever use for(;;it++) in combination with an inner list.erase! --matt
+	std::list< VSceneGraphPart* >::iterator it = m_pChilds.begin();
+	while( it != m_pChilds.end() )
 	{
-		delete *iter;
-		m_pChilds.erase(iter);
+		delete *it;
+		it = m_pChilds.erase( it );
 	}
-	m_pChilds.clear();
 }
 
 void VSceneGraphPart::Update()
