@@ -10,7 +10,10 @@ using namespace v3d; // anti auto indent
 
 VRigidBodyPart::VRigidBodyPart()
 {
-
+	m_Transformation.GetXAxis() = VVector3f(1.0f, 0.0f, 0.0f);
+	m_Transformation.GetYAxis() = VVector3f(0.0f, 1.0f, 0.0f);
+	m_Transformation.GetZAxis() = VVector3f(0.0f, 0.0f, 1.0f);
+	m_Transformation.SetPosition(VVector3f(0.0f, 0.0f, 0.0f));
 }
 
 void VRigidBodyPart::Activate()
@@ -36,11 +39,11 @@ void VRigidBodyPart::SetTransform(const VRBTransform& in_Trans)
 	m_Transformation = in_Trans;
 }
 
+
 VRBTransform VRigidBodyPart::GetTransform()
 {
 	return m_Transformation;
 }
-
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
+#include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity.h>
 #include <V3dLib/Math.h>
 #include <V3dLib/Math/VRBTransform.h>
@@ -10,9 +11,9 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
-using namespace math;
+using namespace v3d::math;
 
-class VRigidBodyPart : public IVPart
+class VRigidBodyPart : public VPartBase
 {
 public:
 		

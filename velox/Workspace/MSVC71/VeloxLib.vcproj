@@ -310,16 +310,6 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="EntityParts"
-					Filter="">
-					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h">
-					</File>
-				</Filter>
-				<Filter
 					Name="Graphics"
 					Filter="">
 					<File
@@ -615,6 +605,16 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3dLib\Utils\VStringValue.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="EntityParts"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h">
 					</File>
 				</Filter>
 			</Filter>

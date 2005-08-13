@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity.h>
 #include <V3dlib/Math/VRBTransform.h>
 #include <V3dlib/EntityParts/VRigidBodyPart.h>
@@ -12,14 +13,10 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
+using namespace v3d::math;
 
-class VSceneGraphPart
+class VSceneGraphPart : public VPartBase
 {
-private:
-	//no copiing
-	void operator=(const VSceneGraphPart&);
-	VSceneGraphPart(const VSceneGraphPart&);
-
 public:
 		
 	VSceneGraphPart();
@@ -43,14 +40,20 @@ public:
 	virtual void SetParent(VSceneGraphPart* in_pParent);
 
 	/**
-	 * Set the relative rigid body transformation of this 
+	 * Set the rigid body transformation of this 
 	 * VSceneGraphPart.
-	 * TODO: Auch die Transformation des VRigidBodyParts 
-	 *       neu setzen?
-	 *
 	 * @param in_Transform The new rigid body transformation
 	 */
 	virtual void SetTransform(const VRBTransform& in_Transform);
+
+
+	/**
+	* Set the relative rigid body transformation of this 
+	* VSceneGraphPart.
+	*
+	* @param in_relTransform The new rigid body transformation
+	*/
+	virtual void SetRelativeTransform(const VRBTransform& in_relTransform);
 
 	/**
 	 * Gets the current relative rigid body transformation of this 
@@ -64,6 +67,12 @@ public:
 	 * Returns the absolute rigid body transformation.
 	 */
 	virtual VRBTransform GetAbsoluteTransform();
+
+
+	/**
+	* Returns the relative rigid body transformation.
+	*/
+	virtual VRBTransform GetRelativeTransform();
 
 	/**
 	 * Adds a new child and sets the new parent for this child.
@@ -92,7 +101,7 @@ public:
 	/**
 	 * 
 	 */
-	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part);
+	virtual void Connect(const utils::VFourCC& in_Id, IVPart& in_Part);
 
 private:
 
@@ -104,8 +113,10 @@ protected:
 	std::list<VSceneGraphPart*> m_pChilds;
 	VRigidBodyPart*             m_pRigidBodyPart;
 	VRBTransform                m_Transform;
+	VRBTransform                m_relativeTransform;
 };
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------
+
 #endif // V3D_VSCENEGRAPHPART_2004_11_14_H

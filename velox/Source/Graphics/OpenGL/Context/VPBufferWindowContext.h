@@ -77,4 +77,6 @@ private:
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VPBufferWindowContext, v3d::graphics::IVRenderContext);
+
 #endif //V3D_VPBUFFERWINDOWCONTEXT_H

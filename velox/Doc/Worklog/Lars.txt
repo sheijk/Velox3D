@@ -15,6 +15,11 @@ Worklog von Lars
 ----- last things Lars finished:
 
 log:
+12.08.2005
+- Entity SceneGraph fertig
+
+07.08.2005
+- Entity SceneGraph geupdatet und dazu eine Demo geschrieben
 
 05.08.2005
 - Offscreen Device erstellt, was aus einem Render Context ein Device macht
