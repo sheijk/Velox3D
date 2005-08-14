@@ -601,6 +601,9 @@
 						RelativePath="..\..\Api\V3dLib\Utils\VFrameCounter.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VGuid.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Utils\VStreamReader.h">
 					</File>
 					<File
@@ -740,6 +743,15 @@
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.h">
 					</File>
+					<Filter
+						Name="Context">
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp">
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -894,6 +906,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VFrameCounter.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VGuid.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VSimpleTokenizer.cpp">

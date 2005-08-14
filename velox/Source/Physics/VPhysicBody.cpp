@@ -168,7 +168,7 @@ void VPhysicBody::SetTransformation()
 	trans.Set(3,2, 0);
 	trans.Set(3,3, 1);
 	
-	pBodyPart->SetTransform(VRBTransform(trans));
+	pBodyPart->SetTransform(math::VRBTransform(trans));
 }
 
 void VPhysicBody::SetCollisionBody(VPhysicGeometry* in_CollisionBodyState)

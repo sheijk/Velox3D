@@ -38,10 +38,10 @@ public:
 private:
 
 	graphics::VDisplaySettings m_DisplaySettings;
-	HDC                        m_devicecontext;
-	HGLRC                      m_rendercontext;
-	HWND                       m_handle;
-	PIXELFORMATDESCRIPTOR      m_pixelformat;
+	HDC                        m_DeviceContext;
+	HGLRC                      m_RenderContext;
+	HWND                       m_Handle;
+	PIXELFORMATDESCRIPTOR      m_Pixelformat;
 };
 
 //-----------------------------------------------------------------------------

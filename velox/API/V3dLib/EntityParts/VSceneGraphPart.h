@@ -13,7 +13,6 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
-using namespace v3d::math;
 
 class VSceneGraphPart : public VPartBase
 {
@@ -44,7 +43,7 @@ public:
 	 * VSceneGraphPart.
 	 * @param in_Transform The new rigid body transformation
 	 */
-	virtual void SetTransform(const VRBTransform& in_Transform);
+	virtual void SetTransform(const math::VRBTransform& in_Transform);
 
 
 	/**
@@ -53,7 +52,7 @@ public:
 	*
 	* @param in_relTransform The new rigid body transformation
 	*/
-	virtual void SetRelativeTransform(const VRBTransform& in_relTransform);
+	virtual void SetRelativeTransform(const math::VRBTransform& in_relTransform);
 
 	/**
 	 * Gets the current relative rigid body transformation of this 
@@ -61,18 +60,18 @@ public:
 	 *
 	 * @return The current transformation
  	 */
-	virtual VRBTransform GetTransform() const;
+	virtual math::VRBTransform GetTransform() const;
 
 	/**
 	 * Returns the absolute rigid body transformation.
 	 */
-	virtual VRBTransform GetAbsoluteTransform();
+	virtual math::VRBTransform GetAbsoluteTransform();
 
 
 	/**
 	* Returns the relative rigid body transformation.
 	*/
-	virtual VRBTransform GetRelativeTransform();
+	virtual math::VRBTransform GetRelativeTransform();
 
 	/**
 	 * Adds a new child and sets the new parent for this child.
@@ -98,11 +97,6 @@ public:
 	 */
 	virtual void Deactivate();
 
-	/**
-	 * 
-	 */
-	virtual void Connect(const utils::VFourCC& in_Id, IVPart& in_Part);
-
 private:
 
 	vbool	                    m_bActive;
@@ -112,8 +106,8 @@ protected:
 
 	std::list<VSceneGraphPart*> m_pChilds;
 	VRigidBodyPart*             m_pRigidBodyPart;
-	VRBTransform                m_Transform;
-	VRBTransform                m_relativeTransform;
+	math::VRBTransform          m_Transform;
+	math::VRBTransform          m_relativeTransform;
 };
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

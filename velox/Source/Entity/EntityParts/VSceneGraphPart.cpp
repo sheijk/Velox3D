@@ -123,36 +123,27 @@ void VSceneGraphPart::Deactivate()
 	}
 }
 
-void VSceneGraphPart::Connect(const utils::VFourCC& in_Id, IVPart& in_Part)
-{
-	if(in_Part.IsOfType<VRigidBodyPart>())
-	{
-		if(in_Id == utils::VFourCC("body"))
-			m_pRigidBodyPart = in_Part.Convert<VRigidBodyPart>();
-	}
-}
-
-void VSceneGraphPart::SetTransform(const VRBTransform& in_Transform)
+void VSceneGraphPart::SetTransform(const math::VRBTransform& in_Transform)
 {
 	m_Transform = in_Transform;
 }
 
-void VSceneGraphPart::SetRelativeTransform(const VRBTransform& in_relTransform)
+void VSceneGraphPart::SetRelativeTransform(const math::VRBTransform& in_relTransform)
 {
 	m_relativeTransform = in_relTransform;
 }
 
-VRBTransform VSceneGraphPart::GetTransform() const
+math::VRBTransform VSceneGraphPart::GetTransform() const
 {
 	return m_Transform;
 }
 
-VRBTransform VSceneGraphPart::GetAbsoluteTransform()
+math::VRBTransform VSceneGraphPart::GetAbsoluteTransform()
 {
 	return m_pRigidBodyPart->GetTransform();
 }
 
-VRBTransform VSceneGraphPart::GetRelativeTransform()
+math::VRBTransform VSceneGraphPart::GetRelativeTransform()
 {
 	return m_relativeTransform;
 }

@@ -35,7 +35,7 @@ public:
 	*/
 	inline HPBUFFERARB GetPixelBuffer()
 	{
-		return m_pixelbuffer;
+		return m_PixelBuffer;
 	}
 
 	/**
@@ -67,11 +67,9 @@ public:
 private:
 
 	graphics::VDisplaySettings m_DisplaySettings;
-	HPBUFFERARB                m_pixelbuffer;
-	HDC                        m_devicecontext;
-	HGLRC                      m_rendercontext;
-	HDC                        m_pbufferdevicecontext;
-	HGLRC                      m_pbufferrendercontext;
+	HPBUFFERARB                m_PixelBuffer;
+	HDC                        m_PBufferDeviceContext;
+	HGLRC                      m_PBufferRenderContext;
 };
 
 //-----------------------------------------------------------------------------

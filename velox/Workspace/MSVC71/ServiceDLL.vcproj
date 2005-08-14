@@ -573,16 +573,9 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.h">
 					</File>
 					<Filter
-						Name="Context"
-						Filter="">
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.cpp">
-						</File>
+						Name="Context">
 						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.h">
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp">
 						</File>
 						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h">

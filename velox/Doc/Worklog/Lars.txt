@@ -15,6 +15,10 @@ Worklog von Lars
 ----- last things Lars finished:
 
 log:
+
+13.08.2005
+- VGuid Util Klasse hinzugefügt
+
 12.08.2005
 - Entity SceneGraph fertig
 

@@ -6,12 +6,14 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* in_pDisplaySettings) : m_devicecontext(0), m_rendercontext(0), m_handle(in_hwnd), m_DisplaySettings(*in_pDisplaySettings)
+VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* in_pDisplaySettings) : 
+	m_DeviceContext(0), m_RenderContext(0), m_Handle(in_hwnd),
+	m_DisplaySettings(*in_pDisplaySettings)
 {
 	//create a OpenGL Device Context
-	m_devicecontext = GetDC(m_handle);
+	m_DeviceContext = GetDC(m_Handle);
 
-	if(m_devicecontext == 0)
+	if(m_DeviceContext == 0)
 	{
 		V3D_THROW(VGraphicException, "Error: OpenGL Device Context wasn't created!");
 	}
@@ -21,18 +23,18 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	}
 
 	//create Pixel Format
-	memset(&m_pixelformat, 0, sizeof(PIXELFORMATDESCRIPTOR));
-	m_pixelformat.nSize = sizeof(PIXELFORMATDESCRIPTOR);
-    m_pixelformat.nVersion = 1;
-    m_pixelformat.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-    m_pixelformat.iPixelType = PFD_TYPE_RGBA;
-	m_pixelformat.cColorBits = m_DisplaySettings.GetBitsPerPixel();
-	m_pixelformat.cDepthBits = m_DisplaySettings.GetDepthBits();
-	m_pixelformat.cStencilBits = m_DisplaySettings.GetStencilBits();
-    m_pixelformat.iLayerType = PFD_MAIN_PLANE;
+	memset(&m_Pixelformat, 0, sizeof(PIXELFORMATDESCRIPTOR));
+	m_Pixelformat.nSize = sizeof(PIXELFORMATDESCRIPTOR);
+    m_Pixelformat.nVersion = 1;
+    m_Pixelformat.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+    m_Pixelformat.iPixelType = PFD_TYPE_RGBA;
+	m_Pixelformat.cColorBits = m_DisplaySettings.GetBitsPerPixel();
+	m_Pixelformat.cDepthBits = m_DisplaySettings.GetDepthBits();
+	m_Pixelformat.cStencilBits = m_DisplaySettings.GetStencilBits();
+    m_Pixelformat.iLayerType = PFD_MAIN_PLANE;
 
 	//create and set Pixel Format
-	if(!(SetPixelFormat(m_devicecontext, ChoosePixelFormat(m_devicecontext, &m_pixelformat), &m_pixelformat)))
+	if(!(SetPixelFormat(m_DeviceContext, ChoosePixelFormat(m_DeviceContext, &m_Pixelformat), &m_Pixelformat)))
 	{
 		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Format wasn't selected!");
 	}
@@ -42,9 +44,9 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	}
 
 	//create a OpenGL Render Context
-	m_rendercontext = wglCreateContext(m_devicecontext);
+	m_RenderContext = wglCreateContext(m_DeviceContext);
 
-	if(m_rendercontext == 0)
+	if(m_RenderContext == 0)
 	{
 		V3D_THROW(VGraphicException, "Error: OpenGL Render Context wasn't created!");
 	}
@@ -56,27 +58,27 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 
 VWin32WindowContext::~VWin32WindowContext()
 {
-	if(m_rendercontext != 0)
+	if(m_RenderContext != 0)
 	{
 		wglMakeCurrent(0, 0);
-		wglDeleteContext(m_rendercontext);
-		m_rendercontext = 0;
+		wglDeleteContext(m_RenderContext);
+		m_RenderContext = 0;
 	}
-	if(m_devicecontext != 0)
+	if(m_DeviceContext != 0)
 	{
-		ReleaseDC(0, m_devicecontext);
-		m_devicecontext = 0;
+		ReleaseDC(0, m_DeviceContext);
+		m_DeviceContext = 0;
 	}
 }
 
 void VWin32WindowContext::MakeCurrent()
 {
-	wglMakeCurrent(m_devicecontext, m_rendercontext);
+	wglMakeCurrent(m_DeviceContext, m_RenderContext);
 }
 
 void VWin32WindowContext::SwapBuffers()
 {
-	::SwapBuffers(m_devicecontext);
+	::SwapBuffers(m_DeviceContext);
 }
 
 //-----------------------------------------------------------------------------

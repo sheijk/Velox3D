@@ -34,13 +34,13 @@ void VRigidBodyPart::SetPosition(const VVector3f& in_Position)
 	m_Transformation.SetPosition(in_Position);
 }
 
-void VRigidBodyPart::SetTransform(const VRBTransform& in_Trans)
+void VRigidBodyPart::SetTransform(const math::VRBTransform& in_Trans)
 {
 	m_Transformation = in_Trans;
 }
 
 
-VRBTransform VRigidBodyPart::GetTransform()
+math::VRBTransform VRigidBodyPart::GetTransform()
 {
 	return m_Transformation;
 }
