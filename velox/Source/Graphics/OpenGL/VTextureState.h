@@ -23,11 +23,15 @@ public:
 	VTextureState(IVTexture* in_pTexture);
 
 	virtual void Apply() const;
+	virtual IVStateCategory* GetCategory() const;
 
+	static void SetCategory(IVStateCategory* in_pStateCategory);
 private:
 
 	IVTexture*        m_pTexture;
 	static IVTexture* m_pLastTexture;
+
+	static IVStateCategory* m_pCategory;
 };
 
 //-----------------------------------------------------------------------------

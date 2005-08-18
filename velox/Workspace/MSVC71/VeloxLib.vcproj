@@ -908,9 +908,6 @@
 					RelativePath="..\..\Source\UtilsLib\VFrameCounter.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\UtilsLib\VGuid.cpp">
-				</File>
-				<File
 					RelativePath="..\..\Source\UtilsLib\VSimpleTokenizer.cpp">
 				</File>
 				<File

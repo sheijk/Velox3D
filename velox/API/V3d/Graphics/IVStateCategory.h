@@ -15,6 +15,13 @@ class IVStateCategory
 {
 public:
 	virtual IVRenderState* CreateState(const VRenderPass& in_Pass) = 0;
+	virtual vuint GetPriority() const { return m_nPriority; }
+
+protected:
+	void SetPriority(vuint in_nPriority) { m_nPriority = in_nPriority; }
+
+private:
+	vuint m_nPriority;
 };
 
 //-----------------------------------------------------------------------------

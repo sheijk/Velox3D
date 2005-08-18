@@ -18,7 +18,10 @@ using namespace v3d::resource;
 V3D_DECLARE_EXCEPTION(VInvalidEffectDescriptionException, VGraphicException);
 
 VTextureStateCategory::VTextureStateCategory()
+	:
+	m_DefaultState(new VUntextured())
 {
+	VTextureState::SetCategory(this);
 }
 
 //vfloat32 VTextureStateCategory::GetPriority() const

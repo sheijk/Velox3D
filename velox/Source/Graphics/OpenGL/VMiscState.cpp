@@ -14,6 +14,19 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // auto unindent
 
+IVStateCategory* VMiscState::m_pStateCategory = 0;
+
+void VMiscState::SetCategory(IVStateCategory* in_pCategory)
+{
+	m_pStateCategory = in_pCategory;
+}
+
+const IVStateCategory* VMiscState::GetCategory() const
+{
+	V3D_ASSERT(m_pStateCategory != 0);
+
+	return m_pStateCategory;
+}
 
 void VMiscState::ReadColor(const VRenderPass& in_Pass)
 {

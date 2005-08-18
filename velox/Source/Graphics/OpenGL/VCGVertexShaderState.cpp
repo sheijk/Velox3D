@@ -42,11 +42,13 @@ CGprofile VCGVertexShaderState::s_LastVertexProfile;
 		}\
 	}
 
-VCGVertexShaderState::VCGVertexShaderState(ShaderMode in_Mode)
+VCGVertexShaderState::VCGVertexShaderState(
+	ShaderMode in_Mode, IVStateCategory* in_pCategory)
 {
 	m_Profile = CG_PROFILE_VP20;
 	m_Program = NULL;
 	m_DisableMode = in_Mode;
+	m_pCategory = in_pCategory;
 }
 
 /**
@@ -54,8 +56,8 @@ VCGVertexShaderState::VCGVertexShaderState(ShaderMode in_Mode)
  */
 VCGVertexShaderState::VCGVertexShaderState(
 	VStringParam in_strFileName,
-	CGprofile in_Profile
-	)
+	CGprofile in_Profile,
+	IVStateCategory* in_pCategory)
 {
 	if( ! IsKnownProfile(in_Profile) )
 	{
@@ -81,6 +83,8 @@ VCGVertexShaderState::VCGVertexShaderState(
 
 		m_ModelViewParam = cgGetNamedParameter(m_Program, "ModelViewMat");
 		V3D_CHECK_CG_ERROR();
+
+		m_pCategory = in_pCategory;
 	}
 	catch(VException& e)
 	{
@@ -200,6 +204,12 @@ std::istream& operator>>(std::istream& str, VCGVertexShaderState::AutoVariable& 
 	//TODO: bessere info ausgeben
 
 	return str;
+}
+
+const IVStateCategory* VCGVertexShaderState::GetCategory() const
+{
+	V3D_ASSERT(m_pCategory != 0);
+	return m_pCategory;
 }
 
 //-----------------------------------------------------------------------------

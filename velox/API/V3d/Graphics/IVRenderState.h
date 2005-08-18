@@ -7,11 +7,13 @@
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
-using namespace v3d; // stop the f*cking vc editor from auto indenting
+class IVStateCategory;
 
 class IVRenderState
 {
 public:
+	virtual const IVStateCategory* GetCategory() const = 0;
+
 	virtual ~IVRenderState() {}
 };
 

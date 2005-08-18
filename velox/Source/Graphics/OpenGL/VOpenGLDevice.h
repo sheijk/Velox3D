@@ -20,6 +20,7 @@
 #include "VVertexShaderCategory.h"
 #include "../DeviceBase/VMeshBase.h"
 
+#include <V3d/Resource/VResourceDataPtr.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -62,12 +63,14 @@ public:
 private:
 	void RecalcModelViewMatrix();
 
-	// render state categories
-	VStateCategoryList m_StateCategories;
-	VTextureStateCategory m_TextureStateCategory;
-	VMiscStateCategory m_MiscStateCategory;
-	VVertexShaderCategory m_VertexShaderCategory;
-	VPixelShaderCategory m_PixelShaderCategory;
+	resource::VResourceDataPtr<const IVMaterial> m_pDefaultMaterial;
+
+	//// render state categories
+	//VStateCategoryList m_StateCategories;
+	//VTextureStateCategory m_TextureStateCategory;
+	//VMiscStateCategory m_MiscStateCategory;
+	//VVertexShaderCategory m_VertexShaderCategory;
+	//VPixelShaderCategory m_PixelShaderCategory;
 
 	typedef std::list<VMeshBase*> MeshList;
 	MeshList m_Meshes;

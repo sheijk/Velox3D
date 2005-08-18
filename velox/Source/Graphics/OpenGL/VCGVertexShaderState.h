@@ -28,17 +28,21 @@ public:
 		AutoVarModelViewMatrix
 	};
 
-	VCGVertexShaderState(ShaderMode in_Mode);
-	VCGVertexShaderState(VStringParam in_strFileName, CGprofile in_Profile);
+	VCGVertexShaderState(ShaderMode in_Mode, IVStateCategory* in_pCategory);
+	VCGVertexShaderState(VStringParam in_strFileName, CGprofile in_Profile,
+		IVStateCategory* in_pCategory);
 	virtual ~VCGVertexShaderState();
 
 	virtual void Apply() const;
+	virtual const IVStateCategory* GetCategory() const;
 
 	void AddAutoVar(const std::string& in_strName, AutoVariable in_Type);
 
 private:
 	void SetAutoVariables() const;
 	void SetAutoVariable(const std::string& name, AutoVariable type) const;
+
+	IVStateCategory* m_pCategory;
 
 	static CGcontext m_Context;
 	CGprogram m_Program;

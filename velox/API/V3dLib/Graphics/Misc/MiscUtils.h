@@ -35,6 +35,13 @@ void RenderMesh(
  */
 void RenderMesh(graphics::IVDevice& in_Device, graphics::VModelMesh& in_Mesh);
 
+/**
+ * Renders all meshes of the given model
+ *
+ * @author sheijk
+ */
+void RenderModel(graphics::IVDevice& in_Device, graphics::VModel& in_Model);
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

@@ -3,7 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include <V3d/Core/SmartPtr/VSharedPtr.h>
 #include <v3d/Graphics/IVMaterial.h>
+#include "VRenderStateList.h"
 
 #include <vector>
 #include <list>
@@ -13,32 +15,22 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-class VRenderStateList : public IVPass
-{
-	std::vector<const IVRenderState*> m_States;
-
-public:
-	typedef std::list<const IVRenderState*> RenderStateList;
-	VRenderStateList(std::list<const IVRenderState*>& in_States);
-
-	virtual vuint StateCount() const;
-
-	virtual const IVRenderState& GetState(vuint in_nPriority) const;
-};
-
 /**
  * @author sheijk
  */
 class VMaterial : public IVMaterial
 {
-	std::vector<VRenderStateList> m_Passes;
-	
 public:
-	VMaterial(const std::vector<VRenderStateList>& in_Passes);
+	typedef std::vector< VSharedPtr<VRenderStateList> > PassList;
+
+	VMaterial(const PassList& in_Passes);
 	virtual ~VMaterial();
 
 	virtual vuint PassCount() const;
 	virtual const IVPass& GetPass(vuint in_nNum) const;
+
+private:
+	PassList m_Passes;
 };
 
 //-----------------------------------------------------------------------------

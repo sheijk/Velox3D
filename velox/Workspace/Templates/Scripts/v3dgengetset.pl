@@ -8,11 +8,22 @@
 #
 # Legal formats:
 # m_nVar, m_Var, var -> GetVar, SetVar
-#
+# Note: m_strVar currently not supported
 
-while(1) {
-	$_ = <STDIN>;
+$declarations="";
+$implementations="";
+
+# set new line symbol to "" to read whole input as one line
+$/ = "";
+$input = <STDIN>;
+@lines = split("\r", $input);
+
+#while(1) {
+for( @lines ) {
 	$line = $_;
+	#print("---" . $line . "---\n");
+
+	# match $_ against a regexp which will extract all interesting values
 	if ( /(\s*)([^\s]+)\s+([^\s;]+)/ ) {
 		
 		$whitespace = $1;
@@ -22,23 +33,46 @@ while(1) {
 		$name =~ m/(m_[a-z]?)?(.*)/;
 		$pureName = $2;
 		$pureName =~ s/^([a-z])/uc($1)/xe;
-#		print("ws = #$whitespace# type = $type\t name = $name\t purename= $pureName \tin $line");
-		# create getter
-		print("${whitespace}${type} Get${pureName}() const\n");
-		print("${whitespace}\{\n");
-		print("${whitespace}\treturn ${name};\n");
-		print("${whitespace}\}\n\n");
+
+		# create prototypes
+		$declarations = $declarations . "${whitespace}${type} Get${pureName}() const;\n"
+		. "${whitespace}void Set${pureName}(const $type& in_${pureName});\n"
+		. "\n";
+		
+		# print("${whitespace}${type} Get${pureName}() const;\n");
+		# print("${whitespace}void Set${pureName}(const $type& in_${pureName});\n");
+		# print("\n");
+		
+		$implementations = $implementations . "${whitespace}${type} xxxtype::Get${pureName}() const\n"
+		. "${whitespace}\{\n"
+		. "${whitespace}\treturn ${name};\n"
+		. "${whitespace}\}\n\n";
 		
 		# create setter
-		print("${whitespace}void Set${pureName}(const $type& in_${pureName})\n");
-		print("${whitespace}\{\n");
-		print("${whitespace}\t${name} = in_${pureName};\n");
-		print("${whitespace}\}\n\n");
+		$implementations = $implementations . "${whitespace}void xxxtype::Set${pureName}(const $type& in_${pureName})\n"
+		. "${whitespace}\{\n"
+		. "${whitespace}\t${name} = in_${pureName};\n"
+		. "${whitespace}\}\n\n";
+	
+		# create getter
+		#print("${whitespace}${type} xxxtype::Get${pureName}() const\n");
+		#print("${whitespace}\{\n");
+		#print("${whitespace}\treturn ${name};\n");
+		#print("${whitespace}\}\n\n");
+		
+		# create setter
+		#print("${whitespace}void Sxxxtype::Set${pureName}(const $type& in_${pureName})\n");
+		#print("${whitespace}\{\n");
+		#print("${whitespace}\t${name} = in_${pureName};\n");
+		#print("${whitespace}\}\n\n");
 	}
 	else {
-		if ( ! $_ ) {
-			exit(0);
-		}
+#print("Could not match line ---${line}---");
 	}
 }
+
+print($declarations);
+print("\n\n\n");
+print($implementations);
+
 

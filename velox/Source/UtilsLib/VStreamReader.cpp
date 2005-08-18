@@ -91,10 +91,31 @@ void* VStreamReader::GetStreamBuffer()
 	else
 		return NULL;
 }
-vulong VStreamReader::GetSizeOfBuffer()
+
+vulong VStreamReader::GetSizeOfBuffer() const
 {
 	return iSizeOfBufferElements;
 }
+
+void VStreamReader::CopyToString(std::string* in_pString) const
+{
+	if( iSizeOfBuffer > 0 )
+	{
+		const char lastChar = m_Buffer[iSizeOfBuffer-1];
+
+		m_Buffer[iSizeOfBuffer-1] = '\0';
+
+		*in_pString = m_Buffer;
+		*in_pString += lastChar;
+
+		m_Buffer[iSizeOfBuffer-1] = lastChar;
+	}
+	else
+	{
+		*in_pString = "";
+	}
+}
+
 //-----------------------------------------------------------------------------
 } // util
 } // v3d

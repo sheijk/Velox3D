@@ -14,7 +14,6 @@ namespace utils {
  * VStreamReader reads out a stream and creates a buffer
  * @author ins
  */
-
 class VStreamReader
 {
 public:
@@ -25,15 +24,16 @@ public:
 		
 	~VStreamReader();
 	VStreamReader(vfs::IVStream* in_pStream);
+
 	void* GetStreamBuffer();
-	vulong GetSizeOfBuffer();
+	vulong GetSizeOfBuffer() const;
+
+	void CopyToString(std::string* in_pString) const;
 	
-	
-	private:
-	
-	 vchar *m_Buffer;
-	 vulong iSizeOfBuffer;
-	 vulong iSizeOfBufferElements;
+private:
+	vchar *m_Buffer;
+	vulong iSizeOfBuffer;
+	vulong iSizeOfBufferElements;
 };
 
 //-----------------------------------------------------------------------------

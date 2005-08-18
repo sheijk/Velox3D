@@ -32,6 +32,14 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+18.08.05
+- rudimentaerer cgfx support
+- material system umgestellt: mehrere klassen fuer materialien, je nach
+  features (fixed function pipeline, cgfx, glsl, ...), erstmal nur ff pipeline
+  implementiert
+- material erzeugung aus device entfernt
+
+??.08.05
 - V3D_DEPRECATED makro (VDeprecated.h)
 - VTypeInfo
 - Resource System nutzt VTypeInfo, so dass Derived resource daten auch als

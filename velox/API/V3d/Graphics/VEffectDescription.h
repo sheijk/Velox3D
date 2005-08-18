@@ -24,17 +24,10 @@ public:
 
 	VStateParameter(InvalidMark);
 
-	VStateParameter(VStringParam in_strName)
-	{
-		m_strName = in_strName;
-	}
+	VStateParameter(VStringParam in_strName);
 
 	template<typename T>
-	VStateParameter(VStringParam in_strName, const T& in_Val)
-	{
-		m_strName = in_strName;
-		SetValue<T>(in_Val);
-	}
+	VStateParameter(VStringParam in_strName, const T& in_Val);
 	
 	VStringRetVal GetName() const;
 
@@ -84,26 +77,6 @@ private:
 	std::vector<VStateParameter> m_Parameters;
 };
 
-template<typename T>
-vbool VState::GetParameter(VStringParam in_strName, T& out_Value) const
-{
-	if( ContainsParameter(in_strName) )
-	{
-		out_Value = GetParameterByName(in_strName).GetValue<T>();
-		return true;
-	}
-	else
-		return false;
-}
-
-template<typename T>
-void VState::SetParameter(VStringParam in_strName, T in_Value)
-{
-	VStateParameter param(in_strName);
-	param.SetValue<T>(in_Value);
-	SetParameter(param);
-}
-
 class VRenderPass
 {
 public:
@@ -152,6 +125,30 @@ private:
 	std::vector<RenderPassPtr> m_RenderPasses;
 };
 
+class VEffectParameter
+{
+public:
+	VEffectParameter(VStringParam in_strName, VStringParam in_strType,
+		VStringParam in_strDefault, VStringParam in_strGeneration);
+
+	std::string GetName() const;
+	void SetName(const std::string& in_Name);
+
+	std::string GetDefault() const;
+	void SetDefault(const std::string& in_Default);
+
+	std::string GetType() const;
+	void SetType(const std::string& in_Type);
+
+	std::string GetGeneration() const;
+	void SetGeneration(const std::string& in_Generation);
+private:
+	std::string m_xName;
+	std::string m_xDefault;
+	std::string m_xType;
+	std::string m_xGeneration;
+};
+
 class VEffectDescription
 {
 public:
@@ -169,12 +166,18 @@ public:
 	/** Removes all paths */
 	void Clear();
 
+	vuint GetEffectCount() const;
+	const VEffectParameter& GetParameter(vuint in_nIndex) const;
+
 private:
 	typedef VPointer<VShaderPath>::SharedPtr ShaderPathPtr;
 
 	std::vector<ShaderPathPtr> m_ShaderPaths;
+	std::vector<VEffectParameter> m_Parameters;
 };
 
+//-----------------------------------------------------------------------------
+#include "VEffectDescription.inl"
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 

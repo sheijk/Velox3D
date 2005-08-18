@@ -10,6 +10,11 @@ VStateParameter::VStateParameter(InvalidMark)
 {
 }
 
+VStateParameter::VStateParameter(VStringParam in_strName)
+{
+	m_strName = in_strName;
+}
+
 VStringRetVal VStateParameter::GetName() const
 {
 	return m_strName;
@@ -236,6 +241,48 @@ void VShaderPath::Clear()
 
 //-----------------------------------------------------------------------------
 
+std::string VEffectParameter::GetName() const
+{
+	return m_xName;
+}
+
+void VEffectParameter::SetName(const std::string& in_Name)
+{
+	m_xName = in_Name;
+}
+
+std::string VEffectParameter::GetDefault() const
+{
+	return m_xDefault;
+}
+
+void VEffectParameter::SetDefault(const std::string& in_Default)
+{
+	m_xDefault = in_Default;
+}
+
+std::string VEffectParameter::GetType() const
+{
+	return m_xType;
+}
+
+void VEffectParameter::SetType(const std::string& in_Type)
+{
+	m_xType = in_Type;
+}
+
+std::string VEffectParameter::GetGeneration() const
+{
+	return m_xGeneration;
+}
+
+void VEffectParameter::SetGeneration(const std::string& in_Generation)
+{
+	m_xGeneration = in_Generation;
+}
+
+//-----------------------------------------------------------------------------
+
 VEffectDescription::VEffectDescription()
 {
 }
@@ -304,6 +351,18 @@ VShaderPath& VEffectDescription::AddShaderPath()
 void VEffectDescription::Clear()
 {
 	m_ShaderPaths.clear();
+}
+
+vuint VEffectDescription::GetEffectCount() const
+{
+	return m_Parameters.size();
+}
+
+const VEffectParameter& VEffectDescription::GetParameter(vuint in_nIndex) const
+{
+	V3D_ASSERT(in_nIndex < m_Parameters.size());
+
+	return m_Parameters[in_nIndex];
 }
 
 //-----------------------------------------------------------------------------

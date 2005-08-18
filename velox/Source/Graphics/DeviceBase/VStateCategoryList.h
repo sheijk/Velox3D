@@ -11,6 +11,7 @@
 
 #include <set>
 #include <memory>
+#include <list>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -25,6 +26,8 @@ public:
 
 	std::vector<VRenderStateList*> CreateMaterialList(
 		const VEffectDescription& in_Effect);
+
+	std::list<const IVRenderState*> CreateDefaultStates() const;
 
 	const VRenderStateList& GetDefaultMaterial();
 

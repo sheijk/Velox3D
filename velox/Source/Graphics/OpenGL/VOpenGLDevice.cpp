@@ -47,6 +47,8 @@ namespace {
 	{
 		return static_cast<const VMeshBase*>(handle);
 	}
+
+	const std::string DEFAULT_MAT_RESOURCE = "/system/graphics/defaultMaterial";
 }
 
 /*
@@ -81,15 +83,31 @@ VOpenGLDevice::VOpenGLDevice(
 {
 	SetDisplay();
 
-	m_StateCategories.RegisterCategory(m_TextureStateCategory);
-	m_StateCategories.RegisterCategory(m_MiscStateCategory);
-	m_StateCategories.RegisterCategory(m_VertexShaderCategory);
-	m_StateCategories.RegisterCategory(m_PixelShaderCategory);
+	//m_StateCategories.RegisterCategory(m_TextureStateCategory);
+	//m_StateCategories.RegisterCategory(m_MiscStateCategory);
+	//m_StateCategories.RegisterCategory(m_VertexShaderCategory);
+	//m_StateCategories.RegisterCategory(m_PixelShaderCategory);
 
 	Identity(m_ModelMatrix);
 	Identity(m_ViewMatrix);
 	Identity(m_ProjectionMatrix);
 	Identity(m_TextureMatrix);
+
+	// create default material if it does not exist, yet
+	using namespace resource;
+
+	VResourceId defaultMatRes = VResourceManagerPtr()->CreateResource(
+		DEFAULT_MAT_RESOURCE.c_str());
+
+	if( ! defaultMatRes->ContainsData<VEffectDescription>() )
+	{
+		VEffectDescription defaultEffect;
+		defaultEffect.AddShaderPath().AddRenderPass();
+		defaultMatRes->AddData(new VEffectDescription(defaultEffect));
+	}
+
+	m_pDefaultMaterial = defaultMatRes->GetData<IVMaterial>();
+
 
 	RecalcModelViewMatrix();
 }
@@ -213,6 +231,13 @@ IVDevice::MeshHandle VOpenGLDevice::CreateMesh(VStringParam in_strResource)
 IVDevice::MaterialHandle VOpenGLDevice::CreateMaterial(VStringParam in_strResource)
 {
 	using namespace resource;
+
+	VResourceDataPtr<const IVMaterial> hMaterial 
+		= GetResourceData<IVMaterial>(in_strResource);
+
+	return &*hMaterial;
+/*
+	using namespace resource;
 	resource::VResourceManagerPtr pResManager;
 
 	VResourceId edRes = pResManager->GetResourceByName(in_strResource);
@@ -243,6 +268,7 @@ IVDevice::MaterialHandle VOpenGLDevice::CreateMaterial(VStringParam in_strResour
 	{
 		return 0;
 	}
+*/
 }
 
 //IVDevice::MeshHandle VOpenGLDevice::CreateMesh(
@@ -517,7 +543,7 @@ void VOpenGLDevice::BeginScene()
 //	wglMakeCurrent(hDC, hRC);
 	m_pContext->MakeCurrent();
 
-	ApplyMaterial(*this, &m_StateCategories.GetDefaultMaterial());
+	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
 
 	// fuer sowas solltes noch fkten geben -ins
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

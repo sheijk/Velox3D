@@ -9,6 +9,7 @@
 #include "../Source/Graphics/OpenGL/VTextureStateCategory.h"
 #include "../Source/Graphics/OpenGL/VMiscStateCategory.h"
 #include "../Source/Graphics/OpenGL/VVertexShaderCategory.h"
+#include "../source/Graphics/OpenGL/Materials/VCGFXState.h"
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace graphics {
@@ -34,7 +35,12 @@ public:
 		VTypeInfo in_Type);
 
 private:
+	VRenderStateList* CreatePass(const VRenderPass& in_Pass) const;
+	VMaterial* CreateMaterial(const VShaderPath& in_Technique) const;
 
+	vbool IsCGFXFile(const std::string& in_strFileName) const;
+
+	VCGFXStateCategory m_CGFXCategory;
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;
 	VMiscStateCategory m_MiscStateCategory;

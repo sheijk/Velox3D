@@ -18,6 +18,7 @@ public:
 	VMiscStateCategory() :
 		m_Default(VRenderPass())
 	{
+		VMiscState::SetCategory(this);
 	}
 
 	//virtual vfloat32 GetPriority() const
@@ -35,6 +36,8 @@ public:
 		VMiscState* pState = new VMiscState(in_Pass);
 		return pState;
 	}
+
+	void SetPriority(vuint n) { IVStateCategory::SetPriority(n); }
 };
 
 //-----------------------------------------------------------------------------

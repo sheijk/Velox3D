@@ -35,7 +35,8 @@ class VTextureStateCategory : public IVStateCategory
 		//TextureMap;
 
 	//TextureMap m_Textures;
-	VUntextured m_DefaultState;
+	VTextureState m_DefaultState;
+	//VUntextured m_DefaultState;
 
 	IVRenderState* Create2DState(const VState* in_pTextureState);
 	IVRenderState* CreateCubeMapState(const VState* in_pTextureState);
@@ -48,6 +49,7 @@ public:
 	//virtual const IVRenderState& GetDefault() const;
 
 	virtual IVRenderState* CreateState(const VRenderPass& in_Pass);
+	void SetPriority(vuint n) { IVStateCategory::SetPriority(n); }
 };
 
 //-----------------------------------------------------------------------------

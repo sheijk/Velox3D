@@ -9,6 +9,7 @@ namespace v3d { namespace graphics {
 using namespace v3d; // anti auto indent
 
 IVTexture* VTextureState::m_pLastTexture = 0;
+IVStateCategory* VTextureState::m_pCategory = 0;
 
 VTextureState::VTextureState(IVTexture* in_pTexture)
 {
@@ -25,6 +26,17 @@ void VTextureState::Apply() const
 	m_pTexture->Bind();
 
 	m_pLastTexture = m_pTexture;
+}
+
+void VTextureState::SetCategory(IVStateCategory* in_pStateCategory)
+{
+	m_pCategory = in_pStateCategory;
+}
+
+IVStateCategory* VTextureState::GetCategory() const
+{
+	V3D_ASSERT(m_pCategory != 0);
+	return m_pCategory;
 }
 
 //-----------------------------------------------------------------------------

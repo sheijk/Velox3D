@@ -12,6 +12,9 @@ using namespace v3d; // anti auto indenting
 
 class VCGShaderCategory : public IVStateCategory
 {
+public:
+	void SetPriority(vuint n) { IVStateCategory::SetPriority(n); }
+
 protected:
 	IVRenderState* CreateShaderState(
 		const VState* in_pState, 

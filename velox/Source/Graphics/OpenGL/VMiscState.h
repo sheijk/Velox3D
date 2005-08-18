@@ -68,15 +68,17 @@ class VMiscState : public IVOpenGLRenderState
 public:
 	VMiscState(const VRenderPass& in_Pass);
 
+	virtual const IVStateCategory* GetCategory() const;
+
 	virtual void Apply() const;
 
+	static void SetCategory(IVStateCategory* in_pCategory);
 private:
 	typedef VPolygonMode PolygonMode;
 	typedef VDepthTest DepthTest;
 	typedef VBlendFactor BlendMode;
-	//typedef VMaterialDescription::PolygonMode PolygonMode;
-	//typedef VMaterialDescription::DepthTest DepthTest;
-	//typedef VMaterialDescription::BlendFactor BlendMode;
+
+	static IVStateCategory* m_pStateCategory;
 
 	// texture matrix state
 	VPropertyConnection<VMatrix44f> m_TextureMatrix;

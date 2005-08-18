@@ -214,6 +214,9 @@
 						RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.inl">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Graphics\VMeshDescription.h">
 					</File>
 					<File
@@ -452,6 +455,12 @@
 						RelativePath="..\..\Source\Graphics\DeviceBase\VMeshBase.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Graphics\DeviceBase\VRenderStateList.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\DeviceBase\VRenderStateList.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\DeviceBase\VStateCategoryList.cpp">
 					</File>
 					<File
@@ -579,6 +588,34 @@
 						</File>
 						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Materials"
+						Filter="">
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXMaterial.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXMaterial.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXPass.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXPass.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXState.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXState.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.h">
 						</File>
 					</Filter>
 				</Filter>

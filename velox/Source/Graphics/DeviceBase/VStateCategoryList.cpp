@@ -108,6 +108,22 @@ const VRenderStateList& VStateCategoryList::GetDefaultMaterial()
 	return *m_pDefaultMaterial;
 }
 
+std::list<const IVRenderState*> VStateCategoryList::CreateDefaultStates() const
+{
+    VEffectDescription defaultEffect;
+	VRenderPass& pass(defaultEffect.AddShaderPath().AddRenderPass());
+
+	std::list<const IVRenderState*> states;
+
+	for( CategoryContainer::const_iterator cat = m_Categories.begin();
+		cat != m_Categories.end(); ++cat)
+	{
+		states.push_back((*cat)->CreateState(pass));
+	}
+
+	return states;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

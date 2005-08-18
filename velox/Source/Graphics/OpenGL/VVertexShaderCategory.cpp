@@ -46,7 +46,7 @@ IVRenderState* VCGShaderCategory::CreateShaderState(
 
 		// get shader from resource manager
 		VCGVertexShaderState* pShaderState = 
-			new VCGVertexShaderState(res.c_str(), profile);
+			new VCGVertexShaderState(res.c_str(), profile, this);
 
 		// get all parameters
 		const vuint paramCount = in_pState->GetParameterCount();
@@ -69,7 +69,7 @@ IVRenderState* VCGShaderCategory::CreateShaderState(
 	}
 	else
 	{
-		return new VCGVertexShaderState(in_DisableMode);
+		return new VCGVertexShaderState(in_DisableMode, this);
 	}
 }
 

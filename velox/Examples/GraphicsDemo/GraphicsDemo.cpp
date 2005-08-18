@@ -218,8 +218,10 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 
 		// calc daytime by clamping it to [0,1]
 		vfloat32 daytime = daytimeVal.GetValue();
-		if( daytime < 0 ) daytime = 0;
-		if( daytime > 1 ) daytime = 1;
+		if( daytime < 0 ) 
+			daytime = 0;
+		if( daytime > 1 ) 
+			daytime = 1;
 		daytimeProperty.Set(daytime);
 		nighttimProperty.Set(1.0f - daytime);
 		cloudAlphaProperty.Set(0.1f + .9f*daytime);

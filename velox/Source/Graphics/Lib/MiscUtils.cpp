@@ -48,6 +48,14 @@ void RenderMesh(graphics::IVDevice& in_Device, graphics::VModelMesh& in_Mesh)
 	RenderMesh(in_Device, &*in_Mesh.GetMesh(), &*in_Mesh.GetMaterial());
 }
 
+void RenderModel(graphics::IVDevice& in_Device, graphics::VModel& in_Model)
+{
+	for(vuint partNum = 0; partNum < in_Model.GetPartCount(); ++partNum)
+	{
+		RenderMesh(in_Device, in_Model.GetPart(partNum));
+	}
+}
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
