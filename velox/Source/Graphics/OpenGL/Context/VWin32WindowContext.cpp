@@ -81,6 +81,13 @@ void VWin32WindowContext::SwapBuffers()
 	::SwapBuffers(m_DeviceContext);
 }
 
+IVRenderContext* VWin32WindowContext::CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings)
+{
+	MakeCurrent();
+
+	return new VPBufferWindowContext(m_DeviceContext, in_pDisplaySettings);
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

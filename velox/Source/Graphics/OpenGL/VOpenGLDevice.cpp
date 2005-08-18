@@ -691,6 +691,10 @@ void VOpenGLDevice::ApplyLight(LightId in_Number, const VPointLight* in_pLight)
 	}
 }
 
+IVRenderContext* VOpenGLDevice::CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings)
+{
+	return m_pContext->CreateOffscreenContext(in_pDisplaySettings);
+}
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

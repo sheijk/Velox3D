@@ -4,7 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VTypeInfo.h>
 #include <V3d/Graphics/IVRenderContext.h>
-#include <V3d/Core/VTypeInfo.h>
+#include <v3d/Graphics/VDisplaySettings.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
@@ -30,6 +30,9 @@ public:
 
 	/** Swap back and front buffer */
 	virtual void SwapBuffers() = 0;
+
+	/** Create a Offscreen Context */
+	virtual IVRenderContext* CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings) = 0;
 };
 
 //-----------------------------------------------------------------------------

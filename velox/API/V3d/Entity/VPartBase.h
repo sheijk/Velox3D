@@ -16,6 +16,7 @@ class VPartBase;
 class VUntypedPartConnection
 {
 public:
+	VUntypedPartConnection();
 	VUntypedPartConnection(
 		IVPart::Location in_Location, utils::VFourCC in_Id, 
 		VPartBase* in_pRegisterTo);
@@ -38,6 +39,7 @@ template<typename T>
 class VPartConnection : public VUntypedPartConnection
 {
 public:
+	VPartConnection();
 	VPartConnection(
 		IVPart::Location in_Location, utils::VFourCC in_Id, 
 		VPartBase* in_pRegisterTo);
@@ -74,6 +76,12 @@ public:
 };
 
 //-----------------------------------------------------------------------------
+
+template<typename T>
+VPartConnection<T>::VPartConnection()
+{
+	m_pPart = 0;
+}
 
 template<typename T>
 VPartConnection<T>::VPartConnection(

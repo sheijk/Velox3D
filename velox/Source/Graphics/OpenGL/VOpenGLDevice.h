@@ -60,6 +60,9 @@ public:
 	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode);
 	
 	void ApplyLight(LightId in_Number, const VPointLight* in_pLight);
+
+	IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings);
+
 private:
 	void RecalcModelViewMatrix();
 

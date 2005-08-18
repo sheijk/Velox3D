@@ -5,13 +5,12 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplaySettings) : 
+VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings) : 
 	m_PBufferDeviceContext(0), 
+	m_WindowDeviceContext(in_DeviceContext),
 	m_PBufferRenderContext(0), 
 	m_DisplaySettings(*in_pDisplaySettings)
 {
-	HDC WindowContext = wglGetCurrentDC();
-
 	const int Format[] = {
 	    WGL_SUPPORT_OPENGL_ARB, true,
         WGL_DRAW_TO_PBUFFER_ARB, true,
@@ -23,11 +22,11 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 		0
 	};
 
-	vuint Count = 0;
-	vint Pixelformat = 0;
+	vuint Count;
+	vint Pixelformat;
 	
 	//select Pixel Buffer Format
-	wglChoosePixelFormatARB(WindowContext, reinterpret_cast<const int*>(&Format), 0, 1, &Pixelformat, &Count);
+	wglChoosePixelFormatARB(in_DeviceContext, Format, 0, 1, &Pixelformat, &Count);
 
 	int Attribute[] = 
 	{
@@ -37,7 +36,7 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 	};
 
 	//create Pixel Buffer
-	m_PixelBuffer = wglCreatePbufferARB(WindowContext, Pixelformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
+	m_PixelBuffer = wglCreatePbufferARB(in_DeviceContext, Pixelformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
 
 	if(m_PixelBuffer == 0)
 	{
@@ -76,7 +75,7 @@ VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplay
 VPBufferWindowContext::~VPBufferWindowContext()
 {
 	wglDeleteContext(m_PBufferRenderContext);
-    wglReleasePbufferDCARB(m_PixelBuffer, m_PBufferDeviceContext);
+    wglReleasePbufferDCARB (m_PixelBuffer, m_PBufferDeviceContext);
     wglDestroyPbufferARB(m_PixelBuffer); 
 }
 
@@ -96,6 +95,11 @@ void VPBufferWindowContext::MakeCurrent()
 void VPBufferWindowContext::SwapBuffers()
 {
 	//Dummy
+}
+
+IVRenderContext* VPBufferWindowContext::CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings)
+{
+	return new VPBufferWindowContext(m_WindowDeviceContext, in_pDisplaySettings);
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

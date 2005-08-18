@@ -508,6 +508,15 @@
 						RelativePath="..\..\Api\V3dLib\Math\ArrayOps.inl">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Math\VBoundingBox.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VBoundingSphere.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VHalfRay.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Math\VQuaternion.h">
 					</File>
 					<File

@@ -19,24 +19,12 @@ class VSceneGraphPart : public VPartBase
 public:
 		
 	VSceneGraphPart();
-	VSceneGraphPart(VSceneGraphPart* in_pParent);
-
 	virtual ~VSceneGraphPart();
 
 	/**
 	 * Updates all children and the VRigidBodyParts named "body"
 	 */
 	virtual void Update();
-
-	/**
-	 * Sets the parent of this VSceneGraphPart. This includes
-	 * unregistration to the old parent and registration to 
-	 * the new parent.
-	 * The parent can not be 0;
-	 *
-	 * @param in_pParent Pointer to the new parent != 0
-	 */
-	virtual void SetParent(VSceneGraphPart* in_pParent);
 
 	/**
 	 * Set the rigid body transformation of this 
@@ -99,15 +87,15 @@ public:
 
 private:
 
-	vbool	                    m_bActive;
-	VSceneGraphPart*	        m_pParent;
+	vbool	                         m_bActive;
+	VPartConnection<VSceneGraphPart> m_pParent;
 
 protected:
 
-	std::list<VSceneGraphPart*> m_pChilds;
-	VRigidBodyPart*             m_pRigidBodyPart;
-	math::VRBTransform          m_Transform;
-	math::VRBTransform          m_relativeTransform;
+	std::list<VSceneGraphPart*>      m_pChilds;
+	VRigidBodyPart*                  m_pRigidBodyPart;
+	math::VRBTransform               m_Transform;
+	math::VRBTransform               m_relativeTransform;
 };
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

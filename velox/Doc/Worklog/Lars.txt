@@ -16,6 +16,9 @@ Worklog von Lars
 
 log:
 
+15.08.2005
+- in VPartConnection ein Standardkonstruktor eingefügt
+
 13.08.2005
 - VGuid Util Klasse hinzugefügt
 

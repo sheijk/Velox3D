@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Graphics/VBuffer.h>
+#include <V3d/Graphics/IVRenderContext.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Math/VMatrix.h>
 
@@ -95,6 +96,8 @@ public:
 	 * Set a point light. Pass a zero pointer to disable light
 	 */
 	virtual void ApplyLight(LightId in_Number, const VPointLight* in_pLight) = 0;
+
+	virtual IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings) = 0;
 
 	virtual ~IVDevice() {};
 };

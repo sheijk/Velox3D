@@ -27,7 +27,7 @@ class VPBufferWindowContext : public IVRenderContext
 {
 public:
 
-	VPBufferWindowContext(const graphics::VDisplaySettings* in_pDisplaySettings = 0);
+	VPBufferWindowContext(HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VPBufferWindowContext();
 
 	/**
@@ -64,11 +64,17 @@ public:
 	*/
 	void SwapBuffers();
 
+	/**
+	* @see v3d::graphics::IVRenderContext::CreateOffscreenContext
+	*/
+	IVRenderContext* CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings);
+
 private:
 
 	graphics::VDisplaySettings m_DisplaySettings;
 	HPBUFFERARB                m_PixelBuffer;
 	HDC                        m_PBufferDeviceContext;
+	HDC                        m_WindowDeviceContext;
 	HGLRC                      m_PBufferRenderContext;
 };
 

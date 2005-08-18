@@ -7,6 +7,7 @@
 #include <v3d/Graphics/GraphicsExceptions.h>
 #include <v3d/Graphics/VDisplaySettings.h>
 #include <v3d/Graphics/IVRenderContext.h>
+#include "VPBufferWindowContext.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -34,6 +35,10 @@ public:
 
 	/** @see v3d::graphics::IVRenderContext::SwapBuffers */
 	void SwapBuffers();
+
+
+	/** @see v3d::graphics::IVRenderContext::CreateOffscreenContext */
+	IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings);
 
 private:
 

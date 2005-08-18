@@ -82,22 +82,34 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	IVDevice::MeshHandle hCube = Device().CreateMesh("/data/cube");
 	IVDevice::MaterialHandle hCubeMat = Device().CreateMaterial("/data/cube");
 
+	IVDevice::MeshHandle hMoon = Device().CreateMesh("/data/moon");
+	IVDevice::MaterialHandle hMoonMat = Device().CreateMaterial("/data/moon");
+
 	VCamera cam;
 	cam.MoveForward(-7);
 	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
 
 	//create Root Entity
 	m_pRoot = CreateEntity(m_pSGRoot);
+	m_pRoot->Activate();
 
-	//create the Translate for the Child with the SceneGraph Root as Parent
+	//create a Sphere for the Child
 	VSceneGraphPart* pSphere = new VSceneGraphPart();
 
 	//add in SceneGraph Root and the Entity Root the Child pSphere
-	m_pRoot->AddChild(CreateEntity(pSphere));
-	m_pSGRoot->AddChild(pSphere);
+	VSharedPtr<VEntity> pSphereEntity = CreateEntity(pSphere);
+	m_pRoot->AddChild(pSphereEntity);
+
+	//create a Moon for the Sphere as a Child
+	VSceneGraphPart* pMoon = new VSceneGraphPart();
+
+	//add in Sphere Child the Child pMoon
+	VSharedPtr<VEntity> pMoonEntity = CreateEntity(pMoon);
+	pSphereEntity->AddChild(pMoonEntity);
 
 	//create the Translate
-	VRBTransform Translate;
+	VRBTransform SphereTrans;
+	VRBTransform MoonTrans;
 	vfloat32 trans = 0.0f;
 
 	m_pUpdater->Start();
@@ -105,16 +117,26 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	{
 		Device().BeginScene();
 
-		//set the relative Transformation from the SceneGraph Child
+		//set the relative Transformation from the SceneGraph Sphere Child
 		trans += 0.00025f;
-		Translate.SetPosition(VVector3f(trans, trans, 0.0f));		
-		pSphere->SetRelativeTransform(Translate);
+		SphereTrans.SetPosition(VVector3f(trans, trans, 0.0f));		
+		pSphere->SetRelativeTransform(SphereTrans);
+
+		//set the relative Transformation from the Sphere Child Moon
+		MoonTrans.SetPosition(VVector3f(-trans, -trans, 0.0f));
+		RotateX(MoonTrans.GetAsMatrix(), DegreeToRadian(-15));
+		RotateZ(MoonTrans.GetAsMatrix(), DegreeToRadian(20));
+		RotateY(MoonTrans.GetAsMatrix(), DegreeToRadian(m_pUpdater->GetFrameDuration() * 2));
+		pMoon->SetRelativeTransform(MoonTrans);
 
 		//update the SceneGraph Root with his Childs
 		m_pSGRoot->Update();
 
 		//set the Mesh Matrix and render the Mesh
-		Device().SetMatrix(IVDevice::ModelMatrix, Translate.GetAsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, MoonTrans.GetAsMatrix());
+		RenderMesh(Device(), hMoon, hMoonMat);	
+
+		Device().SetMatrix(IVDevice::ModelMatrix, SphereTrans.GetAsMatrix());
 		RenderMesh(Device(), hCube, hCubeMat);
 
 		Device().EndScene();
@@ -163,6 +185,7 @@ void VSceneGraphExample::Init()
 
 void VSceneGraphExample::Shutdown()
 {
+	m_pRoot->Deactivate();
 	m_pDevice = 0;
 	m_pWindow.Release();
 	m_pEscapeKey = 0;
@@ -176,6 +199,13 @@ void VSceneGraphExample::CreateResources()
 
 	VResourceId cubeRes = BuildResource("/data/cube", cube);
 	cubeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(0, 1, 0, 1))));
+
+	VPolarSphereMesh<VTexturedVertex> moon(10, 10);
+	moon.GenerateCoordinates();
+	ForEachVertex(moon.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(0.175f, 0.175f, 0.175f));
+
+	VResourceId moonRes = BuildResource("/data/moon", moon);
+	moonRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 0, 0, 1))));
 }
 
 IVDevice& VSceneGraphExample::Device()
