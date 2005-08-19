@@ -8,12 +8,6 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
-VUntypedPartConnection::VUntypedPartConnection()
-{
-	m_pPart = 0;
-}
-
-
 VUntypedPartConnection::VUntypedPartConnection(
 	IVPart::Location in_Location, utils::VFourCC in_Id, 
 	VPartBase* in_pRegisterTo)

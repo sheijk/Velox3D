@@ -193,6 +193,9 @@
 						RelativePath="..\..\Api\V3d\Graphics\IVMesh.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Graphics\IVPass.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Graphics\IVRenderState.h">
 					</File>
 					<File

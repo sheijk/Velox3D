@@ -4,19 +4,12 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VTypeInfo.h>
 
+#include <V3d/Graphics/IVPass.h>
+#include <V3d/Math/VVector.h>
 //----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
-class IVRenderState;
-
-class IVPass
-{
-public:
-	virtual ~IVPass() {};
-	virtual vuint StateCount() const = 0;
-	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
-};
 
 /**
  * Client visible material controlling
@@ -26,12 +19,15 @@ public:
 class IVMaterial
 {
 public:	
+	typedef std::string ParamHandle;
+
 	virtual ~IVMaterial() {};
 
 	virtual vuint PassCount() const = 0;
 	virtual const IVPass& GetPass(vuint in_nNum) const = 0;
-//	virtual vuint StateCount() const = 0;  // number of states
-//	virtual const IVRenderState& GetState(vuint in_nPriority) const = 0;
+
+	virtual void SetParameter(ParamHandle in_Param, vfloat32 in_Value) const = 0;
+	virtual void SetParameter(ParamHandle in_Param, VVector4f in_Value) const = 0;
 };
 
 //-----------------------------------------------------------------------------

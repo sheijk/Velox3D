@@ -81,8 +81,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SceneGraphExample", "SceneG
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PBufferExample", "PBufferExample\PBufferExample.vcproj", "{10BCA0CA-DE20-44E0-8A0A-76E0E09E6246}"
 	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-	ProjectSection(ProjectDependencies) = postProject
+		{20050526-0000-0000-0000-000560019000} = {20050526-0000-0000-0000-000560019000}
+		{20050526-0000-0000-0000-000757427000} = {20050526-0000-0000-0000-000757427000}
+		{20050526-0000-0000-0000-000768881000} = {20050526-0000-0000-0000-000768881000}
 	EndProjectSection
 EndProject
 Global

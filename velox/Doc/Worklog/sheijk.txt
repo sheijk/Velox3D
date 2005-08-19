@@ -32,6 +32,9 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+- parameter fuer cgfx materials
+- textur support fuer cgfx
+
 18.08.05
 - rudimentaerer cgfx support
 - material system umgestellt: mehrere klassen fuer materialien, je nach

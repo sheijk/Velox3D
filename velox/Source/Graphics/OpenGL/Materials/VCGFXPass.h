@@ -17,6 +17,16 @@ using namespace v3d; // anti auto indenting
 
 class VCGFXMaterial;
 
+#define V3D_CHECK_CG_ERROR()\
+{\
+	CGerror error = cgGetError();\
+	if( CG_NO_ERROR != error )\
+{\
+	const char* message = cgGetErrorString(error);\
+	V3D_THROW(VException, message);\
+}\
+}
+
 /**
  */
 class VCGFXPass : public VRenderStateList

@@ -5,6 +5,14 @@
 
 #include <string>
 
+#include <V3d/Resource.h>
+#define private public
+#define protected public
+#include "../VTextureState.h"
+#include "../VTexture2D.h"
+#undef private
+#undef protected
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -15,19 +23,35 @@ using namespace std;
 
 CGcontext VCGFXMaterial::s_Context = cgCreateContext();
 
-#define V3D_CHECK_CG_ERROR()\
-{\
-	CGerror error = cgGetError();\
-	if( CG_NO_ERROR != error )\
-{\
-	const char* message = cgGetErrorString(error);\
-	V3D_THROW(VException, message);\
-}\
+namespace {
+	//#define V3D_CHECK()
+	//{
+	//	vbool errorsOccured = false;
+	//	CGerror error = cgGetFirstError();
+
+	//	string errorMessage;
+
+	//	while( error != CG_NO_ERROR )
+	//	{
+	//		errorsOccured = true;
+
+	//		errorMessage += cgGetErrorString(error);
+	//		errorMessage += "\n";
+
+	//		error = cgGetFirstError();
+	//	}
+
+	//	if( errorsOccured )
+	//	{
+	//		V3D_THROW(VException, errorMessage.c_str());
+	//	}
+	//}
 }
 
 VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates, const std::string& in_strSource)
 {
 	cgGLRegisterStates(s_Context);
+	V3D_CHECK_CG_ERROR();
 
 	// initialize
 	m_Effect = cgCreateEffect(s_Context, in_strSource.c_str(), 0);
@@ -37,17 +61,24 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 
 	// get a suitable technique
 	m_Technique = cgGetFirstTechnique(m_Effect);
+	V3D_CHECK_CG_ERROR();
 
 	while( m_Technique )
 	{
 		cgValidateTechnique(m_Technique);
+		V3D_CHECK_CG_ERROR();
 		m_Technique = cgGetNextTechnique(m_Technique);
+		V3D_CHECK_CG_ERROR();
 	}
 
 	// find a vaild technique
 	m_Technique = cgGetFirstTechnique(m_Effect);
+	V3D_CHECK_CG_ERROR();
 	while( m_Technique != 0 && !cgIsTechniqueValidated(m_Technique) )
+	{
 		m_Technique = cgGetNextTechnique(m_Technique);
+		V3D_CHECK_CG_ERROR();
+	}
 
 	V3D_ASSERT(m_Technique != 0);
 
@@ -55,47 +86,94 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 
 	// get first pass TODO: use all passes (or specific pass)
 	CGpass pass = cgGetFirstPass(m_Technique);
+	V3D_CHECK_CG_ERROR();
 
 	while( pass != 0 )
 	{
 		VCGFXPass* pPass = new VCGFXPass(in_DefaultStates, pass, m_Effect, m_Technique, this);
 		m_Passes.push_back(VSharedPtr<VCGFXPass>(pPass));
 
-		vout << "\tpass " << cgGetPassName(pass) << vendl;
+		string passName = cgGetPassName(pass);
+
+		vout << "\tpass " << passName << vendl;
+		V3D_CHECK_CG_ERROR();
 
 		pass = cgGetNextPass(pass);
+		V3D_CHECK_CG_ERROR();
 	}
 
 	//TODO: get parameters
 	CGparameter param = cgGetFirstEffectParameter(m_Effect);
+	V3D_CHECK_CG_ERROR();
 
 	vout << "parameters:" << vendl;
 
 	while( param != 0 )
 	{
-		CGtype paramType = cgGetParameterType(param);
+		const CGtype paramType = cgGetParameterType(param);
+		V3D_CHECK_CG_ERROR();
 
-		vout << "\t" << cgGetParameterName(param) << " : " 
+		const string paramName = cgGetParameterName(param);
+		V3D_CHECK_CG_ERROR();
+
+		vout << "\t" << paramName << " : " 
 			<< cgGetTypeString(paramType);
 			//<< " as " << cgGetParameterSemantic(param)
 			//<< vendl;
+		V3D_CHECK_CG_ERROR();
 
 		const string semantic(cgGetParameterSemantic(param));
+		V3D_CHECK_CG_ERROR();
 
 		if( semantic == "MODELVIEWPROJECTION" )
 		{
-			AutoParameter autoParam;
-			autoParam.param = param;
-			autoParam.type = APModelViewProjectionMatrix;
+			//AutoParameter autoParam;
+			//autoParam.param = param;
+			//autoParam.type = APModelViewProjectionMatrix;
 
-			m_AutoParameters.push_back(autoParam);
+			//m_AutoParameters.push_back(autoParam);
+
+			m_AutoParameters.push_back(VSharedPtr<VCGFXParameterBase>(new VCGFXModelViewProjectionAutoParam(param)));
 
 			vout << " as " << semantic;
+		}
+		else if( semantic == "" )
+		{
+			VSharedPtr<VCGFXParameterBase> pParam;
+
+			switch(paramType)
+			{
+			case CG_FLOAT:
+				{
+					pParam.Assign(new VCGFXFloatParameter(param));
+				} break;
+			case CG_FLOAT4:
+				{
+					pParam.Assign(new VCGFXFloat4Parameter(param));
+				} break;
+
+			case CG_SAMPLER2D:
+				{
+					using namespace resource;
+
+					VResourceDataPtr<const VTextureState> pTexState = GetResourceData<VTextureState>("/data/moon.jpg");
+					VTexture2D* pTexture = reinterpret_cast<VTexture2D*>(pTexState->m_pTexture);
+
+					GLenum texHandle = pTexture->m_iTextureID;
+
+					m_AutoParameters.push_back(VSharedPtr<VCGFXParameterBase>(new VCGFXTexture(param, texHandle)));
+				} break;
+			}
+
+			// add parameter
+			if( pParam.Get() != 0 )
+				m_Parameters[paramName] = pParam;
 		}
 
 		vout << vendl;
 
 		param = cgGetNextParameter(param);
+		V3D_CHECK_CG_ERROR();
 	}
 }
 
@@ -111,19 +189,86 @@ const IVPass& VCGFXMaterial::GetPass(vuint in_nNum) const
 	return *m_Passes[in_nNum];
 }
 
+void VCGFXMaterial::ApplyParameters()
+{
+	ApplyAutoParameters();
+
+	ParameterMap::iterator param = m_Parameters.begin();
+	for( ; param != m_Parameters.end(); ++param)
+	{
+		param->second->Apply();
+	}
+}
+
+void VCGFXMaterial::UnapplyParameters()
+{
+	UnapplyAutoParameters();
+
+	ParameterMap::iterator param = m_Parameters.begin();
+	for( ; param != m_Parameters.end(); ++param)
+	{
+		param->second->Unapply();
+	}
+}
+
 void VCGFXMaterial::ApplyAutoParameters()
 {
 	for(vuint num = 0; num < m_AutoParameters.size(); ++num) 
 	{
-		AutoParameter& ap(m_AutoParameters[num]);
-
-		switch(ap.type)
-		{
-		case APModelViewProjectionMatrix: {
-			cgGLSetStateMatrixParameter(ap.param, CG_GL_MODELVIEW_PROJECTION_MATRIX, CG_GL_MATRIX_IDENTITY);
-										  } break;
-		}
+		m_AutoParameters[num]->Apply();
 	}
+}
+
+void VCGFXMaterial::UnapplyAutoParameters()
+{
+	for(vuint num = 0; num < m_AutoParameters.size(); ++num) 
+	{
+		m_AutoParameters[num]->Unapply();
+	}
+}
+
+VCGFXParameterBase* VCGFXMaterial::FindParameter(const std::string& in_strName) const
+{
+	ParameterMap::const_iterator paramIter = m_Parameters.find(in_strName);
+
+	VCGFXParameterBase* pParam = 0;
+
+	if( paramIter != m_Parameters.end() )
+		pParam = const_cast<VCGFXParameterBase*>(paramIter->second.Get());
+
+	return pParam;
+}
+
+void VCGFXMaterial::SetParameter(ParamHandle in_Param, vfloat32 in_Value) const
+{
+	VCGFXParameterBase* pParam = FindParameter(in_Param);
+
+	if( pParam != 0 )
+		pParam->Set(in_Value);
+
+	//CGparameter param = cgGetNamedEffectParameter(m_Effect, in_Param.c_str());
+
+	//if( param != 0 )
+	//{
+ //       cgSetParameter1f(param, in_Value);
+	//	V3D_CHECK_CG_ERROR();
+	//}
+}
+
+void VCGFXMaterial::SetParameter(ParamHandle in_Param, VVector4f in_Value) const
+{
+	VCGFXParameterBase* pParam = FindParameter(in_Param);
+
+	if( pParam != 0 )
+		pParam->Set(in_Value);
+
+	//CGparameter param = cgGetNamedEffectParameter(m_Effect, in_Param.c_str());
+
+	//if( param != 0 )
+	//{
+	//	cgSetParameter4f(param, in_Value[0], in_Value[1], in_Value[2], in_Value[3]);
+	//	V3D_CHECK_CG_ERROR();
+	//}
 }
 
 //-----------------------------------------------------------------------------

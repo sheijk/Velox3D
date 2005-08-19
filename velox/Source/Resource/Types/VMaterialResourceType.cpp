@@ -166,6 +166,8 @@ vbool VMaterialResourceType::Generate(
 		//TODO: fehlerbehandlung
 	}
 
+	return false;
+
 	//std::vector<VRenderStateList*> passes;
 
 	//// for each technique

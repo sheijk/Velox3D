@@ -1,5 +1,6 @@
 #include "VPBufferWindowContext.h"
 
+#include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -26,6 +27,7 @@ VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphic
 	vint Pixelformat;
 	
 	//select Pixel Buffer Format
+//	Pixelformat = ChoosePixelFormat(in_DeviceContext, Format);
 	wglChoosePixelFormatARB(in_DeviceContext, Format, 0, 1, &Pixelformat, &Count);
 
 	int Attribute[] = 

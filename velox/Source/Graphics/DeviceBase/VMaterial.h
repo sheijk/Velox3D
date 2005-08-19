@@ -29,6 +29,8 @@ public:
 	virtual vuint PassCount() const;
 	virtual const IVPass& GetPass(vuint in_nNum) const;
 
+	virtual void SetParameter(ParamHandle in_Param, vfloat32 in_Value) const;
+	virtual void SetParameter(ParamHandle in_Param, VVector4f in_Value) const;
 private:
 	PassList m_Passes;
 };

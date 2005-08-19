@@ -40,7 +40,7 @@ private:
 	IVDevice* m_pDevice;
 	IVDevice* m_pPBufferDevice;
 	IVButton* m_pEscapeKey;
-	VPBufferTexture* m_pPBufferTexture;
+	//VPBufferTexture* m_pPBufferTexture;
 	VServicePtr<updater::IVUpdateManager> m_pUpdater;
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
@@ -110,7 +110,7 @@ VPBufferExample::VPBufferExample()
 	m_pDevice = 0;
 	m_pEscapeKey = 0;
 	m_pPBufferDevice = 0;
-	m_pPBufferTexture = 0;
+	//m_pPBufferTexture = 0;
 }
 
 void VPBufferExample::Init()
@@ -162,10 +162,8 @@ void VPBufferExample::CreateResources()
 	VResourceId texRes = VResourceManagerPtr()->CreateResource("/data/texture");
 	texRes->AddData(new VFileName("data/test3.jpg"));
 
-	m_pPBufferDevice = reinterpret_cast<IVDevice*>(&contextRes->
-		GetData<IVDevice>());
-	m_pPBufferTexture = reinterpret_cast<VPBufferTexture*>(&contextRes->
-		GetData<VTextureState>());
+	m_pPBufferDevice = const_cast<IVDevice*>(&*contextRes->GetData<IVDevice>());
+	//m_pPBufferTexture = const_cast<VPBufferTexture*>(&*contextRes->GetData<VTextureState>());
 }
 
 IVDevice& VPBufferExample::Device()

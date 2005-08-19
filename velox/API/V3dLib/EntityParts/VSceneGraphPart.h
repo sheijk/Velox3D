@@ -85,6 +85,7 @@ public:
 	 */
 	virtual void Deactivate();
 
+	static utils::VFourCC GetDefaultId();
 private:
 
 	vbool	                         m_bActive;
@@ -93,6 +94,7 @@ private:
 protected:
 
 	std::list<VSceneGraphPart*>      m_pChilds;
+	//TODO: muss VPartConnection zum Neighbour sein
 	VRigidBodyPart*                  m_pRigidBodyPart;
 	math::VRBTransform               m_Transform;
 	math::VRBTransform               m_relativeTransform;

@@ -66,10 +66,10 @@ VSharedPtr<VEntity> CreateEntity(VSceneGraphPart* pSGPart)
 	VSharedPtr<VEntity> pEntity(new VEntity());
 
 	//create and add RigidBodyPart with Identity Relative Transformation
-	pEntity->AddPart("body", static_cast<VSharedPtr<IVPart> >(new VRigidBodyPart()));
+	pEntity->AddPart(VRigidBodyPart::GetDefaultId(), static_cast<VSharedPtr<IVPart> >(new VRigidBodyPart()));
 
 	//create and add SceneGraphPart with Identity Relative Transformation
-	pEntity->AddPart("sgpa", static_cast<VSharedPtr<IVPart> >(pSGPart));
+	pEntity->AddPart(VSceneGraphPart::GetDefaultId(), static_cast<VSharedPtr<IVPart> >(pSGPart));
 
 	return pEntity;
 }
@@ -112,13 +112,18 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	VRBTransform MoonTrans;
 	vfloat32 trans = 0.0f;
 
+	vfloat32 time = .0f;
+
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())
 	{
 		Device().BeginScene();
 
+		time += m_pUpdater->GetFrameDuration();
+
 		//set the relative Transformation from the SceneGraph Sphere Child
-		trans += 0.00025f;
+//		trans = sin(time/10);
+		trans = 1;
 		SphereTrans.SetPosition(VVector3f(trans, trans, 0.0f));		
 		pSphere->SetRelativeTransform(SphereTrans);
 
@@ -126,7 +131,7 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 		MoonTrans.SetPosition(VVector3f(-trans, -trans, 0.0f));
 		RotateX(MoonTrans.GetAsMatrix(), DegreeToRadian(-15));
 		RotateZ(MoonTrans.GetAsMatrix(), DegreeToRadian(20));
-		RotateY(MoonTrans.GetAsMatrix(), DegreeToRadian(m_pUpdater->GetFrameDuration() * 2));
+		RotateY(MoonTrans.GetAsMatrix(), DegreeToRadian(time));
 		pMoon->SetRelativeTransform(MoonTrans);
 
 		//update the SceneGraph Root with his Childs

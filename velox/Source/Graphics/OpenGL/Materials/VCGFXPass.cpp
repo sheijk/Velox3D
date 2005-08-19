@@ -36,19 +36,18 @@ VCGFXPass::~VCGFXPass()
 
 void VCGFXPass::Bind()
 {
-	// set model view matrix
-	//CGparameter mvp = cgGetEffectParameterBySemantic(m_Effect, "ModelViewProjection");
-	//V3D_ASSERT(mvp != 0);
-	//cgGLSetStateMatrixParameter(mvp, CG_GL_MODELVIEW_PROJECTION_MATRIX, CG_GL_MATRIX_IDENTITY);
-
-	m_pMaterial->ApplyAutoParameters();
-
 	cgSetPassState(m_Pass);
+	V3D_CHECK_CG_ERROR();
+
+	m_pMaterial->ApplyParameters();
 }
 
 void VCGFXPass::Unbind()
 {
+	m_pMaterial->UnapplyParameters();
+
 	cgResetPassState(m_Pass);
+	V3D_CHECK_CG_ERROR();
 }
 
 vbool VCGFXPass::CanRealize(const VRenderPass& in_Pass)

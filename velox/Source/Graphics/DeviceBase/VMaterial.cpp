@@ -34,6 +34,14 @@ const IVPass& VMaterial::GetPass(vuint in_nNum) const
 	return *m_Passes[in_nNum];
 }
 
+void VMaterial::SetParameter(ParamHandle in_Param, vfloat32 in_Value) const
+{
+}
+
+void VMaterial::SetParameter(ParamHandle in_Param, VVector4f in_Value) const
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

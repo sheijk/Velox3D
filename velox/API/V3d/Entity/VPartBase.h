@@ -16,7 +16,6 @@ class VPartBase;
 class VUntypedPartConnection
 {
 public:
-	VUntypedPartConnection();
 	VUntypedPartConnection(
 		IVPart::Location in_Location, utils::VFourCC in_Id, 
 		VPartBase* in_pRegisterTo);
@@ -39,7 +38,6 @@ template<typename T>
 class VPartConnection : public VUntypedPartConnection
 {
 public:
-	VPartConnection();
 	VPartConnection(
 		IVPart::Location in_Location, utils::VFourCC in_Id, 
 		VPartBase* in_pRegisterTo);
@@ -58,8 +56,6 @@ public:
 	VPartBase();
 	virtual ~VPartBase();
 
-	void Register(VUntypedPartConnection& in_Connection);
-
 	virtual void Connect(
 		Location in_Location, 
 		const utils::VFourCC& in_Id, 
@@ -73,15 +69,14 @@ public:
 	virtual vbool IsReady() const;
 	virtual vuint DependencyCount() const;
 	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
+
+private:
+	void Register(VUntypedPartConnection& in_Connection);
+
+	friend class VUntypedPartConnection;
 };
 
 //-----------------------------------------------------------------------------
-
-template<typename T>
-VPartConnection<T>::VPartConnection()
-{
-	m_pPart = 0;
-}
 
 template<typename T>
 VPartConnection<T>::VPartConnection(

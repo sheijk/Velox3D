@@ -44,6 +44,12 @@ math::VRBTransform VRigidBodyPart::GetTransform()
 {
 	return m_Transformation;
 }
+
+utils::VFourCC VRigidBodyPart::GetDefaultId()
+{
+	return utils::VFourCC("body");
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------

@@ -24,6 +24,7 @@
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -32,8 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalOptions="&quot;\Sechsta Sinn\trunk\velox\Local\Build\debug\KernelLib.lib&quot; &quot;\Sechsta Sinn\trunk\velox\Local\Build\debug\CoreLib.lib&quot;  &quot;\Sechsta Sinn\trunk\velox\Local\Build\debug\VeloxLib.lib&quot; "
-				AdditionalDependencies="glew32.lib opengl32.lib"
+				AdditionalDependencies="opengl32.lib"
 				OutputFile="$(OutDir)/PBufferExample.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -71,6 +71,7 @@
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="4"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
