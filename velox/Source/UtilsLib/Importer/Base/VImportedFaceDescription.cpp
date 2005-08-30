@@ -1,6 +1,7 @@
 #include <v3dLib/Graphics/Importer/Base/VImportedFaceDescription.h>
 #include <v3dLib/Graphics/Importer/Base/VImportedBufferDescription.h>
 #include <v3dLib/Graphics/Importer/Base/VImportedMaterialDescription.h>
+#include <v3dLib/Graphics/Importer/VImporterException.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Graphics.h>
 #include <V3dLib/Graphics.h>
@@ -76,8 +77,8 @@ resource::VResourceId VImportedFaceDescription::CreateResource(
 	sIndices.append("/indices");
 	sTexCoords.append("/texcoords");
 	
-	resource::VResourceId face =
-		pResourceManager->CreateResource(m_sName.c_str());
+	//resource::VResourceId face =
+	//	pResourceManager->CreateResource(m_sName.c_str());
 
 	m_pMeshDescription = new VMeshDescription();
 
@@ -98,9 +99,10 @@ resource::VResourceId VImportedFaceDescription::CreateResource(
 
 	//TODO: insert 2. texcoods
 
-	face->AddData(m_pMeshDescription);
+	//face->AddData(m_pMeshDescription);
 	
-	return face;
+	//return face;
+	return 0;
 }
 
 VStringRetVal VImportedFaceDescription::GetResourceName()
@@ -115,12 +117,20 @@ VStringRetVal VImportedFaceDescription::GetParentResourceName()
 
 VImportedBufferDescription* VImportedFaceDescription::GetBufferDescription()
 {
-	return m_pBufferDescription;
+	if(m_pBufferDescription)
+		return m_pBufferDescription;
+	else
+		V3D_THROW(graphics::VImporterException,
+		"requested buffer is not valid. This can be an invalid model.");
 }
 
 graphics::VMeshDescription* VImportedFaceDescription::GetMeshDescription()
 {
-	return m_pMeshDescription;
+	if(m_pBufferDescription)
+        return m_pMeshDescription;
+	else
+		V3D_THROW(graphics::VImporterException,
+		"requested buffer is not valid. This can be an invalid model.");
 }
 
 //-----------------------------------------------------------------------------

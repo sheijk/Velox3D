@@ -331,7 +331,7 @@ vbool VImported3DS::CreateModel(
 	if(LoadFile((in_sFilename)))
 	{
 //		m_FaceContainer.CreateMeshes(in_pModel);
- 		m_FaceContainer.CreateOptimizedMeshes(in_pModel);
+   		m_FaceContainer.CreateOptimizedMeshes(in_pModel);
 		return true;
 	}
 

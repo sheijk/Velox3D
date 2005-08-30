@@ -456,6 +456,9 @@
 							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VEffectLoader.h">
 						</File>
 						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VImporterException.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VModelLoader.h">
 						</File>
 						<File

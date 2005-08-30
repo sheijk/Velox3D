@@ -1,7 +1,7 @@
 #include <v3dLib/Graphics/Importer/Base/VImportedFaceContainer.h>
 #include <v3dLib/Graphics/Importer/Base/VImportedFaceDescription.h>
 #include <v3dLib/Graphics/Importer/Base/VImportedMaterialDescription.h>
-
+#include <V3dLib/Graphics/Importer/VImporterException.h>
 #include <V3dLib/Graphics/Importer/Base/VImportedBufferDescription.h>
 
 #include <V3d/Graphics/VMeshDescription.h>
@@ -200,6 +200,11 @@ void VImportedFaceContainer::CreateOptimizedMeshes(graphics::VModel* in_pModel)
 
 	VMaterialMap::MaterialList::iterator i = mymap.GetMaterialFaceMap().begin();
 	int nFaceCount=0;
+
+	V3D_ASSERT(m_FaceList.size());
+	if(!m_FaceList.size())
+		return;
+    		
 	vuint* indexArray = m_FaceList.front()->GetBufferDescription()->GetIndexBufferArray();
 	
 	for(; i != mymap.GetMaterialFaceMap().end(); ++i)
@@ -210,14 +215,58 @@ void VImportedFaceContainer::CreateOptimizedMeshes(graphics::VModel* in_pModel)
 		VMaterialMap::FaceIDList::iterator begin;
 		begin = mymap.GetFaceList((*i).key)->begin();
 
+		vuint n = m_FaceList.size();
+
 		vuint32* indexBuffer = new vuint32[(*i).listForKey->size() * 3];
 		vuint32 nCount = 0;
 
 		for(; begin != mymap.GetFaceList((*i).key)->end(); ++begin)
 		{
+			if(indexArray[(*begin)] < 0)
+			{
+				std::stringstream ss;
+				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
+				V3D_THROW(graphics::VImporterException, ss.str().c_str());
+			}
+				
+			if(indexArray[(*begin)+1] < 0)
+			{
+				std::stringstream ss;
+				ss << "index: " <<(*begin)+1 << " array value: "<< indexArray[(*begin)+1] << " with valid size of " << n*3;
+				V3D_THROW(graphics::VImporterException, ss.str().c_str());
+			}
+				
+			if(indexArray[(*begin)+2] < 0)
+			{
+				std::stringstream ss;
+				ss << "index: " <<(*begin)+2 << " array value: "<< indexArray[(*begin)+2] << " with valid size of " << n*3;
+				V3D_THROW(graphics::VImporterException, ss.str().c_str());
+			}
+			
+			if(indexArray[(*begin)] > n*3-1)
+			{
+				std::stringstream ss;
+				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
+				V3D_THROW(graphics::VImporterException, ss.str().c_str());
+			}
+			if(indexArray[(*begin)+1] > n*3-1)
+			{
+				std::stringstream ss;
+				ss << "index: " <<(*begin)+1 << " array value: "<< indexArray[(*begin)+1] << " with valid size of " << n*3;
+				V3D_THROW(graphics::VImporterException, ss.str().c_str());
+			}
+				
+			if(indexArray[(*begin)+2] > n*3-1)
+			{
+				std::stringstream ss;
+				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
+				V3D_THROW(graphics::VImporterException, ss.str().c_str());
+			}
+			
 			indexBuffer[nCount] = indexArray[(*begin)];
 			indexBuffer[nCount+1] = indexArray[(*begin)+1];
 			indexBuffer[nCount+2] = indexArray[(*begin)+2];
+
 			nCount +=3;
 		}
 
@@ -256,7 +305,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(graphics::VModel* in_pModel)
 		meshDescription->SetCoordinateResource(m_FaceList.front()->GetMeshDescription()->GetCoordinateResource());
 		meshDescription->SetCoordinateFormat(m_FaceList.front()->GetMeshDescription()->GetCoordinateFormat());
 		meshDescription->SetIndexResource(sIndicesName.c_str());
-		meshDescription->SetIndexFormat(graphics::VDataFormat(0,nCount,0));
+		meshDescription->SetIndexFormat(graphics::VDataFormat(0,nCount ,0));
 		meshDescription->SetTexCoordResource(0, m_FaceList.front()->GetMeshDescription()->GetTexCoordResource(0));
 		meshDescription->SetTexCoordFormat(0, m_FaceList.front()->GetMeshDescription()->GetTexCoordFormat(0));
 		meshResource->AddData(meshDescription);
