@@ -35,6 +35,12 @@ VImported3DS::VImported3DS()
 
 VImported3DS::~VImported3DS()
 {
+	BufferDescriptionList::iterator i = m_BufferDescriptionList.begin();
+
+	for(; i != m_BufferDescriptionList.end(); ++i)
+	{
+		delete (*i);
+	}
 }
 
 vbool VImported3DS::LoadFile(VStringParam in_sFilename)
@@ -86,6 +92,44 @@ vbool VImported3DS::LoadModel()
 	return true;
 }
 
+vbool VImported3DS::CopyBuffers(Lib3dsMesh* in_pMesh, ArrayBuffer* in_pArrayBuffer)
+{
+	if(!in_pArrayBuffer)
+	{
+		V3D_THROW(VException, "invalid arrayBuffer in method call");
+		return false;
+	}
+
+	in_pArrayBuffer->pVertexBuffer = new vfloat32[in_pMesh->points * 3];
+	in_pArrayBuffer->pIndexBuffer = new vuint[in_pMesh->faces * 3];
+	in_pArrayBuffer->pTextureCoordBuffer = 0;
+	
+	if(in_pMesh->texels)
+	{
+		in_pArrayBuffer->pTextureCoordBuffer = new vfloat32[in_pMesh->texels *2];
+		in_pArrayBuffer->nTexelCount = in_pMesh->texels;
+	}
+
+	//copy whole vertex buffer into our own
+	for(vuint i = 0; i< in_pMesh->points; i++)
+	{
+		in_pArrayBuffer->pVertexBuffer[i*3]  = in_pMesh->pointL[i].pos[0];
+		in_pArrayBuffer->pVertexBuffer[i*3+1] = in_pMesh->pointL[i].pos[1];
+		in_pArrayBuffer->pVertexBuffer[i*3+2] = in_pMesh->pointL[i].pos[2];
+	}
+
+	in_pArrayBuffer->nVertexCount = in_pMesh->points;
+
+	//copy texture uv coordinates into a buffer
+	for(vuint i = 0; i < in_pMesh->texels; i++)
+	{
+		in_pArrayBuffer->pTextureCoordBuffer[i*2] = in_pMesh->texelL[i][0];
+		in_pArrayBuffer->pTextureCoordBuffer[i*2+1] = in_pMesh->texelL[i][1];
+	}
+
+	return true;
+}
+
 vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 {
 	vuint nIndexCount = 0;
@@ -105,27 +149,10 @@ vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 		if (!mesh)
             return true;
 
-		vfloat32* pVertexBuffer = new vfloat32[mesh->points * 3];
-		vuint* pIndicesBuffer = new vuint[mesh->faces * 3];
-		vfloat32* pTextureCoordinates = 0;
+		ArrayBuffer buffer;
 
-		if(mesh->texels)
-			 pTextureCoordinates = new vfloat32[mesh->texels *2];
-		
-		//copy whole vertex buffer into our own
-		for(vuint i = 0; i< mesh->points; i++)
-		{
-			pVertexBuffer[i*3]  = mesh->pointL[i].pos[0];
-			pVertexBuffer[i*3+1] = mesh->pointL[i].pos[1];
-			pVertexBuffer[i*3+2] = mesh->pointL[i].pos[2];
-		}
-
-		//copy texture uv coordinates into a buffer
-		for(vuint i = 0; i < mesh->texels; i++)
-		{
-			pTextureCoordinates[i*2] = mesh->texelL[i][0];
-			pTextureCoordinates[i*2+1] = mesh->texelL[i][1];
-		}
+		if(!CopyBuffers(mesh, &buffer))
+			return false;
 
 		for (vuint p = 0; p < mesh->faces; ++p)
 		{
@@ -211,27 +238,30 @@ vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 			for (vint i = 0; i < 3; ++i)
 			{
 				//write indices to our buffer
-				pIndicesBuffer[nIndexCount] = f->points[i];
+				buffer.pIndexBuffer[nIndexCount] = f->points[i];
 				nIndexCount++;
 			}
 		}
 
-		VImportedBufferDescription bufferDesc(
+		VImportedBufferDescription* pBufferDescription = new VImportedBufferDescription
+			(
 			mesh->points,
 			mesh->faces*3,
 			mesh->texels);
+
+		m_BufferDescriptionList.push_back(pBufferDescription);
 		
-		if(pVertexBuffer)
-			bufferDesc.SetVertexArray(pVertexBuffer);
-		if(pTextureCoordinates)
-			bufferDesc.SetTexCoordArray1(pTextureCoordinates);
-		if(pIndicesBuffer)
-			bufferDesc.SetIndexArray(pIndicesBuffer);
+		if(buffer.pVertexBuffer)
+			pBufferDescription->SetVertexArray(buffer.pVertexBuffer);
+		if(buffer.pTextureCoordBuffer)
+			pBufferDescription->SetTexCoordArray1(buffer.pTextureCoordBuffer);
+		if(buffer.pIndexBuffer)
+			pBufferDescription->SetIndexArray(buffer.pIndexBuffer);
 
 		std::string meshname = mesh->name;
 
-		CreateMeshBufferResource(meshname.c_str(), &bufferDesc);
-		m_FaceContainer.CreateFaceResources(&bufferDesc);
+		CreateMeshBufferResource(meshname.c_str(), pBufferDescription);
+		m_FaceContainer.CreateFaceResources(pBufferDescription);
 	}
 
 	return true;
@@ -300,7 +330,8 @@ vbool VImported3DS::CreateModel(
 {
 	if(LoadFile((in_sFilename)))
 	{
-		m_FaceContainer.CreateMeshes(in_pModel);
+//		m_FaceContainer.CreateMeshes(in_pModel);
+ 		m_FaceContainer.CreateOptimizedMeshes(in_pModel);
 		return true;
 	}
 

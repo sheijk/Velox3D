@@ -57,6 +57,26 @@ public:
 
 private:
 
+	struct ArrayBuffer
+	{
+		vfloat32* pVertexBuffer;
+		vfloat32* pTextureCoordBuffer;
+		vuint32* pIndexBuffer;
+		vuint32 nIndexCount;
+		vuint32 nVertexCount;
+		vuint32 nTexelCount;
+
+		ArrayBuffer()
+		{
+			pVertexBuffer = 0;
+			pTextureCoordBuffer = 0;
+			pIndexBuffer = 0;
+			nIndexCount = 0;
+			nVertexCount = 0;
+			nTexelCount = 0;
+		}
+	};
+
 	vbool LoadFile(VStringParam in_sFilename);
 
 	/**
@@ -66,6 +86,7 @@ private:
 	vbool LoadModel();
 	vbool LoadNode(Lib3dsNode* in_pNode);
 	void CreateMeshResourceName(VStringParam in_sName);
+	vbool CopyBuffers(Lib3dsMesh* in_pMesh, ArrayBuffer* in_pArrayBuffer);
 	VStringRetVal CreateMeshPartName(VStringParam in_sMeshPartName);
 	VStringRetVal GetMeshResourceName();
 	void CreateMeshBufferResource(
@@ -78,6 +99,8 @@ private:
 
 	VImportedFaceContainer m_FaceContainer;
 	VImportedMaterialContainer m_MaterialContainer;
+	typedef std::list<VImportedBufferDescription*> BufferDescriptionList;
+	BufferDescriptionList m_BufferDescriptionList;
 
 };
 //-----------------------------------------------------------------------------

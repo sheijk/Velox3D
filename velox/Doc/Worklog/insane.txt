@@ -1,7 +1,7 @@
 Worklog von ins:
 
 //notes to ins here...
-
+--Math includes in der sln fehlen?!
 
 -------------------------------------------------------------------------------
 Personal Notes:
@@ -41,6 +41,8 @@ high:
 //-----------------------------------------------------------------------------
 
 Done List:
+30.08.05
+- importer changed to batched render calls
 
 27.07.05
 - adopted resource types to new VTypeInfo mechanism

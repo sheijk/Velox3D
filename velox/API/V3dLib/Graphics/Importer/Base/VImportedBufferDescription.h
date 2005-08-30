@@ -56,6 +56,8 @@ public:
 	void SetTexCoordArray1(vfloat32* texcoordArray);
 	void SetTexCoordArray2(vfloat32* texCoordArray);
 
+	vuint* GetIndexBufferArray();
+
 private:
 
 	vuint nVertexCount;

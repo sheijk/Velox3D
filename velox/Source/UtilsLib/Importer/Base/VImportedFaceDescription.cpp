@@ -19,6 +19,7 @@ VImportedFaceDescription::VImportedFaceDescription()
 	m_sParentName = "none";
 	m_sName = m_sParentName;
 	m_pMaterial = 0;
+	m_pBufferDescription = 0;
 }
 
 VImportedFaceDescription::VImportedFaceDescription(
@@ -33,6 +34,7 @@ VImportedFaceDescription::VImportedFaceDescription(
 	m_sParentName = in_sParentName;
 	m_pMaterial = in_pMaterialDescription;
 	m_sName = m_sParentName;
+	m_pBufferDescription = 0;
 }
 
 
@@ -58,6 +60,8 @@ VImportedMaterialDescription* VImportedFaceDescription::GetMaterial()
 resource::VResourceId VImportedFaceDescription::CreateResource(
 		VImportedBufferDescription* in_pBufferDescription)
 {
+	m_pBufferDescription = in_pBufferDescription;
+
 	resource::VResourceManagerPtr pResourceManager;
 	std::string sFaceName = m_sParentName;
 	std::string sIndices = m_sParentName;
@@ -75,26 +79,26 @@ resource::VResourceId VImportedFaceDescription::CreateResource(
 	resource::VResourceId face =
 		pResourceManager->CreateResource(m_sName.c_str());
 
-	VMeshDescription* meshDescription = new VMeshDescription();
+	m_pMeshDescription = new VMeshDescription();
 
-	meshDescription->SetGeometryType(VMeshDescription::GeometryType::Triangles);
-	meshDescription->SetCoordinateResource(m_sParentName.c_str());
-	meshDescription->SetCoordinateFormat(
+	m_pMeshDescription->SetGeometryType(VMeshDescription::GeometryType::Triangles);
+	m_pMeshDescription->SetCoordinateResource(m_sParentName.c_str());
+	m_pMeshDescription->SetCoordinateFormat(
 		in_pBufferDescription->GetVertexBufferFormat()->GetCoordinateFormat());
 	
-	meshDescription->SetIndexResource(sIndices.c_str());
-	meshDescription->SetIndexFormat(VDataFormat(m_nFaceIndexStart, 3, 0));
+	m_pMeshDescription->SetIndexResource(sIndices.c_str());
+	m_pMeshDescription->SetIndexFormat(VDataFormat(m_nFaceIndexStart, 3, 0));
 	
 	if(in_pBufferDescription->GetTexCoordCount1())
 	{
-		meshDescription->SetTexCoordResource(0, sTexCoords.c_str());
-		meshDescription->SetTexCoordFormat(0,
+		m_pMeshDescription->SetTexCoordResource(0, sTexCoords.c_str());
+		m_pMeshDescription->SetTexCoordFormat(0,
 		in_pBufferDescription->GetTexCoordBufferFormat1()->GetTexCoordFormat(0));
 	}
 
 	//TODO: insert 2. texcoods
 
-	face->AddData(meshDescription);
+	face->AddData(m_pMeshDescription);
 	
 	return face;
 }
@@ -102,6 +106,21 @@ resource::VResourceId VImportedFaceDescription::CreateResource(
 VStringRetVal VImportedFaceDescription::GetResourceName()
 {
 	return m_sName.c_str();
+}
+
+VStringRetVal VImportedFaceDescription::GetParentResourceName()
+{
+	return m_sParentName.c_str();
+}
+
+VImportedBufferDescription* VImportedFaceDescription::GetBufferDescription()
+{
+	return m_pBufferDescription;
+}
+
+graphics::VMeshDescription* VImportedFaceDescription::GetMeshDescription()
+{
+	return m_pMeshDescription;
 }
 
 //-----------------------------------------------------------------------------

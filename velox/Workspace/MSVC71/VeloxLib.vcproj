@@ -461,6 +461,35 @@
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h">
 						</File>
+						<Filter
+							Name="Base"
+							Filter="">
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedBufferDescription.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedFaceContainer.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedFaceDescription.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedMaterialContainer.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedMaterialDescription.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VMaterialMap.h">
+							</File>
+						</Filter>
+						<Filter
+							Name="3DS"
+							Filter="">
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\3ds\VImported3DS.h">
+							</File>
+						</Filter>
 					</Filter>
 					<Filter
 						Name="Materials"
@@ -978,6 +1007,9 @@
 						</File>
 						<File
 							RelativePath="..\..\Source\UtilsLib\Importer\Base\VImportedMaterialDescription.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\Base\VMaterialMap.cpp">
 						</File>
 					</Filter>
 					<Filter

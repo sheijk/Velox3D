@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 #include <V3d/Resource/VResourceId.h>
+#include <v3d/Graphics/VMeshDescription.h>
 #include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {
@@ -33,6 +34,9 @@ public:
 	VStringRetVal GetResourceName();
 	resource::VResourceId CreateResource(
 		VImportedBufferDescription* in_pBufferDescription);
+	VStringRetVal GetParentResourceName();
+	VImportedBufferDescription* GetBufferDescription();
+	graphics::VMeshDescription* GetMeshDescription();
 
 
 private:
@@ -42,6 +46,8 @@ private:
 	std::string m_sParentName;
 	std::string m_sName;
 	VImportedMaterialDescription* m_pMaterial;
+	VImportedBufferDescription* m_pBufferDescription;
+	graphics::VMeshDescription* m_pMeshDescription;
 	//resource::VResourceId* m_pResourceId;
 };
 

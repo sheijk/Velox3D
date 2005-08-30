@@ -12,7 +12,7 @@ VImportedMaterialContainer::VImportedMaterialContainer()
 	VImportedMaterialDescription* pDefaultMaterial =
 		new VImportedMaterialDescription("default", "");
 	
-	m_MaterialList.push_back(pDefaultMaterial);
+	m_MaterialList.push_back(pDefaultMaterial); //TODO
 }
 
 VImportedMaterialContainer::~VImportedMaterialContainer()

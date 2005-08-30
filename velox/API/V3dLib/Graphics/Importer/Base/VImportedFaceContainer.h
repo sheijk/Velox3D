@@ -40,6 +40,13 @@ public:
 
 	void CreateMeshes(graphics::VModel* in_pModel);
 
+	/**
+	 * creates a optimized mesh for rendering by taking and combining
+	 * equal materials and constructing one mesh description
+	 */
+	void CreateOptimizedMeshes(graphics::VModel* in_pModel);
+	void CreateOptimizedResource();
+
 private:
 	
 	typedef std::list<std::string> MaterialLoadedList;

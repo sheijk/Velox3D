@@ -247,6 +247,11 @@ graphics::VVertexFormat* VImportedBufferDescription::GetNormalBufferFormat()
 	return m_pNormalBufferFormat;
 }
 
+vuint* VImportedBufferDescription::GetIndexBufferArray()
+{
+	return pIndexBufferArray;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------
