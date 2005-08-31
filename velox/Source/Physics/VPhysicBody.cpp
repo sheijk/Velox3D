@@ -13,7 +13,7 @@ namespace physics{
 //-----------------------------------------------------------------------------
 using namespace entity;
 
-VPhysicBody::VPhysicBody()
+VPhysicBody::VPhysicBody()  : pBodyPart(IVPart::Neighbour, VRigidBodyPart::GetDefaultId(), this)
 {
 	m_BodyID = 0;
 	m_pWorld = 0;
@@ -42,7 +42,7 @@ void VPhysicBody::Update()
 
 void VPhysicBody::Activate()
 {
-	if( pBodyPart == 0 )
+	if( pBodyPart.Get() == 0 )
 		V3D_THROW(entity::VMissingPartException, "missing part 'data'");
 }
 
@@ -51,56 +51,33 @@ void VPhysicBody::Deactivate()
 	vout << "deactivating setter part" << vendl;
 }
 
-vuint VPhysicBody::DependencyCount() const
+//void VPhysicBody::Connect(IVPart::Location in_Location, 
+//	const utils::VFourCC& in_Id, entity::IVPart& in_Part)
+//{
+//	if( in_Location == IVPart::Ancestor && 
+//		in_Part.IsOfType<entity::VRigidBodyPart>() )
+//	{
+//		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
+//	}
+//}
+//
+//void VPhysicBody::Disconnect(
+//	IVPart::Location in_Location,
+//	const utils::VFourCC& in_Id,
+//	IVPart& in_Part)
+//{
+//	if( &in_Part == pBodyPart )
+//		pBodyPart = 0;
+//}
+
+
+utils::VFourCC VPhysicBody::GetDefaultId()
 {
-	return 1;
-}
-
-IVPart::Dependency VPhysicBody::GetDependencyInfo(vuint in_nIndex) const
-{
-	V3D_THROW(VException, "TODO: port VPhysicsBody to refactored entity system");
-
-	IVPart::Dependency dependency;
-	dependency.location = IVPart::Ancestor;
-
-	//TODO: vrigidbodypart::GetDefaultId
-	dependency.id == std::string("phys");
-
-	return dependency;
-}
-
-void VPhysicBody::Connect(IVPart::Location in_Location, 
-	const std::string& in_Id, entity::IVPart& in_Part)
-{
-	if( in_Location == IVPart::Ancestor && 
-		in_Part.IsOfType<entity::VRigidBodyPart>() )
-	{
-		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
-	}
-}
-
-void VPhysicBody::Disconnect(
-	IVPart::Location in_Location,
-	const std::string& in_Id,
-	IVPart& in_Part)
-{
-	if( &in_Part == pBodyPart )
-		pBodyPart = 0;
-}
-
-vbool VPhysicBody::IsReady() const
-{
-	// we need a body part to operate
-	return pBodyPart != 0;
-}
-
-std::string VPhysicBody::GetDefaultId()
-{
-	return std::string("phbd");
+	return utils::VFourCC("phys");
 }
 
 
-//void VPhysicBody::TellNeighbourPart(const std::string& in_Id, IVPart& in_Part)
+//void VPhysicBody::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 //{
 //	if( in_Part.IsOfType<entity::VRigidBodyPart>() )
 //		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
@@ -130,7 +107,7 @@ void VPhysicBody::SetTransformation()
 	VMatrix<vfloat32, 4, 4> trans; //TODO: rbtransform accessmethoden aendern
 
 	pBodyPart->GetTransform().GetAxis(x1,y1,z1);
-
+    
 	axis.Set(0,0, x1.Get(0)); 
 	axis.Set(1,0, x1.Get(1));
 	axis.Set(2,0, x1.Get(2));
