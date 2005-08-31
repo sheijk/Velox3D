@@ -106,7 +106,7 @@ void VPhysicWorld::DeleteBodyPairList()
 
 	for(; iterBegin != iterEnd; ++iterBegin)
 	{
-		delete ((*iterBegin).pBody);
+		//delete ((*iterBegin).pBody);//entity will be deleted by it's part
 		//delete ((*iterBegin).pBodyPart); //entity will be deleted by it's part
 	}
 }
