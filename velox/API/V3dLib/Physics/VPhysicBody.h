@@ -41,7 +41,7 @@ public:
 	void Activate();
     void Deactivate();
 
-	static utils::VFourCC GetDefaultId();
+	static std::string GetDefaultId();
 
 	void SetCollisionBody(VPhysicGeometry* in_CollisionBodyState);
 	

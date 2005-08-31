@@ -42,6 +42,8 @@ high:
 
 Done List:
 30.08.05
+- finished importer
+- faster importer loading
 - importer changed to batched render calls
 
 27.07.05

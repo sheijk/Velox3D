@@ -121,9 +121,20 @@
 			Filter="cpp;h">
 			<File
 				RelativePath=".\PhysicsMain.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\PhysicsUtils.h">
+			</File>
+			<File
+				RelativePath=".\VPhysicManagerPart.cpp">
+			</File>
+			<File
+				RelativePath=".\VPhysicManagerPart.h">
 			</File>
 			<Filter
 				Name="ModuleImpl"
@@ -135,41 +146,6 @@
 					RelativePath="..\..\Source\Module\VeloxModule.cpp">
 				</File>
 			</Filter>
-		</Filter>
-		<Filter
-			Name="Shared Entities"
-			Filter="">
-			<File
-				RelativePath="..\CommonSource\Shared\VEntityUpdater.h">
-			</File>
-			<File
-				RelativePath="..\CommonSource\Shared\VRigidBodyPart.cpp">
-			</File>
-			<File
-				RelativePath="..\CommonSource\Shared\VRigidBodyPart.h">
-			</File>
-			<File
-				RelativePath="..\CommonSource\Shared\VUpdateablePart.cpp">
-			</File>
-			<File
-				RelativePath="..\CommonSource\Shared\VUpdateablePart.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Graphic Entities"
-			Filter="">
-			<File
-				RelativePath="..\CommonSource\Graphics\VCameraPosPart.cpp">
-			</File>
-			<File
-				RelativePath="..\CommonSource\Graphics\VCameraPosPart.h">
-			</File>
-			<File
-				RelativePath="..\CommonSource\Graphics\VMeshPart.cpp">
-			</File>
-			<File
-				RelativePath="..\CommonSource\Graphics\VMeshPart.h">
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

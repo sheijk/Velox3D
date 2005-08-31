@@ -71,9 +71,9 @@ void VPhysicBody::Deactivate()
 //}
 
 
-utils::VFourCC VPhysicBody::GetDefaultId()
+std::string VPhysicBody::GetDefaultId()
 {
-	return utils::VFourCC("phys");
+	return std::string("phys");
 }
 
 

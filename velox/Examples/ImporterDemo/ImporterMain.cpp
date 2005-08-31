@@ -62,7 +62,7 @@ void VImporterDemo::LoadModel()
 	resource::VResourceId modelResourceId =
 		resource::VResourceManagerPtr()->CreateResource("/model3ds");
 
-	modelResourceId->AddData(new resource::VFileName("/data/Kran2.3ds"));
+	modelResourceId->AddData(new resource::VFileName("/data/afighter.3ds"));
 }
 
 vint VImporterDemo::Main(vector<string> args)
