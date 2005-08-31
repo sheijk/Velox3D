@@ -19,13 +19,18 @@ namespace physics{
 class VPhysicWorld;
 class VPhysicGeometry;
 
-class VPhysicBody : public VPhysicObject, public entity::IVPart
+class VPhysicBody : public VPhysicObject, public entity::VPartBase
 {
 public:
 
+//	entity::VPartConnection<entity::VRigidBodyPart> partConnection;
+
+public:
+	
 	typedef VVector<vfloat32, 3> Position;
 		
 	VPhysicBody();
+
 	virtual ~VPhysicBody();
 
 	void Create(VPhysicWorld* in_PhysicWorld);
@@ -36,15 +41,7 @@ public:
 	void Activate();
     void Deactivate();
 
-	virtual vuint DependencyCount() const;
-	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
-	virtual void Connect(IVPart::Location in_Location, 
-		const std::string& in_Id, entity::IVPart& in_Part);
-	virtual void Disconnect(IVPart::Location in_Location, 
-		const std::string& in_Id, entity::IVPart& in_Part);
-	virtual vbool IsReady() const;
-	
-	static std::string GetDefaultId();
+	static utils::VFourCC GetDefaultId();
 
 	void SetCollisionBody(VPhysicGeometry* in_CollisionBodyState);
 	
@@ -76,7 +73,8 @@ private:
 protected: 
 
 	dBodyID m_BodyID;
-	entity::VRigidBodyPart* pBodyPart;
+	entity::VPartConnection<entity::VRigidBodyPart> pBodyPart;
+//	entity::VRigidBodyPart* pBodyPart;
 	VQuatf m_Quaternion;
 	VPhysicPositionState m_PositionState;
 };
