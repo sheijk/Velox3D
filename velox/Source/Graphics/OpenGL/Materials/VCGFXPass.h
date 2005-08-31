@@ -40,7 +40,7 @@ public:
 
 	static vbool CanRealize(const VRenderPass& in_Pass);
 
-	void Bind();
+	void Bind(const VOpenGLDevice*);
 	void Unbind();
 
 private:

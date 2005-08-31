@@ -197,6 +197,45 @@ v3d::VSharedPtr<IVPart> CreateModelPart(IVXMLElement* in_pElement)
 	return pModelPart;
 }
 
+class VTestPart : public v3d::entity::VUnconnectedPart
+{
+	typedef std::map<string, string> SettingsMap;
+	SettingsMap m_Settings;
+public:
+	VTestPart()
+	{
+		m_Settings["abc"] = "def";
+		m_Settings["acc"] = "ddf";
+	}
+	
+	void Activate() {}
+	void Deactivate() {}
+
+	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0)
+	{
+		if( in_pAnswer == 0 || ! in_Message.HasProperty("type") )
+			return;
+			
+		string type = in_Message.Get("type").Get<string>();
+			
+		if( type == "getSettings" )
+		{
+			SettingsMap::iterator iter = m_Settings.begin();
+			for( ; iter != m_Settings.end(); ++iter)
+			{
+				in_pAnswer->AddProperty(iter->first, iter->second);
+			}
+		}
+		else if( type == "update") 
+		{
+			string name = in_Message.Get("name").Get<string>();
+			string value = in_Message.Get("value").Get<string>();
+			
+			m_Settings[name] = value;
+		}
+	}
+};
+
 v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
 	v3d::xml::IVXMLElement* in_pElement)
 {
@@ -206,10 +245,25 @@ v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
 	{
 		return CreateModelPart(in_pElement);
 	}
+	else if( type == "simpleScene" )
+	{
+		return VSharedPtr<v3d::entity::IVPart>(new v3d::scene::VSimpleScene());
+	}
+	else if( type == "x" )
+	{
+		return VSharedPtr<v3d::entity::IVPart>(new VTestPart());
+	}
 	else
 	{
 		return VSharedPtr<IVPart>(0);
 	}
+}
+
+v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice)
+{
+	VDefaultRenderAlgorithm* pRenderAlgo = new VDefaultRenderAlgorithm();
+	
+	return new VShooting(in_pDevice, pRenderAlgo);
 }
 
 v3d::entity::VEntity* CreateEntity()

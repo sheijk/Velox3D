@@ -1,6 +1,8 @@
 #include <V3d/Messaging/VMessage.h>
 //-----------------------------------------------------------------------------
 
+#include <V3d/Core/RangeIter/VSTLAccessorRangePolicy.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -40,6 +42,11 @@ void VMessage::Set(const std::string& in_strName, const utils::VStringValue& in_
 	}
 }
 
+void VMessage::Set(const std::string& in_strName, const std::string& in_strValue)
+{
+	Set(in_strName, VStringValue(in_strValue));
+}
+
 utils::VStringValue VMessage::Get(const std::string& in_strName) const
 {
 	PropertyMap::const_iterator prop = m_Properties.find(in_strName);
@@ -63,12 +70,23 @@ vbool VMessage::HasProperty(const std::string& in_strName) const
 	return ( pos != m_Properties.end() );
 }
 
-void VMessage::AddProperty(const std::string& in_strName)
+void VMessage::AddProperty(const std::string& in_strName, const utils::VStringValue& in_Default)
 {
 	if( ! HasProperty(in_strName) )
 	{
-		m_Properties.insert(PropertyMap::value_type(in_strName, VStringValue("")));
+		m_Properties.insert(PropertyMap::value_type(in_strName, in_Default));
 	}
+}
+
+void VMessage::AddProperty(const std::string& in_strName, const std::string& in_strDefault)
+{
+	AddProperty(in_strName, VStringValue(in_strDefault));
+}
+
+VRangeIterator<const std::string> VMessage::PropertyIterator() const
+{
+	return CreateAccesssorIterator<VPair1stAccessor, const std::string>(
+		m_Properties.begin(), m_Properties.end());
 }
 
 //-----------------------------------------------------------------------------

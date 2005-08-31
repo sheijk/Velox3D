@@ -39,12 +39,12 @@ public:
 	virtual vuint DependencyCount() const;
 	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
 	virtual void Connect(IVPart::Location in_Location, 
-		const utils::VFourCC& in_Id, entity::IVPart& in_Part);
+		const std::string& in_Id, entity::IVPart& in_Part);
 	virtual void Disconnect(IVPart::Location in_Location, 
-		const utils::VFourCC& in_Id, entity::IVPart& in_Part);
+		const std::string& in_Id, entity::IVPart& in_Part);
 	virtual vbool IsReady() const;
 	
-	static utils::VFourCC GetDefaultId();
+	static std::string GetDefaultId();
 
 	void SetCollisionBody(VPhysicGeometry* in_CollisionBodyState);
 	

@@ -6,12 +6,9 @@
 #include <string>
 
 #include <V3d/Resource.h>
-#define private public
-#define protected public
+
 #include "../VTextureState.h"
 #include "../VTexture2D.h"
-#undef private
-#undef protected
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -127,12 +124,6 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 
 		if( semantic == "MODELVIEWPROJECTION" )
 		{
-			//AutoParameter autoParam;
-			//autoParam.param = param;
-			//autoParam.type = APModelViewProjectionMatrix;
-
-			//m_AutoParameters.push_back(autoParam);
-
 			m_AutoParameters.push_back(VSharedPtr<VCGFXParameterBase>(new VCGFXModelViewProjectionAutoParam(param)));
 
 			vout << " as " << semantic;
@@ -159,7 +150,7 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 					VResourceDataPtr<const VTextureState> pTexState = GetResourceData<VTextureState>("/data/moon.jpg");
 					VTexture2D* pTexture = reinterpret_cast<VTexture2D*>(pTexState->m_pTexture);
 
-					GLenum texHandle = pTexture->m_iTextureID;
+					GLenum texHandle = pTexture->GetTextureId();
 
 					m_AutoParameters.push_back(VSharedPtr<VCGFXParameterBase>(new VCGFXTexture(param, texHandle)));
 				} break;
@@ -189,14 +180,14 @@ const IVPass& VCGFXMaterial::GetPass(vuint in_nNum) const
 	return *m_Passes[in_nNum];
 }
 
-void VCGFXMaterial::ApplyParameters()
+void VCGFXMaterial::ApplyParameters(const VOpenGLDevice* in_pDevice)
 {
-	ApplyAutoParameters();
+	ApplyAutoParameters(in_pDevice);
 
 	ParameterMap::iterator param = m_Parameters.begin();
 	for( ; param != m_Parameters.end(); ++param)
 	{
-		param->second->Apply();
+		param->second->Apply(in_pDevice);
 	}
 }
 
@@ -211,11 +202,11 @@ void VCGFXMaterial::UnapplyParameters()
 	}
 }
 
-void VCGFXMaterial::ApplyAutoParameters()
+void VCGFXMaterial::ApplyAutoParameters(const VOpenGLDevice* in_pDevice)
 {
 	for(vuint num = 0; num < m_AutoParameters.size(); ++num) 
 	{
-		m_AutoParameters[num]->Apply();
+		m_AutoParameters[num]->Apply(in_pDevice);
 	}
 }
 

@@ -29,6 +29,16 @@ void VBaseTexture::Unbind()
 	glDeleteTextures(1, &m_iTextureID);
 }
 
+GLint VBaseTexture::GetTextureId() const
+{
+	return m_iTextureID;
+}
+
+GLenum VBaseTexture::GetTextureTarget() const
+{
+	return m_iTextureTarget;
+}
+
 /*VCubemapPosX::VCubemapPosX(const image::VImage& in_Image, int in_TextureID) :  VBaseTexture(in_Image, GL_TEXTURE_CUBE_MAP_POSITIVE_X)
 {
 	m_iTextureID = in_TextureID;

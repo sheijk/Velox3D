@@ -4,13 +4,14 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3d/Entity/VEntityExceptions.h>
-#include <V3dLib/Utils/VFourCC.h>
 
 #include <V3d/Messaging/VMessage.h>
+
+#include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
-	//-----------------------------------------------------------------------------
-	using namespace v3d; // prevent auto indenting
+//-----------------------------------------------------------------------------
+using namespace v3d; // prevent auto indenting
 
 /**
  * A part is an independent part of an entity. Derive classes from IVPart to
@@ -36,7 +37,7 @@ public:
 	struct Dependency
 	{
 		Location location;
-		utils::VFourCC id;
+		std::string id;
 	};
 
 	virtual ~IVPart() {}
@@ -54,7 +55,7 @@ public:
 	/** Connect to another entity part */
 	virtual void Connect(
 		Location in_Location, 
-		const utils::VFourCC& in_Id, 
+		const std::string& in_Id, 
 		IVPart& in_Part)
 	{}
 
@@ -65,7 +66,7 @@ public:
 	*/
 	virtual void Disconnect(
 		Location in_Location,
-		const utils::VFourCC& in_Id,
+		const std::string& in_Id,
 		IVPart& in_Part)
 	{}
 
@@ -81,7 +82,7 @@ public:
 	/** Return information about the n-th dependency */
 	virtual Dependency GetDependencyInfo(vuint in_nIndex) const = 0;
 
-	virtual void Send(const messaging::VMessage& in_Message)
+	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0)
 	{}
 
 	template<typename T>

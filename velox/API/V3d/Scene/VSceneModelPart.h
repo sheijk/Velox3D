@@ -29,7 +29,7 @@ public:
 
 	virtual void Send(const messaging::VMessage& in_Message);
 
-	static utils::VFourCC GetDefaultId();
+	static std::string GetDefaultId();
 
 private:
 	graphics::VModel m_Model;

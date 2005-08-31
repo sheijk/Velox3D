@@ -60,6 +60,7 @@ public:
 	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode);
 	
 	void ApplyLight(LightId in_Number, const VPointLight* in_pLight);
+	const VPointLight& GetLight(LightId in_Number) const;
 
 	IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings);
 
@@ -77,6 +78,9 @@ private:
 
 	typedef std::list<VMeshBase*> MeshList;
 	MeshList m_Meshes;
+
+	// lights
+	std::vector<VPointLight> m_PointLights;
 
 	// the matrices
 	VMatrix44f m_ViewMatrix;

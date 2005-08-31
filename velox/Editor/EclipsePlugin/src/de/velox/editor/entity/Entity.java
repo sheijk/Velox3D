@@ -13,18 +13,19 @@ public class Entity implements XMLSerializable {
 	private LinkedList<Part> parts = new LinkedList<Part>();
 	private LinkedList<Entity> entities = new LinkedList<Entity>();
 	
-//	private VEntityPtr impl = /*/null;/*/ new VEntityPtr(new VEntity());/**/
-	private VEntityPtr impl;
+	private Entity parent = null;
+	
+	private VEntityPtr impl = null;	
 	
 	public Entity(String name) {
 		impl = new VEntityPtr(v3d.CreateEntity());
 		this.name = name;
 	}
 	
-	public Entity(String name, VEntity inImpl) {
-		impl = new VEntityPtr(inImpl);
-		this.name = name;
-	}
+//	public Entity(String name, VEntity inImpl) {
+//		impl = new VEntityPtr(inImpl);
+//		this.name = name;
+//	}
 	
 	public String GetName() {
 		return name;
@@ -35,46 +36,68 @@ public class Entity implements XMLSerializable {
 	}
 	
 	public boolean IsActive() {
-		if( impl != null )
+		if( valid(impl) )
 			return impl.IsActive();
 		else
 			return false;
 	}
 	
-	public void Activate() {
-		if( impl != null )
-			impl.Activate();
+	public Entity getParent() {
+		return parent;
 	}
 	
+	public void Activate() {
+		if( valid(impl) )
+			impl.Activate();
+	}
+		
 	public void Deactivate() {
-		if( impl != null )
+		if( valid(impl) )
 			impl.Deactivate();
 	}
 	
 	public void Add(Entity newEntity) {
 		entities.add(newEntity);
 		
-		if( impl != null )
+		newEntity.parent = this;
+
+		if( valid(impl) )
 			impl.AddChild(newEntity.impl);
 	}
 	
 	public void Remove(Entity entityToBeRemoved) {
-		if( impl != null )
+		if( valid(impl) )
 			impl.RemoveChild(entityToBeRemoved.impl);
+		
+		entityToBeRemoved.parent = null;
 		
 		entities.remove(entityToBeRemoved);
 	}
 	
-	public void Add(Part newPart) {
-//		if( impl != null )
-//			impl.AddPart(newPart.GetId(), newPart.GetPart());
-		
-		parts.add(newPart);
-	}
-	
 	public void Remove(Part partToBeRemoved) {
+		if( valid(impl) )
+			impl.RemovePart(partToBeRemoved.GetId());
+		
+		partToBeRemoved.setOwner(null);
 		parts.remove(partToBeRemoved);
 	}
+	
+	public void Add(Part newPart) {
+		if( newPart != null && valid(newPart.GetPart()) ) {		
+			if( valid(impl) ) {
+				impl.AddPart(newPart.GetId(), newPart.GetPart());
+			}
+			
+			newPart.setOwner(this);			
+			parts.add(newPart);
+		}
+	}
+
+//	public void Remove(Part partToBeRemoved) {
+//		if( impl != null )
+//			impl.rem
+//		parts.remove(partToBeRemoved);
+//	}
 	
 	public Iterator<Entity> EntityIterator() {
 		return entities.iterator();
@@ -84,6 +107,14 @@ public class Entity implements XMLSerializable {
 		return parts.iterator();
 	}
 	
+	private static boolean valid(VEntityPtr ptr) {
+		return ptr != null && ptr.Get() != null;
+	}
+	
+	private static boolean valid(VPartPtr ptr) {
+		return ptr != null && ptr.Get() != null;
+	}
+
 	public void ToXML(IVXMLElement outElement) {
 		outElement.SetName("entity");
 		

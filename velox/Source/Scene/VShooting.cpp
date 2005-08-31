@@ -49,7 +49,7 @@ void VShooting::Deactivate()
 }
 
 void VShooting::Connect(
-	Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part)
+	Location in_Location, const std::string& in_Id, IVPart& in_Part)
 {
 	m_pScene = in_Part.Convert<VSimpleScene>();
 	if( m_pScene )
@@ -59,7 +59,7 @@ void VShooting::Connect(
 }
 
 void VShooting::Disconnect(
-	Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part)
+	Location in_Location, const std::string& in_Id, IVPart& in_Part)
 {
 }
 
@@ -84,7 +84,7 @@ IVPart::Dependency VShooting::GetDependencyInfo(vuint in_nIndex) const
 	return dependency;
 }
 
-//void VShooting::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+//void VShooting::TellNeighbourPart(const std::string& in_Id, IVPart& in_Part)
 //{
 //	m_pScene = in_Part.Convert<VSimpleScene>();
 //	if( m_pScene )

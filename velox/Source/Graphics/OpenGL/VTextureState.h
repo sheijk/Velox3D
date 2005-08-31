@@ -26,7 +26,8 @@ public:
 	virtual IVStateCategory* GetCategory() const;
 
 	static void SetCategory(IVStateCategory* in_pStateCategory);
-private:
+//private: /*TODO: removed for VCGFXMaterial, put back in once VTexture2D ist
+//stored in the resource manager instead of VTextureState
 
 	IVTexture*        m_pTexture;
 	static IVTexture* m_pLastTexture;

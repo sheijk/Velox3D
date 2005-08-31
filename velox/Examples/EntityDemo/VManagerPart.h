@@ -42,9 +42,9 @@ public:
 		m_Readers.erase(in_pPart);
 	}
 
-	static utils::VFourCC GetDefaultId()
+	static std::string GetDefaultId()
 	{
-		return utils::VFourCC("mngr");
+		return std::string("mngr");
 	}
 
 	void PrintAllValues();

@@ -57,9 +57,8 @@ public:
 	/**
 	 * Deletes a previously created mesh
 	 */
-	virtual void DeleteMesh(MeshHandle& in_Mesh) = 0;
+	virtual V3D_DEPRECATED void DeleteMesh(MeshHandle& in_Mesh) = 0;
 
-	//////////////////DEPRICATED! DO NOT USE/////////////////////
 	virtual void RenderMesh(MeshHandle in_Mesh) = 0;
 
 	/** sends the vertices of a mesh to the device */
@@ -89,7 +88,7 @@ public:
 	/** Id's of the lights */
 	enum LightId
 	{
-		Light0, Light1, Light2, Light3, Light4, Light5, Light6, Light7
+		Light0, Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightMaxCount
 	};
 
 	/**

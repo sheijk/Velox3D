@@ -5,6 +5,11 @@
 
 #include "VCGFXPass.h"
 
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/VPointLight.h>
+#include <V3dLib/Graphics/Geometry/Conversions.h>
+#include "../VOpenGLDevice.h"
+
 #include <V3d/Math/VVector.h>
 #include <V3d/Core/VIOStream.h>
 
@@ -20,7 +25,7 @@ using namespace v3d; // anti auto indenting
 class VCGFXParameterBase
 {
 public:
-	virtual void Apply() = 0;
+	virtual void Apply(const VOpenGLDevice* in_pDevice) = 0;
 
 	virtual void Unapply() {}
 
@@ -39,7 +44,7 @@ public:
 		m_Parameter = in_Param;
 	}
 
-	virtual void Apply()
+	virtual void Apply(const VOpenGLDevice* in_pDevice)
 	{
 		cgSetParameter1f(m_Parameter, m_fValue);
 		V3D_CHECK_CG_ERROR();
@@ -63,7 +68,7 @@ public:
 		m_Parameter = in_Param;
 	}
 
-	virtual void Apply()
+	virtual void Apply(const VOpenGLDevice* in_pDevice)
 	{
 		cgSetParameter4f(m_Parameter, m_Value[0], m_Value[1], m_Value[2], m_Value[3]);
 		V3D_CHECK_CG_ERROR();
@@ -87,12 +92,76 @@ public:
 		m_Parameter = in_Param;
 	}
 
-	virtual void Apply()
+	virtual void Apply(const VOpenGLDevice* in_pDevice)
 	{
 		cgGLSetStateMatrixParameter(m_Parameter, 
 			CG_GL_MODELVIEW_PROJECTION_MATRIX, CG_GL_MATRIX_IDENTITY);
 		V3D_CHECK_CG_ERROR();
 	}
+};
+
+class VCGFXLightAutoParam : public VCGFXParameterBase
+{
+public:
+	enum Property
+	{
+		Position,
+		AmbientColor,
+		DiffuseColor,
+		SpecularColor
+	};
+
+	VCGFXLightAutoParam(CGparameter in_Param, IVDevice::LightId in_LightId, Property in_Component)
+	{
+		m_Parameter = in_Param;
+		m_LightNum = in_LightId;
+	}
+
+	virtual void Apply(const VOpenGLDevice* in_pDevice)
+	{
+		// get light parameters
+		VPointLight light = in_pDevice->GetLight(m_LightNum);
+
+		VVector4f data;
+
+		switch(m_Component)
+		{
+		case Position:
+			{
+				VVector3f pos = light.GetPosition();
+				data = ToVector4f(pos, 1.0f);
+			} break;
+
+		case AmbientColor:
+			{
+				data = ToVector4f(light.GetAmbient());
+			} break;
+
+		case DiffuseColor:
+			{
+				data = ToVector4f(light.GetDiffuse());
+			} break;
+
+		case SpecularColor:
+			{
+				data = ToVector4f(light.GetSpecular());
+			} break;
+
+		default:
+			{
+				// generate an error
+				Property valid = Property(vuint(m_Component) + 1);
+				V3D_ASSERT(m_Component == valid);
+			} break;
+		};
+
+		// set parameter
+		cgGLSetParameter4f(m_Parameter, data[0], data[1], data[2], data[3]);
+	}
+
+private:
+	IVDevice::LightId m_LightNum;
+	Property m_Component;
 };
 
 class VCGFXTexture : public VCGFXParameterBase
@@ -109,7 +178,7 @@ public:
 		V3D_CHECK_CG_ERROR();
 	}
 
-	virtual void Apply()
+	virtual void Apply(const VOpenGLDevice* in_pDevice)
 	{
 		cgGLEnableTextureParameter(m_Parameter);
 		V3D_CHECK_CG_ERROR();
@@ -134,14 +203,14 @@ public:
 	virtual vuint PassCount() const;
 	virtual const IVPass& GetPass(vuint in_nNum) const;
 
-	void ApplyParameters();
+	void ApplyParameters(const VOpenGLDevice* in_pDevice);
 	void UnapplyParameters();
 
 	virtual void SetParameter(ParamHandle in_Param, vfloat32 in_Value) const;
 	virtual void SetParameter(ParamHandle in_Param, VVector4f in_Value) const;
 
 private:
-	void ApplyAutoParameters();
+	void ApplyAutoParameters(const VOpenGLDevice* in_pDevice);
 	void UnapplyAutoParameters();
 	VCGFXParameterBase* FindParameter(const std::string& in_strName) const;
 

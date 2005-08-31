@@ -14,7 +14,7 @@ using namespace v3d; // anti auto indent
 using namespace v3d::utils;
 
 namespace {
-	vbool DependsOnNeighbour(IVPart& in_Part, VFourCC in_Id)
+	vbool DependsOnNeighbour(IVPart& in_Part, const std::string& in_Id)
 	{
 		for(vuint dep = 0; dep < in_Part.DependencyCount(); ++dep)
 		{
@@ -26,7 +26,7 @@ namespace {
 		return false;
 	}
 
-	vbool DependsOnAncestor(IVPart& in_Part, VFourCC in_Id)
+	vbool DependsOnAncestor(IVPart& in_Part, const std::string& in_Id)
 	{
 		for(vuint dep = 0; dep < in_Part.DependencyCount(); ++dep)
 		{
@@ -43,7 +43,7 @@ class VEntityHelper
 {
 	friend ::v3d::entity::VEntity;
 
-	static IVPart* FindAncestorWithId(VEntity* in_pStart, VFourCC in_Id)
+	static IVPart* FindAncestorWithId(VEntity* in_pStart, const std::string& in_Id)
 	{
 		VEntity* pEntity = in_pStart->m_pParent;
 
@@ -62,7 +62,7 @@ class VEntityHelper
 	}
 
 	static std::vector<IVPart*> FindPartsWhichNeedAncestor(
-		VEntity* in_pAncestorPos, VFourCC in_AncestorId)
+		VEntity* in_pAncestorPos, const std::string& in_AncestorId)
 	{
 		std::vector<IVPart*> dependentParts;
 
@@ -76,7 +76,7 @@ class VEntityHelper
 	}
 
 	static void AddPartsWhichNeedAncestor(std::vector<IVPart*>& io_DependentParts,
-		VEntity* in_pEntity, VFourCC in_AncestorId)
+		VEntity* in_pEntity, const std::string& in_AncestorId)
 	{
 		// add all parts if they depend on the given ancestor
 		VEntity::PartContainer::iterator partIter = in_pEntity->m_Parts.begin();
@@ -121,6 +121,18 @@ VEntity::~VEntity()
 	
 //	--g_nEntityCount;
 //	vout << g_nEntityCount << " entities remaining" << vendl;
+}
+
+IVPart* VEntity::GetPartById(const std::string& in_Id)
+{
+	PartContainer::iterator part = m_Parts.begin();
+	for( ; part != m_Parts.end(); ++part)
+	{
+		if( part->first == in_Id )
+			return part->second.Get();
+	}
+
+	return 0;
 }
 
 void VEntity::Activate()
@@ -194,7 +206,7 @@ void VEntity::ReconnectAllParts()
 	PartContainer::iterator part = m_Parts.begin();
 	for( ; part != m_Parts.end(); ++part)
 	{
-		ConnectPart(part->second, part->first);
+		ConnectPart(part->second.Get(), part->first);
 	}
 
 	EntityContainer::iterator child = m_Entities.begin();
@@ -204,7 +216,22 @@ void VEntity::ReconnectAllParts()
 	}
 }
 
-void VEntity::ConnectPart(PartPtr in_pPart, utils::VFourCC in_Id)
+void VEntity::UnconnectAllParts()
+{
+	PartContainer::iterator part = m_Parts.begin();
+	for( ; part != m_Parts.end(); ++part)
+	{
+		UnconnectPart(part->second.Get(), part->first);
+	}
+
+	EntityContainer::iterator child = m_Entities.begin();
+	for( ; child != m_Entities.end(); ++child)
+	{
+		(*child)->UnconnectAllParts();
+	}
+}
+
+void VEntity::ConnectPart(IVPart* in_pPart, const std::string& in_Id)
 {
 	// connect all part to neighbours and neighbours to part if needed
 	for(
@@ -260,28 +287,82 @@ void VEntity::ConnectPart(PartPtr in_pPart, utils::VFourCC in_Id)
 	}
 }
 
-void VEntity::AddPart(const utils::VFourCC& in_Id, PartPtr in_pPart)
+void VEntity::UnconnectPart(IVPart* in_pPart, const std::string& in_Id)
+{
+	V3D_ASSERT(in_pPart != 0);
+
+	// unconnect from all neighbours
+	for(PartContainer::iterator part = m_Parts.begin(); part != m_Parts.end(); ++part)
+	{
+		if( DependsOnNeighbour(*in_pPart, part->first) )
+			in_pPart->Disconnect(IVPart::Neighbour, part->first, *part->second);
+
+		if( DependsOnNeighbour(*part->second, in_Id) )
+			part->second->Disconnect(IVPart::Neighbour, in_Id, *in_pPart);
+	}
+
+	// unconnect from all ancestors
+	for(vuint depNum = 0; depNum < in_pPart->DependencyCount(); ++depNum)
+	{
+		IVPart::Dependency& dependency(in_pPart->GetDependencyInfo(depNum));
+
+		if( dependency.location == IVPart::Ancestor )
+		{
+			IVPart* pAncestor = VEntityHelper::FindAncestorWithId(this, dependency.id);
+
+			if( pAncestor != 0 )
+				in_pPart->Disconnect(IVPart::Ancestor, dependency.id, *pAncestor);
+		}
+	}
+
+	// find all parts which have in_pPart as ancestor and unconnect them
+	std::vector<IVPart*> dependentParts = 
+		VEntityHelper::FindPartsWhichNeedAncestor(this, in_Id);
+
+	for(vuint partNum = 0; partNum < dependentParts.size(); ++partNum)
+	{
+		IVPart& part(*dependentParts[partNum]);
+
+		part.Disconnect(IVPart::Ancestor, in_Id, *in_pPart);
+	}
+}
+
+void VEntity::CheckDependencies()
+{
+	vbool deactivate = false;
+
+	if( IsActive() )
+	{
+		// check if all parts are ready (have all required connections)
+		for(PartContainer::iterator part = m_Parts.begin(); 
+			part != m_Parts.end(); ++part)
+		{
+			// deactivate if unmatched requirements
+			if( ! part->second->IsReady() )
+				deactivate = true;
+		}
+	}
+
+	if( deactivate )
+	{
+		Deactivate();
+	}
+	else
+	{
+		EntityContainer::iterator child = m_Entities.begin();
+		for( ; child != m_Entities.end(); ++child)
+		{
+			(*child)->CheckDependencies();
+		}
+	}
+}
+
+void VEntity::AddPart(const std::string& in_Id, PartPtr in_pPart)
 {
 	// if part is not contained, yet
-	if( m_Parts.find(in_Id) == m_Parts.end() )
+	if( in_pPart.Get() != 0 && m_Parts.find(in_Id) == m_Parts.end() )
 	{
-		ConnectPart(in_pPart, in_Id);
-
-		//// find closest parent with same id
-		//VEntity* parent = m_pParent;
-		//while( parent != 0 )
-		//{
-		//	// check whether the entity contains a part with the given id
-		//	PartContainer::iterator part = parent->m_Parts.find(in_Id);
-		//	if( part != parent->m_Parts.end() )
-		//	{
-		//		in_pPart->Connect(IVPart::Ancestor, in_Id, *(part->second));
-		//		//in_pPart->TellParentPart(in_Id, *(part->second));
-		//		break;
-		//	}
-
-		//	parent = parent->m_pParent;
-		//}
+		ConnectPart(in_pPart.Get(), in_Id);
 
 		// add part to list
 		m_Parts[in_Id] = in_pPart;
@@ -290,9 +371,24 @@ void VEntity::AddPart(const utils::VFourCC& in_Id, PartPtr in_pPart)
 	{
 		std::stringstream message;
 		message << "Could not insert part because a part with name '";
-		message << in_Id.AsStdString() << "' already exists in entity\n";
+		message << in_Id << "' already exists in entity\n";
 		V3D_THROW(VPartAlreadyPresentException, message.str().c_str());
 	}
+}
+
+void VEntity::RemovePart(const std::string& in_Id)
+{
+	// get part
+	IVPart* pPart = GetPartById(in_Id);
+
+	// unconnect it
+	UnconnectPart(pPart, in_Id);
+
+	// remove it
+	m_Parts.erase(in_Id);
+
+	// check if entity needs to deactivate
+	CheckDependencies();
 }
 
 void VEntity::AddChild(EntityPtr in_pEntity)
@@ -314,6 +410,9 @@ void VEntity::RemoveChild(EntityPtr in_pEntity)
 
 	EntityContainer::iterator ent = 
 		std::find(m_Entities.begin(), m_Entities.end(), in_pEntity);
+
+	if( (*ent)->IsActive() )
+		(*ent)->Deactivate();
 
 	m_Entities.erase(ent);
 	in_pEntity->m_pParent = 0;

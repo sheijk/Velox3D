@@ -21,14 +21,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 import org.eclipse.core.runtime.IAdaptable;
 
-import de.velox.IVXMLAttribute;
-import de.velox.IVXMLElement;
-import de.velox.IVXMLNode;
-import de.velox.VEntity;
-import de.velox.VView;
-import de.velox.VXMLAttributeIterator;
-import de.velox.VXMLNodeIterator;
-import de.velox.v3d;
+import de.velox.*;
 import de.velox.editor.entity.*;
 
 
@@ -54,48 +47,62 @@ public class SceneView extends VeloxViewBase {
 	@SuppressWarnings("unused")
 	private DrillDownAdapter drillDownAdapter;
 	
-	private Action addEntityAction = null;
-	private Action addPartAction = null;
-	private Action addSettingAction = null;
-	private Action doubleClickAction = null;
-	private Action showXMLAction = null;
-	private Action toggleAction = null;
+//	private SceneAction addEntityAction = null;
+//	private SceneAction addPartAction = null;
+//	private SceneAction addSettingAction = null;
+	private SceneAction doubleClickAction = null;
+//	private SceneAction showXMLAction = null;
+//	private SceneAction toggleAction = null;
+//	private SceneAction removeAction = null;
+	
+	private LinkedList<SceneAction> contextMenuActions = new LinkedList<SceneAction>();
 	
 	private Composite myParent = null;
 	
-	private VView renderView = null;
-	
+	private Entity root = new Entity("root");
 
+	public void setEntity(Entity inEntity) {
+		root = inEntity;
+	}
+
+	class SceneAction extends Action
+	{
+		public SceneAction(String caption) {
+			setText(caption);		
+		}
+		
+		void update() {}
+	}
+	
 	class ViewContentProvider implements IStructuredContentProvider, 
 										   ITreeContentProvider 
 	{
-		private final Entity root;
-		
-		ViewContentProvider(VEntity inRoot) {
-			root = new Entity("root", inRoot);
-			
-			root.Add(new Entity("emptyChild"));
-			
-			Entity childWithParts = new Entity("childWithParts");
-			childWithParts.Add(new Part("noSettingsPart"));
-			Part partWithSettings = new Part("partWithSettings");
-			partWithSettings.SetSetting("setting1" ,"value1");
-			partWithSettings.SetSetting("setting2" ,"value2");
-			childWithParts.Add(partWithSettings);
-			
-			root.Add(childWithParts);
-			
-			Entity childWithSubEntities = new Entity("childWithSubs");
-			Entity lala = new Entity("lala");
-			Part lalaPart = new Part("blub");
-			lalaPart.SetSetting("xyz", "abc");
-			lala.Add(lalaPart);
-			childWithSubEntities.Add(lala);
-			
-			root.Add(childWithSubEntities);			
+		ViewContentProvider() {
+//			root.Add(new Entity("emptyChild"));
+//			
+//			Entity childWithParts = new Entity("childWithParts");
+//			childWithParts.Add(new Part("noSettingsPart"));
+//			Part partWithSettings = new Part("partWithSettings");
+//			partWithSettings.SetSetting("setting1" ,"value1");
+//			partWithSettings.SetSetting("setting2" ,"value2");
+//			childWithParts.Add(partWithSettings);
+//			
+//			root.Add(childWithParts);
+//			
+//			Entity childWithSubEntities = new Entity("childWithSubs");
+//			Entity lala = new Entity("lala");
+//			Part lalaPart = new Part("blub");
+//			lalaPart.SetSetting("xyz", "abc");
+//			lala.Add(lalaPart);
+//			childWithSubEntities.Add(lala);
+//			
+//			root.Add(childWithSubEntities);			
 		}
 		
 		public Object[] getElements(Object parent) {
+			if( parent == null || root == null ) {
+				return new Object[] {};
+			}
 			if (parent.equals(getViewSite())) {
 				return new Object[] { root };
 			}
@@ -135,24 +142,11 @@ public class SceneView extends VeloxViewBase {
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
 				
-				// add settings and their values
-//				Iterator<String> settingNameIter = part.SettingNameIterator();
-//				while( settingNameIter.hasNext() ) {
-//					String name = settingNameIter.next();
-//					String value = part.GetSetting(name);
-//					
-//					childs.add(name + "=" + value);
-//				}
-				
 				Iterator<Setting> settingIter = part.settingsIterator();
 				while( settingIter.hasNext() ) {
 					childs.add(settingIter.next());
 				}				
 			}
-//			else if( parent instanceof Setting ) {
-//				Setting setting = (Setting)parent;
-//				childs.addAll(setting.getChildSettings());
-//			}
 			
 			return childs.toArray();				
 		}
@@ -172,17 +166,25 @@ public class SceneView extends VeloxViewBase {
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
 				
-				return part.SettingNameIterator().hasNext();
+				return part.settingsIterator().hasNext();
 			}
 			else {
 				return false;
 			}
 		}
 	}
-
+	
 	class ViewLabelProvider extends LabelProvider {
 
 		public String getText(Object obj) {
+			if( obj == null ) {
+				return "null";
+			}
+			if( obj instanceof VEntity ) {
+				VEntity entity = (VEntity)obj;
+				
+				return (entity.IsActive() ? "(E)" : "(e)") + " Entity";
+			}
 			if( obj instanceof Entity ) {
 				Entity entity = (Entity)obj;
 				
@@ -223,25 +225,58 @@ public class SceneView extends VeloxViewBase {
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		
+		viewer = new TreeViewer(myParent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				final Part selectedPart = getSelectedPart();
+//				final Entity selectedEntity = getSelectedEntity();
+				
+				if( selectedPart != null ) {
+					System.out.println("Selected part of type " + selectedPart.GetId());
+					// display all settings
+					Iterator<Setting> settingNameIter = selectedPart.settingsIterator();
+					while( settingNameIter.hasNext() ) {
+						Setting setting = settingNameIter.next();
+						
+						System.out.println(setting.GetName() + "=" + setting.GetValue());
+					}
+				}
+			}
+		});
+		
+		drillDownAdapter = new DrillDownAdapter(viewer);
+		drillDownAdapter.addNavigationActions(
+			getViewSite().getActionBars().getToolBarManager());
+		viewer.setContentProvider(new ViewContentProvider());
+		viewer.setLabelProvider(new ViewLabelProvider());
+		viewer.setInput(getViewSite());
+
+		makeActions();
+		hookContextMenu();
+		hookDoubleClickAction();
+		
+		viewer.refresh();
+		/*
 		SashForm splitter = new SashForm(myParent, SWT.DEFAULT);
 		
 		viewer = new TreeViewer(
 			splitter, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		
 		Composite preview = new Composite(splitter, SWT.DEFAULT);
-		renderView = new VView(preview.handle);
+
+		renderAction = new VRenderFrameAction(preview.handle);
+		addSceneAndShootingToRoot();
+//		sceneRoot = createDefaultScene();
+		VView.GetInstance().Add(renderAction);
 		
 		drillDownAdapter = new DrillDownAdapter(viewer);
 		drillDownAdapter.addNavigationActions(
 			getViewSite().getActionBars().getToolBarManager());
-		viewer.setContentProvider(
-			new ViewContentProvider(renderView.GetSceneRoot()));
+		viewer.setContentProvider(new ViewContentProvider());
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setInput(getViewSite());
 
-		
-		renderView.StartRendering();
-		
 //		Button button = new Button(splitter, SWT.DEFAULT);
 //		button.setText("lala");
 
@@ -250,10 +285,12 @@ public class SceneView extends VeloxViewBase {
 		hookDoubleClickAction();
 		
 		viewer.refresh();
+		*/
 	}
 	
 	private void makeActions() {
-		addEntityAction = new Action() {
+//		addEntityAction = new SceneAction() {
+		contextMenuActions.add(new SceneAction("Add entity") {
 			public void run() {
 				// get selected entity
 				Entity selectedEntity = getSelectedEntity();
@@ -280,10 +317,51 @@ public class SceneView extends VeloxViewBase {
 				
 				viewer.refresh();
 			}
-		};
-		addEntityAction.setText("Add entity");
+			
+			void update() {
+				setEnabled(getSelectedEntity() != null);
+			}
+		});
+//		addEntityAction.setText("Add entity");
 		
-		addPartAction = new Action() {
+		contextMenuActions.add(new SceneAction("Remove") {
+//		removeAction = new SceneAction() {
+			@Override
+			public void run() {
+				Entity selectedEntity = getSelectedEntity();
+				Part selectedPart = getSelectedPart();
+				
+				if( selectedEntity != null )
+				{
+					Entity parent = selectedEntity.getParent();
+					
+					if( parent != null ) {				
+						parent.Remove(selectedEntity);
+					}
+				}
+				else if( selectedPart != null )
+				{
+					Entity owner = selectedPart.getOwner();
+					
+					if( owner != null )
+						owner.Remove(selectedPart);
+				}
+				
+				viewer.refresh();
+			}
+			
+			void update() {
+				final boolean removeableEntitySelected = 
+					getSelectedEntity() != null && getSelectedEntity().getParent() != null;
+				final boolean removeablePartSelected = 
+					getSelectedPart() != null && getSelectedPart().getOwner() != null;
+				setEnabled(removeablePartSelected || removeableEntitySelected);
+			}
+		});
+//		removeAction.setText("Remove");
+		
+		contextMenuActions.add(new SceneAction("Add part") {
+//		addPartAction = new SceneAction() {
 			public void run() {
 				Entity selectedEntity = getSelectedEntity();
 				
@@ -303,33 +381,40 @@ public class SceneView extends VeloxViewBase {
 				
 				viewer.refresh();								
 			}
-		};
-		addPartAction.setText("Add part");
-		
-		addSettingAction = new Action() {
-			public void run() {
-				Part selectedPart = getSelectedPart();
-				
-				if( selectedPart == null )
-					return;
-				
-				InputDialog dialog = new InputDialog(myParent.getShell(),
-					"Add setting", "Name", "",
-					new IInputValidator() {
-						public String isValid(String x) { return null; }
-					});
-				
-				if( dialog.open() == InputDialog.OK ) {
-					String name = dialog.getValue();
-					selectedPart.SetSetting(name, "...");
-				}
-				
-				viewer.refresh();								
+			
+			void update() {
+				setEnabled(getSelectedEntity() != null);
 			}
-		};
-		addSettingAction.setText("Add setting");
+		});
+//		addPartAction.setText("Add part");
 		
-		doubleClickAction = new Action() {
+//		contextMenuActions.add(new SceneAction("Add setting") {
+//			public void run() {
+//				Part selectedPart = getSelectedPart();
+//				
+//				if( selectedPart == null )
+//					return;
+//				
+//				InputDialog dialog = new InputDialog(myParent.getShell(),
+//					"Add setting", "Name", "",
+//					new IInputValidator() {
+//						public String isValid(String x) { return null; }
+//					});
+//				
+//				if( dialog.open() == InputDialog.OK ) {
+//					String name = dialog.getValue();
+//					selectedPart.SetSetting(name, "...");
+//				}
+//				
+//				viewer.refresh();								
+//			}
+//			
+//			void update() {
+//				setEnabled(getSelectedPart() != null);
+//			}
+//		});
+		
+		doubleClickAction = new SceneAction("") {
 			public void run() {
 				Setting selectedSetting = getSelectedSetting();
 				
@@ -352,7 +437,8 @@ public class SceneView extends VeloxViewBase {
 			}
 		};
 		
-		showXMLAction = new Action() {
+		contextMenuActions.add(new SceneAction("Show XML") {
+//		showXMLAction = new SceneAction() {
 			public void run() {
 				Object obj = getSelectedObject();
 				
@@ -365,10 +451,15 @@ public class SceneView extends VeloxViewBase {
 					showMessage(source);
 				}
 			}
-		};
-		showXMLAction.setText("Show XML");
+			
+			void update() {
+				setEnabled(getSelectedPart() != null || getSelectedEntity() != null);
+			}
+		});
+//		showXMLAction.setText("Show XML");
 		
-		toggleAction = new Action() {
+		contextMenuActions.add(new SceneAction("Activate") {
+//		toggleAction = new SceneAction() {
 			public void run() {
 				Entity entity = getSelectedEntity();
 				
@@ -381,8 +472,17 @@ public class SceneView extends VeloxViewBase {
 					viewer.refresh();
 				}
 			}
-		};
-		toggleAction.setText("Activate");
+			
+			void update() {
+				if( getSelectedEntity() != null ) {
+					setText(
+						getSelectedEntity().IsActive() ? "Deactivate" : "Activate");
+				}
+				
+				setEnabled(getSelectedEntity() != null);
+			}
+		});
+//		toggleAction.setText("Activate");
 	}
 
 	private static String createFormattedSource(IVXMLElement root) {
@@ -480,9 +580,14 @@ public class SceneView extends VeloxViewBase {
 	}
 	
 	private void fillContextMenu(IMenuManager manager) {
-		final boolean entitySelected = getSelectedEntity() != null;
-		final boolean partSelected = getSelectedPart() != null;
+//		final boolean entitySelected = getSelectedEntity() != null;
+//		final boolean partSelected = getSelectedPart() != null;
 		
+		for(SceneAction action : contextMenuActions) {
+			action.update();
+			manager.add(action);
+		}
+/*		
 		toggleAction.setEnabled(entitySelected);
 		if( entitySelected ) {
 			toggleAction.setText(
@@ -492,6 +597,13 @@ public class SceneView extends VeloxViewBase {
 
 		addEntityAction.setEnabled(entitySelected);		
 		manager.add(addEntityAction);
+
+		final boolean removeableEntitySelected = 
+			entitySelected && getSelectedEntity().getParent() != null;
+		final boolean removeablePartSelected = 
+			partSelected && getSelectedPart().getOwner() != null;
+		removeAction.setEnabled(removeablePartSelected || removeableEntitySelected);
+		manager.add(removeAction);
 		
 		addPartAction.setEnabled(entitySelected);
 		manager.add(addPartAction);
@@ -501,7 +613,7 @@ public class SceneView extends VeloxViewBase {
 		
 		showXMLAction.setEnabled(partSelected | entitySelected);
 		manager.add(showXMLAction);
-		
+*/		
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 

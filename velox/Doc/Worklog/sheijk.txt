@@ -32,8 +32,17 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+31.08.05
+- entity system: VFourCC durch std::string ersetzt
+- parts aus entity loeschen
+- deaktivieren von entites mit parts welche nicht korrekt connected sind
+- scene view: synchronisation mit VEntity, erzeugen von entities, parts
+
+30.08.05
+- entity system: VFourCC durch std::string ersetzt
+- editor fixes
 - parameter fuer cgfx materials
-- textur support fuer cgfx
+- (buggy) textur support fuer cgfx
 
 18.08.05
 - rudimentaerer cgfx support

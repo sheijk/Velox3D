@@ -6,6 +6,8 @@
 #include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/VEntity.h>
 #include <V3d/Entity/VEntityManager.h>
+#include <V3d/Entity/VUnconnectedPart.h>
+#include <V3d/Entity/VPartBase.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_ENTITY_2004_10_12_H

@@ -23,5 +23,6 @@
 #include <V3dLib/Graphics/Geometry/VGeometryUtil.h>
 #include <V3dLib/Graphics/Geometry/BufferManipulation.h>
 
+#include <V3dLib/Graphics/Geometry/Conversions.h>
 //-----------------------------------------------------------------------------
 #endif // V3D_GEOMETRY_2004_04_09_H

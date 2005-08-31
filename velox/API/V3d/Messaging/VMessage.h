@@ -4,6 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 
 #include <map>
 #include <string>
@@ -29,12 +30,16 @@ public:
 	VMessage();
 	virtual ~VMessage();
 
+	void AddProperty(const std::string& in_strName, const utils::VStringValue& in_Default);
+	void AddProperty(const std::string& in_strName, const std::string& in_strDefault);
+
 	void Set(const std::string& in_strName, const utils::VStringValue& in_Value);
+	void Set(const std::string& in_strName, const std::string& in_strValue);
 	utils::VStringValue Get(const std::string& inin_strName) const;
 
 	vbool HasProperty(const std::string& in_strName) const;
-	void AddProperty(const std::string& in_strName);
 
+	VRangeIterator<const std::string> PropertyIterator() const;
 private:
 	typedef std::map<std::string, utils::VStringValue> PropertyMap;
 

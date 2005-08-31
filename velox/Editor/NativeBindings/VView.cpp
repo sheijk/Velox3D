@@ -9,6 +9,7 @@
 #include "../../Source/Graphics/OpenGL/VOpenGLDevice.h"
 
 #include <iostream>
+#include <functional>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -22,6 +23,204 @@ using namespace v3d::scene;
 using namespace v3d::entity;
 using namespace std;
 
+VSharedPtr<VView> VView::s_pInstance;
+
+VView::VView()
+{
+	m_Thread = 0;
+	
+	cout << "Creating view for hwnd... " << endl;
+
+	// start rendering
+	try {		
+		m_Thread = glfwCreateThread(VView::FrameUpdateLoop, this);	
+				
+		cout << "done" << endl;	
+	} catch(VException& e) {
+		cout << endl
+			<< "Error: "
+			<< e.GetErrorString() << endl
+			<< e.GetErrorFile() << ":" << e.GetErrorLine() << endl;
+	} catch(...) {
+		cout << "Unknown exception occured" << endl;
+	}
+}
+
+VView::~VView()
+{
+}
+
+void VView::FrameUpdateLoop(void* arg)
+{
+	VView* pView = reinterpret_cast<VView*>(arg);
+	
+	pView->FrameUpdateLoop();
+}
+
+void VView::FrameUpdateLoop()
+{
+	using std::for_each;
+	using std::mem_fun;
+	
+	vfloat32 delay = 1.0f;
+	
+	// initialize
+	for_each(m_FrameActions.begin(), m_FrameActions.end(),
+		mem_fun<void, IVFrameAction>(&IVFrameAction::Init));
+		
+	while( IsRunning() )
+	{
+		// add all new actions
+		for(FrameActions::iterator newAction = m_NewFrameActions.begin();
+			newAction != m_NewFrameActions.end(); ++newAction)
+		{
+			(*newAction)->Init();
+			
+			m_FrameActions.push_back(*newAction);
+		}
+		
+		for_each(m_FrameActions.begin(), m_FrameActions.end(), mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame));
+			
+		// tell all frame actions to execute
+		FrameActions::iterator actionIter = m_FrameActions.begin();
+		
+		try
+		{
+			delay = 1.0 / property::GetProperty<double>("editor.fps");
+		}
+		catch(VException&) 
+		{
+			property::SetProperty<double>("editor.fps", 20.0);
+			delay = 1.0 / 20.0;
+		}
+		
+		// sleep for n seconds
+		glfwSleep(delay);
+	}
+	
+	// tell actions that the main loop ended
+	for_each(m_FrameActions.begin(), m_FrameActions.end(), 
+		mem_fun<void, IVFrameAction>(&IVFrameAction::Shutdown));
+	
+	cout << "Finished rendering" << endl;	
+}
+
+void VView::Start()
+{
+	m_bIsRunning = true;
+}
+
+void VView::Stop()
+{
+	m_bIsRunning = false;
+}
+
+VView* VView::GetInstance()
+{
+	if( s_pInstance.Get() == 0 )
+	{
+		s_pInstance.Assign(new VView());
+	}
+	
+	return s_pInstance.Get();
+}
+
+void VView::Add(IVFrameAction* in_pTestAction)
+{
+	m_NewFrameActions.push_back(in_pTestAction);
+}
+
+//-----------------------------------------------------------------------------
+
+void VTestFrameAction::Init()
+{
+	cout << "VTestFrameAction::Init()" << endl;
+}
+
+void VTestFrameAction::Shutdown()
+{
+	cout << "VTestFrameAction::Shutdown()" << endl;
+}
+
+void VTestFrameAction::UpdateFrame()
+{
+	++m_nCount;
+	
+	if( m_nCount > 100 )
+	{
+		cout << "VTestFrameAction::UpdateFrame: VView updating working" << endl;
+		
+		m_nCount = 0;
+	}
+}
+
+//-----------------------------------------------------------------------------
+
+VRenderFrameAction::VRenderFrameAction(VNativeWindowHandle in_Hwnd)
+{
+	m_pShooting = 0;
+	m_HWND = HWND(in_Hwnd);		
+
+	cout << "\tCreating display settings" << endl;
+	VDisplaySettings settings;
+	settings.SetWidth(200);
+	settings.SetHeight(200);
+	settings.SetPosition(0, 0);
+	
+	cout << "\tCreating context" << endl;
+	IVRenderContext* pContext(new VWin32WindowContext(m_HWND, &settings));
+	
+	cout << "\tCreating device" << endl;
+	m_pDevice.Assign(new VOpenGLDevice(settings, pContext));
+}
+
+void VRenderFrameAction::Init()
+{
+}
+
+void VRenderFrameAction::Shutdown()
+{
+}
+
+#include <V3d/OpenGL.h>
+
+void VRenderFrameAction::UpdateFrame()
+{
+	m_pDevice->BeginScene();
+	
+//	glMatrixMode(GL_MODELVIEW);
+//	glPushMatrix();
+//	glTranslatef(.0f, .0f, -1.0f);
+//	glBegin(GL_TRIANGLES);
+//	glColor3f(1.0f, 1.0f, .0f);
+//	glVertex2f(1.0f, .0f);
+//	glVertex2f(-1.0f, .0f);
+//	glVertex2f(.0f, 1.0f);
+//	glEnd();
+//	glPopMatrix();
+	
+	if( m_pShooting != 0 )
+	{
+		m_pShooting->Cull();
+		m_pShooting->Render();
+	}
+	
+	m_pDevice->EndScene();
+}
+
+void VRenderFrameAction::SetShooting(v3d::scene::IVShooting* in_pShooting)
+{
+	m_pShooting = in_pShooting;
+}
+
+v3d::graphics::IVDevice* VRenderFrameAction::GetDevice()
+{
+	return m_pDevice.Get();
+}
+
+//-----------------------------------------------------------------------------
+
+/*
 void DeHomogenize(VVector3f* out_Vec3f, const VVector4f& in_Vec4f)
 {
 	float w = in_Vec4f.Get(3);
@@ -72,6 +271,8 @@ public:
 	}
 };
 
+
+/*
 VMeshDescription* CreateMeshDescription(
 	VMeshDescription::GeometryType in_Primitives,
 	VVertexBuffer& in_VertexBuffer,
@@ -236,10 +437,10 @@ VResourceDataPtr<const T> GetResourceData(const std::string& in_strResourceName)
 	return GetResource(in_strResourceName)->GetData<T>();
 }
 
-void GLFWCALL VView::RenderLoop(void* arg)
+void GLFWCALL VView::FrameUpdateLoop(void* arg)
 {
 	VView* pView = reinterpret_cast<VView*>(arg);
-	
+
 	// initialize
 	HWND hwnd = pView->GetHWND();
 	
@@ -250,7 +451,7 @@ void GLFWCALL VView::RenderLoop(void* arg)
 	settings.SetPosition(0, 0);
 	
 	cout << "\tCreating context" << endl;
-	VSharedPtr<IVRenderContext> pContext(new VWin32WindowContext(hwnd, &settings));
+	IVRenderContext* pContext(new VWin32WindowContext(hwnd, &settings));
 	
 	cout << "\tCreating device" << endl;
 	pView->m_pDevice.Assign(new VOpenGLDevice(settings, pContext));
@@ -389,7 +590,7 @@ void GLFWCALL VView::RenderLoop(void* arg)
 		}
 	}
 	
-	cout << "Finished rendering" << endl;
+	cout << "Finished rendering" << endl;	
 }
 
 VView::VView(VNativeWindowHandle in_WindowHandle)
@@ -482,6 +683,7 @@ void VView::StopRendering()
 	
 	cout << "Stopped rendering" << endl;
 }
+*/
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::editor

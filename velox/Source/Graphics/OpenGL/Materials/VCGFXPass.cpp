@@ -34,12 +34,12 @@ VCGFXPass::~VCGFXPass()
 {
 }
 
-void VCGFXPass::Bind()
+void VCGFXPass::Bind(const VOpenGLDevice* in_pDevice)
 {
 	cgSetPassState(m_Pass);
 	V3D_CHECK_CG_ERROR();
 
-	m_pMaterial->ApplyParameters();
+	m_pMaterial->ApplyParameters(in_pDevice);
 }
 
 void VCGFXPass::Unbind()

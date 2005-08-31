@@ -22,17 +22,19 @@ public:
 
 /**
  */
-class VCGFXState : public IVRenderState
+class VCGFXState : public IVOpenGLRenderState
 {
 public:
 	VCGFXState(VCGFXPass* in_pPass);
 	virtual ~VCGFXState();
 
-	virtual void Apply() const;
+	virtual void Apply(const VOpenGLDevice* in_pDevice) const;
 	virtual const IVStateCategory* GetCategory() const;
 
 	static void SetStateCategory(IVStateCategory* in_pCategory);
 private:
+	virtual void Apply() const { V3D_ASSERT(false /* should never be called */); }
+
 	static IVStateCategory* s_pCategory;
 
 	static VCGFXPass* s_pLastPass;

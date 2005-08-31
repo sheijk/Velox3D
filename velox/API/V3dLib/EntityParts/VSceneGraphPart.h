@@ -85,7 +85,7 @@ public:
 	 */
 	virtual void Deactivate();
 
-	static utils::VFourCC GetDefaultId();
+	static std::string GetDefaultId();
 private:
 
 	vbool	                         m_bActive;

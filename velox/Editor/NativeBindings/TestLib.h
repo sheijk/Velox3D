@@ -35,6 +35,8 @@ std::string ToString(v3d::utils::VStringValue* val);
 
 v3d::xml::IVXMLElement* CreateXMLElement(v3d::VStringParam in_strName);
 
+v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice);
+
 v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
 	v3d::xml::IVXMLElement* in_pElement);
 

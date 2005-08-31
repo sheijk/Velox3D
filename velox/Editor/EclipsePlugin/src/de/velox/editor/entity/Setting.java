@@ -6,12 +6,15 @@ package de.velox.editor.entity;
 import java.util.LinkedList;
 
 public class Setting {
-	private String name;
+	private final String name;
 	private String value;
+	
+	private final Part part;
 	
 //	private LinkedList<Setting> childs = new LinkedList<Setting>();
 	
-	public Setting(String name, String value) {
+	public Setting(Part part, String name, String value) {
+		this.part = part;
 		this.name = name;
 		this.value = value;
 	}
@@ -24,12 +27,10 @@ public class Setting {
 		return value;
 	}
 
-	public void SetName(String out_name) {
-		name = out_name;
-	}
-
-	public void SetValue(String out_value) {
-		value = out_value;
+	public void SetValue(String newValue) {
+		value = newValue;
+		
+		part.updateSetting(this);
 	}
 	
 //	public LinkedList<Setting> getChildSettings() {

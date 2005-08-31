@@ -16,7 +16,6 @@
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::entity;
-using v3d::utils::VFourCC;
 using std::string;
 
 /**
@@ -143,7 +142,7 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 	// add an entity with an invalid part, which will not be activated
 	{
 		VSharedPtr<VEntity> pInvalid = CreateDemoEntity(-666);
-		pInvalid->AddPart(VFourCC("invd"), VEntity::PartPtr(new VInvalidPart()));
+		pInvalid->AddPart("invd", VEntity::PartPtr(new VInvalidPart()));
 		root.AddChild(pInvalid);
 	}
 

@@ -10,9 +10,17 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
+class VOpenGLDevice;
+
 class IVOpenGLRenderState : public IVRenderState
 {
 public:
+	virtual void Apply(const VOpenGLDevice* in_pDevice) const
+	{
+		Apply();
+	}
+
+protected:
 	virtual void Apply() const = 0;
 };
 

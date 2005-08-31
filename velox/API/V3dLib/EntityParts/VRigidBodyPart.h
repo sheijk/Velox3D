@@ -49,7 +49,7 @@ public:
 	 */
 	void SetTransform(const math::VRBTransform& in_Transformation);
 
-	static utils::VFourCC GetDefaultId();
+	static std::string GetDefaultId();
 
 private:
 	math::VRBTransform m_Transformation;

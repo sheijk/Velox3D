@@ -9,7 +9,8 @@ namespace v3d { namespace entity {
 using namespace v3d; // anti auto indent
 
 VUntypedPartConnection::VUntypedPartConnection(
-	IVPart::Location in_Location, utils::VFourCC in_Id, 
+	IVPart::Location in_Location, 
+	const std::string& in_Id, 
 	VPartBase* in_pRegisterTo)
 {
 	m_Dependency.id = in_Id;
@@ -31,7 +32,7 @@ const IVPart::Dependency& VUntypedPartConnection::GetDependency() const
 
 void VUntypedPartConnection::Connect(
 	IVPart::Location in_Location,
-	const utils::VFourCC& in_Id,
+	const std::string& in_Id,
 	IVPart& in_Part)
 {
 	if( in_Location == m_Dependency.location &&
@@ -67,7 +68,7 @@ void VPartBase::Register(VUntypedPartConnection& in_Connection)
 
 void VPartBase::Connect(
 	Location in_Location, 
-	const utils::VFourCC& in_Id, 
+	const std::string& in_Id, 
 	IVPart& in_Part)
 {
     for(vuint con = 0; con < m_Dependencies.size(); ++con)
@@ -78,7 +79,7 @@ void VPartBase::Connect(
 
 void VPartBase::Disconnect(
 	Location in_Location,
-	const utils::VFourCC& in_Id,
+	const std::string& in_Id,
 	IVPart& in_Part)
 {
 	for(vuint con = 0; con < m_Dependencies.size(); ++con)

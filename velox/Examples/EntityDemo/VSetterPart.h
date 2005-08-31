@@ -47,9 +47,9 @@ public:
 		pData->SetData(v);
 	}
 
-	static utils::VFourCC GetDefaultId()
+	static std::string GetDefaultId()
 	{
-		return utils::VFourCC("setr");
+		return std::string("setr");
 	}
 };
 

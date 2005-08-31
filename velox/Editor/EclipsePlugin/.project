@@ -27,14 +27,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Workbench Dir</name>
-			<type>2</type>
-			<location>C:/Documents and Settings/sheijk/Application Data/eclipse-velox</location>
-		</link>
-		<link>
 			<name>SourceV3d</name>
 			<type>2</type>
-			<location>C:/dev/v3d/svn/trunk/velox/Editor/SourceV3d</location>
+			<location>VELOX_ROOT/Editor/SourceV3d</location>
 		</link>
 	</linkedResources>
 </projectDescription>

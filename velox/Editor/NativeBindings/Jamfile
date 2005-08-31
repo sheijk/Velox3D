@@ -10,7 +10,7 @@ project Velox
 	<include>../../Local/ExternalLibs/Include
 #	<define>V3D_OSX
 	<rtti>on
-	: build-dir ../../Local/Build/bjam
+	: build-dir ../../Local/Build/bjam2
 	;
 
 # external libraries
@@ -123,11 +123,12 @@ lib ScriptingDLL :
 	../../Source/WindowService/VWindowManagerWin32.cpp
 	../../Source/WindowService/VWindowWin32.cpp
 	# input lib
-	[ glob ../../Source/InputLib/*.cpp ]	
+	[ glob ../../Source/InputLib/*.cpp ]
 	# graphics lib
-	[ glob ../../Source/Graphics/DeviceBase/*.cpp ] 
+	[ glob ../../Source/Graphics/DeviceBase/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/*.cpp ]
-	[ glob ../../Source/Graphics/OpenGL/Context/*.cpp ]	
+	[ glob ../../Source/Graphics/OpenGL/Context/*.cpp ]
+	[ glob ../../Source/Graphics/OpenGL/Materials/*.cpp ]
 
 	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
 	[ glob ../../Source/UtilsLib/Importer/Base/*.cpp ]

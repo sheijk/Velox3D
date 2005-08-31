@@ -8,6 +8,10 @@ using namespace v3d::utils;
 using namespace v3d::vfs;
 using namespace v3d::entity;
 using namespace v3d::messaging;
+using namespace v3d::scene;
+using namespace v3d::graphics;
+
+typedef IVPart::Dependency Dependency;
 
 #undef CreateFile
 #undef DeleteFile
@@ -183,6 +187,11 @@ namespace v3d {
 %include "../../API/V3d/Messaging/VMessage.h"
 %include "../../API/V3d/Messaging/VProtocol.h"
 
+// graphics
+//-----------------------------------------------------------------------------
+#define V3D_DEPRECATED
+%include "../../API/V3d/Graphics/IVDevice.h"
+
 // entity system
 //-----------------------------------------------------------------------------
 
@@ -209,6 +218,11 @@ namespace v3d {
 		return $null;
 	}
 }
+
+%template(VShootingPtr) v3d::VSharedPtr<v3d::scene::IVShooting>;
+%template(VSceneManagerPtr) v3d::VSharedPtr<v3d::scene::IVScene>;
+%include "../../API/V3d/Scene/IVShooting.h"
+%include "../../API/V3d/Scene/IVScene.h"
 
 %ignore v3d::entity::IVSceneParser::Register;
 %ignore v3d::entity::IVSceneParser::Unregister;

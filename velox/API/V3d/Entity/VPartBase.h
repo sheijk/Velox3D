@@ -17,13 +17,14 @@ class VUntypedPartConnection
 {
 public:
 	VUntypedPartConnection(
-		IVPart::Location in_Location, utils::VFourCC in_Id, 
+		IVPart::Location in_Location, 
+		const std::string& in_Id, 
 		VPartBase* in_pRegisterTo);
 
 	void Disconnect();
 	void Connect(
 		IVPart::Location in_Location,
-		const utils::VFourCC& in_Id,
+		const std::string& in_Id,
 		IVPart& in_Part);
 
 	const IVPart::Dependency& GetDependency() const;
@@ -39,7 +40,8 @@ class VPartConnection : public VUntypedPartConnection
 {
 public:
 	VPartConnection(
-		IVPart::Location in_Location, utils::VFourCC in_Id, 
+		IVPart::Location in_Location, 
+		const std::string& in_Id, 
 		VPartBase* in_pRegisterTo);
 
 	T* Get() const;
@@ -58,12 +60,12 @@ public:
 
 	virtual void Connect(
 		Location in_Location, 
-		const utils::VFourCC& in_Id, 
+		const std::string& in_Id, 
 		IVPart& in_Part);
 
 	virtual void Disconnect(
 		Location in_Location,
-		const utils::VFourCC& in_Id,
+		const std::string& in_Id,
 		IVPart& in_Part);
 
 	virtual vbool IsReady() const;
@@ -80,7 +82,8 @@ private:
 
 template<typename T>
 VPartConnection<T>::VPartConnection(
-	IVPart::Location in_Location, utils::VFourCC in_Id, 
+	IVPart::Location in_Location, 
+	const std::string& in_Id, 
 	VPartBase* in_pRegisterTo)
 	:
 	VUntypedPartConnection(in_Location, in_Id, in_pRegisterTo)

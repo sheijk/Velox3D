@@ -52,8 +52,7 @@ VSharedPtr<VMessage> VProtocol::CreateMessage() const
 
 	for( ; pDefault != m_Defaults.end(); ++pDefault)
 	{
-		pMessage->AddProperty(pDefault->first);
-		pMessage->Set(pDefault->first, pDefault->second);
+		pMessage->AddProperty(pDefault->first, pDefault->second);
 	}
 
 	return pMessage;

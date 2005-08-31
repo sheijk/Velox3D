@@ -88,6 +88,8 @@ VOpenGLDevice::VOpenGLDevice(
 	//m_StateCategories.RegisterCategory(m_VertexShaderCategory);
 	//m_StateCategories.RegisterCategory(m_PixelShaderCategory);
 
+	m_PointLights.resize(int(LightMaxCount));
+
 	Identity(m_ModelMatrix);
 	Identity(m_ViewMatrix);
 	Identity(m_ProjectionMatrix);
@@ -321,7 +323,7 @@ void VOpenGLDevice::ApplyState(const IVRenderState& in_State)
 	const IVOpenGLRenderState* pState = reinterpret_cast<const IVOpenGLRenderState*>
 		(&in_State);
 
-	pState->Apply();
+	pState->Apply(this);
 }
 
 //-----------------------------------------------------------------------------
@@ -648,7 +650,7 @@ void VOpenGLDevice::RecalcModelViewMatrix()
 
 void VOpenGLDevice::ApplyLight(LightId in_Number, const VPointLight* in_pLight)
 {
-	if( int(in_Number) > int(Light7) ) 
+	if( int(in_Number) > int(LightMaxCount)-1 )
 	{
 		V3D_THROWMSG(VGraphicException, 
 			"Tried to set invalid light "
@@ -657,6 +659,8 @@ void VOpenGLDevice::ApplyLight(LightId in_Number, const VPointLight* in_pLight)
 	}
 
 	GLenum lightnum = GL_LIGHT0 + int(in_Number);
+
+	m_PointLights[int(in_Number)] = *in_pLight;
 
 	if( in_pLight != 0 ) 
 	{
@@ -688,6 +692,19 @@ void VOpenGLDevice::ApplyLight(LightId in_Number, const VPointLight* in_pLight)
 	else
 	{
 		glDisable(lightnum);
+	}
+}
+
+const VPointLight& VOpenGLDevice::GetLight(LightId in_Number) const
+{
+	if( int(in_Number) <= int(Light7) )
+	{
+		return m_PointLights[int(in_Number)];
+	}
+	else
+	{
+		V3D_THROWMSG(VGraphicException, "Tried to get invalid light nr. "
+			<< int(in_Number) << " (max. " << int(LightMaxCount) << ")");
 	}
 }
 

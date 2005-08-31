@@ -49,7 +49,7 @@ public:
 			pManager.Get() != 0;
 	}
 
-	//void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+	//void TellNeighbourPart(const std::string& in_Id, IVPart& in_Part)
 	//{
 	//	if( in_Part.IsOfType<VDataPart>() )
 	//		pData = in_Part.Convert<VDataPart>();
@@ -62,9 +62,9 @@ public:
 		vout << "value = " << pData->GetData() << vendl;
 	}
 
-	static utils::VFourCC GetDefaultId()
+	static std::string GetDefaultId()
 	{
-		return utils::VFourCC("read");
+		return std::string("read");
 	}
 };
 

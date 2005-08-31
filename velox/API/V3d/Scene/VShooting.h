@@ -22,9 +22,9 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 	virtual void Connect(
-		Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part);
+		Location in_Location, const std::string& in_Id, IVPart& in_Part);
 	virtual void Disconnect(
-		Location in_Location, const utils::VFourCC& in_Id, IVPart& in_Part);
+		Location in_Location, const std::string& in_Id, IVPart& in_Part);
 	virtual vbool IsReady() const;
 	virtual vuint DependencyCount() const;
 	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;

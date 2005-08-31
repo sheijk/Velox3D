@@ -38,6 +38,8 @@ public:
 	 */
 	virtual void Unbind();
 
+	GLint GetTextureId() const;
+	GLenum GetTextureTarget() const;
 protected:
 
 	GLenum       m_iTextureTarget;

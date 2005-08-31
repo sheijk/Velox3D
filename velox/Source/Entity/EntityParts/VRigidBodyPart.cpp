@@ -45,9 +45,9 @@ math::VRBTransform VRigidBodyPart::GetTransform()
 	return m_Transformation;
 }
 
-utils::VFourCC VRigidBodyPart::GetDefaultId()
+std::string VRigidBodyPart::GetDefaultId()
 {
-	return utils::VFourCC("body");
+	return "body";
 }
 
 //-----------------------------------------------------------------------------

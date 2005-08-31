@@ -2,23 +2,24 @@ JAVASRC=../SourceV3d/de/velox
 CPPSRC=GlueCode
 JAVAPACKAGE=de.velox
 DLLDEST=..
-BUILDDIR=../../Local/Build/bjam/msvc/debug
+BUILDDIR=../../Local/Build/bjam2/msvc/debug
 
 all : swig cppfiles 
 
 swig : TestLib.cpp TestLib.i
 	mkdir -p $(CPPSRC)
 	mkdir -p $(JAVASRC)
-	swig -c++ -java -package $(JAVAPACKAGE) -outdir $(JAVASRC) -o $(CPPSRC)/TestLibSWIG.cpp TestLib.i
+	swig -c++ -java -package $(JAVAPACKAGE) -outdir $(JAVASRC) -o $(CPPSRC)/TestLibSWIG.cpp TestLib.i > swigbuild.log
 	echo Finished swig
 #	mkdir -p $(JAVASRC)/property
 #	swig -c++ -java -package $(JAVAPACKAGE).property -outdir $(JAVASRC)/property -o $(CPPSRC)/PropertySWIG.cpp Property.i
 
 cppfiles : *.h *.cpp
-	bjam --v2
+	bjam2.bat
 	cp $(BUILDDIR)/*.dll $(DLLDEST)
 	cp $(BUILDDIR)/*.dll $(DLLDEST)/EclipsePlugin
-#	cp ${BUILDDIR}/*.dll $(DLLDEST)/Constructor
+	echo
+	echo Fertig!
 
 cleanswig :
 	rm -rdf $(JAVASRC)/*

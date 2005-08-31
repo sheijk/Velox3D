@@ -64,13 +64,13 @@ IVPart::Dependency VPhysicBody::GetDependencyInfo(vuint in_nIndex) const
 	dependency.location = IVPart::Ancestor;
 
 	//TODO: vrigidbodypart::GetDefaultId
-	dependency.id == utils::VFourCC("phys");
+	dependency.id == std::string("phys");
 
 	return dependency;
 }
 
 void VPhysicBody::Connect(IVPart::Location in_Location, 
-	const utils::VFourCC& in_Id, entity::IVPart& in_Part)
+	const std::string& in_Id, entity::IVPart& in_Part)
 {
 	if( in_Location == IVPart::Ancestor && 
 		in_Part.IsOfType<entity::VRigidBodyPart>() )
@@ -81,7 +81,7 @@ void VPhysicBody::Connect(IVPart::Location in_Location,
 
 void VPhysicBody::Disconnect(
 	IVPart::Location in_Location,
-	const utils::VFourCC& in_Id,
+	const std::string& in_Id,
 	IVPart& in_Part)
 {
 	if( &in_Part == pBodyPart )
@@ -94,13 +94,13 @@ vbool VPhysicBody::IsReady() const
 	return pBodyPart != 0;
 }
 
-utils::VFourCC VPhysicBody::GetDefaultId()
+std::string VPhysicBody::GetDefaultId()
 {
-	return utils::VFourCC("phbd");
+	return std::string("phbd");
 }
 
 
-//void VPhysicBody::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
+//void VPhysicBody::TellNeighbourPart(const std::string& in_Id, IVPart& in_Part)
 //{
 //	if( in_Part.IsOfType<entity::VRigidBodyPart>() )
 //		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();

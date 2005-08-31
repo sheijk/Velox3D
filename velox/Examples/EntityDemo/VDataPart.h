@@ -30,9 +30,9 @@ public:
 	vint GetData() { return data; }
 	void SetData(int d) { data = d; }
 
-	static utils::VFourCC GetDefaultId()
+	static std::string GetDefaultId()
 	{
-		return utils::VFourCC("data");
+		return std::string("data");
 	}
 };
 

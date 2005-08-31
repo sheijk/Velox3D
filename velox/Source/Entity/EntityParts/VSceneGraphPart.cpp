@@ -129,7 +129,7 @@ math::VRBTransform VSceneGraphPart::GetRelativeTransform()
 	return m_relativeTransform;
 }
 
-utils::VFourCC VSceneGraphPart::GetDefaultId()
+std::string VSceneGraphPart::GetDefaultId()
 {
 	return "esgp";
 }

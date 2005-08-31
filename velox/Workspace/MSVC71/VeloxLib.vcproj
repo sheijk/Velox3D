@@ -122,34 +122,6 @@
 					RelativePath="..\..\Api\V3d\Scene.h">
 				</File>
 				<Filter
-					Name="Entity"
-					Filter="">
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVPart.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVPartParser.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVSceneParser.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntity.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VPartBase.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h">
-					</File>
-				</Filter>
-				<Filter
 					Name="Math"
 					Filter="">
 					<File
@@ -268,6 +240,34 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Messaging\VProtocol.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="Entity"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVPartParser.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVSceneParser.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntity.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VPartBase.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h">
 					</File>
 				</Filter>
 			</Filter>
@@ -399,6 +399,9 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\Conversions.h">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColor4f.h">
@@ -735,6 +738,9 @@
 				<Filter
 					Name="Lib"
 					Filter="">
+					<File
+						RelativePath="..\..\Source\Graphics\Lib\Conversions.cpp">
+					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\Lib\DefaultVertexStructures.cpp">
 					</File>

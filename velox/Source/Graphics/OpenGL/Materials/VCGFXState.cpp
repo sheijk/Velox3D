@@ -39,13 +39,13 @@ VCGFXState::~VCGFXState()
 {
 }
 
-void VCGFXState::Apply() const
+void VCGFXState::Apply(const VOpenGLDevice* in_pDevice) const
 {
 	if( s_pLastPass != 0 )
 		s_pLastPass->Unbind();
 
 	if( m_pPass != 0 )
-		m_pPass->Bind();
+		m_pPass->Bind(in_pDevice);
 
 	s_pLastPass = m_pPass;
 }
