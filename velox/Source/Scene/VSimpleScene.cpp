@@ -68,6 +68,11 @@ IVPart::Dependency VSimpleScene::GetDependencyInfo(vuint in_nIndex) const
 	V3D_THROW(VException, "No dependencies");
 }
 
+std::string VSimpleScene::GetDefaultId()
+{
+	return "scene";
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

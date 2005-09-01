@@ -46,7 +46,7 @@ public:
 	 * Will remove the registered part parser for the given type. If no parser
 	 * for the type exists nothing will happen
 	 */
-	virtual void Unregister(utils::VFourCC in_Type) = 0;
+	virtual void Unregister(std::string in_Type) = 0;
 };
 
 //-----------------------------------------------------------------------------

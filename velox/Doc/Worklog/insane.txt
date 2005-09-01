@@ -41,6 +41,12 @@ high:
 //-----------------------------------------------------------------------------
 
 Done List:
+
+31.08.05
+- removed obsolute VFourCC references
+- changed entity part GetDefaultId() method
+- beginning porting physics to new entity structure
+
 30.08.05
 - finished importer
 - faster importer loading

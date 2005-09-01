@@ -22,7 +22,7 @@ public:
 	virtual ~IVPartParser() {}
 
 	/** Returns the type for which parts are parsed */
-	virtual utils::VFourCC GetType() const = 0;
+	virtual std::string GetType() const = 0;
 
 	/** 
 	 * Parse the xml node and create a part from it 

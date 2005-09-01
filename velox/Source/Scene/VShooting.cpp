@@ -78,10 +78,15 @@ IVPart::Dependency VShooting::GetDependencyInfo(vuint in_nIndex) const
 	V3D_ASSERT(in_nIndex == 0);
 
 	Dependency dependency;
-	dependency.id = "scen";
+	dependency.id = GetDefaultId();
 	dependency.location = IVPart::Neighbour;
 
 	return dependency;
+}
+
+std::string VShooting::GetDefaultId()
+{
+	return "shooting";
 }
 
 //void VShooting::TellNeighbourPart(const std::string& in_Id, IVPart& in_Part)

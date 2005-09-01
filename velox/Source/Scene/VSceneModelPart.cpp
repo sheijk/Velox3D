@@ -15,7 +15,7 @@ using namespace std;
 
 VSceneModelPart::VSceneModelPart(const graphics::VModel& in_Model) :
 	m_Model(in_Model),
-	m_pParent(IVPart::Ancestor, std::string("scen"), this)
+		m_pParent(IVPart::Ancestor, VSimpleScene::GetDefaultId(), this)
 {
 }
 
@@ -72,7 +72,7 @@ void VSceneModelPart::Send(const messaging::VMessage& in_Message)
 
 std::string VSceneModelPart::GetDefaultId()
 {
-	return "gfxp";
+	return "model";
 }
 
 //-----------------------------------------------------------------------------

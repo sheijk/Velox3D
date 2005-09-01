@@ -51,44 +51,11 @@ void VPhysicBody::Deactivate()
 	vout << "deactivating setter part" << vendl;
 }
 
-//void VPhysicBody::Connect(IVPart::Location in_Location, 
-//	const utils::VFourCC& in_Id, entity::IVPart& in_Part)
-//{
-//	if( in_Location == IVPart::Ancestor && 
-//		in_Part.IsOfType<entity::VRigidBodyPart>() )
-//	{
-//		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
-//	}
-//}
-//
-//void VPhysicBody::Disconnect(
-//	IVPart::Location in_Location,
-//	const utils::VFourCC& in_Id,
-//	IVPart& in_Part)
-//{
-//	if( &in_Part == pBodyPart )
-//		pBodyPart = 0;
-//}
-
-
-std::string VPhysicBody::GetDefaultId()
-{
-	return std::string("phys");
-}
-
-
-//void VPhysicBody::TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part)
-//{
-//	if( in_Part.IsOfType<entity::VRigidBodyPart>() )
-//		pBodyPart = in_Part.Convert<entity::VRigidBodyPart>();
-//}
-
 void VPhysicBody::SetPosition(vfloat32 x, vfloat32 y, vfloat32 z)
 {
 	m_PositionState.SetPosition(x,y,z);
 	AddState(&m_PositionState);
 }
-							
 
 void VPhysicBody::SetTransformation()
 {
@@ -192,6 +159,11 @@ void VPhysicBody::SetQuaternion(const VQuatf in_Quat)
 	q[3]=m_Quaternion[3];
 
 	dBodySetQuaternion(m_BodyID, q);
+}
+
+std::string VPhysicBody::GetDefaultId()
+{
+	return "physic";
 }
 //-----------------------------------------------------------------------------
 } // namespace physics

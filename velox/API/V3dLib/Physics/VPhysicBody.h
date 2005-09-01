@@ -41,8 +41,6 @@ public:
 	void Activate();
     void Deactivate();
 
-	static std::string GetDefaultId();
-
 	void SetCollisionBody(VPhysicGeometry* in_CollisionBodyState);
 	
 	/**
@@ -62,6 +60,8 @@ public:
 	void SetQuaternion(const vfloat32 x, const vfloat32 y,
 			const vfloat32 z, const vfloat32 w);
 	void SetQuaternion(const VQuatf in_Quat);
+
+	static std::string GetDefaultId();
 
 
 private:

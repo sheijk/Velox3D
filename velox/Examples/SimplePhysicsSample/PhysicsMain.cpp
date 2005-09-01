@@ -14,7 +14,9 @@
 #include <V3d/Entity.h>
 
 #include "VPhysicManagerPart.h"
+#include <V3d/Resource/VResourceDataPtr.h>
 #include <V3dLib/Physics.h>
+#include <V3d/Scene.h>
 
 using namespace v3d;
 using namespace window;
@@ -103,7 +105,7 @@ void VSimplePhysic::InitializeResources()
 vint VSimplePhysic::Main(vector<string> args)
 {
 	InitializeResources();
-
+	
 	// create window
 	VWindowManagerPtr pWindowManager;
 	IVWindowManager::WindowPtr pWindow = pWindowManager->QueryWindow(
@@ -115,25 +117,40 @@ vint VSimplePhysic::Main(vector<string> args)
 	m_pDevice = &device;
 	IVInputManager& input(pWindow->QueryInputManager());
 
-	VPhysicManagerPart m_PhysicsPartManager;
-	m_PhysicsPartManager.GetPhysicWorld().GetSpace()->SetSurfaceBounce(0.85f);
-	m_PhysicsPartManager.GetPhysicWorld().SetGravity(0,0,3.0f);
-	VPhysicBoxMassState massState;
+	scene::VDefaultRenderAlgorithm* pDefaultRenderAlgorithm = new scene::VDefaultRenderAlgorithm();
+
+	entity::VEntity myRootEntity;
+	scene::VSimpleScene* pSimpleScene = new scene::VSimpleScene();
+	scene::VShooting* pShooting = new scene::VShooting(m_pDevice, pDefaultRenderAlgorithm );
+	VPhysicManagerPart* pPhysicsManager = new VPhysicManagerPart();
+    
+	myRootEntity.AddPart(scene::VShooting::GetDefaultId(), SharedPtr(pShooting));	
+	myRootEntity.AddPart(scene::VSimpleScene::GetDefaultId(), SharedPtr(pSimpleScene));
+	myRootEntity.AddPart(VPhysicManagerPart::GetDefaultId(), SharedPtr(pPhysicsManager));
+	myRootEntity.Activate();
+
+	pPhysicsManager->GetPhysicWorld().GetSpace()->SetSurfaceBounce(0.85f);
+	pPhysicsManager->GetPhysicWorld().SetGravity(0,0,3.0f);
+	
 	VPhysicBody* pPhysicBody;
-	pPhysicBody = m_PhysicsPartManager.GetPhysicWorld().CreateBody();
-	
+	VPhysicBoxMassState massState;
 	massState.SetMass(0.3f);
-	pPhysicBody->AddState(&massState); 
-	pPhysicBody->Create(&m_PhysicsPartManager.GetPhysicWorld());
-
-	entity::VEntity entity;
-	VSharedPtr<VRigidBodyPart> pBodyPart(new VRigidBodyPart);
 	
-	//entity.AddPart(VRigidBodyPart::GetDefaultId(), VEntity::PartPtr(pBodyPart));
-	entity.AddPart(VRigidBodyPart::GetDefaultId(), pBodyPart);
-	entity.AddPart("phys", SharedPtr(pPhysicBody));
-	entity.Activate();
+	pPhysicBody = pPhysicsManager->GetPhysicWorld().CreateBody();
+	pPhysicBody->AddState(&massState); 
+	pPhysicBody->Create(&pPhysicsManager->GetPhysicWorld());
 
+	entity::VEntity* pObjectEntity = new entity::VEntity();
+	VRigidBodyPart* pBodyPart = new VRigidBodyPart;
+	
+	pObjectEntity->AddPart(VRigidBodyPart::GetDefaultId(), SharedPtr(pBodyPart));
+	pObjectEntity->AddPart(VPhysicBody::GetDefaultId(), SharedPtr(pPhysicBody));
+	
+	myRootEntity.AddChild(SharedPtr(pObjectEntity));
+	pObjectEntity->Activate();
+
+	scene::VSceneModelPart* pSceneModel  = new scene::VSceneModelPart(
+		*resource::GetResourceData<VModel>("/model3ds"));
 
 	// setup sub systems (for entities)
 	//VSimpleDrawList drawList(device);
@@ -295,13 +312,11 @@ vint VSimplePhysic::Main(vector<string> args)
 		}
 
 		if(pEnterButton->IsDown() == true)
-			m_PhysicsPartManager.GetPhysicWorld().SetGravity(0,0,0);
+			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,0);
 
 		if(pSpace->IsDown() == true)
-			m_PhysicsPartManager.GetPhysicWorld().SetGravity(0,0,3.0);
+			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,3.0);
 		
-		m_PhysicsPartManager.Update();
-	
 	//	m_GraphicsManager.UpdateAll();
 
 
@@ -309,7 +324,7 @@ vint VSimplePhysic::Main(vector<string> args)
 		//device.SetMatrix(IVDevice::ViewMatrix, cam.GetTransform());
 		device.BeginScene();
 
-		resource::VResourceId pModelResourceId = resource::VResourceManagerPtr()->GetResourceByName("/model3ds");
+		/*resource::VResourceId pModelResourceId = resource::VResourceManagerPtr()->GetResourceByName("/model3ds");
 
 		for(vuint i = 0; i < pModelResourceId->GetData<VModel>()->GetPartCount(); i++)
 		{
@@ -320,10 +335,10 @@ vint VSimplePhysic::Main(vector<string> args)
 				ApplyMaterial(device, pPass);
 				device.RenderMesh(&(*(pModelResourceId->GetData<VModel>()->GetPart(i).GetMesh())));
 			}
-		}
+		}*/
 
 		device.EndScene();
-
+		pPhysicsManager->Update();
 	//	drawList.Render();
 		device.EndScene();
 		pUpdater->StartNextFrame();

@@ -19,7 +19,7 @@ public:
 	VSceneModelParser();
 	virtual ~VSceneModelParser();
 
-	virtual utils::VFourCC GetType() const;
+	virtual std::string GetType() const;
 	virtual VSharedPtr<IVPart> Parse(xml::IVXMLElement& in_Node);
 };
 

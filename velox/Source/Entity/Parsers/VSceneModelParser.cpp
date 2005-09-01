@@ -26,7 +26,7 @@ VSceneModelParser::~VSceneModelParser()
 {
 }
 
-utils::VFourCC VSceneModelParser::GetType() const
+std::string VSceneModelParser::GetType() const
 {
 	return VSceneModelPart::GetDefaultId();
 }
@@ -50,7 +50,7 @@ VSharedPtr<IVPart> VSceneModelParser::Parse(xml::IVXMLElement& in_Node)
 	catch(VException& e)
 	{
 		V3D_THROWMSG(VPartParseException,
-			"Could not parse part of type " << GetType().AsStdString()
+			"Could not parse part of type " << GetType().c_str()
 			<< " due to exception: \n"
 			<< e.ToString());
 	}

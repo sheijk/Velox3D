@@ -29,6 +29,8 @@ public:
 	virtual vuint DependencyCount() const;
 	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
 
+	static std::string GetDefaultId();
+
 	void Cull();
 	void Render();
 

@@ -7,6 +7,7 @@
 #include <V3d/Entity/IVSceneParser.h>
 
 #include <map>
+#include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
@@ -22,11 +23,11 @@ public:
 	virtual ~VSceneParser();
 
 	virtual void Register(IVPartParser* in_pPartParser);
-	virtual void Unregister(utils::VFourCC in_Type);
+	virtual void Unregister(std::string in_Type);
 	virtual VSharedPtr<IVPart> ParsePart(xml::IVXMLElement& in_Node);
 
 private:
-	typedef std::map<utils::VFourCC, IVPartParser*> ParserMap;
+	typedef std::map<std::string, IVPartParser*> ParserMap;
 
 	ParserMap m_Parsers;
 };
