@@ -16,9 +16,10 @@ using namespace v3d::entity;
 
 VSceneModelPart::VSceneModelPart(const graphics::VModel& in_Model) :
 	m_Model(in_Model),
-		m_pParent(VPartDependency::Ancestor, VSimpleScene::GetDefaultId(), RegisterTo())
-		m_RigidBodyPart(IVPart::Neighbour,
-		entity::VRigidBodyPart::GetDefaultId(), this)
+		m_pParent(VPartDependency::Ancestor, VSimpleScene::GetDefaultId(), RegisterTo()),
+		m_RigidBodyPart(
+			VPartDependency::Neighbour,	
+			entity::VRigidBodyPart::GetDefaultId(), RegisterTo())
 {
 }
 
