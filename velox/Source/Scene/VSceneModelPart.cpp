@@ -15,7 +15,9 @@ using namespace std;
 
 VSceneModelPart::VSceneModelPart(const graphics::VModel& in_Model) :
 	m_Model(in_Model),
-		m_pParent(IVPart::Ancestor, VSimpleScene::GetDefaultId(), this)
+		m_pParent(IVPart::Ancestor, VSimpleScene::GetDefaultId(), this),
+		m_RigidBodyPart(IVPart::Neighbour,
+		entity::VRigidBodyPart::GetDefaultId(), this)
 {
 }
 
@@ -29,6 +31,11 @@ void VSceneModelPart::AddModelMesh(
 		));
 }
 
+void VSceneModelPart::AddModelMesh(const graphics::VModelMesh in_ModelMesh)
+{
+	m_Model.Add(in_ModelMesh);
+}
+
 void VSceneModelPart::RemoveAllMeshes()
 {
 	m_Model = graphics::VModel();
@@ -39,6 +46,7 @@ void VSceneModelPart::Activate()
 	if( m_pParent.Get() != 0 )
 	{
 		m_Id = m_pParent->Add(m_Model);
+		m_pParent->Add(this);
 	}
 }
 
@@ -48,6 +56,7 @@ void VSceneModelPart::Deactivate()
 	{
 		m_pParent->Remove(m_Id);
 		m_Id = 0;
+		m_pParent->Add(this);
 	}
 }
 
@@ -70,11 +79,20 @@ void VSceneModelPart::Send(const messaging::VMessage& in_Message)
 	}
 }
 
+graphics::VModel& VSceneModelPart::GetModel()
+{
+	return m_Model;
+}
+void VSceneModelPart::Update()
+{
+	math::VRBTransform trans = m_RigidBodyPart->GetTransform();
+	m_Model.ApplyMatrix(trans.GetAsMatrix());
+}
+
 std::string VSceneModelPart::GetDefaultId()
 {
 	return "model";
 }
-
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

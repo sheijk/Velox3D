@@ -42,6 +42,13 @@ high:
 
 Done List:
 
+01.09.05
+- moved to ode 0.5
+- made serveral changes to existing entities parts
+- changed some stuff in VModel
+- removed a bug in importer classes
+
+
 31.08.05
 - removed obsolute VFourCC references
 - changed entity part GetDefaultId() method

@@ -1,4 +1,5 @@
 #include <V3d/Graphics/VModel.h>
+#include <V3d/Math/VMatrixOps.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -106,6 +107,20 @@ VModelMesh& VModel::GetPart(vuint in_nNum)
 const VModelMesh& VModel::GetPart(vuint in_nNum) const
 {
 	return m_Parts[in_nNum];
+}
+
+void VModel::ApplyMatrix(VMatrix44f in_Matrix)
+{
+	if(m_Parts.size())
+	{	PartArray::iterator i = m_Parts.begin();
+		VSharedPtr<VMatrix44f> currentMatrix;
+
+		for(; i != m_Parts.end(); ++i)
+		{
+			currentMatrix = (*i).GetTransform();
+			currentMatrix->m_Mat = in_Matrix.m_Mat;
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

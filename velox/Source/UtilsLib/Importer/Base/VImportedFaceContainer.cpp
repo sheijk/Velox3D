@@ -313,6 +313,9 @@ void VImportedFaceContainer::CreateOptimizedMeshes(graphics::VModel* in_pModel)
 		meshResourcePtr = meshResource->GetData<graphics::IVMesh>();
 
 		graphics::VModelMesh::MatrixPtr matrixPtr;
+		VMatrix44f* pMatrix = new VMatrix44f();
+		Identity(*pMatrix);
+		matrixPtr.Assign(pMatrix);
 		graphics::VModelMesh model(meshResourcePtr,	materialResourcePtr, matrixPtr);
 
 		in_pModel->Add(model);

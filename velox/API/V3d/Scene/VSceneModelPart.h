@@ -7,6 +7,7 @@
 
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Graphics/VModel.h>
+#include <v3dLib/EntityParts/VRigidBodyPart.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
@@ -20,21 +21,28 @@ public:
 	void AddModelMesh(
 		VStringParam in_strMeshResource, 
 		VStringParam in_strMaterialResource);
+	
+	void AddModelMesh(const graphics::VModelMesh in_ModelMesh);
 
 	void RemoveAllMeshes();
+	graphics::VModel& GetModel();
 
-    // dervicd from IVPart:
+    // derived from IVPart:
 	virtual void Activate();
 	virtual void Deactivate();
 
 	virtual void Send(const messaging::VMessage& in_Message);
 
+	void Update();
+
 	static std::string GetDefaultId();
 
 private:
 	graphics::VModel m_Model;
-	VSimpleScene::Id m_Id;
+	scene::VSimpleScene::Id m_Id;
 	entity::VPartConnection<VSimpleScene> m_pParent;
+	
+	entity::VPartConnection<entity::VRigidBodyPart> m_RigidBodyPart;
 };
 
 //-----------------------------------------------------------------------------

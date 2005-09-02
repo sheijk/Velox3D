@@ -13,10 +13,11 @@
 #include <V3d/Image.h>
 #include <V3d/Entity.h>
 
-#include "VPhysicManagerPart.h"
+#include <v3dLib/Physics/VPhysicManagerPart.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3dLib/Physics.h>
 #include <V3d/Scene.h>
+#include <V3d/Graphics/VModel.h>
 
 using namespace v3d;
 using namespace window;
@@ -30,8 +31,9 @@ using namespace image;
 using namespace entity;
 using namespace utils;
 using namespace physics;
-
+using namespace resource;
 using namespace std;
+
 
 //#include "PhysicsUtils.h"
 
@@ -64,6 +66,7 @@ private:
 	//void CreateMeshes();
 
 	void InitializeResources();
+	VEffectDescription CreateTextureEffect(VStringParam in_sResourceName);
 
 	/*IVDevice::MeshHandle m_hSphereMesh;
 	IVDevice::BufferHandle m_hSphereTexture;
@@ -100,6 +103,50 @@ void VSimplePhysic::InitializeResources()
 		resource::VResourceManagerPtr()->CreateResource("/model3ds");
 
 	modelResourceId->AddData(new resource::VFileName("/data/afighter.3ds"));
+
+	VResourceManagerPtr pResMan;
+
+	VPolarSphereMesh<VTexturedVertex> sphere(10, 10);
+	sphere.GenerateCoordinates();
+	sphere.GenerateTexCoords();
+	
+	VResourceId pRes = pResMan->CreateResource("/textures/ball");
+	pRes->AddData(new VFileName("/data/moon.jpg"));
+
+	VResourceId sphereRes = BuildResource("/data/ball", sphere);
+	sphereRes->AddData(new VEffectDescription(CreateTextureEffect("/textures/ball")));
+
+
+	VPlaneMesh<VTexturedVertex> plane(0, 0, -1, -50, 5000);
+	plane.GenerateCoordinates();
+	plane.GenerateTexCoords();
+
+	/*VResourceId planeResFile = pResMan->CreateResource("/textures/ball");
+	planeResFile->AddData(new VFileName("/data/moon.jpg"));*/
+
+	VResourceId planeRes = BuildResource("/data/plane", plane);
+	planeRes->AddData(new VEffectDescription(CreateTextureEffect("/textures/ball")));
+}
+
+VEffectDescription VSimplePhysic::CreateTextureEffect(VStringParam in_sResourceName)
+{
+	// create an effect description for the mesh
+	VEffectDescription effect;
+	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
+
+	pass.AddState(DefaultColorState(VColor4f(1, 1, 1, 1)));
+	pass.AddState(PolygonModeState(PMFilled, PMFilled));
+	pass.AddState(DepthBufferState(DepthOnLess, DepthTestEnabled, DepthWrite));
+	pass.AddState(ColorBufferWriteMaskState(true, true, true, true));
+	pass.AddState(BlendingState(BlendDisabled, BlendSourceAlpha, BlendOneMinusSourceAlpha));
+
+	// add resource info
+
+	VState textureState = TextureState(in_sResourceName);
+
+	pass.AddState(textureState);
+
+	return effect;
 }
 
 vint VSimplePhysic::Main(vector<string> args)
@@ -130,11 +177,11 @@ vint VSimplePhysic::Main(vector<string> args)
 	myRootEntity.Activate();
 
 	pPhysicsManager->GetPhysicWorld().GetSpace()->SetSurfaceBounce(0.85f);
-	pPhysicsManager->GetPhysicWorld().SetGravity(0,0,3.0f);
+	pPhysicsManager->GetPhysicWorld().SetGravity(0,0,0.0f);
 	
 	VPhysicBody* pPhysicBody;
 	VPhysicBoxMassState massState;
-	massState.SetMass(0.3f);
+	massState.SetMass(4.3f);
 	
 	pPhysicBody = pPhysicsManager->GetPhysicWorld().CreateBody();
 	pPhysicBody->AddState(&massState); 
@@ -142,41 +189,87 @@ vint VSimplePhysic::Main(vector<string> args)
 
 	entity::VEntity* pObjectEntity = new entity::VEntity();
 	VRigidBodyPart* pBodyPart = new VRigidBodyPart;
-	
+//	scene::VModelUpdatingPart* pModelUpdatingPart = new scene::VModelUpdatingPart();
+		
 	pObjectEntity->AddPart(VRigidBodyPart::GetDefaultId(), SharedPtr(pBodyPart));
 	pObjectEntity->AddPart(VPhysicBody::GetDefaultId(), SharedPtr(pPhysicBody));
+//	pObjectEntity->AddPart(scene::VModelUpdatingPart::GetDefaultId(), SharedPtr(pModelUpdatingPart));
 	
 	myRootEntity.AddChild(SharedPtr(pObjectEntity));
 	pObjectEntity->Activate();
+	//pModelUpdatingPart->Activate();
 
-	scene::VSceneModelPart* pSceneModel  = new scene::VSceneModelPart(
-		*resource::GetResourceData<VModel>("/model3ds"));
+	//scene::VSceneModelPart* pSceneModel  = new scene::VSceneModelPart(
+	//	*resource::GetResourceData<VModel>("/model3ds"));
+	//pObjectEntity->AddPart(scene::VSceneModelPart::GetDefaultId(), SharedPtr(pSceneModel));
+	//pSceneModel->Activate();
 
-	// setup sub systems (for entities)
-	//VSimpleDrawList drawList(device);
-	//m_GraphicsManager.SetDrawList(drawList);
-	//VEntityUpdater<VUpdateablePart> m_PartUpdater;
+	//---------------------------------------------------------------------------
+	VPhysicBody* pPhysicBody2;
+	VPhysicBoxMassState massState2;
+	VPhysicGeometrySphere sphereGeometry;
+	massState.SetMass(1.3f);
+	sphereGeometry.SetSphereRadius(2.0f);
+	sphereGeometry.CreateSphere(pPhysicsManager->GetPhysicWorld().GetSpace());
 
-	//CreateMeshes();
+
+	pPhysicBody2 = pPhysicsManager->GetPhysicWorld().CreateBody();
+	pPhysicBody2->AddState(&massState2); 
+	pPhysicBody2->Create(&pPhysicsManager->GetPhysicWorld());
+	pPhysicBody2->SetCollisionBody(&sphereGeometry);
+
+	entity::VEntity* pObjectEntity2= new entity::VEntity();
+	VRigidBodyPart* pBodyPart2 = new VRigidBodyPart;
+//	scene::VModelUpdatingPart* pModelUpdatingPart2 = new scene::VModelUpdatingPart();
+
+	pObjectEntity2->AddPart(VRigidBodyPart::GetDefaultId(), SharedPtr(pBodyPart2));
+	pObjectEntity2->AddPart(VPhysicBody::GetDefaultId(), SharedPtr(pPhysicBody2));
+//	pObjectEntity2->AddPart(scene::VModelUpdatingPart::GetDefaultId(), SharedPtr(pModelUpdatingPart2));
+
+	myRootEntity.AddChild(SharedPtr(pObjectEntity2));
+	pObjectEntity2->Activate();
+//	pModelUpdatingPart2->Activate();
+
+	VResourceManagerPtr pResMan;
+
+	VResourceId ball = pResMan->GetResourceByName("/data/ball");
+
+	graphics::VModelMesh::MeshPtr meshResourcePtr = 0;
+	graphics::VModelMesh::MaterialPtr materialResourcePtr = 0;
+
+	meshResourcePtr = ball->GetData<graphics::IVMesh>();
+	materialResourcePtr = ball->GetData<graphics::IVMaterial>();
 	
-	/*m_GraphicsManager.GetDrawList().Add(VModel(m_PlaneMesh));
-	m_GraphicsManager.GetDrawList().Add(VModel(m_PlaneMesh2));
-	m_GraphicsManager.GetDrawList().Add(VModel(m_PlaneMesh3));
-	m_GraphicsManager.GetDrawList().Add(VModel(m_PlaneMesh4));
-	m_GraphicsManager.GetDrawList().Add(VModel(m_PlaneMesh5));
-	m_GraphicsManager.GetDrawList().Add(VModel(m_PlaneMesh6));*/
+	scene::VSceneModelPart* pSceneModel2  = new scene::VSceneModelPart(VModel(VModelMesh(
+	meshResourcePtr, materialResourcePtr)));
 
-	// setup camera
-	//VKeyboardCamera cam(input);
-	//cam.SetMovementSpeed(1);
-	//cam.GetCamera().Move(0, 0, 0.0f);
-	//cam.GetCamera().RotateY(90);
-	//cam.GetCamera().RotateZ(90);
-	//cam.GetCamera().Move(-100, 0, 0.0f);
+	pObjectEntity2->AddPart(scene::VSceneModelPart::GetDefaultId(), SharedPtr(pSceneModel2));
+	pSceneModel2->Activate();
 
+	//---------------------------------------------------------------------------
+	entity::VEntity* pObjectEntity3= new entity::VEntity();
+	VRigidBodyPart* pBodyPart3 = new VRigidBodyPart;
+	
+	VPhysicGeometryPlane plane;
+	plane.SetPlane(graphics::VVertex3f(0,0,-1),-50);
+	plane.CreatePlane(pPhysicsManager->GetPhysicWorld().GetSpace());
 
-	//VEntity::PartPtr pCameraPosPart(new VCameraPosPart(cam.GetCamera(), &m_PartUpdater));
-	//VEntityManagerPtr pEntityManager;
+	VResourceId planeRes = pResMan->GetResourceByName("/data/plane");
+
+	graphics::VModelMesh::MeshPtr meshResourcePtr2 = 0;
+	graphics::VModelMesh::MaterialPtr materialResourcePtr2 = 0;
+
+	meshResourcePtr2 = planeRes->GetData<graphics::IVMesh>();
+	materialResourcePtr2 = planeRes->GetData<graphics::IVMaterial>();
+
+	scene::VSceneModelPart* pSceneModel3  = new scene::VSceneModelPart(VModel(VModelMesh(
+		meshResourcePtr2, materialResourcePtr2)));
+	pObjectEntity3->AddPart(scene::VSceneModelPart::GetDefaultId(),SharedPtr(pSceneModel3));
+	pObjectEntity3->AddPart(VRigidBodyPart::GetDefaultId(), SharedPtr(pBodyPart3));
+	myRootEntity.AddChild(SharedPtr(pObjectEntity3));
+	pSceneModel3->Activate();
+	
+	//---------------------------------------------------------------------------
 
 	/* physics code goes here */
 //	VPhysicGeometryPlane ground[6];
@@ -289,20 +382,22 @@ vint VSimplePhysic::Main(vector<string> args)
 	input::IVButton* pEscapeButton;
 	input::IVButton* pEnterButton;
 	input::IVButton* pSpace;
+	input::IVButton* pB;
+	
+	// setup camera
+	VKeyboardCamera cam(input);
+	cam.SetMovementSpeed(4);
+	cam.GetCamera().Move(0, 0, 0.0f);
+	cam.GetCamera().RotateY(90);
+	cam.GetCamera().RotateZ(90);
+	cam.GetCamera().Move(0, 0, -10.0f);
 
-	input::IVButton* pUp;
-	input::IVButton* pDown;
-	input::IVButton* pLeft;
-	input::IVButton* pRight;
 
     pEscapeButton	= &input.GetStandardKey(KeyEscape);
 	pEnterButton	= &input.GetStandardKey(KeyReturn);
 	pSpace			= &input.GetStandardKey(KeySpace);
-	pUp				= &input.GetStandardKey(KeyA);
-	pDown			= &input.GetStandardKey(KeyS);
-	pLeft			= &input.GetStandardKey(KeyN);
-	pRight			= &input.GetStandardKey(KeyM);
-	
+	pB				= &input.GetStandardKey(KeyB);
+
 
 	while(pSystem->GetStatus())
 	{
@@ -312,51 +407,30 @@ vint VSimplePhysic::Main(vector<string> args)
 		}
 
 		if(pEnterButton->IsDown() == true)
-			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,0);
+			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,-3);
 
 		if(pSpace->IsDown() == true)
-			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,3.0);
+ 			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,3.0);
+
+		if(pB->IsDown() == true)
+			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,0.0);
+
 		
-	//	m_GraphicsManager.UpdateAll();
+		device.SetMatrix(IVDevice::ViewMatrix, cam.GetTransform());
 
-
-
-		//device.SetMatrix(IVDevice::ViewMatrix, cam.GetTransform());
 		device.BeginScene();
 
-		/*resource::VResourceId pModelResourceId = resource::VResourceManagerPtr()->GetResourceByName("/model3ds");
-
-		for(vuint i = 0; i < pModelResourceId->GetData<VModel>()->GetPartCount(); i++)
-		{
-			for(vuint matid = 0; matid < pModelResourceId->GetData<VModel>()->GetPart(i).GetMaterial()->PassCount(); ++matid)
-			{
-				const IVPass* pPass = & pModelResourceId->GetData<VModel>()->GetPart(i).GetMaterial()->GetPass(matid);
-
-				ApplyMaterial(device, pPass);
-				device.RenderMesh(&(*(pModelResourceId->GetData<VModel>()->GetPart(i).GetMesh())));
-			}
-		}*/
+		pShooting->Cull();
+		pShooting->Render();
 
 		device.EndScene();
+
 		pPhysicsManager->Update();
-	//	drawList.Render();
-		device.EndScene();
 		pUpdater->StartNextFrame();
-		//cam.Move(vfloat32(pUpdater->GetFrameDuration()) * 10);
+		cam.Move(vfloat32(pUpdater->GetFrameDuration()) * 10);
 	}
 
 	pUpdater->Stop();
-
-	//clean things up
-	/*for(uint8 i=1; i < MAX_SPHERES; ++i)
-		sphere[i].Destroy();
-	
-	for(uint8 i = 0; i<6; ++i)
-		ground[i].Destroy();
-
-	
-	box.Destroy();
-	world.Destroy();*/
 
 	return 0;
 }

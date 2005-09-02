@@ -598,6 +598,9 @@
 						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointHinge2State.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicManagerPart.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Physics\VPhysicMass.h">
 					</File>
 					<File
@@ -850,6 +853,9 @@
 					RelativePath="..\..\Source\Physics\VPhysicJointHinge2State.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Physics\VPhysicMass.cpp">
 				</File>
 				<File
@@ -909,6 +915,54 @@
 					Filter="">
 					<File
 						RelativePath="..\..\Source\Resource\Types\VFileName.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VFileNameResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VFileNameResType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VGLVertexStreamResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VGLVertexStreamResType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImageResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImageResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VOffscreenDeviceResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VOffscreenDeviceResType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.h">
 					</File>
 				</Filter>
 			</Filter>

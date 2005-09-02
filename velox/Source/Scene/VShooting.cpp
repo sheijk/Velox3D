@@ -51,10 +51,20 @@ void VShooting::Deactivate()
 void VShooting::Connect(
 	Location in_Location, const std::string& in_Id, IVPart& in_Part)
 {
-	m_pScene = in_Part.Convert<VSimpleScene>();
-	if( m_pScene )
+	//FIXED, should be done correctly --ins
+	//if an other part is being connected first it should be checked if it's a scene
+
+	if(in_Part.IsOfType<VSimpleScene>())
 	{
-		m_pRenderList = &m_pScene->GetRenderList();
+		m_pScene = in_Part.Convert<VSimpleScene>();
+		if( m_pScene )
+		{
+			m_pRenderList = &m_pScene->GetRenderList();
+		}
+		else
+		{
+			vout << "scene not valid" << vendl;
+		}
 	}
 }
 
@@ -78,7 +88,7 @@ IVPart::Dependency VShooting::GetDependencyInfo(vuint in_nIndex) const
 	V3D_ASSERT(in_nIndex == 0);
 
 	Dependency dependency;
-	dependency.id = GetDefaultId();
+	dependency.id = IVScene::GetDefaultId();
 	dependency.location = IVPart::Neighbour;
 
 	return dependency;

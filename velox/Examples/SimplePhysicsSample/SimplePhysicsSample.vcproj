@@ -121,20 +121,9 @@
 			Filter="cpp;h">
 			<File
 				RelativePath=".\PhysicsMain.cpp">
-				<FileConfiguration
-					Name="Debug|Win32">
-					<Tool
-						Name="VCCLCompilerTool"/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\PhysicsUtils.h">
-			</File>
-			<File
-				RelativePath=".\VPhysicManagerPart.cpp">
-			</File>
-			<File
-				RelativePath=".\VPhysicManagerPart.h">
 			</File>
 			<Filter
 				Name="ModuleImpl"

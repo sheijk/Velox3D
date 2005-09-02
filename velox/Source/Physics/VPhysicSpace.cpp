@@ -241,7 +241,7 @@ void VPhysicSpace::CollisionCallback(void *data, dGeomID o1, dGeomID o2)
 	VPhysicSpace* pSpace = static_cast<VPhysicSpace*>(data);
 
 	//if (dGeomIsSpace (o1) || dGeomIsSpace (o2))
-	if (dGeomIsSpace(o1) && dGeomIsSpace (o2))
+	if (dGeomIsSpace(o1) && dGeomIsSpace (o2)) //both geoms are spaces
 	{
 		// colliding a space with something
 		SpaceList::iterator it = pSpace->m_SpaceChildList.find((dSpaceID)o1);
@@ -286,7 +286,7 @@ void VPhysicSpace::CollisionCallback(void *data, dGeomID o1, dGeomID o2)
 		dBodyID b2 = dGeomGetBody(o2);
 
 		// Don't do anything if the two bodies are connected
-		if (b2 && b2 && dAreConnected (b1,b2))
+		if (b1 && b2 && dAreConnected (b1,b2))
 			return;
 
 		nContactCount = dCollide (o1, o2, MaxNumContacts, &contact[0].geom,

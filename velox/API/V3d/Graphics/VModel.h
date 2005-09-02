@@ -46,7 +46,8 @@ public:
  */
 class VModel
 {
-	std::vector<VModelMesh> m_Parts;
+	typedef std::vector<VModelMesh> PartArray;
+	PartArray m_Parts;
 
 public:
 	typedef VSharedPtr<VMatrix44f> MatrixPtr;
@@ -57,11 +58,12 @@ public:
 	virtual ~VModel();
 
 	void Add(const VModelMesh& in_Part);
+	void ApplyMatrix(VMatrix44f in_Matrix);
 
 	vuint GetPartCount() const;
 	VModelMesh& GetPart(vuint in_nNum);
 	const VModelMesh& GetPart(vuint in_nNum) const;
-	//vuint GetMeshCount() const;
+   	//vuint GetMeshCount() const;
 	//VMeshHandle GetMesh(vuint in_nNum) const;
 	//VMaterialHandle GetMaterial(vuint in_nNum) const;
 	//MatrixPtr GetTransform(vuint in_nNum);

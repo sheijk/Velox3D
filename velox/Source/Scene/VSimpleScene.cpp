@@ -1,7 +1,7 @@
 #include <V3d/Scene/VSimpleScene.h>
+#include <v3d/Scene/VSceneModelPart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VIOStream.h>
-
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -35,9 +35,24 @@ void VSimpleScene::Remove(Id in_Id)
 	vout << "removed model" << vendl;
 	m_VisibleObjects.Remove(in_Id);
 }
+void VSimpleScene::Add(scene::VSceneModelPart* in_pModelPart)
+{
+	m_ModelParts.push_back(in_pModelPart);
+}
+
+void VSimpleScene::Remove(scene::VSceneModelPart* in_pModelPart)
+{
+	m_ModelParts.remove(in_pModelPart);
+}
 
 void VSimpleScene::UpdateVisibleObjects()
 {
+	ModelList::iterator i = m_ModelParts.begin();
+
+	for(; i != m_ModelParts.end(); ++i)
+	{
+		(*i)->Update();
+	}
 }
 
 VRenderList& VSimpleScene::GetRenderList()
