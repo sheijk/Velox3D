@@ -42,6 +42,17 @@ public class Entity implements XMLSerializable {
 			return false;
 	}
 	
+	/** Resynchronize state with VEntity and it's parts */
+	public void synchronize() {
+		for(Part part : parts) {
+			part.synchronize();
+		}
+		
+		for(Entity entity : entities) {
+			entity.synchronize();
+		}
+	}
+	
 	public Entity getParent() {
 		return parent;
 	}
@@ -113,6 +124,15 @@ public class Entity implements XMLSerializable {
 	
 	private static boolean valid(VPartPtr ptr) {
 		return ptr != null && ptr.Get() != null;
+	}
+	
+	public String toString() {
+		String description = "(E) " + GetName();
+		
+		if( ! IsActive() )
+			description += " (inactive)";
+		
+		return description;
 	}
 
 	public void ToXML(IVXMLElement outElement) {

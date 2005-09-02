@@ -11,7 +11,7 @@ using namespace v3d; // anti auto indent
 VUntypedPartConnection::VUntypedPartConnection(
 	IVPart::Location in_Location, 
 	const std::string& in_Id, 
-	VPartBase* in_pRegisterTo)
+	VPartConnectionManager* in_pRegisterTo)
 {
 	m_Dependency.id = in_Id;
 	m_Dependency.location = in_Location;
@@ -31,7 +31,7 @@ const IVPart::Dependency& VUntypedPartConnection::GetDependency() const
 }
 
 void VUntypedPartConnection::Connect(
-	IVPart::Location in_Location,
+	VPartDependency::Location in_Location,
 	const std::string& in_Id,
 	IVPart& in_Part)
 {
@@ -50,24 +50,24 @@ IVPart* VUntypedPartConnection::GetPart() const
 /**
  * standard c'tor
  */
-VPartBase::VPartBase()
+VPartConnectionManager::VPartConnectionManager()
 {
 }
 
 /**
  * d'tor
  */
-VPartBase::~VPartBase()
+VPartConnectionManager::~VPartConnectionManager()
 {
 }
 
-void VPartBase::Register(VUntypedPartConnection& in_Connection)
+void VPartConnectionManager::Register(VUntypedPartConnection& in_Connection)
 {
 	m_Dependencies.push_back(&in_Connection);
 }
 
-void VPartBase::Connect(
-	Location in_Location, 
+void VPartConnectionManager::Connect(
+	VPartDependency::Location in_Location, 
 	const std::string& in_Id, 
 	IVPart& in_Part)
 {
@@ -77,8 +77,8 @@ void VPartBase::Connect(
 	}
 }
 
-void VPartBase::Disconnect(
-	Location in_Location,
+void VPartConnectionManager::Disconnect(
+	VPartDependency::Location in_Location,
 	const std::string& in_Id,
 	IVPart& in_Part)
 {
@@ -91,7 +91,7 @@ void VPartBase::Disconnect(
 	}
 }
 
-vbool VPartBase::IsReady() const
+vbool VPartConnectionManager::IsReady() const
 {
 	for(vuint con = 0; con < m_Dependencies.size(); ++con)
 	{
@@ -102,12 +102,12 @@ vbool VPartBase::IsReady() const
 	return true;
 }
 
-vuint VPartBase::DependencyCount() const
+vuint VPartConnectionManager::DependencyCount() const
 {
 	return m_Dependencies.size();
 }
 
-IVPart::Dependency VPartBase::GetDependencyInfo(vuint in_nIndex) const
+VPartDependency VPartConnectionManager::GetDependencyInfo(vuint in_nIndex) const
 {
 	if( in_nIndex < m_Dependencies.size() )
 	{

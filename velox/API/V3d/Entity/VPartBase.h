@@ -11,7 +11,7 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-class VPartBase;
+class VPartConnectionManager;
 
 class VUntypedPartConnection
 {
@@ -19,7 +19,7 @@ public:
 	VUntypedPartConnection(
 		IVPart::Location in_Location, 
 		const std::string& in_Id, 
-		VPartBase* in_pRegisterTo);
+		VPartConnectionManager* in_pRegisterTo);
 
 	void Disconnect();
 	void Connect(
@@ -42,7 +42,11 @@ public:
 	VPartConnection(
 		IVPart::Location in_Location, 
 		const std::string& in_Id, 
-		VPartBase* in_pRegisterTo);
+		VPartConnectionManager* in_pRegisterTo);
+
+	VPartConnection(
+		VPartDependency::Location in_Location,
+		VPartConnectionManager* in_pRegisterTo);
 
 	T* Get() const;
 	T* operator->() const;
@@ -50,43 +54,91 @@ public:
 
 //-----------------------------------------------------------------------------
 
-class VPartBase : public IVPart
+class VPartConnectionManager
 {
+	friend class VUntypedPartConnection;
+
 	std::vector<VUntypedPartConnection*> m_Dependencies;
 
 public:
-	VPartBase();
-	virtual ~VPartBase();
+	VPartConnectionManager();
+	virtual ~VPartConnectionManager();
 
-	virtual void Connect(
-		Location in_Location, 
+	void Connect(
+		VPartDependency::Location in_Location, 
 		const std::string& in_Id, 
 		IVPart& in_Part);
 
-	virtual void Disconnect(
-		Location in_Location,
+	void Disconnect(
+		VPartDependency::Location in_Location,
 		const std::string& in_Id,
 		IVPart& in_Part);
 
-	virtual vbool IsReady() const;
-	virtual vuint DependencyCount() const;
-	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
+	vbool IsReady() const;
+	vuint DependencyCount() const;
+	VPartDependency GetDependencyInfo(vuint in_nIndex) const;
 
 private:
 	void Register(VUntypedPartConnection& in_Connection);
+};
+
+template<typename Parent>
+class VPartBaseAdapter : public Parent
+{
+public:
+	virtual void Connect(
+		VPartDependency::Location in_Location, 
+		const std::string& in_Id, 
+		IVPart& in_Part)
+	{
+		m_ConnectionManager.Connect(in_Location, in_Id, in_Part);
+	}
+
+	virtual void Disconnect(
+		VPartDependency::Location in_Location,
+		const std::string& in_Id,
+		IVPart& in_Part)
+	{
+		m_ConnectionManager.Disconnect(in_Location, in_Id, in_Part);
+	}
+
+	vbool IsReady() const { return m_ConnectionManager.IsReady(); }
+	vuint DependencyCount() const { return m_ConnectionManager.DependencyCount(); }
+	VPartDependency GetDependencyInfo(vuint in_nIndex) const
+	{ return m_ConnectionManager.GetDependencyInfo(in_nIndex); }
+
+protected:
+	VPartConnectionManager* RegisterTo() { return &m_ConnectionManager; }
+
+private:
+	VPartConnectionManager m_ConnectionManager;
+
+	void Register(VUntypedPartConnection& in_Connection) 
+	{ m_ConnectionManager.Register(in_Connection); }
 
 	friend class VUntypedPartConnection;
 };
 
+typedef VPartBaseAdapter<IVPart> VPartBase;
 //-----------------------------------------------------------------------------
 
 template<typename T>
 VPartConnection<T>::VPartConnection(
 	IVPart::Location in_Location, 
 	const std::string& in_Id, 
-	VPartBase* in_pRegisterTo)
+	VPartConnectionManager* in_pRegisterTo)
 	:
 	VUntypedPartConnection(in_Location, in_Id, in_pRegisterTo)
+{
+	m_pPart = 0;
+}
+
+template<typename T>
+VPartConnection<T>::VPartConnection(
+	VPartDependency::Location in_Location,
+	VPartConnectionManager* in_pRegisterTo)
+	:
+	VUntypedPartConnection(in_Location, T::GetDefaultId(), in_pRegisterTo)
 {
 	m_pPart = 0;
 }

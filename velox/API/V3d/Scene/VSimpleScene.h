@@ -45,6 +45,8 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
+	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
+	
 	virtual vbool IsReady() const;
 	virtual vuint DependencyCount() const;
 	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;

@@ -58,6 +58,7 @@ public:
 	virtual ~VModel();
 
 	void Add(const VModelMesh& in_Part);
+	void AddMeshes(const VModel& in_Model);
 	void ApplyMatrix(VMatrix44f in_Matrix);
 
 	vuint GetPartCount() const;

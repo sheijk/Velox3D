@@ -12,10 +12,11 @@ namespace v3d { namespace scene {
 using namespace v3d; // anti auto indent
 using namespace v3d::resource;
 using namespace std;
+using namespace v3d::entity;
 
 VSceneModelPart::VSceneModelPart(const graphics::VModel& in_Model) :
 	m_Model(in_Model),
-		m_pParent(IVPart::Ancestor, VSimpleScene::GetDefaultId(), this),
+		m_pParent(VPartDependency::Ancestor, VSimpleScene::GetDefaultId(), RegisterTo())
 		m_RigidBodyPart(IVPart::Neighbour,
 		entity::VRigidBodyPart::GetDefaultId(), this)
 {
@@ -60,23 +61,77 @@ void VSceneModelPart::Deactivate()
 	}
 }
 
-namespace {
-	messaging::VProtocol addProtocol = messaging::VProtocol()
-		.SetDefault("request", "ok")
-		.SetDefault("resource", "");
-}
+//namespace {
+//	messaging::VProtocol addProtocol = messaging::VProtocol()
+//		.SetDefault("request", "ok")
+//		.SetDefault("resource", "");
+//}
 
-void VSceneModelPart::Send(const messaging::VMessage& in_Message)
+void VSceneModelPart::Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
 {
-	string request = in_Message.Get("command").Get<string>();
-
-	if( request == "add" )
+	if( ! in_Message.HasProperty("type") )
+		return;
+		
+	string request = in_Message.Get("type").Get<string>();
+	
+	vout << "xxx" << vendl;
+	
+	if( request == "getSettings" )
 	{
-		string mesh = in_Message.Get("mesh").Get<string>();
-		string material = in_Message.Get("material").Get<string>();
-
-		AddModelMesh(mesh.c_str(), material.c_str());
+		if( in_pAnswer == 0 )
+			return;
+			
+		vout << "ret" << vendl;
+		
+		in_pAnswer->AddProperty("mesh", m_strMeshRes);
+		in_pAnswer->AddProperty("material", m_strMatRes);
+		in_pAnswer->AddProperty("model", m_strModel);
 	}
+	else if( request == "update" )
+	{
+		vout << "set" << vendl;
+		
+		const string name = in_Message.Get("name").Get<string>();
+		const string value = in_Message.Get("value").Get<string>();
+		
+
+		try
+		{
+			if( name == "model" ) {
+				m_strModel = value;
+				
+				vout << "Adding " << m_strModel << vendl;
+				m_Model.AddMeshes(*resource::GetResourceData<graphics::VModel>(m_strModel.c_str()));
+			}
+			else {
+				if( name == "mesh" ) {
+					m_strMeshRes = value;
+				}
+				else if( name == "material" ) {
+					m_strMatRes = value;
+				}
+				
+				vout << "Adding " << m_strMeshRes << ", " << m_strMatRes << vendl;
+				AddModelMesh(m_strMeshRes.c_str(), m_strMatRes.c_str());
+			}
+		}
+		catch(VException& e)
+		{
+			vout << "Failed to create model: " << e.GetErrorString() << vendl;
+		}
+	}
+	else 
+	{
+		vout << "type " << request << vendl;
+	}
+
+//	if( request == "add" )
+//	{
+//		string mesh = in_Message.Get("mesh").Get<string>();
+//		string material = in_Message.Get("material").Get<string>();
+//
+//		AddModelMesh(mesh.c_str(), material.c_str());
+//	}
 }
 
 graphics::VModel& VSceneModelPart::GetModel()

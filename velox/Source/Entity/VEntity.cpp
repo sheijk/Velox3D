@@ -18,7 +18,7 @@ namespace {
 	{
 		for(vuint dep = 0; dep < in_Part.DependencyCount(); ++dep)
 		{
-			if( in_Part.GetDependencyInfo(dep).location == IVPart::Neighbour &&
+			if( in_Part.GetDependencyInfo(dep).location == VPartDependency::Neighbour &&
 				in_Part.GetDependencyInfo(dep).id == in_Id )
 				return true;
 		}
@@ -30,7 +30,7 @@ namespace {
 	{
 		for(vuint dep = 0; dep < in_Part.DependencyCount(); ++dep)
 		{
-			if( in_Part.GetDependencyInfo(dep).location == IVPart::Ancestor &&
+			if( in_Part.GetDependencyInfo(dep).location == VPartDependency::Ancestor &&
 				in_Part.GetDependencyInfo(dep).id == in_Id )
 				return true;
 		}
@@ -241,11 +241,11 @@ void VEntity::ConnectPart(IVPart* in_pPart, const std::string& in_Id)
 	{
 		// connect neighbour to part
 		if( DependsOnNeighbour(*(part->second), in_Id) )
-			part->second->Connect(IVPart::Neighbour, in_Id, *in_pPart);
+			part->second->Connect(VPartDependency::Neighbour, in_Id, *in_pPart);
 
 		// connect part to neighbour
 		if( DependsOnNeighbour(*in_pPart, part->first) )
-			in_pPart->Connect(IVPart::Neighbour, part->first, *(part->second));
+			in_pPart->Connect(VPartDependency::Neighbour, part->first, *(part->second));
 	}
 
 	// connect part to all ancestors it needs
@@ -253,14 +253,14 @@ void VEntity::ConnectPart(IVPart* in_pPart, const std::string& in_Id)
 	{
 		IVPart::Dependency dependency = in_pPart->GetDependencyInfo(dep);
 
-		if( dependency.location == IVPart::Ancestor )
+		if( dependency.location == VPartDependency::Ancestor )
 		{
 			IVPart* pAncestor = 
 				VEntityHelper::FindAncestorWithId(this, dependency.id);
 
 			if( pAncestor != 0 )
 			{
-				in_pPart->Connect(IVPart::Ancestor, dependency.id, *pAncestor);
+				in_pPart->Connect(VPartDependency::Ancestor, dependency.id, *pAncestor);
 			}
 		}
 	}
@@ -280,10 +280,10 @@ void VEntity::ConnectPart(IVPart* in_pPart, const std::string& in_Id)
 		if( ancestorOfSameType != 0 )
 		{
 			dependentParts[partNum]->Disconnect(
-				IVPart::Ancestor, in_Id, *ancestorOfSameType);
+				VPartDependency::Ancestor, in_Id, *ancestorOfSameType);
 		}
 
-		dependentParts[partNum]->Connect(IVPart::Ancestor, in_Id, *in_pPart);
+		dependentParts[partNum]->Connect(VPartDependency::Ancestor, in_Id, *in_pPart);
 	}
 }
 
@@ -295,10 +295,10 @@ void VEntity::UnconnectPart(IVPart* in_pPart, const std::string& in_Id)
 	for(PartContainer::iterator part = m_Parts.begin(); part != m_Parts.end(); ++part)
 	{
 		if( DependsOnNeighbour(*in_pPart, part->first) )
-			in_pPart->Disconnect(IVPart::Neighbour, part->first, *part->second);
+			in_pPart->Disconnect(VPartDependency::Neighbour, part->first, *part->second);
 
 		if( DependsOnNeighbour(*part->second, in_Id) )
-			part->second->Disconnect(IVPart::Neighbour, in_Id, *in_pPart);
+			part->second->Disconnect(VPartDependency::Neighbour, in_Id, *in_pPart);
 	}
 
 	// unconnect from all ancestors
@@ -306,12 +306,12 @@ void VEntity::UnconnectPart(IVPart* in_pPart, const std::string& in_Id)
 	{
 		IVPart::Dependency& dependency(in_pPart->GetDependencyInfo(depNum));
 
-		if( dependency.location == IVPart::Ancestor )
+		if( dependency.location == VPartDependency::Ancestor )
 		{
 			IVPart* pAncestor = VEntityHelper::FindAncestorWithId(this, dependency.id);
 
 			if( pAncestor != 0 )
-				in_pPart->Disconnect(IVPart::Ancestor, dependency.id, *pAncestor);
+				in_pPart->Disconnect(VPartDependency::Ancestor, dependency.id, *pAncestor);
 		}
 	}
 
@@ -323,7 +323,7 @@ void VEntity::UnconnectPart(IVPart* in_pPart, const std::string& in_Id)
 	{
 		IVPart& part(*dependentParts[partNum]);
 
-		part.Disconnect(IVPart::Ancestor, in_Id, *in_pPart);
+		part.Disconnect(VPartDependency::Ancestor, in_Id, *in_pPart);
 	}
 }
 

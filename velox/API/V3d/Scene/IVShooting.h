@@ -20,6 +20,7 @@ public:
 
 	static std::string GetDefaultId() { return "shooting"; }
 
+	virtual vbool IsActive() const = 0;
 };
 
 //-----------------------------------------------------------------------------

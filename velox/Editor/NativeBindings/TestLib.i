@@ -10,6 +10,7 @@ using namespace v3d::entity;
 using namespace v3d::messaging;
 using namespace v3d::scene;
 using namespace v3d::graphics;
+using namespace v3d::math;
 
 typedef IVPart::Dependency Dependency;
 
@@ -76,12 +77,9 @@ namespace v3d {
 	}
 }
 
-//-----------------------------------------------------------------------------
-// editor utils
-%include "VView.h"
 
-//-----------------------------------------------------------------------------
 // core types
+//-----------------------------------------------------------------------------
 
 %include "../../API/V3d/Core/VTypes.h"
 %include "../../API/V3d/Core/VException.h"
@@ -121,14 +119,60 @@ namespace v3d {
 //%include "../../API/V3d/Core/SmartPtr/VSharedPtr.h"
 %include "../../API/V3d/Core/SmartPtr/VGuards.h"
 
+// editor utils
 //-----------------------------------------------------------------------------
+%include "VView.h"
+
+// math
+//-----------------------------------------------------------------------------
+%include "../../API/V3d/Math/VVector.h"
+%template(VVector4f) v3d::VVector<vfloat32, 4>;
+%template(VVector3f) v3d::VVector<vfloat32, 3>;
+%include "../../API/V3dLib/Math/VVectorOps.h"
+
+%include "../../API/V3d/Math/VMatrix.h"
+%include "../../API/V3d/Math/VMatrixOps.h"
+%extend v3d::VMatrix {
+	void Add(const VMatrix& other) { *self += other; }
+	void Sub(const VMatrix& other) { *self -= other; }
+	
+	void MakeIdentity() { v3d::Identity(*self); }
+	void MakeInverse() { MakeInverse(*self); }
+	void MakeTranspose() { MakeTranspose(*self); }
+	
+	void SetToMult(const VMatrix& left, const VMatrix& right) {
+		Mult(*self, left, right);
+	}
+	
+	void MakeTranslation(float x, float y, float z) { SetTranslate(*self, x, y, z); }
+	void MakeRotationX(float angle) { SetRotationX(*self, angle); }
+	void MakeRotationY(float angle) { SetRotationY(*self, angle); }
+	void MakeRotationZ(float angle) { SetRotationZ(*self, angle); }
+	
+	void MakeScale(float scale) { SetScale(*self, scale); }
+	
+	void MakeOrtho(float left, float right, float top, float bottom, float nearWindows_H_SUCKS, float farWindows_H_SUCKS) {
+		SetOrtho(*self, left, right, top, bottom, nearWindows_H_SUCKS, farWindows_H_SUCKS);
+	}
+	
+	void RotateX(float angle) { RotateX(*self, angle); }
+	void RotateY(float angle) { RotateY(*self, angle); }
+	void RotateZ(float angle) { RotateZ(*self, angle); }
+	
+};
+%template(VMatrix44f) v3d::VMatrix<vfloat32, 4, 4>;
+
 // utils
+//-----------------------------------------------------------------------------
 
 %rename(Assign) v3d::utils::VFourCC::operator==;
 %ignore v3d::utils::VFourCC::operator!=;
 %ignore v3d::utils::VFourCC::operator<;
 %rename(toString) v3d::utils::VFourCC::AsStdString;
 %include "../../API/V3dLib/Utils/VFourCC.h"
+
+%include "../../API/V3dLib/Graphics/Misc/IVCamera.h"
+%include "../../API/V3dLib/Graphics/Misc/VCamera.h"
 
 //-----------------------------------------------------------------------------
 // property manager

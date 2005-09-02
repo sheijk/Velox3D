@@ -13,6 +13,27 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
+/** 
+ * Dependency to another part placed in the same entity or an (in)direct 
+ * parent
+ */
+struct VPartDependency
+{
+	/** The location of a dependency: where the required part is located */
+	enum Location { Neighbour, Ancestor };
+
+#ifndef SWIG
+	Location location;
+	std::string id;
+#endif
+
+	Location GetLocation() const { return location; }
+	void SetLocation(Location loc) { location = loc; }
+
+	std::string GetId() const { return id; }
+	void SetId(const std::string& in_Id) { id = in_Id; }
+};
+
 /**
  * A part is an independent part of an entity. Derive classes from IVPart to
  * create custom parts for your subsystems. If a part is dependant from other
@@ -30,15 +51,8 @@ using namespace v3d; // prevent auto indenting
 class IVPart
 {
 public:
-	/** The location of a dependency: where the required part is located */
-	enum Location { Neighbour, Ancestor };
-
-	/** Dependency to another part placed in the same or an (in)direct parent */
-	struct Dependency
-	{
-		Location location;
-		std::string id;
-	};
+	typedef VPartDependency Dependency;
+	typedef VPartDependency::Location Location;
 
 	virtual ~IVPart() {}
 
@@ -54,7 +68,7 @@ public:
 
 	/** Connect to another entity part */
 	virtual void Connect(
-		Location in_Location, 
+		VPartDependency::Location in_Location, 
 		const std::string& in_Id, 
 		IVPart& in_Part)
 	{}
@@ -65,7 +79,7 @@ public:
 	* references to it must be reset to null
 	*/
 	virtual void Disconnect(
-		Location in_Location,
+		VPartDependency::Location in_Location,
 		const std::string& in_Id,
 		IVPart& in_Part)
 	{}
@@ -80,7 +94,7 @@ public:
 	virtual vuint DependencyCount() const = 0;
 
 	/** Return information about the n-th dependency */
-	virtual Dependency GetDependencyInfo(vuint in_nIndex) const = 0;
+	virtual VPartDependency GetDependencyInfo(vuint in_nIndex) const = 0;
 
 	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0)
 	{}

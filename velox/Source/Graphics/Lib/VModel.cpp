@@ -94,6 +94,14 @@ void VModel::Add(const VModelMesh& in_Part)
 	m_Parts.push_back(in_Part);
 }
 
+void VModel::AddMeshes(const VModel& in_Model)
+{
+	for(vuint partnum = 0; partnum < in_Model.GetPartCount(); ++partnum)
+	{
+		Add(in_Model.GetPart(partnum));
+	}
+}
+
 vuint VModel::GetPartCount() const
 {
 	return vuint(m_Parts.size());

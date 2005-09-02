@@ -8,6 +8,7 @@
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Graphics/VModel.h>
 #include <v3dLib/EntityParts/VRigidBodyPart.h>
+#include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
@@ -31,7 +32,7 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
-	virtual void Send(const messaging::VMessage& in_Message);
+	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
 
 	void Update();
 
@@ -42,7 +43,12 @@ private:
 	scene::VSimpleScene::Id m_Id;
 	entity::VPartConnection<VSimpleScene> m_pParent;
 	
+
 	entity::VPartConnection<entity::VRigidBodyPart> m_RigidBodyPart;
+	std::string m_strMeshRes;
+	std::string m_strMatRes;
+	
+	std::string m_strModel;
 };
 
 //-----------------------------------------------------------------------------

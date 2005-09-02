@@ -509,6 +509,7 @@ void VOpenGLDevice::InitializeExtensions()
 	vuint Length =(vuint) strlen(Extensions);
 	vuint y = 0;
 
+/*
     vout << "-------------------------------------------------------" << vendl;
 	vout << "OpenGL vendor: " << m_pVendor << vendl;
 	vout << "OpenGL renderer: " << m_pRenderer << vendl;
@@ -529,13 +530,7 @@ void VOpenGLDevice::InitializeExtensions()
 		}
 
 	}
-
-	//TODO: Kann weg da wir ja später auf glew umstellen müssen
-	/*if(extgl_Initialize() != 0)
-		vout << "Initializing extensions failed!" << vendl;
-	else
-		vout << "Initializing extensions done..." << vendl;*/
-
+*/
 }
 
 //-----------------------------------------------------------------------------

@@ -17,7 +17,7 @@ class VSettingPart : public entity::VPartBase
 public:
 	VSettingPart() :
 		// create connection + make it known to parent
-		pData(IVPart::Neighbour, VDataPart::GetDefaultId(), this)
+		pData(entity::VPartDependency::Neighbour, RegisterTo())
 	{
 	}
 

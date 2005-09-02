@@ -34,6 +34,7 @@ public:
 	void Cull();
 	void Render();
 
+	virtual vbool IsActive() const;
 private:
 	/** The associated scene */
 	IVScene* m_pScene;
@@ -48,6 +49,8 @@ private:
 
 	/** The list of currently visible objects */
 	IVRenderList* m_pRenderList;
+	
+	vbool m_bActive;
 };
 
 //-----------------------------------------------------------------------------

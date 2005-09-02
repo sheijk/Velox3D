@@ -13,7 +13,8 @@ namespace physics{
 //-----------------------------------------------------------------------------
 using namespace entity;
 
-VPhysicBody::VPhysicBody()  : pBodyPart(IVPart::Neighbour, VRigidBodyPart::GetDefaultId(), this)
+VPhysicBody::VPhysicBody() : 
+	pBodyPart(VPartDependency::Neighbour, RegisterTo())
 {
 	m_BodyID = 0;
 	m_pWorld = 0;

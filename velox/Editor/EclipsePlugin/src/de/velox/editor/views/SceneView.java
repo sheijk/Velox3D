@@ -63,6 +63,8 @@ public class SceneView extends VeloxViewBase {
 
 	public void setEntity(Entity inEntity) {
 		root = inEntity;
+		root.synchronize();
+		viewer.refresh();
 	}
 
 	class SceneAction extends Action
@@ -142,10 +144,25 @@ public class SceneView extends VeloxViewBase {
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
 				
+				String dependencyList = "Dependencies: ";
+				boolean firstDep = true;
+				Iterator<VPartDependency> depIter = part.dependencyIterator();
+				while( depIter.hasNext() ) {
+					VPartDependency dep = depIter.next();
+					
+					if( ! firstDep )
+						dependencyList += ", ";
+					
+					dependencyList += dep.GetId() + "@" + dep.GetLocation();
+					firstDep = false;
+				}				
+				childs.add(dependencyList);
+				
+				// add all settings				
 				Iterator<Setting> settingIter = part.settingsIterator();
 				while( settingIter.hasNext() ) {
 					childs.add(settingIter.next());
-				}				
+				}
 			}
 			
 			return childs.toArray();				
@@ -166,7 +183,8 @@ public class SceneView extends VeloxViewBase {
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
 				
-				return part.settingsIterator().hasNext();
+				return true;
+//				return part.settingsIterator().hasNext() || part.dependencyIterator().hasNext();
 			}
 			else {
 				return false;
@@ -180,27 +198,27 @@ public class SceneView extends VeloxViewBase {
 			if( obj == null ) {
 				return "null";
 			}
-			if( obj instanceof VEntity ) {
-				VEntity entity = (VEntity)obj;
-				
-				return (entity.IsActive() ? "(E)" : "(e)") + " Entity";
-			}
-			if( obj instanceof Entity ) {
-				Entity entity = (Entity)obj;
-				
-				return (entity.IsActive() ? "(E)" : "(e)") 
-					+ " " + entity.GetName();
-			}
-			else if( obj instanceof Part ) {
-				Part part = (Part)obj;
-				
-				return "(P) " + part.GetType();
-			}
-			else if( obj instanceof Setting ) {
-				Setting setting = (Setting)obj;
-				
-				return setting.GetName() + "=" + setting.GetValue();
-			}
+//			if( obj instanceof VEntity ) {
+//				VEntity entity = (VEntity)obj;
+//				
+//				return (entity.IsActive() ? "(E)" : "(e)") + " Entity";
+//			}
+//			else if( obj instanceof Entity ) {
+//				Entity entity = (Entity)obj;
+//				
+//				return (entity.IsActive() ? "(E)" : "(e)") 
+//					+ " " + entity.GetName();
+//			}
+//			else if( obj instanceof Part ) {
+//				Part part = (Part)obj;
+//				
+//				return "(P) " + part.GetType();
+//			}
+//			else if( obj instanceof Setting ) {
+//				Setting setting = (Setting)obj;
+//				
+//				return setting.GetName() + "=" + setting.GetValue();
+//			}
 			else {
 				return obj.toString();
 			}
@@ -216,6 +234,14 @@ public class SceneView extends VeloxViewBase {
 	 * The constructor.
 	 */
 	public SceneView() {
+		if( defaultSceneView == null )
+			defaultSceneView = this;
+	}
+	
+	private static SceneView defaultSceneView = null;
+	
+	public static SceneView getDefaultInstance() {
+		return defaultSceneView;
 	}
 
 	/**
@@ -267,8 +293,8 @@ public class SceneView extends VeloxViewBase {
 
 		renderAction = new VRenderFrameAction(preview.handle);
 		addSceneAndShootingToRoot();
-//		sceneRoot = createDefaultScene();
 		VView.GetInstance().Add(renderAction);
+//		sceneRoot = createDefaultScene();
 		
 		drillDownAdapter = new DrillDownAdapter(viewer);
 		drillDownAdapter.addNavigationActions(
@@ -480,6 +506,13 @@ public class SceneView extends VeloxViewBase {
 				}
 				
 				setEnabled(getSelectedEntity() != null);
+			}
+		});
+		
+		contextMenuActions.add(new SceneAction("Refresh") {
+			public void run() {
+				root.synchronize();
+				viewer.refresh();
 			}
 		});
 //		toggleAction.setText("Activate");

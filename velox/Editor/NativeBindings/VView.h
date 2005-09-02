@@ -55,7 +55,13 @@ public:
 	void SetShooting(v3d::scene::IVShooting* in_pShooting);
 	v3d::graphics::IVDevice* GetDevice();
 	
+	void setSize(vuint width, vuint height);
+	
 private:
+	vuint m_nWidth;
+	vuint m_nHeight;
+	vbool m_bResized;
+	
 	v3d::scene::IVShooting* m_pShooting;
 	v3d::VSharedPtr<v3d::graphics::VOpenGLDevice> m_pDevice;
 	HWND m_HWND;
@@ -91,6 +97,8 @@ private:
 	
 	void FrameUpdateLoop();
 #endif
+
+	vbool m_bInitCalled;
 
 	static VSharedPtr<VView> s_pInstance;
 

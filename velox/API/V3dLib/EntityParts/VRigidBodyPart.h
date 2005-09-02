@@ -12,7 +12,7 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-class VRigidBodyPart : public VPartBase
+class VRigidBodyPart : public VUnconnectedPart
 {
 public:
 		

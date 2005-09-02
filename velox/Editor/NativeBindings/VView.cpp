@@ -27,6 +27,7 @@ VSharedPtr<VView> VView::s_pInstance;
 
 VView::VView()
 {
+	m_bInitCalled = false;
 	m_Thread = 0;
 	
 	cout << "Creating view for hwnd... " << endl;
@@ -78,6 +79,8 @@ void VView::FrameUpdateLoop()
 			
 			m_FrameActions.push_back(*newAction);
 		}
+		m_NewFrameActions.clear();
+		m_bInitCalled = true;
 		
 		for_each(m_FrameActions.begin(), m_FrameActions.end(), mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame));
 			
@@ -128,6 +131,13 @@ VView* VView::GetInstance()
 void VView::Add(IVFrameAction* in_pTestAction)
 {
 	m_NewFrameActions.push_back(in_pTestAction);
+	
+	m_bInitCalled = false;
+
+	vfloat32 secondsWaiting = .0f;
+	
+	while( ! m_bInitCalled )
+		glfwSleep(.01f);
 }
 
 //-----------------------------------------------------------------------------
@@ -156,11 +166,28 @@ void VTestFrameAction::UpdateFrame()
 
 //-----------------------------------------------------------------------------
 
+namespace {
+	const std::string g_strGridPropertyName = "v3d.graphics.showGrid";
+}
+
 VRenderFrameAction::VRenderFrameAction(VNativeWindowHandle in_Hwnd)
 {
 	m_pShooting = 0;
 	m_HWND = HWND(in_Hwnd);		
+	m_nWidth = 0;
+	m_nHeight = 0;
+	m_bResized = false;
+}
 
+void CreateTestModel(const std::string& resname);
+
+//VModel model;
+
+const IVMesh* pmesh = 0;
+const IVMaterial* pmat = 0;
+
+void VRenderFrameAction::Init()
+{
 	cout << "\tCreating display settings" << endl;
 	VDisplaySettings settings;
 	settings.SetWidth(200);
@@ -172,37 +199,147 @@ VRenderFrameAction::VRenderFrameAction(VNativeWindowHandle in_Hwnd)
 	
 	cout << "\tCreating device" << endl;
 	m_pDevice.Assign(new VOpenGLDevice(settings, pContext));
-}
 
-void VRenderFrameAction::Init()
-{
+	if( ! property::ExistsProperty(g_strGridPropertyName.c_str()) )
+	{
+		property::SetProperty(g_strGridPropertyName.c_str(), true);	
+	}
+	
+	CreateTestModel("/editor-test");
+//	model = *GetResourceData<VModel>("/editor-test");
+
+	pmesh = &*GetResourceData<IVMesh>("/editor-test");
+	pmat = &*GetResourceData<IVMaterial>("/editor-test");
 }
 
 void VRenderFrameAction::Shutdown()
 {
 }
 
+void VRenderFrameAction::setSize(vuint width, vuint height)
+{
+	m_nWidth = width;
+	m_nHeight = height;
+	m_bResized = true;
+}
+
 #include <V3d/OpenGL.h>
+
+void sendParallelLineVertices(int min, int max, float distance) {
+	glBegin(GL_LINES);
+	for(int i = min; i < max; ++i) {
+		glVertex2f(-1.0f, i * distance);
+		glVertex2f(1.0f, i * distance);
+	}
+	glEnd();
+}
+
+void showOrientationGrid() {
+	const int stripeCount = 10;
+	const float stripeLength = 10.0f;
+	const float stripeDistance = .1f;
+	
+	glPushMatrix();
+	glPushAttrib(GL_LINE_WIDTH);
+	glLineWidth(.2f);
+	
+	glScalef(stripeLength, stripeLength, stripeLength);
+	
+	// show z = 0 plane
+	glColor3f(.0f, .0f, 1.0f);
+	sendParallelLineVertices(-stripeCount, stripeCount, stripeDistance);
+	glRotatef(90.0f, .0f, .0f, 1.0f);
+	sendParallelLineVertices(-stripeCount, stripeCount, stripeDistance);
+	
+	// show y = 0 plane
+	glColor3f(.0f, 1.0f, .0f);
+	glRotatef(90, 0, 1, 0);
+	sendParallelLineVertices(-stripeCount, stripeCount, stripeDistance);
+	glRotatef(90.0f, .0f, .0f, 1.0f);
+	sendParallelLineVertices(-stripeCount, stripeCount, stripeDistance);
+	
+	// show x = 0 plane
+	glColor3f(1.0f, .0f, .0f);
+	glRotatef(90, 0, 1, 0);
+	sendParallelLineVertices(-stripeCount, stripeCount, stripeDistance);
+	glRotatef(90.0f, .0f, .0f, 1.0f);
+	sendParallelLineVertices(-stripeCount, stripeCount, stripeDistance);
+	
+	glPushAttrib(GL_POINT_SIZE);
+	glPointSize(3.0f);
+	
+	glBegin(GL_POINTS);
+	for(int i = -stripeCount; i < stripeCount; ++i) {
+		glColor3f(0, 1, 1);
+		glVertex3f(i * stripeDistance, 0, 0);
+		
+		glColor3f(1, 0, 1);
+		glVertex3f(0, i * stripeDistance, 0);
+		
+		glColor3f(1, 1, 0);
+		glVertex3f(0, 0, i * stripeDistance);
+	}
+	glColor3f(0, 0, 0);
+	glVertex3f(0, 0, 0);
+	glEnd();
+	
+	glPopAttrib();
+	
+	glPopAttrib();
+	glPopMatrix();
+}
 
 void VRenderFrameAction::UpdateFrame()
 {
 	m_pDevice->BeginScene();
 	
-//	glMatrixMode(GL_MODELVIEW);
-//	glPushMatrix();
-//	glTranslatef(.0f, .0f, -1.0f);
-//	glBegin(GL_TRIANGLES);
-//	glColor3f(1.0f, 1.0f, .0f);
-//	glVertex2f(1.0f, .0f);
-//	glVertex2f(-1.0f, .0f);
-//	glVertex2f(.0f, 1.0f);
-//	glEnd();
-//	glPopMatrix();
-	
-	if( m_pShooting != 0 )
+	if( m_bResized )
 	{
+		glViewport(0, 0, m_nWidth, m_nHeight);
+		m_bResized = false;
+	}
+
+	if( property::GetProperty<vbool>(g_strGridPropertyName.c_str()) )
+	{
+		showOrientationGrid();
+	}
+/*
+	if( m_pDevice.Get() != 0 && pmesh != 0 && pmat != 0 )
+	{	
+		m_pDevice->RenderMesh(pmesh);
+//		RenderMesh(*m_pDevice, pmesh, pmat);
+//		RenderModel(*m_pDevice, model);
+	}
+*/	
+
+	if( m_pShooting != 0 && m_pShooting->IsActive() )
+	{
+//		static vbool first = true;
+//		vuint* pnull = 0;
+//		vuint x = first ? *pnull : 0;
+		
+		vout << "culling ";
+		
 		m_pShooting->Cull();
+		
+		vout << " rendering ";
+		
 		m_pShooting->Render();
+		
+		vout << " done" << vendl;
+	}
+
+	if( m_pShooting == 0 )
+	{
+		static vuint count = 100;
+		
+		if( count >= 100 )
+		{
+			vout << "alert! no shooting" << vendl;
+			count = 0;
+		}
+		
+		++count;
 	}
 	
 	m_pDevice->EndScene();
@@ -220,7 +357,6 @@ v3d::graphics::IVDevice* VRenderFrameAction::GetDevice()
 
 //-----------------------------------------------------------------------------
 
-/*
 void DeHomogenize(VVector3f* out_Vec3f, const VVector4f& in_Vec4f)
 {
 	float w = in_Vec4f.Get(3);
@@ -272,7 +408,6 @@ public:
 };
 
 
-/*
 VMeshDescription* CreateMeshDescription(
 	VMeshDescription::GeometryType in_Primitives,
 	VVertexBuffer& in_VertexBuffer,
@@ -424,19 +559,29 @@ VVertexBuffer* CreateTorus(
 const std::string MESH_RESNAME = "/meshes/test";
 const std::string MAT_RESNAME = "/mat/tst";
 
-VResourceId GetResource(const std::string& in_Name)
+void CreateTestModel(const std::string& resname)
 {
-	static VServicePtr<IVResourceManager> pResMngr;
+	VResourceId res = VResourceManagerPtr()->CreateResource(resname.c_str());
+	VVertexBuffer* pTorus = CreateTorus(
+		VVertexFormat::DataTypes(VVertexFormat::Coordinates | VVertexFormat::Normals),
+		0.3f, 100, 100);
 	
-	return pResMngr->GetResourceByName(in_Name.c_str());
+	res->AddData<VVertexBuffer>(pTorus);
+	res->AddData<VMeshDescription>(CreateMeshDescription(
+		VMeshDescription::TriangleStrip,
+		*pTorus,
+		res->GetQualifiedName()));
+	
+	res->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1, 1))));
+
+	VModel* pModel = new VModel();	
+	pModel->Add(VModelMesh(GetResourceData<IVMesh>(resname.c_str()), GetResourceData<IVMaterial>(resname.c_str())));
+	res->AddData(pModel);
+//	pView->m_hMesh = pView->m_pDevice->CreateMesh(MESH_RESNAME.c_str());
+//	pView->m_hMaterial = pView->m_pDevice->CreateMaterial(MAT_RESNAME.c_str());
 }
 
-template<typename T>
-VResourceDataPtr<const T> GetResourceData(const std::string& in_strResourceName)
-{
-	return GetResource(in_strResourceName)->GetData<T>();
-}
-
+/*
 void GLFWCALL VView::FrameUpdateLoop(void* arg)
 {
 	VView* pView = reinterpret_cast<VView*>(arg);

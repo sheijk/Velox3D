@@ -17,7 +17,9 @@ VShooting::VShooting(graphics::IVDevice* in_pDevice, IVRenderAlgorithm* in_pAlgo
 	m_pRenderList = 0;
 	m_pRenderTarget = in_pDevice;
 	m_pRenderAlgorithm.Assign(in_pAlgorithm);
-}
+	
+	m_bActive = false;
+}	
 
 void VShooting::Cull()
 {
@@ -40,12 +42,19 @@ void VShooting::Render()
 		vout << "error in render" << vendl;
 }
 
+vbool VShooting::IsActive() const
+{
+	return m_bActive;
+}
+
 void VShooting::Activate()
 {
+	m_bActive = true;
 }
 
 void VShooting::Deactivate()
 {
+	m_bActive = false;
 }
 
 void VShooting::Connect(
@@ -89,7 +98,7 @@ IVPart::Dependency VShooting::GetDependencyInfo(vuint in_nIndex) const
 
 	Dependency dependency;
 	dependency.id = IVScene::GetDefaultId();
-	dependency.location = IVPart::Neighbour;
+	dependency.location = VPartDependency::Neighbour;
 
 	return dependency;
 }

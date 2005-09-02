@@ -32,9 +32,20 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+- mouse navigation (translation only) fuer render layer
+
+01.09.05
+- scene dokumente erzeugen (per wizard)
+- render layer mit anpassung der groesse des renderings
+- scene editor (stuerzt beim rendern ab :\)
+- rendern im scene editor stuertzt noch ab
+- navigieren per maus im renderlayer
+- die elende gl extension debug ausgaben aus dem device entfernt
+
 31.08.05
-- entity system: VFourCC durch std::string ersetzt
 - parts aus entity loeschen
+- parts mit messages bearbeiten
+- dependencies im scene view anzeigen
 - deaktivieren von entites mit parts welche nicht korrekt connected sind
 - scene view: synchronisation mit VEntity, erzeugen von entities, parts
 

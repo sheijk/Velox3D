@@ -177,20 +177,20 @@ v3d::VSharedPtr<IVPart> CreateModelPart(IVXMLElement* in_pElement)
 {
 	VModel model;
 	
-	IVXMLElement::AttributeIter attribIter = in_pElement->AttributeBegin();
-	
-	while( attribIter.HasNext() )
-	{
-		std::string meshResource = attribIter->GetName();
-		std::string materialResource = attribIter->GetValue().Get<std::string>();
-
-		VModelMesh part(
-			GetResourceData<IVMesh>(meshResource.c_str()),
-			GetResourceData<IVMaterial>(materialResource.c_str())
-			);
-		
-		model.Add(part);
-	}
+//	IVXMLElement::AttributeIter attribIter = in_pElement->AttributeBegin();
+//	
+//	while( attribIter.HasNext() )
+//	{
+//		std::string meshResource = attribIter->GetName();
+//		std::string materialResource = attribIter->GetValue().Get<std::string>();
+//
+//		VModelMesh part(
+//			GetResourceData<IVMesh>(meshResource.c_str()),
+//			GetResourceData<IVMaterial>(materialResource.c_str())
+//			);
+//		
+//		model.Add(part);
+//	}
 	
 	VSharedPtr<VSceneModelPart> pModelPart(new VSceneModelPart(model));
 	
@@ -234,6 +234,30 @@ public:
 			m_Settings[name] = value;
 		}
 	}
+	
+	void AddSetting(string name, string value)
+	{
+		m_Settings[name] = value;
+	}
+	
+	static std::string GetDefaultId() { return "x"; }
+};
+
+class VConnTestPart : public v3d::entity::VPartBase
+{
+	VPartConnection<VTestPart> m_pOtherPart;
+
+public:
+	VConnTestPart() : m_pOtherPart(VPartDependency::Neighbour, RegisterTo())
+	{}
+	
+	void Activate()
+	{
+		m_pOtherPart->AddSetting("conntest", "me was here");
+	}
+
+	void Deactivate()
+	{}
 };
 
 v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
@@ -241,17 +265,21 @@ v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
 {
 	std::string type = in_pElement->GetAttributeValue<std::string>("type");
 
-	if( type == "gfxm" ) 
+	if( type == "model" ) 
 	{
 		return CreateModelPart(in_pElement);
 	}
-	else if( type == "simpleScene" )
+	else if( type == "scene" )
 	{
 		return VSharedPtr<v3d::entity::IVPart>(new v3d::scene::VSimpleScene());
 	}
 	else if( type == "x" )
 	{
 		return VSharedPtr<v3d::entity::IVPart>(new VTestPart());
+	}
+	else if( type == "y" )
+	{
+		return SharedPtr(new VConnTestPart());
 	}
 	else
 	{

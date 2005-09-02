@@ -17,6 +17,10 @@
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
    </requires>
 
    <extension
@@ -56,6 +60,28 @@
             icon="icons/sample.gif"
             id="de.velox.editor.views.VFSView"
             name="VFS"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="VeloxEditor"
+            name="Velox Wizards"/>
+      <wizard
+            category="VeloxEditor"
+            class="de.velox.editor.wizards.NewSceneWizard"
+            icon="icons/sample.gif"
+            id="de.velox.editor.wizards.NewSceneWizard"
+            name="New scene"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="de.velox.editors.SceneEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="v3dscene"
+            icon="icons/sample.gif"
+            id="de.velox.editors.SceneEditor"
+            name="Scene Editor"/>
    </extension>
 
 </plugin>

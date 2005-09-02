@@ -10,7 +10,7 @@ using namespace v3d; // anti auto indent
 
 VSceneGraphPart::VSceneGraphPart() : 
 	m_bActive(false),
-	m_pParent(IVPart::Ancestor, GetDefaultId(), this)
+	m_pParent(VPartDependency::Ancestor, RegisterTo())
 {
 	//TODO: das soll nicht auf ein selbst erzeugtes part, sonder auf das part
 	// im entity welches ueber eine VPartConnection bekommen wird zeigen!!!

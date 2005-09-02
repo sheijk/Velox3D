@@ -33,6 +33,10 @@ public class Setting {
 		part.updateSetting(this);
 	}
 	
+	public String toString() {
+		return name + " = " + value;
+	}
+	
 //	public LinkedList<Setting> getChildSettings() {
 //		return childs;
 //	}

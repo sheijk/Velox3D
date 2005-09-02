@@ -14,6 +14,7 @@ public class Part implements XMLSerializable {
 	private String type;
 	
 	private LinkedList<Setting> settings = new LinkedList<Setting>();
+	private LinkedList<VPartDependency> dependencies = new LinkedList<VPartDependency>();
 	private Entity owner = null;
 	
 	private VPartPtr impl = null;
@@ -55,6 +56,16 @@ public class Part implements XMLSerializable {
 			
 			nameIter.Next();
 		}
+		
+		// get dependencies
+		dependencies.clear();
+		for(int depNum = 0; depNum < impl.DependencyCount(); ++depNum) {
+			VPartDependency dependency = new VPartDependency();
+			dependency.SetId(impl.GetDependencyInfo(depNum).GetId());
+			dependency.SetLocation(impl.GetDependencyInfo(depNum).GetLocation());
+			
+			dependencies.add(dependency);
+		}
 	}
 	
 	void updateSetting(Setting setting) {
@@ -62,6 +73,19 @@ public class Part implements XMLSerializable {
 		VMessage msg = new VMessage();
 		msg.AddProperty("type", "update");
 		msg.AddProperty("name", setting.GetName());
+		msg.AddProperty("value", setting.GetValue());
+		
+		if( valid(impl) ) {
+			impl.Send(msg);
+		}
+	}
+	
+	public void synchronize() {
+		updateSettingsFromPart();		
+	}
+	
+	public Iterator<VPartDependency> dependencyIterator() {
+		return dependencies.iterator();
 	}
 	
 //	public Iterator<String> SettingNameIterator() {
@@ -104,10 +128,6 @@ public class Part implements XMLSerializable {
 	void setOwner(Entity newOwner) {
 		owner = newOwner;
 	}
-
-	public void SetType(String out_type) {
-		type = out_type;
-	}
 	
 	public void ToXML(IVXMLElement outElement) {
 		outElement.SetName("part");
@@ -125,6 +145,39 @@ public class Part implements XMLSerializable {
 	
 	private static boolean valid(VPartPtr ptr) {
 		return ptr != null && ptr.Get() != null;
+	}
+	
+	public String toString() {
+		String description = "(P) " + GetId();
+		
+		LinkedList<String> tags = new LinkedList<String>();
+		
+		if( valid(impl) ) {
+			if( ! impl.IsReady() )
+				tags.add("unready");
+		}
+		else {
+			tags.add("impl invalid");
+		}
+		
+		if( tags.size() > 0 ) {
+			description += "(";
+			boolean first = true;
+			
+			Iterator<String> tagIter = tags.iterator();
+			while(tagIter.hasNext()) {
+				if( ! first )
+					description += ", ";
+				else
+					description += " ";
+				
+				description += tagIter.next();			
+			}
+			
+			description += ")";
+		}
+		
+		return description;	
 	}
 
 	VPartPtr GetPart() {

@@ -83,6 +83,22 @@ IVPart::Dependency VSimpleScene::GetDependencyInfo(vuint in_nIndex) const
 	V3D_THROW(VException, "No dependencies");
 }
 
+void VSimpleScene::Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+{
+	using std::string;
+	using utils::VStringValue;
+
+	if( in_pAnswer == 0 || ! in_Message.HasProperty("type") )
+		return;
+
+	string type = in_Message.Get("type").Get<string>();
+
+	if( type == "getSettings" )
+	{
+		in_pAnswer->AddProperty("count", VStringValue(m_VisibleObjects.MeshCount()));
+	}
+}
+
 std::string VSimpleScene::GetDefaultId()
 {
 	return "scene";

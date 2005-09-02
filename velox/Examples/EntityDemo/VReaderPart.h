@@ -22,8 +22,8 @@ class VReaderPart : public entity::VPartBase
 
 public:
 	VReaderPart() :
-		pData(IVPart::Neighbour, VDataPart::GetDefaultId(), this),
-		pManager(IVPart::Ancestor, VManagerPart::GetDefaultId(), this)
+		pData(entity::VPartDependency::Neighbour, RegisterTo()),
+		pManager(entity::VPartDependency::Ancestor, RegisterTo())
 	{
 	}
 

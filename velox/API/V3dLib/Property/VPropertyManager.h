@@ -26,6 +26,8 @@ T GetProperty(VStringParam in_strName);
 template<typename T>
 void SetProperty(VStringParam in_strName, const T& in_Value);
 
+vbool ExistsProperty(VStringParam in_strName);
+
 class VPropertyManager : public VNamedObject
 {
 public:
@@ -33,6 +35,8 @@ public:
 
 	void SetValue(VStringParam in_strName, const utils::VStringValue& in_strValue);
 	const utils::VStringValue& GetValue(VStringParam in_strName);
+	
+	vbool ExistsProperty(VStringParam in_strName);
 	
 	VRangeIterator<const std::string> GetPropertyNames() const;
 

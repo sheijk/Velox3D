@@ -32,10 +32,21 @@ const utils::VStringValue& VPropertyManager::GetValue(VStringParam in_strName)
 	}
 }
 
+vbool VPropertyManager::ExistsProperty(VStringParam in_strName)
+{
+	return m_Properties.find(in_strName) != m_Properties.end();
+}
+
 VRangeIterator<const std::string> VPropertyManager::GetPropertyNames() const
 {
 	return CreateAccesssorIterator<VPair1stAccessor, const std::string>(
 		m_Properties.begin(), m_Properties.end());
+}
+
+vbool ExistsProperty(VStringParam in_strName)
+{
+	static VServicePtr<VPropertyManager> propertyManager;
+	return propertyManager->ExistsProperty(in_strName);	
 }
 
 //-----------------------------------------------------------------------------

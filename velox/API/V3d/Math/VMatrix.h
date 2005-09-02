@@ -24,14 +24,6 @@ namespace v3d {
 		VMatrix(const MatrixImpl& mat) : m_Mat(mat) {}
 	public:
 
-		enum RotationAxis
-		{
-			X_AXIS,
-			Y_AXIS,
-			Z_AXIS
-
-		};
-
 		VMatrix() {};
 		VMatrix(const VMatrix& in_Source) : m_Mat(in_Source.m_Mat) {}
 		
