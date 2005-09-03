@@ -273,6 +273,10 @@ v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
 	{
 		return VSharedPtr<v3d::entity::IVPart>(new v3d::scene::VSimpleScene());
 	}
+	else if( type == "body" )
+	{
+		return SharedPtr(new VRigidBodyPart());
+	}
 	else if( type == "x" )
 	{
 		return VSharedPtr<v3d::entity::IVPart>(new VTestPart());

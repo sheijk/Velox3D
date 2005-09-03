@@ -34,6 +34,10 @@ Doku:
 
 - mouse navigation (translation only) fuer render layer
 
+03.09.05
+- eclipse rendering problem (hoffentlich) gefixt
+- kamerapositionen der keyboard kamera speichern
+
 01.09.05
 - scene dokumente erzeugen (per wizard)
 - render layer mit anpassung der groesse des renderings

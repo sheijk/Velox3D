@@ -1,4 +1,4 @@
-%module v3d
+%module(directors="1") v3d
 %{
 #include "TestLib.h"
 using namespace v3d;
@@ -121,7 +121,10 @@ namespace v3d {
 
 // editor utils
 //-----------------------------------------------------------------------------
+%feature("director") IVFrameAction;
 %include "VView.h"
+
+
 
 // math
 //-----------------------------------------------------------------------------

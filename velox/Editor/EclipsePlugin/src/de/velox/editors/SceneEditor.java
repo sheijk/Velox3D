@@ -13,10 +13,12 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import de.velox.*;
 import de.velox.editor.entity.*;
+import de.velox.editor.views.RenderLayer;
 import de.velox.editor.views.SceneView;
 
 public class SceneEditor extends VeloxEditorBase {
 	private VRenderFrameAction renderAction = null;
+	private RenderLayer renderLayer = null;
 	private Entity root = null;
 	private IVShooting shooting = null;
 	
@@ -68,12 +70,14 @@ public class SceneEditor extends VeloxEditorBase {
 	public void createPartControl(Composite parent) {
 		System.out.println("SceneEditor.createPartControl");
 
-		SashForm splitter = new SashForm(parent, SWT.DEFAULT);
+//		SashForm splitter = new SashForm(parent, SWT.DEFAULT);
 
-		Composite preview = new Composite(splitter, SWT.DEFAULT);
+//		Composite preview = new Composite(splitter, SWT.DEFAULT);
 
-		renderAction = new VRenderFrameAction(preview.handle);
-		VView.GetInstance().Add(renderAction);
+		renderLayer = new RenderLayer(parent);
+		renderAction = renderLayer.getRenderAction();
+//		renderAction = new VRenderFrameAction(preview.handle);
+//		VView.GetInstance().Add(renderAction);
 		
 		IVDevice device = renderAction.GetDevice();
 		VMatrix44f viewMatrix = new VMatrix44f();

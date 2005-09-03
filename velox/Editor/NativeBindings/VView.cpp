@@ -166,6 +166,7 @@ void VTestFrameAction::UpdateFrame()
 
 namespace {
 	const std::string g_strGridPropertyName = "v3d.graphics.showGrid";
+	const std::string g_strRenderPropertyName = "v3d.graphics.render";
 }
 
 VRenderFrameAction::VRenderFrameAction(VNativeWindowHandle in_Hwnd)
@@ -184,6 +185,30 @@ void CreateTestModel(const std::string& resname);
 const IVMesh* pmesh = 0;
 const IVMaterial* pmat = 0;
 
+class VGLFWContext : public IVRenderContext
+{
+public:
+	VGLFWContext()
+	{
+		int result = glfwOpenWindow(400, 300, 8, 8, 8, 8, 24, 0, GLFW_WINDOW);
+		glfwSetWindowTitle("test render window");
+	}
+	
+	virtual void MakeCurrent()
+	{
+	}
+	
+	virtual void SwapBuffers()
+	{
+		glfwSwapBuffers();
+	}
+	
+	virtual IVRenderContext* CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings)
+	{
+		V3D_THROW(VException, "not supported, yet");
+	}
+};
+
 void VRenderFrameAction::Init()
 {
 	cout << "\tCreating display settings" << endl;
@@ -194,6 +219,7 @@ void VRenderFrameAction::Init()
 	
 	cout << "\tCreating context" << endl;
 	IVRenderContext* pContext(new VWin32WindowContext(m_HWND, &settings));
+//	IVRenderContext* pContext(new VGLFWContext());
 	
 	cout << "\tCreating device" << endl;
 	m_pDevice.Assign(new VOpenGLDevice(settings, pContext));
@@ -201,6 +227,11 @@ void VRenderFrameAction::Init()
 	if( ! property::ExistsProperty(g_strGridPropertyName.c_str()) )
 	{
 		property::SetProperty(g_strGridPropertyName.c_str(), true);	
+	}
+
+	if( ! property::ExistsProperty(g_strRenderPropertyName.c_str()) )
+	{
+		property::SetProperty(g_strRenderPropertyName.c_str(), true);	
 	}
 	
 	CreateTestModel("/editor-test");
@@ -301,21 +332,32 @@ void VRenderFrameAction::UpdateFrame()
 	{
 		showOrientationGrid();
 	}
-/*
+	
+	if( property::GetProperty<vbool>(g_strRenderPropertyName.c_str()) )
 	if( m_pDevice.Get() != 0 && pmesh != 0 && pmat != 0 )
 	{	
-		m_pDevice->RenderMesh(pmesh);
+		VPointLight light;
+		light.SetAmbient(VColor4f(.0f, .0f, .0f, 1.0f));
+		light.SetDiffuse(VColor4f(.0f, 1.0f, .0f, 1.0f));
+		light.SetSpecular(VColor4f(.8f, .8f, 1.0f, 1.0f));
+		light.SetPosition(VVector3f(.0f, .0f, .0f));
+		
+		VPointLight light2;
+		light2.SetAmbient(VColor4f(.2f, .0f, .0f, 1.0f));
+		light2.SetDiffuse(VColor4f(1.0f, .0f, .0f, 1.0f));
+		light2.SetSpecular(VColor4f(1.0f, .4f, .4f, 1.0f));
+		light2.SetPosition(VVector3f(.0f, -.5f, 3.0f));	
+
+		m_pDevice->ApplyLight(IVDevice::Light0, &light);
+		m_pDevice->ApplyLight(IVDevice::Light1, &light2);
+
+//		RenderModel(*m_pDevice, *GetResourceData<VModel>("/data/afighter.3ds"));
+
 //		RenderMesh(*m_pDevice, pmesh, pmat);
-//		RenderModel(*m_pDevice, model);
 	}
-*/	
 
 	if( m_pShooting != 0 && m_pShooting->IsActive() )
 	{
-//		static vbool first = true;
-//		vuint* pnull = 0;
-//		vuint x = first ? *pnull : 0;
-		
 		vout << "culling ";
 		
 		m_pShooting->Cull();
@@ -339,7 +381,7 @@ void VRenderFrameAction::UpdateFrame()
 		
 		++count;
 	}
-	
+
 	m_pDevice->EndScene();
 }
 
@@ -560,23 +602,38 @@ const std::string MAT_RESNAME = "/mat/tst";
 void CreateTestModel(const std::string& resname)
 {
 	VResourceId res = VResourceManagerPtr()->CreateResource(resname.c_str());
-	VVertexBuffer* pTorus = CreateTorus(
-		VVertexFormat::DataTypes(VVertexFormat::Coordinates | VVertexFormat::Normals),
-		0.3f, 100, 100);
+
+	res->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 0, 0, 1))));
 	
-	res->AddData<VVertexBuffer>(pTorus);
-	res->AddData<VMeshDescription>(CreateMeshDescription(
-		VMeshDescription::TriangleStrip,
-		*pTorus,
+	VVertexBuffer* pVertexBuffer = new VVertexBuffer(
+		VVertexFormat(VVertexFormat::Coordinates, 3, 0));
+	pVertexBuffer->SetCoordinate(VVertex3f(1, 0, -1), 0);
+	pVertexBuffer->SetCoordinate(VVertex3f(-1, 0, -1), 1);
+	pVertexBuffer->SetCoordinate(VVertex3f(0, 1, -1), 2);
+	res->AddData(pVertexBuffer);
+	
+	res->AddData(CreateMeshDescription(
+		VMeshDescription::Triangles,
+		*pVertexBuffer,
 		res->GetQualifiedName()));
 	
-	res->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1, 1))));
-
-	VModel* pModel = new VModel();	
-	pModel->Add(VModelMesh(GetResourceData<IVMesh>(resname.c_str()), GetResourceData<IVMaterial>(resname.c_str())));
-	res->AddData(pModel);
-//	pView->m_hMesh = pView->m_pDevice->CreateMesh(MESH_RESNAME.c_str());
-//	pView->m_hMaterial = pView->m_pDevice->CreateMaterial(MAT_RESNAME.c_str());
+	
+//	VResourceId res = VResourceManagerPtr()->CreateResource(resname.c_str());
+//	VVertexBuffer* pTorus = CreateTorus(
+//		VVertexFormat::DataTypes(VVertexFormat::Coordinates | VVertexFormat::Normals),
+//		0.3f, 100, 100);
+//	
+//	res->AddData<VVertexBuffer>(pTorus);
+//	res->AddData<VMeshDescription>(CreateMeshDescription(
+//		VMeshDescription::TriangleStrip,
+//		*pTorus,
+//		res->GetQualifiedName()));
+//	
+//	res->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1, 1))));
+//
+//	VModel* pModel = new VModel();	
+//	pModel->Add(VModelMesh(GetResourceData<IVMesh>(resname.c_str()), GetResourceData<IVMaterial>(resname.c_str())));
+//	res->AddData(pModel);
 }
 
 /*

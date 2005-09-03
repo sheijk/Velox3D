@@ -26,10 +26,27 @@ public class RenderView extends VeloxViewBase {
 //		scene.Add(graphics);
 	}
 	
+	class MyFrameAction extends IVFrameAction {
+		@Override
+		public void Init() {
+			System.out.println("MyFrameAction::Init()");
+		}
+
+		@Override
+		public void Shutdown() {
+			System.out.println("MyFrameAction::Shutdown()");
+		}
+
+		@Override
+		public void UpdateFrame() {
+		}
+	}
+
 	@Override
 	public void createPartControl(Composite in_Parent) {
 		renderLayer = new RenderLayer(in_Parent);
 		
+		VView.GetInstance().Add(new MyFrameAction());
 //		windowHandle = in_Parent.handle;
 //		
 //		renderAction = new VRenderFrameAction(windowHandle);
