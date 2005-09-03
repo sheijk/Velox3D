@@ -82,10 +82,8 @@ void VView::FrameUpdateLoop()
 		m_NewFrameActions.clear();
 		m_bInitCalled = true;
 		
-		for_each(m_FrameActions.begin(), m_FrameActions.end(), mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame));
-			
 		// tell all frame actions to execute
-		FrameActions::iterator actionIter = m_FrameActions.begin();
+		for_each(m_FrameActions.begin(), m_FrameActions.end(), mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame));
 		
 		try
 		{

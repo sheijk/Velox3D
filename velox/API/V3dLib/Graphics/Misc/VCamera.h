@@ -4,6 +4,7 @@
 #include <v3d/Core/VTypes.h>
 #include <v3d/Math/VMatrix.h>
 #include <v3d/Math/VVector.h>
+#include <V3dLib/Math/VRBTransform.h>
 #include <V3dLib/Math/VVectorOps.h>
 #include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Misc/IVCamera.h>
@@ -47,6 +48,9 @@ public:
 	virtual Vector GetPosition() const;
 	virtual Vector GetViewDirection() const;
 	virtual Vector GetUpVector() const;
+
+	math::VRBTransform GetTransform() const;
+	void SetTransform(const math::VRBTransform& transform);
 
 private:
 

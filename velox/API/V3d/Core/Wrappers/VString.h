@@ -57,6 +57,12 @@ VString operator+(const VString& in_VStr, const vchar* in_pcChar);
 
 vbool operator==(const VString& left, const VString& right);
 vbool operator!=(const VString& left, const VString& right);
+
+vbool operator==(const VString& left, VStringParam right);
+vbool operator!=(const VString& left, VStringParam right);
+
+vbool operator==(VStringParam left, const VString& right);
+vbool operator!=(VStringParam left, const VString& right);
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------

@@ -35,6 +35,11 @@ vbool HasAttributeWithValue(
 							VStringParam in_strAttribName,
 							const T& in_ExpectedValue);
 
+/**
+ * Reads out the given xml element and writes it to an xml file
+ */
+void SaveXMLElementToFile(IVXMLElement* in_pELement, VStringParam in_strFileName);
+
 //-----------------------------------------------------------------------------
 #include "XMLUtils.inl"
 //-----------------------------------------------------------------------------

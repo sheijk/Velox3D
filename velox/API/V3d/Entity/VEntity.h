@@ -42,6 +42,10 @@ public:
 	/** Adds a part to the entity. Entity will delete part */
 	void AddPart(const std::string& in_Id, PartPtr in_pPart);
 
+	/** Adds a part using it's class default part id (see implementation below */
+	template<typename PartType>
+	void AddPart(VSharedPtr<PartType> in_pPart);
+
 	/** Removes the part with the given id */
 	void RemovePart(const std::string& in_Id);
 
@@ -77,6 +81,15 @@ private:
 	// put util functions in helper class to keep changes local to VEntity.cpp
 	friend class ::v3d::entity::VEntityHelper;
 };
+
+//-----------------------------------------------------------------------------
+
+template<typename PartType>
+void VEntity::AddPart(VSharedPtr<PartType> in_pPart)
+{
+	// the part's class neeed a "static std::string GetDefaultId()" method
+	AddPart(PartType::GetDefaultId(), in_pPart);
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

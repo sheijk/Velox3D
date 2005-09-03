@@ -7,6 +7,7 @@
 #include <v3d/Graphics.h>
 #include <V3dLib/Graphics/Misc/VCamera.h>
 
+#include <string>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -26,6 +27,7 @@ class VKeyboardCamera
 {
 public:
 	VKeyboardCamera(input::IVInputManager& in_InputDevice);
+	virtual ~VKeyboardCamera();
 
 	void Move(float in_fSeconds);
 
@@ -45,6 +47,8 @@ public:
 
 private:
 	void QueryButtons(input::IVInputManager& in_pInputManager);
+	void LoadCameraPositions(const std::string& in_strFileName);
+	void SaveCameraPositions(const std::string& in_strFileName);
 
 	vfloat32 m_fMovementSpeed;
 	vfloat32 m_fRotationSpeedX;
@@ -73,6 +77,12 @@ private:
 	input::IVButton* m_pRollRightButton2;
 	input::IVRelativeAxis* m_pMouseXAxis;
 	input::IVRelativeAxis* m_pMouseYAxis;
+
+	std::vector<input::IVButton*> m_GotoButtons;
+	input::IVButton* m_pSavePosModifierButton;
+
+	typedef std::map<vuint, math::VRBTransform> SavedOrientationMap;
+	SavedOrientationMap m_SavedOrientations;
 
 	graphics::VCamera m_Camera;
 };

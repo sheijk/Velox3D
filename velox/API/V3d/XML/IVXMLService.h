@@ -79,6 +79,7 @@ public:
 	 */
 	virtual IVXMLWriterPtr CreateXMLWriter(IVStreamPtr pStream) = 0;
 
+	virtual VSharedPtr<IVXMLElement> CreateEmptyElement(VStringParam in_strName = 0) = 0;
 protected:
 	/**
 	* a protected constructor is needed to pass the parameters to the 

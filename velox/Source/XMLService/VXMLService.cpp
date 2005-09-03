@@ -30,6 +30,11 @@ VXMLService::~VXMLService()
 {
 }
 
+VSharedPtr<IVXMLElement> VXMLService::CreateEmptyElement(VStringParam in_strName)
+{
+	return SharedPtr(new VXMLElement(in_strName));
+}
+
 /**
  * Creates the writer class that writes a xml file to a local data 
  * file with specified file name.

@@ -150,6 +150,26 @@ vbool operator!=(const VString& left, const VString& right)
 	return ! (left == right);
 }
 
+vbool operator==(const VString& left, VStringParam right)
+{
+	return left == VString(right);
+}
+
+vbool operator!=(const VString& left, VStringParam right)
+{
+	return left != VString(right);
+}
+
+vbool operator==(VStringParam left, const VString& right)
+{
+	return VString(left) == right;
+}
+
+vbool operator!=(VStringParam left, const VString& right)
+{
+	return VString(left) != right;
+}
+
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------

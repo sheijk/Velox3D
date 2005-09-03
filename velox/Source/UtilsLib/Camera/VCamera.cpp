@@ -6,6 +6,7 @@
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
+using namespace math;
 
 VCamera::VCamera(vfloat32 x, vfloat32 y, vfloat32 z)
 		: m_fPiDiv180((vfloat32) 3.141592654 /(vfloat32) 180)
@@ -243,6 +244,18 @@ void VCamera::CalculateMatrix() const
 
 	m_ViewMatrix = r;
 
+}
+
+VRBTransform VCamera::GetTransform() const
+{
+	return VRBTransform(GetPosition(), m_ViewVector, m_UpVector);
+}
+
+void VCamera::SetTransform(const VRBTransform& transform)
+{
+	Move(transform.GetPosition().GetX(), transform.GetPosition().GetY(), transform.GetPosition().GetZ());
+	m_ViewVector = transform.GetZAxis() * -1;
+	m_UpVector = transform.GetYAxis();
 }
 
 VMatrix44f& VCamera::TransformMatrix()

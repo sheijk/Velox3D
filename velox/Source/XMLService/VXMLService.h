@@ -35,6 +35,7 @@ public:
 	virtual IVXMLWriterPtr CreateXMLWriter(VStringParam FileName);
 	virtual IVXMLWriterPtr CreateXMLWriter(IVStreamPtr pStream);
 
+	virtual VSharedPtr<IVXMLElement> CreateEmptyElement(VStringParam in_strName = 0);
 private: 
 	VXMLElement* BeginTranslation(TiXmlDocument& in_Doc);
 
