@@ -78,11 +78,6 @@ void VMessage::AddProperty(const std::string& in_strName, const utils::VStringVa
 	}
 }
 
-void VMessage::AddProperty(const std::string& in_strName, const std::string& in_strDefault)
-{
-	AddProperty(in_strName, VStringValue(in_strDefault));
-}
-
 VRangeIterator<const std::string> VMessage::PropertyIterator() const
 {
 	return CreateAccesssorIterator<VPair1stAccessor, const std::string>(

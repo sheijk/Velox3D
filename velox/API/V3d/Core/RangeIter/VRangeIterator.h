@@ -7,6 +7,7 @@
 #include <V3d/Core/RangeIter/VSTLRangePolicy.h>
 #include <V3d/Core/RangeIter/VSTLRangeDerefPolicy.h>
 
+#include <V3d/Core/VException.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -37,13 +38,28 @@ template<typename T>
 	 * accidently
 	 */
 	VRangeIterator(); 
-	
+
+	mutable vuint m_nRepeatedGets;
+
+	void CheckAccess() const
+	{
+		++m_nRepeatedGets;
+
+		if( m_nRepeatedGets > 100 )
+		{
+			V3D_THROW(VException, "Detected more than 100 accesses to an "
+				"iterator without progressing to the next element, cancelling "
+				"du to infinity loop");
+		}
+	}
+
 public:
 	explicit VRangeIterator(const IVRangeIteratorPolicy<T>& in_IterImpl)
 	{
-			m_pIteratorImpl = in_IterImpl.Clone();
-			
-			V3D_ASSERT(m_pIteratorImpl != 0);
+		m_pIteratorImpl = in_IterImpl.Clone();
+		m_nRepeatedGets = 0;
+		
+		V3D_ASSERT(m_pIteratorImpl != 0);
 	}
 	
 	~VRangeIterator()
@@ -55,6 +71,7 @@ public:
 	VRangeIterator(const VRangeIterator& in_Source)
 	{
 		m_pIteratorImpl = in_Source.m_pIteratorImpl->Clone();
+		m_nRepeatedGets = 0;
 		
 		V3D_ASSERT(m_pIteratorImpl != 0);
 	}
@@ -63,17 +80,20 @@ public:
 	{
 		delete m_pIteratorImpl;
 		m_pIteratorImpl = in_Source.m_pIteratorImpl->Clone();
+		m_nRepeatedGets = 0;
 		
 		V3D_ASSERT(m_pIteratorImpl != 0);
 	}
 	
 	void operator++()
 	{
+		m_nRepeatedGets = 0;
 		m_pIteratorImpl->Proceed();
 	}
 	
 	void operator++(int)
 	{
+		m_nRepeatedGets = 0;
 		m_pIteratorImpl->Proceed();
 	}
 	
@@ -84,11 +104,13 @@ public:
 	
 	T& operator*() const
 	{
+		CheckAccess();
 		return *m_pIteratorImpl->Get();
 	}
 	
 	T* operator->() const
 	{
+		CheckAccess();
 		return m_pIteratorImpl->Get();
 	}
 	

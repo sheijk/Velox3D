@@ -80,6 +80,7 @@ namespace v3d {
 
 // core types
 //-----------------------------------------------------------------------------
+#define V3D_DEPRECATED
 
 %include "../../API/V3d/Core/VTypes.h"
 %include "../../API/V3d/Core/VException.h"
@@ -228,15 +229,25 @@ namespace v3d {
 %template(VXMLElementPtr) v3d::VSharedPtr<v3d::xml::IVXMLElement>;
 %include "../../API/V3d/XML/IVXMLService.h"
 
+%include "../../API/V3d/XML/XMLUtils.h"
+
 // messaging
 //-----------------------------------------------------------------------------
 
 %include "../../API/V3d/Messaging/VMessage.h"
+%extend v3d::messaging::VMessage {
+	%template(AddProperty) AddProperty<std::string>;
+	%template(AddProperty) AddProperty<int>;
+	%template(AddProperty) AddProperty<float>;
+	
+	%template(GetAsString) GetAs<std::string>;
+	%template(GetAsInt) GetAs<int>;
+	%template(GetAsFloat) GetAs<float>;
+};
 %include "../../API/V3d/Messaging/VProtocol.h"
 
 // graphics
 //-----------------------------------------------------------------------------
-#define V3D_DEPRECATED
 %include "../../API/V3d/Graphics/IVDevice.h"
 
 // entity system

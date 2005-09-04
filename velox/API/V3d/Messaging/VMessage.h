@@ -31,11 +31,17 @@ public:
 	virtual ~VMessage();
 
 	void AddProperty(const std::string& in_strName, const utils::VStringValue& in_Default);
-	void AddProperty(const std::string& in_strName, const std::string& in_strDefault);
+
+	template<typename T>
+	void AddProperty(const std::string& in_strName, T in_Value);
 
 	void Set(const std::string& in_strName, const utils::VStringValue& in_Value);
 	void Set(const std::string& in_strName, const std::string& in_strValue);
+
 	utils::VStringValue Get(const std::string& inin_strName) const;
+
+	template<typename T>
+	T GetAs(const std::string& in_strName) const;
 
 	vbool HasProperty(const std::string& in_strName) const;
 
@@ -45,6 +51,19 @@ private:
 
     PropertyMap m_Properties;
 };
+
+//-----------------------------------------------------------------------------
+template<typename T>
+T VMessage::GetAs(const std::string& in_strName) const
+{
+	return Get(in_strName).Get<T>();
+}
+
+template<typename T>
+void VMessage::AddProperty(const std::string& in_strName, T in_Value)
+{
+	AddProperty(in_strName, utils::VStringValue(in_Value));
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::messaging

@@ -49,6 +49,8 @@ public:
 	 */
 	void SetTransform(const math::VRBTransform& in_Transformation);
 
+	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
+
 	static std::string GetDefaultId();
 
 private:

@@ -19,7 +19,7 @@ cppfiles : *.h *.cpp
 	cp $(BUILDDIR)/*.dll $(DLLDEST)
 	cp $(BUILDDIR)/*.dll $(DLLDEST)/EclipsePlugin
 	echo
-	echo Fertig!
+	echo Successful compilation on `date`
 
 cleanswig :
 	rm -rdf $(JAVASRC)/*

@@ -2,6 +2,8 @@
 #define V3D_VVECTOROPS_01_22_05_H
 //-----------------------------------------------------------------------------
 #include <V3d/Math/VVector.h>
+
+#include <sstream>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -320,6 +322,52 @@ VVector<Scalar, 3>operator*
 		  )
 {
 	return vec * fac;
+}
+
+template<typename Scalar, vint Dimensions>
+std::ostream& operator<<(std::ostream& stream, const VVector<Scalar, Dimensions>& vec)
+{
+	stream << "(";
+
+	for(vint i = 0; i < Dimensions; ++i)
+	{
+		stream << (i > 0 ? "," : "") << vec.Get(i);
+	}
+
+	stream << ")";
+
+	//<< vec.Get(0) << "," << vec.Get(1) << "," << vec.Get(2) << ")";
+
+	return stream;
+}
+
+template<typename Scalar, vint Dimensions>
+std::istream& operator>>(std::istream& stream, VVector<Scalar, Dimensions>& vec)
+{
+	VVector<Scalar, Dimensions> res;
+
+	vchar testchar;
+
+	stream >> testchar;
+	if( testchar != '(' )
+		return stream;
+
+	for(vint i = 0; i < Dimensions; ++i)
+	{
+		if( i > 0 )
+		{
+			stream >> testchar;
+			if( testchar != ',' )
+				return stream;
+		}
+
+		Scalar s;
+		stream >> s;
+		res.Set(i, s);
+	}
+
+	vec = res;
+	return stream;
 }
 
 //-----------------------------------------------------------------------------

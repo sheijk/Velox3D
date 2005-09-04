@@ -32,11 +32,15 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
-- mouse navigation (translation only) fuer render layer
+04.09.05
+- szenen speichern und laden
+- xml element in datei speichern
+- body part: position im editor aendern
 
 03.09.05
 - eclipse rendering problem (hoffentlich) gefixt
 - kamerapositionen der keyboard kamera speichern
+- mouse navigation (translation only) fuer render layer
 
 01.09.05
 - scene dokumente erzeugen (per wizard)

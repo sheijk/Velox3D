@@ -75,8 +75,6 @@ void VSceneModelPart::Send(const messaging::VMessage& in_Message, messaging::VMe
 		
 	string request = in_Message.Get("type").Get<string>();
 	
-	vout << "xxx" << vendl;
-	
 	if( request == "getSettings" )
 	{
 		if( in_pAnswer == 0 )
@@ -90,11 +88,8 @@ void VSceneModelPart::Send(const messaging::VMessage& in_Message, messaging::VMe
 	}
 	else if( request == "update" )
 	{
-		vout << "set" << vendl;
-		
 		const string name = in_Message.Get("name").Get<string>();
 		const string value = in_Message.Get("value").Get<string>();
-		
 
 		try
 		{

@@ -6,5 +6,5 @@ package de.velox.editor.entity;
 import de.velox.IVXMLElement;
 
 public interface XMLSerializable {
-	void ToXML(IVXMLElement outElement);
+	void writeToXML(IVXMLElement outElement);
 }

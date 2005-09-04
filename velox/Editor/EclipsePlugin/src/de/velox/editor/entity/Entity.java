@@ -22,6 +22,30 @@ public class Entity implements XMLSerializable {
 		this.name = name;
 	}
 	
+	public Entity(IVXMLElement xml) {
+		this(xml.GetAttribute("name").GetValue().ToString());
+		
+		// for each child
+		VXMLNodeIterator node = xml.ChildBegin();
+		while( node.HasNext() ) {
+			IVXMLElement element = node.Get().ToElement();
+			final String elementName = element.GetName().AsCString();
+			
+			// if it's a part create and add part
+			if( elementName.equalsIgnoreCase("entity") ) {
+				Entity child = new Entity(element);
+				Add(child);
+			}
+			// if it's an entity create and add child
+			else if( elementName.equalsIgnoreCase("part") ) {
+				Part part = new Part(element);
+				Add(part);
+			}
+			
+			node.Next();
+		}
+	}
+	
 //	public Entity(String name, VEntity inImpl) {
 //		impl = new VEntityPtr(inImpl);
 //		this.name = name;
@@ -118,11 +142,11 @@ public class Entity implements XMLSerializable {
 		return parts.iterator();
 	}
 	
-	private static boolean valid(VEntityPtr ptr) {
+	protected static boolean valid(VEntityPtr ptr) {
 		return ptr != null && ptr.Get() != null;
 	}
 	
-	private static boolean valid(VPartPtr ptr) {
+	protected static boolean valid(VPartPtr ptr) {
 		return ptr != null && ptr.Get() != null;
 	}
 	
@@ -135,21 +159,21 @@ public class Entity implements XMLSerializable {
 		return description;
 	}
 
-	public void ToXML(IVXMLElement outElement) {
+	public void writeToXML(IVXMLElement outElement) {
 		outElement.SetName("entity");
 		
 		outElement.AddAttribute("name", new VStringValue(name));
 		
-		// add all childs
-		for(Entity child : entities) {
-			IVXMLElement childXML = outElement.AddElement("entity");
-			child.ToXML(childXML);
-		}
-		
 		// add all parts
 		for(Part part : parts) {
 			IVXMLElement partXML = outElement.AddElement("part");
-			part.ToXML(partXML);
+			part.writeToXML(partXML);
+		}
+		
+		// add all childs
+		for(Entity child : entities) {
+			IVXMLElement childXML = outElement.AddElement("entity");
+			child.writeToXML(childXML);
 		}
 	}
 }

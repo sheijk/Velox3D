@@ -330,6 +330,10 @@ void VRenderFrameAction::UpdateFrame()
 
 	if( property::GetProperty<vbool>(g_strGridPropertyName.c_str()) )
 	{
+		VMatrix44f identity;
+		math::Identity(identity);
+		
+		m_pDevice->SetMatrix(IVDevice::ModelMatrix, identity);
 		showOrientationGrid();
 	}
 	
@@ -358,15 +362,15 @@ void VRenderFrameAction::UpdateFrame()
 
 	if( m_pShooting != 0 && m_pShooting->IsActive() )
 	{
-		vout << "culling ";
+//		vout << "culling ";
 		
 		m_pShooting->Cull();
 		
-		vout << " rendering ";
+//		vout << " rendering ";
 		
 		m_pShooting->Render();
 		
-		vout << " done" << vendl;
+//		vout << " done" << vendl;
 	}
 
 	if( m_pShooting == 0 )

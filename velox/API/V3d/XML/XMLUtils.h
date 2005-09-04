@@ -40,6 +40,11 @@ vbool HasAttributeWithValue(
  */
 void SaveXMLElementToFile(IVXMLElement* in_pELement, VStringParam in_strFileName);
 
+/**
+ * Same as above but writes to a file without using the vfs
+ */
+void SaveXMLElementToFileNoVFS(IVXMLElement* in_pElement, VStringParam in_strFileName);
+
 //-----------------------------------------------------------------------------
 #include "XMLUtils.inl"
 //-----------------------------------------------------------------------------

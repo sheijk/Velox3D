@@ -472,7 +472,7 @@ public class SceneView extends VeloxViewBase {
 					XMLSerializable selected = (XMLSerializable)obj;
 					
 					IVXMLElement xmlElement = v3d.CreateXMLElement(""); 
-					selected.ToXML(xmlElement);
+					selected.writeToXML(xmlElement);
 					String source = createFormattedSource(xmlElement);
 					showMessage(source);
 				}

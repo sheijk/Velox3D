@@ -5,6 +5,8 @@
 #include <V3d/Xml/IVXMLComment.h>
 #include <V3d/Xml/IVXMLText.h>
 
+#include <sstream>
+#include <fstream>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -29,48 +31,66 @@ vfs::IVStream& operator<<(vfs::IVStream& stream, const std::string str)
 	return stream;
 }
 
-void Save(vfs::IVStream& stream, IVXMLNode& node, const string& indent);
+void Save(std::ostream& stream, IVXMLNode& node, const string& indent);
 
-void Save(vfs::IVStream& stream, IVXMLElement& element, const string& indent)
+void Save(std::ostream& stream, IVXMLElement& element, const string& indent)
 {
+	using namespace std;
+	
+	string name = element.GetName().AsCString();
+
 	stream << indent << "<" << element.GetName();
 
 	// save all attributes
 	VRangeIterator<IVXMLAttribute> attrib = element.AttributeBegin();
-	vbool first = true;
 	while( attrib.HasNext() )
 	{
-		stream << (first ? "" : " ")
-			<< attrib->GetName() << "=" << attrib->GetValue().Get<string>();
+		string attribName = attrib->GetName().AsCString();
+		string attribValue = attrib->GetValue().Get<string>();
+
+		stream << " " << attribName << "=\"" << attribValue << "\"";
+			
+		++attrib;
 	}
 
 	vbool hasChilds = false;
 
 	// save all child nodes
 	VRangeIterator<IVXMLNode> child = element.ChildBegin();
-	while( child.HasNext() )
-	{
-		hasChilds = true;
-		Save(stream, *child, indent + "\t");
-	}
 
-	if( hasChilds )
+	// if the element has childs
+	if( child.HasNext() )
+	{
+		stream << ">\n";
+
+		while( child.HasNext() )
+		{
+			hasChilds = true;
+			Save(stream, *child, indent + "\t");
+			
+			++child;
+		}
+
 		stream << indent << "</" << element.GetName() << ">\n";
+	}
+	// if the element has no childs
 	else
-		stream << indent << ">\n";
+	{
+		stream << "/>\n";
+	}
 }
 
-void Save(vfs::IVStream& stream, IVXMLComment& comment, const string& indent)
+void Save(std::ostream& stream, IVXMLComment& comment, const string& indent)
 {
 	stream << indent << "<!== " << comment.GetComment() << " -->\n";
 }
 
-void Save(vfs::IVStream& stream, IVXMLText& text, const string& indent)
+void Save(std::ostream& stream, IVXMLText& text, const string& indent)
 {
 	stream << indent << text.GetText() << "\n";
 }
 
-void Save(vfs::IVStream& stream, IVXMLNode& node, const string& indent)
+void Save(std::ostream& stream, IVXMLNode& node, const string& indent)
 {
 	if( node.ToElement() != 0 )
 		Save(stream, *node.ToElement(), indent);
@@ -87,7 +107,17 @@ void SaveXMLElementToFile(IVXMLElement* in_pELement, VStringParam in_strFileName
 
 	*pFileStream << "<?" << "xml version=\"1.0\"?>" <<"\n";
 
-	Save(*pFileStream, *in_pELement, "");
+	std::stringstream stream;
+	Save(stream, *in_pELement, "");
+
+	*pFileStream << stream.str();
+}
+
+void SaveXMLElementToFileNoVFS(IVXMLElement* in_pElement, VStringParam in_strFileName)
+{
+	std::ofstream file(in_strFileName);
+
+    Save(file, *in_pElement, "");
 }
 
 //-----------------------------------------------------------------------------

@@ -38,6 +38,34 @@ public class Part implements XMLSerializable {
 		updateSettingsFromPart();
 	}
 	
+	public Part(IVXMLElement xml)
+	{
+		this(xml.GetAttribute("type").GetValue().ToString());
+		settings.clear();
+		
+		// for each attribute
+		VXMLAttributeIterator attrib = xml.AttributeBegin();
+		while( attrib.HasNext() ) {
+			// get name and value
+			final String name = attrib.Get().GetName().toString();
+			final String value = attrib.Get().GetValue().ToString();
+			
+			// store as setting
+			Setting setting = new Setting(this, name, value); 
+			settings.add(setting);
+			
+			// send change message to part
+			updateSetting(setting);
+			
+			attrib.Next();
+		}
+		
+		// refresh settings from part
+		synchronize();
+		
+		//TODO: check for differences and warn if any changes detected
+	}
+	
 	public void updateSettingsFromPart() {
 		if( ! valid(impl) )
 			return;
@@ -129,7 +157,7 @@ public class Part implements XMLSerializable {
 		owner = newOwner;
 	}
 	
-	public void ToXML(IVXMLElement outElement) {
+	public void writeToXML(IVXMLElement outElement) {
 		outElement.SetName("part");
 		
 		outElement.AddAttribute("type", new VStringValue(GetType()));
