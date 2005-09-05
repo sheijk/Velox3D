@@ -28,8 +28,11 @@ public:
 	typedef gmtl::Vec<Scalar, Dimension> VecImpl;
 
 	VecImpl m_Vec;
-	
+
+#ifndef SWIG	
 	VVector(const VecImpl& implv) : m_Vec(implv) {}
+#endif
+
 public:
 	VVector() {}
 	~VVector() {}
@@ -68,6 +71,8 @@ public:
 };
 
 //------------------------------------------------------------------------------
+#ifndef SWIG
+
 template<typename Scalar>
 class VVector<Scalar, 3>
 {
@@ -94,6 +99,13 @@ public:
 	void Set(vuint in_Pos, Scalar in_Val)
 	{
 		m_Vec[in_Pos] = in_Val;
+	}
+	
+	void Set(Scalar x, Scalar y, Scalar z)
+	{
+		SetX(x);
+		SetY(y);
+		SetZ(z);
 	}
 
 	Scalar Get(vuint in_Pos) const
@@ -130,6 +142,8 @@ public:
 		return *this;
 	}
 };
+
+#endif // SWIG
 		
 typedef VVector<vfloat32, 2> VVector2f;
 typedef VVector<vfloat32, 3> VVector3f;

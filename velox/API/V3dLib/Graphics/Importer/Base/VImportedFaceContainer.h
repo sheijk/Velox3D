@@ -44,7 +44,7 @@ public:
 	 * creates a optimized mesh for rendering by taking and combining
 	 * equal materials and constructing one mesh description
 	 */
-	void CreateOptimizedMeshes(graphics::VModel* in_pModel);
+	void CreateOptimizedMeshes(graphics::VModel* in_pModel, VStringParam in_strResource);
 	void CreateOptimizedResource();
 
 private:

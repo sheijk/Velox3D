@@ -352,8 +352,8 @@ void VRenderFrameAction::UpdateFrame()
 		light2.SetSpecular(VColor4f(1.0f, .4f, .4f, 1.0f));
 		light2.SetPosition(VVector3f(.0f, -.5f, 3.0f));	
 
-		m_pDevice->ApplyLight(IVDevice::Light0, &light);
-		m_pDevice->ApplyLight(IVDevice::Light1, &light2);
+//		m_pDevice->ApplyLight(IVDevice::Light0, &light);
+//		m_pDevice->ApplyLight(IVDevice::Light1, &light2);
 
 //		RenderModel(*m_pDevice, *GetResourceData<VModel>("/data/afighter.3ds"));
 

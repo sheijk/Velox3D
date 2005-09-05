@@ -182,7 +182,9 @@ void VImportedFaceContainer::CreateMeshes(graphics::VModel* in_pModel)
 	}
 }
 
-void VImportedFaceContainer::CreateOptimizedMeshes(graphics::VModel* in_pModel)
+void VImportedFaceContainer::CreateOptimizedMeshes(
+	graphics::VModel* in_pModel, VStringParam in_strResource
+	)
 {
 	VMaterialMap mymap;
 
@@ -201,7 +203,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(graphics::VModel* in_pModel)
 	VMaterialMap::MaterialList::iterator i = mymap.GetMaterialFaceMap().begin();
 	int nFaceCount=0;
 
-	V3D_ASSERT(m_FaceList.size());
+	V3D_ASSERT(m_FaceList.size() != 0);
 	if(!m_FaceList.size())
 		return;
     		
@@ -271,7 +273,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(graphics::VModel* in_pModel)
 		}
 
 		std::stringstream ss;
-		std::string name;
+		std::string name = in_strResource;
 		name.append("/testmodel");
         ss << nFaceCount;
 		name.append(ss.str());

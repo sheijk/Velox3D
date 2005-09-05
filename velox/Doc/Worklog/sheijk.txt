@@ -32,6 +32,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+05.09.05
+- 3ds loader fix: meshes werden in die resource (bzw. unterresource) geladen,
+  in welcher das model liegt
+
 04.09.05
 - szenen speichern und laden
 - xml element in datei speichern

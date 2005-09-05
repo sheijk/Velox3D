@@ -123,7 +123,7 @@ public class RenderLayer {
 				if( (e.stateMask & SWT.ALT)  != 0 ) {
 					float t = dy;
 					dy = dz;
-					dz = - t;
+					dz = t;
 				}
 				
 //				System.out.println(" dx=" + dx + " dy=" + dy);

@@ -65,7 +65,7 @@ namespace {
 	void CheckResourceName(VStringParam in_strName)
 	{
 		V3D_ASSERT(0 != in_strName);
-		V3D_ASSERT(in_strName[0] == '/');
+//		V3D_ASSERT(in_strName[0] == '/');
 	}
 } // anonymous namespace
 

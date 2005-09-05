@@ -269,7 +269,7 @@ vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 
 void VImported3DS::CreateMeshResourceName(VStringParam in_sName)
 {
-	m_sMeshResourceName += "/models";
+	//m_sMeshResourceName += "/models";
 	m_sMeshResourceName += in_sName;
 }
 
@@ -331,7 +331,7 @@ vbool VImported3DS::CreateModel(
 	if(LoadFile((in_sFilename)))
 	{
 //		m_FaceContainer.CreateMeshes(in_pModel);
-   		m_FaceContainer.CreateOptimizedMeshes(in_pModel);
+   		m_FaceContainer.CreateOptimizedMeshes(in_pModel, in_sFilename);
 		return true;
 	}
 

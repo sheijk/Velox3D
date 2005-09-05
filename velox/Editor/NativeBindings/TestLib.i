@@ -113,6 +113,9 @@ namespace v3d {
 %ignore operator+(const VString& in_VStr, const vchar* in_pcChar);
 %ignore operator==(const VString& left, const VString& right);
 %ignore operator!=(const VString& left, const VString& right);
+%ignore operator!=(const VString& left, VStringParam right);
+%ignore operator!=(VStringParam left, const VString& right);
+%rename(equals) v3d::VString::operator==;
 %include "../../API/V3d/Core/Wrappers/VString.h"
 
 %rename(Assign) v3d::VSharedPtr::operator=;
@@ -129,11 +132,60 @@ namespace v3d {
 
 // math
 //-----------------------------------------------------------------------------
+%ignore v3d::VVector::m_Vec;
+%ignore v3d::VVector::operator[];
+%ignore v3d::VVector::operator=;
 %include "../../API/V3d/Math/VVector.h"
+%include "../../API/V3dLib/Math/VVectorOps.h"
+%extend v3d::VVector {
+	void Assign(const VVector& o) { *self = o; }
+	
+	void Add(const VVector& o) { *self += o; }
+	void Sub(const VVector& o) { *self -= o; }
+	VVector Plus(const VVector& o) { return *self + o; }
+	VVector Minus(const VVector& o) { return *self - o; }
+	
+	Scalar Dot(const VVector& o) { return Dot(*self, o); }
+	
+	void Scale(float factor) { Mult(*self, factor); }
+	void Scale(int factor) { Mult(*self, factor); }
+	VVector Times(float factor) { return *self * factor; }
+	VVector Times(int factor) { return *self * factor; }
+	
+	void Normalize() { Normalize(*self); }
+	VVector Normalized() { return Normalized(*self); }
+	
+	float Length() { return Length(*self); }
+	float LengthSquared() { return LengthSquared(*self); }
+};
 %template(VVector4f) v3d::VVector<vfloat32, 4>;
 %template(VVector3f) v3d::VVector<vfloat32, 3>;
-%include "../../API/V3dLib/Math/VVectorOps.h"
+%extend v3d::VVector<vfloat32, 3> {
+	VVector3f(float x, float y, float z) {
+		self->Set(x, y, z);
+	}
+	
+	void SetX(float x) { self->SetX(x); }
+	void SetY(float y) { self->SetY(y); }
+	void SetZ(float z) { self->SetZ(z); }
+	
+	float GetX() { return self->GetX(); }
+	float GetY() { return self->GetY(); }
+	float GetZ() { return self->GetZ(); }
+	
+	void Set(float x, float y, float z) {
+		self->SetX(x); self->SetY(y); self->SetZ(z);
+	}
+	
+	void ApplyCross(const VVector3f& left, const VVector3f& right) {
+		ApplyCross(*self, left, right);
+	}
+	VVector3f Cross(const VVector3f& right) {
+		return Cross(*self, right);
+	}
+}
 
+%rename(Assign) v3d::VMatrix::operator=;
 %include "../../API/V3d/Math/VMatrix.h"
 %include "../../API/V3d/Math/VMatrixOps.h"
 %extend v3d::VMatrix {
