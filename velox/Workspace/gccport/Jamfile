@@ -8,7 +8,7 @@
 project Velox
     :
     requirements
-    <include>../API
+    <include>../../API
     ;
 
     
@@ -18,31 +18,28 @@ lib CoreLib
     : # source files 
     ../../Source/Core/MemManager.cpp
     ../../Source/Core/VIOStream.cpp
-    ../../Source/Core/VLogging.cpp
-    ../../Source/Core/VTypeInfo.cpp
     ../../Source/Core/VVeloxApp.cpp
-    ../../Source/Core/Error/VAssert.cpp
-    ../../Source/Core/Error/VException.cpp
     ../../Source/Core/ObjectRegistry/VNamedObject.cpp
     ../../Source/Core/ObjectRegistry/VObjectKey.cpp
     ../../Source/Core/ObjectRegistry/VObjectRegistry.cpp
     ../../Source/Core/ObjectRegistry/VObjectRegistryExceptions.cpp
+    ../../Source/Core/Error/VAssert.cpp
+    ../../Source/Core/Error/VException.cpp
+    ../../Source/Core/VLogging.cpp
     ../../Source/Core/Wrappers/VString.cpp
-
+    
     ;
 
 # sub-project: KernelLib
 #------------------------------------------------------------------------------
 lib KernelLib
     : # source files 
+    ../../Source/Module/VeloxModule.cpp
     ../../Source/Kernel/VKernel.cpp
     ../../Source/Kernel/VKernelIniReader.cpp
-    ../../Source/Kernel/VServiceProxy_LINUX.cpp
-    ../../Source/Module/VeloxModule.cpp
-
+    ../../Source/Kernel/linux/VServiceProxyLinux.cpp
+    
     ;
-
-
 
 # Object targets
 # WARNING: this section is replaced entirely in the sync process
@@ -52,20 +49,19 @@ lib KernelLib
 # CoreLib
 obj MemManager : ../../Source/Core/MemManager.cpp ;
 obj VIOStream : ../../Source/Core/VIOStream.cpp ;
-obj VLogging : ../../Source/Core/VLogging.cpp ;
-obj VTypeInfo : ../../Source/Core/VTypeInfo.cpp ;
 obj VVeloxApp : ../../Source/Core/VVeloxApp.cpp ;
-obj VAssert : ../../Source/Core/Error/VAssert.cpp ;
-obj VException : ../../Source/Core/Error/VException.cpp ;
 obj VNamedObject : ../../Source/Core/ObjectRegistry/VNamedObject.cpp ;
 obj VObjectKey : ../../Source/Core/ObjectRegistry/VObjectKey.cpp ;
 obj VObjectRegistry : ../../Source/Core/ObjectRegistry/VObjectRegistry.cpp ;
 obj VObjectRegistryExceptions : ../../Source/Core/ObjectRegistry/VObjectRegistryExceptions.cpp ;
+obj VAssert : ../../Source/Core/Error/VAssert.cpp ;
+obj VException : ../../Source/Core/Error/VException.cpp ;
+obj VLogging : ../../Source/Core/VLogging.cpp ;
 obj VString : ../../Source/Core/Wrappers/VString.cpp ;
 
 # KernelLib
+obj VeloxModule : ../../Source/Module/VeloxModule.cpp ;
 obj VKernel : ../../Source/Kernel/VKernel.cpp ;
 obj VKernelIniReader : ../../Source/Kernel/VKernelIniReader.cpp ;
-obj VServiceProxy_LINUX : ../../Source/Kernel/VServiceProxy_LINUX.cpp ;
-obj VeloxModule : ../../Source/Module/VeloxModule.cpp ;
+obj VServiceProxyLinux : ../../Source/Kernel/linux/VServiceProxyLinux.cpp ;
 
