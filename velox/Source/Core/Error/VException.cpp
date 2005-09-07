@@ -1,10 +1,14 @@
-#include <v3d/Core/VException.h>
+#include <V3d/Core/VException.h>
 //-----------------------------------------------------------------------------
-#include <windows.h>
 
 #include <sstream>
+
+#ifdef V3D_WIN32
+#include <windows.h>
+#endif
+
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -27,8 +31,11 @@ VException::VException(
 	std::stringstream message;
 	message << "Throwing Exception from [" << in_strFile << "|"
 		<< in_nLine << "]: '" << in_strError << "'\n";
-	
+
+// FIXME: don't use #ifdef whithin methods
+#ifdef V3D_WIN32 
 	OutputDebugString(message.str().c_str());
+#endif // V3D_WIN32
 }
 
 vuint VException::GetErrorLine() const

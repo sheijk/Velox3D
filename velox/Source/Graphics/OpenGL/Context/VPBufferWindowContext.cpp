@@ -1,46 +1,44 @@
 #include "VPBufferWindowContext.h"
 
-#include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings) : 
-	m_PBufferDeviceContext(0), 
-	m_WindowDeviceContext(in_DeviceContext),
-	m_PBufferRenderContext(0), 
-	m_DisplaySettings(*in_pDisplaySettings)
+VPBufferWindowContext::VPBufferWindowContext(const VDisplaySettings* in_pDisplaySettings) : m_devicecontext(0), m_rendercontext(0), m_pbufferdevicecontext(0), m_pbufferrendercontext(0), m_DisplaySettings(*in_pDisplaySettings)
 {
+	m_devicecontext = wglGetCurrentDC();
+	m_rendercontext = wglGetCurrentContext();
+
 	const int Format[] = {
 	    WGL_SUPPORT_OPENGL_ARB, true,
         WGL_DRAW_TO_PBUFFER_ARB, true,
-		WGL_BIND_TO_TEXTURE_RGB_ARB, true,
-        WGL_COLOR_BITS_ARB, m_DisplaySettings.GetBitsPerPixel(),
+        WGL_RED_BITS_ARB, 16,
+        WGL_GREEN_BITS_ARB, 16,
+        WGL_BLUE_BITS_ARB, 16,
+        WGL_ALPHA_BITS_ARB, 16,
 		WGL_DEPTH_BITS_ARB, m_DisplaySettings.GetDepthBits(),
 		WGL_STENCIL_BITS_ARB, m_DisplaySettings.GetStencilBits(),
-        WGL_DOUBLE_BUFFER_ARB, false,
+        WGL_DOUBLE_BUFFER_ARB, true,
 		0
 	};
 
-	vuint Count;
-	vint Pixelformat;
+	vuint count = 0;
+	vint pixelformat = 0;
 	
 	//select Pixel Buffer Format
-//	Pixelformat = ChoosePixelFormat(in_DeviceContext, Format);
-	wglChoosePixelFormatARB(in_DeviceContext, Format, 0, 1, &Pixelformat, &Count);
+	wglChoosePixelFormatARB(m_devicecontext, reinterpret_cast<const int*>(&Format), 0, 1, &pixelformat, &count);
 
 	int Attribute[] = 
 	{
-		WGL_TEXTURE_FORMAT_ARB, WGL_TEXTURE_RGB_ARB,
-		WGL_TEXTURE_TARGET_ARB, WGL_TEXTURE_2D_ARB,
-        0
+		WGL_PBUFFER_LARGEST_ARB, true,
+        0, 0 
 	};
 
 	//create Pixel Buffer
-	m_PixelBuffer = wglCreatePbufferARB(in_DeviceContext, Pixelformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
+	m_pixelbuffer = wglCreatePbufferARB(m_devicecontext, pixelformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
 
-	if(m_PixelBuffer == 0)
+	if(m_pixelbuffer == 0)
 	{
 		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Buffer wasn't created!");
 	}
@@ -50,9 +48,9 @@ VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphic
 	}
 
 	//get Pixel Buffer Device Context
-	m_PBufferDeviceContext = wglGetPbufferDCARB(m_PixelBuffer);
+	m_pbufferdevicecontext = wglGetPbufferDCARB(m_pixelbuffer);
 
-	if(m_PBufferDeviceContext == 0)
+	if(m_pbufferdevicecontext == 0)
 	{
 		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Buffer Device Context wasn't created!");
 	}
@@ -62,9 +60,9 @@ VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphic
 	}
 
 	//get Pixel Buffer Render Context
-	m_PBufferRenderContext = wglCreateContext(m_PBufferDeviceContext);
+	m_pbufferrendercontext = wglCreateContext(m_pbufferdevicecontext);
 
-	if(m_PBufferRenderContext == 0)
+	if(m_pbufferrendercontext == 0)
 	{
 		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Buffer Render Context wasn't created!");
 	}
@@ -72,36 +70,34 @@ VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphic
 	{
 		vout << "OpenGL Pixel Buffer Render Context was created!" << vendl;
 	}
+
+	wglShareLists(m_rendercontext, m_pbufferrendercontext);
 }
 
 VPBufferWindowContext::~VPBufferWindowContext()
 {
-	wglDeleteContext(m_PBufferRenderContext);
-    wglReleasePbufferDCARB (m_PixelBuffer, m_PBufferDeviceContext);
-    wglDestroyPbufferARB(m_PixelBuffer); 
+	wglDeleteContext(m_pbufferrendercontext);
+    wglReleasePbufferDCARB(m_pixelbuffer, m_pbufferdevicecontext);
+    wglDestroyPbufferARB(m_pixelbuffer); 
 }
 
 void VPBufferWindowContext::MakeCurrent()
 {
 	vint flag = 0;
-	wglQueryPbufferARB(m_PixelBuffer, WGL_PBUFFER_LOST_ARB, &flag);
+	wglQueryPbufferARB(m_pixelbuffer, WGL_PBUFFER_LOST_ARB, &flag);
 
 	if(flag)
 	{
-		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Buffer Object is invalid!");
+		//Destroy the Pixel Buffer
+		//create new Pixel Buffer
 	}
 
-	wglMakeCurrent(m_PBufferDeviceContext, m_PBufferRenderContext);
-}
+	wglMakeCurrent(m_pbufferdevicecontext, m_pbufferrendercontext);
 
-void VPBufferWindowContext::SwapBuffers()
-{
-	//Dummy
-}
+	glViewport(m_DisplaySettings.GetX(), m_DisplaySettings.GetY(), m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
 
-IVRenderContext* VPBufferWindowContext::CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings)
-{
-	return new VPBufferWindowContext(m_WindowDeviceContext, in_pDisplaySettings);
+    glDrawBuffer(GL_FRONT);
+    glReadBuffer(GL_FRONT); 
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

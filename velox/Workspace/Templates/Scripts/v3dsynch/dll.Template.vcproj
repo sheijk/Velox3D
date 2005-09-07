@@ -14,13 +14,13 @@
 			Name="Debug|Win32"
 			OutputDirectory="%%relpath%%/Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="%%relpath%%/Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -33,12 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/%%name%%.dll"
+				OutputFile="$(OutDir)/%%name%%.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="%%relpath%%/Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/%%name%%.pdb"
-				SubSystem="2"
+				SubSystem="1"
 				ImportLibrary="$(OutDir)/%%name%%.lib"
 				TargetMachine="1"/>
 			<Tool
@@ -71,7 +70,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -82,9 +81,8 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/%%name%%.dll"
+				OutputFile="$(OutDir)/%%name%%.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="%%relpath%%/Local/ExternalLibs/Lib"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -116,5 +114,24 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="Implementation"
+			Filter="cpp;h">
+			<File
+				RelativePath="%%name%%.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="ModuleImpl"
+			Filter="">
+			<File
+				RelativePath="%%relpath%%\Source\Kernel\main.cpp">
+			</File>
+			<File
+				RelativePath="%%relpath%%\Source\Module\VeloxModule.cpp">
+			</File>
+		</Filter>
 	</Files>
+	<Globals>
+	</Globals>
 </VisualStudioProject>

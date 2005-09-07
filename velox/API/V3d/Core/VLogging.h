@@ -1,7 +1,7 @@
 #ifndef V3D_VLOGGING_H
 #define V3D_VLOGGING_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -21,3 +21,4 @@ void SendDebugMessage(VStringParam in_pcMessage);
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VLOGGING_H
+

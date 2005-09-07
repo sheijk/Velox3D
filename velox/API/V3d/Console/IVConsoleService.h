@@ -1,13 +1,13 @@
 #ifndef V3D_IVCONSOLESERVICE_H
 #define V3D_IVCONSOLESERVICE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VNamedObject.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VNamedObject.h>
 #include <V3d/Utils/IVStringStream.h>
 
 #include <V3dLib/BoostSignals.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace console {
@@ -44,12 +44,14 @@ protected:
 
 //-----------------------------------------------------------------------------
 } // namespace console
-} // namespace v3d
-//-----------------------------------------------------------------------------
+
 template<>
 inline v3d::console::IVConsoleService* v3d::QueryService<v3d::console::IVConsoleService>()
 {
 	return QueryObject<v3d::console::IVConsoleService>("console.service");
 }
+} // namespace v3d
+
 //-----------------------------------------------------------------------------
 #endif // V3D_IVCONSOLESERVICE_H
+

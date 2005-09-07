@@ -42,18 +42,10 @@ void RenderMesh(
 	//}
 }
 
-void RenderMesh(graphics::IVDevice& in_Device, const graphics::VModelMesh& in_Mesh)
+void RenderMesh(graphics::IVDevice& in_Device, graphics::VModelMesh& in_Mesh)
 {
 	in_Device.SetMatrix(IVDevice::ModelMatrix, *in_Mesh.GetTransform());
 	RenderMesh(in_Device, &*in_Mesh.GetMesh(), &*in_Mesh.GetMaterial());
-}
-
-void RenderModel(graphics::IVDevice& in_Device, const graphics::VModel& in_Model)
-{
-	for(vuint partNum = 0; partNum < in_Model.GetPartCount(); ++partNum)
-	{
-		RenderMesh(in_Device, in_Model.GetPart(partNum));
-	}
 }
 
 //-----------------------------------------------------------------------------

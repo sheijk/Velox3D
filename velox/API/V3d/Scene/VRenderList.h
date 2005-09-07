@@ -23,8 +23,6 @@ public:
 	virtual Id Add(const graphics::VModel& in_Model);
 	virtual void Remove(Id in_Model);
 
-	vuint MeshCount() const;
-
 	virtual VRangeIterator<graphics::VModelMesh> Meshes();
 
 private:

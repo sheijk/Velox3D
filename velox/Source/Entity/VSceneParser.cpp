@@ -32,19 +32,19 @@ void VSceneParser::Register(IVPartParser* in_pPartParser)
 	{
 		V3D_THROWMSG(VTypeAlreadyRegisteredException,
 			"Can't register PartParser for type '" 
-			<< in_pPartParser->GetType().c_str()
+			<< in_pPartParser->GetType().AsStdString()
 			<< "' because there is already a parser registered for it");
 	}
 }
 
-void VSceneParser::Unregister(std::string in_Type)
+void VSceneParser::Unregister(utils::VFourCC in_Type)
 {
 	m_Parsers.erase(in_Type);	
 }
 
 VSharedPtr<IVPart> VSceneParser::ParsePart(xml::IVXMLElement& in_Node)
 {
-	std::string type(in_Node.GetAttributeValue<std::string>("type"));
+	utils::VFourCC type(in_Node.GetAttributeValue<std::string>("type"));
 
 	ParserMap::iterator parserIter = m_Parsers.find(type);
 
@@ -57,7 +57,7 @@ VSharedPtr<IVPart> VSceneParser::ParsePart(xml::IVXMLElement& in_Node)
 	else
 	{
 		V3D_THROWMSG(VNoParserForTypeException,
-			"Could not parse part with type " << type.c_str()
+			"Could not parse part with type " << type.AsStdString()
 			<< " because no part parser for the type exists");
 	}
 }

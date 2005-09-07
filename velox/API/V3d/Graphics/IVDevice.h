@@ -28,6 +28,9 @@ class VPointLight;
 class IVDevice
 {
 public:
+	//typedef IVBuffer<vbyte>* BufferHandle;
+	//typedef VBufferBase::CopyMode BufferCopyMode;
+	//typedef VBuffer<vbyte> Buffer;
 	typedef const IVMesh* MeshHandle;
 	typedef const IVMaterial* MaterialHandle;
 

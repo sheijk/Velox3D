@@ -1,0 +1,95 @@
+Worklog von nsn
+-------------------------------------------------------------------------------
+----- messages to nsn:
+
+-------------------------------------------------------------------------------
+----- current assigned tasks:
+
+- gcc port
+    - smart pointer + iterators
+    - KernelLib
+
+-------------------------------------------------------------------------------
+----- random thoughts:
+
+<sheijk|6S> erzeug eine VServiceProxyLinux.h
+<sheijk|6S> und mach eine VServiceProxy.h, welche per #ifdef die passende
+variante includet
+<sheijk|6S> mit VServiceProxy.cpp kannst du dann entweder genauso verfahren
+(ohne include), oder du machst da ein grosses boeses #ifdef drumrum
+
+-------------------------------------------------------------------------------
+----- TODO:
+
+- synchronize v3dsynch/*.template.vcproj with sheijks original Templates
+- make sheijk clean up the Workspace dir (.vcproj and Jamfiles should have
+  the same relative path to the sources)
+
+-------------------------------------------------------------------------------
+----- last things nsn finished:
+
+2005-08-25
+    - moved VServiceProxy_* to corresponding subdirs
+    - added some missing files
+
+2005-08-22
+    - updated MSVC71 project files
+    - update mbuild.xml
+
+2005-06-05
+    - filled Workspace/gccport
+    - fixed paths in mbuild.xml
+
+2005-05-30
+    - added typename declarations to templates
+    - fixed "undeclared" errors by making the declarations
+      more specific. e.g. 
+      return &(*m_Current); 
+       became 
+      return &(*(VSTLRangePolicyBase<STLIterator>::m_Current));
+      somebody should think this over again...
+    - fixed even more include statements - this might become
+      a habit...
+
+2005-05-25
+    - added extern "C" declaration to Source/Module/VeloxModule.cpp's
+      Initialize and Shutdown functions to be able to load them via dlsym
+      without name-mangling problems
+    - fixed some more include statements
+
+2005-05-24
+    - splittet Source/Kernel/VServiceProxy into a win and a linux version
+      WARNING! this is totally untested - the linux version just compiles
+      http://www.linuxjournal.com/article/3687
+      
+2005-05-15
+    - fixed more header problems (case issues with includes, missing includes)
+    - added empty but virtual destructor to VException, VConsoleRedirector
+    - fixed friend declarations (friend Foo => friend class Foo)
+    - added empty default implementation for SendDebugMessage in
+      MemManager.cpp
+    - changed QueryService() - all QueryService() specializations must be
+      moved to namespace v3d
+    - modified VAssert to work in linux -> aborts always
+    - modified delete macro 
+      (caused "has type `void' and is not a throw-expression" error)
+      see: http://www.gamedev.net/community/forums/topic.asp?topic_id=254693&whichpage=1&#1541629
+      Solution: "NULL : delete"  became "SetOwnerStatus ("",0,"") : delete"
+      sheijk has got to check this...
+    - added KernelLib to mbuild.xml
+    - fixed some __declspec errors - simply defined them as empty
+
+
+2005-05-14
+    - added mbuild.xml & .dtd to Workspace/Boost-Build
+    - added directory gccport to Workspace
+    - fixed simple header problems (newlines at end of file, tokens after
+      #endif, case issues with includes)
+      
+
+2005-05-12
+    - added mbuild script to Workspace/Templates/Scripts as v3dsynch.sh
+    - added v3dsynch data to Workspace/Templates/Scripts/v3dsynch/
+    - updated Workspace/Templates/Scripts/install.sh to copy v3dsynch files
+    - created Doc/Worklog/nsn.txt
+

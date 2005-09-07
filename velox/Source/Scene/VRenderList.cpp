@@ -54,11 +54,6 @@ void VRenderList::Remove(Id in_ModelId)
 	}
 }
 
-vuint VRenderList::MeshCount() const
-{
-	return m_Models.size();
-}
-
 VRangeIterator<graphics::VModelMesh> VRenderList::Meshes()
 {
 	return CreateAccesssorIterator<VPair2ndAccessor, graphics::VModelMesh>(

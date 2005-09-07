@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="VeloxLib.lib KernelLib.lib CoreLib.lib"
+				AdditionalDependencies="VeloxLib.lib CoreLib.lib KernelLib.lib"
 				OutputFile="$(OutDir)/V3dConsoleApp.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"

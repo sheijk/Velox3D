@@ -1,4 +1,4 @@
-#include "VServiceProxy.h"
+#include "VServiceProxy_WIN.h"
 //-----------------------------------------------------------------------------
 #include <iostream>
 #include <v3d/Core/MemManager.h>

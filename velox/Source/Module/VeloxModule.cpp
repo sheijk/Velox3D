@@ -5,19 +5,25 @@
  * your instance will be called automagically
  */
 
+#ifdef V3D_WIN32
 #define V3D_MODULE_API __declspec(dllexport)
+#else
+#define V3D_MODULE_API
+#endif // V3D_WIN32
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 
-#include <v3d/Core/Modules/VModuleParams.h>
-#include <v3d/Core/Modules/VModuleBase.h>
+#include <V3d/Core/Modules/VModuleParams.h>
+#include <V3d/Core/Modules/VModuleBase.h>
 
 #define WIN32_LEAN_AND_MEAN
+#ifdef V3D_WIN32
 #include <windows.h>
+#endif // V3D_WIN32
 
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d;
 //-----------------------------------------------------------------------------
@@ -73,8 +79,7 @@ namespace {
 //	const char* in_pcModuleName
 //	);
 
-extern "C" {
-void Initialize(VModuleParams* in_pParams)
+extern "C" V3D_MODULE_API void Initialize(VModuleParams* in_pParams)
 {
 	// set the memory manager
 	//SetMemoryManager(
@@ -92,7 +97,7 @@ void Initialize(VModuleParams* in_pParams)
 		VModuleBase::GetInstance()->Initialize();
 }
 
-void Shutdown()
+extern "C" V3D_MODULE_API void Shutdown()
 {
 	if( VModuleBase::GetInstance() != 0 )
 		VModuleBase::GetInstance()->Shutdown();
@@ -103,6 +108,7 @@ void Shutdown()
 * DLL Einsprungspunkt, wird beim laden der DLL aufgerufen, sollte
 * aber meist nichts tun
 */
+#ifdef V3D_WIN32
 BOOL APIENTRY DllMain( HANDLE hModule,
 					  DWORD  ul_reason_for_call,
 					  LPVOID lpReserved
@@ -118,5 +124,8 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 	}
 	return TRUE;
 }
+#endif
+
 
 //-----------------------------------------------------------------------------
+

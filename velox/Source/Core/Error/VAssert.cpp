@@ -1,15 +1,16 @@
-#include <V3D/Core/VAssert.h>
+#include <V3d/Core/VAssert.h>
 //-----------------------------------------------------------------------------
-#include <windows.h>
 //#include <Error/VDebugLogger.h>
 #include <sstream>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
 
+#ifdef V3D_WIN32
+#include <windows.h>
 void _V3DAssert( bool bExp, const char* cFile, const vuint iLine, const vchar* cExp )
 {
 	int iResult;
@@ -25,6 +26,19 @@ void _V3DAssert( bool bExp, const char* cFile, const vuint iLine, const vchar* c
 		if (iResult == IDCANCEL) abort();
 	}
 }
+#else // V3D_WIN32
+void _V3DAssert( bool bExp, const char* cFile, const vuint iLine, const vchar* cExp )
+{
+	if ( bExp == false ) //assertion failed
+	{
+		std::ostringstream Error;
+		Error <<"ASSERTION FAILED: " << "(" << cExp << ")" << " File: " << cFile << ", Line: " << iLine << "\0";
+
+		abort();
+	}
+}
+#endif // V3D_WIN32
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
+

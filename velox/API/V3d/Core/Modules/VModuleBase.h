@@ -1,8 +1,8 @@
 #ifndef V3D_VMODULEBASE_H
 #define V3D_VMODULEBASE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VException.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VException.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -46,3 +46,4 @@ const char* GetModuleName();
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VMODULEBASE_H
+

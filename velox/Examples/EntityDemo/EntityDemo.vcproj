@@ -35,6 +35,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/EntityDemo.exe"
 				LinkIncremental="2"
+				ModuleDefinitionFile=""
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/EntityDemo.pdb"
 				SubSystem="1"
@@ -83,6 +84,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/EntityDemo.exe"
 				LinkIncremental="1"
+				ModuleDefinitionFile=""
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -124,13 +126,7 @@
 				RelativePath=".\VDataPart.h">
 			</File>
 			<File
-				RelativePath=".\VInvalidPart.h">
-			</File>
-			<File
-				RelativePath=".\VManagerPart.cpp">
-			</File>
-			<File
-				RelativePath=".\VManagerPart.h">
+				RelativePath=".\VHierarchyPart.h">
 			</File>
 			<File
 				RelativePath=".\VReaderPart.h">

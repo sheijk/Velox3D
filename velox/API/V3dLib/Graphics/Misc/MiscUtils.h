@@ -33,14 +33,7 @@ void RenderMesh(
  *
  * @author sheijk
  */
-void RenderMesh(graphics::IVDevice& in_Device, const graphics::VModelMesh& in_Mesh);
-
-/**
- * Renders all meshes of the given model
- *
- * @author sheijk
- */
-void RenderModel(graphics::IVDevice& in_Device, const graphics::VModel& in_Model);
+void RenderMesh(graphics::IVDevice& in_Device, graphics::VModelMesh& in_Mesh);
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

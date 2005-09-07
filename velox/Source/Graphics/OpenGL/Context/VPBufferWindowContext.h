@@ -27,60 +27,26 @@ class VPBufferWindowContext : public IVRenderContext
 {
 public:
 
-	VPBufferWindowContext(HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
+	VPBufferWindowContext(const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VPBufferWindowContext();
 
 	/**
-	 * Get the Pixel Buffer Object
-	*/
-	inline HPBUFFERARB GetPixelBuffer()
-	{
-		return m_PixelBuffer;
-	}
-
-	/**
-	* Get the Pixel Buffer Width
-	*/
-	inline vuint GetWidth()
-	{
-		return m_DisplaySettings.GetWidth();
-	}
-
-	/**
-	* Get the Pixel Buffer Height
-	*/
-	inline vuint GetHeight()
-	{
-		return m_DisplaySettings.GetHeight();
-	}
-
-	/**
-	 * @see v3d::graphics::IVRenderContext::MakeCurrent
+	 * Make the Pixel Buffer rendering Context active
 	*/
 	void MakeCurrent();
-
-	/**
-	 * @see v3d::graphics::IVRenderContext::SwapBuffers
-	*/
-	void SwapBuffers();
-
-	/**
-	* @see v3d::graphics::IVRenderContext::CreateOffscreenContext
-	*/
-	IVRenderContext* CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings);
 
 private:
 
 	graphics::VDisplaySettings m_DisplaySettings;
-	HPBUFFERARB                m_PixelBuffer;
-	HDC                        m_PBufferDeviceContext;
-	HDC                        m_WindowDeviceContext;
-	HGLRC                      m_PBufferRenderContext;
+	HPBUFFERARB                m_pixelbuffer;
+	HDC                        m_devicecontext;
+	HGLRC                      m_rendercontext;
+	HDC                        m_pbufferdevicecontext;
+	HGLRC                      m_pbufferrendercontext;
 };
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
-V3D_TYPEINFO_WITHPARENT(v3d::graphics::VPBufferWindowContext, v3d::graphics::IVRenderContext);
 
 #endif //V3D_VPBUFFERWINDOWCONTEXT_H

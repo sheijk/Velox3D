@@ -1,8 +1,8 @@
 #ifndef V3D_VSTRINGVALUE_08_31_04_H
 #define V3D_VSTRINGVALUE_08_31_04_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VException.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VException.h>
 #include <string>
 #include <sstream>
 //-----------------------------------------------------------------------------

@@ -1,11 +1,11 @@
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Core/VObjectRegistry.h>
 //------------------------------------------------------------------------
-#include <v3d/Core/VLogging.h>
+#include <V3d/Core/VLogging.h>
 #include <sstream>
 #include <iomanip>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using std::ostringstream;
 

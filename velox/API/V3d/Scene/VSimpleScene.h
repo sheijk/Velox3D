@@ -8,13 +8,10 @@
 #include <V3d/Scene/VRenderList.h>
 
 #include <V3d/Graphics/VModel.h>
-
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
-
-class VSceneModelPart;
 
 class VSimpleScene : public IVScene
 {
@@ -27,9 +24,6 @@ public:
 	Id Add(const graphics::VModelMesh& in_Mesh);
 	Id Add(const graphics::VModel& in_Model);
 	void Remove(Id in_Id);
-
-	void Add(scene::VSceneModelPart* in_pModelPart);
-	void Remove(scene::VSceneModelPart* in_pModelPart);
 
 	/** 
 	* Puts all visible objects to it's associated draw list and removes all
@@ -45,21 +39,9 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
-	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
-	
-	virtual vbool IsReady() const;
-	virtual vuint DependencyCount() const;
-	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
-
-	static std::string GetDefaultId();
-
 private:
-
-	typedef std::list<scene::VSceneModelPart*> ModelList;
 	VRenderList m_VisibleObjects;
 	Id m_nNextFreeId;
-
-	ModelList m_ModelParts;
 };
 
 //-----------------------------------------------------------------------------

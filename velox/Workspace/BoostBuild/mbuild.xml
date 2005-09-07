@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE workspace SYSTEM "mbuild.dtd">
+<workspace name="Velox" rootdir="">
+  <projects xmlns:exsl="http://exslt.org/common">
+    <project name="CoreLib" type="lib">
+      <files>
+        <file>../../Api/V3d/Core/Container/VList.h</file>
+        <file>../../Api/V3d/Core/Modules/VModuleBase.h</file>
+        <file>../../Api/V3d/Core/Modules/VModuleParams.h</file>
+        <file>../../Api/V3d/Core/Modules/VVeloxApp.h</file>
+        <file>../../Api/V3d/Core/RangeIter/IVRangeIteratorPolicy.h</file>
+        <file>../../Api/V3d/Core/RangeIter/VRangeIterator.h</file>
+        <file>../../Api/V3d/Core/RangeIter/VSTLAccessorRangePolicy.h</file>
+        <file>../../Api/V3d/Core/RangeIter/VSTLRangeDerefPolicy.h</file>
+        <file>../../Api/V3d/Core/RangeIter/VSTLRangePolicy.h</file>
+        <file>../../Api/V3d/Core/RangeIter/VSTLRangePolicyBase.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VExclusiveOwnerPol.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VExclusiveOwnerPol.inl</file>
+        <file>../../Api/V3d/Core/SmartPtr/VGuards.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VPointerStorage.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VPointerStorage.inl</file>
+        <file>../../Api/V3d/Core/SmartPtr/VRefCountPol.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VRefCountPol.inl</file>
+        <file>../../Api/V3d/Core/SmartPtr/VRefCountSharedStorage.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VRefCountSharedStorage.inl</file>
+        <file>../../Api/V3d/Core/SmartPtr/VServicePtr.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VSharedPtr.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VSharedPtr.inl</file>
+        <file>../../Api/V3d/Core/SmartPtr/VSmartPtr.h</file>
+        <file>../../Api/V3d/Core/SmartPtr/VSmartPtr.inl</file>
+        <file>../../Api/V3d/Core/Wrappers/VGenericUtils.h</file>
+        <file>../../Api/V3d/Core/Wrappers/VString.h</file>
+        <file>../../Api/V3d/Core/IVApplication.h</file>
+        <file>../../Api/V3d/Core/IVMemoryManager.h</file>
+        <file>../../Api/V3d/Core/MemManager.h</file>
+        <file>../../Api/V3d/Core/VAssert.h</file>
+        <file>../../Api/V3d/Core/VBuild.h</file>
+        <file>../../Api/V3d/Core/VCoreLib.h</file>
+        <file>../../Api/V3d/Core/VException.h</file>
+        <file>../../Api/V3d/Core/VIOStream.h</file>
+        <file>../../Api/V3d/Core/VLogging.h</file>
+        <file>../../Api/V3d/Core/VMemory.h</file>
+        <file>../../Api/V3d/Core/VNamedObject.h</file>
+        <file>../../Api/V3d/Core/VObjectKey.h</file>
+        <file>../../Api/V3d/Core/VObjectRegistry.h</file>
+        <file>../../Api/V3d/Core/VObjectRegistryExceptions.h</file>
+        <file>../../Api/V3d/Core/VTypes.h</file>
+        <file>../../Api/V3d/Core.h</file>
+        <file>../../Source/Core/Error/VAssert.cpp</file>
+        <file>../../Source/Core/Error/VException.cpp</file>
+        <file>../../Source/Core/ObjectRegistry/VNamedObject.cpp</file>
+        <file>../../Source/Core/ObjectRegistry/VObjectKey.cpp</file>
+        <file>../../Source/Core/ObjectRegistry/VObjectRegistry.cpp</file>
+        <file>../../Source/Core/ObjectRegistry/VObjectRegistryExceptions.cpp</file>
+        <file>../../Source/Core/Wrappers/VString.cpp</file>
+        <file>../../Source/Core/MemLocalSettings.h</file>
+        <file>../../Source/Core/MemManager.cpp</file>
+        <file>../../Source/Core/VIOStream.cpp</file>
+        <file>../../Source/Core/VLogging.cpp</file>
+        <file>../../Source/Core/VVeloxApp.cpp</file>
+      </files>
+    </project>
+  </projects>
+</workspace>

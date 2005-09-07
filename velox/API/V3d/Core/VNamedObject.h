@@ -1,8 +1,8 @@
 #ifndef V3D_VNAMEDOBJECT_H
 #define V3D_VNAMEDOBJECT_H
 //------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VObjectKey.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VObjectKey.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -82,8 +82,10 @@ T IVXMLElement::GetAttributeValue(VStringParam in_strName)
 	IVXMLAttribute* pAttrib = GetAttribute(in_strName);
 
 	V3D_ASSERT(pAttrib != 0);
-
-	return pAttrib->GetValue().Get<T>();
+    
+    v3d::utils::VStringValue val = pAttrib->GetValue();
+    return val.Get<T>();
+	//return pAttrib->GetValue().Get<T>();
 }
 
 //-----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 #ifndef V3D_VSERVICEPTR_2004_04_24_H
 #define V3D_VSERVICEPTR_2004_04_24_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -13,7 +13,7 @@ ServiceType* QueryService()
 {
 	// create a template specialisation for QueryService for each service
 	// in order to use VServicePtr
-	ErrorTypeNotSupported();
+    ServiceType::ErrorTypeNotSupported();
 }
 
 /**

@@ -73,30 +73,10 @@ public:
 		IVPart& in_Part)
 	{}
 
-	/** 
-	* Notify the part that another connected part has been removed 
-	* The disconnected part might be deleted right after this call. Thus all
-	* references to it must be reset to null
-	*/
-	virtual void Disconnect(
-		VPartDependency::Location in_Location,
-		const std::string& in_Id,
-		IVPart& in_Part)
-	{}
-
-	/** 
-	* The part can activated and used if this function returns true. (all
-	* dependencies must be fulfilled etc.)
-	*/
-	virtual vbool IsReady() const = 0;
-
-	/** Return the number of dependencies */
-	virtual vuint DependencyCount() const = 0;
-
-	/** Return information about the n-th dependency */
-	virtual VPartDependency GetDependencyInfo(vuint in_nIndex) const = 0;
-
-	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0)
+	/**
+	 * Tells the part about the next part with it's id up the entity hierarchy
+	 */
+	virtual void TellParentPart(const utils::VFourCC& in_Id, IVPart& in_Part)
 	{}
 
 	template<typename T>

@@ -3,8 +3,8 @@
 
 //TODO: //---- Zeilen wie in den Templates, damit der Source einheitlich ist (sheijk)
 
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/VMessageTypeEnum.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Error/VMessageTypeEnum.h>
 
 namespace v3d {
 namespace error {
@@ -22,3 +22,4 @@ public:
 } // error
 } // v3d
 #endif // V3D_IVERRORFILTER_H
+

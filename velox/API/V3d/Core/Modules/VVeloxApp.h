@@ -1,11 +1,11 @@
 #ifndef V3D_VVELOXAPP_2004_10_09_H
 #define V3D_VVELOXAPP_2004_10_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Core/Modules/VModuleBase.h>
-#include <v3d/Core/IVApplication.h>
-#include <v3d/Core/VNamedObject.h>
+#include <V3d/Core/Modules/VModuleBase.h>
+#include <V3d/Core/IVApplication.h>
+#include <V3d/Core/VNamedObject.h>
 
 #include <vector>
 #include <string>
@@ -60,3 +60,4 @@ protected:
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VVELOXAPP_2004_10_09_H
+

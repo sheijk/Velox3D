@@ -9,9 +9,8 @@ namespace v3d { namespace entity {
 using namespace v3d; // anti auto indent
 
 VUntypedPartConnection::VUntypedPartConnection(
-	IVPart::Location in_Location, 
-	const std::string& in_Id, 
-	VPartConnectionManager* in_pRegisterTo)
+	IVPart::Location in_Location, utils::VFourCC in_Id, 
+	VPartBase* in_pRegisterTo)
 {
 	m_Dependency.id = in_Id;
 	m_Dependency.location = in_Location;
@@ -31,8 +30,8 @@ const IVPart::Dependency& VUntypedPartConnection::GetDependency() const
 }
 
 void VUntypedPartConnection::Connect(
-	VPartDependency::Location in_Location,
-	const std::string& in_Id,
+	IVPart::Location in_Location,
+	const utils::VFourCC& in_Id,
 	IVPart& in_Part)
 {
 	if( in_Location == m_Dependency.location &&
@@ -50,25 +49,25 @@ IVPart* VUntypedPartConnection::GetPart() const
 /**
  * standard c'tor
  */
-VPartConnectionManager::VPartConnectionManager()
+VPartBase::VPartBase()
 {
 }
 
 /**
  * d'tor
  */
-VPartConnectionManager::~VPartConnectionManager()
+VPartBase::~VPartBase()
 {
 }
 
-void VPartConnectionManager::Register(VUntypedPartConnection& in_Connection)
+void VPartBase::Register(VUntypedPartConnection& in_Connection)
 {
 	m_Dependencies.push_back(&in_Connection);
 }
 
-void VPartConnectionManager::Connect(
-	VPartDependency::Location in_Location, 
-	const std::string& in_Id, 
+void VPartBase::Connect(
+	Location in_Location, 
+	const utils::VFourCC& in_Id, 
 	IVPart& in_Part)
 {
     for(vuint con = 0; con < m_Dependencies.size(); ++con)
@@ -77,9 +76,9 @@ void VPartConnectionManager::Connect(
 	}
 }
 
-void VPartConnectionManager::Disconnect(
-	VPartDependency::Location in_Location,
-	const std::string& in_Id,
+void VPartBase::Disconnect(
+	Location in_Location,
+	const utils::VFourCC& in_Id,
 	IVPart& in_Part)
 {
 	for(vuint con = 0; con < m_Dependencies.size(); ++con)
@@ -91,7 +90,7 @@ void VPartConnectionManager::Disconnect(
 	}
 }
 
-vbool VPartConnectionManager::IsReady() const
+vbool VPartBase::IsReady() const
 {
 	for(vuint con = 0; con < m_Dependencies.size(); ++con)
 	{
@@ -102,12 +101,12 @@ vbool VPartConnectionManager::IsReady() const
 	return true;
 }
 
-vuint VPartConnectionManager::DependencyCount() const
+vuint VPartBase::DependencyCount() const
 {
 	return m_Dependencies.size();
 }
 
-VPartDependency VPartConnectionManager::GetDependencyInfo(vuint in_nIndex) const
+IVPart::Dependency VPartBase::GetDependencyInfo(vuint in_nIndex) const
 {
 	if( in_nIndex < m_Dependencies.size() )
 	{

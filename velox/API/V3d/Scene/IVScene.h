@@ -39,9 +39,6 @@ public:
 	 * Gets the draw list which contains all visible objects of the scene
 	 */
 	virtual IVRenderList& GetRenderList() = 0;
-
-	static std::string GetDefaultId() { return "scene"; }
-
 };
 
 //-----------------------------------------------------------------------------

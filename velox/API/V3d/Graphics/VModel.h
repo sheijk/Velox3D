@@ -30,10 +30,6 @@ public:
 	typedef VSharedPtr<VMatrix44f> MatrixPtr;
 
 	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial, MatrixPtr in_pTransform);
-	/*
-	 * using default identity matrix
-	 */
-	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial);
 
 	MeshPtr GetMesh() const;
 	MaterialPtr GetMaterial() const;
@@ -64,7 +60,7 @@ public:
 	vuint GetPartCount() const;
 	VModelMesh& GetPart(vuint in_nNum);
 	const VModelMesh& GetPart(vuint in_nNum) const;
-   	//vuint GetMeshCount() const;
+	//vuint GetMeshCount() const;
 	//VMeshHandle GetMesh(vuint in_nNum) const;
 	//VMaterialHandle GetMaterial(vuint in_nNum) const;
 	//MatrixPtr GetTransform(vuint in_nNum);

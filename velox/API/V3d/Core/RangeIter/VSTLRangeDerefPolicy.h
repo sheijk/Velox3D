@@ -20,12 +20,17 @@ public:
 		
 	virtual T* Get() const
 	{
-		return &*(*m_Current);
+        // TODO: think this over
+        // was: return &(*m_Current);
+		return &*(*(VSTLRangePolicyBase<STLIterator, T>::m_Current));
 	}
 		
-	virtual IVRangeIteratorPolicy<Type>* Clone() const
+	virtual IVRangeIteratorPolicy<typename VSTLRangePolicyBase<STLIterator, T>::Type>* Clone() const
 	{
-		return new VSTLRangeDerefPolicy(m_Current, m_End);
+        // TODO: think this over
+        // was: return new VSTLRangeDerefPolicy(m_Current, m_End);
+		return new VSTLRangeDerefPolicy(VSTLRangePolicyBase<STLIterator, T>::m_Current, 
+                                        VSTLRangePolicyBase<STLIterator, T>::m_End);
 	}
 };
 
