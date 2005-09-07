@@ -786,6 +786,12 @@
 						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshGeneratorResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshGeneratorResType.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.cpp">
 					</File>
 					<File

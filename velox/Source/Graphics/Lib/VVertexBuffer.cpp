@@ -212,7 +212,7 @@ vuint VVertexBuffer::GetIndex(vuint in_nIndexNum) const
 
 void VVertexBuffer::SetIndex(vuint in_nIndex, vuint in_nIndexNum)
 {
-	V3D_ASSERT(in_nIndex < m_nVertexCount);
+	//V3D_ASSERT(in_nIndex < m_nVertexCount);
 	SetElement(m_VertexData, m_Format.GetIndexFormat(), in_nIndexNum, in_nIndex);
 }
 
@@ -228,6 +228,26 @@ vuint VVertexBuffer::GetVertexCount(const VVertexFormat& in_Format)
 	}
 
 	return size;
+}
+
+vuint VVertexBuffer::GetIndexCount() const
+{
+	return GetFormat().GetIndexFormat().GetCount();
+}
+
+vuint VVertexBuffer::GetCoordinateCount() const
+{
+	return GetFormat().GetCoordinateFormat().GetCount();
+}
+
+vuint VVertexBuffer::GetColorCount() const
+{
+	return GetFormat().GetColorFormat().GetCount();
+}
+
+vuint VVertexBuffer::GetNormalCount() const
+{
+	return GetFormat().GetNormalFormat().GetCount();
 }
 
 //-----------------------------------------------------------------------------

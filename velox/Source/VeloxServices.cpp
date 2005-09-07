@@ -23,6 +23,10 @@
 #include "Resource/Types/VTextureStateResType.h"
 #include "Resource/Types/VGLVertexStreamResType.h"
 #include "Resource/Types/VFileNameResType.h"
+#include "Resource/Types/VImported3DSResourceType.h"
+#include "Resource/Types/VMeshResourceType.h"
+#include "Resource/Types/VMaterialResourceType.h"
+#include "Resource/Types/VMeshGeneratorResType.h"
 
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VDevILLoader.h"
@@ -36,10 +40,6 @@
 #include <v3d/Utils/VAllFilter.h>
 
 #include <V3d/Entity/VEntityManager.h>
-
-#include "Resource/Types/VImported3DSResourceType.h"
-#include "Resource/Types/VMeshResourceType.h"
-#include "Resource/Types/VMaterialResourceType.h"
 
 #include "Entity/VSceneParser.h"
 #include "Entity/Parsers/VSceneModelParser.h"
@@ -160,6 +160,8 @@ void VVeloxModules::Initialize()
 	
 	g_pResourceManager->RegisterResourceType(
 		VSharedPtr<IVResourceType>(new graphics::VMaterialResourceType()));
+
+	g_pResourceManager->RegisterResourceType(SharedPtr(new VMeshGeneratorResType()));
 
 	// image
 	g_pImageFactory.Assign(new VImageFactory());

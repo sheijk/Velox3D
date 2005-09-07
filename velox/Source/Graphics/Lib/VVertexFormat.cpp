@@ -17,6 +17,7 @@ VVertexFormat::VVertexFormat(
 	vuint in_nVertexCount, 
 	vuint in_nIndexCount)
 {
+
 	// iff index count > 0 there must be indices in the data format
 	V3D_ASSERT(
 		in_nIndexCount > 0 ? 
@@ -129,6 +130,28 @@ void VVertexFormat::SetTexCoordFormat(vuint in_nCoord, VDataFormat in_Format)
 	V3D_ASSERT(in_nCoord < GetTexCoordCount());
 
 	m_TexCoordFormats[in_nCoord] = in_Format;
+}
+
+vbool VVertexFormat::Contains(DataTypes in_DataTypes) const
+{
+	if( in_DataTypes & Coordinates && m_CoordinateFormat.GetCount() <= 0 )
+		return false;
+	if( in_DataTypes & Colors && m_ColorFormat.GetCount() <= 0 )
+		return false;
+	if( in_DataTypes & Normals && m_NormalFormat.GetCount() <= 0 )
+		return false;
+	if( in_DataTypes & Indices && m_IndexFormat.GetCount() <= 0 )
+		return false;
+	if( in_DataTypes & TexCoords )
+	{
+		if( m_TexCoordFormats.size() < 1 )
+			return false;
+		if( m_TexCoordFormats[0].GetCount() <= 0 )
+			return false;
+	}
+
+	// all tests passsed, we have everything we need
+	return true;
 }
 
 //-----------------------------------------------------------------------------

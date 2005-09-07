@@ -2,6 +2,9 @@
 #define V3D_VGENERATORS_2004_04_09_H
 //-----------------------------------------------------------------------------
 
+#include <V3dLib/Graphics/Generators/IVMeshGenerator.h>
+#include <V3dLib/Graphics/Generators/VPolarSphereGenerator.h>
+
 #include <V3dLib/Graphics/Generators/VBoxMesh.h>
 #include <V3dLib/Graphics/Generators/VCircleMesh.h>
 #include <V3dLib/Graphics/Generators/VCylinderMesh.h>

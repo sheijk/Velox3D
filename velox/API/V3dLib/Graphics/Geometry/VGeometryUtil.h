@@ -55,6 +55,27 @@ void GenerateInterpolatedTexCoords(
 	vuint height
 	);
 
+/**
+ * Creates a mesh description for the given vertex buffer. The vertex and
+ * index buffers must be located in the resource with the given name
+ *
+ * @author sheijk
+ */
+VMeshDescription* CreateMeshDescription(
+	VMeshDescription::GeometryType in_Primitives,
+	const VVertexBuffer& in_VertexBuffer,
+	const std::string& in_strVBResource,
+	const std::string& in_strIndexResource);
+
+/**
+ * Calls CreateMeshDescription(in_Primitives, in_VertexBuffer, 
+ * in_strVBResource, in_strVBResource
+ */
+VMeshDescription* CreateMeshDescription(
+	VMeshDescription::GeometryType in_Primitives,
+	const VVertexBuffer& in_VertexBuffer,
+	const std::string& in_strVBResource);
+
 //-----------------------------------------------------------------------------
 #include "VGeometryUtil.inl"
 //-----------------------------------------------------------------------------

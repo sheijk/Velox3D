@@ -53,6 +53,8 @@ public:
 	VDataFormat GetTexCoordFormat(vuint in_nCoord) const;
 	void SetTexCoordFormat(vuint in_nCoord, VDataFormat in_Format);
 
+	vbool Contains(DataTypes in_DataTypes) const;
+
 private:
 	VDataFormat m_CoordinateFormat;
 	VDataFormat m_ColorFormat;

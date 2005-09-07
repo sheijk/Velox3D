@@ -337,6 +337,9 @@
 						Name="Generators"
 						Filter="">
 						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\IVMeshGenerator.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.h">
 						</File>
 						<File
@@ -371,6 +374,9 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereGenerator.h">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.h">
@@ -802,6 +808,12 @@
 							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp">
 						</File>
 					</Filter>
+				</Filter>
+				<Filter
+					Name="Generators">
+					<File
+						RelativePath="..\..\Source\Graphics\Generators\VPolarSphereGenerator.cpp">
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>

@@ -32,6 +32,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+06.09.05
+- neues geometrie generations "framework" das mit dem resource system
+  zusammen arbeitet (-> IVMeshGenerator), polar sphere darauf portiert
+
 05.09.05
 - 3ds loader fix: meshes werden in die resource (bzw. unterresource) geladen,
   in welcher das model liegt

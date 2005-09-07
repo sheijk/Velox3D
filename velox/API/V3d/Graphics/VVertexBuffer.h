@@ -41,13 +41,16 @@ public:
 	vuint GetBufferSize() const;
 
 	// accessor functions for vertex data
+	vuint GetCoordinateCount() const;
 	const VVertex3f& GetCoordinate(vuint in_nVertexNum) const;
 	void SetCoordinate(const VVertex3f& in_Coord, vuint in_nVertexNum);
 	void SetCoordinate(const VVector3f& in_Coord, vuint in_nVertexNum);
 
+	vuint GetColorCount() const;
 	const VColor4f& GetColor(vuint in_nVertexNum) const;
 	void SetColor(const VColor4f& in_Color, vuint in_nVertexNum);
 
+	vuint GetNormalCount() const;
 	const VNormal3f& GetNormal(vuint in_nVertexNum) const;
 	void SetNormal(const VNormal3f& in_Normal, vuint in_nVertexNum);
 
@@ -56,6 +59,7 @@ public:
 	void SetTexCoord(vuint in_nTexCoordNum, vuint in_nVertexNum, 
 		const VTexCoord2f& in_TexCoord);
 
+	vuint GetIndexCount() const;
 	vuint GetIndex(vuint in_nIndexNum) const;
 	void SetIndex(vuint in_nVertexIndex, vuint in_nIndexNum);
 
