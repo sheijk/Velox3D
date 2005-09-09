@@ -33,10 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw24d.lib boostd.lib VeloxLib.lib CoreLib.lib KernelLib.lib"
+				AdditionalDependencies="wxmsw24d.lib boostd.lib VeloxLib.lib KernelLib.lib CoreLib.lib"
 				OutputFile="$(OutDir)/WxServiceDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/WxServiceDLL.pdb"
 				SubSystem="2"
@@ -80,6 +81,7 @@
 				OutputFile="$(OutDir)/WxServiceDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"

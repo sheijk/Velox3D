@@ -7,6 +7,7 @@
 #include <v3d/Graphics/GraphicsExceptions.h>
 #include <v3d/Graphics/VDisplaySettings.h>
 #include <v3d/Graphics/IVRenderContext.h>
+#include "VPBufferWindowContext.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -29,18 +30,23 @@ public:
 	VWin32WindowContext(HWND in_hwnd = 0, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VWin32WindowContext();
 
-	/**
-	 * Make the Win32 OpenGL rendering Context active
-	*/
+	/** @see v3d::graphics::IVRenderContext::MakeCurrent */
 	void MakeCurrent();
+
+	/** @see v3d::graphics::IVRenderContext::SwapBuffers */
+	void SwapBuffers();
+
+
+	/** @see v3d::graphics::IVRenderContext::CreateOffscreenContext */
+	IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings);
 
 private:
 
 	graphics::VDisplaySettings m_DisplaySettings;
-	HDC                        m_devicecontext;
-	HGLRC                      m_rendercontext;
-	HWND                       m_handle;
-	PIXELFORMATDESCRIPTOR      m_pixelformat;
+	HDC                        m_DeviceContext;
+	HGLRC                      m_RenderContext;
+	HWND                       m_Handle;
+	PIXELFORMATDESCRIPTOR      m_Pixelformat;
 };
 
 //-----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 #ifndef V3D_VKERNELINIREADER_H
 #define V3D_VKERNELINIREADER_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
+#include <v3d/Core/VCoreLib.h>
 #include <V3d/XML/IVXMLVisitor.h>
 //-----------------------------------------------------------------------------
 #include "VServiceProxy.h"

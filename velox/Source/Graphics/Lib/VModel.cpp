@@ -26,6 +26,26 @@ VModelMesh::VModelMesh(
 	m_pTransform = in_pTransform;
 }
 
+VModelMesh::VModelMesh(
+					   MeshPtr in_pMesh,
+					   MaterialPtr in_pMaterial)
+{
+	m_pMesh = in_pMesh;
+	m_pMaterial = in_pMaterial;
+
+		
+	m_pTransform.Assign(new VMatrix44f(math::IdentityMatrix()));
+}
+//TODO: eine war falsch und produziert nen heap fehler -ins
+/*VModelMesh::VModelMesh(
+	MeshPtr in_pMesh,
+	MaterialPtr in_pMaterial)
+{
+	m_pMesh = in_pMesh;
+	m_pMaterial = in_pMaterial;
+	m_pTransform = math::IdentityPtr();
+}*/
+
 VModelMesh::MeshPtr VModelMesh::GetMesh() const
 {
 	return m_pMesh;
@@ -95,6 +115,20 @@ VModelMesh& VModel::GetPart(vuint in_nNum)
 const VModelMesh& VModel::GetPart(vuint in_nNum) const
 {
 	return m_Parts[in_nNum];
+}
+
+void VModel::ApplyMatrix(VMatrix44f in_Matrix)
+{
+	if(m_Parts.size())
+	{	PartArray::iterator i = m_Parts.begin();
+		VSharedPtr<VMatrix44f> currentMatrix;
+
+		for(; i != m_Parts.end(); ++i)
+		{
+			currentMatrix = (*i).GetTransform();
+			currentMatrix->m_Mat = in_Matrix.m_Mat;
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

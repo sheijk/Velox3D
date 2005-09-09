@@ -122,34 +122,6 @@
 					RelativePath="..\..\Api\V3d\Scene.h">
 				</File>
 				<Filter
-					Name="Entity"
-					Filter="">
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVPart.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVPartParser.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVSceneParser.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntity.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VPartBase.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h">
-					</File>
-				</Filter>
-				<Filter
 					Name="Math"
 					Filter="">
 					<File
@@ -270,6 +242,34 @@
 						RelativePath="..\..\Api\V3d\Messaging\VProtocol.h">
 					</File>
 				</Filter>
+				<Filter
+					Name="Entity"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVPartParser.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVSceneParser.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntity.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VPartBase.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h">
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="V3dLib"
@@ -337,6 +337,9 @@
 						Name="Generators"
 						Filter="">
 						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\IVMeshGenerator.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.h">
 						</File>
 						<File
@@ -373,6 +376,9 @@
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.inl">
 						</File>
 						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereGenerator.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.h">
 						</File>
 						<File
@@ -399,6 +405,9 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.inl">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\Conversions.h">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColor4f.h">
@@ -456,11 +465,43 @@
 							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VEffectLoader.h">
 						</File>
 						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VImporterException.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VModelLoader.h">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h">
 						</File>
+						<Filter
+							Name="Base"
+							Filter="">
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedBufferDescription.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedFaceContainer.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedFaceDescription.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedMaterialContainer.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedMaterialDescription.h">
+							</File>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VMaterialMap.h">
+							</File>
+						</Filter>
+						<Filter
+							Name="3DS"
+							Filter="">
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\3ds\VImported3DS.h">
+							</File>
+						</Filter>
 					</Filter>
 					<Filter
 						Name="Materials"
@@ -561,6 +602,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointHinge2State.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Physics\VPhysicManagerPart.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3dLib\Physics\VPhysicMass.h">
@@ -704,6 +748,9 @@
 					Name="Lib"
 					Filter="">
 					<File
+						RelativePath="..\..\Source\Graphics\Lib\Conversions.cpp">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\Lib\DefaultVertexStructures.cpp">
 					</File>
 					<File
@@ -762,6 +809,12 @@
 						</File>
 					</Filter>
 				</Filter>
+				<Filter
+					Name="Generators">
+					<File
+						RelativePath="..\..\Source\Graphics\Generators\VPolarSphereGenerator.cpp">
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -810,6 +863,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VPhysicJointHinge2State.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VPhysicMass.cpp">
@@ -871,6 +927,54 @@
 					Filter="">
 					<File
 						RelativePath="..\..\Source\Resource\Types\VFileName.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VFileNameResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VFileNameResType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VGLVertexStreamResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VGLVertexStreamResType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImageResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImageResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VOffscreenDeviceResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VOffscreenDeviceResType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.h">
 					</File>
 				</Filter>
 			</Filter>
@@ -978,6 +1082,9 @@
 						</File>
 						<File
 							RelativePath="..\..\Source\UtilsLib\Importer\Base\VImportedMaterialDescription.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\Base\VMaterialMap.cpp">
 						</File>
 					</Filter>
 					<Filter

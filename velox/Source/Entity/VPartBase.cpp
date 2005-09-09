@@ -9,8 +9,9 @@ namespace v3d { namespace entity {
 using namespace v3d; // anti auto indent
 
 VUntypedPartConnection::VUntypedPartConnection(
-	IVPart::Location in_Location, utils::VFourCC in_Id, 
-	VPartBase* in_pRegisterTo)
+	IVPart::Location in_Location, 
+	const std::string& in_Id, 
+	VPartConnectionManager* in_pRegisterTo)
 {
 	m_Dependency.id = in_Id;
 	m_Dependency.location = in_Location;
@@ -30,8 +31,8 @@ const IVPart::Dependency& VUntypedPartConnection::GetDependency() const
 }
 
 void VUntypedPartConnection::Connect(
-	IVPart::Location in_Location,
-	const utils::VFourCC& in_Id,
+	VPartDependency::Location in_Location,
+	const std::string& in_Id,
 	IVPart& in_Part)
 {
 	if( in_Location == m_Dependency.location &&
@@ -49,25 +50,25 @@ IVPart* VUntypedPartConnection::GetPart() const
 /**
  * standard c'tor
  */
-VPartBase::VPartBase()
+VPartConnectionManager::VPartConnectionManager()
 {
 }
 
 /**
  * d'tor
  */
-VPartBase::~VPartBase()
+VPartConnectionManager::~VPartConnectionManager()
 {
 }
 
-void VPartBase::Register(VUntypedPartConnection& in_Connection)
+void VPartConnectionManager::Register(VUntypedPartConnection& in_Connection)
 {
 	m_Dependencies.push_back(&in_Connection);
 }
 
-void VPartBase::Connect(
-	Location in_Location, 
-	const utils::VFourCC& in_Id, 
+void VPartConnectionManager::Connect(
+	VPartDependency::Location in_Location, 
+	const std::string& in_Id, 
 	IVPart& in_Part)
 {
     for(vuint con = 0; con < m_Dependencies.size(); ++con)
@@ -76,9 +77,9 @@ void VPartBase::Connect(
 	}
 }
 
-void VPartBase::Disconnect(
-	Location in_Location,
-	const utils::VFourCC& in_Id,
+void VPartConnectionManager::Disconnect(
+	VPartDependency::Location in_Location,
+	const std::string& in_Id,
 	IVPart& in_Part)
 {
 	for(vuint con = 0; con < m_Dependencies.size(); ++con)
@@ -90,7 +91,7 @@ void VPartBase::Disconnect(
 	}
 }
 
-vbool VPartBase::IsReady() const
+vbool VPartConnectionManager::IsReady() const
 {
 	for(vuint con = 0; con < m_Dependencies.size(); ++con)
 	{
@@ -101,12 +102,12 @@ vbool VPartBase::IsReady() const
 	return true;
 }
 
-vuint VPartBase::DependencyCount() const
+vuint VPartConnectionManager::DependencyCount() const
 {
 	return m_Dependencies.size();
 }
 
-IVPart::Dependency VPartBase::GetDependencyInfo(vuint in_nIndex) const
+VPartDependency VPartConnectionManager::GetDependencyInfo(vuint in_nIndex) const
 {
 	if( in_nIndex < m_Dependencies.size() )
 	{

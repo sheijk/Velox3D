@@ -17,6 +17,10 @@ public:
 
 	virtual void Cull() = 0;
 	virtual void Render() = 0;
+
+	static std::string GetDefaultId() { return "shooting"; }
+
+	virtual vbool IsActive() const = 0;
 };
 
 //-----------------------------------------------------------------------------

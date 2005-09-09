@@ -641,21 +641,11 @@ namespace v3d { namespace mem {
 
 }} // namespace v3d::mem
 
-#ifdef V3D_WIN32
-
 #include <windows.h>
 
 void SendDebugMessage(const char* text)
 {
 	OutputDebugString(text);
 }
-#else // V3D_WIN32
-
-void SendDebugMessage(const char* text)
-{
-    // empty default implementation - nsn
-    // FIXME
-}
-#endif // V3D_WIN32
 
 //-----------------------------------------------------------------------------

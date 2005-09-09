@@ -1,10 +1,10 @@
 #ifndef V3D_IVTESTMANAGER_H
 #define V3D_IVTESTMANAGER_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
-#include <V3d/Core/VNamedObject.h>
-#include <V3d/Core/SmartPtr/VGuards.h>
-#include <V3d/Core/Wrappers/VIterator.h>
+#include <v3d/Core/VCoreLib.h>
+#include <v3d/Core/VNamedObject.h>
+#include <v3d/Core/SmartPtr/VGuards.h>
+#include <v3d/Core/Wrappers/VIterator.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -65,4 +65,3 @@ public:
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_IVTESTMANAGER_H
-

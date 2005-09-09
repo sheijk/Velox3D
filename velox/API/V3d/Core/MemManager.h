@@ -79,7 +79,5 @@ static void operator delete[](void* size)
 
 //-----------------------------------------------------------------------------
 #define	new	(SetOwnerStatus(__FILE__,__LINE__, "???"),false) ? NULL : new
-//#define delete (SetOwnerStatus(__FILE__,__LINE__, "???"),false) ? NULL : delete
-#define delete (SetOwnerStatus(__FILE__,__LINE__, "???"),false) ? SetOwnerStatus("",0,"") : delete
+#define delete (SetOwnerStatus(__FILE__,__LINE__, "???"),false) ? NULL : delete
 //-----------------------------------------------------------------------------
-

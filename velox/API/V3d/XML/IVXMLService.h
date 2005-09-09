@@ -1,13 +1,13 @@
 #ifndef V3D_IVXMLSERVICE_H
 #define V3D_IVXMLSERVICE_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VNamedObject.h>
-#include <V3d/VFS/IVStream.h>
-#include <V3d/XML/IVXMLWriter.h>
+#include <v3d/Core/VNamedObject.h>
+#include <v3d/Vfs/IVStream.h>
+#include <v3d/XML/IVXMLWriter.h>
 #include <V3d/XML/IVXMLVisitor.h>
 #include <V3d/Core/SmartPtr/VGuards.h>
-#include <V3d/Core/VObjectRegistry.h>
-#include <V3d/Core/SmartPtr/VServicePtr.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/SmartPtr/VServicePtr.h>
 #include <V3d/Core/SmartPtr/VSharedPtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
@@ -94,12 +94,12 @@ protected:
 typedef VServicePtr<IVXMLService> VXMLServicePtr;
 //-----------------------------------------------------------------------------
 } //xml
+} //v3d
+//-----------------------------------------------------------------------------
 template<>
 inline v3d::xml::IVXMLService* v3d::QueryService<v3d::xml::IVXMLService>()
 {
 	return QueryObject<v3d::xml::IVXMLService>("xml.service");
 }
-} //v3d
 //-----------------------------------------------------------------------------
 #endif //V3D_IVXMLSERVICE_H
-

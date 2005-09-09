@@ -21,11 +21,20 @@ public:
 
 	virtual void Activate();
 	virtual void Deactivate();
-	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part);
+	virtual void Connect(
+		Location in_Location, const std::string& in_Id, IVPart& in_Part);
+	virtual void Disconnect(
+		Location in_Location, const std::string& in_Id, IVPart& in_Part);
+	virtual vbool IsReady() const;
+	virtual vuint DependencyCount() const;
+	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
+
+	static std::string GetDefaultId();
 
 	void Cull();
 	void Render();
 
+	virtual vbool IsActive() const;
 private:
 	/** The associated scene */
 	IVScene* m_pScene;
@@ -40,6 +49,8 @@ private:
 
 	/** The list of currently visible objects */
 	IVRenderList* m_pRenderList;
+	
+	vbool m_bActive;
 };
 
 //-----------------------------------------------------------------------------

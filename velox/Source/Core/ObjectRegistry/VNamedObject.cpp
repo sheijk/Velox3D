@@ -1,9 +1,9 @@
-#include <V3d/Core/VNamedObject.h>
+#include <v3d/Core/VNamedObject.h>
 //------------------------------------------------------------------------
-#include <V3d/Core/VObjectRegistry.h>
+#include <v3d/Core/VObjectRegistry.h>
 
 //-----------------------------------------------------------------------------
-#include <V3d/Core/MemManager.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -51,4 +51,3 @@ void VNamedObject::UnregisterFromObjectRegistry()
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
-

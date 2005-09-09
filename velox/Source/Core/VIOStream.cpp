@@ -1,22 +1,20 @@
 #ifndef V3D_VCONSOLEREDIRECTOR_H
 #define V3D_VCONSOLEREDIRECTOR_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
-#include <V3d/Core/VObjectRegistry.h>
+#include <v3d/Core/VCoreLib.h>
+#include <v3d/Core/VObjectRegistry.h>
 #include <V3d/Utils/IVStringStream.h>
-#include <V3d/Core/VIOStream.h>
-#include <V3d/Console/IVConsoleService.h>
+#include <v3d/Core/VIOStream.h>
+#include <v3d/Console/IVConsoleService.h>
 #include <iostream>
 #include <list>
 #include <string>
 #include <fstream>
 #define WIN32_LEAN_AND_MEAN
-#ifdef V3D_WIN32
 #include <windows.h>
-#endif // V3D_WIN32
 
 //-----------------------------------------------------------------------------
-#include <V3d/Core/MemManager.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 
@@ -44,7 +42,7 @@ namespace {
 	{
 	public:
 		VConsoleRedirector();
-		virtual ~VConsoleRedirector();
+		~VConsoleRedirector();
 		virtual void Write(VStringParam in_strString);
 		virtual void Flush() {};
 
@@ -77,10 +75,7 @@ namespace {
 		cout << in_strString;
 		cout.flush();
 
-// FIXME: ifdefs should not be used whithin methods...
-#ifdef V3D_WIN32
 		OutputDebugString(in_strString);
-#endif // V3D_WIN32
 
 		if(m_Console)
 		{

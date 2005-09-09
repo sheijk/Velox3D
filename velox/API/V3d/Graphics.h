@@ -18,6 +18,7 @@
 #include <V3d/Graphics/VVertexBuffer.h>
 #include <V3d/Graphics/VVertexFormat.h>
 #include <V3d/Graphics/VModel.h>
+#include <V3d/Graphics/VPointLight.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_GRAPHICS_H

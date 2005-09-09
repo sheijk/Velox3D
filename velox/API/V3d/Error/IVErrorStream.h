@@ -1,10 +1,10 @@
 #ifndef V3D_IVERRORSTREAM_H
 #define V3D_IVERRORSTREAM_H
 
-#include <V3d/Core/VCoreLib.h>
-#include <V3d/Core/Wrappers/VString.h>
-#include <V3d/Error/VMessageTypeEnum.h>
-#include <V3d/Utils/IVStringStream.h>
+#include <v3d/Core/VCoreLib.h>
+#include <v3d/Core/Wrappers/VString.h>
+#include <v3d/Error/VMessageTypeEnum.h>
+#include <v3d/Utils/IVStringStream.h>
 
 namespace v3d {
 namespace error {
@@ -79,4 +79,3 @@ inline IVErrorStream& operator<< ( IVErrorStream& in_Stream, VEndDbgMsg in_EndDb
 }; //v3d
 
 #endif
-

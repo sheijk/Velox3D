@@ -1,8 +1,8 @@
 #ifndef V3D_EXCEPTION_H
 #define V3D_EXCEPTION_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
-#include <V3d/Core/Wrappers/VString.h>
+#include <v3d/Core/VCoreLib.h>
+#include <v3d/Core/Wrappers/VString.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -24,9 +24,6 @@ protected:
 public:
 	VException();
 	VException(VStringParam Error, VStringParam File, vuint Line);
-
-    /** empty but virtual destructor */
-    virtual ~VException() {};
 
 	/** returns the line where the exception was thrown */
 	vuint GetErrorLine() const;

@@ -1,11 +1,11 @@
-#include <V3d/Core/VLogging.h>
+#include <v3d/Core/VLogging.h>
 //-----------------------------------------------------------------------------
-#include <V3d/Error/IVErrorService.h>
-#include <V3d/Core/VObjectRegistry.h>
+#include <v3d/Error/IVErrorService.h>
+#include <v3d/Core/VObjectRegistry.h>
 #include <sstream>
 
 //-----------------------------------------------------------------------------
-#include <V3d/Core/MemManager.h>
+#include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using v3d::error::IVErrorService;
 

@@ -138,6 +138,7 @@
             <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryData.inl"/>
             <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.h"/>
             <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.inl"/>
+            <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VNormal3f.h"/>
             <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VPlane3f.h"/>
             <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VResizeableGeometryData.h"/>
             <File RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VSimpleVertex.h"/>
@@ -248,6 +249,7 @@
           <File RelativePath="..\..\Source\Graphics\Lib\VMeshDescription.cpp"/>
           <File RelativePath="..\..\Source\Graphics\Lib\VModeTypeInfo.cpp"/>
           <File RelativePath="..\..\Source\Graphics\Lib\VModel.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\Lib\VPointLight.cpp"/>
           <File RelativePath="..\..\Source\Graphics\Lib\VVertexBuffer.cpp"/>
           <File RelativePath="..\..\Source\Graphics\Lib\VVertexFormat.cpp"/>
         </Filter>

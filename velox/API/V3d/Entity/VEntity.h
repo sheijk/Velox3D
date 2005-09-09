@@ -42,20 +42,44 @@ public:
 	/** Adds a part to the entity. Entity will delete part */
 	void AddPart(const std::string& in_Id, PartPtr in_pPart);
 
+	/** Adds a part using it's class default part id (see implementation below */
+	template<typename PartType>
+	void AddPart(VSharedPtr<PartType> in_pPart);
+
+	/** Removes the part with the given id */
+	void RemovePart(const std::string& in_Id);
+
 	void AddChild(EntityPtr in_pEntity);
 	void RemoveChild(EntityPtr in_pEntity);
 
+	VRangeIterator<VEntity> ChildIterator();
+	VRangeIterator<IVPart> PartIterator();
+
 private:
-	typedef std::map<utils::VFourCC, PartPtr> PartContainer;
+	typedef std::map<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;
+
 	VEntity(const VEntity&);
 	void operator=(const VEntity&);
+
+	IVPart* GetPartById(const std::string& in_Id);
+
+	void UnconnectAllParts();
+	void ReconnectAllParts();
+	void ConnectPart(IVPart* in_pPart, const std::string& in_Id);
+	void UnconnectPart(IVPart* in_pPart, const std::string& in_Id);
+
+	/* deactivate if any dependency of a part is not fulfilled */
+	void CheckDependencies();
 
 	PartContainer m_Parts;
 	vbool m_bActivated;
 
 	VEntity* m_pParent;
 	EntityContainer m_Entities;
+
+	// put util functions in helper class to keep changes local to VEntity.cpp
+	friend class ::v3d::entity::VEntityHelper;
 };
 
 //-----------------------------------------------------------------------------

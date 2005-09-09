@@ -1,7 +1,7 @@
 #ifndef V3D_VMEMORY_H
 #define V3D_VMEMORY_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
+#include <v3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -33,10 +33,11 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="tinyxmld.lib VeloxLib.lib CoreLib.lib KernelLib.lib"
+				AdditionalDependencies="tinyxmld.lib VeloxLib.lib KernelLib.lib CoreLib.lib"
 				OutputFile="$(OutDir)/XmlServiceDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/XmlServiceDLL.pdb"
 				SubSystem="2"
@@ -80,6 +81,7 @@
 				OutputFile="$(OutDir)/XmlServiceDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
 				OptimizeReferences="2"

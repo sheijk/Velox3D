@@ -1,12 +1,12 @@
 //TODO: insert header file name
 #include "VSmartPointerTests.h"
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VObjectRegistry.h>
-#include <V3d/Core/VException.h>
-#include <V3d/UnitTests/IVTestManager.h>
-#include <V3d/UnitTests/VUnitTestException.h>
+#include <v3d/Core/VObjectRegistry.h>
+#include <v3d/Core/VException.h>
+#include <v3d/UnitTests/IVTestManager.h>
+#include <v3d/UnitTests/VUnitTestException.h>
 
-#include <V3d/Core/SmartPtr/VGuards.h>
+#include <v3d/Core/SmartPtr/VGuards.h>
 #include <V3d/Core/SmartPtr/VSharedPtr.h>
 
 #include "VDestructTest.h"

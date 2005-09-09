@@ -1,7 +1,7 @@
 #ifndef V3D_VKERNELEXCEPTION_H
 #define V3D_VKERNELEXCEPTION_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VException.h>
+#include <v3d/Core/VException.h>
 
 #include <string>
 

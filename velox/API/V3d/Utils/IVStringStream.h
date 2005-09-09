@@ -1,7 +1,7 @@
 #ifndef V3D_IVSTRINGSTREAM_H
 #define V3D_IVSTRINGSTREAM_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
+#include <v3d/Core/VCoreLib.h>
 #include <sstream>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -45,4 +45,3 @@ inline IVStringStream& Flush( IVStringStream& in_Stream )
 } // namespace utils
 } // namespace v3d
 #endif // V3D_IVSTRINGSTREAM_H
-

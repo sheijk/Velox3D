@@ -1,8 +1,8 @@
 #ifndef V3D_VSmartPointerTest_H
 #define V3D_VSmartPointerTest_H
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
-#include <V3d/UnitTests/IVUnitTest.h>
+#include <v3d/Core/VCoreLib.h>
+#include <v3d/UnitTests/IVUnitTest.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

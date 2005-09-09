@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="%%name%%"
 	ProjectGUID="{%%projectid%%}"
+	RootNamespace="%%name%%"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -14,13 +15,13 @@
 			Name="Debug|Win32"
 			OutputDirectory="%%relpath%%/Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="%%relpath%%/Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -32,14 +33,9 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/%%name%%.exe"
-				LinkIncremental="2"
-				GenerateDebugInformation="TRUE"
-				ProgramDatabaseFile="$(OutDir)/%%name%%.pdb"
-				SubSystem="1"
-				ImportLibrary="$(OutDir)/%%name%%.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/%%name%%.lib"
+				IgnoreAllDefaultLibraries="FALSE"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -54,8 +50,6 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -65,12 +59,12 @@
 			Name="Release|Win32"
 			OutputDirectory="%%relpath%%/Local/Build/$(ConfigurationName)"
 			IntermediateDirectory="%%relpath%%/Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="4"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="%%relpath%%/API;%%relpath%%/Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
@@ -80,15 +74,9 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/%%name%%.exe"
-				LinkIncremental="1"
-				GenerateDebugInformation="TRUE"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/%%name%%.lib"
-				TargetMachine="1"/>
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)/%%name%%.lib"
+				IgnoreAllDefaultLibraries="TRUE"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -104,8 +92,6 @@
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
@@ -114,23 +100,6 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Implementation"
-			Filter="cpp;h">
-			<File
-				RelativePath="%%name%%.cpp">
-			</File>
-		</Filter>
-		<Filter
-			Name="ModuleImpl"
-			Filter="">
-			<File
-				RelativePath="%%relpath%%\Source\Kernel\main.cpp">
-			</File>
-			<File
-				RelativePath="%%relpath%%\Source\Module\VeloxModule.cpp">
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
