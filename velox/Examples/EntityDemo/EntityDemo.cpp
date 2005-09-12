@@ -6,6 +6,7 @@
 #include "VReaderPart.h"
 #include "VManagerPart.h"
 #include "VInvalidPart.h"
+#include "VHierarchyPart.h"
 
 #include <V3d/Resource.h>
 
@@ -89,6 +90,25 @@ VSharedPtr<VEntity> CreateDemoEntity(vint in_nValue)
 	return pEntity;
 }
 
+void DumpInfo(VEntity& in_Entity, const std::string& prefix = "")
+{
+	vout << prefix << "Entity" << (in_Entity.IsActive() ? "" : "(inactive)") << vendl;
+
+	VRangeIterator<IVPart> partIter = in_Entity.PartIterator();
+	while( partIter.HasNext() )
+	{
+		vout << prefix << "\tPart" << (partIter->IsReady() ? "" : " (misssing requirements)") << vendl;
+		++partIter;
+	}
+
+	VRangeIterator<VEntity> childIter = in_Entity.ChildIterator();
+	while( childIter.HasNext() )
+	{
+		DumpInfo(*childIter, prefix + "\t");
+		++childIter;
+	}
+}
+
 /**
  * This example demonstratetes sharing of data between multiple subsystems
  * The reader and setter communicate by using the data part without knowing
@@ -118,32 +138,50 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 	VSharedPtr<VManagerPart> pManager(new VManagerPart());
 	VSharedPtr<VSettingPart> pSettingPart(new VSettingPart());
 
-	// we can add childs before the manager will be added and they will
-	// still get correctly connected
-	for(vint id = -3; id < 0; ++id)
-	{
-		root.AddChild(CreateDemoEntity(id));
-	}
+	//// we can add childs before the manager will be added and they will
+	//// still get correctly connected
+	//for(vint id = -3; id < 0; ++id)
+	//{
+	//	root.AddChild(CreateDemoEntity(id));
+	//}
 
-	root.AddPart(VManagerPart::GetDefaultId(), pManager);
+	//root.AddPart(VManagerPart::GetDefaultId(), pManager);
 
-	for(vint id = 1; id < 5; ++id)
-	{
-		root.AddChild(CreateDemoEntity(id));
-	}
+	//for(vint id = 1; id < 5; ++id)
+	//{
+	//	root.AddChild(CreateDemoEntity(id));
+	//}
 
-	// add a part whose value we will change
-	{
-		VSharedPtr<VEntity> pEntity = CreateDemoEntity(1000);
-		root.AddChild(pEntity);
-		pEntity->AddPart(VSettingPart::GetDefaultId(), pSettingPart);
-	}
+	//// add a part whose value we will change
+	//{
+	//	VSharedPtr<VEntity> pEntity = CreateDemoEntity(1000);
+	//	root.AddChild(pEntity);
+	//	pEntity->AddPart(VSettingPart::GetDefaultId(), pSettingPart);
+	//}
 
-	// add an entity with an invalid part, which will not be activated
+	//// add an entity with an invalid part, which will not be activated
+	//{
+	//	VSharedPtr<VEntity> pInvalid = CreateDemoEntity(-666);
+	//	pInvalid->AddPart("invd", VEntity::PartPtr(new VInvalidPart()));
+	//	root.AddChild(pInvalid);
+	//}
+
+	// add entities with hierarchical parts
+	VSharedPtr<VHierarchyPart> pHierarchicalRoot(new VHierarchyPart());
+
 	{
-		VSharedPtr<VEntity> pInvalid = CreateDemoEntity(-666);
-		pInvalid->AddPart("invd", VEntity::PartPtr(new VInvalidPart()));
-		root.AddChild(pInvalid);
+		root.AddPart(pHierarchicalRoot);
+
+		VSharedPtr<VEntity> pChild1 = SharedPtr(new VEntity());
+		pChild1->AddPart(SharedPtr(new VHierarchyPart()));
+		VSharedPtr<VEntity> pChildSub1 = SharedPtr(new VEntity());
+		pChildSub1->AddPart(SharedPtr(new VHierarchyPart()));
+		pChild1->AddChild(pChildSub1);
+		root.AddChild(pChild1);
+
+		VSharedPtr<VEntity> pChild2 = SharedPtr(new VEntity());
+		pChild2->AddPart(SharedPtr(new VHierarchyPart()));
+		root.AddChild(pChild2);
 	}
 
 	// activate the whole scene and all entities
@@ -151,13 +189,20 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 
 	vout << "\n\n\nScene is now active\n\n\n";
 
+
 	// change value of the settable part
-	pSettingPart->SetValue(9999);
+	//pSettingPart->SetValue(9999);
+
+	DumpInfo(root);
+
+	vout << "Hierarchical parts:" << vendl;
+	pHierarchicalRoot->Print("\t");
 
 	// deactivate the whole scene
     root.Deactivate();
 
 	vout << "\n\n\nScene is now inactive\n\n\n";
+
 
 	//VEntity ent;
 	//VSettingPart* pSetter = 0;

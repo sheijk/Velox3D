@@ -11,9 +11,11 @@ using namespace v3d; // anti auto indent
 VUntypedPartConnection::VUntypedPartConnection(
 	IVPart::Location in_Location, 
 	const std::string& in_Id, 
+	VPartDependency::Condition in_Condition,
 	VPartConnectionManager* in_pRegisterTo)
 {
 	m_Dependency.id = in_Id;
+	m_Dependency.condition = in_Condition;
 	m_Dependency.location = in_Location;
 
 	in_pRegisterTo->Register(*this);
@@ -95,8 +97,11 @@ vbool VPartConnectionManager::IsReady() const
 {
 	for(vuint con = 0; con < m_Dependencies.size(); ++con)
 	{
-		if( m_Dependencies[con]->GetPart() == 0 )
+		if( m_Dependencies[con]->GetDependency().condition == VPartDependency::Mandatory
+			&& m_Dependencies[con]->GetPart() == 0 )
+		{
 			return false;
+		}
 	}
 
 	return true;

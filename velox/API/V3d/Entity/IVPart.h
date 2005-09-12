@@ -22,9 +22,12 @@ struct VPartDependency
 	/** The location of a dependency: where the required part is located */
 	enum Location { Neighbour, Ancestor };
 
+	enum Condition { Optional, Mandatory };
+
 #ifndef SWIG
 	Location location;
 	std::string id;
+	Condition condition;
 #endif
 
 	Location GetLocation() const { return location; }
@@ -32,6 +35,9 @@ struct VPartDependency
 
 	std::string GetId() const { return id; }
 	void SetId(const std::string& in_Id) { id = in_Id; }
+
+	Condition GetCondition() const { return condition; }
+	void SetCondition(Condition cond) { condition = cond; }
 };
 
 /**

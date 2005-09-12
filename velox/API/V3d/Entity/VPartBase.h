@@ -17,8 +17,9 @@ class VUntypedPartConnection
 {
 public:
 	VUntypedPartConnection(
-		IVPart::Location in_Location, 
-		const std::string& in_Id, 
+		VPartDependency::Location in_Location,
+		const std::string& in_Id,
+		VPartDependency::Condition in_Condition,
 		VPartConnectionManager* in_pRegisterTo);
 
 	void Disconnect();
@@ -48,8 +49,21 @@ public:
 		VPartDependency::Location in_Location,
 		VPartConnectionManager* in_pRegisterTo);
 
+	VPartConnection(
+		VPartDependency::Location in_Location,
+		VPartDependency::Condition in_Condition,
+		VPartConnectionManager* in_pRegisterTo);
+
+	VPartConnection(
+		VPartDependency::Location in_Location,
+		const std::string& in_Id,
+		VPartDependency::Condition in_Condition,
+		VPartConnectionManager* in_pRegisterTo);
+
 	T* Get() const;
 	T* operator->() const;
+
+	vbool IsConnected() const { return m_pPart != 0; }
 };
 
 //-----------------------------------------------------------------------------
@@ -128,7 +142,11 @@ VPartConnection<T>::VPartConnection(
 	const std::string& in_Id, 
 	VPartConnectionManager* in_pRegisterTo)
 	:
-	VUntypedPartConnection(in_Location, in_Id, in_pRegisterTo)
+	VUntypedPartConnection(
+		in_Location, 
+		in_Id, 
+		VPartDependency::Mandatory,
+		in_pRegisterTo)
 {
 	m_pPart = 0;
 }
@@ -138,7 +156,42 @@ VPartConnection<T>::VPartConnection(
 	VPartDependency::Location in_Location,
 	VPartConnectionManager* in_pRegisterTo)
 	:
-	VUntypedPartConnection(in_Location, T::GetDefaultId(), in_pRegisterTo)
+	VUntypedPartConnection(
+		in_Location, 
+		T::GetDefaultId(), 
+		VPartDependency::Mandatory,
+		in_pRegisterTo)
+{
+	m_pPart = 0;
+}
+
+template<typename T>
+VPartConnection<T>::VPartConnection(
+	VPartDependency::Location in_Location,
+	VPartDependency::Condition in_Condition,
+	VPartConnectionManager* in_pRegisterTo) 
+	:
+	VUntypedPartConnection(
+		in_Location, 
+		T::GetDefaultId(), 
+		in_Condition,
+		in_pRegisterTo)
+{
+	m_pPart = 0;
+}
+
+template<typename T>
+VPartConnection<T>::VPartConnection(
+	VPartDependency::Location in_Location,
+	const std::string& in_Id,
+	VPartDependency::Condition in_Condition,
+	VPartConnectionManager* in_pRegisterTo)
+	:
+	VUntypedPartConnection(
+		in_Location,
+		in_Id,
+		in_Condition,
+		in_pRegisterTo)
 {
 	m_pPart = 0;
 }

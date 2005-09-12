@@ -349,6 +349,7 @@ void VEntity::CheckDependencies()
 	}
 	else
 	{
+		// check dependencies for all childs
 		EntityContainer::iterator child = m_Entities.begin();
 		for( ; child != m_Entities.end(); ++child)
 		{

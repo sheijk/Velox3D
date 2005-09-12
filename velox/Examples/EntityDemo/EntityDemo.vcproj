@@ -124,6 +124,9 @@
 				RelativePath=".\VDataPart.h">
 			</File>
 			<File
+				RelativePath=".\VHierarchyPart.h">
+			</File>
+			<File
 				RelativePath=".\VInvalidPart.h">
 			</File>
 			<File

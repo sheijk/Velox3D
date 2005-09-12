@@ -32,6 +32,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+11.09.05
+- entity system: connections in VPartBase koennen optional sein, passendes
+  beispiel im entity example
+
 06.09.05
 - neues geometrie generations "framework" das mit dem resource system
   zusammen arbeitet (-> IVMeshGenerator), polar sphere darauf portiert

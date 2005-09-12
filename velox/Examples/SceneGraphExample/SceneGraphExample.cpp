@@ -93,6 +93,9 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	m_pRoot = CreateEntity(m_pSGRoot);
 	m_pRoot->Activate();
 
+	// ensure the activation was successful
+	V3D_ASSERT(m_pRoot->IsActive());
+
 	//create a Sphere for the Child
 	VSceneGraphPart* pSphere = new VSceneGraphPart();
 
