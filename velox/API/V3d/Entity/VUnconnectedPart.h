@@ -11,17 +11,24 @@ namespace v3d { namespace entity {
 using namespace v3d; // anti auto indenting
 
 /**
- * Base class for parts which don't need any connections to other parts
- *
- * @author sheijk
- */
-class VUnconnectedPart : public IVPart
+* Base class for parts which don't need any connections to other parts
+*
+* @author sheijk
+*/
+template<typename Parent>
+class VUnconnectedPartAdapter : public Parent
 {
 public:
-	virtual vbool IsReady() const;
-	virtual vuint DependencyCount() const;
-	virtual Dependency GetDependencyInfo(vuint in_nIndex) const;
+	virtual vbool IsReady() const { return true; }
+	virtual vuint DependencyCount() const { return 0; }
+	virtual VPartDependency GetDependencyInfo(vuint in_nIndex) const
+	{
+		V3D_THROWMSG(VException, "Error when querying dependecies ("
+			<< in_nIndex << ") out of bounds");
+	}
 };
+
+typedef VUnconnectedPartAdapter<IVPart> VUnconnectedPart;
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

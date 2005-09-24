@@ -65,7 +65,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				RuntimeLibrary="0"
+				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -182,13 +182,19 @@
 					Name="Scene"
 					Filter="">
 					<File
+						RelativePath="..\..\Api\V3d\Scene\IVGraphicsPart.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Scene\IVRenderAlgorithm.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\IVRenderList.h">
+						RelativePath="..\..\Api\V3d\Scene\IVScene.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\IVScene.h">
+						RelativePath="..\..\Api\V3d\Scene\IVSceneManagerPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\IVShapePart.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Scene\IVShooting.h">
@@ -197,17 +203,36 @@
 						RelativePath="..\..\Api\V3d\Scene\VDefaultRenderAlgorithm.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\VRenderList.h">
+						RelativePath="..\..\Api\V3d\Scene\VMeshPart.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\VSceneModelPart.h">
+						RelativePath="..\..\Api\V3d\Scene\VMeshPartBase.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\VShooting.h">
+						RelativePath="..\..\Api\V3d\Scene\VNaiveSceneManagerPart.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\VSimpleScene.h">
+						RelativePath="..\..\Api\V3d\Scene\VSimpleShooting.h">
 					</File>
+					<Filter
+						Name="odl"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3d\Scene\IVRenderList.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\VRenderList.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\VSceneModelPart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\VShooting.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\VSimpleScene.h">
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="Utils"
@@ -989,6 +1014,15 @@
 					RelativePath="..\..\Source\Scene\VDefaultRenderAlgorithm.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Source\Scene\VMeshPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VMeshPartBase.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VNaiveSceneManagerPart.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Scene\VRenderList.cpp">
 				</File>
 				<File
@@ -999,6 +1033,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VSimpleScene.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VSimpleShooting.cpp">
 				</File>
 			</Filter>
 		</Filter>

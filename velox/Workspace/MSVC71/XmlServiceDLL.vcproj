@@ -1,84 +1,233 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<VisualStudioProject ProjectType="Visual C++" Version="7.10" Name="XmlServiceDLL" ProjectGUID="{20050526-0000-0000-0000-000170963000}" Keyword="Win32Proj">
-  <Platforms>
-    <Platform Name="Win32"/>
-  </Platforms>
-  <Configurations>
-    <Configuration Name="Debug|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="2" CharacterSet="2">
-      <Tool Name="VCCLCompilerTool" Optimization="0" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL" MinimalRebuild="TRUE" BasicRuntimeChecks="3" RuntimeLibrary="3" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="4"/>
-      <Tool Name="VCCustomBuildTool"/>
-      <Tool Name="VCLinkerTool" AdditionalDependencies="tinyxmld.lib" OutputFile="$(OutDir)/XmlServiceDLL.dll" LinkIncremental="2" AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib" ModuleDefinitionFile="DLLExports.def" GenerateDebugInformation="TRUE" ProgramDatabaseFile="$(OutDir)/XmlServiceDLL.pdb" SubSystem="2" ImportLibrary="$(OutDir)/XmlServiceDLL.lib" TargetMachine="1"/>
-      <Tool Name="VCMIDLTool"/>
-      <Tool Name="VCPostBuildEventTool"/>
-      <Tool Name="VCPreBuildEventTool"/>
-      <Tool Name="VCPreLinkEventTool"/>
-      <Tool Name="VCResourceCompilerTool"/>
-      <Tool Name="VCWebServiceProxyGeneratorTool"/>
-      <Tool Name="VCXMLDataGeneratorTool"/>
-      <Tool Name="VCWebDeploymentTool"/>
-      <Tool Name="VCManagedWrapperGeneratorTool"/>
-      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-    </Configuration>
-    <Configuration Name="Release|Win32" OutputDirectory="../../Local/Build/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="2" CharacterSet="2">
-      <Tool Name="VCCLCompilerTool" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS" RuntimeLibrary="0" RuntimeTypeInfo="TRUE" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="TRUE" DebugInformationFormat="3"/>
-      <Tool Name="VCCustomBuildTool"/>
-      <Tool Name="VCLinkerTool" OutputFile="$(OutDir)/XmlServiceDLL.dll" LinkIncremental="1" AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib" ModuleDefinitionFile="DLLExports.def" GenerateDebugInformation="TRUE" SubSystem="2" OptimizeReferences="2" EnableCOMDATFolding="2" ImportLibrary="$(OutDir)/XmlServiceDLL.lib" TargetMachine="1"/>
-      <Tool Name="VCMIDLTool"/>
-      <Tool Name="VCPostBuildEventTool"/>
-      <Tool Name="VCPreBuildEventTool"/>
-      <Tool Name="VCPreLinkEventTool"/>
-      <Tool Name="VCResourceCompilerTool"/>
-      <Tool Name="VCWebServiceProxyGeneratorTool"/>
-      <Tool Name="VCXMLDataGeneratorTool"/>
-      <Tool Name="VCWebDeploymentTool"/>
-      <Tool Name="VCManagedWrapperGeneratorTool"/>
-      <Tool Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
-    </Configuration>
-  </Configurations>
-  <References>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="XmlServiceDLL"
+	ProjectGUID="{20050526-0000-0000-0000-000170963000}"
+	RootNamespace="XmlServiceDLL"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="tinyxmld.lib"
+				OutputFile="$(OutDir)/XmlServiceDLL.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/XmlServiceDLL.pdb"
+				SubSystem="2"
+				ImportLibrary="$(OutDir)/XmlServiceDLL.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="../../Local/Build/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="tinyxml.lib"
+				OutputFile="$(OutDir)/XmlServiceDLL.dll"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				ModuleDefinitionFile="DLLExports.def"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)/XmlServiceDLL.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
 	</References>
-  <Files xmlns:exsl="http://exslt.org/common">
-    <Filter Name="Api" Filter="">
-      <Filter Name="V3d" Filter="">
-        <Filter Name="Xml" Filter="">
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLAttribute.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLComment.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLElement.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLNode.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLService.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLText.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLVisitor.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\IVXMLWriter.h"/>
-          <File RelativePath="..\..\Api\V3d\Xml\VXMLExceptions.h"/>
-        </Filter>
-        <File RelativePath="..\..\Api\V3d\XML.h"/>
-      </Filter>
-    </Filter>
-    <Filter Name="Module" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <File RelativePath="..\..\Source\Module\VeloxModule.cpp"/>
-      </Filter>
-    </Filter>
-    <Filter Name="XMLService" Filter="">
-      <Filter Name="Implementation" Filter="">
-        <File RelativePath="..\..\Source\XMLService\VStreamReader.cpp"/>
-        <File RelativePath="..\..\Source\XMLService\VStreamReader.h"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLAttribute.cpp"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLAttribute.h"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLComment.cpp"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLComment.h"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLElement.cpp"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLElement.h"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLService.cpp"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLService.h"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLText.cpp"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLText.h"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLWriter.cpp"/>
-        <File RelativePath="..\..\Source\XMLService\VXMLWriter.h"/>
-        <File RelativePath="..\..\Source\XMLService\XmlServiceDLL.cpp"/>
-      </Filter>
-    </Filter>
-  </Files>
-  <Globals>
+	<Files>
+		<Filter
+			Name="Api"
+			Filter="">
+			<Filter
+				Name="V3d"
+				Filter="">
+				<File
+					RelativePath="..\..\Api\V3d\XML.h">
+				</File>
+				<Filter
+					Name="Xml"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLAttribute.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLComment.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLElement.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLNode.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLService.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLText.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLVisitor.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\IVXMLWriter.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Xml\VXMLExceptions.h">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Module"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Module\VeloxModule.cpp">
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="XMLService"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\XMLService\VStreamReader.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VStreamReader.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLAttribute.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLAttribute.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLComment.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLComment.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLElement.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLElement.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLService.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLService.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLText.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLText.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLWriter.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\VXMLWriter.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\XMLService\XmlServiceDLL.cpp">
+				</File>
+			</Filter>
+		</Filter>
+	</Files>
+	<Globals>
 	</Globals>
 </VisualStudioProject>

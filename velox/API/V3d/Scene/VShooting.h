@@ -31,7 +31,7 @@ public:
 
 	static std::string GetDefaultId();
 
-	void Cull();
+	void UpdateAndCull();
 	void Render();
 
 	virtual vbool IsActive() const;

@@ -174,6 +174,8 @@ void InitTypeInfo<T>::operator()(VTypeInfo* out_pTypeInfo)
 	// in order for a type T to be used with velox's simple type info there
 	// must be a specialization of InitTypeInfo<T> which constructs the 
 	// VTypeInfo object. See example in declaration above (~ line 62ff)
+	// This error will also occur if you try to get type info for a type
+	// which has been forward declared only
 	typeLacksGetTypeInfoSpecialization();
 }
 

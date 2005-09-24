@@ -65,7 +65,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				RuntimeLibrary="0"
+				RuntimeLibrary="2"
 				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -120,6 +120,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Core\MemManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Core\RangeIter.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Core\VAssert.h">
@@ -188,6 +191,9 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Core\RangeIter\VRangeIterator.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Core\RangeIter\VSingleValueRangePolicy.h">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Core\RangeIter\VSTLAccessorRangePolicy.h">

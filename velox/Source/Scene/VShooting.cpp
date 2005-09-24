@@ -21,7 +21,7 @@ VShooting::VShooting(graphics::IVDevice* in_pDevice, IVRenderAlgorithm* in_pAlgo
 	m_bActive = false;
 }	
 
-void VShooting::Cull()
+void VShooting::UpdateAndCull()
 {
 //	V3D_ASSERT(m_pScene != 0);
 

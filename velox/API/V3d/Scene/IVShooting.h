@@ -5,6 +5,8 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3d/Entity/IVPart.h>
+#include <V3dLib/Graphics/Misc/IVCamera.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
@@ -15,12 +17,10 @@ class IVShooting : public entity::IVPart
 public:
 	virtual ~IVShooting() {}
 
-	virtual void Cull() = 0;
+	virtual void UpdateAndCull() = 0;
 	virtual void Render() = 0;
 
 	static std::string GetDefaultId() { return "shooting"; }
-
-	virtual vbool IsActive() const = 0;
 };
 
 //-----------------------------------------------------------------------------
