@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo $@ | v3dgengetset.pl
+echo "$@" | v3dgengetset.pl
 

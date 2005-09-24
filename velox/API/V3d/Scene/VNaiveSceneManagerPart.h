@@ -28,16 +28,20 @@ public:
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
 
-	virtual void Add(IVShapePart* in_pShape);
-	virtual void Remove(IVShapePart* in_pShape);
+	virtual void Add(IVGraphicsPart* in_pShape);
+	virtual void Remove(IVGraphicsPart* in_pShape);
 
 	void Activate();
 	void Deactivate();
 
 	static std::string GetDefaultId() { return IVGraphicsPart::GetDefaultId(); }
+
 private:
-	typedef	std::set<IVShapePart*> ShapeList;
-	ShapeList m_Shapes;
+	typedef	std::set<const IVShapePart*> ShapeList;
+	ShapeList m_VisibleShapes;
+
+	typedef std::set<IVGraphicsPart*> GraphicsPartList;
+	GraphicsPartList m_Childs;
 };
 
 //-----------------------------------------------------------------------------

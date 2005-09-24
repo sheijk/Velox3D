@@ -185,12 +185,6 @@
 						RelativePath="..\..\Api\V3d\Scene\IVGraphicsPart.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\IVRenderAlgorithm.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Scene\IVScene.h">
-					</File>
-					<File
 						RelativePath="..\..\Api\V3d\Scene\IVSceneManagerPart.h">
 					</File>
 					<File
@@ -200,13 +194,13 @@
 						RelativePath="..\..\Api\V3d\Scene\IVShooting.h">
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Scene\VDefaultRenderAlgorithm.h">
-					</File>
-					<File
 						RelativePath="..\..\Api\V3d\Scene\VMeshPart.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Scene\VMeshPartBase.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\VModelPart.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Scene\VNaiveSceneManagerPart.h">
@@ -214,25 +208,6 @@
 					<File
 						RelativePath="..\..\Api\V3d\Scene\VSimpleShooting.h">
 					</File>
-					<Filter
-						Name="odl"
-						Filter="">
-						<File
-							RelativePath="..\..\Api\V3d\Scene\IVRenderList.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Scene\VRenderList.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Scene\VSceneModelPart.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Scene\VShooting.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Scene\VSimpleScene.h">
-						</File>
-					</Filter>
 				</Filter>
 				<Filter
 					Name="Utils"
@@ -744,12 +719,6 @@
 				<Filter
 					Name="Parsers"
 					Filter="">
-					<File
-						RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.h">
-					</File>
 				</Filter>
 				<Filter
 					Name="EntityParts"
@@ -1011,28 +980,16 @@
 				Name="Implementation"
 				Filter="">
 				<File
-					RelativePath="..\..\Source\Scene\VDefaultRenderAlgorithm.cpp">
-				</File>
-				<File
 					RelativePath="..\..\Source\Scene\VMeshPart.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VMeshPartBase.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Source\Scene\VModelPart.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Scene\VNaiveSceneManagerPart.cpp">
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\VRenderList.cpp">
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\VSceneModelPart.cpp">
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\VShooting.cpp">
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\VSimpleScene.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VSimpleShooting.cpp">

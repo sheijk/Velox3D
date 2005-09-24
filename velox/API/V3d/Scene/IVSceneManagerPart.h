@@ -22,8 +22,8 @@ class IVSceneManagerPart : public IVGraphicsPart
 public:
 	virtual ~IVSceneManagerPart() {}
 
-	virtual void Add(IVShapePart* in_pShape) = 0;
-	virtual void Remove(IVShapePart* in_pShape) = 0;
+	virtual void Add(IVGraphicsPart* in_pShape) = 0;
+	virtual void Remove(IVGraphicsPart* in_pShape) = 0;
 
 	static std::string GetDefaultId() { return IVGraphicsPart::GetDefaultId(); }
 };

@@ -28,25 +28,36 @@ void VNaiveSceneManagerPart::UpdateAndCull(const graphics::IVCamera& in_Camera)
 {
 	using namespace std;
 
-	for(ShapeList::iterator shape = m_Shapes.begin(); shape != m_Shapes.end(); ++shape)
+	m_VisibleShapes.clear();
+
+	// update all graphics parts and create list of visible shapes
+	for(GraphicsPartList::iterator child = m_Childs.begin(); 
+		child != m_Childs.end(); ++child)
 	{
-		(*shape)->UpdateAndCull(in_Camera);
+		(*child)->UpdateAndCull(in_Camera);
+
+		VRangeIterator<const IVShapePart> shape = (*child)->GetVisibleMeshes();
+		while( shape.HasNext() )
+		{
+			m_VisibleShapes.insert(&*shape);
+			++shape;
+		}
 	}
 }
 
 VRangeIterator<const IVShapePart> VNaiveSceneManagerPart::GetVisibleMeshes() const
 {
-	return CreateDerefBeginIterator<const IVShapePart>(m_Shapes);
+	return CreateDerefBeginIterator<const IVShapePart>(m_VisibleShapes);
 }
 
-void VNaiveSceneManagerPart::Add(IVShapePart* in_pShape)
+void VNaiveSceneManagerPart::Add(IVGraphicsPart* in_pChild)
 {
-	m_Shapes.insert(in_pShape);
+	m_Childs.insert(in_pChild);
 }
 
-void VNaiveSceneManagerPart::Remove(IVShapePart* in_pShape)
+void VNaiveSceneManagerPart::Remove(IVGraphicsPart* in_pChild)
 {
-	m_Shapes.erase(in_pShape);
+	m_Childs.erase(in_pChild);
 }
 
 void VNaiveSceneManagerPart::Activate()
