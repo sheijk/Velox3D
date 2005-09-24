@@ -32,6 +32,9 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+23.09.05
+- graphics architecture (api/v3d/scene): finales system
+
 11.09.05
 - entity system: connections in VPartBase koennen optional sein, passendes
   beispiel im entity example
