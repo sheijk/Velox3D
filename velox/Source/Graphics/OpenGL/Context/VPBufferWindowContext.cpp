@@ -6,12 +6,17 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings) : 
+VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings) : 
 	m_PBufferDeviceContext(0), 
-	m_WindowDeviceContext(in_DeviceContext),
+	m_WindowDeviceContext(0),
 	m_PBufferRenderContext(0), 
 	m_DisplaySettings(*in_pDisplaySettings)
 {
+	V3D_ASSERT(in_DeviceContext != 0);
+	V3D_ASSERT(wglGetCurrentDC() != 0);
+
+	m_WindowDeviceContext = GetDC(in_hwnd);
+
 	const int Format[] = {
 	    WGL_SUPPORT_OPENGL_ARB, true,
         WGL_DRAW_TO_PBUFFER_ARB, true,
@@ -27,8 +32,7 @@ VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphic
 	vint Pixelformat;
 	
 	//select Pixel Buffer Format
-//	Pixelformat = ChoosePixelFormat(in_DeviceContext, Format);
-	wglChoosePixelFormatARB(in_DeviceContext, Format, 0, 1, &Pixelformat, &Count);
+	wglChoosePixelFormatARB(m_WindowDeviceContext, Format, 0, 1, &Pixelformat, &Count);
 
 	int Attribute[] = 
 	{
@@ -38,7 +42,7 @@ VPBufferWindowContext::VPBufferWindowContext(HDC in_DeviceContext, const graphic
 	};
 
 	//create Pixel Buffer
-	m_PixelBuffer = wglCreatePbufferARB(in_DeviceContext, Pixelformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
+	m_PixelBuffer = wglCreatePbufferARB(m_WindowDeviceContext, Pixelformat, m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight(), Attribute);
 
 	if(m_PixelBuffer == 0)
 	{
@@ -101,7 +105,7 @@ void VPBufferWindowContext::SwapBuffers()
 
 IVRenderContext* VPBufferWindowContext::CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings)
 {
-	return new VPBufferWindowContext(m_WindowDeviceContext, in_pDisplaySettings);
+	return new VPBufferWindowContext(0, m_WindowDeviceContext, in_pDisplaySettings);
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

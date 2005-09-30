@@ -15,7 +15,6 @@ using namespace v3d; // prevent auto indenting
 class VRigidBodyPart : public VUnconnectedPart
 {
 public:
-		
 	VRigidBodyPart();
 
 	virtual void Activate();

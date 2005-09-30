@@ -152,6 +152,19 @@ namespace v3d {
 			gmtl::operator*(mat.m_Mat, vector.m_Vec));
 	}
 
+	// 3d vector / 4x4 matrix multiplication
+	template<typename Scalar>
+		void Mult(
+		VVector<Scalar, 3>& result,
+		const VMatrix<Scalar, 4, 4>& mat,
+		const VVector<Scalar, 3>& vector
+		)
+	{
+		//r = m * v;
+		result = VVector<Scalar, 3>(
+			gmtl::operator*(mat.m_Mat, vector.m_Vec));
+	}
+
 	/**
 	 * matrix quaternion rotation, works only for 3x3 matrices
 	 * @author: ins

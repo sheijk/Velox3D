@@ -1,7 +1,6 @@
 #include "VSceneModelParser.h"
 //-----------------------------------------------------------------------------
 
-#include <V3d/Scene/VSceneModelPart.h>
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

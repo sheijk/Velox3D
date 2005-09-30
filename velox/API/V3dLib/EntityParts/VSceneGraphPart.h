@@ -7,6 +7,7 @@
 #include <V3d/Entity.h>
 #include <V3dlib/Math/VRBTransform.h>
 #include <V3dlib/EntityParts/VRigidBodyPart.h>
+#include <V3dlib/EntityParts/VUpdateablePart.h>
 
 #include <list>
 //-----------------------------------------------------------------------------
@@ -14,6 +15,11 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
+/**
+* The SceneGraph add RigidBodys in a List
+*
+* @author lars
+*/
 class VSceneGraphPart : public VPartBase
 {
 public:
@@ -94,8 +100,7 @@ private:
 protected:
 
 	std::list<VSceneGraphPart*>      m_pChilds;
-	//TODO: muss VPartConnection zum Neighbour sein
-	VRigidBodyPart*                  m_pRigidBodyPart;
+	VPartConnection<VRigidBodyPart>  m_pRigidBodyPart;
 	math::VRBTransform               m_Transform;
 	math::VRBTransform               m_relativeTransform;
 };

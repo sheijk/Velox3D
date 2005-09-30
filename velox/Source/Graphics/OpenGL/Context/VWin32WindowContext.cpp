@@ -85,7 +85,7 @@ IVRenderContext* VWin32WindowContext::CreateOffscreenContext(const graphics::VDi
 {
 	MakeCurrent();
 
-	return new VPBufferWindowContext(m_DeviceContext, in_pDisplaySettings);
+	return new VPBufferWindowContext(m_Handle, m_DeviceContext, in_pDisplaySettings);
 }
 
 //-----------------------------------------------------------------------------

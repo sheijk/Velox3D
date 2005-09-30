@@ -16,6 +16,21 @@ Worklog von Lars
 
 log:
 
+25.09.2005
+- Entity SceneGraph + SceneGraph Animation + Updater fertig
+
+27.08.2005
+- RotateAxis und RotateQuaternion hinzugefügt
+- VUpdateablePart für Updaten des SceneGraph erstellt
+- VSGAnimationPart für Animationen im SceneGraph erstellt
+
+18.08.2005
+- VSpatialInfoPart für die World-Space Information von Picking Objekt
+- VPickablePart erstellt fürs Picking
+- VBoundingBox math Klasse hinzugefügt
+- VBoundingSphere math Klasse hinzugefügt
+- VHalfRay math Klasse hinzugefügt
+
 15.08.2005
 - in VPartConnection ein Standardkonstruktor eingefügt
 

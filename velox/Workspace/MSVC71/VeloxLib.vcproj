@@ -672,6 +672,12 @@
 					<File
 						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h">
 					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VSGAnimationPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VUpdateablePart.h">
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -728,6 +734,12 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Entity\EntityParts\VSGAnimationPart.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Entity\EntityParts\VUpdateablePart.cpp">
 					</File>
 				</Filter>
 			</Filter>

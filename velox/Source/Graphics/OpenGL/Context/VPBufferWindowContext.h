@@ -27,7 +27,7 @@ class VPBufferWindowContext : public IVRenderContext
 {
 public:
 
-	VPBufferWindowContext(HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
+	VPBufferWindowContext(HWND in_hwnd, HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VPBufferWindowContext();
 
 	/**

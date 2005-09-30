@@ -4,6 +4,8 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <v3d/Math/VMatrix.h>
+#include <v3d/Math/VVector.h>
+#include <V3dlib/Math/VQuaternion.h>
 #include <v3d/Core/SmartPtr/VGuards.h>
 
 //-----------------------------------------------------------------------------
@@ -62,6 +64,60 @@ void SetRotationZ(VMatrix<Scalar, RowCount, ColumnCount>& result, Scalar in_RotA
 	result.Set(0,1, sinus);
 	result.Set(1,0, -sinus);
 	result.Set(1,1, cosinus);
+}
+
+/**
+* @author: lars
+*/
+template<typename Scalar, vuint RowCount, vuint ColumnCount>
+void SetRotationAxis(VMatrix<Scalar, RowCount, ColumnCount>& result, VVector<Scalar, 3> in_Axis, Scalar in_RotAngle)
+{
+	Identity(result);
+
+	Normalize(in_Axis);
+
+	Scalar sinus   = sin(in_RotAngle);
+	Scalar cosinus = cos(in_RotAngle);
+
+	result.Set(0,0, in_Axis.GetX() * in_Axis.GetX() * (1-cosinus) + cosinus);
+	result.Set(1,0, in_Axis.GetX() * in_Axis.GetY() * (1-cosinus) - (in_Axis.GetZ() * sinus));
+	result.Set(2,0, in_Axis.GetX() * in_Axis.GetZ() * (1-cosinus) + (in_Axis.GetY() * sinus));
+
+	result.Set(0,1, in_Axis.GetY() * in_Axis.GetX() * (1-cosinus) + (in_Axis.GetZ() * sinus));
+	result.Set(1,1, in_Axis.GetY() * in_Axis.GetY() * (1-cosinus) + cosinus);
+	result.Set(2,1, in_Axis.GetY() * in_Axis.GetZ() * (1-cosinus) - (in_Axis.GetX() * sinus));
+
+	result.Set(0,2, in_Axis.GetZ() * in_Axis.GetX() * (1-cosinus) - (in_Axis.GetY() * sinus));
+	result.Set(1,2, in_Axis.GetZ() * in_Axis.GetY() * (1-cosinus) + (in_Axis.GetX() * sinus));
+	result.Set(2,2, in_Axis.GetZ() * in_Axis.GetZ() * (1-cosinus) + cosinus);
+}
+
+/**
+* @author: lars
+*/
+template<typename Scalar>
+void SetQuaternionRotation(VVector<Scalar, 3> io_Vector, VQuaternion<Scalar>& in_Rotation)
+{
+	Scalar x1; 
+	Scalar y1;
+	Scalar z1; 
+	Scalar w1;
+	Scalar x2; 
+	Scalar y2;
+	Scalar z2; 
+	Scalar w2;
+	in_Rotation.Get(x1, y1, z1, w1);
+
+	VQuaternion<Scalar> Quat(io_Vector.GetX() * w1 + io_Vector.GetZ() * y1 - io_Vector.GetY() * z1,
+		io_Vector.GetY() * w1 + io_Vector.GetX() * z1 - io_Vector.GetZ() * x1,
+		io_Vector.GetZ() * w1 + io_Vector.GetY() * x1 - io_Vector.GetX() * y1,
+		io_Vector.GetX() * x1 + io_Vector.GetY() * y1 + io_Vector.GetZ() * z1);
+
+	Quat.Get(x2, y2, z2, w2);
+
+	io_Vector = VVector<Scalar, 3>(w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2,
+		w1 * y2 + y1 * w2 + z1 * x2 - x1 * z2,
+		w1 * z2 + z1 * w2 + x1 * y2 - y1 * x2);
 }
 
 /**
@@ -151,6 +207,16 @@ void RotateY(VMatrix44f& matrix, float angle);
  * @author: sheijk
  */
 void RotateZ(VMatrix44f& matrix, float angle);
+
+/**
+* @author: lars
+*/
+void RotateAxis(VMatrix44f& matrix, VVector3f axis, float angle);
+
+/**
+* @author: lars
+*/
+void Rotate(VVector3f rotate, VQuatf quaternion);
 
 /**
  * @author: sheijk

@@ -10,12 +10,9 @@ using namespace v3d; // anti auto indent
 
 VSceneGraphPart::VSceneGraphPart() : 
 	m_bActive(false),
-	m_pParent(VPartDependency::Ancestor, RegisterTo())
+	m_pParent(VPartDependency::Ancestor, VPartDependency::Optional, RegisterTo()),
+	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo())
 {
-	//TODO: das soll nicht auf ein selbst erzeugtes part, sonder auf das part
-	// im entity welches ueber eine VPartConnection bekommen wird zeigen!!!
-	m_pRigidBodyPart = new VRigidBodyPart();
-
 	m_relativeTransform.GetXAxis() = VVector3f(1.0f, 0.0f, 0.0f);
 	m_relativeTransform.GetYAxis() = VVector3f(0.0f, 1.0f, 0.0f);
 	m_relativeTransform.GetZAxis() = VVector3f(0.0f, 0.0f, 1.0f);
@@ -50,7 +47,7 @@ void VSceneGraphPart::AddChild(VSceneGraphPart* in_pChild)
 	if(std::find(m_pChilds.begin(), m_pChilds.end(), in_pChild)
 		== m_pChilds.end())
 	{
-        m_pChilds.push_back(in_pChild);
+        m_pChilds.insert(m_pChilds.end(), in_pChild);
 	}
 }
 
@@ -61,8 +58,6 @@ void VSceneGraphPart::RemoveChild(VSceneGraphPart* in_pChild)
 	std::list<VSceneGraphPart*>::iterator iter = std::find(m_pChilds.begin(),
 		m_pChilds.end(), in_pChild);
 	
-	//TODO: AUF KEINEN FALL EIN ENTITY PART LOESCHEN, DAS DARF NUR VENTITY!!!!!
-	delete* iter;
 	m_pChilds.erase(iter);
 }
 
@@ -72,14 +67,6 @@ void VSceneGraphPart::Activate()
 	{
         if(m_pParent.Get() != 0)
 			m_pParent->AddChild(this);
-
-		//TODO: rausnehmen, die childs werden von VEntity aktiviert
-		for(std::list<VSceneGraphPart*>::iterator iter = m_pChilds.begin();
-			iter != m_pChilds.end();
-			++iter)
-		{
-			(*iter)->Activate();
-		}
 
 		m_bActive = true;
 	}
@@ -91,14 +78,6 @@ void VSceneGraphPart::Deactivate()
 	{
 		if(m_pParent.Get() != 0)
 			m_pParent->RemoveChild(this);
-
-		//TODO: auch rausnehmen, VEntity deaktiviert die child parts
-		for(std::list<VSceneGraphPart*>::iterator iter = m_pChilds.begin();
-			iter != m_pChilds.end();
-			++iter)
-		{
-			(*iter)->Deactivate();
-		}
 
 		m_bActive = false;
 	}

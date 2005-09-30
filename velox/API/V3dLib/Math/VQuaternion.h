@@ -44,6 +44,21 @@ public:
 	{
 		m_Data = in_Quaternion.m_Data;
 	}
+
+	VQuaternion(VVector<Scalar, 3> in_NormalizedAxis, Scalar in_Angle)
+	{
+		Scalar& x, Scalar& y, Scalar& z, Scalar& w;
+		m_Data.get(x,y,z,w);
+
+		const float sinAngle = sin(in_Angle / 2);
+
+		x = in_NormalizedAxis.Get(0) * sinAngle;
+		y = in_NormalizedAxis.Get(1) * sinAngle;
+		z = in_NormalizedAxis.Get(2) * sinAngle;
+		w = cos(in_Angle);
+
+		normalize();
+	}
 	
 	//vc seems not iso compailent - took 15 mins...
 	VQuaternion(const QuatImpl& quat) : m_Data(quat)

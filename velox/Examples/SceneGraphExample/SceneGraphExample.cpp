@@ -10,6 +10,8 @@
 #include <V3d/Entity/VEntityManager.h>
 #include <V3d/Entity/VEntity.h>
 #include <V3dlib/EntityParts/VSceneGraphPart.h>
+#include <V3dlib/EntityParts/VSGAnimationPart.h>
+#include <V3dlib/EntityParts/VUpdateablePart.h>
 
 #include <string>
 
@@ -41,7 +43,6 @@ private:
 	IVDevice* m_pDevice;
 	IVButton* m_pEscapeKey;
 	VSceneGraphPart* m_pSGRoot;
-	VSharedPtr<VEntity> m_pRoot;
 	VServicePtr<updater::IVUpdateManager> m_pUpdater;
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
@@ -59,8 +60,28 @@ const std::string APP_NAME = "Entity SceneGraph Example";
 //-----------------------------------------------------------------------------
 
 /**
- * Create a Entity with a VSceneGraphPart and a VRigidBodyPart
+ * Create a Entity with a VSceneGraphPart, a VRigidBodyPart 
+ * and a VSGAnimationPart
  */
+VSharedPtr<VEntity> CreateEntity(VSceneGraphPart* pSGPart, VSGAnimationPart* pSGAnimPart)
+{
+	VSharedPtr<VEntity> pEntity(new VEntity());
+
+	//create and add RigidBodyPart with Identity Relative Transformation
+	pEntity->AddPart(VRigidBodyPart::GetDefaultId(), static_cast<VSharedPtr<IVPart> >(new VRigidBodyPart()));
+
+	//add SGAnimationPart
+	pEntity->AddPart(VSGAnimationPart::GetDefaultId(), static_cast<VSharedPtr<IVPart> >(pSGAnimPart));
+
+	//add SceneGraphPart with Identity Relative Transformation
+	pEntity->AddPart(VSceneGraphPart::GetDefaultId(), static_cast<VSharedPtr<IVPart> >(pSGPart));
+
+	return pEntity;
+}
+
+/**
+* Create a Entity with a VSceneGraphPart and a VRigidBodyPart 
+*/
 VSharedPtr<VEntity> CreateEntity(VSceneGraphPart* pSGPart)
 {
 	VSharedPtr<VEntity> pEntity(new VEntity());
@@ -79,9 +100,10 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	Init();
 	CreateResources();
 
+	VUpdateManagerPart* pUpdate = new VUpdateManagerPart();
+
 	IVDevice::MeshHandle hCube = Device().CreateMesh("/data/cube");
 	IVDevice::MaterialHandle hCubeMat = Device().CreateMaterial("/data/cube");
-
 	IVDevice::MeshHandle hMoon = Device().CreateMesh("/data/moon");
 	IVDevice::MaterialHandle hMoonMat = Device().CreateMaterial("/data/moon");
 
@@ -90,32 +112,31 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
 
 	//create Root Entity
-	m_pRoot = CreateEntity(m_pSGRoot);
-	m_pRoot->Activate();
-
-	// ensure the activation was successful
-	V3D_ASSERT(m_pRoot->IsActive());
+	VSharedPtr<VEntity> m_pRoot = CreateEntity(m_pSGRoot);
+	m_pRoot->AddPart(VUpdateManagerPart::GetDefaultId(), static_cast<VSharedPtr<IVPart> >(pUpdate));
 
 	//create a Sphere for the Child
 	VSceneGraphPart* pSphere = new VSceneGraphPart();
-
-	//add in SceneGraph Root and the Entity Root the Child pSphere
-	VSharedPtr<VEntity> pSphereEntity = CreateEntity(pSphere);
-	m_pRoot->AddChild(pSphereEntity);
+	VSGAnimationPart* pSphereAnim = new VSGAnimationPart();
 
 	//create a Moon for the Sphere as a Child
 	VSceneGraphPart* pMoon = new VSceneGraphPart();
+	VSGAnimationPart* pMoonAnim = new VSGAnimationPart();
+
+	//add in SceneGraph Root and the Entity Root the Child pSphere
+	VSharedPtr<VEntity> pSphereEntity = CreateEntity(pSphere, pSphereAnim);
 
 	//add in Sphere Child the Child pMoon
-	VSharedPtr<VEntity> pMoonEntity = CreateEntity(pMoon);
+	VSharedPtr<VEntity> pMoonEntity = CreateEntity(pMoon, pMoonAnim);
+	
 	pSphereEntity->AddChild(pMoonEntity);
+	m_pRoot->AddChild(pSphereEntity);
+	m_pRoot->Activate();
+	// ensure the activation was successful
+	V3D_ASSERT(m_pRoot->IsActive());
 
-	//create the Translate
-	VRBTransform SphereTrans;
-	VRBTransform MoonTrans;
-	vfloat32 trans = 0.0f;
-
-	vfloat32 time = .0f;
+	vfloat32 trans = 1.0f;
+	vfloat32 time = 0.0f;
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())
@@ -125,26 +146,21 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 		time += m_pUpdater->GetFrameDuration();
 
 		//set the relative Transformation from the SceneGraph Sphere Child
-//		trans = sin(time/10);
-		trans = 1;
-		SphereTrans.SetPosition(VVector3f(trans, trans, 0.0f));		
-		pSphere->SetRelativeTransform(SphereTrans);
+		trans = sin(time/10);
+		pSphereAnim->SetPosition(VVector3f(trans, trans, 0.0f));		
 
 		//set the relative Transformation from the Sphere Child Moon
-		MoonTrans.SetPosition(VVector3f(-trans, -trans, 0.0f));
-		RotateX(MoonTrans.GetAsMatrix(), DegreeToRadian(-15));
-		RotateZ(MoonTrans.GetAsMatrix(), DegreeToRadian(20));
-		RotateY(MoonTrans.GetAsMatrix(), DegreeToRadian(time));
-		pMoon->SetRelativeTransform(MoonTrans);
+		pMoonAnim->SetPosition(VVector3f(-trans, -trans, 0.0f));
 
 		//update the SceneGraph Root with his Childs
+		pUpdate->Update(time);
 		m_pSGRoot->Update();
 
 		//set the Mesh Matrix and render the Mesh
-		Device().SetMatrix(IVDevice::ModelMatrix, MoonTrans.GetAsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, pMoonAnim->GetRelativeTransform().GetAsMatrix());
 		RenderMesh(Device(), hMoon, hMoonMat);	
 
-		Device().SetMatrix(IVDevice::ModelMatrix, SphereTrans.GetAsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, pSphereAnim->GetRelativeTransform().GetAsMatrix());
 		RenderMesh(Device(), hCube, hCubeMat);
 
 		Device().EndScene();
@@ -156,6 +172,7 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	}
 	m_pUpdater->Stop();
 
+	m_pRoot->Deactivate();
 	Shutdown();
 
 	return 0;
@@ -193,7 +210,6 @@ void VSceneGraphExample::Init()
 
 void VSceneGraphExample::Shutdown()
 {
-	m_pRoot->Deactivate();
 	m_pDevice = 0;
 	m_pWindow.Release();
 	m_pEscapeKey = 0;
