@@ -42,6 +42,7 @@ namespace v3d {
 	}
 %}
 
+/*
 %javaexception("java.lang.Exception") Initialize {
 	try {
 		$action
@@ -76,14 +77,36 @@ namespace v3d {
 		return $null;
 	}
 }
+*/
 
+%javaexception("java.lang.RuntimeException") {
+	try {
+		$action
+	}
+	catch(VException& e) {
+		jclass clazz = jenv->FindClass("java/lang/RuntimeException");
+		std::stringstream msg;
+		msg << "[" << e.GetErrorFile() << ":" << e.GetErrorLine()
+			<< "] " << e.GetErrorString();
+		std::string msgString = msg.str();
+		jenv->ThrowNew(clazz, msgString.c_str());
+		return $null;
+	}
+	catch(...) {
+		jclass clazz = jenv->FindClass("java/lang/RuntimeException");
+		jenv->ThrowNew(clazz, "Unknown exception occured");
+		return $null;
+	}
+}
 
 // core types
 //-----------------------------------------------------------------------------
 #define V3D_DEPRECATED
 
 %include "../../API/V3d/Core/VTypes.h"
+// %pragma(java) jniclassbase=%{java.lang.RuntimeException%}
 %include "../../API/V3d/Core/VException.h"
+
 
 %rename(Next) v3d::VRangeIterator::operator++();
 %ignore v3d::VRangeIterator::operator++(int);
@@ -161,7 +184,7 @@ namespace v3d {
 %template(VVector4f) v3d::VVector<vfloat32, 4>;
 %template(VVector3f) v3d::VVector<vfloat32, 3>;
 %extend v3d::VVector<vfloat32, 3> {
-	VVector3f(float x, float y, float z) {
+	VVector3f<vfloat32, 3>(float x, float y, float z) {
 		self->Set(x, y, z);
 	}
 	
@@ -330,9 +353,9 @@ namespace v3d {
 }
 
 %template(VShootingPtr) v3d::VSharedPtr<v3d::scene::IVShooting>;
-%template(VSceneManagerPtr) v3d::VSharedPtr<v3d::scene::IVScene>;
+%template(VSceneManagerPtr) v3d::VSharedPtr<v3d::scene::IVSceneManagerPart>;
 %include "../../API/V3d/Scene/IVShooting.h"
-%include "../../API/V3d/Scene/IVScene.h"
+%include "../../API/V3d/Scene/IVSceneManagerPart.h"
 
 %ignore v3d::entity::IVSceneParser::Register;
 %ignore v3d::entity::IVSceneParser::Unregister;

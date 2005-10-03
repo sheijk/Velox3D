@@ -8,6 +8,13 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
+VVector3f DeHomogenize(const VVector4f& in_Vec)
+{
+	const vfloat32 w = in_Vec[3];
+
+	return VVector3f(in_Vec[0]/w, in_Vec[1]/w, in_Vec[2]/w);
+}
+
 VVector4f ToVector4f(const VVector3f& in_Vec, vfloat32 in_fW)
 {
 	VVector4f vec;

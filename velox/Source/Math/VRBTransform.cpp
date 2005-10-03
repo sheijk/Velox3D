@@ -9,7 +9,7 @@ namespace math {
 //-----------------------------------------------------------------------------
 using namespace v3d;
 
-VRBTransform::Type VRBTransform::defaultType = VRBTransform::LeftHanded;
+VRBTransform::Type VRBTransform::defaultType = VRBTransform::RightHanded;
 
 VRBTransform::VRBTransform()
 {
@@ -34,6 +34,19 @@ VRBTransform::VRBTransform(const VVector3f& in_Position,
 VRBTransform::VRBTransform(VMatrix44f in_Matrix)
 {
 	Set(in_Matrix); //TODO: validiereung der matrix einbauen (VectorBase kann das realisieren) --ins
+}
+
+VRBTransform::VRBTransform(const VRBTransform& in_Source)
+{
+	*this = in_Source;
+}
+
+void VRBTransform::operator=(const VRBTransform& in_Source)
+{
+	m_Position = in_Source.m_Position;
+	m_XAxis = in_Source.m_XAxis;
+	m_YAxis = in_Source.m_YAxis;
+	m_ZAxis = in_Source.m_ZAxis;
 }
 
 VRBTransform::~VRBTransform()
@@ -187,7 +200,7 @@ void VRBTransform::GetAxis(
 						   VVector3f& out_XAxis,
 						   VVector3f& out_YAxis,
 						   VVector3f& out_ZAxis
-						   )
+						   ) const
 {
 	out_XAxis = m_XAxis;
 	out_YAxis = m_YAxis;

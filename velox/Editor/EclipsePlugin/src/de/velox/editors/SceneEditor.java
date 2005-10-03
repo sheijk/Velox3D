@@ -97,13 +97,20 @@ public class SceneEditor extends VeloxEditorBase {
 			IFileEditorInput fileInput = (IFileEditorInput)input;
 			
 			fileName = fileInput.getFile().getLocation().toOSString();
-
-			if( fileInput.exists() ) {
+			
+			try {
 				loadFromFile(fileName);
 			}
-			else {
+			catch(RuntimeException e) {
 				createNewScene();
 			}
+
+//			if( fileInput.exists() ) {
+//				loadFromFile(fileName);
+//			}
+//			else {
+//				createNewScene();
+//			}
 			
 			name = fileInput.getName();
 			root.SetName(name);

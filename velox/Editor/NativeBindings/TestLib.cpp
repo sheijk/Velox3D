@@ -192,7 +192,7 @@ v3d::VSharedPtr<IVPart> CreateModelPart(IVXMLElement* in_pElement)
 //		model.Add(part);
 //	}
 	
-	VSharedPtr<VSceneModelPart> pModelPart(new VSceneModelPart(model));
+	VSharedPtr<VModelPart> pModelPart(new VModelPart(model));
 	
 	return pModelPart;
 }
@@ -260,42 +260,67 @@ public:
 	{}
 };
 
-v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
-	v3d::xml::IVXMLElement* in_pElement)
+template<typename PartType>
+VPartAndId PartWithId(PartType* in_pPart, const std::string& in_Id)
+{
+	VPartAndId partAndId;
+	
+	partAndId.part = SharedPtr(in_pPart);
+	partAndId.id = in_Id;
+	
+	return partAndId;
+}
+
+VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement)
 {
 	std::string type = in_pElement->GetAttributeValue<std::string>("type");
+	VPartAndId result;
+	result.SetId(type);
 
 	if( type == "model" ) 
 	{
-		return CreateModelPart(in_pElement);
+		result.SetPart(CreateModelPart(in_pElement));
 	}
 	else if( type == "scene" )
 	{
-		return VSharedPtr<v3d::entity::IVPart>(new v3d::scene::VSimpleScene());
+		vout << "creating scene. ";
+		VNaiveSceneManagerPart* pSceneManager = new v3d::scene::VNaiveSceneManagerPart();
+		
+		vout << "building smart pointer.";
+		VSharedPtr<v3d::scene::VNaiveSceneManagerPart> smartptr(pSceneManager);
+		
+		vout << "return " << vendl;
+		result.SetPart(smartptr);
+		result.SetId(VNaiveSceneManagerPart::GetDefaultId());
 	}
 	else if( type == "body" )
 	{
-		return SharedPtr(new VRigidBodyPart());
+		result.SetPart(SharedPtr(new VRigidBodyPart()));
 	}
 	else if( type == "x" )
 	{
-		return VSharedPtr<v3d::entity::IVPart>(new VTestPart());
+		result.SetPart(SharedPtr(new VTestPart()));
 	}
 	else if( type == "y" )
 	{
-		return SharedPtr(new VConnTestPart());
+		result.SetPart(SharedPtr(new VConnTestPart()));
 	}
 	else
 	{
-		return VSharedPtr<IVPart>(0);
+		result.SetPart(VSharedPtr<IVPart>(0));
 	}
+	
+	return result;
 }
 
 v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice)
 {
-	VDefaultRenderAlgorithm* pRenderAlgo = new VDefaultRenderAlgorithm();
+//	VDefaultRenderAlgorithm* pRenderAlgo = new VDefaultRenderAlgorithm();
 	
-	return new VShooting(in_pDevice, pRenderAlgo);
+//	return new VShooting(in_pDevice, pRenderAlgo);
+	VSimpleShooting* pShooting = new VSimpleShooting();
+	pShooting->SetRenderTarget(in_pDevice);
+	return pShooting;
 }
 
 v3d::entity::VEntity* CreateEntity()

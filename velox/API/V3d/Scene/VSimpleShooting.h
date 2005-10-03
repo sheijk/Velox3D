@@ -30,10 +30,13 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
+	virtual vbool IsActive() const;
+
 private:
 	entity::VPartConnection<IVGraphicsPart> m_pScene;
 	graphics::IVDevice* m_pDevice;
 	graphics::IVCamera* m_pCamera;
+	vbool m_bActive;
 };
 
 //-----------------------------------------------------------------------------

@@ -76,6 +76,15 @@ VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, HDC in_DeviceContext,
 	{
 		vout << "OpenGL Pixel Buffer Render Context was created!" << vendl;
 	}
+
+	//GLenum result = glewInit();
+	//if( result != GLEW_OK )
+	//{
+	//	V3D_THROWMSG(VGraphicException, "Could not initialize glew: "
+	//		<< " (" << result << ") "
+	//		<< glewGetErrorString(result)
+	//		);
+	//}
 }
 
 VPBufferWindowContext::~VPBufferWindowContext()

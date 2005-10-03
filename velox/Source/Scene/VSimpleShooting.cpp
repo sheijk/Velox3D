@@ -19,6 +19,7 @@ VSimpleShooting::VSimpleShooting() :
 {
 	m_pDevice = 0;
 	m_pCamera = 0;
+	m_bActive = false;
 }
 
 void VSimpleShooting::SetRenderTarget(graphics::IVDevice* in_pDevice)
@@ -43,15 +44,25 @@ graphics::IVCamera* VSimpleShooting::GetCamera() const
 
 void VSimpleShooting::UpdateAndCull()
 {
+	V3D_ASSERT(m_bActive);
+
 	if( m_pScene.IsConnected() )
 		m_pScene->UpdateAndCull(*m_pCamera);
 }
 
 void VSimpleShooting::Render()
 {
+	V3D_ASSERT(m_bActive);
+
 	if( ! m_pScene.IsConnected() )
 		return;
-	
+
+	static vuint counter = 0;
+	counter = (counter + 1) % 100;
+
+	if( counter == 0 )
+		vout << "rendering: " << vendl;
+
 	VRangeIterator<const IVShapePart> shape = m_pScene->GetVisibleMeshes();
 	while( shape.HasNext() )
 	{
@@ -59,6 +70,21 @@ void VSimpleShooting::Render()
 
 		for(vuint pass = 0; pass < material.PassCount(); ++pass)
 		{
+			math::VRBTransform transform = shape->GetModelTransform();
+
+			m_pDevice->SetMatrix(IVDevice::ModelMatrix, transform.GetAsMatrix());
+
+			//VMatrix44f matrix = math::TranslationMatrix(
+			//	transform.GetXAxis().GetX(),
+			//	transform.GetXAxis().GetY(),
+			//	transform.GetXAxis().GetZ());
+
+			//if( counter == 0 ) {
+   //             vout << "\tobj at " << transform.GetXAxis() << vendl;
+			//}
+
+			//m_pDevice->SetMatrix(IVDevice::ModelMatrix, matrix);
+
 			ApplyMaterial(*m_pDevice, &material.GetPass(pass));
 			shape->SendGeometry(*m_pDevice);
 		}
@@ -69,10 +95,17 @@ void VSimpleShooting::Render()
 
 void VSimpleShooting::Activate()
 {
+	m_bActive = true;
 }
 
 void VSimpleShooting::Deactivate()
 {
+	m_bActive = false;
+}
+
+vbool VSimpleShooting::IsActive() const
+{
+	return m_bActive;
 }
 
 //-----------------------------------------------------------------------------

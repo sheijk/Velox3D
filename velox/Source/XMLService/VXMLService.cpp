@@ -82,25 +82,34 @@ bool VXMLService::Visit(IVXMLVisitor& in_Visitor, VStringParam in_strFile)
  */
 IVXMLService::IVXMLElementPtr VXMLService::GetRootElement(VStringParam in_pcName)
 {
-	TiXmlDocument Doc(in_pcName);
-	Doc.LoadFile();
+	TiXmlDocument doc(in_pcName);
+	doc.LoadFile();
 
-	if( Doc.Error())
+	if( doc.Error() )
 	{
-		std::string Error;
-		Error.append("Document could not be parsed: ");
-		Error.append(in_pcName);
-		V3D_THROW(VXMLTinyXMLException, Error.c_str());
+		//std::string error;
+		//error.append("Document could not be parsed: ");
+		//error.append(in_pcName);
+		//V3D_THROW(VXMLTinyXMLException, error.c_str());
+		V3D_THROWMSG(VXMLTinyXMLException,
+			"Could not parse document \"" << in_pcName << "\": "
+			<< doc.ErrorDesc() );
+	}
+	else if( doc.RootElement() == 0 )
+	{
+		V3D_THROWMSG(VXMLTinyXMLException,
+			"Could not parse document \"" << in_pcName << "\""
+			" because it is empty");
 	}
 
 	IVXMLElementPtr pElement;
-	pElement.Assign(BeginTranslation(Doc));
+	pElement.Assign(BeginTranslation(doc));
 
 	return pElement;    
 }
 
 /**
- * Stream in Buffer kopieren um tinyXML nitzen zu können.
+ * Copy stream to buffer to be able to use tinyXML
  *
  * @author acrylsword
  */

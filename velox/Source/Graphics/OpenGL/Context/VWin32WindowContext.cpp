@@ -46,6 +46,14 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	//create a OpenGL Render Context
 	m_RenderContext = wglCreateContext(m_DeviceContext);
 
+	GLenum result = glewInit();
+	if( result != GLEW_OK )
+	{
+		vout << "Warning. Could not initialize glew: "
+			<< " (" << result << ") "
+			<< glewGetErrorString(result);
+	}
+
 	if(m_RenderContext == 0)
 	{
 		V3D_THROW(VGraphicException, "Error: OpenGL Render Context wasn't created!");

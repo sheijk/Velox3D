@@ -106,56 +106,64 @@ void VModelPart::Deactivate()
 
 void VModelPart::Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
 {
-	//if( ! in_Message.HasProperty("type") )
-	//	return;
-	//	
-	//string request = in_Message.Get("type").Get<string>();
-	//
-	//if( request == "getSettings" )
-	//{
-	//	if( in_pAnswer == 0 )
-	//		return;
-	//		
-	//	vout << "ret" << vendl;
-	//	
-	//	in_pAnswer->AddProperty("mesh", m_strMeshRes);
-	//	in_pAnswer->AddProperty("material", m_strMatRes);
-	//	in_pAnswer->AddProperty("model", m_strModel);
-	//}
-	//else if( request == "update" )
-	//{
-	//	const string name = in_Message.Get("name").Get<string>();
-	//	const string value = in_Message.Get("value").Get<string>();
+	if( ! in_Message.HasProperty("type") )
+		return;
+		
+	string request = in_Message.Get("type").Get<string>();
+	
+	if( request == "getSettings" )
+	{
+		if( in_pAnswer == 0 )
+			return;
 
-	//	try
-	//	{
-	//		if( name == "model" ) {
-	//			m_strModel = value;
-	//			
-	//			vout << "Adding " << m_strModel << vendl;
-	//			m_Model.AddMeshes(*resource::GetResourceData<graphics::VModel>(m_strModel.c_str()));
-	//		}
-	//		else {
-	//			if( name == "mesh" ) {
-	//				m_strMeshRes = value;
-	//			}
-	//			else if( name == "material" ) {
-	//				m_strMatRes = value;
-	//			}
-	//			
-	//			vout << "Adding " << m_strMeshRes << ", " << m_strMatRes << vendl;
-	//			AddModelMesh(m_strMeshRes.c_str(), m_strMatRes.c_str());
-	//		}
-	//	}
-	//	catch(VException& e)
-	//	{
-	//		vout << "Failed to create model: " << e.GetErrorString() << vendl;
-	//	}
-	//}
-	//else 
-	//{
-	//	vout << "type " << request << vendl;
-	//}
+		//vuint meshNum = 0;
+		//for(MeshList::iterator meshIter = m_Meshes.begin(); 
+		//	meshIter != m_Meshes.end(); 
+		//	++meshIter)
+		//{
+		//	std::stringstream name;
+		//	name << "mesh nr. " << meshNum;
+		//	in_pAnswer->AddProperty(
+
+		//	++meshNum;
+		//}
+
+		in_pAnswer->AddProperty("mesh", m_strMeshRes);
+		in_pAnswer->AddProperty("material", m_strMatRes);
+		in_pAnswer->AddProperty("model", m_strModel);
+	}
+	else if( request == "update" )
+	{
+		const string name = in_Message.Get("name").Get<string>();
+		const string value = in_Message.Get("value").Get<string>();
+
+		try
+		{
+			m_Meshes.clear();
+
+			if( name == "model" ) {
+				m_strModel = value;
+				
+				vout << "Adding " << m_strModel << vendl;
+				Add(*resource::GetResourceData<graphics::VModel>(m_strModel.c_str()));
+			}
+			else {
+				if( name == "mesh" ) {
+					m_strMeshRes = value;
+				}
+				else if( name == "material" ) {
+					m_strMatRes = value;
+				}
+				
+				vout << "Adding " << m_strMeshRes << ", " << m_strMatRes << vendl;
+				AddMesh(m_strMeshRes.c_str(), m_strMatRes.c_str());
+			}
+		}
+		catch(VException& e)
+		{
+			vout << "Failed to create model: " << e.GetErrorString() << vendl;
+		}
+	}
 
 //	if( request == "add" )
 //	{
@@ -166,10 +174,48 @@ void VModelPart::Send(const messaging::VMessage& in_Message, messaging::VMessage
 //	}
 }
 
+const math::VRBTransform& VModelPart::GetModelTransform() const
+{
+	return m_RigidBodyPart->GetTransform();
+}
+
+void VModelPart::SetModelTransform(const math::VRBTransform& in_Transform)
+{
+	m_RigidBodyPart->SetTransform(in_Transform);
+}
+
 std::string VModelPart::GetDefaultId()
 {
 	return "model";
 }
+
+//-----------------------------------------------------------------------------
+
+void VModelPart::MeshPart::SendGeometry(graphics::IVDevice& in_Device) const
+{
+	in_Device.RenderMesh(&*m_hMesh);
+}
+
+const math::VRBTransform& VModelPart::MeshPart::GetModelTransform() const
+{
+	math::VRBTransform transform = m_pModelPart->GetModelTransform();
+	return m_pModelPart->GetModelTransform();
+}
+
+const graphics::IVMaterial& VModelPart::MeshPart::GetMaterial() const
+{
+	return *m_hMaterial;
+}
+
+void VModelPart::MeshPart::UpdateAndCull(const graphics::IVCamera& in_Camera)
+{
+}
+
+VRangeIterator<const IVShapePart> VModelPart::MeshPart::GetVisibleMeshes() const
+{
+	return CreateSingleValueIterator<const IVShapePart>(this);
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

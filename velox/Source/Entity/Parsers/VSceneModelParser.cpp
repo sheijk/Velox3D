@@ -1,6 +1,7 @@
 #include "VSceneModelParser.h"
 //-----------------------------------------------------------------------------
 
+#include <V3d/Scene/VModelPart.h>
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -27,7 +28,7 @@ VSceneModelParser::~VSceneModelParser()
 
 std::string VSceneModelParser::GetType() const
 {
-	return VSceneModelPart::GetDefaultId();
+	return VModelPart::GetDefaultId();
 }
 
 VSharedPtr<IVPart> VSceneModelParser::Parse(xml::IVXMLElement& in_Node)
@@ -43,7 +44,7 @@ VSharedPtr<IVPart> VSceneModelParser::Parse(xml::IVXMLElement& in_Node)
 			GetResourceData<IVMaterial>( materialResource.c_str() )));
 
 		// create part
-		VSharedPtr<IVPart> pPart(new VSceneModelPart(model));
+		VSharedPtr<IVPart> pPart(new VModelPart(model));
 		return pPart;
 	}
 	catch(VException& e)

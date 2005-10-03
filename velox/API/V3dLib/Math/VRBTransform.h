@@ -60,6 +60,9 @@ public:
 	 */
 	VRBTransform();
 
+	VRBTransform(const VRBTransform& in_Source);
+	void operator=(const VRBTransform& in_Source);
+
 	/**
 	 * Initialize the orthogonal coordinate system with
 	 * position, direction an up vectors.
@@ -83,7 +86,7 @@ public:
 	 * TOD:: Bessere Doku - acryl
 	 *
 	 */
-	VRBTransform(VMatrix44f in_Matrix);
+	explicit VRBTransform(VMatrix44f in_Matrix);
 
 	/**
 	 * D'tor
@@ -197,7 +200,7 @@ public:
 	 * @param out_ZAxis The z-axis
 	 *
      */
-	void GetAxis(VVector3f& out_XAxis, VVector3f& out_YAxis, VVector3f& out_ZAxis);
+	void GetAxis(VVector3f& out_XAxis, VVector3f& out_YAxis, VVector3f& out_ZAxis) const;
 
 	/**
 	 * Returns the transformation as a matrix

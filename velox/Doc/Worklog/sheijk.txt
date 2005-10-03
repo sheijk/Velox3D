@@ -32,6 +32,15 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+	v3d::VSharedPtr<v3d::entity::IVPart> part;
+	std::string id;
+
+01.10.05
+- editor gefixt, so dass er mit dem neuen graphics scene zeug zusammen arbeitet
+- model part/rigid body part/scene manager part fix: objekte lassen sich
+  wieder durch nachrichten per editor bewegen
+- v3dstats script
+
 23.09.05
 - graphics architecture (api/v3d/scene): finales system
 

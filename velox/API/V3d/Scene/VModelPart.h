@@ -38,6 +38,9 @@ public:
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
 
+	const math::VRBTransform& GetModelTransform() const;
+	void SetModelTransform(const math::VRBTransform& in_Transform);
+
     // derived from IVPart:
 	virtual void Activate();
 	virtual void Deactivate();
@@ -49,29 +52,11 @@ public:
 private:
 	struct MeshPart : public entity::VUnconnectedPartAdapter<IVShapePart>
 	{
-		virtual void SendGeometry(graphics::IVDevice& in_Device) const
-		{
-			in_Device.RenderMesh(&*m_hMesh);
-		}
-	
-		virtual const math::VRBTransform& GetModelTransform() const
-		{
-			return m_pModelPart->m_ModelTransform;
-		}
-	
-		virtual const graphics::IVMaterial& GetMaterial() const
-		{
-			return *m_hMaterial;
-		}
-		
-		virtual void UpdateAndCull(const graphics::IVCamera& in_Camera)
-		{
-		}
-
-		virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const
-		{
-			return CreateSingleValueIterator<const IVShapePart>(this);
-		}
+		virtual void SendGeometry(graphics::IVDevice& in_Device) const;
+		virtual const math::VRBTransform& GetModelTransform() const;
+		virtual const graphics::IVMaterial& GetMaterial() const;
+		virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
+		virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
 
 		virtual void Activate() {}
 		virtual void Deactivate() {}
@@ -80,8 +65,6 @@ private:
 		resource::VResourceDataPtr<const graphics::IVMesh> m_hMesh;
 		resource::VResourceDataPtr<const graphics::IVMaterial> m_hMaterial;
 	};
-
-	math::VRBTransform m_ModelTransform;
 
 	typedef std::list<VSharedPtr<MeshPart> > MeshList;
 	MeshList m_Meshes;

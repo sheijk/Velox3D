@@ -43,8 +43,7 @@ template<typename Scalar, vuint Dimension>
 }
 
 template<typename Scalar, vuint Dimension>
-	VVector<Scalar, Dimension>
-	operator-(
+VVector<Scalar, Dimension> operator-(
 	const VVector<Scalar, Dimension>& a,
 	const VVector<Scalar, Dimension>& b
 	)
@@ -52,6 +51,12 @@ template<typename Scalar, vuint Dimension>
 	VVector<Scalar, Dimension> res;
 	Sub(res, a, b);
 	return res;
+}
+
+template<typename Scalar, vuint Dimension>
+VVector<Scalar, Dimension> operator-(const VVector<Scalar, Dimension>& vec)
+{
+	return VVector<Scalar, Dimension>(- vec.m_Vec);
 }
 
 template<typename Scalar, vuint Dimension>

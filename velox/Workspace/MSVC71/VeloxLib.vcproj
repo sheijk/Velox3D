@@ -725,6 +725,12 @@
 				<Filter
 					Name="Parsers"
 					Filter="">
+					<File
+						RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.h">
+					</File>
 				</Filter>
 				<Filter
 					Name="EntityParts"

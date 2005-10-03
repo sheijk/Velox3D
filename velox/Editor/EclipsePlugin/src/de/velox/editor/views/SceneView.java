@@ -1,16 +1,13 @@
 package de.velox.editor.views;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.*;
 import org.eclipse.jface.viewers.*;
-import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.jface.action.*;
 import org.eclipse.jface.dialogs.IInputValidator;
@@ -19,7 +16,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
-import org.eclipse.core.runtime.IAdaptable;
 
 import de.velox.*;
 import de.velox.editor.entity.*;
@@ -181,8 +177,6 @@ public class SceneView extends VeloxViewBase {
 					entity.PartIterator().hasNext();
 			}
 			else if( parent instanceof Part ) {
-				Part part = (Part)parent;
-				
 				return true;
 //				return part.settingsIterator().hasNext() || part.dependencyIterator().hasNext();
 			}
@@ -515,7 +509,43 @@ public class SceneView extends VeloxViewBase {
 				viewer.refresh();
 			}
 		});
-//		toggleAction.setText("Activate");
+
+		contextMenuActions.add(new SceneAction("Set look at"){
+			@Override public void run() {
+				final Part selectedPart = getSelectedPart();
+				
+				if( selectedPart == null )
+					return;
+				
+				String lookAt = askUser("Orient object", "Look at", "");
+				
+				if( lookAt != null ) {
+					VMessage message = new VMessage();
+					message.AddProperty("type", "update");
+					message.AddProperty("name", "direction");
+					message.AddProperty("value", lookAt);
+					selectedPart.Send(message);						
+				}
+			}
+			
+			@Override public void update() {
+				final Part selectedPart = getSelectedPart();
+				setEnabled(selectedPart != null && selectedPart.GetType().equalsIgnoreCase("body"));
+			}
+		});
+	}
+	
+	private String askUser(String inTitle, String inQuestion, String inDefaultArgument) {
+		InputDialog dialog = new InputDialog(myParent.getShell(),
+				inTitle, inQuestion, inDefaultArgument,
+				new IInputValidator() {
+					public String isValid(String x) { return null; }
+				});
+			
+		if( dialog.open() == InputDialog.OK )
+			return dialog.getValue();
+		else
+			return null;
 	}
 
 	private static String createFormattedSource(IVXMLElement root) {

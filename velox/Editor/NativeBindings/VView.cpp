@@ -364,7 +364,7 @@ void VRenderFrameAction::UpdateFrame()
 	{
 //		vout << "culling ";
 		
-		m_pShooting->Cull();
+		m_pShooting->UpdateAndCull();
 		
 //		vout << " rendering ";
 		

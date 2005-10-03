@@ -149,7 +149,8 @@ void VPBufferExample::CreateResources()
 
 	VResourceId contextRes = VResourceManagerPtr()->CreateResource("/context");
 	contextRes->AddData(Device().CreateOffscreenContext(&displaySettings));	
-	contextRes->AddData(&displaySettings);
+	contextRes->AddData(new VDisplaySettings(displaySettings));
+//	contextRes->AddData(&displaySettings);
 
 	VPolarSphereMesh<VTexturedVertex> cube(50, 50);
 	cube.GenerateCoordinates();

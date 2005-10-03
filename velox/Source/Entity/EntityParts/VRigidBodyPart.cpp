@@ -1,5 +1,6 @@
 #include <v3dlib/EntityParts/VRigidBodyPart.h>
 //-----------------------------------------------------------------------------
+#include <V3d/Core/VIOStream.h>
 
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -10,9 +11,9 @@ using namespace v3d; // anti auto indent
 
 VRigidBodyPart::VRigidBodyPart()
 {
-	m_Transformation.GetXAxis() = VVector3f(1.0f, 0.0f, 0.0f);
-	m_Transformation.GetYAxis() = VVector3f(0.0f, 1.0f, 0.0f);
-	m_Transformation.GetZAxis() = VVector3f(0.0f, 0.0f, 1.0f);
+	//m_Transformation.GetXAxis() = VVector3f(1.0f, 0.0f, 0.0f);
+	//m_Transformation.GetYAxis() = VVector3f(0.0f, 1.0f, 0.0f);
+	//m_Transformation.GetZAxis() = VVector3f(0.0f, 0.0f, 1.0f);
 	m_Transformation.SetPosition(VVector3f(0.0f, 0.0f, 0.0f));
 }
 
@@ -40,7 +41,7 @@ void VRigidBodyPart::SetTransform(const math::VRBTransform& in_Trans)
 }
 
 
-math::VRBTransform VRigidBodyPart::GetTransform()
+const math::VRBTransform& VRigidBodyPart::GetTransform()
 {
 	return m_Transformation;
 }
@@ -75,6 +76,30 @@ void VRigidBodyPart::Send(const messaging::VMessage& in_Message, messaging::VMes
 		{
 			VVector3f pos = in_Message.GetAs<VVector3f>("value");
 			m_Transformation.SetPosition(pos);
+
+			vout << "VRigidBodyPart: set position to " << pos << vendl;
+		}
+		else if( name == "direction" )
+		{
+			VVector3f lookAtPoint = in_Message.GetAs<VVector3f>("value");
+			VVector3f direction = lookAtPoint - m_Transformation.GetPosition();
+			VVector3f upDir = Cross(Cross(VVector3f(0, 1, 0), direction), direction);
+
+			Normalize(direction);
+			Normalize(upDir);
+
+			if( Length(direction) != 0 && Length(upDir) != 0 )
+				m_Transformation.SetLookAt(
+					m_Transformation.GetPosition(),
+					direction,
+					upDir);
+
+			vout << "VRigidBodyPart: looking to " << direction
+				<< ", up = " << upDir << vendl;
+			vout << "x-axis = " << m_Transformation.GetXAxis()
+				<< ", y-axis = " << m_Transformation.GetYAxis()
+				<< ", z-axis = " << m_Transformation.GetZAxis()
+				<< vendl;
 		}
 	}
 }

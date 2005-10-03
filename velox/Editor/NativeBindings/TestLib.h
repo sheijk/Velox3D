@@ -41,7 +41,33 @@ v3d::xml::IVXMLElement* CreateXMLElement(v3d::VStringParam in_strName);
 
 v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice);
 
-v3d::VSharedPtr<v3d::entity::IVPart> CreatePart(
-	v3d::xml::IVXMLElement* in_pElement);
+class VPartAndId {
+public:
+	v3d::VSharedPtr<v3d::entity::IVPart> GetPart() const
+	{
+		return part;
+	}
+
+	void SetPart(const v3d::VSharedPtr<v3d::entity::IVPart>& in_Part)
+	{
+		part = in_Part;
+	}
+
+	std::string GetId() const
+	{
+		return id;
+	}
+
+	void SetId(const std::string& in_Id)
+	{
+		id = in_Id;
+	}
+
+private:
+	v3d::VSharedPtr<v3d::entity::IVPart> part;
+	std::string id;
+};
+
+VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement);
 
 v3d::entity::VEntity* CreateEntity();

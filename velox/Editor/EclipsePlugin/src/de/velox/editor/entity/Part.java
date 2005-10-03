@@ -25,7 +25,10 @@ public class Part implements XMLSerializable {
 		IVXMLElement xmlElement = v3d.CreateXMLElement("part");
 		xmlElement.AddAttribute("type", new VStringValue(type));
 		
-		impl = v3d.CreatePart(xmlElement);
+		VPartAndId partAndId = v3d.CreatePart(xmlElement);
+		impl = partAndId.GetPart();
+		this.type = partAndId.GetId();
+//		impl = v3d.CreatePart(xmlElement);
 		
 		updateSettingsFromPart();
 	}
@@ -106,6 +109,12 @@ public class Part implements XMLSerializable {
 		if( valid(impl) ) {
 			impl.Send(msg);
 		}
+	}
+	
+	public VMessage Send(VMessage inMessage) {
+		VMessage reply = new VMessage();
+		impl.Send(inMessage, reply);
+		return reply;
 	}
 	
 	public void synchronize() {
