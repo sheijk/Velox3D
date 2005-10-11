@@ -116,7 +116,6 @@ private:
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-V3D_TYPEINFO(v3d::graphics::IVDevice);
 V3D_TYPEINFO_WITHPARENT(v3d::graphics::VOpenGLDevice, v3d::graphics::IVDevice);
 
 #endif // V3D_VOPENGLDEVICE_H

@@ -27,6 +27,8 @@
 #include "Resource/Types/VMeshResourceType.h"
 #include "Resource/Types/VMaterialResourceType.h"
 #include "Resource/Types/VMeshGeneratorResType.h"
+#include "Resource/Types/VOffscreenDeviceResType.h"
+#include "Resource/Types/VPBufferTextureResType.h"
 
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VDevILLoader.h"
@@ -151,6 +153,12 @@ void VVeloxModules::Initialize()
 		VSharedPtr<IVResourceType>(new VGLVertexStreamResType()));
 	g_pResourceManager->RegisterResourceType(
 		VSharedPtr<IVResourceType>(new VFileNameResType()));
+
+	g_pResourceManager->RegisterResourceType(
+		VSharedPtr<IVResourceType>(new VOffscreenDeviceResType()));
+
+	g_pResourceManager->RegisterResourceType(
+		VSharedPtr<IVResourceType>(new VPBufferTextureResType()));
 
 	g_pResourceManager->RegisterResourceType(
 		VSharedPtr<IVResourceType>(new utils::VImported3DSResourceType()));

@@ -40,7 +40,7 @@ private:
 	IVDevice* m_pDevice;
 	IVDevice* m_pPBufferDevice;
 	IVButton* m_pEscapeKey;
-	//VPBufferTexture* m_pPBufferTexture;
+	VPBufferTexture* m_pTexState;
 	VServicePtr<updater::IVUpdateManager> m_pUpdater;
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
@@ -64,7 +64,6 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 
 	IVDevice::MeshHandle hTriangle = Device().CreateMesh("/data/cube");
 	IVDevice::MaterialHandle hTriangleMat = Device().CreateMaterial("/data/cube");
-	IVDevice::MaterialHandle hTexture = m_pPBufferDevice->CreateMaterial("/data/texture");
 
 	vfloat32 angle = 0.0f;
 
@@ -76,18 +75,12 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 	while(m_pSystem->GetStatus())
 	{
 		m_pPBufferDevice->BeginScene();
-		m_pPBufferDevice->EndScene();
 
 		Device().BeginScene();
-
-		for(vuint matid = 0; matid < hTexture->PassCount(); ++matid)
-		{
-			const IVPass* pPass = &hTexture->GetPass(matid);
-
-			ApplyMaterial(*m_pPBufferDevice, pPass);
-		}
+		m_pTexState->Bind();
 		RenderMesh(Device(), hTriangle, hTriangleMat);
-		
+		m_pTexState->Unbind();	
+		m_pPBufferDevice->EndScene();
 		Device().EndScene();
 
 		m_pUpdater->StartNextFrame();
@@ -110,7 +103,6 @@ VPBufferExample::VPBufferExample()
 	m_pDevice = 0;
 	m_pEscapeKey = 0;
 	m_pPBufferDevice = 0;
-	//m_pPBufferTexture = 0;
 }
 
 void VPBufferExample::Init()
@@ -148,9 +140,7 @@ void VPBufferExample::CreateResources()
 	displaySettings.SetDepthBits(16);
 
 	VResourceId contextRes = VResourceManagerPtr()->CreateResource("/context");
-	contextRes->AddData(Device().CreateOffscreenContext(&displaySettings));	
-	contextRes->AddData(new VDisplaySettings(displaySettings));
-//	contextRes->AddData(&displaySettings);
+	contextRes->AddData(Device().CreateOffscreenContext(&displaySettings));
 
 	VPolarSphereMesh<VTexturedVertex> cube(50, 50);
 	cube.GenerateCoordinates();
@@ -160,11 +150,10 @@ void VPBufferExample::CreateResources()
 	VResourceId cubeRes = BuildResource("/data/cube", cube);
 	cubeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(0, 1, 0, 1))));
 
-	VResourceId texRes = VResourceManagerPtr()->CreateResource("/data/texture");
-	texRes->AddData(new VFileName("data/test3.jpg"));
-
 	m_pPBufferDevice = const_cast<IVDevice*>(&*contextRes->GetData<IVDevice>());
-	//m_pPBufferTexture = const_cast<VPBufferTexture*>(&*contextRes->GetData<VTextureState>());
+	m_pTexState = const_cast<VPBufferTexture*>(&*contextRes->GetData<VPBufferTexture>());
+
+	V3D_ASSERT(m_pPBufferDevice != 0);
 }
 
 IVDevice& VPBufferExample::Device()

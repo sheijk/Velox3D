@@ -31,6 +31,9 @@ public:
 	/** Swap back and front buffer */
 	virtual void SwapBuffers() = 0;
 
+	/** Gets the Display Settings */
+	virtual VDisplaySettings* GetDisplaySettings() = 0;
+
 	/** Create a Offscreen Context */
 	virtual IVRenderContext* CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings) = 0;
 };

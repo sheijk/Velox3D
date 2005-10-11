@@ -100,9 +100,10 @@ public:
 
 	virtual ~IVDevice() {};
 };
-
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d
 //-----------------------------------------------------------------------------
+V3D_TYPEINFO(v3d::graphics::IVDevice);
+
 #endif // V3D_IVDEVICE_H

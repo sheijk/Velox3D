@@ -1,4 +1,4 @@
-#include "VOffscreenDeviceResType.h"
+#include "VPBufferTextureResType.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -9,32 +9,32 @@ namespace v3d { namespace graphics {
 using namespace v3d; // anti auto indent
 using namespace v3d::resource;
 
-VOffscreenDeviceResType::VOffscreenDeviceResType()
+VPBufferTextureResType::VPBufferTextureResType()
 {
-	m_ManagedTypes.push_back(GetTypeInfo<IVDevice>());
+	m_ManagedTypes.push_back(GetTypeInfo<VPBufferTexture>());
 }
 
-VOffscreenDeviceResType::~VOffscreenDeviceResType()
+VPBufferTextureResType::~VPBufferTextureResType()
 {
 }
 
-VRangeIterator<VTypeInfo> VOffscreenDeviceResType::CreatedTypes()
+VRangeIterator<VTypeInfo> VPBufferTextureResType::CreatedTypes()
 {
 	return CreateBeginIterator<std::vector<VTypeInfo> >(m_ManagedTypes);
 }
 
-vbool VOffscreenDeviceResType::Generate(
+vbool VPBufferTextureResType::Generate(
 	resource::VResource* in_pResource, 
 	VTypeInfo in_Type)
 {
-	V3D_ASSERT(GetTypeInfo<IVDevice>() == in_Type);
+	V3D_ASSERT(GetTypeInfo<VPBufferTexture>() == in_Type);
 
 	VResourceDataPtr<const IVRenderContext> pContextData;
 	IVRenderContext* pContext = 0;
 
 	try
 	{
-		//get the Render Context
+		//get Pixel Buffer Context
 		pContextData = in_pResource->GetData<IVRenderContext>();
 		pContext = const_cast<IVRenderContext*>(&*pContextData);
 	}
@@ -43,9 +43,8 @@ vbool VOffscreenDeviceResType::Generate(
 		return false;
 	}
 
-	//create OpenGL Device for the PBuffer
-	in_pResource->AddData<IVDevice>(new VOpenGLDevice(*pContext->GetDisplaySettings(), 
-		pContext));
+	in_pResource->AddData<VPBufferTexture>(
+		new VPBufferTexture(static_cast<VPBufferWindowContext*>(pContext)));
 
 	return true;
 }

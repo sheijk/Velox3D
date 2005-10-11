@@ -89,11 +89,16 @@ void VWin32WindowContext::SwapBuffers()
 	::SwapBuffers(m_DeviceContext);
 }
 
+VDisplaySettings* VWin32WindowContext::GetDisplaySettings()
+{
+	return &m_DisplaySettings;
+}
+
 IVRenderContext* VWin32WindowContext::CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings)
 {
 	MakeCurrent();
 
-	return new VPBufferWindowContext(m_Handle, m_DeviceContext, in_pDisplaySettings);
+	return new VPBufferWindowContext(m_Handle, in_pDisplaySettings);
 }
 
 //-----------------------------------------------------------------------------

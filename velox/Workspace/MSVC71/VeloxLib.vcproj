@@ -983,6 +983,12 @@
 						RelativePath="..\..\Source\Resource\Types\VOffscreenDeviceResType.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Resource\Types\VPBufferTextureResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VPBufferTextureResType.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.cpp">
 					</File>
 					<File

@@ -6,16 +6,15 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings) : 
+VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, const graphics::VDisplaySettings* in_pDisplaySettings) : 
 	m_PBufferDeviceContext(0), 
 	m_WindowDeviceContext(0),
-	m_PBufferRenderContext(0), 
+	m_PBufferRenderContext(0),
+	m_Handle(in_hwnd),
 	m_DisplaySettings(*in_pDisplaySettings)
 {
-	V3D_ASSERT(in_DeviceContext != 0);
-	V3D_ASSERT(wglGetCurrentDC() != 0);
-
-	m_WindowDeviceContext = GetDC(in_hwnd);
+	m_WindowDeviceContext = GetDC(m_Handle);
+	V3D_ASSERT(m_WindowDeviceContext != 0);
 
 	const int Format[] = {
 	    WGL_SUPPORT_OPENGL_ARB, true,
@@ -112,9 +111,14 @@ void VPBufferWindowContext::SwapBuffers()
 	//Dummy
 }
 
+VDisplaySettings* VPBufferWindowContext::GetDisplaySettings()
+{
+	return &m_DisplaySettings;
+}
+
 IVRenderContext* VPBufferWindowContext::CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings)
 {
-	return new VPBufferWindowContext(0, m_WindowDeviceContext, in_pDisplaySettings);
+	return new VPBufferWindowContext(m_Handle, in_pDisplaySettings);
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

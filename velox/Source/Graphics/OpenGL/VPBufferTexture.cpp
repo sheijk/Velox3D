@@ -8,13 +8,13 @@ using namespace graphics; // anti auto indent
 VPBufferTexture::VPBufferTexture(VPBufferWindowContext* in_pContext) : 
 	m_pContext(in_pContext), m_iTextureID(0)
 {
-	byte* pPixelData = new byte[m_pContext->GetWidth() * m_pContext->GetHeight() * 3];
+	vbyte* pPixelData = new vbyte[m_pContext->GetDisplaySettings()->GetWidth() * m_pContext->GetDisplaySettings()->GetHeight() * 3];
 
 	glEnable(GL_TEXTURE_2D);
 	glGenTextures(1, &m_iTextureID);
 	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, m_pContext->GetWidth(), 
-		m_pContext->GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, 
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, m_pContext->GetDisplaySettings()->GetWidth(), 
+		m_pContext->GetDisplaySettings()->GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, 
 		pPixelData);
 
 	if(pPixelData != 0)

@@ -1,5 +1,5 @@
-#ifndef V3D_VOFFSCREENDEVICERESTYPE_H
-#define V3D_VOFFSCREENDEVICERESTYPE_H
+#ifndef V3D_VPBUFFERTEXTURERESTYPE_H
+#define V3D_VPBUFFERTEXTURERESTYPE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
@@ -7,6 +7,7 @@
 #include <V3d/Resource.h>
 #include <V3d/Graphics/IVRenderContext.h>
 #include "../../Graphics/OpenGL/Context/VPBufferWindowContext.h"
+#include "../../Graphics/OpenGL/VPBufferTexture.h"
 #include "../../Graphics/OpenGL/VOpenGLDevice.h"
 
 #include <vector>
@@ -17,13 +18,13 @@ using namespace v3d; // anti auto indenting
 
 /**
 */
-class VOffscreenDeviceResType : public resource::IVResourceType
+class VPBufferTextureResType : public resource::IVResourceType
 { 
 	std::vector<VTypeInfo> m_ManagedTypes;
 
 public:
-	VOffscreenDeviceResType();
-	virtual ~VOffscreenDeviceResType();
+	VPBufferTextureResType();
+	virtual ~VPBufferTextureResType();
 
 	virtual VRangeIterator<VTypeInfo> CreatedTypes();
 
@@ -35,4 +36,4 @@ public:
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
-#endif // V3D_VOFFSCREENDEVICERESTYPE_H
+#endif // V3D_VPBUFFERTEXTURERESTYPE_H

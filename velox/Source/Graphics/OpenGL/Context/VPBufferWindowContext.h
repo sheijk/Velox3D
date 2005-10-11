@@ -6,6 +6,7 @@
 #include <v3d/Core/VIOStream.h>
 #include <v3d/Graphics/GraphicsExceptions.h>
 #include <v3d/Graphics/VDisplaySettings.h>
+#include <V3d/Graphics/IVDevice.h>
 #include <v3d/Graphics/IVRenderContext.h>
 
 #define WIN32_LEAN_AND_MEAN
@@ -27,7 +28,7 @@ class VPBufferWindowContext : public IVRenderContext
 {
 public:
 
-	VPBufferWindowContext(HWND in_hwnd, HDC in_DeviceContext, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
+	VPBufferWindowContext(HWND in_hwnd, const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VPBufferWindowContext();
 
 	/**
@@ -39,22 +40,6 @@ public:
 	}
 
 	/**
-	* Get the Pixel Buffer Width
-	*/
-	inline vuint GetWidth()
-	{
-		return m_DisplaySettings.GetWidth();
-	}
-
-	/**
-	* Get the Pixel Buffer Height
-	*/
-	inline vuint GetHeight()
-	{
-		return m_DisplaySettings.GetHeight();
-	}
-
-	/**
 	 * @see v3d::graphics::IVRenderContext::MakeCurrent
 	*/
 	void MakeCurrent();
@@ -63,6 +48,11 @@ public:
 	 * @see v3d::graphics::IVRenderContext::SwapBuffers
 	*/
 	void SwapBuffers();
+	
+	/** 
+	 *@see v3d::graphics::IVRenderContext::GetDisplaySettings 
+	*/
+	VDisplaySettings* GetDisplaySettings();
 
 	/**
 	* @see v3d::graphics::IVRenderContext::CreateOffscreenContext
@@ -76,6 +66,7 @@ private:
 	HDC                        m_PBufferDeviceContext;
 	HDC                        m_WindowDeviceContext;
 	HGLRC                      m_PBufferRenderContext;
+	HWND                       m_Handle;
 };
 
 //-----------------------------------------------------------------------------

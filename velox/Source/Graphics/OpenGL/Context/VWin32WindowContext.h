@@ -36,6 +36,8 @@ public:
 	/** @see v3d::graphics::IVRenderContext::SwapBuffers */
 	void SwapBuffers();
 
+	/** @see v3d::graphics::IVRenderContext::GetDisplaySettings */
+	VDisplaySettings* GetDisplaySettings();
 
 	/** @see v3d::graphics::IVRenderContext::CreateOffscreenContext */
 	IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings);
