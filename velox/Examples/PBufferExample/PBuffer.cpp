@@ -77,16 +77,15 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 
 	VCamera cam;
 	cam.MoveForward(-7);
-	cam.ApplyTo(Device());
-	//Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())
 	{
 		// render something to the texture
 		m_pPBufferDevice->BeginScene();
-		DrawScene(Device());
 		m_pPBufferDevice->EndScene();
+		DrawScene(Device());
 
 		// use the generated texture for the plane
 		Device().BeginScene();
@@ -172,7 +171,7 @@ void VPBufferExample::CreateResources()
 	plane.GenerateCoordinates();
 	plane.GenerateTexCoords();
 	VResourceId planeRes = BuildResource("/data/plane", plane);
-	planeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1))));
+	planeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1, 1))));
 	//VEffectDescription textureEffect;
 	//MakeDefaultMaterial(textureEffect.AddShaderPath().AddRenderPass());
 	//textureEffect.ShaderPath(0).RenderPass(0).AddState(
