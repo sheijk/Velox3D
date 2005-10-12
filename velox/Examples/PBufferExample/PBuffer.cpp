@@ -7,8 +7,8 @@
 #include <V3dLib/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Resource.h>
-#include "../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.h"
-#include "../../Source/Graphics/OpenGL/VOpenGLDevice.h"
+//#include "../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.h"
+//#include "../../Source/Graphics/OpenGL/VOpenGLDevice.h"
 #include "../../Source/Graphics/OpenGL/VPBufferTexture.h"
 
 #include <string>
@@ -57,30 +57,43 @@ const std::string APP_NAME = "PBuffer Example";
 
 //-----------------------------------------------------------------------------
 
+void DrawScene(IVDevice& device)
+{
+	static IVDevice::MeshHandle hTriangle = device.CreateMesh("/data/cube");
+	static IVDevice::MaterialHandle hTriangleMat = device.CreateMaterial("/data/cube");
+
+	RenderMesh(device, hTriangle, hTriangleMat);
+}
+
 vint VPBufferExample::Main(std::vector<std::string> args)
 {
 	Init();
 	CreateResources();
 
-	IVDevice::MeshHandle hTriangle = Device().CreateMesh("/data/cube");
-	IVDevice::MaterialHandle hTriangleMat = Device().CreateMaterial("/data/cube");
+	IVDevice::MeshHandle hPlane = &*GetResourceData<IVMesh>("/data/plane");
+	IVDevice::MaterialHandle hPlaneMat = &*GetResourceData<IVMaterial>("/data/plane");
 
 	vfloat32 angle = 0.0f;
 
 	VCamera cam;
 	cam.MoveForward(-7);
-	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+	cam.ApplyTo(Device());
+	//Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())
 	{
+		// render something to the texture
 		m_pPBufferDevice->BeginScene();
-
-		Device().BeginScene();
-		m_pTexState->Bind();
-		RenderMesh(Device(), hTriangle, hTriangleMat);
-		m_pTexState->Unbind();	
+		DrawScene(Device());
 		m_pPBufferDevice->EndScene();
+
+		// use the generated texture for the plane
+		Device().BeginScene();
+		ApplyMaterial(Device(), &hPlaneMat->GetPass(0));
+		m_pTexState->Bind();
+		Device().RenderMesh(hPlane);
+		m_pTexState->Unbind();	
 		Device().EndScene();
 
 		m_pUpdater->StartNextFrame();
@@ -154,6 +167,17 @@ void VPBufferExample::CreateResources()
 	m_pTexState = const_cast<VPBufferTexture*>(&*contextRes->GetData<VPBufferTexture>());
 
 	V3D_ASSERT(m_pPBufferDevice != 0);
+
+	VPlaneMesh<VTexturedVertex> plane(0, 1, 0, 1, 2);
+	plane.GenerateCoordinates();
+	plane.GenerateTexCoords();
+	VResourceId planeRes = BuildResource("/data/plane", plane);
+	planeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1))));
+	//VEffectDescription textureEffect;
+	//MakeDefaultMaterial(textureEffect.AddShaderPath().AddRenderPass());
+	//textureEffect.ShaderPath(0).RenderPass(0).AddState(
+	//	TextureState(contextRes->GetQualifiedName()));
+	//planeRes->AddData(new VEffectDescription(textureEffect));
 }
 
 IVDevice& VPBufferExample::Device()
