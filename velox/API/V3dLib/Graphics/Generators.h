@@ -4,7 +4,9 @@
 
 #include <V3dLib/Graphics/Generators/IVMeshGenerator.h>
 #include <V3dLib/Graphics/Generators/VPolarSphereGenerator.h>
+#include <V3dLib/Graphics/Generators/VBoxGenerator.h>
 
+// deprecated, should be replaced by generators:
 #include <V3dLib/Graphics/Generators/VBoxMesh.h>
 #include <V3dLib/Graphics/Generators/VCircleMesh.h>
 #include <V3dLib/Graphics/Generators/VCylinderMesh.h>

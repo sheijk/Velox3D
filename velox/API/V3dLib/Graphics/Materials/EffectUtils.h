@@ -85,7 +85,10 @@ void MakeWireFrameMaterial(VRenderPass& pass);
  * @author sheijk
  */
 VEffectDescription ColorEffect(const VColor4f& in_Color);
-
+VEffectDescription ColorEffect(
+	vfloat32 in_fRed, vfloat32 in_fGreen, vfloat32 in_fBlue);
+VEffectDescription ColorEffect(
+	vfloat32 in_fRed, vfloat32 in_fGreen, vfloat32 in_fBlue, vfloat32 in_fAlpha);
 
 /**
  * Returns a render pass which will render a wireframe

@@ -48,10 +48,14 @@ IVRenderState* VTextureStateCategory::Create2DState(const VState* in_pTextureSta
 		VResourceManagerPtr pResMan;
 
 		VResourceId pRes = pResMan->GetResourceByName(resName.c_str());
-		VResourceDataPtr<const VTextureState> pState = 
-			pRes->GetData<VTextureState>();
 
-		return const_cast<VTextureState*>(&* pState);
+		VTextureState* pTextureState = new VTextureState(pRes->GetData<IVTexture>());
+
+		return pTextureState;
+		//VResourceDataPtr<const VTextureState> pState = 
+		//	pRes->GetData<VTextureState>();
+
+		//return const_cast<VTextureState*>(&* pState);
 	}
 	// necessary state parameters are missing
 	else

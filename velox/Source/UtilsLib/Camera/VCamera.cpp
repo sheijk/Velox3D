@@ -1,6 +1,10 @@
-//-----------------------------------------------------------------------------
 #include <V3dLib/Graphics/Misc/VCamera.h>
+
 #include <v3d/Math/VMatrixOps.h>
+
+#include <V3d/Graphics/IVDevice.h>
+
+//-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -31,9 +35,10 @@ VCamera::VCamera(vfloat32 x, vfloat32 y, vfloat32 z)
 	m_ViewVector.Set(0,0);
 	m_ViewVector.Set(1,0);
 	m_ViewVector.Set(2,-1);
-	
+
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
+
 VCamera::VCamera()
 		: m_fPiDiv180((vfloat32)3.141592654 / (vfloat32)180)
 {
@@ -54,47 +59,52 @@ VCamera::VCamera()
 	m_ViewVector.Set(1,0);
 	m_ViewVector.Set(2,-1);
 
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
+
+void VCamera::ApplyTo(IVDevice& in_Device) const
+{
+	in_Device.SetMatrix(IVDevice::ViewMatrix, m_ViewMatrix);
+}
 
 void VCamera::Move(vfloat32 in_fX, vfloat32 in_fY, vfloat32 in_fZ)
 {
 	m_PositionVector.v[0] = in_fX;
 	m_PositionVector.v[1] = in_fY;
 	m_PositionVector.v[2] = in_fZ;
-}
-//-----------------------------------------------------------------------------
 
-VCamera::Matrix4f* VCamera::GetMatrix()
-{
 	CalculateMatrix();
-	return &m_ViewMatrix;
 }
-//-----------------------------------------------------------------------------
 
 void VCamera::MoveForward(vfloat32 in_fUnits)
 {
 	m_PositionVector.v[0] = m_PositionVector.v[0] + (m_ViewVector.Get(0) * in_fUnits);
 	m_PositionVector.v[1] = m_PositionVector.v[1] + (m_ViewVector.Get(1) * in_fUnits);
 	m_PositionVector.v[2] = m_PositionVector.v[2] + (m_ViewVector.Get(2) * in_fUnits);
+
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
+
 
 void VCamera::MoveUp(vfloat32 in_fUnits)
 {
 	m_PositionVector.v[0] = m_PositionVector.v[0] + (m_UpVector.Get(0) * in_fUnits);
 	m_PositionVector.v[1] = m_PositionVector.v[1] + (m_UpVector.Get(1) * in_fUnits);
 	m_PositionVector.v[2] = m_PositionVector.v[2] + (m_UpVector.Get(2) * in_fUnits);
+
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
+
 
 void VCamera::Strafe(vfloat32 in_fUnits)
 {
 	m_PositionVector.v[0] = m_PositionVector.v[0]  + (m_RightVector.Get(0) * in_fUnits);
 	m_PositionVector.v[1] = m_PositionVector.v[1]  + (m_RightVector.Get(1) * in_fUnits);
 	m_PositionVector.v[2] = m_PositionVector.v[2]  + (m_RightVector.Get(2) * in_fUnits);
+
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
+
 
 void VCamera::RotateX(vfloat32 in_fAngle)
 {
@@ -132,8 +142,9 @@ void VCamera::RotateX(vfloat32 in_fAngle)
 	m_UpVector.Set(1, -m_UpVector.Get(1));
 	m_UpVector.Set(2, -m_UpVector.Get(2));
 
+
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
 
 void VCamera::RotateY(vfloat32 in_fAngle)
 {
@@ -165,8 +176,9 @@ void VCamera::RotateY(vfloat32 in_fAngle)
 
 	//get the new right vector
 	m_RightVector = Cross(m_ViewVector, m_UpVector);
+
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
 
 void VCamera::RotateZ(vfloat32 in_fAngle)
 {
@@ -198,22 +210,23 @@ void VCamera::RotateZ(vfloat32 in_fAngle)
 
 	//get the new up vector
 	m_UpVector = Cross(m_ViewVector, m_RightVector);
+
+	CalculateMatrix();
 }
-//-----------------------------------------------------------------------------
 
 void VCamera::CalculateMatrix() const
 {
-	Vector f = m_ViewVector;
+	VVector3f f = m_ViewVector;
 	Normalize(f);
 
-	Vector up = m_UpVector;
+	VVector3f up = m_UpVector;
 	Normalize(up);
 
-	Vector s;
+	VVector3f s;
 
 	s = Cross(f,up);
 
-	Vector u;
+	VVector3f u;
 
 	u = Cross(s,f);
 
@@ -244,6 +257,7 @@ void VCamera::CalculateMatrix() const
 
 	m_ViewMatrix = r;
 
+	m_Transform.Set(m_ViewMatrix);
 }
 
 VRBTransform VCamera::GetTransform() const
@@ -256,23 +270,24 @@ void VCamera::SetTransform(const VRBTransform& transform)
 	Move(transform.GetPosition().GetX(), transform.GetPosition().GetY(), transform.GetPosition().GetZ());
 	m_ViewVector = transform.GetZAxis() * -1;
 	m_UpVector = transform.GetYAxis();
-}
 
-VMatrix44f& VCamera::TransformMatrix()
-{
-	return *GetMatrix();
-}
-
-const VMatrix44f& VCamera::TransformMatrix() const
-{
 	CalculateMatrix();
+}
+
+const VMatrix44f& VCamera::ViewMatrix() const
+{
 	return m_ViewMatrix;
 }
 
-IVCamera::Vector VCamera::GetPosition() const
+const math::VRBTransform& VCamera::Transform() const
+{
+	return m_Transform;
+}
+
+VVector3f VCamera::GetPosition() const
 {
 	// warum auch immer m_PositionVector ein VVector3f ist... -> konvertieren
-	Vector pos;
+	VVector3f pos;
 	pos.Set(0, m_PositionVector.x);
 	pos.Set(1, m_PositionVector.y);
 	pos.Set(2, m_PositionVector.z);
@@ -280,17 +295,17 @@ IVCamera::Vector VCamera::GetPosition() const
 	return pos;
 }
 
-IVCamera::Vector VCamera::GetViewDirection() const
+VVector3f VCamera::GetViewDirection() const
 {
 	return m_ViewVector;
 }
 
-IVCamera::Vector VCamera::GetUpVector() const
+VVector3f VCamera::GetUpVector() const
 {
 	return m_UpVector;
 }
 
+VCamera ca;
 //-----------------------------------------------------------------------------
 } // namespace utils
 } // namespace v3d
-//-----------------------------------------------------------------------------

@@ -27,6 +27,9 @@ inline float PseudoRandom(vuint x, vfloat32 in_fMin, vfloat32 in_fMax);
 template<typename T>
 T Interpolate(T a, T b, vfloat32 factor);
 
+template<typename T>
+T Clamp(T value, T minValue, T maxValue);
+
 //-----------------------------------------------------------------------------
 #include "Numerics.inl"
 //-----------------------------------------------------------------------------

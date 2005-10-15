@@ -8,6 +8,7 @@
 
 #include <V3d/OpenGL.h>
 #include <V3d/Graphics/IVTexture.h>
+#include <V3d/Resource/VResourceDataPtr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -21,12 +22,15 @@ class VTextureState : public IVOpenGLRenderState
 {
 public:
 	VTextureState(IVTexture* in_pTexture);
+	VTextureState(resource::VResourceDataPtr<const IVTexture> in_pTexture);
 
 	virtual void Apply() const;
 	virtual IVStateCategory* GetCategory() const;
 
 	static void SetCategory(IVStateCategory* in_pStateCategory);
-//private: /*TODO: removed for VCGFXMaterial, put back in once VTexture2D ist
+
+private: 
+//TODO: removed for VCGFXMaterial, put back in once VTexture2D ist
 //stored in the resource manager instead of VTextureState
 
 	IVTexture*        m_pTexture;

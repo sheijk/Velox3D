@@ -72,7 +72,7 @@ void VSimpleShooting::Render()
 		{
 			math::VRBTransform transform = shape->GetModelTransform();
 
-			m_pDevice->SetMatrix(IVDevice::ModelMatrix, transform.GetAsMatrix());
+			m_pDevice->SetMatrix(IVDevice::ModelMatrix, transform.AsMatrix());
 
 			//VMatrix44f matrix = math::TranslationMatrix(
 			//	transform.GetXAxis().GetX(),

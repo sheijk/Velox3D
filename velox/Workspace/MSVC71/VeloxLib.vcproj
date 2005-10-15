@@ -208,6 +208,29 @@
 					<File
 						RelativePath="..\..\Api\V3d\Scene\VSimpleShooting.h">
 					</File>
+					<Filter
+						Name="Shootings"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Shootings\VProjectedTextureShooting.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Shapes"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Shapes\VArrowMeshPart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Shapes\VCoordSysDisplayPart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Shapes\VOrientationGridPart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Shapes\VPlaneMeshPart.h">
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="Utils"
@@ -338,6 +361,9 @@
 						Filter="">
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\IVMeshGenerator.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxGenerator.h">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.h">
@@ -657,10 +683,16 @@
 						RelativePath="..\..\Api\V3dLib\Utils\VGuid.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VMouseTrackball.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Utils\VStreamReader.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3dLib\Utils\VStringValue.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VTrackball.h">
 					</File>
 				</Filter>
 				<Filter
@@ -823,6 +855,9 @@
 				</Filter>
 				<Filter
 					Name="Generators">
+					<File
+						RelativePath="..\..\Source\Graphics\Generators\VBoxGenerator.cpp">
+					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\Generators\VPolarSphereGenerator.cpp">
 					</File>
@@ -1004,6 +1039,12 @@
 				Name="Implementation"
 				Filter="">
 				<File
+					RelativePath="..\..\Source\Scene\VArrowMeshPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VCoordSysDisplayPart.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Scene\VMeshPart.cpp">
 				</File>
 				<File
@@ -1014,6 +1055,15 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VNaiveSceneManagerPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VOrientationGridPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VSimpleShooting.cpp">
@@ -1039,10 +1089,16 @@
 					RelativePath="..\..\Source\UtilsLib\VFrameCounter.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Source\UtilsLib\VMouseTrackball.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\UtilsLib\VSimpleTokenizer.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VStreamReader.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VTrackball.cpp">
 				</File>
 				<Filter
 					Name="CPUDetect"

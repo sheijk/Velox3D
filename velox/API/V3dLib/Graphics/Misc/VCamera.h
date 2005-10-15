@@ -27,7 +27,9 @@ public:
 	VCamera();
 	VCamera(vfloat32 x, vfloat32 y, vfloat32 z);
 
-	virtual ~VCamera(){};
+	virtual ~VCamera() {};
+
+	virtual void ApplyTo(IVDevice& in_Device) const;
 
 	/** Move to absolute position */
 	void Move(vfloat32 in_fX, vfloat32 in_fY, vfloat32 in_fZ);
@@ -39,15 +41,12 @@ public:
 	void RotateY(vfloat32 in_fAngle);
 	void RotateZ(vfloat32 in_fAngle);
 
-	/** Retruns current view matrix */
-	VMatrix<vfloat32, 4,4>* GetMatrix();
-
-	// dervided from IVCamera:
-	virtual VMatrix44f& TransformMatrix();
-	virtual const VMatrix44f& TransformMatrix() const;
-	virtual Vector GetPosition() const;
-	virtual Vector GetViewDirection() const;
-	virtual Vector GetUpVector() const;
+	// derived from IVCamera:
+	virtual const VMatrix44f& ViewMatrix() const;
+	virtual const math::VRBTransform& Transform() const;
+	virtual VVector3f GetPosition() const;
+	virtual VVector3f GetViewDirection() const;
+	virtual VVector3f GetUpVector() const;
 
 	math::VRBTransform GetTransform() const;
 	void SetTransform(const math::VRBTransform& transform);
@@ -61,11 +60,12 @@ private:
 	const vfloat32 m_fPiDiv180;
 
 	mutable Matrix4f m_ViewMatrix;
+	mutable math::VRBTransform m_Transform;
 
-	Vector m_UpVector;
-	Vector m_RightVector;
-	Vector m_RotationVector;
-	Vector m_ViewVector;
+	VVector3f m_UpVector;
+	VVector3f m_RightVector;
+	VVector3f m_RotationVector;
+	VVector3f m_ViewVector;
 
 	v3d::graphics::VVertex3f m_PositionVector;
 

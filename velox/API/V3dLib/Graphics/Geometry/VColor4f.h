@@ -31,6 +31,14 @@ struct VColor4f
 		blue = in_Blue;
 		alpha = in_Alpha;
 	}
+
+	VColor4f(vfloat32 in_Red, vfloat32 in_Green, vfloat32 in_Blue)
+	{
+		red = in_Red;
+		green = in_Green;
+		blue = in_Blue;
+		alpha = 1.0f;
+	}
 };
 
 //-----------------------------------------------------------------------------

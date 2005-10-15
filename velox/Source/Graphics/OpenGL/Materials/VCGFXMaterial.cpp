@@ -147,8 +147,9 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 				{
 					using namespace resource;
 
-					VResourceDataPtr<const VTextureState> pTexState = GetResourceData<VTextureState>("/data/moon.jpg");
-					VTexture2D* pTexture = reinterpret_cast<VTexture2D*>(pTexState->m_pTexture);
+					//VResourceDataPtr<const VTextureState> pTexState = GetResourceData<VTextureState>("/data/moon.jpg");
+					//VTexture2D* pTexture = reinterpret_cast<VTexture2D*>(pTexState->m_pTexture);
+					VResourceDataPtr<const VTexture2D> pTexture = GetResourceData<VTexture2D>("/data/moon.jpg");
 
 					GLenum texHandle = pTexture->GetTextureId();
 

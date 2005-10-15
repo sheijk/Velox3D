@@ -20,6 +20,8 @@ VKeyboardCamera::VKeyboardCamera(IVInputManager& in_InputDevice)
 {
 	QueryButtons(in_InputDevice);
 
+	m_bIgnoreMouse = false;
+
 	m_fMovementSpeed = 2.0f;
 	m_fRotationSpeedX = 1.0f;
 	m_fRotationSpeedY = 1.0f;
@@ -258,15 +260,36 @@ void VKeyboardCamera::Move(vfloat32 in_fSeconds)
 	if( m_pRotateDownButton->IsDown() == true )
 		m_Camera.RotateX(-m_fRotationSpeedX * m_fKeyRotationFactor  * in_fSeconds);
 
-	// mouse rotation
-	if(m_pRollRightButton->IsDown() == true || m_pRollRightButton2->IsDown() == true)
+	vbool rollRight = false;
+	vbool rollLeft = false;
+
+	if( ! m_bIgnoreMouse )
+	{
+		if( m_pRollRightButton->IsDown() )
+			rollRight = true;
+		if( m_pRollLeftButton->IsDown() )
+			rollLeft = true;
+
+		//if(m_pRollRightButton->IsDown() == true || m_pRollRightButton2->IsDown() == true)
+		//	m_Camera.RotateZ(-m_fRotationSpeedZ * in_fSeconds);
+
+		//if(m_pRollLeftButton->IsDown() == true || m_pRollLeftButton2->IsDown() == true)
+		//	m_Camera.RotateZ(m_fRotationSpeedZ * in_fSeconds);
+
+		m_Camera.RotateX(- m_pMouseYAxis->GetLastMovement() * m_fRotationSpeedX * in_fSeconds);
+		m_Camera.RotateY(m_pMouseXAxis->GetLastMovement() * m_fRotationSpeedY * in_fSeconds);
+	}
+
+	if( m_pRollRightButton2->IsDown() )
+		rollRight = true;
+	if( m_pRollLeftButton2->IsDown() )
+		rollLeft = true;
+
+	if( rollRight )
 		m_Camera.RotateZ(-m_fRotationSpeedZ * in_fSeconds);
 
-	if(m_pRollLeftButton->IsDown() == true || m_pRollLeftButton2->IsDown() == true)
+	if( rollLeft )
 		m_Camera.RotateZ(m_fRotationSpeedZ * in_fSeconds);
-
-	m_Camera.RotateX(- m_pMouseYAxis->GetLastMovement() * m_fRotationSpeedX * in_fSeconds);
-	m_Camera.RotateY(m_pMouseXAxis->GetLastMovement() * m_fRotationSpeedY * in_fSeconds);
 
 	for(vuint savedOrientNum = 0; savedOrientNum < m_GotoButtons.size(); ++savedOrientNum)
 	{
@@ -293,7 +316,37 @@ void VKeyboardCamera::Move(vfloat32 in_fSeconds)
 
 const VMatrix44f& VKeyboardCamera::GetTransform() const
 {
-	return m_Camera.TransformMatrix();
+	return ViewMatrix();
+}
+
+const VMatrix44f& VKeyboardCamera::ViewMatrix() const
+{
+	return m_Camera.ViewMatrix();
+}
+
+const math::VRBTransform& VKeyboardCamera::Transform() const
+{
+	return m_Camera.Transform();
+}
+
+void VKeyboardCamera::ApplyTo(IVDevice& in_Device) const
+{
+	m_Camera.ApplyTo(in_Device);
+}
+
+VVector3f VKeyboardCamera::GetPosition() const
+{
+	return m_Camera.GetPosition();
+}
+
+VVector3f VKeyboardCamera::GetViewDirection() const
+{
+	return m_Camera.GetViewDirection();
+}
+
+VVector3f VKeyboardCamera::GetUpVector() const
+{
+	return m_Camera.GetUpVector();
 }
 
 void VKeyboardCamera::SetMovementSpeed(vfloat32 in_fMovementSpeed)
@@ -334,6 +387,16 @@ void VKeyboardCamera::SetRotationSpeedZ(vfloat32 in_fNewSpeedZ)
 vfloat32 VKeyboardCamera::GetRotationSpeedZ() const
 {
 	return m_fRotationSpeedZ;
+}
+
+void VKeyboardCamera::SetIgnoreMouse(vbool in_bMouseIgnored)
+{
+	m_bIgnoreMouse = in_bMouseIgnored;
+}
+
+vbool VKeyboardCamera::IsMouseIgnored() const
+{
+	return m_bIgnoreMouse;
 }
 
 //-----------------------------------------------------------------------------

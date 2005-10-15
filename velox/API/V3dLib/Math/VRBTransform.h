@@ -1,8 +1,10 @@
 #ifndef V3D_VRBTRANSFORM_2004_11_10_H
 #define V3D_VRBTRANSFORM_2004_11_10_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <V3dLib/Math.h>
+#include <V3d/Core/VCoreLib.h>
+
+#include <V3d/Math/VVector.h>
+#include <V3d/Math/VMatrix.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace math {
@@ -15,17 +17,10 @@ using namespace v3d;
  * preserving and is normally used the change an object's position and
  * orientation.
  *
+ * It consists of a position and the x,y,z axis of the local coordinate
+ * system it defines
  *
- * The translation of the rigid body transform is stored in a 3D position
- * vector. Three 3D axis vectors forms an orthogonal carthesian coordinate
- * system representing the rotation.
- *
- *
- * There a varios way to describe a valid rigid body transform. So VRBTransform
- * provides serveral Get/Set-Methods to set or get the rigid body transform in
- * various ways.
- * Further information is in the documentation of the methods.
- *
+ * The coordinate frame is always right handed (z is the inverse view dir)
  *
  * To concatenate two rigid body transforms use 
  *
@@ -33,22 +28,13 @@ using namespace v3d;
  *                const VRBTransform& in_A,
  *                const VRBTransform& in_B );
  *
- * or the overloaded operator*.
+ * or result = a * b;
  *
- * Fore more information about how two rigid body transforms are concatenated
- * see the commentary.
- *
- * @author sheijk, acrylsword
+ * @author sheijk
  */
-
 class VRBTransform
 {
 public:
-
-	enum Type { LeftHanded, RightHanded };
-
-	static Type defaultType;
-	
 	/**
 	 * Initialize the orthogonal coordinate system to
 	 *
@@ -56,150 +42,41 @@ public:
 	 * Y-Axis = (0.0f, 1.0f, 0.0f)
 	 * Z-Axis = (0.0f, 0.0f, 1.0f)
 	 * Position = (0.0f, 0.0f, 0.0f);
-	 *
 	 */
 	VRBTransform();
 
-	VRBTransform(const VRBTransform& in_Source);
-	void operator=(const VRBTransform& in_Source);
-
 	/**
-	 * Initialize the orthogonal coordinate system with
-	 * position, direction an up vectors.
-	 * 
-	 *
-	 * @param in_Position  The position
-	 * @param in_Direction The direction part of the orientation
-	 * @param in_Up        The up part of the orientation
-	 * @param in_Type	   Left- or RightHanded? 
-	 *                     (default: defaultType)
+	 * Located at in_Position, z axis facing away from in_LookAt
+	 * (we have a right handed coordinate system)
 	 */
 	VRBTransform(const VVector3f& in_Position,
-	             const VVector3f& in_Direction,
-			     const VVector3f& in_Up,
-				 const Type in_Type = defaultType);
+	             const VVector3f& in_LookAt,
+			     const VVector3f& in_Up);
 
 	/**
 	 * Initialize the orthogonal coordinate system with a given
-	 * matrix. If <code>in_Matrix</cod> does not describe a rigid
-	 * body transformation, the rigid body transformation is calculated.
-	 * TOD:: Bessere Doku - acryl
-	 *
+	 * matrix
 	 */
 	explicit VRBTransform(VMatrix44f in_Matrix);
 
-	/**
-	 * D'tor
-	 */
-	virtual ~VRBTransform();
+	/** class is not designed for subclassing */
+	~VRBTransform();
 
-	/**
-	* Sets the position (origin) of the orthogonal coordinate
-	* system.
-	*
-	* @param in_Position The new position (origin) of the coordinate 
-	*                    system
-	*/
 	void SetPosition(const VVector3f& in_Position);
-
-	/**
-	* Gets the position (origin) of the orthogonal coordinate
-	* system
-	*
-	* @return The position (origin) of the coordinate system
-	*/
 	VVector3f GetPosition() const;
 
-	/**
-	 * Sets the orientation using a look-at and up vector
-	 *
-	 * @param in_Direction The direction part of the orientation
-	 * @param in_Up        The up part of the orientation
-	 * @param in_Type	   Left- or RightHanded? 
-	 *                     (default: defaultType)
-	 */
-	void SetLookAt(const VVector3f& in_Direction,
-		           const VVector3f& in_Up,
-				   const Type in_Type = defaultType);
+	void SetDirection(const VVector3f& in_Direction, const VVector3f& in_Up);
 
-	/**
-	 * Sets the position and orientation using a position,
-	 * look-at and up vector.
-	 *
-	 * @param in_Position  The position
-	 * @param in_Direction The direction part of the orientation
-	 * @param in_Up        The up part of the orientation
-	 * @param in_Type	   Left- or RightHanded? 
-	 *                     (default: defaultType)
-	 *
-	 */
 	void SetLookAt(const VVector3f& in_Position,
-		           const VVector3f& in_Direction,
-				   const VVector3f& in_Up,
-				   const Type in_Type = defaultType);
-//
-//	/**
-//	 * Sets the orientation using euler angles
-//	 * 
-//	 * @param in_XAngle 
-//	 * @param in_YAngle
-//	 * @param in_ZAngles
-//	 * @param in_Type	   Left- or RightHanded? 
-//	 *                     (default: m_sDefaultType)
-//	 *
-//	 */
-//	void SetEulerAngles(const vfloat32 in_XAngle,
-//		                const vfloat32 in_YAngle,
-//						const vfloat32 in_ZAngle,
-//						const Type in_Type = m_sDefaultType);
-//
-//	/**
-//	* Sets the position and orientation using euler angles
-//	* position vector.
-//	* 
-//	* @param in_Position  The position
-//	* @param in_XAngle 
-//	* @param in_YAngle
-//	* @param in_ZAngles
-//	* @param in_Type	   Left- or RightHanded? 
-//	*                     (default: m_sDefaultType)
-//	*
-//	*/
-//	void SetEulerAngles(const Vector& in_Position,
-//		                const vfloat32 in_XAngle,
-//		                const vfloat32 in_YAngle,
-//		                const vfloat32 in_ZAngle,
-//		                const Type in_Type = m_sDefaultType);
-//
-	/**
-	 * Gets the x-axis of the orthogonal coordinate system.
-	 *
-	 * @return The cordinate system's x-axis
-	 */
+		           const VVector3f& in_LookAt,
+				   const VVector3f& in_Up);
+	void SetLookAt(vfloat32 m_fPosX, vfloat32 m_fPosY, vfloat32 m_fPosZ,
+		vfloat32 m_fLookAtX, vfloat32 m_fLookAtY, vfloat32 m_fLookAtZ,
+		vfloat32 m_fUpX, vfloat32 m_fUpY, vfloat32 m_fUpZ);
+
 	VVector3f GetXAxis() const ;
-
-	/**
-	 * Gets the y-axis of the orthogonal coordinate system.
-	 *
-	 * @return The cordinate system's y-axis
-	 */
 	VVector3f GetYAxis() const;
-
-	/**
-	* Gets the z-axis of the orthogonal coordinate system.
-	*
-	* @return The cordinate system's z-axis
-	*/
 	VVector3f GetZAxis() const;
-
-	/**
-	 * Get the three axis vectors
-	 *
-	 * @param out_XAxis The x-axis
-	 * @param out_YAxis The y-axis
-	 * @param out_ZAxis The z-axis
-	 *
-     */
 	void GetAxis(VVector3f& out_XAxis, VVector3f& out_YAxis, VVector3f& out_ZAxis) const;
 
 	/**
@@ -207,19 +84,26 @@ public:
 	 *	
 	 * @return A transformation matrix
 	 */
-	VMatrix44f GetAsMatrix() const;
+	VMatrix44f AsMatrix() const;
 
 	/**
-	 *
-	 *
-	 *
+	 * Let's the transform represent the same transformation the given matrix
+	 * represents. This is only possible if the matrix represents a rigid body
+	 * transformation (= a concatenation of rotation and translation transforms)
 	 */
 	void Set(VMatrix44f in_Matrix);
 
+	void Invert();
+
 private:
+	void SetXAxis(const VVector3f& in_XAxis);
+	void SetYAxis(const VVector3f& in_YAxis);
+	void SetZAxis(const VVector3f& in_ZAxis);
+
 	VVector3f m_XAxis;
 	VVector3f m_YAxis;
 	VVector3f m_ZAxis;
+
 	VVector3f m_Position;
 };
 

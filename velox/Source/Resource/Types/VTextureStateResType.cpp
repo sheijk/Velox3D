@@ -125,7 +125,7 @@ namespace {
 		//V3D_THROW(VException, "illegal texture wrapping mode");
 	}
 
-	VTextureState* CreateTextureState(
+	VTexture2D* CreateTexture2D(
 		const image::VImage& image,
         const VTextureOptions& in_Options,
 		const GLenum in_TextureTarget
@@ -177,7 +177,7 @@ namespace {
 			image.GetPixelData()
 			);
 
-		IVTexture* pTexture = 0;
+		VTexture2D* pTexture = 0;
 
 		switch(in_TextureTarget)
 		{
@@ -193,7 +193,8 @@ namespace {
 		if( pTexture != 0 )
 		{
 			//TODO: VTexture2D anstatt IVRenderState in der resource speichern
-			return new VTextureState(pTexture);
+			return pTexture;
+			//return new VTextureState(pTexture);
 		}
 		else
 		{
@@ -209,7 +210,8 @@ namespace {
  */
 VTextureStateResType::VTextureStateResType()
 {
-	m_TextureTargets[GetTypeInfo<VTextureState>()] = GL_TEXTURE_2D;
+	m_TextureTargets[GetTypeInfo<VTexture2D>()] = GL_TEXTURE_2D;
+	m_TextureTargets[GetTypeInfo<IVTexture>()] = GL_TEXTURE_2D;
 
 	//m_TextureTargets[VTypeId::Create<VCubemapPosX>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 	//m_TextureTargets[VTypeId::Create<VCubemapNegX>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
@@ -250,8 +252,9 @@ vbool VTextureStateResType::Generate(
 	resource::VResource* in_pResource,
 	VTypeInfo in_Type)
 {
-	V3D_ASSERT(std::find(m_ManagedTypes.begin(), m_ManagedTypes.end(), in_Type) 
-		!= m_ManagedTypes.end());
+	//V3D_ASSERT(std::find(m_ManagedTypes.begin(), m_ManagedTypes.end(), in_Type) 
+	//	!= m_ManagedTypes.end());
+
 //	V3D_ASSERT(resource::VTypeId::Create<VTextureState2D>() == in_Type);
 
 	// if texture state does not exist, yet
@@ -289,7 +292,7 @@ vbool VTextureStateResType::Generate(
 		GLenum target = GetTextureTarget(in_Type);
 
 		// create opengl texture state from it
-		in_pResource->AddData<VTextureState>(CreateTextureState(*pImage, options, target));
+		in_pResource->AddData<VTexture2D>(CreateTexture2D(*pImage, options, target));
 
 		//in_pResource->DumpInfo(":::");
 	}

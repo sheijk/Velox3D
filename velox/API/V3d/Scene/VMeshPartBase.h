@@ -9,6 +9,7 @@
 #include <V3d/Entity/VPartBase.h>
 
 #include <V3d/Resource/VResourceDataPtr.h>
+#include <V3dLib/EntityParts/VRigidBodyPart.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
@@ -31,6 +32,7 @@ public:
 
 	virtual const graphics::IVMaterial& GetMaterial() const;
 	virtual const math::VRBTransform& GetModelTransform() const;
+	virtual void SetModelTransform(const math::VRBTransform& in_Transform);
 
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera) {}
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
@@ -40,9 +42,10 @@ public:
 
 protected:
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
+	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 
 	resource::VResourceDataPtr<const graphics::IVMaterial> m_hMaterial;
-	math::VRBTransform m_Transform;
+	//math::VRBTransform m_Transform;
 };
 
 //-----------------------------------------------------------------------------

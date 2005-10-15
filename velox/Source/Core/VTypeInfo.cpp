@@ -26,7 +26,7 @@ void VTypeInfo::SetName(const std::string& in_strName)
 	m_strName = in_strName;
 }
 
-vbool VTypeInfo::CanBeCastedTo(const VTypeInfo& in_DestType)
+vbool VTypeInfo::CanBeCastedTo(const VTypeInfo& in_DestType) const
 {
 	// can be casted to itself and any one if it's supertypes
 	return (m_strName == in_DestType.m_strName) ||

@@ -108,13 +108,22 @@ std::vector<IVResourceType*> VResourceManager::GetResourceTypes(VTypeInfo in_Typ
 {
 	std::vector<IVResourceType*> types;
 
-	TypeMap::const_iterator iter = m_ManagedTypes.find(in_Type);
-
-	while(iter != m_ManagedTypes.end() && iter->first == in_Type)
+	TypeMap::const_iterator iter = m_ManagedTypes.begin();
+	for( ; iter != m_ManagedTypes.end(); ++iter)
 	{
-		types.push_back(iter->second.Get());
-		++iter;
+		if( iter->first.CanBeCastedTo(in_Type) )
+		{
+			types.push_back(iter->second.Get());
+		}
 	}
+
+	//TypeMap::const_iterator iter = m_ManagedTypes.find(in_Type);
+
+	//while(iter != m_ManagedTypes.end() && iter->first == in_Type)
+	//{
+	//	types.push_back(iter->second.Get());
+	//	++iter;
+	//}
 
 	return types;
 }

@@ -3,6 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Math/VVector.h>
 #include <V3dLib/Math/VQuaternion.h>
+#include <V3d/Math/Numerics.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 //-----------------------------------------------------------------------------
@@ -264,15 +265,13 @@ template<typename Scalar>
 
 /**
  * Construct a quaternion from an axis and angle
- * @note: in_Angle in radians
  */
 template<typename Scalar>
-VQuaternion<Scalar> ConstructFromAxisAngle(
-								   VVector<Scalar, 3> in_Axis,
-								   Scalar in_Angle)
+VQuaternion<Scalar> QuatFromAxisAngle(
+	const VVector<Scalar, 3>& in_Axis, Scalar in_AngleDegree)
 {
-	Scalar sinx = sin(in_Angle / 2);
-	Scalar cosy = cos(in_Angle / 2);
+	Scalar sinx = sin(math::DegreeToRadian(in_AngleDegree) / 2);
+	Scalar cosy = cos(math::DegreeToRadian(in_AngleDegree) / 2);
 
 	Scalar x,y,z,w;
 

@@ -40,6 +40,8 @@ public:
 	};
 
 	/**
+	 * Use GetResourceData<IVMesh>(in_strResource) instead
+	 *
 	 * Returns a mesh handle to render the given geometry using the effect
 	 * description's materials. Mesh must be deleted using DeleteMesh
 	 * before end of program
@@ -48,11 +50,12 @@ public:
 	 *		VEffectDescription and a VMeshDescription
 	 * @return A handle which can be used to render the mesh
 	 */
-	virtual MeshHandle CreateMesh(
+	virtual V3D_DEPRECATED MeshHandle CreateMesh(
 		VStringParam in_strResource
 		) = 0;
 
-	virtual MaterialHandle CreateMaterial(VStringParam in_strResource) = 0;
+	/** Use GetResourceData<IVMaterial>(in_strResource) instead */
+	virtual V3D_DEPRECATED MaterialHandle CreateMaterial(VStringParam in_strResource) = 0;
 
 	/**
 	 * Deletes a previously created mesh
@@ -99,6 +102,8 @@ public:
 	virtual IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings) = 0;
 
 	virtual ~IVDevice() {};
+
+	static resource::VResourceDataPtr<const IVMaterial> GetDefaultMaterial();
 };
 //-----------------------------------------------------------------------------
 } // namespace graphics

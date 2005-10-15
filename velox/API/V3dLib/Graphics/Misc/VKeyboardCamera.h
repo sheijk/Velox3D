@@ -5,6 +5,7 @@
 
 #include <v3d/Input.h>
 #include <v3d/Graphics.h>
+#include <V3dLib/Graphics/Misc/IVCamera.h>
 #include <V3dLib/Graphics/Misc/VCamera.h>
 
 #include <string>
@@ -23,7 +24,7 @@ using namespace v3d; // ...
  *
  * @sheijk
  */
-class VKeyboardCamera
+class VKeyboardCamera : public IVCamera
 {
 public:
 	VKeyboardCamera(input::IVInputManager& in_InputDevice);
@@ -34,7 +35,15 @@ public:
 	graphics::VCamera& GetCamera();
 	const graphics::VCamera& GetCamera() const;
 
-	virtual const VMatrix44f& GetTransform() const;
+	virtual V3D_DEPRECATED const VMatrix44f& GetTransform() const;
+	virtual const VMatrix44f& ViewMatrix() const;
+	virtual const math::VRBTransform& Transform() const;
+
+	virtual void ApplyTo(IVDevice& in_Device) const;
+
+	virtual VVector3f GetPosition() const;
+	virtual VVector3f GetViewDirection() const;
+	virtual VVector3f GetUpVector() const;
 
 	void SetMovementSpeed(vfloat32 m_fMovementSpeed);
 	vfloat32 GetMovementSpeed() const;
@@ -45,10 +54,15 @@ public:
 	void SetRotationSpeedZ(vfloat32 in_fNewSpeedX);
 	vfloat32 GetRotationSpeedZ() const;
 
+	void SetIgnoreMouse(vbool in_bMouseIgnored);
+	vbool IsMouseIgnored() const;
+
 private:
 	void QueryButtons(input::IVInputManager& in_pInputManager);
 	void LoadCameraPositions(const std::string& in_strFileName);
 	void SaveCameraPositions(const std::string& in_strFileName);
+
+	vbool m_bIgnoreMouse;
 
 	vfloat32 m_fMovementSpeed;
 	vfloat32 m_fRotationSpeedX;

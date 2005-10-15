@@ -35,3 +35,14 @@ inline float PseudoRandom(vuint x, vfloat32 in_fMin, vfloat32 in_fMax)
 
 	return rnd;
 }
+
+template<typename T>
+T Clamp(T value, T minValue, T maxValue)
+{
+	if( value >= maxValue )
+		return maxValue;
+	else if( value <= minValue)
+		return minValue;
+	else
+		return value;
+}

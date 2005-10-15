@@ -251,8 +251,16 @@ void VResource::DumpInfo(const std::string& in_strPrefix) const
 
 vbool VResource::ContainsData(VTypeInfo in_Type)
 {
-	DataMap::const_iterator data = m_Data.find(in_Type);
-	return data != m_Data.end();
+	for(DataMap::const_iterator data = m_Data.begin(); data != m_Data.end(); ++data)
+	{
+		if( data->first.CanBeCastedTo(in_Type) )
+			return true;
+	}
+
+	// nothing found
+	return false;
+	//DataMap::const_iterator data = m_Data.find(in_Type);
+	//return data != m_Data.end();
 }
 
 VResourceData* VResource::FindInstanceOf(VTypeInfo in_Type)

@@ -157,6 +157,18 @@ VEffectDescription ColorEffect(const VColor4f& in_Color)
 	return effect;
 }
 
+VEffectDescription ColorEffect(
+	vfloat32 in_fRed, vfloat32 in_fGreen, vfloat32 in_fBlue)
+{
+	return ColorEffect(VColor4f(in_fRed, in_fGreen, in_fBlue));
+}
+
+VEffectDescription ColorEffect(
+	vfloat32 in_fRed, vfloat32 in_fGreen, vfloat32 in_fBlue, vfloat32 in_fAlpha)
+{
+	return ColorEffect(VColor4f(in_fRed, in_fGreen, in_fBlue, in_fAlpha));
+}
+
 //-----------------------------------------------------------------------------
 
 void PrintEffectDescription(const VEffectDescription& effect)

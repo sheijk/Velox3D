@@ -1,6 +1,9 @@
 #ifndef V3D_VVECTORBASE_01_19_04_H
 #define V3D_VVECTORBASE_01_19_04_H
 //-----------------------------------------------------------------------------
+
+#include <V3d/Math/VVector.h>
+
 namespace v3d {
 namespace math {
 //-----------------------------------------------------------------------------
@@ -162,7 +165,7 @@ public:
 	 * Gram-Schmidt algorithm
 	 *
      * @note: useful for a base that got linear dependant by precession lost
-	 * @note: doesnt work if we have 2 parallel vectors
+	 * @note: doesn't work if we have 2 parallel vectors
 	 */
 	void Orthogonalize()
 	{
@@ -187,6 +190,16 @@ public:
 		m_i = w0; 
 		m_j = w1;
 		m_k	= w2;
+	}
+
+	static void Orthogonalize(
+		VVector<Scalar, 3>* i, VVector<Scalar, 3>* j, VVector<Scalar, 3>* k)
+	{
+		VVectorBase base(*i, *j, *k);
+		base.Orthogonalize();
+		*i = base.GetI();
+		*j = base.GetJ();
+		*k = base.GetK();
 	}
 
 	void SetI(const VVector<Scalar, 3>& in_Vector)

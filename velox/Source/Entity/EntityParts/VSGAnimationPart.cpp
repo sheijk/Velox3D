@@ -44,7 +44,7 @@ void VSGAnimationPart::Update(vfloat32 in_Seconds)
 {
 	//calculate the rotation
 	m_fAngle += m_fRotateSpeed * in_Seconds;
-	VQuatf Quaternion = ConstructFromAxisAngle(m_Rotate, m_fAngle);
+	VQuatf Quaternion = QuatFromAxisAngle(m_Rotate, m_fAngle);
 
 	math::Rotate(m_Transform.GetXAxis(), Quaternion);
 	math::Rotate(m_Transform.GetYAxis(), Quaternion);

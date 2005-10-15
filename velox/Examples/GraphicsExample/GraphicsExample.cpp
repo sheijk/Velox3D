@@ -70,7 +70,8 @@ vint GraphicsExample::Main(std::vector<std::string> args)
 
 	VCamera cam;
 	cam.MoveForward(-7);
-	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+	cam.ApplyTo(Device());
+	//Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
 
 
 	m_pUpdater->Start();

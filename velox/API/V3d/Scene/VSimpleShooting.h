@@ -13,6 +13,14 @@ namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
+/**
+ * Simply renders the whole scene "as it is". For every visible shape it's
+ * material and transform are applied and it's geometry is rendered
+ *
+ * Also serves as a base class for special shootings like shadow mapping etc
+ *
+ * @author sheijk
+ */
 class VSimpleShooting : public entity::VPartBaseAdapter<IVShooting>
 {
 public:
@@ -32,10 +40,12 @@ public:
 
 	virtual vbool IsActive() const;
 
-private:
+protected:
 	entity::VPartConnection<IVGraphicsPart> m_pScene;
 	graphics::IVDevice* m_pDevice;
 	graphics::IVCamera* m_pCamera;
+
+private:
 	vbool m_bActive;
 };
 

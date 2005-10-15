@@ -6,6 +6,8 @@
 #include <v3d/Core/MemManager.h>
 #include <V3dLib/Graphics/Misc/IVDrawList.h>
 #include <V3dLib/Math.h>
+
+#include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -54,6 +56,11 @@ void RenderModel(graphics::IVDevice& in_Device, const graphics::VModel& in_Model
 	{
 		RenderMesh(in_Device, in_Model.GetPart(partNum));
 	}
+}
+
+resource::VResourceDataPtr<const IVMaterial> IVDevice::GetDefaultMaterial()
+{
+	return resource::GetResourceData<IVMaterial>("/system/graphics/defaultMaterial");
 }
 
 //-----------------------------------------------------------------------------

@@ -10,7 +10,8 @@ VBaseTexture::VBaseTexture()
 	//Dummy
 }
 
-VBaseTexture::VBaseTexture(const image::VImage& in_Image, GLenum in_TextureTarget) : m_iTextureTarget(in_TextureTarget)
+VBaseTexture::VBaseTexture(const image::VImage& in_Image, GLenum in_TextureTarget) : 
+	m_iTextureTarget(in_TextureTarget)
 {
 	glEnable(m_iTextureTarget);
 }

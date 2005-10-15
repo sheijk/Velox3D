@@ -157,7 +157,8 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 	// setup camera, and apply it's matrix to the device
 	VCamera cam;
 	cam.MoveForward(-7);
-	device.SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+	cam.ApplyTo(device);
+	//device.SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
 
 	// get the escape key
 	input::IVButton& escapeKey(pWindow->QueryInputManager().GetStandardKey(KeyEscape));

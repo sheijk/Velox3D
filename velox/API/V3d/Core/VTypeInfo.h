@@ -27,7 +27,7 @@ public:
 	 * Returns wheter an instance of the type the info represents can be
 	 * safely casted to an instance of the type in_DestType represents
 	 */
-	vbool CanBeCastedTo(const VTypeInfo& in_DestType);
+	vbool CanBeCastedTo(const VTypeInfo& in_DestType) const;
 
 	/**
 	 * Returns whether the instance has been initialized using InitTypeInfo

@@ -3,10 +3,11 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/Math/VMatrix.h>
-#include <v3d/Math/VVector.h>
-#include <V3dlib/Math/VQuaternion.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Math/VMatrix.h>
+#include <V3d/Math/VVector.h>
+#include <V3dLib/Math/VQuaternion.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3dLib/Math/VRBTransform.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -189,6 +190,22 @@ void SetScale(
 }
 
 /**
+ * Turns the given matrix into a scaling matrix
+ *
+ * @author sheijk
+ */
+template<typename Scalar, vuint Dimension>
+void SetScale(
+	  VMatrix<Scalar, Dimension, Dimension>& out_ScaleMatrix,
+	  const VVector<Scalar, Dimension>& in_ScaleComponents)
+{
+	Identity(out_ScaleMatrix);
+
+	for(int dim = 0; dim < Dimension; ++dim)
+		mat.Set(dim, dim, in_ScaleComponents[dim]);
+}
+
+/**
  * @author: sheijk
  */
 void Translate(VMatrix44f& matrix, float x, float y, float z);
@@ -218,10 +235,21 @@ void RotateAxis(VMatrix44f& matrix, VVector3f axis, float angle);
 */
 void Rotate(VVector3f rotate, VQuatf quaternion);
 
+
+
 /**
  * @author: sheijk
  */
 void Scale(VMatrix44f& matrix, float factor);
+
+template<typename Scalar, vuint Dimension>
+void Scale(VMatrix<Scalar, Dimension, Dimension>& io_Matrix,
+	const VVector<Scalar, Dimension>& in_ScaleComponents)
+{
+	VMatrix<Scalar, Dimension, Dimension> scaleMatrix;
+	SetScale(scaleMatrix, in_ScaleComponents);
+	Mult(io_Matrix, io_Matrix, scaleMatrix);
+}
 
 /**
  * @author: sheijk
@@ -257,6 +285,12 @@ VMatrix44f ScaleMatrix(vfloat32 sx);
  * @author sheijk
  */
 VPointer<VMatrix44f>::SharedPtr IdentityPtr();
+
+void ApplyRow(VMatrix44f* io_pMatrix, vuint in_nRow, const VVector3f& in_Vector);
+void ApplyColumn(
+	VMatrix44f* io_pMatrix, vuint in_nColumn, const VVector3f& in_Vector);
+void MakeTextureProjectionMatrix(
+	VMatrix44f* out_pMatrix, const math::VRBTransform& in_Transform);
 
 //-----------------------------------------------------------------------------
 } // namespace math

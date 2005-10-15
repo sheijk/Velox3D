@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
+#include <V3dLib/Math/VVectorOps.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -16,7 +17,8 @@ using namespace v3d; // anti auto indent
 VPolarSphereGenerator::VPolarSphereGenerator(
 	VVertexFormat::DataTypes in_DataTypes,
 	vuint in_nRings, vuint in_nSectors, 
-	vfloat32 in_fBottom, vfloat32 in_fTop
+	vfloat32 in_fBottom, vfloat32 in_fTop,
+	vfloat32 in_fSize
 	)
 {
 	V3D_THROW(VException, "not implemented");
@@ -38,7 +40,8 @@ VPolarSphereGenerator::VPolarSphereGenerator(
 
 VPolarSphereGenerator::VPolarSphereGenerator(
 	VVertexFormat::DataTypes in_DataTypes,
-	vuint in_nRings, vuint in_nSectors)
+	vuint in_nRings, vuint in_nSectors,
+	vfloat32 in_fSize)
 {
 	//if( (in_DataTypes & VVertexFormat::Indices) != 0 )
 	//	V3D_THROW(VMeshGenException, "Generating a polar sphere requires indices");
@@ -49,6 +52,7 @@ VPolarSphereGenerator::VPolarSphereGenerator(
 	m_nRings = in_nRings;
 	m_fBottom = -1.0f;
 	m_fTop = 1.0f;
+	m_fSize = in_fSize;
 
 	m_Format = VVertexFormat(
 		in_DataTypes,
@@ -156,6 +160,7 @@ void VPolarSphereGenerator::GenerateCoordinates(VVertexBuffer* io_pVB) const
 			//const float scale = 1.0f;
 			VVector3f coord;
 			coord.Set(xpos * scale, ypos, zpos * scale);
+			coord *= m_fSize;
 			io_pVB->SetCoordinate(coord, GetVertexNum(sector, ring));
 			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.x = xpos * scale;
 			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.y = ypos;

@@ -16,7 +16,7 @@ $implementations="";
 # set new line symbol to "" to read whole input as one line
 $/ = "";
 $input = <STDIN>;
-@lines = split("\r", $input);
+@lines = split("\n", $input);
 
 #while(1) {
 for( @lines ) {

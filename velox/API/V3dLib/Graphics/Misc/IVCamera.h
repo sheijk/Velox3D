@@ -5,27 +5,32 @@
 
 #include <V3d/Math/VVector.h>
 #include <V3d/Math/VMatrix.h>
+#include <V3dLib/Math/VRBTransform.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d;
 
+class IVDevice;
+
 /**
- * Interfaces for cameras
+ * Interface for cameras
  *
  * @author sheijk
  */
 class IVCamera
 {
 public:
-	typedef VVector<vfloat32, 3> Vector;
+	virtual const VMatrix44f& ViewMatrix() const = 0;
+	virtual const math::VRBTransform& Transform() const = 0;
 
-	virtual VMatrix44f& TransformMatrix() = 0;
-	virtual const VMatrix44f& TransformMatrix() const = 0;
-	virtual Vector GetPosition() const = 0;
-	virtual Vector GetViewDirection() const = 0;
-	virtual Vector GetUpVector() const = 0;
+	virtual void ApplyTo(IVDevice& in_Device) const = 0;
+
+	virtual VVector3f GetPosition() const = 0;
+	virtual VVector3f GetViewDirection() const = 0;
+	virtual VVector3f GetUpVector() const = 0;
 };
 
 //-----------------------------------------------------------------------------

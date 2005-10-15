@@ -11,18 +11,21 @@ namespace v3d { namespace graphics {
 using namespace v3d; // anti auto indenting
 
 /**
-*/
+ * @author sheijk
+ */
 class VPolarSphereGenerator : public IVMeshGenerator
 {
 public:
 	VPolarSphereGenerator(
 		VVertexFormat::DataTypes in_DataTypes,
-		vuint in_nRings, vuint in_nSectors);
+		vuint in_nRings, vuint in_nSectors,
+		vfloat32 in_fSize = 1.0f);
 
 	VPolarSphereGenerator(
 		VVertexFormat::DataTypes in_DataTypes,
 		vuint in_nRings, vuint in_nSectors, 
-		vfloat32 in_fBottom, vfloat32 in_fTop);
+		vfloat32 in_fBottom, vfloat32 in_fTop,
+		vfloat32 in_fSize = 1.0f);
 
 	virtual ~VPolarSphereGenerator();
 
@@ -45,6 +48,7 @@ private:
 	vfloat32 m_fBottom;
 	vuint m_nRings;
 	vuint m_nSectors;
+	vfloat32 m_fSize;
 };
 
 //-----------------------------------------------------------------------------

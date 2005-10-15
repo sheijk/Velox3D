@@ -27,7 +27,7 @@ vbool VPBufferTextureResType::Generate(
 	resource::VResource* in_pResource, 
 	VTypeInfo in_Type)
 {
-	V3D_ASSERT(GetTypeInfo<VPBufferTexture>() == in_Type);
+	//V3D_ASSERT(GetTypeInfo<VPBufferTexture>() == in_Type);
 
 	VResourceDataPtr<const IVRenderContext> pContextData;
 	IVRenderContext* pContext = 0;

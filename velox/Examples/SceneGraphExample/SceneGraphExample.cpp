@@ -109,7 +109,8 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 
 	VCamera cam;
 	cam.MoveForward(-7);
-	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+	cam.ApplyTo(Device());
+	//Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
 
 	//create Root Entity
 	VSharedPtr<VEntity> m_pRoot = CreateEntity(m_pSGRoot);
@@ -157,10 +158,10 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 		m_pSGRoot->Update();
 
 		//set the Mesh Matrix and render the Mesh
-		Device().SetMatrix(IVDevice::ModelMatrix, pMoonAnim->GetRelativeTransform().GetAsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, pMoonAnim->GetRelativeTransform().AsMatrix());
 		RenderMesh(Device(), hMoon, hMoonMat);	
 
-		Device().SetMatrix(IVDevice::ModelMatrix, pSphereAnim->GetRelativeTransform().GetAsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, pSphereAnim->GetRelativeTransform().AsMatrix());
 		RenderMesh(Device(), hCube, hCubeMat);
 
 		Device().EndScene();

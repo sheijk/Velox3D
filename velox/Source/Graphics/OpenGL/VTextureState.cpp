@@ -16,6 +16,11 @@ VTextureState::VTextureState(IVTexture* in_pTexture)
 	m_pTexture = in_pTexture;
 }
 
+VTextureState::VTextureState(resource::VResourceDataPtr<const IVTexture> in_pTexture)
+{
+	m_pTexture = const_cast<IVTexture*>(&*in_pTexture);
+}
+
 void VTextureState::Apply() const
 {
 	if( m_pLastTexture != 0 )

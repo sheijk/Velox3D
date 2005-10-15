@@ -2,6 +2,7 @@
 #define V3D_VVECTOROPS_01_22_05_H
 //-----------------------------------------------------------------------------
 #include <V3d/Math/VVector.h>
+#include <V3dLib/Math/VQuaternion.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------
@@ -185,6 +186,24 @@ template<typename Scalar, vuint Dimension>
 	return gmtl::lengthSquared(vec.m_Vec);
 }
 
+template<typename Scalar, vuint Dimension>
+vbool operator==(const VVector<Scalar, Dimension>& a,
+				 const VVector<Scalar, Dimension>& b)
+{
+	for(vuint i = 0; i < Dimension; ++i)
+		if( a[i] != b[i] )
+			return false;
+
+	return true;
+}
+
+template<typename Scalar, vuint Dimension>
+vbool operator!=(const VVector<Scalar, Dimension>& a,
+				 const VVector<Scalar, Dimension>& b)
+{
+	return ! (a == b);
+}
+
 //-----------------------------------------------------------------------------
 
 template<typename Scalar>
@@ -327,6 +346,25 @@ VVector<Scalar, 3>operator*
 		  )
 {
 	return vec * fac;
+}
+
+template<typename Scalar>
+void Rotate(
+			VVector<Scalar, 3>& out_Result, 
+			const VVector<Scalar, 3> in_Vector, 
+			const VQuaternion<Scalar>& in_Rotation)
+{
+	out_Result.m_Vec = in_Vector.m_Vec * in_Rotation.m_Data;
+}
+
+template<typename Scalar>
+VVector<Scalar, 3> operator*(
+							 const VVector<Scalar, 3>& in_Vector, 
+							 const VQuaternion<Scalar>& in_Rotation)
+{
+	VVector<Scalar, 3> result;
+	Rotate(result, in_Vector, in_Rotation);
+	return result;
 }
 
 template<typename Scalar, vint Dimensions>

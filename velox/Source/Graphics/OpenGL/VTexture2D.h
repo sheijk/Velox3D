@@ -40,5 +40,7 @@ public:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
+
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VTexture2D, v3d::graphics::IVTexture);
 //-----------------------------------------------------------------------------
 #endif //V3D_VTEXTURE2D_H

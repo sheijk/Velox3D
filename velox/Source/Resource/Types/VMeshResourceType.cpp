@@ -21,8 +21,8 @@ VMeshResourceType::VMeshResourceType()
 }
 
 /**
-* d'tor
-*/
+ * d'tor
+ */
 VMeshResourceType::~VMeshResourceType()
 {
 }

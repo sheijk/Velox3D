@@ -32,8 +32,15 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
-	v3d::VSharedPtr<v3d::entity::IVPart> part;
-	std::string id;
+15.10.05
+- IVTexture anstatt VTextureState in resourcen speichern
+- VTrackball + VMouseTrackball
+- 4 shapes fuer debuggingzwecke (v3d/scene/shapes/..)
+- shooting, um eine textur auf die szene zu projizieren
+- neues skript zum de-inlinen von member funktionen (klappt noch nicht mit VC)
+
+06.10.05
+- VRBTransform und kameras ueberarbeitet
 
 01.10.05
 - editor gefixt, so dass er mit dem neuen graphics scene zeug zusammen arbeitet

@@ -14,14 +14,16 @@ using namespace v3d::entity;
 using namespace v3d::resource;
 using namespace v3d::graphics;
 
-VMeshPartBase::VMeshPartBase(VResourceDataPtr<const IVMaterial> in_hMaterial)
-	: m_pSceneManager(VPartDependency::Ancestor, RegisterTo())
+VMeshPartBase::VMeshPartBase(VResourceDataPtr<const IVMaterial> in_hMaterial) :
+	m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
+	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
 {
 	m_hMaterial = in_hMaterial;
 }
 
 VMeshPartBase::VMeshPartBase(const std::string& in_strMaterialResource)
-	: m_pSceneManager(VPartDependency::Ancestor, RegisterTo())
+	: m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
+	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
 {
 	m_hMaterial = GetResourceData<IVMaterial>(in_strMaterialResource.c_str());
 }
@@ -41,7 +43,12 @@ const graphics::IVMaterial& VMeshPartBase::GetMaterial() const
 
 const math::VRBTransform& VMeshPartBase::GetModelTransform() const
 {
-	return m_Transform;
+	return m_pRigidBody->GetTransform();
+}
+
+void VMeshPartBase::SetModelTransform(const math::VRBTransform& in_Transform)
+{
+	m_pRigidBody->SetTransform(in_Transform);
 }
 
 VRangeIterator<const IVShapePart> VMeshPartBase::GetVisibleMeshes() const

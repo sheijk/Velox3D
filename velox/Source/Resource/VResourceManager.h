@@ -28,7 +28,9 @@ public:
 	/** Print info about all resources to v3d::vout */
 	virtual void DumpResourceInfo() const;
 
-	/** Get a list of registered resource types for the given type */
+	/**
+	 * Get a list of registered resource types which can produce the given type 
+	 */
 	std::vector<IVResourceType*> GetResourceTypes(VTypeInfo in_Type);
 
 private:

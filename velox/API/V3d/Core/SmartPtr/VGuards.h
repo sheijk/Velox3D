@@ -39,6 +39,17 @@ typename VPointer<Subject>::SharedPtr SharedPtr(Subject* in_pValue)
 	return VPointer<Subject>::SharedPtr(in_pValue);
 }
 
+/**
+ * Creates a copy of the given object on the heap
+ * 
+ * @author sheijk
+ */
+template<typename T>
+T* CopyPtr(const T& valueToBeCopied)
+{
+	return new T(valueToBeCopied);
+}
+
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------
