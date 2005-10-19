@@ -296,28 +296,28 @@ lib ServiceDLL
 	<link>shared
 	; # end
 
-lib WxServiceDLL
-    : # source files 
-    ../../Source/Console/VConsoleFrame.cpp
-    ../../Source/Console/VConsoleService.cpp
-    ../../Source/WxServices.cpp
-    ../../Source/Module/VeloxModule.cpp
-    ../../Source/WxWindowsService/VWindowsWxApp.cpp
-    ../../Source/WxWindowsService/VWxConnector.cpp
-
-	CoreLib
-	VeloxLib
-	
-	boostFileSystemLib
-	user32                                                   
-	dxguid
-	dinput8
-	opengl32
-	glu32 
-	gdi32
-	: # settings
-	<link>shared
-	;
+#lib WxServiceDLL
+#    : # source files 
+#    ../../Source/Console/VConsoleFrame.cpp
+#    ../../Source/Console/VConsoleService.cpp
+#    ../../Source/WxServices.cpp
+#    ../../Source/Module/VeloxModule.cpp
+#    ../../Source/WxWindowsService/VWindowsWxApp.cpp
+#    ../../Source/WxWindowsService/VWxConnector.cpp
+#
+#	CoreLib
+#	VeloxLib
+#	
+#	boostFileSystemLib
+#	user32                                                   
+#	dxguid
+#	dinput8
+#	opengl32
+#	glu32 
+#	gdi32
+#	: # settings
+#	<link>shared
+#	;
 	
 lib XmlServiceDLL
     : # source files 
@@ -348,7 +348,7 @@ exe MinimalExample
 	../../Source/Kernel/main.cpp
 	../../Source/Module/VeloxModule.cpp
 	CoreLib
-	UtilsLib
+	VeloxLib
 	KernelLib
 	: # settings
 	;
@@ -359,7 +359,7 @@ exe GraphicsDemo
 	../../Source/Kernel/main.cpp
 	../../Source/Module/VeloxModule.cpp
 	CoreLib
-	UtilsLib
+	VeloxLib
 	KernelLib
 	user32
 	: # settings

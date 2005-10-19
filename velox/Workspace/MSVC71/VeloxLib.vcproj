@@ -185,6 +185,9 @@
 						RelativePath="..\..\Api\V3d\Scene\IVGraphicsPart.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Scene\IVRenderStepPart.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Scene\IVSceneManagerPart.h">
 					</File>
 					<File
@@ -192,6 +195,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Scene\IVShooting.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Scene\VDefaultRenderStepPart.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Scene\VMeshPart.h">
@@ -229,6 +235,13 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VPlaneMeshPart.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Rendering"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Rendering\VProjectTextureRenderStepPart.h">
 						</File>
 					</Filter>
 				</Filter>
@@ -1039,10 +1052,16 @@
 				Name="Implementation"
 				Filter="">
 				<File
+					RelativePath="..\..\Source\Scene\IVRenderStepPart.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Scene\VArrowMeshPart.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VCoordSysDisplayPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VDefaultRenderStepPart.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VMeshPart.cpp">
@@ -1064,6 +1083,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VProjectTextureRenderStepPart.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Scene\VSimpleShooting.cpp">

@@ -8,10 +8,14 @@
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Graphics/IVDevice.h>
 
+#include <V3d/Scene/IVRenderStepPart.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
+
+class IVRenderStepPart;
 
 /**
  * Simply renders the whole scene "as it is". For every visible shape it's
@@ -35,12 +39,24 @@ public:
 	void SetCamera(graphics::IVCamera* in_pCamera);
 	graphics::IVCamera* GetCamera() const;
 
+	void Add(IVRenderStepPart* in_pRenderStep);
+	void Remove(IVRenderStepPart* in_pRenderStep);
+
 	virtual void Activate();
 	virtual void Deactivate();
 
 	virtual vbool IsActive() const;
 
 protected:
+	VSimpleShooting(entity::VPartDependency::Location in_SceneLocation,
+		const std::string& in_SceneId,
+		entity::VPartDependency::Condition in_SceneCondition);
+	
+	void SetupRenderSteps();
+
+	typedef std::vector<IVRenderStepPart*> RenderStepArray;
+	RenderStepArray m_RenderSteps;
+
 	entity::VPartConnection<IVGraphicsPart> m_pScene;
 	graphics::IVDevice* m_pDevice;
 	graphics::IVCamera* m_pCamera;
