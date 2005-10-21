@@ -1,5 +1,5 @@
-#ifndef V3D_VHALFRAY_H
-#define V3D_VHALFRAY_H
+#ifndef V3D_VLINE_H
+#define V3D_VLINE_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
@@ -12,44 +12,45 @@ namespace math {
 using namespace v3d;
 
 /**
- * Ray class for the Picking from Entitys
- *
- * @author lars
- */
-class VHalfRay
+* Line Class
+*
+* @author lars
+*/
+class VLine
 {
 public:
 
-	VHalfRay()
+	VLine()
 	{
-		m_StartPoint = VVector3f(0.0f, 0.0f, 0.0f);
+		m_Origin = VVector3f(0.0f, 0.0f, 0.0f);
 		m_Direction = VVector3f(0.0f, 0.0f, 0.0f);
 	}
 
-	VHalfRay(VVector3f in_StartPoint, VVector3f in_Direction) :
-		m_StartPoint(in_StartPoint), m_Direction(in_Direction)
+	VLine(VVector3f in_Origin, VVector3f in_Direction) :
+		m_Origin(in_Origin), m_Direction(in_Direction)
 	{
 	}
 
-	/** Sets the Start Point from the Ray */
-	void SetStartPoint(VVector3f in_StartPoint)
+	/** Sets the Origin for the Bounding Box */
+	void SetOrigin(VVector3f in_Origin)
 	{
-		m_StartPoint = in_StartPoint;
+		m_Origin = in_Origin;
 	}
 
-	/** Sets the Direction from the Ray */
+	/** Sets the Direction for the Bounding Box */
 	void SetDirection(VVector3f in_Direction)
 	{
 		m_Direction = in_Direction;
 	}
 
-	/** Returned the Start Point from the Ray */
-	VVector3f GetStartPoint() const
+
+	/** Returned the Origin from the Bounding Box */
+	VVector3f GetOrigin() const
 	{
-		return m_StartPoint;
+		return m_Origin;
 	}
 
-	/** Returned the Direction from the Ray */
+	/** Returned the Direction from the Bounding Box */
 	VVector3f GetDirection() const
 	{
 		return m_Direction;
@@ -57,7 +58,7 @@ public:
 
 private:
 
-	VVector3f m_StartPoint;
+	VVector3f m_Origin;
 	VVector3f m_Direction;
 };
 
@@ -65,4 +66,4 @@ private:
 } // namespace math
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif // V3D_VHALFRAY_H
+#endif // V3D_VLINE_H

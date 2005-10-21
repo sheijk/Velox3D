@@ -335,6 +335,9 @@
 						RelativePath="..\..\Api\V3dLib\Collision\VContactReport.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Collision\VIntersectionArray.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Collision\VOpcodeSystem.h">
 					</File>
 				</Filter>
@@ -597,6 +600,12 @@
 						RelativePath="..\..\Api\V3dLib\Math\VHalfRay.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Math\VLine.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\Math\VPlane.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Math\VQuaternion.h">
 					</File>
 					<File
@@ -737,6 +746,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Collision\VContactReport.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Collision\VIntersectionArray.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Collision\VOpcodeSystem.cpp">

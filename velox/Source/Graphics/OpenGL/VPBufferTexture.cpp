@@ -8,7 +8,7 @@ using namespace graphics; // anti auto indent
 VPBufferTexture::VPBufferTexture(VPBufferWindowContext* in_pContext) : 
 	m_pContext(in_pContext), m_iTextureID(0)
 {
-	vbyte* pPixelData = new vbyte[m_pContext->GetDisplaySettings()->GetWidth() * m_pContext->GetDisplaySettings()->GetHeight() * 3];
+	const vbyte* pPixelData = new vbyte[m_pContext->GetDisplaySettings()->GetWidth() * m_pContext->GetDisplaySettings()->GetHeight() * 3];
 
 	glEnable(GL_TEXTURE_2D);
 	glGenTextures(1, &m_iTextureID);
@@ -22,6 +22,10 @@ VPBufferTexture::VPBufferTexture(VPBufferWindowContext* in_pContext) :
 		delete[] pPixelData;
 		pPixelData = 0;
 	}
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE_EXT);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE_EXT);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 }
 
 VPBufferTexture::~VPBufferTexture()
@@ -31,6 +35,7 @@ VPBufferTexture::~VPBufferTexture()
 void VPBufferTexture::Bind()
 {
 	//bind Texture
+	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
 	wglBindTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
 }
 

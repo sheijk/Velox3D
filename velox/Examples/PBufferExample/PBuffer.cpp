@@ -84,8 +84,8 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 	{
 		// render something to the texture
 		m_pPBufferDevice->BeginScene();
-		m_pPBufferDevice->EndScene();
 		DrawScene(Device());
+		m_pPBufferDevice->EndScene();
 
 		// use the generated texture for the plane
 		Device().BeginScene();
@@ -172,11 +172,11 @@ void VPBufferExample::CreateResources()
 	plane.GenerateTexCoords();
 	VResourceId planeRes = BuildResource("/data/plane", plane);
 	planeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1, 1))));
-	//VEffectDescription textureEffect;
-	//MakeDefaultMaterial(textureEffect.AddShaderPath().AddRenderPass());
-	//textureEffect.ShaderPath(0).RenderPass(0).AddState(
-	//	TextureState(contextRes->GetQualifiedName()));
-	//planeRes->AddData(new VEffectDescription(textureEffect));
+	/*VEffectDescription textureEffect;
+	MakeDefaultMaterial(textureEffect.AddShaderPath().AddRenderPass());
+	textureEffect.ShaderPath(0).RenderPass(0).AddState(
+		TextureState(contextRes->GetQualifiedName().c_str()));
+	planeRes->AddData(new VEffectDescription(textureEffect));*/
 }
 
 IVDevice& VPBufferExample::Device()

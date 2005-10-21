@@ -106,6 +106,8 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	IVDevice::MaterialHandle hCubeMat = Device().CreateMaterial("/data/cube");
 	IVDevice::MeshHandle hMoon = Device().CreateMesh("/data/moon");
 	IVDevice::MaterialHandle hMoonMat = Device().CreateMaterial("/data/moon");
+	IVDevice::MeshHandle hSun = Device().CreateMesh("/data/sun");
+	IVDevice::MaterialHandle hSunMat = Device().CreateMaterial("/data/sun");
 
 	VCamera cam;
 	cam.MoveForward(-7);
@@ -116,22 +118,30 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	VSharedPtr<VEntity> m_pRoot = CreateEntity(m_pSGRoot);
 	m_pRoot->AddPart(VUpdateManagerPart::GetDefaultId(), static_cast<VSharedPtr<IVPart> >(pUpdate));
 
-	//create a Sphere for the Child
-	VSceneGraphPart* pSphere = new VSceneGraphPart();
-	VSGAnimationPart* pSphereAnim = new VSGAnimationPart();
+	//create a Sun
+	VSceneGraphPart* pSun = new VSceneGraphPart();
+	VSGAnimationPart* pSunAnim = new VSGAnimationPart();
+
+	//create a Planet for the Child
+	VSceneGraphPart* pPlanet = new VSceneGraphPart();
+	VSGAnimationPart* pPlanetAnim = new VSGAnimationPart();
 
 	//create a Moon for the Sphere as a Child
 	VSceneGraphPart* pMoon = new VSceneGraphPart();
 	VSGAnimationPart* pMoonAnim = new VSGAnimationPart();
 
-	//add in SceneGraph Root and the Entity Root the Child pSphere
-	VSharedPtr<VEntity> pSphereEntity = CreateEntity(pSphere, pSphereAnim);
+	//add the Sun in a Entity
+	VSharedPtr<VEntity> pSunEntity = CreateEntity(pSun, pSunAnim);
 
-	//add in Sphere Child the Child pMoon
+	//add the Planet in a Entity
+	VSharedPtr<VEntity> pPlanetEntity = CreateEntity(pPlanet, pPlanetAnim);
+
+	//add the Moon in a Entity
 	VSharedPtr<VEntity> pMoonEntity = CreateEntity(pMoon, pMoonAnim);
 	
-	pSphereEntity->AddChild(pMoonEntity);
-	m_pRoot->AddChild(pSphereEntity);
+	pSunEntity->AddChild(pPlanetEntity);
+	pPlanetEntity->AddChild(pMoonEntity);
+	m_pRoot->AddChild(pSunEntity);
 	m_pRoot->Activate();
 	// ensure the activation was successful
 	V3D_ASSERT(m_pRoot->IsActive());
@@ -148,7 +158,7 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 
 		//set the relative Transformation from the SceneGraph Sphere Child
 		trans = sin(time/10);
-		pSphereAnim->SetPosition(VVector3f(trans, trans, 0.0f));		
+		pPlanetAnim->SetPosition(VVector3f(trans, trans, 0.0f));		
 
 		//set the relative Transformation from the Sphere Child Moon
 		pMoonAnim->SetPosition(VVector3f(-trans, -trans, 0.0f));
@@ -161,8 +171,11 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 		Device().SetMatrix(IVDevice::ModelMatrix, pMoonAnim->GetRelativeTransform().AsMatrix());
 		RenderMesh(Device(), hMoon, hMoonMat);	
 
-		Device().SetMatrix(IVDevice::ModelMatrix, pSphereAnim->GetRelativeTransform().AsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, pPlanetAnim->GetRelativeTransform().GetAsMatrix());
 		RenderMesh(Device(), hCube, hCubeMat);
+
+		Device().SetMatrix(IVDevice::ModelMatrix, pSunAnim->GetRelativeTransform().GetAsMatrix());
+		RenderMesh(Device(), hSun, hSunMat);
 
 		Device().EndScene();
 
@@ -218,9 +231,9 @@ void VSceneGraphExample::Shutdown()
 
 void VSceneGraphExample::CreateResources()
 {
-	VPolarSphereMesh<VTexturedVertex> cube(50, 50);
+	VPolarSphereMesh<VTexturedVertex> cube(20, 20);
 	cube.GenerateCoordinates();
-	ForEachVertex(cube.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(1.175f, 1.175f, 1.175f));
+	ForEachVertex(cube.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(0.5f, 0.5f, 0.5f));
 
 	VResourceId cubeRes = BuildResource("/data/cube", cube);
 	cubeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(0, 1, 0, 1))));
@@ -231,6 +244,13 @@ void VSceneGraphExample::CreateResources()
 
 	VResourceId moonRes = BuildResource("/data/moon", moon);
 	moonRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 0, 0, 1))));
+
+	VPolarSphereMesh<VTexturedVertex> sun(25, 25);
+	sun.GenerateCoordinates();
+	ForEachVertex(sun.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(0.7f, 0.7f, 0.7f));
+
+	VResourceId sunRes = BuildResource("/data/sun", sun);
+	sunRes->AddData(new VEffectDescription(ColorEffect(VColor4f(0, 1, 1, 1))));
 }
 
 IVDevice& VSceneGraphExample::Device()

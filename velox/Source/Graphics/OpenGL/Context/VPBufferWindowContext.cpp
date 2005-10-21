@@ -6,14 +6,13 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
 
-VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, const graphics::VDisplaySettings* in_pDisplaySettings) : 
+VPBufferWindowContext::VPBufferWindowContext(const graphics::VDisplaySettings* in_pDisplaySettings) : 
 	m_PBufferDeviceContext(0), 
 	m_WindowDeviceContext(0),
 	m_PBufferRenderContext(0),
-	m_Handle(in_hwnd),
 	m_DisplaySettings(*in_pDisplaySettings)
 {
-	m_WindowDeviceContext = GetDC(m_Handle);
+	m_WindowDeviceContext = wglGetCurrentDC();
 	V3D_ASSERT(m_WindowDeviceContext != 0);
 
 	const int Format[] = {
@@ -27,7 +26,7 @@ VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, const graphics::VDisp
 		0
 	};
 
-	vuint Count;
+	vuint Count = 0;
 	vint Pixelformat;
 	
 	//select Pixel Buffer Format
@@ -45,11 +44,11 @@ VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, const graphics::VDisp
 
 	if(m_PixelBuffer == 0)
 	{
-		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Buffer wasn't created!");
+		V3D_THROW(VGraphicException, "Error: Pixel Buffer wasn't created!");
 	}
 	else
 	{
-		vout << "OpenGL Pixel Buffer was created!" << vendl;
+		vout << "Pixel Buffer was created!" << vendl;
 	}
 
 	//get Pixel Buffer Device Context
@@ -57,11 +56,11 @@ VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, const graphics::VDisp
 
 	if(m_PBufferDeviceContext == 0)
 	{
-		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Buffer Device Context wasn't created!");
+		V3D_THROW(VGraphicException, "Error: Pixel Buffer Device Context wasn't created!");
 	}
 	else
 	{
-		vout << "OpenGL Pixel Buffer Device Context was created!" << vendl;
+		vout << "Pixel Buffer Device Context was created!" << vendl;
 	}
 
 	//get Pixel Buffer Render Context
@@ -69,25 +68,33 @@ VPBufferWindowContext::VPBufferWindowContext(HWND in_hwnd, const graphics::VDisp
 
 	if(m_PBufferRenderContext == 0)
 	{
-		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Buffer Render Context wasn't created!");
+		V3D_THROW(VGraphicException, "Error: Pixel Buffer Render Context wasn't created!");
 	}
 	else
 	{
-		vout << "OpenGL Pixel Buffer Render Context was created!" << vendl;
+		vout << "Pixel Buffer Render Context was created!" << vendl;
 	}
 
-	//GLenum result = glewInit();
-	//if( result != GLEW_OK )
-	//{
-	//	V3D_THROWMSG(VGraphicException, "Could not initialize glew: "
-	//		<< " (" << result << ") "
-	//		<< glewGetErrorString(result)
-	//		);
-	//}
+	if(!wglShareLists(m_PBufferRenderContext, wglGetCurrentContext()))
+	{
+		V3D_THROW(VGraphicException, "Error: Pixel Buffer Context wasn't connected with the Window Context!");
+	}
+	else
+	{
+		vout << "Pixel Buffer Context was connected with the Window Context!" << vendl;
+	}
+
+	vint width = m_DisplaySettings.GetWidth();
+	vint height = m_DisplaySettings.GetHeight();
+	wglQueryPbufferARB(m_PixelBuffer, WGL_PBUFFER_WIDTH_ARB, &width);
+	wglQueryPbufferARB(m_PixelBuffer, WGL_PBUFFER_HEIGHT_ARB, &height);
 }
 
 VPBufferWindowContext::~VPBufferWindowContext()
 {
+	glDrawBuffer(GL_BACK);
+	glReadBuffer(GL_BACK);
+
 	wglDeleteContext(m_PBufferRenderContext);
     wglReleasePbufferDCARB (m_PixelBuffer, m_PBufferDeviceContext);
     wglDestroyPbufferARB(m_PixelBuffer); 
@@ -104,6 +111,11 @@ void VPBufferWindowContext::MakeCurrent()
 	}
 
 	wglMakeCurrent(m_PBufferDeviceContext, m_PBufferRenderContext);
+
+	glDrawBuffer(GL_FRONT);
+	glReadBuffer(GL_FRONT);
+	
+	glViewport(m_DisplaySettings.GetX(), m_DisplaySettings.GetY(), m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
 }
 
 void VPBufferWindowContext::SwapBuffers()
@@ -118,7 +130,7 @@ VDisplaySettings* VPBufferWindowContext::GetDisplaySettings()
 
 IVRenderContext* VPBufferWindowContext::CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings)
 {
-	return new VPBufferWindowContext(m_Handle, in_pDisplaySettings);
+	return new VPBufferWindowContext(in_pDisplaySettings);
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

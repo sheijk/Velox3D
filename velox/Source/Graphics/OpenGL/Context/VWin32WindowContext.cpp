@@ -15,11 +15,11 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 
 	if(m_DeviceContext == 0)
 	{
-		V3D_THROW(VGraphicException, "Error: OpenGL Device Context wasn't created!");
+		V3D_THROW(VGraphicException, "Error: Device Context wasn't created!");
 	}
 	else
 	{
-		vout << "OpenGL Device Context was created!" << vendl;
+		vout << "Device Context was created!" << vendl;
 	}
 
 	//create Pixel Format
@@ -36,31 +36,23 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	//create and set Pixel Format
 	if(!(SetPixelFormat(m_DeviceContext, ChoosePixelFormat(m_DeviceContext, &m_Pixelformat), &m_Pixelformat)))
 	{
-		V3D_THROW(VGraphicException, "Error: OpenGL Pixel Format wasn't selected!");
+		V3D_THROW(VGraphicException, "Error: Pixel Format wasn't selected!");
 	}
 	else
 	{
-		vout << "OpenGL Pixel Format was selected!" << vendl;
+		vout << "Pixel Format was selected!" << vendl;
 	}
 
 	//create a OpenGL Render Context
 	m_RenderContext = wglCreateContext(m_DeviceContext);
 
-	GLenum result = glewInit();
-	if( result != GLEW_OK )
-	{
-		vout << "Warning. Could not initialize glew: "
-			<< " (" << result << ") "
-			<< glewGetErrorString(result);
-	}
-
 	if(m_RenderContext == 0)
 	{
-		V3D_THROW(VGraphicException, "Error: OpenGL Render Context wasn't created!");
+		V3D_THROW(VGraphicException, "Error: Render Context wasn't created!");
 	}
 	else
 	{
-		vout << "OpenGL Render Context was created!" << vendl;
+		vout << "Render Context was created!" << vendl;
 	}
 }
 
@@ -98,7 +90,7 @@ IVRenderContext* VWin32WindowContext::CreateOffscreenContext(const graphics::VDi
 {
 	MakeCurrent();
 
-	return new VPBufferWindowContext(m_Handle, in_pDisplaySettings);
+	return new VPBufferWindowContext(in_pDisplaySettings);
 }
 
 //-----------------------------------------------------------------------------

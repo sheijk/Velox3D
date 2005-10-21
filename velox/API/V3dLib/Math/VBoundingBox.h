@@ -24,41 +24,55 @@ public:
 	{
 		m_MinPoint = VVector3f(0.0f, 0.0f, 0.0f);
 		m_MaxPoint = VVector3f(1.0f, 1.0f, 1.0f);
+		m_Size = VVector3f(0.0f, 0.0f, 0.0f);
 	}
 
-	VBoundingBox(VVector3f in_MinPoint, VVector3f in_MaxPoint) :
-		m_MinPoint(in_MinPoint), m_MaxPoint(in_MaxPoint)
+	VBoundingBox(VVector3f in_MinPoint, VVector3f in_MaxPoint, VVector3f in_Size) :
+		m_MinPoint(in_MinPoint), m_MaxPoint(in_MaxPoint), m_Size(in_Size)
 	{
 	}
 
-	/** Sets the Position from the Bounding Sphere */
+	/** Sets the Min Point for the Bounding Box */
 	void SetMinPoint(VVector3f in_MinPoint)
 	{
-		m_Position = in_Position;
+		m_MinPoint = in_MinPoint;
 	}
 
-	/** Sets the Radius from the Bounding Sphere */
+	/** Sets the Max Point for the Bounding Box */
 	void SetMaxPoint(VVector3f in_MaxPoint)
 	{
-		m_fRadius = in_Radius;
+		m_MaxPoint = in_MaxPoint;
 	}
 
-	/** Returned the Position from the Bounding Sphere */
+	/** Sets the Size for the Bounding Box */
+	void SetSize(VVector3f in_Size)
+	{
+		m_Size = in_Size;
+	}
+
+	/** Returned the Min Point from the Bounding Box */
 	VVector3f GetMinPoint() const
 	{
 		return m_MinPoint;
 	}
 
-	/** Returned the Radius from the Bounding Sphere */
+	/** Returned the Max Point from the Bounding Box */
 	VVector3f GetMaxPoint() const
 	{
 		return m_MaxPoint;
+	}
+
+	/** Returned the Size from the Bounding Box*/
+	VVector3f GetSize() const
+	{
+		return m_Size;
 	}
 
 private:
 
 	VVector3f m_MinPoint;
 	VVector3f m_MaxPoint;
+	VVector3f m_Size;
 };
 
 //-----------------------------------------------------------------------------
