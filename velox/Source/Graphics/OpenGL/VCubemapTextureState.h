@@ -6,7 +6,7 @@
 #include "IVOpenGLRenderState.h"
 
 #include <V3d/Resource/VResourceDataPtr.h>
-#include "VBaseTexture.h"
+#include "Textures/VBaseTexture.h"
 
 #include <V3d/OpenGL.h>
 

@@ -1,9 +1,9 @@
-#include <v3dlib/Math/VRBTransform.h>
+#include <V3d/Math/VRBTransform.h>
 //-----------------------------------------------------------------------------
-#include <V3dLib/Math/VVectorOps.h>
+#include <V3d/Math/VVectorOps.h>
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Math/TransformationOps.h>
-#include <V3dLib/Math/VVectorBase.h>
+#include <V3d/Math/VVectorBase.h>
 
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>

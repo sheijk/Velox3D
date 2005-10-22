@@ -5,8 +5,8 @@
 
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity.h>
-#include <V3dLib/Math.h>
-#include <V3dLib/Math/VRBTransform.h>
+#include <V3d/Math.h>
+#include <V3d/Math/VRBTransform.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------

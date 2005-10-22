@@ -480,12 +480,6 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\IVVertexStream.h">
 					</File>
 					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VBaseTexture.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VBaseTexture.h">
-					</File>
-					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VCGVertexShaderState.cpp">
 					</File>
 					<File
@@ -555,12 +549,6 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.h">
 					</File>
 					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VTexture2D.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VTexture2D.h">
-					</File>
-					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.cpp">
 					</File>
 					<File
@@ -571,12 +559,6 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VTextureStateCategory.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VUntextured.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VUntextured.h">
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.cpp">
@@ -619,6 +601,28 @@
 						</File>
 						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="Textures"
+						Filter="">
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.h">
 						</File>
 					</Filter>
 				</Filter>

@@ -9,7 +9,7 @@
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics.h>
 //#include <V3dLib/Graphics/Renderers/Terrain/VTerrainRenderer.h>
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Image.h>
 #include <V3d/Entity.h>

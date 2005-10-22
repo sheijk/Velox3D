@@ -8,7 +8,7 @@
 #include <V3d/Resource.h>
 
 #include "../VTextureState.h"
-#include "../VTexture2D.h"
+#include "../Textures/VTexture2D.h"
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

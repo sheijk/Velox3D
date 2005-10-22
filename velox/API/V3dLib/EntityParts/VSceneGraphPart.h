@@ -5,7 +5,7 @@
 
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity.h>
-#include <V3dlib/Math/VRBTransform.h>
+#include <V3d/Math/VRBTransform.h>
 #include <V3dlib/EntityParts/VRigidBodyPart.h>
 #include <V3dlib/EntityParts/VUpdateablePart.h>
 

@@ -1,3 +1,6 @@
+#include <V3d/Math/xxx.h>
+#include <V3d/Math/yasd.h>
+
 Diese soll eine Liste anstehender Aufgabe sowie eine Uebersicht wer woran arbeitet enthalten. Sinn und Zweck ist es, eine Reihe wichtiger Informationen zentral zu speichern und jederzeit fuer jeden einsehbar zu haben
 
 Anmerkung: ihr duerft diese Datei ruhig bearbeiten, sie ist zu Kommunikation da.. ;)

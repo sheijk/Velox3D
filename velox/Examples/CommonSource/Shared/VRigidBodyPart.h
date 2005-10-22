@@ -4,7 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Entity.h>
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace racer {
 //-----------------------------------------------------------------------------

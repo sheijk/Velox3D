@@ -6,7 +6,7 @@
 #include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
 #include <v3d/Graphics/VBuffer.h>
 #include <V3dLib/Graphics/Geometry/VGeometryData.h>
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

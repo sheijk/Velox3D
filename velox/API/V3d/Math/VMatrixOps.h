@@ -5,7 +5,7 @@
 
 #include <v3d/Math/VMatrix.h>
 #include <v3d/Math/VVector.h>
-#include <V3dLib/Math/VQuaternion.h>
+#include <V3d/Math/VQuaternion.h>
 #include <gmtl/gmtl.h>
 //-----------------------------------------------------------------------------
 namespace v3d {

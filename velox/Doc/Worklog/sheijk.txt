@@ -32,6 +32,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+22.10.05
+- source/opengl/textures angelegt und textur klassen da rein bewegt
+- v3dlib/math* nach v3d/math* verschoben
+- scripts nach workspace/scripts verschoben
+
 21.10.05
 - pbuffer "gefixt" (fertige freie pbuffer klasse eingebaut)
 - entity serialization manager erzeugt, zum laden von parts aus xml files

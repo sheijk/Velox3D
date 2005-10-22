@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity.h>
 

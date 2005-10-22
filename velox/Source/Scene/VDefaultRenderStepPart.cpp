@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Scene/IVShapePart.h>
-#include <V3dLib/Math/VRBTransform.h>
+#include <V3d/Math/VRBTransform.h>
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics.h>
 //-----------------------------------------------------------------------------

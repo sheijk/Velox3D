@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics.h>
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 #include <V3d/Resource.h>
 #include <V3d/Core/VException.h>
 #include "../../Source/Graphics/OpenGL/Context/VWin32WindowContext.h"

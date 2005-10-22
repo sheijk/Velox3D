@@ -5,7 +5,7 @@
 
 #include <V3d/Scene/IVGraphicsPart.h>
 #include <V3d/Graphics/IVMaterial.h>
-#include <V3dLib/Math/VRBTransform.h>
+#include <V3d/Math/VRBTransform.h>
 
 namespace v3d { namespace graphics {
 	class IVDevice;

@@ -5,7 +5,7 @@
 #include <V3dLib/Graphics.h>
 #include <V3d/Window.h>
 #include <V3dLib/Property.h>
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Resource.h>
 

@@ -2,7 +2,7 @@
 #define V3D_VVECTOROPS_01_22_05_H
 //-----------------------------------------------------------------------------
 #include <V3d/Math/VVector.h>
-#include <V3dLib/Math/VQuaternion.h>
+#include <V3d/Math/VQuaternion.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------

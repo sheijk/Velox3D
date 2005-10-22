@@ -5,7 +5,7 @@
 
 #include <V3d/Math/VVector.h>
 #include <V3d/Math/VMatrix.h>
-#include <V3dLib/Math/VRBTransform.h>
+#include <V3d/Math/VRBTransform.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { 

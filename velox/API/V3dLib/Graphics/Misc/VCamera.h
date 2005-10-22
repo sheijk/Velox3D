@@ -4,8 +4,8 @@
 #include <v3d/Core/VTypes.h>
 #include <v3d/Math/VMatrix.h>
 #include <v3d/Math/VVector.h>
-#include <V3dLib/Math/VRBTransform.h>
-#include <V3dLib/Math/VVectorOps.h>
+#include <V3d/Math/VRBTransform.h>
+#include <V3d/Math/VVectorOps.h>
 #include <v3dLib//Graphics/Geometry/VVertex3f.h>
 #include <V3dLib/Graphics/Misc/IVCamera.h>
 //-----------------------------------------------------------------------------

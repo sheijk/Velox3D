@@ -15,7 +15,7 @@
 #include "../../Source/XMLService/VXMLService.h"
 #include <V3d/Core/Modules/VModuleBase.h>
 
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 #include <V3dLib/Property.h>
 
 #include "../../Source/XMLService/VXMLElement.h"

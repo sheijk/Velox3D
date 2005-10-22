@@ -3,12 +3,12 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity.h>
 #include <V3dlib/EntityParts/VSceneGraphPart.h>
 #include <V3dLib/EntityParts/VUpdateablePart.h>
-#include <V3dlib/Math/VRBTransform.h>
+#include <V3d/Math/VRBTransform.h>
 
 #include <list>
 //-----------------------------------------------------------------------------

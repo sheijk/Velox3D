@@ -3,7 +3,7 @@
 #include <V3dLib/Physics/VPhysicWorld.h>
 #include <V3dLib/Physics/VPhysicPositionState.h>
 #include <V3dLib/Physics/VPhysicGeometry.h>
-#include <V3dLib/Math/VRBTransform.h>
+#include <V3d/Math/VRBTransform.h>
 #include <V3d/Core.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>

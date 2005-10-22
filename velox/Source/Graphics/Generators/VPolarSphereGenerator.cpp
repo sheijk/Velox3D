@@ -3,7 +3,7 @@
 #include <cmath>
 
 #include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
-#include <V3dLib/Math/VVectorOps.h>
+#include <V3d/Math/VVectorOps.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

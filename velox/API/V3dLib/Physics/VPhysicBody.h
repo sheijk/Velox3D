@@ -6,7 +6,7 @@
 #include <V3d/Entity.h>
 #include <V3dLib/Physics/VPhysicPositionState.h>
 #include <v3dLib//Graphics/Geometry/VVertex3f.h>
-#include <V3dLib/Math/VQuaternion.h>
+#include <V3d/Math/VQuaternion.h>
 #include <ode/ode.h>
 
 #include <V3dLib/EntityParts/VRigidBodyPart.h>

@@ -3,10 +3,10 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include "VBaseTexture.h"
+#include "Textures/VBaseTexture.h"
 #include "VTextureState.h"
 #include "VCubemapTextureState.h"
-#include "VUntextured.h"
+#include "Textures/VUntextured.h"
 
 #include <v3d/Graphics/IVStateCategory.h>
 

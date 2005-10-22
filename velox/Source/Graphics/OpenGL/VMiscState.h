@@ -11,7 +11,7 @@
 #include <V3dLib/Property.h>
 
 #include "IVOpenGLRenderState.h"
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 
 #include <V3d/OpenGL.h>
 

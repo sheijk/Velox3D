@@ -5,7 +5,7 @@
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/MemManager.h>
 #include <V3dLib/Graphics/Misc/IVDrawList.h>
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
