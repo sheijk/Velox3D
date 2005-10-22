@@ -3,11 +3,17 @@
 
 #include <V3d/Scene/VModelPart.h>
 #include <V3d/Resource.h>
+
+#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Entity/IVEntitySerializationService.h>
+
+#include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
+using namespace v3d;
 using namespace v3d::scene;
 using namespace v3d::resource;
 using namespace v3d::graphics;
@@ -17,6 +23,7 @@ using namespace v3d::graphics;
  */
 VSceneModelParser::VSceneModelParser()
 {
+	//vout << "\n\n\n\n\nVSceneModelParser c'tor" << vendl;
 }
 
 /**
@@ -55,6 +62,11 @@ VSharedPtr<IVPart> VSceneModelParser::Parse(xml::IVXMLElement& in_Node)
 			<< e.ToString());
 	}
 }
+
+//namespace {
+//	//VSceneModelParser p;
+//	utils::VRegisterGuard<VSceneModelParser, IVEntitySerializationService> g;
+//}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

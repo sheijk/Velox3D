@@ -6,26 +6,8 @@ namespace v3d { namespace graphics {
 using namespace graphics; // anti auto indent
 
 VPBufferTexture::VPBufferTexture(VPBufferWindowContext* in_pContext) : 
-	m_pContext(in_pContext), m_iTextureID(0)
+	m_pContext(in_pContext)
 {
-	const vbyte* pPixelData = new vbyte[m_pContext->GetDisplaySettings()->GetWidth() * m_pContext->GetDisplaySettings()->GetHeight() * 3];
-
-	glEnable(GL_TEXTURE_2D);
-	glGenTextures(1, &m_iTextureID);
-	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, m_pContext->GetDisplaySettings()->GetWidth(), 
-		m_pContext->GetDisplaySettings()->GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, 
-		pPixelData);
-
-	if(pPixelData != 0)
-	{
-		delete[] pPixelData;
-		pPixelData = 0;
-	}
-//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE_EXT);
-//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE_EXT);
-//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 }
 
 VPBufferTexture::~VPBufferTexture()
@@ -34,16 +16,14 @@ VPBufferTexture::~VPBufferTexture()
 
 void VPBufferTexture::Bind()
 {
-	//bind Texture
-	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
-	wglBindTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
+	m_pContext->BindTexture();
 }
 
 void VPBufferTexture::Unbind()
 {
-	//unbind Texture
-	wglReleaseTexImageARB(m_pContext -> GetPixelBuffer(), WGL_FRONT_LEFT_ARB);
+	m_pContext->UnbindTexture();
 };
+
 //-----------------------------------------------------------------------------
 }}// namespace v3d::graphics
 //-----------------------------------------------------------------------------

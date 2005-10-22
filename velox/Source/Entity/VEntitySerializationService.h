@@ -1,10 +1,9 @@
-//TODO: add file creation date to file guard
-#ifndef V3D_VSCENEPARSER_2005_07_18_H
-#define V3D_VSCENEPARSER_2005_07_18_H
+#ifndef V3D_VENTITYSERIALIZATIONSERVICE_2005_07_18_H
+#define V3D_VENTITYSERIALIZATIONSERVICE_2005_07_18_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/IVSceneParser.h>
+#include <V3d/Entity/IVEntitySerializationService.h>
 
 #include <map>
 #include <string>
@@ -16,16 +15,17 @@ using namespace v3d; // anti auto indenting
 /**
  * @author sheijk
  */
-class VSceneParser : public IVSceneParser
+class VEntitySerializationService : public IVEntitySerializationService
 {
 public:
-	VSceneParser();
-	virtual ~VSceneParser();
+	VEntitySerializationService();
+	virtual ~VEntitySerializationService();
 
 	virtual void Register(IVPartParser* in_pPartParser);
-	virtual void Unregister(std::string in_Type);
+	virtual void Unregister(IVPartParser* in_pPartParser);
 	virtual VSharedPtr<IVPart> ParsePart(xml::IVXMLElement& in_Node);
 
+	virtual void DumpInfo();
 private:
 	typedef std::map<std::string, IVPartParser*> ParserMap;
 
@@ -35,4 +35,4 @@ private:
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------
-#endif // V3D_VSCENEPARSER_2005_07_18_H
+#endif // V3D_VENTITYSERIALIZATIONSERVICE_2005_07_18_H

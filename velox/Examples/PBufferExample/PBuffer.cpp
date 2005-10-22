@@ -40,7 +40,7 @@ private:
 	IVDevice* m_pDevice;
 	IVDevice* m_pPBufferDevice;
 	IVButton* m_pEscapeKey;
-	VPBufferTexture* m_pTexState;
+	IVTexture* m_pTexState;
 	VServicePtr<updater::IVUpdateManager> m_pUpdater;
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
@@ -77,7 +77,9 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 
 	VCamera cam;
 	cam.MoveForward(-7);
-	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+	cam.ApplyTo(Device());
+
+	cam.ApplyTo(*m_pPBufferDevice);
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())
@@ -90,9 +92,9 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 		// use the generated texture for the plane
 		Device().BeginScene();
 		ApplyMaterial(Device(), &hPlaneMat->GetPass(0));
-		m_pTexState->Bind();
+		//m_pTexState->Bind();
 		Device().RenderMesh(hPlane);
-		m_pTexState->Unbind();	
+		//m_pTexState->Unbind();	
 		Device().EndScene();
 
 		m_pUpdater->StartNextFrame();
@@ -164,6 +166,7 @@ void VPBufferExample::CreateResources()
 
 	m_pPBufferDevice = const_cast<IVDevice*>(&*contextRes->GetData<IVDevice>());
 	m_pTexState = const_cast<VPBufferTexture*>(&*contextRes->GetData<VPBufferTexture>());
+	//m_pTexState = const_cast<IVTexture*>(&*GetResourceData<IVTexture>("/data/day.jpg"));
 
 	V3D_ASSERT(m_pPBufferDevice != 0);
 
@@ -171,7 +174,12 @@ void VPBufferExample::CreateResources()
 	plane.GenerateCoordinates();
 	plane.GenerateTexCoords();
 	VResourceId planeRes = BuildResource("/data/plane", plane);
-	planeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1, 1))));
+	//planeRes->AddData(new VEffectDescription(ColorEffect(VColor4f(1, 1, 1, 1))));
+	VEffectDescription effect = ColorEffect(VColor4f(1, 1, 1, 1));
+	//effect.ShaderPath(0).RenderPass(0).AddState(TextureState("/data/tgatest.tga"));
+	effect.ShaderPath(0).RenderPass(0).AddState(TextureState(contextRes->GetQualifiedName().c_str()));
+	planeRes->AddData(CopyPtr(effect));
+
 	/*VEffectDescription textureEffect;
 	MakeDefaultMaterial(textureEffect.AddShaderPath().AddRenderPass());
 	textureEffect.ShaderPath(0).RenderPass(0).AddState(

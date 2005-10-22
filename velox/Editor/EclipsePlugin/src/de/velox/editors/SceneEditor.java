@@ -102,6 +102,7 @@ public class SceneEditor extends VeloxEditorBase {
 				loadFromFile(fileName);
 			}
 			catch(RuntimeException e) {
+				System.err.println("Could not load scene: " + e);
 				createNewScene();
 			}
 

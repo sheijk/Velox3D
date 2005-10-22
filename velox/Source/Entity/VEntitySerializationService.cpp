@@ -1,8 +1,9 @@
-#include "VSceneParser.h"
+#include "VEntitySerializationService.h"
 //-----------------------------------------------------------------------------
 
+#include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
@@ -11,18 +12,19 @@ using namespace v3d; // anti auto indent
 /**
  * standard c'tor
  */
-VSceneParser::VSceneParser()
+VEntitySerializationService::VEntitySerializationService() :
+	IVEntitySerializationService("entity.serialization")
 {
 }
 
 /**
  * d'tor
  */
-VSceneParser::~VSceneParser()
+VEntitySerializationService::~VEntitySerializationService()
 {
 }
 
-void VSceneParser::Register(IVPartParser* in_pPartParser)
+void VEntitySerializationService::Register(IVPartParser* in_pPartParser)
 {
 	if( m_Parsers.find(in_pPartParser->GetType()) == m_Parsers.end() )
 	{
@@ -37,12 +39,12 @@ void VSceneParser::Register(IVPartParser* in_pPartParser)
 	}
 }
 
-void VSceneParser::Unregister(std::string in_Type)
+void VEntitySerializationService::Unregister(IVPartParser* in_pParser)
 {
-	m_Parsers.erase(in_Type);	
+	m_Parsers.erase(in_pParser->GetType());
 }
 
-VSharedPtr<IVPart> VSceneParser::ParsePart(xml::IVXMLElement& in_Node)
+VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_Node)
 {
 	std::string type(in_Node.GetAttributeValue<std::string>("type"));
 
@@ -56,9 +58,19 @@ VSharedPtr<IVPart> VSceneParser::ParsePart(xml::IVXMLElement& in_Node)
 	}
 	else
 	{
-		V3D_THROWMSG(VNoParserForTypeException,
-			"Could not parse part with type " << type.c_str()
-			<< " because no part parser for the type exists");
+		return VSharedPtr<IVPart>(0);
+		//V3D_THROWMSG(VNoParserForTypeException,
+		//	"Could not parse part with type " << type.c_str()
+		//	<< " because no part parser for the type exists");
+	}
+}
+
+void VEntitySerializationService::DumpInfo()
+{
+	ParserMap::iterator parser = m_Parsers.begin();
+	for( ; parser != m_Parsers.end(); ++parser )
+	{
+		vout << parser->first << vendl;
 	}
 }
 

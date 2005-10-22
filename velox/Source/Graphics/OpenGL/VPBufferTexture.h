@@ -38,9 +38,7 @@ public:
 	void Unbind();
 
 private:
-
 	VPBufferWindowContext* m_pContext;
-	vuint                  m_iTextureID;
 };
 
 //-----------------------------------------------------------------------------

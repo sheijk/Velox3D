@@ -43,9 +43,10 @@
 
 #include <V3d/Entity/VEntityManager.h>
 
-#include "Entity/VSceneParser.h"
+#include "Entity/VEntitySerializationService.h"
 //#include "Entity/Parsers/VSceneModelParser.h"
 
+#include <V3dLib/Utils/VRegisterGuard.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -106,7 +107,7 @@ class VVeloxModules : public v3d::VModuleBase
 	// entity
 	VSharedPtr<VEntityManager> g_pEntityManager;
 
-	VSharedPtr<VSceneParser> g_pSceneParser;
+	VSharedPtr<VEntitySerializationService> g_pEntitySerializer;
 	//VSharedPtr<VSceneModelParser> g_pSceneModelParser;
 
 public:
@@ -197,17 +198,21 @@ void VVeloxModules::Initialize()
 	// entity service
 	g_pEntityManager.Assign(new VEntityManager());
 
-    g_pSceneParser.Assign(new VSceneParser());
+	g_pEntitySerializer.Assign(new VEntitySerializationService());
 	//g_pSceneModelParser.Assign(new VSceneModelParser());
 	//g_pSceneParser->Register(&*g_pSceneModelParser);
+
+	utils::VRegisterGuardBase::RegisterAll();
 }
 
 void VVeloxModules::Shutdown()
 {
+	utils::VRegisterGuardBase::UnregisterAll();
+
 	// entity
 	//g_pSceneParser->Unregister(g_pSceneModelParser->GetType());
 	//g_pSceneModelParser.Release();
-	g_pSceneParser.Release();
+	g_pEntitySerializer.Release();
 
 	g_pEntityManager.Release();
 

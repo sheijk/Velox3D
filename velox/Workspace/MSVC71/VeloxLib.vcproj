@@ -282,13 +282,13 @@
 					Name="Entity"
 					Filter="">
 					<File
+						RelativePath="..\..\Api\V3d\Entity\IVEntitySerializationService.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Entity\IVPart.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Entity\IVPartParser.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVSceneParser.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Entity\VEntity.h">
@@ -298,6 +298,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VGenericPartParser.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Entity\VPartBase.h">
@@ -708,6 +711,9 @@
 						RelativePath="..\..\Api\V3dLib\Utils\VMouseTrackball.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VRegisterGuard.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Utils\VStreamReader.h">
 					</File>
 					<File
@@ -768,27 +774,20 @@
 					RelativePath="..\..\Source\Entity\VEntityManager.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Source\Entity\VEntitySerializationService.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\VEntitySerializationService.h">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\VGenericPartParser.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Entity\VPartBase.cpp">
-				</File>
-				<File
-					RelativePath="..\..\Source\Entity\VSceneParser.cpp">
-				</File>
-				<File
-					RelativePath="..\..\Source\Entity\VSceneParser.h">
 				</File>
 				<File
 					RelativePath="..\..\Source\Entity\VUnconnectedPart.cpp">
 				</File>
-				<Filter
-					Name="Parsers"
-					Filter="">
-					<File
-						RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.h">
-					</File>
-				</Filter>
 				<Filter
 					Name="EntityParts"
 					Filter="">
@@ -871,10 +870,22 @@
 					<Filter
 						Name="Context">
 						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\RenderTexture.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\RenderTexture.h">
+						</File>
+						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.cpp">
 						</File>
 						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.h">
+						</File>
+						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h">
 						</File>
 					</Filter>
 				</Filter>
@@ -1124,6 +1135,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VMouseTrackball.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VRegisterGuard.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VSimpleTokenizer.cpp">

@@ -1012,6 +1012,19 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="Entity"
+			Filter="">
+			<Filter
+				Name="Parsers">
+				<File
+					RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.h">
+				</File>
+			</Filter>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

@@ -1,5 +1,5 @@
-#ifndef V3D_IVSCENEPARSER_2005_07_18_H
-#define V3D_IVSCENEPARSER_2005_07_18_H
+#ifndef V3D_IVENTITYSERIALIZATIONSERVICE_2005_07_18_H
+#define V3D_IVENTITYSERIALIZATIONSERVICE_2005_07_18_H
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
@@ -7,6 +7,10 @@
 #include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/IVPartParser.h>
 #include <V3d/XML/IVXMLElement.h>
+
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
@@ -18,10 +22,14 @@ using namespace v3d; // anti auto indenting
  *
  * @author sheijk
  */
-class IVSceneParser
+class IVEntitySerializationService : public VNamedObject
 {
 public:
-	virtual ~IVSceneParser() {}
+	IVEntitySerializationService(VStringParam in_strName) 
+		: VNamedObject(in_strName, 0) 
+	{};
+
+	virtual ~IVEntitySerializationService() {}
 
 	/** 
 	 * Looks up the "type" attribute and let's the registered parser for the
@@ -46,10 +54,21 @@ public:
 	 * Will remove the registered part parser for the given type. If no parser
 	 * for the type exists nothing will happen
 	 */
-	virtual void Unregister(std::string in_Type) = 0;
+	virtual void Unregister(IVPartParser* in_pPartParser) = 0;
+
+	virtual void DumpInfo() = 0;
 };
 
+typedef VServicePtr<IVEntitySerializationService> VEntitySerializationServicePtr;
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------
-#endif // V3D_IVSCENEPARSER_2005_07_18_H
+template<>
+inline v3d::entity::IVEntitySerializationService* 
+v3d::QueryService<v3d::entity::IVEntitySerializationService>()
+{
+	return QueryObject<v3d::entity::IVEntitySerializationService>(
+		"entity.serialization");
+}
+//-----------------------------------------------------------------------------
+#endif // V3D_IVENTITYSERIALIZATIONSERVICE_2005_07_18_H

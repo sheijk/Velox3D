@@ -22,6 +22,10 @@
 
 #include <sstream>
 
+#include <V3d/Entity/IVEntitySerializationService.h>
+#include <V3d/Entity/VGenericPartParser.h>
+#include <V3dLib/Utils/VRegisterGuard.h>
+
 using namespace std;
 using namespace v3d;
 
@@ -277,11 +281,12 @@ VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement)
 	VPartAndId result;
 	result.SetId(type);
 
-	if( type == "model" ) 
-	{
-		result.SetPart(CreateModelPart(in_pElement));
-	}
-	else if( type == "scene" )
+//	if( type == "model" ) 
+//	{
+//		result.SetPart(CreateModelPart(in_pElement));
+//	}
+//	else 
+	if( type == "scene" )
 	{
 		vout << "creating scene. ";
 		VNaiveSceneManagerPart* pSceneManager = new v3d::scene::VNaiveSceneManagerPart();
@@ -297,20 +302,30 @@ VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement)
 	{
 		result.SetPart(SharedPtr(new VRigidBodyPart()));
 	}
-	else if( type == "x" )
-	{
-		result.SetPart(SharedPtr(new VTestPart()));
-	}
+//	else if( type == "x" )
+//	{
+//		result.SetPart(SharedPtr(new VTestPart()));
+//	}
 	else if( type == "y" )
 	{
 		result.SetPart(SharedPtr(new VConnTestPart()));
 	}
+//	else if( type == "shooting" ) {
+//	}
 	else
 	{
-		result.SetPart(VSharedPtr<IVPart>(0));
+		VServicePtr<entity::IVEntitySerializationService> serializer;
+		serializer->DumpInfo();
+		result.SetPart(serializer->ParsePart(*in_pElement));
 	}
 	
 	return result;
+}
+
+namespace {
+	entity::VPartParser<VTestPart> testParser("x");
+	utils::VRegisterGuard< entity::VPartParser<VTestPart>, IVEntitySerializationService > testParserGuard(
+		&testParser);
 }
 
 v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice)

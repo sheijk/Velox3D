@@ -357,9 +357,9 @@ namespace v3d {
 %include "../../API/V3d/Scene/IVShooting.h"
 %include "../../API/V3d/Scene/IVSceneManagerPart.h"
 
-%ignore v3d::entity::IVSceneParser::Register;
-%ignore v3d::entity::IVSceneParser::Unregister;
-%include "../../API/V3d/Entity/IVSceneParser.h"
+//%ignore v3d::entity::IVSceneParser::Register;
+//%ignore v3d::entity::IVSceneParser::Unregister;
+//%include "../../API/V3d/Entity/IVSceneParser.h"
 
 //-----------------------------------------------------------------------------
 %include "TestLib.h"

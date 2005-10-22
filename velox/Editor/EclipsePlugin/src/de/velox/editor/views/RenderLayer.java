@@ -73,7 +73,8 @@ public class RenderLayer {
 //			viewMatrix.SetTransform(-cameraPositon[0], -cameraPositon[1], -cameraPositon[2]);
 		
 //			device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
-			device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, camera.GetMatrix());
+			camera.ApplyTo(device);
+//			device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, camera.GetMatrix());
 		}
 	}
 	

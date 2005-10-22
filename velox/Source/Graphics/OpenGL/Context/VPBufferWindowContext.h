@@ -13,6 +13,8 @@
 #include <windows.h>
 #include <V3d/OpenGL.h>
 
+#include "RenderTexture.h"
+
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -31,41 +33,24 @@ public:
 	VPBufferWindowContext(const graphics::VDisplaySettings* in_pDisplaySettings = 0);
 	virtual ~VPBufferWindowContext();
 
-	/**
-	 * Get the Pixel Buffer Object
-	*/
-	inline HPBUFFERARB GetPixelBuffer()
-	{
-		return m_PixelBuffer;
-	}
-
-	/**
-	 * @see v3d::graphics::IVRenderContext::MakeCurrent
-	*/
+	/** @see v3d::graphics::IVRenderContext::MakeCurrent */
 	void MakeCurrent();
 
-	/**
-	 * @see v3d::graphics::IVRenderContext::SwapBuffers
-	*/
+	/** @see v3d::graphics::IVRenderContext::SwapBuffers */
 	void SwapBuffers();
+
+	void BindTexture();
+	void UnbindTexture();
 	
-	/** 
-	 *@see v3d::graphics::IVRenderContext::GetDisplaySettings 
-	*/
+	/** @see v3d::graphics::IVRenderContext::GetDisplaySettings */
 	VDisplaySettings* GetDisplaySettings();
 
-	/**
-	* @see v3d::graphics::IVRenderContext::CreateOffscreenContext
-	*/
+	/** @see v3d::graphics::IVRenderContext::CreateOffscreenContext */
 	IVRenderContext* CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings);
 
 private:
-
-	graphics::VDisplaySettings m_DisplaySettings;
-	HPBUFFERARB                m_PixelBuffer;
-	HDC                        m_PBufferDeviceContext;
-	HDC                        m_WindowDeviceContext;
-	HGLRC                      m_PBufferRenderContext;
+	RenderTexture m_RenderTexture;
+	VDisplaySettings m_DisplaySettings;
 };
 
 //-----------------------------------------------------------------------------

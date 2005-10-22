@@ -99,14 +99,22 @@
         <file>../../Api/V3d/Resource/VTypedResourceData.h</file>
         <file>../../Api/V3d/Resource/Types/VFileName.h</file>
         <file>../../Api/V3d/Scene/IVGraphicsPart.h</file>
+        <file>../../Api/V3d/Scene/IVRenderStepPart.h</file>
         <file>../../Api/V3d/Scene/IVSceneManagerPart.h</file>
         <file>../../Api/V3d/Scene/IVShapePart.h</file>
         <file>../../Api/V3d/Scene/IVShooting.h</file>
+        <file>../../Api/V3d/Scene/VDefaultRenderStepPart.h</file>
         <file>../../Api/V3d/Scene/VMeshPart.h</file>
         <file>../../Api/V3d/Scene/VMeshPartBase.h</file>
         <file>../../Api/V3d/Scene/VModelPart.h</file>
         <file>../../Api/V3d/Scene/VNaiveSceneManagerPart.h</file>
         <file>../../Api/V3d/Scene/VSimpleShooting.h</file>
+        <file>../../Api/V3d/Scene/Shootings/VProjectedTextureShooting.h</file>
+        <file>../../Api/V3d/Scene/Shapes/VArrowMeshPart.h</file>
+        <file>../../Api/V3d/Scene/Shapes/VCoordSysDisplayPart.h</file>
+        <file>../../Api/V3d/Scene/Shapes/VOrientationGridPart.h</file>
+        <file>../../Api/V3d/Scene/Shapes/VPlaneMeshPart.h</file>
+        <file>../../Api/V3d/Scene/Rendering/VProjectTextureRenderStepPart.h</file>
         <file>../../Api/V3d/Utils/IVStringStream.h</file>
         <file>../../Api/V3d/Utils/VAllFilter.h</file>
         <file>../../Api/V3d/Utils/VSimpleTokenizer.h</file>
@@ -114,12 +122,13 @@
         <file>../../Api/V3d/Xml/XMLUtils.inl</file>
         <file>../../Api/V3d/Messaging/VMessage.h</file>
         <file>../../Api/V3d/Messaging/VProtocol.h</file>
+        <file>../../Api/V3d/Entity/IVEntitySerializationService.h</file>
         <file>../../Api/V3d/Entity/IVPart.h</file>
         <file>../../Api/V3d/Entity/IVPartParser.h</file>
-        <file>../../Api/V3d/Entity/IVSceneParser.h</file>
         <file>../../Api/V3d/Entity/VEntity.h</file>
         <file>../../Api/V3d/Entity/VEntityExceptions.h</file>
         <file>../../Api/V3d/Entity/VEntityManager.h</file>
+        <file>../../Api/V3d/Entity/VGenericPartParser.h</file>
         <file>../../Api/V3d/Entity/VPartBase.h</file>
         <file>../../Api/V3d/Entity/VUnconnectedPart.h</file>
         <file>../../Api/V3dLib/BoostSignals.h</file>
@@ -232,8 +241,11 @@
         <file>../../Api/V3dLib/Utils/VFourCC.h</file>
         <file>../../Api/V3dLib/Utils/VFrameCounter.h</file>
         <file>../../Api/V3dLib/Utils/VGuid.h</file>
+        <file>../../Api/V3dLib/Utils/VMouseTrackball.h</file>
+        <file>../../Api/V3dLib/Utils/VRegisterGuard.h</file>
         <file>../../Api/V3dLib/Utils/VStreamReader.h</file>
         <file>../../Api/V3dLib/Utils/VStringValue.h</file>
+        <file>../../Api/V3dLib/Utils/VTrackball.h</file>
         <file>../../Api/V3dLib/EntityParts/VRigidBodyPart.h</file>
         <file>../../Api/V3dLib/EntityParts/VSceneGraphPart.h</file>
         <file>../../Api/V3dLib/EntityParts/VSGAnimationPart.h</file>
@@ -243,12 +255,11 @@
         <file>../../Source/Collision/VOpcodeSystem.cpp</file>
         <file>../../Source/Entity/VEntity.cpp</file>
         <file>../../Source/Entity/VEntityManager.cpp</file>
+        <file>../../Source/Entity/VEntitySerializationService.cpp</file>
+        <file>../../Source/Entity/VEntitySerializationService.h</file>
+        <file>../../Source/Entity/VGenericPartParser.cpp</file>
         <file>../../Source/Entity/VPartBase.cpp</file>
-        <file>../../Source/Entity/VSceneParser.cpp</file>
-        <file>../../Source/Entity/VSceneParser.h</file>
         <file>../../Source/Entity/VUnconnectedPart.cpp</file>
-        <file>../../Source/Entity/Parsers/VSceneModelParser.cpp</file>
-        <file>../../Source/Entity/Parsers/VSceneModelParser.h</file>
         <file>../../Source/Entity/EntityParts/VRigidBodyPart.cpp</file>
         <file>../../Source/Entity/EntityParts/VSceneGraphPart.cpp</file>
         <file>../../Source/Entity/EntityParts/VSGAnimationPart.cpp</file>
@@ -317,17 +328,28 @@
         <file>../../Source/Resource/Types/VPBufferTextureResType.h</file>
         <file>../../Source/Resource/Types/VTextureStateResType.cpp</file>
         <file>../../Source/Resource/Types/VTextureStateResType.h</file>
+        <file>../../Source/Scene/IVRenderStepPart.cpp</file>
+        <file>../../Source/Scene/VArrowMeshPart.cpp</file>
+        <file>../../Source/Scene/VCoordSysDisplayPart.cpp</file>
+        <file>../../Source/Scene/VDefaultRenderStepPart.cpp</file>
         <file>../../Source/Scene/VMeshPart.cpp</file>
         <file>../../Source/Scene/VMeshPartBase.cpp</file>
         <file>../../Source/Scene/VModelPart.cpp</file>
         <file>../../Source/Scene/VNaiveSceneManagerPart.cpp</file>
+        <file>../../Source/Scene/VOrientationGridPart.cpp</file>
+        <file>../../Source/Scene/VPlaneMeshPart.cpp</file>
+        <file>../../Source/Scene/VProjectedTextureShooting.cpp</file>
+        <file>../../Source/Scene/VProjectTextureRenderStepPart.cpp</file>
         <file>../../Source/Scene/VSimpleShooting.cpp</file>
         <file>../../Source/UtilsLib/ColorConversion.cpp</file>
         <file>../../Source/UtilsLib/VCommandManager.cpp</file>
         <file>../../Source/UtilsLib/VFourCC.cpp</file>
         <file>../../Source/UtilsLib/VFrameCounter.cpp</file>
+        <file>../../Source/UtilsLib/VMouseTrackball.cpp</file>
+        <file>../../Source/UtilsLib/VRegisterGuard.cpp</file>
         <file>../../Source/UtilsLib/VSimpleTokenizer.cpp</file>
         <file>../../Source/UtilsLib/VStreamReader.cpp</file>
+        <file>../../Source/UtilsLib/VTrackball.cpp</file>
         <file>../../Source/UtilsLib/CPUDetect/VDetectProcessor.cpp</file>
         <file>../../Source/UtilsLib/CPUDetect/VDetectProcessor.h</file>
         <file>../../Source/UtilsLib/Camera/VCamera.cpp</file>
@@ -604,9 +626,11 @@
         <file>../../Source/WindowService/VWindowManagerWin32.h</file>
         <file>../../Source/WindowService/VWindowWin32.cpp</file>
         <file>../../Source/WindowService/VWindowWin32.h</file>
+        <file>../../Source/Entity/Parsers/VSceneModelParser.cpp</file>
+        <file>../../Source/Entity/Parsers/VSceneModelParser.h</file>
       </files>
     </project>
-    <project name="WxServiceDLL" type="dll">
+<!-- project name="WxServiceDLL" type="dll">
       <files>
         <file>../../Api/V3d/Console/IVConsoleService.h</file>
         <file>../../Source/Console/VConsoleFrame.cpp</file>
@@ -620,7 +644,7 @@
         <file>../../Source/WxWindowsService/VWxConnector.cpp</file>
         <file>../../Source/WxWindowsService/VWxConnector.h</file>
       </files>
-    </project>
+    </project -->
     <project name="XmlServiceDLL" type="dll">
       <files>
         <file>../../Api/V3d/XML.h</file>
@@ -649,6 +673,21 @@
         <file>../../Source/XMLService/VXMLWriter.cpp</file>
         <file>../../Source/XMLService/VXMLWriter.h</file>
         <file>../../Source/XMLService/XmlServiceDLL.cpp</file>
+      </files>
+    </project>
+    <project name="GraphicsDemo" type="exe">
+      <files>
+        <file>../../Examples/GraphicsDemo/GraphicsDemo.cpp</file>
+        <file>../../Examples/GraphicsDemo/VSwingFunction.h</file>
+        <file>../../Source/Kernel/main.cpp</file>
+        <file>../../Source/Module/VeloxModule.cpp</file>
+      </files>
+    </project>
+    <project name="ImporterDemo" type="exe">
+      <files>
+        <file>../../Examples/ImporterDemo/ImporterMain.cpp</file>
+        <file>../../Source/Kernel/main.cpp</file>
+        <file>../../Source/Module/VeloxModule.cpp</file>
       </files>
     </project>
   </projects>

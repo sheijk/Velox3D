@@ -3,6 +3,9 @@
 #include <V3d/Core/VIOStream.h>
 
 #include <V3d/Messaging/VProtocol.h>
+#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Entity/IVEntitySerializationService.h>
+#include <V3d/Entity/VGenericPartParser.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -214,6 +217,12 @@ void VModelPart::MeshPart::UpdateAndCull(const graphics::IVCamera& in_Camera)
 VRangeIterator<const IVShapePart> VModelPart::MeshPart::GetVisibleMeshes() const
 {
 	return CreateSingleValueIterator<const IVShapePart>(this);
+}
+
+namespace {
+	VPartParser<VModelPart> parser("model");
+	utils::VRegisterGuard<VPartParser<VModelPart>, IVEntitySerializationService> 
+		parserGuard(&parser);
 }
 
 //-----------------------------------------------------------------------------

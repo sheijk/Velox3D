@@ -88,10 +88,10 @@ lib VeloxLib
     ../../Source/Collision/VOpcodeSystem.cpp
     ../../Source/Entity/VEntity.cpp
     ../../Source/Entity/VEntityManager.cpp
+    ../../Source/Entity/VEntitySerializationService.cpp
+    ../../Source/Entity/VGenericPartParser.cpp
     ../../Source/Entity/VPartBase.cpp
-    ../../Source/Entity/VSceneParser.cpp
     ../../Source/Entity/VUnconnectedPart.cpp
-    ../../Source/Entity/Parsers/VSceneModelParser.cpp
     ../../Source/Entity/EntityParts/VRigidBodyPart.cpp
     ../../Source/Entity/EntityParts/VSceneGraphPart.cpp
     ../../Source/Entity/EntityParts/VSGAnimationPart.cpp
@@ -149,17 +149,28 @@ lib VeloxLib
     ../../Source/Resource/Types/VOffscreenDeviceResType.cpp
     ../../Source/Resource/Types/VPBufferTextureResType.cpp
     ../../Source/Resource/Types/VTextureStateResType.cpp
+    ../../Source/Scene/IVRenderStepPart.cpp
+    ../../Source/Scene/VArrowMeshPart.cpp
+    ../../Source/Scene/VCoordSysDisplayPart.cpp
+    ../../Source/Scene/VDefaultRenderStepPart.cpp
     ../../Source/Scene/VMeshPart.cpp
     ../../Source/Scene/VMeshPartBase.cpp
     ../../Source/Scene/VModelPart.cpp
     ../../Source/Scene/VNaiveSceneManagerPart.cpp
+    ../../Source/Scene/VOrientationGridPart.cpp
+    ../../Source/Scene/VPlaneMeshPart.cpp
+    ../../Source/Scene/VProjectedTextureShooting.cpp
+    ../../Source/Scene/VProjectTextureRenderStepPart.cpp
     ../../Source/Scene/VSimpleShooting.cpp
     ../../Source/UtilsLib/ColorConversion.cpp
     ../../Source/UtilsLib/VCommandManager.cpp
     ../../Source/UtilsLib/VFourCC.cpp
     ../../Source/UtilsLib/VFrameCounter.cpp
+    ../../Source/UtilsLib/VMouseTrackball.cpp
+    ../../Source/UtilsLib/VRegisterGuard.cpp
     ../../Source/UtilsLib/VSimpleTokenizer.cpp
     ../../Source/UtilsLib/VStreamReader.cpp
+    ../../Source/UtilsLib/VTrackball.cpp
     ../../Source/UtilsLib/CPUDetect/VDetectProcessor.cpp
     ../../Source/UtilsLib/Camera/VCamera.cpp
     ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp
@@ -273,6 +284,7 @@ lib ServiceDLL
     ../../Source/WindowService/VWindowManagerBase.cpp
     ../../Source/WindowService/VWindowManagerWin32.cpp
     ../../Source/WindowService/VWindowWin32.cpp
+    ../../Source/Entity/Parsers/VSceneModelParser.cpp
 
 	CoreLib
 	VeloxLib
@@ -296,25 +308,6 @@ lib ServiceDLL
 	<link>shared
 	; # end
 
-#lib WxServiceDLL
-#    : # source files 
-#    ../../Source/Console/VConsoleFrame.cpp
-#    ../../Source/Console/VConsoleService.cpp
-#    ../../Source/WxServices.cpp
-#    ../../Source/Module/VeloxModule.cpp
-#    ../../Source/WxWindowsService/VWindowsWxApp.cpp
-#    ../../Source/WxWindowsService/VWxConnector.cpp
-#
-#	CoreLib
-#	VeloxLib
-#	
-#	boostFileSystemLib
-#	user32                                                   
-#	dxguid
-#	dinput8
-#	opengl32
-#	glu32 
-#	gdi32
 #	: # settings
 #	<link>shared
 #	;
@@ -342,29 +335,44 @@ lib XmlServiceDLL
 # Examples
 #-------------------------------------------------------------------------------
 
-exe MinimalExample
+exe MinimalExampleApp
 	: # files to compile
 	../../Examples/Minimal/Minimal.cpp
 	../../Source/Kernel/main.cpp
 	../../Source/Module/VeloxModule.cpp
+	
 	CoreLib
 	VeloxLib
 	KernelLib
 	: # settings
 	;
 
-exe GraphicsDemo
-	: # files to compile
-	../../Examples/GraphicsDemo/GraphicsDemo.cpp
-	../../Source/Kernel/main.cpp
-	../../Source/Module/VeloxModule.cpp
+exe GraphicsDemoApp
+    : # source files 
+    ../../Examples/GraphicsDemo/GraphicsDemo.cpp
+    ../../Source/Kernel/main.cpp
+    ../../Source/Module/VeloxModule.cpp
+
 	CoreLib
 	VeloxLib
 	KernelLib
-	user32
 	: # settings
-	<link>shared
 	;
+
+exe ImporterDemoApp
+    : # source files 
+    ../../Examples/ImporterDemo/ImporterMain.cpp
+    ../../Source/Kernel/main.cpp
+    ../../Source/Module/VeloxModule.cpp
+
+	CoreLib
+	VeloxLib
+	KernelLib
+	: # settings
+	;
+
+
+
 
 
 
@@ -399,10 +407,10 @@ obj VContactReport : ../../Source/Collision/VContactReport.cpp ;
 obj VOpcodeSystem : ../../Source/Collision/VOpcodeSystem.cpp ;
 obj VEntity : ../../Source/Entity/VEntity.cpp ;
 obj VEntityManager : ../../Source/Entity/VEntityManager.cpp ;
+obj VEntitySerializationService : ../../Source/Entity/VEntitySerializationService.cpp ;
+obj VGenericPartParser : ../../Source/Entity/VGenericPartParser.cpp ;
 obj VPartBase : ../../Source/Entity/VPartBase.cpp ;
-obj VSceneParser : ../../Source/Entity/VSceneParser.cpp ;
 obj VUnconnectedPart : ../../Source/Entity/VUnconnectedPart.cpp ;
-obj VSceneModelParser : ../../Source/Entity/Parsers/VSceneModelParser.cpp ;
 obj VRigidBodyPart : ../../Source/Entity/EntityParts/VRigidBodyPart.cpp ;
 obj VSceneGraphPart : ../../Source/Entity/EntityParts/VSceneGraphPart.cpp ;
 obj VSGAnimationPart : ../../Source/Entity/EntityParts/VSGAnimationPart.cpp ;
@@ -460,17 +468,28 @@ obj VMeshResourceType : ../../Source/Resource/Types/VMeshResourceType.cpp ;
 obj VOffscreenDeviceResType : ../../Source/Resource/Types/VOffscreenDeviceResType.cpp ;
 obj VPBufferTextureResType : ../../Source/Resource/Types/VPBufferTextureResType.cpp ;
 obj VTextureStateResType : ../../Source/Resource/Types/VTextureStateResType.cpp ;
+obj IVRenderStepPart : ../../Source/Scene/IVRenderStepPart.cpp ;
+obj VArrowMeshPart : ../../Source/Scene/VArrowMeshPart.cpp ;
+obj VCoordSysDisplayPart : ../../Source/Scene/VCoordSysDisplayPart.cpp ;
+obj VDefaultRenderStepPart : ../../Source/Scene/VDefaultRenderStepPart.cpp ;
 obj VMeshPart : ../../Source/Scene/VMeshPart.cpp ;
 obj VMeshPartBase : ../../Source/Scene/VMeshPartBase.cpp ;
 obj VModelPart : ../../Source/Scene/VModelPart.cpp ;
 obj VNaiveSceneManagerPart : ../../Source/Scene/VNaiveSceneManagerPart.cpp ;
+obj VOrientationGridPart : ../../Source/Scene/VOrientationGridPart.cpp ;
+obj VPlaneMeshPart : ../../Source/Scene/VPlaneMeshPart.cpp ;
+obj VProjectedTextureShooting : ../../Source/Scene/VProjectedTextureShooting.cpp ;
+obj VProjectTextureRenderStepPart : ../../Source/Scene/VProjectTextureRenderStepPart.cpp ;
 obj VSimpleShooting : ../../Source/Scene/VSimpleShooting.cpp ;
 obj ColorConversion : ../../Source/UtilsLib/ColorConversion.cpp ;
 obj VCommandManager : ../../Source/UtilsLib/VCommandManager.cpp ;
 obj VFourCC : ../../Source/UtilsLib/VFourCC.cpp ;
 obj VFrameCounter : ../../Source/UtilsLib/VFrameCounter.cpp ;
+obj VMouseTrackball : ../../Source/UtilsLib/VMouseTrackball.cpp ;
+obj VRegisterGuard : ../../Source/UtilsLib/VRegisterGuard.cpp ;
 obj VSimpleTokenizer : ../../Source/UtilsLib/VSimpleTokenizer.cpp ;
 obj VStreamReader : ../../Source/UtilsLib/VStreamReader.cpp ;
+obj VTrackball : ../../Source/UtilsLib/VTrackball.cpp ;
 obj VDetectProcessor : ../../Source/UtilsLib/CPUDetect/VDetectProcessor.cpp ;
 obj VCamera : ../../Source/UtilsLib/Camera/VCamera.cpp ;
 obj VKeyboardCamera : ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp ;
@@ -561,13 +580,7 @@ obj VWindowBase : ../../Source/WindowService/VWindowBase.cpp ;
 obj VWindowManagerBase : ../../Source/WindowService/VWindowManagerBase.cpp ;
 obj VWindowManagerWin32 : ../../Source/WindowService/VWindowManagerWin32.cpp ;
 obj VWindowWin32 : ../../Source/WindowService/VWindowWin32.cpp ;
-
-# WxServiceDLL
-obj VConsoleFrame : ../../Source/Console/VConsoleFrame.cpp ;
-obj VConsoleService : ../../Source/Console/VConsoleService.cpp ;
-obj WxServices : ../../Source/WxServices.cpp ;
-obj VWindowsWxApp : ../../Source/WxWindowsService/VWindowsWxApp.cpp ;
-obj VWxConnector : ../../Source/WxWindowsService/VWxConnector.cpp ;
+obj VSceneModelParser : ../../Source/Entity/Parsers/VSceneModelParser.cpp ;
 
 # XmlServiceDLL
 obj VStreamReader : ../../Source/XMLService/VStreamReader.cpp ;
@@ -578,4 +591,10 @@ obj VXMLService : ../../Source/XMLService/VXMLService.cpp ;
 obj VXMLText : ../../Source/XMLService/VXMLText.cpp ;
 obj VXMLWriter : ../../Source/XMLService/VXMLWriter.cpp ;
 obj XmlServiceDLL : ../../Source/XMLService/XmlServiceDLL.cpp ;
+
+# GraphicsDemo
+obj GraphicsDemo : ../../Examples/GraphicsDemo/GraphicsDemo.cpp ;
+
+# ImporterDemo
+obj ImporterMain : ../../Examples/ImporterDemo/ImporterMain.cpp ;
 

@@ -171,10 +171,10 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 		Device().SetMatrix(IVDevice::ModelMatrix, pMoonAnim->GetRelativeTransform().AsMatrix());
 		RenderMesh(Device(), hMoon, hMoonMat);	
 
-		Device().SetMatrix(IVDevice::ModelMatrix, pPlanetAnim->GetRelativeTransform().GetAsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, pPlanetAnim->GetRelativeTransform().AsMatrix());
 		RenderMesh(Device(), hCube, hCubeMat);
 
-		Device().SetMatrix(IVDevice::ModelMatrix, pSunAnim->GetRelativeTransform().GetAsMatrix());
+		Device().SetMatrix(IVDevice::ModelMatrix, pSunAnim->GetRelativeTransform().AsMatrix());
 		RenderMesh(Device(), hSun, hSunMat);
 
 		Device().EndScene();

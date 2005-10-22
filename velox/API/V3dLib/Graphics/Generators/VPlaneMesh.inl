@@ -74,8 +74,8 @@ void VPlaneMesh<VertexStructure>::GenerateTexCoords()
 
 	GetVertexBuffer()[0].texCoords = VTexCoord2f(0,0);
 	GetVertexBuffer()[1].texCoords = VTexCoord2f(0,1);
-	GetVertexBuffer()[2].texCoords = VTexCoord2f(1,0);
-	GetVertexBuffer()[3].texCoords = VTexCoord2f(1,1);
+	GetVertexBuffer()[2].texCoords = VTexCoord2f(1,1);
+	GetVertexBuffer()[3].texCoords = VTexCoord2f(1,0);
 
 }
 
