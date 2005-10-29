@@ -18,16 +18,19 @@ using namespace v3d; // anti auto indenting
 class VPlaneMeshPart : public scene::VMeshPartBase
 {
 public:
-	VPlaneMeshPart(vfloat32 in_fSize);
+	VPlaneMeshPart(vfloat32 in_fSize = 2.0f);
 	VPlaneMeshPart(vfloat32 in_fSize, const std::string& in_strMaterialResource);
 
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
 	vfloat32 m_fSize;
 };
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VPlaneMeshPart, v3d::scene::IVShapePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VPLANEMESHPART_2005_10_15_H

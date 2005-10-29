@@ -5,6 +5,9 @@
 #include <V3dLib/Graphics.h>
 #include <V3d/Scene/IVShapePart.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
+
+#include <string>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -12,6 +15,7 @@ namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
+using namespace std;
 using namespace math;
 using namespace graphics;
 using namespace resource;
@@ -41,10 +45,15 @@ VProjectTextureRenderStepPart::~VProjectTextureRenderStepPart()
 
 void VProjectTextureRenderStepPart::Render(IVGraphicsPart* in_pScene)
 {
+	if( GetOutputDevice() == 0 )
+		return;
+
+	if( &*m_pTexture == 0 )
+		return;
+
 	ApplyMaterial(*GetOutputDevice(), &GetDefaultMaterial()->GetPass(0));
 
 	IVTexture* pTex = const_cast<IVTexture*>(&*m_pTexture);
-
 	pTex->Bind();
 
 	const GLenum texGenMode = GL_EYE_LINEAR;
@@ -83,13 +92,15 @@ void VProjectTextureRenderStepPart::Render(IVGraphicsPart* in_pScene)
 	while( shape.HasNext() )
 	{
 		GetOutputDevice()->SetMatrix(IVDevice::ModelMatrix, shape->GetModelTransform().AsMatrix());
-		glColor4f(1, 1, 1, .5f);
+		glColor4f(1, 0, 0, .5f);
 		shape->SendGeometry(*GetOutputDevice());
 
 		++shape;
 	} 
 
 	glPopAttrib();
+
+	glDisable(GL_BLEND);
 
 	glDisable(GL_TEXTURE_GEN_S);
 	glDisable(GL_TEXTURE_GEN_T);
@@ -139,6 +150,59 @@ vfloat32 VProjectTextureRenderStepPart::GetTextureSize() const
 void VProjectTextureRenderStepPart::SetTextureSize(const vfloat32& in_TextureSize)
 {
 	m_fTextureSize = in_TextureSize;
+}
+
+void VProjectTextureRenderStepPart::Send(const messaging::VMessage& in_Message, 
+				  messaging::VMessage* in_pAnswer)
+{
+	try
+	{
+		vout << "VProjectTextureRenderStepPart received messsage" << vendl;
+
+		if( ! in_Message.HasProperty("type") )
+			return;
+
+		string request = in_Message.Get("type").Get<string>();
+
+		vout << "\trequest=" << request << vendl;
+
+		if( request == "getSettings" )
+		{
+			if( in_pAnswer == 0 )
+				return;
+
+			string textureRes;
+
+			if( &*m_pTexture != 0 && m_pTexture.GetEnclosingResource() != 0 )
+				textureRes = m_pTexture.GetEnclosingResource()->GetQualifiedName();
+            
+			in_pAnswer->AddProperty("texture", textureRes);
+		}
+		else if( request == "update" )
+		{
+			const string name = in_Message.Get("name").Get<string>();
+			const string value = in_Message.Get("value").Get<string>();
+
+			if( name == "texture" )
+			{
+				try
+				{
+					m_pTexture = GetResourceData<IVTexture>(value.c_str());
+				}
+				catch(VDataNotFoundException&)
+				{}
+			}
+		}
+	}
+	catch(VException&)
+	{}
+}
+
+
+//-----------------------------------------------------------------------------
+
+namespace {
+	::v3d::entity::VPartParser<VProjectTextureRenderStepPart> parser;
 }
 
 //-----------------------------------------------------------------------------

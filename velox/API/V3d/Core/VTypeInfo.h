@@ -12,7 +12,9 @@ using namespace v3d; // prevent auto indenting
 
 /**
  * Provides a simple type info to decide whether a dynamic cast is possible
+ * (Scroll down for usage info)
  *
+ * @see v3d::InitTypeInfo<T>
  * @author sheijk
  */
 class VTypeInfo
@@ -60,6 +62,15 @@ template<typename T>
 const VTypeInfo& GetTypeInfo();
 
 /**
+ * Returns the type info for type T. The type of T and thus the returned
+ * type info will be determined at compile time. Thus you _cannot_ use this
+ * function to get the type of an object at runtime. (Runtime type information
+ * is not supported by VTypeInfo)
+ */
+template<typename T>
+const VTypeInfo& GetCompileTimeTypeInfo(T* ptr);
+
+/**
  * Initializes the type info for T. Must be specialized for every type to be
  * used with velox's type info system
  *
@@ -103,9 +114,6 @@ const VTypeInfo& GetTypeInfo();
 	
  See VFileName for a simple real world example
  */
-//template<typename T>
-//inline void InitTypeInfo(VTypeInfo* out_pTypeInfo);
-
 template<typename T>
 class InitTypeInfo
 {
@@ -166,6 +174,12 @@ const VTypeInfo& GetTypeInfo()
 	}
 
 	return typeInfo;
+}
+
+template<typename T>
+const VTypeInfo& GetCompileTimeTypeInfo(T* ptr)
+{
+	return GetTypeInfo<T>();
 }
 
 template<typename T>

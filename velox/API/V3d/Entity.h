@@ -8,6 +8,7 @@
 #include <V3d/Entity/VEntityManager.h>
 #include <V3d/Entity/VUnconnectedPart.h>
 #include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVEntitySerializationService.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_ENTITY_2004_10_12_H

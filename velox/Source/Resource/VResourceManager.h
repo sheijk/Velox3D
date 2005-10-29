@@ -24,6 +24,7 @@ public:
 	virtual VResourceId CreateResource(VStringParam in_strName);
 	virtual VResourceId GetResourceByName(VStringParam in_strName);
 	virtual void RegisterResourceType(VSharedPtr<IVResourceType> in_pResType);
+	virtual void NotifyChange(VResource* in_pResource, VTypeInfo in_Type);
 
 	/** Print info about all resources to v3d::vout */
 	virtual void DumpResourceInfo() const;
@@ -33,11 +34,15 @@ public:
 	 */
 	std::vector<IVResourceType*> GetResourceTypes(VTypeInfo in_Type);
 
+	IVResourceType* GetResourceManager(const VTypeInfo& in_Type);
+
 private:
-	typedef std::multimap<VTypeInfo, VSharedPtr<IVResourceType> > TypeMap;
+	typedef std::multimap<VTypeInfo, VSharedPtr<IVResourceType> > CreatorMap;
+	typedef std::map<VTypeInfo, VSharedPtr<IVResourceType> > ManagerMap;
 
 	VResource m_RootResource;
-	TypeMap m_ManagedTypes;
+	CreatorMap m_TypeCreators;
+	ManagerMap m_TypeManagers;
 };
 
 //-----------------------------------------------------------------------------

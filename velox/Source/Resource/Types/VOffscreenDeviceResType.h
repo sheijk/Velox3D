@@ -26,6 +26,7 @@ public:
 	virtual ~VOffscreenDeviceResType();
 
 	virtual VRangeIterator<VTypeInfo> CreatedTypes();
+	virtual VRangeIterator<VTypeInfo> ManagedTypes();
 
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 

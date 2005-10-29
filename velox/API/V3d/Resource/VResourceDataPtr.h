@@ -12,6 +12,8 @@ namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
+class VResource;
+
 /**
  * A simple proxy for typed resource data. Will be created by VResource when
  * accessing it's data
@@ -30,6 +32,9 @@ public:
 	DataType* operator->() const;
 
 	DataType& operator*() const;
+
+	VResource* GetEnclosingResource() { return m_pData->GetEnclosingResource(); }
+	VTypeInfo GetTypeId() { return m_pData->GetTypeId(); }
 
 private:
 	TypedDataPtr m_pData;
@@ -64,13 +69,16 @@ VResourceDataPtr<DataType>::VResourceDataPtr(TypedDataPtr in_pData)
 template<typename DataType>
 DataType* VResourceDataPtr<DataType>::operator->() const
 {
-	return m_pData->GetData();
+	if( m_pData )
+		return m_pData->GetData();
+	else
+		return 0;
 }
 
 template<typename DataType>
 DataType& VResourceDataPtr<DataType>::operator*() const
 {
-	return * m_pData->GetData();
+	return * operator->();
 }
 
 //-----------------------------------------------------------------------------

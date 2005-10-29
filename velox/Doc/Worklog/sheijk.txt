@@ -32,6 +32,20 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+
+29.10.05
+- zugriff auf non const resource daten
+- resource manager koennen mutable access auf daten erlauben
+- resourcen koennen ueber aenderungen in ihren daten benachrichtigt werden, res manager wird benachrichtigt und kann andere daten aktualisieren
+- msvc projekte die bjam2 nutzen
+- script fixes
+- identifiezierung von entities primaer durch VTypeInfo statt std::string -> Derived kann als Base angesprochen werden
+
+23.10.05
+- getter/setter erzeugungsscript erzeugt jetzt auch inline funktionen
+- entity parts werden primaer durch ihre VTypeInfo identifiziert (damit
+  auch zugriff auf derivedpart als basepart)
+
 22.10.05
 - source/opengl/textures angelegt und textur klassen da rein bewegt
 - v3dlib/math* nach v3d/math* verschoben

@@ -98,6 +98,8 @@ public class Entity implements XMLSerializable {
 
 		if( valid(impl) )
 			impl.AddChild(newEntity.impl);
+		else
+			System.err.println("Tried to add invalid entity: " + newEntity.toString());
 	}
 	
 	public void Remove(Entity entityToBeRemoved) {
@@ -125,6 +127,9 @@ public class Entity implements XMLSerializable {
 			
 			newPart.setOwner(this);			
 			parts.add(newPart);
+		}
+		else {
+			System.err.println("Tried to add invalid part: " + newPart.toString());
 		}
 	}
 

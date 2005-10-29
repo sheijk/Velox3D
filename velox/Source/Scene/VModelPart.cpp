@@ -220,9 +220,7 @@ VRangeIterator<const IVShapePart> VModelPart::MeshPart::GetVisibleMeshes() const
 }
 
 namespace {
-	VPartParser<VModelPart> parser("model");
-	utils::VRegisterGuard<VPartParser<VModelPart>, IVEntitySerializationService> 
-		parserGuard(&parser);
+	entity::VPartParser<VModelPart> parser;
 }
 
 //-----------------------------------------------------------------------------

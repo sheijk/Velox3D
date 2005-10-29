@@ -10,6 +10,7 @@
 
 #include <V3d/Core/VObjectRegistry.h>
 #include <V3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
@@ -55,6 +56,8 @@ public:
 	 * for the type exists nothing will happen
 	 */
 	virtual void Unregister(IVPartParser* in_pPartParser) = 0;
+
+	virtual VRangeIterator<IVPartParser> PartParsers() = 0;
 
 	virtual void DumpInfo() = 0;
 };

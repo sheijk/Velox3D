@@ -4,6 +4,7 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/OpenGL.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -82,6 +83,10 @@ void VOrientationGridPart::SendParallelLineVertices(
 		glVertex2f(1.0f, i * distance);
 	}
 	glEnd();
+}
+
+namespace {
+	entity::VPartParser<VOrientationGridPart> parser;
 }
 
 //-----------------------------------------------------------------------------

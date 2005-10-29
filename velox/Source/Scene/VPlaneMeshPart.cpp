@@ -4,6 +4,8 @@
 #include <V3d/OpenGL.h>
 #include <V3d/Graphics/IVDevice.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -35,6 +37,10 @@ void VPlaneMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 	glVertex3f(m_fSize, ypos, m_fSize);
 	glVertex3f(m_fSize, ypos, -m_fSize);
 	glEnd();
+}
+
+namespace {
+	entity::VPartParser<VPlaneMeshPart> parser;
 }
 
 //-----------------------------------------------------------------------------

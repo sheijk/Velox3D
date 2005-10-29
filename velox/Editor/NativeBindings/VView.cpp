@@ -254,6 +254,7 @@ void VRenderFrameAction::setSize(vuint width, vuint height)
 
 #include <V3d/OpenGL.h>
 
+/*
 void sendParallelLineVertices(int min, int max, float distance) {
 	glBegin(GL_LINES);
 	for(int i = min; i < max; ++i) {
@@ -317,6 +318,7 @@ void showOrientationGrid() {
 	glPopAttrib();
 	glPopMatrix();
 }
+*/
 
 void VRenderFrameAction::UpdateFrame()
 {
@@ -328,37 +330,37 @@ void VRenderFrameAction::UpdateFrame()
 		m_bResized = false;
 	}
 
-	if( property::GetProperty<vbool>(g_strGridPropertyName.c_str()) )
-	{
-		VMatrix44f identity;
-		math::Identity(identity);
-		
-		m_pDevice->SetMatrix(IVDevice::ModelMatrix, identity);
-		showOrientationGrid();
-	}
+//	if( property::GetProperty<vbool>(g_strGridPropertyName.c_str()) )
+//	{
+//		VMatrix44f identity;
+//		math::Identity(identity);
+//		
+//		m_pDevice->SetMatrix(IVDevice::ModelMatrix, identity);
+//		showOrientationGrid();
+//	}
 	
-	if( property::GetProperty<vbool>(g_strRenderPropertyName.c_str()) )
-	if( m_pDevice.Get() != 0 && pmesh != 0 && pmat != 0 )
-	{	
-		VPointLight light;
-		light.SetAmbient(VColor4f(.0f, .0f, .0f, 1.0f));
-		light.SetDiffuse(VColor4f(.0f, 1.0f, .0f, 1.0f));
-		light.SetSpecular(VColor4f(.8f, .8f, 1.0f, 1.0f));
-		light.SetPosition(VVector3f(.0f, .0f, .0f));
-		
-		VPointLight light2;
-		light2.SetAmbient(VColor4f(.2f, .0f, .0f, 1.0f));
-		light2.SetDiffuse(VColor4f(1.0f, .0f, .0f, 1.0f));
-		light2.SetSpecular(VColor4f(1.0f, .4f, .4f, 1.0f));
-		light2.SetPosition(VVector3f(.0f, -.5f, 3.0f));	
-
-//		m_pDevice->ApplyLight(IVDevice::Light0, &light);
-//		m_pDevice->ApplyLight(IVDevice::Light1, &light2);
-
-//		RenderModel(*m_pDevice, *GetResourceData<VModel>("/data/afighter.3ds"));
-
-//		RenderMesh(*m_pDevice, pmesh, pmat);
-	}
+//	if( property::GetProperty<vbool>(g_strRenderPropertyName.c_str()) )
+//	if( m_pDevice.Get() != 0 && pmesh != 0 && pmat != 0 )
+//	{	
+//		VPointLight light;
+//		light.SetAmbient(VColor4f(.0f, .0f, .0f, 1.0f));
+//		light.SetDiffuse(VColor4f(.0f, 1.0f, .0f, 1.0f));
+//		light.SetSpecular(VColor4f(.8f, .8f, 1.0f, 1.0f));
+//		light.SetPosition(VVector3f(.0f, .0f, .0f));
+//		
+//		VPointLight light2;
+//		light2.SetAmbient(VColor4f(.2f, .0f, .0f, 1.0f));
+//		light2.SetDiffuse(VColor4f(1.0f, .0f, .0f, 1.0f));
+//		light2.SetSpecular(VColor4f(1.0f, .4f, .4f, 1.0f));
+//		light2.SetPosition(VVector3f(.0f, -.5f, 3.0f));	
+//
+////		m_pDevice->ApplyLight(IVDevice::Light0, &light);
+////		m_pDevice->ApplyLight(IVDevice::Light1, &light2);
+//
+////		RenderModel(*m_pDevice, *GetResourceData<VModel>("/data/afighter.3ds"));
+//
+////		RenderMesh(*m_pDevice, pmesh, pmat);
+//	}
 
 	if( m_pShooting != 0 && m_pShooting->IsActive() )
 	{

@@ -47,6 +47,8 @@ public:
 		return std::string("mngr");
 	}
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
 	void PrintAllValues();
 
 private:
@@ -55,5 +57,7 @@ private:
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
+
+V3D_TYPEINFO_WITHPARENT(v3d::VManagerPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VMANAGERPART_2005_05_20_H

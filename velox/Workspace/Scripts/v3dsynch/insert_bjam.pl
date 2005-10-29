@@ -33,7 +33,7 @@ while ($line = <JAM>) {
     if ($state == 0 ) { $before .= $line; }
     if ($state == 3) { $after .= $line; }
     if ($line =~ /[a-z]{3,3} $project$/ ) { $state = 1; }
-    if ($state == 2 && $line =~ /.*(;|:).*/ ) { $state = 3; $after.= $line}
+    if ($state == 2 && $line =~ /.*(;|:|stop-sync).*/ ) { $state = 3; $after.= $line}
     if ($state == 1 && $line =~ /.*:.*/ ) {$state = 2; }
 }
 

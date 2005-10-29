@@ -17,11 +17,14 @@ public:
 
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
 	void SendParallelLineVertices(int min, int max, float distance) const;
 };
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VOrientationGridPart, v3d::scene::IVShapePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VORIENTATIONGRIDPART_2005_10_15_H

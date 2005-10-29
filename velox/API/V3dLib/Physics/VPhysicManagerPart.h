@@ -34,6 +34,7 @@ public:
 	VPhysicWorld& GetPhysicWorld();
 
 	static std::string GetDefaultId();
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
 
@@ -45,5 +46,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
+
+V3D_TYPEINFO_WITHPARENT(v3d::physics::VPhysicManagerPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VPHYSICMANAGERPART_2005_08_31_H

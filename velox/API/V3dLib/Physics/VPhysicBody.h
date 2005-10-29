@@ -63,6 +63,7 @@ public:
 
 	static std::string GetDefaultId();
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
 
@@ -83,6 +84,8 @@ protected:
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d
+
+V3D_TYPEINFO_WITHPARENT(v3d::physics::VPhysicBody, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_PHYSICBODY_05_11_04_H
 

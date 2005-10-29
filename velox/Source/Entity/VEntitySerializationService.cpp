@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Core/VIOStream.h>
+#include <V3d/Core/RangeIter/VSTLAccessorRangePolicy.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -72,6 +73,12 @@ void VEntitySerializationService::DumpInfo()
 	{
 		vout << parser->first << vendl;
 	}
+}
+
+VRangeIterator<IVPartParser> VEntitySerializationService::PartParsers()
+{
+	return CreateAccesssorIterator<VPair2ndDerefAccessor, IVPartParser>(
+		m_Parsers.begin(), m_Parsers.end());
 }
 
 //-----------------------------------------------------------------------------

@@ -4,6 +4,7 @@
 #include <v3d/Core/VCoreLib.h>
 
 #include <V3d/Entity/VEntityExceptions.h>
+#include <V3d/Entity/VPartDependency.h>
 
 #include <V3d/Messaging/VMessage.h>
 
@@ -12,33 +13,6 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
-
-/** 
- * Dependency to another part placed in the same entity or an (in)direct 
- * parent
- */
-struct VPartDependency
-{
-	/** The location of a dependency: where the required part is located */
-	enum Location { Neighbour, Ancestor };
-
-	enum Condition { Optional, Mandatory };
-
-#ifndef SWIG
-	Location location;
-	std::string id;
-	Condition condition;
-#endif
-
-	Location GetLocation() const { return location; }
-	void SetLocation(Location loc) { location = loc; }
-
-	std::string GetId() const { return id; }
-	void SetId(const std::string& in_Id) { id = in_Id; }
-
-	Condition GetCondition() const { return condition; }
-	void SetCondition(Condition cond) { condition = cond; }
-};
 
 /**
  * A part is an independent part of an entity. Derive classes from IVPart to
@@ -102,15 +76,23 @@ public:
 	/** Return information about the n-th dependency */
 	virtual VPartDependency GetDependencyInfo(vuint in_nIndex) const = 0;
 
-	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0)
+	/** Return information about the type of the part */
+	virtual const VTypeInfo& GetTypeInfo() const = 0;
+
+	/** Send a message to the part. Used by the serialization manager, the
+	 * editor and maybe in the future to notify parts about events */
+	virtual void Send(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0)
 	{}
 
 	template<typename T>
 		vbool IsOfType() const;
 
+	/** Returns 0 if part could not be converted */
 	template<typename T>
 		const T* Convert() const;
 
+	/** Returns 0 if part could not be converted */
 	template<typename T>
 		T* Convert();
 };
@@ -142,5 +124,7 @@ template<typename T>
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
+
+V3D_TYPEINFO(v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VPART_2004_10_09_H

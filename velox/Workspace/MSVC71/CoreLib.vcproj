@@ -190,6 +190,9 @@
 							RelativePath="..\..\Api\V3d\Core\RangeIter\IVRangeIteratorPolicy.h">
 						</File>
 						<File
+							RelativePath="..\..\Api\V3d\Core\RangeIter\VEmptyPolicy.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Core\RangeIter\VRangeIterator.h">
 						</File>
 						<File

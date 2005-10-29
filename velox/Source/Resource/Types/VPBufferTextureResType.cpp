@@ -29,14 +29,15 @@ vbool VPBufferTextureResType::Generate(
 {
 	//V3D_ASSERT(GetTypeInfo<VPBufferTexture>() == in_Type);
 
-	VResourceDataPtr<const IVRenderContext> pContextData;
+	VResourceDataPtr<IVRenderContext> pContextData;
 	IVRenderContext* pContext = 0;
 
 	try
 	{
 		//get Pixel Buffer Context
-		pContextData = in_pResource->GetData<IVRenderContext>();
-		pContext = const_cast<IVRenderContext*>(&*pContextData);
+		pContextData = in_pResource->GetMutableData<IVRenderContext>();
+		//pContextData = in_pResource->GetData<IVRenderContext>();
+		//pContext = const_cast<IVRenderContext*>(&*pContextData);
 	}
 	catch(resource::VDataNotFoundException&) 
 	{
@@ -44,7 +45,7 @@ vbool VPBufferTextureResType::Generate(
 	}
 
 	in_pResource->AddData<VPBufferTexture>(
-		new VPBufferTexture(static_cast<VPBufferWindowContext*>(pContext)));
+		new VPBufferTexture(static_cast<VPBufferWindowContext*>(&*pContext)));
 
 	return true;
 }

@@ -19,9 +19,12 @@ public:
 	virtual ~VDefaultRenderStepPart();
 
 	virtual void Render(IVGraphicsPart* in_pScene);
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 };
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VDefaultRenderStepPart, v3d::scene::IVRenderStepPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VDEFAULTRENDERSTEPPART_2005_10_19_H

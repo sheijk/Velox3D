@@ -19,6 +19,8 @@ using namespace v3d; // anti auto indenting
 class VMeshPart : public VMeshPartBase
 {
 public:
+	VMeshPart();
+
 	VMeshPart(
 		resource::VResourceDataPtr<const graphics::IVMesh> in_hMesh,
 		resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial
@@ -30,6 +32,7 @@ public:
 		);
 
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
 	resource::VResourceDataPtr<const graphics::IVMesh> m_hMesh;
@@ -37,5 +40,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VMeshPart, v3d::scene::IVShapePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VMESHPART_2005_09_22_H

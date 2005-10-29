@@ -12,11 +12,13 @@ VUntypedPartConnection::VUntypedPartConnection(
 	IVPart::Location in_Location, 
 	const std::string& in_Id, 
 	VPartDependency::Condition in_Condition,
-	VPartConnectionManager* in_pRegisterTo)
+	VPartConnectionManager* in_pRegisterTo,
+	const VTypeInfo& in_TypeInfo)
 {
 	m_Dependency.id = in_Id;
 	m_Dependency.condition = in_Condition;
 	m_Dependency.location = in_Location;
+	m_Dependency.typeInfo = &in_TypeInfo;
 
 	in_pRegisterTo->Register(*this);
 	m_pPart = 0;

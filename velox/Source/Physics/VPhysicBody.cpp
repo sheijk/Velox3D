@@ -166,6 +166,7 @@ std::string VPhysicBody::GetDefaultId()
 {
 	return "physic";
 }
+
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d

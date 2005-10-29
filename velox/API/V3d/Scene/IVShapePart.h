@@ -48,5 +48,7 @@ public:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::IVShapePart, v3d::scene::IVGraphicsPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVSHAPEPART_2005_09_22_H

@@ -95,11 +95,33 @@ VResourceId VResourceManager::GetResourceByName(VStringParam in_strName)
 
 void VResourceManager::RegisterResourceType(VSharedPtr<IVResourceType> in_pResType)
 {
+	// add as manager for managed types (ignore those types which already
+	// have a type manager
+	VRangeIterator<VTypeInfo> managedTypes = in_pResType->ManagedTypes();
+
+	while( managedTypes.HasNext() )
+	{
+		ManagerMap::iterator managedIter = m_TypeManagers.find(*managedTypes);
+
+		if( managedIter == m_TypeManagers.end() )
+		{
+			m_TypeManagers[*managedTypes] = in_pResType;
+		}
+		else
+		{
+			vout << "Warning: manager for type " << managedTypes->GetName()
+				<< " already registered, ignoring second one" << vendl;
+		}
+
+		++managedTypes;
+	}
+
+	// add to type creators
 	VRangeIterator<VTypeInfo> typeIter = in_pResType->CreatedTypes();
 
 	while(typeIter.HasNext())
 	{
-		m_ManagedTypes.insert(TypeMap::value_type(*typeIter, in_pResType));
+		m_TypeCreators.insert(CreatorMap::value_type(*typeIter, in_pResType));
 		typeIter++;
 	}
 }
@@ -108,8 +130,8 @@ std::vector<IVResourceType*> VResourceManager::GetResourceTypes(VTypeInfo in_Typ
 {
 	std::vector<IVResourceType*> types;
 
-	TypeMap::const_iterator iter = m_ManagedTypes.begin();
-	for( ; iter != m_ManagedTypes.end(); ++iter)
+	CreatorMap::const_iterator iter = m_TypeCreators.begin();
+	for( ; iter != m_TypeCreators.end(); ++iter)
 	{
 		if( iter->first.CanBeCastedTo(in_Type) )
 		{
@@ -117,15 +139,44 @@ std::vector<IVResourceType*> VResourceManager::GetResourceTypes(VTypeInfo in_Typ
 		}
 	}
 
-	//TypeMap::const_iterator iter = m_ManagedTypes.find(in_Type);
+	//CreatorMap::const_iterator iter = m_TypeCreators.find(in_Type);
 
-	//while(iter != m_ManagedTypes.end() && iter->first == in_Type)
+	//while(iter != m_TypeCreators.end() && iter->first == in_Type)
 	//{
 	//	types.push_back(iter->second.Get());
 	//	++iter;
 	//}
 
 	return types;
+}
+
+IVResourceType* VResourceManager::GetResourceManager(const VTypeInfo& in_Type)
+{
+	ManagerMap::iterator typeIter = m_TypeManagers.find(in_Type);
+
+	if( typeIter == m_TypeManagers.end() )
+		return 0;
+	else
+		return typeIter->second.Get();
+}
+
+void VResourceManager::NotifyChange(VResource* in_pResource, VTypeInfo in_Type)
+{
+	set<IVResourceType*> uniqueManagers;
+
+	for(ManagerMap::iterator manager = m_TypeManagers.begin();
+		manager != m_TypeManagers.end();
+		++manager)
+	{
+		uniqueManagers.insert(manager->second.Get());
+	}
+
+	for(set<IVResourceType*>::iterator manager = uniqueManagers.begin();
+		manager != uniqueManagers.end();
+		++manager)
+	{
+		(*manager)->NotifyChange(in_Type, in_pResource);
+	}
 }
 
 void VResourceManager::DumpResourceInfo() const

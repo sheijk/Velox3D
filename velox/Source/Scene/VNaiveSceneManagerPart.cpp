@@ -3,6 +3,7 @@
 
 #include <V3d/Core/RangeIter/VSTLRangeDerefPolicy.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -66,6 +67,10 @@ void VNaiveSceneManagerPart::Activate()
 
 void VNaiveSceneManagerPart::Deactivate()
 {
+}
+
+namespace {
+	entity::VPartParser<VNaiveSceneManagerPart> parser;
 }
 
 //-----------------------------------------------------------------------------

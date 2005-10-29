@@ -47,8 +47,6 @@ namespace {
 	{
 		return static_cast<const VMeshBase*>(handle);
 	}
-
-	const std::string DEFAULT_MAT_RESOURCE = "/system/graphics/defaultMaterial";
 }
 
 /*
@@ -96,19 +94,7 @@ VOpenGLDevice::VOpenGLDevice(
 	Identity(m_TextureMatrix);
 
 	// create default material if it does not exist, yet
-	using namespace resource;
-
-	VResourceId defaultMatRes = VResourceManagerPtr()->CreateResource(
-		DEFAULT_MAT_RESOURCE.c_str());
-
-	if( ! defaultMatRes->ContainsData<VEffectDescription>() )
-	{
-		VEffectDescription defaultEffect;
-		defaultEffect.AddShaderPath().AddRenderPass();
-		defaultMatRes->AddData(new VEffectDescription(defaultEffect));
-	}
-
-	m_pDefaultMaterial = defaultMatRes->GetData<IVMaterial>();
+	m_pDefaultMaterial = IVDevice::GetDefaultMaterial();
 
 
 	RecalcModelViewMatrix();

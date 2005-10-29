@@ -121,7 +121,16 @@
 				RelativePath=".\EntityDemo.cpp">
 			</File>
 			<File
+				RelativePath=".\VBasePart.h">
+			</File>
+			<File
+				RelativePath=".\VBasePartUser.h">
+			</File>
+			<File
 				RelativePath=".\VDataPart.h">
+			</File>
+			<File
+				RelativePath=".\VDerivedPart.h">
 			</File>
 			<File
 				RelativePath=".\VHierarchyPart.h">

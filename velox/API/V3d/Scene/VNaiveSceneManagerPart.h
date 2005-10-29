@@ -35,6 +35,7 @@ public:
 	void Deactivate();
 
 	static std::string GetDefaultId() { return IVGraphicsPart::GetDefaultId(); }
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
 	typedef	std::set<const IVShapePart*> ShapeList;
@@ -46,5 +47,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VNaiveSceneManagerPart, v3d::scene::IVSceneManagerPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VNAIVESCENEMANAGERPART_2005_09_22_H

@@ -7,6 +7,9 @@
 #include "VManagerPart.h"
 #include "VInvalidPart.h"
 #include "VHierarchyPart.h"
+#include "VBasePart.h"
+#include "VBasePartUser.h"
+#include "VDerivedPart.h"
 
 #include <V3d/Resource.h>
 
@@ -173,22 +176,30 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 		root.AddPart(pHierarchicalRoot);
 
 		VSharedPtr<VEntity> pChild1 = SharedPtr(new VEntity());
+		root.AddChild(pChild1);
 		pChild1->AddPart(SharedPtr(new VHierarchyPart()));
 		VSharedPtr<VEntity> pChildSub1 = SharedPtr(new VEntity());
-		pChildSub1->AddPart(SharedPtr(new VHierarchyPart()));
 		pChild1->AddChild(pChildSub1);
-		root.AddChild(pChild1);
+		pChildSub1->AddPart(SharedPtr(new VHierarchyPart()));
 
 		VSharedPtr<VEntity> pChild2 = SharedPtr(new VEntity());
 		pChild2->AddPart(SharedPtr(new VHierarchyPart()));
 		root.AddChild(pChild2);
 	}
 
+	// add parts to demonstrate accessing VDerivedPart as VBasePart
+	{
+		VSharedPtr<VEntity> pDeriveEntity = SharedPtr(new VEntity());
+		root.AddChild(pDeriveEntity);
+		pDeriveEntity->AddPart(SharedPtr(new VDerivedPart()));
+		pDeriveEntity->AddPart(SharedPtr(new VBasePartUser()));
+	}
+
 	// activate the whole scene and all entities
 	root.Activate();
+	V3D_ASSERT(root.IsActive());
 
 	vout << "\n\n\nScene is now active\n\n\n";
-
 
 	// change value of the settable part
 	//pSettingPart->SetValue(9999);

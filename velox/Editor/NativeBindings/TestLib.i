@@ -159,7 +159,7 @@ namespace v3d {
 %ignore v3d::VVector::operator[];
 %ignore v3d::VVector::operator=;
 %include "../../API/V3d/Math/VVector.h"
-%include "../../API/V3dLib/Math/VVectorOps.h"
+%include "../../API/V3d/Math/VVectorOps.h"
 %extend v3d::VVector {
 	void Assign(const VVector& o) { *self = o; }
 	
@@ -332,8 +332,12 @@ namespace v3d {
 %template(VPartPtr) v3d::VSharedPtr<v3d::entity::IVPart>;
 %template(VEntityIterator) v3d::VRangeIterator<v3d::entity::VEntity>;
 %template(VPartIterator) v3d::VRangeIterator<v3d::entity::IVPart>;
+%include "../../API/V3d/Entity/VPartDependency.h"
 %include "../../API/V3d/Entity/IVPart.h"
 %include "../../API/V3d/Entity/VEntity.h"
+%include "../../API/V3d/Entity/IVPartParser.h"
+%template(VPartParserIter) v3d::VRangeIterator<v3d::entity::IVPartParser>;
+%include "../../API/V3d/Entity/IVEntitySerializationService.h"
 
 %javaexception("Exception") v3d::entity::IVSceneParser::ParsePart {
 	try {
@@ -356,10 +360,6 @@ namespace v3d {
 %template(VSceneManagerPtr) v3d::VSharedPtr<v3d::scene::IVSceneManagerPart>;
 %include "../../API/V3d/Scene/IVShooting.h"
 %include "../../API/V3d/Scene/IVSceneManagerPart.h"
-
-//%ignore v3d::entity::IVSceneParser::Register;
-//%ignore v3d::entity::IVSceneParser::Unregister;
-//%include "../../API/V3d/Entity/IVSceneParser.h"
 
 //-----------------------------------------------------------------------------
 %include "TestLib.h"

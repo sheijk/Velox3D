@@ -155,6 +155,18 @@ v3d::vfs::IVFileSystem* GetFileSystem()
 	}
 }
 
+v3d::entity::IVEntitySerializationService* GetEntitySerializationService()
+{
+	try {
+		entity::VEntitySerializationServicePtr pSerialService;
+		return &*pSerialService;
+	}
+	catch(VException& e) {
+		return 0;
+	}
+}
+
+
 std::string ToString(v3d::utils::VStringValue* val)
 {
 	std::string str = val->Get<std::string>();
@@ -246,6 +258,7 @@ public:
 	
 	static std::string GetDefaultId() { return "x"; }
 };
+V3D_TYPEINFO_WITHPARENT(VTestPart, v3d::entity::IVPart);
 
 class VConnTestPart : public v3d::entity::VPartBase
 {
@@ -262,7 +275,10 @@ public:
 
 	void Deactivate()
 	{}
+	
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 };
+V3D_TYPEINFO_WITHPARENT(VConnTestPart, v3d::entity::IVPart);
 
 template<typename PartType>
 VPartAndId PartWithId(PartType* in_pPart, const std::string& in_Id)
@@ -323,9 +339,7 @@ VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement)
 }
 
 namespace {
-	entity::VPartParser<VTestPart> testParser("x");
-	utils::VRegisterGuard< entity::VPartParser<VTestPart>, IVEntitySerializationService > testParserGuard(
-		&testParser);
+	entity::VPartParser<VTestPart> testParser();
 }
 
 v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice)

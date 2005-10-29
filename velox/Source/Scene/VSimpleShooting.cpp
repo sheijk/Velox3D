@@ -5,6 +5,7 @@
 #include <V3dLib/Graphics.h>
 #include <V3d/Scene/IVShapePart.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -161,6 +162,10 @@ void VSimpleShooting::Deactivate()
 vbool VSimpleShooting::IsActive() const
 {
 	return m_bActive;
+}
+
+namespace {
+	entity::VPartParser<VSimpleShooting> parser;
 }
 
 //-----------------------------------------------------------------------------

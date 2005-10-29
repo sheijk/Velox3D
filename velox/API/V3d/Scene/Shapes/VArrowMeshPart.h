@@ -20,11 +20,13 @@ using namespace v3d; // anti auto indenting
 class VArrowMeshPart : public VMeshPartBase
 {
 public:
+	VArrowMeshPart();
 	VArrowMeshPart(const graphics::VColor4f& in_Color);
 
 	void SetColor(const graphics::VColor4f& in_Color);
 	void SendGeometry(graphics::IVDevice& in_Device) const;
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
 	graphics::VColor4f m_Color;
 
@@ -35,5 +37,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VArrowMeshPart, v3d::scene::IVShapePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VARROWMESHPART_2005_10_15_H

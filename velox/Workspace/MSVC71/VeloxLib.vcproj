@@ -306,6 +306,9 @@
 						RelativePath="..\..\Api\V3d\Entity\VPartBase.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Entity\VPartDependency.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h">
 					</File>
 				</Filter>

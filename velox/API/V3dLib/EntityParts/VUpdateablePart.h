@@ -66,11 +66,14 @@ public:
 	void Unregister(IVUpdateablePart* in_pChild);
 
 	static std::string GetDefaultId();
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
 	std::list<IVUpdateablePart*> m_pChilds;
 };
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
-//-----------------------------------------------------------------------------
 
+V3D_TYPEINFO_WITHPARENT(v3d::entity::IVUpdateablePart, v3d::entity::IVPart);
+V3D_TYPEINFO_WITHPARENT(v3d::entity::VUpdateManagerPart, v3d::entity::IVPart);
+//-----------------------------------------------------------------------------
 #endif // V3D_VUPDATEABLEPART_H

@@ -47,6 +47,7 @@ public:
 
 	virtual vbool IsActive() const;
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 protected:
 	VSimpleShooting(entity::VPartDependency::Location in_SceneLocation,
 		const std::string& in_SceneId,
@@ -67,5 +68,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VSimpleShooting, v3d::scene::IVShooting);
 //-----------------------------------------------------------------------------
 #endif // V3D_VSIMPLESHOOTING_2005_09_24_H

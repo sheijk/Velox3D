@@ -4,6 +4,8 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/OpenGL.h>
 #include <V3d/Math/Numerics.h>
+
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -12,6 +14,12 @@ namespace v3d { namespace scene {
 using namespace v3d; // anti auto indent
 using namespace graphics;
 using namespace math;
+
+VArrowMeshPart::VArrowMeshPart() :
+	m_Color(VColor4f(1, 1, 1)),
+	VMeshPartBase(graphics::IVDevice::GetDefaultMaterial())
+{
+}
 
 VArrowMeshPart::VArrowMeshPart(const VColor4f& in_Color) : 
 	m_Color(in_Color),
@@ -69,6 +77,10 @@ void VArrowMeshPart::sendCircleVertices(vfloat32 z1, vfloat32 z2)
 		if( z1 != z2 )
 			glVertex3f(sin(DegreeToRadian(angleDeg)), cos(DegreeToRadian(angleDeg)), z2);
 	}
+}
+
+namespace {
+	entity::VPartParser<VArrowMeshPart> parser;
 }
 
 //-----------------------------------------------------------------------------

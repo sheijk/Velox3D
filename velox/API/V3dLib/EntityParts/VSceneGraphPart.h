@@ -92,6 +92,7 @@ public:
 	virtual void Deactivate();
 
 	static std::string GetDefaultId();
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
 
 	vbool	                         m_bActive;
@@ -104,8 +105,10 @@ protected:
 	math::VRBTransform               m_Transform;
 	math::VRBTransform               m_relativeTransform;
 };
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
-//-----------------------------------------------------------------------------
 
+V3D_TYPEINFO_WITHPARENT(v3d::entity::VSceneGraphPart, v3d::entity::IVPart);
+//-----------------------------------------------------------------------------
 #endif // V3D_VSCENEGRAPHPART_2004_11_14_H

@@ -129,6 +129,7 @@ lib ScriptingDLL :
 	[ glob ../../Source/Graphics/OpenGL/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/Context/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/Materials/*.cpp ]
+	[ glob ../../Source/Graphics/OpenGL/Textures/*.cpp ]
 
 	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
 	[ glob ../../Source/UtilsLib/Importer/Base/*.cpp ]

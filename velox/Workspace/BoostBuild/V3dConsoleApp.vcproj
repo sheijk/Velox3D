@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="V3dConsoleApp"
+	ProjectGUID="{984B2B4D-63D6-4ED8-812D-10E36D1F7827}"
+	Keyword="MakeFileProj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="Debug"
+			ConfigurationType="0">
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="g:\cygwin\bin\bjam2.bat $(ProjectName) debug"
+				CleanCommandLine="g:\cygwin\bin\bjam2.bat clean $(ProjectName) debug"
+				Output="V3dConsoleApp.exe"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="Release"
+			ConfigurationType="0">
+			<Tool
+				Name="VCNMakeTool"
+				Output="V3dConsoleApp.exe"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Kernel"
+			Filter="">
+			<Filter
+				Name="Implementation"
+				Filter="">
+				<File
+					RelativePath="..\..\Source\Kernel\main.cpp">
+				</File>
+			</Filter>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

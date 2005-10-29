@@ -39,6 +39,12 @@ public:
 	/** Please ignore this function - thank you ;) */
 	virtual void DumpResourceInfo() const = 0;
 
+	/**
+	 * Tell all resource managers about the data change so they can update
+	 * other data in the same resource appropriately
+	 */
+	virtual void NotifyChange(VResource* in_pResource, VTypeInfo in_Type) = 0;
+
 	virtual ~IVResourceManager() {}
 
 protected:

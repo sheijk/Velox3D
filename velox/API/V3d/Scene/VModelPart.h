@@ -48,6 +48,7 @@ public:
 	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
 
 	static std::string GetDefaultId();
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
 	struct MeshPart : public entity::VUnconnectedPartAdapter<IVShapePart>
@@ -80,5 +81,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VModelPart, v3d::scene::IVGraphicsPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VMODELPART_2005_05_22_H

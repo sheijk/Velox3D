@@ -31,9 +31,13 @@ public:
 	{
 		return false;
 	}
+
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 };
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
+
+V3D_TYPEINFO_WITHPARENT(v3d::VInvalidPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VINVALIDPART_2005_08_01_H

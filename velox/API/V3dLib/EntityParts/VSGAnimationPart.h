@@ -57,6 +57,7 @@ public:
 	virtual void Deactivate();
 
 	static std::string GetDefaultId();
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
 
 	VPartConnection<VSceneGraphPart>    m_pSceneGraphPart;
@@ -70,6 +71,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
-//-----------------------------------------------------------------------------
 
+V3D_TYPEINFO_WITHPARENT(v3d::entity::VSGAnimationPart, v3d::entity::IVUpdateablePart);
+//-----------------------------------------------------------------------------
 #endif // V3D_VSGANIMATIONPART_H

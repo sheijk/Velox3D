@@ -21,6 +21,9 @@ V3D_DECLARE_EXCEPTION(VDataNotFoundException, VResourceException);
 // resource could not be found
 V3D_DECLARE_EXCEPTION(VResourceNotFoundException, VResourceException);
 
+// constant resource data was tried to be accessed mutably
+V3D_DECLARE_EXCEPTION(VDataNotMutableException, VResourceException);
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::resource
 //-----------------------------------------------------------------------------

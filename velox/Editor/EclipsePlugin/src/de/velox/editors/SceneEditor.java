@@ -85,10 +85,10 @@ public class SceneEditor extends VeloxEditorBase {
 
 		root.Add(new Part("scene"));
 		
-		Entity entity = new Entity("obj");
-		entity.Add(new Part("model"));
-		entity.Add(new Part("body"));
-		root.Add(entity);
+//		Entity entity = new Entity("obj");
+//		entity.Add(new Part("model"));
+//		entity.Add(new Part("body"));
+//		root.Add(entity);
 	}
 
 	@Override

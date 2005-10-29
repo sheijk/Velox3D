@@ -130,6 +130,7 @@
         <file>../../Api/V3d/Entity/VEntityManager.h</file>
         <file>../../Api/V3d/Entity/VGenericPartParser.h</file>
         <file>../../Api/V3d/Entity/VPartBase.h</file>
+        <file>../../Api/V3d/Entity/VPartDependency.h</file>
         <file>../../Api/V3d/Entity/VUnconnectedPart.h</file>
         <file>../../Api/V3dLib/BoostSignals.h</file>
         <file>../../Api/V3dLib/Containers.h</file>
@@ -138,6 +139,7 @@
         <file>../../Api/V3dLib/Collision/VCollisionException.h</file>
         <file>../../Api/V3dLib/Collision/VCollisionObject.h</file>
         <file>../../Api/V3dLib/Collision/VContactReport.h</file>
+        <file>../../Api/V3dLib/Collision/VIntersectionArray.h</file>
         <file>../../Api/V3dLib/Collision/VOpcodeSystem.h</file>
         <file>../../Api/V3dLib/Containers/VArray2d.h</file>
         <file>../../Api/V3dLib/Graphics/Generators.h</file>
@@ -212,6 +214,8 @@
         <file>../../Api/V3dLib/Math/VBoundingBox.h</file>
         <file>../../Api/V3dLib/Math/VBoundingSphere.h</file>
         <file>../../Api/V3dLib/Math/VHalfRay.h</file>
+        <file>../../Api/V3dLib/Math/VLine.h</file>
+        <file>../../Api/V3dLib/Math/VPlane.h</file>
         <file>../../Api/V3dLib/Math/VQuaternion.h</file>
         <file>../../Api/V3dLib/Math/VQuaternionOps.h</file>
         <file>../../Api/V3dLib/Math/VRBTransform.h</file>
@@ -252,6 +256,7 @@
         <file>../../Api/V3dLib/EntityParts/VUpdateablePart.h</file>
         <file>../../Source/Collision/VCollisionObject.cpp</file>
         <file>../../Source/Collision/VContactReport.cpp</file>
+        <file>../../Source/Collision/VIntersectionArray.cpp</file>
         <file>../../Source/Collision/VOpcodeSystem.cpp</file>
         <file>../../Source/Entity/VEntity.cpp</file>
         <file>../../Source/Entity/VEntityManager.cpp</file>
@@ -280,8 +285,12 @@
         <file>../../Source/Graphics/Lib/VVertexFormat.cpp</file>
         <file>../../Source/Graphics/OpenGL/VMeshHandle.cpp</file>
         <file>../../Source/Graphics/OpenGL/VMeshHandle.h</file>
+        <file>../../Source/Graphics/OpenGL/Context/RenderTexture.cpp</file>
+        <file>../../Source/Graphics/OpenGL/Context/RenderTexture.h</file>
         <file>../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.cpp</file>
+        <file>../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.h</file>
         <file>../../Source/Graphics/OpenGL/Context/VWin32WindowContext.cpp</file>
+        <file>../../Source/Graphics/OpenGL/Context/VWin32WindowContext.h</file>
         <file>../../Source/Graphics/Generators/VBoxGenerator.cpp</file>
         <file>../../Source/Graphics/Generators/VPolarSphereGenerator.cpp</file>
         <file>../../Source/Math/TransformationOps.cpp</file>
@@ -481,8 +490,6 @@
         <file>../../Source/Graphics/DeviceBase/VStateCategoryList.h</file>
         <file>../../Source/Graphics/OpenGL/IVOpenGLRenderState.h</file>
         <file>../../Source/Graphics/OpenGL/IVVertexStream.h</file>
-        <file>../../Source/Graphics/OpenGL/VBaseTexture.cpp</file>
-        <file>../../Source/Graphics/OpenGL/VBaseTexture.h</file>
         <file>../../Source/Graphics/OpenGL/VCGVertexShaderState.cpp</file>
         <file>../../Source/Graphics/OpenGL/VCGVertexShaderState.h</file>
         <file>../../Source/Graphics/OpenGL/VCubemapTextureState.cpp</file>
@@ -506,14 +513,10 @@
         <file>../../Source/Graphics/OpenGL/VPBufferTexture.h</file>
         <file>../../Source/Graphics/OpenGL/VStreamMesh.cpp</file>
         <file>../../Source/Graphics/OpenGL/VStreamMesh.h</file>
-        <file>../../Source/Graphics/OpenGL/VTexture2D.cpp</file>
-        <file>../../Source/Graphics/OpenGL/VTexture2D.h</file>
         <file>../../Source/Graphics/OpenGL/VTextureState.cpp</file>
         <file>../../Source/Graphics/OpenGL/VTextureState.h</file>
         <file>../../Source/Graphics/OpenGL/VTextureStateCategory.cpp</file>
         <file>../../Source/Graphics/OpenGL/VTextureStateCategory.h</file>
-        <file>../../Source/Graphics/OpenGL/VUntextured.cpp</file>
-        <file>../../Source/Graphics/OpenGL/VUntextured.h</file>
         <file>../../Source/Graphics/OpenGL/VVertexShaderCategory.cpp</file>
         <file>../../Source/Graphics/OpenGL/VVertexShaderCategory.h</file>
         <file>../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.h</file>
@@ -526,6 +529,12 @@
         <file>../../Source/Graphics/OpenGL/Materials/VCGFXState.h</file>
         <file>../../Source/Graphics/OpenGL/Materials/VFixedFunctionPass.cpp</file>
         <file>../../Source/Graphics/OpenGL/Materials/VFixedFunctionPass.h</file>
+        <file>../../Source/Graphics/OpenGL/Textures/VBaseTexture.cpp</file>
+        <file>../../Source/Graphics/OpenGL/Textures/VBaseTexture.h</file>
+        <file>../../Source/Graphics/OpenGL/Textures/VTexture2D.cpp</file>
+        <file>../../Source/Graphics/OpenGL/Textures/VTexture2D.h</file>
+        <file>../../Source/Graphics/OpenGL/Textures/VUntextured.cpp</file>
+        <file>../../Source/Graphics/OpenGL/Textures/VUntextured.h</file>
         <file>../../API/V3d/Graphics/IVRenderContext.h</file>
         <file>../../API/V3d/Graphics/IVTexture.h</file>
         <file>../../Source/ImageService/VDevILLoader.cpp</file>
@@ -628,6 +637,19 @@
         <file>../../Source/WindowService/VWindowWin32.h</file>
         <file>../../Source/Entity/Parsers/VSceneModelParser.cpp</file>
         <file>../../Source/Entity/Parsers/VSceneModelParser.h</file>
+        <file>../../Source/Scene/IVRenderStepPart.cpp</file>
+        <file>../../Source/Scene/VArrowMeshPart.cpp</file>
+        <file>../../Source/Scene/VCoordSysDisplayPart.cpp</file>
+        <file>../../Source/Scene/VDefaultRenderStepPart.cpp</file>
+        <file>../../Source/Scene/VMeshPart.cpp</file>
+        <file>../../Source/Scene/VMeshPartBase.cpp</file>
+        <file>../../Source/Scene/VModelPart.cpp</file>
+        <file>../../Source/Scene/VNaiveSceneManagerPart.cpp</file>
+        <file>../../Source/Scene/VOrientationGridPart.cpp</file>
+        <file>../../Source/Scene/VPlaneMeshPart.cpp</file>
+        <file>../../Source/Scene/VProjectedTextureShooting.cpp</file>
+        <file>../../Source/Scene/VProjectTextureRenderStepPart.cpp</file>
+        <file>../../Source/Scene/VSimpleShooting.cpp</file>
       </files>
     </project>
 <!-- project name="WxServiceDLL" type="dll">

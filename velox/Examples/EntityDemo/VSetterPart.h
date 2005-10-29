@@ -51,9 +51,13 @@ public:
 	{
 		return std::string("setr");
 	}
+
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 };
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
+
+V3D_TYPEINFO_WITHPARENT(v3d::VSettingPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VSETTERPART_2004_10_10_H

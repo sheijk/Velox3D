@@ -34,9 +34,13 @@ public:
 	{
 		return std::string("data");
 	}
+
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 };
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
+
+V3D_TYPEINFO_WITHPARENT(v3d::VDataPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VDATAPART_2004_10_10_H

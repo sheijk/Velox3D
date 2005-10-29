@@ -28,7 +28,6 @@ public class Part implements XMLSerializable {
 		VPartAndId partAndId = v3d.CreatePart(xmlElement);
 		impl = partAndId.GetPart();
 		this.type = partAndId.GetId();
-//		impl = v3d.CreatePart(xmlElement);
 		
 		updateSettingsFromPart();
 	}

@@ -66,9 +66,13 @@ public:
 	{
 		return std::string("read");
 	}
+
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 };
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
+
+V3D_TYPEINFO_WITHPARENT(v3d::VReaderPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VREADERPART_2004_10_10_H

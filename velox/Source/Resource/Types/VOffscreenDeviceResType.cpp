@@ -23,6 +23,11 @@ VRangeIterator<VTypeInfo> VOffscreenDeviceResType::CreatedTypes()
 	return CreateBeginIterator<std::vector<VTypeInfo> >(m_ManagedTypes);
 }
 
+VRangeIterator<VTypeInfo> VOffscreenDeviceResType::ManagedTypes()
+{
+	return CreateBeginIterator<std::vector<VTypeInfo> >(m_ManagedTypes);
+}
+
 vbool VOffscreenDeviceResType::Generate(
 	resource::VResource* in_pResource, 
 	VTypeInfo in_Type)

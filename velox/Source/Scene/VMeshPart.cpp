@@ -5,12 +5,18 @@
 #include <V3d/Graphics/IVMesh.h>
 #include <V3d/Graphics/IVDevice.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+
+VMeshPart::VMeshPart() :
+	VMeshPartBase(graphics::IVDevice::GetDefaultMaterial())
+{
+}
 
 VMeshPart::VMeshPart(
 		  resource::VResourceDataPtr<const graphics::IVMesh> in_hMesh,
@@ -33,6 +39,10 @@ VMeshPart::VMeshPart(
 void VMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
 	in_Device.RenderMesh(&*m_hMesh);
+}
+
+namespace {
+	entity::VPartParser<VMeshPart> parser;
 }
 
 //-----------------------------------------------------------------------------

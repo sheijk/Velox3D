@@ -11,10 +11,9 @@ sub scandir {
 	my $indent = $_[1];
 	my $relpath = $_[2];
 
-#	print("${indent}Entering ${dir}\n");
-
-	if( $dir !~ /\.(h|cpp|inl)$/ ) {
-		print("${indent}<Filter name=\"${dir}\" Filter=\"\">\n");
+	if( $dir !~ /.*\..*$/ ) {
+#		print("${indent}$dir\n");
+		print("${indent}<Filter Name=\"${dir}\" Filter=\"\">\n");
 
 		chdir($dir);
 
@@ -22,10 +21,18 @@ sub scandir {
 			scandir($_, "${indent}  ", "${relpath}\\${dir}");
 		}
 
+		for(<*>) {
+			if( /\.(h|cpp|inl)$/ ) {
+				print("${indent}  <File RelativePath=\"${relpath}\\${dir}\\$_\" />\n");
+			}
+		}
+
+		chdir("..");
+
 		print("${indent}</Filter>\n");
 	}
 	else {
-		print("${indent}<File RelativePath=\"${relpath}\\${dir}\" />\n");
+#		print("${indent}<File RelativePath=\"${relpath}\\${dir}\" />\n");
 #		print("${indent}File $_\n");
 	}
 }

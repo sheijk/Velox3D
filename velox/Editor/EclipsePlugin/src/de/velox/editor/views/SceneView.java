@@ -19,6 +19,7 @@ import org.eclipse.swt.SWT;
 
 import de.velox.*;
 import de.velox.editor.entity.*;
+import de.velox.editor.gui.ComboboxDialog;
 
 
 /**
@@ -178,7 +179,6 @@ public class SceneView extends VeloxViewBase {
 			}
 			else if( parent instanceof Part ) {
 				return true;
-//				return part.settingsIterator().hasNext() || part.dependencyIterator().hasNext();
 			}
 			else {
 				return false;
@@ -192,27 +192,6 @@ public class SceneView extends VeloxViewBase {
 			if( obj == null ) {
 				return "null";
 			}
-//			if( obj instanceof VEntity ) {
-//				VEntity entity = (VEntity)obj;
-//				
-//				return (entity.IsActive() ? "(E)" : "(e)") + " Entity";
-//			}
-//			else if( obj instanceof Entity ) {
-//				Entity entity = (Entity)obj;
-//				
-//				return (entity.IsActive() ? "(E)" : "(e)") 
-//					+ " " + entity.GetName();
-//			}
-//			else if( obj instanceof Part ) {
-//				Part part = (Part)obj;
-//				
-//				return "(P) " + part.GetType();
-//			}
-//			else if( obj instanceof Setting ) {
-//				Setting setting = (Setting)obj;
-//				
-//				return setting.GetName() + "=" + setting.GetValue();
-//			}
 			else {
 				return obj.toString();
 			}
@@ -237,7 +216,7 @@ public class SceneView extends VeloxViewBase {
 	public static SceneView getDefaultInstance() {
 		return defaultSceneView;
 	}
-
+	
 	/**
 	 * This is a callback that will allow us
 	 * to create the viewer and initialize it.
@@ -381,22 +360,27 @@ public class SceneView extends VeloxViewBase {
 //		removeAction.setText("Remove");
 		
 		contextMenuActions.add(new SceneAction("Add part") {
-//		addPartAction = new SceneAction() {
 			public void run() {
 				Entity selectedEntity = getSelectedEntity();
 				
 				if( selectedEntity == null )
 					return;
+
+				LinkedList<String> options = new LinkedList<String>();
+				VPartParserIter partParser = v3d.GetEntitySerializationService().PartParsers();
+				while(partParser.HasNext())
+				{
+					options.add(partParser.Get().GetType());
+					partParser.Next();
+				}
+				ComboboxDialog dialog = new ComboboxDialog(myParent.getShell(), 
+						"Add part",	"Type",	"", options);
 				
-				InputDialog dialog = new InputDialog(myParent.getShell(),
-					"Add part", "Type", "",
-					new IInputValidator() {
-						public String isValid(String x) { return null; }
-					});
+				String selection = dialog.open();
 				
-				if( dialog.open() == InputDialog.OK ) {
-					String type = dialog.getValue();
-					selectedEntity.Add(new Part(type));
+				if( selection != null ) 
+				{
+					selectedEntity.Add(new Part(selection));				
 				}
 				
 				viewer.refresh();								
@@ -406,33 +390,6 @@ public class SceneView extends VeloxViewBase {
 				setEnabled(getSelectedEntity() != null);
 			}
 		});
-//		addPartAction.setText("Add part");
-		
-//		contextMenuActions.add(new SceneAction("Add setting") {
-//			public void run() {
-//				Part selectedPart = getSelectedPart();
-//				
-//				if( selectedPart == null )
-//					return;
-//				
-//				InputDialog dialog = new InputDialog(myParent.getShell(),
-//					"Add setting", "Name", "",
-//					new IInputValidator() {
-//						public String isValid(String x) { return null; }
-//					});
-//				
-//				if( dialog.open() == InputDialog.OK ) {
-//					String name = dialog.getValue();
-//					selectedPart.SetSetting(name, "...");
-//				}
-//				
-//				viewer.refresh();								
-//			}
-//			
-//			void update() {
-//				setEnabled(getSelectedPart() != null);
-//			}
-//		});
 		
 		doubleClickAction = new SceneAction("") {
 			public void run() {
@@ -531,6 +488,24 @@ public class SceneView extends VeloxViewBase {
 			@Override public void update() {
 				final Part selectedPart = getSelectedPart();
 				setEnabled(selectedPart != null && selectedPart.GetType().equalsIgnoreCase("body"));
+			}
+		});
+		
+		contextMenuActions.add(new SceneAction("test dialog") {
+			public void run() {
+				LinkedList<String> options = new LinkedList<String>();
+				VPartParserIter partParser = v3d.GetEntitySerializationService().PartParsers();
+				while(partParser.HasNext())
+				{
+					options.add(partParser.Get().GetType());
+					partParser.Next();
+				}
+				ComboboxDialog dialog = new ComboboxDialog(myParent.getShell(), 
+						"Add part",	"Type",	"", options);
+				
+				String selection = dialog.open();
+				
+				System.out.println("Selected option " + selection);
 			}
 		});
 	}

@@ -30,5 +30,7 @@ public:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::IVSceneManagerPart, v3d::scene::IVGraphicsPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVSCENEMANAGERPART_2005_09_22_H

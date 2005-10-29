@@ -12,6 +12,7 @@
 
 $declarations="";
 $implementations="";
+$inlineimpl="";
 
 # set new line symbol to "" to read whole input as one line
 $/ = "";
@@ -38,11 +39,8 @@ for( @lines ) {
 		$declarations = $declarations . "${whitespace}${type} Get${pureName}() const;\n"
 		. "${whitespace}void Set${pureName}(const $type& in_${pureName});\n"
 		. "\n";
-		
-		# print("${whitespace}${type} Get${pureName}() const;\n");
-		# print("${whitespace}void Set${pureName}(const $type& in_${pureName});\n");
-		# print("\n");
-		
+
+		# create getter
 		$implementations = $implementations . "${whitespace}${type} xxxtype::Get${pureName}() const\n"
 		. "${whitespace}\{\n"
 		. "${whitespace}\treturn ${name};\n"
@@ -53,26 +51,21 @@ for( @lines ) {
 		. "${whitespace}\{\n"
 		. "${whitespace}\t${name} = in_${pureName};\n"
 		. "${whitespace}\}\n\n";
-	
-		# create getter
-		#print("${whitespace}${type} xxxtype::Get${pureName}() const\n");
-		#print("${whitespace}\{\n");
-		#print("${whitespace}\treturn ${name};\n");
-		#print("${whitespace}\}\n\n");
-		
-		# create setter
-		#print("${whitespace}void Sxxxtype::Set${pureName}(const $type& in_${pureName})\n");
-		#print("${whitespace}\{\n");
-		#print("${whitespace}\t${name} = in_${pureName};\n");
-		#print("${whitespace}\}\n\n");
+
+		# create inline getter and setter
+		$inlineimpl = $inlineimpl . "${whitespace}${type} Get${pureName}() const { return ${name}; }\n"
+		. "${whitespace}void Set${pureName}(const ${type}& in_Value) { ${name} = in_Value; }\n";
 	}
 	else {
 #print("Could not match line ---${line}---");
 	}
 }
 
+print("--- Declarations ---\n\n");
 print($declarations);
-print("\n\n\n");
+print("\n\n--- Implementations ---\n\n");
 print($implementations);
+print("\n\n--- Inline functions ---\n\n");
+print($inlineimpl);
 
 

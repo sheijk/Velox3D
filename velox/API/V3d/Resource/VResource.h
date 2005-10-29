@@ -81,6 +81,53 @@ public:
 	template<typename DataType>
 	VResourceDataPtr<const DataType> GetData();
 
+	/**
+	 * Returns data which can be accessed mutably. This means you will get a
+	 * non const object so you can call non const member functions on it. Only
+	 * possible if the IVResourceType managing DataType allows it. Note that
+	 * this operation is different from Lock, because it will not cause any
+	 * other data to be updated
+	 * Throws VDataNotMutableException if IVResourceType does not allow 
+	 * accessing DataType mutably
+	 */
+	template<typename DataType>
+	VResourceDataPtr<DataType> GetMutableData();
+
+	template<typename DataType> 
+	vbool IsMutableAccessAllowed() const;
+
+	/**
+	 * Tell the resource that it's data of type DataType has been changed and
+	 * other data might need to be updated. (For example if you changed an
+	 * image, call NotifyChanged() to let the resource system update
+	 * the texture etc.
+	 */
+	template<typename DataType>
+	void NotifyChanged();
+
+
+	///** Returns whether data of type DataType may be locked */
+	//template<typename DataType>
+	//vbool AllowLocking() const;
+
+	///**
+	// * Locks the data of DataType so it can be modified. After modification the
+	// * data needs to be unlocked which will cause all IVResourceTypes to be
+	// * notified of the change so they can update their own data in this resource.
+	// * For instance, after an VImage is locked and changed, the texture in the
+	// * same resource might get updated
+	// * Throws VLockPermittedException if the IVResourceType managing DataType
+	// * does not allow locking
+	// */
+	//template<typename DataType>
+	//VResourceDataPtr<DataType> Lock();
+
+	///**
+	// * Unlocks a locked resource and notifies all IVResourceTypes of the change
+	// * @see v3d::resource::VResource::Lock
+	// */
+	//void Unlock();
+
 	/*
 	 * Returns true if data of the given type is present
 	 */
@@ -101,7 +148,11 @@ private:
 	VResourceData* FindInstanceOf(VTypeInfo in_Info);
 	VResourceData* GetData(VTypeInfo in_Type);
 
+	vbool IsMutableAccessAllowed(const VTypeInfo& in_Type) const;
+
 	void AddData(VTypeInfo in_Type, VSharedPtr<VResourceData> in_pData);
+
+	void NotifyChanged(VTypeInfo in_Type);
 
 	std::string m_strName;
 	ResourceContainer m_SubResources;
@@ -146,6 +197,40 @@ vbool VResource::ContainsData()
 
 	// look for type id
 	return ContainsData(type);
+}
+
+template<typename DataType>
+VResourceDataPtr<DataType> VResource::GetMutableData()
+{
+	if( IsMutableAccessAllowed<DataType>() )
+	{
+		VResourceData* pUntypedData = GetData(GetTypeInfo<DataType>());
+
+		VTypedResourceData<DataType>* pResData = 
+			reinterpret_cast< VTypedResourceData<DataType>* >(pUntypedData);
+
+		return VResourceDataPtr<DataType>(pResData);
+	}
+	else
+	{
+		V3D_THROWMSG(VDataNotMutableException,
+			"Tried to access data of type \"" << 
+			GetTypeInfo<DataType>().GetName() <<
+			"\" in resource \"" << GetQualifiedName() <<
+			"\" mutably which was not permitted by it's resource type");
+	}
+}
+
+template<typename DataType> 
+vbool VResource::IsMutableAccessAllowed() const
+{
+	return IsMutableAccessAllowed(GetTypeInfo<DataType>());
+}
+
+template<typename DataType>
+void VResource::NotifyChanged()
+{
+	NotifyChanged(GetTypeInfo<DataType>());
 }
 
 //-----------------------------------------------------------------------------

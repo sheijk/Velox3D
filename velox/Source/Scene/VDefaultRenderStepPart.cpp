@@ -5,6 +5,8 @@
 #include <V3d/Math/VRBTransform.h>
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics.h>
+
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -48,6 +50,10 @@ void VDefaultRenderStepPart::Render(IVGraphicsPart* in_pScene)
 
 		++shape;
 	}
+}
+
+namespace {
+	entity::VPartParser<VDefaultRenderStepPart> parser;
 }
 
 //-----------------------------------------------------------------------------

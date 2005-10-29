@@ -58,9 +58,27 @@ void RenderModel(graphics::IVDevice& in_Device, const graphics::VModel& in_Model
 	}
 }
 
+namespace {
+	const std::string DEFAULT_MAT_RESOURCE = "/system/graphics/defaultMaterial";
+}
+
 resource::VResourceDataPtr<const IVMaterial> IVDevice::GetDefaultMaterial()
 {
-	return resource::GetResourceData<IVMaterial>("/system/graphics/defaultMaterial");
+	using namespace resource;
+
+	VResourceManagerPtr resManager;
+
+	VResourceId defaultMatRes = resManager->CreateResource(
+		DEFAULT_MAT_RESOURCE.c_str());
+
+	if( ! defaultMatRes->ContainsData<VEffectDescription>() )
+	{
+		VEffectDescription defaultEffect;
+		defaultEffect.AddShaderPath().AddRenderPass();
+		defaultMatRes->AddData(new VEffectDescription(defaultEffect));
+	}
+	
+	return defaultMatRes->GetData<IVMaterial>();
 }
 
 //-----------------------------------------------------------------------------

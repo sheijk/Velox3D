@@ -1029,6 +1029,49 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="Scene"
+			Filter="">
+			<File
+				RelativePath="..\..\Source\Scene\IVRenderStepPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VArrowMeshPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VCoordSysDisplayPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VDefaultRenderStepPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VMeshPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VMeshPartBase.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VModelPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VNaiveSceneManagerPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VOrientationGridPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VProjectTextureRenderStepPart.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Scene\VSimpleShooting.cpp">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

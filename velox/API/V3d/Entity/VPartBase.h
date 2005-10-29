@@ -20,7 +20,8 @@ public:
 		VPartDependency::Location in_Location,
 		const std::string& in_Id,
 		VPartDependency::Condition in_Condition,
-		VPartConnectionManager* in_pRegisterTo);
+		VPartConnectionManager* in_pRegisterTo,
+		const VTypeInfo& in_TypeInfo);
 
 	void Disconnect();
 	void Connect(
@@ -31,6 +32,7 @@ public:
 	const IVPart::Dependency& GetDependency() const;
 
 	IVPart* GetPart() const;
+
 protected:
 	IVPart::Dependency m_Dependency;
 	IVPart* m_pPart;
@@ -146,7 +148,8 @@ VPartConnection<T>::VPartConnection(
 		in_Location, 
 		in_Id, 
 		VPartDependency::Mandatory,
-		in_pRegisterTo)
+		in_pRegisterTo,
+		GetTypeInfo<T>())
 {
 	m_pPart = 0;
 }
@@ -158,9 +161,11 @@ VPartConnection<T>::VPartConnection(
 	:
 	VUntypedPartConnection(
 		in_Location, 
-		T::GetDefaultId(), 
+		"",
+		//T::GetDefaultId(), 
 		VPartDependency::Mandatory,
-		in_pRegisterTo)
+		in_pRegisterTo,
+		GetTypeInfo<T>())
 {
 	m_pPart = 0;
 }
@@ -173,9 +178,11 @@ VPartConnection<T>::VPartConnection(
 	:
 	VUntypedPartConnection(
 		in_Location, 
-		T::GetDefaultId(), 
+		"",
+		//T::GetDefaultId(), 
 		in_Condition,
-		in_pRegisterTo)
+		in_pRegisterTo,
+		GetTypeInfo<T>())
 {
 	m_pPart = 0;
 }
@@ -191,7 +198,8 @@ VPartConnection<T>::VPartConnection(
 		in_Location,
 		in_Id,
 		in_Condition,
-		in_pRegisterTo)
+		in_pRegisterTo,
+		GetTypeInfo<T>())
 {
 	m_pPart = 0;
 }

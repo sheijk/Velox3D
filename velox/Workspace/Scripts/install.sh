@@ -22,7 +22,7 @@ then
     rm -rf $1/v3dsynch/.svn
 
 	# generate v3dgetdir.sh script
-	cd ../../..
+	cd ../..
 	echo echo `pwd` > $1/v3dgetdir.sh
 else
 	echo Usage: ./install.sh installdir

@@ -54,6 +54,7 @@ public:
 	}
 
 	static std::string GetDefaultId() { return "hierarchyPart"; }
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
 	void Register(VHierarchyPart* child)
@@ -69,5 +70,7 @@ private:
 
 //-----------------------------------------------------------------------------
 } // namespace v3d
+
+V3D_TYPEINFO_WITHPARENT(v3d::VHierarchyPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VHIERARCHYPART_2005_09_12_H

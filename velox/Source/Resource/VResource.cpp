@@ -350,6 +350,24 @@ void VResource::AddData(VTypeInfo in_Type, VSharedPtr<VResourceData> in_pData)
 	}
 }
 
+vbool VResource::IsMutableAccessAllowed(const VTypeInfo& in_Type) const
+{
+	// get resource type
+	VServicePtr<VResourceManager> pResManager;
+	IVResourceType* pResourceType = pResManager->GetResourceManager(in_Type);
+
+	// ask if mutable access is allowed
+	if( pResourceType == 0 )
+		return false;
+	else
+		return pResourceType->AllowMutableAccess(in_Type, this);
+}
+
+void VResource::NotifyChanged(VTypeInfo in_Type)
+{
+	VResourceManagerPtr()->NotifyChange(this, in_Type);
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::resource
 //-----------------------------------------------------------------------------

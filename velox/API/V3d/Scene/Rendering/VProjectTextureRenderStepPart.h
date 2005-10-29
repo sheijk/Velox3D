@@ -36,6 +36,11 @@ public:
 	vfloat32 GetTextureSize() const;
 	void SetTextureSize(const vfloat32& in_TextureSize);
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+	virtual void Send(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 protected:
 	VMatrix44f CalculateTextureMatrix();
 
@@ -47,5 +52,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VProjectTextureRenderStepPart, v3d::scene::IVRenderStepPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VPROJECTTEXTURERENDERSTEPPART_2005_10_19_H

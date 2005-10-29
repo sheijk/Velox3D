@@ -4,6 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Entity/IVPartParser.h>
+#include <V3d/Core/VTypeInfo.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
@@ -14,30 +15,34 @@ using namespace v3d; // anti auto indenting
 class VGenericPartParser : public IVPartParser
 {
 public:
-	VGenericPartParser(VStringParam in_strType);
+	VGenericPartParser();
 	virtual ~VGenericPartParser();
 
-	virtual std::string GetType() const;
+	virtual std::string GetType() const = 0;
 	virtual VSharedPtr<IVPart> Parse(xml::IVXMLElement& in_Node);
 
 protected:
 	virtual VSharedPtr<IVPart> CreatePart() = 0;
-
-private:
-	const vchar* m_strType;
 };
 
 template<typename PartType>
 class VPartParser : public VGenericPartParser
 {
 public:
-	VPartParser(VStringParam in_strId) : VGenericPartParser(in_strId)
+	VPartParser() 
 	{}
+	//VPartParser(VStringParam in_strId) : VGenericPartParser(in_strId)
+	//{}
 
 protected:
 	virtual VSharedPtr<IVPart> CreatePart()
 	{
 		return SharedPtr(new PartType());
+	}
+
+	virtual std::string GetType() const
+	{
+		return GetTypeInfo<PartType>().GetName();
 	}
 };
 

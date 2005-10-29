@@ -40,5 +40,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::IVRenderStepPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVRENDERSTEPPART_2005_10_19_H

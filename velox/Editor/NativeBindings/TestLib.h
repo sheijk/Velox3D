@@ -33,6 +33,7 @@ v3d::property::VPropertyManager* GetPropertyManager();
 v3d::resource::IVResourceManager* GetResourceManager();
 v3d::xml::IVXMLService* GetXMLService();
 v3d::vfs::IVFileSystem* GetFileSystem();
+v3d::entity::IVEntitySerializationService* GetEntitySerializationService();
 
 std::string ToString(v3d::utils::VStringValue* val);
 

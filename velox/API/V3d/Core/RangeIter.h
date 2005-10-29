@@ -10,6 +10,7 @@
 #include <V3d/Core/RangeIter/VSTLRangePolicy.h>
 #include <V3d/Core/RangeIter/VSTLRangeDerefPolicy.h>
 #include <V3d/Core/RangeIter/VRangeIterator.h>
+#include <V3d/Core/RangeIter/VEmptyPolicy.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_RANGEITER_2005_09_23_H

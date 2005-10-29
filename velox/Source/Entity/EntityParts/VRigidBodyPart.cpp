@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VIOStream.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -102,6 +103,10 @@ void VRigidBodyPart::Send(const messaging::VMessage& in_Message, messaging::VMes
 				<< vendl;
 		}
 	}
+}
+
+namespace {
+	VPartParser<VRigidBodyPart> parser;
 }
 
 //-----------------------------------------------------------------------------

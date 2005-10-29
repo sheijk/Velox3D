@@ -51,6 +51,7 @@ public:
 	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
 
 	static std::string GetDefaultId();
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
 	math::VRBTransform m_Transformation;
@@ -58,5 +59,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
+
+V3D_TYPEINFO_WITHPARENT(v3d::entity::VRigidBodyPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VRIGIDBODYPART_2004_10_12_H

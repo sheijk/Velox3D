@@ -4,6 +4,9 @@
 #include <V3d/OpenGL.h>
 #include <V3d/Graphics/IVDevice.h>
 
+#include <V3d/Entity/IVEntitySerializationService.h>
+
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -31,6 +34,10 @@ void VCoordSysDisplayPart::SendGeometry(graphics::IVDevice& in_Device) const
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 0, 1);
 	glEnd();
+}
+
+namespace {
+	entity::VPartParser<VCoordSysDisplayPart> parser;
 }
 
 //-----------------------------------------------------------------------------
