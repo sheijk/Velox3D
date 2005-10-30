@@ -24,7 +24,7 @@ void VPhysicGeometryPlane::SetPlane(graphics::VVertex3f in_Normal,
 								   vfloat32 in_fDistance)
 {
 	m_Normal = in_Normal;
-	m_fDistance = in_fDistance;
+	m_fDistance = -in_fDistance;
 }
 
 vfloat32 VPhysicGeometryPlane::GetPlaneDistance()

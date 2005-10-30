@@ -147,7 +147,7 @@ vint VSceneGraphExample::Main(std::vector<std::string> args)
 	V3D_ASSERT(m_pRoot->IsActive());
 
 	vfloat32 trans = 1.0f;
-	vfloat32 time = 0.0f;
+	vfloat64 time = 0.0f;
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())

@@ -99,7 +99,7 @@ VRenderStateList* VMaterialResourceType::CreatePass(const VRenderPass& in_Pass) 
 
 vbool VMaterialResourceType::IsCGFXFile(const std::string& in_strFileName) const
 {
-	const int len = in_strFileName.length();
+	const int len = static_cast<int>(in_strFileName.length());
 
 	if( len > 2 && in_strFileName[len-2] == 'f' && in_strFileName[len-1] == 'x' )
 		return true;

@@ -89,9 +89,14 @@ private:
 	vbool CopyBuffers(Lib3dsMesh* in_pMesh, ArrayBuffer* in_pArrayBuffer);
 	VStringRetVal CreateMeshPartName(VStringParam in_sMeshPartName);
 	VStringRetVal GetMeshResourceName();
-	void CreateMeshBufferResource(
-		VStringParam in_sMeshname,
+	void CreateMeshBufferResource(VStringParam in_sMeshname,
 		VImportedBufferDescription* in_BufferInfo);
+	
+	/**
+	 * looks for global materials
+	 */
+	vbool IsGlobalMaterial(std::string sName);
+	std::string m_sGlobalMaterialIdentifier;
 	
 	//the libs file structure for loading
 	Lib3dsFile* m_p3DSFile;

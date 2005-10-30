@@ -31,6 +31,7 @@ VImported3DS::VImported3DS()
 	m_iNumVertices = 0;
 	m_nTexCoords = 0;
 	m_sMeshResourceName = "";
+	m_sGlobalMaterialIdentifier = "/";
 }
 
 VImported3DS::~VImported3DS()
@@ -173,34 +174,45 @@ vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 					if(!m_MaterialContainer.FindMaterialByName(
 						sMaterialName.c_str()))
 					{
-						VImportedMaterialDescription* pMat =
-							new VImportedMaterialDescription(
-							sMaterialName.c_str(),
-							mat->texture1_map.name);
+						if(IsGlobalMaterial(sMaterialName.c_str()))
+						{
+							std::string name = m_sMeshResourceName;
+							name.append("/");
+							name.append(mesh->name);
+							
+							VImportedMaterialDescription* pMat =
+								new VImportedMaterialDescription(
+								sMaterialName.c_str(),
+								mat->texture1_map.name,
+								name.c_str()
+								);
 
-						pMat->SetColorAmbient(graphics::VColor4f(
-							mat->ambient[0],
-							mat->ambient[1],
-							mat->ambient[2],
-							mat->ambient[3]));
+							//colors go here
 
-						pMat->SetColorDiffuse(graphics::VColor4f(
-							mat->diffuse[0],
-							mat->diffuse[1],
-							mat->diffuse[2],
-							mat->diffuse[3]
-							));
+							pMat->SetColorAmbient(graphics::VColor4f(
+								mat->ambient[0],
+								mat->ambient[1],
+								mat->ambient[2],
+								mat->ambient[3]));
 
-						pMat->SetColorSpecular(graphics::VColor4f(
-							mat->specular[0],
-							mat->specular[1],
-							mat->specular[2],
-							mat->specular[3]
-							));
-						
-						pMat->SetTransparency(mat->transparency);
+							pMat->SetColorDiffuse(graphics::VColor4f(
+								mat->diffuse[0],
+								mat->diffuse[1],
+								mat->diffuse[2],
+								mat->diffuse[3]
+								));
 
-						m_MaterialContainer.Add(pMat);
+							pMat->SetColorSpecular(graphics::VColor4f(
+								mat->specular[0],
+								mat->specular[1],
+								mat->specular[2],
+								mat->specular[3]
+								));
+							
+							pMat->SetTransparency(mat->transparency);
+
+							m_MaterialContainer.Add(pMat);
+						}
 					}
 
 					std::string name = m_sMeshResourceName;
@@ -276,6 +288,14 @@ void VImported3DS::CreateMeshResourceName(VStringParam in_sName)
 VStringRetVal VImported3DS::GetMeshResourceName()
 {
 	return m_sMeshResourceName.c_str();
+}
+vbool VImported3DS::IsGlobalMaterial(std::string sName)
+{
+	if(m_sGlobalMaterialIdentifier.size() == 
+		sName.find(m_sGlobalMaterialIdentifier, 0))
+    	return false;
+	else
+		return true;
 }
 
 void VImported3DS::CreateMeshBufferResource(VStringParam in_sMeshname,

@@ -26,9 +26,9 @@ const IVRenderState& VRenderStateList::GetState(vuint in_nPriority) const
 
 void VRenderStateList::SetState(IVRenderState* in_pRenderState)
 {
-	const int priority = in_pRenderState->GetCategory()->GetPriority();
+	const vuint priority = in_pRenderState->GetCategory()->GetPriority();
 
-	V3D_ASSERT(priority >= 0 && priority < m_States.size());
+	V3D_ASSERT(priority >= 0 && priority < static_cast<vuint>(m_States.size()));
 
 	ClearState(priority);
 	m_States[priority] = in_pRenderState;

@@ -27,7 +27,7 @@ IVXMLElement* ToElement(IVXMLNode* in_pNode)
 
 vfs::IVStream& operator<<(vfs::IVStream& stream, const std::string str)
 {
-	stream.Write(str.c_str(), str.length());
+	stream.Write(str.c_str(), static_cast<IVStream::ByteCount>(str.length()));
 	return stream;
 }
 

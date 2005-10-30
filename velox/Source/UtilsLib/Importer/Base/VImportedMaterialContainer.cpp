@@ -8,11 +8,7 @@ using namespace v3d;
 
 VImportedMaterialContainer::VImportedMaterialContainer()
 {
-	//create a default material for this list
-	VImportedMaterialDescription* pDefaultMaterial =
-		new VImportedMaterialDescription("default", "");
-	
-	m_MaterialList.push_back(pDefaultMaterial); //TODO
+	CreateDefaultMaterial();
 }
 
 VImportedMaterialContainer::~VImportedMaterialContainer()
@@ -23,6 +19,15 @@ VImportedMaterialContainer::~VImportedMaterialContainer()
 	{
 		delete (*begin);
 	}
+}
+void VImportedMaterialContainer::CreateDefaultMaterial()
+{
+	//create a default material for this list
+	VImportedMaterialDescription* pDefaultMaterial =
+		new VImportedMaterialDescription("default", "");
+
+	//TODO: externer Verweis auf globale DefaultMaterial
+	//m_MaterialList.push_back(pDefaultMaterial); 
 }
 
 void VImportedMaterialContainer::Add(VImportedMaterialDescription* in_pMaterial)

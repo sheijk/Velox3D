@@ -1,46 +1,37 @@
 Worklog von ins:
 
-//notes to ins here...
---Math includes in der sln fehlen?!
-
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Personal Notes:
 
-TODO: write VCOlor3f and use it in VImportedMaterialDescription
-
-make physic states non copyable and assignable
-
 TODO List:
+- Ode link warnings remove
+- make new sample application for physics with the scripts
+- Collision System of ode: propagate collision somehow into an entity part
 - FIX the memleak in VPhyicWorld DeleteBodyPairList()
-
 - Console is closeable with alt f4
-
-
-- Indoor Rendering
-
-
-medium:
-- add multiple window ogl context sharing support
-- fix WxConnector and old non needed wx stuff + make it clean and safe
-
-high:
+- make physic states non copyable and assignable
+- write VCOlor3f and use it in VImportedMaterialDescription
+- PhysicWorld entity schrott entfernen
+- Importer resource namen fixen
+- ResourceTypes fuer VModelMesh nach Material Mesh Description
 - move othro vector extractor of planeMesh into mathlib
-- rewrite Physic code to use rigidbody in lib
-
-- TODO check external libs for correct debug information
-- TODO rewrite Velocity2 into Hinge2 instead of Joint!
+- check external libs for correct debug information
+- rewrite Velocity2 into Hinge2 instead of Joint!
 - build in vfs saving for image saving
-
 - ODE indepenadnt frame movement
-
-- klaeren, warum es 2 VRBTransforms in /Math und /EntityParts gibt
-	- namespace in math rbtransform aendern
-
+- namespace in math rbtransform aendern
 - SetTrasnform RigidBody zurueckfuehren
 
-//-----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 Done List:
+30.10.05
+- fixed importer (hopefully final)
+- fixed several compiler warnings while rebuilding the project (this takes soo long :/ )
+- fixed math lib
+
+15.10.05
+- adapted physic sample to new rendering architecture
 
 01.09.05
 - moved to ode 0.5

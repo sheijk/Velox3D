@@ -171,7 +171,7 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 
 vuint VCGFXMaterial::PassCount() const
 {
-	return m_Passes.size();
+	return static_cast<vuint>(m_Passes.size());
 }
 
 const IVPass& VCGFXMaterial::GetPass(vuint in_nNum) const

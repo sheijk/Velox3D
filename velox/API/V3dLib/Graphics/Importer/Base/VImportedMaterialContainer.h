@@ -43,6 +43,8 @@ public:
 
 private:
 
+	void CreateDefaultMaterial();
+
 	typedef std::list<VImportedMaterialDescription*> MaterialList;
 	MaterialList m_MaterialList;
 };

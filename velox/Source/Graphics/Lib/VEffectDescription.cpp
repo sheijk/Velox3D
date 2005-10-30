@@ -355,7 +355,7 @@ void VEffectDescription::Clear()
 
 vuint VEffectDescription::GetEffectCount() const
 {
-	return m_Parameters.size();
+	return static_cast<vuint>(m_Parameters.size());
 }
 
 const VEffectParameter& VEffectDescription::GetParameter(vuint in_nIndex) const

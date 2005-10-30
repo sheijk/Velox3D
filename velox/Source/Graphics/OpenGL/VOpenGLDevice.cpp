@@ -490,10 +490,10 @@ void VOpenGLDevice::InitializeExtensions()
 	m_pRenderer	= (vchar *)glGetString(GL_RENDERER);
 	m_pVersion	= (vchar *)glGetString(GL_VERSION);
 
-	vchar* Extensions = (vchar*)glGetString(GL_EXTENSIONS);
-	vchar  ExtensionName[64];
-	vuint Length =(vuint) strlen(Extensions);
-	vuint y = 0;
+	//vchar* Extensions = (vchar*)glGetString(GL_EXTENSIONS);
+	//vchar  ExtensionName[64];
+	//vuint Length =(vuint) strlen(Extensions);
+	//vuint y = 0;
 
 /*
     vout << "-------------------------------------------------------" << vendl;

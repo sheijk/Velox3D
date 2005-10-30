@@ -82,7 +82,8 @@ void VImportedMaterialDescription::SetTextureImageName(
 
 VStringRetVal VImportedMaterialDescription::GetResourceName()
 {
-	std::string ret = m_sResourceParentName;
+	std::string ret = m_sResourcePath;
+	ret.append(m_sResourceParentName.c_str());
 	ret.append("/");
 	ret.append(m_sMaterialName);
 
@@ -94,27 +95,41 @@ resource::VResourceId VImportedMaterialDescription::CreateResource()
 	std::string FilenamePath;
 	resource::VResourceManagerPtr pResourceManager;
 
-	resource::VResourceId m_pResourceParent = pResourceManager->CreateResource(
-		m_sResourceParentName.c_str());
+	
+	std::string name;
+	name = m_sResourcePath;
+	name.append("/textures");
 
-	resource::VResourceId retVal = m_pResourceParent->AddSubResource(
-		m_sMaterialName.c_str());
 
+	//look if we have alread created a texture subresource
+	try
+	{
+		resource::VResourceId texResource = pResourceManager->GetResourceByName(name.c_str());
+	}
+	catch(resource::VResourceNotFoundException e)
+	{
+		//create it
+		resource::VResourceId newResource = pResourceManager->GetResourceByName(m_sResourcePath.c_str());
+		newResource->AddSubResource("textures");
+	}
 
+	resource::VResourceId m_Resource = pResourceManager->GetResourceByName(name.c_str());
+	resource::VResourceId result = m_Resource->AddSubResource(m_sMaterialName.c_str());
+    
 	if(m_sTextureImageName.size())
 	{
 		FilenamePath = m_sResourcePath;
 		FilenamePath.append(m_sTextureImageName.c_str());
 
-		retVal->AddData(
+		result->AddData(
 			new resource::VFileName(FilenamePath.c_str())
 			);
 	}
 
-	retVal->AddData(new graphics::VEffectDescription(
+	result->AddData(new graphics::VEffectDescription(
 		CreateEffectDescription()));
 
-	return retVal;
+	return result;
 }
 
 graphics::VEffectDescription

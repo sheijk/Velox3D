@@ -122,7 +122,7 @@ void VSimpleShooting::SetupRenderSteps()
 	m_RenderSteps.back()->SetOutputDevice(m_pDevice);
 
 	// each step renders to "input" device of previous step
-	for(vuint stepNum = m_RenderSteps.size()-1; stepNum > 0; --stepNum)
+	for(vuint stepNum = static_cast<vuint>(m_RenderSteps.size())-1; stepNum > 0; --stepNum)
 	{
 		IVRenderStepPart* prev = m_RenderSteps[stepNum-1];
 		IVRenderStepPart* next = m_RenderSteps[stepNum];

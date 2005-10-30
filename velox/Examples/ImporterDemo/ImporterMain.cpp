@@ -71,7 +71,7 @@ vint VImporterDemo::Main(vector<string> args)
 	VWindowManagerPtr pWindowManager;
 	IVWindowManager::WindowPtr pWindow = pWindowManager->QueryWindow(
 		"ImporterDemo",
-		&VDisplaySettings(VSize(700, 600), VPosition(300, 50))
+		&VDisplaySettings(VSize(800, 600), VPosition(750, 50))
 		);
 
 	IVDevice& device(pWindow->QueryGraphicsDevice());
@@ -108,6 +108,8 @@ vint VImporterDemo::Main(vector<string> args)
 		device.BeginScene();
 
 		resource::VResourceId pModelResourceId = resource::VResourceManagerPtr()->GetResourceByName("/model3ds");
+		
+		
 	
 		for(vuint i = 0; i < pModelResourceId->GetData<VModel>()->GetPartCount(); i++)
 		{
@@ -119,6 +121,17 @@ vint VImporterDemo::Main(vector<string> args)
 				device.RenderMesh(&(*(pModelResourceId->GetData<VModel>()->GetPart(i).GetMesh())));
 			}
 		}
+
+		static bool x = true;
+		while(x)
+		{
+			pModelResourceId->DumpInfo("/model3ds");
+						
+			
+			x = false;
+			resource::VResourceManagerPtr()->DumpResourceInfo();
+		}
+
 	
 		device.EndScene();
 

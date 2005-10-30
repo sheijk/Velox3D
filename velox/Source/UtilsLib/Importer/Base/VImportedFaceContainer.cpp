@@ -217,7 +217,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 		VMaterialMap::FaceIDList::iterator begin;
 		begin = mymap.GetFaceList((*i).key)->begin();
 
-		vuint n = m_FaceList.size();
+		vuint n = static_cast<vuint>(m_FaceList.size());
 
 		vuint32* indexBuffer = new vuint32[(*i).listForKey->size() * 3];
 		vuint32 nCount = 0;
@@ -271,10 +271,10 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 
 			nCount +=3;
 		}
-
+		//TODO: hier namen fixen
 		std::stringstream ss;
 		std::string name = in_strResource;
-		name.append("/testmodel");
+		name.append("/face");
         ss << nFaceCount;
 		name.append(ss.str());
 		nFaceCount++;

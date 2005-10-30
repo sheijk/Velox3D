@@ -122,9 +122,6 @@
 			<File
 				RelativePath=".\PhysicsMain.cpp">
 			</File>
-			<File
-				RelativePath=".\PhysicsUtils.h">
-			</File>
 			<Filter
 				Name="ModuleImpl"
 				Filter="">

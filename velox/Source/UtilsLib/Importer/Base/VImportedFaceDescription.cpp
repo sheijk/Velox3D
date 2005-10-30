@@ -121,7 +121,7 @@ VImportedBufferDescription* VImportedFaceDescription::GetBufferDescription()
 		return m_pBufferDescription;
 	else
 		V3D_THROW(graphics::VImporterException,
-		"requested buffer is not valid. This can be an invalid model.");
+		"requested buffer is not valid. This seems to be an invalid model.");
 }
 
 graphics::VMeshDescription* VImportedFaceDescription::GetMeshDescription()
@@ -130,7 +130,7 @@ graphics::VMeshDescription* VImportedFaceDescription::GetMeshDescription()
         return m_pMeshDescription;
 	else
 		V3D_THROW(graphics::VImporterException,
-		"requested buffer is not valid. This can be an invalid model.");
+		"requested buffer is not valid. This seems to be an invalid model.");
 }
 
 //-----------------------------------------------------------------------------
