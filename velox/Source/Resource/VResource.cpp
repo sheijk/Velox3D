@@ -249,7 +249,7 @@ void VResource::DumpInfo(const std::string& in_strPrefix) const
 	}
 }
 
-vbool VResource::ContainsData(VTypeInfo in_Type)
+vbool VResource::ContainsData(VTypeInfo in_Type) const
 {
 	for(DataMap::const_iterator data = m_Data.begin(); data != m_Data.end(); ++data)
 	{

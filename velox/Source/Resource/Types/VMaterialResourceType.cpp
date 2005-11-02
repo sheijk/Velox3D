@@ -10,6 +10,9 @@
 
 #include <V3d/Vfs.h>
 #include <V3dLib/Utils/VStreamReader.h>
+#include <V3d/Core/RangeIter.h>
+#include <V3d/Resource/Types/VTextFile.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -18,6 +21,7 @@ namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 using resource::VFileName;
+using namespace resource;
 
 /**
  * standard c'tor
@@ -56,6 +60,14 @@ VRangeIterator<VTypeInfo> VMaterialResourceType::CreatedTypes()
 {
 	return CreateBeginIterator< std::vector<VTypeInfo> >(m_ManagedTypes);
 }
+
+VRangeIterator<VTypeInfo> VMaterialResourceType::ManagedTypes()
+{
+	static VTypeInfo cgfxmatType = GetTypeInfo<VCGFXMaterial>();
+
+	return CreateSingleValueIterator(&cgfxmatType, 1);
+}
+
 
 VMaterial* VMaterialResourceType::CreateMaterial(const VShaderPath& in_Technique) const
 {
@@ -113,6 +125,9 @@ vbool VMaterialResourceType::Generate(
 {
 	V3D_ASSERT(GetTypeInfo<IVMaterial>() == in_Type);
 
+	if( in_pResource->ContainsData(in_Type) )
+		return true;
+
 	if( in_pResource->ContainsData<VEffectDescription>() )
 	{
 		resource::VResourceDataPtr<const VEffectDescription> pEffectDescr
@@ -142,18 +157,30 @@ vbool VMaterialResourceType::Generate(
 			return false;
 		}
 	}
-	else if( IsCGFXFile( in_pResource->GetData<VFileName>()->AsString() ) )
+	else //if( IsCGFXFile( in_pResource->GetData<VFileName>()->AsString() ) )
 	{
 		using namespace ::v3d::vfs;
 
-		// load source into string
-		VFileName fileName = *in_pResource->GetData<VFileName>();
-
-		IVFileSystem::FileStreamPtr pFileStream = VFileSystemPtr()->OpenFile(
-			fileName.AsString().c_str(), VReadAccess);
-		utils::VStreamReader reader(&*pFileStream);
 		std::string fileContent;
-		reader.CopyToString(&fileContent);
+
+		if( in_pResource->ContainsData<VTextFile>() ) 
+		{
+			VResourceDataPtr<const VTextFile> pTextFile = 
+				in_pResource->GetData<VTextFile>();
+
+			fileContent = pTextFile->GetContent();
+		}
+		else if( IsCGFXFile( in_pResource->GetData<VFileName>()->AsString() ) )
+		{
+			// load source into string
+			VFileName fileName = *in_pResource->GetData<VFileName>();
+
+			IVFileSystem::FileStreamPtr pFileStream = VFileSystemPtr()->OpenFile(
+				fileName.AsString().c_str(), VReadAccess);
+			utils::VStreamReader reader(&*pFileStream);
+
+			reader.CopyToString(&fileContent);
+		}
 
 		// create material
 		VRenderStateList::RenderStateList defaultStates =
@@ -167,65 +194,20 @@ vbool VMaterialResourceType::Generate(
 	}
 
 	return false;
+}
 
-	//std::vector<VRenderStateList*> passes;
+vbool VMaterialResourceType::AllowMutableAccess(
+	const VTypeInfo& in_TypeInfo, const VResource* in_Resource) const
+{
+	return in_Resource->ContainsData<VCGFXMaterial>();
+}
 
-	//// for each technique
-	//for(vuint pathNum = 0; pathNum < pEffectDescr->GetShaderPathCount(); ++pathNum)
-	//{
-	//	VShaderPath& path(pEffectDescr->ShaderPath(pathNum);
-
-	//	// decide type of render pass
-	//	if( VFixedFunctionPass::CanRealize(passDescription) )
-	//	{
-	//		// create it and replace default states
-	//	}
-	//	// can't create tech
-	//	else
-	//	{
-	//		////TODO: return error material
-	//		//V3D_THROWMSG(VGraphicException, "Could not create render pass nr. "
-	//		//	<< pathNum << " for effect in resource " <<
-	//		//	in_pResource->GetQualifiedName());
-	//	}
-	//}
-
-	// create and return material
-
-	/*
-// old implementation
-	V3D_ASSERT(GetTypeInfo<IVMaterial>() == in_Type);
-
-	resource::VResourceDataPtr<const VEffectDescription> in_pEffectDescription
-		= in_pResource->GetData<VEffectDescription>();
-
-	// create materials
-	std::vector<VRenderStateList*> statelists
-		= m_StateCategories.CreateMaterialList(*in_pEffectDescription);
-
-	std::vector<VRenderStateList> sl;
-
-	for(vuint i = 0; i < statelists.size(); ++i)
+void VMaterialResourceType::NotifyChange(
+	const VTypeInfo& in_Type, VResource* in_pResource)
+{
+	if( in_pResource->ContainsData<VCGFXMaterial>() )
 	{
-		sl.push_back(VRenderStateList(*statelists[i]));
-		delete statelists[i];
-		statelists[i] = 0;
 	}
-
-	VMaterial* pMaterial = new VMaterial(sl);
-
-	if( statelists.size() > 0 )
-	{
-		in_pResource->AddData<IVMaterial>(pMaterial);
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
-	return true;
-	*/
 }
 
 //-----------------------------------------------------------------------------

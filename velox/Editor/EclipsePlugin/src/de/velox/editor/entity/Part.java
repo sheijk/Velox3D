@@ -98,6 +98,15 @@ public class Part implements XMLSerializable {
 		}
 	}
 	
+	public Setting getSetting(String name) {
+		for(Setting s : this.settings) {
+			if( s.GetName().equalsIgnoreCase(name) )
+				return s;
+		}
+		
+		return null;
+	}
+	
 	void updateSetting(Setting setting) {
 		// send part an update message
 		VMessage msg = new VMessage();

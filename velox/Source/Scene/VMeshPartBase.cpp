@@ -68,6 +68,42 @@ void VMeshPartBase::Deactivate()
 		m_pSceneManager->Remove(this);
 }
 
+void VMeshPartBase::Send(
+	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+{
+	using std::string;
+
+	if( ! in_Message.HasProperty("type") )
+		return;
+
+	string request = in_Message.Get("type").Get<string>();
+
+	if( request == "getSettings" )
+	{
+		if( in_pAnswer == 0 )
+			return;
+
+		in_pAnswer->AddProperty("material", 
+			m_hMaterial.GetEnclosingResource()->GetQualifiedName());
+	}
+	else if( request == "update" )
+	{
+		const string name = in_Message.Get("name").Get<string>();
+		const string value = in_Message.Get("value").Get<string>();
+
+		try
+		{
+			if( name == "material" ) {
+				m_hMaterial = GetResourceData<IVMaterial>(value.c_str());
+			}
+		}
+		catch(VException& e)
+		{
+			vout << "Failed to create model: " << e.GetErrorString() << vendl;
+		}
+	}
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

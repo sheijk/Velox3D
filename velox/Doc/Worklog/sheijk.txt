@@ -33,6 +33,11 @@ Doku:
 ----- last things sheijk finished:
 
 
+02.11.05
+- cgfx editor
+- syntax highlighting
+- live feedback: compilerfehler in tasklist und aktualisieren des materials
+
 29.10.05
 - zugriff auf non const resource daten
 - resource manager koennen mutable access auf daten erlauben

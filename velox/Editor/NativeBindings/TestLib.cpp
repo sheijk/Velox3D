@@ -357,6 +357,47 @@ v3d::entity::VEntity* CreateEntity()
 	return new VEntity();
 }
 
+#include "../../Source/Graphics/OpenGL/Materials/VCGFXMaterial.h"
+using namespace v3d::graphics;
+
+bool replaceCGFXSource(v3d::resource::VResource* in_pResource, const std::string& in_strSource)
+{
+	try
+	{
+//		vout << "replacing cgfx source in " << in_pResource->GetQualifiedName()
+//			<< " with <<" << in_strSource << ">>" << vendl;
+			
+		in_pResource->GetData<IVMaterial>();
+		VResourceDataPtr<VCGFXMaterial> cgfx = in_pResource->GetMutableData<VCGFXMaterial>();
+		
+		return cgfx->SetShaderSource(in_strSource);
+	}
+	catch(VException& e)
+	{
+		vout << e.GetErrorString() << vendl;
+		return false;
+	}		
+}
+
+#include <V3d/Resource/Types/VTextFile.h>
+
+void setTextFile(v3d::resource::VResource* in_pResource, const std::string& in_strSource)
+{
+	try
+	{
+		if( ! in_pResource->ContainsData<VTextFile>() )
+		{
+			VTextFile* pTextFile = new VTextFile();
+			pTextFile->SetContent(in_strSource);
+			in_pResource->AddData(pTextFile);
+		}
+	}
+	catch(VException& e)
+	{
+		vout << e.GetErrorString() << vendl;
+	}
+}
+
 //-----------------------------------------------------------------------------
 //
 /* namespace v3d {

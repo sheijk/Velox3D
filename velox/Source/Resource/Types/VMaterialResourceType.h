@@ -29,11 +29,19 @@ public:
 	virtual ~VMaterialResourceType();
 
 	virtual VRangeIterator<VTypeInfo> CreatedTypes();
+	virtual VRangeIterator<VTypeInfo> ManagedTypes();
 
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
 		VTypeInfo in_Type);
 
+	virtual vbool AllowMutableAccess(
+		const VTypeInfo& in_TypeInfo, 
+		const resource::VResource* in_Resource) const;
+
+	virtual void NotifyChange(
+		const VTypeInfo& in_Type, 
+		resource::VResource* in_pResource);
 private:
 	VRenderStateList* CreatePass(const VRenderPass& in_Pass) const;
 	VMaterial* CreateMaterial(const VShaderPath& in_Technique) const;

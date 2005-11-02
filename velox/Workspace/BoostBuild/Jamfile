@@ -150,6 +150,8 @@ lib VeloxLib
     ../../Source/Resource/Types/VMeshResourceType.cpp
     ../../Source/Resource/Types/VOffscreenDeviceResType.cpp
     ../../Source/Resource/Types/VPBufferTextureResType.cpp
+    ../../Source/Resource/Types/VTextFile.cpp
+    ../../Source/Resource/Types/VTextFileResType.cpp
     ../../Source/Resource/Types/VTextureStateResType.cpp
     ../../Source/Scene/IVRenderStepPart.cpp
     ../../Source/Scene/VArrowMeshPart.cpp
@@ -405,6 +407,9 @@ exe ImporterDemoApp
 
 
 
+
+
+
 # Object targets
 # WARNING: this section is replaced entirely in the sync process
 #------------------------------------------------------------------------------
@@ -498,6 +503,8 @@ obj VMaterialResourceType : ../../Source/Resource/Types/VMaterialResourceType.cp
 obj VMeshResourceType : ../../Source/Resource/Types/VMeshResourceType.cpp ;
 obj VOffscreenDeviceResType : ../../Source/Resource/Types/VOffscreenDeviceResType.cpp ;
 obj VPBufferTextureResType : ../../Source/Resource/Types/VPBufferTextureResType.cpp ;
+obj VTextFile : ../../Source/Resource/Types/VTextFile.cpp ;
+obj VTextFileResType : ../../Source/Resource/Types/VTextFileResType.cpp ;
 obj VTextureStateResType : ../../Source/Resource/Types/VTextureStateResType.cpp ;
 obj IVRenderStepPart : ../../Source/Scene/IVRenderStepPart.cpp ;
 obj VArrowMeshPart : ../../Source/Scene/VArrowMeshPart.cpp ;

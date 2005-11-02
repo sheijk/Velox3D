@@ -29,6 +29,7 @@
 #include "Resource/Types/VMeshGeneratorResType.h"
 #include "Resource/Types/VOffscreenDeviceResType.h"
 #include "Resource/Types/VPBufferTextureResType.h"
+#include "Resource/Types/VTextFileResType.h"
 
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VDevILLoader.h"
@@ -171,6 +172,8 @@ void VVeloxModules::Initialize()
 		VSharedPtr<IVResourceType>(new graphics::VMaterialResourceType()));
 
 	g_pResourceManager->RegisterResourceType(SharedPtr(new VMeshGeneratorResType()));
+
+	g_pResourceManager->RegisterResourceType(SharedPtr(new VTextFileResType()));
 
 	// image
 	g_pImageFactory.Assign(new VImageFactory());

@@ -176,6 +176,9 @@
 						<File
 							RelativePath="..\..\Api\V3d\Resource\Types\VFileName.h">
 						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Resource\Types\VTextFile.h">
+						</File>
 					</Filter>
 				</Filter>
 				<Filter
@@ -1061,6 +1064,15 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Resource\Types\VPBufferTextureResType.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VTextFile.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VTextFileResType.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Resource\Types\VTextFileResType.h">
 					</File>
 					<File
 						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.cpp">

@@ -40,6 +40,8 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
+	virtual void Send(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
 protected:
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;

@@ -27,6 +27,7 @@
         <file>../../Api/V3d/Core/Modules/VModuleParams.h</file>
         <file>../../Api/V3d/Core/Modules/VVeloxApp.h</file>
         <file>../../Api/V3d/Core/RangeIter/IVRangeIteratorPolicy.h</file>
+        <file>../../Api/V3d/Core/RangeIter/VEmptyPolicy.h</file>
         <file>../../Api/V3d/Core/RangeIter/VRangeIterator.h</file>
         <file>../../Api/V3d/Core/RangeIter/VSingleValueRangePolicy.h</file>
         <file>../../Api/V3d/Core/RangeIter/VSTLAccessorRangePolicy.h</file>
@@ -98,6 +99,7 @@
         <file>../../Api/V3d/Resource/VResourceId.h</file>
         <file>../../Api/V3d/Resource/VTypedResourceData.h</file>
         <file>../../Api/V3d/Resource/Types/VFileName.h</file>
+        <file>../../Api/V3d/Resource/Types/VTextFile.h</file>
         <file>../../Api/V3d/Scene/IVGraphicsPart.h</file>
         <file>../../Api/V3d/Scene/IVRenderStepPart.h</file>
         <file>../../Api/V3d/Scene/IVSceneManagerPart.h</file>
@@ -335,6 +337,9 @@
         <file>../../Source/Resource/Types/VOffscreenDeviceResType.h</file>
         <file>../../Source/Resource/Types/VPBufferTextureResType.cpp</file>
         <file>../../Source/Resource/Types/VPBufferTextureResType.h</file>
+        <file>../../Source/Resource/Types/VTextFile.cpp</file>
+        <file>../../Source/Resource/Types/VTextFileResType.cpp</file>
+        <file>../../Source/Resource/Types/VTextFileResType.h</file>
         <file>../../Source/Resource/Types/VTextureStateResType.cpp</file>
         <file>../../Source/Resource/Types/VTextureStateResType.h</file>
         <file>../../Source/Scene/IVRenderStepPart.cpp</file>
@@ -680,8 +685,6 @@
         <file>../../Api/V3d/Xml/IVXMLWriter.h</file>
         <file>../../Api/V3d/Xml/VXMLExceptions.h</file>
         <file>../../Source/Module/VeloxModule.cpp</file>
-        <file>../../Source/XMLService/VStreamReader.cpp</file>
-        <file>../../Source/XMLService/VStreamReader.h</file>
         <file>../../Source/XMLService/VXMLAttribute.cpp</file>
         <file>../../Source/XMLService/VXMLAttribute.h</file>
         <file>../../Source/XMLService/VXMLComment.cpp</file>

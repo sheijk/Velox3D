@@ -41,6 +41,10 @@ v3d::xml::IVXMLElement* CreateXMLElement(v3d::VStringParam in_strName);
 
 v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice);
 
+bool replaceCGFXSource(v3d::resource::VResource* in_pResource, const std::string& in_strSource);
+
+void setTextFile(v3d::resource::VResource* in_pResource, const std::string& in_strSource);
+
 class VPartAndId {
 public:
 	v3d::VSharedPtr<v3d::entity::IVPart> GetPart() const

@@ -544,6 +544,7 @@ void VOpenGLDevice::EndScene()
 {
 	m_pContext->MakeCurrent();
 	m_pContext->SwapBuffers();
+	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
 //	wglMakeCurrent(hDC, hRC);
 //	SwapBuffers(hDC);
 }

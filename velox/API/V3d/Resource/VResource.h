@@ -132,9 +132,9 @@ public:
 	 * Returns true if data of the given type is present
 	 */
 	template<typename DataType>
-	vbool ContainsData();
+	vbool ContainsData() const;
 
-	vbool ContainsData(VTypeInfo in_Type);
+	vbool ContainsData(VTypeInfo in_Type) const;
 
 private:
 	typedef std::vector< VSharedPtr<VResource> > ResourceContainer;
@@ -190,7 +190,7 @@ VResourceDataPtr<const DataType> VResource::GetData()
 }
 
 template<typename DataType>
-vbool VResource::ContainsData()
+vbool VResource::ContainsData() const
 {
 	// get type id
 	VTypeInfo type = GetTypeInfo<DataType>();

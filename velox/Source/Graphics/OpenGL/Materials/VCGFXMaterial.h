@@ -199,15 +199,18 @@ class VCGFXMaterial : public IVMaterial
 {
 public:
 	VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates, const std::string& in_strSource);
+	~VCGFXMaterial();
 
 	virtual vuint PassCount() const;
 	virtual const IVPass& GetPass(vuint in_nNum) const;
 
-	void ApplyParameters(const VOpenGLDevice* in_pDevice);
-	void UnapplyParameters();
+	virtual void ApplyParameters(const VOpenGLDevice* in_pDevice);
+	virtual void UnapplyParameters();
 
 	virtual void SetParameter(ParamHandle in_Param, vfloat32 in_Value) const;
 	virtual void SetParameter(ParamHandle in_Param, VVector4f in_Value) const;
+
+	virtual vbool SetShaderSource(const std::string& in_strSource);
 
 private:
 	void ApplyAutoParameters(const VOpenGLDevice* in_pDevice);
@@ -215,6 +218,9 @@ private:
 	VCGFXParameterBase* FindParameter(const std::string& in_strName) const;
 
 	void AddTexture(CGparameter in_Param, GLenum in_Handle);
+
+	void CreateFromSource(const std::string& in_strSource);
+	void Delete();
 
 	//enum AutoParameterType
 	//{
@@ -241,6 +247,8 @@ private:
 	std::vector< VSharedPtr<VCGFXPass> > m_Passes;
 	CGeffect m_Effect;
 	CGtechnique m_Technique;
+
+	VRenderStateList::RenderStateList m_DefaultStates;
 };
 
 //-----------------------------------------------------------------------------

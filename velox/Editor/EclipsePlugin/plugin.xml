@@ -82,6 +82,13 @@
             icon="icons/sample.gif"
             id="de.velox.editors.SceneEditor"
             name="Scene Editor"/>
+      <editor
+            class="de.velox.editor.cgfx.CGFXEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="fx"
+            icon="icons/sample.gif"
+            id="de.velox.editor.cgfx.CGFXEditor"
+            name="CGFX Editor"/>
    </extension>
 
 </plugin>

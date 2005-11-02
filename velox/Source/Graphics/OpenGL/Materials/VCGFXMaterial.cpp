@@ -20,32 +20,22 @@ using namespace std;
 
 CGcontext VCGFXMaterial::s_Context = cgCreateContext();
 
-namespace {
-	//#define V3D_CHECK()
-	//{
-	//	vbool errorsOccured = false;
-	//	CGerror error = cgGetFirstError();
+VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates, 
+	const std::string& in_strSource)
+{
+	m_DefaultStates = in_DefaultStates;
+	m_Effect = 0;
+	m_Technique = 0;
 
-	//	string errorMessage;
-
-	//	while( error != CG_NO_ERROR )
-	//	{
-	//		errorsOccured = true;
-
-	//		errorMessage += cgGetErrorString(error);
-	//		errorMessage += "\n";
-
-	//		error = cgGetFirstError();
-	//	}
-
-	//	if( errorsOccured )
-	//	{
-	//		V3D_THROW(VException, errorMessage.c_str());
-	//	}
-	//}
+	CreateFromSource(in_strSource);
 }
 
-VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates, const std::string& in_strSource)
+VCGFXMaterial::~VCGFXMaterial()
+{
+	Delete();
+}
+
+void VCGFXMaterial::CreateFromSource(const std::string& in_strSource)
 {
 	cgGLRegisterStates(s_Context);
 	V3D_CHECK_CG_ERROR();
@@ -77,7 +67,11 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 		V3D_CHECK_CG_ERROR();
 	}
 
-	V3D_ASSERT(m_Technique != 0);
+	if( m_Technique == 0 )
+		V3D_THROW(VException, "Could not find a suitable technique");
+		//V3D_THROWMSG(VException, "Could not find a suitable technique when "
+		//	"loading the following cgfx source: <<<\n"
+		//	<< in_strSource << "\n>>>\n");
 
 	vout << "Effect using technique " << cgGetTechniqueName(m_Technique) << vendl;
 
@@ -87,7 +81,7 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 
 	while( pass != 0 )
 	{
-		VCGFXPass* pPass = new VCGFXPass(in_DefaultStates, pass, m_Effect, m_Technique, this);
+		VCGFXPass* pPass = new VCGFXPass(m_DefaultStates, pass, m_Effect, m_Technique, this);
 		m_Passes.push_back(VSharedPtr<VCGFXPass>(pPass));
 
 		string passName = cgGetPassName(pass);
@@ -115,8 +109,8 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 
 		vout << "\t" << paramName << " : " 
 			<< cgGetTypeString(paramType);
-			//<< " as " << cgGetParameterSemantic(param)
-			//<< vendl;
+		//<< " as " << cgGetParameterSemantic(param)
+		//<< vendl;
 		V3D_CHECK_CG_ERROR();
 
 		const string semantic(cgGetParameterSemantic(param));
@@ -166,6 +160,35 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 
 		param = cgGetNextParameter(param);
 		V3D_CHECK_CG_ERROR();
+	}
+}
+
+void VCGFXMaterial::Delete()
+{
+	//TODO: release cgfx data
+	m_AutoParameters.clear();
+	m_Parameters.clear();
+	m_Textures.clear();
+	m_Passes.clear();
+	m_Effect = 0;
+	m_Technique = 0;
+}
+
+vbool VCGFXMaterial::SetShaderSource(const std::string& in_strSource)
+{
+	try
+	{
+		if( m_Effect != 0 )
+			Delete();
+
+		CreateFromSource(in_strSource);
+                
+		return true;
+	}
+	catch(VException& e)
+	{
+		vout << e.GetErrorString() << vendl;
+		return false;
 	}
 }
 

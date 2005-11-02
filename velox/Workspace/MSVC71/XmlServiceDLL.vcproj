@@ -181,12 +181,6 @@
 				Name="Implementation"
 				Filter="">
 				<File
-					RelativePath="..\..\Source\XMLService\VStreamReader.cpp">
-				</File>
-				<File
-					RelativePath="..\..\Source\XMLService\VStreamReader.h">
-				</File>
-				<File
 					RelativePath="..\..\Source\XMLService\VXMLAttribute.cpp">
 				</File>
 				<File
