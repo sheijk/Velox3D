@@ -1,6 +1,5 @@
 package de.velox.editor.views;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.eclipse.swt.widgets.Composite;
@@ -12,11 +11,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
-import org.eclipse.core.runtime.IAdaptable;
-
 import de.velox.IVResourceManager;
 import de.velox.VResource;
-import de.velox.VResourceId;
 import de.velox.VResourceIterator;
 import de.velox.v3d;
 

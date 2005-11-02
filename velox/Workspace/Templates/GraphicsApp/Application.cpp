@@ -4,7 +4,7 @@
 #include <v3d/Graphics.h>
 #include <V3dLib/Graphics.h>
 #include <V3d/Window.h>
-#include <V3dLib/Math.h>
+#include <V3d/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Resource.h>
 
@@ -67,7 +67,7 @@ vint %%name%%::Main(std::vector<std::string> args)
 
 	VCamera cam;
 	cam.MoveForward(-7);
-	Device().SetMatrix(IVDevice::ViewMatrix, *cam.GetMatrix());
+	cam.ApplyTo(Device());
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())

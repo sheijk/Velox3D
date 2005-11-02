@@ -5,9 +5,6 @@ package de.velox.editor.entity;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
 import de.velox.*;
 
 public class Part implements XMLSerializable {

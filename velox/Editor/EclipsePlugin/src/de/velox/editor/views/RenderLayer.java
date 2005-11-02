@@ -7,13 +7,11 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import de.velox.IVDevice;
 import de.velox.VCamera;
-import de.velox.VMatrix44f;
 import de.velox.VRenderFrameAction;
 import de.velox.VView;
 
@@ -58,7 +56,6 @@ public class RenderLayer {
 		
 		parent.addListener(SWT.MouseWheel, new Listener() {
 			public void handleEvent(Event event) {
-				int i = event.count;
 				System.out.println("MouseWheel event");
 			}
 		});
@@ -84,9 +81,6 @@ public class RenderLayer {
 		
 		private int lastX = 0;
 		private int lastY = 0;
-		private int pressPosX = 0;
-		private int pressPosY = 0;
-		
 		private boolean leftDown = false;
 
 		public void mouseDown(MouseEvent e) {
@@ -95,9 +89,6 @@ public class RenderLayer {
 				
 				lastX = e.x;
 				lastY = e.y;
-				
-				pressPosX = e.x;
-				pressPosY = e.y;
 			}
 		}
 		

@@ -37,6 +37,7 @@ Doku:
 - cgfx editor
 - syntax highlighting
 - live feedback: compilerfehler in tasklist und aktualisieren des materials
+- absturz bei mehreren render widgets behoben
 
 29.10.05
 - zugriff auf non const resource daten

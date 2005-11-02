@@ -1,11 +1,8 @@
 package de.velox.editor.cgfx;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Timer;
@@ -16,30 +13,24 @@ import java.util.regex.Pattern;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.swt.*;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.editors.text.TextEditor;
-import org.eclipse.ui.texteditor.IElementStateListener;
-import org.eclipse.ui.texteditor.IStatusField;
 
 import de.velox.IVDevice;
 import de.velox.VMatrix44f;
-import de.velox.VMessage;
 import de.velox.VRenderFrameAction;
-import de.velox.VResource;
 import de.velox.VResourceId;
 import de.velox.v3d;
-import de.velox.editor.entity.*;
+import de.velox.editor.entity.Entity;
+import de.velox.editor.entity.Part;
+import de.velox.editor.entity.RootEntity;
 import de.velox.editor.views.RenderLayer;
 import de.velox.editor.views.SceneView;
 
@@ -181,7 +172,7 @@ public class CGFXEditor extends TextEditor {
 	}
 	
 	private String getResourceName() {
-		return "/lalala";
+		return ((IFileEditorInput)getEditorInput()).getFile().getFullPath().toString();
 	}
 	
 	private void compileEffect(String src) {

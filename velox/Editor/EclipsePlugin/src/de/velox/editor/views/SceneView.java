@@ -487,7 +487,9 @@ public class SceneView extends VeloxViewBase {
 			
 			@Override public void update() {
 				final Part selectedPart = getSelectedPart();
-				setEnabled(selectedPart != null && selectedPart.GetType().equalsIgnoreCase("body"));
+				setEnabled(selectedPart != null && 
+					selectedPart.GetType().equalsIgnoreCase(
+						"v3d::entity::VRigidBodyPart"));
 			}
 		});
 		

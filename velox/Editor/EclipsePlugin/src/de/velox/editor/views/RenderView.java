@@ -3,12 +3,8 @@
  */
 package de.velox.editor.views;
 
-import org.eclipse.jface.action.Action;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IActionBars;
-
 import de.velox.*;
-import de.velox.editor.entity.*;
 
 public class RenderView extends VeloxViewBase {
 //	private int windowHandle;
@@ -18,6 +14,7 @@ public class RenderView extends VeloxViewBase {
 //	private Entity graphics = new Entity("graphics");
 //	private IVShooting shooting = null;
 	
+	@SuppressWarnings("unused")
 	private RenderLayer renderLayer;
 	
 	public RenderView() {

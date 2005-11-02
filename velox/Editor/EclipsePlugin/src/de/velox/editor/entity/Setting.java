@@ -3,8 +3,6 @@
  */
 package de.velox.editor.entity;
 
-import java.util.LinkedList;
-
 public class Setting {
 	private final String name;
 	private String value;

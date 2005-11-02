@@ -4,8 +4,6 @@ import org.eclipse.ui.plugin.*;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.osgi.framework.BundleContext;
 
-import de.velox.v3d;
-
 import java.util.*;
  
 /**
