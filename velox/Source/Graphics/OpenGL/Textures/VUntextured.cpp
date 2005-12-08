@@ -21,7 +21,7 @@ VUntextured::~VUntextured()
 	//Dummy
 }
 
-void VUntextured::Bind()
+void VUntextured::Bind(vuint in_nTextureUnit)
 {
 	//Dummy
 }

@@ -27,6 +27,9 @@ V3D_DECLARE_EXCEPTION(VDeviceCreationException, VCreationException);
 // invalid options for display settings
 V3D_DECLARE_EXCEPTION(VIllegalDisplayException, VDeviceCreationException);
 
+// invalid matrix type set
+V3D_DECLARE_EXCEPTION(VInvalidMatrixTypeException, VGraphicException);
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

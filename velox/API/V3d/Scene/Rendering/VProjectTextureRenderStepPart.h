@@ -38,13 +38,13 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-	virtual void Send(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
-
 protected:
 	VMatrix44f CalculateTextureMatrix();
 
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 	math::VRBTransform m_ProjectorOrientation;
 	resource::VResourceDataPtr<const graphics::IVTexture> m_pTexture;
 	vfloat32 m_fTextureSize;

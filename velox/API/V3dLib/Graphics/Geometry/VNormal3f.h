@@ -27,9 +27,7 @@ struct VNormal3f
 
 	VNormal3f(float in_X, float in_Y, float in_Z)
 	{
-		v[0] = in_X;
-		v[1] = in_Y;
-		v[2] = in_Z;
+		Set(in_X, in_Y, in_Z);
 	}
 
 	explicit VNormal3f(const VVector3f& vec)
@@ -37,6 +35,13 @@ struct VNormal3f
 		v[0] = vec[0];
 		v[1] = vec[1];
 		v[2] = vec[2];
+	}
+
+	void Set(float in_X, float in_Y, float in_Z)
+	{
+		v[0] = in_X;
+		v[1] = in_Y;
+		v[2] = in_Z;
 	}
 };
 

@@ -5,6 +5,8 @@
 #include <V3dLib/Graphics/Materials/StateTypes.h>
 //#include "VCubemapTextureState.h"
 
+#include "Textures/VCubeMapTexture.h"
+
 #include <V3d/Image/VImage.h>
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
@@ -75,7 +77,50 @@ VResourceDataPtr<const DataType> GetDataFromResource(VStringParam in_strResName)
 	return data;
 }
 
-/*IVRenderState* VTextureStateCategory::CreateCubeMapState(
+namespace {
+	const image::VImage& GetImage(const VState& state, VStringParam paramName)
+	{
+		return *GetResourceData<image::VImage>(state.GetParameterByName(paramName).GetValue<std::string>().c_str());
+	}
+}
+
+IVRenderState* VTextureStateCategory::CreateCubeMapState(
+	const VState* in_pTextureState)
+{
+	using std::string;
+	IVRenderState* pCubemapState = 0;
+
+	if( in_pTextureState->ContainsParameter("front") &&
+		in_pTextureState->ContainsParameter("back") &&
+		in_pTextureState->ContainsParameter("left") &&
+		in_pTextureState->ContainsParameter("right") &&
+		in_pTextureState->ContainsParameter("top") &&
+		in_pTextureState->ContainsParameter("bottom") )
+	{
+		VCubeMapTexture* pTexture = new VCubeMapTexture(
+			GetImage(*in_pTextureState, "front"),
+			GetImage(*in_pTextureState, "back"),
+			GetImage(*in_pTextureState, "left"),
+			GetImage(*in_pTextureState, "right"),
+			GetImage(*in_pTextureState, "top"),
+			GetImage(*in_pTextureState, "bottom"));
+
+		pCubemapState = new VTextureState(pTexture);
+	}
+	else
+	{
+		V3D_THROW(VInvalidEffectDescriptionException,
+			"CubeMap texture effect description's node 'texture' must contain "
+			"attributes named front, back, left, right, top, bottom which "
+			"reference the six cube map textures");
+	}
+
+	V3D_ASSERT(0 != pCubemapState);
+	return pCubemapState;
+}
+
+/*
+IVRenderState* VTextureStateCategory::CreateCubeMapState(
 	const VState* in_pTextureState)
 {
 	using std::string;
@@ -134,8 +179,8 @@ VResourceDataPtr<const DataType> GetDataFromResource(VStringParam in_strResName)
 
 	V3D_ASSERT(0 != pCubemapState);
 	return pCubemapState;
-}*/
-
+}
+*/
 
 IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 {
@@ -154,10 +199,10 @@ IVRenderState* VTextureStateCategory::CreateState(const VRenderPass& in_Pass)
 		{
 			return Create2DState(pTextureState);
 		}
-		//if( textureType == "cubeMap" )
-		//{
-		//	return CreateCubeMapState(pTextureState);			
-		//}
+		if( textureType == "cube" )
+		{
+			return CreateCubeMapState(pTextureState);			
+		}
 		else
 		{
 			V3D_THROWMSG(VInvalidEffectDescriptionException,

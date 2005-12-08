@@ -1,10 +1,11 @@
 #ifndef V3D_IVOPENGLRENDERSTATE_H
 #define V3D_IVOPENGLRENDERSTATE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/IVRenderState.h>
+#include <V3d/Graphics/IVRenderState.h>
 
+#include <V3d/Core/RangeIter/VEmptyPolicy.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
@@ -20,6 +21,11 @@ public:
 		Apply();
 	}
 
+
+	virtual VRangeIterator<IVParameter> Parameters()
+	{
+		return CreateEmptyIterator<IVParameter>();
+	}
 protected:
 	virtual void Apply() const = 0;
 };

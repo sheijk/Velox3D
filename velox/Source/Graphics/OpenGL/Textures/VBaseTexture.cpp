@@ -7,27 +7,36 @@ using namespace graphics; // anti auto indent
 
 VBaseTexture::VBaseTexture()
 {
-	//Dummy
+	m_iTextureTarget = 0;
+	m_iTextureID = 0;
+	m_nTextureUnit = 0;
 }
 
 VBaseTexture::VBaseTexture(const image::VImage& in_Image, GLenum in_TextureTarget) : 
 	m_iTextureTarget(in_TextureTarget)
 {
-	glEnable(m_iTextureTarget);
+	m_nTextureUnit = 0;
+	m_iTextureID = 0;
 }
 
 VBaseTexture::~VBaseTexture()
 {
 }
 
-void VBaseTexture::Bind()
+void VBaseTexture::Bind(vuint in_nTextureUnit)
 {
+	m_nTextureUnit = in_nTextureUnit;
+	glEnable(m_iTextureTarget);
+	glActiveTexture(GL_TEXTURE0 + m_nTextureUnit);
 	glBindTexture(m_iTextureTarget, m_iTextureID);
 }
 
 void VBaseTexture::Unbind()
 {
-	glDeleteTextures(1, &m_iTextureID);
+	glActiveTexture(GL_TEXTURE0 + m_nTextureUnit);
+	glBindTexture(m_iTextureTarget, 0);
+	glDisable(m_iTextureTarget);
+	glActiveTexture(GL_TEXTURE0);
 }
 
 GLint VBaseTexture::GetTextureId() const

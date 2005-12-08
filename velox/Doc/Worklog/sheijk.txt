@@ -32,6 +32,17 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+??.11.05
+- Parameter fuer Material, Pass, Shader (-> IVParameter)
+- GLSL Support
+- Multitexturing (zumindest mit GLSL)
+- CubeMap Support
+- Skybox Part
+- Terrain Part
+
+05.11.05
+- EXT_frame_buffer_object + glCopyTexSubImage2D versionen des offscreen renderings
+- kleinere Extras fuer das Graphics Device (Clear, EndScene(NoFlip), Flip() usw.)
 
 02.11.05
 - cgfx editor

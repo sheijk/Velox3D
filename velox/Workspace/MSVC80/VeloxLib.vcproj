@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Windows-1252"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8,00"
@@ -177,6 +177,50 @@
 					>
 				</File>
 				<Filter
+					Name="Entity"
+					>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVEntitySerializationService.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\IVPartParser.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntity.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VGenericPartParser.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VPartBase.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VPartDependency.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h"
+						>
+					</File>
+				</Filter>
+				<Filter
 					Name="Math"
 					>
 					<File
@@ -201,6 +245,18 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Math\VVector.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Messaging"
+					>
+					<File
+						RelativePath="..\..\Api\V3d\Messaging\VMessage.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Messaging\VProtocol.h"
 						>
 					</File>
 				</Filter>
@@ -300,10 +356,14 @@
 						>
 					</File>
 					<Filter
-						Name="Shootings"
+						Name="Rendering"
 						>
 						<File
-							RelativePath="..\..\Api\V3d\Scene\Shootings\VProjectedTextureShooting.h"
+							RelativePath="..\..\Api\V3d\Scene\Rendering\VPostProcessingRenderStepPart.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Rendering\VProjectTextureRenderStepPart.h"
 							>
 						</File>
 					</Filter>
@@ -328,14 +388,10 @@
 						</File>
 					</Filter>
 					<Filter
-						Name="Rendering"
+						Name="Shootings"
 						>
 						<File
-							RelativePath="..\..\Api\V3d\Scene\Rendering\VPostProcessingRenderStepPart.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Scene\Rendering\VProjectTextureRenderStepPart.h"
+							RelativePath="..\..\Api\V3d\Scene\Shootings\VProjectedTextureShooting.h"
 							>
 						</File>
 					</Filter>
@@ -365,62 +421,6 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Xml\XMLUtils.inl"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Messaging"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Messaging\VMessage.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Messaging\VProtocol.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Entity"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVEntitySerializationService.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVPart.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\IVPartParser.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntity.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntityExceptions.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VEntityManager.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VGenericPartParser.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VPartBase.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VPartDependency.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h"
 						>
 					</File>
 				</Filter>
@@ -473,6 +473,26 @@
 					>
 					<File
 						RelativePath="..\..\Api\V3dLib\Containers\VArray2d.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="EntityParts"
+					>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VSGAnimationPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Api\V3dLib\EntityParts\VUpdateablePart.h"
 						>
 					</File>
 				</Filter>
@@ -695,6 +715,14 @@
 							>
 						</File>
 						<Filter
+							Name="3ds"
+							>
+							<File
+								RelativePath="..\..\Api\V3dLib\Graphics\Importer\3ds\VImported3DS.h"
+								>
+							</File>
+						</Filter>
+						<Filter
 							Name="Base"
 							>
 							<File
@@ -719,14 +747,6 @@
 							</File>
 							<File
 								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VMaterialMap.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="3DS"
-							>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\3ds\VImported3DS.h"
 								>
 							</File>
 						</Filter>
@@ -956,26 +976,6 @@
 						>
 					</File>
 				</Filter>
-				<Filter
-					Name="EntityParts"
-					>
-					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VSGAnimationPart.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VUpdateablePart.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -1008,6 +1008,10 @@
 			<Filter
 				Name="Implementation"
 				>
+				<File
+					RelativePath="..\..\Source\Entity\IVPart.cpp"
+					>
+				</File>
 				<File
 					RelativePath="..\..\Source\Entity\VEntity.cpp"
 					>
@@ -1064,6 +1068,18 @@
 			<Filter
 				Name="Implementation"
 				>
+				<Filter
+					Name="Generators"
+					>
+					<File
+						RelativePath="..\..\Source\Graphics\Generators\VBoxGenerator.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\Generators\VPolarSphereGenerator.cpp"
+						>
+					</File>
+				</Filter>
 				<Filter
 					Name="Lib"
 					>
@@ -1189,14 +1205,10 @@
 					</Filter>
 				</Filter>
 				<Filter
-					Name="Generators"
+					Name="Parameters"
 					>
 					<File
-						RelativePath="..\..\Source\Graphics\Generators\VBoxGenerator.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\Generators\VPolarSphereGenerator.cpp"
+						RelativePath="..\..\Source\Graphics\Parameters\VMaterialSetup.cpp"
 						>
 					</File>
 				</Filter>
@@ -1214,6 +1226,26 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Math\VRBTransform.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Math\VVector.cpp"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="Messaging"
+			>
+			<Filter
+				Name="Implementation"
+				>
+				<File
+					RelativePath="..\..\Source\Messaging\VMessage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Messaging\VProtocol.cpp"
 					>
 				</File>
 			</Filter>
@@ -1588,6 +1620,14 @@
 						>
 					</File>
 					<Filter
+						Name="3ds"
+						>
+						<File
+							RelativePath="..\..\Source\UtilsLib\Importer\3ds\VImported3DS.cpp"
+							>
+						</File>
+					</Filter>
+					<Filter
 						Name="Base"
 						>
 						<File
@@ -1615,14 +1655,6 @@
 							>
 						</File>
 					</Filter>
-					<Filter
-						Name="3DS"
-						>
-						<File
-							RelativePath="..\..\Source\UtilsLib\Importer\3ds\VImported3DS.cpp"
-							>
-						</File>
-					</Filter>
 				</Filter>
 				<Filter
 					Name="Xml"
@@ -1633,18 +1665,6 @@
 					</File>
 				</Filter>
 			</Filter>
-		</Filter>
-		<Filter
-			Name="Messaging"
-			>
-			<File
-				RelativePath="..\..\Source\Messaging\VMessage.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Messaging\VProtocol.cpp"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

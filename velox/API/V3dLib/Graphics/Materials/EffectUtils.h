@@ -90,6 +90,10 @@ VEffectDescription ColorEffect(
 VEffectDescription ColorEffect(
 	vfloat32 in_fRed, vfloat32 in_fGreen, vfloat32 in_fBlue, vfloat32 in_fAlpha);
 
+VEffectDescription GLSLEffect(
+	const std::string& in_strVertexProgramRes, 
+	const std::string& in_strFragmentProgramRes);
+
 /**
  * Returns a render pass which will render a wireframe
  */

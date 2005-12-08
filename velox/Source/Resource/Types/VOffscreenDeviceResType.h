@@ -31,6 +31,10 @@ public:
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
 		VTypeInfo in_Type);
+
+	virtual vbool AllowMutableAccess(
+		const VTypeInfo& in_TypeInfo, 
+		const resource::VResource* in_Resource) const;
 };
 
 //-----------------------------------------------------------------------------

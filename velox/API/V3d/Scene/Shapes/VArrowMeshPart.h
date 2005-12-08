@@ -32,7 +32,7 @@ private:
 
 	static void sendCircleVertices(vfloat32 z1);
 
-	static void sendCircleVertices(vfloat32 z1, vfloat32 z2);
+	static void sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals);
 };
 
 //-----------------------------------------------------------------------------

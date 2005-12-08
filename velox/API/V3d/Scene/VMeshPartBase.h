@@ -30,7 +30,11 @@ public:
 
 	virtual ~VMeshPartBase();
 
+	virtual void SendGeometry(graphics::IVDevice& in_Device) const = 0;
+
 	virtual const graphics::IVMaterial& GetMaterial() const;
+	virtual void SetMaterial(
+		resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial);
 	virtual const math::VRBTransform& GetModelTransform() const;
 	virtual void SetModelTransform(const math::VRBTransform& in_Transform);
 
@@ -40,9 +44,10 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
-	virtual void Send(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
 protected:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 

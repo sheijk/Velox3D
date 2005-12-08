@@ -34,14 +34,14 @@ public:
 	virtual void Shutdown() {};
 };
 
-class VTestFrameAction : public IVFrameAction
-{
-	vuint m_nCount;
-public:
-	virtual void Init();
-	virtual void UpdateFrame();
-	virtual void Shutdown();
-};
+//class VTestFrameAction : public IVFrameAction
+//{
+//	vuint m_nCount;
+//public:
+//	virtual void Init();
+//	virtual void UpdateFrame();
+//	virtual void Shutdown();
+//};
 
 class VRenderFrameAction : public IVFrameAction
 {
@@ -74,6 +74,7 @@ public:
 	virtual ~VView();
 	
 	void Add(IVFrameAction* in_pAction);
+	void Remove(IVFrameAction* in_pAction);
 	
 	void Start();
 	void Stop();
@@ -109,6 +110,7 @@ private:
 	
 	FrameActions m_FrameActions;
 	FrameActions m_NewFrameActions;
+	FrameActions m_OldFrameActions;
 	
 //	bool m_bIsRendering;
 //	v3d::VSharedPtr<v3d::graphics::VOpenGLDevice> m_pDevice;

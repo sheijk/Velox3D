@@ -28,6 +28,7 @@ public:
 		VTextureStateCategory* in_pTextureStateCategory,
 		VMiscStateCategory* in_pMiscStateCategory);
 
+	virtual VRangeIterator<IVParameter> Parameters();
 private:
 	static vbool StateTypeKnown(const std::string& in_Type);
 

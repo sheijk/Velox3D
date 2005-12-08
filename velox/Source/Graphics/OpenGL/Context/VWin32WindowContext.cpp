@@ -1,10 +1,21 @@
 #include "VWin32WindowContext.h"
 
+#include "VCopyPixelsContext.h"
+#include "VFrameBufferObjectContext.h"
+
+#include <V3dLib/Property.h>
+
 #include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace graphics; // anti auto indent
+
+namespace {
+	const std::string OFFSCREEN_METHOD_PROPNAME = "v3d.graphics.offscreen-method";
+	const std::string OFFSCREEN_FBO = "fbo";
+	const std::string OFFSCREEN_COPY = "copy";
+}
 
 VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* in_pDisplaySettings) : 
 	m_DeviceContext(0), m_RenderContext(0), m_Handle(in_hwnd),
@@ -54,6 +65,17 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 	{
 		vout << "Render Context was created!" << vendl;
 	}
+
+	GLenum result = glewInit();
+	if( result != GLEW_OK )
+	{
+		vout << "glew init failed: " << glewGetErrorString(result) << vendl;
+	}
+
+	if( ! property::ExistsProperty(OFFSCREEN_METHOD_PROPNAME.c_str()) )
+	{
+		property::SetProperty(OFFSCREEN_METHOD_PROPNAME.c_str(), OFFSCREEN_FBO);
+	}
 }
 
 VWin32WindowContext::~VWin32WindowContext()
@@ -90,7 +112,16 @@ IVRenderContext* VWin32WindowContext::CreateOffscreenContext(const graphics::VDi
 {
 	MakeCurrent();
 
-	return new VPBufferWindowContext(in_pDisplaySettings);
+	//return new VPBufferWindowContext(*in_pDisplaySettings, this);
+	//return new VCopyPixelsContext(*in_pDisplaySettings, this);
+	if( property::GetProperty<std::string>(OFFSCREEN_METHOD_PROPNAME.c_str()) == OFFSCREEN_FBO )
+	{
+		return new VFrameBufferObjectContext(*in_pDisplaySettings, this);
+	}
+	else
+	{
+		return new VCopyPixelsContext(*in_pDisplaySettings, this);
+	}
 }
 
 //-----------------------------------------------------------------------------

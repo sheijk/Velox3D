@@ -46,6 +46,12 @@ VResourceDataPtr<const T> GetResourceData(VStringParam in_strResourceName)
 	return VResourceId(in_strResourceName)->GetData<T>();
 }
 
+template<typename T>
+VResourceDataPtr<T> GetMutableResourceData(VStringParam in_strResourceName)
+{
+	return VResourceId(in_strResourceName)->GetMutableData<T>();
+}
+
 template<typename DataType>
 vbool Valid(const VResourceDataPtr<const DataType>& ptr)
 {

@@ -87,6 +87,8 @@ lib VeloxLib
 	: # files to compile
 	# graphics
 	[ glob ../../Source/Graphics/Lib/*.cpp ]
+	[ glob ../../Source/Graphics/Parameters/*.cpp ]
+	
 	[ glob ../../Source/UtilsLib/Camera/*.cpp ]
 	[ glob ../../Source/UtilsLib/DrawList/*.cpp ]
 	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
@@ -130,6 +132,7 @@ lib ScriptingDLL :
 	[ glob ../../Source/Graphics/OpenGL/Context/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/Materials/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/Textures/*.cpp ]
+	[ glob ../../Source/Graphics/OpenGL/GLSL/*.cpp ]
 
 	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
 	[ glob ../../Source/UtilsLib/Importer/Base/*.cpp ]

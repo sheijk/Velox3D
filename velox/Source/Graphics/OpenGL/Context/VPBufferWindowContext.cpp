@@ -8,9 +8,13 @@ namespace v3d { namespace graphics {
 using namespace graphics; // anti auto indent
 using namespace v3d;
 
-VPBufferWindowContext::VPBufferWindowContext(const graphics::VDisplaySettings* in_pDisplaySettings) : 
-	m_DisplaySettings(*in_pDisplaySettings),
-	m_RenderTexture()
+VPBufferWindowContext::VPBufferWindowContext(
+	const graphics::VDisplaySettings& in_DisplaySettings,
+	IVRenderContext* in_pParentContext        
+	) :
+	VOffscreenContextBase(in_DisplaySettings, in_pParentContext),
+	//m_RenderTexture()
+	m_RenderTexture("rgb depth tex2D rtt")
 {
 	m_RenderTexture.Initialize();
 	V3D_ASSERT(m_RenderTexture.Initialize(
@@ -36,8 +40,10 @@ void VPBufferWindowContext::SwapBuffers()
 	m_RenderTexture.EndCapture();
 }
 
-void VPBufferWindowContext::BindTexture()
+void VPBufferWindowContext::BindAsTexture(vuint in_nTextureUnit)
 {
+	V3D_ASSERT(in_nTextureUnit == 0);
+
 	m_RenderTexture.EnableTextureTarget();
 	m_RenderTexture.Bind();
 }
@@ -47,15 +53,6 @@ void VPBufferWindowContext::UnbindTexture()
 	m_RenderTexture.DisableTextureTarget();
 }
 
-VDisplaySettings* VPBufferWindowContext::GetDisplaySettings()
-{
-	return &m_DisplaySettings;
-}
-
-IVRenderContext* VPBufferWindowContext::CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings)
-{
-	return new VPBufferWindowContext(in_pDisplaySettings);
-}
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

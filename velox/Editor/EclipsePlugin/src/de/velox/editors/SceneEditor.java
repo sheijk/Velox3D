@@ -3,6 +3,7 @@ package de.velox.editors;
 import java.io.File;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IActionBars;
@@ -100,8 +101,8 @@ public class SceneEditor extends VeloxEditorBase {
 				loadFromFile(fileName);
 			}
 			catch(RuntimeException e) {
-				System.err.println("Could not load scene: " + e);
-				createNewScene();
+				throw new PartInitException(
+					"Could not load scene: " + e.getMessage(), e);
 			}
 
 //			if( fileInput.exists() ) {

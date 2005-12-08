@@ -45,6 +45,9 @@ private:
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
 	IVDevice& Device();
+	IVInputManager& GetInputManager();
+	IVKeyboardDevice& GetKeyboard();
+	IVMouseDevice& GetMouse();
 
 	void Init();
 	void Shutdown();
@@ -75,15 +78,22 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 
 	vfloat32 angle = 0.0f;
 
-	VCamera cam;
-	cam.MoveForward(-7);
+	//VCamera cam;
+	VKeyboardCamera cam(GetInputManager());
+	cam.GetCamera().MoveForward(-7);
 	cam.ApplyTo(Device());
+	cam.SetIgnoreMouse(true);
 
 	cam.ApplyTo(*m_pPBufferDevice);
+
+	m_pPBufferDevice->SetClearColor(1, 0, 0, 1);
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())
 	{
+		cam.Move(m_pUpdater->GetFrameDuration());
+		cam.ApplyTo(Device());
+
 		// render something to the texture
 		m_pPBufferDevice->BeginScene();
 		DrawScene(Device());
@@ -91,10 +101,11 @@ vint VPBufferExample::Main(std::vector<std::string> args)
 
 		// use the generated texture for the plane
 		Device().BeginScene();
-		ApplyMaterial(Device(), &hPlaneMat->GetPass(0));
-		//m_pTexState->Bind();
+		//ApplyMaterial(Device(), &hPlaneMat->GetPass(0));
+		glColor3f(1, 1, 1);
+		m_pTexState->Bind();
 		Device().RenderMesh(hPlane);
-		//m_pTexState->Unbind();	
+		m_pTexState->Unbind();	
 		Device().EndScene();
 
 		m_pUpdater->StartNextFrame();
@@ -149,14 +160,14 @@ void VPBufferExample::Shutdown()
 void VPBufferExample::CreateResources()
 {
 	VDisplaySettings displaySettings;
-	displaySettings.SetSize(128, 128);
+	displaySettings.SetSize(512, 512);
 	displaySettings.SetBitsPerPixel(32);
 	displaySettings.SetDepthBits(16);
 
 	VResourceId contextRes = VResourceManagerPtr()->CreateResource("/context");
 	contextRes->AddData(Device().CreateOffscreenContext(&displaySettings));
 
-	VPolarSphereMesh<VTexturedVertex> cube(50, 50);
+	VPolarSphereMesh<VTexturedVertex> cube(100, 100);
 	cube.GenerateCoordinates();
 	cube.GenerateTexCoords();
 	ForEachVertex(cube.GetVertexBuffer(), ScaleVertex<VTexturedVertex>(1.175f, 1.175f, 1.175f));
@@ -192,6 +203,21 @@ IVDevice& VPBufferExample::Device()
 	V3D_ASSERT(m_pDevice != 0);
 
 	return *m_pDevice;
+}
+
+IVInputManager& VPBufferExample::GetInputManager()
+{
+	return m_pWindow->QueryInputManager();
+}
+
+IVKeyboardDevice& VPBufferExample::GetKeyboard()
+{
+	return GetInputManager().GetStandardKeyboard();
+}
+
+IVMouseDevice& VPBufferExample::GetMouse()
+{
+	return GetInputManager().GetStandardMouse();
 }
 
 //-----------------------------------------------------------------------------

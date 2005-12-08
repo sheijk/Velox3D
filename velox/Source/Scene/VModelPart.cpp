@@ -107,7 +107,7 @@ void VModelPart::Deactivate()
 //		.SetDefault("resource", "");
 //}
 
-void VModelPart::Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+void VModelPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
 {
 	if( ! in_Message.HasProperty("type") )
 		return;

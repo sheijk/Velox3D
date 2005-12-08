@@ -212,6 +212,8 @@ public:
 
 	virtual vbool SetShaderSource(const std::string& in_strSource);
 
+	virtual VRangeIterator<IVParameter> Parameters();
+	IVParameter* GetParameterByName(const std::string& in_strName);
 private:
 	void ApplyAutoParameters(const VOpenGLDevice* in_pDevice);
 	void UnapplyAutoParameters();
@@ -247,6 +249,9 @@ private:
 	std::vector< VSharedPtr<VCGFXPass> > m_Passes;
 	CGeffect m_Effect;
 	CGtechnique m_Technique;
+
+	std::string m_strSource;
+	vbool m_bNeedsUpdate;
 
 	VRenderStateList::RenderStateList m_DefaultStates;
 };

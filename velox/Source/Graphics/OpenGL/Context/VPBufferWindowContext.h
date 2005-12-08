@@ -14,7 +14,7 @@
 #include <V3d/OpenGL.h>
 
 #include "RenderTexture.h"
-
+#include "VOffscreenContextBase.h"
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -26,11 +26,15 @@ using namespace v3d; // anti auto indenting
  *
  * @author lars
  */
-class VPBufferWindowContext : public IVRenderContext
+class VPBufferWindowContext : public VOffscreenContextBase
 {
 public:
 
-	VPBufferWindowContext(const graphics::VDisplaySettings* in_pDisplaySettings = 0);
+	VPBufferWindowContext(
+		const graphics::VDisplaySettings& in_DisplaySettings,
+        IVRenderContext* in_pParentContext        
+		);
+
 	virtual ~VPBufferWindowContext();
 
 	/** @see v3d::graphics::IVRenderContext::MakeCurrent */
@@ -39,23 +43,16 @@ public:
 	/** @see v3d::graphics::IVRenderContext::SwapBuffers */
 	void SwapBuffers();
 
-	void BindTexture();
+	void BindAsTexture(vuint in_nTextureUnit);
 	void UnbindTexture();
 	
-	/** @see v3d::graphics::IVRenderContext::GetDisplaySettings */
-	VDisplaySettings* GetDisplaySettings();
-
-	/** @see v3d::graphics::IVRenderContext::CreateOffscreenContext */
-	IVRenderContext* CreateOffscreenContext(const VDisplaySettings* in_pDisplaySettings);
-
 private:
 	RenderTexture m_RenderTexture;
-	VDisplaySettings m_DisplaySettings;
 };
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
-V3D_TYPEINFO_WITHPARENT(v3d::graphics::VPBufferWindowContext, v3d::graphics::IVRenderContext);
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VPBufferWindowContext, v3d::graphics::VOffscreenContextBase);
 
 #endif //V3D_VPBUFFERWINDOWCONTEXT_H

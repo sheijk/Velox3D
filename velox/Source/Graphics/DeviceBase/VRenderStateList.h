@@ -25,11 +25,20 @@ public:
 
 	virtual const IVRenderState& GetState(vuint in_nPriority) const;
 
+	virtual VRangeIterator<IVParameter> Parameters();
+	virtual IVParameter* GetParameterByName(
+		const std::string& in_strName);
+
 protected:
 	void SetState(IVRenderState* in_pRenderState);
 
+	void AddParameter(IVParameter* in_pParam);
+	void AddParameters(VRangeIterator<IVParameter> in_Params);
 private:
 	void ClearState(vuint in_nPriority);
+
+	typedef std::list<IVParameter*> ParameterContainer;
+	ParameterContainer m_Parameters;
 };
 
 //-----------------------------------------------------------------------------

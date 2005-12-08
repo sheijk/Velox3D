@@ -199,14 +199,14 @@ public class CGFXEditor extends TextEditor {
 				Matcher matcher = pattern.matcher(line);
 				if( matcher.matches() && matcher.groupCount() >= 3 ) {
 					//String errorFile = matcher.group(1);
-					String errorFile = this.getResourceName();
-					int errorLine = Integer.parseInt(matcher.group(2));
-					String errorMessage = matcher.group(3);
+					final String errorFile = this.getResourceName();
+					final int errorLine = Integer.parseInt(matcher.group(2));
+					final String errorMessage = matcher.group(3);
 					
 					System.out.println("[" + errorFile + ":" + errorLine
 							+ "] " + errorMessage);
 
-					IMarker m = resource.createMarker(IMarker.PROBLEM);
+					final IMarker m = resource.createMarker(IMarker.PROBLEM);
 					m.setAttribute(IMarker.MESSAGE, errorMessage);
 					m.setAttribute(IMarker.LINE_NUMBER, errorLine);
 					m.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);

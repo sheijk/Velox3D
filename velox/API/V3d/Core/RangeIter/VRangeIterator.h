@@ -137,6 +137,16 @@ CreateIterator(STLIterator begin, STLIterator end)
 	return VRangeIterator<T>(policy);
 };
 
+template<typename ValueType, typename STLIterator>
+VRangeIterator<ValueType> CreateIterator2(STLIterator begin, STLIterator end)
+{
+	// create iterator policy for stl iterator range
+	VSTLRangePolicy<STLIterator, ValueType> policy(begin, end);
+
+	// create range iterator and return it
+	return VRangeIterator<ValueType>(policy);
+}
+
 template<typename STLContainer>
 VRangeIterator<typename STLContainer::value_type>
 CreateBeginIterator(STLContainer& in_Container)

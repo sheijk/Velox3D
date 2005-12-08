@@ -30,7 +30,6 @@ vbool VPBufferTextureResType::Generate(
 	//V3D_ASSERT(GetTypeInfo<VPBufferTexture>() == in_Type);
 
 	VResourceDataPtr<IVRenderContext> pContextData;
-	IVRenderContext* pContext = 0;
 
 	try
 	{
@@ -45,7 +44,7 @@ vbool VPBufferTextureResType::Generate(
 	}
 
 	in_pResource->AddData<VPBufferTexture>(
-		new VPBufferTexture(static_cast<VPBufferWindowContext*>(&*pContext)));
+		new VPBufferTexture(static_cast<VOffscreenContextBase*>(&*pContextData)));
 
 	return true;
 }

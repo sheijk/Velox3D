@@ -17,6 +17,18 @@ namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
 
+class CategorySmaller
+{
+public:
+	vbool operator()(const IVStateCategory* left, const IVStateCategory* right)
+	{
+		V3D_ASSERT(left != 0);
+		V3D_ASSERT(right != 0);
+
+		return left->GetPriority() < right->GetPriority();
+	}
+};
+
 class VStateCategoryList
 {
 public:
@@ -32,7 +44,7 @@ public:
 	const VRenderStateList& GetDefaultMaterial();
 
 private:
-	typedef std::set<IVStateCategory*> CategoryContainer;
+	typedef std::set<IVStateCategory*, CategorySmaller> CategoryContainer;
 
 	CategoryContainer m_Categories;
 	//RenderStateList m_DefaultStates;

@@ -20,6 +20,8 @@
 #include "VStreamMesh.h"
 
 #include <V3d/Resource.h>
+
+#include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -46,6 +48,39 @@ namespace {
 	const VMeshBase* MakeMeshPointer(IVDevice::MeshHandle handle)
 	{
 		return static_cast<const VMeshBase*>(handle);
+	}
+
+	void SetGLMatrix(int mode, const VMatrix44f& mat, IVDevice* pDevice)
+	{
+		VDeviceMatrix devMat;
+		VDeviceMatrix::ConvertFromTransform(&devMat, mat, *pDevice);
+
+		glMatrixMode(mode);
+		glLoadMatrixf(devMat.GetElements());	
+	}
+
+	/** 
+	 * Call with GL_(PROJECTION|MODELVIEW|TEXTURE)_MATRIX to get the OpenGL
+	 * matrices 
+	 */
+	void GetGLMatrix(int in_Matrix, VMatrix44f* out_pMatrix)
+	{
+		vfloat32 matrix[16];
+		glGetFloatv(in_Matrix, matrix);
+
+		vuint index = 0;
+		for(vuint column = 0; column < 4; ++column)
+		for(vuint row = 0; row < 4; ++row)
+		{
+			out_pMatrix->Set(row, column, matrix[index]);
+			++index;
+		}
+	}
+
+	template<typename T>
+		vbool BitsSet(T value, T bits)
+	{
+		return value & bits == bits;
 	}
 }
 
@@ -79,8 +114,6 @@ VOpenGLDevice::VOpenGLDevice(
 	m_pContext(in_pContext),
 	m_DisplaySettings(in_Settings)
 {
-	SetDisplay();
-
 	//m_StateCategories.RegisterCategory(m_TextureStateCategory);
 	//m_StateCategories.RegisterCategory(m_MiscStateCategory);
 	//m_StateCategories.RegisterCategory(m_VertexShaderCategory);
@@ -97,7 +130,11 @@ VOpenGLDevice::VOpenGLDevice(
 	m_pDefaultMaterial = IVDevice::GetDefaultMaterial();
 
 
+	SetDisplay();
+
 	RecalcModelViewMatrix();
+
+	m_bActive = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -465,6 +502,7 @@ void VOpenGLDevice::SetScreenSize()
 					m_DisplaySettings.GetHeight()),
 					1.0f,
 					900000.0f);
+	GetGLMatrix(GL_PROJECTION_MATRIX, &m_ProjectionMatrix);
 	//gluPerspective(m_DisplaySettings.m_fFieldOfView,
 	//				((vfloat32)m_DisplaySettings.m_iWidth /
 	//				m_DisplaySettings.m_iHeight),
@@ -525,44 +563,80 @@ void VOpenGLDevice::InitializeExtensions()
 
 void VOpenGLDevice::BeginScene()
 {
-//	wglMakeCurrent(hDC, hRC);
+	m_bActive = true;
+
 	m_pContext->MakeCurrent();
+
+	glViewport(0, 0,
+		m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
 
 	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
 
-	// fuer sowas solltes noch fkten geben -ins
+	glClearColor(m_ClearColor.red, m_ClearColor.green, m_ClearColor.blue, 
+		m_ClearColor.alpha);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
 
 	RecalcModelViewMatrix();
+	SetGLMatrix(GL_PROJECTION, m_ProjectionMatrix, this);
+	SetGLMatrix(GL_TEXTURE, m_TextureMatrix, this);
 }
 
 //-----------------------------------------------------------------------------
-void VOpenGLDevice::EndScene()
+void VOpenGLDevice::EndScene(EndSceneFlags in_Flags)
 {
+	m_bActive = false;
+
 	m_pContext->MakeCurrent();
-	m_pContext->SwapBuffers();
+
+	if( in_Flags & NoFlip == NoFlip )
+		m_pContext->SwapBuffers();
+
 	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
-//	wglMakeCurrent(hDC, hRC);
-//	SwapBuffers(hDC);
 }
 
-//-----------------------------------------------------------------------------
-//TODO: move to a graphics exception header
-V3D_DECLARE_EXCEPTION(VInvalidMatrixTypeException, VException);
-
-namespace
+void VOpenGLDevice::Flip()
 {
-	void SetGLMatrix(int mode, const VMatrix44f& mat, IVDevice* pDevice)
-	{
-		VDeviceMatrix devMat;
-		VDeviceMatrix::ConvertFromTransform(&devMat, mat, *pDevice);
+	m_pContext->SwapBuffers();
+}
 
-		glMatrixMode(mode);
-		glLoadMatrixf(devMat.GetElements());	
-	}
+void VOpenGLDevice::Clear(ClearFlags in_Flags)
+{
+    GLbitfield bitfield = 0;
+
+	if( BitsSet(in_Flags, ClearColor) )
+		bitfield |= GL_COLOR_BUFFER_BIT;
+
+	if( BitsSet(in_Flags, ClearZ) )
+		bitfield |= GL_DEPTH_BUFFER_BIT;
+
+	glClear(bitfield);
+}
+
+void VOpenGLDevice::SetViewport(vint left, vint top, vint right, vint bottom)
+{
+	V3D_ASSERT(left < right);
+	V3D_ASSERT(top < bottom);
+
+	m_DisplaySettings.SetPosition(left, top);
+	m_DisplaySettings.SetSize(right - left, bottom - top);
+}
+
+void VOpenGLDevice::SetClearColor(
+	vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha)
+{
+	m_ClearColor.red = red;
+	m_ClearColor.green = green;
+	m_ClearColor.blue = blue;
+	m_ClearColor.alpha = alpha;
+}
+
+vbool VOpenGLDevice::IsActive() const
+{
+	return m_bActive;
 }
 
 void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix)
@@ -696,6 +770,7 @@ IVRenderContext* VOpenGLDevice::CreateOffscreenContext(const graphics::VDisplayS
 {
 	return m_pContext->CreateOffscreenContext(in_pDisplaySettings);
 }
+
 //-----------------------------------------------------------------------------
 } // namespace graphics
 } // namespace v3d

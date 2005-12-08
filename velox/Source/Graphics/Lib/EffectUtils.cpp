@@ -209,6 +209,22 @@ void PrintEffectDescription(const VEffectDescription& effect)
 	}
 }
 
+VEffectDescription GLSLEffect(
+	const std::string& in_strVertexProgramRes, 
+	const std::string& in_strFragmentProgramRes)
+{
+	VEffectDescription effect;
+	VRenderPass& pass = effect.AddShaderPath().AddRenderPass();
+
+	VState& fragmentState = pass.AddState("vertex-program");
+	fragmentState.SetParameter("res", in_strVertexProgramRes);
+
+	VState& vertexState = pass.AddState("fragment-program");
+	vertexState.SetParameter("res", in_strFragmentProgramRes);
+
+	return effect;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

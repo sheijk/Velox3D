@@ -43,8 +43,8 @@ public:
 		IVRenderContext* in_pContext);
 	virtual ~VOpenGLDevice();
 
-	virtual MeshHandle CreateMesh(VStringParam in_strResource);
-	virtual MaterialHandle CreateMaterial(VStringParam in_strResource);
+	virtual V3D_DEPRECATED MeshHandle CreateMesh(VStringParam in_strResource);
+	virtual V3D_DEPRECATED MaterialHandle CreateMaterial(VStringParam in_strResource);
 
 	virtual void DeleteMesh(MeshHandle& in_Mesh);
 
@@ -53,7 +53,16 @@ public:
 	virtual void ApplyState(const IVRenderState& in_State);
 
 	virtual void BeginScene();
-	virtual void EndScene();
+	virtual void EndScene(EndSceneFlags in_Flags);
+	virtual void Flip();
+
+	virtual void Clear(ClearFlags in_Flags = ClearAll);	
+	virtual void SetViewport(vint left, vint top, vint right, vint bottom);
+
+	virtual void SetClearColor(
+		vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha);
+
+	virtual vbool IsActive() const;
 
 	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix);
 
@@ -79,8 +88,12 @@ private:
 	typedef std::list<VMeshBase*> MeshList;
 	MeshList m_Meshes;
 
+	vbool m_bActive;
+
 	// lights
 	std::vector<VPointLight> m_PointLights;
+
+	VColor4f m_ClearColor;
 
 	// the matrices
 	VMatrix44f m_ViewMatrix;

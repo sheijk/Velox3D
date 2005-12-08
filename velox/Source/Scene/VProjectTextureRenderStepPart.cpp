@@ -152,7 +152,7 @@ void VProjectTextureRenderStepPart::SetTextureSize(const vfloat32& in_TextureSiz
 	m_fTextureSize = in_TextureSize;
 }
 
-void VProjectTextureRenderStepPart::Send(const messaging::VMessage& in_Message, 
+void VProjectTextureRenderStepPart::OnMessage(const messaging::VMessage& in_Message, 
 				  messaging::VMessage* in_pAnswer)
 {
 	try

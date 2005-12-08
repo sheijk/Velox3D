@@ -6,7 +6,7 @@
 #include <V3d/OpenGL.h>
 
 #include <V3d/Graphics/IVTexture.h>
-#include "../../Graphics/OpenGL/Context/VPBufferWindowContext.h"
+#include "../../Graphics/OpenGL/Context/VOffscreenContextBase.h"
 
 #include <string>
 //----------------------------------------------------------------------------
@@ -23,14 +23,13 @@ using namespace v3d;
 class VPBufferTexture : public IVTexture
 {
 public:
-
-	VPBufferTexture(VPBufferWindowContext* in_pContext);
+	VPBufferTexture(VOffscreenContextBase* in_pContext);
 	virtual ~VPBufferTexture();
 
 	/**
 	 * @see v3d::graphics::IVTexture::Bind
 	 */
-	void Bind();
+	void Bind(vuint in_nTextureUnit = 0);
 
 	/**
 	 * @see v3d::graphics::IVTexture::Unbind
@@ -38,7 +37,7 @@ public:
 	void Unbind();
 
 private:
-	VPBufferWindowContext* m_pContext;
+	VOffscreenContextBase* m_pContext;
 };
 
 //-----------------------------------------------------------------------------

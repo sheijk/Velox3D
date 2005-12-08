@@ -4,6 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VTypeInfo.h>
 
+#include <V3d/Graphics/IVParameter.h>
 #include <V3d/Graphics/IVPass.h>
 #include <V3d/Math/VVector.h>
 //----------------------------------------------------------------------------
@@ -26,8 +27,11 @@ public:
 	virtual vuint PassCount() const = 0;
 	virtual const IVPass& GetPass(vuint in_nNum) const = 0;
 
-	virtual void SetParameter(ParamHandle in_Param, vfloat32 in_Value) const = 0;
-	virtual void SetParameter(ParamHandle in_Param, VVector4f in_Value) const = 0;
+	//virtual void SetParameter(ParamHandle in_Param, vfloat32 in_Value) const = 0;
+	//virtual void SetParameter(ParamHandle in_Param, VVector4f in_Value) const = 0;
+
+	virtual VRangeIterator<IVParameter> Parameters() = 0;
+	virtual IVParameter* GetParameterByName(const std::string& in_strName) = 0;
 };
 
 //-----------------------------------------------------------------------------

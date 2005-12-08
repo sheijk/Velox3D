@@ -81,9 +81,8 @@ public:
 
 	/** Send a message to the part. Used by the serialization manager, the
 	 * editor and maybe in the future to notify parts about events */
-	virtual void Send(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0)
-	{}
+	void Send(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
 
 	template<typename T>
 		vbool IsOfType() const;
@@ -95,6 +94,11 @@ public:
 	/** Returns 0 if part could not be converted */
 	template<typename T>
 		T* Convert();
+
+private:
+	/** Override for parts which will handle messages */
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
 };
 
 //-----------------------------------------------------------------------------

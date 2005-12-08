@@ -107,7 +107,7 @@ VResource* VResource::AddSubResource(const std::string& in_strChildName)
 	}
 }
 
-VResource* VResource::AddRandomNamedSubResource()
+VResource* VResource::AddRandomNamedSubResource(VStringParam in_strUsageHint)
 {
 	// get an unused name
 	std::stringstream name;
@@ -117,7 +117,7 @@ VResource* VResource::AddRandomNamedSubResource()
 	do
 	{
 		name.clear();
-		name << "res" << id;
+		name << "private " << in_strUsageHint << id;
 	}
 	while( GetSubResource(name.str()) != 0 );
 
@@ -358,7 +358,7 @@ vbool VResource::IsMutableAccessAllowed(const VTypeInfo& in_Type) const
 
 	// ask if mutable access is allowed
 	if( pResourceType == 0 )
-		return false;
+		return true;
 	else
 		return pResourceType->AllowMutableAccess(in_Type, this);
 }

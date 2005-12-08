@@ -43,6 +43,41 @@ void VRenderStateList::ClearState(vuint in_nPriority)
 	m_States[in_nPriority] = 0;
 }
 
+void VRenderStateList::AddParameter(IVParameter* in_pParam)
+{
+	m_Parameters.push_back(in_pParam);
+}
+
+VRangeIterator<IVParameter> VRenderStateList::Parameters()
+{
+	return CreateDerefBeginIterator<IVParameter>(m_Parameters);
+}
+
+IVParameter* VRenderStateList::GetParameterByName(
+	const std::string& in_strName)
+{
+	for(ParameterContainer::iterator param = m_Parameters.begin();
+		param != m_Parameters.end();
+		++param)
+	{
+		if( (*param)->GetName() == in_strName )
+			return *param;
+	}
+
+	return 0;
+}
+
+void VRenderStateList::AddParameters(VRangeIterator<IVParameter> in_Params)
+{
+	VRangeIterator<IVParameter> params = in_Params;
+
+	while(params.HasNext())
+	{
+		AddParameter(&*params);
+		++params;
+	}
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

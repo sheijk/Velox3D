@@ -24,7 +24,7 @@ namespace v3d {
  *
  * @author sheijk
  */
-template <class TElement, class TIndex> class VArray2d
+template <class TElement, class TIndex = vuint> class VArray2d
 {
 protected:
    // size of array

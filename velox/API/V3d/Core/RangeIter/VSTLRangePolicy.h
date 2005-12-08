@@ -10,12 +10,15 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 	
-template<typename STLIterator>
-	class VSTLRangePolicy : public VSTLRangePolicyBase<STLIterator>
+template<
+	typename STLIterator, 
+	typename T = typename std::iterator_traits<STLIterator>::value_type
+>
+class VSTLRangePolicy : public VSTLRangePolicyBase<STLIterator, T>
 {
 public:
 	VSTLRangePolicy(const STLIterator& in_Begin, const STLIterator& in_End)
-		: VSTLRangePolicyBase<STLIterator>(in_Begin, in_End)
+		: VSTLRangePolicyBase<STLIterator, T>(in_Begin, in_End)
 	{}
 		
 	virtual Type* Get() const

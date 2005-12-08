@@ -16,16 +16,6 @@ VTexture2D::~VTexture2D()
 	glDeleteTextures(1, &m_iTextureID);
 }
 
-void VTexture2D::Bind()
-{
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, m_iTextureID);
-}
-
-void VTexture2D::Unbind()
-{
-	glDisable(GL_TEXTURE_2D);
-}
 //-----------------------------------------------------------------------------
 }}// namespace v3d::graphics
 //-----------------------------------------------------------------------------

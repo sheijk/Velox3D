@@ -22,6 +22,7 @@ public:
 	virtual ~VResourceManager();
 
 	virtual VResourceId CreateResource(VStringParam in_strName);
+	virtual VResourceId CreateRandomNamedResource(VStringParam in_strUsageHint);
 	virtual VResourceId GetResourceByName(VStringParam in_strName);
 	virtual void RegisterResourceType(VSharedPtr<IVResourceType> in_pResType);
 	virtual void NotifyChange(VResource* in_pResource, VTypeInfo in_Type);
@@ -41,6 +42,8 @@ private:
 	typedef std::map<VTypeInfo, VSharedPtr<IVResourceType> > ManagerMap;
 
 	VResource m_RootResource;
+	// root for randomly named resources
+	VResource* m_pRandomRoot;
 	CreatorMap m_TypeCreators;
 	ManagerMap m_TypeManagers;
 };

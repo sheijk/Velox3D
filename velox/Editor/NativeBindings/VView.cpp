@@ -80,6 +80,18 @@ void VView::FrameUpdateLoop()
 			m_FrameActions.push_back(*newAction);
 		}
 		m_NewFrameActions.clear();
+		
+		// remove all old actions
+		for(FrameActions::iterator oldAction = m_OldFrameActions.begin();
+			oldAction != m_OldFrameActions.end(); ++oldAction)
+		{
+			(*oldAction)->Shutdown();
+			FrameActions::iterator newEnd = std::remove(
+				m_FrameActions.begin(), m_FrameActions.end(), *oldAction);
+			m_FrameActions.erase(newEnd, m_FrameActions.end());
+		}
+		m_OldFrameActions.clear();
+		
 		m_bInitCalled = true;
 		
 		// tell all frame actions to execute
@@ -138,29 +150,34 @@ void VView::Add(IVFrameAction* in_pTestAction)
 		glfwSleep(.01f);
 }
 
+void VView::Remove(IVFrameAction* in_pAction)
+{
+	m_OldFrameActions.push_back(in_pAction);
+}
+
 //-----------------------------------------------------------------------------
 
-void VTestFrameAction::Init()
-{
-	cout << "VTestFrameAction::Init()" << endl;
-}
-
-void VTestFrameAction::Shutdown()
-{
-	cout << "VTestFrameAction::Shutdown()" << endl;
-}
-
-void VTestFrameAction::UpdateFrame()
-{
-	++m_nCount;
-	
-	if( m_nCount > 100 )
-	{
-		cout << "VTestFrameAction::UpdateFrame: VView updating working" << endl;
-		
-		m_nCount = 0;
-	}
-}
+//void VTestFrameAction::Init()
+//{
+//	cout << "VTestFrameAction::Init()" << endl;
+//}
+//
+//void VTestFrameAction::Shutdown()
+//{
+//	cout << "VTestFrameAction::Shutdown()" << endl;
+//}
+//
+//void VTestFrameAction::UpdateFrame()
+//{
+//	++m_nCount;
+//	
+//	if( m_nCount > 100 )
+//	{
+//		cout << "VTestFrameAction::UpdateFrame: VView updating working" << endl;
+//		
+//		m_nCount = 0;
+//	}
+//}
 
 //-----------------------------------------------------------------------------
 
@@ -250,6 +267,11 @@ void VRenderFrameAction::setSize(vuint width, vuint height)
 	m_nWidth = width;
 	m_nHeight = height;
 	m_bResized = true;
+	
+	if( m_pDevice.Get() != 0 )
+	{
+		m_pDevice->SetViewport(0, 0, m_nWidth, m_nHeight);
+	}
 }
 
 #include <V3d/OpenGL.h>
@@ -324,9 +346,9 @@ void VRenderFrameAction::UpdateFrame()
 {
 	m_pDevice->BeginScene();
 	
-	if( m_bResized )
+//	if( m_bResized )
 	{
-		glViewport(0, 0, m_nWidth, m_nHeight);
+//		glViewport(0, 0, m_nWidth, m_nHeight);
 		m_bResized = false;
 	}
 
@@ -388,7 +410,7 @@ void VRenderFrameAction::UpdateFrame()
 		++count;
 	}
 
-	m_pDevice->EndScene();
+	m_pDevice->EndScene(IVDevice::FlipScene);
 }
 
 void VRenderFrameAction::SetShooting(v3d::scene::IVShooting* in_pShooting)

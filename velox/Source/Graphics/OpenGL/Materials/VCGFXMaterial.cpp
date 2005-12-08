@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Core/VIOStream.h>
+#include <V3d/Core/RangeIter/VEmptyPolicy.h>
 
 #include <string>
 
@@ -11,7 +12,7 @@
 #include "../Textures/VTexture2D.h"
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -26,8 +27,10 @@ VCGFXMaterial::VCGFXMaterial(VRenderStateList::RenderStateList in_DefaultStates,
 	m_DefaultStates = in_DefaultStates;
 	m_Effect = 0;
 	m_Technique = 0;
+	m_strSource = in_strSource;
+	m_bNeedsUpdate = true;
 
-	CreateFromSource(in_strSource);
+	//CreateFromSource(in_strSource);
 }
 
 VCGFXMaterial::~VCGFXMaterial()
@@ -37,6 +40,10 @@ VCGFXMaterial::~VCGFXMaterial()
 
 void VCGFXMaterial::CreateFromSource(const std::string& in_strSource)
 {
+	vout << "--- Creating cgfx material from source:\n" 
+		<< in_strSource 
+		<< "\n---" << vendl;
+
 	cgGLRegisterStates(s_Context);
 	V3D_CHECK_CG_ERROR();
 
@@ -161,6 +168,8 @@ void VCGFXMaterial::CreateFromSource(const std::string& in_strSource)
 		param = cgGetNextParameter(param);
 		V3D_CHECK_CG_ERROR();
 	}
+
+	m_bNeedsUpdate = false;
 }
 
 void VCGFXMaterial::Delete()
@@ -170,8 +179,10 @@ void VCGFXMaterial::Delete()
 	m_Parameters.clear();
 	m_Textures.clear();
 	m_Passes.clear();
+	cgDestroyEffect(m_Effect);
 	m_Effect = 0;
 	m_Technique = 0;
+	m_strSource = "";
 }
 
 vbool VCGFXMaterial::SetShaderSource(const std::string& in_strSource)
@@ -181,7 +192,9 @@ vbool VCGFXMaterial::SetShaderSource(const std::string& in_strSource)
 		if( m_Effect != 0 )
 			Delete();
 
-		CreateFromSource(in_strSource);
+		m_strSource = in_strSource;
+		m_bNeedsUpdate = true;
+		//CreateFromSource(in_strSource);
                 
 		return true;
 	}
@@ -194,11 +207,25 @@ vbool VCGFXMaterial::SetShaderSource(const std::string& in_strSource)
 
 vuint VCGFXMaterial::PassCount() const
 {
+	if( m_bNeedsUpdate )
+	{
+		VCGFXMaterial* pNonConst = const_cast<VCGFXMaterial*>(this);
+		pNonConst->CreateFromSource(m_strSource);
+		pNonConst->m_bNeedsUpdate = false;
+	}
+
 	return static_cast<vuint>(m_Passes.size());
 }
 
 const IVPass& VCGFXMaterial::GetPass(vuint in_nNum) const
 {
+	if( m_bNeedsUpdate )
+	{
+		VCGFXMaterial* pNonConst = const_cast<VCGFXMaterial*>(this);
+		pNonConst->CreateFromSource(m_strSource);
+		pNonConst->m_bNeedsUpdate = false;
+	}
+
 	V3D_ASSERT(in_nNum < m_Passes.size());
 
 	return *m_Passes[in_nNum];
@@ -284,6 +311,16 @@ void VCGFXMaterial::SetParameter(ParamHandle in_Param, VVector4f in_Value) const
 	//	cgSetParameter4f(param, in_Value[0], in_Value[1], in_Value[2], in_Value[3]);
 	//	V3D_CHECK_CG_ERROR();
 	//}
+}
+
+VRangeIterator<IVParameter> VCGFXMaterial::Parameters()
+{
+	V3D_THROW(VException, "Not yet implemented");
+}
+
+IVParameter* VCGFXMaterial::GetParameterByName(const std::string& in_strName)
+{
+	V3D_THROW(VException, "Not yet implemented");
 }
 
 //-----------------------------------------------------------------------------

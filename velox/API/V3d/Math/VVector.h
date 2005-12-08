@@ -1,7 +1,7 @@
 #ifndef V3D_VVECTOR_H
 #define V3D_VVECTOR_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <gmtl/Vec.h>
 #include <gmtl/VecOps.h>
@@ -148,6 +148,10 @@ public:
 typedef VVector<vfloat32, 2> VVector2f;
 typedef VVector<vfloat32, 3> VVector3f;
 typedef VVector<vfloat32, 4> VVector4f;
+
+VVector2f ToVector2f(float x, float y);
+VVector3f ToVector3f(float x, float y, float z);
+VVector4f ToVector4f(float x, float y, float z, float w);
 
 typedef VVector<vfloat64, 2> VVector2d;
 typedef VVector<vfloat64, 3> VVector3d;

@@ -48,12 +48,12 @@ public:
 	 */
 	void SetTransform(const math::VRBTransform& in_Transformation);
 
-	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
-
 	static std::string GetDefaultId();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
+
 	math::VRBTransform m_Transformation;
 };
 

@@ -25,7 +25,7 @@ public:
 	/**
 	 * Bind Texture
 	 */
-	virtual void Bind() = 0;
+	virtual void Bind(vuint in_nTextureUnit = 0) = 0;
 	
 	/**
 	 * Unbind Texture

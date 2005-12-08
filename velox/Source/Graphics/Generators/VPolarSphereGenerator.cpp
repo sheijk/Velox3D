@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
+#include <V3dLib/Graphics/Geometry/VNormal3f.h>
 #include <V3d/Math/VVectorOps.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -46,6 +47,9 @@ VPolarSphereGenerator::VPolarSphereGenerator(
 	//if( (in_DataTypes & VVertexFormat::Indices) != 0 )
 	//	V3D_THROW(VMeshGenException, "Generating a polar sphere requires indices");
 
+	V3D_ASSERT(in_nRings > 1);
+	V3D_ASSERT(in_nSectors > 1);
+
 	in_DataTypes = VVertexFormat::DataTypes( in_DataTypes & (~VVertexFormat::Indices) );
 
 	m_nSectors = in_nSectors;
@@ -76,6 +80,9 @@ VVertexBuffer* VPolarSphereGenerator::CreateVertexBuffer() const
 
 	if( m_Format.Contains(VVertexFormat::TexCoords) )
 		GenerateTexCoords(pVertexBuffer);
+
+	if( m_Format.Contains(VVertexFormat::Normals) )
+		GenerateNormals(pVertexBuffer);
 
 	return pVertexBuffer;
 }
@@ -144,6 +151,40 @@ void VPolarSphereGenerator::GenerateCoordinates(VVertexBuffer* io_pVB) const
 
 	const float deltaAngle = 2 * pi / m_nSectors;
 	const float height = m_fTop - m_fBottom;
+	//const float deltaY = height / (m_nRings-1);
+
+	float angle = 0;
+	for(vuint sector = 0; sector < m_nSectors; ++sector, angle += deltaAngle)
+	{
+		const float xpos = cos(angle);
+		const float zpos = sin(angle);
+
+		float ypos = m_fBottom;
+		int ring = 0;
+		for(vuint ring = 0; ring < m_nRings; ++ring)
+		{
+			ypos = height * (vfloat32(ring)/vfloat32(m_nRings-1)) + m_fBottom;
+			const float scale = sqrt(1 - ypos*ypos);
+			//const float scale = 1.0f;
+			VVector3f coord;
+			coord.Set(xpos * scale, ypos, zpos * scale);
+			coord *= m_fSize;
+			io_pVB->SetCoordinate(coord, GetVertexNum(sector, ring));
+			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.x = xpos * scale;
+			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.y = ypos;
+			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.z = zpos * scale;
+		}
+	}
+}
+
+void VPolarSphereGenerator::GenerateNormals(VVertexBuffer* io_pVB) const
+{
+	using namespace std;
+
+	const float pi = 3.141592654f;
+
+	const float deltaAngle = 2 * pi / m_nSectors;
+	const float height = m_fTop - m_fBottom;
 	const float deltaY = height / (m_nRings-1);
 
 	float angle = 0;
@@ -157,14 +198,9 @@ void VPolarSphereGenerator::GenerateCoordinates(VVertexBuffer* io_pVB) const
 		for(vuint ring = 0; ring < m_nRings; ++ring, ypos += deltaY)
 		{
 			const float scale = sqrt(1 - ypos*ypos);
-			//const float scale = 1.0f;
-			VVector3f coord;
-			coord.Set(xpos * scale, ypos, zpos * scale);
-			coord *= m_fSize;
-			io_pVB->SetCoordinate(coord, GetVertexNum(sector, ring));
-			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.x = xpos * scale;
-			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.y = ypos;
-			//geometry.GetVertexBuffer()[GetVertexNum(sector, ring)].position.z = zpos * scale;
+			VNormal3f normal;
+			normal.Set(xpos * scale, ypos, zpos * scale);
+			io_pVB->SetNormal(normal, GetVertexNum(sector, ring));
 		}
 	}
 }

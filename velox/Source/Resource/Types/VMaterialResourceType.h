@@ -9,7 +9,8 @@
 #include "../Source/Graphics/OpenGL/VTextureStateCategory.h"
 #include "../Source/Graphics/OpenGL/VMiscStateCategory.h"
 #include "../Source/Graphics/OpenGL/VVertexShaderCategory.h"
-#include "../source/Graphics/OpenGL/Materials/VCGFXState.h"
+#include "../Source/Graphics/OpenGL/Materials/VCGFXState.h"
+#include "../Source/Graphics/OpenGL/VShaderCategory.h"
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace graphics {
@@ -17,10 +18,10 @@ namespace graphics {
 using namespace v3d; // anti auto indenting
 
 /**
-* Automatically loads materials
-*
-* @author: ins
-*/
+ * Automatically loads materials
+ *
+ * @author: ins, sheijk
+ */
 class VMaterialResourceType : public resource::IVResourceType
 {
 	std::vector<VTypeInfo> m_ManagedTypes;
@@ -52,8 +53,7 @@ private:
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;
 	VMiscStateCategory m_MiscStateCategory;
-	VVertexShaderCategory m_VertexShaderCategory;
-	VPixelShaderCategory m_PixelShaderCategory;
+	VShaderCategory m_ShaderCategory;
 };
 
 //-----------------------------------------------------------------------------

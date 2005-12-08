@@ -6,6 +6,7 @@
 
 #include "../../Graphics/OpenGL/Materials/VFixedFunctionPass.h"
 #include "../../Graphics/OpenGL/Materials/VCGFXMaterial.h"
+#include "../../Graphics/OpenGL/glsl/VGLSLPass.h"
 #include <V3d/Resource/Types/VFileName.h>
 
 #include <V3d/Vfs.h>
@@ -30,23 +31,26 @@ VMaterialResourceType::VMaterialResourceType()
 {
 	m_ManagedTypes.push_back(GetTypeInfo<IVMaterial>());
 
-	//register all states
-	m_StateCategories.RegisterCategory(m_CGFXCategory);
-	m_StateCategories.RegisterCategory(m_TextureStateCategory);
-	m_StateCategories.RegisterCategory(m_MiscStateCategory);
-	m_StateCategories.RegisterCategory(m_VertexShaderCategory);
-	m_StateCategories.RegisterCategory(m_PixelShaderCategory);
-
+	// priorities must be asssigned before registering the categories to
+	// the category registry
 	int prio = 0;
 	m_CGFXCategory.SetPriority(prio); ++prio;
-	m_PixelShaderCategory.SetPriority(prio); ++prio;
-	m_VertexShaderCategory.SetPriority(prio); ++prio;
+	m_ShaderCategory.SetPriority(prio); ++prio;
 	m_TextureStateCategory.SetPriority(prio); ++prio;
 	m_MiscStateCategory.SetPriority(prio); ++prio;
+
+	//register all states
+	m_StateCategories.RegisterCategory(m_CGFXCategory);
+	m_StateCategories.RegisterCategory(m_ShaderCategory);
+	m_StateCategories.RegisterCategory(m_TextureStateCategory);
+	m_StateCategories.RegisterCategory(m_MiscStateCategory);
 
 	VFixedFunctionPass::SetCategories(
 		&m_TextureStateCategory,
 		&m_MiscStateCategory);
+	VGLSLPass::SetCategories(
+		&m_ShaderCategory
+		);
 }
 
 /**
@@ -94,7 +98,14 @@ VMaterial* VMaterialResourceType::CreateMaterial(const VShaderPath& in_Technique
 VRenderStateList* VMaterialResourceType::CreatePass(const VRenderPass& in_Pass) const
 {
 	// decide which material type to use
-	if( VFixedFunctionPass::CanRealize(in_Pass) )
+	if( VGLSLPass::CanRealize(in_Pass) )
+	{
+		VRenderStateList::RenderStateList defaultStates = 
+			m_StateCategories.CreateDefaultStates();
+
+		return new VGLSLPass(defaultStates, in_Pass);
+	}
+	else if( VFixedFunctionPass::CanRealize(in_Pass) )
 	{
 		// create default states
 		VRenderStateList::RenderStateList defaultStates =
@@ -199,7 +210,8 @@ vbool VMaterialResourceType::Generate(
 vbool VMaterialResourceType::AllowMutableAccess(
 	const VTypeInfo& in_TypeInfo, const VResource* in_Resource) const
 {
-	return in_Resource->ContainsData<VCGFXMaterial>();
+	return true;
+	//return in_Resource->ContainsData<VCGFXMaterial>();
 }
 
 void VMaterialResourceType::NotifyChange(

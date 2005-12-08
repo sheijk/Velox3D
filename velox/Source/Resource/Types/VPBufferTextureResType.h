@@ -6,7 +6,7 @@
 #include <V3d/Image/VImage.h>
 #include <V3d/Resource.h>
 #include <V3d/Graphics/IVRenderContext.h>
-#include "../../Graphics/OpenGL/Context/VPBufferWindowContext.h"
+#include "../../Graphics/OpenGL/Context/VOffscreenContextBase.h"
 #include "../../Graphics/OpenGL/VPBufferTexture.h"
 #include "../../Graphics/OpenGL/VOpenGLDevice.h"
 

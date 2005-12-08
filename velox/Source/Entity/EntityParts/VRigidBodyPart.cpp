@@ -52,7 +52,7 @@ std::string VRigidBodyPart::GetDefaultId()
 	return "body";
 }
 
-void VRigidBodyPart::Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+void VRigidBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
 {
 	using std::string;
 	

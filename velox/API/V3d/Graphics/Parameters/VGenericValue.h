@@ -1,0 +1,32 @@
+#ifndef V3D_VGENERICVALUE_2005_11_29_H
+#define V3D_VGENERICVALUE_2005_11_29_H
+//-----------------------------------------------------------------------------
+#include <V3d/Core/VCoreLib.h>
+
+#include <V3d/Graphics/Parameters/IVParameterValue.h>
+#include <V3d/Graphics/IVParameter.h>
+//-----------------------------------------------------------------------------
+namespace v3d { namespace graphics {
+//-----------------------------------------------------------------------------
+using namespace v3d; // anti auto indenting
+
+template<typename ParamType>
+class VGenericValue : public IVParameterValue
+{
+public:
+	virtual void Apply(const IVParameter& in_Param) const
+	{
+		in_Param.Apply(m_Value);
+	}
+
+	ParamType GetValue() const { return m_Value; }
+	void SetValue(const ParamType& in_Value) { m_Value = in_Value; }
+
+private:
+	ParamType m_Value;
+};
+
+//-----------------------------------------------------------------------------
+}} // namespace v3d::graphics
+//-----------------------------------------------------------------------------
+#endif // V3D_VGENERICVALUE_2005_11_29_H

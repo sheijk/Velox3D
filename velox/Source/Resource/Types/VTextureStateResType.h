@@ -27,15 +27,21 @@ class VTextureStateResType : public resource::IVResourceType
 	TextureTargetMap m_TextureTargets;
 
 	GLenum GetTextureTarget(VTypeInfo in_Type) const;
+
 public:
 	VTextureStateResType();
 	virtual ~VTextureStateResType();
 
 	virtual VRangeIterator<VTypeInfo> CreatedTypes();
+	virtual VRangeIterator<VTypeInfo> ManagedTypes();
 
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
 		VTypeInfo in_Type);
+
+	virtual vbool AllowMutableAccess(
+		const VTypeInfo& in_TypeInfo, 
+		const resource::VResource* in_Resource) const;
 };
 
 //-----------------------------------------------------------------------------

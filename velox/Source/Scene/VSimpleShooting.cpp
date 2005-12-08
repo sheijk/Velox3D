@@ -66,30 +66,45 @@ void VSimpleShooting::UpdateAndCull()
 void VSimpleShooting::Render()
 {
 	V3D_ASSERT(m_bActive);
+	V3D_ASSERT(m_pDevice != 0);
 
 	if( ! m_pScene.IsConnected() )
 		return;
 
 	if( m_RenderSteps.size() > 0 )
 	{
-		IVDevice* activeDevice = m_pDevice;
+		IVDevice* activeDevice = m_RenderSteps.front()->GetOutputDevice();
+
+		activeDevice->BeginScene();
+
+		//if( m_RenderSteps.front()->GetOutputDevice() != activeDevice )
+		//{
+		//	activeDevice->EndScene(IVDevice::NoFlip);
+		//	activeDevice = m_RenderSteps.front()->GetOutputDevice();
+		//	activeDevice->BeginScene();
+		//}
+
+		if( m_pCamera != 0 )
+			m_pCamera->ApplyTo(*activeDevice);
 
 		for(vuint stepNum = 0; stepNum < m_RenderSteps.size(); ++stepNum)
 		{
 			IVRenderStepPart* renderStep = m_RenderSteps[stepNum];
 
-			//if( activeDevice != renderStep->GetOutputDevice() )
-			//{
-			//	activeDevice->EndScene();
-			//	activeDevice = renderStep->GetOutputDevice();
-			//	activeDevice->BeginScene();
-			//}
+			if( activeDevice != renderStep->GetOutputDevice() )
+			{
+				activeDevice->EndScene();
+				activeDevice = renderStep->GetOutputDevice();
+				activeDevice->BeginScene();
+			}
 
 			renderStep->Render(m_pScene.Get());
 		}
 
 		//if( activeDevice != m_pDevice )
-		//	activeDevice->EndScene();
+		//{
+			activeDevice->EndScene();
+		//}
 	}
 	else
 	{

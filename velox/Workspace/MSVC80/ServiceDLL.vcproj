@@ -1,1323 +1,407 @@
-<?xml version="1.0" encoding="Windows-1252"?>
-<VisualStudioProject
-	ProjectType="Visual C++"
-	Version="8,00"
-	Name="ServiceDLL"
-	ProjectGUID="{20050526-0000-0000-0000-000587248000}"
-	RootNamespace="ServiceDLL"
-	Keyword="Win32Proj"
-	>
-	<Platforms>
-		<Platform
-			Name="Win32"
-		/>
-	</Platforms>
-	<ToolFiles>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<VisualStudioProject ProjectType="Visual C++" Version="8,00" Name="ServiceDLL" ProjectGUID="{20050526-0000-0000-0000-000587248000}" RootNamespace="ServiceDLL" Keyword="Win32Proj">
+  <Platforms>
+    <Platform Name="Win32"/>
+  </Platforms>
+  <ToolFiles>
 	</ToolFiles>
-	<Configurations>
-		<Configuration
-			Name="Debug|Win32"
-			OutputDirectory="../../Local/Build/VC8/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/VC8/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			CharacterSet="2"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="4"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib"
-				OutputFile="$(OutDir)/ServiceDLL.dll"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
-				ModuleDefinitionFile="DLLExports.def"
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(OutDir)/ServiceDLL.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/ServiceDLL.lib"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="../../Local/Build/VC8/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/VC8/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			CharacterSet="2"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
-				RuntimeLibrary="2"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib"
-				OutputFile="$(OutDir)/ServiceDLL.dll"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
-				ModuleDefinitionFile="DLLExports.def"
-				GenerateDebugInformation="true"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/ServiceDLL.lib"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-	</Configurations>
-	<References>
+  <Configurations>
+    <Configuration Name="Debug|Win32" OutputDirectory="../../Local/Build/VC8/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/VC8/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="2" InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops" CharacterSet="2">
+      <Tool Name="VCPreBuildEventTool"/>
+      <Tool Name="VCCustomBuildTool"/>
+      <Tool Name="VCXMLDataGeneratorTool"/>
+      <Tool Name="VCWebServiceProxyGeneratorTool"/>
+      <Tool Name="VCMIDLTool"/>
+      <Tool Name="VCCLCompilerTool" Optimization="0" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL" MinimalRebuild="true" BasicRuntimeChecks="3" RuntimeLibrary="3" RuntimeTypeInfo="true" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="true" DebugInformationFormat="4"/>
+      <Tool Name="VCManagedResourceCompilerTool"/>
+      <Tool Name="VCResourceCompilerTool"/>
+      <Tool Name="VCPreLinkEventTool"/>
+      <Tool Name="VCLinkerTool" AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib" OutputFile="$(OutDir)/ServiceDLL.dll" LinkIncremental="2" AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib" ModuleDefinitionFile="DLLExports.def" GenerateDebugInformation="true" ProgramDatabaseFile="$(OutDir)/ServiceDLL.pdb" SubSystem="2" ImportLibrary="$(OutDir)/ServiceDLL.lib" TargetMachine="1"/>
+      <Tool Name="VCALinkTool"/>
+      <Tool Name="VCManifestTool"/>
+      <Tool Name="VCXDCMakeTool"/>
+      <Tool Name="VCBscMakeTool"/>
+      <Tool Name="VCFxCopTool"/>
+      <Tool Name="VCAppVerifierTool"/>
+      <Tool Name="VCWebDeploymentTool"/>
+      <Tool Name="VCPostBuildEventTool"/>
+    </Configuration>
+    <Configuration Name="Release|Win32" OutputDirectory="../../Local/Build/VC8/$(ConfigurationName)" IntermediateDirectory="../../Local/Build/VC8/intermediate/$(ProjectName)/$(ConfigurationName)" ConfigurationType="2" InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops" CharacterSet="2">
+      <Tool Name="VCPreBuildEventTool"/>
+      <Tool Name="VCCustomBuildTool"/>
+      <Tool Name="VCXMLDataGeneratorTool"/>
+      <Tool Name="VCWebServiceProxyGeneratorTool"/>
+      <Tool Name="VCMIDLTool"/>
+      <Tool Name="VCCLCompilerTool" AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include" PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS" RuntimeLibrary="2" RuntimeTypeInfo="true" UsePrecompiledHeader="0" WarningLevel="3" Detect64BitPortabilityProblems="true" DebugInformationFormat="3"/>
+      <Tool Name="VCManagedResourceCompilerTool"/>
+      <Tool Name="VCResourceCompilerTool"/>
+      <Tool Name="VCPreLinkEventTool"/>
+      <Tool Name="VCLinkerTool" AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib" OutputFile="$(OutDir)/ServiceDLL.dll" LinkIncremental="1" AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib" ModuleDefinitionFile="DLLExports.def" GenerateDebugInformation="true" SubSystem="2" OptimizeReferences="2" EnableCOMDATFolding="2" ImportLibrary="$(OutDir)/ServiceDLL.lib" TargetMachine="1"/>
+      <Tool Name="VCALinkTool"/>
+      <Tool Name="VCManifestTool"/>
+      <Tool Name="VCXDCMakeTool"/>
+      <Tool Name="VCBscMakeTool"/>
+      <Tool Name="VCFxCopTool"/>
+      <Tool Name="VCAppVerifierTool"/>
+      <Tool Name="VCWebDeploymentTool"/>
+      <Tool Name="VCPostBuildEventTool"/>
+    </Configuration>
+  </Configurations>
+  <References>
 	</References>
-	<Files>
-		<Filter
-			Name="Api"
-			>
-			<Filter
-				Name="V3d"
-				>
-				<File
-					RelativePath="..\..\Api\V3d\Config.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3d\Graphics.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3d\Image.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3d\Input.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3d\System.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3d\Updater.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3d\VFS.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3d\Window.h"
-					>
-				</File>
-				<Filter
-					Name="Config"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Config\IVConfigProvider.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Error"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Error\IVErrorFilter.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Error\IVErrorListener.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Error\IVErrorService.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Error\IVErrorStream.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Error\VMessageTypeEnum.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Graphics"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\GraphicsExceptions.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\IVDevice.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\IVMaterial.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\IVMesh.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\IVPass.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\IVRenderState.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\IVStateCategory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VBuffer.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VDataFormat.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VDeviceMatrix.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VDisplaySettings.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.inl"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VMeshDescription.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VModel.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VPointLight.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VVertexBuffer.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Graphics\VVertexFormat.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Image"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Image\IVImageFactory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Image\IVImageLoader.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Image\IVImageManipulator.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Image\IVImageSaver.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Image\VImage.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Input"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Input\IVAbsoluteAxis.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\IVButton.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\IVInputDevice.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\IVInputManager.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\IVKeyboardDevice.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\IVMouseDevice.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\IVRelativeAxis.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\KeyEnumeration.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Input\VInputException.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="System"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\System\IVSystemManager.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Updater"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Updater\IVTimer.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Updater\IVUpdateable.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Updater\IVUpdateManager.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Vfs"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVAccessRights.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVBufferStream.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVDataProvider.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVDataProviderPool.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVDirectory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVFile.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVFileSysObject.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVFileSystem.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVLegalOperations.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVOfflineStream.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVStream.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVStreamFactory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\IVTempDataProvider.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\VAccessRightsFlags.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\VFlags.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\VIOException.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\VMountOptions.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Vfs\VStreamOps.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Window"
-					>
-					<File
-						RelativePath="..\..\Api\V3d\Window\IVWindow.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Window\IVWindowFrame.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Window\IVWindowManager.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Window\IVWxConnector.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="ConfigFiles"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\ConfigFiles\VConfigProvider.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ConfigFiles\VConfigProvider.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Error"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\Error\VDebugMonitor.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VDebugMonitor.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VDebugMonitorEnum.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VErrorConsoleListener.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VErrorConsoleListener.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VErrorService.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VErrorService.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VErrorStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VErrorStream.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VFileLogger.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Error\VFileLogger.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Graphics"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<Filter
-					Name="DeviceBase"
-					>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VMaterial.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VMaterial.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VMeshBase.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VMeshBase.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VRenderStateList.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VRenderStateList.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VStateCategoryList.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\DeviceBase\VStateCategoryList.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="OpenGL"
-					>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\IVOpenGLRenderState.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\IVVertexStream.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VCGVertexShaderState.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VCGVertexShaderState.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VCubemapTextureState.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VCubemapTextureState.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VMiscState.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VMiscState.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VMiscStateCategory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLDevice.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLDevice.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGlUtils.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLUtils.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBOMesh.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBOMesh.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VPBufferTexture.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VPBufferTexture.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VTextureStateCategory.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VTextureStateCategory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.h"
-						>
-					</File>
-					<Filter
-						Name="Context"
-						>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Materials"
-						>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXMaterial.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXMaterial.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXPass.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXPass.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXState.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXState.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Textures"
-						>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="Interface"
-				>
-				<File
-					RelativePath="..\..\API\V3d\Graphics\IVRenderContext.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\API\V3d\Graphics\IVTexture.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="ImageService"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\ImageService\VDevILLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ImageService\VDevILLoader.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ImageService\VDevILSaver.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ImageService\VDevILSaver.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ImageService\VImageFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ImageService\VImageFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ImageService\VImageManipulator.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\ImageService\VImageManipulator.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Implementation"
-			>
-			<File
-				RelativePath="..\..\Source\VeloxServices.cpp"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="InputLib"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIAbsoluteAxis.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIAbsoluteAxis.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIButton.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIButton.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIInputDevice.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIInputDevice.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIInputManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIInputManager.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIKeyboardButton.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIKeyboardButton.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIKeyboardDevice.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIKeyboardDevice.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIMouseDevice.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIMouseDevice.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIRelativeAxis.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VDIRelativeAxis.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VInputDeviceHelper.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\InputLib\VInputDeviceHelper.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Module"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\Module\VeloxModule.cpp"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Resource"
-			>
-			<Filter
-				Name="Implementation"
-				>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="SystemManager"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\SystemManager\VSystemManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\SystemManager\VSystemManager.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="UpdateManager"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\UpdateManager\VPerformanceCounter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\UpdateManager\VPerformanceCounter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\UpdateManager\VUpdateManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\UpdateManager\VUpdateManager.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="UtilsLib"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<Filter
-					Name="CPUDetect"
-					>
-					<File
-						RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="VirtualFileSystem"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VAccessRights.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VAccessRights.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VBufferStreamGuard.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VBufferStreamGuard.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VDataProviderPool.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VDataProviderPool.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VDirectory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VDirectory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VFile.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VFile.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VFileDataProvider.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VFileDataProvider.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VFileStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VFileStream.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VfsUtils.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VLegalOperations.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VLegalOperations.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VMemoryStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VMemoryStream.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VOfflineStreamGuard.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VOfflineStreamGuard.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VSimpleVfs.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VSimpleVfs.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VStreamFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VStreamFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VStreamGuard.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VStreamGuard.inl"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VStreamToOfflineStreamWrapper.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VStreamToOfflineStreamWrapper.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VTempDataProvider.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VTempDataProvider.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VXmlIniReader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\VirtualFileSystem\VXmlIniReader.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="WindowService"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\WindowService\VDeviceFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VOpenGLDeviceFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VOpenGLDeviceFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowBase.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowManagerBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowManagerBase.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowManagerWin32.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowManagerWin32.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowWin32.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\WindowService\VWindowWin32.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Entity"
-			>
-			<Filter
-				Name="Parsers"
-				>
-				<File
-					RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Scene"
-			>
-			<File
-				RelativePath="..\..\Source\Scene\IVRenderStepPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VArrowMeshPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VCoordSysDisplayPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VDefaultRenderStepPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VMeshPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VMeshPartBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VModelPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VNaiveSceneManagerPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VOrientationGridPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VProjectTextureRenderStepPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VSimpleShooting.cpp"
-				>
-			</File>
-		</Filter>
-	</Files>
-	<Globals>
+  <Files xmlns:exsl="http://exslt.org/common">
+    <Filter Name="Api" Filter="">
+      <Filter Name="V3d" Filter="">
+        <Filter Name="Config" Filter="">
+          <File RelativePath="..\..\Api\V3d\Config\IVConfigProvider.h"/>
+        </Filter>
+        <Filter Name="Error" Filter="">
+          <File RelativePath="..\..\Api\V3d\Error\IVErrorFilter.h"/>
+          <File RelativePath="..\..\Api\V3d\Error\IVErrorListener.h"/>
+          <File RelativePath="..\..\Api\V3d\Error\IVErrorService.h"/>
+          <File RelativePath="..\..\Api\V3d\Error\IVErrorStream.h"/>
+          <File RelativePath="..\..\Api\V3d\Error\VMessageTypeEnum.h"/>
+        </Filter>
+        <Filter Name="Graphics" Filter="">
+          <Filter Name="Parameters" Filter="">
+            <File RelativePath="..\..\Api\V3d\Graphics\Parameters\IVParameterValue.h"/>
+            <File RelativePath="..\..\Api\V3d\Graphics\Parameters\VGenericValue.h"/>
+            <File RelativePath="..\..\Api\V3d\Graphics\Parameters\VMaterialSetup.h"/>
+          </Filter>
+          <File RelativePath="..\..\Api\V3d\Graphics\GraphicsExceptions.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVDevice.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVMaterial.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVMesh.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVParameter.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVPass.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVRenderState.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVShader.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVStateCategory.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\IVStateCategoryRegistry.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VBuffer.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VDataFormat.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VDeviceMatrix.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VDisplaySettings.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.inl"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VMeshDescription.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VModel.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VPointLight.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VVertexBuffer.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VVertexFormat.h"/>
+        </Filter>
+        <Filter Name="Image" Filter="">
+          <File RelativePath="..\..\Api\V3d\Image\IVImageFactory.h"/>
+          <File RelativePath="..\..\Api\V3d\Image\IVImageLoader.h"/>
+          <File RelativePath="..\..\Api\V3d\Image\IVImageManipulator.h"/>
+          <File RelativePath="..\..\Api\V3d\Image\IVImageSaver.h"/>
+          <File RelativePath="..\..\Api\V3d\Image\VImage.h"/>
+        </Filter>
+        <Filter Name="Input" Filter="">
+          <File RelativePath="..\..\Api\V3d\Input\IVAbsoluteAxis.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\IVButton.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\IVInputDevice.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\IVInputManager.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\IVKeyboardDevice.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\IVMouseDevice.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\IVRelativeAxis.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\KeyEnumeration.h"/>
+          <File RelativePath="..\..\Api\V3d\Input\VInputException.h"/>
+        </Filter>
+        <Filter Name="System" Filter="">
+          <File RelativePath="..\..\Api\V3d\System\IVSystemManager.h"/>
+        </Filter>
+        <Filter Name="Updater" Filter="">
+          <File RelativePath="..\..\Api\V3d\Updater\IVTimer.h"/>
+          <File RelativePath="..\..\Api\V3d\Updater\IVUpdateManager.h"/>
+          <File RelativePath="..\..\Api\V3d\Updater\IVUpdateable.h"/>
+        </Filter>
+        <Filter Name="Vfs" Filter="">
+          <File RelativePath="..\..\Api\V3d\Vfs\IVAccessRights.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVBufferStream.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVDataProvider.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVDataProviderPool.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVDirectory.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVFile.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVFileSysObject.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVFileSystem.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVLegalOperations.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVOfflineStream.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVStream.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVStreamFactory.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\IVTempDataProvider.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\VAccessRightsFlags.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\VFlags.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\VIOException.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\VMountOptions.h"/>
+          <File RelativePath="..\..\Api\V3d\Vfs\VStreamOps.h"/>
+        </Filter>
+        <Filter Name="Window" Filter="">
+          <File RelativePath="..\..\Api\V3d\Window\IVWindow.h"/>
+          <File RelativePath="..\..\Api\V3d\Window\IVWindowFrame.h"/>
+          <File RelativePath="..\..\Api\V3d\Window\IVWindowManager.h"/>
+          <File RelativePath="..\..\Api\V3d\Window\IVWxConnector.h"/>
+        </Filter>
+        <File RelativePath="..\..\Api\V3d\Config.h"/>
+        <File RelativePath="..\..\Api\V3d\Graphics.h"/>
+        <File RelativePath="..\..\Api\V3d\Image.h"/>
+        <File RelativePath="..\..\Api\V3d\Input.h"/>
+        <File RelativePath="..\..\Api\V3d\System.h"/>
+        <File RelativePath="..\..\Api\V3d\Updater.h"/>
+        <File RelativePath="..\..\Api\V3d\VFS.h"/>
+        <File RelativePath="..\..\Api\V3d\Window.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="ConfigFiles" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\ConfigFiles\VConfigProvider.cpp"/>
+        <File RelativePath="..\..\Source\ConfigFiles\VConfigProvider.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="Entity" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <Filter Name="Parsers" Filter="">
+          <File RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.cpp"/>
+          <File RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.h"/>
+        </Filter>
+      </Filter>
+    </Filter>
+    <Filter Name="Error" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\Error\VDebugMonitor.cpp"/>
+        <File RelativePath="..\..\Source\Error\VDebugMonitor.h"/>
+        <File RelativePath="..\..\Source\Error\VDebugMonitorEnum.h"/>
+        <File RelativePath="..\..\Source\Error\VErrorConsoleListener.cpp"/>
+        <File RelativePath="..\..\Source\Error\VErrorConsoleListener.h"/>
+        <File RelativePath="..\..\Source\Error\VErrorService.cpp"/>
+        <File RelativePath="..\..\Source\Error\VErrorService.h"/>
+        <File RelativePath="..\..\Source\Error\VErrorStream.cpp"/>
+        <File RelativePath="..\..\Source\Error\VErrorStream.h"/>
+        <File RelativePath="..\..\Source\Error\VFileLogger.cpp"/>
+        <File RelativePath="..\..\Source\Error\VFileLogger.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="Graphics" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <Filter Name="DeviceBase" Filter="">
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VMaterial.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VMaterial.h"/>
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VMeshBase.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VMeshBase.h"/>
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VRenderStateList.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VRenderStateList.h"/>
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VStateCategoryList.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\DeviceBase\VStateCategoryList.h"/>
+        </Filter>
+        <Filter Name="OpenGL" Filter="">
+          <Filter Name="Context" Filter="">
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Context\VPBufferWindowContext.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.h"/>
+          </Filter>
+          <Filter Name="Glsl" Filter="">
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLParameter.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLParameter.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLPass.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLPass.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLShader.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLShader.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLTextureParameter.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLTextureParameter.h"/>
+          </Filter>
+          <Filter Name="Materials" Filter="">
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXMaterial.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXMaterial.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXPass.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXPass.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXState.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VCGFXState.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.h"/>
+          </Filter>
+          <Filter Name="Textures" Filter="">
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.h"/>
+          </Filter>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\IVOpenGLRenderState.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\IVVertexStream.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VCGVertexShaderState.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VCGVertexShaderState.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VCubemapTextureState.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VCubemapTextureState.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VMiscState.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VMiscState.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VMiscStateCategory.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLDevice.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLDevice.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLUtils.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBOMesh.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBOMesh.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBORenderMethod.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VOpenGlUtils.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VPBufferTexture.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VPBufferTexture.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VShaderCategory.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VShaderCategory.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VShaderState.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VShaderState.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VTextureState.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VTextureStateCategory.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VTextureStateCategory.h"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.cpp"/>
+          <File RelativePath="..\..\Source\Graphics\OpenGL\VVertexShaderCategory.h"/>
+        </Filter>
+      </Filter>
+      <Filter Name="Interface" Filter="">
+        <File RelativePath="..\..\API\V3d\Graphics\IVRenderContext.h"/>
+        <File RelativePath="..\..\API\V3d\Graphics\IVTexture.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="ImageService" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\ImageService\VDevILLoader.cpp"/>
+        <File RelativePath="..\..\Source\ImageService\VDevILLoader.h"/>
+        <File RelativePath="..\..\Source\ImageService\VDevILSaver.cpp"/>
+        <File RelativePath="..\..\Source\ImageService\VDevILSaver.h"/>
+        <File RelativePath="..\..\Source\ImageService\VImageFactory.cpp"/>
+        <File RelativePath="..\..\Source\ImageService\VImageFactory.h"/>
+        <File RelativePath="..\..\Source\ImageService\VImageManipulator.cpp"/>
+        <File RelativePath="..\..\Source\ImageService\VImageManipulator.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="Implementation" Filter="">
+      <File RelativePath="..\..\Source\VeloxServices.cpp"/>
+    </Filter>
+    <Filter Name="InputLib" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\InputLib\VDIAbsoluteAxis.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIAbsoluteAxis.h"/>
+        <File RelativePath="..\..\Source\InputLib\VDIButton.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIButton.h"/>
+        <File RelativePath="..\..\Source\InputLib\VDIInputDevice.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIInputDevice.h"/>
+        <File RelativePath="..\..\Source\InputLib\VDIInputManager.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIInputManager.h"/>
+        <File RelativePath="..\..\Source\InputLib\VDIKeyboardButton.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIKeyboardButton.h"/>
+        <File RelativePath="..\..\Source\InputLib\VDIKeyboardDevice.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIKeyboardDevice.h"/>
+        <File RelativePath="..\..\Source\InputLib\VDIMouseDevice.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIMouseDevice.h"/>
+        <File RelativePath="..\..\Source\InputLib\VDIRelativeAxis.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VDIRelativeAxis.h"/>
+        <File RelativePath="..\..\Source\InputLib\VInputDeviceHelper.cpp"/>
+        <File RelativePath="..\..\Source\InputLib\VInputDeviceHelper.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="Module" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\Module\VeloxModule.cpp"/>
+      </Filter>
+    </Filter>
+    <Filter Name="Scene" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\Scene\IVRenderStepPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VArrowMeshPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VCoordSysDisplayPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VDefaultRenderStepPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VMeshPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VMeshPartBase.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VModelPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VNaiveSceneManagerPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VOrientationGridPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VProjectTextureRenderStepPart.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp"/>
+        <File RelativePath="..\..\Source\Scene\VSimpleShooting.cpp"/>
+      </Filter>
+    </Filter>
+    <Filter Name="SystemManager" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\SystemManager\VSystemManager.cpp"/>
+        <File RelativePath="..\..\Source\SystemManager\VSystemManager.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="UpdateManager" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\UpdateManager\VPerformanceCounter.cpp"/>
+        <File RelativePath="..\..\Source\UpdateManager\VPerformanceCounter.h"/>
+        <File RelativePath="..\..\Source\UpdateManager\VUpdateManager.cpp"/>
+        <File RelativePath="..\..\Source\UpdateManager\VUpdateManager.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="UtilsLib" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <Filter Name="CPUDetect" Filter="">
+          <File RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp"/>
+          <File RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.h"/>
+        </Filter>
+      </Filter>
+    </Filter>
+    <Filter Name="VirtualFileSystem" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\VirtualFileSystem\VAccessRights.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VAccessRights.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VBufferStreamGuard.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VBufferStreamGuard.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VDataProviderPool.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VDataProviderPool.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VDirectory.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VDirectory.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VFile.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VFile.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VFileDataProvider.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VFileDataProvider.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VFileStream.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VFileStream.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VLegalOperations.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VLegalOperations.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VMemoryStream.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VMemoryStream.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VOfflineStreamGuard.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VOfflineStreamGuard.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VSimpleVfs.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VSimpleVfs.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VStreamFactory.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VStreamFactory.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VStreamGuard.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VStreamGuard.inl"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VStreamToOfflineStreamWrapper.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VStreamToOfflineStreamWrapper.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VTempDataProvider.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VTempDataProvider.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VXmlIniReader.cpp"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VXmlIniReader.h"/>
+        <File RelativePath="..\..\Source\VirtualFileSystem\VfsUtils.h"/>
+      </Filter>
+    </Filter>
+    <Filter Name="WindowService" Filter="">
+      <Filter Name="Implementation" Filter="">
+        <File RelativePath="..\..\Source\WindowService\VDeviceFactory.h"/>
+        <File RelativePath="..\..\Source\WindowService\VOpenGLDeviceFactory.cpp"/>
+        <File RelativePath="..\..\Source\WindowService\VOpenGLDeviceFactory.h"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowBase.cpp"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowBase.h"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowManagerBase.cpp"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowManagerBase.h"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowManagerWin32.cpp"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowManagerWin32.h"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowWin32.cpp"/>
+        <File RelativePath="..\..\Source\WindowService\VWindowWin32.h"/>
+      </Filter>
+    </Filter>
+  </Files>
+  <Globals>
 	</Globals>
 </VisualStudioProject>

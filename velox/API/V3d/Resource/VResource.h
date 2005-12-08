@@ -40,8 +40,12 @@ public:
 	/** Creates a new sub resource if no one with the same name exist yet */
 	VResource* AddSubResource(const std::string& in_strChildName);
 
-	/** Creates a sub resource generating an unused name */
-	VResource* AddRandomNamedSubResource();
+	/** 
+	 * Creates a sub resource generating an unused name which will contain
+	 * in_strUsageHint (for debugging reasons, makes it easier to investigate
+	 * where a resource came from
+	 */
+	VResource* AddRandomNamedSubResource(VStringParam in_strUsageHint);
 
 	/** Find a sub resource with the given name, 0 if no one found */
 	VResource* GetSubResource(const std::string& in_strChildName);

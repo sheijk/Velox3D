@@ -19,6 +19,7 @@ VResourceManager::VResourceManager(VStringParam in_strName) :
 	IVResourceManager(in_strName),
 	m_RootResource("")
 {
+	m_pRandomRoot = m_RootResource.AddSubResource("=v3d-private=");
 }
 
 /**
@@ -84,6 +85,11 @@ VResourceId VResourceManager::CreateResource(VStringParam in_strName)
 		tokens.TokenEnd());
 
 	return VResourceId(pResource);
+}
+
+VResourceId VResourceManager::CreateRandomNamedResource(VStringParam in_strUsageHint)
+{
+	return m_pRandomRoot->AddRandomNamedSubResource(in_strUsageHint);
 }
 
 VResourceId VResourceManager::GetResourceByName(VStringParam in_strName)

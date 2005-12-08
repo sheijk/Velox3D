@@ -31,7 +31,7 @@ public:
 	/**
 	 * @see v3d::graphics::IVTexture::Bind
 	 */
-	void Bind();
+	void Bind(vuint in_nTextureUnit = 0);
 
 	/**
 	 * @see v3d::graphics::IVTexture::Unbind

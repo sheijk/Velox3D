@@ -54,6 +54,13 @@ vbool VOffscreenDeviceResType::Generate(
 
 	return true;
 }
+
+vbool VOffscreenDeviceResType::AllowMutableAccess(
+	const VTypeInfo& in_TypeInfo, const resource::VResource* in_Resource) const
+{
+	return true;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

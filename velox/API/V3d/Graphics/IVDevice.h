@@ -82,11 +82,38 @@ public:
 	 */
 	virtual void BeginScene() = 0;
 
+	enum EndSceneFlags
+	{
+		NoFlip,
+		FlipScene
+	};
+
 	/**
 	 * End rendering to the render target and flip buffer. Other render targets
 	 * may not begin their scene before EndScene has been called
 	 */
-	virtual void EndScene() = 0;
+	virtual void EndScene(EndSceneFlags in_Flags = FlipScene) = 0;
+
+	virtual void Flip() = 0;
+
+	enum ClearFlags
+	{
+		ClearColor = 1,
+		ClearZ = 2,
+		ClearAll = 3
+	};
+
+	virtual void Clear(ClearFlags in_Flags = ClearAll) = 0;
+
+
+	virtual void SetClearColor(
+		vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha) = 0;
+
+	virtual void SetViewport(vint left, vint top, vint right, vint bottom) = 0;
+
+
+	/** Returns true if and only if between calls to BeginScene and EndScene */
+	virtual vbool IsActive() const = 0;
 
 	/** Id's of the lights */
 	enum LightId

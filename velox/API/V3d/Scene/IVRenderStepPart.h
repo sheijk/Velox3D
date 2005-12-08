@@ -23,10 +23,10 @@ public:
 
 	virtual void Render(IVGraphicsPart* in_pScene) = 0;
 
-	graphics::IVDevice* GetPredecessorDevice() const;
+	virtual graphics::IVDevice* GetPredecessorDevice() const;
 
-	graphics::IVDevice* GetOutputDevice() const;
-	void SetOutputDevice(graphics::IVDevice* in_OutputDevice);
+	virtual graphics::IVDevice* GetOutputDevice() const;
+	virtual void SetOutputDevice(graphics::IVDevice* in_OutputDevice);
 
 	virtual void Activate();
 	virtual void Deactivate();

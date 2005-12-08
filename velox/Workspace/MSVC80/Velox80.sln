@@ -1,5 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C++ Express 2005
+# Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreLib", "CoreLib.vcproj", "{20050526-0000-0000-0000-000774134000}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KernelLib", "KernelLib.vcproj", "{20050526-0000-0000-0000-000526654000}"
@@ -24,6 +24,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XmlServiceDLL", "XmlService
 	ProjectSection(ProjectDependencies) = postProject
 		{20050526-0000-0000-0000-000560019000} = {20050526-0000-0000-0000-000560019000}
 		{20050526-0000-0000-0000-000774134000} = {20050526-0000-0000-0000-000774134000}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B85FA89F-50CF-4D5B-B5D1-5C686FD6604D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Local\Model\UML\velox-plan.eap = ..\..\Local\Model\UML\velox-plan.eap
 	EndProjectSection
 EndProject
 Global

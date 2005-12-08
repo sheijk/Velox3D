@@ -23,7 +23,6 @@ using namespace v3d;
 class VBaseTexture : public IVTexture
 {
 public:
-
 	VBaseTexture();
 	VBaseTexture(const image::VImage& in_Image, GLenum in_TextureTarget);
 	virtual ~VBaseTexture();
@@ -31,7 +30,7 @@ public:
 	/**
 	 * @see v3d::graphics::IVTexture::Bind
 	 */
-	virtual void Bind();
+	virtual void Bind(vuint in_nTextureUnit = 0);
 
 	/**
 	 * @see v3d::graphics::IVTexture::Unbind
@@ -40,10 +39,12 @@ public:
 
 	GLint GetTextureId() const;
 	GLenum GetTextureTarget() const;
+
 protected:
 
-	GLenum       m_iTextureTarget;
-	unsigned int m_iTextureID;
+	GLenum m_iTextureTarget;
+	GLuint m_iTextureID;
+	vuint m_nTextureUnit;
 };
 
 //class VCubemapPosX : public VBaseTexture
@@ -153,5 +154,7 @@ protected:
 //};
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
+
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VBaseTexture, v3d::graphics::IVTexture);
 //-----------------------------------------------------------------------------
 #endif //V3D_BASETEXTURE_H

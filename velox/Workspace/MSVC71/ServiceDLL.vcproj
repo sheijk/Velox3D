@@ -193,13 +193,22 @@
 						RelativePath="..\..\Api\V3d\Graphics\IVMesh.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Graphics\IVParameter.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Graphics\IVPass.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\IVRenderState.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Graphics\IVShader.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Graphics\IVStateCategory.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Graphics\IVStateCategoryRegistry.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VBuffer.h">
@@ -234,6 +243,19 @@
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VVertexFormat.h">
 					</File>
+					<Filter
+						Name="Parameters"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3d\Graphics\Parameters\IVParameterValue.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Graphics\Parameters\VGenericValue.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Graphics\Parameters\VMaterialSetup.h">
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="Image"
@@ -543,6 +565,18 @@
 						RelativePath="..\..\Source\Graphics\OpenGL\VPBufferTexture.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VShaderCategory.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VShaderCategory.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VShaderState.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VShaderState.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VStreamMesh.cpp">
 					</File>
 					<File
@@ -613,6 +647,12 @@
 							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.h">
 						</File>
 						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VCubeMapTexture.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VCubeMapTexture.h">
+						</File>
+						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.cpp">
 						</File>
 						<File
@@ -623,6 +663,34 @@
 						</File>
 						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="GLSL"
+						Filter="">
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLParameter.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLParameter.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLPass.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLPass.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLShader.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLShader.h">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLTextureParameter.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLTextureParameter.h">
 						</File>
 					</Filter>
 				</Filter>
@@ -756,64 +824,6 @@
 			<Filter
 				Name="Implementation"
 				Filter="">
-				<Filter
-					Name="Types"
-					Filter="">
-					<File
-						RelativePath="..\..\Source\Resource\Types\VFileNameResType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VFileNameResType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VGLVertexStreamResType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VGLVertexStreamResType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VImageResourceType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VImageResourceType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VImported3DSResourceType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMeshGeneratorResType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMeshGeneratorResType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMeshResourceType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VOffscreenDeviceResType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VOffscreenDeviceResType.h">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.cpp">
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VTextureStateResType.h">
-					</File>
-				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

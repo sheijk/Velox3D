@@ -42,6 +42,7 @@ private:
     void GenerateIndices(VVertexBuffer* io_pVB) const;
 	void GenerateCoordinates(VVertexBuffer* io_pVB) const;
 	void GenerateTexCoords(VVertexBuffer* io_pVB) const;
+	void GenerateNormals(VVertexBuffer* io_pVB) const;
 	
 	VVertexFormat m_Format;
 	vfloat32 m_fTop;

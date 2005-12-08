@@ -248,6 +248,11 @@ VRangeIterator<VTypeInfo> VTextureStateResType::CreatedTypes()
 	return CreateBeginIterator< std::vector<VTypeInfo> >(m_ManagedTypes);
 }
 
+VRangeIterator<VTypeInfo> VTextureStateResType::ManagedTypes()
+{
+	return CreatedTypes();
+}
+
 vbool VTextureStateResType::Generate(
 	resource::VResource* in_pResource,
 	VTypeInfo in_Type)
@@ -299,6 +304,14 @@ vbool VTextureStateResType::Generate(
 
 	return true;
 }
+
+vbool VTextureStateResType::AllowMutableAccess(
+	const VTypeInfo& in_TypeInfo, 
+	const resource::VResource* in_Resource) const
+{
+	return true;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

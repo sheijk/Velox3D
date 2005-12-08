@@ -23,24 +23,13 @@ using namespace v3d;
 class VTexture2D : public VBaseTexture
 {
 public:
-
 	VTexture2D(const image::VImage& in_Image, int in_TextureID);
 	virtual ~VTexture2D();
-
-	/**
-	 * @see v3d::graphics::IVTexture::Bind
-	 */
-	void Bind();
-
-	/**
-	 * @see v3d::graphics::IVTexture::Unbind
-	 */
-	void Unbind();
 };
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 
-V3D_TYPEINFO_WITHPARENT(v3d::graphics::VTexture2D, v3d::graphics::IVTexture);
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VTexture2D, v3d::graphics::VBaseTexture);
 //-----------------------------------------------------------------------------
 #endif //V3D_VTEXTURE2D_H

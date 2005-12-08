@@ -3,6 +3,7 @@
 
 #include "../VTextureStateCategory.h"
 #include "../VMiscStateCategory.h"
+#include <V3d/Core/RangeIter.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -58,10 +59,11 @@ vbool VFixedFunctionPass::CanRealize(const VRenderPass& in_Pass)
 
 vbool VFixedFunctionPass::StateTypeKnown(const std::string& in_Type)
 {
-	if( in_Type == "vshader" || in_Type == "pshader" )
-		return false;
-	else
-		return true;
+	return true;
+	//if( in_Type == "vshader" || in_Type == "pshader" )
+	//	return false;
+	//else
+	//	return true;
 }
 
 void VFixedFunctionPass::SetCategories(
@@ -70,6 +72,11 @@ void VFixedFunctionPass::SetCategories(
 {
 	m_pTextureStateCategory = in_pTextureStateCategory;
 	m_pMiscStateCategory = in_pMiscStateCategory;
+}
+
+VRangeIterator<IVParameter> VFixedFunctionPass::Parameters()
+{
+	return CreateEmptyIterator<IVParameter>();
 }
 
 //-----------------------------------------------------------------------------

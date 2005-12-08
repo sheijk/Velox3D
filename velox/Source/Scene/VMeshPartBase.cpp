@@ -41,6 +41,12 @@ const graphics::IVMaterial& VMeshPartBase::GetMaterial() const
 	return *m_hMaterial;
 }
 
+void VMeshPartBase::SetMaterial(
+	resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial)
+{
+	m_hMaterial = in_hMaterial;
+}
+
 const math::VRBTransform& VMeshPartBase::GetModelTransform() const
 {
 	return m_pRigidBody->GetTransform();
@@ -68,7 +74,7 @@ void VMeshPartBase::Deactivate()
 		m_pSceneManager->Remove(this);
 }
 
-void VMeshPartBase::Send(
+void VMeshPartBase::OnMessage(
 	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
 {
 	using std::string;
