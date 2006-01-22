@@ -4,6 +4,7 @@
 
 #include <V3d/Graphics/IVDevice.h>
 
+#include <V3d/Math/VQuaternionOps.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -15,26 +16,11 @@ using namespace math;
 VCamera::VCamera(vfloat32 x, vfloat32 y, vfloat32 z)
 		: m_fPiDiv180((vfloat32) 3.141592654 /(vfloat32) 180)
 {
-	m_PositionVector.v[0] = x;
-	m_PositionVector.v[1] = y;
-	m_PositionVector.v[2] = z;
+	m_Position = ToVector3f(x, y, z);
 
-	m_UpVector.Set(0, 0);
-	m_UpVector.Set(1, 1);
-    m_UpVector.Set(2, 0);
-
-	m_RightVector.Set(0, 1);
-	m_RightVector.Set(1, 0);
-	m_RightVector.Set(2, 0);
-
-	m_RotationVector.Set(0,0);
-	m_RotationVector.Set(1,0);
-	m_RotationVector.Set(2,0);
-
-
-	m_ViewVector.Set(0,0);
-	m_ViewVector.Set(1,0);
-	m_ViewVector.Set(2,-1);
+	m_UpVector = VVector3f(0, 1, 0);
+	m_RightVector = VVector3f(1, 0, 0);
+	m_ViewVector = VVector3f(0, 0, -1);
 
 	CalculateMatrix();
 }
@@ -42,22 +28,11 @@ VCamera::VCamera(vfloat32 x, vfloat32 y, vfloat32 z)
 VCamera::VCamera()
 		: m_fPiDiv180((vfloat32)3.141592654 / (vfloat32)180)
 {
+	m_Position = VVector3f(0, 0, 0);
 
-	m_UpVector.Set(0, 0);
-	m_UpVector.Set(1, 1);
-	m_UpVector.Set(2, 0);
-
-	m_RightVector.Set(0, 1);
-	m_RightVector.Set(1, 0);
-	m_RightVector.Set(2, 0);
-
-	m_RotationVector.Set(0,0);
-	m_RotationVector.Set(1,0);
-	m_RotationVector.Set(2,0);
-
-	m_ViewVector.Set(0,0);
-	m_ViewVector.Set(1,0);
-	m_ViewVector.Set(2,-1);
+	m_UpVector = VVector3f(0, 1, 0);
+	m_RightVector = VVector3f(1, 0, 0);
+	m_ViewVector = VVector3f(0, 0, -1);
 
 	CalculateMatrix();
 }
@@ -69,18 +44,14 @@ void VCamera::ApplyTo(IVDevice& in_Device) const
 
 void VCamera::Move(vfloat32 in_fX, vfloat32 in_fY, vfloat32 in_fZ)
 {
-	m_PositionVector.v[0] = in_fX;
-	m_PositionVector.v[1] = in_fY;
-	m_PositionVector.v[2] = in_fZ;
+	m_Position = ToVector3f(in_fX, in_fY, in_fZ);
 
 	CalculateMatrix();
 }
 
 void VCamera::MoveForward(vfloat32 in_fUnits)
 {
-	m_PositionVector.v[0] = m_PositionVector.v[0] + (m_ViewVector.Get(0) * in_fUnits);
-	m_PositionVector.v[1] = m_PositionVector.v[1] + (m_ViewVector.Get(1) * in_fUnits);
-	m_PositionVector.v[2] = m_PositionVector.v[2] + (m_ViewVector.Get(2) * in_fUnits);
+	m_Position += m_ViewVector * in_fUnits;
 
 	CalculateMatrix();
 }
@@ -88,9 +59,7 @@ void VCamera::MoveForward(vfloat32 in_fUnits)
 
 void VCamera::MoveUp(vfloat32 in_fUnits)
 {
-	m_PositionVector.v[0] = m_PositionVector.v[0] + (m_UpVector.Get(0) * in_fUnits);
-	m_PositionVector.v[1] = m_PositionVector.v[1] + (m_UpVector.Get(1) * in_fUnits);
-	m_PositionVector.v[2] = m_PositionVector.v[2] + (m_UpVector.Get(2) * in_fUnits);
+	m_Position += m_UpVector * in_fUnits;
 
 	CalculateMatrix();
 }
@@ -98,120 +67,37 @@ void VCamera::MoveUp(vfloat32 in_fUnits)
 
 void VCamera::Strafe(vfloat32 in_fUnits)
 {
-	m_PositionVector.v[0] = m_PositionVector.v[0]  + (m_RightVector.Get(0) * in_fUnits);
-	m_PositionVector.v[1] = m_PositionVector.v[1]  + (m_RightVector.Get(1) * in_fUnits);
-	m_PositionVector.v[2] = m_PositionVector.v[2]  + (m_RightVector.Get(2) * in_fUnits);
+	m_Position += m_RightVector * in_fUnits;
 
 	CalculateMatrix();
 }
 
+void VCamera::RotateAround(const VVector3f& in_Axis, vfloat32 in_fAngle)
+{
+	VQuatf rot = QuatFromAxisAngle(in_Axis, in_fAngle);
+	Rotate(m_ViewVector, rot);
+	Rotate(m_UpVector, rot);
+	Rotate(m_RightVector, rot);
+
+	CalculateMatrix();
+}
 
 void VCamera::RotateX(vfloat32 in_fAngle)
 {
-	// save our current rotation into the vector because we want to rotate over the
-	// existing rotation value
-	m_RotationVector.Set(0, m_RotationVector.Get(0) + in_fAngle);
-
-	vfloat32 x,y,z;
-	
-	x = m_ViewVector.Get(0);
-	y = m_ViewVector.Get(1);
-	z = m_ViewVector.Get(2);
-	
-	x = x*cos(in_fAngle * m_fPiDiv180);
-	y = y*cos(in_fAngle * m_fPiDiv180);
-	z = z*cos(in_fAngle * m_fPiDiv180);
-
-	x += m_UpVector.Get(0) * sin(in_fAngle * m_fPiDiv180);
-	y += m_UpVector.Get(1) * sin(in_fAngle * m_fPiDiv180);
-	z += m_UpVector.Get(2) * sin(in_fAngle * m_fPiDiv180);
-
-	//store the value back
-
-	m_ViewVector.Set(0,x);
-	m_ViewVector.Set(1,y);
-	m_ViewVector.Set(2,z);
-
-	Normalize(m_ViewVector);
-
-	//get the new up vector
-	m_UpVector = Cross(m_ViewVector, m_RightVector);
-
-	//negate it
-	m_UpVector.Set(0, -m_UpVector.Get(0));
-	m_UpVector.Set(1, -m_UpVector.Get(1));
-	m_UpVector.Set(2, -m_UpVector.Get(2));
-
-
-	CalculateMatrix();
+	RotateAround(m_RightVector, in_fAngle);
+	//RotateAround(VVector3f(1, 0, 0), in_fAngle);
 }
 
 void VCamera::RotateY(vfloat32 in_fAngle)
 {
-	// save our current rotation into the vector because we want to rotate over the
-	// existing rotation value
-	m_RotationVector.Set(1, m_RotationVector.Get(1) + in_fAngle);
-
-	vfloat32 x,y,z;
-
-	x = m_ViewVector.Get(0);
-	y = m_ViewVector.Get(1);
-	z = m_ViewVector.Get(2);
-
-	x = x*cos(in_fAngle * m_fPiDiv180);
-	y = y*cos(in_fAngle * m_fPiDiv180);
-	z = z*cos(in_fAngle * m_fPiDiv180);
-
-	x += m_RightVector.Get(0) * sin(in_fAngle * m_fPiDiv180);
-	y += m_RightVector.Get(1) * sin(in_fAngle * m_fPiDiv180);
-	z += m_RightVector.Get(2) * sin(in_fAngle * m_fPiDiv180);
-
-	//store the value back
-
-	m_ViewVector.Set(0,x);
-	m_ViewVector.Set(1,y);
-	m_ViewVector.Set(2,z);
-
-	Normalize(m_ViewVector);
-
-	//get the new right vector
-	m_RightVector = Cross(m_ViewVector, m_UpVector);
-
-	CalculateMatrix();
+	RotateAround(m_UpVector, in_fAngle);
+	//RotateAround(VVector3f(0, 1, 0), in_fAngle);
 }
 
 void VCamera::RotateZ(vfloat32 in_fAngle)
 {
-	// save our current rotation into the vector because we want to rotate over the
-	// existing rotation value
-	m_RotationVector.Set(2, m_RotationVector.Get(2) + in_fAngle);
-
-	vfloat32 x,y,z;
-
-	x = m_RightVector.Get(0);
-	y = m_RightVector.Get(1);
-	z = m_RightVector.Get(2);
-
-	x = x*cos(in_fAngle * m_fPiDiv180);
-	y = y*cos(in_fAngle * m_fPiDiv180);
-	z = z*cos(in_fAngle * m_fPiDiv180);
-
-	x += m_UpVector.Get(0) * sin(in_fAngle * m_fPiDiv180);
-	y += m_UpVector.Get(1) * sin(in_fAngle * m_fPiDiv180);
-	z += m_UpVector.Get(2) * sin(in_fAngle * m_fPiDiv180);
-
-	//store the value back
-
-	m_RightVector.Set(0,x);
-	m_RightVector.Set(1,y);
-	m_RightVector.Set(2,z);
-
-	Normalize(m_RightVector);
-
-	//get the new up vector
-	m_UpVector = Cross(m_ViewVector, m_RightVector);
-
-	CalculateMatrix();
+	RotateAround(m_ViewVector, in_fAngle);
+	//RotateAround(VVector3f(0, 0, 1), in_fAngle);
 }
 
 void VCamera::CalculateMatrix() const
@@ -246,10 +132,7 @@ void VCamera::CalculateMatrix() const
 
 	Matrix4f t;
 	Identity(t);
-	t.SetTransform(
-		-m_PositionVector.v[0],
-		-m_PositionVector.v[1],
-		-m_PositionVector.v[2]);
+	t.SetTransform(-m_Position[0], -m_Position[1], -m_Position[2]);
 
 	Matrix4f r;
 	Identity(r);
@@ -257,12 +140,14 @@ void VCamera::CalculateMatrix() const
 
 	m_ViewMatrix = r;
 
-	m_Transform.Set(m_ViewMatrix);
+	//m_Transform.Set(m_ViewMatrix);
+	m_Transform.SetPosition(m_Position);
+	m_Transform.SetDirection(m_ViewVector, m_UpVector);
 }
 
 VRBTransform VCamera::GetTransform() const
 {
-	return VRBTransform(GetPosition(), m_ViewVector, m_UpVector);
+	return m_Transform;
 }
 
 void VCamera::SetTransform(const VRBTransform& transform)
@@ -286,13 +171,7 @@ const math::VRBTransform& VCamera::Transform() const
 
 VVector3f VCamera::GetPosition() const
 {
-	// warum auch immer m_PositionVector ein VVector3f ist... -> konvertieren
-	VVector3f pos;
-	pos.Set(0, m_PositionVector.x);
-	pos.Set(1, m_PositionVector.y);
-	pos.Set(2, m_PositionVector.z);
-
-	return pos;
+	return m_Position;
 }
 
 VVector3f VCamera::GetViewDirection() const

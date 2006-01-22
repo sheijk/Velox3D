@@ -211,6 +211,9 @@
 						RelativePath="..\..\Api\V3d\Graphics\IVStateCategoryRegistry.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Graphics\OpenGLUtils.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Graphics\VBuffer.h">
 					</File>
 					<File
@@ -227,6 +230,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.inl">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Graphics\VLight.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VMeshDescription.h">
@@ -254,6 +260,9 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Graphics\Parameters\VMaterialSetup.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Graphics\Parameters\VTextureValue.h">
 						</File>
 					</Filter>
 				</Filter>
@@ -691,6 +700,16 @@
 						</File>
 						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Glsl\VGLSLTextureParameter.h">
+						</File>
+					</Filter>
+					<Filter
+						Name="States"
+						Filter="">
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\States\VDepthState.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\States\VDepthState.h">
 						</File>
 					</Filter>
 				</Filter>

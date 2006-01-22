@@ -73,12 +73,14 @@ void VKeyboardCamera::QueryButtons(IVInputManager& in_InputManager)
 	}
 }
 
-const vchar* cameraConfigNodeName = "camera";
-const vchar* posNodeName = "pos";
-const vchar* idAttribName = "id";
-const vchar* xAttribName = "x";
-const vchar* yAttribName = "y";
-const vchar* zAttribName = "z";
+namespace {
+	const vchar* cameraConfigNodeName = "camera";
+	const vchar* posNodeName = "pos";
+	const vchar* idAttribName = "id";
+	const vchar* xAttribName = "x";
+	const vchar* yAttribName = "y";
+	const vchar* zAttribName = "z";
+}
 
 V3D_DECLARE_EXCEPTION(VCameraCfgLoadFailure, VException);
 
@@ -255,10 +257,10 @@ void VKeyboardCamera::Move(vfloat32 in_fSeconds)
 		m_Camera.RotateY(m_fRotationSpeedY * m_fKeyRotationFactor * in_fSeconds);
 
 	if( m_pRotateUpButton->IsDown() == true )
-		m_Camera.RotateX(m_fRotationSpeedX * m_fKeyRotationFactor  * in_fSeconds);
+		m_Camera.RotateX(-m_fRotationSpeedX * m_fKeyRotationFactor  * in_fSeconds);
 
 	if( m_pRotateDownButton->IsDown() == true )
-		m_Camera.RotateX(-m_fRotationSpeedX * m_fKeyRotationFactor  * in_fSeconds);
+		m_Camera.RotateX(m_fRotationSpeedX * m_fKeyRotationFactor  * in_fSeconds);
 
 	vbool rollRight = false;
 	vbool rollLeft = false;

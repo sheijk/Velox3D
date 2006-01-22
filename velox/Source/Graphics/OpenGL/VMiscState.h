@@ -3,6 +3,8 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
+#include "States/VDepthState.h"
+
 #include <v3d/Graphics/VEffectDescription.h>
 
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
@@ -83,6 +85,9 @@ private:
 	// texture matrix state
 	VPropertyConnection<VMatrix44f> m_TextureMatrix;
 
+	// texture generation mode
+	VTexGenMode m_TextureGenerationMode;
+
 	// alpha blending
 	vuint m_SourceFactor;
 	vuint m_DestFactor;
@@ -93,9 +98,13 @@ private:
 	vuint m_nBackPolygonMode;
 
 	// z buffer / depth test
-	vuint m_DepthFunction;
-	vbool m_bDepthWrite;
-	vbool m_bDepthTestEnabled;
+	VDepthState m_DepthState;
+	//vuint m_DepthFunction;
+	//vbool m_bDepthWrite;
+	//vbool m_bDepthTestEnabled;
+
+	// lighting
+	vbool m_bEnableLighting;
 
 	VColorBufferMask m_ColorMask;
 

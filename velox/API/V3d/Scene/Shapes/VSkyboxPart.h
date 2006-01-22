@@ -9,6 +9,7 @@
 #include <V3d/Resource.h>
 #include <V3d/Graphics/IVMaterial.h>
 #include <V3d/Scene/IVSceneManagerPart.h>
+#include <V3dLib/Graphics/Geometry/VColor4f.h>
 
 #include <vector>
 
@@ -38,6 +39,9 @@ public:
 		const std::string& in_strDirectory, 
 		const std::string& in_strExtension);
 
+	/** The sky box will be blended with the given color via vertex color */
+	void SetBaseColor(const graphics::VColor4f& in_Color);
+
 	// inherited
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
@@ -45,43 +49,17 @@ public:
 	virtual void Activate();
 	virtual void Deactivate();
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
-	class VSide : public entity::VPartBaseAdapter<IVShapePart>
-	{
-	public:
-		VSide(VSkyboxPart* in_pContainer, 
-			math::VVector3f in_Pos,
-			math::VVector3f in_Right, 
-			math::VVector3f in_Up);
-
-		void SetMaterial(
-			resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial);
-
-		virtual void Activate();
-		virtual void Deactivate();
-
-		virtual void SendGeometry(graphics::IVDevice& in_Device) const;
-		virtual const graphics::IVMaterial& GetMaterial() const;
-		virtual const math::VRBTransform& GetModelTransform() const;
-		virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
-		virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
-
-		virtual const VTypeInfo& GetTypeInfo() const { return IVShapePart::GetTypeInfo(); }
-
-	private:
-		resource::VResourceDataPtr<const graphics::IVMaterial> m_hMaterial;
-		VSkyboxPart* m_pContainer;
-
-		math::VVector3f m_Position;
-		math::VVector3f m_Right;
-		math::VVector3f m_Up;
-	};
+	class VSide;
 
 	const math::VRBTransform& GetModelTransform() const;
 
-	std::vector<VSide> m_Sides;
+	std::vector<VSharedPtr<VSide> > m_Sides;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
 	entity::VPartConnection<scene::IVSceneManagerPart> m_pSceneManager;
+
+	graphics::VColor4f m_BaseColor;
 };
 
 //-----------------------------------------------------------------------------

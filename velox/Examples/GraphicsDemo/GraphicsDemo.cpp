@@ -204,7 +204,7 @@ vint VGraphicsDemoApp::Main(std::vector<std::string> args)
 		device.BeginScene();
 
 		device.SetMatrix(IVDevice::ModelMatrix, math::IdentityMatrix());
-		device.ApplyLight(IVDevice::Light0, &pointLight);
+		//device.ApplyLight(IVDevice::Light0, &pointLight);
 
 		// update texture matrix and change property to update the clouds
 		// texture matrix (animating the clouds)

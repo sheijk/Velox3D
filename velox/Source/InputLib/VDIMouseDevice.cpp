@@ -231,16 +231,16 @@ void VDIMouseDevice::Update()
 		}
 
 		if(mouseState.rgbButtons[0] & 0x80)
-			m_LeftButton->Set(true);
+			m_LeftButton->SetDown(true);
 		else
-			m_LeftButton->Set(false);
+			m_LeftButton->SetDown(false);
 
 		if(mouseState.rgbButtons[1] & 0x80)
 		{
-			m_RightButton->Set(true);
+			m_RightButton->SetDown(true);
 		}
 		else
-			m_RightButton->Set(false);
+			m_RightButton->SetDown(false);
 
 
 

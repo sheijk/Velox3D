@@ -198,7 +198,7 @@ vbool VDIKeyboardDevice::CreateDeviceObjects()
 	m_KeyMap[KeyF9] = new VDIKeyboardButton( GetKeyboardButtonName(DIK_F9), &m_KeyState[DIK_F9]);
 	m_KeyMap[KeyF10] = new VDIKeyboardButton( GetKeyboardButtonName(DIK_F10), &m_KeyState[DIK_F10]);
 	m_KeyMap[KeyF11] = new VDIKeyboardButton( GetKeyboardButtonName(DIK_F11), &m_KeyState[DIK_F11]);
-	m_KeyMap[KeyF12] = new VDIKeyboardButton( GetKeyboardButtonName(DIK_F11), &m_KeyState[DIK_F12]);
+	m_KeyMap[KeyF12] = new VDIKeyboardButton( GetKeyboardButtonName(DIK_F12), &m_KeyState[DIK_F12]);
 
 	for ( std::map<VKeyCode, VDIKeyboardButton*>::iterator iter = m_KeyMap.begin();
 		  iter != m_KeyMap.end();

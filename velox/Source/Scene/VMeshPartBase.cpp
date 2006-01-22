@@ -18,14 +18,14 @@ VMeshPartBase::VMeshPartBase(VResourceDataPtr<const IVMaterial> in_hMaterial) :
 	m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
 	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
 {
-	m_hMaterial = in_hMaterial;
+	SetMaterial(in_hMaterial);
 }
 
 VMeshPartBase::VMeshPartBase(const std::string& in_strMaterialResource)
 	: m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
 	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
 {
-	m_hMaterial = GetResourceData<IVMaterial>(in_strMaterialResource.c_str());
+	m_hMaterial = GetMutableResourceData<IVMaterial>(in_strMaterialResource.c_str());
 }
 
 
@@ -44,7 +44,7 @@ const graphics::IVMaterial& VMeshPartBase::GetMaterial() const
 void VMeshPartBase::SetMaterial(
 	resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial)
 {
-	m_hMaterial = in_hMaterial;
+	m_hMaterial = GetMutableResourceData<IVMaterial>(in_hMaterial.GetEnclosingResource()->GetQualifiedName().c_str());
 }
 
 const math::VRBTransform& VMeshPartBase::GetModelTransform() const
@@ -74,6 +74,32 @@ void VMeshPartBase::Deactivate()
 		m_pSceneManager->Remove(this);
 }
 
+void VMeshPartBase::ApplyParameterValues() const
+{
+	for(ParamValueMap::const_iterator paramValue = m_ParameterValues.begin();
+		paramValue != m_ParameterValues.end();
+		++paramValue)
+	{
+		IVParameter* parameter = m_hMaterial->GetParameterByName(paramValue->first);
+
+		if( parameter != 0 )
+		{
+			IVParameterValue* pValue = paramValue->second.Get();
+			pValue->Apply(*parameter);
+		}
+	}
+}
+
+void VMeshPartBase::AddParamValue(const std::string& in_strName, VSharedPtr<IVParameterValue> in_pValue)
+{
+	m_ParameterValues[in_strName] = in_pValue;
+}
+
+void VMeshPartBase::RemoveParamValue(const std::string& in_strName)
+{
+	m_ParameterValues.erase(in_strName);
+}
+
 void VMeshPartBase::OnMessage(
 	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
 {
@@ -100,7 +126,7 @@ void VMeshPartBase::OnMessage(
 		try
 		{
 			if( name == "material" ) {
-				m_hMaterial = GetResourceData<IVMaterial>(value.c_str());
+				m_hMaterial = GetMutableResourceData<IVMaterial>(value.c_str());
 			}
 		}
 		catch(VException& e)

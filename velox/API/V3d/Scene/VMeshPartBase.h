@@ -6,11 +6,13 @@
 #include <V3d/Scene/IVShapePart.h>
 #include <V3d/Scene/IVSceneManagerPart.h>
 
+#include <V3d/Graphics/Parameters/IVParameterValue.h>
 #include <V3d/Entity/VPartBase.h>
 
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3dLib/EntityParts/VRigidBodyPart.h>
 
+#include <map>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
@@ -38,6 +40,10 @@ public:
 	virtual const math::VRBTransform& GetModelTransform() const;
 	virtual void SetModelTransform(const math::VRBTransform& in_Transform);
 
+	void AddParamValue(const std::string& in_strParamName, 
+		VSharedPtr<graphics::IVParameterValue> in_pValue);
+	void RemoveParamValue(const std::string& in_strParamName);
+
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera) {}
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
 
@@ -51,7 +57,12 @@ protected:
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 
-	resource::VResourceDataPtr<const graphics::IVMaterial> m_hMaterial;
+	void ApplyParameterValues() const;
+
+	typedef std::map<std::string, VSharedPtr<graphics::IVParameterValue> > ParamValueMap;
+	ParamValueMap m_ParameterValues;
+
+	resource::VResourceDataPtr<graphics::IVMaterial> m_hMaterial;
 	//math::VRBTransform m_Transform;
 };
 

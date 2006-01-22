@@ -16,73 +16,11 @@ using namespace v3d; // auto unindent
 
 IVStateCategory* VMiscState::m_pStateCategory = 0;
 
-void VMiscState::SetCategory(IVStateCategory* in_pCategory)
-{
-	m_pStateCategory = in_pCategory;
-}
-
-const IVStateCategory* VMiscState::GetCategory() const
-{
-	V3D_ASSERT(m_pStateCategory != 0);
-
-	return m_pStateCategory;
-}
-
-void VMiscState::ReadColor(const VRenderPass& in_Pass)
-{
-	VState const* pColorState(in_Pass.GetStateByName("color"));
-
-	if( pColorState != 0 )
-	{
-		std::string value;
-		value = "1";
-
-		pColorState->GetParameter("red", value);
-		m_Red.Connect(value);
-
-		value = "1";
-		pColorState->GetParameter("green", value);
-		m_Green.Connect(value);
-
-		value = "1";
-		pColorState->GetParameter("blue", value);
-		m_Blue.Connect(value);
-
-		value = "1";
-		pColorState->GetParameter("alpha", value);
-		m_Alpha.Connect(value);
-
-		//pColorState->GetParameter<vfloat32>("red", color.red);
-		//pColorState->GetParameter<vfloat32>("green", color.green);
-		//pColorState->GetParameter("blue", color.blue);
-		//pColorState->GetParameter("alpha", color.alpha);
-	}
-}
-
-vuint VMiscState::GetPolygonMode(const std::string& in_strMode)
-{
-	return GetPolygonModeInfo().GetGLEnum(in_strMode);
-}
-
-vuint VMiscState::GetDepthFunction(const std::string& in_strFunc)
-{
-	return GetDepthTestInfo().GetGLEnum(in_strFunc);
-}
-
-vuint VMiscState::GetBlendFunction(const std::string& in_strFunc)
-{
-	return GetBlendFactorInfo().GetGLEnum(in_strFunc);
-}
-
 VMiscState::VMiscState(const VRenderPass& in_Pass)
 {
 	// init with default values
 	m_nFrontPolygonMode = GL_FILL;
 	m_nBackPolygonMode = GL_FILL;
-
-	m_DepthFunction = GL_LESS;
-	m_bDepthWrite = true;
-	m_bDepthTestEnabled = true;
 
 	//m_DefaultColor = VColor4f(0, 0, 0, 1);
 
@@ -115,21 +53,7 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 	}
 
 	// get z buffer modes
-	VState const* depthState = in_Pass.GetStateByName("depth");
-	if( depthState != 0 )
-	{
-		std::string depthTest = "onless";
-		vbool depthWrite = true;
-		vbool enable = true;
-
-		depthState->GetParameter("function", depthTest);
-		depthState->GetParameter("write", depthWrite);
-		depthState->GetParameter("enable", enable);
-
-		m_DepthFunction = GetDepthFunction(depthTest);
-		m_bDepthWrite = depthWrite;
-		m_bDepthTestEnabled = enable;
-	}
+	m_DepthState.Parse(in_Pass);
 
 	VState const* colorMask = in_Pass.GetStateByName("colormask");
 	if( colorMask != 0 )
@@ -157,10 +81,21 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 	const VState* texmatState = in_Pass.GetStateByName("texture");
 	if( texmatState != 0 )
 	{
-		std::string value;
-		texmatState->GetParameter("matrix", value);
+		std::string matrix;
+		texmatState->GetParameter("matrix", matrix);
 
-		m_TextureMatrix.Connect(value);
+		m_TextureMatrix.Connect(matrix);
+
+		std::string coordGen = GetTexGenModeInfo().GetName(TexGenNone);
+		texmatState->GetParameter("genCoords", coordGen);
+		m_TextureGenerationMode = GetTexGenModeInfo().GetMode(coordGen);
+	}
+
+	m_bEnableLighting = true;
+	const VState* lightingState = in_Pass.GetStateByName("lighting");
+    if( lightingState != 0 )
+	{
+        lightingState->GetParameter("enabled", m_bEnableLighting);		
 	}
 
 	ReadColor(in_Pass);
@@ -172,16 +107,7 @@ void VMiscState::Apply() const
 	glPolygonMode(GL_FRONT, m_nFrontPolygonMode);
 	glPolygonMode(GL_BACK, m_nBackPolygonMode);
 
-	if( m_bDepthTestEnabled )
-	{
-		glEnable(GL_DEPTH_TEST);
-	}
-	else
-	{
-		glDisable(GL_DEPTH_TEST);
-	}
-	glDepthFunc(m_DepthFunction);
-	glDepthMask(m_bDepthWrite);
+	m_DepthState.Apply();
 
 	glColor4f(m_Red.Get(), m_Green.Get(), m_Blue.Get(), m_Alpha.Get());
 		//m_DefaultColor.red,
@@ -207,7 +133,44 @@ void VMiscState::Apply() const
 		glDisable(GL_BLEND);
 	}
 
+	if( m_bEnableLighting )
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
+
 	SetGLMatrix(GL_TEXTURE, m_TextureMatrix.Get());
+
+	if( m_TextureGenerationMode == TexGenEyeSpace )
+	{
+		//const GLenum texGenMode = GL_EYE_LINEAR;
+		//const GLenum texPlane = GL_EYE_PLANE;
+
+		//glEnable(GL_TEXTURE_GEN_S);
+		//glEnable(GL_TEXTURE_GEN_T);
+		//glEnable(GL_TEXTURE_GEN_R);
+		//glEnable(GL_TEXTURE_GEN_Q);
+
+		//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, texGenMode);
+		//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, texGenMode);
+		//glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, texGenMode);
+		//glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, texGenMode);
+
+		//float sfact[4] = { 1, 0, 0, 0 };
+		//float tfact[4] = { 0, 1, 0, 0 };
+		//float rfact[4] = { 0, 0, 1, 0 };
+		//float qfact[4] = { 0, 0, 0, 1 };
+		//glTexGenfv(GL_S, texPlane, sfact);
+		//glTexGenfv(GL_T, texPlane, tfact);
+		//glTexGenfv(GL_R, texPlane, rfact);
+		//glTexGenfv(GL_Q, texPlane, qfact);
+	}
+	else
+	{
+		//glDisable(GL_TEXTURE_GEN_S);
+		//glDisable(GL_TEXTURE_GEN_T);
+		//glDisable(GL_TEXTURE_GEN_R);
+		//glDisable(GL_TEXTURE_GEN_Q);
+	}
 }
 
 vuint VMiscState::GetGLModeNum(const PolygonMode in_Mode)
@@ -268,6 +231,64 @@ vuint VMiscState::GetGLModeNum(BlendMode in_Mode)
 	}
 
 	V3D_THROW(VException, "illegal mode for blending state");
+}
+
+void VMiscState::SetCategory(IVStateCategory* in_pCategory)
+{
+	m_pStateCategory = in_pCategory;
+}
+
+const IVStateCategory* VMiscState::GetCategory() const
+{
+	V3D_ASSERT(m_pStateCategory != 0);
+
+	return m_pStateCategory;
+}
+
+void VMiscState::ReadColor(const VRenderPass& in_Pass)
+{
+	VState const* pColorState(in_Pass.GetStateByName("color"));
+
+	if( pColorState != 0 )
+	{
+		std::string value;
+		value = "1";
+
+		pColorState->GetParameter("red", value);
+		m_Red.Connect(value);
+
+		value = "1";
+		pColorState->GetParameter("green", value);
+		m_Green.Connect(value);
+
+		value = "1";
+		pColorState->GetParameter("blue", value);
+		m_Blue.Connect(value);
+
+		value = "1";
+		pColorState->GetParameter("alpha", value);
+		m_Alpha.Connect(value);
+
+		//pColorState->GetParameter<vfloat32>("red", color.red);
+		//pColorState->GetParameter<vfloat32>("green", color.green);
+		//pColorState->GetParameter("blue", color.blue);
+		//pColorState->GetParameter("alpha", color.alpha);
+	}
+}
+
+vuint VMiscState::GetPolygonMode(const std::string& in_strMode)
+{
+	return GetPolygonModeInfo().GetGLEnum(in_strMode);
+}
+
+vuint VMiscState::GetDepthFunction(const std::string& in_strFunc)
+{
+	return GetDepthTestInfo().GetGLEnum(in_strFunc);
+}
+
+vuint VMiscState::GetBlendFunction(const std::string& in_strFunc)
+{
+	return GetBlendFactorInfo().GetGLEnum(in_strFunc);
 }
 
 //-----------------------------------------------------------------------------

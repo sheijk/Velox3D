@@ -3,13 +3,12 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Scene/IVShooting.h>
 #include <V3d/Scene/IVGraphicsPart.h>
-#include <V3d/Entity/VPartBase.h>
 #include <V3d/Graphics/IVDevice.h>
 
-#include <V3d/Scene/IVRenderStepPart.h>
+#include <V3d/Scene/Shootings/VShootingBase.h>
 
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
@@ -25,27 +24,24 @@ class IVRenderStepPart;
  *
  * @author sheijk
  */
-class VSimpleShooting : public entity::VPartBaseAdapter<IVShooting>
+class VSimpleShooting : public VShootingBase
 {
 public:
 	VSimpleShooting();
 
-	virtual void UpdateAndCull();
-	virtual void Render();
-
 	void SetRenderTarget(graphics::IVDevice* in_pDevice);
-	graphics::IVDevice* GetRenderTarget() const;
-	
-	void SetCamera(graphics::IVCamera* in_pCamera);
-	graphics::IVCamera* GetCamera() const;
+	graphics::IVDevice* GetRenderTarget();
 
-	void Add(IVRenderStepPart* in_pRenderStep);
-	void Remove(IVRenderStepPart* in_pRenderStep);
+	void Register(graphics::IVCamera* in_pCamera);
+	void Unregister(graphics::IVCamera* in_pCamera);
 
-	virtual void Activate();
-	virtual void Deactivate();
+	vuint CameraCount() const;
+	void SetActiveCamera(vuint in_nNum);
 
-	virtual vbool IsActive() const;
+	//void SetCamera(graphics::IVCamera* in_pCamera);
+	graphics::IVCamera* GetCamera();
+
+	virtual scene::IVGraphicsPart* GetScene();
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 protected:
@@ -53,17 +49,12 @@ protected:
 		const std::string& in_SceneId,
 		entity::VPartDependency::Condition in_SceneCondition);
 	
-	void SetupRenderSteps();
-
-	typedef std::vector<IVRenderStepPart*> RenderStepArray;
-	RenderStepArray m_RenderSteps;
 
 	entity::VPartConnection<IVGraphicsPart> m_pScene;
 	graphics::IVDevice* m_pDevice;
 	graphics::IVCamera* m_pCamera;
 
-private:
-	vbool m_bActive;
+	std::vector<graphics::IVCamera*> m_Cameras;
 };
 
 //-----------------------------------------------------------------------------

@@ -1,0 +1,54 @@
+#include <V3dLib/Utils/VTrackballPart.h>
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+#include <V3d/Core/MemManager.h>
+//-----------------------------------------------------------------------------
+namespace v3d { namespace utils {
+//-----------------------------------------------------------------------------
+using namespace v3d; // anti auto indent
+using namespace entity;
+
+/**
+ * standard c'tor
+ */
+VTrackballPart::VTrackballPart() :
+	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
+	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
+{
+}
+
+/**
+ * d'tor
+ */
+VTrackballPart::~VTrackballPart()
+{
+}
+
+void VTrackballPart::Activate()
+{
+	m_pUpdateManager->Register(this);
+}
+
+void VTrackballPart::Deactivate()
+{
+	m_pUpdateManager->Unregister(this);
+}
+
+void VTrackballPart::Update(vfloat32 in_fSeconds)
+{
+	if( m_pTrackball.Get() != 0 && m_pRigidBodyPart.Get() != 0 )
+	{
+		m_pTrackball->Update(in_fSeconds);
+		m_pRigidBodyPart->SetTransform(m_pTrackball->GetTransform());
+	}
+}
+
+void VTrackballPart::SetTrackball(const VSharedPtr<VMouseTrackball>& in_Trackball)
+{
+	m_pTrackball = in_Trackball;
+}
+
+//-----------------------------------------------------------------------------
+}} // namespace v3d::utils
+//-----------------------------------------------------------------------------

@@ -79,6 +79,11 @@ public:
 	VVector3f GetZAxis() const;
 	void GetAxis(VVector3f& out_XAxis, VVector3f& out_YAxis, VVector3f& out_ZAxis) const;
 
+	// these methods may result in a non orthonormal basis! use with caution
+	void SetXAxis(const VVector3f& in_XAxis);
+	void SetYAxis(const VVector3f& in_YAxis);
+	void SetZAxis(const VVector3f& in_ZAxis);
+
 	/**
 	 * Returns the transformation as a matrix
 	 *	
@@ -96,10 +101,6 @@ public:
 	void Invert();
 
 private:
-	void SetXAxis(const VVector3f& in_XAxis);
-	void SetYAxis(const VVector3f& in_YAxis);
-	void SetZAxis(const VVector3f& in_ZAxis);
-
 	VVector3f m_XAxis;
 	VVector3f m_YAxis;
 	VVector3f m_ZAxis;

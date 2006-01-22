@@ -30,6 +30,8 @@ V3D_DECLARE_EXCEPTION(VIllegalDisplayException, VDeviceCreationException);
 // invalid matrix type set
 V3D_DECLARE_EXCEPTION(VInvalidMatrixTypeException, VGraphicException);
 
+V3D_DECLARE_EXCEPTION(VOpenGLException, VGraphicException);
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

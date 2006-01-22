@@ -136,6 +136,16 @@ enum VTextureFilter
 std::ostream& operator<<(std::ostream& str, VTextureFilter filter);
 std::istream& operator>>(std::istream& str, VTextureFilter& filter);
 
+/** Texture coord generation */
+enum VTexGenMode
+{
+	TexGenNone,
+	TexGenEyeSpace
+};
+
+std::ostream& operator<<(std::ostream& str, VTexGenMode genMode);
+std::istream& operator>>(std::istream& str, VTexGenMode& genMode);
+
 /**
  * Enable or disable any color channel for writing
  */

@@ -19,7 +19,12 @@ VResourceData::~VResourceData()
 {
 }
 
-VResource* VResourceData::GetEnclosingResource() const
+VResource* VResourceData::GetEnclosingResource()
+{
+	return m_pResource;
+}
+
+const VResource* VResourceData::GetEnclosingResource() const
 {
 	return m_pResource;
 }

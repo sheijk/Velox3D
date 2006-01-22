@@ -6,6 +6,7 @@
 #include "IVOpenGLRenderState.h"
 
 #include "GLSL/VGLSLShader.h"
+#include "States/VDepthState.h"
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -23,10 +24,15 @@ public:
 	virtual const IVStateCategory* GetCategory() const;
 
 	IVShader* GetShader();
+	
+	VDepthState GetDepthState() const { return m_DepthState; }
+	void SetDepthState(const VDepthState& in_Value) { m_DepthState = in_Value; }
 private:
 	IVShader* m_pShader;
 	IVStateCategory* m_pCategory;
 	static IVShader* s_pActiveShader;
+
+	VDepthState m_DepthState;
 };
 
 //-----------------------------------------------------------------------------

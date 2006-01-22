@@ -4,6 +4,7 @@
 #include <v3d/Math/VVector.h>
 #include <V3d/Math/VQuaternion.h>
 #include <V3d/Math/Numerics.h>
+#include <gmtl/QuatOps.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 //-----------------------------------------------------------------------------
@@ -282,6 +283,9 @@ VQuaternion<Scalar> QuatFromAxisAngle(
 
 	return VQuaternion<Scalar>(x,y,z,w);
 }
+
+void Rotate(VVector3f& io_Vector, const VQuatf& in_Rotation);
+
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------

@@ -23,6 +23,13 @@
 #include <V3d/Scene/Shapes/VArrowMeshPart.h>
 #include <V3d/Scene/Shapes/VSkyboxPart.h>
 #include <V3d/Scene/Shapes/VTerrainPart.h>
+#include <V3d/Scene/Shapes/VSphereMeshPart.h>
+
+#include <V3d/Scene/Shootings/VMirrorShooting.h>
+
+#include <V3d/Scene/IVLightManager.h>
+#include <V3d/Scene/Lights/VLightPart.h>
+#include <V3d/Scene/Lights/VNaiveLightManager.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_SCENE_2005_05_22_H

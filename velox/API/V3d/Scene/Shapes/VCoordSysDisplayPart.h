@@ -4,6 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Scene/VMeshPartBase.h>
+#include <V3dLib/Graphics/Geometry/VColor4f.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
@@ -19,10 +20,15 @@ using namespace v3d; // anti auto indenting
 class VCoordSysDisplayPart : public scene::VMeshPartBase
 {
 public:
-	VCoordSysDisplayPart();
+	VCoordSysDisplayPart(vfloat32 in_fBrightness = 1.0f);
 
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+private:
+	graphics::VColor4f m_XColor;
+	graphics::VColor4f m_YColor;
+	graphics::VColor4f m_ZColor;
 };
 
 //-----------------------------------------------------------------------------

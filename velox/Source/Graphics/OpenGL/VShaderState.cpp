@@ -33,6 +33,8 @@ void VShaderState::Apply() const
 		s_pActiveShader->Unbind();
 	}
 
+	m_DepthState.Apply();
+
 	if( m_pShader != 0 )
 	{
 		m_pShader->Bind();

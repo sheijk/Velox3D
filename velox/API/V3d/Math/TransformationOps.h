@@ -202,7 +202,7 @@ void SetScale(
 	Identity(out_ScaleMatrix);
 
 	for(int dim = 0; dim < Dimension; ++dim)
-		mat.Set(dim, dim, in_ScaleComponents[dim]);
+		out_ScaleMatrix.Set(dim, dim, in_ScaleComponents[dim]);
 }
 
 /**
@@ -241,6 +241,8 @@ void Rotate(VVector3f rotate, VQuatf quaternion);
  * @author: sheijk
  */
 void Scale(VMatrix44f& matrix, float factor);
+
+void Scale(VMatrix44f& io_Matrix, vfloat32 sx, vfloat32 sy, vfloat32 sz);
 
 template<typename Scalar, vuint Dimension>
 void Scale(VMatrix<Scalar, Dimension, Dimension>& io_Matrix,
@@ -289,8 +291,12 @@ VPointer<VMatrix44f>::SharedPtr IdentityPtr();
 void ApplyRow(VMatrix44f* io_pMatrix, vuint in_nRow, const VVector3f& in_Vector);
 void ApplyColumn(
 	VMatrix44f* io_pMatrix, vuint in_nColumn, const VVector3f& in_Vector);
+
 void MakeTextureProjectionMatrix(
 	VMatrix44f* out_pMatrix, const math::VRBTransform& in_Transform);
+
+void MakeProjectionMatrix(VMatrix44f* out_pMatrix, 
+	vfloat32 fovy, vfloat32 aspect, vfloat32 znear, vfloat32 zfar);
 
 //-----------------------------------------------------------------------------
 } // namespace math

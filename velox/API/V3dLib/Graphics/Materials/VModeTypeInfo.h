@@ -55,6 +55,7 @@ VModeTypeInfo<VDepthTest> GetDepthTestInfo();
 VModeTypeInfo<VBlendFactor> GetBlendFactorInfo();
 VModeTypeInfo<VTextureWrapMode> GetTextureWrapModeInfo();
 VModeTypeInfo<VTextureFilter> GetTextureFilterInfo();
+VModeTypeInfo<VTexGenMode> GetTexGenModeInfo();
 VModeTypeInfo<VShaderType, CGprofile> GetShaderTypeInfo();
 //-----------------------------------------------------------------------------
 

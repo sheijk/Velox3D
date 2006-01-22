@@ -48,8 +48,6 @@ VShaderState* VShaderCategory::CreateState(const VRenderPass& in_Pass)
 {
 	if( CanCreateStateFrom(in_Pass) )
 	{
-		//TODO: get fragment and vertex shader from resource system
-
 		// get fragment and vertex shader resource name and load them
 		const std::string fragmentResource = GetResFromState(in_Pass, FRAGMENT_PROGRAM_STATE_NAME);
 		const std::string fragmentSource = 
@@ -61,6 +59,11 @@ VShaderState* VShaderCategory::CreateState(const VRenderPass& in_Pass)
 
 		VGLSLShader* pShader = new VGLSLShader(vertexSource, fragmentSource);
 		VShaderState* pShaderState = new VShaderState(pShader, this);
+
+		VDepthState depthState;
+		depthState.Parse(in_Pass);
+		pShaderState->SetDepthState(depthState);
+
 		return pShaderState;
 	}
 	else

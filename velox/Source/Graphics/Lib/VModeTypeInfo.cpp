@@ -8,11 +8,12 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 
 namespace {
-	VModeTypeInfo<VPolygonMode>		g_PolygonModeInfo;
-	VModeTypeInfo<VDepthTest>		g_DepthTestInfo;
-	VModeTypeInfo<VBlendFactor>		g_BlendFactorInfo;
-	VModeTypeInfo<VTextureWrapMode>	g_TextureWrapModeInfo;
-	VModeTypeInfo<VTextureFilter>	g_TextureFilterInfo;
+	VModeTypeInfo<VPolygonMode> g_PolygonModeInfo;
+	VModeTypeInfo<VDepthTest> g_DepthTestInfo;
+	VModeTypeInfo<VBlendFactor> g_BlendFactorInfo;
+	VModeTypeInfo<VTextureWrapMode> g_TextureWrapModeInfo;
+	VModeTypeInfo<VTextureFilter> g_TextureFilterInfo;
+	VModeTypeInfo<VTexGenMode> g_TexGenModeInfo;
 	VModeTypeInfo<VShaderType, CGprofile> g_ShaderTypeInfo;
 
 	class VModeInfoCreator
@@ -56,6 +57,9 @@ namespace {
 			g_TextureFilterInfo.AddModeInfo(FilterNearestMipmapLinear, "nearest.mipmap.linear", GL_NEAREST_MIPMAP_LINEAR);
 			g_TextureFilterInfo.AddModeInfo(FilterLinearMipmapLinear, "linear.mipmap.linear", GL_LINEAR_MIPMAP_LINEAR);
 
+			g_TexGenModeInfo.AddModeInfo(TexGenNone, "none", 0);
+			g_TexGenModeInfo.AddModeInfo(TexGenEyeSpace, "eye", GL_EYE_PLANE);
+
 			// difference by 10 in numbers is intended, nvidia has strange naming conventions ;)
 			g_ShaderTypeInfo.AddModeInfo(ShaderCGVertex10, "cg.v.10", CG_PROFILE_VP20);
 			g_ShaderTypeInfo.AddModeInfo(ShaderCGVertex20, "cg.v.20", CG_PROFILE_VP30);
@@ -94,6 +98,11 @@ VModeTypeInfo<VTextureWrapMode> GetTextureWrapModeInfo()
 VModeTypeInfo<VTextureFilter> GetTextureFilterInfo()
 {
 	return g_TextureFilterInfo;
+}
+
+VModeTypeInfo<VTexGenMode> GetTexGenModeInfo()
+{
+	return g_TexGenModeInfo;
 }
 
 VModeTypeInfo<VShaderType, CGprofile> GetShaderTypeInfo()

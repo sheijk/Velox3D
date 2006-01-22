@@ -269,7 +269,7 @@ void VDIInputDevice::Update()
 				  Iter != m_InputHelper.m_ButtonList.end();
 				  ++Iter )
 				if ( (*Iter)->GetName() == Name )
-					 (*Iter)->Set( (DeviceData[i].dwData & 0x80) != 0 );
+					 (*Iter)->SetDown( (DeviceData[i].dwData & 0x80) != 0 );
 		}
 	}
 }

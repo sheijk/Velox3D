@@ -20,6 +20,12 @@
 #include <V3d/Graphics/VModel.h>
 #include <V3d/Graphics/VPointLight.h>
 #include <V3d/Graphics/IVTexture.h>
+#include <V3d/Graphics/VLight.h>
+
+#include <V3d/Graphics/IVParameter.h>
+#include <V3d/Graphics/Parameters/IVParameterValue.h>
+#include <V3d/Graphics/Parameters/VGenericValue.h>
+#include <V3d/Graphics/Parameters/VTextureValue.h>
 
 //-----------------------------------------------------------------------------
 #endif // V3D_GRAPHICS_H

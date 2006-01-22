@@ -130,6 +130,13 @@ VState BlendingState(
 	return blendState;
 }
 
+VState LightingState(vbool enableLighting)
+{
+	VState lightingState("lighting");
+	lightingState.SetParameter("enabled", enableLighting);
+	return lightingState;
+}
+
 //-----------------------------------------------------------------------------
 void MakeDefaultMaterial(VRenderPass& pass)
 {
@@ -223,6 +230,43 @@ VEffectDescription GLSLEffect(
 	vertexState.SetParameter("res", in_strFragmentProgramRes);
 
 	return effect;
+}
+
+VEffectDescription CubeMapEffect(
+	const std::string& frontResource,
+	const std::string& backResource,
+	const std::string& leftResource,
+	const std::string& rightResource,
+	const std::string& topResource,
+	const std::string& bottomResource)
+{
+	VState state("texture");
+	state.SetParameter("type", "cube");
+	state.SetParameter("front", frontResource);
+	state.SetParameter("back", backResource);
+	state.SetParameter("left", leftResource);
+	state.SetParameter("right", rightResource);
+	state.SetParameter("top", topResource);
+	state.SetParameter("bottom", bottomResource);
+
+	VEffectDescription effect;
+	VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
+	pass.AddState(state);
+
+	return effect;
+}
+
+VEffectDescription CubeMapEffect(
+	const std::string& in_strResourceDir,
+	const std::string& in_strExtension)
+{
+	return CubeMapEffect(
+		in_strResourceDir + "front" + in_strExtension,
+		in_strResourceDir + "back" + in_strExtension,
+		in_strResourceDir + "left" + in_strExtension,
+		in_strResourceDir + "right" + in_strExtension,
+		in_strResourceDir + "top" + in_strExtension,
+		in_strResourceDir + "bottom" + in_strExtension);
 }
 
 //-----------------------------------------------------------------------------

@@ -27,13 +27,16 @@ public:
 	virtual void Apply(const VVector4f& in_NewValue) const;
 	virtual VVector4f AsFloat4() const;
 
+	virtual VMatrix44f AsFloat44() const;
+	virtual void Apply(const VMatrix44f& in_NewValue) const;
+
 	virtual void Apply(vint in_nNewValue) const;
 	virtual vint AsInt() const;
 
 	virtual void Apply(vbool in_bNewValue) const;
 	virtual vbool AsBool() const;
 
-	virtual void ApplyTexture(VStringParam in_strResourceName);
+	virtual void ApplyTexture(VStringParam in_strResourceName) const;
 
 protected:
 	GLint GetLocation() const;

@@ -186,7 +186,9 @@ void VEntity::Activate()
 			part != m_Parts.end();
 			++part)
 		{
-			if( ! part->second->IsReady() )
+			VSharedPtr<IVPart> pPart = part->second;
+
+			if( ! pPart->IsReady() )
 				return;
 		}
 

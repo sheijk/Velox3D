@@ -26,7 +26,8 @@ public:
 	virtual VTypeInfo GetTypeId() const = 0;
 
 	/** Get the resource this data is contained in */
-	VResource* GetEnclosingResource() const;
+	VResource* GetEnclosingResource();
+	const VResource* GetEnclosingResource() const;
 
 protected:
 	VResourceData(VResource* in_pResource);

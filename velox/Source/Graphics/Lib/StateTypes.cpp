@@ -109,6 +109,23 @@ std::istream& operator>>(std::istream& str, VTextureFilter& filter)
 	return str;
 }
 
+std::ostream& operator<<(std::ostream& str, VTexGenMode genMode)
+{
+	str << GetTexGenModeInfo().GetName(genMode);
+
+	return str;	
+}
+
+std::istream& operator>>(std::istream& str, VTexGenMode& genMode)
+{
+	std::string text;
+	str >> text;
+
+    genMode = GetTexGenModeInfo().GetMode(text);
+
+	return str;
+}
+
 //-----------------------------------------------------------------------------
 
 VColorBufferMask::VColorBufferMask() : 

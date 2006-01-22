@@ -15,11 +15,11 @@ namespace input {
 class IVButton
 {
 public:
+	virtual ~IVButton() {};
 	
-	virtual					~IVButton() {};
-	
-	virtual VStringRetVal	GetName() = 0;
-	virtual vbool			IsDown() = 0;
+	virtual VStringRetVal GetName() = 0;
+	virtual vbool IsDown() = 0;
+	virtual void SetDown(vbool down) = 0;
 };
 
 //-----------------------------------------------------------------------------

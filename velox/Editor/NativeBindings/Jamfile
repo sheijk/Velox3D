@@ -150,6 +150,8 @@ lib ScriptingDLL :
 	[ glob ../../Source/Error/*.cpp ]
 	# scene
 	[ glob ../../Source/Scene/*.cpp ]
+	[ glob ../../Source/Scene/Shapes/*.cpp ]
+	[ glob ../../Source/Scene/Shootings/*.cpp ]
 
 	# xml service
 	../../Source/XMLService/VXMLAttribute.cpp

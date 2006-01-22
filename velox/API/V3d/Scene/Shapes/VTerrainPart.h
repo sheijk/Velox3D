@@ -22,6 +22,8 @@ public:
 
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
 private:
 	vuint GetVertexCount() const;
 	vuint GetIndexCount() const;
@@ -33,6 +35,9 @@ private:
 
 	void GenerateIndices();
 	void GenerateVertices();
+	void GenerateNormals();
+
+	VVector3f GetVertexAt(vuint x, vuint y);
 
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hVertexBuffer;
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hIndexBuffer;	
@@ -46,5 +51,7 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VTerrainPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VTERRAINPART_2005_12_07_H

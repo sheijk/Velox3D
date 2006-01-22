@@ -56,6 +56,8 @@ VState BlendingState(
 	VBlendFactor source,
 	VBlendFactor dest);
 
+VState LightingState(vbool enableLighting);
+
 //-----------------------------------------------------------------------------
 
 /**
@@ -94,9 +96,17 @@ VEffectDescription GLSLEffect(
 	const std::string& in_strVertexProgramRes, 
 	const std::string& in_strFragmentProgramRes);
 
-/**
- * Returns a render pass which will render a wireframe
- */
+VEffectDescription CubeMapEffect(
+	const std::string& frontResource,
+	const std::string& backResource,
+	const std::string& leftResource,
+	const std::string& rightResource,
+	const std::string& topResource,
+	const std::string& bottomResource);
+
+VEffectDescription CubeMapEffect(
+	const std::string& in_strResourceDir,
+	const std::string& in_strExtension);
 
 //-----------------------------------------------------------------------------
 

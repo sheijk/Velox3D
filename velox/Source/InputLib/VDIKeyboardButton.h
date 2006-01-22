@@ -14,16 +14,17 @@ namespace input {
 class VDIKeyboardButton : public IVButton
 {
 private:
-	vchar*					m_pButton;
-	VString					m_strName;
+	vchar* m_pButton;
+	VString m_strName;
 
-public:		
-							VDIKeyboardButton() {;};
-							VDIKeyboardButton( VStringParam in_strName, vchar* in_pPointer );
-	virtual					~VDIKeyboardButton();
+	public:
+	VDIKeyboardButton() {;};
+	VDIKeyboardButton( VStringParam in_strName, vchar* in_pPointer );
+	virtual ~VDIKeyboardButton();
 
-	virtual VStringRetVal	GetName();
-	virtual vbool			IsDown();
+	virtual VStringRetVal GetName();
+	virtual vbool IsDown();
+	virtual void SetDown(vbool down);
 };
 
 //-----------------------------------------------------------------------------

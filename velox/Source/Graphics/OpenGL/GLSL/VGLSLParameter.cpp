@@ -81,6 +81,61 @@ VVector4f VGLSLParameter::AsFloat4() const
 		m_fTempBuffer[2], m_fTempBuffer[3]);
 }
 
+namespace {
+	VMatrix44f ToMatrix44f(vfloat32* in_pArray16)
+	{
+		VMatrix44f mat;
+
+		vuint index = 0;
+		for(vuint column = 0; column < 4; ++column)
+		for(vuint row = 0; row < 4; ++row)
+		{
+			mat.Set(row, column, in_pArray16[index]);
+			++index;
+		}
+
+		return mat;
+	}
+
+	void Fill(const VMatrix44f& matrix, vfloat32* out_pArray)
+	{
+		vuint index = 0;
+		for(vuint column = 0; column < 4; ++column)
+		for(vuint row = 0; row < 4; ++row)
+		{
+			out_pArray[index] = matrix.Get(row, column);
+			++index;
+		}
+	}
+
+	V3D_DECLARE_EXCEPTION(VOpenGLException, VException);
+
+	void ThrowGLExceptionOnError()
+	{
+		GLenum error = glGetError();
+
+		if( error != GL_NO_ERROR )
+		{
+			std::string errorMessage = (char*) gluErrorString(error);
+
+			V3D_THROWMSG(VOpenGLException, "OpenGL Error occured: " << errorMessage);
+		}
+	}
+}
+
+VMatrix44f VGLSLParameter::AsFloat44() const
+{
+	glGetUniformfvARB(m_hProgram, m_Location, &m_fTempBuffer[0]);
+
+	return ToMatrix44f(m_fTempBuffer);
+}
+
+void VGLSLParameter::Apply(const VMatrix44f& in_NewValue) const
+{
+	Fill(in_NewValue, &m_fTempBuffer[0]);
+
+	glUniformMatrix4fvARB(m_Location, 1, false, &m_fTempBuffer[0]);
+}
 
 void VGLSLParameter::Apply(vint in_nNewValue) const
 {
@@ -106,7 +161,7 @@ vbool VGLSLParameter::AsBool() const
 	return m_iTempBuffer[0] != 0;
 }
 
-void VGLSLParameter::ApplyTexture(VStringParam in_strResourceName)
+void VGLSLParameter::ApplyTexture(VStringParam in_strResourceName) const
 {
 	return;
 

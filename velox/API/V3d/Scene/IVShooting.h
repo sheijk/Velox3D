@@ -1,4 +1,3 @@
-//TODO: add file creation date to file guard
 #ifndef V3D_IVSHOOTING_2005_05_20_H
 #define V3D_IVSHOOTING_2005_05_20_H
 //-----------------------------------------------------------------------------

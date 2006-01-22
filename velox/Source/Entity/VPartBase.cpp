@@ -40,7 +40,9 @@ void VUntypedPartConnection::Connect(
 	IVPart& in_Part)
 {
 	if( in_Location == m_Dependency.location &&
-		in_Id == m_Dependency.id )
+		in_Id == m_Dependency.id &&
+		in_Part.GetTypeInfo().CanBeCastedTo(m_Dependency.GetTypeInfo())
+		)
 	{
 		m_pPart = &in_Part;
 	}
@@ -111,7 +113,7 @@ vbool VPartConnectionManager::IsReady() const
 
 vuint VPartConnectionManager::DependencyCount() const
 {
-	return m_Dependencies.size();
+	return vuint(m_Dependencies.size());
 }
 
 VPartDependency VPartConnectionManager::GetDependencyInfo(vuint in_nIndex) const

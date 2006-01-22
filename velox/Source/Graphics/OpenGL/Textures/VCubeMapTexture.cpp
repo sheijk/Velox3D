@@ -99,13 +99,36 @@ void VCubeMapTexture::Bind(vuint in_nTextureUnit)
 	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, m_TextureId[TOP_NUM]);
 	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, m_TextureId[BOTTOM_NUM]);
 
-	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
-	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
-	glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
+	const GLenum texGenMode = GL_REFLECTION_MAP;
+	const GLenum texPlane = GL_EYE_PLANE;
 
 	glEnable(GL_TEXTURE_GEN_S);
 	glEnable(GL_TEXTURE_GEN_T);
 	glEnable(GL_TEXTURE_GEN_R);
+	glEnable(GL_TEXTURE_GEN_Q);
+
+	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, texGenMode);
+	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, texGenMode);
+	glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, texGenMode);
+	glTexGeni(GL_Q, GL_TEXTURE_GEN_MODE, texGenMode);
+
+	float sfact[4] = { 1, 0, 0, 0 };
+	float tfact[4] = { 0, 1, 0, 0 };
+	float rfact[4] = { 0, 0, 1, 0 };
+	float qfact[4] = { 0, 0, 0, 1 };
+	glTexGenfv(GL_S, texPlane, sfact);
+	glTexGenfv(GL_T, texPlane, tfact);
+	glTexGenfv(GL_R, texPlane, rfact);
+	glTexGenfv(GL_Q, texPlane, qfact);
+
+	//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
+	//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
+	//glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_REFLECTION_MAP);
+
+	//glEnable(GL_TEXTURE_GEN_S);
+	//glEnable(GL_TEXTURE_GEN_T);
+	//glEnable(GL_TEXTURE_GEN_R);
+
 	glEnable(GL_TEXTURE_CUBE_MAP);
 }
 
@@ -118,6 +141,8 @@ void VCubeMapTexture::Unbind()
 	glDisable(GL_TEXTURE_GEN_S);
 	glDisable(GL_TEXTURE_GEN_T);
 	glDisable(GL_TEXTURE_GEN_R);
+	glDisable(GL_TEXTURE_GEN_Q);
+
 	glDisable(GL_TEXTURE_CUBE_MAP);
 }
 

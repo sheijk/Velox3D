@@ -34,6 +34,11 @@ public:
 	DataType& operator*() const;
 
 	VResource* GetEnclosingResource() { return m_pData->GetEnclosingResource(); }
+	const VResource* GetEnclosingResource() const 
+	{ 
+		return m_pData->GetEnclosingResource(); 
+	}
+
 	VTypeInfo GetTypeId() { return m_pData->GetTypeId(); }
 
 private:

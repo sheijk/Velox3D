@@ -14,7 +14,7 @@
 
 #include <v3d/Graphics/GraphicsExceptions.h>
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
-#include <V3d/Graphics/VPointLight.h>
+#include <V3d/Graphics/VLight.h>
 
 #include "VMeshHandle.h"
 #include "VStreamMesh.h"
@@ -118,8 +118,6 @@ VOpenGLDevice::VOpenGLDevice(
 	//m_StateCategories.RegisterCategory(m_MiscStateCategory);
 	//m_StateCategories.RegisterCategory(m_VertexShaderCategory);
 	//m_StateCategories.RegisterCategory(m_PixelShaderCategory);
-
-	m_PointLights.resize(int(LightMaxCount));
 
 	Identity(m_ModelMatrix);
 	Identity(m_ViewMatrix);
@@ -501,7 +499,7 @@ void VOpenGLDevice::SetScreenSize()
 					((vfloat32)m_DisplaySettings.GetWidth() /
 					m_DisplaySettings.GetHeight()),
 					1.0f,
-					900000.0f);
+					1000.0f);
 	GetGLMatrix(GL_PROJECTION_MATRIX, &m_ProjectionMatrix);
 	//gluPerspective(m_DisplaySettings.m_fFieldOfView,
 	//				((vfloat32)m_DisplaySettings.m_iWidth /
@@ -592,7 +590,7 @@ void VOpenGLDevice::EndScene(EndSceneFlags in_Flags)
 
 	m_pContext->MakeCurrent();
 
-	if( in_Flags & NoFlip == NoFlip )
+	if( (in_Flags & NoFlip) == NoFlip )
 		m_pContext->SwapBuffers();
 
 	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
@@ -706,65 +704,97 @@ void VOpenGLDevice::RecalcModelViewMatrix()
 
 //-----------------------------------------------------------------------------
 
-void VOpenGLDevice::ApplyLight(LightId in_Number, const VPointLight* in_pLight)
+void VOpenGLDevice::ApplyLight(LightId in_Number, const VLight* in_pLight)
 {
-	if( int(in_Number) > int(LightMaxCount)-1 )
+    if( m_Lights.size() <= in_Number )
+		m_Lights.resize(in_Number+1);
+
+	m_Lights[in_Number] = in_pLight;
+
+	if( in_pLight == 0 )
 	{
-		V3D_THROWMSG(VGraphicException, 
-			"Tried to set invalid light "
-			<< in_Number 
-			<< " (only 0-8 are allowed");
+		vuint lastNonZero = -1;
+		for(vuint pos = 0; pos < m_Lights.size(); ++pos)
+		{
+			if( m_Lights[pos] != 0 )
+				lastNonZero = pos;
+		}
+
+		if( m_Lights.size() != (lastNonZero+1) )
+			m_Lights.resize(lastNonZero+1);
 	}
 
-	GLenum lightnum = GL_LIGHT0 + int(in_Number);
+	//if( int(in_Number) > int(LightMaxCount)-1 )
+	//{
+	//	V3D_THROWMSG(VGraphicException, 
+	//		"Tried to set invalid light "
+	//		<< in_Number 
+	//		<< " (only 0-8 are allowed");
+	//}
 
-	m_PointLights[int(in_Number)] = *in_pLight;
+	//GLenum lightnum = GL_LIGHT0 + int(in_Number);
 
-	if( in_pLight != 0 ) 
-	{
-		static float white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-		static float black[] = { .0f, .0f, .0f, 1.0f };
+	//m_PointLights[int(in_Number)] = *in_pLight;
 
-		glMaterialfv(GL_FRONT, GL_AMBIENT, white);
-		glMaterialfv(GL_FRONT, GL_SPECULAR, white);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, white);
-		glMaterialf(GL_FRONT, GL_SHININESS, 10.0f);
+	//if( in_pLight != 0 ) 
+	//{
+	//	static float white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	//	static float black[] = { .0f, .0f, .0f, 1.0f };
 
-		glMaterialfv(GL_BACK, GL_AMBIENT, black);
-		glMaterialfv(GL_BACK, GL_SPECULAR, black);
-		glMaterialfv(GL_BACK, GL_DIFFUSE, black);
+	//	glMaterialfv(GL_FRONT, GL_AMBIENT, white);
+	//	glMaterialfv(GL_FRONT, GL_SPECULAR, white);
+	//	glMaterialfv(GL_FRONT, GL_DIFFUSE, white);
+	//	glMaterialf(GL_FRONT, GL_SHININESS, 10.0f);
 
-		glLightfv(lightnum, GL_AMBIENT, (float*)&(in_pLight->GetAmbient()));
-		glLightfv(lightnum, GL_SPECULAR, (float*)&(in_pLight->GetSpecular()));
-		glLightfv(lightnum, GL_DIFFUSE, (float*)&(in_pLight->GetDiffuse()));
+	//	glMaterialfv(GL_BACK, GL_AMBIENT, black);
+	//	glMaterialfv(GL_BACK, GL_SPECULAR, black);
+	//	glMaterialfv(GL_BACK, GL_DIFFUSE, black);
 
-		VVector3f& lpos(in_pLight->GetPosition());
-		float pos[] = { lpos.GetX(), lpos.GetY(), lpos.GetZ(), 1.0f };
-		glLightfv(lightnum, GL_POSITION, pos);
+	//	glLightfv(lightnum, GL_AMBIENT, (float*)&(in_pLight->GetAmbient()));
+	//	glLightfv(lightnum, GL_SPECULAR, (float*)&(in_pLight->GetSpecular()));
+	//	glLightfv(lightnum, GL_DIFFUSE, (float*)&(in_pLight->GetDiffuse()));
 
-		glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+	//	VVector3f& lpos(in_pLight->GetPosition());
+	//	float pos[] = { lpos.GetX(), lpos.GetY(), lpos.GetZ(), 1.0f };
+	//	glLightfv(lightnum, GL_POSITION, pos);
 
-		glEnable(GL_LIGHTING);
-		glEnable(lightnum);
-	}
-	else
-	{
-		glDisable(lightnum);
-	}
+	//	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+
+	//	glEnable(GL_LIGHTING);
+	//	glEnable(lightnum);
+	//}
+	//else
+	//{
+	//	glDisable(lightnum);
+	//}
 }
 
-const VPointLight& VOpenGLDevice::GetLight(LightId in_Number) const
+IVDevice::LightId VOpenGLDevice::MaxActiveLight() const
 {
-	if( int(in_Number) <= int(Light7) )
-	{
-		return m_PointLights[int(in_Number)];
-	}
-	else
-	{
-		V3D_THROWMSG(VGraphicException, "Tried to get invalid light nr. "
-			<< int(in_Number) << " (max. " << int(LightMaxCount) << ")");
-	}
+	return m_Lights.size();
 }
+
+const VLight* VOpenGLDevice::GetLight(LightId in_Number) const
+{
+	V3D_ASSERT(in_Number < MaxActiveLight());
+	if( in_Number >= 0 && in_Number < m_Lights.size() )
+		return m_Lights[in_Number];
+	else
+		return 0;
+}
+
+//const VPointLight& VOpenGLDevice::GetLight(LightId in_Number) const
+//{
+//	if( int(in_Number) <= int(Light7) )
+//	{
+//		return m_PointLights[int(in_Number)];
+//	}
+//	else
+//	{
+//		V3D_THROWMSG(VGraphicException, "Tried to get invalid light nr. "
+//			<< int(in_Number) << " (max. " << int(LightMaxCount) << ")");
+//	}
+//}
 
 IVRenderContext* VOpenGLDevice::CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings)
 {

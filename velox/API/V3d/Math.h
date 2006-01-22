@@ -16,6 +16,7 @@
 #include <V3d/Math/ArrayOps.h>
 
 #include <V3d/Math/VRect.h>
+#include <V3d/Math/VRect3D.h>
 
 #include <V3d/Math/VQuaternion.h>
 #include <V3d/Math/VQuaternionOps.h>

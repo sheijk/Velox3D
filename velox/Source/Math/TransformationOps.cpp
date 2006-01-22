@@ -1,4 +1,10 @@
 #include <V3d/Math.h>
+
+// for MakeProjectionMatrix, 
+//TODO: replace by implementation not depending on opengl!
+#include <V3d/OpenGL.h>
+#include <V3d/Graphics/OpenGLUtils.h>
+
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -51,6 +57,13 @@ void Scale(VMatrix44f& matrix, float factor)
 	VMatrix44f scale;
 	SetScale(scale, factor);
 	Mult(matrix, matrix, scale);
+}
+
+void Scale(VMatrix44f& io_Matrix, vfloat32 sx, vfloat32 sy, vfloat32 sz)
+{
+	VMatrix44f scaleMat;
+	SetScale(scaleMat, ToVector4f(sx, sy, sz, 1.0f));
+	Mult(io_Matrix, io_Matrix, scaleMat);
 }
 
 VMatrix44f IdentityMatrix()
@@ -131,6 +144,21 @@ void MakeTextureProjectionMatrix(
 
 	VVector3f pos = in_Transform.GetPosition();
 	Translate(*out_pMatrix, pos.GetX(), -pos.GetY(), pos.GetZ());
+}
+
+void MakeProjectionMatrix(VMatrix44f* out_pMatrix, 
+	vfloat32 fovy, vfloat32 aspect, vfloat32 znear, vfloat32 zfar)
+{
+	vfloat32 origProj[16];
+	glGetFloatv(GL_PROJECTION_MATRIX, origProj);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(fovy, aspect, znear, zfar);
+
+	graphics::GetGLMatrix(GL_PROJECTION_MATRIX, out_pMatrix);
+
+	glLoadMatrixf(origProj);
 }
 
 //-----------------------------------------------------------------------------

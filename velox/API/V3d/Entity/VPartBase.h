@@ -102,6 +102,12 @@ template<typename Parent>
 class VPartBaseAdapter : public Parent
 {
 public:
+	// override these methods in derived classes
+	virtual void Activate() = 0;
+	virtual void Deactivate() = 0;
+	virtual const VTypeInfo& GetTypeInfo() const = 0;
+
+
 	virtual void Connect(
 		VPartDependency::Location in_Location, 
 		const std::string& in_Id, 

@@ -38,7 +38,7 @@ vbool VDIButton::IsDown()
 	return m_bState;
 }
 
-void VDIButton::Set(vbool in_bState)
+void VDIButton::SetDown(vbool in_bState)
 {
     m_bState = in_bState;
 }

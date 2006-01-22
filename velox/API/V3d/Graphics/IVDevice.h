@@ -17,7 +17,7 @@ struct VMaterialDescription;
 class IVRenderState;
 class IVMesh;
 class IVMaterial;
-class VPointLight;
+class VLight;
 
 /**
  * A graphical device. Abstraction of DirectGraphics/OpenGL/..
@@ -115,16 +115,19 @@ public:
 	/** Returns true if and only if between calls to BeginScene and EndScene */
 	virtual vbool IsActive() const = 0;
 
-	/** Id's of the lights */
-	enum LightId
-	{
-		Light0, Light1, Light2, Light3, Light4, Light5, Light6, Light7, LightMaxCount
-	};
+	typedef vuint LightId;
 
-	/**
-	 * Set a point light. Pass a zero pointer to disable light
+	/** 
+	 * Id of the maximum active light. Note: some lights with 
+	 * id < MaxActiveLight() might be disabled
 	 */
-	virtual void ApplyLight(LightId in_Number, const VPointLight* in_pLight) = 0;
+	virtual LightId MaxActiveLight() const = 0;
+
+	/** Set a point light. Pass a zero pointer to disable light */
+	virtual void ApplyLight(LightId in_Number, const VLight* in_pLight) = 0;
+
+	/** Get active light. Might return 0 if the given light id is not active */
+	virtual const VLight* GetLight(LightId in_Number) const = 0;
 
 	virtual IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings) = 0;
 

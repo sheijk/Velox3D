@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="opengl32.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/GraphicsDemo.exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="TRUE"
@@ -83,6 +83,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/GraphicsDemo.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="TRUE"

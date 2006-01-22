@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- Velox3D services load info -->
+<Config>
+	<Services>
+		<Service id="velox"			desc="The velox services"		filename="ServiceDLL.dll"/>
+		<Service id="wx"			desc="The wxWidgets services"	filename="WxServiceDLL.dll"/>
+	</Services>
+	<Main id="main"/>
+</Config>

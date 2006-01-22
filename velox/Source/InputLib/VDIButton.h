@@ -15,16 +15,16 @@ namespace input {
  */
 class VDIButton : public IVButton
 {
-    VString					m_strName;
-	vbool					m_bState;
+	VString m_strName;
+	vbool m_bState;
 
 public:
-							VDIButton(VStringParam in_strName);
-	virtual					~VDIButton();
+	VDIButton(VStringParam in_strName);
+	virtual ~VDIButton();
 
-    virtual VStringRetVal	GetName();
-    virtual vbool			IsDown();
-			void			Set( vbool in_bState );
+	virtual VStringRetVal GetName();
+	virtual vbool IsDown();
+	void SetDown( vbool in_bState );
 };
 //-----------------------------------------------------------------------------
 } // namespace input

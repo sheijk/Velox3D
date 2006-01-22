@@ -24,13 +24,13 @@ public:
 
 	virtual ~VGLSLTextureParameter();
 
-	virtual void ApplyTexture(VStringParam in_strResourceName);
+	virtual void ApplyTexture(VStringParam in_strResourceName) const;
 
 	void BindTexture();
 	void UnbindTexture();
 
 private:
-	resource::VResourceDataPtr<VTexture2D> m_pTexture;
+	mutable resource::VResourceDataPtr<IVTexture> m_pTexture;
 	vuint m_nTextureUnit;
 };
 

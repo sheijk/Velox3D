@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="oded.lib"
+				AdditionalDependencies="oded.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/SimplePhysicsSample.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"

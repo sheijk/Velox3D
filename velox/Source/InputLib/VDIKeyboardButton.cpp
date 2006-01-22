@@ -26,6 +26,12 @@ vbool VDIKeyboardButton::IsDown()
 {
 	return (*m_pButton & 0x80) != 0;
 }
+
+void VDIKeyboardButton::SetDown(vbool down)
+{
+	*m_pButton = down ? 0x80 : 0x00;
+}
+
 //-----------------------------------------------------------------------------
 } // namespace input
 } // namespace v3d

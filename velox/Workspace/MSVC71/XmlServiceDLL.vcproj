@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="tinyxmld.lib"
+				AdditionalDependencies="tinyxmld.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/XmlServiceDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
@@ -85,7 +85,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="tinyxml.lib"
+				AdditionalDependencies="tinyxml.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/XmlServiceDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"

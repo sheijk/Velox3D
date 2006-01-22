@@ -66,6 +66,7 @@ VFrameBufferObjectContext::~VFrameBufferObjectContext()
 
 void VFrameBufferObjectContext::MakeCurrent()
 {
+	m_pParentContext->MakeCurrent();
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_FBOId);
 	//glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_TextureId, 0);
 }

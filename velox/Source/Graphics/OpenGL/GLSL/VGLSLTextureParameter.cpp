@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Resource.h>
+#include <V3d/Graphics/OpenGLUtils.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -26,28 +27,32 @@ VGLSLTextureParameter::~VGLSLTextureParameter()
 {
 }
 
-void VGLSLTextureParameter::ApplyTexture(VStringParam in_strResourceName)
+void VGLSLTextureParameter::ApplyTexture(VStringParam in_strResourceName) const
 {
 	using namespace resource;
 
 	// get resource
-	m_pTexture = GetMutableResourceData<VTexture2D>(in_strResourceName);
+	m_pTexture = GetMutableResourceData<IVTexture>(in_strResourceName);
 
 	// set texture id as int
 	//glUniform1iARB(m_Location, pTex->GetTextureId());
-	glUniform1iARB(GetLocation(), m_nTextureUnit);
+	V3D_GLCHECK( glUniform1iARB(GetLocation(), m_nTextureUnit) );	
 }
 
 void VGLSLTextureParameter::BindTexture()
 {	
 	if( &*m_pTexture != 0 )
-		m_pTexture->Bind(m_nTextureUnit);
+	{
+		V3D_GLCHECK( m_pTexture->Bind(m_nTextureUnit) );
+	}
 }
 
 void VGLSLTextureParameter::UnbindTexture()
 {
 	if( &*m_pTexture != 0 )
-		m_pTexture->Unbind();
+	{
+		V3D_GLCHECK( m_pTexture->Unbind() );
+	}
 }
 
 //-----------------------------------------------------------------------------

@@ -14,6 +14,14 @@ template<typename ParamType>
 class VGenericValue : public IVParameterValue
 {
 public:
+	VGenericValue()
+	{}
+
+	VGenericValue(const ParamType& in_InitialValue)
+	{
+		m_Value = in_InitialValue;
+	}
+
 	virtual void Apply(const IVParameter& in_Param) const
 	{
 		in_Param.Apply(m_Value);
@@ -25,6 +33,16 @@ public:
 private:
 	ParamType m_Value;
 };
+
+typedef VGenericValue<vfloat32> VFloatParamValue;
+typedef VGenericValue<VVector2f> VVector2fParamValue;
+typedef VGenericValue<VVector4f> VVector4fParamValue;
+
+typedef VGenericValue<VMatrix44f> VMatrix44fParamValue;
+
+typedef VGenericValue<vint> VIntParamValue;
+
+typedef VGenericValue<vbool> VBoolParamValue;
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

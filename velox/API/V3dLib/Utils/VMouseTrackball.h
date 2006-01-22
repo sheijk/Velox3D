@@ -23,10 +23,14 @@ private:
 	input::IVRelativeAxis* m_pRotationAxis;
 	input::IVRelativeAxis* m_pAltitudeAxis;
 	input::IVRelativeAxis* m_pDistanceAxis;
+	input::IVButton* m_pMovementModifier;
+	input::IVButton* m_pResetButton;
 
 	vfloat32 m_fRotationSpeed;
 	vfloat32 m_fAltitudeSpeed;
 	vfloat32 m_fDistanceSpeed;
+
+	vfloat32 m_fLinearDistance;
 };
 
 //-----------------------------------------------------------------------------

@@ -37,6 +37,7 @@ VTerrainPart::~VTerrainPart()
 
 void VTerrainPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
+	// draw border
 	glBegin(GL_LINE_LOOP);
 	glColor3f(1, 0, 0);
 	glVertex3f(m_XZMin[0], 0, m_XZMin[1]);
@@ -81,9 +82,11 @@ void VTerrainPart::ApplyHeightValues(const VArray2d<vfloat32>& in_Array)
 	for(vuint x = 0; x < m_nVertexCountHor; ++x)
 	{
 		VVertex3f coord = m_hVertexBuffer->GetCoordinate(GetVertexNum(x, y));
-		coord.y = in_Array.Get(x, y);
+		coord.y = in_Array.Get(x, y) + 20;
 		m_hVertexBuffer->SetCoordinate(coord, GetVertexNum(x, y));
 	}
+
+	GenerateNormals();
 }
 
 typedef vfloat32 (*Function2d)(vfloat32, vfloat32);
@@ -99,12 +102,12 @@ vfloat32 SinCosMult(vfloat32 x, vfloat32 y)
 
 vfloat32 Hill(vfloat32 n)
 {
-	return .5f - cos(math::Pi() * 1.8f * (n - .5f));
+	return 1.0f + cos(math::Pi() * 1.8f * (n - .5f));
 }
 
 vfloat32 Hill(vfloat32 x, vfloat32 y)
 {
-	return Hill(x) * Hill(y);
+	return - Hill(x) * Hill(y);
 }
 
 void MakeFractal(VArray2d<vfloat32>* in_pArray, vuint in_nOctaves, vfloat32 in_fLacunarity, Function2d in_pBaseFunction)
@@ -146,7 +149,9 @@ void VTerrainPart::SetVertexCount(vuint in_nWidth, vuint in_nHeight)
 
 	VResourceId res = VResourceManagerPtr()->CreateRandomNamedResource("terrain");
 
-	VVertexFormat format(VVertexFormat::Coordinates | VVertexFormat::TexCoords, vertexCount, 0);
+	VVertexFormat format(
+		VVertexFormat::Coordinates | VVertexFormat::TexCoords | VVertexFormat::Normals, 
+		vertexCount, 0);
 
 	VVertexBuffer* pVertexBuffer = new VVertexBuffer(format);
 	res->AddData(pVertexBuffer);
@@ -160,6 +165,7 @@ void VTerrainPart::SetVertexCount(vuint in_nWidth, vuint in_nHeight)
 
 	GenerateVertices();
 	GenerateIndices();
+	GenerateNormals();
 
 	VMeshDescription* pMeshDescription = new VMeshDescription(VVertexFormat(
 		VVertexFormat::Coordinates | VVertexFormat::TexCoords | VVertexFormat::Indices, 
@@ -172,6 +178,8 @@ void VTerrainPart::SetVertexCount(vuint in_nWidth, vuint in_nHeight)
 	pMeshDescription->SetTexCoordResource(0, res->GetQualifiedName());
 	pMeshDescription->SetIndexResource(indexRes->GetQualifiedName());
 	pMeshDescription->SetIndexFormat(indexFormat.GetIndexFormat());
+	pMeshDescription->SetNormalFormat(format.GetNormalFormat());
+	pMeshDescription->SetNormalResource(res->GetQualifiedName());
 	res->AddData(pMeshDescription);
 
 	m_hMesh = res->GetData<IVMesh>();
@@ -230,6 +238,62 @@ void VTerrainPart::GenerateVertices()
 		texCoord.v = float(y) / float(m_nVertexCountVert-1);
 		m_hVertexBuffer->SetTexCoord(0, vertexNum, texCoord);
 	}
+}
+
+VVector3f VTerrainPart::GetVertexAt(vuint x, vuint y)
+{
+	VVertex3f coord = m_hVertexBuffer->GetCoordinate(GetVertexNum(x, y));
+	return ToVector3f(coord.x, coord.y, coord.z);
+}
+
+namespace {
+	VNormal3f ToNormal3f(const VVector3f& vec)
+	{
+		VNormal3f normal;
+		normal.x = vec[0];
+		normal.y = vec[1];
+		normal.z = vec[2];
+		return normal;
+	}
+}
+
+void VTerrainPart::GenerateNormals()
+{
+	const vuint biggestX = m_nVertexCountHor - 1;
+	const vuint biggestY = m_nVertexCountVert - 1;
+
+	for(vuint x = 0; x < m_nVertexCountHor; ++x)
+	{
+		m_hVertexBuffer->SetNormal(VNormal3f(0, 1, 0), GetVertexNum(x, 0));
+		m_hVertexBuffer->SetNormal(VNormal3f(0, 1, 0), GetVertexNum(x, biggestY));
+	}
+
+	for(vuint y = 0; y < m_nVertexCountVert; ++y)
+	{
+		m_hVertexBuffer->SetNormal(VNormal3f(0, 1, 0), GetVertexNum(0, y));
+		m_hVertexBuffer->SetNormal(VNormal3f(0, 1, 0), GetVertexNum(biggestX, y));
+	}
+
+	for(vuint x = 1; x < biggestX; ++x)
+	for(vuint y = 1; y < biggestY; ++y)
+	{
+        VVector3f xprev = GetVertexAt(x-1, y);
+		VVector3f xnext = GetVertexAt(x+1, y);
+		VVector3f yprev = GetVertexAt(x, y-1);
+		VVector3f ynext = GetVertexAt(x, y+1);
+
+		//VVector3f normal = xprev - xnext;
+		VVector3f normal = Cross(yprev - ynext, xprev - xnext);
+		//VVector3f normal = Cross(xnext - xprev, yprev - ynext);
+		m_hVertexBuffer->SetNormal(ToNormal3f(normal), GetVertexNum(x, y));
+	}
+
+	//for(vuint x = 0; x < m_nVertexCountHor; ++x)
+	//for(vuint y = 0; y < m_nVertexCountVert; ++y)
+	//{
+	//	const vuint vertexNum = GetVertexNum(x, y);
+	//	m_hVertexBuffer->SetNormal(VNormal3f(0, 1, 0), vertexNum);
+	//}
 }
 
 //-----------------------------------------------------------------------------

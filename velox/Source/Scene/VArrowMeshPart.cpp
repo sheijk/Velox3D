@@ -34,6 +34,9 @@ void VArrowMeshPart::SetColor(const VColor4f& in_Color)
 
 void VArrowMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
+	GLboolean cullfaceEnable = glIsEnabled(GL_CULL_FACE);
+	glDisable(GL_CULL_FACE);
+
 	/*
 	    |\
 	|---- \
@@ -45,13 +48,21 @@ void VArrowMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
+	glPushAttrib(GL_POINT_SIZE);
+	glPointSize(4.0f);
+	glBegin(GL_POINTS);
+	glColor4f(m_Color.red/2, m_Color.green/2, m_Color.blue/2, m_Color.alpha);
+	glVertex3f(0, 0, -1);
+	glEnd();
+	glPopAttrib();
+
 	glColor4f(m_Color.red, m_Color.green, m_Color.blue, m_Color.alpha);
 
 	// tip cone from b to c
 	glBegin(GL_TRIANGLE_FAN);
 	glNormal3f(0, 0, -1);
 	glVertex3f(0, 0, -1);
-	sendCircleVertices(0);        
+	sendCircleVertices(0);
 	glEnd();
 
 	// disk at b
@@ -76,6 +87,9 @@ void VArrowMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 	glEnd();
 
 	glPopMatrix();
+
+	if( cullfaceEnable )
+		glEnable(GL_CULL_FACE);
 }
 
 void VArrowMeshPart::sendCircleVertices(vfloat32 z1)
@@ -85,7 +99,7 @@ void VArrowMeshPart::sendCircleVertices(vfloat32 z1)
 
 void VArrowMeshPart::sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals)
 {
-	for(vfloat32 angleDeg = 0; angleDeg <= 360.0f; angleDeg += 36.0f)
+	for(vfloat32 angleDeg = .0f; angleDeg <= 360.0f; angleDeg += 36.0f)
 	{
 		if( normals )
 		{

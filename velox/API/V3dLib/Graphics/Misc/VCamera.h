@@ -52,6 +52,7 @@ public:
 	void SetTransform(const math::VRBTransform& transform);
 
 private:
+	void RotateAround(const VVector3f& in_Axis, vfloat32 in_fAngle);
 
 	typedef VMatrix<vfloat32, 4,4> Matrix4f;
 
@@ -64,10 +65,12 @@ private:
 
 	VVector3f m_UpVector;
 	VVector3f m_RightVector;
-	VVector3f m_RotationVector;
+	//VVector3f m_RotationVector;
 	VVector3f m_ViewVector;
 
-	v3d::graphics::VVertex3f m_PositionVector;
+	VVector3f m_Position;
+
+	//v3d::graphics::VVertex3f m_PositionVector;
 
 };
 

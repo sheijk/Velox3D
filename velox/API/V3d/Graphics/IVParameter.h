@@ -4,6 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Math/VVector.h>
+#include <V3d/Math/VMatrix.h>
 
 #include <string>
 //-----------------------------------------------------------------------------
@@ -31,13 +32,16 @@ public:
 	virtual void Apply(const VVector4f& in_NewValue) const = 0;
 	virtual VVector4f AsFloat4() const = 0;
 
+	virtual VMatrix44f AsFloat44() const = 0;
+	virtual void Apply(const VMatrix44f& in_NewValue) const = 0;
+
 	virtual void Apply(vint in_nNewValue) const = 0;
 	virtual vint AsInt() const = 0;
 
 	virtual void Apply(vbool in_bNewValue) const = 0;
 	virtual vbool AsBool() const = 0;
 
-	virtual void ApplyTexture(VStringParam in_strResourceName) = 0;
+	virtual void ApplyTexture(VStringParam in_strResourceName) const = 0;
 };
 
 //-----------------------------------------------------------------------------

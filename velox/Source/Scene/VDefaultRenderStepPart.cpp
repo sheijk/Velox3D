@@ -45,6 +45,8 @@ void VDefaultRenderStepPart::Render(IVGraphicsPart* in_pScene)
 			GetOutputDevice()->SetMatrix(IVDevice::ModelMatrix, transform.AsMatrix());
 
 			ApplyMaterial(*GetOutputDevice(), &material.GetPass(pass));
+			glCullFace(GL_BACK);
+			glEnable(GL_CULL_FACE);
 			shape->SendGeometry(*GetOutputDevice());
 		}
 

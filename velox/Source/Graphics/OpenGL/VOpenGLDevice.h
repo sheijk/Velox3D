@@ -68,8 +68,10 @@ public:
 
 	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode);
 	
-	void ApplyLight(LightId in_Number, const VPointLight* in_pLight);
-	const VPointLight& GetLight(LightId in_Number) const;
+	virtual LightId MaxActiveLight() const;
+	void ApplyLight(LightId in_Number, const VLight* in_pLight);
+	virtual const VLight* GetLight(LightId in_Number) const;
+	//const VPointLight& GetLight(LightId in_Number) const;
 
 	IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings);
 
@@ -91,7 +93,8 @@ private:
 	vbool m_bActive;
 
 	// lights
-	std::vector<VPointLight> m_PointLights;
+	std::vector<const VLight*> m_Lights;
+	//std::vector<VPointLight> m_PointLights;
 
 	VColor4f m_ClearColor;
 

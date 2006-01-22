@@ -6,7 +6,7 @@
 #include "VCGFXPass.h"
 
 #include <V3d/Graphics/IVDevice.h>
-#include <V3d/Graphics/VPointLight.h>
+#include <V3d/Graphics/VLight.h>
 #include <V3dLib/Graphics/Geometry/Conversions.h>
 #include "../VOpenGLDevice.h"
 
@@ -120,7 +120,10 @@ public:
 	virtual void Apply(const VOpenGLDevice* in_pDevice)
 	{
 		// get light parameters
-		VPointLight light = in_pDevice->GetLight(m_LightNum);
+		if( in_pDevice->GetLight(m_LightNum) == 0 )
+			return;
+
+		const VLight& light = *in_pDevice->GetLight(m_LightNum);
 
 		VVector4f data;
 
@@ -134,17 +137,17 @@ public:
 
 		case AmbientColor:
 			{
-				data = ToVector4f(light.GetAmbient());
+				data = ToVector4f(light.GetAmbientColor());
 			} break;
 
 		case DiffuseColor:
 			{
-				data = ToVector4f(light.GetDiffuse());
+				data = ToVector4f(light.GetDiffuseColor());
 			} break;
 
 		case SpecularColor:
 			{
-				data = ToVector4f(light.GetSpecular());
+				data = ToVector4f(light.GetSpecularColor());
 			} break;
 
 		default:

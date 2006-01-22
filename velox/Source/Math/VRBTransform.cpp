@@ -66,9 +66,15 @@ void VRBTransform::SetDirection(
 {
 	V3D_ASSERT( Length(in_Up) != 0.0f );
 
-	SetZAxis(Normalized(-in_Direction));
-	SetXAxis(Normalized(Cross(in_Direction, in_Up)));
-	SetYAxis(Normalized(Cross(GetXAxis(), in_Direction)));
+	SetZAxis(-in_Direction);
+	SetXAxis(Cross(in_Direction, in_Up));
+	SetYAxis(in_Up);
+	Normalize(m_XAxis);
+	Normalize(m_YAxis);
+	Normalize(m_ZAxis);
+	//SetZAxis(Normalized(-in_Direction));
+	//SetXAxis(Normalized(Cross(in_Direction, in_Up)));
+	//SetYAxis(Normalized(Cross(GetXAxis(), in_Direction)));
 	//VVectorBase3f::Orthogonalize(&m_XAxis, &m_YAxis, &m_ZAxis);
 
 #ifdef V3D_DEBUG
