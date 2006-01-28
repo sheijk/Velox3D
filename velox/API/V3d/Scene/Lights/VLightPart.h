@@ -17,8 +17,6 @@ using namespace v3d; // anti auto indenting
  * An entity part which holds a light. Will register itself to it's ancestor
  * IVLightManager.
  *
- * ATTENTION: currently ignores it's entity's position
- * TODO: implement this once entity event notification is active
  * @author sheijk
  */
 class VLightPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
@@ -37,6 +35,9 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 	graphics::VLight m_Light;
 	entity::VPartConnection<IVLightManager> m_LightManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
@@ -45,6 +46,6 @@ private:
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
-V3D_TYPEINFO_WITHPARENT(v3d::scene::VLightPart, v3d::entity::IVPart);
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VLightPart, v3d::entity::IVUpdateablePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VLIGHTPART_2006_01_21_H

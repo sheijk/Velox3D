@@ -1,6 +1,8 @@
 #include <v3dlib/EntityParts/VSGAnimationPart.h>
 //-----------------------------------------------------------------------------
 
+#include <V3d/Entity/VGenericPartParser.h>
+//-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
@@ -59,6 +61,11 @@ std::string VUpdateManagerPart::GetDefaultId()
 {
 	return "sgum";
 }
+
+namespace {
+	VPartParser<VUpdateManagerPart> parser;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------

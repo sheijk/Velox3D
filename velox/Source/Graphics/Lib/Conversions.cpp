@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
+
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
@@ -45,6 +46,16 @@ VVector4f ToVector4f(const VColor4f& in_Color)
 	vec[3] = in_Color.alpha;
 
 	return vec;
+}
+
+VColor4f ToColor4f(const VVector4f& in_Vec)
+{
+	VColor4f color;
+	color.red = in_Vec[0];
+	color.green = in_Vec[1];
+	color.blue = in_Vec[2];
+	color.alpha = in_Vec[3];
+	return color;
 }
 
 //-----------------------------------------------------------------------------

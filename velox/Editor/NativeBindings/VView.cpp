@@ -276,7 +276,6 @@ void VRenderFrameAction::setSize(vuint width, vuint height)
 
 #include <V3d/OpenGL.h>
 
-/*
 void sendParallelLineVertices(int min, int max, float distance) {
 	glBegin(GL_LINES);
 	for(int i = min; i < max; ++i) {
@@ -340,11 +339,10 @@ void showOrientationGrid() {
 	glPopAttrib();
 	glPopMatrix();
 }
-*/
 
 void VRenderFrameAction::UpdateFrame()
 {
-	m_pDevice->BeginScene();
+//	m_pDevice->BeginScene();
 	
 //	if( m_bResized )
 	{
@@ -352,8 +350,11 @@ void VRenderFrameAction::UpdateFrame()
 		m_bResized = false;
 	}
 
+	// show grid if no scene will be rendered
 //	if( property::GetProperty<vbool>(g_strGridPropertyName.c_str()) )
 //	{
+//		glDisable(GL_LIGHTING);
+//		
 //		VMatrix44f identity;
 //		math::Identity(identity);
 //		
@@ -386,15 +387,8 @@ void VRenderFrameAction::UpdateFrame()
 
 	if( m_pShooting != 0 && m_pShooting->IsActive() )
 	{
-//		vout << "culling ";
-		
 		m_pShooting->UpdateAndCull();
-		
-//		vout << " rendering ";
-		
 		m_pShooting->Render();
-		
-//		vout << " done" << vendl;
 	}
 
 	if( m_pShooting == 0 )
@@ -410,7 +404,7 @@ void VRenderFrameAction::UpdateFrame()
 		++count;
 	}
 
-	m_pDevice->EndScene(IVDevice::FlipScene);
+//	m_pDevice->EndScene(IVDevice::FlipScene);
 }
 
 void VRenderFrameAction::SetShooting(v3d::scene::IVShooting* in_pShooting)

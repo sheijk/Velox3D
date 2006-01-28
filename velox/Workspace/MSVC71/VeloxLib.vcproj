@@ -354,6 +354,9 @@
 						RelativePath="..\..\Api\V3d\Messaging\VMessage.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Messaging\VMessageInterpreter.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Messaging\VProtocol.h">
 					</File>
 				</Filter>
@@ -1425,6 +1428,9 @@
 			Filter="">
 			<File
 				RelativePath="..\..\Source\Messaging\VMessage.cpp">
+			</File>
+			<File
+				RelativePath="..\..\Source\Messaging\VMessageInterpreter.cpp">
 			</File>
 			<File
 				RelativePath="..\..\Source\Messaging\VProtocol.cpp">

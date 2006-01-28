@@ -13,6 +13,7 @@ using namespace v3d; // anti auto indent
  */
 VLight::VLight()
 {
+	m_fW = 1.0f;
 }
 
 /**

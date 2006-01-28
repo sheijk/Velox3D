@@ -20,6 +20,7 @@ import org.eclipse.swt.SWT;
 import de.velox.*;
 import de.velox.editor.entity.*;
 import de.velox.editor.gui.ComboboxDialog;
+import de.velox.editor.widgets.FilterDialog;
 
 
 /**
@@ -373,8 +374,10 @@ public class SceneView extends VeloxViewBase {
 					options.add(partParser.Get().GetType());
 					partParser.Next();
 				}
-				ComboboxDialog dialog = new ComboboxDialog(myParent.getShell(), 
-						"Add part",	"Type",	"", options);
+				FilterDialog dialog = new FilterDialog(myParent.getShell(),
+						"Add part", options);
+//				ComboboxDialog dialog = new ComboboxDialog(myParent.getShell(), 
+//						"Add part",	"Type",	"", options);
 				
 				String selection = dialog.open();
 				
@@ -508,6 +511,47 @@ public class SceneView extends VeloxViewBase {
 				String selection = dialog.open();
 				
 				System.out.println("Selected option " + selection);
+			}
+		});
+		
+		contextMenuActions.add(new SceneAction("Update") {
+			void updatePart(Part part) {
+				if( part != null &&
+					part.GetPart() != null &&
+					part.GetPart().Get() != null )
+				{
+					v3d.UpdatePart(.0f, part.GetPart().Get());
+				}
+			}
+			
+			public void run() {
+				Entity selectedEntity = getSelectedEntity();
+				if( selectedEntity != null ) {
+					Iterator<Part> partIter = selectedEntity.PartIterator();
+					while(partIter.hasNext()) {
+						updatePart(partIter.next());
+					}
+				}
+				else {
+					Part selectedPart = getSelectedPart();
+					updatePart(selectedPart);
+				}
+			}
+			
+			public void update() {
+				Entity selectedEntity = getSelectedEntity();
+				if( selectedEntity != null ) {
+					setEnabled(true);
+				}
+				else {
+					boolean enable = false;
+					
+					Part selectedPart = getSelectedPart();
+					if( selectedPart != null && selectedPart.GetPart() != null )
+						enable = v3d.CanBeUpdated(selectedPart.GetPart().Get());
+					
+					setEnabled(enable);
+				}
 			}
 		});
 	}

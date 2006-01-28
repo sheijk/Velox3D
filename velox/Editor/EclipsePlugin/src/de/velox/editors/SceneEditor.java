@@ -83,11 +83,6 @@ public class SceneEditor extends VeloxEditorBase {
 		}
 
 		root.Add(new Part("scene"));
-		
-//		Entity entity = new Entity("obj");
-//		entity.Add(new Part("model"));
-//		entity.Add(new Part("body"));
-//		root.Add(entity);
 	}
 
 	@Override
@@ -101,8 +96,9 @@ public class SceneEditor extends VeloxEditorBase {
 				loadFromFile(fileName);
 			}
 			catch(RuntimeException e) {
-				throw new PartInitException(
-					"Could not load scene: " + e.getMessage(), e);
+				createNewScene();
+//				throw new PartInitException(
+//					"Could not load scene: " + e.getMessage(), e);
 			}
 
 //			if( fileInput.exists() ) {

@@ -75,6 +75,8 @@ public:
 	VRangeIterator<VEntity> ChildIterator();
 	VRangeIterator<IVPart> PartIterator();
 
+	std::string GetName() const;
+	void SetName(const std::string& in_strName);
 private:
 	typedef std::map<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;
@@ -91,6 +93,8 @@ private:
 
 	/* deactivate if any dependency of a part is not fulfilled */
 	void CheckDependencies();
+
+	std::string m_strName;
 
 	PartContainer m_Parts;
 	vbool m_bActivated;

@@ -40,6 +40,6 @@ private:
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 
-V3D_TYPEINFO_WITHPARENT(v3d::utils::VCameraPart, v3d::entity::IVPart);
+V3D_TYPEINFO_WITHPARENT(v3d::utils::VCameraPart, v3d::entity::IVUpdateablePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VCAMERAPART_2005_12_09_H

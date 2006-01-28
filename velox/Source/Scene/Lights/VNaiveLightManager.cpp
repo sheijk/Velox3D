@@ -35,7 +35,8 @@ namespace {
 				const VColor4f diffuse = pLight->GetDiffuseColor();
 				const VColor4f specular = pLight->GetSpecularColor();
 				//static vfloat32 pos[4] = {0, 10, 0, 1 };
-				const VVector4f position = ToVector4f(pLight->GetPosition(), 1.0f);
+				const VVector4f position = ToVector4f(
+					pLight->GetPosition(), pLight->GetW());
 
 				glLightfv(lightGL, GL_POSITION, (float*)&position);
 				//glLightfv(lightGL, GL_POSITION, pos);

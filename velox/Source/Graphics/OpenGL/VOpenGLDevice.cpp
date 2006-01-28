@@ -575,6 +575,8 @@ void VOpenGLDevice::BeginScene()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	static vfloat32 ambient[4] = { .5f, .5f, .5f, 1.0f };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 	//glMatrixMode(GL_MODELVIEW);
 	//glLoadIdentity();
 

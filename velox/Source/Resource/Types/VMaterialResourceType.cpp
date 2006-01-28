@@ -14,6 +14,7 @@
 #include <V3d/Core/RangeIter.h>
 #include <V3d/Resource/Types/VTextFile.h>
 
+#include <V3dLib/Graphics/Importer/VEffectLoader.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -120,6 +121,13 @@ VRenderStateList* VMaterialResourceType::CreatePass(const VRenderPass& in_Pass) 
 	}
 }
 
+vbool IsEffectFile(const std::string& fileName)
+{
+	std::string ext = fileName.substr(fileName.find_last_of("."), fileName.length());
+
+	return ext == ".v3dmat";
+}
+
 vbool VMaterialResourceType::IsCGFXFile(const std::string& in_strFileName) const
 {
 	const int len = static_cast<int>(in_strFileName.length());
@@ -167,6 +175,16 @@ vbool VMaterialResourceType::Generate(
 		{
 			return false;
 		}
+	}
+	else if( IsEffectFile( in_pResource->GetData<VFileName>()->AsString() ) )
+	{
+		VEffectLoader loader;
+		loader.LoadEffect(in_pResource->GetData<VFileName>()->AsString().c_str(),
+			in_pResource);
+
+		Generate(in_pResource, in_Type);
+
+		return true;
 	}
 	else //if( IsCGFXFile( in_pResource->GetData<VFileName>()->AsString() ) )
 	{

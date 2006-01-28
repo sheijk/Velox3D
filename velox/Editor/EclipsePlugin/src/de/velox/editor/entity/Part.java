@@ -222,7 +222,7 @@ public class Part implements XMLSerializable {
 		return description;	
 	}
 
-	VPartPtr GetPart() {
+	public VPartPtr GetPart() {
 		return impl;
 	}
 }

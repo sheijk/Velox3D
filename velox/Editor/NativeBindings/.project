@@ -15,7 +15,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.core.errorOutputParser</key>
-					<value>org.eclipse.cdt.core.VCErrorParser;</value>
+					<value>org.eclipse.cdt.core.VCErrorParser;org.eclipse.cdt.core.GCCErrorParser;</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.environment</key>

@@ -8,7 +8,7 @@
 #include <V3dLib/Graphics.h>
 
 #include <V3d/OpenGL.h>
-
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -273,6 +273,43 @@ void VSkyboxPart::Deactivate()
 	m_pSceneManager->Remove(this);
 }
 
+namespace {
+	// property names
+	const std::string PN_TEXTURE_DIR = "texture-dir";
+}
+
+void VSkyboxPart::OnMessage(
+	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+{
+	using std::string;
+
+	if( ! in_Message.HasProperty("type") )
+		return;
+
+	string request = in_Message.Get("type").Get<string>();
+
+	if( request == "getSettings" )
+	{
+		if( in_pAnswer == 0 )
+			return;
+
+		in_pAnswer->AddProperty(PN_TEXTURE_DIR, "");
+	}
+	else if( request == "update" )
+	{
+		const string name = in_Message.Get("name").Get<string>();
+		const string value = in_Message.Get("value").Get<string>();
+
+		if( name == PN_TEXTURE_DIR )
+		{
+			SetTextureDir(value, ".jpg");
+		}
+	}
+}
+
+namespace {
+	VPartParser<VSkyboxPart> parser;
+}
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

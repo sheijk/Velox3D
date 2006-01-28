@@ -476,6 +476,15 @@ VRangeIterator<IVPart> VEntity::PartIterator()
 		m_Parts.begin(), m_Parts.end());
 }
 
+std::string VEntity::GetName() const
+{
+	return m_strName;
+}
+
+void VEntity::SetName(const std::string& in_TrName)
+{
+	m_strName = in_TrName;
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

@@ -32,6 +32,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+28.01.06
+- VMessageInterpreter fuer einfacheren message support in entity parts
+- einige entities mit mehr konfigurierbaren properties ausgestattet
+- lichter im editor einstellbar
+
 22.01.06
 - beleuchtung
 - part zum bewegen von entities mittels tastatur

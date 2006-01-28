@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass>
+			<state name="vertex-program">
+				<parameter name="res" value="/system/graphics/mat/light-vertex.glsl" />
+			</state>
+			<state name="fragment-program">
+				<parameter name="res" value="/system/graphics/mat/light-fragment.glsl" />
+			</state>
+		</renderPass>
+		<!-- renderPass>
+            <state name="texture">
+                <parameter name="res" value="/data/tex/mud1.tga" />
+            </state>
+            <state name="color">
+                <parameter name="red" value="1" />
+                <parameter name="green" value="1" />
+                <parameter name="blue" value="1" />
+                <parameter name="alpha" value="1" />
+            </state>
+        </renderPass -->
+    </shaderPath>
+</effect>
+

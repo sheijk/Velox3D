@@ -105,14 +105,15 @@ private:
 template<typename T>
 	vbool IVPart::IsOfType() const
 {
-	return (typeid(*this) == typeid(T)) != 0;
+	return GetTypeInfo().CanBeCastedTo(GetCompileTimeTypeInfo<T>(0));
+	//return (typeid(*this) == typeid(T)) != 0;
 }
 
 template<typename T>
 	const T* IVPart::Convert() const
 {
 	if( IsOfType<T>() )
-		return dynamic_cast<const T*>(this);
+		return reinterpret_cast<const T*>(this);
 	else
 		return 0;
 }
@@ -121,7 +122,7 @@ template<typename T>
 	T* IVPart::Convert()
 {
 	if( IsOfType<T>() )
-		return dynamic_cast<T*>(this);
+		return reinterpret_cast<T*>(this);
 	else
 		return 0;
 }

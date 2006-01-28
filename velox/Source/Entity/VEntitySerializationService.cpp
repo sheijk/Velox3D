@@ -9,6 +9,7 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace xml;
 
 /**
  * standard c'tor
@@ -63,6 +64,40 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 		//V3D_THROWMSG(VNoParserForTypeException,
 		//	"Could not parse part with type " << type.c_str()
 		//	<< " because no part parser for the type exists");
+	}
+}
+
+VSharedPtr<VEntity> VEntitySerializationService::ParseScene(xml::IVXMLElement& in_Node)
+{
+	try
+	{
+		VSharedPtr<VEntity> pEntity(new VEntity());
+
+		IVXMLAttribute* attrib = in_Node.GetAttribute("name");
+
+		if( attrib != NULL )
+			pEntity->SetName(attrib->GetValue().Get<std::string>());
+
+		VRangeIterator<IVXMLNode> childNode = in_Node.ChildBegin();
+		while( childNode.HasNext() )
+		{
+			IVXMLElement* element = childNode->ToElement();
+			if( element != NULL )
+			{
+				if( element->GetName() == "part" )
+					pEntity->AddPart(ParsePart(*element));
+				else if( element->GetName() == "entity" )
+					pEntity->AddChild(ParseScene(*element));
+			}
+
+			++childNode;
+		}
+
+		return pEntity;		
+	}
+	catch(VException& e)
+	{
+		return SharedPtr<VEntity>(0);
 	}
 }
 

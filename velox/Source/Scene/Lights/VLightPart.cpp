@@ -1,7 +1,9 @@
 #include <V3d/Scene/Lights/VLightPart.h>
 //-----------------------------------------------------------------------------
 
+#include <V3d/Messaging/VMessageInterpreter.h>
 #include <V3d/Entity/VGenericPartParser.h>
+#include <V3dLib/Graphics/Geometry/Conversions.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -39,6 +41,25 @@ void VLightPart::Deactivate()
 void VLightPart::Update(vfloat32 in_fSeconds)
 {
 	m_Light.SetPosition(m_pRigidBody->GetPosition());
+}
+
+void VLightPart::OnMessage(const messaging::VMessage& in_Message, 
+	messaging::VMessage* in_pAnswer)
+{
+	static messaging::VMessageInterpreter interpreter;
+
+	if( ! interpreter.IsInitialized() )
+	{
+        interpreter.AddMemberOption("ambientColor", this, &m_Light.ambientColor);
+		interpreter.AddMemberOption("diffuseColor", this, &m_Light.diffuseColor);
+		interpreter.AddMemberOption("specularColor", this, &m_Light.specularColor);
+		interpreter.AddMemberOption("position", this, &m_Light.m_Position);
+		interpreter.AddMemberOption("w", this, &m_Light.m_fW);
+
+		interpreter.SetInitialized(true);
+	}
+
+	interpreter.HandleMessage(this, in_Message, in_pAnswer);
 }
 
 namespace {

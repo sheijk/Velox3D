@@ -75,3 +75,8 @@ private:
 VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement);
 
 v3d::entity::VEntity* CreateEntity();
+
+// no v3d types because swig has trouble with it TODO: fix
+bool CanBeUpdated(v3d::entity::IVPart* in_pPart);
+void UpdatePart(float in_fSeconds, v3d::entity::IVPart* in_pPart);
+

@@ -4,7 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Scene/IVRenderStepPart.h>
-
+#include <V3dLib/Graphics/Geometry/VColor4f.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
@@ -20,6 +20,12 @@ public:
 
 	virtual void Render(IVGraphicsPart* in_pScene);
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+private:
+	graphics::VColor4f m_BackgroundColor;
+
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
 };
 
 //-----------------------------------------------------------------------------

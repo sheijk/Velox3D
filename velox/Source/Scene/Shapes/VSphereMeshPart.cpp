@@ -5,6 +5,7 @@
 
 #include <v3d/Graphics/IVDevice.h>
 #include <V3d/Entity/VGenericPartParser.h>
+#include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -23,6 +24,21 @@ void VSphereMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
 	ApplyParameterValues();
 	glutSolidSphere(m_fRadius, m_nDetail, m_nDetail);
+}
+
+void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message, 
+	messaging::VMessage* in_pAnswer)
+{
+	static messaging::VMessageInterpreter interpreter;
+
+	if( ! interpreter.IsInitialized() )
+	{
+		interpreter.AddMemberOption("radius", this, &m_fRadius);
+
+		interpreter.SetInitialized(true);
+	}
+
+	interpreter.HandleMessage(this, in_Message, in_pAnswer);
 }
 
 namespace {

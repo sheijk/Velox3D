@@ -11,6 +11,10 @@
 #include <string>
 #include <map>
 //-----------------------------------------------------------------------------
+namespace v3d { namespace scene {
+	class VLightPart;
+}}
+
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
@@ -42,6 +46,9 @@ public:
 	VVector3f GetPosition() const;
 	void SetPosition(const VVector3f& in_Position);
 
+	vfloat32 GetW() const { return m_fW; }
+	void SetW(const vfloat32& in_Value) { m_fW = in_Value; }
+
 	VColor4f GetAmbientColor() const;
 	void SetAmbientColor(const VColor4f& in_AmbientColor);
 
@@ -52,7 +59,12 @@ public:
 	void SetSpecularColor(const VColor4f& in_SpecularColor);
 
 private:
+	// temp. workaround for VMessageInterpreter's lack of support for getters
+	// and setters (->VLightPart.OnMessage)
+	friend class ::v3d::scene::VLightPart;
+
 	VVector3f m_Position;
+	vfloat32 m_fW;
 	VColor4f ambientColor;
 	VColor4f diffuseColor;
 	VColor4f specularColor;

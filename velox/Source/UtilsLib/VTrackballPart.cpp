@@ -1,6 +1,7 @@
 #include <V3dLib/Utils/VTrackballPart.h>
 //-----------------------------------------------------------------------------
 
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -47,6 +48,10 @@ void VTrackballPart::Update(vfloat32 in_fSeconds)
 void VTrackballPart::SetTrackball(const VSharedPtr<VMouseTrackball>& in_Trackball)
 {
 	m_pTrackball = in_Trackball;
+}
+
+namespace {
+	VPartParser<VTrackballPart> parser;
 }
 
 //-----------------------------------------------------------------------------

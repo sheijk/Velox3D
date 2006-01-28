@@ -50,6 +50,10 @@ public:
 	virtual void Deactivate();
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	virtual void OnMessage(
+		const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 private:
 	class VSide;
 

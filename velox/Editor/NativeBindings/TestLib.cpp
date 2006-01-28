@@ -398,6 +398,45 @@ void setTextFile(v3d::resource::VResource* in_pResource, const std::string& in_s
 	}
 }
 
+//void UpdateParts(vfloat32 in_fSeconds, v3d::entity::VEntity* in_pEntity)
+//{
+//	if( in_pEntity == 0 )
+//		return;
+//
+//	VRangeIterator<IVPart> part = in_pEntity->PartIterator();
+//    while( part.HasNext() )
+//	{
+//		IVUpdateablePart* pUpdateablePart = part->Convert<IVUpdateablePart>();
+//		if( pUpdateablePart != NULL )
+//		{
+//			pUpdateablePart->Update(in_fSeconds);
+//		}
+//
+//		++part;
+//	}
+//}
+
+bool CanBeUpdated(v3d::entity::IVPart* in_pPart)
+{
+	if( in_pPart != 0 )
+		return in_pPart->IsOfType<IVUpdateablePart>();
+	else
+		return false;
+}
+
+void UpdatePart(vfloat32 in_fSeconds, v3d::entity::IVPart* in_pPart)
+{
+	if( in_pPart == 0 )
+		return;
+
+	IVUpdateablePart* updateablePart = in_pPart->Convert<IVUpdateablePart>();
+
+	if( updateablePart != 0 )
+	{
+		updateablePart->Update(in_fSeconds);
+	}
+}
+
 //-----------------------------------------------------------------------------
 //
 /* namespace v3d {

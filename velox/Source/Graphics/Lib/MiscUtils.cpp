@@ -7,6 +7,8 @@
 #include <V3dLib/Graphics/Misc/IVDrawList.h>
 #include <V3d/Math.h>
 
+#include <V3dLib/Graphics/Materials/EffectUtils.h>
+
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -74,7 +76,10 @@ resource::VResourceDataPtr<const IVMaterial> IVDevice::GetDefaultMaterial()
 	if( ! defaultMatRes->ContainsData<VEffectDescription>() )
 	{
 		VEffectDescription defaultEffect;
-		defaultEffect.AddShaderPath().AddRenderPass();
+		VRenderPass& pass(defaultEffect.AddShaderPath().AddRenderPass());
+
+		pass.AddState(LightingState(false));
+
 		defaultMatRes->AddData(new VEffectDescription(defaultEffect));
 	}
 	

@@ -6,6 +6,8 @@
 #include <V3d/Entity/VEntityExceptions.h>
 #include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/IVPartParser.h>
+#include <V3d/Entity/VEntity.h>
+
 #include <V3d/XML/IVXMLElement.h>
 
 #include <V3d/Core/VObjectRegistry.h>
@@ -40,6 +42,8 @@ public:
 	 * been registered
 	 */
 	virtual VSharedPtr<IVPart> ParsePart(xml::IVXMLElement& in_Node) = 0;
+
+	virtual VSharedPtr<VEntity> ParseScene(xml::IVXMLElement& in_Node) = 0;
 
 	/** 
 	 * Will add the given part parse to the part parser list and will use the

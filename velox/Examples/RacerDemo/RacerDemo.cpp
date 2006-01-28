@@ -13,7 +13,10 @@
 #include <V3dLib/Utils/VCameraPart.h>
 #include <V3dLib/Utils/VTrackballPart.h>
 #include <V3dLib/Utils/VFPSMoverPart.h>
+#include <V3d/Vfs.h>
+#include <V3d/Xml.h>
 
+#include <sstream>
 #include <string>
 
 using namespace v3d;
@@ -27,6 +30,7 @@ using namespace v3d::resource;
 using namespace v3d::scene;
 using namespace v3d::entity;
 using namespace v3d::utils;
+using namespace v3d::xml;
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -41,6 +45,13 @@ const std::string MIRROR_TEXTURE_RES = "/mirror-texture";
 
 const std::string MAT_WHITE_UNLIT = "/system/mat/unlit-white";
 
+const std::string SHADERS_DIR = "/system/graphics/mat/";
+const std::string MIRROR_VERTEX_SHADER = SHADERS_DIR + "mirror-vertex.glsl";
+const std::string MIRROR_FRAGMENT_SHADER = SHADERS_DIR + "mirror-fragment.glsl";
+
+const std::string TERRAIN_MAT = "/data/mat/terrain";
+
+const VColor4f fogColor(.6f, .4f, .4f, 1.0f);
 //-----------------------------------------------------------------------------
 
 class VCircleMoverPart : public VPartBaseAdapter<IVUpdateablePart>
@@ -258,8 +269,6 @@ private:
 
 	VSharedPtr<VEntity> CreateTerrain()
 	{
-		const static std::string TERRAIN_MAT = "/data/terrainmat";
-
 		static vbool terrainResourcesCreated = false;
 
 		if( ! terrainResourcesCreated )
@@ -267,7 +276,7 @@ private:
 			VResourceId matres = VResourceManagerPtr()->CreateResource(TERRAIN_MAT.c_str());
 			VEffectDescription effect;
 			VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
-			pass.AddState(TextureState("/data/test2.jpg"));
+			pass.AddState(TextureState("/data/tex/mud1.tga"));
 			pass.AddState(DefaultColorState(VColor4f(1, 1, 1, 1)));
 			matres->AddData(CopyPtr(effect));
 		}
@@ -285,7 +294,7 @@ private:
 		VSharedPtr<VEntity> pEntity(new VEntity());
 		VSharedPtr<VSkyboxPart> pSkyboxPart(new VSkyboxPart());
 		pSkyboxPart->SetTextureDir("/data/cubemap/", ".jpg");
-		pSkyboxPart->SetBaseColor(VColor4f(.6f, .4f, .4f, 1));
+		pSkyboxPart->SetBaseColor(fogColor);
 		pEntity->AddPart(pSkyboxPart);
 		pEntity->AddPart(SharedPtr(new VRigidBodyPart()));
 		return pEntity;
@@ -459,13 +468,44 @@ private:
 
 //-----------------------------------------------------------------------------
 
+void DumpDir(vfs::IVDirectory& dir, const std::string& prefix)
+{
+	vout << prefix << dir.GetName() << "/" << vendl;
+
+	VRangeIterator<vfs::IVDirectory> childdirs = dir.SubDirs();
+	while( childdirs.HasNext() )
+	{
+		DumpDir(*childdirs, prefix + "\t");
+		++childdirs;
+	}
+
+	VRangeIterator<vfs::IVFile> files = dir.Files();
+	while( files.HasNext() )
+	{
+		vout << prefix << "\t" << files->GetName() << vendl;
+		++files;
+	}
+}
+
+void DumpFileSystem()
+{
+	DumpDir(*vfs::VFileSystemPtr()->GetDir("/"), "");
+}
+
 /**
  * @author sheijk
  */
 vint RacerDemo::Main(std::vector<std::string> args)
 {
+	VColor4f vec = VColor4f(1, 2, 3, 4);
+	vout << vec << vendl;
+	std::stringstream stream("(4.1,3.2,2.3,1.4)");
+	stream >> vec;
+
 	Init();
 	CreateResources();
+
+	//DumpFileSystem();
 
 	//m_pCamera->GetCamera().Move(0, 1.0f, 0);
 
@@ -492,6 +532,10 @@ vint RacerDemo::Main(std::vector<std::string> args)
 			CreateTrackballCamPart(pAmbient);
 			CreateKeyboardCamPart(pAmbient);
 
+			VSharedPtr<VEntity> pLoaded = VEntitySerializationServicePtr()->ParseScene(
+				*VXMLServicePtr()->GetRootElement(&*vfs::VFileSystemPtr()->OpenFile("/data/deco.xml", vfs::VReadAccess)));
+			pAmbient->AddChild(pLoaded);
+
 			{ // test geometry
 				const vfloat32 minv = -20.0f;
 				const vfloat32 maxv = 20.0f;
@@ -509,6 +553,17 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	pRoot->Activate();
 	DumpInfo(*pRoot);
+
+	glEnable(GL_FOG);
+	vfloat32 fogColor2[4] = { fogColor.red, fogColor.green, fogColor.blue, .1f };
+	glFogfv(GL_FOG_COLOR, fogColor2);
+	glFogf(GL_FOG_DENSITY, 1.0f);
+	glFogf(GL_FOG_MODE, GL_LINEAR);
+	glFogf(GL_FOG_START, 300.f);
+	glFogf(GL_FOG_END, 1000.0f);
+
+	VMatrix44f test = math::ScaleMatrix(10.0f);
+	vout << test << vendl;
 
 	m_pUpdater->Start();
 	while(m_pSystem->GetStatus())
@@ -534,7 +589,10 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 		m_pUpdater->StartNextFrame();
 
-		if( m_pCamToggleKey->IsDown() )
+		static vfloat32 timeTillNextToggle = .0f;
+		timeTillNextToggle -= frameDuration;
+
+		if( m_pCamToggleKey->IsDown() && timeTillNextToggle <= .0f )
 		{
 			static vuint camNum = 0;
 			camNum = (camNum + 1) % m_pRootShooting->CameraCount();
@@ -542,6 +600,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 			m_pRootShooting->SetActiveCamera(camNum);
 
 			m_pCamToggleKey->SetDown(false);
+			timeTillNextToggle = .1f;
 		}
 
 		if( m_pEscapeKey->IsDown() )
@@ -606,7 +665,7 @@ void RacerDemo::CreateResources()
 	whiteUnlit->AddData(CopyPtr(whiteUnlitEffect));
 
 	VResourceId mirrorRes = VResourceManagerPtr()->CreateResource(MIRROR_TEXTURE_RES.c_str());
-	mirrorRes->AddData(CopyPtr(GLSLEffect("/data/shaders/mirror-vertex.glsl", "/data/shaders/mirror-fragment.glsl")));
+	mirrorRes->AddData(CopyPtr(GLSLEffect(MIRROR_VERTEX_SHADER.c_str(), MIRROR_FRAGMENT_SHADER.c_str())));
 
 	VResourceId whiteMat = VResourceManagerPtr()->CreateResource("/materials/white");
 	whiteMat->AddData(CopyPtr(ColorEffect(1, 1, 1, 1)));

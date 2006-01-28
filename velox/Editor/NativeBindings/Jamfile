@@ -92,10 +92,10 @@ lib VeloxLib
 	[ glob ../../Source/UtilsLib/Camera/*.cpp ]
 	[ glob ../../Source/UtilsLib/DrawList/*.cpp ]
 	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
+	[ glob ../../Source/UtilsLib/*.cpp ]
 	# renderers currently not in build
 	# image currently not in build
 	[ glob ../../Source/Math/*.cpp ]
-	[ glob ../../Source/UtilsLib/*.cpp ]
 	[ glob ../../Source/UtilsLib/CPUDetect/*.cpp ]
 	[ glob ../../Source/Collision/*.cpp ]
 	[ glob ../../Source/Entity/*.cpp ]
@@ -133,6 +133,7 @@ lib ScriptingDLL :
 	[ glob ../../Source/Graphics/OpenGL/Materials/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/Textures/*.cpp ]
 	[ glob ../../Source/Graphics/OpenGL/GLSL/*.cpp ]
+	[ glob ../../Source/Graphics/OpenGL/States/*.cpp ]
 
 	[ glob ../../Source/UtilsLib/Importer/*.cpp ]
 	[ glob ../../Source/UtilsLib/Importer/Base/*.cpp ]
@@ -152,6 +153,9 @@ lib ScriptingDLL :
 	[ glob ../../Source/Scene/*.cpp ]
 	[ glob ../../Source/Scene/Shapes/*.cpp ]
 	[ glob ../../Source/Scene/Shootings/*.cpp ]
+	[ glob ../../Source/Scene/Lights/*.cpp ]
+	../../Source/UtilsLib/VCameraPart.cpp
+	../../Source/UtilsLib/VTrackballPart.cpp
 
 	# xml service
 	../../Source/XMLService/VXMLAttribute.cpp

@@ -91,7 +91,7 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 		m_TextureGenerationMode = GetTexGenModeInfo().GetMode(coordGen);
 	}
 
-	m_bEnableLighting = true;
+	m_bEnableLighting = false;
 	const VState* lightingState = in_Pass.GetStateByName("lighting");
     if( lightingState != 0 )
 	{

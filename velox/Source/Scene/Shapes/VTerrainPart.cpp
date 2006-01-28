@@ -5,6 +5,8 @@
 #include <V3dLib/Graphics/Geometry.h>
 
 #include <V3d/OpenGL.h>
+
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -294,6 +296,10 @@ void VTerrainPart::GenerateNormals()
 	//	const vuint vertexNum = GetVertexNum(x, y);
 	//	m_hVertexBuffer->SetNormal(VNormal3f(0, 1, 0), vertexNum);
 	//}
+}
+
+namespace {
+	entity::VPartParser<VTerrainPart> parser;
 }
 
 //-----------------------------------------------------------------------------
