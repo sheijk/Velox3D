@@ -9,6 +9,10 @@ import java.util.LinkedList;
 import de.velox.*;
 
 public class Entity implements XMLSerializable {
+	private final static String NODE_TYPE_ENTITY = "entity";
+	private final static String NODE_TYPE_PART = "part";
+	private final static String ENTITY_NAME_ATTRIB = "name";
+	
 	private String name = "";
 	private LinkedList<Part> parts = new LinkedList<Part>();
 	private LinkedList<Entity> entities = new LinkedList<Entity>();
@@ -23,7 +27,7 @@ public class Entity implements XMLSerializable {
 	}
 	
 	public Entity(IVXMLElement xml) {
-		this(xml.GetAttribute("name").GetValue().ToString());
+		this(xml.GetAttribute(ENTITY_NAME_ATTRIB).GetValue().ToString());
 		
 		// for each child
 		VXMLNodeIterator node = xml.ChildBegin();
@@ -32,12 +36,12 @@ public class Entity implements XMLSerializable {
 			final String elementName = element.GetName().AsCString();
 			
 			// if it's a part create and add part
-			if( elementName.equalsIgnoreCase("entity") ) {
+			if( elementName.equalsIgnoreCase(NODE_TYPE_ENTITY) ) {
 				Entity child = new Entity(element);
 				Add(child);
 			}
 			// if it's an entity create and add child
-			else if( elementName.equalsIgnoreCase("part") ) {
+			else if( elementName.equalsIgnoreCase(NODE_TYPE_PART) ) {
 				Part part = new Part(element);
 				Add(part);
 			}
@@ -46,6 +50,46 @@ public class Entity implements XMLSerializable {
 		}
 	}
 	
+	/** 
+	 * Will apply all settings from the xml scene to it's parts and children
+	 * only settings will be applied, but no parts and entities created
+	 */ 
+	public void applySettings(IVXMLElement xmlElement) {
+		final String xmlElementName = xmlElement.GetAttribute("name").GetValue().ToString();
+		if( ! xmlElementName.equalsIgnoreCase(GetName()) )
+			return;
+		
+		VXMLNodeIterator node = xmlElement.ChildBegin();
+		while( node.HasNext() ) {
+			final IVXMLElement childElement = node.Get().ToElement();
+			if( childElement != null ) {
+				final String type = childElement.GetName().AsCString();
+				if( NODE_TYPE_ENTITY.equalsIgnoreCase(type) ) {
+					for(Entity child : entities) {
+						child.applySettings(childElement);
+					}
+//					final String childElementName = childElement.GetAttribute(ENTITY_NAME_ATTRIB).GetValue().ToString();
+//					Entity child = getChildByName(childElementName);
+//					if( child != null ) {
+//						child.applySettings(childElement);
+//					}
+				}
+				else if( NODE_TYPE_PART.equalsIgnoreCase(type) ) {
+					for(Part part : parts) {
+						part.applySettings(childElement);
+					}
+//					final String partType = childElement.GetAttribute("type").GetValue().ToString();
+//					Part part = getPartByName(partType);
+//					if( part != null ) {
+//						part.applySettings(childElement);
+//					}
+				}
+			}
+			
+			node.Next();
+		}
+	}
+		
 //	public Entity(String name, VEntity inImpl) {
 //		impl = new VEntityPtr(inImpl);
 //		this.name = name;
@@ -103,20 +147,38 @@ public class Entity implements XMLSerializable {
 	}
 	
 	public void Remove(Entity entityToBeRemoved) {
+		final boolean wasActive = IsActive();
+		
+		if( wasActive )
+			Deactivate();
+		
 		if( valid(impl) )
 			impl.RemoveChild(entityToBeRemoved.impl);
 		
 		entityToBeRemoved.parent = null;
 		
 		entities.remove(entityToBeRemoved);
+		
+		if( wasActive )
+			Activate();
 	}
 	
 	public void Remove(Part partToBeRemoved) {
+		final boolean wasActive = IsActive();
+		
+		if( wasActive ) {
+			Deactivate();
+		}
+		
 		if( valid(impl) )
 			impl.RemovePart(partToBeRemoved.GetId());
 		
 		partToBeRemoved.setOwner(null);
 		parts.remove(partToBeRemoved);
+		
+		if( wasActive ) {
+			Activate();
+		}
 	}
 	
 	public void Add(Part newPart) {
@@ -180,6 +242,13 @@ public class Entity implements XMLSerializable {
 			IVXMLElement childXML = outElement.AddElement("entity");
 			child.writeToXML(childXML);
 		}
+	}
+	
+	public VEntity impl() {
+		if( impl != null )
+			return impl.Get();
+		else
+			return null;
 	}
 }
 

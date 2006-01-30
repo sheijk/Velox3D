@@ -437,6 +437,50 @@ void UpdatePart(vfloat32 in_fSeconds, v3d::entity::IVPart* in_pPart)
 	}
 }
 
+namespace {
+	template<typename T>
+	T* GetPart(VEntity* in_pEntity)
+	{
+		if( in_pEntity != NULL )
+		{
+			VRangeIterator<IVPart> part = in_pEntity->PartIterator();
+			while(part.HasNext())
+			{
+                T* t = part->Convert<T>();
+
+				if( t != NULL )
+					return t;
+
+				++part;
+			}
+
+			return NULL;
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+}
+
+math::VRBTransform GetTransform(VEntity* in_pEntity)
+{
+	VRigidBodyPart* pRBPart = GetPart<VRigidBodyPart>(in_pEntity);
+
+	if( pRBPart != NULL )
+		return pRBPart->GetTransform();
+	else
+		return math::VRBTransform();	
+}
+
+void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
+{
+	VRigidBodyPart* pRBPart = GetPart<VRigidBodyPart>(in_pEntity);
+
+	if( pRBPart != NULL )
+		pRBPart->SetTransform(in_Transform);
+}
+
 //-----------------------------------------------------------------------------
 //
 /* namespace v3d {

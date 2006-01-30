@@ -241,6 +241,8 @@ namespace v3d {
 };
 %template(VMatrix44f) v3d::VMatrix<vfloat32, 4, 4>;
 
+%include "../../API/V3d/Math/VRBTransform.h"
+
 // utils
 //-----------------------------------------------------------------------------
 

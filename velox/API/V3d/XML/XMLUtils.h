@@ -45,6 +45,8 @@ void SaveXMLElementToFile(IVXMLElement* in_pELement, VStringParam in_strFileName
  */
 void SaveXMLElementToFileNoVFS(IVXMLElement* in_pElement, VStringParam in_strFileName);
 
+std::string XMLElementToString(IVXMLElement* in_pElement);
+
 //-----------------------------------------------------------------------------
 #include "XMLUtils.inl"
 //-----------------------------------------------------------------------------

@@ -80,3 +80,5 @@ v3d::entity::VEntity* CreateEntity();
 bool CanBeUpdated(v3d::entity::IVPart* in_pPart);
 void UpdatePart(float in_fSeconds, v3d::entity::IVPart* in_pPart);
 
+v3d::math::VRBTransform GetTransform(v3d::entity::VEntity* in_pEntity);
+void SetTransform(v3d::entity::VEntity* in_pEntity, const v3d::math::VRBTransform& in_Transform);

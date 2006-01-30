@@ -65,6 +65,32 @@ public class Part implements XMLSerializable {
 		//TODO: check for differences and warn if any changes detected
 	}
 	
+	public void applySettings(IVXMLElement xml) {
+		final String xmlType = xml.GetAttribute("type").GetValue().ToString();
+		if( ! xmlType.equalsIgnoreCase(GetType()) )
+			return;
+		
+		VXMLAttributeIterator attrib = xml.AttributeBegin();
+		while( attrib.HasNext() ) {
+			final String name = attrib.Get().GetName().AsCString();
+			final String value = attrib.Get().GetValue().ToString();
+			
+			Setting setting = new Setting(this, name, value);
+			updateSetting(setting);
+			
+			attrib.Next();
+		}
+//		VXMLNodeIterator node = xml.ChildBegin();
+//		while( node.HasNext() ) {
+//			IVXMLElement childElement = node.Get().ToElement();
+//			if( childElement != null ) {
+//				VXML
+//			}
+//			
+//			node.Next();
+//		}
+	}
+	
 	public void updateSettingsFromPart() {
 		if( ! valid(impl) )
 			return;

@@ -81,7 +81,7 @@ public class CGFXEditor extends TextEditor {
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}
-	}	
+	}
 	
 	@Override
 	protected void createActions() {

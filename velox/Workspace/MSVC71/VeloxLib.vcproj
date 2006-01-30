@@ -334,6 +334,9 @@
 						RelativePath="..\..\Api\V3d\Utils\VAllFilter.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VCircleMoverPart.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Utils\VSimpleTokenizer.h">
 					</File>
 				</Filter>
@@ -1314,6 +1317,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VCameraPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VCircleMoverPart.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VCommandManager.cpp">

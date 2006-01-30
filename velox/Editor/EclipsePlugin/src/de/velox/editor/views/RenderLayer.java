@@ -21,15 +21,10 @@ public class RenderLayer {
 	private final int windowHandle;
 	private final IVDevice device;
 	private final VRenderFrameAction renderAction;
-
+	private final Composite parent;
 	private final VCamera camera = new VCamera();
-//	private final VMatrix44f viewMatrix = new VMatrix44f();
-
-//	private final float[] cameraPositon = new float[3];
 
 	public RenderLayer(final Composite parent) {
-//		super(parent, style);
-		
 		windowHandle = parent.handle;
 		renderAction = new VRenderFrameAction(windowHandle);
 		VView.GetInstance().Add(renderAction);
@@ -38,9 +33,6 @@ public class RenderLayer {
 		camera.GetPosition().SetX(1.0f);
 		camera.GetPosition().SetY(1.0f);
 		camera.GetPosition().SetZ(2.0f);
-//		cameraPositon[0] = 1.0f;
-//		cameraPositon[1] = 1.0f;
-//		cameraPositon[2] = 2.0f;
 		
 		applyCamera();
 		
@@ -68,7 +60,10 @@ public class RenderLayer {
 			}
 		});
 		
-		MouseHandler mouseHandler = new MouseHandler();
+		this.parent = parent;
+	}
+	
+	public void addMouseListener(MouseEventListener mouseHandler) {
 		parent.addMouseListener(mouseHandler);
 		parent.addMouseMoveListener(mouseHandler);
 	}
@@ -83,73 +78,73 @@ public class RenderLayer {
 		}
 	}
 	
-	private class MouseHandler implements MouseMoveListener, MouseListener
-	{
-		private final float moveScale = 1.0f / 100;
-		
-		private int lastX = 0;
-		private int lastY = 0;
-		private boolean leftDown = false;
-
-		public void mouseDown(MouseEvent e) {
-			if( e.button == 1 ) {
-				leftDown = true;
-				
-				lastX = e.x;
-				lastY = e.y;
-			}
-		}
-		
-		public void mouseUp(MouseEvent e) {
-			if( e.button == 1 )
-				leftDown = false;
-		}
-		
-		public void mouseDoubleClick(MouseEvent e) {
-		}
-		
-		public void mouseMove(MouseEvent e) {
-			if( leftDown ) {
-//				System.out.print("moved by x=" + e.x + " y=" + e.y);
-				
-				float scale = moveScale;
-				if( (e.stateMask & SWT.SHIFT) != 0 )
-					scale *= 8;
-				
-				float dx = (e.x - lastX) * scale;
-				float dy = -(e.y - lastY) * scale;
-				float dz = 0;
-				
-				if( (e.stateMask & SWT.ALT)  != 0 ) {
-					float t = dy;
-					dy = dz;
-					dz = t;
-				}
-				
-//				System.out.println(" dx=" + dx + " dy=" + dy);
-
-				if( (e.stateMask & SWT.CONTROL) != 0 ) {
-					camera.RotateX(dy*10);
-					camera.RotateY(-dx*10);
-					camera.RotateZ(dz*10);
-				}
-				else {
-					camera.Strafe(dx);
-					camera.MoveUp(dy);
-					camera.MoveForward(dz);
-//					camera.Move(dx, dy, dz);
-				}
-//				cameraPositon[0] += dx;
-//				cameraPositon[1] += dy;
-//				cameraPositon[2] += dz;
-				
-				applyCamera();
-				
-				lastX = e.x;
-				lastY = e.y;
-			}
-		}
-	}
+//	private class MouseHandler implements MouseMoveListener, MouseListener
+//	{
+//		private final float moveScale = 1.0f / 100;
+//		
+//		private int lastX = 0;
+//		private int lastY = 0;
+//		private boolean leftDown = false;
+//
+//		public void mouseDown(MouseEvent e) {
+//			if( e.button == 1 ) {
+//				leftDown = true;
+//				
+//				lastX = e.x;
+//				lastY = e.y;
+//			}
+//		}
+//		
+//		public void mouseUp(MouseEvent e) {
+//			if( e.button == 1 )
+//				leftDown = false;
+//		}
+//		
+//		public void mouseDoubleClick(MouseEvent e) {
+//		}
+//		
+//		public void mouseMove(MouseEvent e) {
+//			if( leftDown ) {
+////				System.out.print("moved by x=" + e.x + " y=" + e.y);
+//				
+//				float scale = moveScale;
+//				if( (e.stateMask & SWT.SHIFT) != 0 )
+//					scale *= 8;
+//				
+//				float dx = (e.x - lastX) * scale;
+//				float dy = -(e.y - lastY) * scale;
+//				float dz = 0;
+//				
+//				if( (e.stateMask & SWT.ALT)  != 0 ) {
+//					float t = dy;
+//					dy = dz;
+//					dz = t;
+//				}
+//				
+////				System.out.println(" dx=" + dx + " dy=" + dy);
+//
+//				if( (e.stateMask & SWT.CONTROL) != 0 ) {
+//					camera.RotateX(dy*10);
+//					camera.RotateY(-dx*10);
+//					camera.RotateZ(dz*10);
+//				}
+//				else {
+//					camera.Strafe(dx);
+//					camera.MoveUp(dy);
+//					camera.MoveForward(dz);
+////					camera.Move(dx, dy, dz);
+//				}
+////				cameraPositon[0] += dx;
+////				cameraPositon[1] += dy;
+////				cameraPositon[2] += dz;
+//				
+//				applyCamera();
+//				
+//				lastX = e.x;
+//				lastY = e.y;
+//			}
+//		}
+//	}
 
 	public IVDevice getDevice() {
 		return device;
@@ -162,4 +157,10 @@ public class RenderLayer {
 	public int getWindowHandle() {
 		return windowHandle;
 	}
-}
+	
+	public static interface MouseEventListener 
+		extends MouseMoveListener, MouseListener 
+	{
+	}
+}	
+

@@ -68,9 +68,14 @@ void VView::FrameUpdateLoop()
 	// initialize
 	for_each(m_FrameActions.begin(), m_FrameActions.end(),
 		mem_fun<void, IVFrameAction>(&IVFrameAction::Init));
-		
+
+	VServicePtr<updater::IVUpdateManager> pUpdater;
+	pUpdater->Start();
+
 	while( IsRunning() )
 	{
+		const vfloat32 frameDuration = vfloat32(pUpdater->GetFrameDuration());
+
 		// add all new actions
 		for(FrameActions::iterator newAction = m_NewFrameActions.begin();
 			newAction != m_NewFrameActions.end(); ++newAction)
@@ -95,7 +100,14 @@ void VView::FrameUpdateLoop()
 		m_bInitCalled = true;
 		
 		// tell all frame actions to execute
-		for_each(m_FrameActions.begin(), m_FrameActions.end(), mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame));
+		for(FrameActions::iterator action = m_FrameActions.begin();
+			action != m_FrameActions.end(); ++action)
+		{
+			(*action)->UpdateFrame(frameDuration);
+		}
+		//for_each(
+		//	m_FrameActions.begin(), 
+		//	m_FrameActions.end(), bind1st(mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame), frameDuration));
 		
 		try
 		{
@@ -109,7 +121,10 @@ void VView::FrameUpdateLoop()
 		
 		// sleep for n seconds
 		glfwSleep(delay);
+		pUpdater->StartNextFrame();
 	}
+
+	pUpdater->Stop();
 	
 	// tell actions that the main loop ended
 	for_each(m_FrameActions.begin(), m_FrameActions.end(), 
@@ -153,6 +168,17 @@ void VView::Add(IVFrameAction* in_pTestAction)
 void VView::Remove(IVFrameAction* in_pAction)
 {
 	m_OldFrameActions.push_back(in_pAction);
+}
+
+template<typename Container, typename T>
+bool contains(const Container& container, T t)
+{
+	return std::find(container.begin(), container.end(), t) != container.end();
+}
+
+bool VView::Contains(IVFrameAction* in_pAction)
+{
+	return contains(m_FrameActions, in_pAction) || contains(m_NewFrameActions, in_pAction);
 }
 
 //-----------------------------------------------------------------------------
@@ -340,7 +366,7 @@ void showOrientationGrid() {
 	glPopMatrix();
 }
 
-void VRenderFrameAction::UpdateFrame()
+void VRenderFrameAction::UpdateFrame(vfloat32 in_fFrameDuration)
 {
 //	m_pDevice->BeginScene();
 	
@@ -415,6 +441,59 @@ void VRenderFrameAction::SetShooting(v3d::scene::IVShooting* in_pShooting)
 v3d::graphics::IVDevice* VRenderFrameAction::GetDevice()
 {
 	return m_pDevice.Get();
+}
+
+//-----------------------------------------------------------------------------
+namespace {
+	template<typename T>
+		T* GetPart(VEntity* in_pEntity)
+	{
+		if( in_pEntity != NULL )
+		{
+			VRangeIterator<IVPart> part = in_pEntity->PartIterator();
+			while(part.HasNext())
+			{
+				T* t = part->Convert<T>();
+
+				if( t != NULL )
+					return t;
+
+				++part;
+			}
+
+			return NULL;
+		}
+		else
+		{
+			return NULL;
+		}
+	}
+}
+
+VUpdateManagerCallAction::VUpdateManagerCallAction()
+{
+	m_pUpdateManager = 0;
+	// dummy updating, no "moving"
+	m_fUpdateSpeedFactor = .0f;
+}
+
+void VUpdateManagerCallAction::Init()
+{
+}
+
+void VUpdateManagerCallAction::UpdateFrame(vfloat32 in_fFrameDuration)
+{
+	if( m_pUpdateManager != 0 )
+		m_pUpdateManager->Update(in_fFrameDuration * m_fUpdateSpeedFactor);
+}
+
+void VUpdateManagerCallAction::Shutdown()
+{
+}
+
+void VUpdateManagerCallAction::SetEntity(entity::VEntity* in_pEntity)
+{
+	m_pUpdateManager = GetPart<VUpdateManagerPart>(in_pEntity);
 }
 
 //-----------------------------------------------------------------------------

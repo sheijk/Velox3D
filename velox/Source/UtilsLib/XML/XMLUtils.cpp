@@ -120,6 +120,20 @@ void SaveXMLElementToFileNoVFS(IVXMLElement* in_pElement, VStringParam in_strFil
     Save(file, *in_pElement, "");
 }
 
+std::string XMLElementToString(IVXMLElement* in_pElement)
+{
+	if( in_pElement != NULL )
+	{
+		std::stringstream stream;
+		Save(stream, *in_pElement, "");
+		return stream.str();
+	}
+	else
+	{
+		return "";
+	}
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::xml
 //-----------------------------------------------------------------------------

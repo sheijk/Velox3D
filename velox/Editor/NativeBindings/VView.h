@@ -6,6 +6,7 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Entity.h>
 #include <V3d/Scene.h>
+#include <V3dLib/EntityParts/VUpdateablePart.h>
 
 #include <V3d/OpenGL.h>
 #include <GL/glfw.h>
@@ -30,7 +31,7 @@ public:
 	virtual ~IVFrameAction() {}
 	
 	virtual void Init() {};
-	virtual void UpdateFrame() = 0;
+	virtual void UpdateFrame(vfloat32 in_fFrameDuration) = 0;
 	virtual void Shutdown() {};
 };
 
@@ -49,7 +50,7 @@ public:
 	VRenderFrameAction(VNativeWindowHandle in_Hwnd);
 	
 	virtual void Init();
-	virtual void UpdateFrame();
+	virtual void UpdateFrame(vfloat32 in_fFrameDuration);
 	virtual void Shutdown();
 	
 	void SetShooting(v3d::scene::IVShooting* in_pShooting);
@@ -67,6 +68,24 @@ private:
 	HWND m_HWND;
 };
 
+class VUpdateManagerCallAction : public IVFrameAction
+{
+public:
+	VUpdateManagerCallAction();
+
+	virtual void Init();
+	virtual void UpdateFrame(vfloat32 in_fFrameDuration);
+	virtual void Shutdown();
+
+	void SetEntity(v3d::entity::VEntity* in_pEntity);
+
+	vfloat32 GetUpdateSpeedFactor() const { return m_fUpdateSpeedFactor; }
+	void SetUpdateSpeedFactor(const vfloat32& in_Value) { m_fUpdateSpeedFactor = in_Value; }
+private:
+	v3d::entity::VUpdateManagerPart* m_pUpdateManager;
+	vfloat32 m_fUpdateSpeedFactor;
+};
+
 class VView
 {
 public:
@@ -75,6 +94,7 @@ public:
 	
 	void Add(IVFrameAction* in_pAction);
 	void Remove(IVFrameAction* in_pAction);
+	bool Contains(IVFrameAction* in_pAction);
 	
 	void Start();
 	void Stop();

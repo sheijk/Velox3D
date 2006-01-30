@@ -156,6 +156,7 @@ lib ScriptingDLL :
 	[ glob ../../Source/Scene/Lights/*.cpp ]
 	../../Source/UtilsLib/VCameraPart.cpp
 	../../Source/UtilsLib/VTrackballPart.cpp
+	../../Source/UtilsLib/VCircleMoverPart.cpp
 
 	# xml service
 	../../Source/XMLService/VXMLAttribute.cpp

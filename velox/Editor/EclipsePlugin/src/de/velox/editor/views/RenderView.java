@@ -35,7 +35,7 @@ public class RenderView extends VeloxViewBase {
 		}
 
 		@Override
-		public void UpdateFrame() {
+		public void UpdateFrame(float frameDuration) {
 		}
 	}
 

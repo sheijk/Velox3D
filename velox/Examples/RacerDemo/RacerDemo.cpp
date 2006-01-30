@@ -13,6 +13,7 @@
 #include <V3dLib/Utils/VCameraPart.h>
 #include <V3dLib/Utils/VTrackballPart.h>
 #include <V3dLib/Utils/VFPSMoverPart.h>
+#include <V3dLib/Utils/VCircleMoverPart.h>
 #include <V3d/Vfs.h>
 #include <V3d/Xml.h>
 
@@ -54,65 +55,6 @@ const std::string TERRAIN_MAT = "/data/mat/terrain";
 const VColor4f fogColor(.6f, .4f, .4f, 1.0f);
 //-----------------------------------------------------------------------------
 
-class VCircleMoverPart : public VPartBaseAdapter<IVUpdateablePart>
-{
-public:
-	VCircleMoverPart();
-
-	void Update(vfloat32 in_fSeconds);
-
-	void Activate();
-	void Deactivate();
-
-	vfloat32 GetRadius() const { return m_fRadius; }
-	void SetRadius(const vfloat32& in_Value) { m_fRadius = in_Value; }
-	VVector3f GetCenter() const { return m_Center; }
-	void SetCenter(const VVector3f& in_Value) { m_Center = in_Value; }
-	vfloat32 GetSpeed() const { return m_fSpeed; }
-	void SetSpeed(const vfloat32& in_Value) { m_fSpeed = in_Value; }
-
-	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
-	
-private:
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
-
-    vfloat32 m_fRadius;
-	VVector3f m_Center;
-	vfloat32 m_fSpeed;
-
-	vfloat32 m_fAngle;
-};
-
-V3D_TYPEINFO_WITHPARENT(VCircleMoverPart, v3d::entity::IVUpdateablePart);
-
-VCircleMoverPart::VCircleMoverPart() :
-	m_pRigidBody(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(entity::VPartDependency::Ancestor, RegisterTo())
-{
-	m_fSpeed = math::Pi() * 1;
-	m_fAngle = .0f;
-	m_fRadius = 10.0f;
-}
-
-void VCircleMoverPart::Update(vfloat32 in_fSeconds)
-{
-	m_fAngle += in_fSeconds * m_fSpeed;
-	VVector3f newPos(sin(m_fAngle), 0, cos(m_fAngle));
-	newPos *= m_fRadius;
-	newPos += m_Center;
-	m_pRigidBody->SetPosition(newPos);
-}
-
-void VCircleMoverPart::Activate()
-{
-	m_pUpdateManager->Register(this);
-}
-
-void VCircleMoverPart::Deactivate()
-{
-	m_pUpdateManager->Unregister(this);
-}
 
 //-----------------------------------------------------------------------------
 

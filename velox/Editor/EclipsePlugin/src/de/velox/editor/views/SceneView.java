@@ -61,7 +61,10 @@ public class SceneView extends VeloxViewBase {
 
 	public void setEntity(Entity inEntity) {
 		root = inEntity;
-		root.synchronize();
+		
+		if( root != null )
+			root.synchronize();
+		
 		viewer.refresh();
 	}
 
@@ -78,25 +81,6 @@ public class SceneView extends VeloxViewBase {
 										   ITreeContentProvider 
 	{
 		ViewContentProvider() {
-//			root.Add(new Entity("emptyChild"));
-//			
-//			Entity childWithParts = new Entity("childWithParts");
-//			childWithParts.Add(new Part("noSettingsPart"));
-//			Part partWithSettings = new Part("partWithSettings");
-//			partWithSettings.SetSetting("setting1" ,"value1");
-//			partWithSettings.SetSetting("setting2" ,"value2");
-//			childWithParts.Add(partWithSettings);
-//			
-//			root.Add(childWithParts);
-//			
-//			Entity childWithSubEntities = new Entity("childWithSubs");
-//			Entity lala = new Entity("lala");
-//			Part lalaPart = new Part("blub");
-//			lalaPart.SetSetting("xyz", "abc");
-//			lala.Add(lalaPart);
-//			childWithSubEntities.Add(lala);
-//			
-//			root.Add(childWithSubEntities);			
 		}
 		
 		public Object[] getElements(Object parent) {
@@ -648,6 +632,27 @@ public class SceneView extends VeloxViewBase {
 		
 		Object selectedElement = selection.getFirstElement();
 		return selectedElement;
+	}
+	
+	/**
+	 * returns the entity which is currently selected (if a part or a setting
+	 * is selected, it's parent entity will be returned
+	 */
+	public Entity getActiveEntity() {
+		Entity selectedEntity = getSelectedEntity();
+		
+		if( selectedEntity == null ) {
+			Part selectedPart = getSelectedPart();
+			if( selectedPart != null )
+				selectedEntity = selectedPart.getOwner();
+			
+			//TODO
+//			Setting selectedSetting = getSelectedSetting();
+//			if( selectedSetting != null )
+//				selectedEntity = selectedSetting.
+		}
+		
+		return selectedEntity;
 	}
 	
 	private void hookContextMenu() {
