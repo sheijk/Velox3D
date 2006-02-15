@@ -71,6 +71,10 @@ public class SceneEditor extends VeloxEditorBase {
 			root.setRenderAction(renderAction);
 		}
 		
+		if( renderLayer != null ) {
+			v3d.TellInputManager(root.impl(), renderLayer.getInputManager());
+		}
+		
 		if( ! VView.GetInstance().Contains(updateAction) ) {
 			updateAction.SetEntity(root.impl());
 			VView.GetInstance().Add(updateAction);			
@@ -157,6 +161,8 @@ public class SceneEditor extends VeloxEditorBase {
 		device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
 		if( root != null )
 			root.setRenderAction(renderAction);
+		if( renderLayer != null )
+			v3d.TellInputManager(root.impl(), renderLayer.getInputManager());
 		
 		IActionBars bars = getEditorSite().getActionBars();
 		
@@ -224,9 +230,9 @@ public class SceneEditor extends VeloxEditorBase {
 			SceneView.getDefaultInstance().setEntity(root);
 	}
 
-	private class MouseHandler implements RenderLayer.MouseEventListener
+	private static class MouseHandler implements RenderLayer.MouseEventListener
 	{
-		private VVector3f createVector(float x, float y, float z) {
+		private static VVector3f createVector(float x, float y, float z) {
 			VVector3f vec = new VVector3f();
 			vec.Set(x, y, z);
 			return vec;
@@ -246,56 +252,112 @@ public class SceneEditor extends VeloxEditorBase {
 			}
 		}
 		
+		private void rotate(float angle, VVector3f axis) {
+			Entity selectedEntity = SceneView.getDefaultInstance().getActiveEntity();
+			
+			if( selectedEntity != null ) {
+				VRBTransform transform = v3d.GetTransform(selectedEntity.impl());
+				transform.Rotate(angle, axis);
+				v3d.SetTransform(selectedEntity.impl(), transform);
+			}
+		}
+		
+		private static final int MB_LEFT = 1;
+		private static final int MB_RIGHT = 3;
+				
+		private static final VVector3f X_AXIS = createVector(1, 0, 0);
+		private static final VVector3f Y_AXIS = createVector(0, 1, 0);
+		private static final VVector3f Z_AXIS = createVector(0, 0, 1);
+		
 		private final float moveScale = 1.0f / 100;
+		private final float rotationScale = 1.0f;
 		
 		private int lastX = 0;
 		private int lastY = 0;
 		private boolean leftDown = false;
+		private boolean rightDown = false;
 
 		public void mouseDown(MouseEvent e) {
-			if( e.button == 1 ) {
-				leftDown = true;
-				
-				lastX = e.x;
-				lastY = e.y;
+			if( e.button == MB_LEFT ) {
+				leftDown = true;			
 			}
+			else if( e.button == MB_RIGHT ) {
+				rightDown = true;
+				System.out.println("right mouse released");
+			}
+			else {
+				System.out.println("pressed button number " + e.button);
+			}
+			
+			lastX = e.x;
+			lastY = e.y;
 		}
 		
 		public void mouseUp(MouseEvent e) {
-			if( e.button == 1 )
+			if( e.button == MB_LEFT )
 				leftDown = false;
+			else if( e.button == MB_RIGHT )
+				rightDown = false;
 		}
 		
 		public void mouseDoubleClick(MouseEvent e) {
 		}
+
+		private enum Action { NONE, MOVE, ROTATE }
 		
 		public void mouseMove(MouseEvent e) {
+			Action action = Action.NONE;
+			float scale = 1.0f;
+			
+//			final boolean controlDown = (e.stateMask & SWT.CONTROL) != 0;
+			final boolean shiftDown = (e.stateMask & SWT.SHIFT) != 0;
+			final boolean altDown = (e.stateMask & SWT.ALT) != 0;
+			
+			float dx = (e.x - lastX) * scale;
+			float dy = -(e.y - lastY) * scale;
+			float dz = 0;
+			
+			lastX = e.x;
+			lastY = e.y;
+			
 			if( leftDown ) {
-				float scale = moveScale;
-				if( (e.stateMask & SWT.SHIFT) != 0 )
+				action = Action.MOVE;
+			}
+			else if( rightDown ) {
+				action = Action.ROTATE;
+			}
+			
+			if( action == Action.MOVE ) {
+				scale *= moveScale;
+				
+				if( shiftDown )
 					scale *= 8;
-				
-				float dx = (e.x - lastX) * scale;
-				float dy = -(e.y - lastY) * scale;
-				float dz = 0;
-				
-				if( (e.stateMask & SWT.ALT)  != 0 ) {
+		
+				if( altDown ) {
 					float t = dy;
 					dy = dz;
 					dz = t;
 				}
 				
-				if( (e.stateMask & SWT.CONTROL) != 0 ) {
-//					camera.RotateX(dy*10);
-//					camera.RotateY(-dx*10);
-//					camera.RotateZ(dz*10);
-				}
-				else {
-					move(dx, dy, dz);
+				move(dx, dy, dz);
+			}
+			else if( action == Action.ROTATE ) {
+				scale *= rotationScale;
+				
+				if( shiftDown )
+					scale *= .1f;
+				
+				if( altDown ) {
+					if( Math.abs(dx) < Math.abs(dy) )
+						dx = .0f;
+					
+					if( Math.abs(dy) < Math.abs(dx) )
+						dy = .0f;
 				}
 				
-				lastX = e.x;
-				lastY = e.y;
+				rotate(-dy * scale, X_AXIS);
+				rotate(dx * scale, Y_AXIS);
+//				rotate(-dz * scale, Z_AXIS);
 			}
 		}
 	}

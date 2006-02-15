@@ -481,6 +481,29 @@ void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
 		pRBPart->SetTransform(in_Transform);
 }
 
+#include <V3dLib/Utils/VInputPart.h>
+#include "../../Source/InputLib/VDIInputManager.h"
+
+v3d::input::IVInputManager* CreateInputManager(int hwnd)
+{
+	return new input::VDIInputManager(HWND(hwnd));
+}
+
+void TellInputManager(
+	v3d::entity::VEntity* pEntity, 
+	v3d::input::IVInputManager* pInputManager)
+{
+	if( pEntity != 0 )
+	{
+		utils::VInputPart* pInputPart = pEntity->GetPart<utils::VInputPart>();
+
+		if( pInputPart != 0 )
+		{
+			pInputPart->SetInputManager(pInputManager);
+		}
+	}
+}
+
 //-----------------------------------------------------------------------------
 //
 /* namespace v3d {

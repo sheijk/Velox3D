@@ -91,10 +91,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RacerDemo", "RacerDemo\Race
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dummy", "dummy\dummy.vcproj", "{499C1898-6BD1-4B17-AA5F-6CE406A8162F}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScriptingDLL", "..\Workspace\MSVC71\ScriptingDLL.vcproj", "{20060125-0000-0000-0000-000312500000}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -196,12 +192,6 @@ Global
 		{20051201-0000-0000-0000-000171875000}.Release.Build.0 = Release|Win32
 		{20051201-0000-0000-0000-000171875000}.UnitTests.ActiveCfg = Release|Win32
 		{20051201-0000-0000-0000-000171875000}.UnitTests.Build.0 = Release|Win32
-		{499C1898-6BD1-4B17-AA5F-6CE406A8162F}.Debug.ActiveCfg = Debug|Win32
-		{499C1898-6BD1-4B17-AA5F-6CE406A8162F}.Debug.Build.0 = Debug|Win32
-		{499C1898-6BD1-4B17-AA5F-6CE406A8162F}.Release.ActiveCfg = Release|Win32
-		{499C1898-6BD1-4B17-AA5F-6CE406A8162F}.Release.Build.0 = Release|Win32
-		{499C1898-6BD1-4B17-AA5F-6CE406A8162F}.UnitTests.ActiveCfg = Release|Win32
-		{499C1898-6BD1-4B17-AA5F-6CE406A8162F}.UnitTests.Build.0 = Release|Win32
 		{20060125-0000-0000-0000-000312500000}.Debug.ActiveCfg = Debug|Win32
 		{20060125-0000-0000-0000-000312500000}.Debug.Build.0 = Debug|Win32
 		{20060125-0000-0000-0000-000312500000}.Release.ActiveCfg = Release|Win32

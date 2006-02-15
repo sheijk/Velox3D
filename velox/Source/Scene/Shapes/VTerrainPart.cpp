@@ -206,6 +206,8 @@ void VTerrainPart::GenerateIndices()
 			++num;
 		}
 
+		const vuint x = m_nVertexCountHor;
+
 		// add degenerated triangle
 		m_hIndexBuffer->SetIndex(GetVertexNum(x-1, y+1), num);
 		++num;

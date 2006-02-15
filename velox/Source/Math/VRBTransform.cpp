@@ -4,6 +4,7 @@
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Math/TransformationOps.h>
 #include <V3d/Math/VVectorBase.h>
+#include <V3d/Math/VQuaternionOps.h>
 
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -213,6 +214,14 @@ void VRBTransform::Invert()
 	m_YAxis = - m_YAxis;
 	m_ZAxis = - m_ZAxis;
 	m_Position = - m_Position;
+}
+
+void VRBTransform::Rotate(vfloat32 in_fAngleDegree, const VVector3f& axis)
+{
+	VQuatf quat = QuatFromAxisAngle(axis, in_fAngleDegree);
+	v3d::Rotate(m_XAxis, quat);
+	v3d::Rotate(m_YAxis, quat);
+	v3d::Rotate(m_ZAxis, quat);
 }
 
 //-----------------------------------------------------------------------------

@@ -41,6 +41,13 @@ void VLightPart::Deactivate()
 void VLightPart::Update(vfloat32 in_fSeconds)
 {
 	m_Light.SetPosition(m_pRigidBody->GetPosition());
+
+	if( m_Light.GetW() == .0f )
+	{
+		VVector3f pos = m_Light.GetPosition();
+		VVector3f dir = Normalized(pos);
+		m_Light.SetPosition(dir);
+	}
 }
 
 void VLightPart::OnMessage(const messaging::VMessage& in_Message, 

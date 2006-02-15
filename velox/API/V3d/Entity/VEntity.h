@@ -77,6 +77,9 @@ public:
 
 	std::string GetName() const;
 	void SetName(const std::string& in_strName);
+
+	template<typename PartType>
+	PartType* GetPart();
 private:
 	typedef std::map<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;
@@ -107,6 +110,16 @@ private:
 };
 
 //-----------------------------------------------------------------------------
+
+template<typename PartType>
+PartType* VEntity::GetPart()
+{
+	IVPart* part = GetPartById(GetTypeInfo<PartType>().GetName());
+	if( part->IsOfType<PartType>() )
+	{
+		return part->Convert<PartType>();
+	}
+}
 
 //template<typename PartType>
 //void VEntity::AddPart(VSharedPtr<PartType> in_pPart)

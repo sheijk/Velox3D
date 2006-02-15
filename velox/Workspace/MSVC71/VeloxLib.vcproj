@@ -802,6 +802,9 @@
 						RelativePath="..\..\Api\V3dLib\Utils\VGuid.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3dLib\Utils\VInputPart.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Utils\VMouseTrackball.h">
 					</File>
 					<File
@@ -1332,6 +1335,9 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VFrameCounter.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VInputPart.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VMouseTrackball.cpp">

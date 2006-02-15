@@ -61,34 +61,30 @@ const VColor4f fogColor(.6f, .4f, .4f, 1.0f);
 
 void DumpInfo(VEntity& in_Entity, const std::string& prefix = "")
 {
-	if( in_Entity.IsActive() == false )
+	vout
+		<< (in_Entity.IsActive() ? " " : "!")
+		<< prefix
+		<< "Entity \"" << in_Entity.GetName() << "\""
+		<< vendl;
+
+	VRangeIterator<IVPart> partIter = in_Entity.PartIterator();
+	while( partIter.HasNext() )
 	{
-		vout
-			<< (in_Entity.IsActive() ? " " : "!")
-			<< prefix
-			<< "Entity"
+		vout 
+			<< prefix 
+			<< "\tPart " 
+			<< partIter->GetTypeInfo().GetName()
+			<< (partIter->IsReady() ? "" : " (misssing requirements)") 
 			<< vendl;
 
-		VRangeIterator<IVPart> partIter = in_Entity.PartIterator();
-		while( partIter.HasNext() )
-		{
-			vout 
-				<< prefix 
-				<< "\tPart " 
-				<< partIter->GetTypeInfo().GetName()
-				<< (partIter->IsReady() ? "" : " (misssing requirements)") 
-				<< vendl;
-
-			++partIter;
-		}
+		++partIter;
 	}
-	else {
-		VRangeIterator<VEntity> childIter = in_Entity.ChildIterator();
-		while( childIter.HasNext() )
-		{
-			DumpInfo(*childIter, prefix + "\t");
-			++childIter;
-		}
+
+	VRangeIterator<VEntity> childIter = in_Entity.ChildIterator();
+	while( childIter.HasNext() )
+	{
+		DumpInfo(*childIter, prefix + "\t");
+		++childIter;
 	}
 }
 /*
@@ -146,35 +142,36 @@ private:
 	//VSharedPtr<VKeyboardCamera> m_pCamera;
 	VSharedPtr<VSimpleShooting> m_pRootShooting;
 	VSharedPtr<IVLightManager> m_pLightManager;
-	VSharedPtr<VUpdateManagerPart> m_pUpdateManager;
+	//VSharedPtr<VUpdateManagerPart> m_pUpdateManager;
+	VUpdateManagerPart* m_pUpdateManager;
 
 	IVDevice& Device();
 
 	void Init();
-	void Shutdown();
+	void Cleanup();
 	void CreateResources();
 
-	VSharedPtr<VEntity> CreateRoot()
-	{
-		VSharedPtr<VEntity> pRoot(new VEntity());
+	//VSharedPtr<VEntity> CreateRoot()
+	//{
+	//	VSharedPtr<VEntity> pRoot(new VEntity());
 
-		VSharedPtr<VNaiveSceneManagerPart> pSceneManager(new VNaiveSceneManagerPart());
-		pRoot->AddPart(pSceneManager);
+	//	VSharedPtr<VNaiveSceneManagerPart> pSceneManager(new VNaiveSceneManagerPart());
+	//	pRoot->AddPart(pSceneManager);
 
-		VSharedPtr<VSimpleShooting> pShooting(new VSimpleShooting());
-		//pShooting->SetCamera(m_pCamera.Get());
-		pShooting->SetRenderTarget(m_pDevice);
-		m_pRootShooting = pShooting;
-		pRoot->AddPart(m_pRootShooting);
+	//	VSharedPtr<VSimpleShooting> pShooting(new VSimpleShooting());
+	//	//pShooting->SetCamera(m_pCamera.Get());
+	//	pShooting->SetRenderTarget(m_pDevice);
+	//	m_pRootShooting = pShooting;
+	//	pRoot->AddPart(m_pRootShooting);
 
-		m_pLightManager.Assign(new VNaiveLightManager());
-		pRoot->AddPart(m_pLightManager);
+	//	m_pLightManager.Assign(new VNaiveLightManager());
+	//	pRoot->AddPart(m_pLightManager);
 
-		m_pUpdateManager.Assign(new VUpdateManagerPart());
-		pRoot->AddPart(m_pUpdateManager);
+	//	m_pUpdateManager.Assign(new VUpdateManagerPart());
+	//	pRoot->AddPart(m_pUpdateManager);
 
-		return pRoot;
-	}
+	//	return pRoot;
+	//}
 
 	VSharedPtr<VEntity> CreateWorld()
 	{
@@ -220,6 +217,7 @@ private:
 			VRenderPass& pass(effect.AddShaderPath().AddRenderPass());
 			pass.AddState(TextureState("/data/tex/mud1.tga"));
 			pass.AddState(DefaultColorState(VColor4f(1, 1, 1, 1)));
+			pass.AddState(LightingState(true));
 			matres->AddData(CopyPtr(effect));
 		}
 
@@ -434,16 +432,21 @@ void DumpFileSystem()
 	DumpDir(*vfs::VFileSystemPtr()->GetDir("/"), "");
 }
 
+VSharedPtr<VEntity> LoadScene(const std::string& in_strFileName)
+{
+	VSharedPtr<vfs::IVStream> pFileStream = vfs::VFileSystemPtr()->OpenFile(
+		in_strFileName.c_str(), vfs::VReadAccess);
+	VSharedPtr<IVXMLElement> pXMLDocument = VXMLServicePtr()->GetRootElement(pFileStream.Get());
+	VSharedPtr<VEntity> pScene = VEntitySerializationServicePtr()->ParseScene(*pXMLDocument);
+
+	return pScene;
+}
+
 /**
  * @author sheijk
  */
 vint RacerDemo::Main(std::vector<std::string> args)
 {
-	VColor4f vec = VColor4f(1, 2, 3, 4);
-	vout << vec << vendl;
-	std::stringstream stream("(4.1,3.2,2.3,1.4)");
-	stream >> vec;
-
 	Init();
 	CreateResources();
 
@@ -453,56 +456,68 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	//property::SetProperty("v3d.graphics.showNormals", true);
 
+	VSharedPtr<VEntity> pRoot = LoadScene("/edit/racer.v3dscene");
+	m_pUpdateManager = pRoot->GetPart<VUpdateManagerPart>();
+	//m_pUpdateManager.Assign(new VUpdateManagerPart());
+	//pRoot->AddPart(m_pUpdateManager);
+	VSharedPtr<VSimpleShooting> pShooting(new VSimpleShooting());
+	pShooting->SetRenderTarget(m_pDevice);
+	m_pRootShooting = pShooting;
+	pRoot->AddPart(m_pRootShooting);
+	VInputPart* pInputPart = pRoot->GetPart<VInputPart>();
+	pInputPart->SetInputManager(&m_pWindow->QueryInputManager());
+
 	// indenting represents scene graph hierarchy
-	VSharedPtr<VEntity> pRoot = CreateRoot();
-		VSharedPtr<VEntity> pAmbient = CreateAmbient();
-		pRoot->AddChild(pAmbient);
-			pAmbient->AddChild(CreateSkyBox());
-			pAmbient->AddChild(CreateReflectiveObj());
-			VRect3D mirrorArea;
-			mirrorArea.right = ToVector3f(100, 0, 0);
-			mirrorArea.up = ToVector3f(0, 0, -100);
-			mirrorArea.distance = 0;
-			CreateWater(mirrorArea, pAmbient);
-			const vfloat32 mapSize = 70.0f;
-			CreateMovingLight(VColor4f(1, 0, 0), VVector3f(0, 15, 5), 20.0f, .05f, pAmbient);
-			CreateMovingLight(VColor4f(0, 1, 0), VVector3f(10, 20, 0), 30.0f, -.2f, pAmbient);
-			CreateMovingLight(VColor4f(0, 0, 1), VVector3f(0, 25, 10), 50.0f, .1f, pAmbient);
-			CreateMovingLight(VColor4f(0, 1, 1), VVector3f(20, 20, 0), 80.0f, -.1f, pAmbient);
-			CreateLight(VColor4f(1, 1, 1), VVector3f(0, 5, 0), pAmbient);
+	//VSharedPtr<VEntity> pRoot = CreateRoot();
+	//	VSharedPtr<VEntity> pAmbient = CreateAmbient();
+	//	pRoot->AddChild(pAmbient);
+	//		pAmbient->AddChild(CreateSkyBox());
+	//		pAmbient->AddChild(CreateReflectiveObj());
+	//		VRect3D mirrorArea;
+	//		mirrorArea.right = ToVector3f(100, 0, 0);
+	//		mirrorArea.up = ToVector3f(0, 0, -100);
+	//		mirrorArea.distance = 0;
+	//		CreateWater(mirrorArea, pAmbient);
+	//		const vfloat32 mapSize = 70.0f;
+	//		CreateMovingLight(VColor4f(1, 0, 0), VVector3f(0, 15, 5), 20.0f, .05f, pAmbient);
+	//		CreateMovingLight(VColor4f(0, 1, 0), VVector3f(10, 20, 0), 30.0f, -.2f, pAmbient);
+	//		CreateMovingLight(VColor4f(0, 0, 1), VVector3f(0, 25, 10), 50.0f, .1f, pAmbient);
+	//		CreateMovingLight(VColor4f(0, 1, 1), VVector3f(20, 20, 0), 80.0f, -.1f, pAmbient);
+	//		CreateLight(VColor4f(1, 1, 1), VVector3f(0, 5, 0), pAmbient);
 
-			CreateTrackballCamPart(pAmbient);
-			CreateKeyboardCamPart(pAmbient);
+	//		CreateTrackballCamPart(pAmbient);
+	//		CreateKeyboardCamPart(pAmbient);
 
-			VSharedPtr<VEntity> pLoaded = VEntitySerializationServicePtr()->ParseScene(
-				*VXMLServicePtr()->GetRootElement(&*vfs::VFileSystemPtr()->OpenFile("/data/deco.xml", vfs::VReadAccess)));
-			pAmbient->AddChild(pLoaded);
+	//		VSharedPtr<VEntity> pLoaded = VEntitySerializationServicePtr()->ParseScene(
+	//			*VXMLServicePtr()->GetRootElement(&*vfs::VFileSystemPtr()->OpenFile("/data/deco.xml", vfs::VReadAccess)));
+	//		pAmbient->AddChild(pLoaded);
 
-			{ // test geometry
-				const vfloat32 minv = -20.0f;
-				const vfloat32 maxv = 20.0f;
-				const vfloat32 step = 20.0f;
+	//		{ // test geometry
+	//			const vfloat32 minv = -20.0f;
+	//			const vfloat32 maxv = 20.0f;
+	//			const vfloat32 step = 20.0f;
 
-				for(vfloat32 x = minv; x <= maxv; x += step)
-				for(vfloat32 y = minv; y <= maxv; y += step)
-				for(vfloat32 z = minv; z <= maxv; z += step)
-					CreateSphere(ToVector3f(x, y, z), 1.0f, pAmbient);
-			}
-		VSharedPtr<VEntity> pWorld = CreateWorld();
-		pRoot->AddChild(pWorld);
-			pWorld->AddChild(CreateTerrain());
+	//			for(vfloat32 x = minv; x <= maxv; x += step)
+	//			for(vfloat32 y = minv; y <= maxv; y += step)
+	//			for(vfloat32 z = minv; z <= maxv; z += step)
+	//				CreateSphere(ToVector3f(x, y, z), 1.0f, pAmbient);
+	//		}
+	//	VSharedPtr<VEntity> pWorld = CreateWorld();
+	//	pRoot->AddChild(pWorld);
+	//		pWorld->AddChild(CreateTerrain());
 
 
 	pRoot->Activate();
 	DumpInfo(*pRoot);
 
+	//TODO: support im device oder so
 	glEnable(GL_FOG);
-	vfloat32 fogColor2[4] = { fogColor.red, fogColor.green, fogColor.blue, .1f };
+	vfloat32 fogColor2[4] = { fogColor.red, fogColor.green, fogColor.blue, 1.0f };
 	glFogfv(GL_FOG_COLOR, fogColor2);
 	glFogf(GL_FOG_DENSITY, 1.0f);
 	glFogf(GL_FOG_MODE, GL_LINEAR);
 	glFogf(GL_FOG_START, 300.f);
-	glFogf(GL_FOG_END, 1000.0f);
+	glFogf(GL_FOG_END, 400.0f);
 
 	VMatrix44f test = math::ScaleMatrix(10.0f);
 	vout << test << vendl;
@@ -519,12 +534,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 		m_pUpdateManager->Update(frameDuration);
 
-		//m_pCamera->Move(frameDuration);
-		//m_pCamera->ApplyTo(Device());
-
 		m_pRootShooting->UpdateAndCull();
-		//m_pCamera->ApplyTo(Device());
-		//m_pLightManager->ApplyLights(&Device(), NULL);
 		m_pRootShooting->Render();
 
 		Device().EndScene();
@@ -552,7 +562,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	pRoot->Deactivate();
 	
-	Shutdown();
+	Cleanup();
 
 	return 0;
 }
@@ -590,7 +600,7 @@ void RacerDemo::Init()
 	//m_pCamera.Assign(new VKeyboardCamera(m_pWindow->QueryInputManager()));
 }
 
-void RacerDemo::Shutdown()
+void RacerDemo::Cleanup()
 {
 	m_pDevice = 0;
 	m_pWindow.Release();
@@ -610,7 +620,9 @@ void RacerDemo::CreateResources()
 	mirrorRes->AddData(CopyPtr(GLSLEffect(MIRROR_VERTEX_SHADER.c_str(), MIRROR_FRAGMENT_SHADER.c_str())));
 
 	VResourceId whiteMat = VResourceManagerPtr()->CreateResource("/materials/white");
-	whiteMat->AddData(CopyPtr(ColorEffect(1, 1, 1, 1)));
+	VEffectDescription whiteLit = ColorEffect(1, 1, 1, 1);
+	whiteLit.ShaderPath(0).RenderPass(0).AddState(LightingState(true));
+	whiteMat->AddData(CopyPtr(whiteLit));
 }
 
 IVDevice& RacerDemo::Device()

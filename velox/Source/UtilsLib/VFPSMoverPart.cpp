@@ -3,6 +3,7 @@
 
 #include <V3d/Math/VQuaternionOps.h>
 
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -16,7 +17,8 @@ using namespace v3d::input;
  */
 VFPSMoverPart::VFPSMoverPart() :
 	m_pRigidBody(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(entity::VPartDependency::Ancestor, RegisterTo())
+	m_pUpdateManager(entity::VPartDependency::Ancestor, RegisterTo()),
+	m_pInputPart(entity::VPartDependency::Ancestor, RegisterTo())
 {
 	m_bIgnoreMouse = false;
 
@@ -100,6 +102,7 @@ void VFPSMoverPart::Update(vfloat32 in_fSeconds)
 void VFPSMoverPart::Activate()
 {
 	m_pUpdateManager->Register(this);
+	QueryButtons(*m_pInputPart->GetInputManager());
 }
 
 void VFPSMoverPart::Deactivate()
@@ -183,6 +186,10 @@ void VFPSMoverPart::QueryButtons(IVInputManager& in_InputManager)
 	m_pMouseYAxis = &in_InputManager.GetStandardMouse().GetYAxis();
 
 	m_pFastTriggerButton = &in_InputManager.GetStandardKeyboard().GetKey(KeyLeftShift);
+}
+
+namespace {
+	entity::VPartParser<VFPSMoverPart> parser;
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils

@@ -138,7 +138,14 @@ public class Part implements XMLSerializable {
 		msg.AddProperty("value", setting.GetValue());
 		
 		if( valid(impl) ) {
-			impl.Send(msg);
+			try {
+				impl.Send(msg);
+				updateSettingsFromPart();
+			}
+			catch(Throwable e) {
+				System.err.println(e.getMessage());
+				e.printStackTrace(System.err);
+			}
 		}
 	}
 	

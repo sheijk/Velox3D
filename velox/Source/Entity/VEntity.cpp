@@ -387,7 +387,10 @@ void VEntity::CheckDependencies()
 
 void VEntity::AddPart(VSharedPtr<IVPart> in_pPart)
 {
-	AddPart(in_pPart->GetTypeInfo().GetName(), in_pPart);
+	if( in_pPart.Get() != 0 ) 
+	{
+		AddPart(in_pPart->GetTypeInfo().GetName(), in_pPart);
+	}
 }
 
 void VEntity::AddPart(const std::string& in_Id, PartPtr in_pPart)

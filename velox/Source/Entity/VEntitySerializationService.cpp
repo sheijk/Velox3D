@@ -30,6 +30,9 @@ void VEntitySerializationService::Register(IVPartParser* in_pPartParser)
 {
 	if( m_Parsers.find(in_pPartParser->GetType()) == m_Parsers.end() )
 	{
+		vout << "part parser for type <" << in_pPartParser->GetType()
+			<< "> registered" << vendl;
+
 		m_Parsers[in_pPartParser->GetType()] = in_pPartParser;
 	}
 	else
@@ -69,6 +72,20 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 
 VSharedPtr<VEntity> VEntitySerializationService::ParseScene(xml::IVXMLElement& in_Node)
 {
+	static vbool firstTime = true;
+	if( firstTime == true )
+	{
+		firstTime = false;
+
+		vout << "Registered parsers:" << vendl;
+
+		for(ParserMap::iterator parser = m_Parsers.begin();
+			parser != m_Parsers.end(); ++parser)
+		{
+			vout << "\t" << parser->first << vendl;
+		}
+	}
+
 	try
 	{
 		VSharedPtr<VEntity> pEntity(new VEntity());

@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Entity/VGenericPartParser.h>
+#include <V3d/Input/IVInputManager.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -15,7 +16,8 @@ using namespace entity;
  */
 VTrackballPart::VTrackballPart() :
 	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
+	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo()),
+	m_pInputPart(VPartDependency::Ancestor, RegisterTo())
 {
 }
 
@@ -29,6 +31,15 @@ VTrackballPart::~VTrackballPart()
 void VTrackballPart::Activate()
 {
 	m_pUpdateManager->Register(this);
+
+	using namespace input;
+
+	IVInputManager* pInputManager = m_pInputPart->GetInputManager();
+	if( pInputManager != 0 )
+	{
+		IVMouseDevice* pMouse = &pInputManager->GetStandardMouse();
+		m_pTrackball.Assign(new VMouseTrackball(pMouse));
+	}
 }
 
 void VTrackballPart::Deactivate()

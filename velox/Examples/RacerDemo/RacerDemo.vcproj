@@ -33,10 +33,10 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="CoreLib.lib VeloxLib.lib KernelLib.lib opengl32.lib glu32.lib"
+				AdditionalDependencies="CoreLib.lib VeloxLib.lib KernelLib.lib glew32.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/RacerDemo.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(OutDir)"
+				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib;$(OutDir)"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile="$(OutDir)/RacerDemo.pdb"
 				SubSystem="1"

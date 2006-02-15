@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib oded.lib glfw.lib CoreLib.lib VeloxLib.lib KernelLib.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib cg.lib cgGL.lib lib3ds-120d.lib oded.lib glew32.lib glfw.lib opengl32.lib glu32.lib CoreLib.lib VeloxLib.lib KernelLib.lib"
 				OutputFile="$(OutDir)/ScriptingDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib;$(OutDir)"
@@ -1431,6 +1431,16 @@
 			</File>
 			<File
 				RelativePath="..\..\Editor\NativeBindings\TestLib.i">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating java code using swig..."
+						CommandLine="cd ../../Editor/NativeBindings
+&quot;g:/Program Files/swigwin-1.3.25/swig.exe&quot; -c++ -java -package de.velox -outdir ../SourceV3d/de/velox -o GlueCode/TestLibSWIG.cpp TestLib.i &gt; swigbuild.log
+"
+						Outputs="../../Editor/NativeBindings/GlueCode/TestLibSWIG.h;../../Editor/NativeBindings/GlueCode/TestLibSWIG.cpp"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\Editor\NativeBindings\VRangeIter.h">
@@ -1444,6 +1454,30 @@
 			<File
 				RelativePath="..\..\Editor\NativeBindings\VView.h">
 			</File>
+			<Filter
+				Name="Generated"
+				Filter="">
+				<File
+					RelativePath="..\..\Editor\NativeBindings\GlueCode\TestLibSWIG.cpp">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCLCompilerTool"
+							AdditionalIncludeDirectories="../../Editor/NativeBindings"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\Editor\NativeBindings\GlueCode\TestLibSWIG.h">
+					<FileConfiguration
+						Name="Debug|Win32">
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Performisdfsdfng Custom Build Step"
+							CommandLine=""
+							Outputs=""/>
+					</FileConfiguration>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="ServiceDLL"

@@ -67,6 +67,7 @@
             <File RelativePath="..\..\Api\V3d\Graphics\Parameters\IVParameterValue.h"/>
             <File RelativePath="..\..\Api\V3d\Graphics\Parameters\VGenericValue.h"/>
             <File RelativePath="..\..\Api\V3d\Graphics\Parameters\VMaterialSetup.h"/>
+            <File RelativePath="..\..\Api\V3d\Graphics\Parameters\VTextureValue.h"/>
           </Filter>
           <File RelativePath="..\..\Api\V3d\Graphics\GraphicsExceptions.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\IVDevice.h"/>
@@ -78,12 +79,14 @@
           <File RelativePath="..\..\Api\V3d\Graphics\IVShader.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\IVStateCategory.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\IVStateCategoryRegistry.h"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\OpenGLUtils.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VBuffer.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VDataFormat.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VDeviceMatrix.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VDisplaySettings.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VEffectDescription.inl"/>
+          <File RelativePath="..\..\Api\V3d\Graphics\VLight.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VMeshDescription.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VModel.h"/>
           <File RelativePath="..\..\Api\V3d\Graphics\VPointLight.h"/>
@@ -218,9 +221,15 @@
             <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.cpp"/>
             <File RelativePath="..\..\Source\Graphics\OpenGL\Materials\VFixedFunctionPass.h"/>
           </Filter>
+          <Filter Name="States" Filter="">
+            <File RelativePath="..\..\Source\Graphics\OpenGL\States\VDepthState.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\States\VDepthState.h"/>
+          </Filter>
           <Filter Name="Textures" Filter="">
             <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.cpp"/>
             <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VBaseTexture.h"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VCubeMapTexture.cpp"/>
+            <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VCubeMapTexture.h"/>
             <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.cpp"/>
             <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VTexture2D.h"/>
             <File RelativePath="..\..\Source\Graphics\OpenGL\Textures\VUntextured.cpp"/>

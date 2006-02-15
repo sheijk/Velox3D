@@ -8,16 +8,18 @@
 #define V3D_MODULE_API __declspec(dllexport)
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 
-#include <v3d/Core/Modules/VModuleParams.h>
-#include <v3d/Core/Modules/VModuleBase.h>
+#include <V3d/Core/Modules/VModuleParams.h>
+#include <V3d/Core/Modules/VModuleBase.h>
+
+#include <V3dLib/Utils/VRegisterGuard.h>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d;
 //-----------------------------------------------------------------------------
@@ -74,29 +76,33 @@ namespace {
 //	);
 
 extern "C" {
-void Initialize(VModuleParams* in_pParams)
-{
-	// set the memory manager
-	//SetMemoryManager(
-	//	in_pParams->pMemoryManager,
-	//	VModuleBase::GetInstance()->GetModuleName()
-	//	);
+	void Initialize(VModuleParams* in_pParams)
+	{
+		// set the memory manager
+		//SetMemoryManager(
+		//	in_pParams->pMemoryManager,
+		//	VModuleBase::GetInstance()->GetModuleName()
+		//	);
 
-	// store the object registry instance
-	VObjectRegistry::SetInstance(in_pParams->pObjectRegistry);
+		// store the object registry instance
+		VObjectRegistry::SetInstance(in_pParams->pObjectRegistry);
 
-	//g_ModuleId = in_pParams->moduleId;
-	SetMemLogger(in_pParams->pMemLogger);
+		//g_ModuleId = in_pParams->moduleId;
+		SetMemLogger(in_pParams->pMemLogger);
 
-	if( VModuleBase::GetInstance() != 0 )
-		VModuleBase::GetInstance()->Initialize();
-}
+		if( VModuleBase::GetInstance() != 0 )
+			VModuleBase::GetInstance()->Initialize();
 
-void Shutdown()
-{
-	if( VModuleBase::GetInstance() != 0 )
-		VModuleBase::GetInstance()->Shutdown();
-}
+		//utils::VRegisterGuardBase::RegisterAll();
+	}
+
+	void Shutdown()
+	{
+		//utils::VRegisterGuardBase::UnregisterAll();
+
+		if( VModuleBase::GetInstance() != 0 )
+			VModuleBase::GetInstance()->Shutdown();
+	}
 }
 
 /**

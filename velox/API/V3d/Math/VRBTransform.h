@@ -100,6 +100,8 @@ public:
 
 	void Invert();
 
+	void Rotate(vfloat32 in_fAngleDegree, const VVector3f& axis);
+
 private:
 	VVector3f m_XAxis;
 	VVector3f m_YAxis;

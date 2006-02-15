@@ -8,6 +8,7 @@
 #include <V3d/Entity/VPartBase.h>
 #include <V3dLib/EntityParts/VUpdateablePart.h>
 #include <V3dLib/EntityParts/VRigidBodyPart.h>
+#include <V3dLib/Utils/VInputPart.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------
@@ -34,6 +35,7 @@ private:
 
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VPartConnection<utils::VInputPart> m_pInputPart;
 };
 
 //-----------------------------------------------------------------------------

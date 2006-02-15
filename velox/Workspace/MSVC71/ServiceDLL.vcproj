@@ -1057,6 +1057,33 @@
 					RelativePath="..\..\Source\Entity\Parsers\VSceneModelParser.h">
 				</File>
 			</Filter>
+			<Filter
+				Name="EntityParts">
+				<File
+					RelativePath="..\..\Source\UtilsLib\VCameraPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VFPSMoverPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VInputPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\EntityParts\VRigidBodyPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\EntityParts\VSGAnimationPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VTrackballPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\EntityParts\VUpdateablePart.cpp">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Scene"
@@ -1092,6 +1119,9 @@
 				RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp">
 			</File>
 			<File
+				RelativePath="..\..\Source\Scene\VPostProcessingRenderStepPart.cpp">
+			</File>
+			<File
 				RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp">
 			</File>
 			<File
@@ -1100,6 +1130,36 @@
 			<File
 				RelativePath="..\..\Source\Scene\VSimpleShooting.cpp">
 			</File>
+			<Filter
+				Name="Lights">
+				<File
+					RelativePath="..\..\Source\Scene\Lights\VLightPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\Lights\VNaiveLightManager.cpp">
+				</File>
+			</Filter>
+			<Filter
+				Name="Shapes">
+				<File
+					RelativePath="..\..\Source\Scene\Shapes\VSkyboxPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\Shapes\VSphereMeshPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\Shapes\VTerrainPart.cpp">
+				</File>
+			</Filter>
+			<Filter
+				Name="Shootings">
+				<File
+					RelativePath="..\..\Source\Scene\Shootings\VMirrorShooting.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\Shootings\VShootingBase.cpp">
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

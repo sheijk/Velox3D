@@ -32,7 +32,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
-20.01.06
+12.02.06
+- racer laedt vom editor erzeugte szene
+- extras, damit der editor alle parts erstellen kann
+
+30.01.06
 - editor hat play/pause funktion, zum testen von physik, animationen usw.,
   nach stop wird auf ursprungszustand zurueckgesetzt
 
