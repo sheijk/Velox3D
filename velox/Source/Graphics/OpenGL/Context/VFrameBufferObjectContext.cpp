@@ -3,6 +3,8 @@
 #include <V3d/Graphics/GraphicsExceptions.h>
 
 #include <V3d/OpenGL.h>
+#include <GL/glfw.h>
+#include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -19,6 +21,8 @@ VFrameBufferObjectContext::VFrameBufferObjectContext(
 	:
 	VOffscreenContextBase(in_DisplaySettings, in_pParentContext)
 {
+	vout << "Creating FBO context from thread " << glfwGetThreadID() << vendl;
+
 	in_pParentContext->MakeCurrent();
 
 	const vuint width = in_DisplaySettings.GetWidth();

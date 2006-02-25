@@ -35,6 +35,14 @@ public:
 	virtual void Shutdown() {};
 };
 
+class IVSynchronizedAction
+{
+public:
+	virtual ~IVSynchronizedAction() {}
+
+	virtual void Run() = 0;
+};
+
 //class VTestFrameAction : public IVFrameAction
 //{
 //	vuint m_nCount;
@@ -57,7 +65,6 @@ public:
 	v3d::graphics::IVDevice* GetDevice();
 	
 	void setSize(vuint width, vuint height);
-	
 private:
 	vuint m_nWidth;
 	vuint m_nHeight;
@@ -98,6 +105,8 @@ public:
 	
 	void Start();
 	void Stop();
+
+	void ExecSynchronized(IVSynchronizedAction* in_pAction);
 	
 	bool IsRunning() const { return m_bIsRunning; }
 		
@@ -131,6 +140,11 @@ private:
 	FrameActions m_FrameActions;
 	FrameActions m_NewFrameActions;
 	FrameActions m_OldFrameActions;
+
+	typedef std::vector<IVSynchronizedAction*> SyncActions;
+	SyncActions m_SyncActions;
+	GLFWmutex m_SyncMutex;
+	GLFWcond m_SyncDoneCondition;
 	
 //	bool m_bIsRendering;
 //	v3d::VSharedPtr<v3d::graphics::VOpenGLDevice> m_pDevice;

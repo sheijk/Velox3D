@@ -32,6 +32,13 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+25.02.06
+- resource daten koennen ausgetauscht werden (durch aktuelle version), ohne 
+  dass bestehende VResourceDataPtr instanzen ungueltig werden
+- materials reagieren auf aenderung der effect description, damit kann man sie
+  im editor bearbeiten (per text edit)
+- threading fehler im editor behoben (wird noch mehr arbeit machen..)
+
 12.02.06
 - racer laedt vom editor erzeugte szene
 - extras, damit der editor alle parts erstellen kann

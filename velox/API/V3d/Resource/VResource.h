@@ -109,6 +109,7 @@ public:
 	template<typename DataType>
 	void NotifyChanged();
 
+	void NotifyChanged(VTypeInfo in_Type);
 
 	///** Returns whether data of type DataType may be locked */
 	//template<typename DataType>
@@ -140,6 +141,11 @@ public:
 
 	vbool ContainsData(VTypeInfo in_Type) const;
 
+	/** Returns all data object currently contained within the resource */
+	VRangeIterator<VResourceData> DataIterator();
+
+	template<typename DataType>
+	void ReplaceData(DataType* in_pNewData);
 private:
 	typedef std::vector< VSharedPtr<VResource> > ResourceContainer;
 	typedef std::map< VTypeInfo, VSharedPtr<VResourceData> > DataMap;
@@ -155,8 +161,6 @@ private:
 	vbool IsMutableAccessAllowed(const VTypeInfo& in_Type) const;
 
 	void AddData(VTypeInfo in_Type, VSharedPtr<VResourceData> in_pData);
-
-	void NotifyChanged(VTypeInfo in_Type);
 
 	std::string m_strName;
 	ResourceContainer m_SubResources;
@@ -177,6 +181,20 @@ void VResource::AddData(DataType* in_pData)
 
 	// and store it
 	AddData(type, pContainer);
+}
+
+template<typename DataType>
+void VResource::ReplaceData(DataType* in_pNewData)
+{
+	const VTypeInfo typeInfo = GetTypeInfo<DataType>();
+
+	// find data
+	VResourceData* pUntypedData = GetData(typeInfo);
+	VTypedResourceData<const DataType>* pResData =
+		reinterpret_cast< VTypedResourceData<const DataType>* >(pUntypedData);
+
+	// replace data pointer
+	pResData->SetData(SharedPtr(in_pNewData));
 }
 
 template<typename DataType>

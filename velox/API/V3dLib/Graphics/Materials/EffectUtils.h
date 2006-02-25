@@ -32,8 +32,11 @@ VState TextureState(
 	const VMatrix44f* pTextureMatrix = 0
 	);
 
+/**
+ * Create a state for a texture in the resource in_strTextureResource
+ */
 VState TextureState(
-	VStringParam in_strResourceName,
+	VStringParam in_strTextureResource,
 	VTextureFilter magnificationFilter = FilterLinear, 
 	VTextureFilter minificationFilter = FilterLinear,
 	VTextureWrapMode texCoordWrapU = TextureRepeat, 

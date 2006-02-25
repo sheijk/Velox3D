@@ -7,6 +7,8 @@
 #include <V3d/Core/VException.h>
 #include "../../Source/Graphics/OpenGL/Context/VWin32WindowContext.h"
 #include "../../Source/Graphics/OpenGL/VOpenGLDevice.h"
+#include "../../Source/Graphics/OpenGL/glsl/VGLSLShader.h"
+#include "../../Source/Graphics/OpenGL/Context/VFrameBufferObjectContext.h"
 
 #include <iostream>
 #include <functional>
@@ -34,9 +36,12 @@ VView::VView()
 
 	// start rendering
 	try {		
-		m_Thread = glfwCreateThread(VView::FrameUpdateLoop, this);	
+		m_Thread = glfwCreateThread(VView::FrameUpdateLoop, this);
+
+		m_SyncMutex = glfwCreateMutex();
+		m_SyncDoneCondition = glfwCreateCond();
 				
-		cout << "done" << endl;	
+		cout << "done. ThreadId = " << m_Thread << endl;
 	} catch(VException& e) {
 		cout << endl
 			<< "Error: "
@@ -49,6 +54,9 @@ VView::VView()
 
 VView::~VView()
 {
+	glfwDestroyCond(m_SyncDoneCondition);
+	glfwDestroyMutex(m_SyncMutex);
+	glfwDestroyThread(m_Thread);
 }
 
 void VView::FrameUpdateLoop(void* arg)
@@ -60,6 +68,8 @@ void VView::FrameUpdateLoop(void* arg)
 
 void VView::FrameUpdateLoop()
 {
+	vout << "Started update loop (thread " << glfwGetThreadID() << ")" << vendl;
+
 	using std::for_each;
 	using std::mem_fun;
 	
@@ -118,6 +128,18 @@ void VView::FrameUpdateLoop()
 			property::SetProperty<double>("editor.fps", 20.0);
 			delay = 1.0 / 20.0;
 		}
+
+        glfwLockMutex(m_SyncMutex);
+		if( m_SyncActions.size() > 0 )
+		{
+			vout << "[VView] executing " << m_SyncActions.size()
+				<< " synchronized actions" << vendl;
+		}
+		for_each(m_SyncActions.begin(), m_SyncActions.end(),
+			mem_fun<void, IVSynchronizedAction>(&IVSynchronizedAction::Run));
+		m_SyncActions.clear();
+		glfwUnlockMutex(m_SyncMutex);
+		glfwBroadcastCond(m_SyncDoneCondition);
 		
 		// sleep for n seconds
 		glfwSleep(delay);
@@ -131,6 +153,25 @@ void VView::FrameUpdateLoop()
 		mem_fun<void, IVFrameAction>(&IVFrameAction::Shutdown));
 	
 	cout << "Finished rendering" << endl;	
+}
+
+void VView::ExecSynchronized(IVSynchronizedAction* in_pAction)
+{
+	vout << "[VView] ExecSynchronized ";
+
+	if( ! IsRunning() )
+	{
+		vout << "failed: not running" << vendl;
+		V3D_THROW(VException, "Cannot run action synchronized because VView"
+			" is not running. (Internal error?)");
+	}
+
+	glfwLockMutex(m_SyncMutex);
+	m_SyncActions.push_back(in_pAction);
+	const double timeoutSeconds = 2;
+	glfwWaitCond(m_SyncDoneCondition, m_SyncMutex, timeoutSeconds);
+	vout << " done" << vendl;
+	glfwUnlockMutex(m_SyncMutex);
 }
 
 void VView::Start()
@@ -416,6 +457,68 @@ void VRenderFrameAction::UpdateFrame(vfloat32 in_fFrameDuration)
 		m_pShooting->UpdateAndCull();
 		m_pShooting->Render();
 	}
+	else if( m_pDevice.Get() != NULL )
+	{
+		m_pDevice->BeginScene();
+		m_pDevice->EndScene(IVDevice::FlipScene);
+	}
+	//{
+	//	try
+	//	{
+	//		static vbool initialized = false;
+	//		if( ! initialized )
+	//		{
+	//			initialized = true;
+
+	//			VResourceId offscreen = VResourceManagerPtr()->CreateResource("/offscreen");
+
+	//			graphics::VDisplaySettings displaySettings;
+	//			displaySettings.SetSize(512, 512);
+	//			IVRenderContext* context = m_pDevice->CreateOffscreenContext(&displaySettings);
+	//			offscreen->AddData(context);
+
+	//			VResourceDataPtr<IVDevice> device = offscreen->GetMutableData<IVDevice>();
+	//			device->BeginScene();
+	//			device->SetMatrix(IVDevice::ModelMatrix, math::TranslationMatrix(0, 0, -4));
+	//			device->SetMatrix(IVDevice::ViewMatrix, math::IdentityMatrix());
+	//			glClearColor(1, 0, 0, 1);
+	//			glClear(GL_COLOR_BUFFER_BIT);
+	//			glBegin(GL_TRIANGLES);
+	//			glColor3f(0, 1, 0);
+	//			glTexCoord2f(1, 0);   glVertex2f(1, 0);
+	//			glTexCoord2f(.5f, 1); glVertex2f(0, 1);
+	//			glTexCoord2f(0, 0);	  glVertex2f(-1, 0);
+	//			glEnd();
+	//			device->EndScene(IVDevice::FlipScene);
+	//		}
+
+	//		VResourceId offscreen("/offscreen");
+	//		VResourceDataPtr<IVTexture> texture = offscreen->GetMutableData<IVTexture>();
+
+	//		m_pDevice->BeginScene();
+
+	//		m_pDevice->SetMatrix(IVDevice::ModelMatrix, math::TranslationMatrix(0, 0, -4));
+	//		m_pDevice->SetMatrix(IVDevice::ViewMatrix, math::IdentityMatrix());
+
+	//		texture->Bind(0);
+	//		glBegin(GL_TRIANGLES);
+	//		glColor3f(1, 1, 1);
+	//		glTexCoord2f(1, 0);
+	//		glVertex2f(1, 0);
+	//		glTexCoord2f(0, 0);
+	//		glVertex2f(0, 1);
+	//		glTexCoord2f(.5f, 1);
+	//		glVertex2f(-1, 0);
+	//		glEnd();
+	//		texture->Unbind();
+
+	//		m_pDevice->EndScene(IVDevice::FlipScene);
+	//	}
+	//	catch(const VException& e)
+	//	{
+	//		vout << "Caught exception in test code: \n" << e.ToString();
+	//	}
+	//}
 
 	if( m_pShooting == 0 )
 	{

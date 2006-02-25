@@ -952,6 +952,9 @@
 					</Filter>
 					<Filter
 						Name="OpenGL">
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\VDeviceCaps.cpp">
+						</File>
 						<Filter
 							Name="Context">
 							<File
@@ -1411,6 +1414,9 @@
 		</Filter>
 		<Filter
 			Name="Bindings">
+			<File
+				RelativePath="..\..\Editor\NativeBindings\Core.i">
+			</File>
 			<File
 				RelativePath="..\..\Editor\NativeBindings\Jamfile">
 			</File>

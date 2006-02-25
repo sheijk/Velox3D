@@ -138,14 +138,10 @@ vbool VMaterialResourceType::IsCGFXFile(const std::string& in_strFileName) const
 		return false;
 }
 
-vbool VMaterialResourceType::Generate(
-	resource::VResource* in_pResource,
-	VTypeInfo in_Type)
+VMaterialResourceType::CreatedMaterial 
+	VMaterialResourceType::CreateMaterial(VResource* in_pResource) const
 {
-	V3D_ASSERT(GetTypeInfo<IVMaterial>() == in_Type);
-
-	if( in_pResource->ContainsData(in_Type) )
-		return true;
+	CreatedMaterial result;
 
 	if( in_pResource->ContainsData<VEffectDescription>() )
 	{
@@ -167,24 +163,19 @@ vbool VMaterialResourceType::Generate(
 
 		if( pMaterial != 0 )
 		{
-			in_pResource->AddData<IVMaterial>(pMaterial);
-
-			return true;
-		}
-		else
-		{
-			return false;
+			result.pMaterial = pMaterial;
+			result.typeInfo = GetTypeInfo<IVMaterial>();
 		}
 	}
 	else if( IsEffectFile( in_pResource->GetData<VFileName>()->AsString() ) )
 	{
+		//TODO: move to resource type for VEffectDescription
 		VEffectLoader loader;
 		loader.LoadEffect(in_pResource->GetData<VFileName>()->AsString().c_str(),
 			in_pResource);
 
-		Generate(in_pResource, in_Type);
-
-		return true;
+		//Generate(in_pResource, in_Type);
+		result = CreateMaterial(in_pResource);
 	}
 	else //if( IsCGFXFile( in_pResource->GetData<VFileName>()->AsString() ) )
 	{
@@ -216,13 +207,39 @@ vbool VMaterialResourceType::Generate(
 			m_StateCategories.CreateDefaultStates();
 
 		VCGFXMaterial* pMaterial = new VCGFXMaterial(defaultStates, fileContent.c_str());
-		in_pResource->AddData(pMaterial);
 
-		return true;
+		result.pMaterial = pMaterial;
+		result.typeInfo = GetTypeInfo<VCGFXMaterial>();
+		//in_pResource->AddData(pMaterial);
+
+		//return true;
 		//TODO: fehlerbehandlung
 	}
 
-	return false;
+	return result;
+}
+
+vbool VMaterialResourceType::Generate(
+	resource::VResource* in_pResource,
+	VTypeInfo in_Type)
+{
+	V3D_ASSERT(GetTypeInfo<IVMaterial>() == in_Type);
+
+	if( in_pResource->ContainsData(in_Type) )
+		return true;
+
+	CreatedMaterial result = CreateMaterial(in_pResource);
+
+	if( result.pMaterial != 0 )
+	{
+		//in_pResource->AddData(result.typeInfo, SharedPtr(result.pMaterial));
+		in_pResource->AddData(result.pMaterial);
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 vbool VMaterialResourceType::AllowMutableAccess(
@@ -235,9 +252,35 @@ vbool VMaterialResourceType::AllowMutableAccess(
 void VMaterialResourceType::NotifyChange(
 	const VTypeInfo& in_Type, VResource* in_pResource)
 {
-	if( in_pResource->ContainsData<VCGFXMaterial>() )
+	// if the effect description changed, update the material
+	if( in_Type == GetCompileTimeTypeInfo<VEffectDescription>(0) )
 	{
+		VEffectLoader loader;
+		VEffectDescription effect = 
+			loader.LoadEffect(in_pResource->GetQualifiedName().c_str());
+		in_pResource->ReplaceData<VEffectDescription>(CopyPtr(effect));
+
+		CreatedMaterial result = CreateMaterial(in_pResource);
+
+		vout << "Updating material in resource " 
+			<< in_pResource->GetQualifiedName() << " ... ";
+
+		if( result.pMaterial != 0 )
+		{
+			in_pResource->ReplaceData<IVMaterial>(result.pMaterial);
+
+			vout << "successful" << vendl;
+		}
+		else
+		{
+			vout << "failed" << vendl;
+		}
 	}
+}
+
+VMaterialResourceType::CreatedMaterial::CreatedMaterial()
+{
+	pMaterial = 0;
 }
 
 //-----------------------------------------------------------------------------

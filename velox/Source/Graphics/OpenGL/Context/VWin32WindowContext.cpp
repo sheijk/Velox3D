@@ -15,56 +15,6 @@ namespace {
 	const std::string OFFSCREEN_METHOD_PROPNAME = "v3d.graphics.offscreen-method";
 	const std::string OFFSCREEN_FBO = "fbo";
 	const std::string OFFSCREEN_COPY = "copy";
-
-	/**
-	 * Provide information about the capabilities of a graphics device (it's
-	 * underlying opengl context
-	 */
-	struct VDeviceCaps
-	{
-		/** number of texture units */
-		GLint maxTextures;
-
-		/** supports opengl shading language */
-		vbool supportsGLSL;
-		/** GL_EXT_FRAMEBUFFER_OBJECT support */
-		vbool supportsFBO;
-
-		//vbool isAccelerated;
-
-		VDeviceCaps();
-
-		/** Gathers the infos from the currently active opengl context */
-		void GatherInfoFromCurrentContext();
-
-		/** prints all infos to vout */
-		void PrintInfo() const;
-	};
-
-	VDeviceCaps::VDeviceCaps()
-	{
-		maxTextures = 0;
-		supportsGLSL = false;
-		supportsFBO = false;
-	}
-
-	void VDeviceCaps::GatherInfoFromCurrentContext()
-	{
-		glGetIntegerv(GL_MAX_TEXTURE_UNITS, &maxTextures);
-
-		supportsGLSL = GLEW_ARB_fragment_program;
-		supportsFBO = GLEW_EXT_framebuffer_object;
-	}
-
-	void VDeviceCaps::PrintInfo() const
-	{
-		vout << "OpenGL Device capabilities:\n";
-		vout << "Texture units: " << maxTextures << "\n";
-		vout << "Supports GLSL: " << supportsGLSL << "\n";
-		vout << "Supports FBO:  " << supportsFBO << "\n";
-		vout << vendl;
-	}
-
 }
 
 VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* in_pDisplaySettings) : 
@@ -116,15 +66,11 @@ VWin32WindowContext::VWin32WindowContext(HWND in_hwnd, const VDisplaySettings* i
 		vout << "Render Context was created!" << vendl;
 	}
 
-	GLenum result = glewInit();
-	if( result != GLEW_OK )
-	{
-		vout << "glew init failed: " << glewGetErrorString(result) << vendl;
-	}
-
-	VDeviceCaps caps;
-	caps.GatherInfoFromCurrentContext();
-	caps.PrintInfo();
+	//GLenum result = glewInit();
+	//if( result != GLEW_OK )
+	//{
+	//	vout << "glew init failed: " << glewGetErrorString(result) << vendl;
+	//}
 
 	if( ! property::ExistsProperty(OFFSCREEN_METHOD_PROPNAME.c_str()) )
 	{

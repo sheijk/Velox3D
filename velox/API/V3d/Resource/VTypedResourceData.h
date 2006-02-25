@@ -28,10 +28,14 @@ public:
 	virtual ~VTypedResourceData();
 
 	DataType* GetData();
+	void SetData(VSharedPtr<DataType> in_pNewData);
 
 	virtual VTypeInfo GetTypeId() const;
 
 private:
+	VTypedResourceData(const VTypedResourceData&);
+	void operator=(const VTypedResourceData&);
+
 	VSharedPtr<DataType> m_pData;
 };
 
@@ -62,6 +66,12 @@ template<typename DataType>
 VTypeInfo VTypedResourceData<DataType>::GetTypeId() const
 {
 	return GetTypeInfo<DataType>();
+}
+
+template<typename DataType>
+void VTypedResourceData<DataType>::SetData(VSharedPtr<DataType> in_pNewData)
+{
+	m_pData = in_pNewData;
 }
 
 //-----------------------------------------------------------------------------

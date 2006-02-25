@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib glfw.lib"
 				OutputFile="$(OutDir)/ServiceDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
@@ -218,6 +218,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VDataFormat.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Graphics\VDeviceCaps.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Graphics\VDeviceMatrix.h">
@@ -521,6 +524,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VCubemapTextureState.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VDeviceCaps.cpp">
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.cpp">

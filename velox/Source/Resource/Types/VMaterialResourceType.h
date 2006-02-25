@@ -44,6 +44,16 @@ public:
 		const VTypeInfo& in_Type, 
 		resource::VResource* in_pResource);
 private:
+	struct CreatedMaterial
+	{
+		CreatedMaterial();
+
+		VTypeInfo typeInfo;
+		IVMaterial* pMaterial;
+	};
+
+	CreatedMaterial CreateMaterial(resource::VResource* in_pResource) const;
+
 	VRenderStateList* CreatePass(const VRenderPass& in_Pass) const;
 	VMaterial* CreateMaterial(const VShaderPath& in_Technique) const;
 

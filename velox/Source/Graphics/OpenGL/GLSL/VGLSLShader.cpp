@@ -5,6 +5,9 @@
 
 #include "VGLSLTextureParameter.h"
 
+#include <V3d/Core/VIOStream.h>
+#include <GL/glfw.h>
+
 #include <sstream>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -18,6 +21,8 @@ VGLSLShader::VGLSLShader(
 			const std::string& in_strVertexSource, 
 			const std::string& in_strFragmentSource)
 {
+	vout << "Creating GLSL Shader from thread " << glfwGetThreadID() << vendl;
+
 	m_nTextureCount = 0;
 
 	if( ! IsGLSLSupported() )

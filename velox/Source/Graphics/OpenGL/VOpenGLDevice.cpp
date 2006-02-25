@@ -21,6 +21,8 @@
 
 #include <V3d/Resource.h>
 
+#include <V3d/Graphics/VDeviceCaps.h>
+
 #include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -554,7 +556,19 @@ void VOpenGLDevice::InitializeExtensions()
 	}
 */
 
-	glewInit();
+	GLenum result = glewInit();
+	if( result != GLEW_OK )
+	{
+		vout << "glew init failed: " << glewGetErrorString(result) << vendl;
+	}
+	else
+	{
+		vout << "[VOpenGLDevice.cpp] glewInit() succeeded" << vendl;
+
+		VDeviceCaps caps;
+		caps.GatherInfoFromCurrentContext();
+		caps.PrintInfo();
+	}
 }
 
 //-----------------------------------------------------------------------------

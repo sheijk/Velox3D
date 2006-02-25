@@ -12,7 +12,9 @@ import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 import de.velox.IVResourceManager;
+import de.velox.VResDataIterator;
 import de.velox.VResource;
+import de.velox.VResourceData;
 import de.velox.VResourceIterator;
 import de.velox.v3d;
 
@@ -88,13 +90,19 @@ public class ResourceView extends VeloxViewBase {
 			if( parent instanceof VResource ) {
 				VResource res = (VResource)parent;
 				
-				LinkedList<VResource> childs = new LinkedList<VResource>();
+				LinkedList<Object> childs = new LinkedList<Object>();
 				
 				VResourceIterator iter = res.ChildIterator();
 				while( iter.HasNext() ) {
 					VResource child = iter.Get();
 					childs.add(child);
 					iter.Next();
+				}
+				
+				VResDataIterator data = res.DataIterator();
+				while( data.HasNext() ) {
+					childs.add(data.Get());
+					data.Next();
 				}
 				
 				return childs.toArray();				
@@ -109,8 +117,9 @@ public class ResourceView extends VeloxViewBase {
 				VResource res = (VResource)parent;
 				
 				VResourceIterator iter = res.ChildIterator();
+				VResDataIterator data = res.DataIterator();
 				
-				return iter.HasNext();
+				return iter.HasNext() || data.HasNext();
 			}
 			else { 
 				return false;
@@ -125,6 +134,10 @@ public class ResourceView extends VeloxViewBase {
 			if( obj instanceof VResource ) {
 				VResource res = (VResource)obj;
 				return res.GetName();
+			}
+			else if( obj instanceof VResourceData ) {
+				VResourceData resdata = (VResourceData)obj;
+				return resdata.GetTypeId().GetName();
 			}
 			else {
 				return obj.toString();
@@ -190,7 +203,45 @@ public class ResourceView extends VeloxViewBase {
 		manager.add(action2);
 	}
 
+	private Object getSelectedObject() {
+		IStructuredSelection selection = 
+			(IStructuredSelection)viewer.getSelection();
+		
+		Object selectedElement = selection.getFirstElement();
+		return selectedElement;
+	}
+	
+	private VResource getSelectedResource() {
+		Object selectedObj = getSelectedObject();
+		if( selectedObj instanceof VResource ) {
+			return (VResource)selectedObj;
+		}
+		else {
+			return null;
+		}
+	}
+	
+	private VResourceData getSelectedResourceData() {
+		Object selectedObj = getSelectedObject();
+		if( selectedObj instanceof VResourceData ) {
+			return (VResourceData)selectedObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	private void fillContextMenu(IMenuManager manager) {
+		manager.add(new Action(){
+			@Override public void run() {
+				VResourceData resdata = getSelectedResourceData();
+				if( resdata != null ) {
+					resdata.GetEnclosingResource().NotifyChanged(
+						resdata.GetTypeId());
+				}
+			}
+		});
+		
 		manager.add(action1);
 		manager.add(action2);
 		manager.add(new Separator());

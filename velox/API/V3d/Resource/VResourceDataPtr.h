@@ -28,16 +28,14 @@ class VResourceDataPtr
 public:
 	VResourceDataPtr();
 	VResourceDataPtr(TypedDataPtr in_pData);
+	VResourceDataPtr(const std::string& in_strResourceName);
 
 	DataType* operator->() const;
-
 	DataType& operator*() const;
 
-	VResource* GetEnclosingResource() { return m_pData->GetEnclosingResource(); }
-	const VResource* GetEnclosingResource() const 
-	{ 
-		return m_pData->GetEnclosingResource(); 
-	}
+	/** Return the resource this data object belongs to */
+	VResource* GetEnclosingResource();
+	const VResource* GetEnclosingResource() const;
 
 	VTypeInfo GetTypeId() { return m_pData->GetTypeId(); }
 
@@ -46,24 +44,42 @@ private:
 };
 
 template<typename T>
-VResourceDataPtr<const T> GetResourceData(VStringParam in_strResourceName)
-{
-	return VResourceId(in_strResourceName)->GetData<T>();
-}
+VResourceDataPtr<const T> GetResourceData(VStringParam in_strResourceName);
 
 template<typename T>
-VResourceDataPtr<T> GetMutableResourceData(VStringParam in_strResourceName)
-{
-	return VResourceId(in_strResourceName)->GetMutableData<T>();
-}
+VResourceDataPtr<T> GetMutableResourceData(VStringParam in_strResourceName);
 
-template<typename DataType>
-vbool Valid(const VResourceDataPtr<const DataType>& ptr)
-{
-	return (&*ptr) != 0;
-}
+//template<typename DataType>
+//vbool Valid(const VResourceDataPtr<const DataType>& ptr)
+//{
+//	return (&*ptr) != 0;
+//}
 
 //-----------------------------------------------------------------------------
+
+template<typename T>
+struct VResDataAccessorUtil
+{
+    VResourceDataPtr<T> operator()(const std::string& in_ResName) const
+	{
+		return VResourceId(in_ResName.c_str())->GetMutableData<T>();
+	}
+};
+
+template<typename T>
+struct VResDataAccessorUtil<const T>
+{
+	VResourceDataPtr<const T> operator()(const std::string& in_ResName) const
+	{
+		return VResourceId(in_ResName.c_str())->GetData<T>();
+	}
+};
+
+template<typename DataType>
+VResourceDataPtr<DataType>::VResourceDataPtr(const std::string& in_strResourceName)
+{
+	*this = VResDataAccessorUtil<DataType>()(in_strResourceName);
+}
 
 template<typename DataType>
 VResourceDataPtr<DataType>::VResourceDataPtr()
@@ -90,6 +106,31 @@ template<typename DataType>
 DataType& VResourceDataPtr<DataType>::operator*() const
 {
 	return * operator->();
+}
+
+template<typename DataType>
+VResource* VResourceDataPtr<DataType>::GetEnclosingResource() { 
+	return m_pData->GetEnclosingResource(); 
+}
+
+template<typename DataType>
+const VResource* VResourceDataPtr<DataType>::GetEnclosingResource() const 
+{ 
+	return m_pData->GetEnclosingResource(); 
+}
+
+template<typename T>
+VResourceDataPtr<const T> GetResourceData(VStringParam in_strResourceName)
+{
+	//return VResourceId(in_strResourceName)->GetData<T>();
+	return VResourceDataPtr<const T>(in_strResourceName);
+}
+
+template<typename T>
+VResourceDataPtr<T> GetMutableResourceData(VStringParam in_strResourceName)
+{
+	//return VResourceId(in_strResourceName)->GetMutableData<T>();
+	return VResourceDataPtr<T>(in_strResourceName);
 }
 
 //-----------------------------------------------------------------------------

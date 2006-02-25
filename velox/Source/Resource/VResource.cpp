@@ -9,6 +9,7 @@
 #include <V3d/VFS/IVFileSystem.h>
 
 #include "VResourceManager.h"
+#include <V3d/Core/RangeIter.h>
 
 #include <iostream>
 #include <list>
@@ -366,6 +367,12 @@ vbool VResource::IsMutableAccessAllowed(const VTypeInfo& in_Type) const
 void VResource::NotifyChanged(VTypeInfo in_Type)
 {
 	VResourceManagerPtr()->NotifyChange(this, in_Type);
+}
+
+VRangeIterator<VResourceData> VResource::DataIterator()
+{
+	return CreateAccesssorIterator<VPair2ndDerefAccessor, VResourceData>(
+		m_Data.begin(), m_Data.end());
 }
 
 //-----------------------------------------------------------------------------

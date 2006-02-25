@@ -130,9 +130,7 @@ VEffectLoader::~VEffectLoader()
 {
 }
 
-void VEffectLoader::LoadEffect(
-	VStringParam in_strEffectFile, 
-	resource::VResourceId in_pResource )
+VEffectDescription VEffectLoader::LoadEffect(VStringParam in_strEffectFile)
 {
 	m_Effect.Clear();
 
@@ -162,6 +160,15 @@ void VEffectLoader::LoadEffect(
 	m_strFileName = in_strEffectFile;
 
 	pRootNode->VisitChildren(*this);
+
+	return m_Effect;
+}
+
+void VEffectLoader::LoadEffect(
+	VStringParam in_strEffectFile, 
+	resource::VResourceId in_pResource )
+{
+	m_Effect = LoadEffect(in_strEffectFile);
 
 	// put effect into resource
 	in_pResource->AddData(new VEffectDescription(m_Effect));

@@ -28,6 +28,8 @@ public:
 		resource::VResourceId in_pResource
 		);
 
+	VEffectDescription LoadEffect(VStringParam in_strEffectFile);
+
 private:
 	std::string m_strFileName;
 	VEffectDescription m_Effect;
