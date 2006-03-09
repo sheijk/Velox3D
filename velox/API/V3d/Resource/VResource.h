@@ -146,14 +146,15 @@ public:
 
 	template<typename DataType>
 	void ReplaceData(DataType* in_pNewData);
+
+	const VResource* GetParent() const;
+	VResource* GetParent();
+	VResource* GetRootResource();
 private:
 	typedef std::vector< VSharedPtr<VResource> > ResourceContainer;
 	typedef std::map< VTypeInfo, VSharedPtr<VResourceData> > DataMap;
 
 	void SetParent(VResource* in_pParent);
-	const VResource* GetParent() const;
-	VResource* GetParent();
-	VResource* GetRootResource();
 
 	VResourceData* FindInstanceOf(VTypeInfo in_Info);
 	VResourceData* GetData(VTypeInfo in_Type);

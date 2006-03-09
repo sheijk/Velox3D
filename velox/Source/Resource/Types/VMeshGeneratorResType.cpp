@@ -99,6 +99,11 @@ vbool VMeshGeneratorResType::GenerateMeshDescription(resource::VResource* in_pRe
 	return true;
 }
 
+void VMeshGeneratorResType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

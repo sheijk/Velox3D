@@ -74,14 +74,16 @@ VRangeIterator<VTypeInfo> VMaterialResourceType::ManagedTypes()
 }
 
 
-VMaterial* VMaterialResourceType::CreateMaterial(const VShaderPath& in_Technique) const
+VMaterial* VMaterialResourceType::CreateMaterial(
+	const VShaderPath& in_Technique, std::string in_ResourceName)
 {
 	VMaterial::PassList passes;
 	passes.resize(in_Technique.GetRenderPassCount());
 	
 	for(vuint passNum = 0; passNum < in_Technique.GetRenderPassCount(); ++passNum)
 	{
-        VRenderStateList* pPass = CreatePass(in_Technique.RenderPass(passNum));
+        VRenderStateList* pPass = CreatePass(
+			in_Technique.RenderPass(passNum), in_ResourceName);
 
 		if( pPass != 0 )
 		{
@@ -96,13 +98,24 @@ VMaterial* VMaterialResourceType::CreateMaterial(const VShaderPath& in_Technique
 	return new VMaterial(passes);
 }
 
-VRenderStateList* VMaterialResourceType::CreatePass(const VRenderPass& in_Pass) const
+VRenderStateList* VMaterialResourceType::CreatePass(
+	const VRenderPass& in_Pass, std::string in_ResourceName)
 {
 	// decide which material type to use
 	if( VGLSLPass::CanRealize(in_Pass) )
 	{
 		VRenderStateList::RenderStateList defaultStates = 
 			m_StateCategories.CreateDefaultStates();
+
+		std::vector<std::string> dependantResources =
+			VShaderCategory::GetResourceDependencies(in_Pass);
+		for(std::vector<std::string>::iterator dep = dependantResources.begin();
+			dep != dependantResources.end();
+			++dep)
+		{
+			// if a shader is changed, also change the material which uses it
+			m_DependantResources.insert(make_pair(*dep, in_ResourceName));
+		}
 
 		return new VGLSLPass(defaultStates, in_Pass);
 	}
@@ -139,7 +152,7 @@ vbool VMaterialResourceType::IsCGFXFile(const std::string& in_strFileName) const
 }
 
 VMaterialResourceType::CreatedMaterial 
-	VMaterialResourceType::CreateMaterial(VResource* in_pResource) const
+	VMaterialResourceType::CreateMaterial(VResource* in_pResource)
 {
 	CreatedMaterial result;
 
@@ -155,7 +168,9 @@ VMaterialResourceType::CreatedMaterial
 		// fallback techniques (aka shader paths)
 		while( pMaterial == 0 && techniqueNum < pEffectDescr->GetShaderPathCount() )
 		{
-			pMaterial = CreateMaterial(pEffectDescr->ShaderPath(techniqueNum));
+			pMaterial = CreateMaterial(
+				pEffectDescr->ShaderPath(techniqueNum), 
+				in_pResource->GetQualifiedName());
 
 			// try next technique
 			++techniqueNum;
@@ -249,32 +264,43 @@ vbool VMaterialResourceType::AllowMutableAccess(
 	//return in_Resource->ContainsData<VCGFXMaterial>();
 }
 
+void VMaterialResourceType::UpdateMaterial(VResource* in_pResource)
+{
+	VEffectLoader loader;
+	VEffectDescription effect = 
+		loader.LoadEffect(in_pResource->GetQualifiedName().c_str());
+	in_pResource->ReplaceData<VEffectDescription>(CopyPtr(effect));
+
+	CreatedMaterial result = CreateMaterial(in_pResource);
+
+	vout << "Updating material in resource " 
+		<< in_pResource->GetQualifiedName() << " ... ";
+
+	if( result.pMaterial != 0 )
+	{
+		in_pResource->ReplaceData<IVMaterial>(result.pMaterial);
+
+		vout << "successful" << vendl;
+	}
+	else
+	{
+		vout << "failed" << vendl;
+	}
+}
+
 void VMaterialResourceType::NotifyChange(
 	const VTypeInfo& in_Type, VResource* in_pResource)
 {
 	// if the effect description changed, update the material
 	if( in_Type == GetCompileTimeTypeInfo<VEffectDescription>(0) )
 	{
-		VEffectLoader loader;
-		VEffectDescription effect = 
-			loader.LoadEffect(in_pResource->GetQualifiedName().c_str());
-		in_pResource->ReplaceData<VEffectDescription>(CopyPtr(effect));
-
-		CreatedMaterial result = CreateMaterial(in_pResource);
-
-		vout << "Updating material in resource " 
-			<< in_pResource->GetQualifiedName() << " ... ";
-
-		if( result.pMaterial != 0 )
-		{
-			in_pResource->ReplaceData<IVMaterial>(result.pMaterial);
-
-			vout << "successful" << vendl;
-		}
-		else
-		{
-			vout << "failed" << vendl;
-		}
+		UpdateMaterial(in_pResource);
+	}
+	else if( m_DependantResources.find(in_pResource->GetQualifiedName())
+		!= m_DependantResources.end() )
+	{
+		VResourceId matres(m_DependantResources[in_pResource->GetQualifiedName()].c_str());
+		UpdateMaterial(&*matres);
 	}
 }
 

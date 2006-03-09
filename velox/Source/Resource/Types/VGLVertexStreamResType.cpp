@@ -57,6 +57,11 @@ vbool VGLVertexStreamResType::Generate(
 	return success;
 }
 
+void VGLVertexStreamResType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

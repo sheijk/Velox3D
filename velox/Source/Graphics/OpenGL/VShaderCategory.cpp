@@ -13,6 +13,7 @@ namespace {
 	const std::string FRAGMENT_PROGRAM_STATE_NAME = "fragment-program";
 	const std::string VERTEX_PROGRAM_STATE_NAME = "vertex-program";
 
+	/** Extracts the resource name to which the state refers (if it does) */
 	std::string GetResFromState(
 		const VRenderPass& pass, 
 		const std::string& stateName)
@@ -77,6 +78,17 @@ vbool VShaderCategory::CanCreateStateFrom(const VRenderPass& in_Pass)
 {
 	return in_Pass.GetStateByName(VERTEX_PROGRAM_STATE_NAME.c_str()) != 0 &&
 		in_Pass.GetStateByName(FRAGMENT_PROGRAM_STATE_NAME.c_str()) != 0;
+}
+
+std::vector<std::string> VShaderCategory::GetResourceDependencies(
+	const VRenderPass& in_Pass)
+{
+	std::vector<std::string> resources;
+
+	resources.push_back(GetResFromState(in_Pass, FRAGMENT_PROGRAM_STATE_NAME));
+	resources.push_back(GetResFromState(in_Pass, VERTEX_PROGRAM_STATE_NAME));
+
+	return resources;
 }
 
 //-----------------------------------------------------------------------------

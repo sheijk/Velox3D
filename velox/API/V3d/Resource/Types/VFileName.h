@@ -17,10 +17,13 @@ class VFileName
 {
 public:
 	VFileName(VStringParam in_strName);
+	VFileName(const std::string& in_strName);
 	virtual ~VFileName();
 
 	const std::string& AsString() const;
 
+	/** Returning a file name describing a subdir or file */
+	VFileName Append(const std::string& in_strName) const;
 private:
 	std::string m_strName;
 };

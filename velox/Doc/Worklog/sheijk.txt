@@ -32,6 +32,17 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+09.03.06
+- glsl shader update => alle resourcen die den shader verwenden werden mit
+  aktualisiert
+- updaten von resourcen per resource view im editor
+- => glsl shader im editor bearbeiten
+- fixes im vfs: dateipfade sind relativ zum vfs workdir, nicht zum system
+  workdir -> velox funktioniert weiter wenn das system workdir sich aendert
+  (Datei oeffnen Dialog etc.) + es kann ein Datenverzeichnis unabhaengig vom
+  system arbeitsverzeichnis gesetzt werden
+- editor mountet die vfs.xml aus dem workspace, nicht mehr die im eclipse dir
+
 25.02.06
 - resource daten koennen ausgetauscht werden (durch aktuelle version), ohne 
   dass bestehende VResourceDataPtr instanzen ungueltig werden

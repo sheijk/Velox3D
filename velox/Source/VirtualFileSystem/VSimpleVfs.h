@@ -5,6 +5,8 @@
 #include <v3d/VFS/IVFileSystem.h>
 
 #include "VDirectory.h"
+
+#include <string>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
@@ -32,11 +34,17 @@ public:
 		VStringParam in_strPathAndName,
 		VAccessModeFlags in_Access);
 
+	virtual std::string GetWorkingDir() const;
+	virtual void SetWorkingDir(const std::string& in_strNewWorkingDir);
+
+	vbool ExistsFile(const std::string& in_strPath) const;
+
+	// removed from IVFileSystem
 	virtual IVDirectory* GetDir(VStringParam in_strDir);
 
-	virtual vbool ExistsDir(VStringParam in_strDir);
-	virtual vbool ExistsFile(VStringParam in_strFile);
-	virtual vbool Exists(VStringParam in_strFSObject);
+	virtual vbool ExistsDir(VStringParam in_strDir) const;
+	virtual vbool ExistsFile(VStringParam in_strFile) const;
+	virtual vbool Exists(VStringParam in_strFSObject) const;
 };
 
 //-----------------------------------------------------------------------------

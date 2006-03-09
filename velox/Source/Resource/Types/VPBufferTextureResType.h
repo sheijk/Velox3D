@@ -31,6 +31,9 @@ public:
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
 		VTypeInfo in_Type);
+
+	virtual void NotifyChange(const VTypeInfo& in_Type, 
+		resource::VResource* in_pResource);
 };
 
 //-----------------------------------------------------------------------------

@@ -13,9 +13,9 @@ namespace v3d { namespace resource {
 using namespace v3d; // anti auto indenting
 
 /**
- * Establishes a link between the virtual file system and the resource manager
- * If a file exists in the vfs with a name which is the same as the resource
- * a VFileName will be created for it
+ * Creates VFileName's for resources. Will get the VFileName of the parent's
+ * resource and add this resource's name to it. The root resource will be 
+ * mapped to the current working dir
  *
  * @author sheijk
  */
@@ -31,6 +31,9 @@ public:
 	virtual vbool Generate(
 		resource::VResource* in_pResource, 
 		VTypeInfo in_Type);
+
+	virtual void NotifyChange(const VTypeInfo& in_Type, 
+		resource::VResource* in_pResource);
 };
 
 //-----------------------------------------------------------------------------

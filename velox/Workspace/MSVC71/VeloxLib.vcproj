@@ -1161,6 +1161,9 @@
 						RelativePath="..\..\Source\Resource\Types\VFileNameResType.h">
 					</File>
 					<File
+						RelativePath="..\..\Source\Resource\Types\VGLSLShaderResType.h">
+					</File>
+					<File
 						RelativePath="..\..\Source\Resource\Types\VGLVertexStreamResType.cpp">
 					</File>
 					<File

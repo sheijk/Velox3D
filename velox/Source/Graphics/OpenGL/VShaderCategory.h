@@ -6,6 +6,9 @@
 #include <V3d/Graphics/IVStateCategory.h>
 #include "GLSL/VGLSLShader.h"
 #include "VShaderState.h"
+
+#include <vector>
+#include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -24,6 +27,8 @@ public:
 	static vbool CanCreateStateFrom(const VRenderPass& in_Pass);
 
 	void SetPriority(vuint in_nPriority) { IVStateCategory::SetPriority(in_nPriority); }
+
+	static std::vector<std::string> GetResourceDependencies(const VRenderPass& in_Pass);
 private:
 };
 

@@ -26,6 +26,9 @@
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3dLib/Utils/VRegisterGuard.h>
 
+#include <boost/filesystem/convenience.hpp>
+#include <boost/filesystem/operations.hpp>
+
 using namespace std;
 using namespace v3d;
 
@@ -48,7 +51,7 @@ void Initialize()
 	
 	try {
 		cout << "Initializing velox... " << endl;
-		
+
 		// create kernel
 		cout << "\tCreating kernel" << endl;
 		g_pKernel.Assign(new kernel::VKernel());

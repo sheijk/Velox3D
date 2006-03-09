@@ -312,6 +312,11 @@ vbool VTextureStateResType::AllowMutableAccess(
 	return true;
 }
 
+void VTextureStateResType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

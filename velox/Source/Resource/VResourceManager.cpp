@@ -168,20 +168,24 @@ IVResourceType* VResourceManager::GetResourceManager(const VTypeInfo& in_Type)
 
 void VResourceManager::NotifyChange(VResource* in_pResource, VTypeInfo in_Type)
 {
+	// get a set containing every managed type exactly once
 	set<IVResourceType*> uniqueManagers;
 
 	for(ManagerMap::iterator manager = m_TypeManagers.begin();
 		manager != m_TypeManagers.end();
 		++manager)
 	{
-		uniqueManagers.insert(manager->second.Get());
+		IVResourceType* pCurrent = manager->second.Get();
+		uniqueManagers.insert(pCurrent);
 	}
 
+	// update them
 	for(set<IVResourceType*>::iterator manager = uniqueManagers.begin();
 		manager != uniqueManagers.end();
 		++manager)
 	{
-		(*manager)->NotifyChange(in_Type, in_pResource);
+		IVResourceType* pCurrent = *manager;
+		pCurrent->NotifyChange(in_Type, in_pResource);
 	}
 }
 

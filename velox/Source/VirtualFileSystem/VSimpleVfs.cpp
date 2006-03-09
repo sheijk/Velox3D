@@ -28,6 +28,7 @@
 namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
+	boost::filesystem::path s_WorkingDir;
 
 IVDataProvider& GetDataProvider(std::string in_strId)
 {
@@ -47,6 +48,9 @@ VSimpleVfs::VSimpleVfs(
 					   VNamedObject* in_pParent)
 	: IVFileSystem(in_strName, in_pParent)
 {
+	s_WorkingDir = boost::filesystem::current_path();
+	vout << "Working directory is \"" << s_WorkingDir.string() << "\"" << vendl;
+
 	// create root dir
 	m_pRootDirSP.Assign(new VDirectory(
 		"",
@@ -131,6 +135,27 @@ IVFileSystem::FileStreamPtr VSimpleVfs::OpenFile(
 	IVFile::FileStreamPtr pFileStream = fileIter->Open(in_Access);
 
 	return pFileStream;
+}
+
+std::string VSimpleVfs::GetWorkingDir() const
+{
+	return s_WorkingDir.string();
+}
+
+void VSimpleVfs::SetWorkingDir(const std::string& in_strNewWorkingDir)
+{
+	namespace bfs = boost::filesystem;
+	s_WorkingDir = bfs::path(in_strNewWorkingDir, bfs::native);
+}
+
+vbool VSimpleVfs::ExistsFile(const std::string& in_strPath) const
+{
+	//boost::filesystem::path filePath(vfs::VFileSystemPtr()->GetWorkingDir());
+	//// /= is (mis)used to append by boost..
+	//filePath /= in_strPath;
+
+	//return boost::filesystem::exists(filePath);
+	return Exists(in_strPath.c_str());
 }
 
 IVDirectory* VSimpleVfs::GetDir(VStringParam in_strDir)
@@ -244,7 +269,7 @@ namespace {
 	}
 } // anonymous namespace
 
-vbool VSimpleVfs::ExistsDir(VStringParam in_strDir)
+vbool VSimpleVfs::ExistsDir(VStringParam in_strDir) const
 {
 	V3D_ASSERT(in_strDir[0] != '\0');
 
@@ -258,7 +283,7 @@ vbool VSimpleVfs::ExistsDir(VStringParam in_strDir)
 	return pDir != 0;
 }
 
-vbool VSimpleVfs::ExistsFile(VStringParam in_strFile)
+vbool VSimpleVfs::ExistsFile(VStringParam in_strFile) const
 {
 	V3D_ASSERT(in_strFile[0] != '\0');
 
@@ -280,7 +305,7 @@ vbool VSimpleVfs::ExistsFile(VStringParam in_strFile)
 	return pFile != 0;
 }
 
-vbool VSimpleVfs::Exists(VStringParam in_strFSObject)
+vbool VSimpleVfs::Exists(VStringParam in_strFSObject) const
 {
 	return 
 		ExistsDir(in_strFSObject) || 

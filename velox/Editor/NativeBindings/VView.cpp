@@ -125,7 +125,7 @@ void VView::FrameUpdateLoop()
 		}
 		catch(VException&) 
 		{
-			property::SetProperty<double>("editor.fps", 20.0);
+			property::SetProperty<double>("editor.fps", 60.0f);
 			delay = 1.0 / 20.0;
 		}
 

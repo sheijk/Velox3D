@@ -72,19 +72,19 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 
 VSharedPtr<VEntity> VEntitySerializationService::ParseScene(xml::IVXMLElement& in_Node)
 {
-	static vbool firstTime = true;
-	if( firstTime == true )
-	{
-		firstTime = false;
+	//static vbool firstTime = true;
+	//if( firstTime == true )
+	//{
+	//	firstTime = false;
 
-		vout << "Registered parsers:" << vendl;
+	//	vout << "Registered parsers:" << vendl;
 
-		for(ParserMap::iterator parser = m_Parsers.begin();
-			parser != m_Parsers.end(); ++parser)
-		{
-			vout << "\t" << parser->first << vendl;
-		}
-	}
+	//	for(ParserMap::iterator parser = m_Parsers.begin();
+	//		parser != m_Parsers.end(); ++parser)
+	//	{
+	//		vout << "\t" << parser->first << vendl;
+	//	}
+	//}
 
 	try
 	{

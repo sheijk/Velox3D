@@ -12,10 +12,12 @@ import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 import de.velox.IVResourceManager;
+import de.velox.IVSynchronizedAction;
 import de.velox.VResDataIterator;
 import de.velox.VResource;
 import de.velox.VResourceData;
 import de.velox.VResourceIterator;
+import de.velox.VView;
 import de.velox.v3d;
 
 
@@ -230,17 +232,57 @@ public class ResourceView extends VeloxViewBase {
 			return null;
 		}
 	}
+	
+	abstract class SyncAction extends Action {
+		public SyncAction() {
+			super();
+		}
+		
+		public SyncAction(String name) {
+			setText(name);
+		}
+		
+		@Override public final void run() {
+			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+				@Override public void Run() {
+					try {
+						exec();
+					}
+					catch(RuntimeException e) {
+						System.err.println("Exception occured: " +
+								e.getMessage());
+					}
+				}
+			});
+		}
+		
+		protected abstract void exec();
+	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		manager.add(new Action(){
-			@Override public void run() {
-				VResourceData resdata = getSelectedResourceData();
+		manager.add(new SyncAction("Notify change") {
+			final VResourceData resdata = getSelectedResourceData();
+			
+			@Override protected void exec() {
 				if( resdata != null ) {
 					resdata.GetEnclosingResource().NotifyChanged(
-						resdata.GetTypeId());
+							resdata.GetTypeId());
 				}
 			}
 		});
+//		manager.add(new Action(){
+//			@Override public void run() {
+//				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+//					@Override public void Run() throws RuntimeException {
+//						VResourceData resdata = getSelectedResourceData();
+//						if( resdata != null ) {
+//							resdata.GetEnclosingResource().NotifyChanged(
+//									resdata.GetTypeId());
+//						}
+//					}
+//				});
+//			}
+//		});
 		
 		manager.add(action1);
 		manager.add(action2);

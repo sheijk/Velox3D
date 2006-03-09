@@ -61,6 +61,11 @@ vbool VImageResourceType::Generate(
 	}
 }
 
+void VImageResourceType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::image
 //-----------------------------------------------------------------------------

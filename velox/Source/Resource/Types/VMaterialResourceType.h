@@ -52,18 +52,28 @@ private:
 		IVMaterial* pMaterial;
 	};
 
-	CreatedMaterial CreateMaterial(resource::VResource* in_pResource) const;
+	CreatedMaterial CreateMaterial(resource::VResource* in_pResource);
 
-	VRenderStateList* CreatePass(const VRenderPass& in_Pass) const;
-	VMaterial* CreateMaterial(const VShaderPath& in_Technique) const;
+	VRenderStateList* CreatePass(
+		const VRenderPass& in_Pass, std::string in_ResourceName);
+	VMaterial* CreateMaterial(
+		const VShaderPath& in_Technique, std::string in_ResourceName);
 
 	vbool IsCGFXFile(const std::string& in_strFileName) const;
+
+	void UpdateMaterial(resource::VResource* in_pResource);
 
 	VCGFXStateCategory m_CGFXCategory;
 	VStateCategoryList m_StateCategories;
 	VTextureStateCategory m_TextureStateCategory;
 	VMiscStateCategory m_MiscStateCategory;
 	VShaderCategory m_ShaderCategory;
+
+	typedef std::map<std::string, std::string> StringMap;
+	/** If resource key is changed, material in resource value must be rebuild
+	 * (shaders of material changed, etc.)
+	 */
+	StringMap m_DependantResources;
 };
 
 //-----------------------------------------------------------------------------

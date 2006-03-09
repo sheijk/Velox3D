@@ -63,6 +63,11 @@ vbool VImported3DSResourceType::Generate(
 		return false;
 }
 
+void VImported3DSResourceType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------

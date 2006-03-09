@@ -136,11 +136,11 @@ void VShootingBase::Render()
 
 	activeDevice->BeginScene();
 
-	if( m_pLightManager.IsConnected() )
-		m_pLightManager->ApplyLights(activeDevice, NULL);
-
 	if( GetCamera() != 0 )
 		GetCamera()->ApplyTo(*activeDevice);
+
+	if( m_pLightManager.IsConnected() )
+		m_pLightManager->ApplyLights(activeDevice, NULL);
 
 	//for(vuint stepNum = 0; stepNum < m_RenderSteps.size(); ++stepNum)
 	while( renderStep.HasNext() )

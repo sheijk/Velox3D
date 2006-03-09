@@ -48,6 +48,11 @@ vbool VPBufferTextureResType::Generate(
 
 	return true;
 }
+
+void VPBufferTextureResType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

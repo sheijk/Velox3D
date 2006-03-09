@@ -450,7 +450,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	Init();
 	CreateResources();
 
-	//DumpFileSystem();
+	DumpFileSystem();
 
 	//m_pCamera->GetCamera().Move(0, 1.0f, 0);
 

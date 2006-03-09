@@ -4,6 +4,7 @@
 #include <v3d/VFS/IVAccessRights.h>
 #include <v3d/VFS/VIOException.h>
 
+#include <V3d/VFS/IVFileSystem.h>
 #include "VAccessRights.h"
 #include "VFile.h"
 
@@ -13,13 +14,18 @@
 #include <boost/filesystem/exception.hpp>
 
 #include <fstream>
-#include <v3d/Core/MemManager.h>
+#include <boost/filesystem/path.hpp>
+//-----------------------------------------------------------------------------
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
 namespace fs = boost::filesystem;
 
+//TODO: clean this mess up
+// defined in VSimpleVfs.cpp
+extern boost::filesystem::path s_WorkingDir;
 
 IVStreamFactory* VFileDataProvider::s_pStreamFact = 0;
 
@@ -72,10 +78,23 @@ IVDataProvider::StreamPtr VFileDataProvider::OpenFile(
 IVDataProvider::DirPtr VFileDataProvider::CreateMountedDir(
 	const VMountOptions& in_MountOptions)
 {
+	using namespace boost::filesystem;
+
+	path sourcePath;
+
+	try {
+		sourcePath = s_WorkingDir;
+		sourcePath /= in_MountOptions.GetSource().AsCString();
+	}
+	catch(const boost::filesystem::filesystem_error& e) {
+		std::string msg = e.what();
+	}
+
 	VDirectory* pDirectory = new VDirectory(
 		in_MountOptions.GetName().AsCString(), 
 		in_MountOptions.GetType().AsCString(),
-		in_MountOptions.GetSource().AsCString(),
+		//in_MountOptions.GetSource().AsCString(),
+		sourcePath.string(),
 		in_MountOptions.GetAccessRights());
 
 	DirPtr pDirAP(pDirectory);
@@ -83,7 +102,8 @@ IVDataProvider::DirPtr VFileDataProvider::CreateMountedDir(
 	// add files and directories to dir
 	AddDirContent(
 		*pDirectory, 
-		in_MountOptions.GetSource().AsCString(),
+		//in_MountOptions.GetSource().AsCString(),
+		sourcePath,
 		in_MountOptions.GetAccessRights());
 
 	return pDirAP;
@@ -249,7 +269,9 @@ void VFileDataProvider::DeleteFile(VStringParam in_strSource)
 
 vbool VFileDataProvider::IsDirectory(VStringParam in_strPossibleDir)
 {
-	fs::path dirPath(in_strPossibleDir);
+	fs::path dirPath(s_WorkingDir);
+	dirPath /= in_strPossibleDir;
+	//fs::path dirPath(in_strPossibleDir);
 
 	if( fs::exists(dirPath) && fs::is_directory(dirPath) )
 		return true;
@@ -259,7 +281,9 @@ vbool VFileDataProvider::IsDirectory(VStringParam in_strPossibleDir)
 
 vbool VFileDataProvider::IsFile(VStringParam in_strPossibleFile)
 {
-	fs::path filePath(in_strPossibleFile);
+	fs::path filePath(s_WorkingDir);
+	filePath /= in_strPossibleFile;
+	//fs::path filePath(in_strPossibleFile);
 
 	if( fs::exists(filePath) && ! fs::is_directory(filePath) )
 		return true;

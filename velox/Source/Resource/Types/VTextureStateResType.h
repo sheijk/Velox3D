@@ -42,6 +42,9 @@ public:
 	virtual vbool AllowMutableAccess(
 		const VTypeInfo& in_TypeInfo, 
 		const resource::VResource* in_Resource) const;
+
+	virtual void NotifyChange(const VTypeInfo& in_Type, 
+		resource::VResource* in_pResource);
 };
 
 //-----------------------------------------------------------------------------

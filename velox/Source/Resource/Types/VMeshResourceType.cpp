@@ -50,6 +50,11 @@ vbool VMeshResourceType::Generate(
 	return true;
 }
 
+void VMeshResourceType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

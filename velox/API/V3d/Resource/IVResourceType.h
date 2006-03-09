@@ -71,8 +71,7 @@ public:
 	 * it manages
 	 */
 	virtual void NotifyChange(
-		const VTypeInfo& in_Type, VResource* in_pResource) 
-	{}
+		const VTypeInfo& in_Type, VResource* in_pResource) = 0;
 };
 
 //-----------------------------------------------------------------------------

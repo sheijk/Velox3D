@@ -61,6 +61,11 @@ vbool VOffscreenDeviceResType::AllowMutableAccess(
 	return true;
 }
 
+void VOffscreenDeviceResType::NotifyChange(
+	const VTypeInfo& in_Type, resource::VResource* in_pResource)
+{
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

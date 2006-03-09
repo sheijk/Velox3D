@@ -170,7 +170,7 @@ void VTerrainPart::SetVertexCount(vuint in_nWidth, vuint in_nHeight)
 	GenerateNormals();
 
 	VMeshDescription* pMeshDescription = new VMeshDescription(VVertexFormat(
-		VVertexFormat::Coordinates | VVertexFormat::TexCoords | VVertexFormat::Indices, 
+		VVertexFormat::Coordinates | VVertexFormat::TexCoords | VVertexFormat::Indices | VVertexFormat::Normals, 
 		vertexCount, 
 		indexCount));
 	pMeshDescription->SetGeometryType(VMeshDescription::TriangleStrip);
@@ -287,7 +287,7 @@ void VTerrainPart::GenerateNormals()
 		VVector3f ynext = GetVertexAt(x, y+1);
 
 		//VVector3f normal = xprev - xnext;
-		VVector3f normal = Cross(yprev - ynext, xprev - xnext);
+		VVector3f normal = Normalized(Cross(yprev - ynext, xprev - xnext));
 		//VVector3f normal = Cross(xnext - xprev, yprev - ynext);
 		m_hVertexBuffer->SetNormal(ToNormal3f(normal), GetVertexNum(x, y));
 	}

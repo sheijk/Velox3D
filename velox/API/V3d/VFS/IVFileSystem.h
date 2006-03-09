@@ -20,8 +20,11 @@ namespace vfs {
  * - mount and unmount data
  * - open files
  * - access a virtual directory structure
+ *
+ * Deprecated: use the resource system instead
+ * fileStream = GetResourceData<IVFileStream>(path);
  */
-class IVFileSystem : public VNamedObject
+class V3D_DEPRECATED IVFileSystem : public VNamedObject
 {
 public:
 	typedef VSharedPtr<IVBufferStream> FileStreamPtr;
@@ -34,12 +37,25 @@ public:
 		VStringParam in_strPathAndName,
 		VAccessModeFlags in_Access) = 0;
 
-	/** get directory info */
+	/** The working dir at the time the vfs was created */
+	virtual std::string GetWorkingDir() const = 0;
+
+	/** Change the working dir. "Local" file mountings in the vfs.xml file
+	 * will be relative to this path. Effective at the time of mounting. Thus
+	 * changing the current dir will not affect previously mounted files. Will
+	 * not change the current directory of the operating system
+	 */
+	virtual void SetWorkingDir(const std::string& in_strNewWorkingDir) = 0;
+
+	/** Returns whether a file or directory named workdir/in_strPath exists */
+	virtual vbool ExistsFile(const std::string& in_strPath) const = 0;
+
+	///** get directory info */
 	virtual IVDirectory* GetDir(VStringParam in_strDir = "/") = 0;
 
-	virtual vbool ExistsDir(VStringParam in_strDir) = 0;
-	virtual vbool ExistsFile(VStringParam in_strFile) = 0;
-	virtual vbool Exists(VStringParam in_strFSObject) = 0;
+	virtual vbool ExistsDir(VStringParam in_strDir) const = 0;
+	virtual vbool ExistsFile(VStringParam in_strFile) const = 0;
+	virtual vbool Exists(VStringParam in_strFSObject) const = 0;
 
 	/** mount resources as described inside the xml file */
 	virtual void MountFromXML(VStringParam in_strFileName) = 0;

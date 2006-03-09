@@ -14,6 +14,7 @@
 #include <iostream>
 #include <list>
 #include <sstream>
+#include <boost/filesystem/operations.hpp>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
