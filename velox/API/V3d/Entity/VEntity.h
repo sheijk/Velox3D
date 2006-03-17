@@ -115,9 +115,13 @@ template<typename PartType>
 PartType* VEntity::GetPart()
 {
 	IVPart* part = GetPartById(GetTypeInfo<PartType>().GetName());
-	if( part->IsOfType<PartType>() )
+	if( part != 0 && part->IsOfType<PartType>() )
 	{
 		return part->Convert<PartType>();
+	}
+	else
+	{
+		return 0;
 	}
 }
 
