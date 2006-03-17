@@ -34,7 +34,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib cg.lib cgGL.lib lib3ds-120d.lib oded.lib glew32.lib glfw.lib opengl32.lib glu32.lib CoreLib.lib VeloxLib.lib KernelLib.lib"
+				AdditionalDependencies="boostd.lib jpeg.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib cg.lib cgGL.lib lib3ds-120d.lib oded.lib glew32.lib glfw.lib opengl32.lib glu32.lib CoreLib.lib VeloxLib.lib KernelLib.lib"
 				OutputFile="$(OutDir)/ScriptingDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib;$(OutDir)"
@@ -1376,6 +1376,27 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 					</File>
 					<File
 						RelativePath="..\..\Source\XMLService\VXMLWriter.h">
+					</File>
+				</Filter>
+				<Filter
+					Name="TinyXML">
+					<File
+						RelativePath="..\..\Source\XMLService\TinyXML\tinystr.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\XMLService\TinyXML\tinystr.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\XMLService\TinyXML\tinyxml.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\XMLService\TinyXML\tinyxml.h">
+					</File>
+					<File
+						RelativePath="..\..\Source\XMLService\TinyXML\tinyxmlerror.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\XMLService\TinyXML\tinyxmlparser.cpp">
 					</File>
 				</Filter>
 			</Filter>

@@ -10,6 +10,8 @@
 #include <V3d/Core/Modules/VModuleBase.h>
 #include "VKernelIniReader.h"
 
+#include "../XMLService/VXMLService.h"
+//-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using std::string;
@@ -82,18 +84,24 @@ struct VServiceInfo
 	string strFileName;
 };
 
+namespace {
+	VSharedPtr<IVXMLService> g_pXMLService;
+}
+
 /**
 * Push the xml service into the list an immedeatly  load it
 */
 void VKernel::LoadXMLService()
 {
-	m_Services.push_back(
-		ServicePointer(new VServiceProxy("XMLServiceDLL.dll")));
-	ServicePointer XmlServiceProxy = m_Services.back();
-	XmlServiceProxy->Initialize(VObjectRegistry::GetInstance());
+	g_pXMLService.Assign(new v3d::xml::VXMLService());
+	m_XmlService = g_pXMLService.Get();
 
-	m_XmlService = QueryObject<IVXMLService>("xml.service");
+	//m_Services.push_back(
+	//	ServicePointer(new VServiceProxy("XMLServiceDLL.dll")));
+	//ServicePointer XmlServiceProxy = m_Services.back();
+	//XmlServiceProxy->Initialize(VObjectRegistry::GetInstance());
 
+	//m_XmlService = QueryObject<IVXMLService>("xml.service");
 }
 
 /**
