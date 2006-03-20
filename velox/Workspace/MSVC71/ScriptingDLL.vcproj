@@ -1471,6 +1471,10 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 						Name="VCCustomBuildTool"
 						Description="Generating java code using swig..."
 						CommandLine="cd ../../Editor/NativeBindings
+mkdir GlueCode
+mkdir ..\SourceV3d
+mkdir ..\SourceV3d\de
+mkdir ..\SourceV3d\de\velox
 &quot;$(SWIG_HOME)/swig.exe&quot; -c++ -java -Fmicrosoft -package de.velox -outdir ../SourceV3d/de/velox -o GlueCode/TestLibSWIG.cpp TestLib.i &gt; swigbuild.log
 "
 						Outputs="../../Editor/NativeBindings/GlueCode/TestLibSWIG.h;../../Editor/NativeBindings/GlueCode/TestLibSWIG.cpp"/>

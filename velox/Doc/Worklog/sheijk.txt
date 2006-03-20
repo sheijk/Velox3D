@@ -2,8 +2,6 @@ Worklog von sheijk
 -------------------------------------------------------------------------------
 ----- messages to sheijk:
 
-Das Feature VOpenGLDevice::ApplyMaterial() fixen --ins :)
-
 -------------------------------------------------------------------------------
 ----- current assigned tasks:
 
@@ -31,6 +29,14 @@ Doku:
 
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
+
+20.03.06
+- Buildsystem gefixt: Verzeichnisse fuer Swig werden erstellt
+- kleinere Fixes am Editor
+
+17.03.06
+- XML Service in den Kernel gemerget und Tinyxml Source mit aufgenommen
+ (wird eh immer benoetigt, Extra Libs machen das ganze nur umstaendlicher)
 
 09.03.06
 - glsl shader update => alle resourcen die den shader verwenden werden mit

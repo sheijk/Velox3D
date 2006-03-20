@@ -334,7 +334,7 @@ VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement)
 	else
 	{
 		VServicePtr<entity::IVEntitySerializationService> serializer;
-		serializer->DumpInfo();
+		//serializer->DumpInfo();
 		result.SetPart(serializer->ParsePart(*in_pElement));
 	}
 	

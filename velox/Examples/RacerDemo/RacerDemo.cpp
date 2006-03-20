@@ -61,6 +61,8 @@ const VColor4f fogColor(.6f, .4f, .4f, 1.0f);
 
 void DumpInfo(VEntity& in_Entity, const std::string& prefix = "")
 {
+	const std::string indent = ".\t";
+
 	vout
 		<< (in_Entity.IsActive() ? " " : "!")
 		<< prefix
@@ -72,7 +74,7 @@ void DumpInfo(VEntity& in_Entity, const std::string& prefix = "")
 	{
 		vout 
 			<< prefix 
-			<< "\tPart " 
+			<< indent << "Part " 
 			<< partIter->GetTypeInfo().GetName()
 			<< (partIter->IsReady() ? "" : " (misssing requirements)") 
 			<< vendl;
@@ -83,7 +85,7 @@ void DumpInfo(VEntity& in_Entity, const std::string& prefix = "")
 	VRangeIterator<VEntity> childIter = in_Entity.ChildIterator();
 	while( childIter.HasNext() )
 	{
-		DumpInfo(*childIter, prefix + "\t");
+		DumpInfo(*childIter, prefix + indent);
 		++childIter;
 	}
 }
@@ -410,19 +412,21 @@ private:
 
 void DumpDir(vfs::IVDirectory& dir, const std::string& prefix)
 {
+	const std::string indent = ".\t";
+
 	vout << prefix << dir.GetName() << "/" << vendl;
 
 	VRangeIterator<vfs::IVDirectory> childdirs = dir.SubDirs();
 	while( childdirs.HasNext() )
 	{
-		DumpDir(*childdirs, prefix + "\t");
+		DumpDir(*childdirs, prefix + indent);
 		++childdirs;
 	}
 
 	VRangeIterator<vfs::IVFile> files = dir.Files();
 	while( files.HasNext() )
 	{
-		vout << prefix << "\t" << files->GetName() << vendl;
+		vout << prefix << indent << files->GetName() << vendl;
 		++files;
 	}
 }

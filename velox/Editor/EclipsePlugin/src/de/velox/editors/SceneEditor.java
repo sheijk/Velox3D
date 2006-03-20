@@ -36,6 +36,11 @@ public class SceneEditor extends VeloxEditorBase {
 	private String name = "";
 	
 	public SceneEditor() {
+		try {
+			v3d.Initialize();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
 	}
 
 	@Override
@@ -92,10 +97,31 @@ public class SceneEditor extends VeloxEditorBase {
 		
 		//TODO fire property change of dirty flag
 	}
+
+	private static class Reference<T> {
+		private T value = null;
+
+		public Reference() {}
+		
+		public Reference(T value) {
+			this.value = value;
+		}
+		
+		public T get() { return value; }
+		public void set(T newValue) { value = newValue; }
+	};
 	
-	private void loadFromFile(String fileName) {
-		VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
-		setRootEntity(new RootEntity(xml.Get()));
+	private void loadFromFile(final String fileName) {	
+		final Reference<RootEntity> rootEntity = new Reference<RootEntity>();
+		
+		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+			@Override public void Run() throws RuntimeException {
+				VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
+				rootEntity.set(new RootEntity(xml.Get()));
+			}
+		});
+		
+		setRootEntity(rootEntity.get());
 	}
 	
 	private void createNewScene() {
