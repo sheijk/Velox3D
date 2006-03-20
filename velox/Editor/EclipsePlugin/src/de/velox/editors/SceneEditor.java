@@ -1,6 +1,8 @@
 package de.velox.editors;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.Action;
@@ -33,6 +35,11 @@ public class SceneEditor extends VeloxEditorBase {
 	private RootEntity root = null;
 	
 	private String fileName = "";
+	/** true iff the content of this file has not been loaded, yet.
+	 * This will be set in loadFile if createPartControl has not been called yet
+	 * (loading a file will require the opengl context to be created
+	 */
+	private boolean needsLoading = false;
 	private String name = "";
 	
 	public SceneEditor() {
@@ -111,17 +118,38 @@ public class SceneEditor extends VeloxEditorBase {
 		public void set(T newValue) { value = newValue; }
 	};
 	
-	private void loadFromFile(final String fileName) {	
-		final Reference<RootEntity> rootEntity = new Reference<RootEntity>();
-		
-		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
-			@Override public void Run() throws RuntimeException {
-				VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
-				rootEntity.set(new RootEntity(xml.Get()));
-			}
-		});
-		
-		setRootEntity(rootEntity.get());
+	private void loadFromFile(final String fileName) {
+		// we need a valid opengl context
+		if( renderLayer != null ) {
+			final Reference<RootEntity> rootEntity = new Reference<RootEntity>();
+			
+			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+				@Override public void Run() throws RuntimeException {
+					VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
+					rootEntity.set(new RootEntity(xml.Get()));
+				}
+			});
+			
+			setRootEntity(rootEntity.get());
+			
+			name = generateDisplayName(fileName);
+			root.SetName(name);
+			setPartName(name);
+		}
+		else {
+			needsLoading = true;
+			this.fileName = fileName;
+		}
+	}
+
+	private static String generateDisplayName(final String fileName) {
+		Pattern pattern = Pattern.compile(".*[\\/\\\\]([^\\.]+)\\..*");
+		Matcher matcher = pattern.matcher(fileName);
+
+		if( matcher.find() )
+			return matcher.group(1);
+		else
+			return fileName;
 	}
 	
 	private void createNewScene() {
@@ -145,18 +173,14 @@ public class SceneEditor extends VeloxEditorBase {
 //				throw new PartInitException(
 //					"Could not load scene: " + e.getMessage(), e);
 			}
-
+			
 //			if( fileInput.exists() ) {
 //				loadFromFile(fileName);
 //			}
 //			else {
 //				createNewScene();
 //			}
-			
-			name = fileInput.getName();
-			root.SetName(name);
-			setPartName(name);
-			
+						
 			setInput(input);
 			setSite(site);
 		}
@@ -185,6 +209,12 @@ public class SceneEditor extends VeloxEditorBase {
 		VMatrix44f viewMatrix = new VMatrix44f();
 		viewMatrix.SetTransform(1.0f, 1.0f, -7.0f);
 		device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
+		
+		// delayed loading, if required (see above)
+		if( needsLoading == true ) {
+			loadFromFile(fileName);
+		}
+		
 		if( root != null )
 			root.setRenderAction(renderAction);
 		if( renderLayer != null )

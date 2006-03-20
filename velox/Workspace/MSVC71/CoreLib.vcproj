@@ -113,6 +113,9 @@
 					Name="Core"
 					Filter="">
 					<File
+						RelativePath="..\..\Api\V3d\Core\DebugUtils.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Core\IVApplication.h">
 					</File>
 					<File
@@ -276,6 +279,9 @@
 			<Filter
 				Name="Implementation"
 				Filter="">
+				<File
+					RelativePath="..\..\Source\Core\DebugUtils.cpp">
+				</File>
 				<File
 					RelativePath="..\..\Source\Core\MemLocalSettings.h">
 				</File>

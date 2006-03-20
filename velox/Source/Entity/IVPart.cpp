@@ -1,6 +1,7 @@
 #include <V3d/Entity/IVPart.h>
 //-----------------------------------------------------------------------------
 
+#include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -35,6 +36,12 @@ void IVPart::Send(
 			Set(in_pAnswer, "exception-message", e.GetErrorString());
 			Set(in_pAnswer, "exception-file", e.GetErrorFile());
 			Set(in_pAnswer, "exception-line", e.GetErrorLine());
+		}
+		else
+		{
+			vout << "Exception when sending message to part:\n"
+				<< in_Message.ToString()
+				<< e.ToString();
 		}
 	}
 }

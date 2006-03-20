@@ -80,8 +80,10 @@ namespace v3d {
 }
 */
 
+// add this code to every generated function (?)
 %javaexception("java.lang.RuntimeException") {
 	try {
+//		std::cout << "calling a c++ function" << std::endl;
 		$action
 	}
 	catch(VException& e) {

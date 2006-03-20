@@ -31,6 +31,9 @@ Doku:
 ----- last things sheijk finished:
 
 20.03.06
+- Skybox gefixt (im Editor und im Racer)
+- Materialien werden im Editor korrekt erzeugt (auch mit Shadern), Bug
+  verbleibend wenn eine Szene direkt beim starten geladen wird
 - Buildsystem gefixt: Verzeichnisse fuer Swig werden erstellt
 - kleinere Fixes am Editor
 

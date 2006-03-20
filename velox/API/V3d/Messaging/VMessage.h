@@ -46,6 +46,8 @@ public:
 	vbool HasProperty(const std::string& in_strName) const;
 
 	VRangeIterator<const std::string> PropertyIterator() const;
+
+	std::string ToString() const;
 private:
 	typedef std::map<std::string, utils::VStringValue> PropertyMap;
 

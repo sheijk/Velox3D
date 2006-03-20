@@ -33,7 +33,9 @@ namespace {
 		"varying vec2 texCoord;"
 		"void main() {"
 		"	gl_FragDepth = .999f;"
-		"	gl_FragColor = texture2D(texture, texCoord) * baseColor;"
+		"	gl_FragColor = texture2D(texture, texCoord);"
+//		"	gl_FragColor = texture2D(texture, texCoord) * baseColor;"
+//		"	gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);"
 		"}";
 	const std::string TEX_PARAM_NAME = "texture";
 	const std::string COLOR_PARAM_NAME = "baseColor";
@@ -203,7 +205,8 @@ VSkyboxPart::VSkyboxPart() :
 	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
 	m_pSceneManager(VPartDependency::Ancestor, RegisterTo())
 {
-	const float size = 10.0f;
+	const float size = 100.0f;
+	m_BaseColor = VColor4f(1, 1, 1, 1);
 
 	// left side
 	m_Sides.push_back(SharedPtr(new VSide(this, VVector3f(-size, -size, size), VVector3f(0, 0, -size*2), VVector3f(0, size*2, 0))));
@@ -235,16 +238,17 @@ void VSkyboxPart::SetTextureDir(
 	const std::string& in_strDirectory, 
 	const std::string& in_strExtension)
 {
-	V3D_ASSERT(in_strDirectory[in_strDirectory.size()-1] == '/');
-	V3D_ASSERT(in_strExtension.size() >= 1);
-	V3D_ASSERT(in_strExtension[0] == '.');
-
-	m_Sides[0]->SetMaterial(CreateTextureMaterial(in_strDirectory + "left" + in_strExtension));
-	m_Sides[1]->SetMaterial(CreateTextureMaterial(in_strDirectory + "right" + in_strExtension));
-	m_Sides[2]->SetMaterial(CreateTextureMaterial(in_strDirectory + "front" + in_strExtension));
-	m_Sides[3]->SetMaterial(CreateTextureMaterial(in_strDirectory + "back" + in_strExtension));
-	m_Sides[4]->SetMaterial(CreateTextureMaterial(in_strDirectory + "top" + in_strExtension));
-	m_Sides[5]->SetMaterial(CreateTextureMaterial(in_strDirectory + "bottom" + in_strExtension));
+	if( in_strDirectory[in_strDirectory.size()-1] == '/' &&
+		in_strExtension.size() >= 1 &&
+		in_strExtension[0] == '.' )
+	{
+		m_Sides[0]->SetMaterial(CreateTextureMaterial(in_strDirectory + "left" + in_strExtension));
+		m_Sides[1]->SetMaterial(CreateTextureMaterial(in_strDirectory + "right" + in_strExtension));
+		m_Sides[2]->SetMaterial(CreateTextureMaterial(in_strDirectory + "front" + in_strExtension));
+		m_Sides[3]->SetMaterial(CreateTextureMaterial(in_strDirectory + "back" + in_strExtension));
+		m_Sides[4]->SetMaterial(CreateTextureMaterial(in_strDirectory + "top" + in_strExtension));
+		m_Sides[5]->SetMaterial(CreateTextureMaterial(in_strDirectory + "bottom" + in_strExtension));
+	}
 }
 
 void VSkyboxPart::UpdateAndCull(const graphics::IVCamera& in_Camera)

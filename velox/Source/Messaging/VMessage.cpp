@@ -84,6 +84,23 @@ VRangeIterator<const std::string> VMessage::PropertyIterator() const
 		m_Properties.begin(), m_Properties.end());
 }
 
+std::string VMessage::ToString() const
+{
+	const std::string indent = "\t";
+
+	std::string str = "Message\n";
+
+	for(VRangeIterator<const std::string> prop = PropertyIterator(); prop.HasNext(); ++prop)
+	{
+		const std::string name = *prop;
+		const std::string value = GetAs<std::string>(name);
+
+		str += indent + name + "=\"" + value + "\"\n";
+	}
+
+	return str;
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::messaging
 //-----------------------------------------------------------------------------

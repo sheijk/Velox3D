@@ -14,6 +14,8 @@
 #include <V3d/Core/RangeIter.h>
 #include <V3d/Resource/Types/VTextFile.h>
 
+#include <V3d/Core/DebugUtils.h>
+
 #include <V3dLib/Graphics/Importer/VEffectLoader.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -24,6 +26,14 @@ namespace graphics {
 using namespace v3d; // anti auto indent
 using resource::VFileName;
 using namespace resource;
+
+#ifdef V3D_DEBUG
+#define V3D_LOG(msg) vout << "[" << __FILE__ << ":" << __LINE__ << "] " << msg;
+#else
+#define V3D_LOG(msg)
+#endif
+
+#define V3D_LOGLN(msg) V3D_LOG(msg << vendl)
 
 /**
  * standard c'tor
@@ -240,6 +250,8 @@ vbool VMaterialResourceType::Generate(
 {
 	V3D_ASSERT(GetTypeInfo<IVMaterial>() == in_Type);
 
+	V3D_LOGLN("generating material from thread " << IdOfCurrentThread());
+
 	if( in_pResource->ContainsData(in_Type) )
 		return true;
 
@@ -291,6 +303,8 @@ void VMaterialResourceType::UpdateMaterial(VResource* in_pResource)
 void VMaterialResourceType::NotifyChange(
 	const VTypeInfo& in_Type, VResource* in_pResource)
 {
+	V3D_LOGLN("changing material from thread " << IdOfCurrentThread());
+	
 	// if the effect description changed, update the material
 	if( in_Type == GetCompileTimeTypeInfo<VEffectDescription>(0) )
 	{
