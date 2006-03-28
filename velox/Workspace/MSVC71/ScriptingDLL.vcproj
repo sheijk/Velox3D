@@ -1197,6 +1197,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 				Name="Scene">
 				<Filter
 					Name="Implementation">
+					<File
+						RelativePath="..\..\Source\Scene\VPostProcessingRenderStepPart.cpp">
+					</File>
 					<Filter
 						Name="Lights">
 						<File

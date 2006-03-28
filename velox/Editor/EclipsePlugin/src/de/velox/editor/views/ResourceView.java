@@ -12,13 +12,12 @@ import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 import de.velox.IVResourceManager;
-import de.velox.IVSynchronizedAction;
 import de.velox.VResDataIterator;
 import de.velox.VResource;
 import de.velox.VResourceData;
 import de.velox.VResourceIterator;
-import de.velox.VView;
 import de.velox.v3d;
+import de.velox.editor.SyncAction;
 
 
 /**
@@ -233,32 +232,6 @@ public class ResourceView extends VeloxViewBase {
 		}
 	}
 	
-	abstract class SyncAction extends Action {
-		public SyncAction() {
-			super();
-		}
-		
-		public SyncAction(String name) {
-			setText(name);
-		}
-		
-		@Override public final void run() {
-			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
-				@Override public void Run() {
-					try {
-						exec();
-					}
-					catch(RuntimeException e) {
-						System.err.println("Exception occured: " +
-								e.getMessage());
-					}
-				}
-			});
-		}
-		
-		protected abstract void exec();
-	}
-
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(new SyncAction("Notify change") {
 			final VResourceData resdata = getSelectedResourceData();

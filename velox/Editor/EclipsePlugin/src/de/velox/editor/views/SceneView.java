@@ -416,16 +416,20 @@ public class SceneView extends VeloxViewBase {
 		contextMenuActions.add(new SceneAction("Activate") {
 //		toggleAction = new SceneAction() {
 			public void run() {
-				Entity entity = getSelectedEntity();
+				final Entity entity = getSelectedEntity();
 				
-				if( entity != null ) {				
-					if( entity.IsActive() )
-						entity.Deactivate();
-					else
-						entity.Activate();
-					
-					viewer.refresh();
-				}
+				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+					@Override public void Run() throws RuntimeException {
+						if( entity != null ) {				
+							if( entity.IsActive() )
+								entity.Deactivate();
+							else
+								entity.Activate();
+						}
+					}
+				});
+				
+				viewer.refresh();
 			}
 			
 			void update() {
