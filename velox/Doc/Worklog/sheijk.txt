@@ -30,6 +30,21 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+29.03.06
+- shader + materials ins svn getan, examples workdir nach velox/Data bewegt
+  achtung: local/workdir/examples loeschen/umbennen, um dumme fehler zu
+  vermeiden (ecplise editor workdir muss z.b. umgestellt werden)
+
+28.03.0 das
+- bug im editor gefixt: absturz beim schliessen einer szene,
+  Achtung: RenderLayer.windowClosed() muss als erstes in .dispose() aufgerufen
+  werden, wenn ein Editor/View/.. mit einem RenderLayer geschlossen wird
+- skybox texture dir geht nicht mehr beim speichern verloren
+
+27.03.06
+- post processsing effekte gehen im editor + engine
+- "sepia" effekt
+
 20.03.06
 - Skybox gefixt (im Editor und im Racer)
 - Materialien werden im Editor korrekt erzeugt (auch mit Shadern), Bug

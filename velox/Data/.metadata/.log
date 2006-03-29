@@ -1,0 +1,129 @@
+!SESSION 2006-03-30 00:21:02.250 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 1 0 2006-03-30 00:21:04.421
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.debug.ui', commandId='org.rubypeople.rdt.debug.ui.TemplateInspectCommand'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.comment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.contentassist'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.htmlexport'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.437
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.formatsource'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.437
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.comment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.437
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.437
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.content.assist.proposals'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:21:04.437
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.generate.rdoc'.
+
+!ENTRY org.eclipse.ui 2 0 2006-03-30 00:21:04.546
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:21:04.546
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.comment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:21:04.546
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:21:04.546
+!MESSAGE Cannot bind to an undefined command: plug-in='org.epic.perleditor', commandId='org.epic.eclipse.perleditor.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:21:04.546
+!MESSAGE Cannot bind to an undefined command: plug-in='org.epic.perleditor', commandId='org.epic.eclipse.perleditor.comment'.
+
+!ENTRY org.eclipse.core.resources 2 10035 2006-03-30 00:21:05.468
+!MESSAGE A workspace crash was detected. The previous session did not exit normally.
+!SESSION 2006-03-30 00:25:52.93 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 1 0 2006-03-30 00:25:54.281
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.281
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.debug.ui', commandId='org.rubypeople.rdt.debug.ui.TemplateInspectCommand'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.281
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.281
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.comment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.281
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.contentassist'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.281
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.htmlexport'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.281
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.formatsource'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.296
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.comment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.296
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.296
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.content.assist.proposals'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:25:54.296
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.generate.rdoc'.
+
+!ENTRY org.eclipse.ui 2 0 2006-03-30 00:25:54.406
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:25:54.406
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.comment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:25:54.406
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:25:54.406
+!MESSAGE Cannot bind to an undefined command: plug-in='org.epic.perleditor', commandId='org.epic.eclipse.perleditor.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:25:54.406
+!MESSAGE Cannot bind to an undefined command: plug-in='org.epic.perleditor', commandId='org.epic.eclipse.perleditor.comment'.
+
+!ENTRY org.eclipse.core.resources 2 10035 2006-03-30 00:25:55.250
+!MESSAGE A workspace crash was detected. The previous session did not exit normally.
+!SESSION 2006-03-30 00:28:49.218 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.debug.ui', commandId='org.rubypeople.rdt.debug.ui.TemplateInspectCommand'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.comment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.contentassist'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.htmlexport'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.epic.perleditor', commandId='org.epic.perleditor.formatsource'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.comment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.content.assist.proposals'.
+!SUBENTRY 1 org.eclipse.ui 1 0 2006-03-30 00:28:51.421
+!MESSAGE Commands should really have a category, not categoryId='': plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.generate.rdoc'.
+
+!ENTRY org.eclipse.ui 2 0 2006-03-30 00:28:51.546
+!MESSAGE Warnings while parsing the key bindings from the 'org.eclipse.ui.commands' extension point
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:28:51.546
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.comment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:28:51.546
+!MESSAGE Defining a key binding with no key sequence has no effect: plug-in='org.rubypeople.rdt.ui', commandId='org.rubypeople.rdt.ui.edit.text.ruby.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:28:51.546
+!MESSAGE Cannot bind to an undefined command: plug-in='org.epic.perleditor', commandId='org.epic.eclipse.perleditor.uncomment'.
+!SUBENTRY 1 org.eclipse.ui 2 0 2006-03-30 00:28:51.546
+!MESSAGE Cannot bind to an undefined command: plug-in='org.epic.perleditor', commandId='org.epic.eclipse.perleditor.comment'.

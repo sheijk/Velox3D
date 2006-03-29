@@ -64,6 +64,8 @@ private:
 	entity::VPartConnection<scene::IVSceneManagerPart> m_pSceneManager;
 
 	graphics::VColor4f m_BaseColor;
+
+	std::string m_strTextureDir;
 };
 
 //-----------------------------------------------------------------------------

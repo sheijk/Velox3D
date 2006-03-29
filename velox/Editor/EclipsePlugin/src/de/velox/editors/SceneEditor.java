@@ -79,11 +79,11 @@ public class SceneEditor extends VeloxEditorBase {
 	private void setRootEntity(RootEntity newRoot) {
 		root = newRoot;
 
-		if( renderAction != null ) {
+		if( renderAction != null && root != null ) {
 			root.setRenderAction(renderAction);
 		}
 		
-		if( renderLayer != null ) {
+		if( renderLayer != null && root != null ) {
 			v3d.TellInputManager(root.impl(), renderLayer.getInputManager());
 		}
 		
@@ -271,6 +271,12 @@ public class SceneEditor extends VeloxEditorBase {
 
 	@Override
 	public void dispose() {
+		//TODO: this must happen _earlier_, before the widget (and it's windows
+		// resources) are disposed. this happens before this method is called
+		// thus causing crashes from time to time. find a notification/.. which
+		// will be called before the window is closed, and put this call there
+		renderLayer.windowClosed();
+
 		super.dispose();
 		
 		if( SceneView.getDefaultInstance() != null ) {
@@ -278,6 +284,7 @@ public class SceneEditor extends VeloxEditorBase {
 		}
 		
 		VView.GetInstance().Remove(updateAction);
+		
 	}
 
 	@Override

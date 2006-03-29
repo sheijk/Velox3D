@@ -33,19 +33,19 @@ void VMessageInterpreter::AddOption(VOption* option)
 	m_Options.insert(make_pair(option->GetName(), SharedPtr(option)));
 }
 
-vbool VMessageInterpreter::HandleMessage(void* object,
+VMessageInterpreter::Result VMessageInterpreter::HandleMessage(void* object,
 					const messaging::VMessage& in_Message,
 					messaging::VMessage* io_pAnswer)
 {
 	if( ! in_Message.HasProperty("type") )
-		return false;
+		return NotProcessed;
 
 	std::string request = in_Message.Get("type").Get<std::string>();
 
 	if( request == "getSettings" )
 	{
 		if( io_pAnswer == 0 )
-			return false;
+			return Done;
 
 		OptionMap::iterator option = m_Options.begin();
 		for( ; option != m_Options.end(); ++option)
@@ -56,7 +56,7 @@ vbool VMessageInterpreter::HandleMessage(void* object,
 			io_pAnswer->AddProperty(name, value);
 		}
 
-		return true;
+		return GetSettings;
 	}
 	else if( request == "update" )
 	{
@@ -68,14 +68,14 @@ vbool VMessageInterpreter::HandleMessage(void* object,
 		if( option != m_Options.end() )
 		{
 			option->second->Write(value, object);
-			return true;
+			return Done;
 		}
 		else
-			return false;
+			return ApplySetting;
 	}
 	else
 	{
-		return false;
+		return NotProcessed;
 	}
 }
 

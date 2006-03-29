@@ -1,0 +1,43 @@
+<entity name="racer">
+	<part type="v3d::scene::VNaiveSceneManagerPart"/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)"/>
+	<part type="v3d::entity::VUpdateManagerPart"/>
+	<part type="v3d::scene::VNaiveLightManager"/>
+	<part type="v3d::utils::VInputPart"/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/sepia_pp.v3dmat"/>
+	<part type="shooting"/>
+	<entity name="ambient">
+		<entity name="skybox">
+			<part type="v3d::entity::VRigidBodyPart" pos="(-11,49,232)"/>
+			<part type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/"/>
+		</entity>
+		<entity name="dummy">
+			<part type="v3d::entity::VRigidBodyPart" pos="(2,77,0)"/>
+			<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="10"/>
+		</entity>
+		<entity name="water">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+		</entity>
+		<entity name="editorCam">
+			<part type="v3d::entity::VRigidBodyPart" pos="(-11,49,232)"/>
+			<part type="v3d::utils::VCameraPart"/>
+			<part type="v3d::utils::VTrackballPart"/>
+		</entity>
+		<entity name="debug">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial"/>
+		</entity>
+		<entity name="sun">
+			<part type="v3d::entity::VRigidBodyPart" pos="(100,100,0)"/>
+			<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(0.8,0.3,0,1)" position="(100,100,0)" specularColor="(0,1,0,1)" w="1"/>
+			<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="1"/>
+		</entity>
+	</entity>
+	<entity name="world">
+		<entity name="terrain">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::scene::VTerrainPart" material="/edit/mat/phong.v3dmat"/>
+		</entity>
+		<entity name="playerCar"/>
+	</entity>
+</entity>

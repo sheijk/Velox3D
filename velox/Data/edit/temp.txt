@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+	
+		<!-- renderPass>
+			<state name="vertex-program">
+				<param name="res" value="/data/shaders_/terrain.vert.glsl" />
+			</state>
+			<state name="fragment-program">
+				<param name="res" value="/data/shaders_/terrain.frag.glsl />
+			</state>
+		</renderPass -->
+		
+	</shaderPath>
+</effect>
+

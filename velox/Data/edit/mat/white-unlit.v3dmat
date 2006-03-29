@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+	
+		<!-- dark surface -->
+		<renderPass> 
+			<state name="lighting">
+				<param name="enabled" value="true" />
+			</state>
+		</renderPass>
+		
+	</shaderPath>
+</effect>
+

@@ -112,27 +112,58 @@ void VMeshPartBase::OnMessage(
 
 	if( request == "getSettings" )
 	{
-		if( in_pAnswer == 0 )
-			return;
-
-		in_pAnswer->AddProperty("material", 
-			m_hMaterial.GetEnclosingResource()->GetQualifiedName());
+		AddVariables(in_pAnswer);
 	}
 	else if( request == "update" )
 	{
-		const string name = in_Message.Get("name").Get<string>();
-		const string value = in_Message.Get("value").Get<string>();
+		ApplySetting(in_Message);
+	}
+}
 
-		try
+void VMeshPartBase::AddVariables(messaging::VMessage* in_pAnswer)
+{
+	if( in_pAnswer == 0 )
+		return;
+
+	in_pAnswer->AddProperty("material", 
+		m_hMaterial.GetEnclosingResource()->GetQualifiedName());
+
+	for(ParamValueMap::const_iterator paramValue = m_ParameterValues.begin();
+		paramValue != m_ParameterValues.end();
+		++paramValue)
+	{
+		IVParameter* parameter = m_hMaterial->GetParameterByName(paramValue->first);
+
+		if( parameter != 0 )
 		{
-			if( name == "material" ) {
-				m_hMaterial = GetMutableResourceData<IVMaterial>(value.c_str());
-			}
+			const std::string name = "mat." + paramValue->first;
+			const std::string value = "?";
+
+			in_pAnswer->AddProperty(name, value);
+
+			//IVParameterValue* pValue = paramValue->second.Get();
+			//pValue->Apply(*parameter);
 		}
-		catch(VException& e)
-		{
-			vout << "Failed to create model: " << e.GetErrorString() << vendl;
+	}
+
+}
+
+void VMeshPartBase::ApplySetting(const messaging::VMessage& in_Message)
+{
+	using std::string;
+
+	const string name = in_Message.Get("name").Get<string>();
+	const string value = in_Message.Get("value").Get<string>();
+
+	try
+	{
+		if( name == "material" ) {
+			m_hMaterial = GetMutableResourceData<IVMaterial>(value.c_str());
 		}
+	}
+	catch(VException& e)
+	{
+		vout << "Failed to create model: " << e.GetErrorString() << vendl;
 	}
 }
 

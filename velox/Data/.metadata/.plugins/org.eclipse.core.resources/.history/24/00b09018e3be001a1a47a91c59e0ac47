@@ -1,0 +1,28 @@
+uniform sampler2D image;
+
+const float step = 1.0 / 512.0;
+
+void sepia() {
+	vec2 pos = gl_TexCoord[0].st;
+	vec4 color = texture2D(image, pos);
+	float brightness = length(color.rgb) * 0.7;
+	gl_FragColor = vec4(
+		brightness * 0.9,
+		brightness * 0.8,
+		brightness * 0.4,
+		1.0);
+	
+	
+//	gl_FragColor = vec4(
+//		color.r, 
+//		color.g, 
+//		color.b / 4.0, 
+//		color.a);
+}
+
+void main(void) {
+//	blur();
+	sepia();
+
+//	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+}

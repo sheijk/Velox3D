@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!-- Virtual File System Mount Table -->
+<Vfs version="1.0">
+<FileSystem version="1.0">
+
+	<Mount
+		name="data"
+		type="localfs"
+		source="data"
+		rights="rwfd"
+		/>
+	<Mount
+		name="edit"
+		type="localfs"
+		source="edit"
+		rights="rwfd"
+		/>
+
+    <!-- Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory -->
+
+	<!--Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory-->
+
+</FileSystem>
+</Vfs>

@@ -54,6 +54,11 @@ protected:
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
 
+	/** add variables and values to a "getSettings" answer */
+	void AddVariables(messaging::VMessage* in_pAnswer);
+	/** apply the given setting */
+	void ApplySetting(const messaging::VMessage& in_Message);
+
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 

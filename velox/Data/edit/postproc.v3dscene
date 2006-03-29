@@ -1,0 +1,14 @@
+<entity name="postproc.v3dscene">
+	<part type="v3d::scene::VNaiveSceneManagerPart"/>
+	<part type="v3d::scene::VDefaultRenderStepPart"/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/test/postproc.fx"/>
+	<part type="shooting"/>
+	<entity name="obj">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+		<part type="v3d::scene::VModelPart" material="" mesh="" model="/data/afighter.3ds"/>
+	</entity>
+	<entity name="coordsys">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial"/>
+	</entity>
+</entity>

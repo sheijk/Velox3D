@@ -1,0 +1,14 @@
+<entity name="lights.v3dscene">
+	<part type="v3d::scene::VNaiveSceneManagerPart"/>
+	<part type="shooting"/>
+	<part type="v3d::entity::VUpdateManagerPart"/>
+	<part type="v3d::scene::VNaiveLightManager"/>
+	<entity name="coords">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+		<part type="v3d::scene::VOrientationGridPart" material="/data/mat/white-unlit.v3dmat"/>
+	</entity>
+	<entity name="blue-light">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+		<part type="v3d::scene::VLightPart"/>
+	</entity>
+</entity>

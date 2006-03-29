@@ -65,6 +65,13 @@ public class RenderLayer {
 		this.parent = parent;
 	}
 	
+	// needs to be called before the window gets closed, otherwise the program
+	// might crash when the renderAction tries to make the context of the
+	// deleted window current
+	public void windowClosed() {
+		VView.GetInstance().Remove(renderAction);
+	}
+	
 	public IVInputManager getInputManager() {
 		//TODO: dinput device kann nicht erstellt werden...
 //		if( inputManager == null ) {

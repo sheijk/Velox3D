@@ -89,3 +89,5 @@ v3d::input::IVInputManager* CreateInputManager(int hwnd);
 void TellInputManager(
 	v3d::entity::VEntity* pEntity,
 	v3d::input::IVInputManager* pInputManager);
+
+void DumpDir(v3d::vfs::IVDirectory& dir, const std::string& prefix);

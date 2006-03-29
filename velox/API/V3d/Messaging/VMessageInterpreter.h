@@ -75,7 +75,9 @@ class VMessageInterpreter
 public:
 	void AddOption(VOption* option);
 
-	vbool HandleMessage(void* object,
+	enum Result { Done, GetSettings, ApplySetting, NotProcessed };
+
+	Result HandleMessage(void* object,
 		const messaging::VMessage& in_Message,
 		messaging::VMessage* io_pAnswer);
 

@@ -1,0 +1,22 @@
+<entity name="NewScene.v3dscene">
+	<part type="v3d::scene::VNaiveSceneManagerPart"/>
+	<part type="v3d::scene::VDefaultRenderStepPart"/>
+	<part type="shooting"/>
+	<entity name="ship">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,5,0)"/>
+		<part type="v3d::scene::VPlaneMeshPart" material="/system/graphics/defaultMaterial"/>
+		<part type="v3d::scene::VCoordSysDisplayPart" material="/system/graphics/defaultMaterial"/>
+	</entity>
+	<entity name="arrow">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,15,0)"/>
+		<part type="v3d::scene::VArrowMeshPart" material="/system/graphics/defaultMaterial"/>
+	</entity>
+	<entity name="coordsys">
+		<part type="v3d::scene::VModelPart" material="" mesh="" model="/data/afighter.3ds"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,-20)"/>
+	</entity>
+	<entity name="lantern">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+		<part type="v3d::scene::VModelPart" material="" mesh="" model="/data/streetlight.3ds"/>
+	</entity>
+</entity>

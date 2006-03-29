@@ -248,6 +248,8 @@ void VSkyboxPart::SetTextureDir(
 		m_Sides[3]->SetMaterial(CreateTextureMaterial(in_strDirectory + "back" + in_strExtension));
 		m_Sides[4]->SetMaterial(CreateTextureMaterial(in_strDirectory + "top" + in_strExtension));
 		m_Sides[5]->SetMaterial(CreateTextureMaterial(in_strDirectory + "bottom" + in_strExtension));
+
+		m_strTextureDir = in_strDirectory;
 	}
 }
 
@@ -297,7 +299,7 @@ void VSkyboxPart::OnMessage(
 		if( in_pAnswer == 0 )
 			return;
 
-		in_pAnswer->AddProperty(PN_TEXTURE_DIR, "");
+		in_pAnswer->AddProperty(PN_TEXTURE_DIR, m_strTextureDir);
 	}
 	else if( request == "update" )
 	{

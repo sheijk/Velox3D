@@ -507,6 +507,27 @@ void TellInputManager(
 	}
 }
 
+void DumpDir(vfs::IVDirectory& dir, const std::string& prefix)
+{
+	const std::string indent = ".\t";
+
+	vout << prefix << dir.GetName() << "/" << vendl;
+
+	VRangeIterator<vfs::IVDirectory> childdirs = dir.SubDirs();
+	while( childdirs.HasNext() )
+	{
+		DumpDir(*childdirs, prefix + indent);
+		++childdirs;
+	}
+
+	VRangeIterator<vfs::IVFile> files = dir.Files();
+	while( files.HasNext() )
+	{
+		vout << prefix << indent << files->GetName() << vendl;
+		++files;
+	}
+}
+
 //-----------------------------------------------------------------------------
 //
 /* namespace v3d {

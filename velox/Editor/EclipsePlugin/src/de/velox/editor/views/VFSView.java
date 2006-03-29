@@ -6,6 +6,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.*;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
 import org.eclipse.swt.SWT;
@@ -154,9 +158,33 @@ public class VFSView extends VeloxViewBase {
 		viewer.setContentProvider(new ViewContentProvider());
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setInput(getViewSite());
+		
+		makeActions();
+		contributeToActionBars();
+	}
+	
+	private Action dumpAction = null;
+	
+	private void makeActions() {
+		dumpAction = new Action(){
+			@Override public void run() {
+				v3d.DumpDir(v3d.GetFileSystem().GetDir("/"), "");
+			}
+		};
+		dumpAction.setText("Dump");
 	}
 
+	private void contributeToActionBars() {
+		IActionBars bars = getViewSite().getActionBars();
+//		fillLocalPullDown(bars.getMenuManager());
+		fillLocalToolBar(bars.getToolBarManager());
+	}
 
+	private void fillLocalToolBar(IToolBarManager manager) {
+		manager.add(dumpAction);
+//		drillDownAdapter.addNavigationActions(manager);
+	}
+	
 	@SuppressWarnings("unused")
 	private void showMessage(String message) {
 		MessageDialog.openInformation(

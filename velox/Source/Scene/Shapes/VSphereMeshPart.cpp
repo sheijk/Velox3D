@@ -38,7 +38,19 @@ void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message,
 		interpreter.SetInitialized(true);
 	}
 
-	interpreter.HandleMessage(this, in_Message, in_pAnswer);
+	messaging::VMessageInterpreter::Result result = 
+		interpreter.HandleMessage(this, in_Message, in_pAnswer);
+
+	switch(result) {
+	case messaging::VMessageInterpreter::GetSettings:
+		{
+			AddVariables(in_pAnswer);
+		} break;
+	case messaging::VMessageInterpreter::ApplySetting:
+		{
+			ApplySetting(in_Message);
+		} break;
+	}
 }
 
 namespace {

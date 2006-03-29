@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+
+		<!-- light lines -->
+		<renderPass>
+			<state name="vshader">
+				<param name="file" value="data/simplevs.cg" />
+				<param name="profile" value="cg.v.20" />
+				<param name="ModelViewMat" value="$modelview.matrix" />
+			</state>
+			<state name="polygonmode">
+				<param name="front" value="line" />
+				<param name="back" value="line" />
+			</state>
+			<state name="depth">
+				<param name="function" value="onless" />
+				<param name="write" value="true" />
+				<param name="enable" value="true" />
+			</state>
+			<state name="colormask">
+				<param name="red" value="true" />
+				<param name="green" value="true" />
+				<param name="blue" value="true" />
+				<param name="alpha" value="true" />
+			</state>
+			<state name="color">
+				<param name="red" value="0" />
+				<param name="green" value="1" />
+				<param name="blue" value="0" />
+				<param name="alpha" value="1" />
+			</state>
+			<state name="blending">
+				<param name="enable" value="false" />
+				<param name="source" value="source.alpha" />
+				<param name="dest" value="one.minus.source.alpha" />
+			</state>
+		</renderPass>
+		
+		<!-- dark surface -->
+		<renderPass> 
+			<state name="vshader">
+				<param name="file" value="data/simplevs.cg" />
+				<param name="profile" value="cg.v.20" />
+				<param name="ModelViewMat" value="$modelview.matrix" />
+			</state>
+			<state name="pshader">
+				<param name="file" value="data/simpleps.cg" />
+				<param name="profile" value="cg.p.20" />
+			</state>
+			<state name="polygonmode">
+				<param name="front" value="fill" />
+				<param name="back" value="fill" />
+			</state>
+			<state name="depth">
+				<param name="function" value="onless" />
+				<param name="write" value="true" />
+				<param name="enable" value="true" />
+			</state>
+			<state name="colormask">
+				<param name="red" value="true" />
+				<param name="green" value="true" />
+				<param name="blue" value="true" />
+				<param name="alpha" value="true" />
+			</state>
+			<state name="color">
+				<param name="red" value="0" />
+				<param name="green" value=".5" />
+				<param name="blue" value="0" />
+				<param name="alpha" value="1" />
+			</state>
+			<state name="blending">
+				<param name="enable" value="false" />
+				<param name="source" value="source.alpha" />
+				<param name="dest" value="one.minus.source.alpha" />
+			</state>
+		</renderPass>
+		
+	</shaderPath>
+</effect>
+
