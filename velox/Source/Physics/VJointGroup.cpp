@@ -1,4 +1,4 @@
-#include <v3dLib/Physics/VPhysicState.h>
+#include <v3d/Physics/VJointGroup.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -6,36 +6,30 @@ namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
 
-VPhysicState::VPhysicState()
+VJointGroup::VJointGroup()
 {
-	m_Parent = 0;
+	m_JointGroupID = dJointGroupCreate(0);
 }
 
-VPhysicState::~VPhysicState()
+VJointGroup::~VJointGroup()
 {
+//	Destroy();
 }
 
-void VPhysicState::SetParent(VPhysicObject* in_Object)
+void VJointGroup::Destroy()
 {
-	m_Parent = in_Object;
+	dJointGroupDestroy(m_JointGroupID);
 }
 
-VPhysicObject* VPhysicState::GetParent()
+void VJointGroup::Empty()
 {
-	return m_Parent;
+	dJointGroupEmpty(m_JointGroupID);
 }
 
-void VPhysicState::UpdateState()
+dJointGroupID* VJointGroup::GetJointGroupID()
 {
-	VPhysicObject* objPtr = GetParent();
-
-	V3D_ASSERT(objPtr != 0);
-	
-	if(objPtr)
-        objPtr->AddState(this);
+	return &m_JointGroupID;
 }
-
-
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d

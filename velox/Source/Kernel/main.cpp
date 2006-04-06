@@ -74,7 +74,7 @@ int main(int argv, char* argc[])
 			// if you stop here, an uncaught exception occured. check the value
 			// of pcMessage/msg to get further information
 			// when done, simply continue to end application gracefully
-			int 3; 
+ 			int 3; 
 		}
 	}
 

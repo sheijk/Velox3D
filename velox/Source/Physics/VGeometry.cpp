@@ -1,11 +1,11 @@
-#include <v3dLib/Physics/VPhysicGeometry.h>
+#include <v3d/Physics/VGeometry.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
-VPhysicGeometry::VPhysicGeometry()
+VGeometry::VGeometry()
 {
 	m_GeomID = 0;
 	m_bIsEnabled = true;
@@ -13,57 +13,57 @@ VPhysicGeometry::VPhysicGeometry()
 	m_CollisionGroup = 0;
 }
 
-VPhysicGeometry::~VPhysicGeometry()
-{
-}
+//VGeometry::~VGeometry()
+//{
+//}
 
-void VPhysicGeometry::Destroy()
+void VGeometry::Destroy()
 {
 	dGeomDestroy(m_GeomID);
 }
 
-dGeomID* VPhysicGeometry::GetGeomID()
+dGeomID* VGeometry::GetGeomID()
 {
 	return &m_GeomID;
 }
 
-void VPhysicGeometry::Enable()
+void VGeometry::Enable()
 {
 	dGeomEnable(m_GeomID);
 	m_bIsEnabled = true;
 }
 
-void VPhysicGeometry::Disable()
+void VGeometry::Disable()
 {
 	dGeomDisable(m_GeomID);
 	m_bIsEnabled = false;
 }
 
-vbool VPhysicGeometry::IsEnabled()
+vbool VGeometry::IsEnabled()
 {
 	return m_bIsEnabled;
 }
 
-void VPhysicGeometry::SetCategoryGroup(Group in_CategoryGroup)
+void VGeometry::SetCategoryGroup(Group in_CategoryGroup)
 {
     m_CategoryGroup = in_CategoryGroup;
 
 	dGeomSetCategoryBits(m_GeomID,m_CategoryGroup);
 }
 
-void VPhysicGeometry::SetCollisionGroup(Group in_CollisionGroup)
+void VGeometry::SetCollisionGroup(Group in_CollisionGroup)
 {
 	m_CollisionGroup = in_CollisionGroup;
 	dGeomSetCollideBits (m_GeomID,m_CollisionGroup);
 }
 
-vint VPhysicGeometry::GetCategoryGroup()
+vint VGeometry::GetCategoryGroup()
 {
 	m_CategoryGroup =  dGeomGetCategoryBits(m_GeomID);	
 	return m_CategoryGroup;
 }
 
-vint VPhysicGeometry::GetCollisionGroup()
+vint VGeometry::GetCollisionGroup()
 {
 	m_CollisionGroup =  dGeomGetCollideBits(m_GeomID);
 	return m_CollisionGroup;

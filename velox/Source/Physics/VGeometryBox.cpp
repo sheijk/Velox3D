@@ -1,54 +1,54 @@
-#include <v3dLib/Physics/VPhysicGeometryBox.h>
-#include <v3dLib/Physics/VPhysicSpace.h>
+#include <v3d/Physics/VGeometryBox.h>
+#include <v3d/Physics/VSpace.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
-VPhysicGeometryBox::VPhysicGeometryBox()
+VGeometryBox::VGeometryBox()
 {
 	m_fLength	= 1.0f;
 	m_fWidth	= 1.0f;
 	m_fHeight	= 1.0f;
 }
 
-VPhysicGeometryBox::~VPhysicGeometryBox()
+VGeometryBox::~VGeometryBox()
 {
 }
 
-void VPhysicGeometryBox::CreateBox(VPhysicSpace* in_SpaceState)
+void VGeometryBox::CreateBox(VSpace* in_SpaceState)
 {
 	m_GeomID = dCreateBox (*in_SpaceState->GetSpaceID(), m_fLength,
 							m_fWidth, m_fHeight);
 }
 
-void VPhysicGeometryBox::SetWidth(vfloat32 in_fWidth)
+void VGeometryBox::SetWidth(vfloat32 in_fWidth)
 {
 	m_fWidth = in_fWidth;
 }
 
-void VPhysicGeometryBox::SetLength(vfloat32 in_fLength)
+void VGeometryBox::SetLength(vfloat32 in_fLength)
 {
 	m_fLength = in_fLength;
 }
 
-void VPhysicGeometryBox::SetHeight(vfloat32 in_fHeight)
+void VGeometryBox::SetHeight(vfloat32 in_fHeight)
 {
 	m_fHeight = in_fHeight;
 }
 
-vfloat32 VPhysicGeometryBox::GetWidth()
+vfloat32 VGeometryBox::GetWidth()
 {
 	return m_fWidth;
 }
 
-vfloat32 VPhysicGeometryBox::GetLength()
+vfloat32 VGeometryBox::GetLength()
 {
 	return m_fLength;
 }
 
-vfloat32 VPhysicGeometryBox::GetHeight()
+vfloat32 VGeometryBox::GetHeight()
 {
 	return m_fHeight;
 }

@@ -87,6 +87,7 @@ private:
 	IVDevice& GetDevice() { return *m_pDevice; }
 	
 	IVDevice* m_pDevice;
+	VPhysicWorld* m_pWorld;
 };
 
 //-----------------------------------------------------------------------------
@@ -229,11 +230,11 @@ void VSimplePhysic::CreateBoxPhysicObject(vfloat32 in_fMasss,
 	pBoxGeometry->SetWidth(in_Expansion[0]);
 	pBoxGeometry->SetLength(in_Expansion[1]);
 	pBoxGeometry->SetHeight(in_Expansion[2]);
-	pBoxGeometry->CreateBox(in_pPhysicManager->GetPhysicWorld().GetSpace());
+	pBoxGeometry->CreateBox(in_pPhysicManager->GetPhysicWorld()->GetSpace());
 
-	pPhysicBody = in_pPhysicManager->GetPhysicWorld().CreateBody();
+	pPhysicBody = in_pPhysicManager->GetPhysicWorld()->CreateBody();
 	pPhysicBody->AddState(pMassState);
-	pPhysicBody->Create(&in_pPhysicManager->GetPhysicWorld());
+	pPhysicBody->Create(in_pPhysicManager->GetPhysicWorld());
 	pPhysicBody->SetCollisionBody(pBoxGeometry);
 
 	entity::VEntity* pObjectEntityBox= new entity::VEntity();
@@ -276,7 +277,7 @@ VEffectDescription VSimplePhysic::CreateTextureEffectDescription(VStringParam in
 
 	// add resource info
 
-	VState textureState = TextureState(in_sResourceName);
+	graphics::VState textureState = TextureState(in_sResourceName);
 
 	pass.AddState(textureState);
 
@@ -295,11 +296,11 @@ void VSimplePhysic::CreateSpherePhysicObject(
 	VPhysicGeometrySphere* pSphereGeometry = new VPhysicGeometrySphere();
 	pMassState->SetMass(in_fMasss);
 	pSphereGeometry->SetSphereRadius(in_fRadius);
-	pSphereGeometry->CreateSphere(in_pPhysicManager->GetPhysicWorld().GetSpace());
+	pSphereGeometry->CreateSphere(in_pPhysicManager->GetPhysicWorld()->GetSpace());
 
-	pPhysicBodySphere = in_pPhysicManager->GetPhysicWorld().CreateBody();
+	pPhysicBodySphere = in_pPhysicManager->GetPhysicWorld()->CreateBody();
 	pPhysicBodySphere->AddState(pMassState);
-	pPhysicBodySphere->Create(&in_pPhysicManager->GetPhysicWorld());
+	pPhysicBodySphere->Create(in_pPhysicManager->GetPhysicWorld());
 	pPhysicBodySphere->SetCollisionBody(pSphereGeometry);
 
 	entity::VEntity* pObjectEntitySphere= new entity::VEntity();
@@ -341,7 +342,7 @@ void VSimplePhysic::CreatePlanePhysicObject(
 
 	VPhysicGeometryPlane plane;
 	plane.SetPlane(graphics::VVertex3f(in_Normal[0], in_Normal[1], in_Normal[2]),in_fDistance);
-	plane.CreatePlane(in_pPhysicManager->GetPhysicWorld().GetSpace());
+	plane.CreatePlane(in_pPhysicManager->GetPhysicWorld()->GetSpace());
 
 	VResourceId planeRes = pResMan->GetResourceByName(in_sResourceName.c_str());
 
@@ -363,6 +364,8 @@ vint VSimplePhysic::Main(vector<string> args)
 {
 	InitializeResources();
 
+	m_pWorld = new VPhysicWorld();
+
 	// create window
 	VWindowManagerPtr pWindowManager;
 	VDisplaySettings dis(VSize(1024,768), VPosition(0,0));
@@ -382,7 +385,7 @@ vint VSimplePhysic::Main(vector<string> args)
 	entity::VEntity myRootEntity;
 	scene::VNaiveSceneManagerPart* pSimpleScene = new scene::VNaiveSceneManagerPart();
 	scene::VSimpleShooting* pShooting = new scene::VSimpleShooting();//(m_pDevice);//, pDefaultRenderAlgorithm );
-	VPhysicManagerPart* pPhysicsManager = new VPhysicManagerPart();
+	VPhysicManagerPart* pPhysicsManager = new VPhysicManagerPart(m_pWorld);
 	pShooting->SetRenderTarget(m_pDevice);
     
 	myRootEntity.AddPart(scene::VSimpleShooting::GetDefaultId(), SharedPtr(pShooting));	
@@ -391,17 +394,17 @@ vint VSimplePhysic::Main(vector<string> args)
 	myRootEntity.Activate();
 
 	//customize the physic manager
-	pPhysicsManager->GetPhysicWorld().GetSpace()->SetSurfaceBounce(0.85f);
-	pPhysicsManager->GetPhysicWorld().SetGravity(0,0,0.0f);
+	pPhysicsManager->GetPhysicWorld()->GetSpace()->SetSurfaceBounce(0.85f);
+	pPhysicsManager->GetPhysicWorld()->SetGravity(0,0,0.0f);
 	
 
 	VPhysicBody* pPhysicBody;
 	VPhysicBoxMassState massState;
 	massState.SetMass(4.3f);
 	
-	pPhysicBody = pPhysicsManager->GetPhysicWorld().CreateBody();
+	pPhysicBody = pPhysicsManager->GetPhysicWorld()->CreateBody();
 	pPhysicBody->AddState(&massState); 
-	pPhysicBody->Create(&pPhysicsManager->GetPhysicWorld());
+	pPhysicBody->Create(pPhysicsManager->GetPhysicWorld());
 
 	entity::VEntity* pObjectEntity = new entity::VEntity();
 	VRigidBodyPart* pBodyPart = new VRigidBodyPart;
@@ -452,8 +455,8 @@ vint VSimplePhysic::Main(vector<string> args)
     pEscapeButton	= &input.GetStandardKey(KeyEscape);
 	pEnterButton	= &input.GetStandardKey(KeyReturn);
 	pSpace			= &input.GetStandardKey(KeySpace);
-	pB				= &input.GetStandardKey(KeyB);
-	pN				= &input.GetStandardKey(KeyN);
+	pB					= &input.GetStandardKey(KeyB);
+	pN					= &input.GetStandardKey(KeyN);
 
 
 
@@ -465,13 +468,13 @@ vint VSimplePhysic::Main(vector<string> args)
 		}
 
 		if(pEnterButton->IsDown() == true)
-			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,-3);
+			pPhysicsManager->GetPhysicWorld()->SetGravity(0,0,-3);
 
 		if(pSpace->IsDown() == true)
- 			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,3.0);
+ 			pPhysicsManager->GetPhysicWorld()->SetGravity(0,0,3.0);
 
 		if(pB->IsDown() == true)
-			pPhysicsManager->GetPhysicWorld().SetGravity(0,0,0.0);
+			pPhysicsManager->GetPhysicWorld()->SetGravity(0,0,0.0);
 
 		if(pN->IsDown() == true)
 		{
@@ -497,7 +500,8 @@ vint VSimplePhysic::Main(vector<string> args)
 
 		device.EndScene();
 
-		pPhysicsManager->Update();
+		//pPhysicsManager->Update();
+
 		pUpdater->StartNextFrame();
 		cam.Move(vfloat32(pUpdater->GetFrameDuration()) * 10);
 	}

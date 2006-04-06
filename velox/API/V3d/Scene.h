@@ -24,6 +24,7 @@
 #include <V3d/Scene/Shapes/VSkyboxPart.h>
 #include <V3d/Scene/Shapes/VTerrainPart.h>
 #include <V3d/Scene/Shapes/VSphereMeshPart.h>
+#include <V3d/Scene/Shapes/VTorusMeshPart.h>
 
 #include <V3d/Scene/Shootings/VMirrorShooting.h>
 

@@ -1,4 +1,4 @@
-#include <v3dLib/Physics/VPhysicJoint.h>
+#include <v3d/Physics/VJoint.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -6,7 +6,7 @@ namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
 
-VPhysicJoint::VPhysicJoint()
+VJoint::VJoint()
 {
 	m_pPhysicWorld		= 0;
 	m_pJointGroup		= 0;
@@ -26,142 +26,142 @@ VPhysicJoint::VPhysicJoint()
 	m_fSuspensionERP	= 1.0f;
 }
 
-VPhysicJoint::~VPhysicJoint()
+VJoint::~VJoint()
 {
 }
 
-void VPhysicJoint::Destroy()
+void VJoint::Destroy()
 {
 	dJointDestroy(m_JointID);
 }
 
-void VPhysicJoint::AddWorld(VPhysicWorld* in_pPhysicWorld)
+void VJoint::AddWorld(VWorld* in_pPhysicWorld)
 {
 	V3D_ASSERT(in_pPhysicWorld != 0);
 
 	m_pPhysicWorld = in_pPhysicWorld;
 	m_pJointGroup  = 0;
 }
-void VPhysicJoint::AddJointGroup(VPhysicJointGroup* in_pJointGroup)
+void VJoint::AddJointGroup(VJointGroup* in_pJointGroup)
 {
 	m_pJointGroup = in_pJointGroup;
 }
 
-void VPhysicJoint::SetLowStop(vfloat32 in_fLowStop)
+void VJoint::SetLowStop(vfloat32 in_fLowStop)
 {
 	m_fLowStop = in_fLowStop;
 }
 
-vfloat32 VPhysicJoint::GetLowStop()
+vfloat32 VJoint::GetLowStop()
 {
 	return m_fLowStop;
 }
 
-void VPhysicJoint::SetHighStop(vfloat32 in_fHighStop)
+void VJoint::SetHighStop(vfloat32 in_fHighStop)
 {
 	m_fHighStop = in_fHighStop;
 }
 
-vfloat32 VPhysicJoint::GetHighStop()
+vfloat32 VJoint::GetHighStop()
 {
 	return m_fHighStop;
 }
 
-void VPhysicJoint::SetVelocity(vfloat32 in_fVelocity)
+void VJoint::SetVelocity(vfloat32 in_fVelocity)
 {
 	m_fVelocity = in_fVelocity;
 }
 
-vfloat32 VPhysicJoint::GetVelocity()
+vfloat32 VJoint::GetVelocity()
 {
 	return m_fVelocity;
 }
 
-void VPhysicJoint::SetMaxForce(vfloat32 in_fMaxForce)
+void VJoint::SetMaxForce(vfloat32 in_fMaxForce)
 {
 	m_fMaxForce = in_fMaxForce;
 }
 
-vfloat32 VPhysicJoint::GetMaxForce()
+vfloat32 VJoint::GetMaxForce()
 {
 	return m_fMaxForce;
 }
 
-void VPhysicJoint::SetFudgeFactor(vfloat32 in_fFudgeFactor)
+void VJoint::SetFudgeFactor(vfloat32 in_fFudgeFactor)
 {
 	m_fFudgeFactor = in_fFudgeFactor;
 }
 
-vfloat32 VPhysicJoint::GetFudgeFactor()
+vfloat32 VJoint::GetFudgeFactor()
 {
 	return m_fFudgeFactor;
 }
 
-void VPhysicJoint::SetBounce(vfloat32 in_fBounce)
+void VJoint::SetBounce(vfloat32 in_fBounce)
 {
 	m_fBounce = in_fBounce;
 }
 
-vfloat32 VPhysicJoint::GetBounce()
+vfloat32 VJoint::GetBounce()
 {
 	return m_fBounce;
 }
 
-void VPhysicJoint::SetCFM(vfloat32 in_fCFM)
+void VJoint::SetCFM(vfloat32 in_fCFM)
 {
 	m_fCFM = in_fCFM;
 }
 
-vfloat32 VPhysicJoint::GetCFM()
+vfloat32 VJoint::GetCFM()
 {
 	return m_fCFM;
 }
 
-void VPhysicJoint::SetStopCFM(vfloat32 in_fStopCFM)
+void VJoint::SetStopCFM(vfloat32 in_fStopCFM)
 {
 	m_fStopCFM = in_fStopCFM;
 }
 
-vfloat32 VPhysicJoint::GetStopCFM()
+vfloat32 VJoint::GetStopCFM()
 {
 	return m_fStopCFM;
 }
 
-void VPhysicJoint::SetStopERP(vfloat32 in_fStopERP)
+void VJoint::SetStopERP(vfloat32 in_fStopERP)
 {
 	m_fStopERP = in_fStopERP;
 }
 
-vfloat32 VPhysicJoint::GetStopERP()
+vfloat32 VJoint::GetStopERP()
 {
 	return m_fStopERP;
 }
 
-void VPhysicJoint::SetSuspensionERP(vfloat32 in_fSuspensionERP)
+void VJoint::SetSuspensionERP(vfloat32 in_fSuspensionERP)
 {
 	m_fSuspensionERP = in_fSuspensionERP;
 }
 
-vfloat32 VPhysicJoint::GetSuspensionERP()
+vfloat32 VJoint::GetSuspensionERP()
 {
 	return m_fSuspensionERP;
 }
 
-void VPhysicJoint::SetSuspensionCFM(vfloat32 in_fSuspensionCFM)
+void VJoint::SetSuspensionCFM(vfloat32 in_fSuspensionCFM)
 {
 	m_fSuspensionCFM = in_fSuspensionCFM;
 }
-vfloat32 VPhysicJoint::GetSuspensionCFM()
+vfloat32 VJoint::GetSuspensionCFM()
 {
 	return m_fSuspensionCFM;
 }
 
-void VPhysicJoint::SetVelocity2(vfloat32 in_fVelocity2)
+void VJoint::SetVelocity2(vfloat32 in_fVelocity2)
 {
 	m_fVelocity2 = in_fVelocity2;
 }
 
-vfloat32 VPhysicJoint::GetVelocity2()
+vfloat32 VJoint::GetVelocity2()
 {
 	return m_fVelocity2;
 }

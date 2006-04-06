@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="oded.lib lib3ds-120d.lib opengl32.lib glu32.lib"
+				AdditionalDependencies="lib3ds-120d.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/ImporterDemo.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"

@@ -63,9 +63,17 @@ public:
 	}
 
 	/** Returned the Size from the Bounding Box*/
+	//TODO: was ist die size einer box? --ins
 	VVector3f GetSize() const
 	{
 		return m_Size;
+	}
+
+	VVector3f GetLength()
+	{
+		return VVector3f(m_MaxPoint.GetX() - m_MinPoint.GetX(),
+						 m_MaxPoint.GetY() - m_MinPoint.GetY(),
+						 m_MaxPoint.GetZ() - m_MinPoint.GetZ());
 	}
 
 private:

@@ -32,7 +32,7 @@ namespace {
 		"uniform vec4 baseColor;"
 		"varying vec2 texCoord;"
 		"void main() {"
-		"	gl_FragDepth = .999f;"
+		"	gl_FragDepth = .999;"
 		"	gl_FragColor = texture2D(texture, texCoord);"
 //		"	gl_FragColor = texture2D(texture, texCoord) * baseColor;"
 //		"	gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);"

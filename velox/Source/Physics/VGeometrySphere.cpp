@@ -1,41 +1,36 @@
-#include <v3dLib/Physics/VPhysicMass.h>
+#include <v3d/Physics/VGeometrySphere.h>
+#include <v3d/Physics/VSpace.h>
+#include <V3d/Core.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
-
-VPhysicMass::VPhysicMass()
-{
-	m_fDensity = 1.0f;
-	m_fMass = 1.0f;
-}
-VPhysicMass::~VPhysicMass()
+VGeometrySphere::VGeometrySphere()
 {
 }
 
-void VPhysicMass::SetDensity(vfloat32 in_fDensity)
+VGeometrySphere::~VGeometrySphere()
 {
-	m_fDensity = in_fDensity;
 }
 
-vfloat32 VPhysicMass::GetDensity()
+void VGeometrySphere::CreateSphere(VSpace* in_SpaceState)
 {
-	return m_fDensity;
+	V3D_ASSERT(in_SpaceState != 0);
+	m_GeomID = dCreateSphere (*in_SpaceState->GetSpaceID(), m_fRadius);
 }
 
-void VPhysicMass::SetMass(vfloat32 in_fMass)
+void VGeometrySphere::SetSphereRadius(vfloat32 in_fRadius)
 {
-	m_fMass = in_fMass;
+	m_fRadius = in_fRadius;
 }
 
-vfloat32 VPhysicMass::GetMass()
+vfloat32 VGeometrySphere::GetSphereRadius()
 {
-	return m_fMass;
+	return m_fRadius;
 }
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-

@@ -300,9 +300,21 @@ void VTerrainPart::GenerateNormals()
 	//}
 }
 
+resource::VResourceDataPtr<graphics::VVertexBuffer> VTerrainPart::GetVertexBuffer()
+{
+	return m_hVertexBuffer;
+}
+
+resource::VResourceDataPtr<graphics::VVertexBuffer> VTerrainPart::GetIndexBuffer()
+{
+	return m_hIndexBuffer;
+}
+
 namespace {
 	entity::VPartParser<VTerrainPart> parser;
 }
+
+
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene

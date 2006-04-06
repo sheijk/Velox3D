@@ -79,7 +79,7 @@ void VSimpleShooting::Unregister(graphics::IVCamera* in_pCamera)
 
 vuint VSimpleShooting::CameraCount() const
 {
-	return m_Cameras.size();
+	return static_cast<vuint>(m_Cameras.size());
 }
 
 void VSimpleShooting::SetActiveCamera(vuint in_nNum)

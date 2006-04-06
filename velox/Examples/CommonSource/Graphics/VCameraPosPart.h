@@ -29,6 +29,7 @@ public:
 
 	virtual void TellNeighbourPart(const utils::VFourCC& in_Id, IVPart& in_Part);
 	virtual void Update();
+	virtual vbool IsReady() const;
 };
 
 //-----------------------------------------------------------------------------

@@ -42,11 +42,12 @@ VGLSLShader::VGLSLShader(
 	glShaderSourceARB(m_hFragmentShader, 1, &fragmentSource, &fragmentSize);
 
 	glCompileShaderARB(m_hVertexShader);
-	if( ErrorOccured(m_hVertexShader, &errorMessage) )
+	if( CompileErrorOccured(m_hVertexShader, &errorMessage) )
 		V3D_THROWMSG(VGLSLException, "Could not compile vertex shader: " << errorMessage);
 
 	glCompileShaderARB(m_hFragmentShader);
-	if( ErrorOccured(m_hFragmentShader, &errorMessage) )
+	
+	if( CompileErrorOccured(m_hFragmentShader, &errorMessage) )
 		V3D_THROWMSG(VGLSLException, "Could not compile fragment shader: " << errorMessage);
 
 	glAttachObjectARB(m_hProgram, m_hVertexShader);
@@ -56,7 +57,7 @@ VGLSLShader::VGLSLShader(
 	glDeleteObjectARB(m_hFragmentShader);
 
 	glLinkProgramARB(m_hProgram);
-	if( ErrorOccured(m_hProgram, &errorMessage) )
+	if( LinkErrorOccured(m_hProgram, &errorMessage) )
 		V3D_THROWMSG(VGLSLException, "Could not link glsl program: " << errorMessage);
 
 	glUseProgramObjectARB(m_hProgram);
@@ -115,18 +116,42 @@ VSharedPtr<IVParameter> VGLSLShader::GetParameter(VStringParam in_strName)
 	return SharedPtr(new VGLSLParameter(m_hProgram, in_strName));
 }
 
-vbool VGLSLShader::ErrorOccured(GLhandleARB in_hProgram, std::string* in_pstrErrorMesssage)
+vbool VGLSLShader::CompileErrorOccured(GLhandleARB in_hProgram, std::string* in_pstrErrorMesssage)
 {
 	GLint length = 0;
+	GLint compileError = 0;
 	glGetObjectParameterivARB(in_hProgram, GL_OBJECT_INFO_LOG_LENGTH_ARB, &length);
+	glGetObjectParameterivARB(in_hProgram, GL_OBJECT_COMPILE_STATUS_ARB, &compileError);
 
-	if( length > 1 )
+	if( compileError != 1)
 	{
 		char* message = new char[length];
 		in_pstrErrorMesssage->resize(length);
 		glGetInfoLogARB(in_hProgram, length, &length, message);
 		*in_pstrErrorMesssage = message;
-		delete message;
+		delete[] message;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+vbool VGLSLShader::LinkErrorOccured(GLhandleARB in_hProgram, std::string* in_pstrErrorMesssage)
+{
+	GLint length;
+	GLint linkError = 0;
+	glGetObjectParameterivARB(in_hProgram, GL_OBJECT_INFO_LOG_LENGTH_ARB, &length);
+	glGetObjectParameterivARB(in_hProgram, GL_OBJECT_LINK_STATUS_ARB, &linkError);
+
+	if( linkError != 1)
+	{
+		char* message = new char[length];
+		in_pstrErrorMesssage->resize(length);
+		glGetInfoLogARB(in_hProgram, length, &length, message);
+		*in_pstrErrorMesssage = message;
+		delete[] message;
 		return true;
 	}
 	else

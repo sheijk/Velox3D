@@ -44,7 +44,8 @@ public:
 	static vbool IsGLSLSupported();
 
 private:
-	vbool ErrorOccured(GLhandleARB in_hProgram, std::string* in_pstrErrorMesssage);
+	vbool CompileErrorOccured(GLhandleARB in_hProgram, std::string* in_pstrErrorMesssage);
+	vbool LinkErrorOccured(GLhandleARB in_hProgram, std::string* in_pstrErrorMesssage);
 	IVParameter* GetActiveUniformParameter(vuint in_nIndex);
 
 	GLhandleARB m_hVertexShader;

@@ -8,13 +8,16 @@ namespace v3d { namespace  physics {
 //-----------------------------------------------------------------------------
 using namespace v3d;
 
-VPhysicManagerPart::VPhysicManagerPart()
+VPhysicManagerPart::VPhysicManagerPart(
+	VPhysicManagerPart::PhysicWorld in_pPhysicWorld)
 {
+	V3D_ASSERT(in_pPhysicWorld != 0);
+	m_pPhysicWorld = in_pPhysicWorld;
 }
 
 VPhysicManagerPart::~VPhysicManagerPart()
 {
-	m_PhysicWorld.Destroy();
+	;//m_PhysicWorld.Destroy();
 }
 
 void VPhysicManagerPart::Activate()
@@ -28,17 +31,16 @@ void VPhysicManagerPart::Deactivate()
 
 void VPhysicManagerPart::Update()
 {
-	m_PhysicWorld.Update();
 }
 
-VPhysicWorld& VPhysicManagerPart::GetPhysicWorld()
+VPhysicManagerPart::PhysicWorld VPhysicManagerPart::GetPhysicWorld()
 {
-	return m_PhysicWorld;
+	return m_pPhysicWorld;
 }
 
 std::string VPhysicManagerPart::GetDefaultId()
 {
-	return "physicManager";
+	return "physicManagerPart";
 }
 
 

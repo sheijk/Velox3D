@@ -208,7 +208,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 		return;
     		
 	vuint* indexArray = m_FaceList.front()->GetBufferDescription()->GetIndexBufferArray();
-	
+
 	for(; i != mymap.GetMaterialFaceMap().end(); ++i)
 	{
 		//cast to resource pointer

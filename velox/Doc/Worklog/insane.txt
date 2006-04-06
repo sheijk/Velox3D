@@ -1,9 +1,23 @@
+Box
+
 Worklog von ins:
+-dQFromAxisAndAngle implementieren in math
+-Desctructors fuer VGeometry
+-klaren, warum RenderTexture nicht im namespace ist
+-neuen typ einfuegen float_t fuer konfigurierbare fliesskomma
+-klaeren, warum App::Shutdown 2x aufgerufen wird [done]
+-phyisk typen (float, double) defnierbar
+
+script makeapp graphics app holds old reference to v3dlib/math.h which is not existing
+Uebergeordnetes rigidbody wird bei anhaengen eines 2. entities ignoriert
 
 --------------------------------------------------------------------------------
 Personal Notes:
 
 TODO List:
+- add VCylinderMeshPart.cpp to svn
+-remove VPositionState because of obsoletness
+
 - Ode link warnings remove
 - make new sample application for physics with the scripts
 - Collision System of ode: propagate collision somehow into an entity part
@@ -25,6 +39,24 @@ TODO List:
 --------------------------------------------------------------------------------
 
 Done List:
+28.01.06
+- fixed car physics
+- cleaned up some sources
+
+21.01.06
+- implemented a torus mesh part
+- implemented suspension and joints to the racer project
+
+08.01.06
+- removed unneccassary part code in physic implementation
+- cleaned up own implenentation
+- changed some physic code
+- redisigned physic handling by manager
+- implemented first real physicmanager service
+
+17.12.05
+- physic utils ausgelagert
+
 30.10.05
 - fixed importer (hopefully final)
 - fixed several compiler warnings while rebuilding the project (this takes soo long :/ )

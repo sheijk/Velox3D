@@ -1,38 +1,38 @@
-#include <v3dLib/Physics/VPhysicGeometryPlane.h>
-#include <v3dLib/Physics/VPhysicSpace.h>
+#include <v3d/Physics/VGeometryPlane.h>
+#include <v3d/Physics/VSpace.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
-VPhysicGeometryPlane::VPhysicGeometryPlane()
+VGeometryPlane::VGeometryPlane()
 {
 	m_fDistance = 0;
 }
 
-VPhysicGeometryPlane::~VPhysicGeometryPlane()
+VGeometryPlane::~VGeometryPlane()
 {
 }
 
-void VPhysicGeometryPlane::CreatePlane(VPhysicSpace* in_SpaceState)
+void VGeometryPlane::CreatePlane(VSpace* in_SpaceState)
 {
 	m_GeomID = dCreatePlane (*in_SpaceState->GetSpaceID(), m_Normal.x, m_Normal.y, m_Normal.z, m_fDistance);
 }
 
-void VPhysicGeometryPlane::SetPlane(graphics::VVertex3f in_Normal,
+void VGeometryPlane::SetPlane(graphics::VVertex3f in_Normal,
 								   vfloat32 in_fDistance)
 {
 	m_Normal = in_Normal;
 	m_fDistance = -in_fDistance;
 }
 
-vfloat32 VPhysicGeometryPlane::GetPlaneDistance()
+vfloat32 VGeometryPlane::GetPlaneDistance()
 {
 	return m_fDistance;
 }
 
-graphics::VVertex3f VPhysicGeometryPlane::GetPlaneNormal()
+graphics::VVertex3f VGeometryPlane::GetPlaneNormal()
 {
 	return m_Normal;
 }

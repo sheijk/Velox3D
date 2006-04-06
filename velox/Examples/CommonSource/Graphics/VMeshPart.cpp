@@ -80,7 +80,7 @@ void VMeshPart::Update()
 	if( m_pRigidBodyPart != 0 )
 	{
 		//VVector3f pos = m_pRigidBodyPart->GetPosition();
-		VMatrix44f transform = m_pRigidBodyPart->GetTransform().GetAsMatrix();
+		VMatrix44f transform = m_pRigidBodyPart->GetTransform().AsMatrix();
 
 		// for all meshes, set position
 		for(MeshList::iterator model = m_Meshes.begin(); model != m_Meshes.end(); ++model)

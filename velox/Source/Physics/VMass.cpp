@@ -1,4 +1,4 @@
-#include <v3dLib/Physics/VPhysicJointGroup.h>
+#include <v3d/Physics/VMass.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -6,29 +6,44 @@ namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
 
-VPhysicJointGroup::VPhysicJointGroup()
+VMass::VMass()
 {
-	m_JointGroupID = dJointGroupCreate(0);
+	m_fDensity = 1.0f;
+	m_fMass = 1.0f;
+	m_fTotalMass = 1.0f;
+}
+VMass::~VMass()
+{
 }
 
-VPhysicJointGroup::~VPhysicJointGroup()
+void VMass::SetDensity(vfloat32 in_fDensity)
 {
-//	Destroy();
+	m_fDensity = in_fDensity;
 }
 
-void VPhysicJointGroup::Destroy()
+vfloat32 VMass::GetDensity()
 {
-	dJointGroupDestroy(m_JointGroupID);
+	return m_fDensity;
 }
 
-void VPhysicJointGroup::Empty()
+void VMass::SetMass(vfloat32 in_fMass)
 {
-	dJointGroupEmpty(m_JointGroupID);
+	m_fMass = in_fMass;
 }
 
-dJointGroupID* VPhysicJointGroup::GetJointGroupID()
+vfloat32 VMass::GetMass()
 {
-	return &m_JointGroupID;
+	return m_fMass;
+}
+
+void VMass::SetTotalMass(vfloat32 in_fTotalMass)
+{
+	m_fTotalMass = in_fTotalMass;
+}
+
+vfloat32 VMass::GetTotalMass()
+{
+	return m_fTotalMass;
 }
 //-----------------------------------------------------------------------------
 } // namespace physics

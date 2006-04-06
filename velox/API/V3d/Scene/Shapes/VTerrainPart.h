@@ -24,9 +24,14 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-private:
+	//changed here from private to public for racer demo --ins
+	resource::VResourceDataPtr<graphics::VVertexBuffer> GetVertexBuffer();
+	resource::VResourceDataPtr<graphics::VVertexBuffer> GetIndexBuffer();
+
 	vuint GetVertexCount() const;
 	vuint GetIndexCount() const;
+
+private:
 	vuint GetVertexNum(vuint x, vuint y) const;
 
 	void SetVertexCount(vuint in_nWidth, vuint in_nHeigth);

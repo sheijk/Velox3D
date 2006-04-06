@@ -34,7 +34,9 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="oded.lib opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/VeloxLib.lib"
+				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
 				IgnoreAllDefaultLibraries="FALSE"/>
 			<Tool
 				Name="VCMIDLTool"/>
@@ -397,6 +399,95 @@
 						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h">
 					</File>
 				</Filter>
+				<Filter
+					Name="Physics"
+					Filter="">
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VBody.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VBodyPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VGeometry.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VGeometryBox.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VGeometryMesh.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VGeometryPlane.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VGeometrySphere.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VJoint.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VJointGroup.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VJointHinge2.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VMass.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VOdeBody.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VPhysicManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VPhysics.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VSpace.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VState.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VStateBoxMass.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VStateListContainer.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VStateOrientation.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VStatePosition.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VStateSphereMass.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VWorld.h">
+					</File>
+					<Filter
+						Name="Bounding"
+						Filter="">
+						<File
+							RelativePath="..\..\Api\V3d\Physics\Bounding\IVBoundingVolumePart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingBoxVolumePart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingMesh.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingMeshVolumePart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingSphereVolumePart.h">
+						</File>
+					</Filter>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="V3dLib"
@@ -713,61 +804,6 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="Physics"
-					Filter="">
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicBody.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicBoxMassState.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometry.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometryBox.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometryPlane.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicGeometrySphere.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJoint.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointGroup.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicJointHinge2State.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicManagerPart.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicMass.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicObject.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicPositionState.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicSpace.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicSphereMassState.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicState.h">
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Physics\VPhysicWorld.h">
-					</File>
-				</Filter>
-				<Filter
 					Name="Property"
 					Filter="">
 					<File
@@ -1064,56 +1100,84 @@
 				Name="Implementation"
 				Filter="">
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicBody.cpp">
+					RelativePath="..\..\Source\Physics\VBody.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicBoxMassState.cpp">
+					RelativePath="..\..\Source\Physics\VBodyPart.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicGeometry.cpp">
+					RelativePath="..\..\Source\Physics\VGeometry.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicGeometryBox.cpp">
+					RelativePath="..\..\Source\Physics\VGeometryBox.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicGeometryPlane.cpp">
+					RelativePath="..\..\Source\Physics\VGeometryMesh.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicGeometrySphere.cpp">
+					RelativePath="..\..\Source\Physics\VGeometryPlane.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicJoint.cpp">
+					RelativePath="..\..\Source\Physics\VGeometrySphere.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicJointGroup.cpp">
+					RelativePath="..\..\Source\Physics\VJoint.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicJointHinge2State.cpp">
+					RelativePath="..\..\Source\Physics\VJointGroup.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp">
+					RelativePath="..\..\Source\Physics\VJointHinge2.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicMass.cpp">
+					RelativePath="..\..\Source\Physics\VMass.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicObject.cpp">
+					RelativePath="..\..\Source\Physics\VOdeBody.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicPositionState.cpp">
+					RelativePath="..\..\Source\Physics\VPhysicManager.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicSpace.cpp">
+					RelativePath="..\..\Source\Physics\VSpace.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicSphereMassState.cpp">
+					RelativePath="..\..\Source\Physics\VState.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicState.cpp">
+					RelativePath="..\..\Source\Physics\VStateBoxMass.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VPhysicWorld.cpp">
+					RelativePath="..\..\Source\Physics\VStateListContainer.cpp">
 				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VStateOrientation.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VStatePosition.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VStateSphereMass.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VWorld.cpp">
+				</File>
+				<Filter
+					Name="Bounding"
+					Filter="">
+					<File
+						RelativePath="..\..\Source\Physics\Bounding\VBoundingBoxVolumePart.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\Bounding\VBoundingMesh.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\Bounding\VBoundingMeshVolumePart.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\Bounding\VBoundingSphereVolumePart.cpp">
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
