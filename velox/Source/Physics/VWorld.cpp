@@ -10,7 +10,7 @@ namespace physics {
 VWorld::VWorld()
 {
 	m_Gravity.x = 0;
-	m_Gravity.y = -1.5f;
+	m_Gravity.y = -0.5f;
 	m_Gravity.z = 0;
 	m_fWorldStep = 0.05f;
 

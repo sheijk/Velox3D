@@ -15,5 +15,10 @@
 #include <V3d/Physics/VWorld.h>
 #include <V3d/Physics/VPhysicManager.h>
 #include <V3d/Physics/VJointHinge2.h>
+#include <V3d/Physics/Bounding/IVBoundingVolumePart.h>
+#include <V3d/Physics/Bounding/VBoundingBoxVolumePart.h>
+#include <V3d/Physics/Bounding/VBoundingMesh.h>
+#include <V3d/Physics/Bounding/VBoundingMeshVolumePart.h>
+#include <V3d/Physics/Bounding/VBoundingSphereVolumePart.h>
 //-----------------------------------------------------------------------------
 #endif // V3D_VPHYSICS_2006_02_15_H

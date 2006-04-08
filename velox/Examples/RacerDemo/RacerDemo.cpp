@@ -16,6 +16,7 @@
 #include <V3dLib/Utils/VCircleMoverPart.h>
 #include <V3d/Vfs.h>
 #include <V3d/Xml.h>
+#include <V3d/Physics/VPhysics.h>
 
 #include <sstream>
 #include <string>
@@ -32,6 +33,7 @@ using namespace v3d::scene;
 using namespace v3d::entity;
 using namespace v3d::utils;
 using namespace v3d::xml;
+using namespace v3d::physics;
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -138,6 +140,8 @@ private:
 	IVDevice* m_pDevice;
 	IVButton* m_pEscapeKey;
 	IVButton* m_pCamToggleKey;
+	IVButton* m_pF1Key;
+	IVButton* m_pF2Key;
 	VServicePtr<updater::IVUpdateManager> m_pUpdater;
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
@@ -146,6 +150,7 @@ private:
 	VSharedPtr<IVLightManager> m_pLightManager;
 	//VSharedPtr<VUpdateManagerPart> m_pUpdateManager;
 	VUpdateManagerPart* m_pUpdateManager;
+	VPhysicManagerPtr m_pPhysicManager;
 
 	IVDevice& Device();
 
@@ -174,6 +179,8 @@ private:
 
 	//	return pRoot;
 	//}
+
+	void CreateTerrainVolumePart(VTerrainPart* in_pTerrain);
 
 	VSharedPtr<VEntity> CreateWorld()
 	{
@@ -447,6 +454,118 @@ VSharedPtr<VEntity> LoadScene(const std::string& in_strFileName)
 }
 
 /**
+* @author ins
+*/
+VTerrainPart* FindTerrain(VSharedPtr<VEntity> in_Entity)
+{
+	VTerrainPart* terrain = 0;
+	VRangeIterator<VEntity> it = in_Entity->ChildIterator();
+
+	while(it.HasNext())
+	{
+		std::string name =  (*it).GetName();
+		if(name == "world")
+		{
+			VRangeIterator<VEntity> it2 = (*it).ChildIterator();
+			while(it2.HasNext())
+			{
+				std::string name2 = (*it2).GetName();
+				if(name2 == "terrain")
+				{
+					terrain = (*it2).GetPart<VTerrainPart>();
+				}
+				++it2;
+			}
+		}
+		++it;
+	}
+	return terrain;
+}
+
+//VEntity* FindWorld(VSharedPtr<VEntity> in_Entity)
+//{
+//	VTerrainPart* terrain = 0;
+//	VRangeIterator<VEntity> it = in_Entity->ChildIterator();
+//
+//	while(it.HasNext())
+//	{
+//		std::string name =  (*it).GetName();
+//		if(name == "world")
+//		{
+//			return &(*it);
+//		}
+//		++it;
+//	}
+//	return 0;
+//}
+
+/**
+ * @author ins
+ * @pre	valid pointer to terrain part
+ * @note creates a memory leak, indices will not be deleted
+ */
+void RacerDemo::CreateTerrainVolumePart(VTerrainPart* in_pTerrain)
+{
+	VSharedPtr<VBoundingMeshVolumePart> pBoundingVolume(new VBoundingMeshVolumePart);
+
+	vint size = in_pTerrain->GetIndexCount();
+	size = (size-2) * 3; //hack, does not take degenerated triangle into account
+	vint* pNewIndices = new vint[size];
+
+	vint* pIndices = (vint*)in_pTerrain->GetIndexBuffer()->GetBufferAddress();
+	vint nCount = 0;
+	int lastIndex1 = 0;
+	int lastIndex2 = 0;
+	int lastIndex3 = 0;
+	//create a index list out of the terrain strip WITHOUT degenerated triangles
+	for(int i = 0; i<in_pTerrain->GetIndexCount(); i++)
+	{
+		if(i==0) //first triangle copy data
+		{
+			pNewIndices[nCount] = pIndices[i];
+			nCount++;
+			pNewIndices[nCount] = pIndices[i+1];
+			nCount++;
+			pNewIndices[nCount] = pIndices[i+2];
+			nCount++;
+			i=2;
+			continue;
+		}
+		pNewIndices[nCount] = pIndices[i-1];
+		lastIndex1 = pNewIndices[nCount];
+		nCount++;
+
+		pNewIndices[nCount] = pIndices[i-2];
+		lastIndex2 = pNewIndices[nCount];
+		nCount++;
+
+		pNewIndices[nCount] = pIndices[i];
+		lastIndex3 = pNewIndices[nCount];
+		nCount++;
+
+		if(lastIndex1 == lastIndex2 || lastIndex2 == lastIndex3 || lastIndex1 == lastIndex3)
+		{
+			nCount -=3;
+			vuint a = 0;
+			i+=2;
+			/*pNewIndices[nCount-2] = 0;
+			pNewIndices[nCount-1] = 1;
+			pNewIndices[nCount] = 2;*/
+
+		}	
+	}
+
+	VBoundingMesh mesh((float*)in_pTerrain->GetVertexBuffer()->GetBufferAddress(), in_pTerrain->GetVertexCount(), 3* sizeof(vfloat32),
+		pNewIndices, nCount, 3 * sizeof(vint));
+
+	pBoundingVolume->SetBoundingMesh(mesh);
+	//we dont need to attach this by now [laziness]
+	//in_pTerrain->AddPart(pBoundingVolume);
+	m_pPhysicManager->CreateGeom(pBoundingVolume.Get());
+
+}
+
+/**
  * @author sheijk
  */
 vint RacerDemo::Main(std::vector<std::string> args)
@@ -510,10 +629,23 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	//	pRoot->AddChild(pWorld);
 	//		pWorld->AddChild(CreateTerrain());
 
+	m_pPhysicManager.Assign(new VPhysicManager());
+	m_pPhysicManager->RegisterToUpdater();
 
 	pRoot->Activate();
 	DumpInfo(*pRoot);
 
+
+	VTerrainPart* pTerrain = FindTerrain(pRoot);
+	m_pF1Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF1);
+	m_pF2Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF2);
+
+	if(pTerrain)
+	{
+		CreateTerrainVolumePart(pTerrain);
+	}
+
+	
 	//TODO: support im device oder so
 	glEnable(GL_FOG);
 	vfloat32 fogColor2[4] = { fogColor.red, fogColor.green, fogColor.blue, 1.0f };
@@ -561,6 +693,83 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 		if( m_pEscapeKey->IsDown() )
 			m_pSystem->SetStatus(false);
+
+		if( m_pF1Key->IsDown() )
+		{
+			float f = rand() % 10;
+			f+=0.1f; //excluding 0
+
+			VSharedPtr<VEntity> pEntity(new VEntity());
+			VSharedPtr<VRigidBodyPart> pRidgidPart(new VRigidBodyPart());
+			VSharedPtr<VBoundingSphereVolumePart> pBoundingVolume(new VBoundingSphereVolumePart());
+		
+			pBoundingVolume->GetBoundingSphere()->SetRadius(f);
+			pEntity->AddPart(pBoundingVolume);
+
+			VSharedPtr<VBodyPart> pPhysicPart = m_pPhysicManager->Create(
+			pBoundingVolume.Get(), f);
+
+			//pRidgidPart->SetPosition(VVector3f(0,20,0));
+			pRidgidPart->SetPosition(m_pRootShooting->GetCamera()->GetPosition());
+			//set the position of the body, cos the entity system does not work by now
+			pPhysicPart->GetBody()->SetPosition(
+				graphics::VVertex3f(
+				m_pRootShooting->GetCamera()->GetPosition().GetX(),
+				m_pRootShooting->GetCamera()->GetPosition().GetY(),
+				m_pRootShooting->GetCamera()->GetPosition().GetZ()
+				)
+				);
+
+			pEntity->AddPart(pPhysicPart);
+			pEntity->AddPart(pRidgidPart);
+
+			//pEntity->AddPart(SharedPtr(new VArrowMeshPart(VColor4f(1,0,1,1))));
+			pEntity->AddPart(SharedPtr(new VSphereMeshPart()));
+			
+			pRoot->AddChild(pEntity);
+			//FindWorld(pRoot)->AddChild(pEntity);
+			pEntity->Activate();
+			//DumpInfo(*pRoot);
+
+		}
+		//TODO: write a VBoxMeshPart
+		//if( m_pF2Key->IsDown() )
+		//{
+		//	
+		//	float f = rand() % 10;
+		//	f+=0.1f; //excluding 0
+
+		//	VSharedPtr<VEntity> pEntity(new VEntity());
+		//	VSharedPtr<VRigidBodyPart> pRidgidPart(new VRigidBodyPart());
+		//	VSharedPtr<VBoundingBoxVolumePart> pBoundingVolume(new VBoundingBoxVolumePart());
+
+		//	pBoundingVolume->GetBoundingBox()->SetSize(VVector3f(1+f,2-f,1+f));
+		//	pEntity->AddPart(pBoundingVolume);
+
+		//	VSharedPtr<VBodyPart> pPhysicPart = m_pPhysicManager->Create(pBoundingVolume.Get(), f);
+		//	//pRidgidPart->SetPosition(VVector3f(0,20,0));
+		//	pRidgidPart->SetPosition(m_pRootShooting->GetCamera()->GetPosition());
+		//	//set the position of the body, cos the entity system does not work by now
+		//	pPhysicPart->GetBody()->SetPosition(
+		//		graphics::VVertex3f(
+		//		m_pRootShooting->GetCamera()->GetPosition().GetX(),
+		//		m_pRootShooting->GetCamera()->GetPosition().GetY(),
+		//		m_pRootShooting->GetCamera()->GetPosition().GetZ()
+		//		)
+		//		);
+
+		//	pEntity->AddPart(pPhysicPart);
+		//	pEntity->AddPart(pRidgidPart);
+
+		//	//pEntity->AddPart(SharedPtr(new VArrowMeshPart(VColor4f(1,0,1,1))));
+		//	pEntity->AddPart(SharedPtr(new VBoxMesh(1+f,2-f,1+f)));
+
+		//	pRoot->AddChild(pEntity);
+		//	//FindWorld(pRoot)->AddChild(pEntity);
+		//	pEntity->Activate();
+		//	//DumpInfo(*pRoot);
+
+		//}
 	}
 	m_pUpdater->Stop();
 

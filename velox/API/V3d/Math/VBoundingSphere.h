@@ -23,7 +23,7 @@ public:
 	VBoundingSphere()
 	{
 		m_Position = VVector3f(0.0f, 0.0f, 0.0f);
-		m_fRadius = 0.0f;
+		m_fRadius = 1.0f;
 	}
 
 	VBoundingSphere(VVector3f in_Position, vfloat32 in_Radius) :
