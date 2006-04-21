@@ -39,6 +39,8 @@ public:
 
 	VTypeInfo GetTypeId() { return m_pData->GetTypeId(); }
 
+	vbool operator==(void* ptr) const;
+	vbool operator!=(void* ptr) const;
 private:
 	TypedDataPtr m_pData;
 };
@@ -56,6 +58,17 @@ VResourceDataPtr<T> GetMutableResourceData(VStringParam in_strResourceName);
 //}
 
 //-----------------------------------------------------------------------------
+template<typename T>
+vbool VResourceDataPtr<T>::operator==(void* ptr) const
+{
+	return m_pData == ptr;
+}
+
+template<typename T>
+vbool VResourceDataPtr<T>::operator!=(void* ptr) const
+{
+	return m_pData != ptr;
+}
 
 template<typename T>
 struct VResDataAccessorUtil

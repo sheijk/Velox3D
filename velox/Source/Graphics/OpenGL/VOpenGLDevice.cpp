@@ -23,6 +23,8 @@
 
 #include <V3d/Graphics/VDeviceCaps.h>
 
+#include <V3d/Graphics/IVGraphicsService.h>
+
 #include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -133,6 +135,12 @@ VOpenGLDevice::VOpenGLDevice(
 	SetDisplay();
 
 	RecalcModelViewMatrix();
+
+	VGraphicsServicePtr pGfxService;
+	if( pGfxService->GetMainDevice() == 0 )
+	{
+		pGfxService->SetMainDevice(this);
+	}
 
 	m_bActive = false;
 }

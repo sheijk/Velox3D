@@ -99,3 +99,15 @@ vbool operator!=(const VSharedPtr<T>& left, const VSharedPtr<T2>& right)
 {
 	return left.Get() != right.Get();
 }
+
+template<typename T>
+vbool operator==(const VSharedPtr<T>& left, void* right)
+{
+	return left.Get() == right;
+}
+
+template<typename T>
+vbool operator!=(const VSharedPtr<T>& left, void* right)
+{
+	return left.Get() != right;
+}

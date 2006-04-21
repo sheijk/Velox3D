@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+	
+		<renderPass> 
+			<state name="color">
+				<param name="red" value="1.0" />
+				<param name="green" value="1.0" />
+				<param name="blue" value="0.0" />
+				<param name="alpha" value="0.0" />
+			</state>
+
+			<!-- state name="vertex-program">
+				<param name="res" value="/edit/mat/simple.vert" />
+			</state>
+			<state name="fragment-program">
+				<param name="res" value="/edit/mat/red.frag" />
+			</state -->
+			
+			<state name="texture">
+				<param name="res" value="/someSubResource" />
+			</state>
+		</renderPass>
+		
+	</shaderPath>
+</effect>
+

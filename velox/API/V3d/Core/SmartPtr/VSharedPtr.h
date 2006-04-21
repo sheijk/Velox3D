@@ -117,6 +117,12 @@ vbool operator==(const VSharedPtr<T>& left, const VSharedPtr<T2>& right);
 template<typename T, typename T2>
 vbool operator!=(const VSharedPtr<T>& left, const VSharedPtr<T2>& right);
 
+template<typename T>
+vbool operator==(const VSharedPtr<T>& left, void* right);
+
+template<typename T>
+vbool operator!=(const VSharedPtr<T>& left, void* right);
+
 //-----------------------------------------------------------------------------
 #include "VSharedPtr.inl"
 //-----------------------------------------------------------------------------

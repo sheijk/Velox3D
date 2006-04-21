@@ -38,6 +38,8 @@
 
 #include "WindowService/VWindowManagerWin32.h"
 
+#include "Graphics/OpenGL/VGraphicsService.h"
+
 #include "Error/VErrorConsoleListener.h"
 #include "Error/VErrorService.h"
 #include <v3d/Utils/VAllFilter.h>
@@ -87,6 +89,8 @@ class VVeloxModules : public v3d::VModuleBase
 
 	// system
 	VSharedPtr<system::VSystemManager> g_pSystemManager;
+
+	VSharedPtr<graphics::VGraphicsService> g_pGraphicsService;
 
 	// image
 	VSharedPtr<VImageFactory> g_pImageFactory;
@@ -184,6 +188,8 @@ void VVeloxModules::Initialize()
 	// window
 	g_pWindowManagerWin.Assign(new VWindowManagerWin32());
 
+	g_pGraphicsService.Assign(new VGraphicsService());
+
 	// error
 	// create log devices
 	g_pConsoleListener.Assign( new VErrorConsoleListener() );
@@ -223,14 +229,11 @@ void VVeloxModules::Shutdown()
 	g_pPropertyManager.Release();
 
 	// error
-	//unregister debug loggers
 	g_pErrorService->UnregisterListener( g_pConsoleListener.Get() );
-
-	// delete debug loggers
 	g_pConsoleListener.Release();
-
-	// delete and unregister service object
 	g_pErrorService.Release();
+
+    g_pGraphicsService.Release();
 
 	// window
 	g_pWindowManagerWin.Release();

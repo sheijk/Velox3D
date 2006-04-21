@@ -304,7 +304,7 @@ private:
 		pRBPart->SetPosition(VVector3f(0, -100, 0));
 		pEntity->AddPart(pRBPart);
 
-		if( in_pParent.Get() != 0 )
+		if( in_pParent != 0 )
 		{
 			in_pParent->AddChild(pEntity);
 		}

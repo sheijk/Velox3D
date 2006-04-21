@@ -54,26 +54,6 @@ void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message,
 }
 
 namespace {
-	//class VSphereMeshParser : public entity::VGenericPartParser
-	//{
-	//public:
-	//	VSphereMeshParser()
-	//		: VGenericPartParser()
-	//	{
-	//	}
-
-	//	virtual VSharedPtr<entity::IVPart> CreatePart()
-	//	{
-	//		return SharedPtr(new VSphereMeshPart());
-	//	}
-
-	//	virtual std::string GetType() const
-	//	{
-	//		return GetTypeInfo<VSphereMeshPart>().GetName();
-	//	}
-	//};
-
-	//VSphereMeshParser parser;
 	entity::VPartParser<VSphereMeshPart> g_SphereMeshParser;
 }
 

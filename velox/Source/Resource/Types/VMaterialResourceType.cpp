@@ -14,6 +14,8 @@
 #include <V3d/Core/RangeIter.h>
 #include <V3d/Resource/Types/VTextFile.h>
 
+#include <V3dLib/Graphics/Materials/EffectUtils.h>
+
 #include <V3d/Core/DebugUtils.h>
 
 #include <V3dLib/Graphics/Importer/VEffectLoader.h>
@@ -87,25 +89,32 @@ VRangeIterator<VTypeInfo> VMaterialResourceType::ManagedTypes()
 VMaterial* VMaterialResourceType::CreateMaterial(
 	const VShaderPath& in_Technique, std::string in_ResourceName)
 {
-	VMaterial::PassList passes;
-	passes.resize(in_Technique.GetRenderPassCount());
-	
-	for(vuint passNum = 0; passNum < in_Technique.GetRenderPassCount(); ++passNum)
+	try
 	{
-        VRenderStateList* pPass = CreatePass(
-			in_Technique.RenderPass(passNum), in_ResourceName);
+		VMaterial::PassList passes;
+		passes.resize(in_Technique.GetRenderPassCount());
+		
+		for(vuint passNum = 0; passNum < in_Technique.GetRenderPassCount(); ++passNum)
+		{
+			VRenderStateList* pPass = CreatePass(
+				in_Technique.RenderPass(passNum), in_ResourceName);
 
-		if( pPass != 0 )
-		{
-            passes[passNum].Assign(pPass);
+			if( pPass != 0 )
+			{
+				passes[passNum].Assign(pPass);
+			}
+			else
+			{
+				return 0;
+			}
 		}
-		else
-		{
-			return 0;
-		}
+
+		return new VMaterial(passes);
 	}
-
-	return new VMaterial(passes);
+	catch(VException& e)
+	{
+		return 0;
+	}
 }
 
 VRenderStateList* VMaterialResourceType::CreatePass(
@@ -186,11 +195,19 @@ VMaterialResourceType::CreatedMaterial
 			++techniqueNum;
 		}
 
-		if( pMaterial != 0 )
+		// no material could be created
+		if( pMaterial == 0 )
 		{
-			result.pMaterial = pMaterial;
-			result.typeInfo = GetTypeInfo<IVMaterial>();
+			VShaderPath path;
+			VRenderPass& pass(path.AddRenderPass());
+			pass.AddState(DefaultColorState(1.0f, 0, 0, 1));
+			pMaterial = CreateMaterial(path, in_pResource->GetQualifiedName());
+
+			V3D_ASSERT(pMaterial != 0);
 		}
+
+		result.pMaterial = pMaterial;
+		result.typeInfo = GetTypeInfo<IVMaterial>();
 	}
 	else if( IsEffectFile( in_pResource->GetData<VFileName>()->AsString() ) )
 	{
@@ -310,6 +327,7 @@ void VMaterialResourceType::NotifyChange(
 	{
 		UpdateMaterial(in_pResource);
 	}
+	//TODO: update _all_ materials instead of only one
 	else if( m_DependantResources.find(in_pResource->GetQualifiedName())
 		!= m_DependantResources.end() )
 	{

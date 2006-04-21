@@ -218,31 +218,10 @@
 						Name="SmartPtr"
 						Filter="">
 						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VExclusiveOwnerPol.inl">
+							RelativePath="..\..\Api\V3d\Core\SmartPtr\VAutoPtr.h">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Core\SmartPtr\VGuards.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VPointerStorage.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VPointerStorage.inl">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountPol.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountPol.inl">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VRefCountSharedStorage.inl">
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Core\SmartPtr\VServicePtr.h">
@@ -252,12 +231,6 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Core\SmartPtr\VSharedPtr.inl">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VSmartPtr.h">
-						</File>
-						<File
-							RelativePath="..\..\Api\V3d\Core\SmartPtr\VSmartPtr.inl">
 						</File>
 					</Filter>
 					<Filter

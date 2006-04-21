@@ -9,6 +9,10 @@
 
 #include <V3d/Scene/VDefaultRenderStepPart.h>
 #include <V3d/Scene/IVLightManager.h>
+
+#include <V3d/Graphics/IVGraphicsService.h>
+
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -19,6 +23,10 @@ using namespace resource;
 using namespace graphics;
 using namespace entity;
 using namespace math;
+
+namespace {
+	const std::string g_strRenderTargetPropertyName = "render-target";
+}
 
 /**
  * standard c'tor
@@ -208,6 +216,26 @@ void VMirrorShooting::SetRenderTargetResource(const std::string& in_strResourceN
 {
 	VResourceId res(in_strResourceName.c_str());
 
+	if( ! res->ContainsData<IVDevice>() )
+	{
+//TODO:
+//plane aus rigid body part berechnen
+//resource bei bedarf erzeugen (?)
+
+		graphics::VGraphicsServicePtr pGfxService;
+
+		graphics::VDisplaySettings settings;
+		settings.SetSize(512, 512);
+
+		graphics::IVRenderContext* pRenderContext =
+			pGfxService->GetMainDevice()->CreateOffscreenContext(&settings);
+
+		res->AddData(pRenderContext);
+
+		//VAutoPtr<IVDevice> device = pGfxService->CreateOffscreenDevice(settings);
+		//res->AddData(device.DropOwnership());
+	}
+
 	m_pRenderTarget = res->GetMutableData<IVDevice>();
 }
 
@@ -265,6 +293,59 @@ math::VPlane VMirrorShooting::GetPlane() const
 void VMirrorShooting::SetPlane(const math::VPlane& in_Plane)
 {
 	m_Plane = in_Plane;
+}
+
+void VMirrorShooting::OnMessage(
+	const messaging::VMessage& in_Message, 
+	messaging::VMessage* in_pAnswer)
+{
+	using std::string;
+
+	if( ! in_Message.HasProperty("type") )
+		return;
+
+	string request = in_Message.Get("type").Get<string>();
+
+	if( request == "getSettings" )
+	{
+		if( in_pAnswer == 0 )
+			return;
+
+		std::string renderTargetResource = "";
+		if( m_pRenderTarget != 0 &&
+			m_pRenderTarget.GetEnclosingResource() != 0 )
+		{
+			renderTargetResource = m_pRenderTarget.GetEnclosingResource()->GetQualifiedName();
+		}
+
+		in_pAnswer->AddProperty(g_strRenderTargetPropertyName, renderTargetResource);
+	}
+	else if( request == "update" )
+	{
+		const string name = in_Message.Get("name").Get<string>();
+		const string value = in_Message.Get("value").Get<string>();
+
+		if( name == g_strRenderTargetPropertyName )
+		{
+			SetRenderTargetResource(value);
+		}
+	}
+}
+
+namespace {
+	using namespace v3d::entity;
+
+	class Parser : public VPartParser<VMirrorShooting>
+	{
+	public:
+		virtual VSharedPtr<IVPart> CreatePart()
+		{
+			return SharedPtr(new VMirrorShooting());
+		}
+	};
+
+	Parser g_Parser;
+	//v3d::entity::VPartParser<VMirrorShooting> g_parser;
 }
 
 //-----------------------------------------------------------------------------

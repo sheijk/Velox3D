@@ -187,6 +187,9 @@
 						RelativePath="..\..\Api\V3d\Graphics\IVDevice.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Graphics\IVGraphicsService.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Graphics\IVMaterial.h">
 					</File>
 					<File
@@ -527,6 +530,12 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VDeviceCaps.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VGraphicsService.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VGraphicsService.h">
 					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VImmediateVertexStream.cpp">

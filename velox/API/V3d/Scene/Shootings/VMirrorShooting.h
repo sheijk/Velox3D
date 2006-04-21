@@ -44,6 +44,9 @@ public:
 	virtual void UpdateAndCull();
 
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer);
+
 	virtual graphics::IVDevice* GetRenderTarget();
 	virtual graphics::IVCamera* GetCamera();
 	virtual scene::IVGraphicsPart* GetScene();
