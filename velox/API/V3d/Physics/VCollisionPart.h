@@ -1,38 +1,30 @@
-#ifndef V3D_VBODYPART_2006_02_18_H
-#define V3D_VBODYPART_2006_02_18_H
+#ifndef V3D_VCOLLISIONPART_2006_04_22_H
+#define V3D_VCOLLISIONPART_2006_04_22_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Entity.h>
-#include <V3dLib/EntityParts/VRigidBodyPart.h> //todo: sollte da verschwinden und in v3d/
-#include <V3d/Physics/VBody.h>
-#include <V3dLib/EntityParts/VUpdateablePart.h> //move away
+#include <V3d/Physics/VGeometry.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
 
 /**
- * a body part connecting VBody to the entity system
+ * This part is used for collision only objects
  */
-//class VBody;
 class VPhysicManagerPart;
 class IVBoundingVolumePart;
 
-class VBodyPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VCollisionPart : public entity::VPartBase
 {
 public:
-	typedef VSharedPtr<VBody> BodyPtr;
 	
-	VBodyPart(BodyPtr in_pBody);
-	VBodyPart();
+	VCollisionPart();
 
-	virtual ~VBodyPart();
-	BodyPtr GetBody();
-
+	
 	// IVPart derived
 	void Activate();
 	void Deactivate();
-	void Update(vfloat32 in_fSeconds);
-
+	
 	static std::string GetDefaultId();
 
 	virtual const VTypeInfo& GetTypeInfo() const 
@@ -41,22 +33,19 @@ public:
 private:
 
 	void Create();
+	vbool m_bActive;
 
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;	
 	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
 	entity::VPartConnection<physics::IVBoundingVolumePart> m_pVolumePart;
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
-	
 
-	BodyPtr m_pBody;
-	vfloat32 m_fMass;
-	VVector3f m_Position;
+	VSharedPtr<physics::VGeometry> m_pGeometry;
+		
 };
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
-V3D_TYPEINFO_WITHPARENT(v3d::physics::VBodyPart, v3d::entity::IVPart);
+V3D_TYPEINFO_WITHPARENT(v3d::physics::VCollisionPart, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
-#endif // V3D_VBODYPART_2006_02_18_H
+#endif //V3D_VCOLLISIONPART_2006_04_22_H

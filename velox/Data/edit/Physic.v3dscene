@@ -1,0 +1,74 @@
+<entity name="Physic">
+	<part type="v3d::scene::VNaiveSceneManagerPart"/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)"/>
+	<part type="v3d::entity::VUpdateManagerPart"/>
+	<part type="v3d::scene::VNaiveLightManager"/>
+	<part type="v3d::utils::VInputPart"/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart" material=""/>
+	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-0.5,0)" MaxContacts="40" ObjectCount="5" Slip1="0.1" Slip2="0.1" SoftCFM="0.3" SoftERP="0.5" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="0.5" SurfaceMu2="0.5" UpdateStep="0.05"/>
+	<part type="shooting"/>
+	<entity name="ambient">
+		<entity name="editorCam">
+			<part type="v3d::entity::VRigidBodyPart" pos="(-8,51,180)"/>
+			<part type="v3d::utils::VCameraPart"/>
+			<part type="v3d::utils::VTrackballPart"/>
+		</entity>
+		<entity name="debug">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial"/>
+		</entity>
+		<entity name="sun">
+			<part type="v3d::entity::VRigidBodyPart" pos="(100,100,0)"/>
+			<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(0.8,0.3,0,1)" position="(100,100,0)" specularColor="(0,1,0,1)" w="1"/>
+			<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="1"/>
+		</entity>
+	</entity>
+	<entity name="world">
+		<entity name="terrain">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::scene::VTerrainPart" material="/edit/mat/phong.v3dmat"/>
+			<part type="v3d::physics::VBoundingTerrainVolumePart" IndexCount="388626" IndexStride="12" NormalCount="0" NormalStride="0" VertexCount="65536" VertexStride="12"/>
+			<part type="v3d::physics::VCollisionPart" Active="true"/>
+		</entity>
+	</entity>
+	<entity name="sphere">
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="3"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,22.9441,0)"/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="3"/>
+		<part type="v3d::physics::VBodyPart" Mass="1" Position="(0,22.9441,0)"/>
+	</entity>
+	<entity name="sphere2">
+		<part type="v3d::physics::VBodyPart" Mass="1" Position="(10,30,20)"/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="7"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(10,30,20)"/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="7"/>
+	</entity>
+	<entity name="box">
+		<part type="v3d::entity::VRigidBodyPart" pos="(1,30,12)"/>
+		<part type="v3d::physics::VBodyPart" Mass="1" Position="(1,30,12)"/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(10,10,10)" MinPoint="(0,0,0)" material="/edit/mat/phong.v3dmat"/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(10,10,10)" MaxPoint="(10,10,10)" MinPoint="(0,0,0)"/>
+	</entity>
+	<entity name="sphere3">
+		<part type="v3d::physics::VBodyPart" Mass="1" Position="(-20,30,0)"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-20,30,0)"/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="5"/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="5"/>
+	</entity>
+	<entity name="box2">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-26.3464,16.5483,-0.364462)"/>
+		<part type="v3d::physics::VBodyPart" Mass="1" Position="(-26.3464,16.5483,-0.364462)"/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(20,10,30)" MaxPoint="(20,10,30)" MinPoint="(0,0,0)"/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(20,10,30)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat"/>
+	</entity>
+	<entity name="Collision">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+		<part type="v3d::physics::VCollisionPart" Active="true"/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="20"/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="20"/>
+	</entity>
+	<entity name="ground">
+		<part type="v3d::physics::VCollisionPart" Active="true"/>
+		<part type="v3d::physics::VBoundingPlaneVolumePart" Distance="10" Normal="(0,1,0)"/>
+	</entity>
+</entity>

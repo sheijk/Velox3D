@@ -7,7 +7,8 @@
 #include "VBoundingMesh.h"
 #include "IVBoundingVolumePart.h"
 //-----------------------------------------------------------------------------
-namespace v3d { 
+namespace v3d {
+namespace physics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
@@ -22,6 +23,7 @@ public:
 	math::VBoundingSphere* GetBoundingSphere();
 	math::VBoundingMesh* GetBoundingMesh();
 	vbool HasBoundingMesh();
+	math::VPlane* GetBoundingPlane();
 	
 	virtual void SetBoundingMesh(VBoundingMesh in_BoundingMesh);
 
@@ -32,12 +34,14 @@ public:
 
 private:
 
+	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 	math::VBoundingMesh m_BoundingMesh;
 };
 
 //-----------------------------------------------------------------------------
+}
 } // namespace v3d::
 //-----------------------------------------------------------------------------
-V3D_TYPEINFO_WITHPARENT(v3d::VBoundingMeshVolumePart, v3d::IVBoundingVolumePart);
+V3D_TYPEINFO_WITHPARENT(v3d::physics::VBoundingMeshVolumePart, v3d::physics::IVBoundingVolumePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VBOUNDINGSPHEREVOLUMEPART_12_28_05

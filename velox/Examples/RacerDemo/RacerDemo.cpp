@@ -706,8 +706,9 @@ vint RacerDemo::Main(std::vector<std::string> args)
 			pBoundingVolume->GetBoundingSphere()->SetRadius(f);
 			pEntity->AddPart(pBoundingVolume);
 
-			VSharedPtr<VBodyPart> pPhysicPart = m_pPhysicManager->Create(
+			VSharedPtr<VBody> pBody = m_pPhysicManager->Create(
 			pBoundingVolume.Get(), f);
+			VSharedPtr<VBodyPart> pPhysicPart(new VBodyPart(pBody));
 
 			//pRidgidPart->SetPosition(VVector3f(0,20,0));
 			pRidgidPart->SetPosition(m_pRootShooting->GetCamera()->GetPosition());

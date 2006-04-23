@@ -7,7 +7,6 @@
 #include <v3d/math/VBoundingBox.h>
 #include <v3d/math/VBoundingSphere.h>
 #include <v3d/Physics/Bounding/VBoundingMesh.h>
-
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -18,6 +17,7 @@ using namespace v3d::math;
 
 VPhysicManager::VPhysicManager()
 {
+	
 }
 VPhysicManager::~VPhysicManager()
 {
@@ -25,25 +25,25 @@ VPhysicManager::~VPhysicManager()
 
 void VPhysicManager::RegisterToUpdater()
 {
-	Register();
+	//Register();
 }
 
 void VPhysicManager::UnregisterToUpdater()
 {
-	Unregister();
+	//Unregister();
 }
 
 void VPhysicManager::Update(vfloat32 in_fSeconds)
 {
 	m_World.Update();
 
-	typedef BodyPartList::iterator Iter;
+	typedef BodyList::iterator Iter;
 	Iter begin = m_BodyList.begin();
 	Iter end = m_BodyList.end();
 
 	for(; begin != end; ++begin)
 	{
-		(*begin)->Update();
+ 		(*begin)->Update();
 	}
 }
 
@@ -57,10 +57,11 @@ void VPhysicManager::Deactivate()
 	;
 }
 
-void VPhysicManager::CreateGeom(IVBoundingVolumePart* in_pBoundingPart)
+VPhysicManager::Geometry VPhysicManager::CreateGeom(IVBoundingVolumePart* in_pBoundingPart)
 {
 	VBoundingBox* pBox = in_pBoundingPart->GetBoundingBox();
 	VBoundingSphere* pSphere = in_pBoundingPart->GetBoundingSphere();
+	math::VPlane* pPlane = in_pBoundingPart->GetBoundingPlane();
 	VBoundingMesh* pMesh = 0;
 
 	if( in_pBoundingPart->HasBoundingMesh() )
@@ -69,28 +70,56 @@ void VPhysicManager::CreateGeom(IVBoundingVolumePart* in_pBoundingPart)
 	}	
 
 	if(pBox)
-		;////CreateBoxGeom(in_fMass, pBox->GetLength());
+		return CreateBoxGeom(pBox);
 	if(pSphere)
-		;//return CreateSphere(in_fMass, pSphere->GetRadius());
+		return CreateSphereGeom(pSphere);
 	if(pMesh)
-		CreateMeshGeom(pMesh);
+		return CreateMeshGeom(pMesh);
+	if(pPlane)
+		return CreatePlane(pPlane->GetNormal(), pPlane->GetDistance());
+	
+	V3D_THROW(VException, "no valid bounding part found");
+	Geometry retValue;
+	retValue.Assign(0);
+	return retValue;
 }
 
-void VPhysicManager::CreateMeshGeom(VBoundingMesh* in_pBoundingMesh)
+VPhysicManager::Geometry VPhysicManager::CreateBoxGeom(VBoundingBox* in_pBoundingBox)
 {
-	VGeometryMesh* pGeometryMesh(new VGeometryMesh(*in_pBoundingMesh));
+	VSharedPtr<VGeometryBox> pGeometryBox(new VGeometryBox());
+	pGeometryBox->SetWidth(in_pBoundingBox->GetLength().GetX());
+	pGeometryBox->SetHeight(in_pBoundingBox->GetLength().GetY());
+	pGeometryBox->SetLength(in_pBoundingBox->GetLength().GetZ());
 
-	pGeometryMesh->Create(m_World.GetSpace());
+	pGeometryBox->CreateBox(m_World.GetSpace());
+	return pGeometryBox;
+}
+VPhysicManager::Geometry VPhysicManager::CreateMeshGeom(VBoundingMesh* in_pBoundingMesh)
+{
+	VSharedPtr<VGeometryMesh> pGeometry(new VGeometryMesh(*in_pBoundingMesh));
+	
+	pGeometry->Create(m_World.GetSpace());
+	return pGeometry;
+}
+
+VPhysicManager::Geometry VPhysicManager::CreateSphereGeom(VBoundingSphere* in_pBoundingSphere)
+{
+	VSharedPtr<VGeometrySphere> pGeometrySphere(new VGeometrySphere());
+	pGeometrySphere->SetSphereRadius(in_pBoundingSphere->GetRadius());
+
+	pGeometrySphere->CreateSphere(m_World.GetSpace());
+	return pGeometrySphere;
 }
 
 VPhysicManager::BodyPtr VPhysicManager::CreateBody()
 {
 	//body will take ownership of odeBody
-	VOdeBody* odeBody = new VOdeBody();
-	odeBody->Create(&m_World);
-	VSharedPtr<VBody> body(new VBody(odeBody));
-	VSharedPtr<VBodyPart> bodyPart(new VBodyPart(body));
-    return bodyPart;
+	VOdeBody* pOdeBody = new VOdeBody();
+	pOdeBody->Create(&m_World);
+	BodyPtr pBody(new VBody(pOdeBody));
+	//VSharedPtr<VBodyPart> bodyPart(new VBodyPart(body));
+    //return bodyPart;
+	return pBody;
 }
 
 VPhysicManager::BodyPtr VPhysicManager::Create(IVBoundingVolumePart* in_pBoundingPart,
@@ -121,37 +150,37 @@ VPhysicManager::BodyPtr VPhysicManager::CreateSphere(
 	vfloat32 in_fRadius
 	)
 {
-	BodyPtr body = CreateBody();
+	BodyPtr pBody = CreateBody();
 
 	//physic stuff
-	VStateSphereMass* pMassState(new VStateSphereMass(body->GetBody()->GetOdeBody()));
-	VGeometrySphere* pSphereGeometry(new VGeometrySphere());
+	VStateSphereMass* pMassState(new VStateSphereMass(pBody->GetOdeBody())); //FIXME: no deletion!!!!!!!!!
+	VGeometrySphere* pSphereGeometry(new VGeometrySphere());//FIXME: no deletion!!!!!!!!!
 	//assign values
 	pMassState->SetMass(in_fMass);
 	pMassState->SetRadius(in_fRadius);
-	body->GetBody()->Add(pMassState);
+	pBody->Add(pMassState);
 	
 	pSphereGeometry->SetSphereRadius(in_fRadius);
 	pSphereGeometry->CreateSphere(m_World.GetSpace());
 
-	body->GetBody()->SetCollisionMesh(pSphereGeometry);
+	pBody->SetCollisionMesh(pSphereGeometry);
 	
-	m_BodyList.push_back(body.Get());
+	m_BodyList.push_back(pBody);
 	
-	return body;
+	return pBody;
 }
 
 VPhysicManager::BodyPtr VPhysicManager::CreateBox(
 	vfloat32 in_fMass,
 	VVector3f in_Expansion)
 {
-	BodyPtr body = CreateBody();
+	BodyPtr pBody = CreateBody();
 
-	VStateBoxMass* pMassState(new VStateBoxMass(body->GetBody()->GetOdeBody()));
-	VGeometryBox* pGeometryBox(new VGeometryBox());
+	VStateBoxMass* pMassState(new VStateBoxMass(pBody->GetOdeBody())); //!!!!!
+	VGeometryBox* pGeometryBox(new VGeometryBox());//!!!
 
 	pMassState->SetMass(in_fMass);
-	pMassState->SetLength(in_Expansion[0]);
+	pMassState->SetLength(in_Expansion[0]); //fix this settings!!
 	pMassState->SetWidth(in_Expansion[1]);
 	pMassState->SetHeight(in_Expansion[2]);
 
@@ -160,22 +189,21 @@ VPhysicManager::BodyPtr VPhysicManager::CreateBox(
 	pGeometryBox->SetHeight(in_Expansion[2]);
 
 	pGeometryBox->CreateBox(m_World.GetSpace());
-	body->GetBody()->Add(pMassState);
+	pBody->Add(pMassState);
 	
-	body->GetBody()->SetCollisionMesh(pGeometryBox);
+	pBody->SetCollisionMesh(pGeometryBox);
 
-	m_BodyList.push_back(body.Get());
-		
-	return body;
+	m_BodyList.push_back(pBody);
+	return pBody;
 }
 
 VPhysicManager::BodyPtr VPhysicManager::CreateMesh(
 	vfloat32 in_fMass,
 	VBoundingMesh* in_BoundingMesh)
 {
-	BodyPtr body = CreateBody();
+	BodyPtr pBody = CreateBody();
 
-	VStateBoxMass* pMassState(new VStateBoxMass(body->GetBody()->GetOdeBody()));
+	VStateBoxMass* pMassState(new VStateBoxMass(pBody->GetOdeBody()));
 	VGeometryMesh* pGeometryMesh(new VGeometryMesh(*in_BoundingMesh));
 
 	pMassState->SetMass(in_fMass);
@@ -185,15 +213,15 @@ VPhysicManager::BodyPtr VPhysicManager::CreateMesh(
 	//pGeometryBox->SetHeight(in_Expansion[2]);
 
 	pGeometryMesh->Create(m_World.GetSpace());
-	body->GetBody()->Add(pMassState);
-	body->GetBody()->SetCollisionMesh(pGeometryMesh);
+	pBody->Add(pMassState);
+	pBody->SetCollisionMesh(pGeometryMesh);
 
-	m_BodyList.push_back(body.Get());
+	m_BodyList.push_back(pBody);
 
-	return body;
+	return pBody;
 }
 
-VPhysicManager::Plane VPhysicManager::CreatePlane(
+VPhysicManager::Geometry VPhysicManager::CreatePlane(
 	VVector3f in_Normal,
 	vfloat32 in_fDistance
 	)
@@ -212,7 +240,7 @@ void VPhysicManager::LinkBody(
 	  VPhysicManager::JointPtr in_LinkMode)
 {
 	in_LinkMode->Create(&m_World);
-	in_LinkMode->AddBody(in_pBody1->GetBody().Get(), in_pBody2->GetBody().Get());
+	in_LinkMode->AddBody(in_pBody1.Get(), in_pBody2.Get());
 	in_LinkMode->Apply();
 }
 
@@ -224,6 +252,15 @@ void VPhysicManager::DeleteCollisionMesh(VGeometry* in_Geometry)
 
 }
 
+VWorld* VPhysicManager::GetWorld()
+{
+	return &m_World;
+}
+
+vuint VPhysicManager::GetPhysicObjectCount()
+{
+	return static_cast<vuint>(m_BodyList.size());
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::

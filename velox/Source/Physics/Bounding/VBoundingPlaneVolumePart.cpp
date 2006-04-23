@@ -1,4 +1,4 @@
-#include <v3d/Physics/Bounding/VBoundingBoxVolumePart.h>
+#include <v3d/Physics/Bounding/VBoundingPlaneVolumePart.h>
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
@@ -7,48 +7,43 @@
 namespace v3d {
 namespace physics {
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indent
+using namespace v3d;
 
-//VBoundingBoxVolumePart::VBoundingBoxVolumePart()
-//{
-//	;
-//}
-
-math::VBoundingBox* VBoundingBoxVolumePart::GetBoundingBox()
+math::VBoundingBox* VBoundingPlaneVolumePart::GetBoundingBox()
 {
-	return &m_BoundingBox;
+	return 0;
 }
-math::VBoundingSphere* VBoundingBoxVolumePart::GetBoundingSphere()
+math::VBoundingSphere* VBoundingPlaneVolumePart::GetBoundingSphere()
 {
 	return 0;
 }
 
-VBoundingMesh* VBoundingBoxVolumePart::GetBoundingMesh()
+VBoundingMesh* VBoundingPlaneVolumePart::GetBoundingMesh()
 {
 	return 0;
 }
 
-vbool VBoundingBoxVolumePart::HasBoundingMesh()
+vbool VBoundingPlaneVolumePart::HasBoundingMesh()
 {
 	return false;
 }
 
-math::VPlane* VBoundingBoxVolumePart::GetBoundingPlane()
+math::VPlane* VBoundingPlaneVolumePart::GetBoundingPlane()
 {
-	return 0;
+	return &m_Plane;
 }
 
-void VBoundingBoxVolumePart::Activate()
-{
-	;
-}
-
-void VBoundingBoxVolumePart::Deactivate()
+void VBoundingPlaneVolumePart::Activate()
 {
 	;
 }
 
-void VBoundingBoxVolumePart::OnMessage(
+void VBoundingPlaneVolumePart::Deactivate()
+{
+	;
+}
+
+void VBoundingPlaneVolumePart::OnMessage(
 	const messaging::VMessage& in_Message,
 	messaging::VMessage* in_pAnswer)
 {
@@ -63,9 +58,8 @@ void VBoundingBoxVolumePart::OnMessage(
 	{
 		if( in_pAnswer != 0 )
 		{
-			in_pAnswer->AddProperty("MinPoint", m_BoundingBox.GetMinPoint());
-			in_pAnswer->AddProperty("MaxPoint", m_BoundingBox.GetMaxPoint());
-			in_pAnswer->AddProperty("Length",  m_BoundingBox.GetLength());
+			in_pAnswer->AddProperty("Normal", m_Plane.GetNormal());
+			in_pAnswer->AddProperty("Distance", m_Plane.GetDistance());
 		}
 	}
 	else if( request == "update" )
@@ -73,26 +67,26 @@ void VBoundingBoxVolumePart::OnMessage(
 		const string name = in_Message.GetAs<string>("name");
 		//const string val = in_pAnswer->GetAs<string>("value");
 
-		if( name == "MinPoint" )
+		if( name == "Normal" )
 		{
 			VVector3f pos = in_Message.GetAs<VVector3f>("value");
-			m_BoundingBox.SetMinPoint(pos);
+			m_Plane.SetNormal(pos);
 
-			vout << "BoundingBox: min point set to " << pos << vendl;
+			vout << "Physics: normal set to " << pos << vendl;
 		}
 
-		if( name == "MaxPoint" )
+		if( name == "Distance" )
 		{
-			VVector3f pos = in_Message.GetAs<VVector3f>("value");
-			m_BoundingBox.SetMaxPoint(pos);
+			vfloat32 pos = in_Message.GetAs<vfloat32>("value");
+			m_Plane.SetDistance(pos);
 
-			vout << "BoundingBox: max point set to " << pos << vendl;
+			vout << "Physics: distance set to " << pos << vendl;
 		}
 	}
 }
 
 namespace {
-	entity::VPartParser<VBoundingBoxVolumePart> parser;
+	entity::VPartParser<VBoundingPlaneVolumePart> parser;
 }
 
 

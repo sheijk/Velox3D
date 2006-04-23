@@ -84,6 +84,11 @@ void VWorld::RemoveCollisionMesh(dGeomID in_GeomId)
 	dSpaceRemove(*m_Space.GetSpaceID(), in_GeomId);
 }
 
+VVector3f VWorld::GetGravity()
+{
+	return VVector3f(m_Gravity.x, m_Gravity.y, m_Gravity.z);
+}
+
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d

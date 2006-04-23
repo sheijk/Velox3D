@@ -420,6 +420,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 							RelativePath="..\..\Api\V3d\Physics\VBodyPart.h">
 						</File>
 						<File
+							RelativePath="..\..\Api\V3d\Physics\VCollisionPart.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Physics\VGeometry.h">
 						</File>
 						<File
@@ -1075,6 +1078,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 						RelativePath="..\..\Source\Physics\VBodyPart.cpp">
 					</File>
 					<File
+						RelativePath="..\..\Source\Physics\VCollisionPart.cpp">
+					</File>
+					<File
 						RelativePath="..\..\Source\Physics\VGeometry.cpp">
 					</File>
 					<File
@@ -1106,6 +1112,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 					</File>
 					<File
 						RelativePath="..\..\Source\Physics\VPhysicManager.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp">
 					</File>
 					<File
 						RelativePath="..\..\Source\Physics\VSpace.cpp">
@@ -1143,7 +1152,13 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 							RelativePath="..\..\Source\Physics\Bounding\VBoundingMeshVolumePart.cpp">
 						</File>
 						<File
+							RelativePath="..\..\Source\Physics\Bounding\VBoundingPlaneVolumePart.cpp">
+						</File>
+						<File
 							RelativePath="..\..\Source\Physics\Bounding\VBoundingSphereVolumePart.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Physics\Bounding\VBoundingTerrainVolumePart.cpp">
 						</File>
 					</Filter>
 				</Filter>
@@ -1271,6 +1286,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 					</Filter>
 					<Filter
 						Name="Shapes">
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\VBoxMeshPart.cpp">
+						</File>
 						<File
 							RelativePath="..\..\Source\Scene\Shapes\VSkyboxPart.cpp">
 						</File>

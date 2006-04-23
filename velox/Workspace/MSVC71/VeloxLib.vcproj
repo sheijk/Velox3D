@@ -287,6 +287,9 @@
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VArrowMeshPart.h">
 						</File>
 						<File
+							RelativePath="..\..\Api\V3d\Scene\Shapes\VBoxMeshPart.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VCoordSysDisplayPart.h">
 						</File>
 						<File
@@ -409,6 +412,9 @@
 						RelativePath="..\..\Api\V3d\Physics\VBodyPart.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Physics\VCollisionPart.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Physics\VGeometry.h">
 					</File>
 					<File
@@ -440,6 +446,9 @@
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Physics\VPhysicManager.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VPhysicManagerPart.h">
 					</File>
 					<File
 						RelativePath="..\..\Api\V3d\Physics\VPhysics.h">
@@ -484,7 +493,13 @@
 							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingMeshVolumePart.h">
 						</File>
 						<File
+							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingPlaneVolumePart.h">
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingSphereVolumePart.h">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingTerrainVolumePart.h">
 						</File>
 					</Filter>
 				</Filter>
@@ -1139,6 +1154,9 @@
 					RelativePath="..\..\Source\Physics\VPhysicManager.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Physics\VSpace.cpp">
 				</File>
 				<File
@@ -1175,7 +1193,13 @@
 						RelativePath="..\..\Source\Physics\Bounding\VBoundingMeshVolumePart.cpp">
 					</File>
 					<File
+						RelativePath="..\..\Source\Physics\Bounding\VBoundingPlaneVolumePart.cpp">
+					</File>
+					<File
 						RelativePath="..\..\Source\Physics\Bounding\VBoundingSphereVolumePart.cpp">
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\Bounding\VBoundingTerrainVolumePart.cpp">
 					</File>
 				</Filter>
 			</Filter>
@@ -1344,6 +1368,9 @@
 				<Filter
 					Name="Shapes"
 					Filter="">
+					<File
+						RelativePath="..\..\Source\Scene\Shapes\VBoxMeshPart.cpp">
+					</File>
 					<File
 						RelativePath="..\..\Source\Scene\Shapes\VSkyboxPart.cpp">
 					</File>

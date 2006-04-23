@@ -24,7 +24,7 @@ VBody::~VBody()
 {
 	if(m_Body)
 	{
-		m_Body->Destroy();
+		m_Body->Destroy(); //todo tell the manager abou this
 		delete m_Body;
 	}
 	if(m_CollisionMesh)
@@ -44,6 +44,7 @@ VGeometry* VBody::GetCollisionMesh()
 
 void VBody::Update()
 {
+
 	const dReal* p = dBodyGetPosition(*m_Body->GetBodyID());
 	const dReal* q = dBodyGetQuaternion(*m_Body->GetBodyID());
 

@@ -360,6 +360,11 @@ void VSpace::SetNoCollisionCallback()
 {
 	m_pCollisionCallbackFunction = &VSpace::NoCollisionCallback;
 }
+
+vuint VSpace::GetMaxNumContacts()
+{
+	return VSpace::MaxNumContacts;
+}
 //-----------------------------------------------------------------------------
 //vint VPhysicSpace::m_iContactMode = 0;
 //vfloat32 VPhysicSpace::m_fSurfaceMu = 0;

@@ -33,6 +33,7 @@ public:
 	VSpace* GetSpace();
 	VJointGroup* GetJointGroup();
 	void RemoveCollisionMesh(dGeomID in_GeomId);
+	VVector3f GetGravity();
 	
 private:
 

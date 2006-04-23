@@ -199,6 +199,11 @@ public:
 	*/
 	void SetContactMode(ContactMode in_Mode);
 	vint GetContactMode();
+	
+	/**
+	 * Returns the maximum processed contacts for collision testing
+	 */
+	vuint GetMaxNumContacts();
 
 
 

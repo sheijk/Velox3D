@@ -6,8 +6,9 @@
 #include <V3d/Entity.h>
 #include <V3d/Updater.h>
 #include <V3d/Physics/VBodyPart.h>
-
 #include <v3d/Physics/Bounding/IVBoundingVolumePart.h>
+#include <V3d/Math/VBoundingBox.h>
+#include <V3d/Math/VBoundingSphere.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
@@ -24,14 +25,20 @@ public:
 	VPhysicManager();
     virtual ~VPhysicManager();
 
-	typedef VSharedPtr<VBodyPart> BodyPtr;
+	//typedef VSharedPtr<VBodyPart> BodyPtr;
+	typedef VSharedPtr<VBody> BodyPtr;
 	typedef VSharedPtr<VJoint> JointPtr;
 	typedef VSharedPtr<entity::VEntity> EntityPtr;
-	typedef VSharedPtr<VGeometryPlane> Plane;
-	typedef std::list<VBodyPart*> BodyPartList;
+	typedef VSharedPtr<VGeometry> Geometry;
+	typedef std::list<BodyPtr> BodyList;
 
 	void Update();
 	void LinkBody(BodyPtr in_pBody1, BodyPtr in_pBody2, JointPtr in_LinkMode);
+	
+	/**
+	 * Returns the currently registered count of objects
+	 */
+	vuint GetPhysicObjectCount();
 
 	//EntityPtr CreateBox();
 	
@@ -72,25 +79,28 @@ public:
 	// TODO: fix mass parameter to be a part
 	BodyPtr Create(IVBoundingVolumePart* in_pBoundingPart, vfloat32 in_fMass);
 
-	void CreateGeom(IVBoundingVolumePart* in_pBoundingPart);
+	Geometry CreateGeom(IVBoundingVolumePart* in_pBoundingPart);
 
 	/**
 	 * a plane cannot be attached to a body, thus we return only the object
 	 */
-	Plane CreatePlane(VVector3f in_Normal,vfloat32 in_fDistance);
+	Geometry CreatePlane(VVector3f in_Normal,vfloat32 in_fDistance);
+	VWorld* GetWorld();
 
 
 private:
 
 	BodyPtr CreateBody();
-	void CreateMeshGeom(VBoundingMesh* in_pBoundingMesh);
+	Geometry CreateMeshGeom(VBoundingMesh* in_pBoundingMesh);
+	Geometry CreateSphereGeom(math::VBoundingSphere* in_pBoundingMesh);
+	Geometry CreateBoxGeom(math::VBoundingBox* in_pBoundingMesh);
 	BodyPtr CreateSphere(vfloat32 in_fMass, vfloat32 in_fRadius);
 	BodyPtr CreateBox(vfloat32 in_fMass, VVector3f in_Expansion);
 	BodyPtr CreateMesh(vfloat32 in_fMass, VBoundingMesh* in_BoundingMesh);
 	
 	VWorld m_World;
 	//list of all created bodies for updating reasons
-	std::list<VBodyPart*> m_BodyList; 
+	BodyList m_BodyList; 
 };
 
 typedef VSharedPtr<VPhysicManager> VPhysicManagerPtr;
