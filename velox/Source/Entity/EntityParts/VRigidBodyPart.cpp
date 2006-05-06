@@ -66,6 +66,8 @@ void VRigidBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging:
 		if( in_pAnswer != 0 )
 		{
 			in_pAnswer->AddProperty("pos", m_Transformation.GetPosition());
+			in_pAnswer->AddProperty("viewdir", -m_Transformation.GetZAxis());
+			in_pAnswer->AddProperty("updir", m_Transformation.GetYAxis());
 		}
 	}
 	else if( request == "update" )
@@ -101,6 +103,16 @@ void VRigidBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging:
 				<< ", y-axis = " << m_Transformation.GetYAxis()
 				<< ", z-axis = " << m_Transformation.GetZAxis()
 				<< vendl;
+		}
+		else if( name == "viewdir" )
+		{
+			VVector3f viewdir = in_Message.GetAs<VVector3f>("value");
+			m_Transformation.SetZAxis(-viewdir);
+		}
+		else if( name == "updir" )
+		{
+			VVector3f updir = in_Message.GetAs<VVector3f>("value");
+			m_Transformation.SetYAxis(updir);
 		}
 	}
 }
