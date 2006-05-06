@@ -41,6 +41,9 @@ public:
 
 	vbool operator==(void* ptr) const;
 	vbool operator!=(void* ptr) const;
+
+	vbool operator==(const VResourceDataPtr<DataType>& other) const;
+	vbool operator!=(const VResourceDataPtr<DataType>& other) const;
 private:
 	TypedDataPtr m_pData;
 };
@@ -50,12 +53,6 @@ VResourceDataPtr<const T> GetResourceData(VStringParam in_strResourceName);
 
 template<typename T>
 VResourceDataPtr<T> GetMutableResourceData(VStringParam in_strResourceName);
-
-//template<typename DataType>
-//vbool Valid(const VResourceDataPtr<const DataType>& ptr)
-//{
-//	return (&*ptr) != 0;
-//}
 
 //-----------------------------------------------------------------------------
 template<typename T>
@@ -68,6 +65,23 @@ template<typename T>
 vbool VResourceDataPtr<T>::operator!=(void* ptr) const
 {
 	return m_pData != ptr;
+}
+
+template<typename T>
+vbool VResourceDataPtr<T>::operator==(const VResourceDataPtr<T>& other) const
+{
+	if( m_pData != 0 && other.m_pData != 0 )
+		return m_pData->GetData() == other.m_pData->GetData();
+	else if( m_pData == 0 && other.m_pData == 0 )
+		return true;
+	else
+		return false;
+}
+
+template<typename T>
+vbool VResourceDataPtr<T>::operator!=(const VResourceDataPtr<T>& other) const
+{
+	return ! (*this == other);
 }
 
 template<typename T>
@@ -123,7 +137,10 @@ DataType& VResourceDataPtr<DataType>::operator*() const
 
 template<typename DataType>
 VResource* VResourceDataPtr<DataType>::GetEnclosingResource() { 
-	return m_pData->GetEnclosingResource(); 
+	if( m_pData != 0 )
+		return m_pData->GetEnclosingResource();
+	else
+		return 0;
 }
 
 template<typename DataType>

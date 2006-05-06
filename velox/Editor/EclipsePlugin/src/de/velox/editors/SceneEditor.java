@@ -135,6 +135,7 @@ public class SceneEditor extends VeloxEditorBase {
 					try {
 						VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
 						rootEntity.set(new RootEntity(xml.Get()));
+						rootEntity.get().applySettings(xml.Get());
 					}
 					catch(Throwable t) {
 						System.err.println("Error when loading scene: " + t.getMessage());

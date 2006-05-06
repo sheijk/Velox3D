@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="3" version="2.0">
+<workbench progressCount="8" version="2.0">
 <workbenchAdvisor/>
-<window height="768" width="1230" x="173" y="123">
+<window height="1088" maximized="true" width="1293" x="0" y="27">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -17,20 +17,54 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="108" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="de.velox.editor.materials.MaterialEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="de.velox.editors.SceneEditor" itemType="typePlaceholder" x="77" y="22"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
-<page focus="true" label="Workspace - velox">
+<page focus="true" label="Workspace - velox shader">
 <editors>
-<editorArea activeWorkbook="DefaultEditorWorkbook">
+<editorArea activeWorkbook="org.eclipse.ui.internal.EditorStack@80d028">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.internal.EditorStack@80d028" ratio="0.4993515" ratioLeft="385" ratioRight="386" relationship="4" relative="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+<part id="1"/>
+<part id="2"/>
+</presentation>
+</folder>
+</info>
+<info part="org.eclipse.ui.internal.EditorStack@af9d74" ratio="0.5" ratioLeft="516" ratioRight="516" relationship="2" relative="org.eclipse.ui.internal.EditorStack@80d028">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
+<part id="0"/>
+</presentation>
 </folder>
 </info>
 </editorArea>
+<editor focus="true" id="org.eclipse.ui.DefaultTextEditor" name="phong.v3dmat" partName="phong.v3dmat" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/phong.v3dmat" title="phong.v3dmat" tooltip="edit/mat/phong.v3dmat" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/phong.v3dmat"/>
+</editor>
+<editor id="org.eclipse.ui.DefaultTextEditor" name="textured.v3dmat" partName="textured.v3dmat" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/textured.v3dmat" title="textured.v3dmat" tooltip="edit/mat/textured.v3dmat" workbook="org.eclipse.ui.internal.EditorStack@80d028">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/textured.v3dmat"/>
+</editor>
+<editor id="org.eclipse.ui.DefaultTextEditor" name="mirror.vert" partName="mirror.vert" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/mirror.vert" title="mirror.vert" tooltip="edit/mat/mirror.vert" workbook="org.eclipse.ui.internal.EditorStack@80d028">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/mirror.vert"/>
+</editor>
+<editor activePart="true" focus="true" id="de.velox.editor.materials.MaterialEditor" name="red.v3dmat" partName="red.v3dmat" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/red.v3dmat" title="red.v3dmat" tooltip="edit/mat/red.v3dmat" workbook="org.eclipse.ui.internal.EditorStack@80d028">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/red.v3dmat"/>
+</editor>
+<editor focus="true" id="org.eclipse.ui.DefaultTextEditor" name="mirror.frag" partName="mirror.frag" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/mirror.frag" title="mirror.frag" tooltip="edit/mat/mirror.frag" workbook="org.eclipse.ui.internal.EditorStack@af9d74">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/mirror.frag"/>
+</editor>
 </editors>
 <views>
 <view id="de.velox.editor.views.SceneView" partName="Scene">
@@ -52,18 +86,19 @@
 <filter element=".*" isEnabled="false"/>
 </filters>
 <expanded>
+<element path="/data"/>
 <element path="/edit"/>
 <element path="/edit/mat"/>
 </expanded>
 <selection>
-<element path="/edit/racer.v3dscene"/>
+<element path="/edit/mat/phong.v3dmat"/>
 </selection>
 </viewState>
 </view>
 </views>
-<perspectives activePart="org.eclipse.ui.views.ResourceNavigator" activePerspective="velox">
+<perspectives activePart="de.velox.editor.materials.MaterialEditor" activePerspective="velox_shader">
 <perspective editorAreaVisible="1" fixed="0" version="0.016">
-<descriptor descriptor="org.eclipse.jdt.ui.JavaPerspective" id="velox" label="velox"/>
+<descriptor descriptor="velox" id="velox_shader" label="velox shader"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.openExternalFile"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
@@ -142,7 +177,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.80969477" ratioLeft="451" ratioRight="106" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1964fe8"/>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@352d87" ratio="0.6431718" ratioLeft="584" ratioRight="324" relationship="2" relative="org.eclipse.ui.editorss">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@352d87" ratio="0.7441003" ratioLeft="1009" ratioRight="347" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="de.velox.editor.views.SceneView" appearance="2" expanded="2">
 <page content="de.velox.editor.views.SceneView" label="Scene"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
@@ -175,134 +210,152 @@
 </perspectives>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/outline_pp.v3dmat"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/phong.v3dmat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/sepia_pp.v3dmat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/terrain.v3dmat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/textured.v3dmat"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/textured.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/mirror.vert"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/phong.v3dmat"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/mirror.vert"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/mirror.frag"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/mirror.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/phong.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/mirror.vert"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" path="/edit/mat/red.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/phong.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" path="/edit/mat/red.v3dmat"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/textured.v3dmat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/phong.frag"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/textured.v3dmat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/textured.v3dmat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/mat/red.frag"/>
 </editors>
-<item historyLabel="outline_pp.v3dmat" index="1">
-<position info="not_deleted" x="344" y="0"/>
-</item>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="phong.v3dmat" index="2">
+<item historyLabel="phong.v3dmat" index="0">
 <position/>
 </item>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="sepia_pp.v3dmat" index="3">
+<item historyLabel="racer" index="1"/>
+<item historyLabel="phong.v3dmat" index="0">
+<position info="not_deleted" x="353" y="0"/>
+</item>
+<item historyLabel="racer" index="2"/>
+<item historyLabel="phong.v3dmat" index="0">
 <position/>
 </item>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="terrain.v3dmat" index="4">
+<item historyLabel="mirror.vert" index="3">
+<position info="not_deleted" x="133" y="0"/>
+</item>
+<item historyLabel="racer" index="4"/>
+<item historyLabel="mirror.vert" index="3">
 <position/>
 </item>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="textured.v3dmat" index="5">
+<item historyLabel="racer.v3dscene" index="5">
 <position/>
 </item>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="textured.v3dmat" index="5">
+<item historyLabel="mirror.vert" index="3">
 <position/>
 </item>
-<item historyLabel="racer" index="6"/>
-<item historyLabel="textured.v3dmat" index="5">
-<position/>
+<item historyLabel="phong.v3dmat" index="6">
+<position info="not_deleted" x="355" y="0"/>
 </item>
 <item historyLabel="racer" index="7"/>
-<item historyLabel="textured.v3dmat" index="8">
+<item historyLabel="phong.v3dmat" index="6">
+<position info="not_deleted" x="355" y="0"/>
+</item>
+<item historyLabel="mirror.vert" index="8">
 <position/>
 </item>
-<item historyLabel="racer.v3dscene" index="9"/>
-<item historyLabel="textured.v3dmat" index="8">
+<item historyLabel="racer" index="9"/>
+<item historyLabel="mirror.vert" index="8">
+<position info="not_deleted" x="183" y="0"/>
+</item>
+<item historyLabel="racer" index="9"/>
+<item historyLabel="mirror.vert" index="8">
+<position info="not_deleted" x="183" y="0"/>
+</item>
+<item historyLabel="mirror.frag" index="10">
 <position/>
 </item>
-<item historyLabel="racer" index="10"/>
-<item historyLabel="textured.v3dmat" index="8">
-<position info="not_deleted" x="458" y="0"/>
+<item historyLabel="mirror.vert" index="8">
+<position info="not_deleted" x="58" y="0"/>
 </item>
-<item historyLabel="racer" index="11"/>
-<item historyLabel="textured.v3dmat" index="8">
+<item historyLabel="racer" index="9"/>
+<item historyLabel="mirror.vert" index="8">
+<position info="not_deleted" x="133" y="0"/>
+</item>
+<item historyLabel="racer" index="9"/>
+<item historyLabel="mirror.vert" index="8">
+<position info="not_deleted" x="133" y="0"/>
+</item>
+<item historyLabel="mirror.v3dmat" index="11">
 <position/>
 </item>
-<item historyLabel="racer.v3dscene" index="12"/>
-<item historyLabel="textured.v3dmat" index="13">
+<item historyLabel="mirror.vert" index="8">
 <position/>
 </item>
-<item historyLabel="racer.v3dscene" index="12"/>
-<item historyLabel="textured.v3dmat" index="13">
+<item historyLabel="phong.v3dmat" index="12">
+<position info="not_deleted" x="355" y="0"/>
+</item>
+<item historyLabel="mirror.vert" index="13">
+<position info="not_deleted" x="228" y="0"/>
+</item>
+<item historyLabel="red.v3dmat" index="14">
 <position/>
 </item>
-<item historyLabel="racer" index="14"/>
-<item historyLabel="textured.v3dmat" index="13">
+<item historyLabel="mirror.vert" index="13">
+<position info="not_deleted" x="228" y="0"/>
+</item>
+<item historyLabel="phong.v3dmat" index="15">
+<position info="not_deleted" x="355" y="0"/>
+</item>
+<item historyLabel="red.v3dmat" index="16">
 <position/>
 </item>
-<item historyLabel="racer.v3dscene" index="15"/>
-<item historyLabel="textured.v3dmat" index="13">
+<item historyLabel="racer" index="17"/>
+<item historyLabel="red.v3dmat" index="16">
 <position/>
 </item>
-<item historyLabel="racer.v3dscene" index="15"/>
-<item historyLabel="textured.v3dmat" index="13">
+<item historyLabel="red.frag" index="18">
 <position/>
 </item>
-<item historyLabel="racer.v3dscene" index="16"/>
-<item historyLabel="textured.v3dmat" index="13">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="287" y="0"/>
 </item>
-<item historyLabel="racer.v3dscene" index="16"/>
-<item historyLabel="textured.v3dmat" index="13">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="250" y="0"/>
 </item>
-<item historyLabel="racer.v3dscene" index="17"/>
-<item historyLabel="textured.v3dmat" index="13">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="256" y="0"/>
 </item>
-<item historyLabel="racer.v3dscene" index="18"/>
-<item historyLabel="textured.v3dmat" index="13">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="306" y="0"/>
 </item>
-<item historyLabel="racer.v3dscene" index="18"/>
-<item historyLabel="textured.v3dmat" index="13">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="348" y="0"/>
 </item>
-<item historyLabel="racer" index="19"/>
-<item historyLabel="phong.frag" index="20">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="287" y="0"/>
 </item>
-<item historyLabel="racer" index="19"/>
-<item historyLabel="textured.v3dmat" index="21">
-<position/>
+<item historyLabel="red.frag" index="18">
+<position info="not_deleted" x="69" y="0"/>
 </item>
-<item historyLabel="textured.v3dmat" index="21">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="287" y="0"/>
 </item>
-<item historyLabel="textured.v3dmat" index="22">
-<position/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="413" y="0"/>
 </item>
-<item historyLabel="racer" index="23"/>
-<item historyLabel="textured.v3dmat" index="22">
-<position/>
+<item historyLabel="racer" index="17"/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="413" y="0"/>
 </item>
-<item active="true" historyLabel="racer" index="24"/>
+<item historyLabel="racer" index="17"/>
+<item historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="413" y="0"/>
+</item>
+<item historyLabel="racer" index="17"/>
+<item active="true" historyLabel="red.v3dmat" index="16">
+<position info="not_deleted" x="413" y="0"/>
+</item>
 </navigationHistory>
 <stickyState>
 <perspective IMemento.internal.id="velox2"/>
@@ -316,44 +369,44 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" name="racer.v3dscene" tooltip="edit/racer.v3dscene">
 <persistable path="/edit/racer.v3dscene"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="textured.v3dmat" tooltip="edit/mat/textured.v3dmat">
-<persistable path="/edit/mat/textured.v3dmat"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" name="red.v3dmat" tooltip="edit/mat/red.v3dmat">
+<persistable path="/edit/mat/red.v3dmat"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="phong.frag" tooltip="edit/mat/phong.frag">
-<persistable path="/edit/mat/phong.frag"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="mirror.v3dmat" tooltip="edit/mat/mirror.v3dmat">
+<persistable path="/edit/mat/mirror.v3dmat"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="terrain.v3dmat" tooltip="edit/mat/terrain.v3dmat">
-<persistable path="/edit/mat/terrain.v3dmat"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" name="postproc.v3dscene" tooltip="edit/postproc.v3dscene">
+<persistable path="/edit/postproc.v3dscene"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="sepia_pp.v3dmat" tooltip="edit/mat/sepia_pp.v3dmat">
-<persistable path="/edit/mat/sepia_pp.v3dmat"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="day.jpg" tooltip="data/day.jpg">
+<persistable path="/data/day.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="phong.v3dmat" tooltip="edit/mat/phong.v3dmat">
-<persistable path="/edit/mat/phong.v3dmat"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="_sky.jpg" tooltip="data/_sky.jpg">
+<persistable path="/data/_sky.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="outline_pp.v3dmat" tooltip="edit/mat/outline_pp.v3dmat">
-<persistable path="/edit/mat/outline_pp.v3dmat"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="_night.jpg" tooltip="data/_night.jpg">
+<persistable path="/data/_night.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="depth.v3dmat" tooltip="edit/mat/depth.v3dmat">
-<persistable path="/edit/mat/depth.v3dmat"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="rocks2048.jpg" tooltip="data/rocks2048.jpg">
+<persistable path="/data/rocks2048.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="depth.vert" tooltip="edit/mat/depth.vert">
-<persistable path="/edit/mat/depth.vert"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="sky.jpg" tooltip="data/sky.jpg">
+<persistable path="/data/sky.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="depth.frag" tooltip="edit/mat/depth.frag">
-<persistable path="/edit/mat/depth.frag"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="stars.jpg" tooltip="data/stars.jpg">
+<persistable path="/data/stars.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="outline.vert" tooltip="edit/mat/outline.vert">
-<persistable path="/edit/mat/outline.vert"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="test2.jpg" tooltip="data/test2.jpg">
+<persistable path="/data/test2.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="outline.frag" tooltip="edit/mat/outline.frag">
-<persistable path="/edit/mat/outline.frag"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="planet.jpg" tooltip="data/planet.jpg">
+<persistable path="/data/planet.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="temp.txt" tooltip="edit/temp.txt">
-<persistable path="/edit/temp.txt"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="dusm.jpg" tooltip="data/dusm.jpg">
+<persistable path="/data/dusm.jpg"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="sepia.vert" tooltip="edit/mat/sepia.vert">
-<persistable path="/edit/mat/sepia.vert"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="mirror.vert" tooltip="edit/mat/mirror.vert">
+<persistable path="/edit/mat/mirror.vert"/>
 </file>
 </mruList>
 </workbench>

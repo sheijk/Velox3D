@@ -26,14 +26,13 @@ namespace {
 		case GL_FLOAT: return IVParameter::Float;
 		case GL_FLOAT_VEC2: return IVParameter::Float2;
 		case GL_FLOAT_VEC4: return IVParameter::Float4;
+		case GL_FLOAT_MAT4: return IVParameter::Float44;
+
 		case GL_INT: return IVParameter::Int;
 		case GL_BOOL: return IVParameter::Bool;
-		default:
-			//vbool notImplementedEnumType = false;
-			//V3D_ASSERT(notImplementedEnumType);
 
+		default:
 			V3D_LOGONCE(unimplementedShaderParamDataType);
-			V3D_LOG(in_GLTypeEnum);
 
 			return IVParameter::Unknown;
 		}

@@ -30,6 +30,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+06.05.06
+- material editor, speichern -> automatisches resourcen update
+- mirror shooting part gibt einstellungen an graphics part im gleichen entity
+  (spiegelungsmatrix, textur resource)
+  
 05.05.06
 - shader koennen direkt in die effect description eingebunden werden
 - kein absturz mehr beim schliessen von szenen

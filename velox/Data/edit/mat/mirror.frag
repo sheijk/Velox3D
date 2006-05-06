@@ -28,7 +28,7 @@ void main()
 	texCoord += vec4(.5, .5, .5, 0);
 	
 	// add offset
-	texCoord.x += .004 * sin(texCoord.y * 400 + time * 4);
+//	texCoord.x += .004 * sin(texCoord.y * 400 + time * 4);
 	
 	gl_FragColor = mix(texture2D(mirrorTex, texCoord.xy), vec4(0, 0, .4, 1), .2);
 	

@@ -7,7 +7,13 @@
 				<param name="res" value="/edit/mat/simple.vert" />
 			</state>
 			<state name="fragment-program">
-				<param name="res" value="/edit/mat/red.frag" />
+				<iparam name="source">
+uniform vec4 color;
+
+void main(void) {
+	gl_FragColor = color;
+}
+				</iparam>
 			</state>
 		</renderPass>
 		

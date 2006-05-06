@@ -81,8 +81,8 @@ VRangeIterator<VTypeInfo> VMaterialResourceType::ManagedTypes()
 VMaterial* VMaterialResourceType::CreateMaterial(
 	const VShaderPath& in_Technique, std::string in_ResourceName)
 {
-	try
-	{
+	//try
+	//{
 		VMaterial::PassList passes;
 		passes.resize(in_Technique.GetRenderPassCount());
 		
@@ -102,11 +102,11 @@ VMaterial* VMaterialResourceType::CreateMaterial(
 		}
 
 		return new VMaterial(passes);
-	}
-	catch(VException& e)
-	{
-		return 0;
-	}
+	//}
+	//catch(VException& e)
+	//{
+	//	return 0;
+	//}
 }
 
 VRenderStateList* VMaterialResourceType::CreatePass(

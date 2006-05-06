@@ -89,6 +89,13 @@
             icon="icons/sample.gif"
             id="de.velox.editor.cgfx.CGFXEditor"
             name="CGFX Editor"/>
+      <editor
+            class="de.velox.editor.materials.MaterialEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="v3dmat"
+            icon="icons/sample.gif"
+            id="de.velox.editor.materials.MaterialEditor"
+            name="Material Editor"/>
    </extension>
 
 </plugin>

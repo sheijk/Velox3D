@@ -5,15 +5,23 @@
 		<renderPass> 
 			<state name="vertex-program">
 				<iparam name="source">
+varying vec2 texCoord;
+
 void main(void) {
 	gl_Position = ftransform();
-}				
+	texCoord = gl_MultiTexCoord0.xy;
+}
 				</iparam>
 			</state>
 			<state name="fragment-program">
 				<iparam name="source">
+varying vec2 texCoord;
+uniform sampler2D texture;
+
 void main(void) {
-	gl_FragColor = vec4(0, 1, 0, 1);
+/* this be comment */
+/*	gl_FragColor = vec4(texCoord.x, texCoord.y, 0, 1); */
+	gl_FragColor = texture2D(texture, texCoord);
 }
 				</iparam>
 			</state>
@@ -21,4 +29,3 @@ void main(void) {
 		
 	</shaderPath>
 </effect>
-

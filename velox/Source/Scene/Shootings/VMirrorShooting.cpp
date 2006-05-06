@@ -32,7 +32,9 @@ namespace {
  * standard c'tor
  */
 VMirrorShooting::VMirrorShooting() :
-	m_pMainShooting(VPartDependency::Ancestor, RegisterTo())
+	m_pMainShooting(VPartDependency::Ancestor, RegisterTo()),
+	m_pMirrorMesh(VPartDependency::Neighbour, VPartDependency::Optional, RegisterTo()),
+	m_pRigidyBodyPart(VPartDependency::Neighbour, RegisterTo())
 {
 	m_pTextureMatrixValue.Assign(new VFloat44ParamValue());
 }
@@ -80,9 +82,7 @@ namespace {
 		reflected.SetZAxis(newz);
 		return reflected;
 	}
-}
 
-namespace {
 	void MakeTextureProjectionMatrix2(
 		VMatrix44f* out_pMatrix, const math::VRBTransform& in_Transform)
 	{
@@ -133,10 +133,12 @@ void VMirrorShooting::UpdateAndCull()
 
 	if( m_pMainShooting.Get() != 0 && m_pMainShooting->GetCamera() != 0 )
 	{
+		// calculate plane from rigid body part
+		m_Plane.SetNormal(m_pRigidyBodyPart->GetTransform().GetYAxis());
+		m_Plane.SetDistance(0.);
+
 		// calculate mirrored camera position
 		IVCamera* pOriginalCam = m_pMainShooting->GetCamera();
-
-		//VVector3f newPos = Reflect(pOriginalCam->GetPosition(), m_Plane);
 
 		VRBTransform transform;
 		transform = Reflect(pOriginalCam->Transform(), m_Plane);
@@ -156,6 +158,22 @@ void VMirrorShooting::UpdateAndCull()
 		Mult(textureMatrix, proj, view);
 		//Scale(textureMatrix, 4.0f/3.0f, 1, 1);
 		m_pTextureMatrixValue->SetValue(textureMatrix);
+
+		if( m_pMirrorMesh.IsConnected() )
+		{
+			static vbool initalized = false;
+			static messaging::VMessage msg;
+			if( ! initalized )
+			{
+				initalized = true;
+				msg.AddProperty("type", "update");
+				msg.AddProperty("name", "mat_cam");
+				msg.AddProperty("value", "");
+			}
+
+			msg.Set("value", utils::VStringValue(textureMatrix));
+			m_pMirrorMesh->Send(msg);
+		}
 	}
 }
 
@@ -247,6 +265,23 @@ void VMirrorShooting::SetRenderTargetResource(const std::string& in_strResourceN
 	}
 
 	m_pRenderTarget = res->GetMutableData<IVDevice>();
+
+	if( m_pMirrorMesh.IsConnected() )
+	{
+		static vbool initialized = false;
+		static messaging::VMessage msg;
+		if( ! initialized )
+		{
+			initialized = true;
+			msg.AddProperty("type", "update");
+			msg.AddProperty("name", "mat_mirrorTex");
+			msg.AddProperty("value", "");
+		}
+
+		msg.Set("value", res->GetQualifiedName());
+
+		m_pMirrorMesh->Send(msg);
+	}
 }
 
 std::string VMirrorShooting::GetRenderTargetResource() const

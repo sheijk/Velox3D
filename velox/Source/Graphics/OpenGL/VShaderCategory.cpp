@@ -95,9 +95,19 @@ VShaderState* VShaderCategory::CreateState(const VRenderPass& in_Pass)
 	}
 }
 
+namespace {
+	vbool DeviceSupportsGLSL()
+	{
+		return GLEW_ARB_fragment_shader && 
+			GLEW_ARB_vertex_shader && 
+			GLEW_ARB_shading_language_100;
+	}
+}
+
 vbool VShaderCategory::CanCreateStateFrom(const VRenderPass& in_Pass)
 {
-	return in_Pass.GetStateByName(VERTEX_PROGRAM_STATE_NAME.c_str()) != 0 &&
+	return DeviceSupportsGLSL() &&
+		in_Pass.GetStateByName(VERTEX_PROGRAM_STATE_NAME.c_str()) != 0 &&
 		in_Pass.GetStateByName(FRAGMENT_PROGRAM_STATE_NAME.c_str()) != 0;
 }
 

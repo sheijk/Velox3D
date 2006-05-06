@@ -65,20 +65,26 @@ const graphics::IVMaterial& VMeshPartBase::GetMaterial() const
 void VMeshPartBase::SetMaterial(
 	resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial)
 {
-	m_hMaterial = GetMutableResourceData<IVMaterial>(
-		in_hMaterial.GetEnclosingResource()->GetQualifiedName().c_str());
+	resource::VResourceDataPtr<graphics::IVMaterial> newMaterial =
+		GetMutableResourceData<IVMaterial>(
+			in_hMaterial.GetEnclosingResource()->GetQualifiedName().c_str());
 
-	m_ParameterValues.clear();
-
-	// add parameter values for all parameters
-	VRangeIterator<IVParameter> params = m_hMaterial->Parameters();
-	while( params.HasNext() )
+	if( m_hMaterial != newMaterial )
 	{
-		VSharedPtr<IVParameterValue> pParamValue = 
-			CreateParamValue(params->GetType());
+		m_hMaterial = newMaterial;
 
-		AddParamValue(params->GetName(), pParamValue);
-		++params;
+		m_ParameterValues.clear();
+
+		// add parameter values for all parameters
+		VRangeIterator<IVParameter> params = m_hMaterial->Parameters();
+		while( params.HasNext() )
+		{
+			VSharedPtr<IVParameterValue> pParamValue = 
+				CreateParamValue(params->GetType());
+
+			AddParamValue(params->GetName(), pParamValue);
+			++params;
+		}
 	}
 }
 
@@ -160,8 +166,13 @@ void VMeshPartBase::AddVariables(messaging::VMessage* in_pAnswer)
 	if( in_pAnswer == 0 )
 		return;
 
-	in_pAnswer->AddProperty("material", 
-		m_hMaterial.GetEnclosingResource()->GetQualifiedName());
+	std::string materialResourceName;
+
+	if( m_hMaterial.GetEnclosingResource() != 0 )
+		materialResourceName =
+			m_hMaterial.GetEnclosingResource()->GetQualifiedName();
+
+	in_pAnswer->AddProperty("material", materialResourceName);
 
 	for(ParamValueMap::const_iterator paramValue = m_ParameterValues.begin();
 		paramValue != m_ParameterValues.end();

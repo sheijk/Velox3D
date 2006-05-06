@@ -116,19 +116,25 @@ public class SceneView extends VeloxViewBase {
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
 				
-				String dependencyList = "Dependencies: ";
-				boolean firstDep = true;
 				Iterator<VPartDependency> depIter = part.dependencyIterator();
 				while( depIter.hasNext() ) {
 					VPartDependency dep = depIter.next();
 					
-					if( ! firstDep )
-						dependencyList += ", ";
+					String descr = "" + dep.GetLocation().toString().charAt(0);
 					
-					dependencyList += dep.GetId() + "@" + dep.GetLocation();
-					firstDep = false;
+					if( dep.GetCondition() == VPartDependency.Condition.Optional )
+						descr += "? ";
+					else
+						descr += " ";
+					
+					descr += dep.GetTypeInfo().GetName();
+					
+					if( dep.GetId().length() > 0 )
+						descr += "(id:" + dep.GetId() + ")";
+					
+					childs.add(descr);
 				}				
-				childs.add(dependencyList);
+//				childs.add(dependencyList);
 				
 				// add all settings				
 				Iterator<Setting> settingIter = part.settingsIterator();

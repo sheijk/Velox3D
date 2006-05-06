@@ -116,6 +116,8 @@ public class Part implements XMLSerializable {
 			VPartDependency dependency = new VPartDependency();
 			dependency.SetId(impl.GetDependencyInfo(depNum).GetId());
 			dependency.SetLocation(impl.GetDependencyInfo(depNum).GetLocation());
+			dependency.SetTypeInfo(impl.GetDependencyInfo(depNum).GetTypeInfo());
+			dependency.SetCondition(impl.GetDependencyInfo(depNum).GetCondition());
 			
 			dependencies.add(dependency);
 		}

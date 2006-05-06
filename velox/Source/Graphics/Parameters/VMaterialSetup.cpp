@@ -107,6 +107,7 @@ std::string IVParameter::AsString() const
 	case IVParameter::Float: value.Set(AsFloat()); break;
 	case IVParameter::Float2: value.Set(AsFloat2()); break;
 	case IVParameter::Float4: value.Set(AsFloat4()); break;
+	case IVParameter::Float44: value.Set(AsFloat44()); break;
 
 	case IVParameter::Int: value.Set(AsInt()); break;
 

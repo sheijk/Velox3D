@@ -10,6 +10,7 @@
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Math/VPlane.h>
 #include <V3d/Graphics/Parameters/VGenericValue.h>
+#include <V3dLib/EntityParts/VRigidBodyPart.h>
 
 #include <string>
 //-----------------------------------------------------------------------------
@@ -52,6 +53,8 @@ private:
 	virtual scene::IVGraphicsPart* GetScene();
 
 	entity::VPartConnection<VSimpleShooting> m_pMainShooting;
+	entity::VPartConnection<IVGraphicsPart> m_pMirrorMesh;
+	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidyBodyPart;
 
 	resource::VResourceDataPtr<graphics::IVDevice> m_pRenderTarget;
 	VSharedPtr<graphics::VFloat44ParamValue> m_pTextureMatrixValue;
