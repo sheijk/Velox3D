@@ -15,10 +15,11 @@ using namespace v3d; // anti auto indenting
 class VGLSLParameter : public IVParameter
 {
 public:
-	VGLSLParameter(GLhandleARB in_hProgram, VStringParam in_strName);
+	VGLSLParameter(GLhandleARB in_hProgram, VStringParam in_strName, Type in_Type);
 	virtual ~VGLSLParameter();
 
 	virtual std::string GetName() const;
+	virtual Type GetType() const;
 
 	virtual void Apply(vfloat32 in_fNewValue) const;
 	virtual vfloat32 AsFloat() const;
@@ -37,6 +38,7 @@ public:
 	virtual vbool AsBool() const;
 
 	virtual void ApplyTexture(VStringParam in_strResourceName) const;
+	virtual std::string TextureResource() const;
 
 protected:
 	GLint GetLocation() const;
@@ -47,6 +49,8 @@ private:
 
 	GLint m_Location;
 	GLhandleARB m_hProgram;
+
+	Type m_Type;
 
 	static GLfloat m_fTempBuffer[16];
 	static GLint m_iTempBuffer[16];

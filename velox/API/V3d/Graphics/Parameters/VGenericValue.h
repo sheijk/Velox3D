@@ -5,6 +5,7 @@
 
 #include <V3d/Graphics/Parameters/IVParameterValue.h>
 #include <V3d/Graphics/IVParameter.h>
+#include <V3dLib/Utils/VStringValue.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -30,15 +31,21 @@ public:
 	ParamType GetValue() const { return m_Value; }
 	void SetValue(const ParamType& in_Value) { m_Value = in_Value; }
 
+	virtual void Set(const std::string& in_NewValue)
+	{
+		utils::VStringValue value(in_NewValue);
+		m_Value = value.Get<ParamType>();
+	}
+
 private:
 	ParamType m_Value;
 };
 
 typedef VGenericValue<vfloat32> VFloatParamValue;
-typedef VGenericValue<VVector2f> VVector2fParamValue;
-typedef VGenericValue<VVector4f> VVector4fParamValue;
+typedef VGenericValue<VVector2f> VFloat2ParamValue;
+typedef VGenericValue<VVector4f> VFloat4ParamValue;
 
-typedef VGenericValue<VMatrix44f> VMatrix44fParamValue;
+typedef VGenericValue<VMatrix44f> VFloat44ParamValue;
 
 typedef VGenericValue<vint> VIntParamValue;
 

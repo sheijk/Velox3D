@@ -98,8 +98,15 @@ public class SceneEditor extends VeloxEditorBase {
 		System.out.println("Saving to file " + fileName 
 				+ " (absolute path: " + file.getAbsolutePath());
 		
-		IVXMLElement xml = v3d.CreateXMLElement("scene");
-		root.writeToXML(xml);
+		final IVXMLElement xml = v3d.CreateXMLElement("scene");
+		
+		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+			@Override public void Run() throws RuntimeException {
+				root.synchronize();
+				root.writeToXML(xml);
+			}
+		});
+		
 		v3d.SaveXMLElementToFileNoVFS(xml, fileName);
 		
 		//TODO fire property change of dirty flag
@@ -125,8 +132,14 @@ public class SceneEditor extends VeloxEditorBase {
 			
 			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
 				@Override public void Run() throws RuntimeException {
-					VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
-					rootEntity.set(new RootEntity(xml.Get()));
+					try {
+						VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
+						rootEntity.set(new RootEntity(xml.Get()));
+					}
+					catch(Throwable t) {
+						System.err.println("Error when loading scene: " + t.getMessage());
+						t.printStackTrace(System.err);
+					}
 				}
 			});
 			
@@ -135,6 +148,14 @@ public class SceneEditor extends VeloxEditorBase {
 			name = generateDisplayName(fileName);
 			root.SetName(name);
 			setPartName(name);
+			
+			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+				@Override public void Run() throws RuntimeException {
+					rootEntity.get().Activate();
+				}
+			});
+			
+			needsLoading = false;
 		}
 		else {
 			needsLoading = true;
@@ -302,7 +323,7 @@ public class SceneEditor extends VeloxEditorBase {
 		}
 		
 		private void move(float x, float y, float z) {
-			System.out.println("Moved by x=" + x + " y=" + y + "z=" + z);
+//			System.out.println("Moved by x=" + x + " y=" + y + "z=" + z);
 			
 			Entity selectedEntity = SceneView.getDefaultInstance().getActiveEntity();
 			

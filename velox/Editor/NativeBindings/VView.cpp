@@ -30,6 +30,7 @@ VSharedPtr<VView> VView::s_pInstance;
 VView::VView()
 {
 	m_bInitCalled = false;
+	m_bIsRunning = true;
 	m_Thread = 0;
 	
 	cout << "Creating view for hwnd... " << endl;
@@ -38,9 +39,14 @@ VView::VView()
 	try {		
 		m_Thread = glfwCreateThread(VView::FrameUpdateLoop, this);
 
+		if( m_Thread < 0 )
+		{
+			V3D_THROW(VException, "Could not create c++ thread");
+		}
+
 		m_SyncMutex = glfwCreateMutex();
 		m_SyncDoneCondition = glfwCreateCond();
-				
+
 		cout << "done. ThreadId = " << m_Thread << endl;
 	} catch(VException& e) {
 		cout << endl
@@ -66,8 +72,11 @@ void VView::FrameUpdateLoop(void* arg)
 	pView->FrameUpdateLoop();
 }
 
+bool fu = false;
+
 void VView::FrameUpdateLoop()
 {
+	fu = true;
 	vout << "Started update loop (thread " << glfwGetThreadID() << ")" << vendl;
 
 	using std::for_each;
@@ -196,14 +205,24 @@ VView* VView::GetInstance()
 
 void VView::Add(IVFrameAction* in_pTestAction)
 {
+	//if( ! fu )
+	//	V3D_THROW(VException, "no fu!");
+
 	m_NewFrameActions.push_back(in_pTestAction);
 	
 	m_bInitCalled = false;
 
 	vfloat32 secondsWaiting = .0f;
-	
-	while( ! m_bInitCalled )
-		glfwSleep(.01f);
+
+	if( m_bIsRunning )
+	{
+		while( ! m_bInitCalled )
+			glfwSleep(.01f);
+	}
+	else
+	{
+		V3D_THROW(VException, "Velox C++ render loop is not running!");
+	}
 }
 
 void VView::Remove(IVFrameAction* in_pAction)

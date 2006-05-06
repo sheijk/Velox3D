@@ -25,6 +25,7 @@ public:
 	virtual ~VGLSLTextureParameter();
 
 	virtual void ApplyTexture(VStringParam in_strResourceName) const;
+	virtual std::string TextureResource() const;
 
 	void BindTexture();
 	void UnbindTexture();

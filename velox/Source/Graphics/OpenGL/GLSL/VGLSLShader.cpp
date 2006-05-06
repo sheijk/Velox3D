@@ -7,6 +7,7 @@
 
 #include <V3d/Core/VIOStream.h>
 #include <GL/glfw.h>
+#include <V3d/Core/VLogging.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------
@@ -16,6 +17,28 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 using namespace std;
+
+namespace {
+	IVParameter::Type ParamTypeFromGLEnum(GLenum in_GLTypeEnum)
+	{
+		switch(in_GLTypeEnum)
+		{
+		case GL_FLOAT: return IVParameter::Float;
+		case GL_FLOAT_VEC2: return IVParameter::Float2;
+		case GL_FLOAT_VEC4: return IVParameter::Float4;
+		case GL_INT: return IVParameter::Int;
+		case GL_BOOL: return IVParameter::Bool;
+		default:
+			//vbool notImplementedEnumType = false;
+			//V3D_ASSERT(notImplementedEnumType);
+
+			V3D_LOGONCE(unimplementedShaderParamDataType);
+			V3D_LOG(in_GLTypeEnum);
+
+			return IVParameter::Unknown;
+		}
+	}
+}
 
 VGLSLShader::VGLSLShader(
 			const std::string& in_strVertexSource, 
@@ -113,7 +136,15 @@ vbool VGLSLShader::IsGLSLSupported()
 
 VSharedPtr<IVParameter> VGLSLShader::GetParameter(VStringParam in_strName)
 {
-	return SharedPtr(new VGLSLParameter(m_hProgram, in_strName));
+	for(vuint paramNum = 0; paramNum < m_Parameters.size(); ++paramNum)
+	{
+		if( m_Parameters[paramNum]->GetName() == in_strName )
+			return m_Parameters[paramNum];
+	}
+
+	return SharedPtr<IVParameter>(0);
+
+	//return SharedPtr(new VGLSLParameter(m_hProgram, in_strName));
 }
 
 vbool VGLSLShader::CompileErrorOccured(GLhandleARB in_hProgram, std::string* in_pstrErrorMesssage)
@@ -186,7 +217,7 @@ IVParameter* VGLSLShader::GetActiveUniformParameter(vuint in_nIndex)
 	}
 	else if( type != 0 )
 	{
-		return new VGLSLParameter(m_hProgram, name);
+		return new VGLSLParameter(m_hProgram, name, ParamTypeFromGLEnum(type));
 	}
 	else
 	{

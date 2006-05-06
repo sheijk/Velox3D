@@ -253,7 +253,7 @@ private:
 
 	void CreateWater(const VRect3D& area, VSharedPtr<VEntity> pParent)
 	{
-		VSharedPtr<VMatrix44fParamValue> m_pCameraMatValue;
+		VSharedPtr<VFloat44ParamValue> m_pCameraMatValue;
 
 		VSharedPtr<VEntity> pMirrorEntity(new VEntity());
 

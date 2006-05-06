@@ -40,6 +40,9 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 	VVector3f m_Position;
 	VVector3f m_Right;
 	VVector3f m_Up;

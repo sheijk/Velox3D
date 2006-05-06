@@ -211,6 +211,10 @@ namespace v3d {
 		in_Matrix.Set(2,1, yz + wx);
 		in_Matrix.Set(2,2, 1.0f - (xx + yy));
 	}
+
+	std::ostream& operator<<(std::ostream& str, const VMatrix44f& matrix);
+	std::istream& operator>>(std::istream& str, VMatrix44f& matrix);
+
 //-----------------------------------------------------------------------------
 } // namespace v3d
 //-----------------------------------------------------------------------------

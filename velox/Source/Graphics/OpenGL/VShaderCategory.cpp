@@ -9,11 +9,12 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
+using namespace resource;
+
 namespace {
 	const std::string FRAGMENT_PROGRAM_STATE_NAME = "fragment-program";
 	const std::string VERTEX_PROGRAM_STATE_NAME = "vertex-program";
 
-	/** Extracts the resource name to which the state refers (if it does) */
 	std::string GetResFromState(
 		const VRenderPass& pass, 
 		const std::string& stateName)
@@ -25,7 +26,34 @@ namespace {
 
 		VStateParameter param = pState->GetParameterByName("res");
 		std::string res = param.GetValue<std::string>();
+
 		return res;
+	}
+
+	std::string GetSourceFromState(
+		const VRenderPass& pass, 
+		const std::string& stateName)
+	{
+		const VState* pState = pass.GetStateByName(stateName.c_str());
+
+		if( pState == 0 )
+			return "";
+
+		VStateParameter param = pState->GetParameterByName("res");
+		std::string res = param.GetValue<std::string>();
+
+		std::string source;
+
+		if( res.empty() )
+		{
+			source = pState->GetParameterByName("source").GetValue<std::string>();
+		}
+		else
+		{
+			source = GetResourceData<VTextFile>(res.c_str())->GetContent();
+		}
+
+		return source;
 	}
 }
 
@@ -43,20 +71,13 @@ VShaderCategory::~VShaderCategory()
 {
 }
 
-using namespace resource;
-
 VShaderState* VShaderCategory::CreateState(const VRenderPass& in_Pass)
 {
 	if( CanCreateStateFrom(in_Pass) )
 	{
 		// get fragment and vertex shader resource name and load them
-		const std::string fragmentResource = GetResFromState(in_Pass, FRAGMENT_PROGRAM_STATE_NAME);
-		const std::string fragmentSource = 
-			GetResourceData<VTextFile>(fragmentResource.c_str())->GetContent();
-
-		const std::string vertexResource = GetResFromState(in_Pass, VERTEX_PROGRAM_STATE_NAME);
-		const std::string vertexSource =
-			GetResourceData<VTextFile>(vertexResource.c_str())->GetContent();
+		const std::string fragmentSource = GetSourceFromState(in_Pass, FRAGMENT_PROGRAM_STATE_NAME);
+		const std::string vertexSource = GetSourceFromState(in_Pass, VERTEX_PROGRAM_STATE_NAME);
 
 		VGLSLShader* pShader = new VGLSLShader(vertexSource, fragmentSource);
 		VShaderState* pShaderState = new VShaderState(pShader, this);

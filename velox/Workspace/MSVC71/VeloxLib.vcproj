@@ -307,6 +307,12 @@
 						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VTerrainPart.h">
 						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\VTorusMeshPart.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Api\V3d\Scene\Shapes\VTorusMeshPart.h">
+						</File>
 					</Filter>
 					<Filter
 						Name="Rendering"

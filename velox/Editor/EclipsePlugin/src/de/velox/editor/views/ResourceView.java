@@ -61,12 +61,9 @@ public class ResourceView extends VeloxViewBase {
 			if (parent.equals(getViewSite())) {
 				if( root == null ) {
 					root = v3d.GetResourceManager().GetResourceByName("/").__deref__();
-					
-					root.AddRandomNamedSubResource("");
-					root.AddSubResource("someSubResource");
 				}
 				
-				root.DumpInfo("#");
+//				root.DumpInfo("#");
 				
 				return getChildren(root);
 			}

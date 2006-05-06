@@ -4,18 +4,10 @@
 	
 		<renderPass> 
 			<state name="vertex-program">
-				<iparam name="source">
-void main(void) {
-	gl_Position = ftransform();
-}				
-				</iparam>
+				<param name="res" value="/edit/mat/mirror.vert" />
 			</state>
 			<state name="fragment-program">
-				<iparam name="source">
-void main(void) {
-	gl_FragColor = vec4(0, 1, 0, 1);
-}
-				</iparam>
+				<param name="res" value="/edit/mat/mirror.frag" />
 			</state>
 		</renderPass>
 		

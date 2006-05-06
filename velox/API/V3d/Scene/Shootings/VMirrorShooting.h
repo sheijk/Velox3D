@@ -34,7 +34,7 @@ public:
 	math::VPlane GetPlane() const;
 	void SetPlane(const math::VPlane& in_Plane);
 
-	VSharedPtr<graphics::VMatrix44fParamValue> GetTextureMatrixValue() const;
+	VSharedPtr<graphics::VFloat44ParamValue> GetTextureMatrixValue() const;
 
 	// overridden
 	virtual void Activate();
@@ -54,7 +54,7 @@ private:
 	entity::VPartConnection<VSimpleShooting> m_pMainShooting;
 
 	resource::VResourceDataPtr<graphics::IVDevice> m_pRenderTarget;
-	VSharedPtr<graphics::VMatrix44fParamValue> m_pTextureMatrixValue;
+	VSharedPtr<graphics::VFloat44ParamValue> m_pTextureMatrixValue;
 	graphics::VCamera m_Camera;
 	math::VPlane m_Plane;
 };

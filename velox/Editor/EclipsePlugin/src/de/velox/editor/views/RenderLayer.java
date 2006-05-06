@@ -8,17 +8,20 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Widget;
 
 import de.velox.IVDevice;
 import de.velox.IVInputManager;
+import de.velox.IVSynchronizedAction;
 import de.velox.VCamera;
 import de.velox.VRenderFrameAction;
 import de.velox.VView;
 
-public class RenderLayer {
+public class RenderLayer /* extends Canvas <- hilft nicht */ {
 	private final int windowHandle;
 	private final IVDevice device;
 	private final VRenderFrameAction renderAction;
@@ -27,6 +30,8 @@ public class RenderLayer {
 	private IVInputManager inputManager = null;
 
 	public RenderLayer(final Composite parent) {
+//		super(parent, SWT.DEFAULT);
+		
 		windowHandle = parent.handle;
 		renderAction = new VRenderFrameAction(windowHandle);
 		VView.GetInstance().Add(renderAction);
@@ -53,14 +58,15 @@ public class RenderLayer {
 		parent.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
 				VView.GetInstance().Remove(renderAction);
+				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction());
 			}
 		});
 		
-		parent.addListener(SWT.MouseWheel, new Listener() {
-			public void handleEvent(Event event) {
-				System.out.println("MouseWheel event");
-			}
-		});
+//		parent.addListener(SWT.MouseWheel, new Listener() {
+//			public void handleEvent(Event event) {
+//				System.out.println("MouseWheel event");
+//			}
+//		});
 		
 		this.parent = parent;
 	}

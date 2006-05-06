@@ -24,6 +24,7 @@ public:
 	virtual VResourceId CreateResource(VStringParam in_strName);
 	virtual VResourceId CreateRandomNamedResource(VStringParam in_strUsageHint);
 	virtual VResourceId GetResourceByName(VStringParam in_strName);
+	virtual vbool ExistsResource(VStringParam in_strName);
 	virtual void RegisterResourceType(VSharedPtr<IVResourceType> in_pResType);
 	virtual void NotifyChange(VResource* in_pResource, VTypeInfo in_Type);
 

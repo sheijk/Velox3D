@@ -47,8 +47,13 @@ public class SceneView extends VeloxViewBase {
 	public void setEntity(Entity inEntity) {
 		root = inEntity;
 		
-		if( root != null )
-			root.synchronize();
+		if( root != null ) {
+			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+				@Override public void Run() throws RuntimeException {
+					root.synchronize();
+				}
+			});
+		}
 		
 		viewer.refresh();
 	}
@@ -444,7 +449,11 @@ public class SceneView extends VeloxViewBase {
 		
 		contextMenuActions.add(new SceneAction("Refresh") {
 			public void run() {
-				root.synchronize();
+				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+					@Override public void Run() throws RuntimeException {
+						root.synchronize();
+					}
+				});
 				viewer.refresh();
 			}
 		});

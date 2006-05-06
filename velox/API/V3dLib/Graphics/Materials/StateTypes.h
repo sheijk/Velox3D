@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <v3d/Core/VCoreLib.h>
 
-#include <v3d/Math/VMatrix.h>
+#include <v3d/Math/VMatrixOps.h>
 
 #include <iostream>
 
@@ -13,9 +13,6 @@ Name-Type-GLenum Zuordnungen werden in VModeTypeInfo.cpp festgelegt
 
 //-----------------------------------------------------------------------------
 namespace v3d { 
-std::ostream& operator<<(std::ostream& str, const VMatrix44f& matrix);
-std::istream& operator>>(std::istream& str, VMatrix44f& matrix);
-
 namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting

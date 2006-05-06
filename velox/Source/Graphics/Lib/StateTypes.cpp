@@ -7,30 +7,6 @@
 //-----------------------------------------------------------------------------
 namespace v3d { 
 
-std::ostream& operator<<(std::ostream& str, const VMatrix44f& matrix)
-{
-	for(vuint row = 0; row < 4; ++row)
-	for(vuint column = 0; column < 4; ++column)
-	{
-        str << matrix.Get(row, column) << " ";
-	}
-
-	return str;
-}
-
-std::istream& operator>>(std::istream& str, VMatrix44f& matrix)
-{
-	for(vuint row = 0; row < 4; ++row)
-	for(vuint column = 0; column < 4; ++column)
-	{
-		vfloat32 val;
-        str >> val;
-		matrix.Set(row, column, val);
-	}
-
-	return str;
-}
-
 namespace graphics {
 //-----------------------------------------------------------------------------
 

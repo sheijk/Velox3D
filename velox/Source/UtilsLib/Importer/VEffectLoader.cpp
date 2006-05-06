@@ -19,6 +19,7 @@ using namespace v3d::resource;
 class VStateParser : public IVXMLVisitor
 {
 	VState m_State;
+	std::string m_IParamName;
 
 public:
 	VStateParser(VStringParam in_strStateName) : m_State(in_strStateName)
@@ -33,10 +34,17 @@ public:
 
 	virtual void OnElementOpen(xml::IVXMLElement* pElement)
 	{
-		std::string name = pElement->GetAttributeValue<std::string>("name");
-		std::string value = pElement->GetAttributeValue<std::string>("value");
+		if( pElement->GetName() == "param" )
+		{
+			std::string name = pElement->GetAttributeValue<std::string>("name");
+			std::string value = pElement->GetAttributeValue<std::string>("value");
 
-		m_State.SetParameter(name.c_str(), value);
+			m_State.SetParameter(name.c_str(), value);
+		}
+		else if( pElement->GetName() == "iparam" )
+		{
+			m_IParamName = pElement->GetAttributeValue<std::string>("name");
+		}
 	}
 
 	virtual void OnFileEnd()
@@ -49,6 +57,11 @@ public:
 
 	virtual void OnText(VStringParam pText)
 	{
+		if( ! m_IParamName.empty() )
+		{
+			m_State.SetParameter(m_IParamName.c_str(), pText);
+			m_IParamName = "";
+		}
 	}
 };
 

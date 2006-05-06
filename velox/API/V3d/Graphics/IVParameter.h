@@ -23,7 +23,17 @@ using namespace v3d; // anti auto indenting
 class IVParameter
 {
 public:
+	enum Type
+	{
+		Float, Float2, Float4, Float44,
+		Int,
+		Bool,
+		Texture,
+		Unknown
+	};
+
 	virtual std::string GetName() const = 0;
+	virtual Type GetType() const = 0;
 
 	virtual void Apply(vfloat32 in_fNewValue) const = 0;
 	virtual vfloat32 AsFloat() const = 0;
@@ -42,6 +52,13 @@ public:
 	virtual vbool AsBool() const = 0;
 
 	virtual void ApplyTexture(VStringParam in_strResourceName) const = 0;
+	virtual std::string TextureResource() const = 0;
+
+	// -> VMaterialSetup.cpp, TODO: correct this!
+	/** Will convert the string to a value dependent on this parameter's type */
+	void Apply(const std::string& in_strValue);
+	/** Return's the parameters value to a string (depending on it's type */
+	std::string AsString() const;
 };
 
 //-----------------------------------------------------------------------------

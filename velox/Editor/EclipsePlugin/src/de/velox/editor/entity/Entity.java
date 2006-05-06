@@ -112,13 +112,17 @@ public class Entity implements XMLSerializable {
 	
 	/** Resynchronize state with VEntity and it's parts */
 	public void synchronize() {
-		for(Part part : parts) {
-			part.synchronize();
-		}
-		
-		for(Entity entity : entities) {
-			entity.synchronize();
-		}
+//		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+//			@Override public void Run() throws RuntimeException {
+				for(Part part : parts) {
+					part.synchronize();
+				}
+				
+				for(Entity entity : entities) {
+					entity.synchronize();
+				}
+//			}
+//		});
 	}
 	
 	public Entity getParent() {

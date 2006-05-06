@@ -30,6 +30,18 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+05.05.06
+- shader koennen direkt in die effect description eingebunden werden
+- kein absturz mehr beim schliessen von szenen
+- speicherbug gefixt: settings waren manchmal beim speichern nicht synchron mit
+  den werten in den parts (verschieben mit der maus, etc.)
+- shader parameter des materials koennen im editor als properties bearbeitet
+  werden
+
+04.05.06
+- V3D_LOG und V3D_LOGONCE in VLogging.h eingebaut
+- szenen werden direkt beim oeffnen im editor aktiviert
+
 21.04.06
 - mirror shooting
 - default material, wenn ein material aus einer effect description nicht

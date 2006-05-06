@@ -1298,6 +1298,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 						<File
 							RelativePath="..\..\Source\Scene\Shapes\VTerrainPart.cpp">
 						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\VTorusMeshPart.cpp">
+						</File>
 					</Filter>
 					<Filter
 						Name="Shootings">
@@ -1534,6 +1537,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 			</File>
 			<File
 				RelativePath="..\..\Editor\NativeBindings\makefile">
+			</File>
+			<File
+				RelativePath="..\..\Editor\NativeBindings\PartParsers.cpp">
 			</File>
 			<File
 				RelativePath="..\..\Editor\NativeBindings\swigbuild.log">

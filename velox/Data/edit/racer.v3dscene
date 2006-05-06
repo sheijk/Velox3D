@@ -8,24 +8,26 @@
 	<part type="shooting"/>
 	<entity name="ambient">
 		<entity name="skybox">
-			<part type="v3d::entity::VRigidBodyPart" pos="(-11,49,232)"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,210)"/>
 			<part type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/"/>
 		</entity>
 		<entity name="dummy">
-			<part type="v3d::entity::VRigidBodyPart" pos="(2,77,0)"/>
-			<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="10"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-20,48,0)"/>
+			<part type="v3d::scene::VSphereMeshPart" mat_color="(0,0,0,0)" material="/edit/mat/red.v3dmat" radius="10"/>
 		</entity>
 		<entity name="water">
 			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::scene::VMirrorShooting" render-target="/someSubResource"/>
 		</entity>
 		<entity name="editorCam">
-			<part type="v3d::entity::VRigidBodyPart" pos="(-11,49,232)"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,210)"/>
 			<part type="v3d::utils::VCameraPart"/>
 			<part type="v3d::utils::VTrackballPart"/>
 		</entity>
 		<entity name="debug">
-			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(15,-32,0)"/>
 			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial"/>
+			<part type="v3d::scene::VPlaneMeshPart" material="/edit/mat/textured.v3dmat" pos="(-50,0,-50)" right="(100,0,0)" up="(0,0,100)"/>
 		</entity>
 		<entity name="sun">
 			<part type="v3d::entity::VRigidBodyPart" pos="(100,100,0)"/>
@@ -35,7 +37,7 @@
 	</entity>
 	<entity name="world">
 		<entity name="terrain">
-			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-187,-136,0)"/>
 			<part type="v3d::scene::VTerrainPart" material="/edit/mat/phong.v3dmat"/>
 		</entity>
 		<entity name="playerCar"/>

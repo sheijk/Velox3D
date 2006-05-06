@@ -194,6 +194,20 @@ void VResourceManager::DumpResourceInfo() const
 	m_RootResource.DumpInfo("");
 }
 
+vbool VResourceManager::ExistsResource(VStringParam in_strName)
+{
+	// quick and dirty hack..
+	try
+	{
+		VResourceId x(in_strName);
+		return true;
+	}
+	catch(VException&)
+	{
+		return false;
+	}
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::resource
 //-----------------------------------------------------------------------------

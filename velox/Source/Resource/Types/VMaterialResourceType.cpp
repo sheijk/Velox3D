@@ -29,14 +29,6 @@ using namespace v3d; // anti auto indent
 using resource::VFileName;
 using namespace resource;
 
-#ifdef V3D_DEBUG
-#define V3D_LOG(msg) vout << "[" << __FILE__ << ":" << __LINE__ << "] " << msg;
-#else
-#define V3D_LOG(msg)
-#endif
-
-#define V3D_LOGLN(msg) V3D_LOG(msg << vendl)
-
 /**
  * standard c'tor
  */
@@ -126,13 +118,15 @@ VRenderStateList* VMaterialResourceType::CreatePass(
 		VRenderStateList::RenderStateList defaultStates = 
 			m_StateCategories.CreateDefaultStates();
 
+		// store resource dependencies (if a shader is changed, also recreate
+		// materials which use it
 		std::vector<std::string> dependantResources =
 			VShaderCategory::GetResourceDependencies(in_Pass);
+
 		for(std::vector<std::string>::iterator dep = dependantResources.begin();
 			dep != dependantResources.end();
 			++dep)
 		{
-			// if a shader is changed, also change the material which uses it
 			m_DependantResources.insert(make_pair(*dep, in_ResourceName));
 		}
 

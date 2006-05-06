@@ -1,6 +1,7 @@
 #include <V3d/Math/VQuaternionOps.h>
 //-----------------------------------------------------------------------------
 
+#include <V3d/Math/VMatrixOps.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -19,6 +20,30 @@ void Rotate(VVector3f& io_Vector, const VQuatf& in_Rotation)
 	io_Vector[0] = res[0];
 	io_Vector[1] = res[1];
 	io_Vector[2] = res[2];
+}
+
+std::ostream& operator<<(std::ostream& str, const VMatrix44f& matrix)
+{
+	for(vuint row = 0; row < 4; ++row)
+		for(vuint column = 0; column < 4; ++column)
+		{
+			str << matrix.Get(row, column) << " ";
+		}
+
+		return str;
+}
+
+std::istream& operator>>(std::istream& str, VMatrix44f& matrix)
+{
+	for(vuint row = 0; row < 4; ++row)
+		for(vuint column = 0; column < 4; ++column)
+		{
+			vfloat32 val;
+			str >> val;
+			matrix.Set(row, column, val);
+		}
+
+		return str;
 }
 
 //-----------------------------------------------------------------------------

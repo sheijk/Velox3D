@@ -33,6 +33,8 @@ public:
 	/** Returns a resource by it's fully qualified name */
 	virtual VResourceId GetResourceByName(VStringParam in_strName) = 0;
 
+	virtual vbool ExistsResource(VStringParam in_strName) = 0;
+
 	/** 
 	 * Returns a resource for internal usage. It will have a randomly generated
 	 * name containing in_strUsageHint and will be placed in an unspecified

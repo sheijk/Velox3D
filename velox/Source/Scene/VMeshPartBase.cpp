@@ -2,6 +2,7 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Resource.h>
+#include <V3dLib/Utils/VStringValue.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -13,6 +14,26 @@ using namespace v3d; // anti auto indent
 using namespace v3d::entity;
 using namespace v3d::resource;
 using namespace v3d::graphics;
+
+namespace {
+	std::string ParameterVarName(const IVParameter& in_Param)
+	{
+		return "mat_" + in_Param.GetName();
+	}
+
+	vbool contains(const std::string& str, const char* chars)
+	{
+		return str.find_first_of(chars) < str.size();
+	}
+
+	vbool IsValidPartParamName(const std::string& name)
+	{
+		vbool isglstate = name.find("mat_gl_") == 0;
+		vbool containsInvalidChars = contains(name, "[]");
+
+		return !isglstate && !containsInvalidChars;
+	}
+}
 
 VMeshPartBase::VMeshPartBase(VResourceDataPtr<const IVMaterial> in_hMaterial) :
 	m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
@@ -44,7 +65,21 @@ const graphics::IVMaterial& VMeshPartBase::GetMaterial() const
 void VMeshPartBase::SetMaterial(
 	resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial)
 {
-	m_hMaterial = GetMutableResourceData<IVMaterial>(in_hMaterial.GetEnclosingResource()->GetQualifiedName().c_str());
+	m_hMaterial = GetMutableResourceData<IVMaterial>(
+		in_hMaterial.GetEnclosingResource()->GetQualifiedName().c_str());
+
+	m_ParameterValues.clear();
+
+	// add parameter values for all parameters
+	VRangeIterator<IVParameter> params = m_hMaterial->Parameters();
+	while( params.HasNext() )
+	{
+		VSharedPtr<IVParameterValue> pParamValue = 
+			CreateParamValue(params->GetType());
+
+		AddParamValue(params->GetName(), pParamValue);
+		++params;
+	}
 }
 
 const math::VRBTransform& VMeshPartBase::GetModelTransform() const
@@ -136,10 +171,14 @@ void VMeshPartBase::AddVariables(messaging::VMessage* in_pAnswer)
 
 		if( parameter != 0 )
 		{
-			const std::string name = "mat." + paramValue->first;
-			const std::string value = "?";
+			const std::string name = ParameterVarName(*parameter);
+			const std::string value = parameter->AsString();
 
-			in_pAnswer->AddProperty(name, value);
+			if( IsValidPartParamName(name) )
+				in_pAnswer->AddProperty(name, value);
+			else
+				V3D_LOG("ignored material param as part param: " 
+					<< name << "=" << value << "\n");
 
 			//IVParameterValue* pValue = paramValue->second.Get();
 			//pValue->Apply(*parameter);
@@ -157,8 +196,23 @@ void VMeshPartBase::ApplySetting(const messaging::VMessage& in_Message)
 
 	try
 	{
-		if( name == "material" ) {
-			m_hMaterial = GetMutableResourceData<IVMaterial>(value.c_str());
+		if( name == "material" ) 
+		{
+			SetMaterial(GetResourceData<IVMaterial>(value.c_str()));
+		}
+		else 
+		{
+			for(ParamValueMap::const_iterator paramValue = m_ParameterValues.begin();
+				paramValue != m_ParameterValues.end();
+				++paramValue)
+			{
+				IVParameter* parameter = m_hMaterial->GetParameterByName(paramValue->first);
+
+				if( parameter != 0 && ParameterVarName(*parameter) == name )
+				{
+					paramValue->second->Set(value);
+				}
+			}
 		}
 	}
 	catch(VException& e)

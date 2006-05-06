@@ -33,6 +33,11 @@ void VTextureValue::SetTextureResource(const std::string& in_Value)
 	m_strTextureResource = in_Value;
 }
 
+void VTextureValue::Set(const std::string& in_NewValue)
+{
+	SetTextureResource(in_NewValue);
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

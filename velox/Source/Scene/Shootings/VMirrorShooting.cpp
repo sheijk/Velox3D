@@ -34,7 +34,7 @@ namespace {
 VMirrorShooting::VMirrorShooting() :
 	m_pMainShooting(VPartDependency::Ancestor, RegisterTo())
 {
-	m_pTextureMatrixValue.Assign(new VMatrix44fParamValue());
+	m_pTextureMatrixValue.Assign(new VFloat44ParamValue());
 }
 
 /**
@@ -159,7 +159,7 @@ void VMirrorShooting::UpdateAndCull()
 	}
 }
 
-VSharedPtr<VMatrix44fParamValue> VMirrorShooting::GetTextureMatrixValue() const
+VSharedPtr<VFloat44ParamValue> VMirrorShooting::GetTextureMatrixValue() const
 {
 	return m_pTextureMatrixValue;
 }
@@ -167,6 +167,12 @@ VSharedPtr<VMatrix44fParamValue> VMirrorShooting::GetTextureMatrixValue() const
 void VMirrorShooting::Render()
 {
 	IVDevice* activeDevice = GetRenderTarget();
+
+	if( activeDevice == NULL )
+	{
+		V3D_LOGONCE(activeDeviceNull);
+		return;
+	}
 
 	activeDevice->BeginScene();
 
@@ -214,6 +220,11 @@ void VMirrorShooting::Render()
 
 void VMirrorShooting::SetRenderTargetResource(const std::string& in_strResourceName)
 {
+	if( ! VResourceManagerPtr()->ExistsResource(in_strResourceName.c_str()) )
+	{
+		VResourceManagerPtr()->CreateResource(in_strResourceName.c_str());
+	}
+
 	VResourceId res(in_strResourceName.c_str());
 
 	if( ! res->ContainsData<IVDevice>() )
@@ -221,7 +232,6 @@ void VMirrorShooting::SetRenderTargetResource(const std::string& in_strResourceN
 //TODO:
 //plane aus rigid body part berechnen
 //resource bei bedarf erzeugen (?)
-
 		graphics::VGraphicsServicePtr pGfxService;
 
 		graphics::VDisplaySettings settings;

@@ -16,11 +16,13 @@ using namespace v3d; // anti auto indent
 GLfloat VGLSLParameter::m_fTempBuffer[16];
 GLint VGLSLParameter::m_iTempBuffer[16];
 
-VGLSLParameter::VGLSLParameter(GLhandleARB in_hProgram, VStringParam in_strName)
+VGLSLParameter::VGLSLParameter(
+	GLhandleARB in_hProgram, VStringParam in_strName, Type in_Type)
 {
 	m_hProgram = in_hProgram;
 	m_Location = glGetUniformLocationARB(in_hProgram, in_strName);
 	m_strName = in_strName;
+	m_Type = in_Type;
 }
 
 VGLSLParameter::~VGLSLParameter()
@@ -30,6 +32,11 @@ VGLSLParameter::~VGLSLParameter()
 std::string VGLSLParameter::GetName() const
 {
 	return m_strName;
+}
+
+IVParameter::Type VGLSLParameter::GetType() const
+{
+	return m_Type;
 }
 
 GLint VGLSLParameter::GetLocation() const
@@ -174,6 +181,11 @@ void VGLSLParameter::ApplyTexture(VStringParam in_strResourceName) const
 	//// set texture id as int
 	////glUniform1iARB(m_Location, pTex->GetTextureId());
 	//glUniform1iARB(m_Location, 0);
+}
+
+std::string VGLSLParameter::TextureResource() const
+{
+	return "";
 }
 
 //-----------------------------------------------------------------------------

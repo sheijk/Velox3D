@@ -4,6 +4,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Core/SmartPtr/VSharedPtr.h>
+#include <V3d/Graphics/IVParameter.h>
 
 #include <map>
 //-----------------------------------------------------------------------------

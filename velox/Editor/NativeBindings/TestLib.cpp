@@ -49,7 +49,7 @@ void Initialize()
 	
 	g_bInitialized = true;
 	
-	try {
+	//try {
 		cout << "Initializing velox... " << endl;
 
 		// create kernel
@@ -77,20 +77,20 @@ void Initialize()
 		glfwInit();
 	
 		cout << "done" << endl;
-	}
-	catch(VException& e) {
-		cout 
-			<< "\n\n----------------------------------------\n"
-			<< "Exception while initializing:\n"
-			<< "Message: \"" << e.GetErrorString() << "\"\n"
-			<< "File:    \"" << e.GetErrorFile() << "\"\n"
-			<< "Line:    \"" << e.GetErrorLine() << "\"\n"
-			<< "XErr:    \"" << e.GetExtendedErrorString() << "\"\n"
-			<< "\n";
-	}
-	catch(...) {
-		cout << "An unknown error occurred while initializing\n" << endl;
-	}
+	//}
+	//catch(VException& e) {
+	//	cout 
+	//		<< "\n\n----------------------------------------\n"
+	//		<< "Exception while initializing:\n"
+	//		<< "Message: \"" << e.GetErrorString() << "\"\n"
+	//		<< "File:    \"" << e.GetErrorFile() << "\"\n"
+	//		<< "Line:    \"" << e.GetErrorLine() << "\"\n"
+	//		<< "XErr:    \"" << e.GetExtendedErrorString() << "\"\n"
+	//		<< "\n";
+	//}
+	//catch(...) {
+	//	cout << "An unknown error occurred while initializing\n" << endl;
+	//}
 }
 
 void Shutdown()
