@@ -33,6 +33,7 @@ public:
 private:
 	mutable resource::VResourceDataPtr<IVTexture> m_pTexture;
 	vuint m_nTextureUnit;
+	mutable vbool m_bWasFineLastTime;
 };
 
 //-----------------------------------------------------------------------------

@@ -37,6 +37,13 @@ public:
 		m_Value = value.Get<ParamType>();
 	}
 
+	virtual std::string Get() const
+	{
+		utils::VStringValue value;
+		value.Set(m_Value);
+		return value.Get<std::string>();
+	}
+
 private:
 	ParamType m_Value;
 };

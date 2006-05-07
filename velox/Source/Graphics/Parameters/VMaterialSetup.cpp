@@ -60,6 +60,11 @@ public:
 
 	virtual void Set(const std::string& in_NewValue) 
 	{}
+
+	virtual std::string Get() const
+	{
+		return "";
+	}
 };
 
 VSharedPtr<IVParameterValue> CreateParamValue(IVParameter::Type in_ParamType)

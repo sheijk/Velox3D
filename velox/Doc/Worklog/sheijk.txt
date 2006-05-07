@@ -30,6 +30,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+07.05.06
+- wizards fuer material, glsl fragment + vertex shader
+- tolles spherical ambient lighting
+- glsl compiler fehler in der konsole
+
 06.05.06
 - material editor, speichern -> automatisches resourcen update
 - mirror shooting part gibt einstellungen an graphics part im gleichen entity

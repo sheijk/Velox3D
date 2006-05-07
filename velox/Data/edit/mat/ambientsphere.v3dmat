@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+varying float dir;
+varying vec3 normal;
+varying vec3 lightDir;
+
+void main(void) {
+	gl_Position = ftransform();
+	normal = normalize(gl_NormalMatrix * gl_Normal);
+	dir = 0.5 + normal.y/2;
+	lightDir = normalize(gl_LightSource[0].position.xyz - (gl_ModelViewMatrix * gl_Vertex).xyz);
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<iparam name="source">
+uniform vec4 groundColor;
+uniform vec4 skyColor;
+
+varying float dir;
+varying vec3 normal;
+varying vec3 lightDir;
+
+vec4 diffuse() {
+	return max(dot(normal, lightDir), 0.0) *
+		gl_LightSource[0].diffuse;
+}
+
+vec4 ambient() {
+	return mix(groundColor, skyColor, dir);	
+}
+
+void main(void) {
+	gl_FragColor = ambient() + diffuse()*1;
+}
+				</iparam>
+			</state>
+		</renderPass>
+	</shaderPath>
+</effect>

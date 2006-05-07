@@ -7387,3 +7387,363 @@ Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk
 
 !ENTRY org.eclipse.core.resources 1 1 2006-05-07 00:21:37.562
 !MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 00:49:22.656 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 00:49:27.312
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 00:49:48.578 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 00:49:53.78
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 01:05:36.453 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 01:05:39.953
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 01:24:05.859 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 01:24:10.328
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 01:25:49.625 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 01:25:53.203
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 01:38:44.703 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 01:38:48.265
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 01:48:39.296 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 01:48:42.781
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 02:08:43.859 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 02:08:47.312
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 02:12:13.484 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 02:12:16.953
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 02:14:18.15 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 02:14:21.531
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 02:23:23.406 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 02:23:26.859
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 02:39:36.78 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 02:39:39.515
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 02:43:59.31 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 02:44:04.625
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 02:57:45.656 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 02:57:50.953
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 03:00:43.968 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 03:00:47.750
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 03:32:35.578 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 03:32:39.890
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 03:51:35.15 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 03:51:38.546
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 03:59:28.546 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 03:59:32.78
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 03:59:52.562 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 03:59:56.93
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 04:04:43.890 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 04:04:47.359
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 04:10:23.531 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 04:10:27.62
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 04:18:51.00 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 04:18:54.546
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 04:21:18.656 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 04:21:22.125
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:05:00.46 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:05:03.531
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:05:25.890 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:05:29.421
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:06:53.62 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:06:56.625
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:09:47.421 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:09:50.906
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:30:04.687 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:30:08.203
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:33:42.187 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:33:45.703
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:40:58.93 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:41:01.515
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 05:48:43.500 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 05:48:47.31
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 06:25:51.140 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 06:25:54.593
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 06:37:12.468 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 06:37:15.906
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 06:39:03.312 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 06:39:06.781
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 06:43:29.500 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 06:43:32.937
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-07 06:47:55.734 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-07 06:47:59.218
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.

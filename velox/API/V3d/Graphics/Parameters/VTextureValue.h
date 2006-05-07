@@ -28,6 +28,7 @@ public:
 	void SetTextureResource(const std::string& in_Value);
 
 	virtual void Set(const std::string& in_NewValue);
+	virtual std::string Get() const;
 private:
 	std::string m_strTextureResource;
 };

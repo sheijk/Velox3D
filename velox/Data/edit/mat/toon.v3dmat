@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+varying float dir;
+
+void main(void) {
+	gl_Position = ftransform();	
+	dir = dot(gl_Normal, vec3(0, 1, 0));
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<iparam name="source">
+varying float dir;
+
+void main(void) {
+	vec4 skyColor = vec4(0, 0, 0.5, 1);
+	vec4 groundColor = vec4(0, 0.5, 0, 1);
+	
+	gl_FragColor = mix(skyColor, groundColor, dir);
+}
+				</iparam>
+			</state>
+		</renderPass>
+	</shaderPath>
+</effect>

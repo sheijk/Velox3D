@@ -23,7 +23,11 @@ VSphereMeshPart::VSphereMeshPart(vfloat32 in_fRadius, vuint in_nDetail) :
 void VSphereMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
 	ApplyParameterValues();
+
+	glPushAttrib(GL_NORMALIZE);
+	glEnable(GL_NORMALIZE);
 	glutSolidSphere(m_fRadius, m_nDetail, m_nDetail);
+	glPopAttrib() ;
 }
 
 void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message, 

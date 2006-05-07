@@ -183,7 +183,8 @@ void VMeshPartBase::AddVariables(messaging::VMessage* in_pAnswer)
 		if( parameter != 0 )
 		{
 			const std::string name = ParameterVarName(*parameter);
-			const std::string value = parameter->AsString();
+			//const std::string value = parameter->AsString();
+			const std::string& value = paramValue->second->Get();
 
 			if( IsValidPartParamName(name) )
 				in_pAnswer->AddProperty(name, value);

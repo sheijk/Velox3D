@@ -9,7 +9,7 @@
 		</list>
 	</section>
 	<section name="NewWizardAction">
-		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="de.velox.editor.wizards.NewSceneWizard"/>
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="de.velox.editor.materials.GLSLMaterialWizard"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="VeloxEditor"/>
 		</list>

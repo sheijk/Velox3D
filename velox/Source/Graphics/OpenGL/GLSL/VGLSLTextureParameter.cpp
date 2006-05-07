@@ -18,6 +18,7 @@ VGLSLTextureParameter::VGLSLTextureParameter(
 	: VGLSLParameter(in_hProgram, in_strName, IVParameter::Texture)
 {
 	m_nTextureUnit = in_nTextureUnit;
+	m_bWasFineLastTime = true;
 }
 
 /**
@@ -31,13 +32,20 @@ void VGLSLTextureParameter::ApplyTexture(VStringParam in_strResourceName) const
 {
 	using namespace resource;
 
-	// get resource
 	try
 	{
 		m_pTexture = GetMutableResourceData<IVTexture>(in_strResourceName);
+		m_bWasFineLastTime = true;
 	}
-	catch(VException&)
+	catch(VException& e)
 	{
+		//if( m_bWasFineLastTime )
+		//{
+		//	V3D_LOGLN("Could not apply texture " << in_strResourceName
+		//		<< ":" << e.GetErrorString());
+		//}
+
+		m_bWasFineLastTime = false;
 	}
 
 	// set texture id as int

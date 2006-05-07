@@ -72,6 +72,24 @@
             icon="icons/sample.gif"
             id="de.velox.editor.wizards.NewSceneWizard"
             name="New scene"/>
+      <wizard
+            category="VeloxEditor"
+            class="de.velox.editor.materials.GLSLMaterialWizard"
+            icon="icons/sample.gif"
+            id="de.velox.editor.materials.GLSLMaterialWizard"
+            name="GLSL Material Wizard"/>
+      <wizard
+            category="VeloxEditor"
+            class="de.velox.editor.materials.GLSLVertexProgramWizard"
+            icon="icons/sample.gif"
+            id="de.velox.editor.materials.GLSLVertexProgramWizard"
+            name="GLSL Vertex Program"/>
+      <wizard
+            category="VeloxEditor"
+            class="de.velox.editor.materials.GLSLFragmentProgramWizard"
+            icon="icons/sample.gif"
+            id="de.velox.editor.materials.GLSLFragmentProgramWizard"
+            name="GLSL Fragment Program"/>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -96,6 +114,12 @@
             icon="icons/sample.gif"
             id="de.velox.editor.materials.MaterialEditor"
             name="Material Editor"/>
+      <editor
+            class="de.velox.editor.materials.GLSLEditor"
+            extensions="vert,frag"
+            icon="icons/sample.gif"
+            id="de.velox.editor.materials.GLSLEditor"
+            name="GLSL Editor"/>
    </extension>
 
 </plugin>

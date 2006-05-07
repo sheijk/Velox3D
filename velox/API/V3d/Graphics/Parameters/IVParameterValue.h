@@ -19,6 +19,7 @@ public:
 
 	virtual void Apply(const IVParameter& in_Param) const = 0;
 	virtual void Set(const std::string& in_NewValue) = 0;
+	virtual std::string Get() const = 0;
 };
 
 // implemented in VMaterialSetup.cpp, sorry *hide* ;)
