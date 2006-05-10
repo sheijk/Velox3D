@@ -9,6 +9,7 @@
 #include <V3d/Physics/VGeometry.h>
 #include <V3d/Physics/VStateListContainer.h>
 #include <V3d/Math.h>
+#include <V3d/Math/VVector.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
@@ -32,6 +33,7 @@ public:
 
 	void SetPosition(graphics::VVertex3f in_Position);
 	void SetOrientation(math::VQuatf in_Orientation);
+	void VBody::SetOrientation(math::VVector4f in_Orientation);
 	
 	/**
 	 * returns 0 if no mesh is set

@@ -96,7 +96,12 @@ void VBody::SetOrientation(math::VQuatf in_Orientation)
 {
 	m_OrientationState.GetQuat().Set(in_Orientation[0], in_Orientation[1], in_Orientation[2], in_Orientation[3]);
 	m_OrientationState.Apply();
+}
 
+void VBody::SetOrientation(VVector4f in_Orientation)
+{
+	m_OrientationState.GetQuat().Set(in_Orientation[0], in_Orientation[1], in_Orientation[2], in_Orientation[3]);
+	m_OrientationState.Apply();
 }
 
 //-----------------------------------------------------------------------------

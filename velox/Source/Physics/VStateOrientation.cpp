@@ -41,6 +41,16 @@ VQuatf& VStateOrientation::GetQuat()
 	return m_Quaternion;
 }
 
+VVector4f VStateOrientation::GetAsVector()
+{
+	VVector4f quat;
+	
+	for(vuint i=0; i < 4; i++)
+	{
+		quat.Set(i, m_Quaternion[i]);
+	}
+	return quat;
+}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::

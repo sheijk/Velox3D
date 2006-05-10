@@ -234,15 +234,15 @@ VPhysicManager::Geometry VPhysicManager::CreatePlane(
 	return pGeometryPlane;
 }
 
-void VPhysicManager::LinkBody(
-      VPhysicManager::BodyPtr in_pBody1,
-	  VPhysicManager::BodyPtr in_pBody2,
-	  VPhysicManager::JointPtr in_LinkMode)
-{
-	in_LinkMode->Create(&m_World);
-	in_LinkMode->AddBody(in_pBody1.Get(), in_pBody2.Get());
-	in_LinkMode->Apply();
-}
+//void VPhysicManager::LinkBody(
+//      VPhysicManager::BodyPtr in_pBody1,
+//	  VPhysicManager::BodyPtr in_pBody2,
+//	  VPhysicManager::JointPtr in_LinkMode)
+//{
+//	in_LinkMode->Create(&m_World);
+//	in_LinkMode->AddBody(in_pBody1.Get(), in_pBody2.Get());
+//	in_LinkMode->Apply();
+//}
 
 void VPhysicManager::DeleteCollisionMesh(VGeometry* in_Geometry)
 {

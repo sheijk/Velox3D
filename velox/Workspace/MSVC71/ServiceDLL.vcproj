@@ -1217,6 +1217,15 @@
 					RelativePath="..\..\Source\Physics\VJointHinge2.cpp">
 				</File>
 				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2LinkAncestorBodyPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2LinkPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2Part.cpp">
+				</File>
+				<File
 					RelativePath="..\..\Source\Physics\VMass.cpp">
 				</File>
 				<File

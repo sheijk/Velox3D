@@ -6,6 +6,7 @@
 #include <V3d/Core/VIOStream.h>
 #include <V3d/Physics/VPhysicManagerPart.h>
 #include <V3d/Physics/Bounding/IVBoundingVolumePart.h>
+#include <V3d/Math//VQuaternionOps.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -160,8 +161,17 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 	{
 		if( in_pAnswer != 0 )
 		{
+			VVector4f quat;
+			VVector4f axisAngleQuat;
+			
+			if( m_pBody.Get() != 0)
+				quat = m_pBody.Get()->GetOrientation().GetAsVector();
+			
 			in_pAnswer->AddProperty("Mass", m_fMass);
 			in_pAnswer->AddProperty("Position", m_Position);
+			in_pAnswer->AddProperty("Address", m_pBody.Get());
+			in_pAnswer->AddProperty("Quat", quat);
+			in_pAnswer->AddProperty("QuatAxisAngle", axisAngleQuat);
 		}
 	}
 	else if( request == "update" )
@@ -176,6 +186,35 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 			{
 				m_pBody->SetPosition(graphics::VVertex3f(pos.GetX(),pos.GetY(),pos.GetZ()));
 				vout << "Physics: pos set to " << pos << vendl;
+			}
+		}
+
+		if( name == "Quat" )
+		{
+			VVector4f pos = in_Message.GetAs<VVector4f>("value");
+
+			if(m_pBody.Get())
+			{
+				m_pBody->SetOrientation(pos);
+			}
+		}
+
+		if( name == "QuatAxisAngle" )
+		{
+			VVector4f pos = in_Message.GetAs<VVector4f>("value");
+			VVector3f axis;
+			
+			for(vuint i = 0; i < 3; i++)
+			{
+				axis.Set(i, pos[i]);
+			}
+			
+			VQuatf quat = QuatFromAxisAngle(axis, pos[3]);
+			//TODO: check if coharent with dQFromAxisAndAngle
+			
+			if(m_pBody.Get())
+			{
+				m_pBody->SetOrientation(quat);
 			}
 		}
 	}

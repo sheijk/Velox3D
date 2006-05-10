@@ -445,6 +445,12 @@
 						RelativePath="..\..\Api\V3d\Physics\VJointHinge2.h">
 					</File>
 					<File
+						RelativePath="..\..\Api\V3d\Physics\VJointHinge2LinkAncestorBodyPart.h">
+					</File>
+					<File
+						RelativePath="..\..\Api\V3d\Physics\VJointHinge2LinkPart.h">
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Physics\VMass.h">
 					</File>
 					<File
@@ -1149,6 +1155,15 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VJointHinge2.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2LinkAncestorBodyPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2LinkPart.cpp">
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2Part.cpp">
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VMass.cpp">

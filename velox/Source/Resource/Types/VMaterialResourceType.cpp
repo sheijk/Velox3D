@@ -194,7 +194,9 @@ VMaterialResourceType::CreatedMaterial
 		{
 			VShaderPath path;
 			VRenderPass& pass(path.AddRenderPass());
-			pass.AddState(DefaultColorState(1.0f, 0, 0, 1));
+			// red to indicate an error
+			pass.AddState(DefaultColorState(1, 0, 0, 1));
+			pass.AddState(LightingState(true));
 			pMaterial = CreateMaterial(path, in_pResource->GetQualifiedName());
 
 			V3D_ASSERT(pMaterial != 0);

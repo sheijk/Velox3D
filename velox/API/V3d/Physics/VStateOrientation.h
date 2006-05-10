@@ -19,6 +19,7 @@ public:
 
 	virtual void Apply();
 	VQuatf& GetQuat();
+	VVector4f GetAsVector();
 
 private:
 

@@ -33,7 +33,7 @@ public:
 	typedef std::list<BodyPtr> BodyList;
 
 	void Update();
-	void LinkBody(BodyPtr in_pBody1, BodyPtr in_pBody2, JointPtr in_LinkMode);
+	//void LinkBody(BodyPtr in_pBody1, BodyPtr in_pBody2, JointPtr in_LinkMode);
 	
 	/**
 	 * Returns the currently registered count of objects
