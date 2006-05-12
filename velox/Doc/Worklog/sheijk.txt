@@ -30,6 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+11.05.06
+- ein paar "auto" variablen: v3d_MaxLights, v3d_TimeFraction, v3d_TimeFraction60,
+  die vor dem Rendern eines Meshes automatisch eingestellt werden
+- SceneView in SplitView umorganisiert: oben die Entitystruktur und unten die
+  Parts mit ihren Settings
+
 07.05.06
 - wizards fuer material, glsl fragment + vertex shader
 - tolles spherical ambient lighting

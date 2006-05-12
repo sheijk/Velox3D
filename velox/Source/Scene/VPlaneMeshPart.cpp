@@ -24,9 +24,11 @@ VPlaneMeshPart::VPlaneMeshPart(vfloat32 in_fSize) :
 }
 
 VPlaneMeshPart::VPlaneMeshPart(
-	vfloat32 in_fSize, const std::string& in_strMaterialResource) : 
-m_fSize(in_fSize),
-VMeshPartBase(in_strMaterialResource)
+	vfloat32 in_fSize, 
+	const std::string& in_strMaterialResource
+	) : 
+	m_fSize(in_fSize),
+	VMeshPartBase(in_strMaterialResource)
 {
 	m_Position = ToVector3f(-in_fSize/2, -2, -in_fSize/2);
 	m_Right = ToVector3f(in_fSize, 0, 0);
@@ -42,7 +44,7 @@ namespace {
 
 void VPlaneMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
-	ApplyParameterValues();
+	ApplyParameterValues(in_Device);
 
 	bool cullFace = glIsEnabled(GL_CULL_FACE) == GL_TRUE;
 	glDisable(GL_CULL_FACE);

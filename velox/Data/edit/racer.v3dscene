@@ -26,10 +26,10 @@
 			<part type="v3d::scene::VPlaneMeshPart" material="/system/graphics/defaultMaterial" pos="(-50,0,-50)" right="(100,0,0)" up="(0,0,100)"/>
 		</entity>
 		<entity name="sun">
-			<part type="v3d::entity::VRigidBodyPart" pos="(99.1869,40,12.726)" updir="(0,1,0)" viewdir="(0,0,-1)"/>
-			<part type="v3d::scene::VLightPart" ambientColor="(0.1,0.1,0.1,1)" diffuseColor="(0.8,0.4,0,1)" position="(99.1869,40,12.726)" specularColor="(1,0,0,1)" w="1"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-18.6299,40,-98.2493)" updir="(0,1,0)" viewdir="(0,0,-1)"/>
+			<part type="v3d::scene::VLightPart" ambientColor="(0.1,0.1,0.1,1)" diffuseColor="(0.8,0.4,0,1)" position="(-14.7727,40,-98.9028)" specularColor="(1,0,0,1)" w="1"/>
 			<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="1"/>
-			<part type="v3d::utils::VCircleMoverPart" angle="673.744" center="(0,40,0)" radius="100" speed="1"/>
+			<part type="v3d::utils::VCircleMoverPart" angle="694.479" center="(0,40,0)" radius="100" speed="1"/>
 		</entity>
 		<entity name="dummy2">
 			<part type="v3d::entity::VRigidBodyPart" pos="(-57,14,10)" updir="(0,1,0)" viewdir="(0,0,-1)"/>

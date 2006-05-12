@@ -1,0 +1,2 @@
+This folder contains code snippets to be used to quickly create new shaders. 
+Later the material system will support some kind of #include statement to directly reuse this code

@@ -4,6 +4,8 @@
 #include <V3d/Resource.h>
 #include <V3dLib/Utils/VStringValue.h>
 
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Updater/IVUpdateManager.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -115,7 +117,8 @@ void VMeshPartBase::Deactivate()
 		m_pSceneManager->Remove(this);
 }
 
-void VMeshPartBase::ApplyParameterValues() const
+//TODO: move to material setup, together with AddVariables and ApplySetting
+void VMeshPartBase::ApplyParameterValues(graphics::IVDevice& in_Device) const
 {
 	for(ParamValueMap::const_iterator paramValue = m_ParameterValues.begin();
 		paramValue != m_ParameterValues.end();
@@ -127,6 +130,8 @@ void VMeshPartBase::ApplyParameterValues() const
 		{
 			IVParameterValue* pValue = paramValue->second.Get();
 			pValue->Apply(*parameter);
+
+			parameter->ApplyAutoValue(in_Device);
 		}
 	}
 }

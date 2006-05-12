@@ -22,7 +22,7 @@ VUpdateManager::VUpdateManager(VStringParam in_strId)
 	// instanciate VTimer here
 	m_pTimer = new VPerformanceCounter();
 
-
+	m_nMilliSecondsSinceStart = 0;
 }
 
 /**
@@ -50,6 +50,8 @@ void VUpdateManager::StartNextFrame()
 		my_Subjects.end(), 
 		bind2nd(mem_fun(&IVUpdateable::Update), 1.0f)
 		);
+
+	m_nMilliSecondsSinceStart += vuint32(m_pTimer->GetFrameDuration() * 1000.0);
 }
 
 void VUpdateManager::Start()
@@ -85,6 +87,11 @@ void VUpdateManager::Mainloop()
 vfloat64 VUpdateManager::GetFrameDuration()
 {
 	return m_pTimer->GetFrameDuration();
+}
+
+vuint32 VUpdateManager::GetMilliSecondsSinceStart()
+{
+	return m_nMilliSecondsSinceStart;
 }
 
 //-----------------------------------------------------------------------------

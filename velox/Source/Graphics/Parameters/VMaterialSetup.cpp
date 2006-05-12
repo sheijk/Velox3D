@@ -11,6 +11,9 @@
 #include <V3d/Math/VVectorOps.h>
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Graphics/Parameters/VTextureValue.h>
+
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Updater/IVUpdateManager.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -103,6 +106,15 @@ void IVParameter::Apply(const std::string& in_strValue)
 	V3D_THROW(VException, "not implemented, yet");
 }
 
+//-----------------------------------------------------------------------------
+//TODO: move to IVParameter.cpp (and create it..)
+
+namespace {
+	const std::string LIGHT_COUNT_PARAM_NAME = "v3d_MaxLight";
+	const std::string TIME_PARAM_NAME = "v3d_TimeFraction";
+	const std::string TIME_MIN_PARAM_NAME = "v3d_TimeFraction60";
+}
+
 std::string IVParameter::AsString() const
 {
 	utils::VStringValue value;
@@ -131,6 +143,28 @@ std::string IVParameter::AsString() const
 	}
 
 	return value.Get<std::string>();
+}
+
+void IVParameter::ApplyAutoValue(IVDevice& in_Device)
+{
+	const std::string name = GetName();
+
+	if( name == LIGHT_COUNT_PARAM_NAME )
+	{
+		Apply(vint(in_Device.MaxActiveLight()));
+	}
+	else if( name == TIME_PARAM_NAME )
+	{
+		vuint32 ms = updater::VUpdateManagerPtr()->GetMilliSecondsSinceStart() % 1000;
+		vfloat32 secondFraction = vfloat32(ms) / 1000.0f;
+		Apply(secondFraction);
+	}
+	else if( name == TIME_MIN_PARAM_NAME )
+	{
+		vuint32 ms = updater::VUpdateManagerPtr()->GetMilliSecondsSinceStart() % (1000 * 60);
+		vfloat32 secondFraction = vfloat32(ms) / 1000.0f / 60.0f;
+		Apply(secondFraction);
+	}
 }
 
 //-----------------------------------------------------------------------------

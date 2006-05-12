@@ -55,6 +55,7 @@ public:
 	virtual void Mainloop() = 0;
 
 	virtual vfloat64 GetFrameDuration() = 0;
+	virtual vuint32 GetMilliSecondsSinceStart() = 0;
 
 protected:
 	/**

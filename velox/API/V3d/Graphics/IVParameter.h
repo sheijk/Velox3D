@@ -12,6 +12,8 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
+class IVDevice;
+
 /**
  * Base class for parameters which belong to a material/shader/.. <br />
  * Values can only be applied and queried while the associated material/shader/..
@@ -59,6 +61,9 @@ public:
 	void Apply(const std::string& in_strValue);
 	/** Return's the parameters value to a string (depending on it's type */
 	std::string AsString() const;
+
+	/** applies values to special parameters (v3d_MaxLight etc.) */
+	void ApplyAutoValue(IVDevice& in_Device);
 };
 
 //-----------------------------------------------------------------------------

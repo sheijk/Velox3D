@@ -1,10 +1,10 @@
 uniform sampler2D image;
 
-const float step = 1.0 / 512.0;
+// texture size should be 512x512
+const float step = 1.0 / 256.0;
 
 void blur() {
 	vec2 pos = gl_TexCoord[0].st;
-	pos.x = 1.0 - pos.x;
 	vec4 c1 = texture2D(image, pos + vec2(step, 0.0));
 	vec4 c2 = texture2D(image, pos);
 	vec4 c3 = texture2D(image, pos + vec2(0.0, step));
@@ -39,12 +39,17 @@ void diff() {
 //	gl_FragColor = color * diff;
 }
 
+uniform float v3d_TimeFraction60;
+
 void disturb() {
+	float d = v3d_TimeFraction60 * 3.1415 * 2 * 15;
 	vec2 pos = gl_TexCoord[0].st;
-//	vec2 dist = vec2(sin(pos.x), sin(pos.y));
-	vec2 dist = vec2(sin(pos.y * 31), sin(pos.x * 31));
-	vec4 color = texture2D(image, pos + dist * .01);
-//	vec4 color = texture2D(image, pos) + vec4(dist.x, dist.y, .0, 1.0);
+	vec2 dist = vec2(sin(pos.y * 31 + d), sin(pos.x * 31 + d));
+	dist *= .3;
+	vec4 color = mix(
+			texture2D(image, pos + dist * .01),
+			vec4(0, 0, .5, 1),
+			0.1);
 	
 	gl_FragColor = color;
 }
@@ -52,9 +57,9 @@ void disturb() {
 void main(void) {
 //	blur();
 //	sepia();
-	defaultColor();
+//	defaultColor();
 //	diff();
-//	disturb();
+	disturb();
 
 //	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }

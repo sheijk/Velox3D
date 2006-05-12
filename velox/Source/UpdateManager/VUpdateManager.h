@@ -30,11 +30,15 @@ public:
 	virtual void Mainloop();
 	vfloat64 GetFrameDuration();
 
+	vuint32 GetMilliSecondsSinceStart();
 protected:
 	virtual void Register(IVUpdateable* in_pObject);
 	virtual void Unregister(IVUpdateable* in_pObject);
 
 	IVTimer* m_pTimer;
+
+	// will overflow after ~1100 hours..
+	vuint32 m_nMilliSecondsSinceStart;
 };
 
 //-----------------------------------------------------------------------------

@@ -12,8 +12,8 @@ vec4 normal2Color(vec3 n) {
 }
 
 void main(void) {
-	float brightness = max(dot(normal, lightDir), 0.0);
-	brightness = min(1, max(0, brightness));
+	float diffuse = max(dot(normal, lightDir), 0.0);
+	diffuse = min(1, max(0, diffuse));
 	
 	normal = normalize(normal);
 	lightDir = normalize(lightDir);
@@ -27,7 +27,7 @@ void main(void) {
 			half);
 			//gl_LightSource[0].halfVector.xyz); 
 		specular = min(1, max(0, specular));
-		specular = pow(specular, 32);
+		specular = pow(specular, 32) * 0.4;
 	}
 	
 	vec4 surfaceColor = 
@@ -36,7 +36,7 @@ void main(void) {
 		
 	vec4 light = 
 		gl_LightSource[0].ambient
-		+ gl_LightSource[0].diffuse * brightness
+		+ gl_LightSource[0].diffuse * diffuse
 		+ gl_LightSource[0].specular * specular;
 
 	gl_FragColor = surfaceColor * light;

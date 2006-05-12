@@ -90,6 +90,12 @@ void VPostProcesssingRenderStepPart::Render(IVGraphicsPart* in_pScene)
 	{
 		ApplyMaterial(*GetOutputDevice(), &m_hPostProcessingShader->GetPass(0));
 		m_MaterialSetup.Apply(*m_hPostProcessingShader);
+		VRangeIterator<IVParameter> params = m_hPostProcessingShader->Parameters();
+		while( params.HasNext() )
+		{
+			params->ApplyAutoValue(*GetOutputDevice());
+			++params;
+		}
 	}
 	else
 	{

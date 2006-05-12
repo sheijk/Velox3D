@@ -62,7 +62,7 @@ protected:
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 
-	void ApplyParameterValues() const;
+	void ApplyParameterValues(graphics::IVDevice& in_Device) const;
 
 	typedef std::map<std::string, VSharedPtr<graphics::IVParameterValue> > ParamValueMap;
 	ParamValueMap m_ParameterValues;

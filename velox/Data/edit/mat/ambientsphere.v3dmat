@@ -35,7 +35,7 @@ vec4 ambient() {
 }
 
 void main(void) {
-	gl_FragColor = ambient() + diffuse()*1;
+	gl_FragColor = ambient() + diffuse()*0.5;
 }
 				</iparam>
 			</state>
