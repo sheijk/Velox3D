@@ -25,7 +25,15 @@ void VCircleMoverPart::Update(vfloat32 in_fSeconds)
 	VVector3f newPos(sin(m_fAngle), 0, cos(m_fAngle));
 	newPos *= m_fRadius;
 	newPos += m_Center;
-	m_pRigidBody->SetPosition(newPos);
+	VVector3f dir(newPos.GetZ(), 0.0f, -newPos.GetX());
+
+	math::VRBTransform transform;
+	transform.SetPosition(newPos);
+	transform.SetDirection(dir, VVector3f(0.0f, 1.0f, 0.0f));
+
+	m_pRigidBody->SetTransform(transform);
+	//m_pRigidBody->SetPosition(newPos);
+	//m_pRigidBody->
 }
 
 void VCircleMoverPart::Activate()

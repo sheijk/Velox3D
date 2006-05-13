@@ -6,6 +6,9 @@
 #include <V3d/Math/Numerics.h>
 
 #include <V3d/Entity/VGenericPartParser.h>
+
+#include <V3d/Messaging/VMessageInterpreter.h>
+#include <V3dLib/Graphics/Geometry/Conversions.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -17,12 +20,14 @@ using namespace math;
 
 VArrowMeshPart::VArrowMeshPart() :
 	m_Color(VColor4f(1, 1, 1)),
+	m_fSize(1.0f),
 	VMeshPartBase(graphics::IVDevice::GetDefaultMaterial())
 {
 }
 
 VArrowMeshPart::VArrowMeshPart(const VColor4f& in_Color) : 
 	m_Color(in_Color),
+	m_fSize(1.0f),
 	VMeshPartBase(graphics::IVDevice::GetDefaultMaterial())
 {
 }
@@ -47,6 +52,8 @@ void VArrowMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 	*/
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+
+	glScalef(m_fSize, m_fSize, m_fSize);
 
 	glPushAttrib(GL_POINT_SIZE);
 	glPointSize(4.0f);
@@ -112,6 +119,33 @@ void VArrowMeshPart::sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals)
 		{
 			glVertex3f(sin(DegreeToRadian(angleDeg)), cos(DegreeToRadian(angleDeg)), z2);
 		}
+	}
+}
+
+using namespace messaging;
+
+void VArrowMeshPart::OnMessage(
+	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+{
+	static VMessageInterpreter interpreter;
+
+	if( interpreter.IsInitialized() == false )
+	{
+		interpreter.SetInitialized(true);
+
+		interpreter.AddMemberOption("size", this, &m_fSize);
+		interpreter.AddMemberOption("color", this, &m_Color);
+	}
+
+	switch( interpreter.HandleMessage(this, in_Message, in_pAnswer) )
+	{
+	case VMessageInterpreter::GetSettings:
+		VMeshPartBase::AddVariables(in_pAnswer);
+		break;
+
+	case VMessageInterpreter::ApplySetting:
+		VMeshPartBase::ApplySetting(in_Message);
+		break;
 	}
 }
 

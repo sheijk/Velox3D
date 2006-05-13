@@ -61,6 +61,12 @@ public class SceneView extends VeloxViewBase {
 		
 		viewer.refresh();
 	}
+	
+	private void refresh()
+	{
+		viewer.refresh();
+		settingsViewer.refresh();
+	}
 
 	class SceneAction extends Action
 	{
@@ -349,7 +355,7 @@ public class SceneView extends VeloxViewBase {
 //			}
 //		});
 		
-		viewer.refresh();
+		refresh();
 				
 		
 //		Button test = new Button(myParent, SWT.DEFAULT);
@@ -382,7 +388,7 @@ public class SceneView extends VeloxViewBase {
 		hookContextMenu();
 		hookDoubleClickAction();
 		
-		viewer.refresh();
+		refresh();
 		*/
 	}
 	
@@ -412,7 +418,7 @@ public class SceneView extends VeloxViewBase {
 					selectedEntity.Add(new Entity(name));
 				}
 				
-				viewer.refresh();
+				refresh();
 			}
 			
 			void update() {
@@ -433,7 +439,7 @@ public class SceneView extends VeloxViewBase {
 						parent.Remove(selectedEntity);
 					}
 				}
-				viewer.refresh();
+				refresh();
 			}
 			
 			void update() {
@@ -489,7 +495,7 @@ public class SceneView extends VeloxViewBase {
 					selectedEntity.Add(new Part(selection));				
 				}
 				
-				viewer.refresh();								
+				refresh();								
 			}
 			
 			void update() {
@@ -522,7 +528,7 @@ public class SceneView extends VeloxViewBase {
 					
 				}
 				
-				viewer.refresh();
+				refresh();
 			}
 		};
 		
@@ -560,7 +566,7 @@ public class SceneView extends VeloxViewBase {
 					}
 				});
 				
-				viewer.refresh();
+				refresh();
 			}
 			
 			void update() {
@@ -580,7 +586,7 @@ public class SceneView extends VeloxViewBase {
 						root.synchronize();
 					}
 				});
-				viewer.refresh();
+				refresh();
 			}
 		});
 

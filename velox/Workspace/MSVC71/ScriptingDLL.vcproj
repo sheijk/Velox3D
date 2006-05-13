@@ -299,6 +299,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 								RelativePath="..\..\Api\V3d\Scene\Shootings\VMirrorShooting.h">
 							</File>
 							<File
+								RelativePath="..\..\Api\V3d\Scene\Shootings\VOffscreenShooting.h">
+							</File>
+							<File
 								RelativePath="..\..\Api\V3d\Scene\Shootings\VProjectedTextureShooting.h">
 							</File>
 							<File
@@ -1315,6 +1318,9 @@ copy $(TargetPath) ..\..\Editor\EclipsePlugin\$(TargetFileName)
 						Name="Shootings">
 						<File
 							RelativePath="..\..\Source\Scene\Shootings\VMirrorShooting.cpp">
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shootings\VOffscreenShooting.cpp">
 						</File>
 						<File
 							RelativePath="..\..\Source\Scene\Shootings\VShootingBase.cpp">

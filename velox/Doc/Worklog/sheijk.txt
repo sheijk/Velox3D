@@ -30,6 +30,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+12.05.06
+- VOffscreenShooting: rendern in eine Textur vom aktuellen Objekt aus. Inklusive
+  eigener Postprocessing Effekte etc.
+
 11.05.06
 - ein paar "auto" variablen: v3d_MaxLights, v3d_TimeFraction, v3d_TimeFraction60,
   die vor dem Rendern eines Meshes automatisch eingestellt werden

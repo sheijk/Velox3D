@@ -6,7 +6,7 @@
 
 #include <V3d/Resource/VTypedResourceData.h>
 
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------
@@ -36,6 +36,9 @@ public:
 	/** Return the resource this data object belongs to */
 	VResource* GetEnclosingResource();
 	const VResource* GetEnclosingResource() const;
+
+	/** Returns the name of the enclosing resource or "" if it is 0 */
+	std::string GetResourceName() const;
 
 	VTypeInfo GetTypeId() { return m_pData->GetTypeId(); }
 
@@ -146,7 +149,19 @@ VResource* VResourceDataPtr<DataType>::GetEnclosingResource() {
 template<typename DataType>
 const VResource* VResourceDataPtr<DataType>::GetEnclosingResource() const 
 { 
-	return m_pData->GetEnclosingResource(); 
+	if( m_pData != 0 )
+		return m_pData->GetEnclosingResource();
+	else
+		return 0;
+}
+
+template<typename DataType>
+std::string VResourceDataPtr<DataType>::GetResourceName() const
+{
+	if( GetEnclosingResource() != 0 )
+		return GetEnclosingResource()->GetQualifiedName();
+	else
+		return "";
 }
 
 template<typename T>

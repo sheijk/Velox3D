@@ -29,10 +29,14 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
 	graphics::VColor4f m_Color;
+	vfloat32 m_fSize;
 
 	static void sendCircleVertices(vfloat32 z1);
 
 	static void sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals);
+
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
 };
 
 //-----------------------------------------------------------------------------

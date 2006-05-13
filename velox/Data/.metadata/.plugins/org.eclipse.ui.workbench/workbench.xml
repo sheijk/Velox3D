@@ -20,13 +20,13 @@
 <coolItem id="de.velox.editor.cgfx.CGFXEditor" itemType="typePlaceholder" x="61" y="22"/>
 <coolItem id="de.velox.editor.materials.MaterialEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="de.velox.editors.SceneEditor" itemType="typePlaceholder" x="84" y="22"/>
+<coolItem id="de.velox.editors.SceneEditor" itemType="typePlaceholder" x="44" y="22"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
 <page focus="true" label="Workspace - velox shader">
 <editors>
-<editorArea activeWorkbook="DefaultEditorWorkbook">
+<editorArea activeWorkbook="org.eclipse.ui.internal.EditorStack@19f31de">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
@@ -49,7 +49,6 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
-<part id="3"/>
 </presentation>
 </folder>
 </info>
@@ -66,17 +65,14 @@
 <editor focus="true" id="de.velox.editor.materials.GLSLEditor" name="sepia.frag" partName="sepia.frag" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/sepia.frag" title="sepia.frag" tooltip="edit/mat/sepia.frag" workbook="org.eclipse.ui.internal.EditorStack@a06d25">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/sepia.frag"/>
 </editor>
-<editor id="de.velox.editor.materials.GLSLEditor" name="phong.frag" partName="phong.frag" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/phong.frag" title="phong.frag" tooltip="edit/mat/phong.frag" workbook="org.eclipse.ui.internal.EditorStack@19f31de">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/phong.frag"/>
-</editor>
-<editor focus="true" id="de.velox.editor.materials.GLSLEditor" name="terrain.frag" partName="terrain.frag" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/terrain.frag" title="terrain.frag" tooltip="edit/mat/terrain.frag" workbook="org.eclipse.ui.internal.EditorStack@19f31de">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/terrain.frag"/>
-</editor>
 <editor id="de.velox.editor.materials.MaterialEditor" name="terrain.v3dmat" partName="terrain.v3dmat" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/terrain.v3dmat" title="terrain.v3dmat" tooltip="edit/mat/terrain.v3dmat" workbook="org.eclipse.ui.internal.EditorStack@19f31de">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/terrain.v3dmat"/>
 </editor>
-<editor id="de.velox.editor.materials.GLSLEditor" name="phong.vert" partName="phong.vert" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/phong.vert" title="phong.vert" tooltip="edit/mat/phong.vert" workbook="org.eclipse.ui.internal.EditorStack@19f31de">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/phong.vert"/>
+<editor activePart="true" focus="true" id="de.velox.editor.materials.GLSLEditor" name="water_pp.frag" partName="water_pp.frag" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/water_pp.frag" title="water_pp.frag" tooltip="edit/mat/water_pp.frag" workbook="org.eclipse.ui.internal.EditorStack@19f31de">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/water_pp.frag"/>
+</editor>
+<editor id="de.velox.editor.materials.MaterialEditor" name="water_pp.v3dmat" partName="water_pp.v3dmat" path="G:/dev/v3d/svn/trunk/velox/Data/edit/mat/water_pp.v3dmat" title="water_pp.v3dmat" tooltip="edit/mat/water_pp.v3dmat" workbook="org.eclipse.ui.internal.EditorStack@19f31de">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/edit/mat/water_pp.v3dmat"/>
 </editor>
 </editors>
 <views>
@@ -103,12 +99,12 @@
 <element path="/edit/mat"/>
 </expanded>
 <selection>
-<element path="/edit/Physic.v3dscene"/>
+<element path="/edit/mat/water_pp.frag"/>
 </selection>
 </viewState>
 </view>
 </views>
-<perspectives activePart="org.eclipse.ui.views.ResourceNavigator" activePerspective="velox_shader">
+<perspectives activePart="de.velox.editor.materials.GLSLEditor" activePerspective="velox_shader">
 <perspective editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor descriptor="velox" id="velox_shader" label="velox shader"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -215,137 +211,142 @@
 </perspectives>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/sepia.frag"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/scratch.txt"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/scratch.txt"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/scratch.txt"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/scratch.txt"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/sepia.frag"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/terrain.frag"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" path="/edit/mat/ambientsphere.v3dmat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/mirror.frag"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/terrain.vert"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/scratch.txt"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/Physic.v3dscene"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/sepia.frag"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/sepia.vert"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" path="/edit/mat/water_pp.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" path="/edit/mat/sepia_pp.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/water_pp.frag"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/edit/scratch.txt"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" path="/edit/racer.v3dscene"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" path="/edit/mat/terrain.v3dmat"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" path="/edit/mat/water_pp.frag"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" path="/edit/mat/water_pp.v3dmat"/>
 </editors>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1386" y="0"/>
+<item historyLabel="racer" index="1"/>
+<item historyLabel="scratch.txt" index="0">
+<position/>
 </item>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1381" y="0"/>
-</item>
-<item historyLabel="racer" index="0"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1381" y="0"/>
-</item>
-<item historyLabel="scratch.txt" index="2">
+<item historyLabel="racer" index="2"/>
+<item historyLabel="scratch.txt" index="0">
 <position/>
 </item>
 <item historyLabel="racer" index="3"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1148" y="0"/>
-</item>
-<item historyLabel="racer" index="3"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1148" y="0"/>
-</item>
-<item historyLabel="scratch.txt" index="4">
+<item historyLabel="scratch.txt" index="0">
 <position/>
 </item>
-<item historyLabel="racer" index="5"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1114" y="0"/>
+<item historyLabel="racer" index="4"/>
+<item historyLabel="terrain.frag" index="5">
+<position info="not_deleted" x="241" y="0"/>
 </item>
-<item historyLabel="racer" index="5"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1114" y="0"/>
+<item historyLabel="racer" index="4"/>
+<item historyLabel="terrain.frag" index="5">
+<position info="not_deleted" x="241" y="0"/>
 </item>
 <item historyLabel="scratch.txt" index="6">
 <position/>
 </item>
 <item historyLabel="racer" index="7"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1209" y="0"/>
-</item>
-<item historyLabel="racer" index="7"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1081" y="0"/>
-</item>
-<item historyLabel="racer" index="7"/>
-<item historyLabel="sepia.frag" index="1">
-<position info="not_deleted" x="1081" y="0"/>
-</item>
-<item historyLabel="scratch.txt" index="8">
+<item historyLabel="scratch.txt" index="6">
 <position/>
 </item>
-<item historyLabel="racer" index="9"/>
-<item historyLabel="sepia.frag" index="10">
-<position info="not_deleted" x="1385" y="0"/>
-</item>
-<item historyLabel="terrain.frag" index="11">
-<position info="not_deleted" x="206" y="0"/>
-</item>
-<item historyLabel="sepia.frag" index="10">
-<position info="not_deleted" x="1385" y="0"/>
-</item>
-<item historyLabel="ambientsphere.v3dmat" index="12">
+<item historyLabel="racer" index="8"/>
+<item historyLabel="scratch.txt" index="6">
 <position/>
 </item>
-<item historyLabel="terrain.frag" index="11">
-<position info="not_deleted" x="241" y="0"/>
+<item historyLabel="sepia.frag" index="9">
+<position info="not_deleted" x="111" y="0"/>
 </item>
-<item historyLabel="mirror.frag" index="13">
+<item historyLabel="scratch.txt" index="6">
 <position/>
 </item>
-<item historyLabel="terrain.frag" index="11">
-<position info="not_deleted" x="241" y="0"/>
+<item historyLabel="racer" index="10"/>
+<item historyLabel="sepia.frag" index="9">
+<position info="not_deleted" x="1116" y="0"/>
 </item>
-<item historyLabel="ambientsphere.v3dmat" index="12">
-<position info="not_deleted" x="708" y="0"/>
-</item>
-<item historyLabel="terrain.vert" index="14">
+<item historyLabel="racer" index="10"/>
+<item historyLabel="sepia.vert" index="11">
 <position/>
 </item>
-<item historyLabel="sepia.frag" index="10">
-<position info="not_deleted" x="1294" y="0"/>
+<item historyLabel="racer" index="10"/>
+<item historyLabel="water_pp.v3dmat" index="12">
+<position/>
 </item>
-<item historyLabel="racer" index="9"/>
-<item historyLabel="sepia.frag" index="10">
-<position info="not_deleted" x="1294" y="0"/>
+<item historyLabel="racer" index="10"/>
+<item historyLabel="sepia_pp.v3dmat" index="13">
+<position/>
+</item>
+<item historyLabel="racer" index="10"/>
+<item historyLabel="water_pp.frag" index="14">
+<position/>
+</item>
+<item historyLabel="racer" index="10"/>
+<item historyLabel="sepia.frag" index="9">
+<position info="not_deleted" x="1412" y="0"/>
+</item>
+<item historyLabel="racer" index="10"/>
+<item historyLabel="sepia.frag" index="9">
+<position info="not_deleted" x="1412" y="0"/>
 </item>
 <item historyLabel="scratch.txt" index="15">
 <position/>
 </item>
 <item historyLabel="racer" index="16"/>
-<item historyLabel="sepia.frag" index="10">
+<item historyLabel="terrain.v3dmat" index="17">
+<position/>
+</item>
+<item historyLabel="water_pp.frag" index="18">
+<position/>
+</item>
+<item historyLabel="sepia.frag" index="9">
+<position info="not_deleted" x="1461" y="0"/>
+</item>
+<item historyLabel="water_pp.frag" index="18">
+<position info="not_deleted" x="255" y="0"/>
+</item>
+<item historyLabel="sepia.frag" index="9">
 <position info="not_deleted" x="1495" y="0"/>
 </item>
-<item historyLabel="racer" index="16"/>
-<item historyLabel="sepia.frag" index="10">
-<position info="not_deleted" x="1304" y="0"/>
+<item historyLabel="water_pp.frag" index="18">
+<position info="not_deleted" x="556" y="0"/>
 </item>
-<item historyLabel="racer" index="16"/>
-<item historyLabel="sepia.frag" index="10">
-<position info="not_deleted" x="1118" y="0"/>
+<item historyLabel="terrain.v3dmat" index="17">
+<position info="not_deleted" x="230" y="0"/>
 </item>
-<item historyLabel="racer" index="16"/>
-<item historyLabel="sepia.frag" index="10">
-<position info="not_deleted" x="1118" y="0"/>
+<item historyLabel="water_pp.frag" index="18">
+<position info="not_deleted" x="556" y="0"/>
 </item>
-<item historyLabel="Physic" index="17"/>
-<item historyLabel="racer" index="18"/>
-<item historyLabel="Physic" index="17"/>
-<item active="true" historyLabel="sepia.frag" index="10">
+<item historyLabel="water_pp.v3dmat" index="19">
 <position/>
+</item>
+<item historyLabel="sepia.frag" index="9">
+<position info="not_deleted" x="1450" y="0"/>
+</item>
+<item historyLabel="water_pp.frag" index="18">
+<position info="not_deleted" x="597" y="0"/>
+</item>
+<item historyLabel="sepia.frag" index="9">
+<position info="not_deleted" x="1450" y="0"/>
+</item>
+<item historyLabel="water_pp.frag" index="18">
+<position info="not_deleted" x="556" y="0"/>
+</item>
+<item historyLabel="racer" index="16"/>
+<item historyLabel="water_pp.frag" index="18">
+<position info="not_deleted" x="556" y="0"/>
+</item>
+<item historyLabel="racer" index="16"/>
+<item active="true" historyLabel="water_pp.frag" index="18">
+<position info="not_deleted" x="556" y="0"/>
 </item>
 </navigationHistory>
 <stickyState>
@@ -357,20 +358,26 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" name="water_pp.v3dmat" tooltip="edit/mat/water_pp.v3dmat">
+<persistable path="/edit/mat/water_pp.v3dmat"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" name="water_pp.frag" tooltip="edit/mat/water_pp.frag">
+<persistable path="/edit/mat/water_pp.frag"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" name="racer.v3dscene" tooltip="edit/racer.v3dscene">
 <persistable path="/edit/racer.v3dscene"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" name="Physic.v3dscene" tooltip="edit/Physic.v3dscene">
-<persistable path="/edit/Physic.v3dscene"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" name="mirror.frag" tooltip="edit/mat/mirror.frag">
-<persistable path="/edit/mat/mirror.frag"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" name="sepia_pp.v3dmat" tooltip="edit/mat/sepia_pp.v3dmat">
 <persistable path="/edit/mat/sepia_pp.v3dmat"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" name="sepia.vert" tooltip="edit/mat/sepia.vert">
 <persistable path="/edit/mat/sepia.vert"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" name="Physic.v3dscene" tooltip="edit/Physic.v3dscene">
+<persistable path="/edit/Physic.v3dscene"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" name="mirror.frag" tooltip="edit/mat/mirror.frag">
+<persistable path="/edit/mat/mirror.frag"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" name="sepia.frag" tooltip="edit/mat/sepia.frag">
 <persistable path="/edit/mat/sepia.frag"/>
@@ -395,12 +402,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editors.SceneEditor" name="postproc.v3dscene" tooltip="edit/postproc.v3dscene">
 <persistable path="/edit/postproc.v3dscene"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.GLSLEditor" name="phong.vert" tooltip="edit/mat/phong.vert">
-<persistable path="/edit/mat/phong.vert"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="de.velox.editor.materials.MaterialEditor" name="ambientsphere.v3dmat" tooltip="edit/mat/ambientsphere.v3dmat">
-<persistable path="/edit/mat/ambientsphere.v3dmat"/>
 </file>
 </mruList>
 </workbench>

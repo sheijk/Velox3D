@@ -60,6 +60,6 @@ protected:
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 
-V3D_TYPEINFO_WITHPARENT(v3d::scene::VSimpleShooting, v3d::scene::IVShooting);
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VSimpleShooting, v3d::scene::VShootingBase);
 //-----------------------------------------------------------------------------
 #endif // V3D_VSIMPLESHOOTING_2005_09_24_H

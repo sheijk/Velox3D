@@ -56,10 +56,10 @@ void disturb() {
 
 void main(void) {
 //	blur();
-//	sepia();
+	sepia();
 //	defaultColor();
 //	diff();
-	disturb();
+//	disturb();
 
 //	gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }

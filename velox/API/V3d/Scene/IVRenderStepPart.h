@@ -11,7 +11,7 @@ namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-class VSimpleShooting;
+class VShootingBase;
 
 /**
  */
@@ -35,7 +35,7 @@ private:
 	/** The device this render step will render to */
 	graphics::IVDevice* m_pOutputDevice;
 
-	entity::VPartConnection<VSimpleShooting> m_pShooting;
+	entity::VPartConnection<VShootingBase> m_pShooting;
 };
 
 //-----------------------------------------------------------------------------

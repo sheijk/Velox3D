@@ -55,7 +55,8 @@ void VShootingBase::RemovePreShooting(IVShooting* in_pPreShooting)
 	ShootingArray::iterator preShooting = std::find(
 		m_PreShootings.begin(), m_PreShootings.end(), in_pPreShooting);
 
-	m_PreShootings.erase(preShooting);
+	if( preShooting != m_PreShootings.end() )
+		m_PreShootings.erase(preShooting);
 }
 
 void VShootingBase::SetupRenderSteps()

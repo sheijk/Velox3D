@@ -8067,3 +8067,376 @@ Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk
 
 !ENTRY org.eclipse.core.resources 1 1 2006-05-12 03:24:13.681
 !MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-12 23:39:36.15 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-12 23:39:39.78
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 00:01:05.359 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 00:01:08.937
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 00:05:04.375 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 00:05:07.859
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+
+!ENTRY org.eclipse.ui 4 4 2006-05-13 00:06:13.171
+!MESSAGE Unhandled event loop exception
+
+!ENTRY org.eclipse.ui 4 0 2006-05-13 00:06:13.187
+!MESSAGE Unknown exception occured
+!STACK 0
+java.lang.RuntimeException: Unknown exception occured
+	at de.velox.v3dJNI.VPartPtr_Send__SWIG_0(Native Method)
+	at de.velox.VPartPtr.Send(VPartPtr.java:107)
+	at de.velox.editor.entity.Part.updateSettingsFromPart(Part.java:102)
+	at de.velox.editor.entity.Part.<init>(Part.java:29)
+	at de.velox.editor.views.SceneView$7.run(SceneView.java:495)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:996)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:538)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:488)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:400)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:843)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3080)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2713)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:585)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+
+!ENTRY org.eclipse.ui 4 4 2006-05-13 00:07:03.796
+!MESSAGE Unhandled event loop exception
+
+!ENTRY org.eclipse.ui 4 0 2006-05-13 00:07:03.796
+!MESSAGE Unknown exception occured
+!STACK 0
+java.lang.RuntimeException: Unknown exception occured
+	at de.velox.v3dJNI.VPartPtr_Send__SWIG_0(Native Method)
+	at de.velox.VPartPtr.Send(VPartPtr.java:107)
+	at de.velox.editor.entity.Part.updateSettingsFromPart(Part.java:102)
+	at de.velox.editor.entity.Part.<init>(Part.java:29)
+	at de.velox.editor.views.SceneView$7.run(SceneView.java:495)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:996)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:538)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:488)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:400)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:843)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3080)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2713)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:585)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+!SESSION 2006-05-13 00:26:09.453 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 00:26:13.312
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 00:32:39.78 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 00:32:42.593
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 00:37:05.187 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 00:37:08.703
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 00:54:33.375 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 00:54:36.875
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 01:23:46.00 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 01:23:48.937
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+
+!ENTRY org.eclipse.ui 4 4 2006-05-13 01:30:09.640
+!MESSAGE Unhandled event loop exception
+
+!ENTRY org.eclipse.ui 4 0 2006-05-13 01:30:09.656
+!MESSAGE No enum class de.velox.VPartDependency$Location with value -842150451
+!STACK 0
+java.lang.IllegalArgumentException: No enum class de.velox.VPartDependency$Location with value -842150451
+	at de.velox.VPartDependency$Location.swigToEnum(VPartDependency.java:87)
+	at de.velox.VPartDependency.GetLocation(VPartDependency.java:41)
+	at de.velox.editor.views.SceneView$PartContentProvider.getChildren(SceneView.java:227)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:899)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:790)
+	at org.eclipse.jface.viewers.StructuredViewer.getSortedChildren(StructuredViewer.java:905)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.updateChildren(AbstractTreeViewer.java:1707)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefreshStruct(AbstractTreeViewer.java:1268)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefreshStruct(AbstractTreeViewer.java:1275)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefresh(AbstractTreeViewer.java:1245)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefresh(AbstractTreeViewer.java:1201)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefresh(AbstractTreeViewer.java:1188)
+	at org.eclipse.jface.viewers.StructuredViewer$7.run(StructuredViewer.java:1264)
+	at org.eclipse.jface.viewers.StructuredViewer.preservingSelection(StructuredViewer.java:1201)
+	at org.eclipse.jface.viewers.StructuredViewer.refresh(StructuredViewer.java:1262)
+	at org.eclipse.jface.viewers.StructuredViewer.refresh(StructuredViewer.java:1221)
+	at de.velox.editor.views.SceneView.refresh(SceneView.java:68)
+	at de.velox.editor.views.SceneView.access$4(SceneView.java:65)
+	at de.velox.editor.views.SceneView$12.run(SceneView.java:569)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:996)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:538)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:488)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:400)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:843)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3080)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2713)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:585)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+!SESSION 2006-05-13 01:30:23.140 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 01:30:26.656
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 01:32:28.531 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 01:32:33.156
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+
+!ENTRY org.eclipse.ui 4 4 2006-05-13 01:45:08.203
+!MESSAGE Unhandled event loop exception
+
+!ENTRY org.eclipse.ui 4 0 2006-05-13 01:45:08.203
+!MESSAGE Unknown exception occured
+!STACK 0
+java.lang.RuntimeException: Unknown exception occured
+	at de.velox.v3dJNI.VView_ExecSynchronized(Native Method)
+	at de.velox.VView.ExecSynchronized(VView.java:61)
+	at de.velox.editor.views.SceneView$12.run(SceneView.java:558)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:996)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:538)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:488)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:400)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:66)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:843)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3080)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:2713)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:1699)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:1663)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:367)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:143)
+	at org.eclipse.ui.internal.ide.IDEApplication.run(IDEApplication.java:103)
+	at org.eclipse.core.internal.runtime.PlatformActivator$1.run(PlatformActivator.java:226)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:376)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:163)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:585)
+	at org.eclipse.core.launcher.Main.invokeFramework(Main.java:334)
+	at org.eclipse.core.launcher.Main.basicRun(Main.java:278)
+	at org.eclipse.core.launcher.Main.run(Main.java:973)
+	at org.eclipse.core.launcher.Main.main(Main.java:948)
+!SESSION 2006-05-13 01:46:50.484 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2006-05-13 01:46:53.875
+!MESSAGE A workspace crash was detected. The previous session did not exit normally.
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 01:46:54.15
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 01:58:15.46 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 01:58:18.546
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 01:59:46.296 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 01:59:49.843
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:15:12.750 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:15:16.562
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:16:52.359 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:16:55.875
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:20:19.296 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:20:22.781
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:26:39.78 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:26:42.593
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:39:34.281 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:39:37.812
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:46:48.78 ------------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:46:51.593
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:52:59.875 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:53:03.421
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.
+!SESSION 2006-05-13 02:56:42.875 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.5.0_05
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.sdk.ide -pdelaunch
+Command-line arguments:  -product org.eclipse.sdk.ide -data G:\dev\v3d\svn\trunk\velox\Data -dev file:G:/Users/sheijk/workspace31/.metadata/.plugins/org.eclipse.pde.core/Velox Editor/dev.properties -pdelaunch -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 1 1 2006-05-13 02:56:46.406
+!MESSAGE Could not load library: core_3_1_0.dll.  This library provides platform-specific optimizations for certain file system operations.  This library is not present on all platforms, so this may not be an error.  The resources plug-in will safely fall back to using java.io.File functionality.

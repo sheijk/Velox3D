@@ -1409,6 +1409,9 @@
 						RelativePath="..\..\Source\Scene\Shootings\VMirrorShooting.cpp">
 					</File>
 					<File
+						RelativePath="..\..\Source\Scene\Shootings\VOffscreenShooting.cpp">
+					</File>
+					<File
 						RelativePath="..\..\Source\Scene\Shootings\VShootingBase.cpp">
 					</File>
 				</Filter>

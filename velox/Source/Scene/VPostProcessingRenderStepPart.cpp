@@ -7,6 +7,7 @@
 #include <V3d/Resource.h>
 
 #include <V3d/Entity/VGenericPartParser.h>
+#include <V3d/Resource/VResource.h>
 
 #include <string>
 //-----------------------------------------------------------------------------
