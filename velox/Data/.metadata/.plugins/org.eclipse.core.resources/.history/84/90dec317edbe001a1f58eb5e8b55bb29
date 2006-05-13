@@ -1,5 +1,0 @@
-
-void main(void) {
-	float depth = gl_FragDepth;
-	gl_FragColor = vec4(depth, 1.0, 0.0, 1.0);
-}
