@@ -147,8 +147,8 @@ void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 						mountOptions.SetAccessRights(CreateAccessRights(access));
 
 						// mount it and add to root dir
-						VDirectory::DirPtr pDir = 
-							dataProv.CreateMountedDir(mountOptions);
+						VDirectory::DirPtr pDir = dataProv.CreateMountedDir(
+							GetDirStackTop(), mountOptions);
 						m_DirStack.top()->AddSubdir(pDir);
 					}
 					// if it is a file
@@ -181,7 +181,7 @@ void VXmlIniReader::OnElementOpen(IVXMLElement* pElement)
 
 				// create new dir
 				VDirectory* pDir = new VDirectory(
-					name, "", "", CreateAccessRights(access));
+					GetDirStackTop(),	name, "", "", CreateAccessRights(access));
 
 				// add it to last dir
 				m_DirStack.top()->AddSubdir(VDirectory::DirPtr(pDir));
@@ -211,6 +211,14 @@ void VXmlIniReader::OnText(VStringParam pText)
 	V3D_LOGMSG("text: " << pText);
 }
 
+IVDirectory* VXmlIniReader::GetDirStackTop()
+{
+	IVDirectory* parent = 0;
+	if( ! m_DirStack.empty() )
+		parent = m_DirStack.top();
+
+	return parent;
+}
 
 
 //-----------------------------------------------------------------------------

@@ -44,7 +44,7 @@ namespace {
 
 void VPlaneMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
-	ApplyParameterValues(in_Device);
+	//ApplyParameterValues(in_Device);
 
 	bool cullFace = glIsEnabled(GL_CULL_FACE) == GL_TRUE;
 	glDisable(GL_CULL_FACE);

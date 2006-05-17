@@ -76,6 +76,7 @@ IVDataProvider::StreamPtr VFileDataProvider::OpenFile(
 }
 
 IVDataProvider::DirPtr VFileDataProvider::CreateMountedDir(
+	IVDirectory* in_pParent,
 	const VMountOptions& in_MountOptions)
 {
 	using namespace boost::filesystem;
@@ -91,6 +92,7 @@ IVDataProvider::DirPtr VFileDataProvider::CreateMountedDir(
 	}
 
 	VDirectory* pDirectory = new VDirectory(
+		in_pParent,
 		in_MountOptions.GetName().AsCString(), 
 		in_MountOptions.GetType().AsCString(),
 		//in_MountOptions.GetSource().AsCString(),
@@ -110,8 +112,9 @@ IVDataProvider::DirPtr VFileDataProvider::CreateMountedDir(
 }
 
 /**
- * Adds the content of a (real) directory to the VDirectory. Recursively
- * loads all subdirectories
+ * Adds the content of a (real) directory to the VDirectory. (subdirectories
+ * are initially emtpy, fill them with VFileDataProvider::Update, they should
+ * do this themselfes on demand)
  */
 void VFileDataProvider::AddDirContent(
 	VDirectory& io_Dir, 
@@ -139,13 +142,14 @@ void VFileDataProvider::AddDirContent(
 			{
 				// create virtual subdir
 				VDirectory* pDir = new VDirectory(
+					&io_Dir,
 					(*dirIt).leaf(),
 					m_strType,
 					(*dirIt).string(),
 					in_pAR);
 				
 				// enter dir and add it's content
-				AddDirContent(*pDir, *dirIt, in_pAR);
+				//AddDirContent(*pDir, *dirIt, in_pAR);
 
 				// add it to current dir
 				io_Dir.AddSubdir(VDirectory::DirPtr(pDir));
@@ -176,32 +180,34 @@ void VFileDataProvider::AddDirContent(
 IVDataProvider::DirPtr VFileDataProvider::CreateDir(
 	const VMountOptions& in_Options)
 {
-	// build the path + dirname
-	//TODO: auf "\" am ende pruefen
-	fs::path dirPath(in_Options.GetSource() + "/" + in_Options.GetName().AsCString());
+	V3D_THROW(VException, "not implemented, yet");
 
-	// create the dir
-	try
-	{
-		fs::create_directory(dirPath);
-	}
-	catch(fs::filesystem_error&)
-	{
-		V3D_THROW(VElementNotFoundException, std::string(
-			"could not create directory \""
-			+ dirPath.string() + "\"").c_str() );
-	}
+	//// build the path + dirname
+	////TODO: auf "\" am ende pruefen
+	//fs::path dirPath(in_Options.GetSource() + "/" + in_Options.GetName().AsCString());
 
-	// create an IVDirectory representing it
-	DirPtr pDir(new VDirectory(
-		dirPath.leaf(),
-		"localfs",
-		dirPath.string(),
-		in_Options.GetAccessRights()
-		));
+	//// create the dir
+	//try
+	//{
+	//	fs::create_directory(dirPath);
+	//}
+	//catch(fs::filesystem_error&)
+	//{
+	//	V3D_THROW(VElementNotFoundException, std::string(
+	//		"could not create directory \""
+	//		+ dirPath.string() + "\"").c_str() );
+	//}
 
-	// return it
-	return pDir;
+	//// create an IVDirectory representing it
+	//DirPtr pDir(new VDirectory(
+	//	dirPath.leaf(),
+	//	"localfs",
+	//	dirPath.string(),
+	//	in_Options.GetAccessRights()
+	//	));
+
+	//// return it
+	//return pDir;
 }
 
 void VFileDataProvider::DeleteDir(VStringParam in_strDir)
@@ -289,6 +295,24 @@ vbool VFileDataProvider::IsFile(VStringParam in_strPossibleFile)
 		return true;
 	else
 		return false;
+}
+
+void VFileDataProvider::UpdateDir(const std::string& path, VDirectory* io_pDir)
+{
+	try
+	{
+		if( boost::filesystem::exists(fs::path(path, fs::native)) )
+		{
+			AddDirContent(
+				*io_pDir, 
+				fs::path(path, fs::native), 
+				SharedPtr(new VAccessRights(*io_pDir->GetAccessRights())));
+		}
+	}
+	catch(fs::filesystem_error& e)
+	{
+		V3D_THROW(VIOException, e.what());
+	}
 }
 
 //-----------------------------------------------------------------------------

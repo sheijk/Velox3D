@@ -93,6 +93,10 @@ VResource* VResource::GetRootResource()
 
 VResource* VResource::AddSubResource(const std::string& in_strChildName)
 {
+	if( ! IsValidResourceName(in_strChildName) )
+		V3D_THROWMSG(VIllegalResourceNameException, 
+			"\"" << in_strChildName << "\" is not a valid resource name");
+
 	// if the given sub resource does not exist, yet
 	if( GetSubResource(in_strChildName) == 0 )
 	{
@@ -374,6 +378,25 @@ VRangeIterator<VResourceData> VResource::DataIterator()
 {
 	return CreateAccesssorIterator<VPair2ndDerefAccessor, VResourceData>(
 		m_Data.begin(), m_Data.end());
+}
+
+vbool VResource::IsValidResourceName(const std::string& in_strName)
+{
+	// no '/' allowed
+	return in_strName.find_first_of("/") == std::string::npos;
+}
+
+vbool VResource::ExistsResourceData(
+	const VTypeInfo& in_Type, const std::string& in_strPath)
+{
+	vbool exists = false;
+
+	if( VResourceManagerPtr()->ExistsResource(in_strPath.c_str()) )
+	{
+		exists = VResourceId(in_strPath.c_str())->ContainsData(in_Type);
+	}
+
+	return exists;
 }
 
 //-----------------------------------------------------------------------------

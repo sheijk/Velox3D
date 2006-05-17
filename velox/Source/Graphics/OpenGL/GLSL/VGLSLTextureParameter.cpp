@@ -32,10 +32,15 @@ void VGLSLTextureParameter::ApplyTexture(VStringParam in_strResourceName) const
 {
 	using namespace resource;
 
+	m_pTexture = VResourceDataPtr<IVTexture>();
+
 	try
 	{
-		m_pTexture = GetMutableResourceData<IVTexture>(in_strResourceName);
-		m_bWasFineLastTime = true;
+		if( in_strResourceName != 0 && in_strResourceName[0] != '\0' )
+		{
+			m_pTexture = GetMutableResourceData<IVTexture>(in_strResourceName);
+			m_bWasFineLastTime = true;
+		}
 	}
 	catch(VException& e)
 	{

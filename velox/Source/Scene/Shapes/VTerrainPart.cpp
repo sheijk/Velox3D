@@ -39,7 +39,7 @@ VTerrainPart::~VTerrainPart()
 
 void VTerrainPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
-	ApplyParameterValues(in_Device);
+	//ApplyParameterValues(in_Device);
 
 	// draw border
 	glBegin(GL_LINE_LOOP);

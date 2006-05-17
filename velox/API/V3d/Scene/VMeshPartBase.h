@@ -37,6 +37,11 @@ public:
 	virtual const graphics::IVMaterial& GetMaterial() const;
 	virtual void SetMaterial(
 		resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial);
+
+	virtual vuint GetPassCount() const;
+	virtual void ApplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const;
+	virtual void UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const;
+
 	virtual const math::VRBTransform& GetModelTransform() const;
 	virtual void SetModelTransform(const math::VRBTransform& in_Transform);
 
@@ -62,13 +67,14 @@ protected:
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 
-	void ApplyParameterValues(graphics::IVDevice& in_Device) const;
-
 	typedef std::map<std::string, VSharedPtr<graphics::IVParameterValue> > ParamValueMap;
 	ParamValueMap m_ParameterValues;
 
 	resource::VResourceDataPtr<graphics::IVMaterial> m_hMaterial;
 	//math::VRBTransform m_Transform;
+
+private:
+	void ApplyParameterValues(graphics::IVDevice& in_Device) const;
 };
 
 //-----------------------------------------------------------------------------

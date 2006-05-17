@@ -108,6 +108,9 @@ public:
 
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 	virtual const graphics::IVMaterial& GetMaterial() const;
+	virtual vuint GetPassCount() const;
+	virtual void ApplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const;
+	virtual void UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const;
 	virtual const math::VRBTransform& GetModelTransform() const;
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
@@ -180,6 +183,24 @@ void VSkyboxPart::VSide::SendGeometry(graphics::IVDevice& in_Device) const
 const graphics::IVMaterial& VSkyboxPart::VSide::GetMaterial() const
 {
 	return *m_hMaterial;
+}
+
+vuint VSkyboxPart::VSide::GetPassCount() const
+{
+	if( m_hMaterial != 0 )
+		return m_hMaterial->PassCount();
+	else
+		return 0;
+}
+
+void VSkyboxPart::VSide::ApplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const
+{
+	ApplyMaterial(in_Device, &m_hMaterial->GetPass(in_nPassNum));
+}
+
+void VSkyboxPart::VSide::UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const
+{
+	//nothing..
 }
 
 const math::VRBTransform& VSkyboxPart::VSide::GetModelTransform() const

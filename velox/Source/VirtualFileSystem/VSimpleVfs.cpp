@@ -53,6 +53,7 @@ VSimpleVfs::VSimpleVfs(
 
 	// create root dir
 	m_pRootDirSP.Assign(new VDirectory(
+		0,
 		"",
 		"",
 		boost::filesystem::current_path().string(),

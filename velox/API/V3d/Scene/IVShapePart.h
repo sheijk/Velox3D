@@ -35,7 +35,11 @@ public:
 	/**
 	 * This material will be applied before rendering the shape's geometry
 	 */
-	virtual const graphics::IVMaterial& GetMaterial() const = 0;
+	//virtual const graphics::IVMaterial& GetMaterial() const = 0;
+
+	virtual vuint GetPassCount() const = 0;
+	virtual void ApplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const = 0;
+	virtual void UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const = 0;
 
 	/**
 	 * Will be converted to a matrix and set as the model matrix in the device

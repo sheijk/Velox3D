@@ -93,7 +93,7 @@ public class VFSView extends VeloxViewBase {
 		public boolean hasChildren(Object parent) {
 			if (parent instanceof IVDirectory) {
 				IVDirectory dir = (IVDirectory)parent;
-				
+
 				return dir.SubDirs().HasNext() ||
 					dir.Files().HasNext();
 			}
@@ -164,6 +164,7 @@ public class VFSView extends VeloxViewBase {
 	}
 	
 	private Action dumpAction = null;
+	private Action refreshAction = null;
 	
 	private void makeActions() {
 		dumpAction = new Action(){
@@ -172,6 +173,13 @@ public class VFSView extends VeloxViewBase {
 			}
 		};
 		dumpAction.setText("Dump");
+		
+		refreshAction = new Action() {
+			@Override public void run() {
+				viewer.refresh();
+			}
+		};
+		refreshAction.setText("Refresh");
 	}
 
 	private void contributeToActionBars() {
@@ -182,6 +190,7 @@ public class VFSView extends VeloxViewBase {
 
 	private void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(dumpAction);
+		manager.add(refreshAction);
 //		drillDownAdapter.addNavigationActions(manager);
 	}
 	

@@ -39,7 +39,8 @@ public:
 		VStringParam in_strSource, 
 		VAccessModeFlags in_Access);
 
-	virtual DirPtr CreateMountedDir(const VMountOptions& in_MountOptions);
+	virtual DirPtr CreateMountedDir(
+		IVDirectory* in_pParent, const VMountOptions& in_MountOptions);
 
 	virtual vbool IsDirectory(VStringParam in_strPossibleDir);
 	virtual vbool IsFile(VStringParam in_strPossibleFile);
@@ -48,6 +49,7 @@ public:
 	virtual void DeleteDir(VStringParam in_strDir);
 	virtual FilePtr CreateFile(const VMountOptions& in_Options);
 	virtual void DeleteFile(VStringParam in_strSource);
+	virtual void UpdateDir(const std::string& path, VDirectory* io_pDir);
 };
 
 //-----------------------------------------------------------------------------

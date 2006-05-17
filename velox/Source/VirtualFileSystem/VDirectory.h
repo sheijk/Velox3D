@@ -11,6 +11,7 @@
 namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
+class IVDataProvider;
 
 /**
  * Information about a directory, it's files and subdirs
@@ -23,8 +24,14 @@ public:
 	typedef VPointer<IVAccessRights>::SharedPtr SharedAccessRightsPtr;
 
 private:
+	IVDataProvider* MyDataProvider() const;
+
+	void Update() const;
+
 	typedef std::list<FilePtr> FileList;
 	typedef std::list<DirPtr> DirList;
+
+	IVDirectory* m_pParent;
 
 	std::string m_strName;
 	std::string m_strPath;
@@ -36,9 +43,12 @@ private:
 	FileList m_Files;
 	DirList m_Dirs;
 
+	IVDirectory* GetSubDir(const VString& name);
+	IVFile* GetFile(const VString& name);
 public:
 	VDirectory();
 	VDirectory(
+		IVDirectory* in_pParent,
 		std::string in_strName, 
 		std::string in_strTypeId,
 		std::string in_strSource,
@@ -54,6 +64,11 @@ public:
 	virtual ConstDirIter SubDirs() const;
 	virtual FileIter Files();
 	virtual ConstFileIter Files() const;
+
+	virtual IVDirectory* GetParent();
+	virtual const IVDirectory* GetParent() const;
+
+	virtual std::string GetQualifiedName() const;
 
 	virtual IVDirectory& CreateSubdir(
 		VStringParam in_strName,

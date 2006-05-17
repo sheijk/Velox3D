@@ -8,8 +8,13 @@
 
 #include "VfsUtils.h"
 #include "VAccessRights.h"
+#include <V3d/VFS/IVDataProviderPool.h>
+
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Core/VLogging.h>
 
 #include <algorithm>
+//-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -21,14 +26,18 @@ namespace vfs {
  */
 VDirectory::VDirectory()
 {
+	m_pParent = 0;
 }
 
 VDirectory::VDirectory(
+	IVDirectory* in_pParent,
 	std::string in_strName, 
 	std::string in_strTypeId,
 	std::string in_strSource,
 	SharedAccessRightsPtr in_pAccessRights)
 {
+	m_pParent = in_pParent;
+
 	m_strName = in_strName;
 	m_strTypeId = in_strTypeId;
 	m_strSource = in_strSource;
@@ -60,75 +69,42 @@ IVFileSystemObject::AccessRightsPtr VDirectory::GetAccessRights() const
 
 IVDirectory::DirIter VDirectory::SubDirs()
 {
-	//typedef VSTLDerefIteratorPol<
-	//	DirList::iterator, 
-	//	IVDirectory> DirIterPol;
-
-	//return DirIterRange(
-		//DirIter(new DirIterPol(m_Dirs.begin())),
-		//DirIter(new DirIterPol(m_Dirs.end())) );
+	Update();
 
 	return CreateDerefIterator<IVDirectory>(m_Dirs.begin(), m_Dirs.end());
-	//return DirIterRange(
-	//	CreateDerefBeginIterator<IVDirectory>(m_Dirs),
-	//	CreateDerefEndIterator<IVDirectory>(m_Dirs)
-	//	);
 }
 
 IVDirectory::ConstDirIter VDirectory::SubDirs() const
 {
-	//typedef VSTLDerefIteratorPol<
-	//	DirList::const_iterator, 
-	//	const IVDirectory
-	//> DirIterPol;
-
-	//return ConstDirIterRange(
-	//	ConstDirIter(new DirIterPol(m_Dirs.begin())),
-	//	ConstDirIter(new DirIterPol(m_Dirs.end())) );
+	Update();
 
 	return CreateDerefIterator<const IVDirectory>(m_Dirs.begin(), m_Dirs.end());
-	//return ConstDirIterRange(
-	//	CreateDerefBeginIterator<const IVDirectory>(m_Dirs),
-	//	CreateDerefEndIterator<const IVDirectory>(m_Dirs)
-	//	);
 }
 
 IVDirectory::FileIter VDirectory::Files()
 {
-	//typedef VSTLDerefIteratorPol<
-	//	FileList::iterator, 
-	//	IVFile
-	//> FileIterPol;
-
-	//return FileIterRange(
-	//	FileIter(new FileIterPol(m_Files.begin())),
-	//	FileIter(new FileIterPol(m_Files.end())) );
+	Update();
 
 	return CreateDerefIterator<IVFile>(m_Files.begin(), m_Files.end());
 }
 
 IVDirectory::ConstFileIter VDirectory::Files() const
 {
-	//typedef VSTLDerefIteratorPol<
-	//	FileList::const_iterator, 
-	//	const IVFile
-	//> FileIterPol;
-
-	//return ConstFileIterRange(
-	//	ConstFileIter(new FileIterPol(m_Files.begin())),
-	//	ConstFileIter(new FileIterPol(m_Files.end())) );
+	Update();
 
 	return CreateDerefIterator<const IVFile>(m_Files.begin(), m_Files.end());
 }
 
 void VDirectory::AddSubdir(DirPtr in_pSubdir)
 {
-	m_Dirs.push_back(in_pSubdir);
+	if( GetSubDir(in_pSubdir->GetName()) == 0)
+		m_Dirs.push_back(in_pSubdir);
 }
 
 void VDirectory::AddFile(FilePtr in_pFile)
 {
-	m_Files.push_back(in_pFile);
+	if( GetFile(in_pFile->GetName()) == 0 )
+		m_Files.push_back(in_pFile);
 }
 
 IVDirectory& VDirectory::CreateSubdir(
@@ -275,6 +251,77 @@ void VDirectory::DeleteFile(VStringParam in_strName)
 		// delete file
 		GetDataProvider(m_strTypeId)->DeleteFile(fileToBeRemoved.c_str());
 	}
+}
+
+IVDataProvider* VDirectory::MyDataProvider() const
+{
+	return &VServicePtr<IVDataProviderPool>()->GetDataProvider(m_strTypeId.c_str());
+}
+
+std::string VDirectory::GetQualifiedName() const
+{
+	if( GetParent() != 0 )
+	{
+		return GetParent()->GetQualifiedName() + "/" + m_strName;
+	}
+	else
+	{
+		return "";
+	}		
+}
+
+IVDirectory* VDirectory::GetParent()
+{
+	return m_pParent;
+}
+
+const IVDirectory* VDirectory::GetParent() const
+{
+	return m_pParent;
+}
+
+template<typename T>
+T* non_const(const T* t)
+{
+	return const_cast<T*>(t);
+}
+
+void VDirectory::Update() const
+{
+	try
+	{
+		if( m_strTypeId.empty() == false )
+		{
+			VDirectory* self = non_const(this);
+			MyDataProvider()->UpdateDir(m_strSource, non_const(this));
+		}
+	}
+	catch(VException& e)
+	{
+		V3D_LOGLN("error: " << e.ToString());
+	}
+}
+
+IVDirectory* VDirectory::GetSubDir(const VString& name)
+{
+	for(DirList::iterator dir = m_Dirs.begin(); dir != m_Dirs.end(); ++dir)
+	{
+		if( (*dir)->GetName() == name )
+			return dir->Get();
+	}
+
+	return 0;
+}
+
+IVFile* VDirectory::GetFile(const VString& name)
+{
+	for(FileList::iterator file = m_Files.begin(); file != m_Files.end(); ++file)
+	{
+		if( (*file)->GetName() == name )
+			return file->Get();
+	}
+
+	return 0;
 }
 
 //-----------------------------------------------------------------------------

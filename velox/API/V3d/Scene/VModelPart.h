@@ -56,6 +56,9 @@ private:
 		virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 		virtual const math::VRBTransform& GetModelTransform() const;
 		virtual const graphics::IVMaterial& GetMaterial() const;
+		virtual vuint GetPassCount() const;
+		virtual void ApplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const;
+		virtual void UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const;
 		virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
 		virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
 

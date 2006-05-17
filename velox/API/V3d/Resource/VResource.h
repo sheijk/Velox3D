@@ -111,28 +111,6 @@ public:
 
 	void NotifyChanged(VTypeInfo in_Type);
 
-	///** Returns whether data of type DataType may be locked */
-	//template<typename DataType>
-	//vbool AllowLocking() const;
-
-	///**
-	// * Locks the data of DataType so it can be modified. After modification the
-	// * data needs to be unlocked which will cause all IVResourceTypes to be
-	// * notified of the change so they can update their own data in this resource.
-	// * For instance, after an VImage is locked and changed, the texture in the
-	// * same resource might get updated
-	// * Throws VLockPermittedException if the IVResourceType managing DataType
-	// * does not allow locking
-	// */
-	//template<typename DataType>
-	//VResourceDataPtr<DataType> Lock();
-
-	///**
-	// * Unlocks a locked resource and notifies all IVResourceTypes of the change
-	// * @see v3d::resource::VResource::Lock
-	// */
-	//void Unlock();
-
 	/*
 	 * Returns true if data of the given type is present
 	 */
@@ -147,9 +125,15 @@ public:
 	template<typename DataType>
 	void ReplaceData(DataType* in_pNewData);
 
+	static vbool IsValidResourceName(const std::string& in_strName);
+	static vbool ExistsResourceData(
+		const VTypeInfo& in_Type, const std::string& in_strPath);
+
+	// why is this public?
 	const VResource* GetParent() const;
 	VResource* GetParent();
 	VResource* GetRootResource();
+
 private:
 	typedef std::vector< VSharedPtr<VResource> > ResourceContainer;
 	typedef std::map< VTypeInfo, VSharedPtr<VResourceData> > DataMap;
@@ -168,6 +152,9 @@ private:
 	DataMap m_Data;
 	VResource* m_pParent;
 };
+
+template<typename T>
+vbool ExistsResourceData(VStringParam in_strResourceName);
 
 //-----------------------------------------------------------------------------
 template<typename DataType>
@@ -254,6 +241,12 @@ template<typename DataType>
 void VResource::NotifyChanged()
 {
 	NotifyChanged(GetTypeInfo<DataType>());
+}
+
+template<typename T>
+vbool ExistsResourceData(VStringParam in_strResourceName)
+{
+	return VResource::ExistsResourceData(GetTypeInfo<T>(), in_strResourceName);
 }
 
 //-----------------------------------------------------------------------------

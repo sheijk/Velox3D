@@ -30,6 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+17.05.06
+- VFS aktualisiert sich (neue Dateien werden erkannt, geloeschte nicht)
+- Editor: VFSView hat Refresh Action zum aktualisieren der Anzeige
+- VGLSLTextureParam/VTextureValue pruefen auf sinnvolle Eingaben -> keine
+  Dauerfehlermeldungen mehr bei ungueltigen/fehlenden Texturdateinamen
+  
 12.05.06
 - VOffscreenShooting: rendern in eine Textur vom aktuellen Objekt aus. Inklusive
   eigener Postprocessing Effekte etc.

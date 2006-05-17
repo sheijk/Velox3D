@@ -1,4 +1,5 @@
 uniform sampler2D mud;
+uniform vec4 mudColor;
 
 const vec4 baseColor = vec4(1, 1, 1, 1);
 
@@ -39,5 +40,5 @@ void main(void) {
 		+ gl_LightSource[0].diffuse * diffuse
 		+ gl_LightSource[0].specular * specular;
 
-	gl_FragColor = surfaceColor * light;
+	gl_FragColor = surfaceColor * light + mudColor;
 }

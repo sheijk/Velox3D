@@ -6,6 +6,7 @@
 
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Updater/IVUpdateManager.h>
+#include <V3dLib/Graphics/Misc/MiscUtils.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -62,6 +63,29 @@ VMeshPartBase::~VMeshPartBase()
 const graphics::IVMaterial& VMeshPartBase::GetMaterial() const
 {
 	return *m_hMaterial;
+}
+
+vuint VMeshPartBase::GetPassCount() const
+{
+	if( m_hMaterial != 0 )
+		return m_hMaterial->PassCount();
+	else
+		return 0;
+}
+
+void VMeshPartBase::ApplyPassStates(vuint in_nPassNum, IVDevice& in_Device) const
+{
+	//bad.. texture parameter values need to be updated before the material is
+	// applied, all other after that..
+	ApplyParameterValues(in_Device);
+	ApplyMaterial(in_Device, &m_hMaterial->GetPass(in_nPassNum));
+	ApplyParameterValues(in_Device);
+}
+
+void VMeshPartBase::UnapplyPassStates(vuint in_nPassNum, IVDevice& in_Device) const
+{
+	// do nothing
+	//TODO: give materials an "unapply" method
 }
 
 void VMeshPartBase::SetMaterial(

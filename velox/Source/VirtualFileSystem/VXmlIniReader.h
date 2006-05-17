@@ -10,12 +10,14 @@ namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
 class VDirectory;
+class IVDirectory;
 
 /**
  * parses the vfs's xml ini file and adds content to the given dir
  */
 class VXmlIniReader : public xml::IVXMLVisitor
 {
+
 	VDirectory* m_pDestDir;
 
 	enum State
@@ -26,7 +28,10 @@ class VXmlIniReader : public xml::IVXMLVisitor
 	};
 
 	State m_State;
-	
+
+	// 0 or m_DirStack.top (depending on m_DirStack.empty())
+	IVDirectory* GetDirStackTop();
+
 	std::stack<VDirectory*> m_DirStack;
 public:
 	VXmlIniReader(VDirectory* in_pDestDir);

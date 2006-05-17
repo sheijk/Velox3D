@@ -1,0 +1,24 @@
+<entity name="textest">
+	<part type="v3d::scene::VNaiveSceneManagerPart"/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)"/>
+	<part type="v3d::entity::VUpdateManagerPart"/>
+	<part type="v3d::scene::VNaiveLightManager"/>
+	<part type="v3d::utils::VInputPart"/>
+	<part type="shooting"/>
+	<entity name="plane1">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-44,26,0)" updir="(0.377594,-0.0517625,0.924519)" viewdir="(0.142319,0.989813,-0.00270825)"/>
+		<part type="v3d::scene::VPlaneMeshPart" mat_texture="/data/sky.jpg" material="/edit/mat/textured.v3dmat" pos="(-1,-2,-1)" right="(20,0,0)" up="(0,0,20)"/>
+	</entity>
+	<entity name="grid">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)"/>
+		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial"/>
+	</entity>
+	<entity name="cam">
+		<part type="v3d::utils::VCameraPart"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(13,8,81)" updir="(0.0089443,0.992196,-0.124363)" viewdir="(-0.307756,-0.1156,-0.944417)"/>
+	</entity>
+	<entity name="plane2">
+		<part type="v3d::entity::VRigidBodyPart" pos="(3,15,38)" updir="(-0.16871,0.143472,0.97516)" viewdir="(0.217511,0.97037,-0.105136)"/>
+		<part type="v3d::scene::VPlaneMeshPart" mat_texture="/data/day.jpg" material="/edit/mat/textured.v3dmat" pos="(0,0,0)" right="(10,0,0)" up="(0,0,10)"/>
+	</entity>
+</entity>

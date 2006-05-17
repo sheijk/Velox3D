@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.*;
 import org.eclipse.jface.viewers.*;
@@ -21,7 +20,6 @@ import org.eclipse.swt.SWT;
 
 import de.velox.*;
 import de.velox.editor.entity.*;
-import de.velox.editor.gui.ComboboxDialog;
 import de.velox.editor.widgets.FilterDialog;
 
 

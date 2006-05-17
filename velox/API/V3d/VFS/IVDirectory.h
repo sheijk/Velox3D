@@ -52,6 +52,11 @@ public:
 
 	/** delete file */
 	virtual void DeleteFile(VStringParam in_strName) = 0;
+
+	virtual IVDirectory* GetParent() = 0;
+	virtual const IVDirectory* GetParent() const = 0;
+
+	virtual std::string GetQualifiedName() const = 0;
 };
 
 //-----------------------------------------------------------------------------

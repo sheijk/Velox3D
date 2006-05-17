@@ -48,18 +48,23 @@ void VDefaultRenderStepPart::Render(IVGraphicsPart* in_pScene)
 	VRangeIterator<const IVShapePart> shape = in_pScene->GetVisibleMeshes();
 	while( shape.HasNext() )
 	{
-		const IVMaterial& material = shape->GetMaterial();
+		//const IVMaterial& material = shape->GetMaterial();
 
-		for(vuint pass = 0; pass < material.PassCount(); ++pass)
+		//for(vuint pass = 0; pass < material.PassCount(); ++pass)
+		for(vuint pass = 0; pass < shape->GetPassCount(); ++pass)
 		{
+			IVDevice& device(*GetOutputDevice());
+
 			math::VRBTransform transform = shape->GetModelTransform();
 
 			GetOutputDevice()->SetMatrix(IVDevice::ModelMatrix, transform.AsMatrix());
 
-			ApplyMaterial(*GetOutputDevice(), &material.GetPass(pass));
+			//ApplyMaterial(*GetOutputDevice(), &material.GetPass(pass));
+			shape->ApplyPassStates(pass, device);
 			glCullFace(GL_BACK);
 			glEnable(GL_CULL_FACE);
 			shape->SendGeometry(*GetOutputDevice());
+			shape->UnapplyPassStates(pass, device);
 		}
 
 		++shape;

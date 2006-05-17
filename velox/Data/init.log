@@ -3689,3 +3689,1258 @@ Creating GLSL Shader from thread 0
 	 type=v3d::entity::VRigidBodyPart
 	 pos=(-20,48,0)
 VRigidBodyPart: set position to (-20,48,0)
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VPlaneMeshPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VPlaneMeshPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+.	data/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+.	.	cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+.	.	.	back.jpg
+.	.	.	bottom.jpg
+.	.	.	front.jpg
+.	.	.	left.jpg
+.	.	.	right.jpg
+.	.	.	top.jpg
+.	.	.	back.jpg
+.	.	.	bottom.jpg
+.	.	.	front.jpg
+.	.	.	left.jpg
+.	.	.	right.jpg
+.	.	.	top.jpg
+.	.	tex/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/tex
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/tex
+.	.	.	mud1.tga
+.	.	.	mud1.tga
+.	.	cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+.	.	.	back.jpg
+.	.	.	bottom.jpg
+.	.	.	front.jpg
+.	.	.	left.jpg
+.	.	.	right.jpg
+.	.	.	top.jpg
+.	.	.	back.jpg
+.	.	.	bottom.jpg
+.	.	.	front.jpg
+.	.	.	left.jpg
+.	.	.	right.jpg
+.	.	.	top.jpg
+.	.	tex/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/tex
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/tex
+.	.	.	mud1.tga
+.	.	.	mud1.tga
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+.	.	.project
+.	.	afighter.3ds
+.	.	ball.tga
+.	.	day.jpg
+.	.	deco.xml
+.	.	detail.jpg
+.	.	dusm.jpg
+.	.	dusmdetail.jpg
+.	.	extreme.3ds
+.	.	fuss.jpg
+.	.	moon.jpg
+.	.	night.jpg
+.	.	plane.jpg
+.	.	planet.jpg
+.	.	postproc.fx
+.	.	rocks.raw
+.	.	rocks2048.jpg
+.	.	simplemodel.xml
+.	.	sky.jpg
+.	.	stars.jpg
+.	.	streetlight.3ds
+.	.	test.bsp
+.	.	test.obj
+.	.	test2.jpg
+.	.	Thumbs.db
+.	.	_night.jpg
+.	.	_sky.jpg
+.	.	.project
+.	.	afighter.3ds
+.	.	ball.tga
+.	.	day.jpg
+.	.	deco.xml
+.	.	detail.jpg
+.	.	dusm.jpg
+.	.	dusmdetail.jpg
+.	.	extreme.3ds
+.	.	fuss.jpg
+.	.	moon.jpg
+.	.	night.jpg
+.	.	plane.jpg
+.	.	planet.jpg
+.	.	postproc.fx
+.	.	rocks.raw
+.	.	rocks2048.jpg
+.	.	simplemodel.xml
+.	.	sky.jpg
+.	.	stars.jpg
+.	.	streetlight.3ds
+.	.	test.bsp
+.	.	test.obj
+.	.	test2.jpg
+.	.	Thumbs.db
+.	.	_night.jpg
+.	.	_sky.jpg
+.	.	.project
+.	.	afighter.3ds
+.	.	ball.tga
+.	.	day.jpg
+.	.	deco.xml
+.	.	detail.jpg
+.	.	dusm.jpg
+.	.	dusmdetail.jpg
+.	.	extreme.3ds
+.	.	fuss.jpg
+.	.	moon.jpg
+.	.	night.jpg
+.	.	plane.jpg
+.	.	planet.jpg
+.	.	postproc.fx
+.	.	rocks.raw
+.	.	rocks2048.jpg
+.	.	simplemodel.xml
+.	.	sky.jpg
+.	.	stars.jpg
+.	.	streetlight.3ds
+.	.	test.bsp
+.	.	test.obj
+.	.	test2.jpg
+.	.	Thumbs.db
+.	.	_night.jpg
+.	.	_sky.jpg
+.	edit/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn
+.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/prop-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/props
+.	.	.	.	Physic.v3dscene.svn-work
+.	.	.	.	Physic.v3dscene.svn-work
+.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/text-base
+.	.	.	.	.project.svn-base
+.	.	.	.	lights.v3dscene.svn-base
+.	.	.	.	modeltest.v3dscene.svn-base
+.	.	.	.	NewScene.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	postproc.fx.svn-base
+.	.	.	.	postproc.v3dscene.svn-base
+.	.	.	.	racer.v3dscene.svn-base
+.	.	.	.	redorbit.fx.svn-base
+.	.	.	.	scratch.txt.svn-base
+.	.	.	.	simple.v3dscene.svn-base
+.	.	.	.	temp.txt.svn-base
+.	.	.	.	xyz.fx.svn-base
+.	.	.	.	.project.svn-base
+.	.	.	.	lights.v3dscene.svn-base
+.	.	.	.	modeltest.v3dscene.svn-base
+.	.	.	.	NewScene.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	postproc.fx.svn-base
+.	.	.	.	postproc.v3dscene.svn-base
+.	.	.	.	racer.v3dscene.svn-base
+.	.	.	.	redorbit.fx.svn-base
+.	.	.	.	scratch.txt.svn-base
+.	.	.	.	simple.v3dscene.svn-base
+.	.	.	.	temp.txt.svn-base
+.	.	.	.	xyz.fx.svn-base
+.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp
+.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/prop-base
+.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/props
+.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/text-base
+.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp
+.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn
+.	.	.	empty-file
+.	.	.	entries
+.	.	.	format
+.	.	.	README.txt
+.	.	.	empty-file
+.	.	.	entries
+.	.	.	format
+.	.	.	README.txt
+.	.	mat/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+.	.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn
+.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/prop-base
+.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/props
+.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/text-base
+.	.	.	.	.	ambientsphere.v3dmat.svn-base
+.	.	.	.	.	depth.frag.svn-base
+.	.	.	.	.	depth.v3dmat.svn-base
+.	.	.	.	.	depth.vert.svn-base
+.	.	.	.	.	mirror.frag.svn-base
+.	.	.	.	.	mirror.v3dmat.svn-base
+.	.	.	.	.	mirror.vert.svn-base
+.	.	.	.	.	outline.frag.svn-base
+.	.	.	.	.	outline.vert.svn-base
+.	.	.	.	.	outline_pp.v3dmat.svn-base
+.	.	.	.	.	phong.frag.svn-base
+.	.	.	.	.	phong.v3dmat.svn-base
+.	.	.	.	.	phong.vert.svn-base
+.	.	.	.	.	red.v3dmat.svn-base
+.	.	.	.	.	sepia.frag.svn-base
+.	.	.	.	.	sepia_pp.v3dmat.svn-base
+.	.	.	.	.	simple.vert.svn-base
+.	.	.	.	.	terrain.frag.svn-base
+.	.	.	.	.	terrain.v3dmat.svn-base
+.	.	.	.	.	terrain.vert.svn-base
+.	.	.	.	.	textured.v3dmat.svn-base
+.	.	.	.	.	toon.v3dmat.svn-base
+.	.	.	.	.	water_pp.frag.svn-base
+.	.	.	.	.	water_pp.v3dmat.svn-base
+.	.	.	.	.	white-lit.v3dmat.svn-base
+.	.	.	.	.	white-unlit.v3dmat.svn-base
+.	.	.	.	.	ambientsphere.v3dmat.svn-base
+.	.	.	.	.	depth.frag.svn-base
+.	.	.	.	.	depth.v3dmat.svn-base
+.	.	.	.	.	depth.vert.svn-base
+.	.	.	.	.	mirror.frag.svn-base
+.	.	.	.	.	mirror.v3dmat.svn-base
+.	.	.	.	.	mirror.vert.svn-base
+.	.	.	.	.	outline.frag.svn-base
+.	.	.	.	.	outline.vert.svn-base
+.	.	.	.	.	outline_pp.v3dmat.svn-base
+.	.	.	.	.	phong.frag.svn-base
+.	.	.	.	.	phong.v3dmat.svn-base
+.	.	.	.	.	phong.vert.svn-base
+.	.	.	.	.	red.v3dmat.svn-base
+.	.	.	.	.	sepia.frag.svn-base
+.	.	.	.	.	sepia_pp.v3dmat.svn-base
+.	.	.	.	.	simple.vert.svn-base
+.	.	.	.	.	terrain.frag.svn-base
+.	.	.	.	.	terrain.v3dmat.svn-base
+.	.	.	.	.	terrain.vert.svn-base
+.	.	.	.	.	textured.v3dmat.svn-base
+.	.	.	.	.	toon.v3dmat.svn-base
+.	.	.	.	.	water_pp.frag.svn-base
+.	.	.	.	.	water_pp.v3dmat.svn-base
+.	.	.	.	.	white-lit.v3dmat.svn-base
+.	.	.	.	.	white-unlit.v3dmat.svn-base
+.	.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp
+.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/prop-base
+.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/props
+.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/text-base
+.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp
+.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn
+.	.	.	.	empty-file
+.	.	.	.	entries
+.	.	.	.	format
+.	.	.	.	README.txt
+.	.	.	.	empty-file
+.	.	.	.	entries
+.	.	.	.	format
+.	.	.	.	README.txt
+.	.	.	more/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more
+.	.	.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn
+.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/prop-base
+.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/props
+.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/text-base
+.	.	.	.	.	.	cube.xml.svn-base
+.	.	.	.	.	.	mirror-fragment.glsl.svn-base
+.	.	.	.	.	.	mirror-vertex.glsl.svn-base
+.	.	.	.	.	.	oldschool.xml.svn-base
+.	.	.	.	.	.	pp-fragment.glsl.svn-base
+.	.	.	.	.	.	pp-vertex.glsl.svn-base
+.	.	.	.	.	.	trianglemesh.xml.svn-base
+.	.	.	.	.	.	cube.xml.svn-base
+.	.	.	.	.	.	mirror-fragment.glsl.svn-base
+.	.	.	.	.	.	mirror-vertex.glsl.svn-base
+.	.	.	.	.	.	oldschool.xml.svn-base
+.	.	.	.	.	.	pp-fragment.glsl.svn-base
+.	.	.	.	.	.	pp-vertex.glsl.svn-base
+.	.	.	.	.	.	trianglemesh.xml.svn-base
+.	.	.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp
+.	.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/prop-base
+.	.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/props
+.	.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/text-base
+.	.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp
+.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more
+.	.	.	.	cube.xml
+.	.	.	.	mirror-fragment.glsl
+.	.	.	.	mirror-vertex.glsl
+.	.	.	.	oldschool.xml
+.	.	.	.	pp-fragment.glsl
+.	.	.	.	pp-vertex.glsl
+.	.	.	.	trianglemesh.xml
+.	.	.	.	cube.xml
+.	.	.	.	mirror-fragment.glsl
+.	.	.	.	mirror-vertex.glsl
+.	.	.	.	oldschool.xml
+.	.	.	.	pp-fragment.glsl
+.	.	.	.	pp-vertex.glsl
+.	.	.	.	trianglemesh.xml
+.	.	.	shaders/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders
+.	.	.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn
+.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/prop-base
+.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/props
+.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/text-base
+.	.	.	.	.	.	debug.glsl.svn-base
+.	.	.	.	.	.	diffuse.glsl.svn-base
+.	.	.	.	.	.	info.txt.svn-base
+.	.	.	.	.	.	sphericalAmbient.glsl.svn-base
+.	.	.	.	.	.	debug.glsl.svn-base
+.	.	.	.	.	.	diffuse.glsl.svn-base
+.	.	.	.	.	.	info.txt.svn-base
+.	.	.	.	.	.	sphericalAmbient.glsl.svn-base
+.	.	.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp
+.	.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/prop-base
+.	.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/props
+.	.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/text-base
+.	.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp
+.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders
+.	.	.	.	debug.glsl
+.	.	.	.	diffuse.glsl
+.	.	.	.	info.txt
+.	.	.	.	sphericalAmbient.glsl
+.	.	.	.	debug.glsl
+.	.	.	.	diffuse.glsl
+.	.	.	.	info.txt
+.	.	.	.	sphericalAmbient.glsl
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+.	.	.	ambientsphere.v3dmat
+.	.	.	depth.frag
+.	.	.	depth.v3dmat
+.	.	.	depth.vert
+.	.	.	mirror.frag
+.	.	.	mirror.v3dmat
+.	.	.	mirror.vert
+.	.	.	outline.frag
+.	.	.	outline.vert
+.	.	.	outline_pp.v3dmat
+.	.	.	phong.frag
+.	.	.	phong.v3dmat
+.	.	.	phong.vert
+.	.	.	red.v3dmat
+.	.	.	sepia.frag
+.	.	.	sepia_pp.v3dmat
+.	.	.	simple.vert
+.	.	.	terrain.frag
+.	.	.	terrain.v3dmat
+.	.	.	terrain.vert
+.	.	.	textured.v3dmat
+.	.	.	toon.v3dmat
+.	.	.	water_pp.frag
+.	.	.	water_pp.v3dmat
+.	.	.	white-lit.v3dmat
+.	.	.	white-unlit.v3dmat
+.	.	.	ambientsphere.v3dmat
+.	.	.	depth.frag
+.	.	.	depth.v3dmat
+.	.	.	depth.vert
+.	.	.	mirror.frag
+.	.	.	mirror.v3dmat
+.	.	.	mirror.vert
+.	.	.	outline.frag
+.	.	.	outline.vert
+.	.	.	outline_pp.v3dmat
+.	.	.	phong.frag
+.	.	.	phong.v3dmat
+.	.	.	phong.vert
+.	.	.	red.v3dmat
+.	.	.	sepia.frag
+.	.	.	sepia_pp.v3dmat
+.	.	.	simple.vert
+.	.	.	terrain.frag
+.	.	.	terrain.v3dmat
+.	.	.	terrain.vert
+.	.	.	textured.v3dmat
+.	.	.	toon.v3dmat
+.	.	.	water_pp.frag
+.	.	.	water_pp.v3dmat
+.	.	.	white-lit.v3dmat
+.	.	.	white-unlit.v3dmat
+.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn
+.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/prop-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/props
+.	.	.	.	Physic.v3dscene.svn-work
+.	.	.	.	Physic.v3dscene.svn-work
+.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/text-base
+.	.	.	.	.project.svn-base
+.	.	.	.	lights.v3dscene.svn-base
+.	.	.	.	modeltest.v3dscene.svn-base
+.	.	.	.	NewScene.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	postproc.fx.svn-base
+.	.	.	.	postproc.v3dscene.svn-base
+.	.	.	.	racer.v3dscene.svn-base
+.	.	.	.	redorbit.fx.svn-base
+.	.	.	.	scratch.txt.svn-base
+.	.	.	.	simple.v3dscene.svn-base
+.	.	.	.	temp.txt.svn-base
+.	.	.	.	xyz.fx.svn-base
+.	.	.	.	.project.svn-base
+.	.	.	.	lights.v3dscene.svn-base
+.	.	.	.	modeltest.v3dscene.svn-base
+.	.	.	.	NewScene.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	postproc.fx.svn-base
+.	.	.	.	postproc.v3dscene.svn-base
+.	.	.	.	racer.v3dscene.svn-base
+.	.	.	.	redorbit.fx.svn-base
+.	.	.	.	scratch.txt.svn-base
+.	.	.	.	simple.v3dscene.svn-base
+.	.	.	.	temp.txt.svn-base
+.	.	.	.	xyz.fx.svn-base
+.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp
+.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/prop-base
+.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/props
+.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/text-base
+.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/tmp
+.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/.svn
+.	.	.	empty-file
+.	.	.	entries
+.	.	.	format
+.	.	.	README.txt
+.	.	.	empty-file
+.	.	.	entries
+.	.	.	format
+.	.	.	README.txt
+.	.	mat/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+.	.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn
+.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/prop-base
+.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/props
+.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/text-base
+.	.	.	.	.	ambientsphere.v3dmat.svn-base
+.	.	.	.	.	depth.frag.svn-base
+.	.	.	.	.	depth.v3dmat.svn-base
+.	.	.	.	.	depth.vert.svn-base
+.	.	.	.	.	mirror.frag.svn-base
+.	.	.	.	.	mirror.v3dmat.svn-base
+.	.	.	.	.	mirror.vert.svn-base
+.	.	.	.	.	outline.frag.svn-base
+.	.	.	.	.	outline.vert.svn-base
+.	.	.	.	.	outline_pp.v3dmat.svn-base
+.	.	.	.	.	phong.frag.svn-base
+.	.	.	.	.	phong.v3dmat.svn-base
+.	.	.	.	.	phong.vert.svn-base
+.	.	.	.	.	red.v3dmat.svn-base
+.	.	.	.	.	sepia.frag.svn-base
+.	.	.	.	.	sepia_pp.v3dmat.svn-base
+.	.	.	.	.	simple.vert.svn-base
+.	.	.	.	.	terrain.frag.svn-base
+.	.	.	.	.	terrain.v3dmat.svn-base
+.	.	.	.	.	terrain.vert.svn-base
+.	.	.	.	.	textured.v3dmat.svn-base
+.	.	.	.	.	toon.v3dmat.svn-base
+.	.	.	.	.	water_pp.frag.svn-base
+.	.	.	.	.	water_pp.v3dmat.svn-base
+.	.	.	.	.	white-lit.v3dmat.svn-base
+.	.	.	.	.	white-unlit.v3dmat.svn-base
+.	.	.	.	.	ambientsphere.v3dmat.svn-base
+.	.	.	.	.	depth.frag.svn-base
+.	.	.	.	.	depth.v3dmat.svn-base
+.	.	.	.	.	depth.vert.svn-base
+.	.	.	.	.	mirror.frag.svn-base
+.	.	.	.	.	mirror.v3dmat.svn-base
+.	.	.	.	.	mirror.vert.svn-base
+.	.	.	.	.	outline.frag.svn-base
+.	.	.	.	.	outline.vert.svn-base
+.	.	.	.	.	outline_pp.v3dmat.svn-base
+.	.	.	.	.	phong.frag.svn-base
+.	.	.	.	.	phong.v3dmat.svn-base
+.	.	.	.	.	phong.vert.svn-base
+.	.	.	.	.	red.v3dmat.svn-base
+.	.	.	.	.	sepia.frag.svn-base
+.	.	.	.	.	sepia_pp.v3dmat.svn-base
+.	.	.	.	.	simple.vert.svn-base
+.	.	.	.	.	terrain.frag.svn-base
+.	.	.	.	.	terrain.v3dmat.svn-base
+.	.	.	.	.	terrain.vert.svn-base
+.	.	.	.	.	textured.v3dmat.svn-base
+.	.	.	.	.	toon.v3dmat.svn-base
+.	.	.	.	.	water_pp.frag.svn-base
+.	.	.	.	.	water_pp.v3dmat.svn-base
+.	.	.	.	.	white-lit.v3dmat.svn-base
+.	.	.	.	.	white-unlit.v3dmat.svn-base
+.	.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp
+.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/prop-base
+.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/props
+.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/text-base
+.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/tmp
+.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/.svn
+.	.	.	.	empty-file
+.	.	.	.	entries
+.	.	.	.	format
+.	.	.	.	README.txt
+.	.	.	.	empty-file
+.	.	.	.	entries
+.	.	.	.	format
+.	.	.	.	README.txt
+.	.	.	more/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more
+.	.	.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn
+.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/prop-base
+.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/props
+.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/text-base
+.	.	.	.	.	.	cube.xml.svn-base
+.	.	.	.	.	.	mirror-fragment.glsl.svn-base
+.	.	.	.	.	.	mirror-vertex.glsl.svn-base
+.	.	.	.	.	.	oldschool.xml.svn-base
+.	.	.	.	.	.	pp-fragment.glsl.svn-base
+.	.	.	.	.	.	pp-vertex.glsl.svn-base
+.	.	.	.	.	.	trianglemesh.xml.svn-base
+.	.	.	.	.	.	cube.xml.svn-base
+.	.	.	.	.	.	mirror-fragment.glsl.svn-base
+.	.	.	.	.	.	mirror-vertex.glsl.svn-base
+.	.	.	.	.	.	oldschool.xml.svn-base
+.	.	.	.	.	.	pp-fragment.glsl.svn-base
+.	.	.	.	.	.	pp-vertex.glsl.svn-base
+.	.	.	.	.	.	trianglemesh.xml.svn-base
+.	.	.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp
+.	.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/prop-base
+.	.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/props
+.	.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/text-base
+.	.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/tmp
+.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more/.svn
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/more
+.	.	.	.	cube.xml
+.	.	.	.	mirror-fragment.glsl
+.	.	.	.	mirror-vertex.glsl
+.	.	.	.	oldschool.xml
+.	.	.	.	pp-fragment.glsl
+.	.	.	.	pp-vertex.glsl
+.	.	.	.	trianglemesh.xml
+.	.	.	.	cube.xml
+.	.	.	.	mirror-fragment.glsl
+.	.	.	.	mirror-vertex.glsl
+.	.	.	.	oldschool.xml
+.	.	.	.	pp-fragment.glsl
+.	.	.	.	pp-vertex.glsl
+.	.	.	.	trianglemesh.xml
+.	.	.	shaders/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders
+.	.	.	.	.svn/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn
+.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/prop-base
+.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/props
+.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/text-base
+.	.	.	.	.	.	debug.glsl.svn-base
+.	.	.	.	.	.	diffuse.glsl.svn-base
+.	.	.	.	.	.	info.txt.svn-base
+.	.	.	.	.	.	sphericalAmbient.glsl.svn-base
+.	.	.	.	.	.	debug.glsl.svn-base
+.	.	.	.	.	.	diffuse.glsl.svn-base
+.	.	.	.	.	.	info.txt.svn-base
+.	.	.	.	.	.	sphericalAmbient.glsl.svn-base
+.	.	.	.	.	tmp/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp
+.	.	.	.	.	.	prop-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/prop-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/prop-base
+.	.	.	.	.	.	props/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/props
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/props
+.	.	.	.	.	.	text-base/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/text-base
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/text-base
+.	.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/tmp
+.	.	.	.	.	wcprops/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn/wcprops
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders/.svn
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat/shaders
+.	.	.	.	debug.glsl
+.	.	.	.	diffuse.glsl
+.	.	.	.	info.txt
+.	.	.	.	sphericalAmbient.glsl
+.	.	.	.	debug.glsl
+.	.	.	.	diffuse.glsl
+.	.	.	.	info.txt
+.	.	.	.	sphericalAmbient.glsl
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+.	.	.	ambientsphere.v3dmat
+.	.	.	depth.frag
+.	.	.	depth.v3dmat
+.	.	.	depth.vert
+.	.	.	mirror.frag
+.	.	.	mirror.v3dmat
+.	.	.	mirror.vert
+.	.	.	outline.frag
+.	.	.	outline.vert
+.	.	.	outline_pp.v3dmat
+.	.	.	phong.frag
+.	.	.	phong.v3dmat
+.	.	.	phong.vert
+.	.	.	red.v3dmat
+.	.	.	sepia.frag
+.	.	.	sepia_pp.v3dmat
+.	.	.	simple.vert
+.	.	.	terrain.frag
+.	.	.	terrain.v3dmat
+.	.	.	terrain.vert
+.	.	.	textured.v3dmat
+.	.	.	toon.v3dmat
+.	.	.	water_pp.frag
+.	.	.	water_pp.v3dmat
+.	.	.	white-lit.v3dmat
+.	.	.	white-unlit.v3dmat
+.	.	.	ambientsphere.v3dmat
+.	.	.	depth.frag
+.	.	.	depth.v3dmat
+.	.	.	depth.vert
+.	.	.	mirror.frag
+.	.	.	mirror.v3dmat
+.	.	.	mirror.vert
+.	.	.	outline.frag
+.	.	.	outline.vert
+.	.	.	outline_pp.v3dmat
+.	.	.	phong.frag
+.	.	.	phong.v3dmat
+.	.	.	phong.vert
+.	.	.	red.v3dmat
+.	.	.	sepia.frag
+.	.	.	sepia_pp.v3dmat
+.	.	.	simple.vert
+.	.	.	terrain.frag
+.	.	.	terrain.v3dmat
+.	.	.	terrain.vert
+.	.	.	textured.v3dmat
+.	.	.	toon.v3dmat
+.	.	.	water_pp.frag
+.	.	.	water_pp.v3dmat
+.	.	.	white-lit.v3dmat
+.	.	.	white-unlit.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+.	.	.project
+.	.	lights.v3dscene
+.	.	modeltest.v3dscene
+.	.	NewScene.v3dscene
+.	.	Physic.v3dscene
+.	.	postproc.fx
+.	.	postproc.v3dscene
+.	.	racer.v3dscene
+.	.	redorbit.fx
+.	.	scratch.txt
+.	.	simple.v3dscene
+.	.	temp.txt
+.	.	textest.v3dscene
+.	.	xyz.fx
+.	.	.project
+.	.	lights.v3dscene
+.	.	modeltest.v3dscene
+.	.	NewScene.v3dscene
+.	.	Physic.v3dscene
+.	.	postproc.fx
+.	.	postproc.v3dscene
+.	.	racer.v3dscene
+.	.	redorbit.fx
+.	.	scratch.txt
+.	.	simple.v3dscene
+.	.	temp.txt
+.	.	textest.v3dscene
+.	.	xyz.fx
+.	.	.project
+.	.	lights.v3dscene
+.	.	modeltest.v3dscene
+.	.	NewScene.v3dscene
+.	.	Physic.v3dscene
+.	.	postproc.fx
+.	.	postproc.v3dscene
+.	.	racer.v3dscene
+.	.	redorbit.fx
+.	.	scratch.txt
+.	.	simple.v3dscene
+.	.	temp.txt
+.	.	textest.v3dscene
+.	.	xyz.fx
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/edit/mat
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: 

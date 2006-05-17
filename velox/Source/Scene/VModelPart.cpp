@@ -6,7 +6,7 @@
 #include <V3dLib/Utils/VRegisterGuard.h>
 #include <V3d/Entity/IVEntitySerializationService.h>
 #include <V3d/Entity/VGenericPartParser.h>
-
+#include <V3dLib/Graphics/Misc/MiscUtils.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -208,6 +208,24 @@ const math::VRBTransform& VModelPart::MeshPart::GetModelTransform() const
 const graphics::IVMaterial& VModelPart::MeshPart::GetMaterial() const
 {
 	return *m_hMaterial;
+}
+
+vuint VModelPart::MeshPart::GetPassCount() const
+{
+	if( m_hMaterial != 0 )
+		return m_hMaterial->PassCount();
+	else
+		return 0;
+}
+
+void VModelPart::MeshPart::ApplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const
+{
+	ApplyMaterial(in_Device, &m_hMaterial->GetPass(in_nPassNum));
+}
+
+void VModelPart::MeshPart::UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const
+{
+	//nothing..
 }
 
 void VModelPart::MeshPart::UpdateAndCull(const graphics::IVCamera& in_Camera)

@@ -12,6 +12,7 @@
 namespace v3d {
 namespace vfs {
 //-----------------------------------------------------------------------------
+class VDirectory;
 
 // fix some of the troubles caused by windows.h
 #undef CreateFile
@@ -39,7 +40,10 @@ public:
 		VAccessModeFlags in_Access) = 0;
 
 	/** creates a dir from mount info */
-	virtual DirPtr CreateMountedDir(const VMountOptions& in_MountOptions) = 0;
+	virtual DirPtr CreateMountedDir(
+		IVDirectory* in_pParent, const VMountOptions& in_MountOptions) = 0;
+
+	virtual void UpdateDir(const std::string& path, VDirectory* io_pDir) = 0;
 
 	virtual vbool IsDirectory(VStringParam in_strPossibleDir) = 0;
 	virtual vbool IsFile(VStringParam in_strPossibleFile) = 0;

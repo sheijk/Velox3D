@@ -2,6 +2,9 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Graphics/IVParameter.h>
+#include <V3d/Resource/VResourceId.h>
+#include <V3d/Resource/VResource.h>
+#include <V3d/Graphics/IVTexture.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -30,7 +33,16 @@ std::string VTextureValue::GetTextureResource() const
 
 void VTextureValue::SetTextureResource(const std::string& in_Value)
 {
-	m_strTextureResource = in_Value;
+	//if( resource::ExistsResourceData<graphics::IVTexture>(in_Value.c_str()) )
+	try
+	{
+		resource::GetResourceData<graphics::IVTexture>(in_Value.c_str());
+		m_strTextureResource = in_Value;
+	}
+	catch(VException&)
+	{
+		// no texture for resource, ignore this setting
+	}
 }
 
 void VTextureValue::Set(const std::string& in_NewValue)
