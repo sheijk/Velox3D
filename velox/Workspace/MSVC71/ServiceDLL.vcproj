@@ -1131,9 +1131,6 @@
 				RelativePath="..\..\Source\Scene\VOrientationGridPart.cpp">
 			</File>
 			<File
-				RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp">
-			</File>
-			<File
 				RelativePath="..\..\Source\Scene\VPostProcessingRenderStepPart.cpp">
 			</File>
 			<File

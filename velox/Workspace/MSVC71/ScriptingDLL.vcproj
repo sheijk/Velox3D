@@ -2270,9 +2270,6 @@ mkdir ..\SourceV3d\de\velox
 					RelativePath="..\..\Source\Scene\VOrientationGridPart.cpp">
 				</File>
 				<File
-					RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp">
-				</File>
-				<File
 					RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp">
 				</File>
 				<File

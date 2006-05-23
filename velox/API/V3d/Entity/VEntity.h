@@ -94,6 +94,8 @@ private:
 	void ConnectPart(IVPart* in_pPart, const std::string& in_Id);
 	void UnconnectPart(IVPart* in_pPart, const std::string& in_Id);
 
+	void SetAllPartsActive(vbool in_bActive);
+
 	/* deactivate if any dependency of a part is not fulfilled */
 	void CheckDependencies();
 

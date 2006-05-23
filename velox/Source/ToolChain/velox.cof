@@ -1,0 +1,136 @@
+/*
+ * This is an exporter for Cinema4d. It creates a simple xml file containing all
+ * meshes found in the current document. It will only export objects of type
+ * PolygonObject (select object and press 'C' to triangulate it)
+ *
+ * Place it into the "plugins" folder inside your Cinema4d installation
+ * Tested with Cinema4d 9.5
+ *
+ * TODO:
+ * - obtain a plugin id
+ * - extract the materials associated with the meshes
+ * - extract tex coords and normals
+ */
+
+//TODO: obtain a plugin id
+const var cPluginID = 1000006;
+
+class VeloxExporter : FilterPlugin
+{ 
+public:
+	VeloxExporter();
+	GetID();
+	GetName();
+	GetHelp();
+    Save(doc, fname, obj, mat, env, dialog);
+}
+
+VeloxExporter::VeloxExporter() { super(); }
+VeloxExporter::GetID() { return cPluginID; }
+
+VeloxExporter::GetName() { return "Velox Exporter"; }
+VeloxExporter::GetHelp() { return "Exports a mesh for Velox3D"; }
+
+Write(thing, file)
+{
+    var pos = thing->GetPosition();
+
+//    println(
+//        "writing object: " 
+//        + thing->GetName()
+//        + " @ (" + tostring(pos.x) + ", "
+//        + tostring(pos.y) + ", " + tostring(pos.z) + ")"
+//    );
+
+    file->WriteString("   <mesh name=\"" + thing->GetName() + "\" " +
+        " pos=\"(" + 
+            tostring(pos.x) + ", " + 
+            tostring(pos.y) + ", " +
+            tostring(pos.z) + ")\"" +
+        " type=\"triangles\" indices=\"yes\" texCoords=\"0\"" +
+        " coords=\"yes\" normals=\"no\">\n");
+
+    if( instanceof(thing, PolygonObject) ) {
+        var i;
+
+        for(i = 0; i < thing->GetPointCount(); ++i)
+        {
+            var point = thing->GetPoint(i);
+
+            file->WriteString(
+                "       <vertex x=\"" + tostring(point.x) +
+                "\" y=\"" + tostring(point.y) +
+                "\" z=\"" + tostring(point.z) + "\" />\n");
+        }
+
+        for(i = 0; i < thing->GetPolygonCount(); ++i)
+        {
+            var poly = thing->GetPolygon(i);
+
+            if( poly->c == poly->d ) {
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->a) + "\" /> ");
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->b) + "\" /> ");
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->c) + "\" />\n");
+            }
+            else {
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->a) + "\" /> ");
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->b) + "\" /> ");
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->c) + "\" />\n");
+
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->c) + "\" /> ");
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->d) + "\" /> ");
+                file->WriteString("       <index id=\"" + 
+                    tostring(poly->a) + "\" />\n");
+            }
+        }
+    }
+
+    file->WriteString("   </mesh>\n");
+}
+
+VeloxExporter::Save(doc, fname, obj, mat, env, dialog)
+{
+    var fileName = fname->GetFullString();
+
+    if( 
+        GeFileExist(
+        fname, 
+        FALSE) == 
+        FALSE ) {
+        var file = new(BaseFile);
+        file->Open(fname, GE_WRITE);
+
+        println("exporting to velox file: " + fileName);
+
+        file->WriteString("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+        file->WriteString("<model version=\"1.0\">\n");
+
+        var foo = doc->GetFirstObject();
+
+        while( foo ) {
+            Write(foo, file);
+
+            foo = foo->GetNext();
+        }
+
+        file->WriteString("</model>\n");
+
+        //TODO: close, however this can be done...
+    }
+}
+
+main()
+{ 
+	println("VeloxExporter is being loaded");
+
+	Register(VeloxExporter);
+}
+

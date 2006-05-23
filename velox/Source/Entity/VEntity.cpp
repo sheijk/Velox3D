@@ -175,6 +175,20 @@ IVPart* VEntity::GetPartById(const std::string& in_Id)
 	return 0;
 }
 
+void VEntity::SetAllPartsActive(vbool in_bActive)
+{
+	for(
+		PartContainer::iterator part = m_Parts.begin();
+		part != m_Parts.end();
+	++part)
+	{
+		if( in_bActive )
+			part->second->Activate();
+		else
+			part->second->Deactivate();
+	}
+}
+
 void VEntity::Activate()
 {
 	if( ! m_bActivated )
@@ -193,13 +207,7 @@ void VEntity::Activate()
 		}
 
 		// activate all parts
-		for(
-			PartContainer::iterator part = m_Parts.begin();
-			part != m_Parts.end();
-			++part)
-		{
-			part->second->Activate();
-		}
+		SetAllPartsActive(true);
 
 		// activate all childs
 		for(EntityContainer::iterator child = m_Entities.begin();
@@ -226,13 +234,7 @@ void VEntity::Deactivate()
 		}
 	
 		// deactivate all parts
-		for(
-			PartContainer::iterator part = m_Parts.begin();
-			part != m_Parts.end();
-			++part)
-		{
-			part->second->Deactivate();
-		}
+		SetAllPartsActive(false);
 	
 		m_bActivated = false;
 	}
@@ -398,12 +400,18 @@ void VEntity::AddPart(const std::string& in_Id, PartPtr in_pPart)
 	// if part is not contained, yet
 	if( in_pPart.Get() != 0 && m_Parts.find(in_Id) == m_Parts.end() )
 	{
+		if( m_bActivated )
+			SetAllPartsActive(false);
+
 		UnconnectAllParts();
 
 		// add part to list
 		m_Parts[in_Id] = in_pPart;
 
 		ReconnectAllParts();
+
+		if( m_bActivated )
+			SetAllPartsActive(true);
 	}
 	else
 	{
