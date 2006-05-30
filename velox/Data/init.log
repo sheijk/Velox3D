@@ -4943,4 +4943,4125 @@ Creating GLSL Shader from thread 0
 [g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data/cubemap
 [g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data
 [g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: g:/dev/v3d/svn/trunk/velox/Data/data
-[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: 
+[g:\dev\v3d\svn\trunk\velox\source\virtualfilesystem\vdirectory.cpp:296] updating from: Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+/
+.	data/
+.	.	cubemap/
+.	.	.	back.jpg
+.	.	.	bottom.jpg
+.	.	.	front.jpg
+.	.	.	left.jpg
+.	.	.	right.jpg
+.	.	.	top.jpg
+.	.	models/
+.	.	.	foo.xml
+.	.	tex/
+.	.	.	mud1.tga
+.	.	.project
+.	.	afighter.3ds
+.	.	ball.tga
+.	.	day.jpg
+.	.	deco.xml
+.	.	detail.jpg
+.	.	dusm.jpg
+.	.	dusmdetail.jpg
+.	.	extreme.3ds
+.	.	fuss.jpg
+.	.	moon.jpg
+.	.	night.jpg
+.	.	plane.jpg
+.	.	planet.jpg
+.	.	postproc.fx
+.	.	rocks.raw
+.	.	rocks2048.jpg
+.	.	simplemodel.xml
+.	.	sky.jpg
+.	.	stars.jpg
+.	.	streetlight.3ds
+.	.	test.bsp
+.	.	test.obj
+.	.	test2.jpg
+.	.	Thumbs.db
+.	.	_night.jpg
+.	.	_sky.jpg
+.	edit/
+.	.	.svn/
+.	.	.	prop-base/
+.	.	.	.	Car3.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	props/
+.	.	.	.	Car3.v3dscene.svn-work
+.	.	.	.	Physic.v3dscene.svn-work
+.	.	.	text-base/
+.	.	.	.	.project.svn-base
+.	.	.	.	Car3.v3dscene.svn-base
+.	.	.	.	lights.v3dscene.svn-base
+.	.	.	.	modeltest.v3dscene.svn-base
+.	.	.	.	NewScene.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	postproc.fx.svn-base
+.	.	.	.	postproc.v3dscene.svn-base
+.	.	.	.	racer.v3dscene.svn-base
+.	.	.	.	redorbit.fx.svn-base
+.	.	.	.	scratch.txt.svn-base
+.	.	.	.	simple.v3dscene.svn-base
+.	.	.	.	temp.txt.svn-base
+.	.	.	.	textest.v3dscene.svn-base
+.	.	.	.	xyz.fx.svn-base
+.	.	.	tmp/
+.	.	.	.	prop-base/
+.	.	.	.	props/
+.	.	.	.	text-base/
+.	.	.	.	wcprops/
+.	.	.	wcprops/
+.	.	.	empty-file
+.	.	.	entries
+.	.	.	format
+.	.	.	README.txt
+.	.	mat/
+.	.	.	.svn/
+.	.	.	.	prop-base/
+.	.	.	.	props/
+.	.	.	.	text-base/
+.	.	.	.	.	ambientsphere.v3dmat.svn-base
+.	.	.	.	.	depth.frag.svn-base
+.	.	.	.	.	depth.v3dmat.svn-base
+.	.	.	.	.	depth.vert.svn-base
+.	.	.	.	.	mirror.frag.svn-base
+.	.	.	.	.	mirror.v3dmat.svn-base
+.	.	.	.	.	mirror.vert.svn-base
+.	.	.	.	.	outline.frag.svn-base
+.	.	.	.	.	outline.vert.svn-base
+.	.	.	.	.	outline_pp.v3dmat.svn-base
+.	.	.	.	.	phong.frag.svn-base
+.	.	.	.	.	phong.v3dmat.svn-base
+.	.	.	.	.	phong.vert.svn-base
+.	.	.	.	.	red.v3dmat.svn-base
+.	.	.	.	.	sepia.frag.svn-base
+.	.	.	.	.	sepia_pp.v3dmat.svn-base
+.	.	.	.	.	simple.vert.svn-base
+.	.	.	.	.	terrain.frag.svn-base
+.	.	.	.	.	terrain.v3dmat.svn-base
+.	.	.	.	.	terrain.vert.svn-base
+.	.	.	.	.	textured.v3dmat.svn-base
+.	.	.	.	.	toon.v3dmat.svn-base
+.	.	.	.	.	water_pp.frag.svn-base
+.	.	.	.	.	water_pp.v3dmat.svn-base
+.	.	.	.	.	white-lit.v3dmat.svn-base
+.	.	.	.	.	white-unlit.v3dmat.svn-base
+.	.	.	.	tmp/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	wcprops/
+.	.	.	.	wcprops/
+.	.	.	.	empty-file
+.	.	.	.	entries
+.	.	.	.	format
+.	.	.	.	README.txt
+.	.	.	debug/
+.	.	.	.	.svn/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	.	normals.v3dmat.svn-base
+.	.	.	.	.	tmp/
+.	.	.	.	.	.	prop-base/
+.	.	.	.	.	.	props/
+.	.	.	.	.	.	text-base/
+.	.	.	.	.	.	wcprops/
+.	.	.	.	.	wcprops/
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	normals.v3dmat
+.	.	.	more/
+.	.	.	.	.svn/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	.	cube.xml.svn-base
+.	.	.	.	.	.	foo.txt.svn-base
+.	.	.	.	.	.	mirror-fragment.glsl.svn-base
+.	.	.	.	.	.	mirror-vertex.glsl.svn-base
+.	.	.	.	.	.	oldschool.xml.svn-base
+.	.	.	.	.	.	pp-fragment.glsl.svn-base
+.	.	.	.	.	.	pp-vertex.glsl.svn-base
+.	.	.	.	.	.	trianglemesh.xml.svn-base
+.	.	.	.	.	tmp/
+.	.	.	.	.	.	prop-base/
+.	.	.	.	.	.	props/
+.	.	.	.	.	.	text-base/
+.	.	.	.	.	.	wcprops/
+.	.	.	.	.	wcprops/
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	cube.xml
+.	.	.	.	foo.txt
+.	.	.	.	mirror-fragment.glsl
+.	.	.	.	mirror-vertex.glsl
+.	.	.	.	oldschool.xml
+.	.	.	.	pp-fragment.glsl
+.	.	.	.	pp-vertex.glsl
+.	.	.	.	trianglemesh.xml
+.	.	.	shaders/
+.	.	.	.	.svn/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	.	debug.glsl.svn-base
+.	.	.	.	.	.	diffuse.glsl.svn-base
+.	.	.	.	.	.	info.txt.svn-base
+.	.	.	.	.	.	sphericalAmbient.glsl.svn-base
+.	.	.	.	.	tmp/
+.	.	.	.	.	.	prop-base/
+.	.	.	.	.	.	props/
+.	.	.	.	.	.	text-base/
+.	.	.	.	.	.	wcprops/
+.	.	.	.	.	wcprops/
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	debug.glsl
+.	.	.	.	diffuse.glsl
+.	.	.	.	info.txt
+.	.	.	.	sphericalAmbient.glsl
+.	.	.	ambientsphere.v3dmat
+.	.	.	depth.frag
+.	.	.	depth.v3dmat
+.	.	.	depth.vert
+.	.	.	mirror.frag
+.	.	.	mirror.v3dmat
+.	.	.	mirror.vert
+.	.	.	outline.frag
+.	.	.	outline.vert
+.	.	.	outline_pp.v3dmat
+.	.	.	phong.frag
+.	.	.	phong.v3dmat
+.	.	.	phong.vert
+.	.	.	red.v3dmat
+.	.	.	sepia.frag
+.	.	.	sepia_pp.v3dmat
+.	.	.	simple.vert
+.	.	.	terrain.frag
+.	.	.	terrain.v3dmat
+.	.	.	terrain.vert
+.	.	.	textured.v3dmat
+.	.	.	toon.v3dmat
+.	.	.	water_pp.frag
+.	.	.	water_pp.v3dmat
+.	.	.	white-lit.v3dmat
+.	.	.	white-unlit.v3dmat
+.	.	models/
+.	.	.	foo.xml
+.	.	.	sheijk.xml
+.	.	.project
+.	.	.racer.v3dscene.swp
+.	.	Car3.v3dscene
+.	.	lights.v3dscene
+.	.	modeltest.v3dscene
+.	.	NewScene.v3dscene
+.	.	Physic.v3dscene
+.	.	postproc.fx
+.	.	postproc.v3dscene
+.	.	racer.v3dscene
+.	.	redorbit.fx
+.	.	scratch.txt
+.	.	simple.v3dscene
+.	.	temp.txt
+.	.	textest.v3dscene
+.	.	xyz.fx
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0.2,0.2,0.2,1)
+	 mat_skyColor=(0,0,0.3,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(34,61,0)
+VRigidBodyPart: set position to (34,61,0)
+	 updir=(0.135435,0.875506,-0.463827)
+	 viewdir=(0.0405012,-0.472641,-0.880318)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 mesh=
+	 model=/edit/models/sheijk.xml
+Adding /edit/models/sheijk.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+ Entity "racer"
+.	Part v3d::entity::VUpdateManagerPart
+.	Part v3d::scene::VDefaultRenderStepPart
+.	Part v3d::scene::VNaiveLightManager
+.	Part v3d::scene::VNaiveSceneManagerPart
+.	Part v3d::scene::VPostProcesssingRenderStepPart
+.	Part v3d::scene::VSimpleShooting
+.	Part v3d::utils::VInputPart
+ .	Entity "ambient"
+ .	.	Entity "skybox"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VSkyboxPart
+ .	.	Entity "dummy"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VSphereMeshPart
+ .	.	Entity "editorCam"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::utils::VCameraPart
+.	.	.	Part v3d::utils::VTrackballPart
+ .	.	Entity "debug"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VOrientationGridPart
+!.	.	Entity "sun"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VArrowMeshPart
+.	.	.	Part v3d::scene::VDefaultRenderStepPart (misssing requirements)
+.	.	.	Part v3d::scene::VLightPart
+.	.	.	Part v3d::scene::VPostProcesssingRenderStepPart (misssing requirements)
+ .	.	Entity "dummy2"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VSphereMeshPart
+ .	.	Entity "model"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VModelPart
+ .	Entity "world"
+ .	.	Entity "terrain"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VTerrainPart
+ .	.	Entity "playerCar"
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Unregistering window...
+Return value of main service: 0
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+/
+.	data/
+.	.	cubemap/
+.	.	.	back.jpg
+.	.	.	bottom.jpg
+.	.	.	front.jpg
+.	.	.	left.jpg
+.	.	.	right.jpg
+.	.	.	top.jpg
+.	.	models/
+.	.	.	foo.xml
+.	.	tex/
+.	.	.	mud1.tga
+.	.	.project
+.	.	afighter.3ds
+.	.	ball.tga
+.	.	day.jpg
+.	.	deco.xml
+.	.	detail.jpg
+.	.	dusm.jpg
+.	.	dusmdetail.jpg
+.	.	extreme.3ds
+.	.	fuss.jpg
+.	.	moon.jpg
+.	.	night.jpg
+.	.	plane.jpg
+.	.	planet.jpg
+.	.	postproc.fx
+.	.	rocks.raw
+.	.	rocks2048.jpg
+.	.	simplemodel.xml
+.	.	sky.jpg
+.	.	stars.jpg
+.	.	streetlight.3ds
+.	.	test.bsp
+.	.	test.obj
+.	.	test2.jpg
+.	.	Thumbs.db
+.	.	_night.jpg
+.	.	_sky.jpg
+.	edit/
+.	.	.svn/
+.	.	.	prop-base/
+.	.	.	.	Car3.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	props/
+.	.	.	.	Car3.v3dscene.svn-work
+.	.	.	.	Physic.v3dscene.svn-work
+.	.	.	text-base/
+.	.	.	.	.project.svn-base
+.	.	.	.	Car3.v3dscene.svn-base
+.	.	.	.	lights.v3dscene.svn-base
+.	.	.	.	modeltest.v3dscene.svn-base
+.	.	.	.	NewScene.v3dscene.svn-base
+.	.	.	.	Physic.v3dscene.svn-base
+.	.	.	.	postproc.fx.svn-base
+.	.	.	.	postproc.v3dscene.svn-base
+.	.	.	.	racer.v3dscene.svn-base
+.	.	.	.	redorbit.fx.svn-base
+.	.	.	.	scratch.txt.svn-base
+.	.	.	.	simple.v3dscene.svn-base
+.	.	.	.	temp.txt.svn-base
+.	.	.	.	textest.v3dscene.svn-base
+.	.	.	.	xyz.fx.svn-base
+.	.	.	tmp/
+.	.	.	.	prop-base/
+.	.	.	.	props/
+.	.	.	.	text-base/
+.	.	.	.	wcprops/
+.	.	.	wcprops/
+.	.	.	empty-file
+.	.	.	entries
+.	.	.	format
+.	.	.	README.txt
+.	.	mat/
+.	.	.	.svn/
+.	.	.	.	prop-base/
+.	.	.	.	props/
+.	.	.	.	text-base/
+.	.	.	.	.	ambientsphere.v3dmat.svn-base
+.	.	.	.	.	depth.frag.svn-base
+.	.	.	.	.	depth.v3dmat.svn-base
+.	.	.	.	.	depth.vert.svn-base
+.	.	.	.	.	mirror.frag.svn-base
+.	.	.	.	.	mirror.v3dmat.svn-base
+.	.	.	.	.	mirror.vert.svn-base
+.	.	.	.	.	outline.frag.svn-base
+.	.	.	.	.	outline.vert.svn-base
+.	.	.	.	.	outline_pp.v3dmat.svn-base
+.	.	.	.	.	phong.frag.svn-base
+.	.	.	.	.	phong.v3dmat.svn-base
+.	.	.	.	.	phong.vert.svn-base
+.	.	.	.	.	red.v3dmat.svn-base
+.	.	.	.	.	sepia.frag.svn-base
+.	.	.	.	.	sepia_pp.v3dmat.svn-base
+.	.	.	.	.	simple.vert.svn-base
+.	.	.	.	.	terrain.frag.svn-base
+.	.	.	.	.	terrain.v3dmat.svn-base
+.	.	.	.	.	terrain.vert.svn-base
+.	.	.	.	.	textured.v3dmat.svn-base
+.	.	.	.	.	toon.v3dmat.svn-base
+.	.	.	.	.	water_pp.frag.svn-base
+.	.	.	.	.	water_pp.v3dmat.svn-base
+.	.	.	.	.	white-lit.v3dmat.svn-base
+.	.	.	.	.	white-unlit.v3dmat.svn-base
+.	.	.	.	tmp/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	wcprops/
+.	.	.	.	wcprops/
+.	.	.	.	empty-file
+.	.	.	.	entries
+.	.	.	.	format
+.	.	.	.	README.txt
+.	.	.	debug/
+.	.	.	.	.svn/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	.	normals.v3dmat.svn-base
+.	.	.	.	.	tmp/
+.	.	.	.	.	.	prop-base/
+.	.	.	.	.	.	props/
+.	.	.	.	.	.	text-base/
+.	.	.	.	.	.	wcprops/
+.	.	.	.	.	wcprops/
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	normals.v3dmat
+.	.	.	more/
+.	.	.	.	.svn/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	.	cube.xml.svn-base
+.	.	.	.	.	.	foo.txt.svn-base
+.	.	.	.	.	.	mirror-fragment.glsl.svn-base
+.	.	.	.	.	.	mirror-vertex.glsl.svn-base
+.	.	.	.	.	.	oldschool.xml.svn-base
+.	.	.	.	.	.	pp-fragment.glsl.svn-base
+.	.	.	.	.	.	pp-vertex.glsl.svn-base
+.	.	.	.	.	.	trianglemesh.xml.svn-base
+.	.	.	.	.	tmp/
+.	.	.	.	.	.	prop-base/
+.	.	.	.	.	.	props/
+.	.	.	.	.	.	text-base/
+.	.	.	.	.	.	wcprops/
+.	.	.	.	.	wcprops/
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	cube.xml
+.	.	.	.	foo.txt
+.	.	.	.	mirror-fragment.glsl
+.	.	.	.	mirror-vertex.glsl
+.	.	.	.	oldschool.xml
+.	.	.	.	pp-fragment.glsl
+.	.	.	.	pp-vertex.glsl
+.	.	.	.	trianglemesh.xml
+.	.	.	shaders/
+.	.	.	.	.svn/
+.	.	.	.	.	prop-base/
+.	.	.	.	.	props/
+.	.	.	.	.	text-base/
+.	.	.	.	.	.	debug.glsl.svn-base
+.	.	.	.	.	.	diffuse.glsl.svn-base
+.	.	.	.	.	.	info.txt.svn-base
+.	.	.	.	.	.	sphericalAmbient.glsl.svn-base
+.	.	.	.	.	tmp/
+.	.	.	.	.	.	prop-base/
+.	.	.	.	.	.	props/
+.	.	.	.	.	.	text-base/
+.	.	.	.	.	.	wcprops/
+.	.	.	.	.	wcprops/
+.	.	.	.	.	empty-file
+.	.	.	.	.	entries
+.	.	.	.	.	format
+.	.	.	.	.	README.txt
+.	.	.	.	debug.glsl
+.	.	.	.	diffuse.glsl
+.	.	.	.	info.txt
+.	.	.	.	sphericalAmbient.glsl
+.	.	.	ambientsphere.v3dmat
+.	.	.	depth.frag
+.	.	.	depth.v3dmat
+.	.	.	depth.vert
+.	.	.	mirror.frag
+.	.	.	mirror.v3dmat
+.	.	.	mirror.vert
+.	.	.	outline.frag
+.	.	.	outline.vert
+.	.	.	outline_pp.v3dmat
+.	.	.	phong.frag
+.	.	.	phong.v3dmat
+.	.	.	phong.vert
+.	.	.	red.v3dmat
+.	.	.	sepia.frag
+.	.	.	sepia_pp.v3dmat
+.	.	.	simple.vert
+.	.	.	terrain.frag
+.	.	.	terrain.v3dmat
+.	.	.	terrain.vert
+.	.	.	textured.v3dmat
+.	.	.	toon.v3dmat
+.	.	.	water_pp.frag
+.	.	.	water_pp.v3dmat
+.	.	.	white-lit.v3dmat
+.	.	.	white-unlit.v3dmat
+.	.	models/
+.	.	.	foo.xml
+.	.	.	sheijk.xml
+.	.	.project
+.	.	Car3.v3dscene
+.	.	lights.v3dscene
+.	.	modeltest.v3dscene
+.	.	NewScene.v3dscene
+.	.	Physic.v3dscene
+.	.	postproc.fx
+.	.	postproc.v3dscene
+.	.	racer.v3dscene
+.	.	redorbit.fx
+.	.	scratch.txt
+.	.	simple.v3dscene
+.	.	temp.txt
+.	.	textest.v3dscene
+.	.	xyz.fx
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+ Entity "racer"
+.	Part v3d::entity::VUpdateManagerPart
+.	Part v3d::scene::VDefaultRenderStepPart
+.	Part v3d::scene::VNaiveLightManager
+.	Part v3d::scene::VNaiveSceneManagerPart
+.	Part v3d::scene::VPostProcesssingRenderStepPart
+.	Part v3d::scene::VSimpleShooting
+.	Part v3d::utils::VInputPart
+ .	Entity "ambient"
+ .	.	Entity "skybox"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VSkyboxPart
+ .	.	Entity "dummy"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VSphereMeshPart
+ .	.	Entity "editorCam"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::utils::VCameraPart
+.	.	.	Part v3d::utils::VTrackballPart
+ .	.	Entity "debug"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VOrientationGridPart
+!.	.	Entity "sun"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VArrowMeshPart
+.	.	.	Part v3d::scene::VDefaultRenderStepPart (misssing requirements)
+.	.	.	Part v3d::scene::VLightPart
+.	.	.	Part v3d::scene::VPostProcesssingRenderStepPart (misssing requirements)
+ .	.	Entity "dummy2"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VSphereMeshPart
+ .	.	Entity "model"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VModelPart
+ .	Entity "world"
+ .	.	Entity "terrain"
+.	.	.	Part v3d::entity::VRigidBodyPart
+.	.	.	Part v3d::scene::VTerrainPart
+ .	.	Entity "playerCar"
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Demonstrating simple case
+
+
+VDerivedPart::SayHello
+
+
+
+Scene is now active
+
+
+Entity
+	Part
+	Entity
+		Part
+		Entity
+			Part
+	Entity
+		Part
+	Entity
+		Part
+		Part
+Hierarchical parts:
+	hierarchical part (2 childs)
+		hierarchical part (1 childs)
+			hierarchical part (0 childs)
+		hierarchical part (0 childs)
+
+
+
+Scene is now inactive
+
+
+Return value of main service: 0
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+Window manager creating window:
+Creating window: "RacerDemo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+Creating part of type v3d::scene::VNaiveSceneManagerPart
+	 type=v3d::scene::VNaiveSceneManagerPart
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0.2,0.4,0.8,1)
+Creating part of type v3d::entity::VUpdateManagerPart
+	 type=v3d::entity::VUpdateManagerPart
+Creating part of type v3d::scene::VNaiveLightManager
+	 type=v3d::scene::VNaiveLightManager
+Creating part of type v3d::utils::VInputPart
+	 type=v3d::utils::VInputPart
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/water_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSkyboxPart
+	 type=v3d::scene::VSkyboxPart
+	 texture-dir=/data/cubemap/
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-31,8,-15)
+VRigidBodyPart: set position to (-31,8,-15)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_groundColor=(0,0,0,1)
+	 mat_skyColor=(1,1,1,1)
+	 material=/edit/mat/ambientsphere.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\graphics\opengl\glsl\vglslshader.cpp:35] unimplementedShaderParamDataType	 radius=10
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(70,100,255)
+VRigidBodyPart: set position to (70,100,255)
+	 updir=(-0.0849993,0.965858,-0.244643)
+	 viewdir=(-0.36922,-0.258584,-0.892622)
+Creating part of type v3d::utils::VCameraPart
+	 type=v3d::utils::VCameraPart
+Creating part of type v3d::utils::VTrackballPart
+	 type=v3d::utils::VTrackballPart
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-236,74,-135)
+VRigidBodyPart: set position to (-236,74,-135)
+	 updir=(0.818095,-0.0275671,0.574389)
+	 viewdir=(-0.00105138,-0.998894,-0.0464492)
+Creating part of type v3d::scene::VOrientationGridPart
+	 type=v3d::scene::VOrientationGridPart
+	 material=/system/graphics/defaultMaterial
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-18.5939,90,-98.2561)
+VRigidBodyPart: set position to (-18.5939,90,-98.2561)
+	 updir=(0,1,0)
+	 viewdir=(-0.982561,0,0.185939)
+Creating part of type v3d::scene::VLightPart
+	 type=v3d::scene::VLightPart
+	 ambientColor=(0.1,0.1,0.1,1)
+	 diffuseColor=(0.8,0.4,0,1)
+	 position=(-18.5939,90,-98.2561)
+	 specularColor=(1,0,0,1)
+	 w=1
+Creating part of type v3d::scene::VArrowMeshPart
+	 type=v3d::scene::VArrowMeshPart
+	 color=(1,0,0,1)
+	 material=/system/graphics/defaultMaterial
+	 size=1
+Creating part of type v3d::scene::VDefaultRenderStepPart
+	 type=v3d::scene::VDefaultRenderStepPart
+	 clearColor=(0,0,0,0)
+Creating part of type v3d::scene::VPostProcesssingRenderStepPart
+	 type=v3d::scene::VPostProcesssingRenderStepPart
+	 material=/edit/mat/sepia_pp.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-57,14,10)
+VRigidBodyPart: set position to (-57,14,10)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VSphereMeshPart
+	 type=v3d::scene::VSphereMeshPart
+	 mat_mud=
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+Creating GLSL Shader from thread 0
+	 radius=7.5
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(54,42,4)
+VRigidBodyPart: set position to (54,42,4)
+	 updir=(0.269903,0.862259,0.428511)
+	 viewdir=(0.882748,-0.0438562,-0.467758)
+Creating part of type v3d::scene::VModelPart
+	 type=v3d::scene::VModelPart
+	 material=
+	 model=/edit/models/foo.xml
+Adding /edit/models/foo.xml
+Creating part of type v3d::entity::VRigidBodyPart
+	 type=v3d::entity::VRigidBodyPart
+	 pos=(-41,-4,-2)
+VRigidBodyPart: set position to (-41,-4,-2)
+	 updir=(0,1,0)
+	 viewdir=(0,0,-1)
+Creating part of type v3d::scene::VTerrainPart
+	 type=v3d::scene::VTerrainPart
+	 mat_mud=/data/tex/mud1.tga
+	 mat_mudColor=(0,0,0,0)
+	 material=/edit/mat/terrain.v3dmat
+---------------------------
+Query input manager...
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+Creating FBO context from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+---------------------------
+Query input manager...
+---------------------------
+Query input manager...
+10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
+Unregistering window...
+Return value of main service: 0

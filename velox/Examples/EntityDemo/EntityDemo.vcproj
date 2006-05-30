@@ -1,116 +1,183 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="8,00"
 	Name="EntityDemo"
 	ProjectGUID="{2DADAD67-04E0-47C5-B84B-8E9DE2BE6843}"
-	Keyword="Win32Proj">
+	RootNamespace="EntityDemo"
+	Keyword="Win32Proj"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Local/Build8/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build8/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="1"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
-				MinimalRebuild="TRUE"
+				PreprocessorDefinitions="_HAS_ITERATOR_DEBUGGING=0;WIN32;_DEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS;_HAS_ITERATOR_DEBUGGING=0"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				RuntimeTypeInfo="TRUE"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/EntityDemo.exe"
 				LinkIncremental="2"
-				GenerateDebugInformation="TRUE"
+				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
+				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/EntityDemo.pdb"
 				SubSystem="1"
 				ImportLibrary="$(OutDir)/GraphicsDemo.lib"
-				TargetMachine="1"/>
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCAppVerifierTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCWebDeploymentTool"
+			/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Local/Build8/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build8/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
-			CharacterSet="2">
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
 				RuntimeLibrary="0"
-				RuntimeTypeInfo="TRUE"
+				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="3"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/EntityDemo.exe"
 				LinkIncremental="1"
-				GenerateDebugInformation="TRUE"
+				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
+				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				ImportLibrary="$(OutDir)/GraphicsDemo.lib"
-				TargetMachine="1"/>
+				TargetMachine="1"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCManifestTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
+				Name="VCAppVerifierTool"
+			/>
 			<Tool
-				Name="VCXMLDataGeneratorTool"/>
+				Name="VCWebDeploymentTool"
+			/>
 			<Tool
-				Name="VCWebDeploymentTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -118,49 +185,63 @@
 	<Files>
 		<Filter
 			Name="Implementation"
-			Filter="cpp">
+			Filter="cpp"
+			>
 			<File
-				RelativePath=".\EntityDemo.cpp">
+				RelativePath=".\EntityDemo.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\VBasePart.h">
+				RelativePath=".\VBasePart.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VBasePartUser.h">
+				RelativePath=".\VBasePartUser.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VDataPart.h">
+				RelativePath=".\VDataPart.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VDerivedPart.h">
+				RelativePath=".\VDerivedPart.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VHierarchyPart.h">
+				RelativePath=".\VHierarchyPart.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VInvalidPart.h">
+				RelativePath=".\VInvalidPart.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VManagerPart.cpp">
+				RelativePath=".\VManagerPart.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\VManagerPart.h">
+				RelativePath=".\VManagerPart.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VReaderPart.h">
+				RelativePath=".\VReaderPart.h"
+				>
 			</File>
 			<File
-				RelativePath=".\VSetterPart.h">
+				RelativePath=".\VSetterPart.h"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="ModuleImpl"
-			Filter="">
+			>
 			<File
-				RelativePath="..\..\Source\Kernel\main.cpp">
+				RelativePath="..\..\Source\Kernel\main.cpp"
+				>
 			</File>
 			<File
-				RelativePath="..\..\Source\Module\VeloxModule.cpp">
+				RelativePath="..\..\Source\Module\VeloxModule.cpp"
+				>
 			</File>
 		</Filter>
 	</Files>

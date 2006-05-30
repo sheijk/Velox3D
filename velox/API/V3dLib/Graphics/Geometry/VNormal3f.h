@@ -43,6 +43,11 @@ struct VNormal3f
 		v[1] = in_Y;
 		v[2] = in_Z;
 	}
+
+	VVector3f AsVector() const
+	{
+		return VVector3f(x, y, z);
+	}
 };
 
 //-----------------------------------------------------------------------------

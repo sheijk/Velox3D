@@ -219,12 +219,12 @@ void VVertexBuffer::SetIndex(vuint in_nIndex, vuint in_nIndexNum)
 vuint VVertexBuffer::GetVertexCount(const VVertexFormat& in_Format)
 {
 	vuint size = in_Format.GetCoordinateFormat().GetCount();
-	size = max(size, in_Format.GetColorFormat().GetCount());
-	size = max(size, in_Format.GetNormalFormat().GetCount());
+	size = std::max(size, in_Format.GetColorFormat().GetCount());
+	size = std::max(size, in_Format.GetNormalFormat().GetCount());
 
 	for(vuint texCoordNum = 0; texCoordNum < in_Format.GetTexCoordCount(); ++texCoordNum)
 	{
-		size = max(size, in_Format.GetTexCoordFormat(texCoordNum).GetCount());
+		size = std::max(size, in_Format.GetTexCoordFormat(texCoordNum).GetCount());
 	}
 
 	return size;

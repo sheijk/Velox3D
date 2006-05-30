@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="../../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Local/Build8/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build8/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="2"
@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;_HAS_ITERATOR_DEBUGGING=0"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib cg.lib cgGL.lib lib3ds-120d.lib oded.lib glew32.lib glfw.lib opengl32.lib glu32.lib CoreLib.lib VeloxLib.lib KernelLib.lib"
+				AdditionalDependencies="DevIL.lib ilu.lib dinput8.lib dxguid.lib cg.lib cgGL.lib lib3ds-120d.lib oded.lib glew32.lib glfw.lib opengl32.lib glu32.lib libboost_filesystem-vc80-mt-gd-1_33_1.lib"
 				OutputFile="$(OutDir)/ScriptingDLL.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib;$(OutDir)"
+				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
 				ModuleDefinitionFile="DLLExports.def"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/ScriptingDLL.pdb"
@@ -103,8 +103,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="../../Local/Build/$(ConfigurationName)"
-			IntermediateDirectory="../../Local/Build/intermediate/$(ProjectName)/$(ConfigurationName)"
+			OutputDirectory="../../Local/Build8/$(ConfigurationName)"
+			IntermediateDirectory="../../Local/Build8/intermediate/$(ProjectName)/$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="2"
@@ -148,7 +148,7 @@
 				Name="VCLinkerTool"
 				OutputFile="$(OutDir)/ScriptingDLL.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="../../Local/ExternalLibs/Lib"
+				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"

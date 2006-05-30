@@ -31,9 +31,9 @@ void main(void) {
 		specular = pow(specular, 32) * 0.4;
 	}
 	
-	vec4 surfaceColor = 
-		baseColor * 
-		texture2D(mud, texCoord);
+	vec4 surfaceColor =
+		0.9 * baseColor +
+		0.1 * texture2D(mud, texCoord);
 		
 	vec4 light = 
 		gl_LightSource[0].ambient

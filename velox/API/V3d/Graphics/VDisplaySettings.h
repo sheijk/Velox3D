@@ -1,7 +1,10 @@
 #ifndef V3D_VDISPLAYSETTINGS_H
 #define V3D_VDISPLAYSETTINGS_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VTypes.h>
+#include <V3d/Core/VTypes.h>
+
+#include <V3d/Core/VTypeInfo.h>
+
 #include <string>
 //-----------------------------------------------------------------------------
 namespace v3d {

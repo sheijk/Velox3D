@@ -59,7 +59,7 @@ private:
 	void SetParameters();
 	void SetAxisAndAnchor();
 
-	VJointHinge2(const &VJointHinge2);
+	VJointHinge2(const VJointHinge2&);
 	VJointHinge2& operator=(const VJointHinge2&);
 
 	VBody* m_pBody1;

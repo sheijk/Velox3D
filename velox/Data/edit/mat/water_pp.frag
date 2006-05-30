@@ -18,8 +18,8 @@ void disturb() {
 	dist *= .3;
 	vec4 color = mix(
 			texture2D(image, pos + dist * .01),
-			vec4(0, 0, .5, 1),
-			0.1);
+			vec4(0.0, 0, 1.0, 1),
+			0.0);
 	
 	gl_FragColor = color;
 }

@@ -13,7 +13,7 @@
 		</entity>
 		<entity name="dummy">
 			<part type="v3d::entity::VRigidBodyPart" pos="(-31,8,-15)" updir="(0,1,0)" viewdir="(0,0,-1)"/>
-			<part type="v3d::scene::VSphereMeshPart" mat_groundColor="(0.2,0.2,0.2,1)" mat_skyColor="(0,0,0.3,1)" material="/edit/mat/ambientsphere.v3dmat" radius="10"/>
+			<part type="v3d::scene::VSphereMeshPart" mat_groundColor="(0,0,0,1)" mat_skyColor="(1,1,1,1)" material="/edit/mat/ambientsphere.v3dmat" radius="10"/>
 		</entity>
 		<entity name="editorCam">
 			<part type="v3d::entity::VRigidBodyPart" pos="(70,100,255)" updir="(-0.0849993,0.965858,-0.244643)" viewdir="(-0.36922,-0.258584,-0.892622)"/>
@@ -37,6 +37,10 @@
 		<entity name="dummy2">
 			<part type="v3d::entity::VRigidBodyPart" pos="(-57,14,10)" updir="(0,1,0)" viewdir="(0,0,-1)"/>
 			<part type="v3d::scene::VSphereMeshPart" mat_mud="" mat_mudColor="(0,0,0,0)" material="/edit/mat/terrain.v3dmat" radius="7.5"/>
+		</entity>
+		<entity name="model">
+			<part type="v3d::entity::VRigidBodyPart" pos="(54,42,4)" updir="(0.269903,0.862259,0.428511)" viewdir="(0.882748,-0.0438562,-0.467758)"/>
+			<part type="v3d::scene::VModelPart" material="" model="/edit/models/foo.xml"/>
 		</entity>
 	</entity>
 	<entity name="world">

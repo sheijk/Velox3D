@@ -30,6 +30,13 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+29.05.06
+- Umstieg auf MSVC 2005
+
+24.05.06
+- C4d -> XML Exporter
+- Part in aktiviertes Entity einfuegen -> Part wird auch connected + aktiviert
+
 17.05.06
 - VFS aktualisiert sich (neue Dateien werden erkannt, geloeschte nicht)
 - Editor: VFSView hat Refresh Action zum aktualisieren der Anzeige

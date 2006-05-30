@@ -1,26 +1,26 @@
-#ifndef V3D_VMESHRESOURCETYPE_H
-#define V3D_VMESHRESOURCETYPE_H
+#ifndef V3D_VXMLMODELRESOURCETYPE_2006_05_24_H
+#define V3D_VXMLMODELRESOURCETYPE_2006_05_24_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <V3d/Resource/Types/VFileName.h>
-#include <V3d/Resource.h>
+#include <V3d/Core/VCoreLib.h>
+
+#include <V3d/Resource/IVResourceType.h>
 //-----------------------------------------------------------------------------
-namespace v3d{
-namespace graphics {
+namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
 /**
-* Create a mesh from a mesh description
-*
-* @author: ins
-*/
-class VMeshResourceType : public resource::IVResourceType
+ * Creates a VModel from an .xml file which can be loaded with VModelLoader
+ *
+ * @see VModelLoader
+ *
+ * @author sheijk
+ */
+class VXMLModelResourceType : public resource::IVResourceType
 {
-	std::vector<VTypeInfo> m_ManagedTypes;
 public:
-	VMeshResourceType();
-	virtual ~VMeshResourceType();
+	VXMLModelResourceType();
+	virtual ~VXMLModelResourceType();
 
 	virtual VRangeIterator<VTypeInfo> CreatedTypes();
 
@@ -33,6 +33,6 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::image
+}} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
-#endif // V3D_VMESHRESOURCETYPE_H
+#endif // V3D_VXMLMODELRESOURCETYPE_2006_05_24_H

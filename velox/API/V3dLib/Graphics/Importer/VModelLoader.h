@@ -6,6 +6,8 @@
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics.h>
 
+#include <V3d/Core/SmartPtr/VAutoPtr.h>
+
 #include <string>
 #include <map>
 //-----------------------------------------------------------------------------
@@ -23,6 +25,8 @@ V3D_DECLARE_EXCEPTION(VModelLoadingException, VException);
 
 /**
  * Loads a mesh from an xml file
+ *
+ * @author sheijk
  */
 class VModelLoader
 {
@@ -35,9 +39,8 @@ public:
 		resource::VResourceId in_pResource);
 
 private:
-	void GetFormat(VVertexFormat& out_Format, xml::IVXMLElement* in_pMeshNode);
 	void CheckRootNode(xml::IVXMLElement* in_pRootNode);
-	void CreateMeshNode(
+	graphics::VModelMesh CreateMeshNode(
 		xml::IVXMLElement* in_pMeshNode, 
 		resource::VResourceId in_pResource);
 

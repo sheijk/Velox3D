@@ -131,8 +131,8 @@ void VModelPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMe
 		//	++meshNum;
 		//}
 
-		in_pAnswer->AddProperty("mesh", m_strMeshRes);
-		in_pAnswer->AddProperty("material", m_strMatRes);
+		//in_pAnswer->AddProperty("mesh", m_strMeshRes);
+		in_pAnswer->AddProperty("material", "");
 		in_pAnswer->AddProperty("model", m_strModel);
 	}
 	else if( request == "update" )
@@ -144,23 +144,28 @@ void VModelPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMe
 		{
 			m_Meshes.clear();
 
-			if( name == "model" ) {
+			if( name == "model" ) 
+			{
 				m_strModel = value;
 				
 				vout << "Adding " << m_strModel << vendl;
 				Add(*resource::GetResourceData<graphics::VModel>(m_strModel.c_str()));
 			}
-			else {
-				if( name == "mesh" ) {
-					m_strMeshRes = value;
-				}
-				else if( name == "material" ) {
-					m_strMatRes = value;
-				}
-				
-				vout << "Adding " << m_strMeshRes << ", " << m_strMatRes << vendl;
-				AddMesh(m_strMeshRes.c_str(), m_strMatRes.c_str());
+			else if( name == "set-material" )
+			{
+				ChangeMaterialForAllMeshes(value);
 			}
+			//else {
+			//	if( name == "mesh" ) {
+			//		m_strMeshRes = value;
+			//	}
+			//	else if( name == "material" ) {
+			//		m_strMatRes = value;
+			//	}
+			//	
+			//	vout << "Adding " << m_strMeshRes << ", " << m_strMatRes << vendl;
+			//	AddMesh(m_strMeshRes.c_str(), m_strMatRes.c_str());
+			//}
 		}
 		catch(VException& e)
 		{
@@ -175,6 +180,21 @@ void VModelPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMe
 //
 //		AddModelMesh(mesh.c_str(), material.c_str());
 //	}
+}
+
+void VModelPart::ChangeMaterialForAllMeshes(const std::string& in_strResourceName)
+{
+	using graphics::IVMaterial;
+
+	VResourceDataPtr<const IVMaterial> hMaterial =
+		GetResourceData<IVMaterial>(in_strResourceName.c_str());
+
+	for(MeshList::iterator part = m_Meshes.begin(); part != m_Meshes.end(); ++part)
+	{
+		VSharedPtr<MeshPart> pMeshPart = *part;
+
+		pMeshPart->m_hMaterial = hMaterial;
+	}
 }
 
 const math::VRBTransform& VModelPart::GetModelTransform() const

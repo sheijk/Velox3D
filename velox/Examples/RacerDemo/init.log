@@ -30,3 +30,157 @@ Service Filename: ServiceDLL.dll
 Service Name: wx
 Service Description: The
 Service Filename: WxServiceDLL.dll
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Service Name: wx
+Service Description: The wxWidgets services
+Service Filename: WxServiceDLL.dll
+
+
+----------------------------------------
+Exception while processing "init.xml":
+Message: "could not load DLL file <ServiceDLL.dll>"
+File:    "g:\dev\v3d\svn\trunk\velox\source\kernel\vserviceproxy.cpp"
+Line:    "46"
+XErr:    "No extended error string avaible
+"
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Service Name: wx
+Service Description: The wxWidgets services
+Service Filename: WxServiceDLL.dll
+
+
+----------------------------------------
+Exception while processing "init.xml":
+Message: "could not load DLL file <ServiceDLL.dll>"
+File:    "g:\dev\v3d\svn\trunk\velox\source\kernel\vserviceproxy.cpp"
+Line:    "46"
+XErr:    "No extended error string avaible
+"
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Service Name: wx
+Service Description: The wxWidgets services
+Service Filename: WxServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Examples/RacerDemo"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+
+
+----------------------------------------
+Exception while processing "init.xml":
+Message: "could not load DLL file <WxServiceDLL.dll>"
+File:    "g:\dev\v3d\svn\trunk\velox\source\kernel\vserviceproxy.cpp"
+Line:    "46"
+XErr:    "No extended error string avaible
+"
+
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Service Name: wx
+Service Description: The wxWidgets services
+Service Filename: WxServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Examples/RacerDemo"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+
+
+----------------------------------------
+Exception while processing "init.xml":
+Message: "could not load DLL file <WxServiceDLL.dll>"
+File:    "g:\dev\v3d\svn\trunk\velox\source\kernel\vserviceproxy.cpp"
+Line:    "46"
+XErr:    "No extended error string avaible
+"
+

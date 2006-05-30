@@ -13,6 +13,11 @@ namespace v3d { namespace graphics {
 using namespace v3d; // anti auto indenting
 
 /**
+ * Executes a mesh generator in the same resource to create a mesh
+ *
+ * @see IVMeshGenerator
+ *
+ * @author sheijk
  */
 class VMeshGeneratorResType : public resource::IVResourceType
 {

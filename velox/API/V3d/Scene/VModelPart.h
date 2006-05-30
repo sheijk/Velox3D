@@ -49,6 +49,7 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
+	void ChangeMaterialForAllMeshes(const std::string& in_strResourceName);
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
 
 	struct MeshPart : public entity::VUnconnectedPartAdapter<IVShapePart>

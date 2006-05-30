@@ -297,6 +297,7 @@ public class SceneEditor extends VeloxEditorBase {
 		// resources) are disposed. this happens before this method is called
 		// thus causing crashes from time to time. find a notification/.. which
 		// will be called before the window is closed, and put this call there
+		//TODO: seems to be fixed
 		renderLayer.windowClosed();
 
 		super.dispose();

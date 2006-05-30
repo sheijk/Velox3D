@@ -158,6 +158,18 @@ VEntity::~VEntity()
 	{
 		part->second.Release();
 	}
+
+ 	m_Parts.clear();
+
+	for(EntityContainer::iterator child = m_Entities.begin();
+		child != m_Entities.end();
+		++child)
+	{
+		child->Release();
+	}
+
+	m_Entities.clear();
+
 	
 //	--g_nEntityCount;
 //	vout << g_nEntityCount << " entities remaining" << vendl;

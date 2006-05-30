@@ -30,6 +30,7 @@
 #include "Resource/Types/VOffscreenDeviceResType.h"
 #include "Resource/Types/VPBufferTextureResType.h"
 #include "Resource/Types/VTextFileResType.h"
+#include "Resource/Types/VXMLModelResourceType.h"
 
 #include "ImageService/VImageFactory.h"
 #include "ImageService/VDevILLoader.h"
@@ -159,6 +160,7 @@ void VVeloxModules::Initialize()
 		VSharedPtr<IVResourceType>(new VGLVertexStreamResType()));
 	g_pResourceManager->RegisterResourceType(
 		VSharedPtr<IVResourceType>(new VFileNameResType()));
+	g_pResourceManager->RegisterResourceType(SharedPtr(new VXMLModelResourceType()));
 
 	g_pResourceManager->RegisterResourceType(
 		VSharedPtr<IVResourceType>(new VOffscreenDeviceResType()));

@@ -103,9 +103,9 @@ void SetTexCoord(
 	memcpy(io_Buffer.GetDataAddress()+offset, &in_TexCoord, sizeof(in_TexCoord));
 }
 
-VVertex3f ReadCoordinate(IVXMLElement* in_pElement)
+VVector3f ReadCoordinate(IVXMLElement* in_pElement)
 {
-	return VVertex3f(
+	return VVector3f(
 		in_pElement->GetAttributeValue<vfloat32>("x"),
 		in_pElement->GetAttributeValue<vfloat32>("y"),
 		in_pElement->GetAttributeValue<vfloat32>("z")
@@ -147,6 +147,16 @@ VTexCoord2f ReadTexCoord(IVXMLElement* in_pElement, vuint in_nTexCoordNum)
 	return VTexCoord2f(u, v);
 }
 
+/** return the direction of the plane defined by the three vertices
+ (direction = "unnormalized normal" */
+VVector3f CalcNormalDir(
+	const VVector3f& vert1, 
+	const VVector3f& vert2, 
+	const VVector3f& vert3)
+{
+	return Cross(vert3 - vert2, vert1 - vert2);
+}
+
 void VModelLoader::CheckRootNode(IVXMLElement* in_pRootNode)
 {
 	if( in_pRootNode->GetName() != VString("model") )
@@ -180,6 +190,8 @@ void VModelLoader::LoadMesh(
 	
 	//TODO: check version
 
+	VAutoPtr<VModel> pModel(new VModel());
+
 	// for each mesh node
 	for(IVXMLElement::NodeIter node = pRootNode->ChildBegin();
 		node != pRootNode->ChildEnd();
@@ -189,10 +201,18 @@ void VModelLoader::LoadMesh(
 
 		if( pMeshNode != 0 && pMeshNode->GetName() == VString("mesh") )
 		{
-			// create mesh for the node
-			CreateMeshNode(pMeshNode, in_pResource);
+			std::string meshName;
+			if( pMeshNode->GetAttribute("name") != NULL )
+				meshName = pMeshNode->GetAttributeValue<std::string>("name");
+
+			VResourceId res = in_pResource->AddRandomNamedSubResource(meshName.c_str());
+
+			VModelMesh modelMesh = CreateMeshNode(pMeshNode, res);
+			pModel->Add(modelMesh);
 		}
 	}
+
+	in_pResource->AddData(pModel.DropOwnership());
 }
 
 vuint CountNodesWithName(
@@ -217,7 +237,7 @@ vuint CountNodesWithName(
 	return nodeCount;
 }
 
-void VModelLoader::CreateMeshNode(
+VModelMesh VModelLoader::CreateMeshNode(
 	xml::IVXMLElement* in_pMeshNode, 
 	resource::VResourceId in_pResource)
 {
@@ -252,7 +272,7 @@ void VModelLoader::CreateMeshNode(
 	if( bColors )
 		vertexSize += colorSize;
 
-	if( bNormals )
+	//if( bNormals )
 		vertexSize += normalSize;
 
 	vertexSize += nTexCoordCount * texCoordSize;
@@ -275,12 +295,12 @@ void VModelLoader::CreateMeshNode(
 		dataEnd += colorSize * vertexCount;
 	}
 
-	if( bNormals )
-	{
+	//if( bNormals )
+	//{
 		format.SetNormalFormat(
 			VDataFormat(dataEnd, vertexCount, normalSize));
 		dataEnd += normalSize * vertexCount;
-	}
+	//}
 
 	format.SetTexCoordCount(nTexCoordCount);
 	for(vuint i = 0; i < nTexCoordCount; ++i)
@@ -299,6 +319,10 @@ void VModelLoader::CreateMeshNode(
 
 	IVXMLElement::NodeIter meshChildNode = in_pMeshNode->ChildBegin();
 
+	VVector3f meshPos;
+	if( in_pMeshNode->GetAttribute("pos") != NULL )
+		meshPos = in_pMeshNode->GetAttributeValue<VVector3f>("pos");
+
 	// read all vertices
 	vuint nVertexId = 0;
 	vbool bReadingVertices = true;
@@ -314,16 +338,14 @@ void VModelLoader::CreateMeshNode(
 			// get vertex data and write it to the buffer
 			if( bCoordinates )
 			{
-				VVertex3f v = ReadCoordinate(pVertexNode);
-				//SetCoordinate(vertices, nVertexId, format, v);
+				VVector3f v = ReadCoordinate(pVertexNode);
+				v += meshPos;
 				vertices->SetCoordinate(v, nVertexId);
 			}
 
 			if( bColors )
 			{
 				VColor4f color = ReadColor(pVertexNode);
-				//VColor4f color(1, 0, 0, 1);
-				//SetColor(vertices, nVertexId, format, color);
 				vertices->SetColor(color, nVertexId);
 			}
 
@@ -336,7 +358,6 @@ void VModelLoader::CreateMeshNode(
 			for(vuint i = 0; i < nTexCoordCount; ++i)
 			{
 				VTexCoord2f texCoord = ReadTexCoord(pVertexNode, i);
-				//SetTexCoord(i, vertices, nVertexId, format, texCoord);
 				vertices->SetTexCoord(0, nVertexId, texCoord);
 			}
 
@@ -350,7 +371,6 @@ void VModelLoader::CreateMeshNode(
 	}
 
 	// add vertex buffer and mesh description to resource
-	//in_pResource->AddData(new VVertexBuffer(vertices, format));
 	in_pResource->AddData(vertices);
 	VMeshDescription* pMeshDescription = 
 		new VMeshDescription(format);
@@ -365,21 +385,32 @@ void VModelLoader::CreateMeshNode(
 		pMeshDescription->SetCoordinateResource(in_pResource->GetQualifiedName());
 	if( bColors )
 		pMeshDescription->SetColorResource(in_pResource->GetQualifiedName());
-	if( bNormals )
+	//if( bNormals )
 		pMeshDescription->SetNormalResource(in_pResource->GetQualifiedName());
 	for(vuint i = 0; i < nTexCoordCount; ++i)
 		pMeshDescription->SetTexCoordResource(i, in_pResource->GetQualifiedName());
 
 	// if indices are present, read them now
-	if( HasAttributeWithValue<std::string>(in_pMeshNode, "indices", "yes") )
+	const vbool bIndices = HasAttributeWithValue<std::string>(in_pMeshNode, "indices", "yes");
+
+	vuint indexCount = 0;
+
+	if( bIndices )
 	{
-		const vuint indexCount = CountNodesWithName(
+		indexCount = CountNodesWithName(
 			in_pMeshNode->ChildBegin(), in_pMeshNode->ChildEnd(), "index");
+	}
+	else
+	{
+		indexCount = vertexCount;
+	}
 
-		const vuint indexBufferSize = indexCount * sizeof(vuint);
+	const vuint indexBufferSize = indexCount * sizeof(vuint);
 
-		VBuffer<vuint> indices(new vuint[indexBufferSize], indexBufferSize);
+	VBuffer<vuint> indices(new vuint[indexBufferSize], indexBufferSize);
 
+	if( bIndices )
+	{
 		vuint indexNum = 0;
 		for( ; meshChildNode != in_pMeshNode->ChildEnd(); ++meshChildNode)
 		{
@@ -416,10 +447,61 @@ void VModelLoader::CreateMeshNode(
 		pMeshDescription->SetIndexResource(indexRes->GetQualifiedName());
         indexRes->AddData(new VVertexBuffer(indices, indexFormat));
 	}
+	else
+	{
+		for(vuint indexNum = 0; indexNum < indexCount; ++indexNum)
+		{
+			indices[indexNum] = indexNum;
+		}
+	}
+
+	// generate normals if they are needed
+	if( bNormals == false )
+	{
+		for(vuint vertexNum = 0; vertexNum < vertexCount; ++vertexNum)
+		{
+			vertices->SetNormal(VNormal3f(0., 0., 0.), vertexNum);
+		}
+
+		for(int indexNum = 0; indexNum < indexCount - 2; indexNum += 3)
+		{
+			vuint faceIndices[3] = 
+			{ 
+				indices[indexNum],
+				indices[indexNum+1],
+				indices[indexNum+2]
+			};
+
+			VVector3f faceNormal = CalcNormalDir(
+				vertices->GetCoordinate(faceIndices[0]).AsVector(),
+				vertices->GetCoordinate(faceIndices[1]).AsVector(),
+				vertices->GetCoordinate(faceIndices[2]).AsVector());
+
+			for(vuint v = 0; v < 3; ++v)
+			{
+				VNormal3f normal = vertices->GetNormal(faceIndices[v]);
+
+				normal = VNormal3f(normal.AsVector() + faceNormal);
+
+				vertices->SetNormal(normal,	faceIndices[v]);
+			}
+		}
+
+		for(vuint vertexNum = 0; vertexNum < vertexCount; ++vertexNum)
+		{
+			VNormal3f normal = vertices->GetNormal(vertexNum);
+			normal = VNormal3f(Normalized(normal.AsVector()));
+
+			vertices->SetNormal(normal,	vertexNum);
+		}
+	}
 
 	in_pResource->AddData(pMeshDescription);
 
-	//VFloatBuffer v(vertices);
+	return VModelMesh(
+		in_pResource->GetData<IVMesh>(), 
+		resource::GetResourceData<IVMaterial>("/edit/mat/ambientsphere.v3dmat"));
+		//IVDevice::GetDefaultMaterial());
 }
 
 VMeshDescription::GeometryType VModelLoader::GetGeometryType(
@@ -439,12 +521,6 @@ VMeshDescription::GeometryType VModelLoader::GetGeometryType(
 		msg << "': primitive type '" << in_strName << "' unknown";
 		V3D_THROW(VModelLoadingException, msg.str().c_str());
 	}
-}
-
-void VModelLoader::GetFormat(
-	VVertexFormat& out_Format, 
-	xml::IVXMLElement* in_pMeshNode)
-{
 }
 
 //-----------------------------------------------------------------------------
