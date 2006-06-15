@@ -11,7 +11,7 @@ varying vec3 lightDir;
 void main(void) {
 	gl_Position = ftransform();
 	normal = normalize(gl_NormalMatrix * gl_Normal);
-	dir = 0.5 + normal.y/2;
+	dir = 0.5 + normal.y/2.0;
 	lightDir = normalize(gl_LightSource[0].position.xyz - (gl_ModelViewMatrix * gl_Vertex).xyz);
 }
 				</iparam>

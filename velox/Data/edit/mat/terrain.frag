@@ -14,7 +14,7 @@ vec4 normal2Color(vec3 n) {
 
 void main(void) {
 	float diffuse = max(dot(normal, lightDir), 0.0);
-	diffuse = min(1, max(0, diffuse));
+	diffuse = min(1.0, max(0.0, diffuse));
 	
 	normal = normalize(normal);
 	lightDir = normalize(lightDir);
@@ -27,8 +27,8 @@ void main(void) {
 			normal, 
 			half);
 			//gl_LightSource[0].halfVector.xyz); 
-		specular = min(1, max(0, specular));
-		specular = pow(specular, 32) * 0.4;
+		specular = min(1.0, max(0.0, specular));
+		specular = pow(specular, 32.0) * 0.4;
 	}
 	
 	vec4 surfaceColor =

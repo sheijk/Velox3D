@@ -42,13 +42,13 @@ void diff() {
 uniform float v3d_TimeFraction60;
 
 void disturb() {
-	float d = v3d_TimeFraction60 * 3.1415 * 2 * 15;
+	float d = v3d_TimeFraction60 * 3.1415 * 2.0 * 15;
 	vec2 pos = gl_TexCoord[0].st;
-	vec2 dist = vec2(sin(pos.y * 31 + d), sin(pos.x * 31 + d));
+	vec2 dist = vec2(sin(pos.y * 31.0 + d), sin(pos.x * 31.0 + d));
 	dist *= .3;
 	vec4 color = mix(
 			texture2D(image, pos + dist * .01),
-			vec4(0, 0, .5, 1),
+			vec4(0, 0, .5, 1.0),
 			0.1);
 	
 	gl_FragColor = color;
