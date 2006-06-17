@@ -75,11 +75,21 @@ public class Part implements XMLSerializable {
 			final String name = attrib.Get().GetName().AsCString();
 			final String value = attrib.Get().GetValue().ToString();
 			
-			Setting setting = new Setting(this, name, value);
-			updateSetting(setting);
+			if( name.equalsIgnoreCase("tags") ) {
+				String[] tagNames = value.split(" ");
+				for(String tag : tagNames) {
+					if( tag.length() > 0 && !tag.equals(" ") )
+						AttachTag(tag);
+				}
+			}
+			else {
+				Setting setting = new Setting(this, name, value);
+				updateSetting(setting);
+			}
 			
 			attrib.Next();
 		}
+				
 //		VXMLNodeIterator node = xml.ChildBegin();
 //		while( node.HasNext() ) {
 //			IVXMLElement childElement = node.Get().ToElement();
@@ -218,6 +228,16 @@ public class Part implements XMLSerializable {
 			
 			outElement.AddAttribute(s.GetName(), new VStringValue(s.GetValue()));
 		}
+
+		final StringBuffer tagList = new StringBuffer();
+		VTagIterator tagIter = tags();
+		while( tagIter.HasNext() ) {
+			final String tagName = tagIter.Get().GetName();
+			tagList.append(" " + tagName);
+			tagIter.Next();
+		}
+		
+		outElement.AddAttribute("tags", new VStringValue(tagList.toString()));
 	}
 	
 	private static boolean valid(VPartPtr ptr) {
@@ -259,5 +279,17 @@ public class Part implements XMLSerializable {
 
 	public VPartPtr GetPart() {
 		return impl;
+	}
+	
+	public VTagIterator tags() {
+		return impl.Tags();
+	}
+	
+	public void AttachTag(String id) {
+		impl.AttachTag(v3d.GetTagRegistry().GetTagWithName(id));
+	}
+	
+	public void RemoveTag(String id) {
+		impl.RemoveTag(v3d.GetTagRegistry().GetTagWithName(id));
 	}
 }

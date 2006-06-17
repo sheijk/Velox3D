@@ -1,16 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<effect version="1.0">
-	<shaderPath>
-	
-		<!-- renderPass>
-			<state name="vertex-program">
-				<param name="res" value="/data/shaders_/terrain.vert.glsl" />
-			</state>
-			<state name="fragment-program">
-				<param name="res" value="/data/shaders_/terrain.frag.glsl />
-			</state>
-		</renderPass -->
-		
-	</shaderPath>
-</effect>
-
+//	vec2 pos = gl_TexCoord[0].st;	
+//	color = gl_FragColor(image, pos);
+//	for(int i = -stepCount; i < stepCount; ++i) {
+//		color += vec4(.1, 0.0, .0, .0);
+//		color += texture2D(image, pos);
+//	}

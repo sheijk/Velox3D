@@ -44,12 +44,12 @@ public:
 	virtual scene::IVGraphicsPart* GetScene();
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
 protected:
 	VSimpleShooting(entity::VPartDependency::Location in_SceneLocation,
 		const std::string& in_SceneId,
 		entity::VPartDependency::Condition in_SceneCondition);
 	
-
 	entity::VPartConnection<IVGraphicsPart> m_pScene;
 	graphics::IVDevice* m_pDevice;
 	graphics::IVCamera* m_pCamera;

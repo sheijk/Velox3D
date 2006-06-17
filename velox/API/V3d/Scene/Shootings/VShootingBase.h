@@ -55,6 +55,7 @@ protected:
 
 	entity::VPartConnection<IVLightManager> m_pLightManager;
 
+	entity::VPartConnection<VShootingBase> m_pParentShooting;
 private:
 	vbool m_bActive;
 };

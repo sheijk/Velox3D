@@ -22,12 +22,15 @@ VModelPart::VModelPart(const graphics::VModel& in_Model) :
 	m_RigidBodyPart(VPartDependency::Neighbour,	RegisterTo())
 {
 	Add(in_Model);
+
+	m_bIsActive = false;
 }
 
 VModelPart::VModelPart() :
 	m_pParent(VPartDependency::Ancestor, RegisterTo()),
 	m_RigidBodyPart(VPartDependency::Neighbour,	RegisterTo())
 {
+	m_bIsActive = false;
 }
 
 void VModelPart::Add(const graphics::VModel& in_Model)
@@ -86,6 +89,8 @@ void VModelPart::Activate()
 			++part;
 		}
 	}
+
+	m_bIsActive = true;
 }
 
 void VModelPart::Deactivate()
@@ -99,6 +104,8 @@ void VModelPart::Deactivate()
 			++part;
 		}
 	}
+
+	m_bIsActive = false;
 }
 
 //namespace {
@@ -119,19 +126,6 @@ void VModelPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMe
 		if( in_pAnswer == 0 )
 			return;
 
-		//vuint meshNum = 0;
-		//for(MeshList::iterator meshIter = m_Meshes.begin(); 
-		//	meshIter != m_Meshes.end(); 
-		//	++meshIter)
-		//{
-		//	std::stringstream name;
-		//	name << "mesh nr. " << meshNum;
-		//	in_pAnswer->AddProperty(
-
-		//	++meshNum;
-		//}
-
-		//in_pAnswer->AddProperty("mesh", m_strMeshRes);
 		in_pAnswer->AddProperty("material", "");
 		in_pAnswer->AddProperty("model", m_strModel);
 	}
@@ -142,44 +136,32 @@ void VModelPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMe
 
 		try
 		{
-			m_Meshes.clear();
-
 			if( name == "model" ) 
 			{
+				vbool wasActive = m_bIsActive;
+				if( wasActive )
+					Deactivate();
+
+				m_Meshes.clear();
+
 				m_strModel = value;
 				
 				vout << "Adding " << m_strModel << vendl;
 				Add(*resource::GetResourceData<graphics::VModel>(m_strModel.c_str()));
+
+				if( wasActive )
+					Activate();
 			}
 			else if( name == "set-material" )
 			{
 				ChangeMaterialForAllMeshes(value);
 			}
-			//else {
-			//	if( name == "mesh" ) {
-			//		m_strMeshRes = value;
-			//	}
-			//	else if( name == "material" ) {
-			//		m_strMatRes = value;
-			//	}
-			//	
-			//	vout << "Adding " << m_strMeshRes << ", " << m_strMatRes << vendl;
-			//	AddMesh(m_strMeshRes.c_str(), m_strMatRes.c_str());
-			//}
 		}
 		catch(VException& e)
 		{
 			vout << "Failed to create model: " << e.GetErrorString() << vendl;
 		}
 	}
-
-//	if( request == "add" )
-//	{
-//		string mesh = in_Message.Get("mesh").Get<string>();
-//		string material = in_Message.Get("material").Get<string>();
-//
-//		AddModelMesh(mesh.c_str(), material.c_str());
-//	}
 }
 
 void VModelPart::ChangeMaterialForAllMeshes(const std::string& in_strResourceName)

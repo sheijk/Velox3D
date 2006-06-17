@@ -19,7 +19,7 @@ then
 	cp v3d*.sh $1
 	cp v3d*.pl $1
     cp -r  v3dsynch/ $1
-    rm -rf $1/v3dsynch/.svn
+    rm -rdf $1/v3dsynch/.svn
 
 	# generate v3dgetdir.sh script
 	cd ../..

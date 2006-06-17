@@ -15,8 +15,15 @@ using namespace v3d; // anti auto indent
 /**
  * standard c'tor
  */
-VShootingBase::VShootingBase() : m_pLightManager(
-	entity::VPartDependency::Neighbour, entity::VPartDependency::Optional, RegisterTo())
+VShootingBase::VShootingBase() : 
+	m_pLightManager(
+		entity::VPartDependency::Neighbour, 
+		entity::VPartDependency::Optional, 
+		RegisterTo()),
+	m_pParentShooting(
+		entity::VPartDependency::Ancestor,
+		entity::VPartDependency::Optional,
+		RegisterTo())
 {
 	m_bActive = false;
 }
@@ -170,11 +177,19 @@ void VShootingBase::Activate()
 {
 	m_bActive = true;
 	SetupRenderSteps();
+
+	V3D_ASSERT(m_pParentShooting.Get() != this);
+
+	if( m_pParentShooting.IsConnected() )
+		m_pParentShooting->AddPreShooting(this);
 }
 
 void VShootingBase::Deactivate()
 {
 	m_bActive = false;
+
+	if( m_pParentShooting.IsConnected() )
+		m_pParentShooting->RemovePreShooting(this);
 }
 
 vbool VShootingBase::IsActive() const

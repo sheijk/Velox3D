@@ -33,17 +33,21 @@ public class Entity implements XMLSerializable {
 		VXMLNodeIterator node = xml.ChildBegin();
 		while( node.HasNext() ) {
 			IVXMLElement element = node.Get().ToElement();
-			final String elementName = element.GetName().AsCString();
-			
-			// if it's a part create and add part
-			if( elementName.equalsIgnoreCase(NODE_TYPE_ENTITY) ) {
-				Entity child = new Entity(element);
-				Add(child);
-			}
-			// if it's an entity create and add child
-			else if( elementName.equalsIgnoreCase(NODE_TYPE_PART) ) {
-				Part part = new Part(element);
-				Add(part);
+
+			// skip comments + text
+			if( element != null ) {
+				final String elementName = element.GetName().AsCString();
+				
+				// if it's a part create and add part
+				if( elementName.equalsIgnoreCase(NODE_TYPE_ENTITY) ) {
+					Entity child = new Entity(element);
+					Add(child);
+				}
+				// if it's an entity create and add child
+				else if( elementName.equalsIgnoreCase(NODE_TYPE_PART) ) {
+					Part part = new Part(element);
+					Add(part);
+				}
 			}
 			
 			node.Next();

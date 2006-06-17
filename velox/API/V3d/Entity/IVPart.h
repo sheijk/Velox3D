@@ -7,7 +7,9 @@
 #include <V3d/Entity/VPartDependency.h>
 
 #include <V3d/Messaging/VMessage.h>
+#include <V3d/Tags/VTag.h>
 
+#include <vector>
 #include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
@@ -23,8 +25,9 @@ using namespace v3d; // prevent auto indenting
  * and Deactivate. Outside this interval the part has to be unknown to any 
  * other systems because it might be deleted any time without further notice
  *
- * @see v3d::entity::VEntityManager
  * @see v3d::entity::VEntity
+ * @see v3d::entity::VUnconnectedPartAdapter
+ * @see v3d::entity::VPartBaseAdapter
  * 
  * @author sheijk
  */
@@ -95,10 +98,16 @@ public:
 	template<typename T>
 		T* Convert();
 
+	void AttachTag(const tags::VTag& tag);
+	void RemoveTag(const tags::VTag& tag);
+	vbool HasTag(const tags::VTag& tag) const;
+	VRangeIterator<const tags::VTag> Tags() const;
 private:
 	/** Override for parts which will handle messages */
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
+
+	std::vector<const tags::VTag*> m_Tags;
 };
 
 //-----------------------------------------------------------------------------

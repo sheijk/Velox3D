@@ -50,6 +50,8 @@
 #include "Entity/VEntitySerializationService.h"
 //#include "Entity/Parsers/VSceneModelParser.h"
 
+#include <V3d/Tags/VTagRegistry.h>
+
 #include <V3dLib/Utils/VRegisterGuard.h>
 
 //-----------------------------------------------------------------------------
@@ -115,6 +117,8 @@ class VVeloxModules : public v3d::VModuleBase
 
 	VSharedPtr<VEntitySerializationService> g_pEntitySerializer;
 	//VSharedPtr<VSceneModelParser> g_pSceneModelParser;
+
+	VSharedPtr<tags::VTagRegistry> g_pTagRegistry;
 
 public:
 	VVeloxModules()
@@ -213,12 +217,16 @@ void VVeloxModules::Initialize()
 	//g_pSceneModelParser.Assign(new VSceneModelParser());
 	//g_pSceneParser->Register(&*g_pSceneModelParser);
 
+	g_pTagRegistry.Assign(new tags::VTagRegistry());
+
 	utils::VRegisterGuardBase::RegisterAll();
 }
 
 void VVeloxModules::Shutdown()
 {
 	utils::VRegisterGuardBase::UnregisterAll();
+
+	g_pTagRegistry.Release();
 
 	// entity
 	//g_pSceneParser->Unregister(g_pSceneModelParser->GetType());

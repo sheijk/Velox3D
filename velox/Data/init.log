@@ -9065,3 +9065,190 @@ Query input manager...
 10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1 
 Unregistering window...
 Return value of main service: 0
+Parsing configuration of ini file:
+-------------------------------------------------------
+Service Name: velox
+Service Description: The velox services
+Service Filename: ServiceDLL.dll
+Working directory is "g:/dev/v3d/svn/trunk/velox/Data"
+vfsxml: open: Vfs
+vfsxml: open: FileSystem
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: open: Mount
+vfsxml: close: Mount
+vfsxml: comment:  Directory name="system">
+        <Directory name="graphics">
+            <Mount name="mat" type="localfs"
+                source="../../../Source/Graphics/Shaders" rights="rwfd" />
+        </Directory>
+    </Directory 
+vfsxml: comment: Directory name="system">
+		<Directory name="graphics">
+			<Mount name="mat" type="localfs"
+            source="../../../Source/Graphics/Shaders" />
+		<Directory>
+	</Directory
+vfsxml: close: FileSystem
+vfsxml: close: Vfs
+part parser for type <v3d::physics::VBoundingTerrainVolumePart> registered
+part parser for type <v3d::physics::VBoundingSphereVolumePart> registered
+part parser for type <v3d::physics::VBoundingPlaneVolumePart> registered
+part parser for type <v3d::physics::VBoundingMeshVolumePart> registered
+part parser for type <v3d::physics::VBoundingBoxVolumePart> registered
+part parser for type <v3d::physics::VPhysicManagerPart> registered
+part parser for type <v3d::physics::VJointHinge2Part> registered
+part parser for type <v3d::physics::VJointHinge2LinkPart> registered
+part parser for type <v3d::physics::VJointHinge2LinkAncestorBodyPart> registered
+part parser for type <v3d::physics::VCollisionPart> registered
+part parser for type <v3d::physics::VBodyPart> registered
+part parser for type <v3d::scene::VMirrorShooting> registered
+part parser for type <v3d::scene::VTerrainPart> registered
+part parser for type <v3d::scene::VSphereMeshPart> registered
+part parser for type <v3d::scene::VSkyboxPart> registered
+part parser for type <v3d::scene::VBoxMeshPart> registered
+part parser for type <v3d::scene::VNaiveLightManager> registered
+part parser for type <v3d::scene::VLightPart> registered
+part parser for type <v3d::scene::VSimpleShooting> registered
+part parser for type <v3d::scene::VProjectTextureRenderStepPart> registered
+part parser for type <v3d::scene::VPostProcesssingRenderStepPart> registered
+part parser for type <v3d::scene::VOrientationGridPart> registered
+part parser for type <v3d::scene::VNaiveSceneManagerPart> registered
+part parser for type <v3d::scene::VModelPart> registered
+part parser for type <v3d::scene::VMeshPart> registered
+part parser for type <v3d::scene::VDefaultRenderStepPart> registered
+part parser for type <v3d::scene::VCoordSysDisplayPart> registered
+part parser for type <v3d::scene::VArrowMeshPart> registered
+part parser for type <v3d::entity::VUpdateManagerPart> registered
+part parser for type <v3d::utils::VTrackballPart> registered
+part parser for type <v3d::entity::VRigidBodyPart> registered
+part parser for type <v3d::utils::VInputPart> registered
+part parser for type <v3d::utils::VFPSMoverPart> registered
+part parser for type <v3d::utils::VCameraPart> registered
+Dumping registered objects:
+-------------------------------------------------------
+<config.provider>
+<entity.manager>
+<entity.serialization>
+<error.service>
+<graphics.service>
+<image.service>
+<main>
+<property.manager>
+<resource.manager>
+<system.service>
+<tag.registry>
+<tempfile.service>
+<updater.service>
+<vfs.dpp>
+<vfs.fs>
+<vfs.strfact>
+<window.manager>
+<xml.service>
+-------------------------------------------------------
+Dumping registered objects done
+-------------------------------------------------------
+This is the velox demo application
+Window manager creating window:
+Creating window: ".v3d graphics demo"
+Registering window...
+---------------------------
+Query input manager...
+Using DirectInput...
+Init DirectInput8...
+Create standard keyboard device...
+Create standard mouse device...
+---------------------------
+Query graphics device...
+Using OpenGL API...
+Device Context was created!
+Pixel Format was selected!
+Render Context was created!
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[VOpenGLDevice.cpp] glewInit() succeeded
+OpenGL Device capabilities:
+Texture units: 4
+Supports GLSL: 1
+Supports FBO:  1
+
+-------------------------------------------------------
+Query graphics device...
+Shader Path 1/1:
+  Render pass 1/3:
+    State "color"
+      Param red=@daytime
+      Param green=@daytime
+      Param blue=@daytime
+      Param alpha=1
+    State "polygonmode"
+      Param front=fill
+      Param back=fill
+    State "depth"
+      Param function=onless
+      Param write=true
+      Param enable=true
+    State "colormask"
+      Param red=true
+      Param green=true
+      Param blue=true
+      Param alpha=true
+    State "blending"
+      Param enable=false
+      Param source=source.alpha
+      Param dest=one.minus.source.alpha
+    State "texture"
+      Param res=/data/../data/./day
+      Param wrapu=repeat
+      Param wrapv=repeat
+      Param magnification.filter=linear
+      Param minification.filter=linear
+      Param matrix=1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 
+  Render pass 2/3:
+    State "color"
+      Param red=1
+      Param green=1
+      Param blue=1
+      Param alpha=@nighttime
+    State "blending"
+      Param enable=true
+      Param source=source.alpha
+      Param dest=dest.color
+    State "depth"
+      Param function=onlesseq
+      Param write=false
+      Param enable=true
+    State "texture"
+      Param res=/data/night
+      Param wrapu=repeat
+      Param wrapv=repeat
+      Param magnification.filter=linear
+      Param minification.filter=linear
+  Render pass 3/3:
+    State "color"
+      Param red=@cloud.alpha
+      Param green=@cloud.alpha
+      Param blue=@cloud.alpha
+      Param alpha=0.8
+    State "blending"
+      Param enable=true
+      Param source=source.alpha
+      Param dest=dest.alpha
+    State "depth"
+      Param function=onlesseq
+      Param write=false
+      Param enable=true
+    State "texture"
+      Param res=/data/sky
+      Param wrapu=repeat
+      Param wrapv=repeat
+      Param magnification.filter=linear
+      Param minification.filter=linear
+      Param matrix=@skytexmatrix
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+[g:\dev\v3d\svn\trunk\velox\source\resource\types\vmaterialresourcetype.cpp:266] generating material from thread 0
+---------------------------
+Query input manager...
+Have a nice day
+Unregistering window...
+Return value of main service: 0

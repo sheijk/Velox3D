@@ -169,6 +169,18 @@ v3d::entity::IVEntitySerializationService* GetEntitySerializationService()
 	}
 }
 
+v3d::tags::VTagRegistry* GetTagRegistry()
+{
+	try
+	{
+		tags::VTagRegistryPtr pTagRegistry;
+		return &*pTagRegistry;
+	}
+	catch(VException& e) {
+		return 0;
+	}
+}
+
 
 std::string ToString(v3d::utils::VStringValue* val)
 {

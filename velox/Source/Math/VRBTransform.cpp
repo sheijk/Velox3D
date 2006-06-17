@@ -43,8 +43,8 @@ void VRBTransform::SetLookAt(const VVector3f& in_Position,
 							 const VVector3f& in_LookAt,
 							 const VVector3f& in_Up)
 {
-	V3D_ASSERT(Length(in_Up) != 0.0f);
-	V3D_ASSERT(in_Position != in_LookAt);
+	//V3D_ASSERT(Length(in_Up) != 0.0f);
+	//V3D_ASSERT(in_Position != in_LookAt);
 
 	m_Position = in_Position;
 
@@ -65,7 +65,7 @@ void VRBTransform::SetLookAt(
 void VRBTransform::SetDirection(
 	const VVector3f& in_Direction, const VVector3f& in_Up)
 {
-	V3D_ASSERT( Length(in_Up) != 0.0f );
+	//V3D_ASSERT( Length(in_Up) != 0.0f );
 
 	SetZAxis(-in_Direction);
 	SetXAxis(Cross(in_Direction, in_Up));
@@ -78,12 +78,12 @@ void VRBTransform::SetDirection(
 	//SetYAxis(Normalized(Cross(GetXAxis(), in_Direction)));
 	//VVectorBase3f::Orthogonalize(&m_XAxis, &m_YAxis, &m_ZAxis);
 
-#ifdef V3D_DEBUG
-	VVectorBase3f base(GetXAxis(), GetYAxis(), GetZAxis());
-	V3D_ASSERT(base.IsRightHanded());
-	V3D_ASSERT(base.IsOrthogonal());
-	V3D_ASSERT(base.IsNormalized());
-#endif
+//#ifdef V3D_DEBUG
+//	VVectorBase3f base(GetXAxis(), GetYAxis(), GetZAxis());
+//	V3D_ASSERT(base.IsRightHanded());
+//	V3D_ASSERT(base.IsOrthogonal());
+//	V3D_ASSERT(base.IsNormalized());
+//#endif
 }
 
 VVector3f VRBTransform::GetXAxis() const

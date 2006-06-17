@@ -6,6 +6,10 @@
 #include <V3d/Core/VIOStream.h>
 #include <V3dLib/Utils/VRegisterGuard.h>
 #include <V3d/Entity/IVEntitySerializationService.h>
+
+#include <V3d/Tags/VTagRegistry.h>
+
+#include <sstream>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -123,7 +127,7 @@ VSharedPtr<IVPart> VGenericPartParser::Parse(xml::IVXMLElement& in_Node)
 
 		vout << "\t " << name << "=" << value << vendl;
 
-		if( name != "type" )
+		if( name != "type" && name != "tags" )
 		{
 			messaging::VMessage message;
 			message.AddProperty("type", "update");
@@ -131,6 +135,19 @@ VSharedPtr<IVPart> VGenericPartParser::Parse(xml::IVXMLElement& in_Node)
 			message.AddProperty("value", value);
 
 			pPart->Send(message);
+		}
+		else if( name == "tags" )
+		{
+			tags::VTagRegistryPtr pTagRegistry;
+
+			std::stringstream tags(value);
+			std::string tagName;
+
+			while( ! tags.eof() )
+			{
+				tags >> tagName;
+				pPart->AttachTag(pTagRegistry->GetTagWithName(tagName));
+			}
 		}
 
 		++attrib;

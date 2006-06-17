@@ -15,6 +15,8 @@
 #include <V3d/Entity.h>
 #include <V3d/Messaging/VProtocol.h>
 
+#include <V3d/Tags/VTagRegistry.h>
+
 #include <string>
 #include <V3d/OpenGL.h>
 #include <windows.h>
@@ -36,6 +38,7 @@ v3d::resource::IVResourceManager* GetResourceManager();
 v3d::xml::IVXMLService* GetXMLService();
 v3d::vfs::IVFileSystem* GetFileSystem();
 v3d::entity::IVEntitySerializationService* GetEntitySerializationService();
+v3d::tags::VTagRegistry* GetTagRegistry();
 
 std::string ToString(v3d::utils::VStringValue* val);
 

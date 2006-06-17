@@ -66,13 +66,14 @@ public class SceneView extends VeloxViewBase {
 		settingsViewer.refresh();
 	}
 
-	class SceneAction extends Action
+	abstract class SceneAction extends Action
 	{
 		public SceneAction(String caption) {
 			setText(caption);		
 		}
 		
-		void update() {}
+		abstract void update();
+		abstract public void run();
 	}
 	
 	class EntityContentProvider implements IStructuredContentProvider, 
@@ -208,43 +209,65 @@ public class SceneView extends VeloxViewBase {
 			if( parent instanceof Entity ) {
 				Entity entity = (Entity)parent;
 				
-				// add entity parts
-				Iterator<Part> partIter = entity.PartIterator();
-				while( partIter.hasNext() ) {
-					childs.add(partIter.next());
-				}
+				addEntityChilds(childs, entity);
 			}
-			// if the object is a part, add it's settings and values
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
 				
-				Iterator<VPartDependency> depIter = part.dependencyIterator();
-				while( depIter.hasNext() ) {
-					VPartDependency dep = depIter.next();
-					
-					String descr = "" + dep.GetLocation().toString().charAt(0);
-					
-					if( dep.GetCondition() == VPartDependency.Condition.Optional )
-						descr += "? ";
-					else
-						descr += " ";
-					
-					descr += dep.GetTypeInfo().GetName();
-					
-					if( dep.GetId().length() > 0 )
-						descr += "(id:" + dep.GetId() + ")";
-					
-					childs.add(descr);
-				}				
+				addPartChilds(childs, part);
+			}
+			else if( parent instanceof TagListNode ) {
+				TagListNode tagNode = (TagListNode)parent;
 				
-				// add all settings				
-				Iterator<Setting> settingIter = part.settingsIterator();
-				while( settingIter.hasNext() ) {
-					childs.add(settingIter.next());
-				}
+				addTags(childs, tagNode.part);
 			}
 			
 			return childs.toArray();				
+		}
+
+		private void addTags(LinkedList<Object> childs, Part part) {
+			VTagIterator tags = part.tags();
+			while( tags.HasNext() ) {
+				childs.add(new TagNode(tags.Get(), part));
+				tags.Next();
+			}
+		}
+
+		private void addEntityChilds(LinkedList<Object> childs, Entity entity) {
+			// add entity parts
+			Iterator<Part> partIter = entity.PartIterator();
+			while( partIter.hasNext() ) {
+				childs.add(partIter.next());
+			}
+		}
+
+		private void addPartChilds(LinkedList<Object> childs, Part part) {
+			Iterator<VPartDependency> depIter = part.dependencyIterator();
+			while( depIter.hasNext() ) {
+				VPartDependency dep = depIter.next();
+				
+				String descr = "" + dep.GetLocation().toString().charAt(0);
+				
+				if( dep.GetCondition() == VPartDependency.Condition.Optional )
+					descr += "? ";
+				else
+					descr += " ";
+				
+				descr += dep.GetTypeInfo().GetName();
+				
+				if( dep.GetId().length() > 0 )
+					descr += "(id:" + dep.GetId() + ")";
+				
+				childs.add(descr);
+			}				
+			
+			// add all settings				
+			Iterator<Setting> settingIter = part.settingsIterator();
+			while( settingIter.hasNext() ) {
+				childs.add(settingIter.next());
+			}
+			
+			childs.add(new TagListNode(part));
 		}
 		
 		public Object getParent(Object out_element) {
@@ -258,8 +281,40 @@ public class SceneView extends VeloxViewBase {
 				return ((Part)parent).settingsIterator().hasNext();
 			else if( parent instanceof Setting )
 				return false;
+			else if( parent instanceof TagListNode ) {
+				TagListNode tagNode = (TagListNode)parent;
+				return tagNode.part.tags().HasNext();
+			}
+			else if( parent instanceof TagNode )
+				return false;
 			else
 				return true;
+		}
+	}
+	
+	private static class TagListNode {
+		public TagListNode(Part part2) {
+			part = part2;
+		}
+
+		public final Part part;
+
+		@Override public String toString() {
+			return "Tags";
+		}
+	}
+	
+	private static class TagNode {
+		public TagNode(VTag tag, Part part) {
+			this.tag = tag;
+			this.part = part;
+		}
+		
+		private final VTag tag;
+		private final Part part;
+		
+		@Override public String toString() {
+			return tag.GetName();
 		}
 	}
 	
@@ -528,6 +583,8 @@ public class SceneView extends VeloxViewBase {
 				
 				refresh();
 			}
+			
+			@Override public void update() {}
 		};
 		
 		partContextActions.add(new SceneAction("Show XML") {
@@ -586,6 +643,8 @@ public class SceneView extends VeloxViewBase {
 				});
 				refresh();
 			}
+
+			@Override void update() {}
 		});
 
 		partContextActions.add(new SceneAction("Set look at"){
@@ -683,6 +742,58 @@ public class SceneView extends VeloxViewBase {
 				setEnabled(enable);
 			}
 		});
+		
+		partContextActions.add(new SceneAction("Add tag") {
+			@Override public void run() {
+				final TagListNode tagNode = getSelectedTagNode();
+				
+				if( tagNode == null ) {
+					setEnabled(false);
+					return;
+				}
+				
+				final InputDialog dialog = new InputDialog(myParent.getShell(),
+						"Add new tag", 
+						"Name",
+						"",
+						new IInputValidator() {
+					public String isValid(String x) { return null; }
+				});
+				
+				if( dialog.open() == InputDialog.OK ) {
+					VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+						@Override public void Run() throws RuntimeException {
+							tagNode.part.AttachTag(dialog.getValue());
+						}
+					});
+				}
+				
+				refresh();
+			}
+
+			@Override void update() {
+				setEnabled(getSelectedTagNode() != null);
+			}
+		});
+		
+		partContextActions.add(new SceneAction("Remove tag") {
+			@Override public void run() {
+				final TagNode selectedTag = getSelectedTag();
+				
+				if( selectedTag == null ) {
+					setEnabled(false);
+					return;
+				}
+				
+				selectedTag.part.RemoveTag(selectedTag.tag.GetName());
+				
+				refresh();
+			}
+
+			@Override void update() {
+				setEnabled(getSelectedTag() != null);
+			}
+		});
 	}
 	
 	private String askUser(String inTitle, String inQuestion, String inDefaultArgument) {
@@ -742,6 +853,24 @@ public class SceneView extends VeloxViewBase {
 		});
 	}
 	
+	private TagListNode getSelectedTagNode() {
+		Object selectedObject = getSelectedObjectInPartView();
+		
+		if( selectedObject instanceof TagListNode )
+			return (TagListNode)selectedObject;
+		else
+			return null;
+	}
+
+	private TagNode getSelectedTag() {
+		Object selectedObject = getSelectedObjectInPartView();
+		
+		if( selectedObject instanceof TagNode )
+			return (TagNode)selectedObject;
+		else
+			return null;
+	}
+	
 	private Entity getSelectedEntity() {
 		Object selectedElement = getSelectedObject();
 		
@@ -753,10 +882,14 @@ public class SceneView extends VeloxViewBase {
 			return null;
 	}
 	
-	private Part getSelectedPart() {
+	private Object getSelectedObjectInPartView() {
 		IStructuredSelection selection = 
 			(IStructuredSelection)settingsViewer.getSelection();
-		Object selectedElement = selection.getFirstElement();
+		return selection.getFirstElement();
+	}
+	
+	private Part getSelectedPart() {
+		Object selectedElement = getSelectedObjectInPartView();
 		
 		if( selectedElement instanceof Part )
 			return (Part)selectedElement;

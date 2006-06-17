@@ -14,6 +14,11 @@ namespace v3d { namespace graphics {
 #include <V3d/Messaging/VMessageInterpreter.h>
 
 #include <V3d/Entity/VGenericPartParser.h>
+
+#include <V3d/Tags/VTagRegistry.h>
+
+#include <sstream>
+#include <string>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -21,12 +26,21 @@ namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 using namespace graphics;
+using namespace tags;
+using std::string;
+using std::stringstream;
+
+namespace {
+	const string excludePropertyName = "exclude-tags";
+	const string includePropertyName = "include-tags";
+}
 
 /**
  * standard c'tor
  */
 VDefaultRenderStepPart::VDefaultRenderStepPart()
 {
+	m_bIncludeAll = true;
 }
 
 /**
@@ -48,27 +62,55 @@ void VDefaultRenderStepPart::Render(IVGraphicsPart* in_pScene)
 	VRangeIterator<const IVShapePart> shape = in_pScene->GetVisibleMeshes();
 	while( shape.HasNext() )
 	{
-		//const IVMaterial& material = shape->GetMaterial();
-
-		//for(vuint pass = 0; pass < material.PassCount(); ++pass)
-		for(vuint pass = 0; pass < shape->GetPassCount(); ++pass)
+		if( RenderShape(*shape) )
 		{
-			IVDevice& device(*GetOutputDevice());
+			for(vuint pass = 0; pass < shape->GetPassCount(); ++pass)
+			{
+				IVDevice& device(*GetOutputDevice());
 
-			math::VRBTransform transform = shape->GetModelTransform();
+				math::VRBTransform transform = shape->GetModelTransform();
 
-			GetOutputDevice()->SetMatrix(IVDevice::ModelMatrix, transform.AsMatrix());
+				GetOutputDevice()->SetMatrix(
+					IVDevice::ModelMatrix, transform.AsMatrix());
 
-			//ApplyMaterial(*GetOutputDevice(), &material.GetPass(pass));
-			shape->ApplyPassStates(pass, device);
-			glCullFace(GL_BACK);
-			glEnable(GL_CULL_FACE);
-			shape->SendGeometry(*GetOutputDevice());
-			shape->UnapplyPassStates(pass, device);
+				shape->ApplyPassStates(pass, device);
+				glCullFace(GL_BACK);
+				glEnable(GL_CULL_FACE);
+				shape->SendGeometry(*GetOutputDevice());
+				shape->UnapplyPassStates(pass, device);
+			}
 		}
 
 		++shape;
 	}
+}
+
+vbool IntersectionEmpty(
+	VRangeIterator<const VTag> tags1,
+	const std::vector<VTag>& tags2)
+{
+	while( tags1.HasNext() )
+	{
+		std::vector<VTag>::const_iterator iter = 
+			std::find(tags2.begin(), tags2.end(), *tags1);
+
+		if( iter != tags2.end() )
+			return false;
+
+		++tags1;
+	}
+
+	return true;
+}
+
+vbool VDefaultRenderStepPart::RenderShape(const IVGraphicsPart& shape) const
+{
+	if( m_bIncludeAll || ! IntersectionEmpty(shape.Tags(), m_IncludeTags) )
+	{
+		return IntersectionEmpty(shape.Tags(), m_ExcludeTags);
+	}
+	else
+		return false;
 }
 
 /*
@@ -197,6 +239,36 @@ private:
 };
 /**/
 
+string TagNames(const std::vector<VTag>& tags)
+{
+	string tagNames;
+
+	for(
+		std::vector<VTag>::const_iterator tagIter = tags.begin();
+		tagIter != tags.end();
+	++tagIter)
+	{
+		tagNames += " ";
+		tagNames += tagIter->GetName();
+	}
+
+	return tagNames;
+}
+
+void SetTags(const std::string& tagNames, std::vector<VTag>* tags)
+{
+	tags->clear();
+
+	stringstream tagList(tagNames);
+
+	while( ! tagList.eof() )
+	{
+		string tag;
+		tagList >> tag;
+		tags->push_back(VTagRegistryPtr()->GetTagWithName(tag));
+	}
+}
+
 void VDefaultRenderStepPart::OnMessage(
 	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
 {
@@ -206,10 +278,32 @@ void VDefaultRenderStepPart::OnMessage(
 
 	if( ! interpreter.IsInitialized() )
 	{
-		interpreter.AddOption(new messaging::VMemberVarOption<g::VColor4f>("clearColor", this, &m_BackgroundColor));
+		interpreter.AddOption(new messaging::VMemberVarOption<g::VColor4f>(
+			"clearColor", this, &m_BackgroundColor));
+		interpreter.AddMemberOption("include-all", this, &m_bIncludeAll);
 	}
 
-	interpreter.HandleMessage(this, in_Message, in_pAnswer);
+	switch( interpreter.HandleMessage(this, in_Message, in_pAnswer) )
+	{
+	case messaging::VMessageInterpreter::GetSettings:
+		{
+			in_pAnswer->AddProperty(excludePropertyName, TagNames(m_ExcludeTags));
+			in_pAnswer->AddProperty(includePropertyName, TagNames(m_IncludeTags));
+
+		} break;
+
+	case messaging::VMessageInterpreter::ApplySetting:
+		{
+			const string name = in_Message.GetAs<string>("name");
+			const string tagList = in_Message.GetAs<string>("value");
+
+			if( name == excludePropertyName )
+				SetTags(tagList, &m_ExcludeTags);
+			else if( name == includePropertyName )
+				SetTags(tagList, &m_IncludeTags);
+				
+		} break;
+	}
 }
 
 namespace {

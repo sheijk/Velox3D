@@ -5,6 +5,9 @@
 
 #include <V3d/Scene/IVRenderStepPart.h>
 #include <V3dLib/Graphics/Geometry/VColor4f.h>
+#include <V3d/Tags/VTag.h>
+
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
@@ -22,7 +25,13 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
+	vbool RenderShape(const IVGraphicsPart& shape) const;
+
 	graphics::VColor4f m_BackgroundColor;
+
+	std::vector<tags::VTag> m_IncludeTags;
+	vbool m_bIncludeAll;
+	std::vector<tags::VTag> m_ExcludeTags;
 
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);

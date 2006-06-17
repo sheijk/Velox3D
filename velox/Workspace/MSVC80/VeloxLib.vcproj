@@ -373,7 +373,7 @@
 							>
 						</File>
 						<File
-							RelativePath="..\..\Api\V3d\Scene\Shootings\VProjectedTextureShooting.h"
+							RelativePath="..\..\API\V3d\Scene\Shootings\VShadowMapShooting.h"
 							>
 						</File>
 						<File
@@ -681,6 +681,18 @@
 							>
 						</File>
 					</Filter>
+				</Filter>
+				<Filter
+					Name="Tags"
+					>
+					<File
+						RelativePath="..\..\API\V3d\Tags\VTag.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Tags\VTagRegistry.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -1791,10 +1803,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\Source\Scene\VProjectTextureRenderStepPart.cpp"
 					>
 				</File>
@@ -1834,6 +1842,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\Source\Scene\Shootings\VShadowMapShooting.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Source\Scene\Shootings\VShootingBase.cpp"
 						>
 					</File>
@@ -1849,6 +1861,10 @@
 						RelativePath="..\..\Source\Scene\Lights\VNaiveLightManager.cpp"
 						>
 					</File>
+				</Filter>
+				<Filter
+					Name="Rendering"
+					>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -2021,6 +2037,18 @@
 			</File>
 			<File
 				RelativePath="..\..\Source\Messaging\VProtocol.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Tags"
+			>
+			<File
+				RelativePath="..\..\Source\Tags\VTag.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Source\Tags\VTagRegistry.cpp"
 				>
 			</File>
 		</Filter>

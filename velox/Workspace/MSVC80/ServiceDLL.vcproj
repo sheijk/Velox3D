@@ -1474,10 +1474,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Source\Scene\VProjectedTextureShooting.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\Source\Scene\VProjectTextureRenderStepPart.cpp"
 				>
 			</File>

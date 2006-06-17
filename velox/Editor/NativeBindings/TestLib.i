@@ -112,6 +112,7 @@ namespace v3d {
 %include "XML.i"
 %include "Messaging.i"
 %include "Graphics.i"
+%include "Tags.i"
 %include "Entity.i"
 %include "Scene.i"
 

@@ -23,6 +23,7 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import de.velox.*;
+import de.velox.editor.SyncAction;
 import de.velox.editor.entity.*;
 import de.velox.editor.views.RenderLayer;
 import de.velox.editor.views.SceneView;
@@ -244,12 +245,12 @@ public class SceneEditor extends VeloxEditorBase {
 		
 		IActionBars bars = getEditorSite().getActionBars();
 		
-		Action playAction = new Action() {
+		Action playAction = new SyncAction() {
 			private boolean playing = false;
 			private IVXMLElement preupdateScene = null;
 			
 			@Override
-			public void run() {
+			public void exec() {
 				if( playing ) {
 					updateAction.SetUpdateSpeedFactor(.0f);
 					this.setText("Play");

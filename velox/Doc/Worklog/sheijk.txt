@@ -30,6 +30,17 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+16.06.06
+- neue scripts:
+  v3d-make-source-backup.sh fuer Backups vor dem svn update/committ
+  Tipp: folgende Zeilen in ~/.bashrc einfuegen:
+  alias gos='cd `v3dsourcedir.pl` && pwd'
+  alias goa='cd `v3dapidir.pl` && pwd'
+  alias gov3d='cd `v3dgetdir.sh` && pwd'
+- shader fuer bloom effekt
+- diverse fixes   
+- Tags, um Entity Parts zu markieren (und VDefaultRenderStep kann darauf basierend filtern)
+
 29.05.06
 - Umstieg auf MSVC 2005
 

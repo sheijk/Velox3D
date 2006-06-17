@@ -81,7 +81,7 @@ public:
 	template<typename PartType>
 	PartType* GetPart();
 private:
-	typedef std::map<std::string, PartPtr> PartContainer;
+	typedef std::multimap<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;
 
 	VEntity(const VEntity&);

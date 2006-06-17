@@ -1,0 +1,24 @@
+<entity name="foo">
+	<part type="v3d::scene::VNaiveSceneManagerPart" tags=""/>
+	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
+	<part type="shooting" tags=""/>
+	
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0.3,1)" exclude-tags=" debug" include-all="true" include-tags=" " tags=""/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/vblur_pp.v3dmat" tags=""/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart2" material="/edit/mat/hblur_pp.v3dmat" tags=""/>
+	<entity name="lal">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,-5,-40)" updir="(0,1,0)" viewdir="(-1,0,-0)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="1" tags=" bar"/>
+		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=" debug"/>
+		<part type="v3d::utils::VCircleMoverPart" angle="0" center="(0,-5,-50)" radius="10" speed="3.1415" tags=""/>
+	</entity>
+	<entity name="editorCam">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,10)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+		<part type="v3d::utils::VCameraPart" tags=""/>
+	</entity>
+	<entity name="blup">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-9,2,-29)" updir="(0.758921,-0.549026,0.350098)" viewdir="(0.0841293,-0.450468,-0.888801)" tags=""/>
+		<part type="v3d::scene::VTorusMeshPart" material="/system/graphics/defaultMaterial" tags=" foo"/>
+		<part type="v3d::scene::VCoordSysDisplayPart" material="/system/graphics/defaultMaterial" tags=" debug"/>
+	</entity>
+</entity>

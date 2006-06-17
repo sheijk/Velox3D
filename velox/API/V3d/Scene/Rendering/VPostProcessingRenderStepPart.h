@@ -53,9 +53,19 @@ private:
 	graphics::VMaterialSetup m_MaterialSetup;
 };
 
+// quick and ugly workaround for problem in the entity system (an entity which
+// contains multiple parts of the same type will not work in the editor) thus
+// we simply create some extra types...
+class VPostProcesssingRenderStepPart2 : public VPostProcesssingRenderStepPart {};
+class VPostProcesssingRenderStepPart3 : public VPostProcesssingRenderStepPart {};
+class VPostProcesssingRenderStepPart4 : public VPostProcesssingRenderStepPart {};
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 
 V3D_TYPEINFO_WITHPARENT(v3d::scene::VPostProcesssingRenderStepPart, v3d::scene::IVRenderStepPart);
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VPostProcesssingRenderStepPart2, v3d::scene::IVRenderStepPart);
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VPostProcesssingRenderStepPart3, v3d::scene::IVRenderStepPart);
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VPostProcesssingRenderStepPart4, v3d::scene::IVRenderStepPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VPOSTPROCESSINGRENDERSTEPPART_2005_11_06_H

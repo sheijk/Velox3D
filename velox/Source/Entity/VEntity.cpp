@@ -411,6 +411,7 @@ void VEntity::AddPart(const std::string& in_Id, PartPtr in_pPart)
 {
 	// if part is not contained, yet
 	if( in_pPart.Get() != 0 && m_Parts.find(in_Id) == m_Parts.end() )
+	//if( in_pPart.Get() != 0 )
 	{
 		if( m_bActivated )
 			SetAllPartsActive(false);
@@ -418,7 +419,8 @@ void VEntity::AddPart(const std::string& in_Id, PartPtr in_pPart)
 		UnconnectAllParts();
 
 		// add part to list
-		m_Parts[in_Id] = in_pPart;
+		m_Parts.insert(make_pair(in_Id, in_pPart));
+		//m_Parts[in_Id] = in_pPart;
 
 		ReconnectAllParts();
 

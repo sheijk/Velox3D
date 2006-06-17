@@ -29,7 +29,8 @@ import org.eclipse.ui.ide.IDE;
 public class NewSceneWizard extends Wizard implements INewWizard {
 	private NewSceneWizardPage page;
 	private ISelection selection;
-
+	private String fileName = null;
+	
 	/**
 	 * Constructor for NewSceneWizard.
 	 */
@@ -54,7 +55,8 @@ public class NewSceneWizard extends Wizard implements INewWizard {
 	 */
 	public boolean performFinish() {
 		final String containerName = page.getContainerName();
-		final String fileName = page.getFileName();
+		fileName = page.getFileName();
+		
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
@@ -128,9 +130,32 @@ public class NewSceneWizard extends Wizard implements INewWizard {
 	 */
 
 	private InputStream openContentStream() {
-		String contents =
-			"This is the initial file contents for *.v3dscene file that should be word-sorted in the Preview page of the multi-page editor";
-		return new ByteArrayInputStream(contents.getBytes());
+		try {
+			final String sceneName = fileName.replaceAll("\\..*", "");
+		
+			final String contents =
+				"<entity name=\"" + sceneName + "\">\n" + 
+				"	<part type=\"v3d::scene::VNaiveSceneManagerPart\"/>\n" + 
+				"	<part type=\"shooting\"/>\n" + 
+				"	<part type=\"v3d::entity::VUpdateManagerPart\"/>\n" + 
+				"	<part type=\"v3d::scene::VNaiveLightManager\"/>\n" +
+				"	<part type=\"v3d::utils::VInputPart\" tags=\"\"/>\n" + 
+				"	<entity name=\"editorCam\">\n" + 
+				"		<part type=\"v3d::entity::VRigidBodyPart\" pos=\"(0,0,5)\" updir=\"(0,1,0)\" viewdir=\"(0,0,-1)\" tags=\"\"/>\n" + 
+				"		<part type=\"v3d::utils::VCameraPart\" tags=\"\"/>\n" + 
+				"		<part type=\"v3d::utils::VTrackballPart\" tags=\"\"/>\n" + 
+				"	</entity>\n" + 
+				"	<entity name=\"debug\">\n" + 
+				"		<part type=\"v3d::entity::VRigidBodyPart\" pos=\"(0,0,0)\" updir=\"(0,1,0)\" viewdir=\"(0,0,1)\" tags=\"\"/>\n" + 
+				"		<part type=\"v3d::scene::VOrientationGridPart\" material=\"/system/graphics/defaultMaterial\" tags=\"\"/>\n" + 
+				"	</entity>\n" + 
+				"</entity>\n" + 
+				"";
+			return new ByteArrayInputStream(contents.getBytes());
+		}
+		catch(RuntimeException e) {
+			throw e;
+		}
 	}
 
 	private void throwCoreException(String message) throws CoreException {

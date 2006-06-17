@@ -3,7 +3,8 @@
 $currentdir = $ENV{'PWD'};
 
 $newdir = $currentdir;
-$newdir =~ s#(.*velox)/API/(V3d|V3dLib)(.*)#\1/Source\3#i ;
+$newdir =~ s#(.*velox)/Source(.*)#\1/API/V3d\2#i ;
 
 print("${newdir}\n");
+
 

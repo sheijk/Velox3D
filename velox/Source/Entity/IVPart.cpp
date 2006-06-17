@@ -52,6 +52,47 @@ void IVPart::OnMessage(
 {
 }
 
+void IVPart::AttachTag(const tags::VTag& tag)
+{
+	if( ! HasTag(tag) )
+	{
+		m_Tags.push_back(&tag);
+	}
+}
+
+
+void IVPart::RemoveTag(const tags::VTag& tag)
+{
+	for(std::vector<const tags::VTag*>::iterator tagIter = m_Tags.begin();
+		tagIter != m_Tags.end();
+		++tagIter)
+	{
+		if( (**tagIter) == tag )
+		{
+			m_Tags.erase(tagIter);
+			break;
+		}
+	}
+}
+
+vbool IVPart::HasTag(const tags::VTag& tag) const
+{
+	for(std::vector<const tags::VTag*>::const_iterator tagIter = m_Tags.begin();
+		tagIter != m_Tags.end();
+		++tagIter)
+	{
+		if( **tagIter == tag )
+			return true;
+	}
+
+	return false;
+}
+
+VRangeIterator<const tags::VTag> IVPart::Tags() const
+{
+	return CreateDerefBeginIterator<const tags::VTag>(m_Tags);
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d
 //-----------------------------------------------------------------------------

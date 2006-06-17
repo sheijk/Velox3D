@@ -169,6 +169,9 @@ void VPostProcesssingRenderStepPart::OnMessage(
 
 namespace {
 	entity::VPartParser<VPostProcesssingRenderStepPart> parser;
+	entity::VPartParser<VPostProcesssingRenderStepPart2> parser2;
+	entity::VPartParser<VPostProcesssingRenderStepPart3> parser3;
+	entity::VPartParser<VPostProcesssingRenderStepPart4> parser4;
 }
 
 //-----------------------------------------------------------------------------

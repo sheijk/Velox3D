@@ -81,6 +81,8 @@ private:
 	std::string m_strMatRes;
 	
 	std::string m_strModel;
+
+	vbool m_bIsActive;
 };
 
 //-----------------------------------------------------------------------------
