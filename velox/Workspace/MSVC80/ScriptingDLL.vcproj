@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="DevIL.lib ilu.lib dinput8.lib dxguid.lib cg.lib cgGL.lib lib3ds-120d.lib oded.lib glew32.lib glfw.lib opengl32.lib glu32.lib libboost_filesystem-vc80-mt-gd-1_33_1.lib"
+				AdditionalDependencies="DevIL.lib ilu.lib dinput8.lib dxguid.lib cg.lib cgGL.lib lib3ds-120d.lib glew32.lib glfw.lib opengl32.lib glu32.lib libboost_filesystem-vc80-mt-gd-1_33_1.lib SingleTrimesh.lib"
 				OutputFile="$(OutDir)/ScriptingDLL.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"

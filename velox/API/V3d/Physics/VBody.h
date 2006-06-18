@@ -34,12 +34,21 @@ public:
 	void SetPosition(graphics::VVertex3f in_Position);
 	void SetOrientation(math::VQuatf in_Orientation);
 	void VBody::SetOrientation(math::VVector4f in_Orientation);
+
+	void Deactivate();
+	void Activate();
+
+	void Destroy();
+	bool IsValid();
 	
 	/**
 	 * returns 0 if no mesh is set
 	 * use this to remove a collision mesh with the manager
 	 */
 	VGeometry* GetCollisionMesh();
+
+	//returns true if the body is taking part in the simulation
+	vbool IsEnabled();
 
 			
 protected: 
@@ -55,7 +64,6 @@ protected:
 	 */
 	VStateOrientation m_OrientationState;
 	VStatePosition m_PositionState;
-
 	VStateListContainer m_StateListContainer;
 };
 

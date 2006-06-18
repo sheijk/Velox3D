@@ -68,7 +68,7 @@ VJointGroup* VWorld::GetJointGroup()
 void VWorld::Update()
 {
 	m_Space.Collide();
-	dWorldStep(m_WorldID, m_fWorldStep);
+	dWorldStep(m_WorldID, m_fWorldStep); 
 	m_JointGroup.Empty();
 }
 

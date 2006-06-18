@@ -2,15 +2,14 @@
 #define V3D_VRBTRANSFORM_2004_11_10_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Math/VVector.h>
 #include <V3d/Math/VMatrix.h>
+#include <V3d/Math/VQuaternion.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace math {
 //-----------------------------------------------------------------------------
 using namespace v3d;
-
 /**
  * A rigid body transform is transform that consists of concatenations of only
  * translations and rotations. This transform is length, angle and normal 
@@ -101,6 +100,7 @@ public:
 	void Invert();
 
 	void Rotate(vfloat32 in_fAngleDegree, const VVector3f& axis);
+	void Rotate(VQuatf& in_Quatf);
 
 private:
 	VVector3f m_XAxis;

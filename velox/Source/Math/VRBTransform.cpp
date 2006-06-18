@@ -224,6 +224,43 @@ void VRBTransform::Rotate(vfloat32 in_fAngleDegree, const VVector3f& axis)
 	v3d::Rotate(m_ZAxis, quat);
 }
 
+void VRBTransform::Rotate(VQuatf& in_Quatf)
+{
+	//this seems not to work...
+	/*v3d::Rotate(m_XAxis, in_Quatf);
+	v3d::Rotate(m_YAxis, in_Quatf);
+	v3d::Rotate(m_ZAxis, in_Quatf);*/
+
+	VMatrix<vfloat32, 3, 3> axis;
+	axis.Set(0,0, m_XAxis.Get(0)); 
+	axis.Set(1,0, m_XAxis.Get(1));
+	axis.Set(2,0, m_XAxis.Get(2));
+
+	axis.Set(0,1, m_YAxis.Get(0));
+	axis.Set(1,1, m_YAxis.Get(1));
+	axis.Set(2,1, m_YAxis.Get(2));
+
+	axis.Set(0,2, m_ZAxis.Get(0));
+	axis.Set(1,2, m_ZAxis.Get(1));
+	axis.Set(2,2, m_ZAxis.Get(2));
+
+	//MakeTranspose(axis);
+
+	v3d::Rotate(axis, in_Quatf);
+	m_XAxis.SetX(axis.Get(0,0));
+	m_XAxis.SetY(axis.Get(1,0));
+	m_XAxis.SetZ(axis.Get(2,0));
+
+	m_YAxis.SetX(axis.Get(0,1));
+	m_YAxis.SetY(axis.Get(1,1));
+	m_YAxis.SetZ(axis.Get(2,1));
+
+	m_ZAxis.SetX(axis.Get(0,2));
+	m_ZAxis.SetY(axis.Get(1,2));
+	m_ZAxis.SetZ(axis.Get(2,2));
+
+}
+
 //-----------------------------------------------------------------------------
 } //namespace math
 } //namespace v3d

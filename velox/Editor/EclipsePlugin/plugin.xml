@@ -11,6 +11,9 @@
       <library name="VeloxEditor.jar">
          <export name="*"/>
       </library>
+      <library name="SourceV3d/">
+         <export name="*"/>
+      </library>
    </runtime>
 
    <requires>

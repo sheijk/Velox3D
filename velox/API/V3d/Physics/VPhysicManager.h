@@ -63,7 +63,7 @@ public:
 	* Tells the object that the main loop has been entered
 	* and it can expect calls to Update from now on.
 	* Objects should register themselves to any external
-	* managers now
+	* managers
 	*/
 	virtual void Activate();
 	virtual void Deactivate();
@@ -78,6 +78,7 @@ public:
 
 	// TODO: fix mass parameter to be a part
 	BodyPtr Create(IVBoundingVolumePart* in_pBoundingPart, vfloat32 in_fMass);
+	void Delete(BodyPtr in_Body);
 
 	Geometry CreateGeom(IVBoundingVolumePart* in_pBoundingPart);
 

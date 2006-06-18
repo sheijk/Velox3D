@@ -39,7 +39,7 @@ public:
 	 *
 	 * @return The current rigid body transformation
 	 */
-	const math::VRBTransform& GetTransform();
+	math::VRBTransform& GetTransform();
 
 	/**
 	 * Sets the rigid body transformation of this part

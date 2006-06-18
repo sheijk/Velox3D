@@ -10,7 +10,8 @@ namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
 
 /**
- * This part is used joints
+ * This part is used for joints
+ * author: ins
  */
 
 class VPhysicManagerPart;
@@ -25,7 +26,6 @@ public:
 	// IVPart derived
 	void Activate();
 	void Deactivate();
-	//vbool IsReady() const;
 	
 	void RegisterBody(VBody* in_pAddress);
 	void UnregisterBody(VBody* in_pAddress);
@@ -39,7 +39,9 @@ private:
 
 	void Create();
 
-	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
+	virtual void OnMessage(
+		const messaging::VMessage& in_Message,
+		messaging::VMessage* in_pAnswer);
 	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
 	
 	VJointHinge2 m_Joint;
@@ -47,7 +49,6 @@ private:
 	vbool m_bIsLinkedByBodyTwo;
 	VBody* m_pBodyAddressOne;
 	VBody* m_pBodyAddressTwo;
-
 
 	vbool m_bIsActive;
 	vbool m_bIsReady;

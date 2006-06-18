@@ -35,6 +35,8 @@ lib glewLib : :
 	<file>../../Local/ExternalLibs/Lib/glew32.lib <link>static ;
 lib 3dsLib : :
 	<file>../../Local/ExternalLibs/Lib/lib3ds-120d.lib <link>static ;
+lib glut32Lib : :
+	<file>../../Local/ExternalLibs/Lib/glut32.lib <link>static ;
 	
 # system libraries
 #-------------------------------------------------------------------------------
@@ -183,6 +185,7 @@ lib ScriptingDLL :
 	glfwLib
 	glewLib
 	3dsLib
+	glut32Lib
 	
 	# dependencies and other files
 	../../Source/Module/VeloxModule.cpp

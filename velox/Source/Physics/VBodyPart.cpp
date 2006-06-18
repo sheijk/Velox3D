@@ -7,6 +7,9 @@
 #include <V3d/Physics/VPhysicManagerPart.h>
 #include <V3d/Physics/Bounding/IVBoundingVolumePart.h>
 #include <V3d/Math//VQuaternionOps.h>
+#include <V3d/Math/VQuaternion.h>
+
+#include <limits>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -45,7 +48,8 @@ std::string VBodyPart::GetDefaultId()
 
 void VBodyPart::Create()
 {
-	if( !m_pBody.Get())
+	if( ! m_pBody.Get() || ! m_pBody.Get()->IsValid() )
+	//if( ! m_pBody.Get())
 	{
 		m_pBody = m_pPhysicManagerPart->GetPhysicManager()->Create(m_pVolumePart.Get(), m_fMass);
 	}
@@ -79,72 +83,86 @@ VBodyPart::BodyPtr VBodyPart::GetBody()
 
 void VBodyPart::Update(vfloat32 in_fSeconds)
 {
-	//m_pBody->Update(); //TODO: wird doppelt aufgerufen
 
-	VVector3f x1,y1,z1;
-	VMatrix<vfloat32, 3, 3> axis;
-	VMatrix<vfloat32, 4, 4> trans; //TODO: rbtransform accessmethoden aendern
-
-	m_pRigidBodyPart->GetTransform().GetAxis(x1,y1,z1);
-
-	axis.Set(0,0, x1.Get(0)); 
-	axis.Set(1,0, x1.Get(1));
-	axis.Set(2,0, x1.Get(2));
-
-	axis.Set(0,1, y1.Get(0));
-	axis.Set(1,1, y1.Get(1));
-	axis.Set(2,1, y1.Get(2));
-
-	axis.Set(0,2, z1.Get(0));
-	axis.Set(1,2, z1.Get(1));
-	axis.Set(2,2, z1.Get(2));
-
-	//MakeTranspose(axis);
-	
 	//hack!
+	/*if(
+		m_Position.GetX() - m_pRigidBodyPart.Get()->GetPosition().GetX() <= std::numeric_limits<float>::epsilon() &&
+		m_Position.GetY() - m_pRigidBodyPart.Get()->GetPosition().GetY() <= std::numeric_limits<float>::epsilon() &&
+		m_Position.GetZ() - m_pRigidBodyPart.Get()->GetPosition().GetZ() <= std::numeric_limits<float>::epsilon()
+		) //makes all things oscillating
+	*/
 	if(
 		m_Position.GetX() == m_pRigidBodyPart.Get()->GetPosition().GetX() &&
 		m_Position.GetY() == m_pRigidBodyPart.Get()->GetPosition().GetY() &&
-		m_Position.GetZ() == m_pRigidBodyPart.Get()->GetPosition().GetZ()
-		)
+		m_Position.GetZ() == m_pRigidBodyPart.Get()->GetPosition().GetZ())
 	{
-	
-		Rotate(axis, m_pBody->GetOrientation().GetQuat());
-		graphics::VVertex3f pos = m_pBody->GetPositionState().GetPositon();
-		MakeTranspose(axis); //TODO: should be coorect but recheck!
-		m_Position = pos.AsVector();
+		//VVector3f x1,y1,z1;
+		//VMatrix<vfloat32, 3, 3> axis;
+		//VMatrix<vfloat32, 4, 4> trans; //TODO: rbtransform accessmethoden aendern
 
-			trans.Set(0,0, axis.Get(0,0));
-			trans.Set(0,1, axis.Get(0,1));
-			trans.Set(0,2, axis.Get(0,2));
-			trans.Set(0,3, pos.x);
+		//m_pRigidBodyPart->GetTransform().GetAxis(x1,y1,z1);
 
-			trans.Set(1,0, axis.Get(1,0));
-			trans.Set(1,1, axis.Get(1,1));
-			trans.Set(1,2, axis.Get(1,2));
-			trans.Set(1,3, pos.y);
+		//axis.Set(0,0, x1.Get(0)); 
+		//axis.Set(1,0, x1.Get(1));
+		//axis.Set(2,0, x1.Get(2));
 
-			trans.Set(2,0, axis.Get(2,0));
-			trans.Set(2,1, axis.Get(2,1));
-			trans.Set(2,2, axis.Get(2,2));
-			trans.Set(2,3, pos.z);
+		//axis.Set(0,1, y1.Get(0));
+		//axis.Set(1,1, y1.Get(1));
+		//axis.Set(2,1, y1.Get(2));
 
-			trans.Set(3,0, 0);
-			trans.Set(3,1, 0);
-			trans.Set(3,2, 0);
-			trans.Set(3,3, 1);
-	
-		m_pRigidBodyPart->SetTransform(math::VRBTransform(trans));
+		//axis.Set(0,2, z1.Get(0));
+		//axis.Set(1,2, z1.Get(1));
+		//axis.Set(2,2, z1.Get(2));
+
+		////MakeTranspose(axis);
+
+		//Rotate(axis, m_pBody->GetOrientation().GetQuat());
+		//graphics::VVertex3f pos = m_pBody->GetPositionState().GetPositon();
+		//MakeTranspose(axis); //TODO: should be coorect but recheck!
+		//m_Position = pos.AsVector();
+
+		//trans.Set(0,0, axis.Get(0,0));
+		//trans.Set(0,1, axis.Get(0,1));
+		//trans.Set(0,2, axis.Get(0,2));
+		//trans.Set(0,3, pos.x);
+
+		//trans.Set(1,0, axis.Get(1,0));
+		//trans.Set(1,1, axis.Get(1,1));
+		//trans.Set(1,2, axis.Get(1,2));
+		//trans.Set(1,3, pos.y);
+
+		//trans.Set(2,0, axis.Get(2,0));
+		//trans.Set(2,1, axis.Get(2,1));
+		//trans.Set(2,2, axis.Get(2,2));
+		//trans.Set(2,3, pos.z);
+
+		//trans.Set(3,0, 0);
+		//trans.Set(3,1, 0);
+		//trans.Set(3,2, 0);
+		//trans.Set(3,3, 1);
+
+		//m_pRigidBodyPart->SetTransform(math::VRBTransform(trans));
+		m_pRigidBodyPart->GetTransform().Rotate(m_pBody->GetOrientation().GetQuat());
+		m_pRigidBodyPart->SetPosition(m_pBody->GetPositionState().GetPositon().AsVector());
 	}
 	else
 	{
+		//delete body
+
+		VQuatf rigidQuat = m_pBody->GetOrientation().GetQuat();
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
+		m_pBody->Deactivate();
+
+		//TODO will not take joints into account. coming with new physic manager design
+		//restore the old values
 		m_pBody->SetPosition(
 			graphics::VVertex3f(
-			m_Position.GetX(),
-			m_Position.GetY(),
-			m_Position.GetZ())
+			m_Position[0],
+			m_Position[1],
+			m_Position[2])
 			);
+		//m_pBody->SetOrientation(rigidQuat);
+		m_pBody->Activate();
 	}
 }
 
@@ -163,15 +181,20 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 		{
 			VVector4f quat;
 			VVector4f axisAngleQuat;
-			
+			vbool isEnabled = false;
 			if( m_pBody.Get() != 0)
-				quat = m_pBody.Get()->GetOrientation().GetAsVector();
+			{
+				quat = m_pBody->GetOrientation().GetAsVector();
+				isEnabled = m_pBody->IsEnabled();
+			}
+				
 			
 			in_pAnswer->AddProperty("Mass", m_fMass);
 			in_pAnswer->AddProperty("Position", m_Position);
 			in_pAnswer->AddProperty("Address", m_pBody.Get());
 			in_pAnswer->AddProperty("Quat", quat);
 			in_pAnswer->AddProperty("QuatAxisAngle", axisAngleQuat);
+			in_pAnswer->AddProperty("Enabled", isEnabled);
 		}
 	}
 	else if( request == "update" )

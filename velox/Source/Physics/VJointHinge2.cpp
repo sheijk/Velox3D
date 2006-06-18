@@ -32,8 +32,8 @@ void VJointHinge2::Apply()
 
 		//TODO:check if still true
 		//ode sometimes has problems with parametes
-		SetParameters();
-		SetAxisAndAnchor();
+		/*SetParameters();
+		SetAxisAndAnchor();*/
 	}
 }
 
@@ -69,8 +69,12 @@ void VJointHinge2::AddBody(VBody* in_pBody1, VBody* in_pBody2)
 	V3D_ASSERT(*m_pBody2->GetOdeBody()->GetBodyID() != 0);
 
 	//SetParameters();
-	Apply();
-    dJointAttach(m_JointID, *m_pBody1->GetOdeBody()->GetBodyID(), *m_pBody2->GetOdeBody()->GetBodyID());
+	dJointAttach(
+		m_JointID,
+		*m_pBody1->GetOdeBody()->GetBodyID(),
+		*m_pBody2->GetOdeBody()->GetBodyID()
+		);
+	Apply(); //ode wiki tells to attach joint before applying settings
 }
 
 void VJointHinge2::SetAnchor(vfloat32 x, vfloat32 y, vfloat32 z)
@@ -126,6 +130,20 @@ void VJointHinge2::SetAxis2(VVector3f in_Axis)
 }
 
 VVector3f VJointHinge2::GetAnchor()
+{
+	VVector3f anchor;
+	dVector3 result;
+	if(m_JointID)
+	{
+		dJointGetHinge2Anchor (m_JointID, result);
+		anchor.Set(result[0],result[1], result[2]);
+		return anchor;
+	}
+	else
+		return m_Anchor;
+}
+
+VVector3f VJointHinge2::GetOwnAnchor()
 {
 	return m_Anchor;
 }
@@ -190,6 +208,9 @@ void VJointHinge2::SetAxisAndAnchor()
 	dJointSetHinge2Anchor(m_JointID, m_Anchor[0], m_Anchor[1], m_Anchor[2]);
 	dJointSetHinge2Axis1(m_JointID, m_Axis1[0], m_Axis1[1], m_Axis1[2]);
 	dJointSetHinge2Axis2(m_JointID, m_Axis2[0], m_Axis2[1], m_Axis2[2]);
+
+	//debug purpose
+	GetAnchor();
 }
 
 //-----------------------------------------------------------------------------

@@ -47,6 +47,11 @@ void VPhysicManager::Update(vfloat32 in_fSeconds)
 	}
 }
 
+void VPhysicManager::Delete(BodyPtr in_Body)
+{
+	m_BodyList.remove(in_Body);
+}
+
 void VPhysicManager::Activate()
 {
 	;
@@ -87,9 +92,9 @@ VPhysicManager::Geometry VPhysicManager::CreateGeom(IVBoundingVolumePart* in_pBo
 VPhysicManager::Geometry VPhysicManager::CreateBoxGeom(VBoundingBox* in_pBoundingBox)
 {
 	VSharedPtr<VGeometryBox> pGeometryBox(new VGeometryBox());
-	pGeometryBox->SetWidth(in_pBoundingBox->GetLength().GetX());
-	pGeometryBox->SetHeight(in_pBoundingBox->GetLength().GetY());
-	pGeometryBox->SetLength(in_pBoundingBox->GetLength().GetZ());
+	pGeometryBox->SetLength(in_pBoundingBox->GetLength().GetX());
+	pGeometryBox->SetWidth(in_pBoundingBox->GetLength().GetY());
+	pGeometryBox->SetHeight(in_pBoundingBox->GetLength().GetZ());
 
 	pGeometryBox->CreateBox(m_World.GetSpace());
 	return pGeometryBox;

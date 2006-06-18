@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="oded.lib opengl32.lib glu32.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib SingleTrimesh.lib"
 				OutputFile="$(OutDir)/VeloxLib.lib"
 				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
 				IgnoreAllDefaultLibraries="false"
@@ -1476,6 +1476,10 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VBodyPart.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VCollisionPart.cpp"
 					>
 				</File>
 				<File

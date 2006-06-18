@@ -8,7 +8,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indent
+using namespace v3d;
 using namespace v3d::entity;
 
 VJointHinge2Part::VJointHinge2Part() : 
@@ -58,14 +58,12 @@ void VJointHinge2Part::UnregisterBody(VBody* in_pAddress)
 		{
 			m_pBodyAddressOne = 0;
 			m_bIsLinkedByBodyOne = false;
-//			Deactivate();
 		}
 
 		if( in_pAddress == m_pBodyAddressTwo )
 		{
 			m_pBodyAddressTwo = 0;
 			m_bIsLinkedByBodyTwo = false;
-//			Deactivate();
 		}
 
 		else
@@ -74,14 +72,6 @@ void VJointHinge2Part::UnregisterBody(VBody* in_pAddress)
 		}
 	}
 }
-
-//vbool VJointHinge2Part::IsReady() const
-//{
-//	if(m_bIsLinkedByBodyOne && m_bIsLinkedByBodyTwo && VPartBase::IsReady())
-//		return true;
-//	else
-//		return false;
-//}
 
 void VJointHinge2Part::Activate()
 {
@@ -95,6 +85,10 @@ void VJointHinge2Part::Activate()
 		//create the link of the 2 bodies
 		Create();
 	}
+	
+	//ode seems to forget the anchor location
+	m_Joint.SetAnchor(m_Joint.GetOwnAnchor());
+	m_Joint.Apply();
 }
 
 void VJointHinge2Part::Create()
@@ -109,7 +103,7 @@ void VJointHinge2Part::Create()
 void VJointHinge2Part::Deactivate()
 {
 	m_bIsActive = false;
-	m_Joint.Destroy();
+	m_Joint.Destroy(); //not sure if this is a good idea
 }
 
 void VJointHinge2Part::OnMessage(
@@ -130,6 +124,16 @@ void VJointHinge2Part::OnMessage(
 			in_pAnswer->AddProperty("LinkedByBodyOne", m_bIsLinkedByBodyOne);
 			in_pAnswer->AddProperty("LinkedByBodyTwo", m_bIsLinkedByBodyTwo);
 			in_pAnswer->AddProperty("Anchor", m_Joint.GetAnchor());
+			
+			/* somehow a bug...
+			 * this seems to be the solution I searched one month for..
+			 * cannot explain it but entity systems seems to do some mess up
+			 * with ode...never seen this kind of strange behavior
+			 */
+			m_Joint.SetAnchor(m_Joint.GetAnchor());
+			m_Joint.Apply();
+			
+			
 			in_pAnswer->AddProperty("Axis1", m_Joint.GetAxis1());
 			in_pAnswer->AddProperty("Axis2", m_Joint.GetAxis2());
 			in_pAnswer->AddProperty("LowStop", m_Joint.GetLowStop());

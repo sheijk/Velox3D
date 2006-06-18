@@ -16,7 +16,8 @@ using namespace v3d; // anti auto indenting
  * represents a bounding box volume part
  * @author: ins
  */
-class VBoundingBoxVolumePart :  public entity::VUnconnectedPartAdapter<IVBoundingVolumePart>
+class VBoundingBoxVolumePart :  
+	public entity::VUnconnectedPartAdapter<IVBoundingVolumePart>
 {
 public:
 
@@ -33,7 +34,8 @@ public:
 	//entity related methods
 	virtual void Activate();
 	virtual void Deactivate();
-	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+	virtual const VTypeInfo& GetTypeInfo() const 
+	{ return GetCompileTimeTypeInfo(this); }
 
 private:
 	virtual void OnMessage(

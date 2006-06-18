@@ -49,7 +49,6 @@ private:
 	entity::VPartConnection<physics::IVBoundingVolumePart> m_pVolumePart;
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 	
-
 	BodyPtr m_pBody;
 	vfloat32 m_fMass;
 	VVector3f m_Position;

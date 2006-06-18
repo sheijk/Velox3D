@@ -1,6 +1,5 @@
 #include <v3dlib/EntityParts/VSGAnimationPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -54,7 +53,14 @@ void VUpdateManagerPart::Unregister(IVUpdateablePart* in_pChild)
 	std::list<IVUpdateablePart*>::iterator iter = std::find(m_pChilds.begin(),
 		m_pChilds.end(), in_pChild);
 
-	m_pChilds.erase(iter);
+	//nothing found here
+	if(iter == m_pChilds.end())
+	{
+		V3D_THROW(VException, "part not found to delete. surely you coded a bug");
+		return;
+	}
+
+	m_pChilds.erase(iter); 
 }
 
 std::string VUpdateManagerPart::GetDefaultId()

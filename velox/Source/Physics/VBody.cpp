@@ -24,7 +24,7 @@ VBody::~VBody()
 {
 	if(m_Body)
 	{
-		m_Body->Destroy(); //todo tell the manager abou this
+		m_Body->Destroy(); //todo tell the manager about this
 		delete m_Body;
 	}
 	if(m_CollisionMesh)
@@ -49,7 +49,7 @@ void VBody::Update()
 	const dReal* q = dBodyGetQuaternion(*m_Body->GetBodyID());
 
 	m_PositionState.SetPosition(p[0],p[1],p[2]);
-	m_OrientationState.GetQuat().Set(q[1], q[2], q[3],q[0]); //convert to x,y,z,w format
+	m_OrientationState.GetQuat().Set(q[0], q[1], q[2],q[3]); //convert to x,y,z,w format
 	
 	/*m_OrientationState.Apply();
 	m_PositionState.Apply();
@@ -94,16 +94,67 @@ void VBody::SetPosition(graphics::VVertex3f in_Position)
 
 void VBody::SetOrientation(math::VQuatf in_Orientation)
 {
-	m_OrientationState.GetQuat().Set(in_Orientation[0], in_Orientation[1], in_Orientation[2], in_Orientation[3]);
+	m_OrientationState.GetQuat().Set(
+		in_Orientation[1],
+		in_Orientation[2],
+		in_Orientation[3],
+		in_Orientation[0]);
+
 	m_OrientationState.Apply();
 }
 
 void VBody::SetOrientation(VVector4f in_Orientation)
 {
-	m_OrientationState.GetQuat().Set(in_Orientation[0], in_Orientation[1], in_Orientation[2], in_Orientation[3]);
+	m_OrientationState.GetQuat().Set(
+		in_Orientation[1],
+		in_Orientation[2],
+		in_Orientation[3],
+		in_Orientation[0]);
+
 	m_OrientationState.Apply();
 }
 
+void VBody::Destroy()
+{
+
+	m_Body->Destroy();
+	delete m_Body;
+	m_Body = 0;
+}
+
+bool VBody::IsValid()
+{
+	if(m_Body)
+		return true;
+
+	return false;
+}
+void VBody::Deactivate()
+{
+	if(m_Body)
+		dBodyDisable(*m_Body->GetBodyID());
+}
+
+void VBody::Activate()
+{
+	if (m_Body)
+	{
+		dBodyEnable(*m_Body->GetBodyID());
+		dBodySetLinearVel  (*m_Body->GetBodyID(), 0,0,0);
+		dBodySetAngularVel (*m_Body->GetBodyID(), 0,0,0);
+	}
+}
+
+vbool VBody::IsEnabled()
+{
+	if(m_Body)
+	{
+		if(dBodyIsEnabled(*m_Body->GetBodyID()))
+			return true;
+	}
+
+	return false;
+}
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d

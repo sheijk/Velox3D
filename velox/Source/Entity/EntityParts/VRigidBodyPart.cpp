@@ -42,7 +42,7 @@ void VRigidBodyPart::SetTransform(const math::VRBTransform& in_Trans)
 }
 
 
-const math::VRBTransform& VRigidBodyPart::GetTransform()
+math::VRBTransform& VRigidBodyPart::GetTransform()
 {
 	return m_Transformation;
 }

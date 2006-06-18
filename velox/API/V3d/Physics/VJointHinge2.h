@@ -47,6 +47,8 @@ public:
 	VVector3f GetAxis1();
 	VVector3f GetAxis2();
 	VVector3f GetAnchor();
+	VVector3f GetOwnAnchor();
+
 	VBody* GetBody1();
 	VBody* GetBody2();
 
