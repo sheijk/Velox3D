@@ -1846,10 +1846,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\Source\Scene\Shootings\VShadowMapShooting.cpp"
-						>
-					</File>
-					<File
 						RelativePath="..\..\Source\Scene\Shootings\VShootingBase.cpp"
 						>
 					</File>

@@ -4,6 +4,8 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Entity.h>
 #include <V3d/Physics/VGeometry.h>
+#include <V3dLib/EntityParts/VRigidBodyPart.h>
+#include <V3dLib/EntityParts/VUpdateablePart.h> //move away
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
@@ -14,7 +16,7 @@ namespace v3d { namespace physics {
 class VPhysicManagerPart;
 class IVBoundingVolumePart;
 
-class VCollisionPart : public entity::VPartBase
+class VCollisionPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
 {
 public:
 	
@@ -24,6 +26,7 @@ public:
 	// IVPart derived
 	void Activate();
 	void Deactivate();
+	void Update(vfloat32 in_fSeconds);
 	
 	static std::string GetDefaultId();
 
@@ -39,8 +42,11 @@ private:
 
 	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
 	entity::VPartConnection<physics::IVBoundingVolumePart> m_pVolumePart;
+	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
+	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
 	VSharedPtr<physics::VGeometry> m_pGeometry;
+	VVector3f m_Position;
 		
 };
 

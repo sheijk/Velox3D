@@ -13,7 +13,9 @@ using namespace v3d::entity;
 
 VCollisionPart::VCollisionPart() : 
 	m_pVolumePart(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pPhysicManagerPart(entity::VPartDependency::Ancestor, RegisterTo())
+	m_pRigidBodyPart(entity::VPartDependency::Neighbour, RegisterTo()),
+	m_pPhysicManagerPart(entity::VPartDependency::Ancestor, RegisterTo()),
+	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 {
 	m_pGeometry.Assign(0);
 	m_bActive = false;
@@ -27,7 +29,10 @@ void VCollisionPart::Activate()
 		V3D_THROW(entity::VMissingPartException, "missing part physic manager 'data'");
 
 	if( !m_bActive )
+	{
 		Create();
+		m_pUpdateManager->Register(this);
+	}
 }
 
 void VCollisionPart::Deactivate()
@@ -35,6 +40,7 @@ void VCollisionPart::Deactivate()
 	m_bActive = false;
 	m_pGeometry->Destroy();
 	m_pGeometry.Release();
+	m_pUpdateManager->Unregister(this);
 }
 
 void VCollisionPart::Create()
@@ -59,6 +65,21 @@ void VCollisionPart::OnMessage(
 		if( in_pAnswer != 0 )
 		{
 			in_pAnswer->AddProperty("Active", m_bActive);
+		}
+	}
+}
+
+void VCollisionPart::Update(vfloat32 in_fSeconds)
+{
+	if(m_pRigidBodyPart.Get())
+	{
+		//look if the position has been modified since our last visit
+		if (m_Position != m_pRigidBodyPart->GetPosition())
+		{
+			m_pGeometry->SetPosition(m_pRigidBodyPart->GetPosition());
+			m_Position = m_pRigidBodyPart->GetPosition();
+
+			//todo orientation
 		}
 	}
 }

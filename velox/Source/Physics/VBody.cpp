@@ -16,8 +16,6 @@ VBody::VBody(VOdeBody* in_pOdeBody) : m_PositionState(in_pOdeBody), m_Orientatio
 {
 	m_CollisionMesh = 0;
 	m_Body = in_pOdeBody;
-	//m_StateListContainer.RegisterForUpdate(&m_PositionState);
-	//m_StateListContainer.RegisterForUpdate(&m_OrientationState);
 }
 
 VBody::~VBody()
@@ -44,19 +42,11 @@ VGeometry* VBody::GetCollisionMesh()
 
 void VBody::Update()
 {
-
 	const dReal* p = dBodyGetPosition(*m_Body->GetBodyID());
 	const dReal* q = dBodyGetQuaternion(*m_Body->GetBodyID());
 
 	m_PositionState.SetPosition(p[0],p[1],p[2]);
-	m_OrientationState.GetQuat().Set(q[0], q[1], q[2],q[3]); //convert to x,y,z,w format
-	
-	/*m_OrientationState.Apply();
-	m_PositionState.Apply();
-	*///m_StateListContainer.RegisterForUpdate(&m_PositionState);
-	//m_StateListContainer.RegisterForUpdate(&m_OrientationState);
-
-	//m_StateListContainer.Update();
+	m_OrientationState.GetQuat().Set(q[1], q[2], q[3],q[0]); //convert to x,y,z,w format
 }
 
 VStatePosition& VBody::GetPositionState()
@@ -95,21 +85,22 @@ void VBody::SetPosition(graphics::VVertex3f in_Position)
 void VBody::SetOrientation(math::VQuatf in_Orientation)
 {
 	m_OrientationState.GetQuat().Set(
+		in_Orientation[0],
 		in_Orientation[1],
 		in_Orientation[2],
-		in_Orientation[3],
-		in_Orientation[0]);
+		in_Orientation[3]);
 
 	m_OrientationState.Apply();
 }
 
 void VBody::SetOrientation(VVector4f in_Orientation)
 {
+	//ode quat representation w,x,y,z but recheck
 	m_OrientationState.GetQuat().Set(
+		in_Orientation[0],
 		in_Orientation[1],
 		in_Orientation[2],
-		in_Orientation[3],
-		in_Orientation[0]);
+		in_Orientation[3]);
 
 	m_OrientationState.Apply();
 }

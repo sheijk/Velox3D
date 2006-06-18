@@ -2,6 +2,8 @@
 #define V3D_VGEOMETRY_2004_11_19_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VTypes.h>
+#include <V3d/Math/VVector.h>
+#include <V3d/Math/VQuaternion.h>
 #include <ode/ode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -85,6 +87,9 @@ public:
 
 	void SetCollisionGroup(Group in_CollisionGroup);
 	vint GetCollisionGroup();
+
+	void SetPosition(VVector3f in_Position);
+	void SetOrientation(VQuatf in_Quatf);
 
 protected:
 

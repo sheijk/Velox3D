@@ -69,6 +69,28 @@ vint VGeometry::GetCollisionGroup()
 	return m_CollisionGroup;
 }
 
+void VGeometry::SetPosition(VVector3f in_Position)
+{
+	dGeomSetPosition(
+		m_GeomID,
+		in_Position[0],
+		in_Position[1],
+		in_Position[2]
+	);
+}
+
+void VGeometry::SetOrientation(VQuatf in_Quatf)
+{
+	dQuaternion quat;
+	
+	for(vuint i=0; i<4; i++)
+		quat[i] = in_Quatf[i];
+
+	dGeomSetQuaternion(
+		m_GeomID, quat);
+}
+
+
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d
