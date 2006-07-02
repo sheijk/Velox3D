@@ -115,43 +115,11 @@ VSharedPtr<IVPart> VGenericPartParser::Parse(xml::IVXMLElement& in_Node)
 	using namespace xml;
 	using std::string;
 
+
 	VSharedPtr<IVPart> pPart = CreatePart();
 
-	vout << "Creating part of type " << GetType() << vendl;
-
-	IVXMLElement::AttributeIter attrib = in_Node.AttributeBegin();
-	while( attrib.HasNext() )
-	{
-		string name = attrib->GetName();
-		string value = attrib->GetValue().Get<string>();
-
-		vout << "\t " << name << "=" << value << vendl;
-
-		if( name != "type" && name != "tags" )
-		{
-			messaging::VMessage message;
-			message.AddProperty("type", "update");
-			message.AddProperty("name", name);
-			message.AddProperty("value", value);
-
-			pPart->Send(message);
-		}
-		else if( name == "tags" )
-		{
-			tags::VTagRegistryPtr pTagRegistry;
-
-			std::stringstream tags(value);
-			std::string tagName;
-
-			while( ! tags.eof() )
-			{
-				tags >> tagName;
-				pPart->AttachTag(pTagRegistry->GetTagWithName(tagName));
-			}
-		}
-
-		++attrib;
-	}
+	//if( pPart != 0 )
+	//	ApplyParameters(in_Node, *pPart);
 
 	return pPart;
 }

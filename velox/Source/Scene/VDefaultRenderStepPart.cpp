@@ -66,6 +66,8 @@ void VDefaultRenderStepPart::Render(IVGraphicsPart* in_pScene)
 		{
 			for(vuint pass = 0; pass < shape->GetPassCount(); ++pass)
 			{
+				const IVShapePart* pShape = &*shape;
+
 				IVDevice& device(*GetOutputDevice());
 
 				math::VRBTransform transform = shape->GetModelTransform();

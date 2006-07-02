@@ -24,7 +24,7 @@ namespace vfs {
  * Deprecated: use the resource system instead
  * fileStream = GetResourceData<IVFileStream>(path);
  */
-class V3D_DEPRECATED IVFileSystem : public VNamedObject
+class IVFileSystem : public VNamedObject
 {
 public:
 	typedef VSharedPtr<IVBufferStream> FileStreamPtr;
@@ -59,9 +59,17 @@ public:
 
 	/** mount resources as described inside the xml file */
 	virtual void MountFromXML(VStringParam in_strFileName) = 0;
+
+	/** prints all file and directory names to vout */
+	virtual void DumpFileSystem() const = 0;
+	/** prints all file and directory names starting at the given dir to vout */
+	virtual void DumpDir(vfs::IVDirectory& dir, const std::string& prefix) const = 0;
 };
 
 typedef VServicePtr<IVFileSystem> VFileSystemPtr;
+
+inline void DumpFileSystem() { VFileSystemPtr()->DumpFileSystem(); }
+
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

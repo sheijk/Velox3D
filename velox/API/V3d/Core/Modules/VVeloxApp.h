@@ -29,7 +29,7 @@ class VVeloxApp : public VModuleBase
 		VVeloxApp* m_pApp;
 	public:
 		VVeloxMainProxy(VVeloxApp* pApp);
-		virtual vint Main();
+		virtual vint Main(const std::vector<std::string>& args);
 	};
 
 	std::auto_ptr<VVeloxMainProxy> m_pMainService;

@@ -494,11 +494,36 @@ VRangeIterator<VEntity> VEntity::ChildIterator()
 	return CreateDerefBeginIterator<VEntity>(m_Entities);
 }
 
+VRangeIterator<const VEntity> VEntity::ChildIterator() const
+{
+	return CreateDerefBeginIterator<const VEntity>(m_Entities);
+}
+
 VRangeIterator<IVPart> VEntity::PartIterator()
 {
 	return CreateAccesssorIterator<
 		VPair2ndDerefAccessor, IVPart, PartContainer::iterator>(
 		m_Parts.begin(), m_Parts.end());
+}
+
+VRangeIterator<const IVPart> VEntity::PartIterator() const
+{
+	return CreateAccesssorIterator<
+		VPair2ndDerefAccessor, const IVPart, PartContainer::const_iterator>(
+		m_Parts.begin(), m_Parts.end());
+}
+
+VSharedPtr<VEntity> VEntity::GetChildWithName(const std::string& in_strName)
+{
+	for(EntityContainer::iterator childIter = m_Entities.begin();
+		childIter != m_Entities.end();
+		++childIter)
+	{
+		if( (*childIter)->GetName() == in_strName )
+			return *childIter;
+	}
+
+	return VSharedPtr<VEntity>(0);
 }
 
 std::string VEntity::GetName() const
@@ -511,6 +536,72 @@ void VEntity::SetName(const std::string& in_TrName)
 	m_strName = in_TrName;
 }
 
+void PrintPartSettings(const IVPart& in_Part, const std::string& prefix)
+{
+	using messaging::VMessage;
+
+	IVPart& part = const_cast<IVPart&>(in_Part);
+
+	VMessage request;
+	request.AddProperty("type", "getSettings");
+	VMessage answer;
+
+	part.Send(request, &answer);
+
+	VRangeIterator<const std::string> propertyIter = answer.PropertyIterator();
+	while( propertyIter.HasNext() )
+	{
+		vout << prefix 
+			<< *propertyIter 
+			<< " = " 
+			<< answer.GetAs<std::string>(*propertyIter) 
+			<< vendl;
+		++propertyIter;
+	}
+}
+
+void VEntity::DumpInfo(const std::string& prefix) const
+{
+	if( this != 0 ) 
+	{
+		const std::string indent = ".\t";
+
+		vout
+			<< (IsActive() ? "" : "!")
+			<< prefix
+			<< "Entity \"" << GetName() << "\""
+			<< (IsActive() ? "" : " (inactive)")
+			<< vendl;
+
+		VRangeIterator<const IVPart> partIter = PartIterator();
+		while( partIter.HasNext() )
+		{
+			vout 
+				<< prefix 
+				<< indent << "Part " 
+				<< partIter->GetTypeInfo().GetName()
+				<< (partIter->IsReady() ? "" : " (unresolved dependencies)") 
+				<< vendl;
+
+			PrintPartSettings(*partIter, prefix + indent + indent);
+
+			++partIter;
+		}
+
+		VRangeIterator<const VEntity> childIter = ChildIterator();
+		while( childIter.HasNext() )
+		{
+			childIter->DumpInfo(prefix + indent);
+			++childIter;
+		}
+	}
+	else
+	{
+		vout << prefix << "Entity.this = 0";
+	}
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------
+

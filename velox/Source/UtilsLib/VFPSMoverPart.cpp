@@ -101,8 +101,11 @@ void VFPSMoverPart::Update(vfloat32 in_fSeconds)
 
 void VFPSMoverPart::Activate()
 {
-	m_pUpdateManager->Register(this);
-	QueryButtons(*m_pInputPart->GetInputManager());
+	if( m_pInputPart->GetInputManager() != 0 )
+	{
+		m_pUpdateManager->Register(this);
+		QueryButtons(*m_pInputPart->GetInputManager());
+	}
 }
 
 void VFPSMoverPart::Deactivate()

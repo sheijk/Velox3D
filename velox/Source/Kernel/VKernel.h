@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------
 #include <string>
 #include <list>
+#include <vector>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace kernel {
@@ -36,6 +37,7 @@ private:
 	ServiceList m_Services;
 	std::string m_strAppName;
 	xml::IVXMLService* m_XmlService;
+	std::vector<std::string> m_Arguments;
 
 public:
 	VKernel();
@@ -43,6 +45,8 @@ public:
 
 	/** loads ini file and interpretes it */
 	void ProcessIniFile(std::string in_strFileName);
+
+	void SetArguments(int argc, char* argv[]);
 };
 
 //-----------------------------------------------------------------------------

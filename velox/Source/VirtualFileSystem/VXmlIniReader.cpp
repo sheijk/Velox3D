@@ -20,8 +20,8 @@ namespace vfs {
 using namespace xml;
 using namespace std;
 
-#define V3D_LOGMSG(x) vout << "vfsxml: " << x << vendl;
-//#define V3D_LOGMSG(x) 
+//#define V3D_LOGMSG(x) vout << "vfsxml: " << x << vendl;
+#define V3D_LOGMSG(x) 
 
 /**
  * standard c'tor

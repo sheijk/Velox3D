@@ -58,12 +58,12 @@ void VKernel::ProcessIniFile(std::string in_strFileName)
 	catch(VModuleLoadFailure&)
 	{}
 
-	vout << "Dumping registered objects:" << vendl;
-	vout << "-------------------------------------------------------" << vendl;
-	vout << VObjectRegistry::GetInstance()->GetObjectDump();
-	vout << "-------------------------------------------------------" << vendl;
-	vout << "Dumping registered objects done" << vendl;
-	vout << "-------------------------------------------------------" << vendl;
+	//vout << "Dumping registered objects:" << vendl;
+	//vout << "-------------------------------------------------------" << vendl;
+	//vout << VObjectRegistry::GetInstance()->GetObjectDump();
+	//vout << "-------------------------------------------------------" << vendl;
+	//vout << "Dumping registered objects done" << vendl;
+	//vout << "-------------------------------------------------------" << vendl;
 
 	// delegate control to app service
 	DelegateControl();
@@ -162,7 +162,7 @@ void VKernel::DelegateControl()
 	// start it
 	if( 0 != pApp )
 	{
-		int ret = pApp->Main();
+		int ret = pApp->Main(m_Arguments);
 
 		vout << "Return value of main service: " << ret << "\n";
 	}
@@ -183,6 +183,15 @@ void VKernel::Shutdown()
 	for( ; serviceIter != m_Services.end(); ++serviceIter )
 	{
 		(*serviceIter)->Shutdown();
+	}
+}
+
+
+void VKernel::SetArguments(int argc, char* argv[])
+{
+	for(vint currentArg = 0; currentArg < argc; ++currentArg)
+	{
+		m_Arguments.push_back(argv[currentArg]);
 	}
 }
 

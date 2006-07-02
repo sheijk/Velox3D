@@ -313,6 +313,33 @@ vbool VSimpleVfs::Exists(VStringParam in_strFSObject) const
 		ExistsFile(in_strFSObject);
 }
 
+void VSimpleVfs::DumpDir(vfs::IVDirectory& dir, const std::string& prefix) const
+{
+	const std::string indent = ".\t";
+
+	vout << prefix << dir.GetName() << "/" << vendl;
+
+	VRangeIterator<vfs::IVDirectory> childdirs = dir.SubDirs();
+	while( childdirs.HasNext() )
+	{
+		DumpDir(*childdirs, prefix + indent);
+		++childdirs;
+	}
+
+	VRangeIterator<vfs::IVFile> files = dir.Files();
+	while( files.HasNext() )
+	{
+		vout << prefix << indent << files->GetName() << vendl;
+		++files;
+	}
+}
+
+void VSimpleVfs::DumpFileSystem() const
+{
+	DumpDir(*vfs::VFileSystemPtr()->GetDir("/"), "");
+}
+
+
 //-----------------------------------------------------------------------------
 } // namespace vfs
 } // namespace v3d

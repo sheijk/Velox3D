@@ -1,8 +1,8 @@
 #ifndef V3D_VFSUTILS_H
 #define V3D_VFSUTILS_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVFileSysObject.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVFileSysObject.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

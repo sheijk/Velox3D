@@ -8,6 +8,7 @@
 #include <V3d/Core/VIOStream.h>
 #include <GL/glfw.h>
 #include <V3d/Core/VLogging.h>
+#include <V3d/Core/DebugUtils.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------
@@ -43,7 +44,14 @@ VGLSLShader::VGLSLShader(
 			const std::string& in_strVertexSource, 
 			const std::string& in_strFragmentSource)
 {
-	vout << "Creating GLSL Shader from thread " << glfwGetThreadID() << vendl;
+	static VThreadId lastThreadId = -1;
+	VThreadId threadId = IdOfCurrentThread();
+
+	if( lastThreadId != threadId )
+	{
+		vout << "Creating GLSL Shader from thread " << threadId << vendl;
+		lastThreadId = threadId;
+	}
 
 	m_nTextureCount = 0;
 

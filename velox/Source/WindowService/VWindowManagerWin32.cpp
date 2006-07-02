@@ -35,11 +35,11 @@ IVWindowManager::IVWindowPtr VWindowManagerWin32::QueryWindow(
 	IVWindowManager::IVWindowPtr window;
 	VWindowWin32* window32 = new VWindowWin32;
 
-	vout << "Window manager creating window:" << vendl;
+	//vout << "Window manager creating window:" << vendl;
 	window32->Create(in_pName);
 
 	m_iNumWindows++;
-	vout << "-------------------------------------------------------" << vendl;
+	//vout << "-------------------------------------------------------" << vendl;
 
 	window.Assign(window32);
 	return window;
@@ -55,12 +55,12 @@ IVWindowManager::IVWindowPtr VWindowManagerWin32::QueryWindow(
 	IVWindowManager::IVWindowPtr window;
 	VWindowWin32* window32 = new VWindowWin32;
 
-	vout << "Window manager creating window:" << vendl;
+	//vout << "Window manager creating window:" << vendl;
 	window32->SetDisplaySettings(in_pDisplaySettings);
 	window32->Create(in_pName);
 
 	m_iNumWindows++;
-	vout << "-------------------------------------------------------" << vendl;
+	//vout << "-------------------------------------------------------" << vendl;
 
 	window.Assign(window32);
 	return window;

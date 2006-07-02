@@ -1501,6 +1501,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Source\UtilsLib\VCircleMoverPart.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Source\Scene\Shapes\VSkyboxPart.cpp"
 					>
 				</File>
@@ -1518,6 +1526,10 @@
 				>
 				<File
 					RelativePath="..\..\Source\Scene\Shootings\VMirrorShooting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Scene\Shootings\VOffscreenShooting.cpp"
 					>
 				</File>
 				<File

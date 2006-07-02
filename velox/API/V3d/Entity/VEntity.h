@@ -60,7 +60,7 @@ public:
 	
 	vbool IsActive() const;
 
-	/** Adds a part to the entity. Entity will delete part */
+	/** Adds a part to the entity. Entity will own part */
 	void AddPart(const std::string& in_Id, PartPtr in_pPart);
 
 	/** Adds a part using it's  */
@@ -73,13 +73,21 @@ public:
 	void RemoveChild(EntityPtr in_pEntity);
 
 	VRangeIterator<VEntity> ChildIterator();
+	VRangeIterator<const VEntity> ChildIterator() const;
 	VRangeIterator<IVPart> PartIterator();
+	VRangeIterator<const IVPart> PartIterator() const;
 
 	std::string GetName() const;
 	void SetName(const std::string& in_strName);
 
 	template<typename PartType>
 	PartType* GetPart();
+
+	VSharedPtr<VEntity> GetChildWithName(const std::string& in_strName);
+
+	/** print all sub entities and parts to vout */
+	void DumpInfo(const std::string& prefix = "") const;
+
 private:
 	typedef std::multimap<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;

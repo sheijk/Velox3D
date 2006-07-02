@@ -6,6 +6,23 @@
 	<part type="v3d::utils::VInputPart" tags=""/>
 	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/water_pp.v3dmat" tags=""/>
 	<part type="shooting" tags=""/>
+
+	<!-- entity name="foo">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags="" />
+		<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="10.0" tags="" />
+		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags="" />
+	</entity>
+
+	<entity name="fpsCam">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::utils::VCameraPart" tags=""/>
+		<part type="v3d::utils::VFPSMoverPart" tags=""/>
+	</entity>
+
+	<entity name="skybox">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+		<part type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/" tags=""/>
+	</entity -->
 	<entity name="ambient">
 		<entity name="skybox">
 			<part type="v3d::entity::VRigidBodyPart" pos="(70,100,255)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
@@ -13,7 +30,11 @@
 		</entity>
 		<entity name="dummy">
 			<part type="v3d::entity::VRigidBodyPart" pos="(-31,8,-15)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-			<part type="v3d::scene::VSphereMeshPart" mat_groundColor="(0,0,0,1)" mat_skyColor="(1,1,1,1)" material="/edit/mat/ambientsphere.v3dmat" radius="10" tags=" glow foo"/>
+			<part type="v3d::scene::VSphereMeshPart" mat_groundColor="(0,0,0,1)" mat_skyColor="(1,1,1,1)" material="/edit/mat/ambientsphere.v3dmat" radius="10" tags=""/>
+		</entity>
+		<entity name="dummy_">
+			<part type="v3d::entity::VRigidBodyPart" pos="(-41,8,-15)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+			<part type="v3d::scene::VSphereMeshPart" mat_groundColor="(0,0,0,1)" mat_skyColor="(1,1,1,1)" material="/edit/mat/ambientsphere.v3dmat" radius="10" tags=""/>
 		</entity>
 		<entity name="editorCam">
 			<part type="v3d::entity::VRigidBodyPart" pos="(70,100,255)" updir="(-0.0849993,0.965858,-0.244643)" viewdir="(-0.36922,-0.258584,-0.892622)" tags=""/>
@@ -31,16 +52,22 @@
 			<part type="v3d::utils::VCircleMoverPart" angle="694.479" center="(0,90,0)" radius="100" speed="1" tags=""/>
 			<part type="v3d::scene::VOffscreenShooting" render-target="/cameraRT" tags=""/>
 			<part type="v3d::scene::VArrowMeshPart" color="(1,0,0,1)" material="/system/graphics/defaultMaterial" size="1" tags=""/>
-			<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags="" include-all="true" include-tags="" tags=""/>
+			<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags=" " include-all="true" include-tags=" " tags=""/>
 			<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/sepia_pp.v3dmat" tags=""/>
 		</entity>
 		<entity name="dummy2">
 			<part type="v3d::entity::VRigidBodyPart" pos="(-57,14,10)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-			<part type="v3d::scene::VSphereMeshPart" mat_mud="" mat_mudColor="(0,0,0,0)" material="/edit/mat/terrain.v3dmat" radius="7.5" tags=""/>
+			<part type="v3d::scene::VSphereMeshPart" mat_color="(1,0.3,0,1)" material="/edit/mat/red.v3dmat" radius="7.5" tags=""/>
+			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
 		</entity>
 		<entity name="model">
 			<part type="v3d::entity::VRigidBodyPart" pos="(54,42,4)" updir="(0.269903,0.862259,0.428511)" viewdir="(0.882748,-0.0438562,-0.467758)" tags=""/>
 			<part type="v3d::scene::VModelPart" material="" model="/edit/models/foo.xml" tags=""/>
+		</entity>
+		<entity name="fpsCam">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+			<part type="v3d::utils::VCameraPart" tags=""/>
+			<part type="v3d::utils::VFPSMoverPart" tags=""/>
 		</entity>
 	</entity>
 	<entity name="world">

@@ -30,6 +30,11 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+- Command Line Parameter werden bis an die App durchgereicht + 
+  VCommandLineOptions um Optionen zu parsen
+- diverse unnoetige Debugausgaben entfernt
+- RacerDemo aufgeraeumt
+
 16.06.06
 - neue scripts:
   v3d-make-source-backup.sh fuer Backups vor dem svn update/committ

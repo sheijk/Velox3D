@@ -12,9 +12,9 @@ VVeloxApp::VVeloxMainProxy::VVeloxMainProxy(VVeloxApp* pApp) :
 {
 }
 
-vint VVeloxApp::VVeloxMainProxy::Main()
+vint VVeloxApp::VVeloxMainProxy::Main(const std::vector<std::string>& args)
 {
-	return m_pApp->Main(std::vector<std::string>());
+	return m_pApp->Main(args);
 }
 
 VVeloxApp::VVeloxApp()

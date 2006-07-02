@@ -52,9 +52,16 @@ void IVPart::OnMessage(
 {
 }
 
+namespace {
+	vbool IsValidTagName(const tags::VTag& tag)
+	{
+		return tag.GetName().length() > 0;
+	}
+}
+
 void IVPart::AttachTag(const tags::VTag& tag)
 {
-	if( ! HasTag(tag) )
+	if( IsValidTagName(tag) && ! HasTag(tag) )
 	{
 		m_Tags.push_back(&tag);
 	}

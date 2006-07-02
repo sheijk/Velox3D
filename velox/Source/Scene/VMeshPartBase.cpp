@@ -217,12 +217,9 @@ void VMeshPartBase::AddVariables(messaging::VMessage* in_pAnswer)
 
 			if( IsValidPartParamName(name) )
 				in_pAnswer->AddProperty(name, value);
-			else
-				V3D_LOG("ignored material param as part param: " 
-					<< name << "=" << value << "\n");
-
-			//IVParameterValue* pValue = paramValue->second.Get();
-			//pValue->Apply(*parameter);
+			//else
+				//V3D_LOG("ignored material param as part param: " 
+					//<< name << "=" << value << "\n");
 		}
 	}
 

@@ -31,6 +31,8 @@ public:
 private:
 	typedef std::map<std::string, IVPartParser*> ParserMap;
 
+	VSharedPtr<VEntity> Parse(xml::IVXMLElement& in_Node);
+
 	ParserMap m_Parsers;
 };
 

@@ -80,7 +80,7 @@ void VRigidBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging:
 			VVector3f pos = in_Message.GetAs<VVector3f>("value");
 			m_Transformation.SetPosition(pos);
 
-			vout << "VRigidBodyPart: set position to " << pos << vendl;
+			//vout << "VRigidBodyPart: set position to " << pos << vendl;
 		}
 		else if( name == "direction" )
 		{

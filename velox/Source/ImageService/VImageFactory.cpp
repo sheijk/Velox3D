@@ -97,17 +97,17 @@ void VImageFactory::SaveImageToFile(VStringParam in_sFilename, VImage& in_Image)
 		if(strcmp(sExtension, "bmp") == 0)
 		{
 			theImageSaver->SaveImageToFile(in_Image,
-			IVImageSaver::ImageType::SaveBMP, in_sFilename);
+			IVImageSaver::SaveBMP, in_sFilename);
 		}
 		else if(strcmp(sExtension,"tga") == 0)
 		{
 			theImageSaver->SaveImageToFile(in_Image,
-				IVImageSaver::ImageType::SaveTGA, in_sFilename);
+				IVImageSaver::SaveTGA, in_sFilename);
 		}
 		else if(strcmp(sExtension,"jpg") == 0)
 		{
 			theImageSaver->SaveImageToFile(in_Image,
-				IVImageSaver::ImageType::SaveJPG, in_sFilename);
+				IVImageSaver::SaveJPG, in_sFilename);
 		}
 	}
 		

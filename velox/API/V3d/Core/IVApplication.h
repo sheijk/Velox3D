@@ -1,6 +1,11 @@
 #ifndef V3D_APPLICATION_H
 #define V3D_APPLICATION_H
 //-----------------------------------------------------------------------------
+#include <V3d/Core/VTypes.h>
+
+#include <vector>
+#include <string>
+
 namespace v3d {
 //-----------------------------------------------------------------------------
 
@@ -18,7 +23,7 @@ public:
 	/**
 	 * The main function. Will be called by the kernel after initialisation
 	 */
-	virtual int Main() = 0;
+	virtual int Main(const std::vector<std::string>& args) = 0;
 
 	virtual ~IVApplication() {}
 };

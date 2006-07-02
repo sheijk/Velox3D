@@ -263,7 +263,14 @@ vbool VMaterialResourceType::Generate(
 {
 	V3D_ASSERT(GetTypeInfo<IVMaterial>() == in_Type);
 
-	V3D_LOGLN("generating material from thread " << IdOfCurrentThread());
+	static VThreadId lastThreadId = -1;
+	VThreadId threadId = IdOfCurrentThread();
+
+	if( threadId != lastThreadId )
+	{
+		lastThreadId = threadId;
+		V3D_LOGLN("generating material from thread " << threadId);
+	}
 
 	if( in_pResource->ContainsData(in_Type) )
 		return true;

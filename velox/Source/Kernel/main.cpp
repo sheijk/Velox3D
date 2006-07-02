@@ -25,20 +25,22 @@ namespace v3d {
 /** the main function */
 int main(int argv, char* argc[])
 {
-	vchar* pcXmlFileName = 0;
+	const vchar* pcXmlFileName = "init.xml";
 
 	// create the kernel
 	g_pKernel.Assign(new VKernel());
 
 	// get name of xml config file
 
-	if( argv > 1 )
+	if( argv > 2 )
 	{
-		pcXmlFileName = argc[1];
-	}
-	else
-	{
-		pcXmlFileName = "init.xml";
+		const std::string arg1 = argc[1];
+		const std::string arg2 = argc[2];
+
+		if( arg1 == "-ini" )
+			pcXmlFileName = arg2.c_str();
+
+		//pcXmlFileName = argc[1];
 	}
 	
 	try
@@ -46,6 +48,7 @@ int main(int argv, char* argc[])
 		// load and init
 		std::string fileName;
 		fileName = pcXmlFileName;
+		g_pKernel->SetArguments(argv, argc);
 		g_pKernel->ProcessIniFile(fileName);
 	}
 	catch(VException& exc)
@@ -66,7 +69,7 @@ int main(int argv, char* argc[])
 
 		std::string msg = ostr.str();
 
-		vout << pcMessage;
+		vout << msg;
 
 		// force a breakpoint
 		__asm
@@ -84,3 +87,4 @@ int main(int argv, char* argc[])
 	// exit program
 	return 0;
 }
+

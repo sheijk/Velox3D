@@ -45,6 +45,9 @@ public:
 	virtual vbool ExistsDir(VStringParam in_strDir) const;
 	virtual vbool ExistsFile(VStringParam in_strFile) const;
 	virtual vbool Exists(VStringParam in_strFSObject) const;
+
+	virtual void DumpFileSystem() const;
+	virtual void DumpDir(vfs::IVDirectory& dir, const std::string& prefix) const;
 };
 
 //-----------------------------------------------------------------------------
