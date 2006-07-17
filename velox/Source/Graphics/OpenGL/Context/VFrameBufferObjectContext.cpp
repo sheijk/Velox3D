@@ -33,6 +33,7 @@ VFrameBufferObjectContext::VFrameBufferObjectContext(
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	vbyte* pixels = new vbyte[width*height*4];
+	// looks strange, seems to be old test initialisation code..
 	for(vuint32* pix = (vuint32*)pixels; pix < (vuint*)(pixels)+(width*height); ++pix)
 	{
 		*pix = 0xFF0000FF;

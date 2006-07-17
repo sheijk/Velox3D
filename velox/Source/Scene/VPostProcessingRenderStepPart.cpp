@@ -89,35 +89,39 @@ void VPostProcesssingRenderStepPart::Render(IVGraphicsPart* in_pScene)
 
 	if( &*m_hPostProcessingShader != 0 )
 	{
-		ApplyMaterial(*GetOutputDevice(), &m_hPostProcessingShader->GetPass(0));
-		m_MaterialSetup.Apply(*m_hPostProcessingShader);
-		VRangeIterator<IVParameter> params = m_hPostProcessingShader->Parameters();
-		while( params.HasNext() )
-		{
-			params->ApplyAutoValue(*GetOutputDevice());
-			++params;
-		}
+		//TODO: seems not to work correctly with multipass materials
+		// use two render targets for multiple passes
+		//for(vuint passNum = 0; passNum < m_hPostProcessingShader->PassCount(); ++passNum)
+		//{
+		const vuint passNum = 0;
+			ApplyMaterial(*GetOutputDevice(), &m_hPostProcessingShader->GetPass(passNum));
+			m_MaterialSetup.Apply(*m_hPostProcessingShader);
+			VRangeIterator<IVParameter> params = m_hPostProcessingShader->Parameters();
+			while( params.HasNext() )
+			{
+				params->ApplyAutoValue(*GetOutputDevice());
+				++params;
+			}
+
+			m_hOffscreenTexture->Bind();
+
+			glColor3f(1, 1, 1);
+			SendTexturedQuad(1.0f, -.5f);
+
+			m_hOffscreenTexture->Unbind();
+		//}
 	}
 	else
 	{
 		ApplyMaterial(*GetOutputDevice(), &IVDevice::GetDefaultMaterial()->GetPass(0));
+
+		m_hOffscreenTexture->Bind();
+
+		glColor3f(1, 1, 1);
+		SendTexturedQuad(1.0f, -.5f);
+
+		m_hOffscreenTexture->Unbind();
 	}
-
-	m_hOffscreenTexture->Bind();
-
-
-	glColor3f(1, 1, 1);
-	SendTexturedQuad(1.0f, -.5f);
-
-	//glDisable(GL_DEPTH_TEST);
-	//for(vfloat32 percent = 1.0f; percent >= .0f; percent -= .1f)
-	//{
-	//	glColor3f(0, 0, percent);
-	//	sendTexturedQuad(percent, -1.0f * percent);
-	//}
-	//glEnable(GL_DEPTH_TEST);
-
-	m_hOffscreenTexture->Unbind();
 }
 
 void VPostProcesssingRenderStepPart::AddMaterialParameter(

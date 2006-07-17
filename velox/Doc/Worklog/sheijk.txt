@@ -30,6 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+17.07.06
+- crash, wenn VPostProcessingPart keinen shader zugewiesen hat behoben
+- "toller" glow effekt
+
+02.07.06
+- Szenen koennen wieder in der Engine geladen werden
 - Command Line Parameter werden bis an die App durchgereicht + 
   VCommandLineOptions um Optionen zu parsen
 - diverse unnoetige Debugausgaben entfernt

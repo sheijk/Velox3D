@@ -149,7 +149,12 @@ VRenderStateList* VMaterialResourceType::CreatePass(
 
 vbool IsEffectFile(const std::string& fileName)
 {
-	std::string ext = fileName.substr(fileName.find_last_of("."), fileName.length());
+	std::string ext;
+
+	if( fileName.length() > 1 )
+		ext = fileName.substr(fileName.find_last_of("."), fileName.length());
+	else
+		ext = "";
 
 	return ext == ".v3dmat";
 }

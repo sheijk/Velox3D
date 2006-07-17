@@ -526,7 +526,7 @@ public class SceneView extends VeloxViewBase {
 		
 		entityContextActions.add(new SceneAction("Add part") {
 			public void run() {
-				Entity selectedEntity = getSelectedEntity();
+				final Entity selectedEntity = getSelectedEntity();
 				
 				if( selectedEntity == null )
 					return;
@@ -541,11 +541,15 @@ public class SceneView extends VeloxViewBase {
 				FilterDialog dialog = new FilterDialog(myParent.getShell(),
 						"Add part", options);
 				
-				String selection = dialog.open();
+				final String selection = dialog.open();
 				
 				if( selection != null ) 
 				{
-					selectedEntity.Add(new Part(selection));				
+					VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+						@Override public void Run() throws RuntimeException {
+							selectedEntity.Add(new Part(selection));				
+						}
+					});
 				}
 				
 				refresh();								

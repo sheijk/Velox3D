@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+void main(void) {
+	gl_Position = ftransform();
+	gl_TexCoord[0] = gl_MultiTexCoord0;
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<param name="res" value="/edit/mat/hblur_pp.frag" />
+			</state>
+		</renderPass>
+		
+	</shaderPath>
+</effect>

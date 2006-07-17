@@ -4,25 +4,10 @@
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
-	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/water_pp.v3dmat" tags=""/>
 	<part type="shooting" tags=""/>
-
-	<!-- entity name="foo">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags="" />
-		<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="10.0" tags="" />
-		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags="" />
-	</entity>
-
-	<entity name="fpsCam">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-		<part type="v3d::utils::VCameraPart" tags=""/>
-		<part type="v3d::utils::VFPSMoverPart" tags=""/>
-	</entity>
-
-	<entity name="skybox">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-		<part type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/" tags=""/>
-	</entity -->
+	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/water_pp.v3dmat" tags=""/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart3" material="/edit/mat/fakehdr_pp.v3dmat" tags=""/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart2" material="/edit/mat/fakehdr2_pp.v3dmat" tags=""/>
 	<entity name="ambient">
 		<entity name="skybox">
 			<part type="v3d::entity::VRigidBodyPart" pos="(70,100,255)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
