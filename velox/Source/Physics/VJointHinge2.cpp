@@ -29,11 +29,6 @@ void VJointHinge2::Apply()
 	{	
 		SetParameters();
 		SetAxisAndAnchor();
-
-		//TODO:check if still true
-		//ode sometimes has problems with parametes
-		/*SetParameters();
-		SetAxisAndAnchor();*/
 	}
 }
 
@@ -83,16 +78,16 @@ void VJointHinge2::SetAnchor(vfloat32 x, vfloat32 y, vfloat32 z)
 	m_Anchor.Set(1,y);
 	m_Anchor.Set(2,z);
 
-	/*V3D_ASSERT(m_JointID != 0);
-	dJointSetHinge2Anchor(m_JointID, m_Anchor[0], m_Anchor[1], m_Anchor[2]);*/
+	/*V3D_ASSERT(m_JointID != 0);*/
+//	dJointSetHinge2Anchor(m_JointID, m_Anchor[0], m_Anchor[1], m_Anchor[2]);
 }
 
 void VJointHinge2::SetAnchor(VVector3f in_Anchor)
 {
 	m_Anchor = in_Anchor;
 	
-	/*V3D_ASSERT(m_JointID != 0);
-	dJointSetHinge2Anchor(m_JointID, m_Anchor[0], m_Anchor[1], m_Anchor[2]);*/
+	/*V3D_ASSERT(m_JointID != 0);*/
+//	dJointSetHinge2Anchor(m_JointID, m_Anchor[0], m_Anchor[1], m_Anchor[2]);
 }
 void VJointHinge2::SetAxis1(vfloat32 x, vfloat32 y, vfloat32 z)
 {
@@ -100,15 +95,16 @@ void VJointHinge2::SetAxis1(vfloat32 x, vfloat32 y, vfloat32 z)
 	m_Axis1.Set(1,y);
 	m_Axis1.Set(2,z);
 
-	/*V3D_ASSERT(m_JointID != 0);
-	dJointSetHinge2Axis1(m_JointID, m_Axis1[0], m_Axis1[1], m_Axis1[2]);*/
+	/*V3D_ASSERT(m_JointID != 0);*/
+	
+//	dJointSetHinge2Axis1(m_JointID, m_Axis1[0], m_Axis1[1], m_Axis1[2]);
 }
 
 void VJointHinge2::SetAxis1(VVector3f in_Axis)
 {
 	m_Axis1 = in_Axis;
-	/*V3D_ASSERT(m_JointID != 0);
-	dJointSetHinge2Axis1(m_JointID, m_Axis1[0], m_Axis1[1], m_Axis1[2]);*/
+	/*V3D_ASSERT(m_JointID != 0);*/
+//	dJointSetHinge2Axis1(m_JointID, m_Axis1[0], m_Axis1[1], m_Axis1[2]);
 }
 
 void VJointHinge2::SetAxis2(vfloat32 x, vfloat32 y, vfloat32 z)
@@ -117,16 +113,16 @@ void VJointHinge2::SetAxis2(vfloat32 x, vfloat32 y, vfloat32 z)
 	m_Axis2.Set(1,y);
 	m_Axis2.Set(2,z);
 	
-	/*V3D_ASSERT(m_JointID != 0);
-	dJointSetHinge2Axis2(m_JointID, m_Axis2[0], m_Axis2[1], m_Axis2[2]);*/
+	/*V3D_ASSERT(m_JointID != 0);*/
+//	dJointSetHinge2Axis2(m_JointID, m_Axis2[0], m_Axis2[1], m_Axis2[2]);
 }
 
 void VJointHinge2::SetAxis2(VVector3f in_Axis)
 {
 	m_Axis2 = in_Axis;
 	
-	//V3D_ASSERT(m_JointID != 0);
-	//dJointSetHinge2Axis2(m_JointID, m_Axis2[0], m_Axis2[1], m_Axis2[2]);
+	//V3D_ASSERT(m_JointID != 0);*/
+//	dJointSetHinge2Axis2(m_JointID, m_Axis2[0], m_Axis2[1], m_Axis2[2]);
 }
 
 VVector3f VJointHinge2::GetAnchor()

@@ -90,7 +90,7 @@ public:
 
 
 private:
-
+	void UpdateBodies();
 	BodyPtr CreateBody();
 	Geometry CreateMeshGeom(VBoundingMesh* in_pBoundingMesh);
 	Geometry CreateSphereGeom(math::VBoundingSphere* in_pBoundingMesh);
@@ -102,6 +102,7 @@ private:
 	VWorld m_World;
 	//list of all created bodies for updating reasons
 	BodyList m_BodyList; 
+	const vfloat32 m_fTimeStep;
 };
 
 typedef VSharedPtr<VPhysicManager> VPhysicManagerPtr;

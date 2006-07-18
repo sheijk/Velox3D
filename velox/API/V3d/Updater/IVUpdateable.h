@@ -10,87 +10,87 @@ namespace v3d {
 namespace updater {
 //-----------------------------------------------------------------------------
 
+/**
+ * Interface for objects which require regular updates
+ */
+class IVUpdateable
+{
+public:
+
 	/**
-	 * Interface for objects which require regular updates
+	 * Updates the object.
+	 * @param in_fSeconds Seconds since last update
 	 */
-	class IVUpdateable
+	virtual void Update(vfloat32 in_fSeconds) = 0;
+
+	/**
+	 * Tells the object that the mainloop has been entered
+	 * and it can expect calls to Update from now on.
+	 * Objects should register themselves to any externel
+	 * managers now
+	 */
+	virtual void Activate() = 0;
+
+	/**
+	 * Tells the object that the mainloop ended and it cannont
+	 * expect any further updates.
+	 * Object should unregister themselves from any external
+	 * managers now and prepare to be deleted
+	 */
+	virtual void Deactivate() = 0;
+
+protected:
+	IVUpdateable() 
 	{
-	public:
+		m_bRegistered = false;
+	}
 
-		/**
-		 * Updates the object.
-		 * @param in_fSeconds Seconds since last update
-		 */
-		virtual void Update(vfloat32 in_fSeconds) = 0;
+	void Register()
+	{
+		// query update manager
+		IVUpdateManager& updateMngr = 
+			* QueryObject<IVUpdateManager>("updater.service");
 
-		/**
-		 * Tells the object that the mainloop has been entered
-		 * and it can expect calls to Update from now on.
-		 * Objects should register themselves to any externel
-		 * managers now
-		 */
-		virtual void Activate() = 0;
+		// register object
+        updateMngr.Register(this);
 
-		/**
-		 * Tells the object that the mainloop ended and it cannont
-		 * expect any further updates.
-		 * Object should unregister themselves from any external
-		 * managers now and prepare to be deleted
-		 */
-		virtual void Deactivate() = 0;
+		// store that object is registered
+		m_bRegistered = true;
+	}
 
-	protected:
-		IVUpdateable() 
+	void Unregister()
+	{
+		// query update manager
+		IVUpdateManager& updateMngr = 
+			* QueryObject<IVUpdateManager>("updater.service");
+		
+		updateMngr.Unregister(this);
+
+		m_bRegistered = false;
+	}
+
+	virtual ~IVUpdateable()
+	{
+		if( m_bRegistered )
 		{
-			m_bRegistered = false;
-		}
-
-		void Register()
-		{
-			// query update manager
-			IVUpdateManager& updateMngr = 
-				* QueryObject<IVUpdateManager>("updater.service");
-
-			// register object
-            updateMngr.Register(this);
-
-			// store that object is registered
-			m_bRegistered = true;
-		}
-
-		void Unregister()
-		{
-			// query update manager
-			IVUpdateManager& updateMngr = 
-				* QueryObject<IVUpdateManager>("updater.service");
-			
-			updateMngr.Unregister(this);
-
-			m_bRegistered = false;
-		}
-
-		virtual ~IVUpdateable()
-		{
-			if( m_bRegistered )
+			try
 			{
-				try
-				{
-					// query update manager
-					IVUpdateManager& updateMngr = 
-						* QueryObject<IVUpdateManager>("updater.service");
+				// query update manager
+				IVUpdateManager& updateMngr = 
+					* QueryObject<IVUpdateManager>("updater.service");
 
-					// unregister object
-					updateMngr.Unregister(this);
-				}
-				catch(VObjectRegistryException&)
-				{
-				}
+				// unregister object
+				updateMngr.Unregister(this);
+			}
+			catch(VObjectRegistryException&)
+			{
 			}
 		}
+	}
 
-	private:
-		vbool m_bRegistered;
-	};
+private:
+	vbool m_bRegistered;
+};
 
 //-----------------------------------------------------------------------------
 } // namespace updater

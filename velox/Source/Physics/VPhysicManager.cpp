@@ -7,6 +7,7 @@
 #include <v3d/math/VBoundingBox.h>
 #include <v3d/math/VBoundingSphere.h>
 #include <v3d/Physics/Bounding/VBoundingMesh.h>
+#include <algorithm>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -14,10 +15,10 @@ namespace v3d { namespace  physics{
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::math;
+using namespace std;
 
-VPhysicManager::VPhysicManager()
+VPhysicManager::VPhysicManager() : m_fTimeStep(0.01f)
 {
-	
 }
 VPhysicManager::~VPhysicManager()
 {
@@ -35,16 +36,35 @@ void VPhysicManager::UnregisterToUpdater()
 
 void VPhysicManager::Update(vfloat32 in_fSeconds)
 {
-	m_World.Update();
+	//limit time of physic simulation
+	vfloat32 t= 0.0f;
+	
+	//see if our time is far to high (alt tabbing or initial start up)
+	if(in_fSeconds > 2.0f)
+		return;
 
-	typedef BodyList::iterator Iter;
+	vfloat32 timeDelta =in_fSeconds;
+	//step small fixed steps forward in time
+	while( timeDelta >= m_fTimeStep )
+	{
+		t+=m_fTimeStep;
+		m_World.SetWorldStep(t);
+		m_World.Update();
+		UpdateBodies();
+		timeDelta -= m_fTimeStep;
+	}
+}
+
+void VPhysicManager::UpdateBodies()
+{
+	typedef BodyList::const_iterator Iter;
 	Iter begin = m_BodyList.begin();
 	Iter end = m_BodyList.end();
 
 	for(; begin != end; ++begin)
-	{
- 		(*begin)->Update();
-	}
+		(*begin)->Update();
+
+	//for_each(begin, end, mem_fun(&VBody::Update));
 }
 
 void VPhysicManager::Delete(BodyPtr in_Body)

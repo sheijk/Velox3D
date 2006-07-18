@@ -21,7 +21,6 @@ VJointHinge2Part::VJointHinge2Part() :
 	
 	m_pBodyAddressOne = 0;
 	m_pBodyAddressTwo = 0;
-
 }
 
 void VJointHinge2Part::RegisterBody(VBody* in_pAddress)
@@ -133,7 +132,6 @@ void VJointHinge2Part::OnMessage(
 			m_Joint.SetAnchor(m_Joint.GetAnchor());
 			m_Joint.Apply();
 			
-			
 			in_pAnswer->AddProperty("Axis1", m_Joint.GetAxis1());
 			in_pAnswer->AddProperty("Axis2", m_Joint.GetAxis2());
 			in_pAnswer->AddProperty("LowStop", m_Joint.GetLowStop());
@@ -149,7 +147,6 @@ void VJointHinge2Part::OnMessage(
 			in_pAnswer->AddProperty("SuspensionCFM", m_Joint.GetSuspensionCFM());
 			in_pAnswer->AddProperty("Velocity2", m_Joint.GetVelocity2());
 			in_pAnswer->AddProperty("MaxForce2", m_Joint.GetMaxForce2());
-
 			in_pAnswer->AddProperty("Body1", m_pBodyAddressOne);
 			in_pAnswer->AddProperty("Body2", m_pBodyAddressTwo);
 		}
