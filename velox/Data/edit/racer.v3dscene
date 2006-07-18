@@ -4,10 +4,10 @@
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
-	<part type="shooting" tags=""/>
 	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/water_pp.v3dmat" tags=""/>
 	<part type="v3d::scene::VPostProcesssingRenderStepPart3" material="/edit/mat/fakehdr_pp.v3dmat" tags=""/>
 	<part type="v3d::scene::VPostProcesssingRenderStepPart2" material="/edit/mat/fakehdr2_pp.v3dmat" tags=""/>
+	<part type="shooting" tags=""/>
 	<entity name="ambient">
 		<entity name="skybox">
 			<part type="v3d::entity::VRigidBodyPart" pos="(70,100,255)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
@@ -58,7 +58,7 @@
 	<entity name="world">
 		<entity name="terrain">
 			<part type="v3d::entity::VRigidBodyPart" pos="(-41,-4,-2)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-			<part type="v3d::scene::VTerrainPart" mat_mud="/data/tex/mud1.tga" mat_mudColor="(0,0,0,0)" material="/edit/mat/terrain.v3dmat" tags=""/>
+			<part type="v3d::scene::VTerrainPart" extent="(400,400)" mat_mud="/data/tex/mud1.tga" mat_mudColor="(0,0,0,0)" material="/edit/mat/terrain.v3dmat" resolution="256" tags=""/>
 		</entity>
 		<entity name="playerCar"/>
 	</entity>

@@ -486,6 +486,14 @@
 					Name="Messaging"
 					>
 					<File
+						RelativePath="..\..\API\V3d\Messaging\VMemberFunctionOption.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Messaging\VMemberVarOption.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Messaging\VMessage.h"
 						>
 					</File>
@@ -494,7 +502,15 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Messaging\VOption.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Messaging\VProtocol.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Messaging\VTypedOptionBase.h"
 						>
 					</File>
 				</Filter>
@@ -2033,6 +2049,10 @@
 			</File>
 			<File
 				RelativePath="..\..\Source\Messaging\VMessageInterpreter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Source\Messaging\VOption.cpp"
 				>
 			</File>
 			<File

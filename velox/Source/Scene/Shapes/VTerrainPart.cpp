@@ -3,10 +3,14 @@
 
 #include <V3d/Graphics.h>
 #include <V3dLib/Graphics/Geometry.h>
+#include <V3d/Math/VVectorOps.h>
 
 #include <V3d/OpenGL.h>
 
 #include <V3d/Entity/VGenericPartParser.h>
+
+#include <V3d/Messaging/VMessageInterpreter.h>
+#include <boost/signals.hpp>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -27,7 +31,8 @@ VTerrainPart::VTerrainPart() : VMeshPartBase(IVDevice::GetDefaultMaterial())
 	//m_XZMax = ToVector2f(30, 5);
 	//m_XZMin = ToVector2f(-10, -3);
 
-	SetVertexCount(256, 256);
+	//SetVertexCount(256, 256);
+	SetVertexCount(16, 16);
 }
 
 /**
@@ -116,8 +121,8 @@ vfloat32 Hill(vfloat32 x, vfloat32 y)
 
 void MakeFractal(VArray2d<vfloat32>* in_pArray, vuint in_nOctaves, vfloat32 in_fLacunarity, Function2d in_pBaseFunction)
 {
-	const vfloat32 width = in_pArray->GetWidth();
-	const vfloat32 height = in_pArray->GetHeight();
+	const vfloat32 width = vfloat32(in_pArray->GetWidth());
+	const vfloat32 height = vfloat32(in_pArray->GetHeight());
 
 	for(vfloat32 y = 0; y < in_pArray->GetWidth(); ++y)
 	for(vfloat32 x = 0; x < in_pArray->GetHeight(); ++x)
@@ -139,7 +144,7 @@ void MakeFractal(VArray2d<vfloat32>* in_pArray, vuint in_nOctaves, vfloat32 in_f
 			scale *= in_fLacunarity;
 		}
 
-		in_pArray->Set(x, y, val);
+		in_pArray->Set(vuint(x), vuint(y), val);
 	}
 }
 
@@ -312,11 +317,83 @@ resource::VResourceDataPtr<graphics::VVertexBuffer> VTerrainPart::GetIndexBuffer
 	return m_hIndexBuffer;
 }
 
+vuint VTerrainPart::GetResolution() const
+{
+	V3D_ASSERT(m_nVertexCountHor == m_nVertexCountVert);
+
+	return m_nVertexCountHor;
+}
+
+void VTerrainPart::SetResolution(const vuint& in_nNewCount)
+{
+	if( in_nNewCount != GetResolution() )
+	{
+		VArray2d<vfloat32> heightField;
+		heightField.ResizeUninit(m_nVertexCountHor, m_nVertexCountVert);
+		MakeFractal(&heightField, 4, .712f, Hill);
+		ApplyHeightValues(heightField);	
+		SetVertexCount(in_nNewCount, in_nNewCount);
+	}
+}
+
+VVector2f VTerrainPart::GetExtent() const
+{
+	return m_XZMax - m_XZMin;
+}
+
+void VTerrainPart::SetExtent(const VVector2f& in_Extent)
+{
+	m_XZMax = in_Extent;
+	Mult(m_XZMax, 0.5f);
+
+	m_XZMin = in_Extent;
+	Mult(m_XZMin, - 0.5f);
+
+	GenerateVertices();
+}
+
+void VTerrainPart::OnMessage(
+	const messaging::VMessage& in_Message, 
+	messaging::VMessage* in_pAnswer)
+{
+	using namespace messaging;
+	static VMessageInterpreter interpreter;
+
+	if( ! interpreter.IsInitialized() )
+	{
+		interpreter.SetInitialized(true);
+
+		interpreter.AddAccessorOption<VTerrainPart, vuint>(
+			"resolution",
+			&VTerrainPart::GetResolution, 
+			&VTerrainPart::SetResolution);
+		interpreter.AddAccessorOption<VTerrainPart, VVector2f>(
+			"extent",
+			&VTerrainPart::GetExtent,
+			&VTerrainPart::SetExtent);
+		//interpreter.AddOption(new VSignalOption(
+	}
+
+	messaging::VMessageInterpreter::Result result = 
+		interpreter.HandleMessage(this, in_Message, in_pAnswer);
+
+	switch(result) {
+	case messaging::VMessageInterpreter::GetSettings:
+		{
+			AddVariables(in_pAnswer);
+		} break;
+	case messaging::VMessageInterpreter::ApplySetting:
+		{
+			ApplySetting(in_Message);
+		} break;
+	}
+}
+
+//-----------------------------------------------------------------------------
+
 namespace {
 	entity::VPartParser<VTerrainPart> parser;
 }
-
-
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene

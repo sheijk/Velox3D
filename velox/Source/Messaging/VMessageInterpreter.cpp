@@ -8,26 +8,6 @@ namespace v3d { namespace messaging {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
-VOption::VOption(const std::string& name)
-{
-	m_strName = name;
-}
-
-VOption::~VOption()
-{
-}
-
-std::string VOption::GetName() const
-{
-	return m_strName;
-}
-
-void VOption::SetName(const std::string& in_Value)
-{
-	m_strName = in_Value;
-}
-
-
 void VMessageInterpreter::AddOption(VOption* option)
 {
 	m_Options.insert(make_pair(option->GetName(), SharedPtr(option)));

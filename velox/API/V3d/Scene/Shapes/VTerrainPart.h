@@ -26,12 +26,14 @@ public:
 
 	//changed here from private to public for racer demo --ins
 	resource::VResourceDataPtr<graphics::VVertexBuffer> GetVertexBuffer();
-	resource::VResourceDataPtr<graphics::VVertexBuffer> GetIndexBuffer();
-
 	vuint GetVertexCount() const;
+	resource::VResourceDataPtr<graphics::VVertexBuffer> GetIndexBuffer();
 	vuint GetIndexCount() const;
 
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 	vuint GetVertexNum(vuint x, vuint y) const;
 
 	void SetVertexCount(vuint in_nWidth, vuint in_nHeigth);
@@ -44,12 +46,19 @@ private:
 
 	VVector3f GetVertexAt(vuint x, vuint y);
 
+	vuint GetResolution() const;
+	void SetResolution(const vuint& in_nNewCount);
+
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hVertexBuffer;
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hIndexBuffer;	
 	resource::VResourceDataPtr<const graphics::IVMesh> m_hMesh;
 
 	vuint m_nVertexCountHor;
 	vuint m_nVertexCountVert;
+
+	VVector2f GetExtent() const;
+	void SetExtent(const VVector2f& in_Extent);
+
 	VVector2f m_XZMin;
 	VVector2f m_XZMax;
 };

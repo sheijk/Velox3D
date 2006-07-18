@@ -4,72 +4,31 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Messaging/VMessage.h>
+#include <V3d/Messaging/VOption.h>
+#include <V3d/Messaging/VMemberVarOption.h>
+#include <V3d/Messaging/VMemberFunctionOption.h>
+
 #include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace messaging {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-class VOption
-{
-public:
-	VOption(const std::string& name);
-	virtual ~VOption();
-
-	virtual void Write(const std::string& value, void* object) = 0;
-	virtual std::string Read(void* object) = 0;
-
-	std::string GetName() const;
-	void SetName(const std::string& in_Value);
-private:
-	std::string m_strName;
-};
-
-template<typename T>
-class VMemberVarOption : public VOption
-{
-public:
-	VMemberVarOption(const std::string& name, void* object, T* member) :
-	VOption(name)
-	{
-		m_nOffsetBytes = BytesDistance(object, member);
-	}
-
-	virtual void Write(const std::string& value, void* object)
-	{
-		T* address = MemberAddress(object);
-
-		utils::VStringValue val(value);
-		T newValue = val.Get<T>();
-		*address = newValue;
-	}
-
-	virtual std::string Read(void* object)
-	{
-		T* address = MemberAddress(object);
-
-		utils::VStringValue val;
-		val.Set(*address);
-		return val.Get<std::string>();
-	}
-
-private:
-	T* MemberAddress(void* object)
-	{
-		vbyte* objectAddress = reinterpret_cast<vbyte*>(object);
-		vbyte* memberAddress = objectAddress + m_nOffsetBytes;
-		return reinterpret_cast<T*>(memberAddress);
-	}
-
-	vuint BytesDistance(void* a, void* b)
-	{
-		return vuint((vbyte*)b - (vbyte*)a);
-	}
-
-	vuint m_nOffsetBytes;
-};
-
 //TODO: mehrere VMessageInterpreter "zusammenschalten", fuer part + parent part
+/**
+ * Realizes the message protocol of entity parts which is used for 
+ * serialisation and by the editor. Each part class will create a static
+ * instance of a message interpreter which it delegates messages to from
+ * OnMessage. For each persistent property in the part an VOption is added
+ * to the message interpreter which will read/write the property from the
+ * part. There are several different option classes which provide different
+ * ways of accessing properties.
+ * 
+ * @author sheijk
+ * @see v3d::entity::IVPart
+ * @see v3d::entity::IVPart::OnMessage
+ * @see v3d::messaging::VOption
+ */
 class VMessageInterpreter
 {
 public:
@@ -87,6 +46,12 @@ public:
 	template<typename T>
 	void AddMemberOption(const std::string& name, void* object, T* pMember);
 
+	template<typename ClassType, typename OptionType>
+	void AddAccessorOption(
+		const std::string& name,
+		typename VMemberFunctionOption<ClassType, OptionType>::Getter getter,
+		typename VMemberFunctionOption<ClassType, OptionType>::Setter setter);
+
 private:
 	typedef std::map<std::string, VSharedPtr<VOption> > OptionMap;
 	OptionMap m_Options;
@@ -101,6 +66,15 @@ void VMessageInterpreter::AddMemberOption(
 	const std::string& name, void* object, T* pMember)
 {
 	AddOption(new VMemberVarOption<T>(name, object, pMember));
+}
+
+template<typename ClassType, typename OptionType>
+void VMessageInterpreter::AddAccessorOption(
+	const std::string& name, 
+	typename VMemberFunctionOption<ClassType, OptionType>::Getter getter,
+	typename VMemberFunctionOption<ClassType, OptionType>::Setter setter)
+{
+	AddOption(new VMemberFunctionOption<ClassType, OptionType>(name, getter, setter));
 }
 
 //-----------------------------------------------------------------------------
