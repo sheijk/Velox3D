@@ -20,10 +20,10 @@ VJoint::VJoint()
 	m_fMaxForce			= 0.0f;
 	m_fFudgeFactor		= 1.0f;
 	m_fBounce			= 0.0f;
-	m_fCFM				= (vfloat32)1.0000000e-010;
+	m_fCFM				= (vfloat32)1.0000000e-05; //10^-10 for vfloat64
 	//m_fCFM				= std::numeric_limits<float>::min();
 	m_fStopERP			= 0.2f;
-	m_fStopCFM			= (vfloat32)1.0000000e-010;
+	m_fStopCFM			= (vfloat32)1.0000000e-05; //10^-10 for vfloat64
 	//m_fStopCFM			= std::numeric_limits<float>::min();
 	m_fSuspensionCFM	= 1.0f;
 	m_fSuspensionERP	= 1.0f;

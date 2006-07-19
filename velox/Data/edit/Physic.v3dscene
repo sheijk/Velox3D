@@ -1,74 +1,97 @@
-<entity name="Physic">
-	<part type="v3d::scene::VNaiveSceneManagerPart"/>
-	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)"/>
-	<part type="v3d::entity::VUpdateManagerPart"/>
-	<part type="v3d::scene::VNaiveLightManager"/>
-	<part type="v3d::utils::VInputPart"/>
-	<part type="v3d::scene::VPostProcesssingRenderStepPart" material=""/>
-	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-0.5,0)" MaxContacts="40" ObjectCount="5" Slip1="0.1" Slip2="0.1" SoftCFM="0.3" SoftERP="0.5" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="0.5" SurfaceMu2="0.5" UpdateStep="0.05"/>
-	<part type="shooting"/>
+<entity name="Physic2">
+	<part type="v3d::scene::VNaiveSceneManagerPart" tags=""/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)" exclude-tags=" " include-all="true" include-tags=" " tags=""/>
+	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
+	<part type="v3d::scene::VNaiveLightManager" tags=""/>
+	<part type="v3d::utils::VInputPart" tags=""/>
+	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-15,0)" MaxContacts="40" ObjectCount="8" Slip1="0.1" Slip2="0.1" SoftCFM="0.001" SoftERP="0.001" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="0.5" SurfaceMu2="0.5" UpdateStep="0.05" tags=""/>
+	<part type="shooting" tags=""/>
 	<entity name="ambient">
 		<entity name="editorCam">
-			<part type="v3d::entity::VRigidBodyPart" pos="(-8,51,180)"/>
-			<part type="v3d::utils::VCameraPart"/>
-			<part type="v3d::utils::VTrackballPart"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-36,54,180)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+			<part type="v3d::utils::VCameraPart" tags=""/>
+			<part type="v3d::utils::VTrackballPart" tags=""/>
 		</entity>
 		<entity name="debug">
-			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
-			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
 		</entity>
 		<entity name="sun">
-			<part type="v3d::entity::VRigidBodyPart" pos="(100,100,0)"/>
-			<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(0.8,0.3,0,1)" position="(100,100,0)" specularColor="(0,1,0,1)" w="1"/>
-			<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="1"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-11.3802,50,-16.4466)" updir="(0,1,0)" viewdir="(-0.822329,0,0.569012)" tags=""/>
+			<part type="v3d::scene::VLightPart" ambientColor="(7,3,3,8)" diffuseColor="(0.8,0.3,0,1)" position="(-11.3802,50,-16.4466)" specularColor="(0,1,0,1)" w="1" tags=""/>
+			<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="1" tags=""/>
+			<part type="v3d::utils::VCircleMoverPart" angle="889.676" center="(0,50,0)" radius="20" speed="3.1415" tags=""/>
 		</entity>
 	</entity>
 	<entity name="world">
 		<entity name="terrain">
-			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
-			<part type="v3d::scene::VTerrainPart" material="/edit/mat/phong.v3dmat"/>
-			<part type="v3d::physics::VBoundingTerrainVolumePart" IndexCount="388626" IndexStride="12" NormalCount="0" NormalStride="0" VertexCount="65536" VertexStride="12"/>
-			<part type="v3d::physics::VCollisionPart" Active="true"/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+			<part type="v3d::scene::VTerrainPart" extent="(200,200)" material="/edit/mat/white-lit.v3dmat" resolution="16" tags=""/>
+			<part type="v3d::physics::VBoundingTerrainVolumePart" IndexCount="1266" IndexStride="12" NormalCount="0" NormalStride="0" VertexCount="256" VertexStride="12" tags=""/>
+			<part type="v3d::physics::VCollisionPart" Active="true" tags=""/>
 		</entity>
 	</entity>
 	<entity name="sphere">
-		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="3"/>
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,22.9441,0)"/>
-		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="3"/>
-		<part type="v3d::physics::VBodyPart" Mass="1" Position="(0,22.9441,0)"/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="3" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-793.297,667.373,-0.955276)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="3" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="05520650" Enabled="true" Mass="1" Position="(-793.297,667.373,-0.955276)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 	</entity>
 	<entity name="sphere2">
-		<part type="v3d::physics::VBodyPart" Mass="1" Position="(10,30,20)"/>
-		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="7"/>
-		<part type="v3d::entity::VRigidBodyPart" pos="(10,30,20)"/>
-		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="7"/>
+		<part type="v3d::physics::VBodyPart" Address="0551F9A0" Enabled="true" Mass="1" Position="(-18.3014,45.1522,22.6505)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="7" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-18.3014,45.1522,22.6505)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="7" tags=""/>
 	</entity>
 	<entity name="box">
-		<part type="v3d::entity::VRigidBodyPart" pos="(1,30,12)"/>
-		<part type="v3d::physics::VBodyPart" Mass="1" Position="(1,30,12)"/>
-		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(10,10,10)" MinPoint="(0,0,0)" material="/edit/mat/phong.v3dmat"/>
-		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(10,10,10)" MaxPoint="(10,10,10)" MinPoint="(0,0,0)"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-40.2579,51.14,23.8599)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="0551D698" Enabled="true" Mass="1" Position="(-40.2579,51.14,23.8599)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(10,10,10)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(10,10,10)" MaxPoint="(10,10,10)" MinPoint="(0,0,0)" tags=""/>
 	</entity>
 	<entity name="sphere3">
-		<part type="v3d::physics::VBodyPart" Mass="1" Position="(-20,30,0)"/>
-		<part type="v3d::entity::VRigidBodyPart" pos="(-20,30,0)"/>
-		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="5"/>
-		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="5"/>
+		<part type="v3d::physics::VBodyPart" Address="0551D5E8" Enabled="true" Mass="1" Position="(36.7701,40.2624,-33.8602)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(36.7701,40.2624,-33.8602)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="5" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="5" tags=""/>
 	</entity>
 	<entity name="box2">
-		<part type="v3d::entity::VRigidBodyPart" pos="(-26.3464,16.5483,-0.364462)"/>
-		<part type="v3d::physics::VBodyPart" Mass="1" Position="(-26.3464,16.5483,-0.364462)"/>
-		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(20,10,30)" MaxPoint="(20,10,30)" MinPoint="(0,0,0)"/>
-		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(20,10,30)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(4.6767,54.3968,-19.049)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="0551E4A0" Enabled="true" Mass="1" Position="(4.6767,54.3968,-19.049)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(20,10,30)" MaxPoint="(20,10,30)" MinPoint="(0,0,0)" tags=""/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(20,10,30)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
 	</entity>
 	<entity name="Collision">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
-		<part type="v3d::physics::VCollisionPart" Active="true"/>
-		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="20"/>
-		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="20"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-16,20,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+		<part type="v3d::physics::VCollisionPart" Active="true" tags=""/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="20" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="20" tags=""/>
 	</entity>
 	<entity name="ground">
-		<part type="v3d::physics::VCollisionPart" Active="true"/>
-		<part type="v3d::physics::VBoundingPlaneVolumePart" Distance="10" Normal="(0,1,0)"/>
+		<part type="v3d::physics::VCollisionPart" Active="false" tags=""/>
+		<part type="v3d::physics::VBoundingPlaneVolumePart" Distance="10" Normal="(0,1,0)" tags=""/>
+	</entity>
+	<entity name="JointTest">
+		<part type="v3d::physics::VJointHinge2Part" Anchor="(-388.159,-217.994,34.9483)" Axis1="(1,0,0)" Axis2="(0,1,0)" Body1="0551EBC8" Body2="0550BEA0" Bounce="0" CFM="1.17549e-038" FudgeFactor="1" HighStop="3.40282e+038" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="-3.40282e+038" MaxForce="0" MaxForce2="0" StopCFM="1.17549e-038" StopERP="0.2" SuspensionCFM="1" SuspensionERP="1" Velocity="0" Velocity2="0" tags=""/>
+		<entity name="Body1">
+			<part type="v3d::physics::VBodyPart" Address="0551EBC8" Enabled="true" Mass="1" Position="(-54.303,4.51615,1.32021)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-54.303,4.51615,1.32021)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+			<part type="v3d::physics::VBoundingSphereVolumePart" Position="(-50,100,0)" Radius="5" tags=""/>
+			<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="5" tags=""/>
+			<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
+		</entity>
+		<entity name="Body2">
+			<part type="v3d::physics::VBodyPart" Address="0550BEA0" Enabled="true" Mass="1" Position="(43.9031,3.1437,-8.50472)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(43.9031,3.1437,-8.50472)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+			<part type="v3d::physics::VBoundingSphereVolumePart" Position="(50,100,0)" Radius="5" tags=""/>
+			<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="5" tags=""/>
+			<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
+		</entity>
+	</entity>
+	<entity name="kugel">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-39.2693,95.8724,-1.68082)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="10" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="10" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="0550C0E0" Enabled="true" Mass="1" Position="(-39.2693,95.8724,-1.68082)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 	</entity>
 </entity>

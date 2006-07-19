@@ -16,6 +16,8 @@ VBody::VBody(VOdeBody* in_pOdeBody) : m_PositionState(in_pOdeBody), m_Orientatio
 {
 	m_CollisionMesh = 0;
 	m_Body = in_pOdeBody;
+	m_PositionState.Apply();
+	m_OrientationState.Apply();
 }
 
 VBody::~VBody()
@@ -74,6 +76,8 @@ void VBody::SetCollisionMesh(VGeometry* in_Geometry)
 
 	m_CollisionMesh = in_Geometry;
 	dGeomSetBody(*in_Geometry->GetGeomID(), *m_Body->GetBodyID());
+	m_PositionState.Apply();
+	m_OrientationState.Apply();
 }
 
 void VBody::SetPosition(graphics::VVertex3f in_Position)

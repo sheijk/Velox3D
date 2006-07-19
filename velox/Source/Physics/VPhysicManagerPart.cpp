@@ -95,9 +95,9 @@ void VPhysicManagerPart::OnMessage(const messaging::VMessage& in_Message, messag
 		if( name == "UpdateStep" )
 		{
 			vfloat32 pos = in_Message.GetAs<vfloat32>("value");
-			m_pPhysicManager->GetWorld()->SetWorldStep(pos);
+			//m_pPhysicManager->GetWorld()->SetWorldStep(pos);
 
-			vout << "Physics: world update step size set to " << pos << vendl;
+			//vout << "Physics: world update step size set to " << pos << vendl;
 		}
 
 		if( name == "SurfaceMu" )

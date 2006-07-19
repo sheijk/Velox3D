@@ -17,7 +17,7 @@ using namespace v3d;
 using namespace v3d::math;
 using namespace std;
 
-VPhysicManager::VPhysicManager() : m_fTimeStep(0.01f)
+VPhysicManager::VPhysicManager() : m_fTimeStep(0.001f)
 {
 }
 VPhysicManager::~VPhysicManager()
@@ -48,10 +48,12 @@ void VPhysicManager::Update(vfloat32 in_fSeconds)
 	while( timeDelta >= m_fTimeStep )
 	{
 		t+=m_fTimeStep;
+		//m_World.SetWorldStep(m_fTimeStep);
 		m_World.SetWorldStep(t);
 		m_World.Update();
 		UpdateBodies();
-		timeDelta -= m_fTimeStep;
+		//timeDelta -= m_fTimeStep;
+		timeDelta -= t;
 	}
 }
 

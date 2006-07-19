@@ -52,6 +52,18 @@ void VBodyPart::Create()
 	//if( ! m_pBody.Get())
 	{
 		m_pBody = m_pPhysicManagerPart->GetPhysicManager()->Create(m_pVolumePart.Get(), m_fMass);
+		
+		m_Position = m_pRigidBodyPart.Get()->GetPosition();
+		m_pBody->Deactivate();
+
+		m_pBody->SetPosition(
+			graphics::VVertex3f(
+			m_Position[0],
+			m_Position[1],
+			m_Position[2])
+			);
+		//TODO: set orientation
+		m_pBody->Activate();
 	}
 }
 
@@ -91,10 +103,17 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 		m_Position.GetZ() - m_pRigidBodyPart.Get()->GetPosition().GetZ() <= std::numeric_limits<float>::epsilon()
 		) //makes all things oscillating
 	*/
+	//if(
+	//	m_Position.GetX() == m_pRigidBodyPart.Get()->GetPosition().GetX() &&
+	//	m_Position.GetY() == m_pRigidBodyPart.Get()->GetPosition().GetY() &&
+	//	m_Position.GetZ() == m_pRigidBodyPart.Get()->GetPosition().GetZ())
+
 	if(
-		m_Position.GetX() == m_pRigidBodyPart.Get()->GetPosition().GetX() &&
-		m_Position.GetY() == m_pRigidBodyPart.Get()->GetPosition().GetY() &&
-		m_Position.GetZ() == m_pRigidBodyPart.Get()->GetPosition().GetZ())
+		fabs( m_Position.GetX() - m_pRigidBodyPart.Get()->GetPosition().GetX() ) <= std::numeric_limits<vfloat32>::epsilon() &&
+		fabs( m_Position.GetY() - m_pRigidBodyPart.Get()->GetPosition().GetY() ) <= std::numeric_limits<vfloat32>::epsilon() &&
+		fabs( m_Position.GetZ() - m_pRigidBodyPart.Get()->GetPosition().GetZ() ) <= std::numeric_limits<vfloat32>::epsilon() )
+
+
 	{
 		//VVector3f x1,y1,z1;
 		//VMatrix<vfloat32, 3, 3> axis;
@@ -143,7 +162,9 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 
 		//m_pRigidBodyPart->SetTransform(math::VRBTransform(trans));
 		m_pRigidBodyPart->GetTransform().Rotate(m_pBody->GetOrientation().GetQuat());
-		m_pRigidBodyPart->SetPosition(m_pBody->GetPositionState().GetPositon().AsVector());
+ 		m_pRigidBodyPart->SetPosition(m_pBody->GetPositionState().GetPositon().AsVector());
+		m_Position = m_pBody->GetPositionState().GetPositon().AsVector();
+
 	}
 	else
 	{
