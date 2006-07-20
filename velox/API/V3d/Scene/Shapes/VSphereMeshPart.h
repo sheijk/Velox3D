@@ -25,7 +25,7 @@ public:
 private:
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
-
+	
 	vfloat32 m_fRadius;
 	vuint m_nDetail;
 };

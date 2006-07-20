@@ -5,26 +5,29 @@
 	<part type="v3d::utils::VInputPart" tags=""/>
 	<part type="shooting" tags=""/>
 	<entity name="editorCam">
-		<part type="v3d::entity::VRigidBodyPart" pos="(20,5,20)" updir="(0,1,0)" viewdir="(-1,0,-1)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(4,40,163)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
 		<part type="v3d::utils::VCameraPart" tags=""/>
 		<part type="v3d::utils::VTrackballPart" tags=""/>
 	</entity>
 	<entity name="debug">
-		<part type="v3d::entity::VRigidBodyPart" pos="(7,6,11)" updir="(0.0501063,0.99661,0.0651624)" viewdir="(0.906911,-0.0727307,0.414981)" tags=""/>
-		<part type="v3d::scene::VCoordSysDisplayPart" material="/system/graphics/defaultMaterial" tags=""/>
-		<part type="v3d::scene::VPlaneMeshPart" mat_texture="/offscreen" material="/edit/mat/textured.v3dmat" pos="(0,0,0)" right="(3,0,0)" up="(0,3,0)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
+		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
+	</entity>
+	<entity name="terrain">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VTerrainPart" extent="(200,200)" mat_mud="/data/tex/mud1.tga" mat_mudColor="(0.2,0.2,0.2,1)" material="/edit/mat/terrain.v3dmat" resolution="64" tags=""/>
 	</entity>
 	<entity name="light">
-		<part type="v3d::entity::VRigidBodyPart" pos="(1,5,0)" updir="(0.820502,-0.441411,0.363215)" viewdir="(-0.287132,-0.867668,-0.405835)" tags=""/>
-		<part type="v3d::scene::VArrowMeshPart" color="(1,1,1,1)" material="/system/graphics/defaultMaterial" size="0.2" tags=""/>
-		<part type="v3d::scene::VOffscreenShooting" render-target="/offscreen" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(40,52,71)" updir="(0,1,0)" viewdir="(-1,0,0)" tags=""/>
+		<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(1,1,1,1)" position="(40,52,71)" specularColor="(0,0,0,0)" w="1" tags=""/>
+		<part type="v3d::scene::VArrowMeshPart" color="(1,0,0,1)" material="/system/graphics/defaultMaterial" size="1" tags=""/>
 	</entity>
-	<entity name="groundplane">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0.0727125,0.90631,0.416184)" viewdir="(0.611094,-0.370262,0.699546)" tags=""/>
-		<part type="v3d::scene::VPlaneMeshPart" material="/system/graphics/defaultMaterial" pos="(-10,0,-10)" right="(20,0,0)" up="(0,0,20)" tags=""/>
+	<entity name="caster">
+		<part type="v3d::entity::VRigidBodyPart" pos="(20,22,35)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
+		<part type="v3d::scene::VTorusMeshPart" bottom-radius="3" color="(1,1,1,1)" height="5" material="/edit/mat/phong.v3dmat" slices="15" stacks="15" top-radius="5" tags=""/>
 	</entity>
-	<entity name="sphere">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-		<part type="v3d::scene::VSphereMeshPart" material="/system/graphics/defaultMaterial" radius="1" tags=""/>
+	<entity name="display">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-11,45,126)" updir="(0,1,0)" viewdir="(-0,-0,1)" tags=""/>
+		<part type="v3d::scene::VPlaneMeshPart" material="/system/graphics/defaultMaterial" pos="(0,0,0)" right="(10,0,0)" up="(0,10,0)" tags=""/>
 	</entity>
 </entity>

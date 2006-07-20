@@ -37,6 +37,9 @@ entity::VEntity* VIntersectionArray::GetEntity(vuint in_Count) const
 		if((*iter)->Count == in_Count)
 			return (*iter)->pEntity;
 	}
+
+	// programming error.. why doesn't this path return anything? --sheijk
+	V3D_ASSERT(false);
 }
 
 VVector3f VIntersectionArray::GetPosition(vuint in_Count) const
@@ -48,6 +51,9 @@ VVector3f VIntersectionArray::GetPosition(vuint in_Count) const
 		if((*iter)->Count == in_Count)
 			return (*iter)->Position;
 	}
+
+	// programming error.. why doesn't this path return anything? --sheijk
+	V3D_ASSERT(false);
 }
 
 template <class T>

@@ -349,7 +349,11 @@ void VTerrainPart::SetExtent(const VVector2f& in_Extent)
 	m_XZMin = in_Extent;
 	Mult(m_XZMin, - 0.5f);
 
-	GenerateVertices();
+	// hack to regenerate terrain with same size
+	vuint res = GetResolution();
+	m_nVertexCountVert = 0;
+	m_nVertexCountVert = 0;
+	SetVertexCount(res, res);
 }
 
 void VTerrainPart::OnMessage(

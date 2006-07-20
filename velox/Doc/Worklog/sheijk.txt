@@ -30,6 +30,15 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+
+20.07.06
+- bug fixes
+
+18.07.06
+- VMessageInterpreter: unterstuetzung fuer getter/setter durch
+ VMemberFunctionOption
+- VTerrainPart: anzahl vertices + ausdehnung aendern inkl. bug
+
 17.07.06
 - crash, wenn VPostProcessingPart keinen shader zugewiesen hat behoben
 - "toller" glow effekt

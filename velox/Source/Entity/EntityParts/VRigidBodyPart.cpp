@@ -107,12 +107,14 @@ void VRigidBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging:
 		else if( name == "viewdir" )
 		{
 			VVector3f viewdir = in_Message.GetAs<VVector3f>("value");
-			m_Transformation.SetZAxis(-viewdir);
+			m_Transformation.SetDirection(viewdir, m_Transformation.GetYAxis());
+			//m_Transformation.SetZAxis(-viewdir);
 		}
 		else if( name == "updir" )
 		{
 			VVector3f updir = in_Message.GetAs<VVector3f>("value");
-			m_Transformation.SetYAxis(updir);
+			m_Transformation.SetDirection(-m_Transformation.GetZAxis(), updir);
+			//m_Transformation.SetYAxis(updir);
 		}
 	}
 }

@@ -18,6 +18,7 @@ void main(void) {
 	
 	normal = normalize(normal);
 	lightDir = normalize(lightDir);
+	eye = normalize(eye);
 	float specular = 0.0;
 	
 //	if( dot(normal, lightDir) > 0.0 )

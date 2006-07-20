@@ -42,19 +42,7 @@ void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message,
 		interpreter.SetInitialized(true);
 	}
 
-	messaging::VMessageInterpreter::Result result = 
-		interpreter.HandleMessage(this, in_Message, in_pAnswer);
-
-	switch(result) {
-	case messaging::VMessageInterpreter::GetSettings:
-		{
-			AddVariables(in_pAnswer);
-		} break;
-	case messaging::VMessageInterpreter::ApplySetting:
-		{
-			ApplySetting(in_Message);
-		} break;
-	}
+	InterpreteMessage(interpreter, in_Message, in_pAnswer);
 }
 
 namespace {
@@ -63,4 +51,5 @@ namespace {
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
 //-----------------------------------------------------------------------------

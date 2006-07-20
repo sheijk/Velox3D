@@ -14,6 +14,11 @@
 
 #include <map>
 //-----------------------------------------------------------------------------
+namespace v3d { namespace messaging {
+	class VMEssage;
+	class VMessageInterpreter;
+}}
+
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
@@ -63,6 +68,11 @@ protected:
 	void AddVariables(messaging::VMessage* in_pAnswer);
 	/** apply the given setting */
 	void ApplySetting(const messaging::VMessage& in_Message);
+
+	void InterpreteMessage(
+		messaging::VMessageInterpreter &interpreter, 
+		const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer);
 
 	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;

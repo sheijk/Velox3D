@@ -32,7 +32,7 @@ using namespace v3d; // anti auto indenting
 class VMessageInterpreter
 {
 public:
-	void AddOption(VOption* option);
+	void AddOption(VSharedPtr<VOption> option);
 
 	enum Result { Done, GetSettings, ApplySetting, NotProcessed };
 
@@ -65,7 +65,7 @@ template<typename T>
 void VMessageInterpreter::AddMemberOption(
 	const std::string& name, void* object, T* pMember)
 {
-	AddOption(new VMemberVarOption<T>(name, object, pMember));
+	AddOption(SharedPtr(new VMemberVarOption<T>(name, object, pMember)));
 }
 
 template<typename ClassType, typename OptionType>
@@ -74,7 +74,7 @@ void VMessageInterpreter::AddAccessorOption(
 	typename VMemberFunctionOption<ClassType, OptionType>::Getter getter,
 	typename VMemberFunctionOption<ClassType, OptionType>::Setter setter)
 {
-	AddOption(new VMemberFunctionOption<ClassType, OptionType>(name, getter, setter));
+	AddOption(SharedPtr(new VMemberFunctionOption<ClassType, OptionType>(name, getter, setter)));
 }
 
 //-----------------------------------------------------------------------------

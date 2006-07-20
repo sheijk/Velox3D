@@ -280,8 +280,8 @@ void VDefaultRenderStepPart::OnMessage(
 
 	if( ! interpreter.IsInitialized() )
 	{
-		interpreter.AddOption(new messaging::VMemberVarOption<g::VColor4f>(
-			"clearColor", this, &m_BackgroundColor));
+		interpreter.AddOption(SharedPtr(new messaging::VMemberVarOption<g::VColor4f>(
+			"clearColor", this, &m_BackgroundColor)));
 		interpreter.AddMemberOption("include-all", this, &m_bIncludeAll);
 	}
 

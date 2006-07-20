@@ -7,6 +7,7 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Updater/IVUpdateManager.h>
 #include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -256,6 +257,26 @@ void VMeshPartBase::ApplySetting(const messaging::VMessage& in_Message)
 	catch(VException& e)
 	{
 		vout << "Failed to create model: " << e.GetErrorString() << vendl;
+	}
+}
+
+void VMeshPartBase::InterpreteMessage(
+	messaging::VMessageInterpreter &interpreter,  
+	const messaging::VMessage& in_Message,  
+	messaging::VMessage* in_pAnswer ) 
+{
+	messaging::VMessageInterpreter::Result result = 
+		interpreter.HandleMessage(this, in_Message, in_pAnswer);
+
+	switch(result) {
+	case messaging::VMessageInterpreter::GetSettings:
+		{
+			AddVariables(in_pAnswer);
+		} break;
+	case messaging::VMessageInterpreter::ApplySetting:
+		{
+			ApplySetting(in_Message);
+		} break;
 	}
 }
 

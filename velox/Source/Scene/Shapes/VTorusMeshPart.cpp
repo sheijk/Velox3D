@@ -3,7 +3,10 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/OpenGL.h>
 #include <V3d/Math/Numerics.h>
+#include <V3dLib/Graphics/Geometry/Conversions.h>
 #include <V3d/Entity/VGenericPartParser.h>
+#include <V3d/Messaging/VMessageInterpreter.h>
+
 #include <gl/glut.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
@@ -83,10 +86,34 @@ void VTorusMeshPart::sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals)
 	}
 }
 
+void v3d::scene::VTorusMeshPart::OnMessage(
+	const messaging::VMessage& in_Message,  
+	messaging::VMessage* in_pAnswer) 
+{
+	using namespace messaging;
+
+	static VMessageInterpreter interpreter;
+
+	if( !interpreter.IsInitialized() )
+	{
+		interpreter.SetInitialized(true);
+
+		interpreter.AddMemberOption("color", this, &m_Color);
+		interpreter.AddMemberOption("top-radius", this, &m_fTopRadius);
+		interpreter.AddMemberOption("bottom-radius", this, &m_fButtonRadius);
+		interpreter.AddMemberOption("height", this, &m_fHeight);
+		interpreter.AddMemberOption("slices", this, &m_iSlices);
+		interpreter.AddMemberOption("stacks", this, &m_iStacks);
+	}
+
+	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+}
+
 namespace {
 	entity::VPartParser<VTorusMeshPart> parser;
 }
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
+
 //-----------------------------------------------------------------------------

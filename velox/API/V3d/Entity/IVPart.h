@@ -102,6 +102,7 @@ public:
 	void RemoveTag(const tags::VTag& tag);
 	vbool HasTag(const tags::VTag& tag) const;
 	VRangeIterator<const tags::VTag> Tags() const;
+
 private:
 	/** Override for parts which will handle messages */
 	virtual void OnMessage(const messaging::VMessage& in_Message, 

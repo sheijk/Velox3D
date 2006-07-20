@@ -8,9 +8,9 @@ namespace v3d { namespace messaging {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
-void VMessageInterpreter::AddOption(VOption* option)
+void v3d::messaging::VMessageInterpreter::AddOption(VSharedPtr<VOption> option) 
 {
-	m_Options.insert(make_pair(option->GetName(), SharedPtr(option)));
+	m_Options.insert(make_pair(option->GetName(), option));
 }
 
 VMessageInterpreter::Result VMessageInterpreter::HandleMessage(void* object,
