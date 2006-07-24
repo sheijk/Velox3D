@@ -270,6 +270,11 @@ void VJointHinge2Part::OnMessage(
 	}
 }
 
+VJointHinge2& VJointHinge2Part::GetJointHinge2()
+{
+	return m_Joint;
+}
+
 namespace {
 	entity::VPartParser<VJointHinge2Part> parser;
 }

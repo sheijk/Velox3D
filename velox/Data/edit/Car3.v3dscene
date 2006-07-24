@@ -25,52 +25,58 @@
 		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 	</entity>
 	<entity name="Car">
-		<part type="v3d::entity::VRigidBodyPart" pos="(1,20,1)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,20,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(30,0.5,30)" MaxPoint="(30,0.5,30)" MinPoint="(0,0,0)" tags=""/>
 		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(30,0.5,30)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
-		<part type="v3d::physics::VBodyPart" Address="06E7D470" Enabled="true" Mass="1" Position="(0,20,0)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
-		<entity name="Joint1">
-			<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,10)" Axis1="(0,1,0)" Axis2="(-1,0,0)" Body1="06E7D470" Body2="06EDC0A8" Bounce="0" CFM="0" FudgeFactor="0.1" HighStop="0" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="0" MaxForce="0" MaxForce2="0" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
-			<part type="v3d::physics::VJointHinge2LinkAncestorBodyPart" tags=""/>
-			<entity name="Wheel1">
-				<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="2" tags=""/>
-				<part type="v3d::entity::VRigidBodyPart" pos="(10,15,10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-				<part type="v3d::physics::VBodyPart" Address="06EDC0A8" Enabled="true" Mass="1" Position="(12,15,10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
-				<part type="v3d::physics::VBoundingSphereVolumePart" Position="(12,15,10)" Radius="2" tags=""/>
-				<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
-			</entity>
-		</entity>
-		<entity name="Joint2">
-			<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,-10)" Axis1="(0,1,0)" Axis2="(-1,0,0)" Body1="06E7D470" Body2="06C96170" Bounce="0" CFM="0" FudgeFactor="0.1" HighStop="0" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="0" MaxForce="0" MaxForce2="0" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
-			<part type="v3d::physics::VJointHinge2LinkAncestorBodyPart" tags=""/>
-			<entity name="Wheel2">
-				<part type="v3d::entity::VRigidBodyPart" pos="(10,15,-10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-				<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="2" tags=""/>
-				<part type="v3d::physics::VBoundingSphereVolumePart" Position="(12,15,-10)" Radius="2" tags=""/>
-				<part type="v3d::physics::VBodyPart" Address="06C96170" Enabled="true" Mass="1" Position="(12,15,-10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
-				<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
-			</entity>
-		</entity>
+		<part type="v3d::physics::VBodyPart" Address="067CEA88" Enabled="true" Mass="1" Position="(1,20,1)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 		<entity name="Joint3">
-			<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="06E7D470" Body2="06D869B0" Bounce="0" CFM="1.17549e-038" FudgeFactor="1" HighStop="0" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="0" MaxForce="0" MaxForce2="0" StopCFM="1.17549e-038" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
+			<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="067CEA88" Body2="067CF118" Bounce="0" CFM="1.17549e-038" FudgeFactor="1" HighStop="0" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="0" MaxForce="0" MaxForce2="0" StopCFM="1.17549e-038" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
 			<part type="v3d::physics::VJointHinge2LinkAncestorBodyPart" tags=""/>
 			<entity name="Wheel3">
-				<part type="v3d::entity::VRigidBodyPart" pos="(-10,15,10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-				<part type="v3d::physics::VBoundingSphereVolumePart" Position="(-10,15,10)" Radius="2" tags=""/>
+					<part type="v3d::entity::VRigidBodyPart" pos="(10,15,-10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+					<part type="v3d::physics::VBoundingSphereVolumePart" Position="(12,15,-10)" Radius="2" tags=""/>
+					<part type="v3d::physics::VBodyPart" Address="067D0368" Enabled="true" Mass="1" Position="(10,15,-10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+					<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
 				<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="2" tags=""/>
-				<part type="v3d::physics::VBodyPart" Address="06D869B0" Enabled="true" Mass="1" Position="(-10,15,10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
-				<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
+
 			</entity>
 		</entity>
 		<entity name="Joint4">
-			<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,-10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="06E7D470" Body2="06D31358" Bounce="0" CFM="0" FudgeFactor="1" HighStop="0" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="0" MaxForce="0" MaxForce2="0" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
+			<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,-10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="067CEA88" Body2="067CF720" Bounce="0" CFM="0" FudgeFactor="1" HighStop="0" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="0" MaxForce="0" MaxForce2="0" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
 			<part type="v3d::physics::VJointHinge2LinkAncestorBodyPart" tags=""/>
 			<entity name="Wheel4">
 				<part type="v3d::entity::VRigidBodyPart" pos="(-10,15,-10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 				<part type="v3d::physics::VBoundingSphereVolumePart" Position="(-10,15,-10)" Radius="2" tags=""/>
 				<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="2" tags=""/>
-				<part type="v3d::physics::VBodyPart" Address="06D31358" Enabled="true" Mass="1" Position="(-10,15,-10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+				<part type="v3d::physics::VBodyPart" Address="067CF720" Enabled="true" Mass="1" Position="(-10,15,-10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 				<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
+			</entity>
+		</entity>
+		<entity name="Steering">
+			<entity name="Joint1">
+				<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="067CEA88" Body2="067CFD60" Bounce="0" CFM="0" FudgeFactor="0.1" HighStop="1" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="-1" MaxForce="0.1" MaxForce2="1" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
+				<part type="v3d::physics::VJointHinge2LinkAncestorBodyPart" tags=""/>
+				<part type="v3d::physics::VJointHinge2ModifierPart" KeyEvent="10" tags=""/>
+				<entity name="Wheel1">
+					<part type="v3d::entity::VRigidBodyPart" pos="(10,15,10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+					<part type="v3d::physics::VBodyPart" Address="067CFD60" Enabled="true" Mass="1" Position="(10,15,10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+					<part type="v3d::physics::VBoundingSphereVolumePart" Position="(10,15,10)" Radius="2" tags=""/>
+					<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
+					<part type="v3d::scene::VArrowMeshPart" color="(1,1,1,1)" material="/system/graphics/defaultMaterial" size="1" tags=""/>
+				</entity>
+			</entity>
+			<entity name="Joint2">
+				<part type="v3d::physics::VJointHinge2ModifierPart" KeyEvent="10" tags=""/>
+				<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,10,10)" Axis1="(0,1,0)" Axis2="(-1,0,0)" Body1="067CEA88" Body2="067D0368" Bounce="0" CFM="0" FudgeFactor="0.1" HighStop="0" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="0" MaxForce="0" MaxForce2="0" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
+				<part type="v3d::physics::VJointHinge2LinkAncestorBodyPart" tags=""/>
+				<entity name="Wheel2">
+				<part type="v3d::entity::VRigidBodyPart" pos="(-10,10,10)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+				<part type="v3d::physics::VBoundingSphereVolumePart" Position="(-10,10,10)" Radius="2" tags=""/>
+				<part type="v3d::scene::VArrowMeshPart" color="(1,1,1,1)" material="/system/graphics/defaultMaterial" size="1" tags=""/>
+				<part type="v3d::physics::VBodyPart" Address="067CF118" Enabled="true" Mass="1" Position="(-10,10,10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+				<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
+
+				</entity>
 			</entity>
 		</entity>
 	</entity>

@@ -55,10 +55,10 @@ public:
 	
 
 	virtual void Apply();
-
+	void SetParameters();
 
 private:
-	void SetParameters();
+	
 	void SetAxisAndAnchor();
 
 	VJointHinge2(const VJointHinge2&);

@@ -1597,6 +1597,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2ModifierPart.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Source\Physics\VJointHinge2Part.cpp"
 					>
 				</File>

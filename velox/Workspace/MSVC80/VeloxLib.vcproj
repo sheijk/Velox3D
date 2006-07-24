@@ -614,6 +614,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Physics\VJointHinge2ModifierPart.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Physics\VMass.h"
 						>
 					</File>
@@ -1536,6 +1540,10 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VJointHinge2LinkPart.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VJointHinge2ModifierPart.cpp"
 					>
 				</File>
 				<File

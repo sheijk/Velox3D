@@ -29,6 +29,8 @@ public:
 	
 	void RegisterBody(VBody* in_pAddress);
 	void UnregisterBody(VBody* in_pAddress);
+	
+	VJointHinge2& GetJointHinge2();
 
 	static std::string GetDefaultId();
 
