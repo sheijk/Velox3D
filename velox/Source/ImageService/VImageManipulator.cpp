@@ -37,7 +37,7 @@ void VImageManipulator::Scale(VImage& in_ImageSource, VImage& in_ImageDest)
 		in_ImageSource.GetWidth(),
 		in_ImageSource.GetHeight(),
 		1,
-		in_ImageSource.GetBPP() / 8,
+		in_ImageSource.GetBitsPerPixel() / 8,
 		IL_RGB,
 		IL_UNSIGNED_BYTE,
 		in_ImageSource.GetData().GetDataAddress()
@@ -88,13 +88,13 @@ void VImageManipulator::Convert(VImage& in_ImageSource, VImage& in_ImageDest)
 		in_ImageSource.GetWidth(),
 		in_ImageSource.GetHeight(),
 		1,
-		in_ImageSource.GetBPP() / 8,
+		in_ImageSource.GetBitsPerPixel() / 8,
 		IL_RGB,
 		IL_UNSIGNED_BYTE,
 		in_ImageSource.GetData().GetDataAddress()
 		);
 
-	switch(in_ImageDest.GetBPP())
+	switch(in_ImageDest.GetBitsPerPixel())
 	{
 	case 32:
 		{

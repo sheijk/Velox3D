@@ -1782,11 +1782,11 @@
 						Name="Shootings"
 						>
 						<File
-							RelativePath="..\..\Source\Scene\Shootings\VMirrorShooting.cpp"
+							RelativePath="..\..\Source\Scene\Shootings\VOffscreenShooting.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\Source\Scene\Shootings\VOffscreenShooting.cpp"
+							RelativePath="..\..\Source\Scene\Rendering\VShadowMapRenderStepPart.cpp"
 							>
 						</File>
 						<File

@@ -373,10 +373,6 @@
 							>
 						</File>
 						<File
-							RelativePath="..\..\API\V3d\Scene\Shootings\VShadowMapShooting.h"
-							>
-						</File>
-						<File
 							RelativePath="..\..\Api\V3d\Scene\Shootings\VShootingBase.h"
 							>
 						</File>
@@ -434,6 +430,10 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Scene\Rendering\VProjectTextureRenderStepPart.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Scene\Rendering\VShadowMapRenderStepPart.h"
 							>
 						</File>
 					</Filter>
@@ -1889,6 +1889,10 @@
 				<Filter
 					Name="Rendering"
 					>
+					<File
+						RelativePath="..\..\Source\Scene\Rendering\VShadowMapRenderStepPart.cpp"
+						>
+					</File>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -1924,6 +1928,10 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\UtilsLib\VFrameCounter.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\UtilsLib\VImage.cpp"
 					>
 				</File>
 				<File

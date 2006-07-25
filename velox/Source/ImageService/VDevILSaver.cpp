@@ -40,7 +40,7 @@ void VDevILSaver::SaveImageToFile(VImage& in_Image, ImageType in_ImageType,
 		in_Image.GetWidth(),
 		in_Image.GetHeight(),
 		1,
-		in_Image.GetBPP() / 8,
+		in_Image.GetBitsPerPixel() / 8,
 		IL_RGB,
 		IL_UNSIGNED_BYTE,
 		in_Image.GetData().GetDataAddress()
@@ -62,7 +62,7 @@ void VDevILSaver::SaveImageToFile(VImage& in_Image, ImageType in_ImageType,
 
 	case IVImageSaver::ImageType::SaveJPG:
 		{
-			if(in_Image.GetBPP() == 32)
+			if(in_Image.GetBitsPerPixel() == 32)
 				V3D_THROW(VException, "32 bit per pixel are not supported by jpg format!");
 
 			ilSave(IL_JPG, (vchar*)in_sFilename);
@@ -70,7 +70,7 @@ void VDevILSaver::SaveImageToFile(VImage& in_Image, ImageType in_ImageType,
 		}
 	case IVImageSaver::ImageType::SaveTGA:
 		{
-			if(in_Image.GetBPP() == 8)
+			if(in_Image.GetBitsPerPixel() == 8)
 				V3D_THROW(VException, "8 bit per pixel are not supported by tga format!");
 
 			ilSave(IL_TGA, (vchar*)in_sFilename);

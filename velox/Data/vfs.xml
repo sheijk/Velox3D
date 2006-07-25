@@ -16,19 +16,11 @@
 		rights="rwfd"
 		/>
 
-    <!-- Directory name="system">
-        <Directory name="graphics">
-            <Mount name="mat" type="localfs"
-                source="../../../Source/Graphics/Shaders" rights="rwfd" />
-        </Directory>
-    </Directory -->
-
-	<!--Directory name="system">
-		<Directory name="graphics">
-			<Mount name="mat" type="localfs"
-            source="../../../Source/Graphics/Shaders" />
-		<Directory>
-	</Directory-->
-
+	<Mount
+		name="system"
+		type="localfs"
+		source="system"
+		rights="rwfd"
+		/>
 </FileSystem>
 </Vfs>

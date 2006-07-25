@@ -125,6 +125,19 @@ namespace {
 		//V3D_THROW(VException, "illegal texture wrapping mode");
 	}
 
+	GLenum FormatForBPP(vuint bpp)
+	{
+		switch(bpp)
+		{
+		case 8: return GL_LUMINANCE;
+		//case 16: return GL_RGB;
+		case 24: return GL_RGB;
+		case 32: return GL_RGBA;
+		default: V3D_THROWMSG(VException, "no support for textures with "
+					 << bpp << " bits per pixel");
+		}
+	}
+
 	VTexture2D* CreateTexture2D(
 		const image::VImage& image,
         const VTextureOptions& in_Options,
@@ -134,6 +147,9 @@ namespace {
 		V3D_ASSERT(image.GetWidth() > 0);
 		V3D_ASSERT(image.GetHeight() > 0);
 		V3D_ASSERT(image.GetPixelData() != 0);
+		V3D_ASSERT(image.GetBitsPerPixel() % 8 == 0);
+		V3D_ASSERT(image.GetBitsPerPixel() >= 8);
+		V3D_ASSERT(image.GetBitsPerPixel() <= 32);
 
 		const vbyte* temp = image.GetPixelData();
 
@@ -169,10 +185,10 @@ namespace {
 
 		gluBuild2DMipmaps(
 			in_TextureTarget, 
-			GL_RGB, 
+			image.GetBitsPerPixel() / 8,
 			image.GetWidth(), 
 			image.GetHeight(),
-			GL_RGB,
+			FormatForBPP(image.GetBitsPerPixel()),
 			GL_UNSIGNED_BYTE, 
 			image.GetPixelData()
 			);

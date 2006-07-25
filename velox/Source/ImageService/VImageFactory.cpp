@@ -177,9 +177,11 @@ void VImageFactory::CreateImage(VStringParam in_sFilename,
 
 void VImageFactory::MakeDeepImageCopy(VImage& in_Image, VImage& in_ImageDest)
 {
-	const vuint nSize = in_Image.GetWidth() * in_Image.GetHeight() * in_Image.GetBPP() / 8;
+	const vuint nSize = in_Image.GetWidth() * 
+		in_Image.GetHeight() * 
+		in_Image.GetBitsPerPixel() / 8;
 
-	in_ImageDest.iBPP = in_Image.GetBPP();
+	in_ImageDest.iBPP = in_Image.GetBitsPerPixel();
 	in_ImageDest.iWidth = in_Image.GetWidth();
 	in_ImageDest.iHeight = in_Image.GetHeight();
 

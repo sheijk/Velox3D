@@ -93,66 +93,73 @@ void VView::FrameUpdateLoop()
 
 	while( IsRunning() )
 	{
-		const vfloat32 frameDuration = vfloat32(pUpdater->GetFrameDuration());
-
-		// add all new actions
-		for(FrameActions::iterator newAction = m_NewFrameActions.begin();
-			newAction != m_NewFrameActions.end(); ++newAction)
-		{
-			(*newAction)->Init();
-			
-			m_FrameActions.push_back(*newAction);
-		}
-		m_NewFrameActions.clear();
-		
-		// remove all old actions
-		for(FrameActions::iterator oldAction = m_OldFrameActions.begin();
-			oldAction != m_OldFrameActions.end(); ++oldAction)
-		{
-			(*oldAction)->Shutdown();
-			FrameActions::iterator newEnd = std::remove(
-				m_FrameActions.begin(), m_FrameActions.end(), *oldAction);
-			m_FrameActions.erase(newEnd, m_FrameActions.end());
-		}
-		m_OldFrameActions.clear();
-		
-		m_bInitCalled = true;
-		
-		// tell all frame actions to execute
-		for(FrameActions::iterator action = m_FrameActions.begin();
-			action != m_FrameActions.end(); ++action)
-		{
-			(*action)->UpdateFrame(frameDuration);
-		}
-		//for_each(
-		//	m_FrameActions.begin(), 
-		//	m_FrameActions.end(), bind1st(mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame), frameDuration));
-		
 		try
 		{
-			delay = 1.0 / property::GetProperty<double>("editor.fps");
-		}
-		catch(VException&) 
-		{
-			property::SetProperty<double>("editor.fps", 60.0f);
-			delay = 1.0 / 20.0;
-		}
+			const vfloat32 frameDuration = vfloat32(pUpdater->GetFrameDuration());
 
-        glfwLockMutex(m_SyncMutex);
-		if( m_SyncActions.size() > 0 )
-		{
-			vout << "[VView] executing " << m_SyncActions.size()
-				<< " synchronized actions" << vendl;
+			// add all new actions
+			for(FrameActions::iterator newAction = m_NewFrameActions.begin();
+				newAction != m_NewFrameActions.end(); ++newAction)
+			{
+				(*newAction)->Init();
+
+				m_FrameActions.push_back(*newAction);
+			}
+			m_NewFrameActions.clear();
+
+			// remove all old actions
+			for(FrameActions::iterator oldAction = m_OldFrameActions.begin();
+				oldAction != m_OldFrameActions.end(); ++oldAction)
+			{
+				(*oldAction)->Shutdown();
+				FrameActions::iterator newEnd = std::remove(
+					m_FrameActions.begin(), m_FrameActions.end(), *oldAction);
+				m_FrameActions.erase(newEnd, m_FrameActions.end());
+			}
+			m_OldFrameActions.clear();
+
+			m_bInitCalled = true;
+
+			// tell all frame actions to execute
+			for(FrameActions::iterator action = m_FrameActions.begin();
+				action != m_FrameActions.end(); ++action)
+			{
+				(*action)->UpdateFrame(frameDuration);
+			}
+			//for_each(
+			//	m_FrameActions.begin(), 
+			//	m_FrameActions.end(), bind1st(mem_fun<void, IVFrameAction>(&IVFrameAction::UpdateFrame), frameDuration));
+
+			try
+			{
+				delay = 1.0 / property::GetProperty<double>("editor.fps");
+			}
+			catch(VException&) 
+			{
+				property::SetProperty<double>("editor.fps", 60.0f);
+				delay = 1.0 / 20.0;
+			}
+
+			glfwLockMutex(m_SyncMutex);
+			if( m_SyncActions.size() > 0 )
+			{
+				vout << "[VView] executing " << m_SyncActions.size()
+					<< " synchronized actions" << vendl;
+			}
+			for_each(m_SyncActions.begin(), m_SyncActions.end(),
+				mem_fun<void, IVSynchronizedAction>(&IVSynchronizedAction::Run));
+			m_SyncActions.clear();
+			glfwUnlockMutex(m_SyncMutex);
+			glfwBroadcastCond(m_SyncDoneCondition);
+
+			// sleep for n seconds
+			glfwSleep(delay);
+			pUpdater->StartNextFrame();
 		}
-		for_each(m_SyncActions.begin(), m_SyncActions.end(),
-			mem_fun<void, IVSynchronizedAction>(&IVSynchronizedAction::Run));
-		m_SyncActions.clear();
-		glfwUnlockMutex(m_SyncMutex);
-		glfwBroadcastCond(m_SyncDoneCondition);
-		
-		// sleep for n seconds
-		glfwSleep(delay);
-		pUpdater->StartNextFrame();
+		catch(v3d::VException& e)
+		{
+			vout << "Catched exception in C++ loop: " << e.ToString() << vendl;
+		}
 	}
 
 	pUpdater->Stop();
