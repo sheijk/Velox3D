@@ -15,7 +15,7 @@ namespace vfs {
  * Provides a method to create a temporal files on disc
  * @author: ins
  */
-
+#undef CreateFile //windows defines sucks..
 class IVTempDataProvider : VNamedObject
 {
 public:
@@ -34,7 +34,7 @@ public:
 	virtual VStringParam CreateFile(void* in_pBuffer, vuint in_nBytes) = 0;
 	
 	/**
-	 * Writes the stream into a binary flile
+	 * Writes the stream into a binary file
 	 */
 	virtual VStringParam CreateFile(IVStream* in_pStream) = 0;
 

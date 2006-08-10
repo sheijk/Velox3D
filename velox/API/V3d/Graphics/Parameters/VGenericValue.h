@@ -2,10 +2,9 @@
 #define V3D_VGENERICVALUE_2005_11_29_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Graphics/Parameters/IVParameterValue.h>
 #include <V3d/Graphics/IVParameter.h>
-#include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Utils/VStringValue.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------

@@ -19,7 +19,7 @@
 %template(VStringIter) v3d::VRangeIterator<const std::string>;
 
 // bind VStringValue and instantiate the Get<T> function for some common types
-%include "../../API/V3dLib/Utils/VStringValue.h"
+%include "../../API/V3d/Utils/VStringValue.h"
 %extend v3d::utils::VStringValue {
 	%template(ToString) Get<std::string>;
 	%template(ToInt) Get<int>;

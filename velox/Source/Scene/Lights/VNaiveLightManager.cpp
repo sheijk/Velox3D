@@ -3,8 +3,8 @@
 
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Math/TransformationOps.h>
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
-#include <V3dLib/Graphics/Geometry/Conversions.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Geometry/Conversions.h>
 #include <V3d/Graphics/VLight.h>
 #include <V3d/Scene/Lights/VLightPart.h>
 #include <V3d/OpenGL.h>

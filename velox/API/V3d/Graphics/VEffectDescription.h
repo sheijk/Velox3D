@@ -1,13 +1,12 @@
 #ifndef V3D_VEFFECTDESCRIPTION_2004_08_28_H
 #define V3D_VEFFECTDESCRIPTION_2004_08_28_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VTypeInfo.h>
-
-#include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/Core/Wrappers/VString.h>
-#include <v3d/Core/VException.h>
-#include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/Wrappers/VString.h>
+#include <V3d/Core/VException.h>
+#include <V3d/Utils/VStringValue.h>
 
 #include <vector>
 #include <string>

@@ -5,7 +5,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Math/VVector.h>
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------

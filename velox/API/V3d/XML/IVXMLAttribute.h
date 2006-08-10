@@ -2,7 +2,7 @@
 #define V3D_IVXMLATTRIBUTE_09_15_2004_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VTypes.h>
-#include <V3dlib/Utils/VStringValue.h>
+#include <V3d/Utils/VStringValue.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{

@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Image/IVImageFactory.h>
-#include <v3d/Image/VImage.h>
-#include <V3dLib/Utils/VStreamReader.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Image/IVImageFactory.h>
+#include <V3d/Image/VImage.h>
+#include <V3d/Utils/VStreamReader.h>
 #include <memory.h>
 #include <string>
 #include "VDevILSaver.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace image{

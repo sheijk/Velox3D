@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/XML/IVXMLAttribute.h>
 #include <V3d/Core/Wrappers/VString.h>
-#include <V3dlib/Utils/VStringValue.h>
+#include <V3d/Utils/VStringValue.h>
 //-----------------------------------------------------------------------------
 using namespace v3d;
 //-----------------------------------------------------------------------------

@@ -1,6 +1,5 @@
-#include <V3dLib/Utils/VTrackballPart.h>
+#include <V3d/Utils/VTrackballPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Input/IVInputManager.h>
 //-----------------------------------------------------------------------------

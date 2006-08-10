@@ -1,14 +1,12 @@
 //TODO: insert header file name
-#include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Graphics/Misc/MiscUtils.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/MemManager.h>
-#include <V3dLib/Graphics/Misc/IVDrawList.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/MemManager.h>
+#include <V3d/Graphics/Misc/IVDrawList.h>
 #include <V3d/Math.h>
-
-#include <V3dLib/Graphics/Materials/EffectUtils.h>
-
+#include <V3d/Graphics/Materials/EffectUtils.h>
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
 namespace v3d {

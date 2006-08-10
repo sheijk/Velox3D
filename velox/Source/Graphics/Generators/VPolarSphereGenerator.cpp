@@ -1,9 +1,9 @@
-#include <V3dLib/Graphics/Generators/VPolarSphereGenerator.h>
+#include <V3d/Graphics/Generators/VPolarSphereGenerator.h>
 //-----------------------------------------------------------------------------
 #include <cmath>
 
-#include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
-#include <V3dLib/Graphics/Geometry/VNormal3f.h>
+#include <V3d/Graphics/Geometry/VTexCoord2f.h>
+#include <V3d/Graphics/Geometry/VNormal3f.h>
 #include <V3d/Math/VVectorOps.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

@@ -1,10 +1,9 @@
 #include "VTextureStateResType.h"
 //-----------------------------------------------------------------------------
 
-#include <v3d/Image/VImage.h>
-
-#include <V3dLib/Graphics/Materials/StateTypes.h>
-#include <V3dLib/Graphics/Materials/VModeTypeInfo.h>
+#include <V3d/Image/VImage.h>
+#include <V3d/Graphics/Materials/StateTypes.h>
+#include <V3d/Graphics/Materials/VModeTypeInfo.h>
 #include "../../Graphics/OpenGL/VTextureState.h"
 
 #include <V3d/OpenGL.h>

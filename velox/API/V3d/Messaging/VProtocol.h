@@ -2,10 +2,8 @@
 #define V3D_VPROTOCOL_2005_07_29_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Messaging/VMessage.h>
-
-#include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Utils/VStringValue.h>
 
 #include <map>
 #include <string>

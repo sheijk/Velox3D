@@ -1,10 +1,8 @@
-#include <V3dLib/Property/VPropertyManager.h>
+#include <V3d/Property/VPropertyManager.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Core/RangeIter/VSTLAccessorRangePolicy.h>
-
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace property {
 //-----------------------------------------------------------------------------

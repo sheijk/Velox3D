@@ -1,10 +1,9 @@
-#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Utils/VRegisterGuard.h>
 //-----------------------------------------------------------------------------
-
 #include <functional>
 #include <algorithm>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------

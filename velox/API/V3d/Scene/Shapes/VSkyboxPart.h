@@ -2,14 +2,13 @@
 #define V3D_VSKYBOXPART_2005_12_01_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Scene/IVShapePart.h>
-#include <V3dLib/EntityParts/VRigidBodyPart.h>
+#include <V3d/Entity/VRigidBodyPart.h>
 #include <V3d/Resource.h>
 #include <V3d/Graphics/IVMaterial.h>
 #include <V3d/Scene/IVSceneManagerPart.h>
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
 
 #include <vector>
 

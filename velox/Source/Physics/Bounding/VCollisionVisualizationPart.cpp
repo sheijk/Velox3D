@@ -1,7 +1,7 @@
 #include <v3d/Physics/Bounding/VCollisionVisualizationPart.h>
 #include <V3d/Entity/VGenericPartParser.h>
-#include <V3dLib/Graphics/Importer/Base/VImportedBufferDescription.h>
-#include <V3dLib/Graphics/Geometry.h>
+#include <V3d/Graphics/Importer/Base/VImportedBufferDescription.h>
+#include <V3d/Graphics/Geometry.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

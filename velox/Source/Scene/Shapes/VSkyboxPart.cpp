@@ -1,12 +1,9 @@
 #include <V3d/Scene/Shapes/VSkyboxPart.h>
 //-----------------------------------------------------------------------------
-
-
 #include <V3d/Core/RangeIter.h>
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Graphics.h>
-#include <V3dLib/Graphics.h>
-
+#include <V3d/Graphics.h>
 #include <V3d/OpenGL.h>
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------

@@ -1,11 +1,9 @@
 #ifndef V3D_IVSHOOTING_2005_05_20_H
 #define V3D_IVSHOOTING_2005_05_20_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Entity/IVPart.h>
-#include <V3dLib/Graphics/Misc/IVCamera.h>
-
+#include <V3d/Graphics/Misc/IVCamera.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------

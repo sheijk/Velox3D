@@ -1,8 +1,7 @@
 #include "VTextureStateCategory.h"
 //-----------------------------------------------------------------------------
 #include <v3d/Graphics/GraphicsExceptions.h>
-
-#include <V3dLib/Graphics/Materials/StateTypes.h>
+#include <V3d/Graphics/Materials/StateTypes.h>
 //#include "VCubemapTextureState.h"
 
 #include "Textures/VCubeMapTexture.h"

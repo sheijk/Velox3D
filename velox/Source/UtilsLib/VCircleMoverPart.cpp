@@ -1,6 +1,5 @@
-#include <V3dLib/Utils/VCircleMoverPart.h>
+#include <V3d/Utils/VCircleMoverPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Messaging/VMessageInterpreter.h>
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------

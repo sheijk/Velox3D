@@ -3,10 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <algorithm>
 
-#include <v3d/Core/VCoreLib.h>
-
-#include <V3dLib/Containers/VArray2d.h>
-#include <v3d/Math/Numerics.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/Container/VArray2d.h>
+#include <V3d/Math/Numerics.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace math {

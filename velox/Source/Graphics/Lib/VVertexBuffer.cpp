@@ -1,10 +1,9 @@
 #include <V3d/Graphics/VVertexBuffer.h>
 //-----------------------------------------------------------------------------
-
-#include <V3dLib/Graphics/Geometry/VVertex3f.h>
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
-#include <V3dLib/Graphics/Geometry/VNormal3f.h>
-#include <V3dLib/Graphics/Geometry/VTexCoord2f.h>
+#include <V3d/Graphics/Geometry/VVertex3f.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Geometry/VNormal3f.h>
+#include <V3d/Graphics/Geometry/VTexCoord2f.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-#include "V3dLib/Collision/VIntersectionArray.h"
+#include <V3d/Collision/VIntersectionArray.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core.h>
 

@@ -3,7 +3,7 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/OpenGL.h>
 #include <V3d/Math/Numerics.h>
-#include <V3dLib/Graphics/Geometry/Conversions.h>
+#include <V3d/Graphics/Geometry/Conversions.h>
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Messaging/VMessageInterpreter.h>
 

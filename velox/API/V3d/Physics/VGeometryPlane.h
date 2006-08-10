@@ -2,7 +2,7 @@
 #define V3D_VGEOMETRYPLANE_2004_11_07_H
 //-----------------------------------------------------------------------------
 #include <V3d/Physics/VGeometry.h>
-#include <v3dLib/Graphics/Geometry/VVertex3f.h>
+#include <V3d/Graphics/Geometry/VVertex3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

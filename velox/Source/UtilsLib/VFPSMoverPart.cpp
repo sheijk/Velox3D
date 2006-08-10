@@ -1,8 +1,6 @@
-#include <V3dLib/Utils/VFPSMoverPart.h>
+#include <V3d/Utils/VFPSMoverPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Math/VQuaternionOps.h>
-
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>

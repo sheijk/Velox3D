@@ -2,15 +2,14 @@
 #define V3D_VMIRRORSHOOTING_2005_12_10_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Scene/Shootings/VShootingBase.h>
 #include <V3d/Scene/VSimpleShooting.h>
 #include <V3d/Graphics/IVDevice.h>
-#include <V3dLib/Graphics/Misc/VCamera.h>
+#include <V3d/Graphics/Misc/VCamera.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Math/VPlane.h>
 #include <V3d/Graphics/Parameters/VGenericValue.h>
-#include <V3dLib/EntityParts/VRigidBodyPart.h>
+#include <V3d/Entity/VRigidBodyPart.h>
 
 #include <string>
 //-----------------------------------------------------------------------------

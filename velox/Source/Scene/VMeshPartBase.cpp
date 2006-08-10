@@ -1,12 +1,10 @@
 #include <V3d/Scene/VMeshPartBase.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Resource.h>
-#include <V3dLib/Utils/VStringValue.h>
-
+#include <V3d/Utils/VStringValue.h>
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Updater/IVUpdateManager.h>
-#include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Graphics/Misc/MiscUtils.h>
 #include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

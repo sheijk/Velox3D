@@ -5,7 +5,7 @@
 #include <V3d/Graphics/VMeshDescription.h>
 #include <V3d/Graphics/VEffectDescription.h>
 
-#include <V3dLib/Graphics/Materials/EffectUtils.h>
+#include <V3d/Graphics/Materials/EffectUtils.h>
 
 #include <v3d/Graphics/VDeviceMatrix.h>
 #include <v3d/Math/VMatrixOps.h>
@@ -13,7 +13,7 @@
 #include "IVOpenGLRenderState.h"
 
 #include <v3d/Graphics/GraphicsExceptions.h>
-#include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Graphics/Misc/MiscUtils.h>
 #include <V3d/Graphics/VLight.h>
 
 #include "VMeshHandle.h"

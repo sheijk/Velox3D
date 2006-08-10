@@ -3,9 +3,9 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Entity.h>
-#include <V3dLib/EntityParts/VRigidBodyPart.h> //todo: sollte da verschwinden und in v3d/
+#include <V3d/Entity/VRigidBodyPart.h> //todo: sollte da verschwinden und in v3d/
 #include <V3d/Physics/VBody.h>
-#include <V3dLib/EntityParts/VUpdateablePart.h> //move away
+#include <V3d/Entity/VUpdateablePart.h> //move away
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------

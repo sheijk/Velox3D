@@ -1,16 +1,13 @@
 #ifndef V3D_VMODELPART_2005_05_22_H
 #define V3D_VMODELPART_2005_05_22_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Scene/IVSceneManagerPart.h>
 #include <V3d/Scene/IVGraphicsPart.h>
-
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity/VUnconnectedPart.h>
 #include <V3d/Graphics/VModel.h>
-#include <v3dLib/EntityParts/VRigidBodyPart.h>
-
+#include <V3d/Entity/VRigidBodyPart.h>
 #include <V3d/Graphics/IVDevice.h>
 
 #include <string>

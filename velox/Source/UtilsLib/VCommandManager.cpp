@@ -1,4 +1,4 @@
-#include <V3dLib/Utils/VCommandManager.h>
+#include <V3d/Utils/VCommandManager.h>
 //-----------------------------------------------------------------------------
 #include <string>
 

@@ -1,8 +1,7 @@
-#include <V3dLib/Graphics/Importer/VModelLoader.h>
+#include <V3d/Graphics/Importer/VModelLoader.h>
 //-----------------------------------------------------------------------------
 #include <V3d/XML.h>
 #include <V3d/Vfs.h>
-
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

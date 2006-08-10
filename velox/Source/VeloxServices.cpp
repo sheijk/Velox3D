@@ -13,7 +13,7 @@
 #include "UpdateManager/VUpdateManager.h"
 #include "SystemManager/VSystemManager.h"
 
-#include <V3dLib/Property/VPropertyManager.h>
+#include <V3d/Property/VPropertyManager.h>
 
 // thank you, windows.h -- it's a feature, not a bug :P -ins
 #undef NO_ERROR
@@ -52,7 +52,7 @@
 
 #include <V3d/Tags/VTagRegistry.h>
 
-#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Utils/VRegisterGuard.h>
 
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

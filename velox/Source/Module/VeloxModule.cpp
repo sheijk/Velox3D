@@ -10,11 +10,9 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VObjectRegistry.h>
 #include <V3d/Core/SmartPtr/VGuards.h>
-
 #include <V3d/Core/Modules/VModuleParams.h>
 #include <V3d/Core/Modules/VModuleBase.h>
-
-#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Utils/VRegisterGuard.h>
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

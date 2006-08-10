@@ -1,8 +1,7 @@
 #include <V3d/Scene/Shootings/VShootingBase.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Scene/IVShapePart.h>
-#include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Graphics/Misc/MiscUtils.h>
 #include <V3d/Scene/VDefaultRenderStepPart.h>
 #include <V3d/Scene/IVLightManager.h>
 //-----------------------------------------------------------------------------

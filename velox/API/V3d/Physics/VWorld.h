@@ -1,8 +1,8 @@
 #ifndef V3D_VWORLD_05_11_04_H
 #define V3D_VWORLD_05_11_04_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3dLib//Graphics/Geometry/VVertex3f.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Graphics/Geometry/VVertex3f.h>
 #include <V3d/Physics/VSpace.h>
 #include <V3d/Physics/VJointGroup.h>
 #include <V3d/Physics/VBody.h>

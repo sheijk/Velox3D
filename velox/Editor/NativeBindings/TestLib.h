@@ -1,20 +1,13 @@
-#include <V3dLib/Property/VPropertyManager.h>
+#include <V3d/Property/VPropertyManager.h>
 #include <V3d/Resource.h>
-
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Math/TransformationOps.h>
-
 #include <V3d/XML.h>
-
-#include <V3dLib/Utils/VFourCC.h>
-
-#include <V3dLib/Graphics/Misc/VCamera.h>
-
+#include <V3d/Utils/VFourCC.h>
+#include <V3d/Graphics/Misc/VCamera.h>
 #include <V3d/Vfs.h>
-
 #include <V3d/Entity.h>
 #include <V3d/Messaging/VProtocol.h>
-
 #include <V3d/Tags/VTagRegistry.h>
 
 #include <string>

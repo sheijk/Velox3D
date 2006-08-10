@@ -2,9 +2,8 @@
 #define V3D_VDEFAULTRENDERSTEPPART_2005_10_19_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Scene/IVRenderStepPart.h>
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
 #include <V3d/Tags/VTag.h>
 
 #include <vector>

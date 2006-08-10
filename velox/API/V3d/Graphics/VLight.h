@@ -2,11 +2,10 @@
 #define V3D_VLIGHT_2005_12_26_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Graphics/IVParameter.h>
 #include <V3d/Graphics/Parameters/IVParameterValue.h>
 #include <V3d/Core/RangeIter.h>
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
 
 #include <string>
 #include <map>

@@ -2,10 +2,9 @@
 #define V3D_VOFFSCREENSHOOTING_2006_05_12_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Scene/VSimpleShooting.h>
-#include <V3dLib/Graphics/Misc/VCamera.h>
-#include <V3dLib/EntityParts/VRigidBodyPart.h>
+#include <V3d/Graphics/Misc/VCamera.h>
+#include <V3d/Entity/VRigidBodyPart.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------

@@ -1,12 +1,9 @@
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Messaging/VMessage.h>
-
 #include <V3d/Core/VIOStream.h>
-#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Utils/VRegisterGuard.h>
 #include <V3d/Entity/IVEntitySerializationService.h>
-
 #include <V3d/Tags/VTagRegistry.h>
 
 #include <sstream>

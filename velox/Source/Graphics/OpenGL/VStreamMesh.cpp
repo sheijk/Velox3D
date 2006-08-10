@@ -2,11 +2,11 @@
 //-----------------------------------------------------------------------------
 #include "VOpenGLUtils.h"
 
-#include <V3dLib/Graphics/Geometry.h>
+#include <V3d/Graphics/Geometry.h>
 
 // to display normals
 #ifdef V3D_DEBUG
-#include <V3dLib/Property/VPropertyManager.h>
+#include <V3d/Property/VPropertyManager.h>
 namespace {
 	const VStringParam NORMAL_PROPERTY_FLAG = "v3d.graphics.showNormals";
 }

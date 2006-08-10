@@ -5,7 +5,7 @@
 #include <V3d/Physics/VJointHinge2Part.h>
 #include <V3d/Input/VKeyCode.h>
 #include <V3d/Input/IVButton.h>
-#include <V3dLib/Utils/VInputPart.h>
+#include <V3d/Utils/VInputPart.h>
 #include <V3d/Entity.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {

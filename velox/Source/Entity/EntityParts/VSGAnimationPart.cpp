@@ -1,6 +1,5 @@
-#include <v3dlib/EntityParts/VSGAnimationPart.h>
+#include <V3d/Entity/VSGAnimationPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {

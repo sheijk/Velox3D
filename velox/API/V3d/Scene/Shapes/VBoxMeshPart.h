@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Scene/VMeshPartBase.h>
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
 #include <V3d/Math/VBoundingBox.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {

@@ -1,14 +1,14 @@
 #ifndef V3D_VCOLLISIONVISUALIZATIONPART_08_09_H
 #define V3D_VCOLLISIONVISUALIZATIONPART_08_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Entity/VUnconnectedPart.h>
-#include <v3d/Entity.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Entity/VUnconnectedPart.h>
+#include <V3d/Entity.h>
 #include "VBoundingMesh.h"
 #include "IVBoundingVolumePart.h"
 #include <V3d/Resource.h>
-#include <V3dLib/EntityParts/VRigidBodyPart.h>
-#include <V3dLib/EntityParts/VUpdateablePart.h> //move away
+#include <V3d/Entity/VRigidBodyPart.h>
+#include <V3d/Entity/VUpdateablePart.h>
 #include <V3d/OpenGL.h>
 #include <V3d/Graphics.h>
 #include <V3d/Scene/VMeshPartBase.h>

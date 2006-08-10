@@ -1,19 +1,17 @@
-#include <v3dLib/Graphics/Importer/3DS/VImported3DS.h>
-
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/vfs/IVTempDataProvider.h>
-#include <v3d/VFS/IVFileSystem.h>
-#include <v3d/Resource.h>
-#include <v3d/Graphics.h>
-#include <V3dLib/Graphics.h>
+#include <V3d/Graphics/Importer/3DS/VImported3DS.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/vfs/IVTempDataProvider.h>
+#include <V3d/VFS/IVFileSystem.h>
+#include <V3d/Resource.h>
+#include <V3d/Graphics.h>
+#include <V3d/Graphics.h>
 #include <V3d/Graphics/IVDevice.h>
 #include <sstream>
 #include "lib3ds/mesh.h"
 #include "lib3ds/material.h"
 
-#include <V3dLib/Graphics/Importer/Base/VImportedBufferDescription.h>
-#include <V3dLib/Graphics/Importer/Base/VImportedFaceDescription.h>
-
+#include <V3d/Graphics/Importer/Base/VImportedBufferDescription.h>
+#include <V3d/Graphics/Importer/Base/VImportedFaceDescription.h>
 #include <V3d/Core/MemManager.h>
 
 using namespace v3d::resource;

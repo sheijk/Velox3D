@@ -1,12 +1,12 @@
-#include <v3dLib/Graphics/Importer/Base/VImportedFaceDescription.h>
-#include <v3dLib/Graphics/Importer/Base/VImportedBufferDescription.h>
-#include <v3dLib/Graphics/Importer/Base/VImportedMaterialDescription.h>
-#include <v3dLib/Graphics/Importer/VImporterException.h>
+#include <V3d/Graphics/Importer/Base/VImportedFaceDescription.h>
+#include <V3d/Graphics/Importer/Base/VImportedBufferDescription.h>
+#include <V3d/Graphics/Importer/Base/VImportedMaterialDescription.h>
+#include <V3d/Graphics/Importer/VImporterException.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Graphics.h>
-#include <V3dLib/Graphics.h>
+#include <V3d/Graphics.h>
+#include <V3d/Graphics.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------

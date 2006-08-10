@@ -1,16 +1,14 @@
 #ifndef V3D_VMISCSTATE_H
 #define V3D_VMISCSTATE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include "States/VDepthState.h"
 
-#include <v3d/Graphics/VEffectDescription.h>
-
-#include <V3dLib/Graphics/Geometry/VColor4f.h>
-#include <V3dLib/Graphics/Materials/StateTypes.h>
-
-#include <V3dLib/Property.h>
+#include <V3d/Graphics/VEffectDescription.h>
+#include <V3d/Graphics/Geometry/VColor4f.h>
+#include <V3d/Graphics/Materials/StateTypes.h>
+#include <V3d/Property.h>
 
 #include "IVOpenGLRenderState.h"
 #include <V3d/Math.h>

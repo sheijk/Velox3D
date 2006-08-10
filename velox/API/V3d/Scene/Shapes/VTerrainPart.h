@@ -2,11 +2,10 @@
 #define V3D_VTERRAINPART_2005_12_07_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Resource.h>
 #include <V3d/Graphics.h>
 #include <V3d/Scene/VMeshPartBase.h>
-#include <V3dLib/Containers/VArray2d.h>
+#include <V3d/Core/Container/VArray2d.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------

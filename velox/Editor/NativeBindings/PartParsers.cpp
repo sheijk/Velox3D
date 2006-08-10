@@ -26,13 +26,13 @@
 #include <V3d/Physics/Bounding/VBoundingTerrainVolumePart.h>
 #include <V3d/Physics/Bounding/VCollisionVisualizationPart.h>
 
-#include <V3dLib/EntityParts/VRigidBodyPart.h>
-#include <V3dLib/EntityParts/VUpdateablePart.h>
-#include <V3dLib/Utils/VCameraPart.h>
-#include <V3dLib/Utils/VCircleMoverPart.h>
-#include <V3dLib/Utils/VFPSMoverPart.h>
-#include <V3dLib/Utils/VInputPart.h>
-#include <V3dLib/Utils/VTrackballPart.h>
+#include <V3d/Entity/VRigidBodyPart.h>
+#include <V3d/Entity/VUpdateablePart.h>
+#include <V3d/Utils/VCameraPart.h>
+#include <V3d/Utils/VCircleMoverPart.h>
+#include <V3d/Utils/VFPSMoverPart.h>
+#include <V3d/Utils/VInputPart.h>
+#include <V3d/Utils/VTrackballPart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

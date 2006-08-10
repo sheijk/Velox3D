@@ -1,7 +1,7 @@
-#include <v3dLib/Graphics/Importer/Base/VImportedBufferDescription.h>
-#include <v3d/Graphics/VVertexFormat.h>
+#include <V3d/Graphics/Importer/Base/VImportedBufferDescription.h>
+#include <V3d/Graphics/VVertexFormat.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------

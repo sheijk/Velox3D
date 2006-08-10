@@ -1,14 +1,10 @@
 #include <V3d/Scene/Shapes/VTerrainPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Graphics.h>
-#include <V3dLib/Graphics/Geometry.h>
+#include <V3d/Graphics/Geometry.h>
 #include <V3d/Math/VVectorOps.h>
-
 #include <V3d/OpenGL.h>
-
 #include <V3d/Entity/VGenericPartParser.h>
-
 #include <V3d/Messaging/VMessageInterpreter.h>
 #include <boost/signals.hpp>
 //-----------------------------------------------------------------------------

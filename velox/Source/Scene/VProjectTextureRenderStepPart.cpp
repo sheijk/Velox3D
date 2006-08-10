@@ -1,10 +1,8 @@
 #include <V3d/Scene/Rendering/VProjectTextureRenderStepPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Graphics.h>
-#include <V3dLib/Graphics.h>
+#include <V3d/Graphics.h>
 #include <V3d/Scene/IVShapePart.h>
-
 #include <V3d/Entity/VGenericPartParser.h>
 
 #include <string>

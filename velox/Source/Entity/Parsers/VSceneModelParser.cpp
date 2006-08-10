@@ -1,12 +1,9 @@
 #include "VSceneModelParser.h"
 //-----------------------------------------------------------------------------
-
 #include <V3d/Scene/VModelPart.h>
 #include <V3d/Resource.h>
-
-#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Utils/VRegisterGuard.h>
 #include <V3d/Entity/IVEntitySerializationService.h>
-
 #include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

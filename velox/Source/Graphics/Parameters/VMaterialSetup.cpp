@@ -6,12 +6,10 @@
 #include <V3d/Graphics/Parameters/IVParameterValue.h>
 #include <V3d/Graphics/Parameters/VGenericValue.h>
 #include <V3d/Graphics/IVMaterial.h>
-
-#include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Utils/VStringValue.h>
 #include <V3d/Math/VVectorOps.h>
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Graphics/Parameters/VTextureValue.h>
-
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Updater/IVUpdateManager.h>
 //-----------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-#include <V3dLib/Utils/VFrameCounter.h>
+#include <V3d/Utils/VFrameCounter.h>
 //-----------------------------------------------------------------------------
 #include <cstdio>
 #include <v3d/Core/MemManager.h>

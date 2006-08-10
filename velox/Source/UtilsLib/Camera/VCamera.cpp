@@ -1,9 +1,6 @@
-#include <V3dLib/Graphics/Misc/VCamera.h>
-
-#include <v3d/Math/VMatrixOps.h>
-
+#include <V3d/Graphics/Misc/VCamera.h>
+#include <V3d/Math/VMatrixOps.h>
 #include <V3d/Graphics/IVDevice.h>
-
 #include <V3d/Math/VQuaternionOps.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

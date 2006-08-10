@@ -1,13 +1,11 @@
 #include "VMiscState.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Graphics/GraphicsExceptions.h>
-
-#include <V3dLib/Graphics/Materials/VModeTypeInfo.h>
-
+#include <V3d/Graphics/GraphicsExceptions.h>
+#include <V3d/Graphics/Materials/VModeTypeInfo.h>
 #include "VOpenGLUtils.h"
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

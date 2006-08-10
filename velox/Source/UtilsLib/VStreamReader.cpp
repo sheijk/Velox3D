@@ -1,5 +1,5 @@
-#include <v3dLib/Utils/VStreamReader.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Utils/VStreamReader.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace utils{

@@ -2,9 +2,7 @@
 
 #include "VCopyPixelsContext.h"
 #include "VFrameBufferObjectContext.h"
-
-#include <V3dLib/Property.h>
-
+#include <V3d/Property.h>
 #include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {

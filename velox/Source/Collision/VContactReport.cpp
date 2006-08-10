@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-#include <v3dLib/Collision/VContactReport.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Collision/VContactReport.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace collision {

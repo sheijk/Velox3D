@@ -1,6 +1,6 @@
-#include <v3dLib/Graphics/Importer/Base/VMaterialMap.h>
+#include <V3d/Graphics/Importer/Base/VMaterialMap.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------

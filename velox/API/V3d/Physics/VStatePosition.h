@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Physics/VState.h>
-#include <v3dLib/Graphics/Geometry/VVertex3f.h>
+#include <V3d/Graphics/Geometry/VVertex3f.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

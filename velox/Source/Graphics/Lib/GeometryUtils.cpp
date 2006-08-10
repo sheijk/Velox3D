@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-#include <V3dLib/Graphics/Geometry/VGeometryUtil.h>
+#include <V3d/Graphics/Geometry/VGeometryUtil.h>
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 

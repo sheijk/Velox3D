@@ -1,6 +1,5 @@
-#include <V3dLib/Utils/VMouseTrackball.h>
+#include <V3d/Utils/VMouseTrackball.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Math/VVectorOps.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>

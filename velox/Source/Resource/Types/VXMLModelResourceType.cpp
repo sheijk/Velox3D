@@ -1,7 +1,6 @@
 #include "VXMLModelResourceType.h"
 //-----------------------------------------------------------------------------
-
-#include <V3dLib/Graphics/Importer/VModelLoader.h>
+#include <V3d/Graphics/Importer/VModelLoader.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

@@ -6,7 +6,7 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Entity.h>
 #include <V3d/Scene.h>
-#include <V3dLib/EntityParts/VUpdateablePart.h>
+#include <V3d/Entity/VUpdateablePart.h>
 
 #include <V3d/OpenGL.h>
 #include <GL/glfw.h>

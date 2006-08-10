@@ -3,7 +3,7 @@
 
 #include <V3d/Graphics/VEffectDescription.h>
 
-#include <V3dLib/Graphics/Materials/VModeTypeInfo.h>
+#include <V3d/Graphics/Materials/VModeTypeInfo.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

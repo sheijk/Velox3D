@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
-#include <v3dLib/Collision/VCollisionObject.h>
-#include <v3dLib/Collision/VCollisionException.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Collision/VCollisionObject.h>
+#include <V3d/Collision/VCollisionException.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace collision {

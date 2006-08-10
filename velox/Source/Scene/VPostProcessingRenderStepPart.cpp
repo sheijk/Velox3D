@@ -1,11 +1,8 @@
 #include <V3d/Scene/Rendering/VPostProcessingRenderStepPart.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Graphics.h>
-#include <V3dLib/Graphics.h>
 #include <V3d/Math.h>
 #include <V3d/Resource.h>
-
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Resource/VResource.h>
 

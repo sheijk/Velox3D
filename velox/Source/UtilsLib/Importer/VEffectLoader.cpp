@@ -1,13 +1,11 @@
-#include <V3dLib/Graphics/Importer/VEffectLoader.h>
+#include <V3d/Graphics/Importer/VEffectLoader.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Vfs.h>
-
 #include <V3d/Core.h>
-#include <V3dLib/Graphics/Materials/EffectUtils.h>
+#include <V3d/Graphics/Materials/EffectUtils.h>
 #include <V3d/Resource/VResource.h>
-
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------

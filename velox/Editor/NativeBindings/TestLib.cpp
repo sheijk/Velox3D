@@ -16,7 +16,7 @@
 #include <V3d/Core/Modules/VModuleBase.h>
 
 #include <V3d/Math.h>
-#include <V3dLib/Property.h>
+#include <V3d/Property.h>
 
 #include "../../Source/XMLService/VXMLElement.h"
 
@@ -24,7 +24,7 @@
 
 #include <V3d/Entity/IVEntitySerializationService.h>
 #include <V3d/Entity/VGenericPartParser.h>
-#include <V3dLib/Utils/VRegisterGuard.h>
+#include <V3d/Utils/VRegisterGuard.h>
 
 #include <boost/filesystem/convenience.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -496,7 +496,7 @@ void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
 		pRBPart->SetTransform(in_Transform);
 }
 
-#include <V3dLib/Utils/VInputPart.h>
+#include <V3d/Utils/VInputPart.h>
 #include "../../Source/InputLib/VDIInputManager.h"
 
 v3d::input::IVInputManager* CreateInputManager(int hwnd)

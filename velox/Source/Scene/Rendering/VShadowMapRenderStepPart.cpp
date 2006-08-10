@@ -1,9 +1,8 @@
 #include <V3d/Scene/Rendering/VShadowMapRenderStepPart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Entity/VGenericPartParser.h>
-
 #include <V3d/OpenGL.h>
-#include <V3dLib/Graphics/Misc/MiscUtils.h>
+#include <V3d/Graphics/Misc/MiscUtils.h>
 #include <V3d/Graphics/IVGraphicsService.h>
 #include <V3d/Scene/IVShapePart.h>
 //-----------------------------------------------------------------------------

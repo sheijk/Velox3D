@@ -1,4 +1,4 @@
-#include <v3dlib/EntityParts/VSGAnimationPart.h>
+#include <V3d/Entity/VSGAnimationPart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------

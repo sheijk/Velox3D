@@ -2,10 +2,8 @@
 #define V3D_VTYPEDOPTIONBASE_2006_07_18_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Messaging/VOption.h>
-
-#include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Utils/VStringValue.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace messaging {
 //-----------------------------------------------------------------------------

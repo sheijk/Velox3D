@@ -1,7 +1,6 @@
-#include <V3dLib/Graphics/Misc/VKeyboardCamera.h>
+#include <V3d/Graphics/Misc/VKeyboardCamera.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
-
+#include <V3d/Core/MemManager.h>
 #include <V3d/XML.h>
 
 #include <sstream>

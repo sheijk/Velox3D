@@ -1,9 +1,8 @@
-#include <V3dLib/Graphics/Materials/EffectUtils.h>
+#include <V3d/Graphics/Materials/EffectUtils.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VIOStream.h>
-
+#include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------

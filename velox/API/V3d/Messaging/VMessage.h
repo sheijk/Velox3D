@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Utils/VStringValue.h>
 #include <V3d/Core/RangeIter/VRangeIterator.h>
 
 #include <map>

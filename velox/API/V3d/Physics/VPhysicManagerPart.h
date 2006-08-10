@@ -5,7 +5,7 @@
 //#include <V3d/Physics/VPhysics.h>
 #include <V3d/Physics/VPhysicManager.h>
 #include <V3d/Entity.h>
-#include <V3dLib/EntityParts/VUpdateablePart.h> //move away
+#include <V3d/Entity/VUpdateablePart.h> //move away
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------

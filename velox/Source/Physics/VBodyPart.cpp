@@ -1,7 +1,7 @@
 #include <V3d/Physics/VBodyPart.h>
 #include <V3d/Core.h>
 #include <V3d/Physics/VBody.h>
-#include <V3dLib/Graphics/Geometry/VVertex3f.h>
+#include <V3d/Graphics/Geometry/VVertex3f.h>
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Core/VIOStream.h>
 #include <V3d/Physics/VPhysicManagerPart.h>

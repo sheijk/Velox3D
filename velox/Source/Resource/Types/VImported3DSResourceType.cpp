@@ -1,7 +1,7 @@
 #include "VImported3dsResourceType.h"
 //-----------------------------------------------------------------------------
 #include <V3d/Graphics/VModel.h>
-#include <V3dLib/Graphics/Importer/3DS/VImported3DS.h>
+#include <V3d/Graphics/Importer/3DS/VImported3DS.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

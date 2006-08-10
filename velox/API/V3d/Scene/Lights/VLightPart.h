@@ -6,8 +6,8 @@
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Scene/IVLightManager.h>
 #include <V3d/Graphics/VLight.h>
-#include <V3dLib/EntityParts/VUpdateablePart.h>
-#include <V3dLib/EntityParts/VRigidBodyPart.h>
+#include <V3d/Entity/VUpdateablePart.h>
+#include <V3d/Entity/VRigidBodyPart.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------

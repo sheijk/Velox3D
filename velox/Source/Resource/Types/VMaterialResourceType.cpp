@@ -3,22 +3,17 @@
 #include <V3d/Graphics/IVMaterial.h>
 #include <V3d/Graphics/VEffectDescription.h>
 #include <../Source/Graphics/DeviceBase/VMaterial.h>
-
 #include "../../Graphics/OpenGL/Materials/VFixedFunctionPass.h"
 #include "../../Graphics/OpenGL/Materials/VCGFXMaterial.h"
 #include "../../Graphics/OpenGL/glsl/VGLSLPass.h"
 #include <V3d/Resource/Types/VFileName.h>
-
 #include <V3d/Vfs.h>
-#include <V3dLib/Utils/VStreamReader.h>
+#include <V3d/Utils/VStreamReader.h>
 #include <V3d/Core/RangeIter.h>
 #include <V3d/Resource/Types/VTextFile.h>
-
-#include <V3dLib/Graphics/Materials/EffectUtils.h>
-
+#include <V3d/Graphics/Materials/EffectUtils.h>
 #include <V3d/Core/DebugUtils.h>
-
-#include <V3dLib/Graphics/Importer/VEffectLoader.h>
+#include <V3d/Graphics/Importer/VEffectLoader.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

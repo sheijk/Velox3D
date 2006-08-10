@@ -1,11 +1,11 @@
 #include "VXMLService.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VIOStream.h>
-#include <v3d/VFS/IVFileSystem.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/VFS/IVFileSystem.h>
 #include "VXMLComment.h"
 #include "VXMLText.h"
-#include <v3d/Core/MemManager.h>
-#include <V3dLib/Utils/VStreamReader.h>
+#include <V3d/Core/MemManager.h>
+#include <V3d/Utils/VStreamReader.h>
 
 namespace v3d{
 namespace xml{

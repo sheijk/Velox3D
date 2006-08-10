@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3dLib/Graphics/Generators/IVMeshGenerator.h>
+#include <V3d/Graphics/Generators/IVMeshGenerator.h>
 #include <V3d/Resource.h>
 
 #include <vector>

@@ -9,12 +9,10 @@ namespace v3d { namespace graphics {
 #include <V3d/Scene/IVShapePart.h>
 #include <V3d/Math/VRBTransform.h>
 #include <V3d/Graphics.h>
-#include <V3dLib/Graphics.h>
-#include <V3dLib/Utils/VStringValue.h>
+#include <V3d/Graphics.h>
+#include <V3d/Utils/VStringValue.h>
 #include <V3d/Messaging/VMessageInterpreter.h>
-
 #include <V3d/Entity/VGenericPartParser.h>
-
 #include <V3d/Tags/VTagRegistry.h>
 
 #include <sstream>

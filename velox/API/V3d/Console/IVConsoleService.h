@@ -5,7 +5,7 @@
 #include <v3d/Core/VNamedObject.h>
 #include <V3d/Utils/IVStringStream.h>
 
-#include <V3dLib/BoostSignals.h>
+#include <V3d/BoostSignals.h>
 #include <v3d/Core/VObjectRegistry.h>
 #include <v3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
