@@ -149,10 +149,7 @@ void VArrowMeshPart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VArrowMeshPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VArrowMeshPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

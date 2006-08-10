@@ -23,13 +23,13 @@ VBoundingMesh::VBoundingMesh()
 }
 
 VBoundingMesh::VBoundingMesh(
-							 const float* in_pVertices,
+							 float* in_pVertices,
 							 vuint in_nVertexCount,
 							 vuint in_nVertexStride,
-							 const vint* in_pIndices,
+							 vuint* in_pIndices,
 							 vuint in_nIndexCount,
 							 vuint in_nIndexStride,
-							 const float* in_pNormals,
+							 float* in_pNormals,
 							 vuint in_nNormalCount,
 							 vuint in_nNormalStride
 							 )
@@ -52,17 +52,17 @@ VBoundingMesh::~VBoundingMesh()
 	;
 }
 
-const vfloat32* VBoundingMesh::GetVertices()
+vfloat32* VBoundingMesh::GetVertices()
 {
 	return m_pVertices;
 }
 
-const vint* VBoundingMesh::GetIndices()
+vuint* VBoundingMesh::GetIndices()
 {
 	return m_pIndices;
 }
 
-const vfloat32* VBoundingMesh::GetNormals()
+vfloat32* VBoundingMesh::GetNormals()
 {
 	return m_pNormals;
 }

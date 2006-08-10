@@ -85,11 +85,7 @@ void VBoundingPlaneVolumePart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VBoundingPlaneVolumePart> parser;
-}
-
-
+V3D_REGISTER_PART_PARSER(VBoundingPlaneVolumePart);
 //-----------------------------------------------------------------------------
 }
 } // namespace v3d::

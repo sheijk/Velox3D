@@ -41,10 +41,7 @@ void VMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 	in_Device.RenderMesh(&*m_hMesh);
 }
 
-namespace {
-	entity::VPartParser<VMeshPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VMeshPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

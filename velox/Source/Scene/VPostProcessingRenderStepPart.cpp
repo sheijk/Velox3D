@@ -171,13 +171,10 @@ void VPostProcesssingRenderStepPart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VPostProcesssingRenderStepPart> parser;
-	entity::VPartParser<VPostProcesssingRenderStepPart2> parser2;
-	entity::VPartParser<VPostProcesssingRenderStepPart3> parser3;
-	entity::VPartParser<VPostProcesssingRenderStepPart4> parser4;
-}
-
+V3D_REGISTER_PART_PARSER(VPostProcesssingRenderStepPart);
+V3D_REGISTER_PART_PARSER(VPostProcesssingRenderStepPart2);
+V3D_REGISTER_PART_PARSER(VPostProcesssingRenderStepPart3);
+V3D_REGISTER_PART_PARSER(VPostProcesssingRenderStepPart4);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

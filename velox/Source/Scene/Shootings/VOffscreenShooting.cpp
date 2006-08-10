@@ -116,9 +116,7 @@ void VOffscreenShooting::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VOffscreenShooting> g_Parser;
-}
+V3D_REGISTER_PART_PARSER(VOffscreenShooting);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

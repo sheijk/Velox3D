@@ -61,10 +61,7 @@ void VTrackballPart::SetTrackball(const VSharedPtr<VMouseTrackball>& in_Trackbal
 	m_pTrackball = in_Trackball;
 }
 
-namespace {
-	VPartParser<VTrackballPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VTrackballPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------

@@ -88,10 +88,7 @@ void VSimpleShooting::SetActiveCamera(vuint in_nNum)
 		m_pCamera = m_Cameras[in_nNum];
 }
 
-namespace {
-	entity::VPartParser<VSimpleShooting> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VSimpleShooting);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

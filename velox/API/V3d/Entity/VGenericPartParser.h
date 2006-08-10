@@ -46,6 +46,22 @@ protected:
 	}
 };
 
+/**
+ * declares parser for the given class and adds a workaround for a "bug" in
+ * msvc which will remove global variables from .libs if they are not referenced
+ *
+ * You will need to add a call to AssurePartClassExists() to make the protect
+ * the parser from being stripped by the MSVC linker (-> PartParsers.cpp)
+ */
+#define V3D_REGISTER_PART_PARSER(PartClass) \
+	namespace {\
+		entity::VPartParser<PartClass> parser##PartClass;\
+	}\
+	void* Assure##PartClass##Exist()\
+	{\
+	return &parser##PartClass;\
+	}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------

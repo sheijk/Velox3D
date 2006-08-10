@@ -19,7 +19,7 @@ using namespace v3d;
  *
  * @author: ins
  */
-class VBoundingTerrainVolumePart :public entity::VPartBaseAdapter<IVBoundingVolumePart>
+class VBoundingTerrainVolumePart : public entity::VPartBaseAdapter<IVBoundingVolumePart>
 {
 public:
 	VBoundingTerrainVolumePart();
@@ -46,7 +46,7 @@ private:
 	math::VBoundingMesh m_BoundingMesh;
 	vbool m_bActive;
 
-	vint* m_pIndicesPointer; //delete
+	vuint* m_pIndicesPointer; //delete
 
 };
 

@@ -41,10 +41,7 @@ void VJointHinge2LinkAncestorBodyPart::OnMessage(
 		return;
 }
 
-namespace {
-	entity::VPartParser<VJointHinge2LinkAncestorBodyPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VJointHinge2LinkAncestorBodyPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
 //-----------------------------------------------------------------------------

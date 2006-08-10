@@ -85,10 +85,7 @@ void VOrientationGridPart::SendParallelLineVertices(
 	glEnd();
 }
 
-namespace {
-	entity::VPartParser<VOrientationGridPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VOrientationGridPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

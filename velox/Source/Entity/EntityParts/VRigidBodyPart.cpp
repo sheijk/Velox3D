@@ -119,10 +119,7 @@ void VRigidBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging:
 	}
 }
 
-namespace {
-	VPartParser<VRigidBodyPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VRigidBodyPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------

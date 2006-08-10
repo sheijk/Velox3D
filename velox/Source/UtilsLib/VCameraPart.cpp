@@ -55,9 +55,7 @@ void VCameraPart::Update(vfloat32 in_fSeconds)
 	}
 }
 
-namespace {
-	VPartParser<VCameraPart> parser;
-}
+V3D_REGISTER_PART_PARSER(VCameraPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------

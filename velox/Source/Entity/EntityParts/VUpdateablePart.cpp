@@ -68,10 +68,7 @@ std::string VUpdateManagerPart::GetDefaultId()
 	return "sgum";
 }
 
-namespace {
-	VPartParser<VUpdateManagerPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VUpdateManagerPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------

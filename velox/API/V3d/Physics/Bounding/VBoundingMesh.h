@@ -17,13 +17,13 @@ public:
 
 	VBoundingMesh();
 	VBoundingMesh(
-		const float* in_pVertices,
+		float* in_pVertices,
 		vuint in_nVertexCount,
 		vuint in_nVertexStride = 0,
-		const vint* in_pIndices = 0,
+		vuint* in_pIndices = 0,
 		vuint in_nIndexCount = 0,
 		vuint in_nIndexStride = 0,
-		const float* in_pNormals = 0,
+		float* in_pNormals = 0,
 		vuint in_nNormalCount = 0,
 		vuint in_nNormalStride =0 
 		);
@@ -32,9 +32,9 @@ public:
 
 
 
-	const vfloat32* GetVertices();
-	const vint* GetIndices();
-	const vfloat32* GetNormals();
+	vfloat32* GetVertices();
+	vuint* GetIndices();
+	vfloat32* GetNormals();
 
 	vuint GetVertexStride();
 	vuint GetVertexCount();
@@ -46,9 +46,9 @@ public:
 
 private:
 
-	const float* m_pVertices;
-	const vint* m_pIndices;
-	const float* m_pNormals;
+	float* m_pVertices;
+	vuint* m_pIndices;
+	float* m_pNormals;
 	vuint m_nVertexStride;
 	vuint m_nVertexCount;
 	vuint m_nIndexStride;

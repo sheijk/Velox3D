@@ -377,21 +377,23 @@ void VMirrorShooting::OnMessage(
 	}
 }
 
-namespace {
-	using namespace v3d::entity;
+//namespace {
+//	using namespace v3d::entity;
+//
+//	class Parser : public VPartParser<VMirrorShooting>
+//	{
+//	public:
+//		virtual VSharedPtr<IVPart> CreatePart()
+//		{
+//			return SharedPtr(new VMirrorShooting());
+//		}
+//	};
+//
+//	Parser g_Parser;
+//	//v3d::entity::VPartParser<VMirrorShooting> g_parser;
+//}
 
-	class Parser : public VPartParser<VMirrorShooting>
-	{
-	public:
-		virtual VSharedPtr<IVPart> CreatePart()
-		{
-			return SharedPtr(new VMirrorShooting());
-		}
-	};
-
-	Parser g_Parser;
-	//v3d::entity::VPartParser<VMirrorShooting> g_parser;
-}
+V3D_REGISTER_PART_PARSER(VMirrorShooting);
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene

@@ -109,10 +109,7 @@ void v3d::scene::VTorusMeshPart::OnMessage(
 	InterpreteMessage(interpreter, in_Message, in_pAnswer);
 }
 
-namespace {
-	entity::VPartParser<VTorusMeshPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VTorusMeshPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 

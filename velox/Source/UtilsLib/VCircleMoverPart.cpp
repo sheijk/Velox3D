@@ -61,10 +61,7 @@ void VCircleMoverPart::OnMessage(
 	interpreter.HandleMessage(this, in_Message, in_pAnswer);
 }
 
-namespace {
-	entity::VPartParser<VCircleMoverPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VCircleMoverPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------

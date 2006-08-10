@@ -1397,35 +1397,11 @@
 				Name="EntityParts"
 				>
 				<File
-					RelativePath="..\..\Source\UtilsLib\VCameraPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\UtilsLib\VFPSMoverPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\UtilsLib\VInputPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Entity\EntityParts\VRigidBodyPart.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\Source\Entity\EntityParts\VSGAnimationPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\UtilsLib\VTrackballPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Entity\EntityParts\VUpdateablePart.cpp"
 					>
 				</File>
 			</Filter>
@@ -1438,100 +1414,12 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Source\Scene\VArrowMeshPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VCoordSysDisplayPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VDefaultRenderStepPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VMeshPart.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\Source\Scene\VMeshPartBase.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VModelPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VNaiveSceneManagerPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VOrientationGridPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VPostProcessingRenderStepPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VProjectTextureRenderStepPart.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Source\Scene\VSimpleShooting.cpp"
-				>
-			</File>
-			<Filter
-				Name="Lights"
-				>
-				<File
-					RelativePath="..\..\Source\Scene\Lights\VLightPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\Lights\VNaiveLightManager.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Shapes"
-				>
-				<File
-					RelativePath="..\..\Source\Scene\Shapes\VBoxMeshPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\UtilsLib\VCircleMoverPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\VPlaneMeshPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\Shapes\VSkyboxPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\Shapes\VSphereMeshPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\Shapes\VTerrainPart.cpp"
-					>
-				</File>
-			</Filter>
 			<Filter
 				Name="Shootings"
 				>
-				<File
-					RelativePath="..\..\Source\Scene\Shootings\VMirrorShooting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Scene\Shootings\VOffscreenShooting.cpp"
-					>
-				</File>
 				<File
 					RelativePath="..\..\Source\Scene\Shootings\VShootingBase.cpp"
 					>
@@ -1546,14 +1434,6 @@
 				>
 				<File
 					RelativePath="..\..\Source\Physics\VBody.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VBodyPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VCollisionPart.cpp"
 					>
 				</File>
 				<File
@@ -1589,22 +1469,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2LinkAncestorBodyPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2LinkPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2ModifierPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2Part.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\Source\Physics\VMass.cpp"
 					>
 				</File>
@@ -1614,10 +1478,6 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VPhysicManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp"
 					>
 				</File>
 				<File
@@ -1656,27 +1516,7 @@
 					Name="Bounding"
 					>
 					<File
-						RelativePath="..\..\Source\Physics\Bounding\VBoundingBoxVolumePart.cpp"
-						>
-					</File>
-					<File
 						RelativePath="..\..\Source\Physics\Bounding\VBoundingMesh.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Physics\Bounding\VBoundingMeshVolumePart.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Physics\Bounding\VBoundingPlaneVolumePart.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Physics\Bounding\VBoundingSphereVolumePart.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Physics\Bounding\VBoundingTerrainVolumePart.cpp"
 						>
 					</File>
 				</Filter>

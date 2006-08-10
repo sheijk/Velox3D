@@ -308,10 +308,7 @@ void VDefaultRenderStepPart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VDefaultRenderStepPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VDefaultRenderStepPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

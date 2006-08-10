@@ -36,10 +36,7 @@ void VInputPart::Deactivate()
 {
 }
 
-namespace {
-	entity::VPartParser<VInputPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VInputPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------

@@ -85,10 +85,7 @@ void VBoundingSphereVolumePart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VBoundingSphereVolumePart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VBoundingSphereVolumePart);
 //-----------------------------------------------------------------------------
 } // namespace v3d::
 }

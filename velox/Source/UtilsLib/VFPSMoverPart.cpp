@@ -191,9 +191,7 @@ void VFPSMoverPart::QueryButtons(IVInputManager& in_InputManager)
 	m_pFastTriggerButton = &in_InputManager.GetStandardKeyboard().GetKey(KeyLeftShift);
 }
 
-namespace {
-	entity::VPartParser<VFPSMoverPart> parser;
-}
+V3D_REGISTER_PART_PARSER(VFPSMoverPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------

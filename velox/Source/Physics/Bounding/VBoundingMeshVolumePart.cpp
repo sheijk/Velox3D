@@ -76,10 +76,7 @@ void VBoundingMeshVolumePart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VBoundingMeshVolumePart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VBoundingMeshVolumePart);
 //-----------------------------------------------------------------------------
 } // namespace v3d::
 }

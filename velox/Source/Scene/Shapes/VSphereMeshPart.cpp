@@ -45,10 +45,7 @@ void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message,
 	InterpreteMessage(interpreter, in_Message, in_pAnswer);
 }
 
-namespace {
-	entity::VPartParser<VSphereMeshPart> g_SphereMeshParser;
-}
-
+V3D_REGISTER_PART_PARSER(VSphereMeshPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 

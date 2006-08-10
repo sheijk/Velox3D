@@ -58,7 +58,7 @@ void VBoundingTerrainVolumePart::Create()
 
 	vint size = m_pTerrainPart->GetIndexCount();
 	size = (size-2) * 3; //hack, does not take degenerated triangle into account
-	vint* pNewIndices = new vint[size];
+	vuint* pNewIndices = new vuint[size];
 
 	vint* pIndices = (vint*)m_pTerrainPart->GetIndexBuffer()->GetBufferAddress();
 	vint nCount = 0;
@@ -104,7 +104,7 @@ void VBoundingTerrainVolumePart::Create()
 	}
 
 	VBoundingMesh mesh((float*)m_pTerrainPart->GetVertexBuffer()->GetBufferAddress(), m_pTerrainPart->GetVertexCount(), 3* sizeof(vfloat32),
-		pNewIndices, nCount, 3 * sizeof(vint));
+		pNewIndices, nCount, 3 * sizeof(vuint));
 	m_pIndicesPointer = pNewIndices;
 
 	m_BoundingMesh = mesh;
@@ -143,10 +143,7 @@ void VBoundingTerrainVolumePart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VBoundingTerrainVolumePart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VBoundingTerrainVolumePart);
 //-----------------------------------------------------------------------------
 } // namespace v3d::
 }

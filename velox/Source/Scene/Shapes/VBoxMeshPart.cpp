@@ -237,10 +237,7 @@ void VBoxMeshPart::OnMessage(const messaging::VMessage& in_Message, messaging::V
 	}
 }
 
-namespace {
-	entity::VPartParser<VBoxMeshPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VBoxMeshPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

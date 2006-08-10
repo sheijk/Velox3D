@@ -201,10 +201,7 @@ void VProjectTextureRenderStepPart::OnMessage(const messaging::VMessage& in_Mess
 
 //-----------------------------------------------------------------------------
 
-namespace {
-	::v3d::entity::VPartParser<VProjectTextureRenderStepPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VProjectTextureRenderStepPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

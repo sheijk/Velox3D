@@ -700,6 +700,10 @@
 							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingTerrainVolumePart.h"
 							>
 						</File>
+						<File
+							RelativePath="..\..\API\V3d\Physics\Bounding\VCollisionVisualizationPart.h"
+							>
+						</File>
 					</Filter>
 				</Filter>
 				<Filter
@@ -1623,6 +1627,10 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Physics\Bounding\VBoundingTerrainVolumePart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\Bounding\VCollisionVisualizationPart.cpp"
 						>
 					</File>
 				</Filter>

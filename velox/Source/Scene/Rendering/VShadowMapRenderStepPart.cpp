@@ -119,10 +119,8 @@ void VShadowMapRenderStepPart::Render(IVGraphicsPart* in_pScene)
 	//device.BeginScene();
 }
 
-namespace {
-	entity::VPartParser<VShadowMapRenderStepPart> g_Parser;
-}
 
+V3D_REGISTER_PART_PARSER(VShadowMapRenderStepPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

@@ -334,9 +334,7 @@ void VSkyboxPart::OnMessage(
 	}
 }
 
-namespace {
-	VPartParser<VSkyboxPart> parser;
-}
+V3D_REGISTER_PART_PARSER(VSkyboxPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

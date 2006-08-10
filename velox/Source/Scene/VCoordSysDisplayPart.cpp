@@ -46,10 +46,7 @@ void VCoordSysDisplayPart::SendGeometry(graphics::IVDevice& in_Device) const
 	glEnd();
 }
 
-namespace {
-	entity::VPartParser<VCoordSysDisplayPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VCoordSysDisplayPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

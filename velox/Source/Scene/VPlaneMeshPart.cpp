@@ -145,16 +145,8 @@ void VPlaneMeshPart::OnMessage(
 
 //-----------------------------------------------------------------------------
 
-namespace {
-	entity::VPartParser<VPlaneMeshPart> parser;
-}
 
-// call from a cpp inside the .exe/.dll to ensure the global variable exists..
-// (msvc just plain sucks.)
-void* AssurePlaneMeshPartParserExists()
-{
-	return &parser;
-}
+V3D_REGISTER_PART_PARSER(VPlaneMeshPart);
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene

@@ -91,11 +91,7 @@ void VBoundingBoxVolumePart::OnMessage(
 	}
 }
 
-namespace {
-	entity::VPartParser<VBoundingBoxVolumePart> parser;
-}
-
-
+V3D_REGISTER_PART_PARSER(VBoundingBoxVolumePart);
 //-----------------------------------------------------------------------------
 }
 } // namespace v3d::

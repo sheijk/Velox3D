@@ -275,10 +275,7 @@ VJointHinge2& VJointHinge2Part::GetJointHinge2()
 	return m_Joint;
 }
 
-namespace {
-	entity::VPartParser<VJointHinge2Part> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VJointHinge2Part);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
 //-----------------------------------------------------------------------------

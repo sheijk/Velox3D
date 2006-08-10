@@ -187,10 +187,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	}
 }
 
-namespace {
-	entity::VPartParser<VJointHinge2ModifierPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VJointHinge2ModifierPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
 //-----------------------------------------------------------------------------

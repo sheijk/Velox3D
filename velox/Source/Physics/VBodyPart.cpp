@@ -264,10 +264,7 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 	}
 }
 
-namespace {
-	entity::VPartParser<VBodyPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VBodyPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
 //-----------------------------------------------------------------------------

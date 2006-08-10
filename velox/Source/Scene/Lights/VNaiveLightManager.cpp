@@ -98,10 +98,8 @@ void VNaiveLightManager::Deactivate()
 {
 }
 
-namespace {
-	entity::VPartParser<VNaiveLightManager> g_NaiveLightManagerParser;
-}
 
+V3D_REGISTER_PART_PARSER(VNaiveLightManager);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

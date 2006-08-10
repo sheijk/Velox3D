@@ -84,10 +84,7 @@ void VCollisionPart::Update(vfloat32 in_fSeconds)
 	}
 }
 
-namespace {
-	entity::VPartParser<VCollisionPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VCollisionPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
 //-----------------------------------------------------------------------------

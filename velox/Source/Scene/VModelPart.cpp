@@ -239,10 +239,7 @@ VRangeIterator<const IVShapePart> VModelPart::MeshPart::GetVisibleMeshes() const
 	return CreateSingleValueIterator<const IVShapePart>(this);
 }
 
-namespace {
-	entity::VPartParser<VModelPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VModelPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------

@@ -69,9 +69,7 @@ void VLightPart::OnMessage(const messaging::VMessage& in_Message,
 	interpreter.HandleMessage(this, in_Message, in_pAnswer);
 }
 
-namespace {
-	entity::VPartParser<VLightPart> g_LightPartParser;
-}
+V3D_REGISTER_PART_PARSER(VLightPart);
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene

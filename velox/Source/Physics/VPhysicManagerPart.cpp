@@ -183,11 +183,7 @@ void VPhysicManagerPart::OnMessage(const messaging::VMessage& in_Message, messag
 }
 
 
-namespace {
-	entity::VPartParser<VPhysicManagerPart> parser;
-}
-
-
+V3D_REGISTER_PART_PARSER(VPhysicManagerPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::
 //-----------------------------------------------------------------------------

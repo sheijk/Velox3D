@@ -69,10 +69,7 @@ void VNaiveSceneManagerPart::Deactivate()
 {
 }
 
-namespace {
-	entity::VPartParser<VNaiveSceneManagerPart> parser;
-}
-
+V3D_REGISTER_PART_PARSER(VNaiveSceneManagerPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------
