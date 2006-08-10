@@ -1,8 +1,8 @@
-@SET VSINSTALLDIR=g:\Program Files\Microsoft Visual Studio .NET 2003\Common7\IDE
-@SET VCINSTALLDIR=g:\Program Files\Microsoft Visual Studio .NET 2003
-@SET FrameworkDir=g:\WINDOWS\Microsoft.NET\Framework
+@SET VSINSTALLDIR=D:\Home\Programs\Microsoft Visual Studio .NET 2003\Common7\IDE
+@SET VCINSTALLDIR=D:\Home\Programs\Microsoft Visual Studio .NET 2003
+@SET FrameworkDir=C:\WINDOWS\Microsoft.NET\Framework
 @SET FrameworkVersion=v1.1.4322
-@SET FrameworkSDKDir=g:\Program Files\Microsoft Visual Studio .NET 2003\SDK\v1.1
+@SET FrameworkSDKDir=D:\Home\Programs\Microsoft Visual Studio .NET 2003\SDK\v1.1
 @rem Root of Visual Studio common files.
 
 @if "%VSINSTALLDIR%"=="" goto Usage

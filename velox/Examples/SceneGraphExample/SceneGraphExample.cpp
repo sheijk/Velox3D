@@ -2,16 +2,15 @@
 #include <v3d/Updater.h>
 #include <v3d/System.h>
 #include <v3d/Graphics.h>
-#include <V3dLib/Graphics.h>
 #include <V3d/Window.h>
 #include <V3d/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Resource.h>
 #include <V3d/Entity/VEntityManager.h>
 #include <V3d/Entity/VEntity.h>
-#include <V3dlib/EntityParts/VSceneGraphPart.h>
-#include <V3dlib/EntityParts/VSGAnimationPart.h>
-#include <V3dlib/EntityParts/VUpdateablePart.h>
+#include <V3d/Entity/VSceneGraphPart.h>
+#include <V3d/Entity/VSGAnimationPart.h>
+#include <V3d/Entity/VUpdateablePart.h>
 
 #include <string>
 

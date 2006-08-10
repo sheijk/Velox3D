@@ -22,12 +22,12 @@
 			<part type="v3d::scene::VSphereMeshPart" mat_groundColor="(0,0,0,1)" mat_skyColor="(1,1,1,1)" material="/edit/mat/ambientsphere.v3dmat" radius="10" tags=""/>
 		</entity>
 		<entity name="editorCam">
-			<part type="v3d::entity::VRigidBodyPart" pos="(70,100,255)" updir="(-0.0849993,0.965858,-0.244643)" viewdir="(-0.36922,-0.258584,-0.892622)" tags=""/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(70,100,255)" updir="(-0.0850011,0.965879,-0.244648)" viewdir="(-0.369227,-0.258589,-0.892639)" tags=""/>
 			<part type="v3d::utils::VCameraPart" tags=""/>
 			<part type="v3d::utils::VTrackballPart" tags=""/>
 		</entity>
 		<entity name="debug">
-			<part type="v3d::entity::VRigidBodyPart" pos="(-236,74,-135)" updir="(0.818095,-0.0275671,0.574389)" viewdir="(-0.00105138,-0.998894,-0.0464492)" tags=""/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-236,74,-135)" updir="(0.818111,-0.0275676,0.5744)" viewdir="(-0.00105141,-0.99892,-0.0464504)" tags=""/>
 			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
 			<part type="v3d::scene::VPlaneMeshPart" mat_texture="/cameraRT" material="/edit/mat/textured.v3dmat" pos="(-50,0,-50)" right="(50,0,0)" up="(0,0,50)" tags=""/>
 		</entity>
@@ -46,8 +46,8 @@
 			<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
 		</entity>
 		<entity name="model">
-			<part type="v3d::entity::VRigidBodyPart" pos="(54,42,4)" updir="(0.269903,0.862259,0.428511)" viewdir="(0.882748,-0.0438562,-0.467758)" tags=""/>
-			<part type="v3d::scene::VModelPart" material="" model="/edit/models/foo.xml" tags=""/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(54,42,4)" updir="(0.269908,0.862276,0.42852)" viewdir="(0.882764,-0.043857,-0.467766)" tags=""/>
+			<part type="v3d::scene::VModelPart" material="" model="/Data/afighter.3ds" tags=""/>
 		</entity>
 		<entity name="fpsCam">
 			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>

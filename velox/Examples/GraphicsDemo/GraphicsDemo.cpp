@@ -2,9 +2,8 @@
 #include <v3d/Updater.h>
 #include <v3d/System.h>
 #include <v3d/Graphics.h>
-#include <V3dLib/Graphics.h>
 #include <V3d/Window.h>
-#include <V3dLib/Property.h>
+#include <V3d/Property.h>
 #include <V3d/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Resource.h>

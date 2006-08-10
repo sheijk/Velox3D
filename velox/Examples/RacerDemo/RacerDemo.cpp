@@ -2,24 +2,28 @@
 #include <v3d/Updater.h>
 #include <v3d/System.h>
 #include <v3d/Graphics.h>
-#include <V3dLib/Graphics.h>
 #include <V3d/Window.h>
 #include <V3d/Math.h>
 #include <V3d/Input.h>
 #include <V3d/Resource.h>
 #include <V3d/Scene.h>
 #include <V3d/Entity.h>
-#include <V3dLib/Property.h>
-#include <V3dLib/Utils/VCameraPart.h>
-#include <V3dLib/Utils/VTrackballPart.h>
-#include <V3dLib/Utils/VFPSMoverPart.h>
-#include <V3dLib/Utils/VCircleMoverPart.h>
+#include <V3d/Property.h>
+#include <V3d/Utils/VCameraPart.h>
+#include <V3d/Utils/VTrackballPart.h>
+#include <V3d/Utils/VFPSMoverPart.h>
+#include <V3d/Utils/VCircleMoverPart.h>
 #include <V3d/Vfs.h>
 #include <V3d/Xml.h>
 #include <V3d/Physics/VPhysics.h>
 
 #include <sstream>
 #include <string>
+
+#include <windows.h>
+#include <glew/glew.h>
+#include <glew/wglew.h>
+#include <GL/gl.h>
 
 using namespace v3d;
 using namespace v3d::updater;
@@ -41,8 +45,8 @@ using namespace v3d::physics;
 using namespace v3d;
 //-----------------------------------------------------------------------------
 
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 600;
+const int WINDOW_WIDTH = 1024;
+const int WINDOW_HEIGHT = 1024;
 const std::string APP_NAME = "RacerDemo";
 
 const VColor4f fogColor(.6f, .4f, .4f, 1.0f);
@@ -62,6 +66,7 @@ private:
 	IVButton* m_pCamToggleKey;
 	IVButton* m_pF1Key;
 	IVButton* m_pF2Key;
+	IVButton* m_pSpace;
 	VServicePtr<updater::IVUpdateManager> m_pUpdater;
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
@@ -166,6 +171,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	m_pF1Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF1);
 	m_pF2Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF2);
+	m_pSpace = &m_pWindow->QueryInputManager().GetStandardKey(KeySpace);
 
 	//TODO: support im device oder so
 	glEnable(GL_FOG);
@@ -186,11 +192,13 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 		const vfloat32 frameDuration = vfloat32(m_pUpdater->GetFrameDuration());
 
-		m_pUpdateManager->Update(frameDuration);
-
+		//if(m_pSpace->IsDown())
+			m_pUpdateManager->Update(frameDuration);
+		
 		m_pRootShooting->UpdateAndCull();
 		m_pRootShooting->Render();
 
+		
 		Device().EndScene();
 
 		m_pUpdater->StartNextFrame();
@@ -211,6 +219,8 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 		if( m_pEscapeKey->IsDown() )
 			m_pSystem->SetStatus(false);
+
+		
 
 	}
 	m_pUpdater->Stop();
