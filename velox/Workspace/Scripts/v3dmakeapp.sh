@@ -1,10 +1,19 @@
 #!/bin/bash
 
+if [ $1 ] && [ -e $1 ]; then
+	echo Directory $1 already exists, aborting
+	exit
+fi
+
 if ! [ $1 ] || ! [ $2 ]
 then
 	echo "v3dmakeapp.sh AppName AppType"
 	echo
 	echo "For a list of app types see `v3dgetdir.sh`/Workspace/Templates/Scripts/ and look for directories containing an Application.vcproj file. Use the dir name as app type"
+	cd `v3dgetdir.sh`/Workspace/Templates/
+	pwd
+	echo Available templates:
+	echo *App
 	exit
 fi
 
