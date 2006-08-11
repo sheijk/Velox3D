@@ -12,6 +12,8 @@
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
+
 
 GLfloat VGLSLParameter::m_fTempBuffer[16];
 GLint VGLSLParameter::m_iTempBuffer[16];
@@ -60,18 +62,18 @@ vfloat32 VGLSLParameter::AsFloat() const
 	return m_fTempBuffer[0];
 }
 
-void VGLSLParameter::Apply(const VVector2f& in_NewValue) const
+void VGLSLParameter::Apply(const math::VVector2f& in_NewValue) const
 {
 	glUniform2fARB(m_Location, in_NewValue[0], in_NewValue[1]);
 }
 
-VVector2f VGLSLParameter::AsFloat2() const
+math::VVector2f VGLSLParameter::AsFloat2() const
 {
 	glGetUniformfv(m_hProgram, m_Location, &m_fTempBuffer[0]);
 	return ToVector2f(m_fTempBuffer[0], m_fTempBuffer[1]);
 }
 
-void VGLSLParameter::Apply(const VVector4f& in_NewValue) const
+void VGLSLParameter::Apply(const math::VVector4f& in_NewValue) const
 {
 	glUniform4fARB(m_Location, 
 		in_NewValue[0], 
@@ -80,7 +82,7 @@ void VGLSLParameter::Apply(const VVector4f& in_NewValue) const
 		in_NewValue[3]);
 }
 
-VVector4f VGLSLParameter::AsFloat4() const
+math::VVector4f VGLSLParameter::AsFloat4() const
 {
 	glGetUniformfvARB(m_hProgram, m_Location, &m_fTempBuffer[0]);
 	
@@ -89,9 +91,9 @@ VVector4f VGLSLParameter::AsFloat4() const
 }
 
 namespace {
-	VMatrix44f ToMatrix44f(vfloat32* in_pArray16)
+	math::VMatrix44f ToMatrix44f(vfloat32* in_pArray16)
 	{
-		VMatrix44f mat;
+		math::VMatrix44f mat;
 
 		vuint index = 0;
 		for(vuint column = 0; column < 4; ++column)
@@ -104,7 +106,7 @@ namespace {
 		return mat;
 	}
 
-	void Fill(const VMatrix44f& matrix, vfloat32* out_pArray)
+	void Fill(const math::VMatrix44f& matrix, vfloat32* out_pArray)
 	{
 		vuint index = 0;
 		for(vuint column = 0; column < 4; ++column)
@@ -130,14 +132,14 @@ namespace {
 	}
 }
 
-VMatrix44f VGLSLParameter::AsFloat44() const
+math::VMatrix44f VGLSLParameter::AsFloat44() const
 {
 	glGetUniformfvARB(m_hProgram, m_Location, &m_fTempBuffer[0]);
 
 	return ToMatrix44f(m_fTempBuffer);
 }
 
-void VGLSLParameter::Apply(const VMatrix44f& in_NewValue) const
+void VGLSLParameter::Apply(const math::VMatrix44f& in_NewValue) const
 {
 	Fill(in_NewValue, &m_fTempBuffer[0]);
 

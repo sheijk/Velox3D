@@ -5,8 +5,10 @@
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
+namespace math {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 VVector2f ToVector2f(float x, float y)
 {
@@ -36,5 +38,6 @@ VVector4f ToVector4f(float x, float y, float z, float w)
 }
 
 //-----------------------------------------------------------------------------
+} 
 } // namespace v3d
 //-----------------------------------------------------------------------------

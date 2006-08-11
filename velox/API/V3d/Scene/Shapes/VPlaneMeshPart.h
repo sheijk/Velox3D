@@ -21,19 +21,19 @@ public:
 	VPlaneMeshPart(vfloat32 in_fSize = 2.0f);
 	VPlaneMeshPart(vfloat32 in_fSize, const std::string& in_strMaterialResource);
 
-	VVector3f GetPosition() const;
-	void SetPosition(const VVector3f& in_Position);
+	math::VVector3f GetPosition() const;
+	void SetPosition(const math::VVector3f& in_Position);
 
-	VVector3f GetRight() const;
-	void SetRight(const VVector3f& in_Right);
+	math::VVector3f GetRight() const;
+	void SetRight(const math::VVector3f& in_Right);
 
-	VVector3f GetUp() const;
-	void SetUp(const VVector3f& in_Up);
+	math::VVector3f GetUp() const;
+	void SetUp(const math::VVector3f& in_Up);
 
 	/** Changes the position in a way such that the plane will be centered
 	 * at the given position
 	 */
-	void CenterAt(const VVector3f& in_Center);
+	void CenterAt(const math::VVector3f& in_Center);
 
 	// overidden
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
@@ -43,9 +43,9 @@ private:
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
 
-	VVector3f m_Position;
-	VVector3f m_Right;
-	VVector3f m_Up;
+	math::VVector3f m_Position;
+	math::VVector3f m_Right;
+	math::VVector3f m_Up;
 
 	vfloat32 m_fSize;
 };

@@ -21,13 +21,13 @@ class VModelMesh
 {
 	resource::VResourceDataPtr<const IVMesh> m_pMesh;
 	resource::VResourceDataPtr<const IVMaterial> m_pMaterial;
-	VSharedPtr<VMatrix44f> m_pTransform;
+	VSharedPtr<math::VMatrix44f> m_pTransform;
 
 public:
 	//VModelMesh(IVMesh* in_pMesh, IVMaterial* in_pMaterial);
 	typedef resource::VResourceDataPtr<const IVMesh> MeshPtr;
 	typedef resource::VResourceDataPtr<const IVMaterial> MaterialPtr;
-	typedef VSharedPtr<VMatrix44f> MatrixPtr;
+	typedef VSharedPtr<math::VMatrix44f> MatrixPtr;
 
 	VModelMesh(MeshPtr in_pMesh, MaterialPtr in_pMaterial, MatrixPtr in_pTransform);
 	/*
@@ -37,8 +37,8 @@ public:
 
 	MeshPtr GetMesh() const;
 	MaterialPtr GetMaterial() const;
-	VSharedPtr<VMatrix44f> GetTransform();
-	VSharedPtr<const VMatrix44f> GetTransform() const;
+	VSharedPtr<math::VMatrix44f> GetTransform();
+	VSharedPtr<const math::VMatrix44f> GetTransform() const;
 };
 
 /**
@@ -50,7 +50,7 @@ class VModel
 	PartArray m_Parts;
 
 public:
-	typedef VSharedPtr<VMatrix44f> MatrixPtr;
+	typedef VSharedPtr<math::VMatrix44f> MatrixPtr;
 
 	VModel();
 	VModel(const VModelMesh& in_Part);
@@ -59,7 +59,7 @@ public:
 
 	void Add(const VModelMesh& in_Part);
 	void AddMeshes(const VModel& in_Model);
-	void ApplyMatrix(VMatrix44f in_Matrix);
+	void ApplyMatrix(math::VMatrix44f in_Matrix);
 
 	vuint GetPartCount() const;
 	VModelMesh& GetPart(vuint in_nNum);

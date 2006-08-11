@@ -7,6 +7,7 @@
 namespace v3d { namespace  physics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 /**
  * standard c'tor

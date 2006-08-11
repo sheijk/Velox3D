@@ -49,7 +49,7 @@ IndexedTriangle* VCollisionObject::GetIndexPointer()
 	return m_pTriangleIndex;
 }
 
-VMatrix44f* VCollisionObject::GetWorldMatrix()
+math::VMatrix44f* VCollisionObject::GetWorldMatrix()
 {
 	return m_pWorldMatrix;
 }
@@ -59,7 +59,7 @@ Opcode::Model& VCollisionObject::GetOpcodeModel()
 	return m_Model;
 }
 
-void VCollisionObject::SetWorldMatrix(VMatrix44f* in_pWorldMatrix)
+void VCollisionObject::SetWorldMatrix(math::VMatrix44f* in_pWorldMatrix)
 {
 	m_pWorldMatrix =  in_pWorldMatrix;
 }

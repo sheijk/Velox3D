@@ -7,6 +7,7 @@ namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
 using namespace v3d::math;
+
 VJointHinge2::VJointHinge2()
 {
 	m_pBody1 = 0;

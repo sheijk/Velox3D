@@ -13,6 +13,7 @@
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 VPlaneMeshPart::VPlaneMeshPart(vfloat32 in_fSize) :
 	m_fSize(in_fSize),

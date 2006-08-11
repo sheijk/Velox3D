@@ -15,6 +15,7 @@ using namespace v3d; // anti auto indentespace entity;
 using namespace entity;
 using namespace resource;
 using namespace graphics;
+using namespace math;
 
 namespace {
 	const std::string vertexShader =

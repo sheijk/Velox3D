@@ -15,7 +15,7 @@ namespace graphics {
 
 GLint GetGeometryMode(VMeshDescription::GeometryType in_eType);
 
-void SetGLMatrix(int mode, const VMatrix44f& mat);
+void SetGLMatrix(int mode, const math::VMatrix44f& mat);
 
 //-----------------------------------------------------------------------------
 } // namespace graphics

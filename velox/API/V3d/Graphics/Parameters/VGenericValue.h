@@ -48,10 +48,10 @@ private:
 };
 
 typedef VGenericValue<vfloat32> VFloatParamValue;
-typedef VGenericValue<VVector2f> VFloat2ParamValue;
-typedef VGenericValue<VVector4f> VFloat4ParamValue;
+typedef VGenericValue<math::VVector2f> VFloat2ParamValue;
+typedef VGenericValue<math::VVector4f> VFloat4ParamValue;
 
-typedef VGenericValue<VMatrix44f> VFloat44ParamValue;
+typedef VGenericValue<math::VMatrix44f> VFloat44ParamValue;
 
 typedef VGenericValue<vint> VIntParamValue;
 

@@ -15,6 +15,7 @@ namespace v3d { namespace scene {
 using namespace v3d; // anti auto indent
 using namespace graphics;
 using namespace resource;
+using namespace math;
 
 /**
  * standard c'tor

@@ -111,38 +111,38 @@ void VFPSMoverPart::Deactivate()
 	m_pUpdateManager->Unregister(this);
 }
 
-void VFPSMoverPart::MoveBy(const VVector3f& in_Distance)
+void VFPSMoverPart::MoveBy(const math::VVector3f& in_Distance)
 {
 	m_pRigidBody->SetPosition(m_pRigidBody->GetPosition() + in_Distance);
 }
 
 void VFPSMoverPart::MoveForward(vfloat32 in_fDistance)
 {
-	VVector3f movement = m_pRigidBody->GetTransform().GetZAxis() * (- in_fDistance);
+	math::VVector3f movement = m_pRigidBody->GetTransform().GetZAxis() * (- in_fDistance);
 	MoveBy(movement);
 }
 
 void VFPSMoverPart::StrafeRight(vfloat32 in_fDistance)
 {
-	VVector3f movement = m_pRigidBody->GetTransform().GetXAxis() * in_fDistance;
+	math::VVector3f movement = m_pRigidBody->GetTransform().GetXAxis() * in_fDistance;
 	MoveBy(movement);
 }
 
 void VFPSMoverPart::MoveUp(vfloat32 in_fDistance)
 {
-	VVector3f movement = m_pRigidBody->GetTransform().GetYAxis() * in_fDistance;
+	math::VVector3f movement = m_pRigidBody->GetTransform().GetYAxis() * in_fDistance;
 	MoveBy(movement);
 }
 
-void VFPSMoverPart::RotateAround(const VVector3f& in_Axis, vfloat32 in_fAngle)
+void VFPSMoverPart::RotateAround(const math::VVector3f& in_Axis, vfloat32 in_fAngle)
 {
 	math::VRBTransform transform = m_pRigidBody->GetTransform();
-	VVector3f view = - transform.GetZAxis();
-	VVector3f up = transform.GetYAxis();
+	math::VVector3f view = - transform.GetZAxis();
+	math::VVector3f up = transform.GetYAxis();
 
-	VQuatf rot = QuatFromAxisAngle(in_Axis, in_fAngle);
-	Rotate(view, rot);
-	Rotate(up, rot);
+	math::VQuatf rot = QuatFromAxisAngle(in_Axis, in_fAngle);
+	math::Rotate(view, rot);
+	math::Rotate(up, rot);
 
 	transform.SetDirection(view, up);
 

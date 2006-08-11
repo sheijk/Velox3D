@@ -8,7 +8,7 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
-
+using namespace math;
 VRigidBodyPart::VRigidBodyPart()
 {
 	//m_Transformation.GetXAxis() = VVector3f(1.0f, 0.0f, 0.0f);

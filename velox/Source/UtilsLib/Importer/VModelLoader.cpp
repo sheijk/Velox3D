@@ -10,6 +10,7 @@ namespace v3d { namespace graphics {
 using namespace v3d; // anti auto indent
 using namespace v3d::xml;
 using namespace v3d::resource;
+using namespace math;
 
 /**
  * standard c'tor

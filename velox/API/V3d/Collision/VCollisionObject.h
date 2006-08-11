@@ -32,7 +32,7 @@ public:
 	vint GetIndexCount();
 	Point* GetVertexPointer();
 	IndexedTriangle* GetIndexPointer();
-	VMatrix44f* GetWorldMatrix();
+	math::VMatrix44f* GetWorldMatrix();
 	Opcode::Model& GetOpcodeModel();
 
 	/**
@@ -43,7 +43,7 @@ public:
 	*		  is supported by opcode
 	*/
 
-	void SetWorldMatrix(VMatrix44f* in_pWorldMatrix);
+	void SetWorldMatrix(math::VMatrix44f* in_pWorldMatrix);
 
 	/**
 	 * overwrite this method if you need a concrete vertex to collision
@@ -74,7 +74,7 @@ protected:
 	vuint				m_iNumIndices;
 	Point*				m_pPoints;
 	IndexedTriangle*	m_pTriangleIndex;
-	VMatrix44f*			m_pWorldMatrix;
+	math::VMatrix44f*			m_pWorldMatrix;
 
 	/**
 	 * The one and only opcode model for this object

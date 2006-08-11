@@ -10,7 +10,7 @@ namespace collision {
 //-----------------------------------------------------------------------------
 
 VIntersectionArray::VIntersectionArray(entity::VEntity* in_pEntity, 
-									   VVector3f in_Position)
+									   math::VVector3f in_Position)
 {
 	Intersection* pIntersection = 0;
 	pIntersection->pEntity = in_pEntity;
@@ -42,7 +42,7 @@ entity::VEntity* VIntersectionArray::GetEntity(vuint in_Count) const
 	V3D_ASSERT(false);
 }
 
-VVector3f VIntersectionArray::GetPosition(vuint in_Count) const
+math::VVector3f VIntersectionArray::GetPosition(vuint in_Count) const
 {
 	for(std::list<Intersection*>::const_iterator iter = m_pArray.begin(); 
 		iter != m_pArray.end(); 

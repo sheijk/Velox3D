@@ -19,15 +19,15 @@ using namespace v3d;
  */
 class VTransformNode : public VNodeBase
 {
-	Matrix44f m_Transform;
+	math::VMatrix44f m_Transform;
 
 public:
-	VTransformNode(const Matrix44f& in_Transform);
+	VTransformNode(const math::VMatrix44f& in_Transform);
 
-	virtual void ApplyTransformation(Matrix44f* io_pMatrix);
-	virtual void SetAbsoluteTransformation(const Matrix44f& in_Matrix);
+	virtual void ApplyTransformation(math::VMatrix44f* io_pMatrix);
+	virtual void SetAbsoluteTransformation(const math::VMatrix44f& in_Matrix);
 
-	Matrix44f& GetTransformation()
+	math::VMatrix44f& GetTransformation()
 	{
 		return m_Transform;
 	}

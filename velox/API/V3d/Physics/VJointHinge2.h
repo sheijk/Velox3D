@@ -28,11 +28,11 @@ public:
 	void Create(VWorld* in_PhysicWorld);
 	void AddBody(VBody* in_pBody1, VBody* in_pBody2);
 
-	void SetAxis1(VVector3f in_Axis);
+	void SetAxis1(math::VVector3f in_Axis);
 	void SetAxis1(vfloat32 x, vfloat32 y, vfloat32 z);
-	void SetAxis2(VVector3f in_Axis);
+	void SetAxis2(math::VVector3f in_Axis);
 	void SetAxis2(vfloat32 x, vfloat32 y, vfloat32 z);
-	void SetAnchor(VVector3f in_Anchor);
+	void SetAnchor(math::VVector3f in_Anchor);
 	void SetAnchor(vfloat32 x, vfloat32 y, vfloat32 z);
 	void SetMaxForce2(vfloat32 in_fMaxForce2);
 
@@ -44,10 +44,10 @@ public:
 	graphics::VVertex3f  GetAnchor();
 	*/
 
-	VVector3f GetAxis1();
-	VVector3f GetAxis2();
-	VVector3f GetAnchor();
-	VVector3f GetOwnAnchor();
+	math::VVector3f GetAxis1();
+	math::VVector3f GetAxis2();
+	math::VVector3f GetAnchor();
+	math::VVector3f GetOwnAnchor();
 
 	VBody* GetBody1();
 	VBody* GetBody2();
@@ -69,9 +69,9 @@ private:
 
 	vfloat32 m_fMaxForce2;
 
-	VVector3f m_Axis1;
-	VVector3f m_Axis2;
-	VVector3f m_Anchor;
+	math::VVector3f m_Axis1;
+	math::VVector3f m_Axis2;
+	math::VVector3f m_Anchor;
 };
 
 //-----------------------------------------------------------------------------

@@ -30,7 +30,7 @@ protected:
 private:
 	vbool m_bInDrawList;
 	//IVDevice::MeshHandle m_hMesh;
-	VSharedPtr<VMatrix44f> m_pAbsTransform;
+	VSharedPtr<math::VMatrix44f> m_pAbsTransform;
 	VModelMesh m_Model;
 };
 

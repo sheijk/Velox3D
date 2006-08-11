@@ -12,6 +12,7 @@ using namespace v3d::input;
 using namespace v3d::xml;
 using std::string;
 using utils::VStringValue;
+using namespace math;
 
 const std::string g_strCameraConfigFile = "/data/camera.cfg";
 

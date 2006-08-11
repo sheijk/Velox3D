@@ -71,10 +71,10 @@ public:
 	virtual void ApplyState(const IVRenderState& in_State) = 0;
 
 	/** set the projection, view, model and texture matrices */
-	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix) = 0;
+	virtual void SetMatrix(MatrixMode in_Mode, const math::VMatrix44f& in_Matrix) = 0;
 
 	/** Returns the current matrix */
-	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode) = 0;
+	virtual const math::VMatrix44f& GetMatrix(MatrixMode in_Mode) = 0;
 
 	/**
 	 * Begin rendering to the render target. All render calls and state settings

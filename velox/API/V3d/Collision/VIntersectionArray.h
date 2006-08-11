@@ -17,17 +17,17 @@ class VIntersectionArray
 {
 	typedef struct {
 		entity::VEntity* pEntity;
-		VVector3f Position;
+		math::VVector3f Position;
 		vuint Count;
 	} Intersection;
 public:
 
-	VIntersectionArray(entity::VEntity* in_pEntity, VVector3f in_Position);
+	VIntersectionArray(entity::VEntity* in_pEntity, math::VVector3f in_Position);
 	virtual ~VIntersectionArray();
 
 	entity::VEntity* GetEntity(vuint in_Count) const;
 	
-	VVector3f GetPosition(vuint in_Count) const;
+	math::VVector3f GetPosition(vuint in_Count) const;
 	
 	template<class T>
 	T GetPart(T& t, vuint in_Count) const;

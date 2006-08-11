@@ -43,7 +43,7 @@ private:
 	void GenerateVertices();
 	void GenerateNormals();
 
-	VVector3f GetVertexAt(vuint x, vuint y);
+	math::VVector3f GetVertexAt(vuint x, vuint y);
 
 	vuint GetResolution() const;
 	void SetResolution(const vuint& in_nNewCount);
@@ -55,11 +55,11 @@ private:
 	vuint m_nVertexCountHor;
 	vuint m_nVertexCountVert;
 
-	VVector2f GetExtent() const;
-	void SetExtent(const VVector2f& in_Extent);
+	math::VVector2f GetExtent() const;
+	void SetExtent(const math::VVector2f& in_Extent);
 
-	VVector2f m_XZMin;
-	VVector2f m_XZMax;
+	math::VVector2f m_XZMin;
+	math::VVector2f m_XZMax;
 };
 
 //-----------------------------------------------------------------------------

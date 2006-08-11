@@ -11,7 +11,7 @@
 namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
-
+using namespace math;
 VBody::VBody(VOdeBody* in_pOdeBody) : m_PositionState(in_pOdeBody), m_OrientationState(in_pOdeBody)
 {
 	m_CollisionMesh = 0;

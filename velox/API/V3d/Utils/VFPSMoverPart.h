@@ -40,8 +40,8 @@ private:
 	void RotateY(vfloat32 in_fAngleDegree);
 	void RotateZ(vfloat32 in_fAngelDegree);
 
-	void MoveBy(const VVector3f& in_Distance);
-	void RotateAround(const VVector3f& in_Axis, vfloat32 in_fAngle);
+	void MoveBy(const math::VVector3f& in_Distance);
+	void RotateAround(const math::VVector3f& in_Axis, vfloat32 in_fAngle);
 
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;

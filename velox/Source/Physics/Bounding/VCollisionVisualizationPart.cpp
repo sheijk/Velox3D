@@ -13,6 +13,7 @@ using namespace v3d::entity;
 using namespace v3d::utils;
 using namespace resource;
 using namespace v3d::graphics;
+using namespace math;
 
 VCollisionVisualizationPart::VCollisionVisualizationPart() :
 	VMeshPartBase(IVDevice::GetDefaultMaterial()),

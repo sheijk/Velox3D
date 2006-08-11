@@ -16,6 +16,7 @@
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------
 using namespace v3d;
+using namespace math;
 
 VImportedFaceContainer::VImportedFaceContainer()
 {

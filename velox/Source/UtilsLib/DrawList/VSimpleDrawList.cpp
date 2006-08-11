@@ -6,7 +6,7 @@
 namespace v3d {
 namespace graphics {
 //-----------------------------------------------------------------------------
-
+using namespace math;
 VSimpleDrawList::VSimpleDrawList(IVDevice& in_Device) : m_Device(in_Device)
 {
 	m_nNextFreeId = 1;

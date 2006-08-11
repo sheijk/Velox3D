@@ -54,7 +54,7 @@ namespace {
 		return static_cast<const VMeshBase*>(handle);
 	}
 
-	void SetGLMatrix(int mode, const VMatrix44f& mat, IVDevice* pDevice)
+	void SetGLMatrix(int mode, const math::VMatrix44f& mat, IVDevice* pDevice)
 	{
 		VDeviceMatrix devMat;
 		VDeviceMatrix::ConvertFromTransform(&devMat, mat, *pDevice);
@@ -67,7 +67,7 @@ namespace {
 	 * Call with GL_(PROJECTION|MODELVIEW|TEXTURE)_MATRIX to get the OpenGL
 	 * matrices 
 	 */
-	void GetGLMatrix(int in_Matrix, VMatrix44f* out_pMatrix)
+	void GetGLMatrix(int in_Matrix, math::VMatrix44f* out_pMatrix)
 	{
 		vfloat32 matrix[16];
 		glGetFloatv(in_Matrix, matrix);
@@ -661,7 +661,7 @@ vbool VOpenGLDevice::IsActive() const
 	return m_bActive;
 }
 
-void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix)
+void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const math::VMatrix44f& in_Matrix)
 {
 	switch(in_Mode)
 	{
@@ -694,7 +694,7 @@ void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix)
 
 //-----------------------------------------------------------------------------
 
-const VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode)
+const math::VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode)
 {
 	switch(in_Mode)
 	{
@@ -719,7 +719,7 @@ const VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode)
 
 void VOpenGLDevice::RecalcModelViewMatrix()
 {
-	VMatrix44f modelView;
+	math::VMatrix44f modelView;
 	Mult(modelView, m_ViewMatrix, m_ModelMatrix);
 	//Mult(modelView, m_ModelMatrix, m_ViewMatrix);
 

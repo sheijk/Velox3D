@@ -7,7 +7,7 @@
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
-
+using namespace math;
 VVector3f DeHomogenize(const VVector4f& in_Vec)
 {
 	const vfloat32 w = in_Vec[3];

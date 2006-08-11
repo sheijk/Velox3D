@@ -34,9 +34,9 @@ struct VVertex3f
 		v[2] = in_Z;
 	}
 
-	VVector3f AsVector() const
+	math::VVector3f AsVector() const
 	{
-		return VVector3f(x, y, z);
+		return math::VVector3f(x, y, z);
 	}
 };
 

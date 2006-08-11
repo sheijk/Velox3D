@@ -30,7 +30,7 @@ struct VNormal3f
 		Set(in_X, in_Y, in_Z);
 	}
 
-	explicit VNormal3f(const VVector3f& vec)
+	explicit VNormal3f(const math:: VVector3f& vec)
 	{
 		v[0] = vec[0];
 		v[1] = vec[1];
@@ -44,9 +44,9 @@ struct VNormal3f
 		v[2] = in_Z;
 	}
 
-	VVector3f AsVector() const
+	math::VVector3f AsVector() const
 	{
-		return VVector3f(x, y, z);
+		return math::VVector3f(x, y, z);
 	}
 };
 

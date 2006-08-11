@@ -20,7 +20,7 @@ class VPlaneMesh : public VGeometryData<VertexStructure>
 {
 	vfloat32	m_fDistance;
 	vfloat32	m_fVisSize;
-	VVector3f	m_Normal;
+	math::VVector3f	m_Normal;
 
 public:
 	VPlaneMesh(

@@ -47,10 +47,10 @@ void RotateAxis(VMatrix44f& matrix, VVector3f axis, float angle)
 	Mult(matrix, matrix, rot);
 }
 
-void Rotate(VVector3f rotate, VQuatf quaternion)
-{
-	SetQuaternionRotation(rotate, quaternion);
-}
+//void Rotate(VVector3f rotate, VQuatf quaternion)
+//{
+//	SetQuaternionRotation(rotate, quaternion);
+//}
 
 void Scale(VMatrix44f& matrix, float factor)
 {

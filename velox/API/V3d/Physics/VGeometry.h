@@ -88,8 +88,8 @@ public:
 	void SetCollisionGroup(Group in_CollisionGroup);
 	vint GetCollisionGroup();
 
-	void SetPosition(VVector3f in_Position);
-	void SetOrientation(VQuatf in_Quatf);
+	void SetPosition(math::VVector3f in_Position);
+	void SetOrientation(math::VQuatf in_Quatf);
 
 protected:
 

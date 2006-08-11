@@ -1,13 +1,14 @@
 #include <V3d/Math/VQuaternionOps.h>
 //-----------------------------------------------------------------------------
-
 #include <V3d/Math/VMatrixOps.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
+namespace math {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 void Rotate(VVector3f& io_Vector, const VQuatf& in_Rotation)
 {
@@ -47,5 +48,6 @@ std::istream& operator>>(std::istream& str, VMatrix44f& matrix)
 }
 
 //-----------------------------------------------------------------------------
+} // namespace math
 } // namespace v3d
 //-----------------------------------------------------------------------------

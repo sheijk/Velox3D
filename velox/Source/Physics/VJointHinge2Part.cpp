@@ -10,6 +10,7 @@ namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::entity;
+using namespace math;
 
 VJointHinge2Part::VJointHinge2Part() : 
 	m_pPhysicManagerPart(entity::VPartDependency::Ancestor, RegisterTo())

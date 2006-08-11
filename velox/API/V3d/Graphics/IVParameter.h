@@ -39,13 +39,13 @@ public:
 
 	virtual void Apply(vfloat32 in_fNewValue) const = 0;
 	virtual vfloat32 AsFloat() const = 0;
-	virtual void Apply(const VVector2f& in_NewValue) const = 0;
-	virtual VVector2f AsFloat2() const = 0;
-	virtual void Apply(const VVector4f& in_NewValue) const = 0;
-	virtual VVector4f AsFloat4() const = 0;
+	virtual void Apply(const math::VVector2f& in_NewValue) const = 0;
+	virtual math::VVector2f AsFloat2() const = 0;
+	virtual void Apply(const math::VVector4f& in_NewValue) const = 0;
+	virtual math::VVector4f AsFloat4() const = 0;
 
-	virtual VMatrix44f AsFloat44() const = 0;
-	virtual void Apply(const VMatrix44f& in_NewValue) const = 0;
+	virtual math::VMatrix44f AsFloat44() const = 0;
+	virtual void Apply(const math::VMatrix44f& in_NewValue) const = 0;
 
 	virtual void Apply(vint in_nNewValue) const = 0;
 	virtual vint AsInt() const = 0;

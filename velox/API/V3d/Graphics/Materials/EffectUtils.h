@@ -27,7 +27,7 @@ VState TextureState(
 	vuint width, vuint height,
 	VTextureFilter magnificationFilter, VTextureFilter minificationFilter,
 	VTextureWrapMode texCoordWrapU, VTextureWrapMode texCoordWrapV,
-	const VMatrix44f* pTextureMatrix = 0
+	const math::VMatrix44f* pTextureMatrix = 0
 	);
 
 /**
@@ -39,7 +39,7 @@ VState TextureState(
 	VTextureFilter minificationFilter = FilterLinear,
 	VTextureWrapMode texCoordWrapU = TextureRepeat, 
 	VTextureWrapMode texCoordWrapV = TextureRepeat,
-	const VMatrix44f* pTextureMatrix = 0
+	const math::VMatrix44f* pTextureMatrix = 0
 	);
 
 /** creates a state for polygon mode */

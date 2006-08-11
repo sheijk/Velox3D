@@ -46,7 +46,7 @@ private:
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
 	VSharedPtr<physics::VGeometry> m_pGeometry;
-	VVector3f m_Position;
+	math::VVector3f m_Position;
 		
 };
 

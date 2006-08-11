@@ -93,33 +93,33 @@ void SetRotationAxis(VMatrix<Scalar, RowCount, ColumnCount>& result, VVector<Sca
 	result.Set(2,2, in_Axis.GetZ() * in_Axis.GetZ() * (1-cosinus) + cosinus);
 }
 
-/**
-* @author: lars
-*/
-template<typename Scalar>
-void SetQuaternionRotation(VVector<Scalar, 3> io_Vector, VQuaternion<Scalar>& in_Rotation)
-{
-	Scalar x1; 
-	Scalar y1;
-	Scalar z1; 
-	Scalar w1;
-	Scalar x2; 
-	Scalar y2;
-	Scalar z2; 
-	Scalar w2;
-	in_Rotation.Get(x1, y1, z1, w1);
-
-	VQuaternion<Scalar> Quat(io_Vector.GetX() * w1 + io_Vector.GetZ() * y1 - io_Vector.GetY() * z1,
-		io_Vector.GetY() * w1 + io_Vector.GetX() * z1 - io_Vector.GetZ() * x1,
-		io_Vector.GetZ() * w1 + io_Vector.GetY() * x1 - io_Vector.GetX() * y1,
-		io_Vector.GetX() * x1 + io_Vector.GetY() * y1 + io_Vector.GetZ() * z1);
-
-	Quat.Get(x2, y2, z2, w2);
-
-	io_Vector = VVector<Scalar, 3>(w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2,
-		w1 * y2 + y1 * w2 + z1 * x2 - x1 * z2,
-		w1 * z2 + z1 * w2 + x1 * y2 - y1 * x2);
-}
+///**
+//* @author: lars
+//*/
+//template<typename Scalar>
+//void SetQuaternionRotation(VVector<Scalar, 3> io_Vector, VQuaternion<Scalar>& in_Rotation)
+//{
+//	Scalar x1; 
+//	Scalar y1;
+//	Scalar z1; 
+//	Scalar w1;
+//	Scalar x2; 
+//	Scalar y2;
+//	Scalar z2; 
+//	Scalar w2;
+//	in_Rotation.Get(x1, y1, z1, w1);
+//
+//	VQuaternion<Scalar> Quat(io_Vector.GetX() * w1 + io_Vector.GetZ() * y1 - io_Vector.GetY() * z1,
+//		io_Vector.GetY() * w1 + io_Vector.GetX() * z1 - io_Vector.GetZ() * x1,
+//		io_Vector.GetZ() * w1 + io_Vector.GetY() * x1 - io_Vector.GetX() * y1,
+//		io_Vector.GetX() * x1 + io_Vector.GetY() * y1 + io_Vector.GetZ() * z1);
+//
+//	Quat.Get(x2, y2, z2, w2);
+//
+//	io_Vector = VVector<Scalar, 3>(w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2,
+//		w1 * y2 + y1 * w2 + z1 * x2 - x1 * z2,
+//		w1 * z2 + z1 * w2 + x1 * y2 - y1 * x2);
+//}
 
 /**
 * @author: ins
@@ -230,10 +230,10 @@ void RotateZ(VMatrix44f& matrix, float angle);
 */
 void RotateAxis(VMatrix44f& matrix, VVector3f axis, float angle);
 
-/**
-* @author: lars
-*/
-void Rotate(VVector3f rotate, VQuatf quaternion);
+///**
+//* @author: lars
+//*/
+//void Rotate(VVector3f rotate, VQuatf quaternion);
 
 
 

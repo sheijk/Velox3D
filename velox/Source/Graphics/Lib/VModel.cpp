@@ -8,6 +8,7 @@
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 //VModelMesh::VModelMesh(IVMesh* in_pMesh, IVMaterial* in_pMaterial)
 //{

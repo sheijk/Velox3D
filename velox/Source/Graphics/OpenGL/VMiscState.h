@@ -81,7 +81,7 @@ private:
 	static IVStateCategory* m_pStateCategory;
 
 	// texture matrix state
-	VPropertyConnection<VMatrix44f> m_TextureMatrix;
+	VPropertyConnection<math::VMatrix44f> m_TextureMatrix;
 
 	// texture generation mode
 	VTexGenMode m_TextureGenerationMode;

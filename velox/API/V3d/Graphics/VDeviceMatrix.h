@@ -22,7 +22,7 @@ class VDeviceMatrix
 	float m_afElements[16];
 
 public:
-	typedef VMatrix<float, 4, 4> TransformMatrix;
+	typedef math::VMatrix<float, 4, 4> TransformMatrix;
 
 	/** Standard c'tor, loads the identity matrix */
 	VDeviceMatrix()

@@ -39,7 +39,7 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 protected:
-	VMatrix44f CalculateTextureMatrix();
+	math::VMatrix44f CalculateTextureMatrix();
 
 private:
 	virtual void OnMessage(const messaging::VMessage& in_Message, 

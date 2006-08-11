@@ -5,6 +5,7 @@
 #include <gmtl/Quat.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
+namespace math{
 //-----------------------------------------------------------------------------
 /**
  * Wrapps a quaternion representation out of gmtl
@@ -72,6 +73,7 @@ public:
 typedef VQuaternion<vfloat32> VQuatf;
 typedef VQuaternion<vfloat64> VQuatd;
 //-----------------------------------------------------------------------------
+} //namespace math
 } //namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VQUATERNION_01_8_04_H

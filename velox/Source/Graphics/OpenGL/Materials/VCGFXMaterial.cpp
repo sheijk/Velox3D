@@ -297,7 +297,7 @@ void VCGFXMaterial::SetParameter(ParamHandle in_Param, vfloat32 in_Value) const
 	//}
 }
 
-void VCGFXMaterial::SetParameter(ParamHandle in_Param, VVector4f in_Value) const
+void VCGFXMaterial::SetParameter(ParamHandle in_Param, math::VVector4f in_Value) const
 {
 	VCGFXParameterBase* pParam = FindParameter(in_Param);
 

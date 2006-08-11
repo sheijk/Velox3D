@@ -34,15 +34,15 @@ public:
 	graphics::VCamera& GetCamera();
 	const graphics::VCamera& GetCamera() const;
 
-	virtual V3D_DEPRECATED const VMatrix44f& GetTransform() const;
-	virtual const VMatrix44f& ViewMatrix() const;
+	virtual V3D_DEPRECATED const math::VMatrix44f& GetTransform() const;
+	virtual const math::VMatrix44f& ViewMatrix() const;
 	virtual const math::VRBTransform& Transform() const;
 
 	virtual void ApplyTo(IVDevice& in_Device) const;
 
-	virtual VVector3f GetPosition() const;
-	virtual VVector3f GetViewDirection() const;
-	virtual VVector3f GetUpVector() const;
+	virtual math::VVector3f GetPosition() const;
+	virtual math::VVector3f GetViewDirection() const;
+	virtual math::VVector3f GetUpVector() const;
 
 	void SetMovementSpeed(vfloat32 m_fMovementSpeed);
 	vfloat32 GetMovementSpeed() const;

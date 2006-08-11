@@ -7,6 +7,7 @@
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 VMouseTrackball::VMouseTrackball(input::IVMouseDevice* in_pMouse)
 {

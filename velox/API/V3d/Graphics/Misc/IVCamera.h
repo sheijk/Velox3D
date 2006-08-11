@@ -23,14 +23,14 @@ class IVDevice;
 class IVCamera
 {
 public:
-	virtual const VMatrix44f& ViewMatrix() const = 0;
+	virtual const math::VMatrix44f& ViewMatrix() const = 0;
 	virtual const math::VRBTransform& Transform() const = 0;
 
 	virtual void ApplyTo(IVDevice& in_Device) const = 0;
 
-	virtual VVector3f GetPosition() const = 0;
-	virtual VVector3f GetViewDirection() const = 0;
-	virtual VVector3f GetUpVector() const = 0;
+	virtual math::VVector3f GetPosition() const = 0;
+	virtual math::VVector3f GetViewDirection() const = 0;
+	virtual math::VVector3f GetUpVector() const = 0;
 };
 
 //-----------------------------------------------------------------------------

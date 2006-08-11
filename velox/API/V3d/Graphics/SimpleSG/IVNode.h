@@ -23,7 +23,7 @@ class IVNode
 public:
 	typedef VRangeIterator<IVNode> NodeIterator;
 	//typedef VBidirectionalIterator<IVNode> NodeIterator;
-	typedef VMatrix<float, 4, 4> Matrix44f;
+	typedef math::VMatrix<float, 4, 4> Matrix44f;
 
 	/** transforms the given matrix by node's local transformation */
 	virtual void ApplyTransformation(Matrix44f* io_pMatrix) = 0;

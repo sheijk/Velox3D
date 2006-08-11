@@ -25,14 +25,14 @@ public:
 	 *
 	 * @param in_Position The new position
 	 */
-	virtual void SetPosition(const VVector3f& in_Position);
+	virtual void SetPosition(const math::VVector3f& in_Position);
 
 	/**
 	 * Gets the position
 	 *
 	 * @return The position
 	 */
-	virtual VVector3f GetPosition() const;
+	virtual math::VVector3f GetPosition() const;
 
 	/**
 	 * Gets the current rigid body transformation of this part

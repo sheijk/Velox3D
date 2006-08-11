@@ -30,7 +30,7 @@ public:
 	virtual void Unapply() {}
 
 	virtual vbool Set(vfloat32 in_fValue) { return false; }
-	virtual vbool Set(const VVector4f& in_Value) { return false; }
+	virtual vbool Set(const math::VVector4f& in_Value) { return false; }
 
 protected:
     CGparameter m_Parameter;    
@@ -74,14 +74,14 @@ public:
 		V3D_CHECK_CG_ERROR();
 	}
 
-	virtual vbool Set(const VVector4f& in_Value)
+	virtual vbool Set(const math::VVector4f& in_Value)
 	{
 		m_Value = in_Value;
 		return true;
 	}
 
 private:
-	VVector4f m_Value;
+	math::VVector4f m_Value;
 };
 
 class VCGFXModelViewProjectionAutoParam : public VCGFXParameterBase
@@ -125,13 +125,13 @@ public:
 
 		const VLight& light = *in_pDevice->GetLight(m_LightNum);
 
-		VVector4f data;
+		math::VVector4f data;
 
 		switch(m_Component)
 		{
 		case Position:
 			{
-				VVector3f pos = light.GetPosition();
+				math::VVector3f pos = light.GetPosition();
 				data = ToVector4f(pos, 1.0f);
 			} break;
 
@@ -211,7 +211,7 @@ public:
 	virtual void UnapplyParameters();
 
 	virtual void SetParameter(ParamHandle in_Param, vfloat32 in_Value) const;
-	virtual void SetParameter(ParamHandle in_Param, VVector4f in_Value) const;
+	virtual void SetParameter(ParamHandle in_Param, math::VVector4f in_Value) const;
 
 	virtual vbool SetShaderSource(const std::string& in_strSource);
 

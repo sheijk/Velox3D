@@ -17,6 +17,8 @@ using namespace std;
 using namespace math;
 using namespace graphics;
 using namespace resource;
+using namespace math;
+
 
 namespace {
 	//TODO: should use it's own material..

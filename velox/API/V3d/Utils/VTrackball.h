@@ -18,9 +18,9 @@ public:
 
 	math::VRBTransform GetTransform();
 
-	VVector3f GetViewPoint() const;
+	math::VVector3f GetViewPoint() const;
 
-	VVector3f GetUpVector() const;
+	math::VVector3f GetUpVector() const;
 
 	void RecalculateTransform();
 
@@ -33,14 +33,14 @@ public:
 	vfloat32 GetDistance() const;
 	void SetDistance(vfloat32 in_fDistance);
 
-	VVector3f GetCenter() const;
-	void SetCenter(const VVector3f& in_Center);
+	math::VVector3f GetCenter() const;
+	void SetCenter(const math::VVector3f& in_Center);
 
 private:
 	vfloat32 m_fAltitudeAngle;
 	vfloat32 m_fDirectionAngle;
 	vfloat32 m_fDistance;
-	VVector3f m_Center;
+	math::VVector3f m_Center;
 
 	math::VRBTransform m_Transform;
 };

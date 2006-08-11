@@ -5,6 +5,8 @@
 namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
+using namespace math;
+
 VGeometry::VGeometry()
 {
 	m_GeomID = 0;

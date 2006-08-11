@@ -8,6 +8,7 @@ namespace v3d {
 namespace physics {
 //-----------------------------------------------------------------------------
 using namespace v3d;
+using namespace math;
 
 math::VBoundingBox* VBoundingPlaneVolumePart::GetBoundingBox()
 {

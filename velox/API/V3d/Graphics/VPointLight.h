@@ -19,8 +19,8 @@ using namespace v3d; // anti auto indenting
 class VPointLight
 {
 public:
-	VVector3f GetPosition() const;
-	void SetPosition(const VVector3f& in_Position);
+	math::VVector3f GetPosition() const;
+	void SetPosition(const math::VVector3f& in_Position);
 
 	VColor4f GetAmbient() const;
 	void SetAmbient(const VColor4f& in_Ambient);
@@ -32,7 +32,7 @@ public:
 	void SetDiffuse(const VColor4f& in_Diffuse);
 
 private:
-	VVector3f m_Position;
+	math::VVector3f m_Position;
 	VColor4f m_Ambient;
 	VColor4f m_Specular;
 	VColor4f m_Diffuse;

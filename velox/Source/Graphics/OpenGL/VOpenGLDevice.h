@@ -64,9 +64,9 @@ public:
 
 	virtual vbool IsActive() const;
 
-	virtual void SetMatrix(MatrixMode in_Mode, const VMatrix44f& in_Matrix);
+	virtual void SetMatrix(MatrixMode in_Mode, const math::VMatrix44f& in_Matrix);
 
-	virtual const VMatrix44f& GetMatrix(MatrixMode in_Mode);
+	virtual const math::VMatrix44f& GetMatrix(MatrixMode in_Mode);
 	
 	virtual LightId MaxActiveLight() const;
 	void ApplyLight(LightId in_Number, const VLight* in_pLight);
@@ -99,10 +99,10 @@ private:
 	VColor4f m_ClearColor;
 
 	// the matrices
-	VMatrix44f m_ViewMatrix;
-	VMatrix44f m_ModelMatrix;
-	VMatrix44f m_ProjectionMatrix;
-	VMatrix44f m_TextureMatrix;
+	math::VMatrix44f m_ViewMatrix;
+	math::VMatrix44f m_ModelMatrix;
+	math::VMatrix44f m_ProjectionMatrix;
+	math::VMatrix44f m_TextureMatrix;
 
 	void SetDisplay();
 	//void SetPixFormat();

@@ -47,7 +47,7 @@ VState TextureState(
 	vuint width, vuint height,
 	VTextureFilter magnificationFilter, VTextureFilter minificationFilter,
 	VTextureWrapMode texCoordWrapU, VTextureWrapMode texCoordWrapV,
-	const VMatrix44f* pTextureMatrix
+	const math::VMatrix44f* pTextureMatrix
 	)
 {
 	VState textureState("texture");
@@ -75,7 +75,7 @@ VState TextureState(
 	VTextureFilter minificationFilter,
 	VTextureWrapMode texCoordWrapU, 
 	VTextureWrapMode texCoordWrapV,
-	const VMatrix44f* pTextureMatrix
+	const math::VMatrix44f* pTextureMatrix
 	)
 {
 	VState textureState("texture");

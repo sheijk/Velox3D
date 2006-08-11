@@ -16,6 +16,7 @@ namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d::graphics;
 using namespace v3d::entity;
+using namespace math;
 
 namespace {
 	void ApplyGLLightStates(IVDevice& in_Device)

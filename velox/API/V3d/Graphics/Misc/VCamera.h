@@ -42,33 +42,32 @@ public:
 	void RotateZ(vfloat32 in_fAngle);
 
 	// derived from IVCamera:
-	virtual const VMatrix44f& ViewMatrix() const;
+	virtual const math::VMatrix44f& ViewMatrix() const;
 	virtual const math::VRBTransform& Transform() const;
-	virtual VVector3f GetPosition() const;
-	virtual VVector3f GetViewDirection() const;
-	virtual VVector3f GetUpVector() const;
+	virtual math::VVector3f GetPosition() const;
+	virtual math::VVector3f GetViewDirection() const;
+	virtual math::VVector3f GetUpVector() const;
 
 	math::VRBTransform GetTransform() const;
 	void SetTransform(const math::VRBTransform& transform);
 
 private:
-	void RotateAround(const VVector3f& in_Axis, vfloat32 in_fAngle);
+	void RotateAround(const math::VVector3f& in_Axis, vfloat32 in_fAngle);
 
-	typedef VMatrix<vfloat32, 4,4> Matrix4f;
+	typedef math::VMatrix<vfloat32, 4,4> Matrix4f;
 
 	void CalculateMatrix() const;
 
 	const vfloat32 m_fPiDiv180;
 
-	mutable Matrix4f m_ViewMatrix;
+	mutable math::VMatrix44f m_ViewMatrix;
 	mutable math::VRBTransform m_Transform;
 
-	VVector3f m_UpVector;
-	VVector3f m_RightVector;
+	math::VVector3f m_UpVector;
+	math::VVector3f m_RightVector;
 	//VVector3f m_RotationVector;
-	VVector3f m_ViewVector;
-
-	VVector3f m_Position;
+	math::VVector3f m_ViewVector;
+	math::VVector3f m_Position;
 
 	//v3d::graphics::VVertex3f m_PositionVector;
 

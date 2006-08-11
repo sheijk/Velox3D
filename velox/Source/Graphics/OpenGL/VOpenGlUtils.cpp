@@ -34,7 +34,7 @@ GLint GetGeometryMode(VMeshDescription::GeometryType in_eType)
 	}
 }
 
-void SetGLMatrix(int mode, const VMatrix44f& mat)
+void SetGLMatrix(int mode, const math::VMatrix44f& mat)
 {
 	vfloat32 glmat[16];
 

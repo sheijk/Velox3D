@@ -23,13 +23,13 @@ public:
 
 	virtual void Apply(vfloat32 in_fNewValue) const;
 	virtual vfloat32 AsFloat() const;
-	virtual void Apply(const VVector2f& in_NewValue) const;
-	virtual VVector2f AsFloat2() const;
-	virtual void Apply(const VVector4f& in_NewValue) const;
-	virtual VVector4f AsFloat4() const;
+	virtual void Apply(const math::VVector2f& in_NewValue) const;
+	virtual math::VVector2f AsFloat2() const;
+	virtual void Apply(const math::VVector4f& in_NewValue) const;
+	virtual math::VVector4f AsFloat4() const;
 
-	virtual VMatrix44f AsFloat44() const;
-	virtual void Apply(const VMatrix44f& in_NewValue) const;
+	virtual math::VMatrix44f AsFloat44() const;
+	virtual void Apply(const math::VMatrix44f& in_NewValue) const;
 
 	virtual void Apply(vint in_nNewValue) const;
 	virtual vint AsInt() const;

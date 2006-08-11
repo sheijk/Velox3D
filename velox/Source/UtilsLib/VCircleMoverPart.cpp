@@ -8,6 +8,7 @@
 namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 VCircleMoverPart::VCircleMoverPart() :
 	m_pRigidBody(entity::VPartDependency::Neighbour, RegisterTo()),

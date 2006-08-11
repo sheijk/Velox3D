@@ -44,7 +44,7 @@ public:
 	vuint GetCoordinateCount() const;
 	const VVertex3f& GetCoordinate(vuint in_nVertexNum) const;
 	void SetCoordinate(const VVertex3f& in_Coord, vuint in_nVertexNum);
-	void SetCoordinate(const VVector3f& in_Coord, vuint in_nVertexNum);
+	void SetCoordinate(const math::VVector3f& in_Coord, vuint in_nVertexNum);
 
 	vuint GetColorCount() const;
 	const VColor4f& GetColor(vuint in_nVertexNum) const;

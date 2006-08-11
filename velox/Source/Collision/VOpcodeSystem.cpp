@@ -118,7 +118,7 @@ vbool VOpcodeSystem::CollideRay(
 vbool VOpcodeSystem::CollideSphere(
 								   graphics::VVertex3f in_Origin,
 								   vfloat32 in_fRadius,
-								   VMatrix44f* in_pWorldMatrix,
+								   math::VMatrix44f* in_pWorldMatrix,
 								   VCollisionObject* in_pObject,
 								   VContactReport* out_pReport)
 {

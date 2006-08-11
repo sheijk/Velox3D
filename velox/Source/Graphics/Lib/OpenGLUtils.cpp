@@ -11,6 +11,7 @@
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 void GetGLMatrix(GLenum in_Matrix, VMatrix44f* out_pMatrix)
 {

@@ -8,6 +8,7 @@
 namespace v3d { namespace  physics {
 //-----------------------------------------------------------------------------
 using namespace v3d;
+using namespace math;
 
 VPhysicManagerPart::VPhysicManagerPart() : 
 m_pUpdateManager(entity::VPartDependency::Neighbour, RegisterTo())

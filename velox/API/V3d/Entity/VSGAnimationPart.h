@@ -29,10 +29,10 @@ public:
 	virtual ~VSGAnimationPart();
 
 	/** Sets the Position for the Translate */
-	void SetPosition(VVector3f in_Position);
+	void SetPosition(math::VVector3f in_Position);
 
 	/** Sets the Rotate Axis for the Rotation */
-	void SetRotateAxis(VVector3f in_Rotate);
+	void SetRotateAxis(math::VVector3f in_Rotate);
 
 	/** Sets the Speed for the Rotation */
 	void SetRotateSpeed(vfloat32 in_Speed);
@@ -62,8 +62,8 @@ private:
 	VPartConnection<VSceneGraphPart>    m_pSceneGraphPart;
 	VPartConnection<VUpdateManagerPart> m_pParent;
 	math::VRBTransform                  m_Transform;
-	VVector3f                           m_Position;
-	VVector3f                           m_Rotate;
+	math::VVector3f                           m_Position;
+	math::VVector3f                           m_Rotate;
 	vfloat32                            m_fRotateSpeed;
 	vfloat32                            m_fAngle;
 };

@@ -22,8 +22,8 @@ public:
 
 	vfloat32 GetRadius() const { return m_fRadius; }
 	void SetRadius(const vfloat32& in_Value) { m_fRadius = in_Value; }
-	VVector3f GetCenter() const { return m_Center; }
-	void SetCenter(const VVector3f& in_Value) { m_Center = in_Value; }
+	math::VVector3f GetCenter() const { return m_Center; }
+	void SetCenter(const math::VVector3f& in_Value) { m_Center = in_Value; }
 	vfloat32 GetSpeed() const { return m_fSpeed; }
 	void SetSpeed(const vfloat32& in_Value) { m_fSpeed = in_Value; }
 	vfloat32 GetAngle() const { return m_fAngle; }
@@ -39,7 +39,7 @@ private:
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
 
 	vfloat32 m_fRadius;
-	VVector3f m_Center;
+	math::VVector3f m_Center;
 	vfloat32 m_fSpeed;
 
 	vfloat32 m_fAngle;

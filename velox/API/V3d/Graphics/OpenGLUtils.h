@@ -16,7 +16,7 @@ using namespace v3d; // prevent auto indenting
  * out_pMatrix
  * @parameter in_Matrix GL_MODELVIEW_MATRIX, GL_PROJECTION_MATRIX, GL_TEXTURE_MATRIX
  */
-void GetGLMatrix(GLenum in_Matrix, VMatrix44f* out_pMatrix);
+void GetGLMatrix(GLenum in_Matrix, math::VMatrix44f* out_pMatrix);
 
 void ThrowOnGLError(VStringParam in_strFileName, vuint in_nLine, VStringParam in_strOperation);
 

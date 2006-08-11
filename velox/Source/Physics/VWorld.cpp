@@ -6,6 +6,7 @@
 namespace v3d {
 namespace physics {
 //-----------------------------------------------------------------------------
+using namespace math;
 
 VWorld::VWorld()
 {

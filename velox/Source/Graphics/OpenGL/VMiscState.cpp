@@ -31,7 +31,7 @@ VMiscState::VMiscState(const VRenderPass& in_Pass)
 	m_DestFactor = GetGLModeNum(BlendOneMinusSourceAlpha);
 	m_bBlendingEnabled = false;
 
-	VMatrix44f identity;
+	math::VMatrix44f identity;
 	Identity(identity);
 	m_TextureMatrix.Set(identity);
 

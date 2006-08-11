@@ -42,8 +42,8 @@ public:
 
 	// some default values used for fixed function pipeline rendering
 	// (and probably supported in many shaders)
-	VVector3f GetPosition() const;
-	void SetPosition(const VVector3f& in_Position);
+	math::VVector3f GetPosition() const;
+	void SetPosition(const math::VVector3f& in_Position);
 
 	vfloat32 GetW() const { return m_fW; }
 	void SetW(const vfloat32& in_Value) { m_fW = in_Value; }
@@ -62,7 +62,7 @@ private:
 	// and setters (->VLightPart.OnMessage)
 	friend class ::v3d::scene::VLightPart;
 
-	VVector3f m_Position;
+	math::VVector3f m_Position;
 	vfloat32 m_fW;
 	VColor4f ambientColor;
 	VColor4f diffuseColor;

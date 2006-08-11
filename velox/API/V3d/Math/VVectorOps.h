@@ -7,6 +7,7 @@
 #include <sstream>
 //-----------------------------------------------------------------------------
 namespace v3d {
+namespace math {
 //-----------------------------------------------------------------------------
 
 template<typename Scalar, vuint Dimension>
@@ -414,6 +415,7 @@ std::istream& operator>>(std::istream& stream, VVector<Scalar, Dimensions>& vec)
 }
 
 //-----------------------------------------------------------------------------
+} //namespace math
 } //namespace v3d
 //-----------------------------------------------------------------------------
 #endif //V3D_VVECTOROPS_01_22_05_H

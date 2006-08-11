@@ -51,7 +51,7 @@ private:
 	
 	BodyPtr m_pBody;
 	vfloat32 m_fMass;
-	VVector3f m_Position;
+	math::VVector3f m_Position;
 };
 
 //-----------------------------------------------------------------------------

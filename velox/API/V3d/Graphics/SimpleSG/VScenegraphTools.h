@@ -14,7 +14,7 @@ namespace graphics{
  */
 void UpdateLocations(
 	v3d::graphics::IVNode* in_pNode, 
-	const VMatrix44f& in_Transform
+	const math::VMatrix44f& in_Transform
 	);
 
 //-----------------------------------------------------------------------------

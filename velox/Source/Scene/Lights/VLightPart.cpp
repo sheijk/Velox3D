@@ -9,6 +9,7 @@
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace math;
 
 VLightPart::VLightPart() : 
 	m_LightManager(entity::VPartDependency::Ancestor, RegisterTo()),

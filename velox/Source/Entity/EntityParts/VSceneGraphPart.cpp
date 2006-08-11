@@ -7,7 +7,7 @@
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
-
+using namespace math;
 VSceneGraphPart::VSceneGraphPart() : 
 	m_bActive(false),
 	m_pParent(VPartDependency::Ancestor, VPartDependency::Optional, RegisterTo()),

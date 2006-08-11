@@ -18,12 +18,12 @@ public:
 	virtual ~VStateOrientation();
 
 	virtual void Apply();
-	VQuatf& GetQuat();
-	VVector4f GetAsVector();
+	math::VQuatf& GetQuat();
+	math::VVector4f GetAsVector();
 
 private:
 
-	VQuatf m_Quaternion;
+	math::VQuatf m_Quaternion;
 };
 
 //-----------------------------------------------------------------------------

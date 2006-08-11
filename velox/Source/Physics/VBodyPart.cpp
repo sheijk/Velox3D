@@ -17,6 +17,7 @@ namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 using namespace v3d::entity;
+using namespace math;
 
 VBodyPart::VBodyPart(BodyPtr in_pBody) : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
 										 m_pPhysicManagerPart(VPartDependency::Ancestor, RegisterTo()),

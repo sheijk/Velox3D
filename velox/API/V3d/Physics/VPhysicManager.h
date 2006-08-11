@@ -85,7 +85,7 @@ public:
 	/**
 	 * a plane cannot be attached to a body, thus we return only the object
 	 */
-	Geometry CreatePlane(VVector3f in_Normal,vfloat32 in_fDistance);
+	Geometry CreatePlane(math::VVector3f in_Normal,vfloat32 in_fDistance);
 	VWorld* GetWorld();
 
 
@@ -96,7 +96,7 @@ private:
 	Geometry CreateSphereGeom(math::VBoundingSphere* in_pBoundingMesh);
 	Geometry CreateBoxGeom(math::VBoundingBox* in_pBoundingMesh);
 	BodyPtr CreateSphere(vfloat32 in_fMass, vfloat32 in_fRadius);
-	BodyPtr CreateBox(vfloat32 in_fMass, VVector3f in_Expansion);
+	BodyPtr CreateBox(vfloat32 in_fMass, math::VVector3f in_Expansion);
 	BodyPtr CreateMesh(vfloat32 in_fMass, VBoundingMesh* in_BoundingMesh);
 	
 	VWorld m_World;

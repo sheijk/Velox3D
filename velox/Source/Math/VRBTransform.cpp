@@ -13,6 +13,7 @@ namespace v3d {
 namespace math {
 //-----------------------------------------------------------------------------
 using namespace v3d;
+using namespace math;
 
 VRBTransform::VRBTransform()
 {
@@ -219,9 +220,9 @@ void VRBTransform::Invert()
 void VRBTransform::Rotate(vfloat32 in_fAngleDegree, const VVector3f& axis)
 {
 	VQuatf quat = QuatFromAxisAngle(axis, in_fAngleDegree);
-	v3d::Rotate(m_XAxis, quat);
-	v3d::Rotate(m_YAxis, quat);
-	v3d::Rotate(m_ZAxis, quat);
+	v3d::math::Rotate(m_XAxis, quat);
+	v3d::math::Rotate(m_YAxis, quat);
+	v3d::math::Rotate(m_ZAxis, quat);
 }
 
 void VRBTransform::Rotate(VQuatf& in_Quatf)
@@ -246,7 +247,7 @@ void VRBTransform::Rotate(VQuatf& in_Quatf)
 
 	//MakeTranspose(axis);
 
-	v3d::Rotate(axis, in_Quatf);
+	v3d::math::Rotate(axis, in_Quatf);
 	m_XAxis.SetX(axis.Get(0,0));
 	m_XAxis.SetY(axis.Get(1,0));
 	m_XAxis.SetZ(axis.Get(2,0));

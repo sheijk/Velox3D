@@ -7,6 +7,7 @@
 #include <gmtl/QuatOps.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
+namespace math {
 //-----------------------------------------------------------------------------
 /**
  * Quaternion operations templates
@@ -284,9 +285,10 @@ VQuaternion<Scalar> QuatFromAxisAngle(
 	return VQuaternion<Scalar>(x,y,z,w);
 }
 
-void Rotate(VVector3f& io_Vector, const VQuatf& in_Rotation);
+void Rotate(math::VVector3f& io_Vector, const VQuatf& in_Rotation);
 
 //-----------------------------------------------------------------------------
+} // namespace math
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif //V3D_VQUATERNIONOPS_01_09_05_H
