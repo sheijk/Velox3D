@@ -239,6 +239,10 @@
 						Name="Container"
 						>
 						<File
+							RelativePath="..\..\API\V3d\Core\Container\VArray2d.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Core\Container\VList.h"
 							>
 						</File>

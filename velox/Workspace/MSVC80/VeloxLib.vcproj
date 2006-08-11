@@ -159,23 +159,79 @@
 				Name="V3d"
 				>
 				<File
-					RelativePath="..\..\Api\V3d\CG.h"
+					RelativePath="..\..\API\V3d\BoostSignals.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\Api\V3d\Entity.h"
+					RelativePath="..\..\API\V3d\CG.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\Api\V3d\OpenGL.h"
+					RelativePath="..\..\API\V3d\Config.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\Api\V3d\Resource.h"
+					RelativePath="..\..\API\V3d\Console.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\Api\V3d\Scene.h"
+					RelativePath="..\..\API\V3d\Core.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Editor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Entity.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Graphics.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Image.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Input.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\OpenGL.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Property.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Resource.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Scene.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\System.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Updater.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Vfs.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\Window.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\API\V3d\XML.h"
 					>
 				</File>
 				<Filter
@@ -454,6 +510,10 @@
 					Name="Utils"
 					>
 					<File
+						RelativePath="..\..\API\V3d\Utils\ColorConversion.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Utils\IVStringStream.h"
 						>
 					</File>
@@ -462,11 +522,63 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Utils\VCameraPart.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3dLib\Utils\VCircleMoverPart.h"
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Utils\VCommandManager.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VFourCC.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VFPSMoverPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VFrameCounter.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VGuid.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VInputPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\vmousetrackball.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VRegisterGuard.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Utils\VSimpleTokenizer.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VStreamReader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VStringValue.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VTrackball.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Utils\VTrackballPart.h"
 						>
 					</File>
 				</Filter>
@@ -554,7 +666,23 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Entity\VRigidBodyPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Entity\VScenegraphPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Entity\VSGAnimationPart.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Entity\VUnconnectedPart.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Entity\VUpdateablePart.h"
 						>
 					</File>
 				</Filter>
@@ -718,407 +846,31 @@
 						>
 					</File>
 				</Filter>
-			</Filter>
-			<Filter
-				Name="V3dLib"
-				>
-				<File
-					RelativePath="..\..\Api\V3dLib\BoostSignals.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3dLib\Containers.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3dLib\Graphics.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Api\V3dLib\Math.h"
-					>
-				</File>
 				<Filter
 					Name="Collision"
 					>
 					<File
-						RelativePath="..\..\Api\V3dLib\Collision\VCollisionException.h"
+						RelativePath="..\..\API\V3d\Collision\VCollisionException.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Collision\VCollisionObject.h"
+						RelativePath="..\..\API\V3d\Collision\VCollisionObject.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Collision\VContactReport.h"
+						RelativePath="..\..\API\V3d\Collision\VContactReport.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Collision\VIntersectionArray.h"
+						RelativePath="..\..\API\V3d\Collision\VIntersectionArray.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Collision\VOpcodeSystem.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Containers"
-					>
-					<File
-						RelativePath="..\..\Api\V3dLib\Containers\VArray2d.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Graphics"
-					>
-					<File
-						RelativePath="..\..\Api\V3dLib\Graphics\Generators.h"
+						RelativePath="..\..\API\V3d\Collision\VOpcode.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Graphics\Geometry.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Graphics\Importer.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Graphics\Materials.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Graphics\Misc.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Graphics\Portal.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Graphics\SimpleSG.h"
-						>
-					</File>
-					<Filter
-						Name="Generators"
-						>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\IVMeshGenerator.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxGenerator.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VBoxMesh.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCircleMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCircleMesh.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCylinderMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VCylinderMesh.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VGeoSphereMesh.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VHeightmapMesh.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPlaneMesh.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereGenerator.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VPolarSphereMesh.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VQuadMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTerrainChunkMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTriangleMesh.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Generators\VTriangleMesh.inl"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Geometry"
-						>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\BufferManipulation.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\Conversions.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColor4f.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColoredTextureVertex.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VColoredVertex.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VDynamicGeometryData.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryData.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryData.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VGeometryUtil.inl"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VNormal3f.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VPlane3f.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VResizeableGeometryData.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VSimpleVertex.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VTexCoord2f.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VTexturedVertex.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VVertex3f.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Geometry\VVertexDataLayout.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Importer"
-						>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VEffectLoader.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VImporterException.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VModelLoader.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Importer\VQ3BspImporter.h"
-							>
-						</File>
-						<Filter
-							Name="Base"
-							>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedBufferDescription.h"
-								>
-							</File>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedFaceContainer.h"
-								>
-							</File>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedFaceDescription.h"
-								>
-							</File>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedMaterialContainer.h"
-								>
-							</File>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VImportedMaterialDescription.h"
-								>
-							</File>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\Base\VMaterialMap.h"
-								>
-							</File>
-						</Filter>
-						<Filter
-							Name="3DS"
-							>
-							<File
-								RelativePath="..\..\Api\V3dLib\Graphics\Importer\3ds\VImported3DS.h"
-								>
-							</File>
-						</Filter>
-					</Filter>
-					<Filter
-						Name="Materials"
-						>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Materials\EffectUtils.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Materials\StateTypes.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Materials\VModeTypeInfo.h"
-							>
-						</File>
-					</Filter>
-					<Filter
-						Name="Misc"
-						>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Misc\IVCamera.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Misc\IVDrawList.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Misc\MiscUtils.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Misc\VCamera.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Misc\VKeyboardCamera.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Api\V3dLib\Graphics\Misc\VSimpleDrawList.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
-				<Filter
-					Name="Math"
-					>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\ArrayOps.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\ArrayOps.inl"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VBoundingBox.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VBoundingSphere.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VHalfRay.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VLine.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VPlane.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VQuaternion.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VQuaternionOps.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VRBTransform.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VVectorBase.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3dLib\Math\VVectorOps.h"
+						RelativePath="..\..\API\V3d\Collision\VOpcodeSystem.h"
 						>
 					</File>
 				</Filter>
@@ -1126,93 +878,501 @@
 					Name="Property"
 					>
 					<File
-						RelativePath="..\..\Api\V3dLib\Property\VProperty.h"
+						RelativePath="..\..\API\V3d\Property\VProperty.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Property\VPropertyManager.h"
+						RelativePath="..\..\API\V3d\Property\VPropertyManager.h"
 						>
 					</File>
 				</Filter>
 				<Filter
-					Name="Utils"
+					Name="Graphics"
 					>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\ColorConversion.h"
+						RelativePath="..\..\API\V3d\Graphics\Generators.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VCameraPart.h"
+						RelativePath="..\..\API\V3d\Graphics\Geometry.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VCommandManager.h"
+						RelativePath="..\..\API\V3d\Graphics\GraphicsExceptions.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VFourCC.h"
+						RelativePath="..\..\API\V3d\Graphics\Importer.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VFPSMoverPart.h"
+						RelativePath="..\..\API\V3d\Graphics\IVDevice.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VFrameCounter.h"
+						RelativePath="..\..\API\V3d\Graphics\IVGraphicsService.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VGuid.h"
+						RelativePath="..\..\API\V3d\Graphics\IVMaterial.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VInputPart.h"
+						RelativePath="..\..\API\V3d\Graphics\IVMesh.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VMouseTrackball.h"
+						RelativePath="..\..\API\V3d\Graphics\IVParameter.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VRegisterGuard.h"
+						RelativePath="..\..\API\V3d\Graphics\IVPass.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VStreamReader.h"
+						RelativePath="..\..\API\V3d\Graphics\IVRenderContext.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VStringValue.h"
+						RelativePath="..\..\API\V3d\Graphics\IVRenderState.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VTrackball.h"
+						RelativePath="..\..\API\V3d\Graphics\IVShader.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\Utils\VTrackballPart.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="EntityParts"
-					>
-					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VRigidBodyPart.h"
+						RelativePath="..\..\API\V3d\Graphics\IVStateCategory.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VSceneGraphPart.h"
+						RelativePath="..\..\API\V3d\Graphics\IVTexture.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VSGAnimationPart.h"
+						RelativePath="..\..\API\V3d\Graphics\Materials.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3dLib\EntityParts\VUpdateablePart.h"
+						RelativePath="..\..\API\V3d\Graphics\Misc.h"
 						>
 					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\OpenGLUtils.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\Simplesg.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VBuffer.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VDataFormat.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VDeviceCaps.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VDeviceMatrix.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VDisplaySettings.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VEffectDescription.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VEffectDescription.inl"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VLight.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VMeshDescription.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VModel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VPointLight.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VVertexBuffer.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\API\V3d\Graphics\VVertexFormat.h"
+						>
+					</File>
+					<Filter
+						Name="Generators"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\IVMeshGenerator.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VBoxGenerator.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VBoxMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VBoxMesh.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VCircleMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VCircleMesh.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VCylinderMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VCylinderMesh.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VGeoSphereMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VGeoSphereMesh.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VHeightmapMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VHeightmapMesh.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VPlaneMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VPlaneMesh.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VPolarSphereGenerator.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VPolarSphereMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VPolarSphereMesh.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VQuadMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VTerrainchunkMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VTriangleMesh.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Generators\VTriangleMesh.inl"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Geometry"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\BufferManipulation.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\BufferManipulation.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\Conversions.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VColor4f.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VColoredTextureVertex.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VColoredVertex.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VDynamicGeometryData.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VGeometryData.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VGeometryData.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VGeometryUtil.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VGeometryUtil.inl"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VNormal3f.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VPlane3f.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VResizeableGeometryData.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VSimpleVertex.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VTexCoord2f.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VTexturedVertex.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VVertex3f.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Geometry\VVertexDataLayout.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Importer"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\VEffectLoader.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\3DS\VImported3DS.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\Base\VImportedBufferDescription.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\Base\VImportedFaceContainer.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\Base\VImportedFaceDescription.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\Base\VImportedMaterialContainer.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\Base\VImportedMaterialDescription.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\VImporterException.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\Base\VMaterialMap.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\VModelLoader.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Importer\VQ3BSPImporter.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Materials"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Materials\EffectUtils.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Materials\StateTypes.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Materials\VModeTypeInfo.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Misc"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Misc\IVCamera.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Misc\IVDrawList.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Misc\MiscUtils.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Misc\VCamera.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Misc\VKeyboardCamera.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Misc\VMultipassDrawList.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Misc\VSimpleDrawList.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Parameters"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Parameters\IVParameterValue.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Parameters\VGenericValue.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Parameters\VMaterialSetup.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Parameters\VTextureValue.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Portal"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Portal\IVCell.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Portal\VIndoorCell.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Portal\VTerrainCell.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Renderers"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Renderers\Sky\IVSkyColorizer.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Renderers\BSP\VBSPRenderer.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Renderers\Sky\VDaylightSkyColorizer.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Renderers\Terrain\VLodHeightmap.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Renderers\Sky\VSkyDome.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Renderers\Terrain\VTerrainLodChunk.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\Renderers\Terrain\VTerrainRenderer.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="SimpleSG"
+						>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\SimpleSG\IVNode.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\SimpleSG\VMeshNode.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\SimpleSG\VNodeBase.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\SimpleSG\VScenegraphTools.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Graphics\SimpleSG\VTransformNode.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -1377,6 +1537,10 @@
 				<Filter
 					Name="OpenGL"
 					>
+					<File
+						RelativePath="..\..\Source\Graphics\OpenGL\VDeviceCaps.cpp"
+						>
+					</File>
 					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VMeshHandle.cpp"
 						>
@@ -2096,10 +2260,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\Source\Graphics\OpenGL\VDeviceCaps.cpp"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

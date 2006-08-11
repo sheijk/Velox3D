@@ -24,7 +24,7 @@ VBodyPart::VBodyPart(BodyPtr in_pBody) : m_pRigidBodyPart(VPartDependency::Neigh
 										 m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 {
 	V3D_ASSERT(in_pBody.Get() != 0);
-	m_fMass = 1;
+	m_fMass = 0.1f;
 	m_pBody = in_pBody;
 }
 
@@ -34,7 +34,7 @@ VBodyPart::VBodyPart() : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo
 						 m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 {
 	m_pBody.Assign(0);
-	m_fMass  = 1;
+	m_fMass  = 0.1f;
 }
 
 VBodyPart::~VBodyPart()
@@ -64,6 +64,7 @@ void VBodyPart::Create()
 			);
 		//TODO: set orientation
 		m_pBody->Activate();
+		m_fMass = m_pBody->GetMass();
 	}
 }
 
@@ -75,7 +76,6 @@ void VBodyPart::Activate()
 		V3D_THROW(entity::VMissingPartException, "missing part volume part 'data'");
 	if( m_pPhysicManagerPart.Get() == 0)
 		V3D_THROW(entity::VMissingPartException, "missing part physic manager 'data'");
-
 	if( m_pRigidBodyPart.Get() == 0 )
 		V3D_THROW(entity::VMissingPartException, "missing part 'data'");
 	
@@ -209,7 +209,6 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 				isEnabled = m_pBody->IsEnabled();
 			}
 				
-			
 			in_pAnswer->AddProperty("Mass", m_fMass);
 			in_pAnswer->AddProperty("Position", m_Position);
 			in_pAnswer->AddProperty("Address", m_pBody.Get());
@@ -221,6 +220,16 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 	else if( request == "update" )
 	{
 		const string name = in_Message.GetAs<string>("name");
+
+		if (name == "Mass" )
+		{
+			vfloat32 param = in_Message.GetAs<vfloat32>("value");
+			if(m_pBody.Get())
+			{
+				m_pBody->SetMass(param);
+				m_fMass = m_pBody->GetMass();
+			}
+		}
 
 		if( name == "Position" )
 		{

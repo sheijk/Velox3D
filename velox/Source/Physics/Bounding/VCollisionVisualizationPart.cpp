@@ -28,13 +28,12 @@ VCollisionVisualizationPart::VCollisionVisualizationPart() :
 
 void VCollisionVisualizationPart::Activate()
 {
-	VMeshPartBase::Activate();
-
 	if( m_pVolumePart.Get() == 0 )
 		V3D_THROW(entity::VMissingPartException, "missing terrain volume part 'data'");
 	if( !m_bCreated )
 		Create();
 
+	VMeshPartBase::Activate();
 }
 
 void VCollisionVisualizationPart::Deactivate()
@@ -45,8 +44,8 @@ void VCollisionVisualizationPart::Deactivate()
 void VCollisionVisualizationPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
 	glColor3f(0,0,1);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_BACK, GL_FILL);
 	in_Device.RenderMesh(&*m_hMesh);
 }
 

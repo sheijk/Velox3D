@@ -150,6 +150,29 @@ vbool VBody::IsEnabled()
 
 	return false;
 }
+
+void VBody::SetMass(vfloat32 in_fMass)
+{
+	if(m_Body)
+	{
+		dMass mass;
+		dBodyGetMass(*m_Body->GetBodyID(), &mass);
+		mass.adjust(in_fMass);
+		dBodySetMass(*m_Body->GetBodyID(), &mass);
+	}
+}
+
+vfloat32 VBody::GetMass()
+{
+	if(m_Body)
+	{
+		dMass mass;
+		dBodyGetMass(*m_Body->GetBodyID(), &mass);
+		return mass.mass;
+	}
+	else
+		return 0;
+}
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d

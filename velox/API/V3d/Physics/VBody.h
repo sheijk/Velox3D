@@ -33,6 +33,7 @@ public:
 
 	void SetPosition(graphics::VVertex3f in_Position);
 	void SetOrientation(math::VQuatf in_Orientation);
+	void SetMass(vfloat32 in_fMass);
 	void VBody::SetOrientation(math::VVector4f in_Orientation);
 
 	void Deactivate();
@@ -49,6 +50,7 @@ public:
 
 	//returns true if the body is taking part in the simulation
 	vbool IsEnabled();
+	vfloat32 GetMass();
 
 			
 protected: 

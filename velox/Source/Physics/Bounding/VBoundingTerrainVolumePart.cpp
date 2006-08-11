@@ -99,7 +99,6 @@ void VBoundingTerrainVolumePart::Create()
 			/*pNewIndices[nCount-2] = 0;
 			pNewIndices[nCount-1] = 1;
 			pNewIndices[nCount] = 2;*/
-
 		}	
 	}
 

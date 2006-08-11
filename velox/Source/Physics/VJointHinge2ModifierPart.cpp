@@ -26,8 +26,9 @@ VJointHinge2ModifierPart::VJointHinge2ModifierPart() :
 	m_fSpeed = 0.0f;
 	m_fSteering = 0.0f;
 	m_fSpeedFactor = 0.5f;
-	m_fSteerFactor = 0.6f;
-	m_fMaxSpeed = 20.0f;
+	m_fSteerFactor = 0.5f;
+	m_fMaxSpeed = 200;
+		
 }
 
 void VJointHinge2ModifierPart::Activate()
@@ -171,11 +172,12 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	if (v < -0.1) v = -0.1;
 	v *= m_fMaxSpeed;
 	
-	if(test)
-	{
+	//if(test)
+	//{
 		pJoint->SetVelocity2(-m_fSpeed);
 		pJoint->SetVelocity(v);
-		pJoint->SetMaxForce(0.2f);
+		pJoint->SetMaxForce(10.2f);
+		pJoint->SetMaxForce2(10.1f);
 		pJoint->SetFudgeFactor(0.1);
 		pJoint->SetLowStop(-.75f);
 		pJoint->SetHighStop(0.75f);
@@ -184,7 +186,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 		//pJoint->Apply();
 		
 		pJoint->SetParameters();
-	}
+//	}
 }
 
 V3D_REGISTER_PART_PARSER(VJointHinge2ModifierPart);

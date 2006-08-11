@@ -26,8 +26,8 @@ void VGeometryMesh::Delete()
 
 void VGeometryMesh::Create(VSpace* in_SpaceState)
 {
-	//@note: this only works for single precision vertex buffer. to change this take
-	//the according functions in collision_trimesh, in ode.
+	//@note: this only works for single precision vertex buffer. to change this
+	//use the according functions in collision_trimesh, in ode.
 	m_TriMeshData = dGeomTriMeshDataCreate();
 
 	dGeomTriMeshDataBuildSingle1(
@@ -42,7 +42,7 @@ void VGeometryMesh::Create(VSpace* in_SpaceState)
 		);
 
 	V3D_ASSERT(in_SpaceState != 0);
-	//@note: last 3 params are optinal collision callbacks
+	//@note: last 3 params are optional collision callbacks
 	m_GeomID = dCreateTriMesh (*in_SpaceState->GetSpaceID(), m_TriMeshData, 0,0,0);
 	
 	//dGeomSetData(m_GeomID, m_TriMeshData);

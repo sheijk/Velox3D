@@ -1381,6 +1381,10 @@
 		<Filter
 			Name="Entity"
 			>
+			<File
+				RelativePath="..\..\Editor\NativeBindings\PartParsers.cpp"
+				>
+			</File>
 			<Filter
 				Name="Parsers"
 				>

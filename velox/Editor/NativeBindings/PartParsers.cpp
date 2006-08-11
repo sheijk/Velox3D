@@ -145,6 +145,7 @@ void foo()
 	v3d::physics::AssureVJointHinge2ModifierPartExist();
 	v3d::physics::AssureVJointHinge2PartExist();
 	v3d::physics::AssureVPhysicManagerPartExist();
+	v3d::physics::AssureVCollisionVisualizationPartExist();
 
 	v3d::entity::AssureVRigidBodyPartExist();
 	//v3d::entity::AssureVUpdateablePartExist();
