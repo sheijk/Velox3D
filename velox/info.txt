@@ -9,4 +9,4 @@ Pers.Files:		Doc/Worklog/Name.txt	(Nachrichten an Entwickler, Informationen uebe
 Dokumentation:		Doc/Index.html
 
 Web: http://www.sechsta-sinn.de/velox
-
+Trac: http://jumbo.meb.uni-bonn.de:8000/v3dtrac/
