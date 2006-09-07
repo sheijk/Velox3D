@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include <V3d/Physics/VJointHinge2ModifierPart.h>
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Input/IVInputManager.h>
@@ -123,7 +130,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	{
 		if(m_pButton->IsDown())
 		{
-			m_fSpeed+=m_fSpeedFactor;
+			m_fSpeed += m_fSpeedFactor;
 			test = true;
 		}
 	}
@@ -131,7 +138,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	{
 		if(m_pButton2->IsDown())
 		{
-			m_fSpeed-=m_fSpeedFactor;
+			m_fSpeed -= m_fSpeedFactor;
 			test = true;
 		}
 	}
@@ -140,7 +147,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	{
 		if(m_pButton3->IsDown())
 		{
-			m_fSteering+=m_fSteerFactor;
+			m_fSteering += m_fSteerFactor;
 			test = true;
 		}
 	}
@@ -149,7 +156,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	{
 		if(m_pButton4->IsDown())
 		{
-			m_fSteering-=m_fSteerFactor;
+			m_fSteering -= m_fSteerFactor;
 			test = true;
 		}
 	}
@@ -193,3 +200,4 @@ V3D_REGISTER_PART_PARSER(VJointHinge2ModifierPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
 //-----------------------------------------------------------------------------
+

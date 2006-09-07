@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 %ignore v3d::math::VVector::m_Vec;
 %ignore v3d::math::VVector::operator[];
 %ignore v3d::math::VVector::operator=;
@@ -120,4 +127,5 @@
 	}
 };
 %include "../../API/V3d/Math/VRBTransform.h"
+
 

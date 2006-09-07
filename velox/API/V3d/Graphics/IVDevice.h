@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #ifndef V3D_IVDEVICE_H
 #define V3D_IVDEVICE_H
 //-----------------------------------------------------------------------------
@@ -131,6 +138,8 @@ public:
 
 	virtual IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings) = 0;
 
+	virtual IVRenderContext* GetRenderContext() = 0;
+
 	virtual ~IVDevice() {};
 
 	static resource::VResourceDataPtr<const IVMaterial> GetDefaultMaterial();
@@ -142,3 +151,4 @@ public:
 V3D_TYPEINFO(v3d::graphics::IVDevice);
 
 #endif // V3D_IVDEVICE_H
+

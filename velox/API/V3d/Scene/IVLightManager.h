@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #ifndef V3D_IVLIGHTMANAGER_2006_01_21_H
 #define V3D_IVLIGHTMANAGER_2006_01_21_H
 //-----------------------------------------------------------------------------
@@ -7,6 +14,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 	class IVDevice;
+	class VLight;
 }}
 
 namespace v3d { namespace scene {
@@ -31,6 +39,8 @@ public:
 
 	/** Apply all lights for the given shape */
 	virtual void ApplyLights(graphics::IVDevice* in_pDevice, IVShapePart* in_pShape) = 0;
+
+	virtual VRangeIterator<graphics::VLight> Lights() = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -38,3 +48,4 @@ public:
 V3D_TYPEINFO_WITHPARENT(v3d::scene::IVLightManager, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVLIGHTMANAGER_2006_01_21_H
+

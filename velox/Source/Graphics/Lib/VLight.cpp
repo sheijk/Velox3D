@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include <V3d/Graphics/VLight.h>
 //-----------------------------------------------------------------------------
 
@@ -73,14 +80,23 @@ void VLight::ApplyTo(VRangeIterator<IVParameter> in_Parameters)
 
 VVector3f VLight::GetPosition() const
 {
-	return m_Position;
+	return m_Transform.GetPosition();
 }
 
 void VLight::SetPosition(const VVector3f& in_Position)
 {
-	m_Position = in_Position;
+	m_Transform.SetPosition(in_Position);
 }
 
+const math::VRBTransform& VLight::GetTransform() const
+{
+	return m_Transform;
+}
+
+void VLight::SetTransform(const math::VRBTransform& in_Transform)
+{
+	m_Transform = in_Transform;
+}
 
 VColor4f VLight::GetAmbientColor() const
 {
@@ -115,3 +131,4 @@ void VLight::SetSpecularColor(const VColor4f& in_SpecularColor)
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
+

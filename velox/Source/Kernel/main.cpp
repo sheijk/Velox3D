@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include "VKernel.h"
 #include <v3d/Core/SmartPtr/VGuards.h>
 #include <v3d/Core/VIOStream.h>
@@ -87,4 +94,5 @@ int main(int argv, char* argc[])
 	// exit program
 	return 0;
 }
+
 

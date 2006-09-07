@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #ifndef V3D_VLIGHT_2005_12_26_H
 #define V3D_VLIGHT_2005_12_26_H
 //-----------------------------------------------------------------------------
@@ -6,6 +13,7 @@
 #include <V3d/Graphics/Parameters/IVParameterValue.h>
 #include <V3d/Core/RangeIter.h>
 #include <V3d/Graphics/Geometry/VColor4f.h>
+#include <V3d/Math/VRBTransform.h>
 
 #include <string>
 #include <map>
@@ -45,6 +53,9 @@ public:
 	math::VVector3f GetPosition() const;
 	void SetPosition(const math::VVector3f& in_Position);
 
+	const math::VRBTransform& GetTransform() const;
+	void SetTransform(const math::VRBTransform& in_Transform);
+
 	vfloat32 GetW() const { return m_fW; }
 	void SetW(const vfloat32& in_Value) { m_fW = in_Value; }
 
@@ -63,6 +74,7 @@ private:
 	friend class ::v3d::scene::VLightPart;
 
 	math::VVector3f m_Position;
+	math::VRBTransform m_Transform;
 	vfloat32 m_fW;
 	VColor4f ambientColor;
 	VColor4f diffuseColor;
@@ -76,3 +88,4 @@ private:
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
 #endif // V3D_VLIGHT_2005_12_26_H
+

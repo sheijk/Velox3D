@@ -5,8 +5,8 @@ API Header:		API/V3D/..		(alles was Clients von Velox/Services kennen muessen)
 Implementation:		Source/..		(Implementation von Velox und Services)
 Workdir fuer Examples:	Data/ Data/data muss von ftp:/resource/data runtergeladen werden
 Coding Style Guides: 	Doc/Information/StyleGuidelines.html
+Issues:			Doc/Worklog/Issues.html
+Goals:			Doc/Information/GoalDefinitions.html
+Roadmap:		Doc/Information/Roadmap.html
 Pers.Files:		Doc/Worklog/Name.txt	(Nachrichten an Entwickler, Informationen ueber aktuellen Aufgaben, .plan, usw.)
 Dokumentation:		Doc/Index.html
-
-Web: http://www.sechsta-sinn.de/velox
-Trac: http://jumbo.meb.uni-bonn.de:8000/v3dtrac/

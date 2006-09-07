@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 %template(VXMLAttributeIterator) v3d::VRangeIterator<v3d::xml::IVXMLAttribute>;
 %template(VXMLNodeIterator) v3d::VRangeIterator<v3d::xml::IVXMLNode>;
 %include "../../API/V3d/XML/IVXMLNode.h"
@@ -15,4 +22,5 @@
 %include "../../API/V3d/XML/IVXMLService.h"
 
 %include "../../API/V3d/XML/XMLUtils.h"
+
 

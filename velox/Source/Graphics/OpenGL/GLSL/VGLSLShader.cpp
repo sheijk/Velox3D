@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include "VGLSLShader.h"
 //-----------------------------------------------------------------------------
 
@@ -93,8 +100,10 @@ VGLSLShader::VGLSLShader(
 	glUseProgramObjectARB(m_hProgram);
 
 	GLint uniformCount[10] = { 99 };
+	// generates an opengl error..
 	glGetIntegerv(GL_ACTIVE_UNIFORMS, uniformCount);
 	GLint maxUniforms[10] = { 99 };
+	// this one, too
 	glGetIntegerv(GL_ACTIVE_UNIFORM_MAX_LENGTH, maxUniforms);
 
 	vuint paramNum = 0;
@@ -235,3 +244,4 @@ IVParameter* VGLSLShader::GetActiveUniformParameter(vuint in_nIndex)
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
+

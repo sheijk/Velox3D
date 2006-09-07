@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 //TODO: add file creation date to file guard
 #ifndef V3D_VPOINTLIGHT_2005_06_15_H
 #define V3D_VPOINTLIGHT_2005_06_15_H
@@ -42,3 +49,4 @@ private:
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
 #endif // V3D_VPOINTLIGHT_2005_06_15_H
+

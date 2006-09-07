@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include <V3d/Utils/VTrackball.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Math.h>
@@ -86,3 +93,4 @@ void VTrackball::SetCenter(const VVector3f& in_Center)
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils
 //-----------------------------------------------------------------------------
+

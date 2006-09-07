@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include "VErrorConsoleListener.h"
 #include <iostream>
 #include <v3d/Core/MemManager.h>
@@ -45,3 +52,4 @@ inline std::ostream& operator<<( std::ostream& in_oStream, VMessageType in_Messa
 } // namespcae error
 } // namespace v3d
 //-----------------------------------------------------------------------------
+

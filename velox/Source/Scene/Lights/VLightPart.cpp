@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include <V3d/Scene/Lights/VLightPart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Messaging/VMessageInterpreter.h>
@@ -40,7 +47,8 @@ void VLightPart::Deactivate()
 
 void VLightPart::Update(vfloat32 in_fSeconds)
 {
-	m_Light.SetPosition(m_pRigidBody->GetPosition());
+//	m_Light.SetPosition(m_pRigidBody->GetPosition());
+	m_Light.SetTransform(m_pRigidBody->GetTransform());
 
 	if( m_Light.GetW() == .0f )
 	{
@@ -60,7 +68,6 @@ void VLightPart::OnMessage(const messaging::VMessage& in_Message,
         interpreter.AddMemberOption("ambientColor", this, &m_Light.ambientColor);
 		interpreter.AddMemberOption("diffuseColor", this, &m_Light.diffuseColor);
 		interpreter.AddMemberOption("specularColor", this, &m_Light.specularColor);
-		interpreter.AddMemberOption("position", this, &m_Light.m_Position);
 		interpreter.AddMemberOption("w", this, &m_Light.m_fW);
 
 		interpreter.SetInitialized(true);
@@ -74,3 +81,4 @@ V3D_REGISTER_PART_PARSER(VLightPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
 //-----------------------------------------------------------------------------
+

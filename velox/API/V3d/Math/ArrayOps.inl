@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 template<typename Array2d>
 void GenerateNoise(Array2d& out_Area, vfloat32 in_fMin, vfloat32 in_fMax)
 {
@@ -183,5 +190,6 @@ void SampleDown(Array2d& io_Dest, const Array2d& in_Source)
 		io_Dest(x,y) = in_Source(2*x, 2*y);
 	}
 }
+
 
 

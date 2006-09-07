@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include "VFrameBufferObjectContext.h"
 //-----------------------------------------------------------------------------
 #include <V3d/Graphics/GraphicsExceptions.h>
@@ -5,6 +12,7 @@
 #include <V3d/OpenGL.h>
 #include <GL/glfw.h>
 #include <V3d/Core/VIOStream.h>
+#include <V3d/Scene/IVLightManager.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -28,16 +36,12 @@ VFrameBufferObjectContext::VFrameBufferObjectContext(
 	const vuint width = in_DisplaySettings.GetWidth();
 	const vuint height = in_DisplaySettings.GetHeight();
 
+	// create texture
 	glGenTextures(1, &m_TextureId);
 	glBindTexture(GL_TEXTURE_2D, m_TextureId);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	vbyte* pixels = new vbyte[width*height*4];
-	// looks strange, seems to be old test initialisation code..
-	for(vuint32* pix = (vuint32*)pixels; pix < (vuint*)(pixels)+(width*height); ++pix)
-	{
-		*pix = 0xFF0000FF;
-	}
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
 	glGenFramebuffersEXT(1, &m_FBOId);
@@ -56,6 +60,19 @@ VFrameBufferObjectContext::VFrameBufferObjectContext(
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_TextureId, 0);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+}
+
+VFrameBufferObjectContext::VFrameBufferObjectContext(
+	const VDisplaySettings& in_DisplaySettings,
+	IVRenderContext* in_pParentContext,
+	NoInitMarker)
+	:
+	VOffscreenContextBase(in_DisplaySettings, in_pParentContext)
+{
+	m_TextureId = 0;
+	m_FBOId = 0;
+	m_DepthBufferId = 0;
+	m_StencilBufferId = 0;
 }
 
 /**
@@ -99,3 +116,4 @@ void VFrameBufferObjectContext::UnbindTexture()
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
+

@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 #include "VSceneModelParser.h"
 //-----------------------------------------------------------------------------
 #include <V3d/Scene/VModelPart.h>
@@ -68,3 +75,4 @@ VSharedPtr<IVPart> VSceneModelParser::Parse(xml::IVXMLElement& in_Node)
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------
+

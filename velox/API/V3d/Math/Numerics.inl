@@ -1,3 +1,10 @@
+/*
+ * Copyright 2002-2006 Velox Development Team. This file is licenced under the
+ * revised BSD licence. See licence_bsd.txt in the root of the Velox 
+ * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+ * complete licence text
+ */
+
 inline vfloat32 DegreeToRadian(vfloat32 degree)
 {
 	return degree / 180.0f * Pi();
@@ -46,3 +53,4 @@ T Clamp(T value, T minValue, T maxValue)
 	else
 		return value;
 }
+
