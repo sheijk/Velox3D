@@ -1,5 +1,10 @@
 #!/usr/bin/perl
 
+# Copyright 2002-2006 Velox Development Team. This file is licenced under the
+# revised BSD licence. See licence_bsd.txt in the root of the Velox 
+# distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+# complete licence text
+
 # author: sheijk, 12-06-2005
 
 # reads a series of code lines like "type name;" from the standard input 
@@ -67,5 +72,6 @@ print("\n\n--- Implementations ---\n\n");
 print($implementations);
 print("\n\n--- Inline functions ---\n\n");
 print($inlineimpl);
+
 
 

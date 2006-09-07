@@ -1,5 +1,10 @@
 #!/bin/perl
 
+# Copyright 2002-2006 Velox Development Team. This file is licenced under the
+# revised BSD licence. See licence_bsd.txt in the root of the Velox 
+# distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+# complete licence text
+
 $classname=$ARGV[0];
 # remove trailing .h
 $classname =~ s/(.*)\.h/$1/;
@@ -74,4 +79,5 @@ for($line_num = 0; $line_num < @lines; $line_num += 1) {
 
 print("Declarations:\n\n${declarations}");
 print("\n\nImplementation stubs:\n\n${implementations}");
+
 

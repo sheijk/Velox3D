@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Copyright 2002-2006 Velox Development Team. This file is licenced under the
+# revised BSD licence. See licence_bsd.txt in the root of the Velox 
+# distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
+# complete licence text
+
 if ! [ $1 ]
 then
  echo $0 name
@@ -20,4 +25,5 @@ cd "Workspace/BoostBuild"
 cp ../Templates/bjam.vcproj ${targetname}.vcproj
 v3dreplace.sh ${targetname}.vcproj "%%name%%" ${targetname}
 v3dreplace.sh ${targetname}.vcproj "%%projectid%%" ${projectid}
+
 

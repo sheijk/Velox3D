@@ -1430,6 +1430,10 @@
 				</File>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\Editor\NativeBindings\PartParsers.cpp"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
