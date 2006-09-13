@@ -45,6 +45,7 @@ void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message,
 	if( ! interpreter.IsInitialized() )
 	{
 		interpreter.AddMemberOption("radius", this, &m_fRadius);
+		interpreter.AddMemberOption("detail", this, &m_nDetail);
 
 		interpreter.SetInitialized(true);
 	}

@@ -30,6 +30,12 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+13.07.06
+- added dither screening shader
+- fixed lib and a script
+
+07.09.06
+- added licencing informations
 
 20.07.06
 - bug fixes

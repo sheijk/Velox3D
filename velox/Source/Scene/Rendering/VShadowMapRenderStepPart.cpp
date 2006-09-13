@@ -106,6 +106,7 @@ public:
 	}
 };
 
+/*
 class VDepthMapShooting : public VShootingBase
 {
 public:
@@ -131,6 +132,7 @@ private:
 	graphics::VCamera m_Camera;
 	resource::VResourceDataPtr<graphics::IVDevice> m_hShadowMapDevice;
 };
+*/
 
 void VShadowMapRenderStepPart::AquireResources()
 {

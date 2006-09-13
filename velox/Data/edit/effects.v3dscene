@@ -1,0 +1,34 @@
+<entity name="effects">
+	<part type="v3d::scene::VNaiveSceneManagerPart" tags=""/>
+	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
+	<part type="v3d::scene::VNaiveLightManager" tags=""/>
+	<part type="v3d::utils::VInputPart" tags=""/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.1,0.1,0.35,0)" exclude-tags=" " include-all="true" include-tags=" " tags=""/>
+	<part type="shooting" tags=""/>
+	<entity name="editorCam">
+		<part type="v3d::entity::VRigidBodyPart" pos="(4,6,66)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+		<part type="v3d::utils::VCameraPart" tags=""/>
+		<part type="v3d::utils::VTrackballPart" tags=""/>
+	</entity>
+	<entity name="debug">
+		<part type="v3d::entity::VRigidBodyPart" pos="(16,-10,0)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
+		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
+	</entity>
+	<entity name="npr">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-11,20,-22)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" detail="60" mat_amplitude="0.03" mat_baseColor="(1,0.25,0,1)" mat_scale="(3,3)" material="/edit/mat/dither-screening.v3dmat" radius="35" tags=""/>
+	</entity>
+	<entity name="light">
+		<part type="v3d::entity::VRigidBodyPart" pos="(3,14,20)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_color="(1,1,1,1)" material="/edit/mat/red.v3dmat" radius="0.2" tags=""/>
+		<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(0,0,0,0)" specularColor="(0,0,0,0)" w="1" tags=""/>
+	</entity>
+	<entity name="npr2">
+		<part type="v3d::entity::VRigidBodyPart" pos="(14,-6,7)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" detail="40" mat_amplitude="0.03" mat_baseColor="(1,1,1,1)" mat_scale="(3,3)" material="/edit/mat/dither-screening.v3dmat" radius="10" tags=""/>
+	</entity>
+	<entity name="npr3">
+		<part type="v3d::entity::VRigidBodyPart" pos="(15,19,20)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" detail="40" mat_amplitude="0.03" mat_baseColor="(0,1,0,1)" mat_scale="(3,3)" material="/edit/mat/dither-screening.v3dmat" radius="5" tags=""/>
+	</entity>
+</entity>
