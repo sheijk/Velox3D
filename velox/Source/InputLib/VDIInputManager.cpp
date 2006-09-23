@@ -42,6 +42,7 @@ template<class Iter> void deleteAll(Iter begin, Iter end)
 { 
 	for( ; begin != end; ++begin)
 	{
+		//delte object and set to zero
 		delete *begin;
 		*begin = 0;
 	}

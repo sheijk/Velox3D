@@ -15,6 +15,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
@@ -90,11 +92,7 @@ public class SceneEditor extends VeloxEditorBase {
 		if( renderAction != null && root != null ) {
 			root.setRenderAction(renderAction);
 		}
-		
-		if( renderLayer != null && root != null ) {
-			v3d.TellInputManager(root.impl(), renderLayer.getInputManager());
-		}
-		
+				
 		if( ! VView.GetInstance().Contains(updateAction) ) {
 			updateAction.SetEntity(root.impl());
 			VView.GetInstance().Add(updateAction);			
@@ -235,11 +233,21 @@ public class SceneEditor extends VeloxEditorBase {
 		renderLayer.addMouseListener(new MouseHandler());
 		renderAction = renderLayer.getRenderAction();
 		
+		parent.addFocusListener(new FocusListener() {
+			public void focusLost(FocusEvent e) {
+				System.out.print("lalalal LOST");
+			}
+		
+			public void focusGained(FocusEvent e) {
+				System.out.print("gained");
+			}
+		});
+		
 		IVDevice device = renderAction.GetDevice();
 		VMatrix44f viewMatrix = new VMatrix44f();
 		viewMatrix.SetTransform(1.0f, 1.0f, -7.0f);
 		device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
-		
+
 		// delayed loading, if required (see above)
 		if( needsLoading == true ) {
 			loadFromFile(fileName);
@@ -247,8 +255,6 @@ public class SceneEditor extends VeloxEditorBase {
 		
 		if( root != null )
 			root.setRenderAction(renderAction);
-		if( renderLayer != null )
-			v3d.TellInputManager(root.impl(), renderLayer.getInputManager());
 		
 		IActionBars bars = getEditorSite().getActionBars();
 		

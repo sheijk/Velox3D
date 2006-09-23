@@ -133,7 +133,7 @@ void foo()
 	v3d::scene::AssureVPostProcesssingRenderStepPart3Exist();
 	v3d::scene::AssureVPostProcesssingRenderStepPart4Exist();
 	v3d::scene::AssureVProjectTextureRenderStepPartExist();
-	v3d::scene::AssureVShadowMapRenderStepPartExist();
+	//v3d::scene::AssureVShadowMapRenderStepPartExist();
 	v3d::scene::AssureVSimpleShootingExist();
 	v3d::scene::AssureVSkyboxPartExist();
 	v3d::scene::AssureVSphereMeshPartExist();

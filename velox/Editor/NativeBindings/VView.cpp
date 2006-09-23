@@ -356,6 +356,13 @@ void VRenderFrameAction::Init()
 
 	//pmesh = &*GetResourceData<IVMesh>("/editor-test");
 	//pmat = &*GetResourceData<IVMaterial>("/editor-test");
+	
+	HWND hWnd = GetAncestor(m_HWND, GA_ROOT);
+	m_pInputManager = new input::VDIInputManager(hWnd);
+}
+v3d::input::IVInputManager* VRenderFrameAction::GetInputManager()
+{
+	return m_pInputManager;
 }
 
 void VRenderFrameAction::Shutdown()

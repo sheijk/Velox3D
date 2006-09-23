@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="opengl32.lib glu32.lib SingleTrimesh.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib SingleTrimesh.lib DxErr8.lib DxErr.lib"
 				OutputFile="$(OutDir)/VeloxLib.lib"
 				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
 				IgnoreAllDefaultLibraries="false"
@@ -1823,14 +1823,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VBodyPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VCollisionPart.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\Source\Physics\VGeometry.cpp"
 					>
 				</File>
@@ -1863,22 +1855,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2LinkAncestorBodyPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2LinkPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2ModifierPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VJointHinge2Part.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\Source\Physics\VMass.cpp"
 					>
 				</File>
@@ -1888,10 +1864,6 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VPhysicManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp"
 					>
 				</File>
 				<File
@@ -1955,6 +1927,38 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Physics\Bounding\VCollisionVisualizationPart.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Parts"
+					>
+					<File
+						RelativePath="..\..\Source\Physics\VBodyPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\VCollisionPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\VJointHinge2LinkAncestorBodyPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\VJointHinge2LinkPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\VJointHinge2ModifierPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\VJointHinge2Part.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\VPhysicManagerPart.cpp"
 						>
 					</File>
 				</Filter>
@@ -2224,6 +2228,14 @@
 					<File
 						RelativePath="..\..\Source\Scene\Rendering\VShadowMapRenderStepPart.cpp"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
 					</File>
 				</Filter>
 			</Filter>

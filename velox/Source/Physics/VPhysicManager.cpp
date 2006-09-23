@@ -241,11 +241,6 @@ VPhysicManager::BodyPtr VPhysicManager::CreateMesh(
 	VGeometryMesh* pGeometryMesh(new VGeometryMesh(*in_BoundingMesh));
 
 	pMassState->SetMass(in_fMass);
-	
-	//pGeometryBox->SetLength(in_Expansion[0]);
-	//pGeometryBox->SetWidth(in_Expansion[1]);
-	//pGeometryBox->SetHeight(in_Expansion[2]);
-
 	pGeometryMesh->Create(m_World.GetSpace());
 	pBody->Add(pMassState);
 	pBody->SetCollisionMesh(pGeometryMesh);
@@ -283,7 +278,6 @@ void VPhysicManager::DeleteCollisionMesh(VGeometry* in_Geometry)
 	V3D_ASSERT(in_Geometry != 0);
 	m_World.RemoveCollisionMesh(*in_Geometry->GetGeomID());
 	delete in_Geometry;
-
 }
 
 VWorld* VPhysicManager::GetWorld()

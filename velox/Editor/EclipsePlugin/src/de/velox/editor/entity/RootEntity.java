@@ -15,6 +15,7 @@ import de.velox.v3d;
 
 public class RootEntity extends Entity {
 	private static final String SHOOTING_PART_ID = "shooting";
+	private static final String INPUT_PART_ID = "v3d::utils::VInputPart";
 	
 	private VRenderFrameAction renderAction = null;
 	private IVShooting shooting = null;
@@ -34,15 +35,24 @@ public class RootEntity extends Entity {
 			shooting = v3d.CreateShooting(renderAction.GetDevice());
 			renderAction.SetShooting(shooting);
 			super.Add(new Part(SHOOTING_PART_ID, new VPartPtr(shooting)));
+			try {
+				v3d.TellInputManager(this.impl(), renderAction.GetInputManager());
+			}
+			catch(RuntimeException t) {
+				throw t;
+			}
 		}
 	}
 	
 	@Override
 	public void Add(Part newPart) {
-		if( valid(newPart.GetPart()) && ! newPart.GetId().equalsIgnoreCase(SHOOTING_PART_ID) ) {
+		if( newPart != null && valid(newPart.GetPart()) && ! newPart.GetId().equalsIgnoreCase(SHOOTING_PART_ID) ) {
 			super.Add(newPart);
+			
+			if( renderAction != null && newPart.GetId().equalsIgnoreCase(INPUT_PART_ID) ) {
+				v3d.TellInputManager(this.impl(), renderAction.GetInputManager());
+			}
 		}
 	}
-
 }
 

@@ -10,6 +10,7 @@
 #include <v3d/Core/VAssert.h>
 #include <v3d/Input/VInputExceptions.h>
 #include <v3d/Core/MemManager.h>
+#include <Dxerr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -79,28 +80,34 @@ vbool VDIKeyboardDevice::CreateDevice(const LPDIRECTINPUT8 in_pDI,
 									  const HWND in_hWnd )
 {
 	HRESULT hr;
+	const char* pErrorString = 0;
 
 	if ( DI_OK != ( hr = in_pDI->CreateDevice(m_DeviceInstance.guidInstance, &m_pDevice, NULL) ) )
 	{
-		vout << "failed: IDirectInput8::CreateDevice() says:" << hr << vendl;
+		pErrorString = DXGetErrorString(hr);
+		vout << "failed: IDirectInput8::CreateDevice() says:" << pErrorString << vendl;
 		return false;
 	}
 
 	if ( DI_OK != ( hr = m_pDevice->SetDataFormat(&c_dfDIKeyboard)) )
 	{
-		vout << "failed: IDirectInputDevice8::SetDataFormat() says: " <<hr << vendl;
+		pErrorString = DXGetErrorString(hr);
+		vout << "failed: IDirectInputDevice8::SetDataFormat() says: " << pErrorString << vendl;
 		return false;
 	}
 
 	if ( DI_OK != (hr = m_pDevice->SetCooperativeLevel( in_hWnd, DISCL_NONEXCLUSIVE | DISCL_BACKGROUND)) )
 	{
-		vout << "failed: IDirectInputDevice8::SetCooperativeLevel() says: " << hr << vendl;
+		pErrorString = DXGetErrorString(hr);
+
+		vout << "failed: IDirectInputDevice8::SetCooperativeLevel() says: " << pErrorString << vendl;
 		return false;
 	}
 
 	if ( DI_OK != (hr = m_pDevice->Acquire()) )
 	{
-		vout << "failed: IDirectInputDevice8::Acquire() says: " << hr << vendl;
+		pErrorString = DXGetErrorString(hr);
+		vout << "failed: IDirectInputDevice8::Acquire() says: " << pErrorString << vendl;
 		return false;
 	}
 
@@ -109,7 +116,8 @@ vbool VDIKeyboardDevice::CreateDevice(const LPDIRECTINPUT8 in_pDI,
 
 	if ( DI_OK != (hr = m_pDevice->GetCapabilities(&m_DevCaps)) )
 	{
-		vout << "failed: IDirectInputDevice8::GetCapabilities() says: " << hr << vendl;
+		pErrorString = DXGetErrorString(hr);
+		vout << "failed: IDirectInputDevice8::GetCapabilities() says: " << pErrorString << vendl;
 		return false;
 	}
 

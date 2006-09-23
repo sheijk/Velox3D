@@ -17,6 +17,8 @@
 
 #include <V3d/OpenGL.h>
 #include <GL/glfw.h>
+#include "../../Source/InputLib/VDIInputManager.h"
+#include <v3d/Input/IVInputManager.h>
 
 #include <vector>
 
@@ -70,6 +72,7 @@ public:
 	
 	void SetShooting(v3d::scene::IVShooting* in_pShooting);
 	v3d::graphics::IVDevice* GetDevice();
+	v3d::input::IVInputManager* GetInputManager();
 	
 	void setSize(vuint width, vuint height);
 private:
@@ -80,6 +83,8 @@ private:
 	v3d::scene::IVShooting* m_pShooting;
 	v3d::VSharedPtr<v3d::graphics::VOpenGLDevice> m_pDevice;
 	HWND m_HWND;
+	v3d::input::IVInputManager* m_pInputManager;
+
 };
 
 class VUpdateManagerCallAction : public IVFrameAction
