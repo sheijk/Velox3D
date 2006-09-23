@@ -19,25 +19,31 @@ namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
 using namespace math;
-VBody::VBody(VOdeBody* in_pOdeBody) : m_PositionState(in_pOdeBody), m_OrientationState(in_pOdeBody)
+VBody::VBody(VOdeBody* in_pOdeBody, std::string in_sName) : m_PositionState(in_pOdeBody), m_OrientationState(in_pOdeBody)
 {
 	m_CollisionMesh = 0;
 	m_Body = in_pOdeBody;
 	m_PositionState.Apply();
 	m_OrientationState.Apply();
+	m_sName = in_sName;
 }
 
 VBody::~VBody()
 {
 	if(m_Body)
 	{
-		m_Body->Destroy(); //todo tell the manager about this
+		m_Body->Destroy(); //todo tell the manager about this delete name
 		delete m_Body;
 	}
 	if(m_CollisionMesh)
 	{
 		//delete m_CollisionMesh;
 	}
+}
+
+std::string VBody::GetName()
+{
+	return m_sName;
 }
 VOdeBody* VBody::GetOdeBody()
 {
@@ -118,7 +124,7 @@ void VBody::SetOrientation(VVector4f in_Orientation)
 
 void VBody::Destroy()
 {
-
+	//TODO unregister name!!!
 	m_Body->Destroy();
 	delete m_Body;
 	m_Body = 0;
@@ -179,6 +185,10 @@ vfloat32 VBody::GetMass()
 	}
 	else
 		return 0;
+}
+void VBody::SetName(std::string in_sName)
+{
+	m_sName = in_sName;
 }
 //-----------------------------------------------------------------------------
 } // namespace physics

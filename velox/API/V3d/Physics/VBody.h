@@ -31,7 +31,7 @@ public:
 
 	VStateOrientation& GetOrientation();
 	VStatePosition& GetPositionState();
-	VBody(VOdeBody* in_pOdeBody);
+	VBody(VOdeBody* in_pOdeBody, std::string in_sName);
 	virtual ~VBody();
 	VOdeBody* GetOdeBody();
 	void Add(VState* in_pState);
@@ -58,6 +58,8 @@ public:
 	//returns true if the body is taking part in the simulation
 	vbool IsEnabled();
 	vfloat32 GetMass();
+	std::string GetName();
+	void SetName(std::string in_sName);
 
 			
 protected: 
@@ -74,6 +76,7 @@ protected:
 	VStateOrientation m_OrientationState;
 	VStatePosition m_PositionState;
 	VStateListContainer m_StateListContainer;
+	std::string m_sName;
 };
 
 //-----------------------------------------------------------------------------

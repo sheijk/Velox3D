@@ -29,68 +29,75 @@ VJointHinge2Part::VJointHinge2Part() :
 	
 	m_pBodyAddressOne = 0;
 	m_pBodyAddressTwo = 0;
+	m_sBody1Name = "";
+	m_sBody2Name = "";
 }
-
-void VJointHinge2Part::RegisterBody(VBody* in_pAddress)
+VJointHinge2Part::~VJointHinge2Part()
 {
-	if(in_pAddress != 0)
-	{
-		if( (m_pBodyAddressOne != in_pAddress) && (m_pBodyAddressTwo != in_pAddress))
-		{
-			if (m_pBodyAddressOne == 0)
-			{
-				m_pBodyAddressOne = in_pAddress;
-				m_bIsLinkedByBodyOne = true;
-				Create();
-			}
-			else
-			{
-				m_pBodyAddressTwo = in_pAddress;
-				m_bIsLinkedByBodyTwo = true;
-				Create();
-			}
-		}
-		else
-		{
-			V3D_THROW(VException, "body address does not match. Something smells");
-		}
-	}
+	m_pPhysicManagerPart->GetPhysicManager()->UnregisterJoint(&m_Joint);
 }
 
-void VJointHinge2Part::UnregisterBody(VBody* in_pAddress)
-{
-	if( in_pAddress != 0)
-	{
-		if( in_pAddress == m_pBodyAddressOne )
-		{
-			m_pBodyAddressOne = 0;
-			m_bIsLinkedByBodyOne = false;
-		}
+//void VJointHinge2Part::RegisterBody(VBody* in_pAddress)
+//{
+//	if(in_pAddress != 0)
+//	{
+//		if( (m_pBodyAddressOne != in_pAddress) && (m_pBodyAddressTwo != in_pAddress))
+//		{
+//			if (m_pBodyAddressOne == 0)
+//			{
+//				m_pBodyAddressOne = in_pAddress;
+//				m_bIsLinkedByBodyOne = true;
+//				Create();
+//			}
+//			else
+//			{
+//				m_pBodyAddressTwo = in_pAddress;
+//				m_bIsLinkedByBodyTwo = true;
+//				Create();
+//			}
+//		}
+//		else
+//		{
+//			V3D_THROW(VException, "body address does not match. Something smells");
+//		}
+//	}
+//}
 
-		if( in_pAddress == m_pBodyAddressTwo )
-		{
-			m_pBodyAddressTwo = 0;
-			m_bIsLinkedByBodyTwo = false;
-		}
-
-		else
-		{
-			V3D_THROW(VException, "invalid address to pointer specified!");
-		}
-	}
-}
+//void VJointHinge2Part::UnregisterBody(VBody* in_pAddress)
+//{
+//	if( in_pAddress != 0)
+//	{
+//		if( in_pAddress == m_pBodyAddressOne )
+//		{
+//			m_pBodyAddressOne = 0;
+//			m_bIsLinkedByBodyOne = false;
+//		}
+//
+//		if( in_pAddress == m_pBodyAddressTwo )
+//		{
+//			m_pBodyAddressTwo = 0;
+//			m_bIsLinkedByBodyTwo = false;
+//		}
+//
+//		else
+//		{
+//			V3D_THROW(VException, "invalid address to pointer specified!");
+//		}
+//	}
+//}
 
 void VJointHinge2Part::Activate()
 {
 	if( m_pPhysicManagerPart.Get() == 0)
 		V3D_THROW(entity::VMissingPartException, "missing part physic manager 'data'");
 
-	if( !m_bIsActive)
+	if( !m_bIsActive && ! m_Joint.IsActive())
 	{
 		m_Joint.Create(m_pPhysicManagerPart.Get()->GetPhysicManager().Get()->GetWorld());
 		m_bIsActive = true;
 		//create the link of the 2 bodies
-		Create();
+		//Create();
+		RegisterLink();
 	}
 	
 	//ode seems to forget the anchor location
@@ -98,14 +105,14 @@ void VJointHinge2Part::Activate()
 	m_Joint.Apply();
 }
 
-void VJointHinge2Part::Create()
-{
-	if( m_bIsLinkedByBodyTwo && m_bIsLinkedByBodyOne )
-	{
-		m_Joint.AddBody(m_pBodyAddressOne, m_pBodyAddressTwo);
-		m_Joint.Apply();
-	}
-}
+//void VJointHinge2Part::Create()
+//{
+//	if( m_bIsLinkedByBodyTwo && m_bIsLinkedByBodyOne )
+//	{
+//		m_Joint.AddBody(m_pBodyAddressOne, m_pBodyAddressTwo);
+//		m_Joint.Apply();
+//	}
+//}
 
 void VJointHinge2Part::Deactivate()
 {
@@ -130,7 +137,8 @@ void VJointHinge2Part::OnMessage(
 		{
 			in_pAnswer->AddProperty("LinkedByBodyOne", m_bIsLinkedByBodyOne);
 			in_pAnswer->AddProperty("LinkedByBodyTwo", m_bIsLinkedByBodyTwo);
-			in_pAnswer->AddProperty("Anchor", m_Joint.GetAnchor());
+			math::VVector3f anchor = m_Joint.GetAnchor();
+			in_pAnswer->AddProperty("Anchor", anchor);
 			
 			/* somehow a bug...
 			 * this seems to be the solution I searched one month for..
@@ -157,6 +165,8 @@ void VJointHinge2Part::OnMessage(
 			in_pAnswer->AddProperty("MaxForce2", m_Joint.GetMaxForce2());
 			in_pAnswer->AddProperty("Body1", m_pBodyAddressOne);
 			in_pAnswer->AddProperty("Body2", m_pBodyAddressTwo);
+			in_pAnswer->AddProperty("Body1Name", m_sBody1Name);
+			in_pAnswer->AddProperty("Body2Name", m_sBody2Name);
 		}
 	}
 
@@ -275,12 +285,42 @@ void VJointHinge2Part::OnMessage(
 			m_Joint.SetMaxForce2(pos);
 			m_Joint.Apply();
 		}
+		//implement link logic here
+		if( name == "Body1Name")
+		{
+			std::string name = in_Message.GetAs<std::string>("value");
+			m_sBody1Name = name;
+			RegisterLink();
+		}
+
+		if( name == "Body2Name")
+		{
+			std::string name = in_Message.GetAs<std::string>("value");
+			m_sBody2Name = name;
+			RegisterLink();
+		}
 	}
 }
 
 VJointHinge2& VJointHinge2Part::GetJointHinge2()
 {
 	return m_Joint;
+}
+
+void VJointHinge2Part::RegisterLink()
+{
+	if( m_pPhysicManagerPart.IsConnected() )
+	{
+		VBody* pBody1 = m_pPhysicManagerPart->GetPhysicManager()->QueryBodyByName(m_sBody1Name);
+		VBody* pBody2 = m_pPhysicManagerPart->GetPhysicManager()->QueryBodyByName(m_sBody2Name);
+
+		if(pBody1 && pBody2)
+		{
+			m_Joint.AddBody(pBody1, pBody2);
+			m_Joint.Apply();
+			m_pPhysicManagerPart->GetPhysicManager()->RegisterJoint(&m_Joint);
+		}
+	}
 }
 
 V3D_REGISTER_PART_PARSER(VJointHinge2Part);

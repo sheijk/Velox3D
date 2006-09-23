@@ -29,13 +29,14 @@ class VJointHinge2Part : public entity::VPartBase
 public:
 	
 	VJointHinge2Part();
+	~VJointHinge2Part();
 	
 	// IVPart derived
 	void Activate();
 	void Deactivate();
 	
-	void RegisterBody(VBody* in_pAddress);
-	void UnregisterBody(VBody* in_pAddress);
+	//void RegisterBody(VBody* in_pAddress);
+	//void UnregisterBody(VBody* in_pAddress);
 	
 	VJointHinge2& GetJointHinge2();
 
@@ -46,7 +47,8 @@ public:
 
 private:
 
-	void Create();
+	//void Create();
+	void RegisterLink();
 
 	virtual void OnMessage(
 		const messaging::VMessage& in_Message,
@@ -61,6 +63,8 @@ private:
 
 	vbool m_bIsActive;
 	vbool m_bIsReady;
+	std::string m_sBody1Name;
+	std::string m_sBody2Name;
 };
 
 //-----------------------------------------------------------------------------

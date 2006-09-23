@@ -34,6 +34,7 @@ VBodyPart::VBodyPart(BodyPtr in_pBody) : m_pRigidBodyPart(VPartDependency::Neigh
 	V3D_ASSERT(in_pBody.Get() != 0);
 	m_fMass = 0.1f;
 	m_pBody = in_pBody;
+	m_sIdentifier = "";
 }
 
 VBodyPart::VBodyPart() : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
@@ -43,10 +44,12 @@ VBodyPart::VBodyPart() : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo
 {
 	m_pBody.Assign(0);
 	m_fMass  = 0.1f;
+	m_sIdentifier = "";
 }
 
 VBodyPart::~VBodyPart()
 {
+	m_pPhysicManagerPart->GetPhysicManager()->Delete(m_pBody);
 }
 
 std::string VBodyPart::GetDefaultId()
@@ -57,10 +60,9 @@ std::string VBodyPart::GetDefaultId()
 void VBodyPart::Create()
 {
 	if( ! m_pBody.Get() || ! m_pBody.Get()->IsValid() )
-	//if( ! m_pBody.Get())
 	{
-		m_pBody = m_pPhysicManagerPart->GetPhysicManager()->Create(m_pVolumePart.Get(), m_fMass);
-		
+		m_sIdentifier = m_pPhysicManagerPart->GetPhysicManager()->QueryAvailableIdentifier(m_sIdentifier);
+		m_pBody = m_pPhysicManagerPart->GetPhysicManager()->Create(m_pVolumePart.Get(), m_fMass, m_sIdentifier);
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
 		m_pBody->Deactivate();
 
@@ -120,8 +122,6 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 		fabs( m_Position.GetX() - m_pRigidBodyPart.Get()->GetPosition().GetX() ) <= std::numeric_limits<vfloat32>::epsilon() &&
 		fabs( m_Position.GetY() - m_pRigidBodyPart.Get()->GetPosition().GetY() ) <= std::numeric_limits<vfloat32>::epsilon() &&
 		fabs( m_Position.GetZ() - m_pRigidBodyPart.Get()->GetPosition().GetZ() ) <= std::numeric_limits<vfloat32>::epsilon() )
-
-
 	{
 		//VVector3f x1,y1,z1;
 		//VMatrix<vfloat32, 3, 3> axis;
@@ -177,7 +177,6 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 	else
 	{
 		//delete body
-
 		VQuatf rigidQuat = m_pBody->GetOrientation().GetQuat();
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
 		m_pBody->Deactivate();
@@ -223,6 +222,7 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 			in_pAnswer->AddProperty("Quat", quat);
 			in_pAnswer->AddProperty("QuatAxisAngle", axisAngleQuat);
 			in_pAnswer->AddProperty("Enabled", isEnabled);
+			in_pAnswer->AddProperty("Identifier", m_sIdentifier);
 		}
 	}
 	else if( request == "update" )
@@ -278,9 +278,22 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 				m_pBody->SetOrientation(quat);
 			}
 		}
+		if( name == "Identifier" )
+		{
+			std::string name = in_Message.GetAs<std::string>("value");
+			if(m_pBody.Get())
+			{
+				m_pPhysicManagerPart->GetPhysicManager()->RequestNameChange(name, this->GetBody().Get());
+				m_sIdentifier = this->GetBody()->GetName();
+			}
+			//save name for future usage
+			else
+			{
+				m_sIdentifier = name;
+			}
+		}
 	}
 }
-
 V3D_REGISTER_PART_PARSER(VBodyPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics

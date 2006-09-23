@@ -58,6 +58,7 @@ void VJointHinge2::Create(VWorld* in_PhysicWorld)
 			*m_pPhysicWorld->GetWorld(),
 			*m_pJointGroup->GetJointGroupID());
 	}
+	m_bIsActive = true;
 }
 
 void VJointHinge2::AddBody(VBody* in_pBody1, VBody* in_pBody2)
@@ -149,13 +150,13 @@ VVector3f VJointHinge2::GetAnchor()
 {
 	VVector3f anchor;
 	dVector3 result;
-	if(m_JointID)
+	/*if(m_JointID)
 	{
 		dJointGetHinge2Anchor (m_JointID, result);
 		anchor.Set(result[0],result[1], result[2]);
 		return anchor;
 	}
-	else
+	else*/
 		return m_Anchor;
 }
 

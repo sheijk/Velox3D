@@ -45,7 +45,7 @@ public class SceneEditor extends VeloxEditorBase {
 	private RootEntity root = null;
 	
 	private String fileName = "";
-	/** true iff the content of this file has not been loaded, yet.
+	/** true if the content of this file has not been loaded, yet.
 	 * This will be set in loadFile if createPartControl has not been called yet
 	 * (loading a file will require the opengl context to be created
 	 */
@@ -135,13 +135,13 @@ public class SceneEditor extends VeloxEditorBase {
 		// we need a valid opengl context
 		if( renderLayer != null ) {
 			final Reference<RootEntity> rootEntity = new Reference<RootEntity>();
+			final Reference<VXMLElementPtr> xml = new Reference<VXMLElementPtr>();
 			
 			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
 				@Override public void Run() throws RuntimeException {
 					try {
-						VXMLElementPtr xml = v3d.GetXMLService().GetRootElement(fileName);
-						rootEntity.set(new RootEntity(xml.Get()));
-						rootEntity.get().applySettings(xml.Get());
+						xml.set( v3d.GetXMLService().GetRootElement(fileName) );
+						rootEntity.set(new RootEntity(xml.get().Get()));
 					}
 					catch(Throwable t) {
 						System.err.println("Error when loading scene: " + t.getMessage());
@@ -158,7 +158,9 @@ public class SceneEditor extends VeloxEditorBase {
 			
 			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
 				@Override public void Run() throws RuntimeException {
+					// activate here, because shooting is created in setRootEntity
 					rootEntity.get().Activate();
+					rootEntity.get().applySettings(xml.get().Get());
 				}
 			});
 			

@@ -74,8 +74,8 @@ namespace v3d { namespace scene {
 namespace v3d { namespace physics {
 		extern void* AssureVBodyPartExist();
 		extern void* AssureVCollisionPartExist();
-		extern void* AssureVJointHinge2LinkAncestorBodyPartExist();
-		extern void* AssureVJointHinge2LinkPartExist();
+	//	extern void* AssureVJointHinge2LinkAncestorBodyPartExist();
+	//	extern void* AssureVJointHinge2LinkPartExist();
 		extern void* AssureVJointHinge2ModifierPartExist();
 		extern void* AssureVJointHinge2PartExist();
 		extern void* AssureVPhysicManagerPartExist();
@@ -147,8 +147,8 @@ void foo()
 	v3d::physics::AssureVBoundingSphereVolumePartExist();
 	v3d::physics::AssureVBoundingTerrainVolumePartExist();
 	v3d::physics::AssureVCollisionPartExist();
-	v3d::physics::AssureVJointHinge2LinkAncestorBodyPartExist();
-	v3d::physics::AssureVJointHinge2LinkPartExist();
+//	v3d::physics::AssureVJointHinge2LinkAncestorBodyPartExist();
+//	v3d::physics::AssureVJointHinge2LinkPartExist();
 	v3d::physics::AssureVJointHinge2ModifierPartExist();
 	v3d::physics::AssureVJointHinge2PartExist();
 	v3d::physics::AssureVPhysicManagerPartExist();

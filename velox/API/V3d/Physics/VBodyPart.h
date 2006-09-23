@@ -59,6 +59,7 @@ private:
 	BodyPtr m_pBody;
 	vfloat32 m_fMass;
 	math::VVector3f m_Position;
+	std::string m_sIdentifier;
 };
 
 //-----------------------------------------------------------------------------

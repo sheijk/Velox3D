@@ -81,7 +81,7 @@ public:
 	 * The current joint stop/motor implementation has a small problem:
 	 * when the joint is at one stop and the motor is set to move it away
 	 * from the stop, too much force may be applied for one time step, 
-	 * causing a ``jumping'' motion. This fudge factor is used to scale this
+	 * causing a jumping'' motion. This fudge factor is used to scale this
 	 * excess force. It should have a value between zero and one
 	 * (the default value). If the jumping motion is too visible in a joint,
 	 * the value can be reduced. Making this value too small can prevent the 
@@ -133,6 +133,7 @@ public:
 	 */
 	void SetSuspensionCFM(vfloat32 in_fSuspensionCFM);
 	vfloat32 GetSuspensionCFM();
+	vbool IsActive();
 
 	void SetVelocity2(vfloat32 in_fVelocity2);
 	vfloat32 GetVelocity2();
@@ -158,6 +159,7 @@ protected:
 	dJointID m_JointID;
 	VWorld* m_pPhysicWorld;
 	VJointGroup* m_pJointGroup;
+	vbool m_bIsActive;
 
 	vfloat32 m_fLowStop;
 	vfloat32 m_fHighStop;
@@ -178,4 +180,3 @@ protected:
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VJOINT_2004_11_07_H
-

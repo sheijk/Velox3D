@@ -34,6 +34,7 @@ VJoint::VJoint()
 	//m_fStopCFM			= std::numeric_limits<float>::min();
 	m_fSuspensionCFM	= 1.0f;
 	m_fSuspensionERP	= 1.0f;
+	m_bIsActive = false;
 }
 
 VJoint::~VJoint()
@@ -43,6 +44,11 @@ VJoint::~VJoint()
 void VJoint::Destroy()
 {
 	dJointDestroy(m_JointID);
+	m_bIsActive = false;
+}
+vbool VJoint::IsActive()
+{
+	return m_bIsActive;
 }
 
 void VJoint::AddWorld(VWorld* in_pPhysicWorld)
