@@ -30,7 +30,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
-13.07.06
+23.09.06
+- fixed input handling in editor
+
+13.09.06
 - added dither screening shader
 - fixed lib and a script
 

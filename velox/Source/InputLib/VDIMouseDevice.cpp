@@ -343,6 +343,15 @@ IVInputDevice::RelativeAxisIterator	VDIMouseDevice::RelativeAxisEnd()
 	return m_InputHelper.RelativeAxisEnd();
 }
 
+void VDIMouseDevice::ClearInputData()
+{
+	m_LeftButton->SetDown(false);
+	m_RightButton->SetDown(false);
+	m_XAxis->Set(0.);
+	m_YAxis->Set(0.);
+	m_Wheel->Set(0.);
+}
+
 //-----------------------------------------------------------------------------
 } // namespace input	
 } // namespace v3d

@@ -139,12 +139,12 @@ void VView::FrameUpdateLoop()
 
 			try
 			{
-				delay = 1.0 / property::GetProperty<double>("editor.fps");
+				delay = 1.0f / property::GetProperty<vfloat32>("editor.fps");
 			}
 			catch(VException&) 
 			{
-				property::SetProperty<double>("editor.fps", 60.0f);
-				delay = 1.0 / 20.0;
+				property::SetProperty<vfloat32>("editor.fps", 60.0f);
+				delay = 1.0f / 60.0f;
 			}
 
 			glfwLockMutex(m_SyncMutex);
@@ -336,7 +336,6 @@ void VRenderFrameAction::Init()
 	
 	cout << "\tCreating context" << endl;
 	IVRenderContext* pContext(new VWin32WindowContext(m_HWND, &settings));
-//	IVRenderContext* pContext(new VGLFWContext());
 	
 	cout << "\tCreating device" << endl;
 	m_pDevice.Assign(new VOpenGLDevice(settings, pContext));
@@ -351,14 +350,9 @@ void VRenderFrameAction::Init()
 		property::SetProperty(g_strRenderPropertyName.c_str(), true);	
 	}
 	
-	//CreateTestModel("/editor-test");
-//	model = *GetResourceData<VModel>("/editor-test");
-
-	//pmesh = &*GetResourceData<IVMesh>("/editor-test");
-	//pmat = &*GetResourceData<IVMaterial>("/editor-test");
-	
 	HWND hWnd = GetAncestor(m_HWND, GA_ROOT);
 	m_pInputManager = new input::VDIInputManager(hWnd);
+	m_pInputManager->SetActive(false);
 }
 v3d::input::IVInputManager* VRenderFrameAction::GetInputManager()
 {
@@ -449,48 +443,7 @@ void showOrientationGrid() {
 
 void VRenderFrameAction::UpdateFrame(vfloat32 in_fFrameDuration)
 {
-//	m_pDevice->BeginScene();
-	
-//	if( m_bResized )
-	{
-//		glViewport(0, 0, m_nWidth, m_nHeight);
-		m_bResized = false;
-	}
-
-	// show grid if no scene will be rendered
-//	if( property::GetProperty<vbool>(g_strGridPropertyName.c_str()) )
-//	{
-//		glDisable(GL_LIGHTING);
-//		
-//		VMatrix44f identity;
-//		math::Identity(identity);
-//		
-//		m_pDevice->SetMatrix(IVDevice::ModelMatrix, identity);
-//		showOrientationGrid();
-//	}
-	
-//	if( property::GetProperty<vbool>(g_strRenderPropertyName.c_str()) )
-//	if( m_pDevice.Get() != 0 && pmesh != 0 && pmat != 0 )
-//	{	
-//		VPointLight light;
-//		light.SetAmbient(VColor4f(.0f, .0f, .0f, 1.0f));
-//		light.SetDiffuse(VColor4f(.0f, 1.0f, .0f, 1.0f));
-//		light.SetSpecular(VColor4f(.8f, .8f, 1.0f, 1.0f));
-//		light.SetPosition(VVector3f(.0f, .0f, .0f));
-//		
-//		VPointLight light2;
-//		light2.SetAmbient(VColor4f(.2f, .0f, .0f, 1.0f));
-//		light2.SetDiffuse(VColor4f(1.0f, .0f, .0f, 1.0f));
-//		light2.SetSpecular(VColor4f(1.0f, .4f, .4f, 1.0f));
-//		light2.SetPosition(VVector3f(.0f, -.5f, 3.0f));	
-//
-////		m_pDevice->ApplyLight(IVDevice::Light0, &light);
-////		m_pDevice->ApplyLight(IVDevice::Light1, &light2);
-//
-////		RenderModel(*m_pDevice, *GetResourceData<VModel>("/data/afighter.3ds"));
-//
-////		RenderMesh(*m_pDevice, pmesh, pmat);
-//	}
+	m_bResized = false;
 
 	if( m_pShooting != 0 && m_pShooting->IsActive() )
 	{
@@ -502,63 +455,6 @@ void VRenderFrameAction::UpdateFrame(vfloat32 in_fFrameDuration)
 		m_pDevice->BeginScene();
 		m_pDevice->EndScene(IVDevice::FlipScene);
 	}
-	//{
-	//	try
-	//	{
-	//		static vbool initialized = false;
-	//		if( ! initialized )
-	//		{
-	//			initialized = true;
-
-	//			VResourceId offscreen = VResourceManagerPtr()->CreateResource("/offscreen");
-
-	//			graphics::VDisplaySettings displaySettings;
-	//			displaySettings.SetSize(512, 512);
-	//			IVRenderContext* context = m_pDevice->CreateOffscreenContext(&displaySettings);
-	//			offscreen->AddData(context);
-
-	//			VResourceDataPtr<IVDevice> device = offscreen->GetMutableData<IVDevice>();
-	//			device->BeginScene();
-	//			device->SetMatrix(IVDevice::ModelMatrix, math::TranslationMatrix(0, 0, -4));
-	//			device->SetMatrix(IVDevice::ViewMatrix, math::IdentityMatrix());
-	//			glClearColor(1, 0, 0, 1);
-	//			glClear(GL_COLOR_BUFFER_BIT);
-	//			glBegin(GL_TRIANGLES);
-	//			glColor3f(0, 1, 0);
-	//			glTexCoord2f(1, 0);   glVertex2f(1, 0);
-	//			glTexCoord2f(.5f, 1); glVertex2f(0, 1);
-	//			glTexCoord2f(0, 0);	  glVertex2f(-1, 0);
-	//			glEnd();
-	//			device->EndScene(IVDevice::FlipScene);
-	//		}
-
-	//		VResourceId offscreen("/offscreen");
-	//		VResourceDataPtr<IVTexture> texture = offscreen->GetMutableData<IVTexture>();
-
-	//		m_pDevice->BeginScene();
-
-	//		m_pDevice->SetMatrix(IVDevice::ModelMatrix, math::TranslationMatrix(0, 0, -4));
-	//		m_pDevice->SetMatrix(IVDevice::ViewMatrix, math::IdentityMatrix());
-
-	//		texture->Bind(0);
-	//		glBegin(GL_TRIANGLES);
-	//		glColor3f(1, 1, 1);
-	//		glTexCoord2f(1, 0);
-	//		glVertex2f(1, 0);
-	//		glTexCoord2f(0, 0);
-	//		glVertex2f(0, 1);
-	//		glTexCoord2f(.5f, 1);
-	//		glVertex2f(-1, 0);
-	//		glEnd();
-	//		texture->Unbind();
-
-	//		m_pDevice->EndScene(IVDevice::FlipScene);
-	//	}
-	//	catch(const VException& e)
-	//	{
-	//		vout << "Caught exception in test code: \n" << e.ToString();
-	//	}
-	//}
 
 	if( m_pShooting == 0 )
 	{
@@ -573,7 +469,16 @@ void VRenderFrameAction::UpdateFrame(vfloat32 in_fFrameDuration)
 		++count;
 	}
 
-//	m_pDevice->EndScene(IVDevice::FlipScene);
+	if( m_pInputManager->GetStandardKey(input::KeyEscape).IsDown() )
+	{
+		SetIgnoreInput(true);
+		vout << "Disabled input" << vendl;
+	}
+}
+
+void VRenderFrameAction::SetIgnoreInput(vbool ignore)
+{
+	m_pInputManager->SetActive(! ignore);
 }
 
 void VRenderFrameAction::SetShooting(v3d::scene::IVShooting* in_pShooting)

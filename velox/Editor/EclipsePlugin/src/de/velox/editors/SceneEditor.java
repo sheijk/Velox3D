@@ -258,6 +258,15 @@ public class SceneEditor extends VeloxEditorBase {
 		
 		IActionBars bars = getEditorSite().getActionBars();
 		
+		Action enableInputAction = new SyncAction(){
+			@Override protected void exec() {
+				renderAction.SetIgnoreInput(false);
+			}
+		};
+		enableInputAction.setText("Enable input");
+		enableInputAction.setToolTipText("Press Escape to disable again");
+		bars.getToolBarManager().add(enableInputAction);
+		
 		Action playAction = new SyncAction() {
 			private boolean playing = false;
 			private IVXMLElement preupdateScene = null;

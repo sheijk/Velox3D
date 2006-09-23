@@ -73,6 +73,8 @@ public:
 	void SetShooting(v3d::scene::IVShooting* in_pShooting);
 	v3d::graphics::IVDevice* GetDevice();
 	v3d::input::IVInputManager* GetInputManager();
+
+	void SetIgnoreInput(vbool ignore);
 	
 	void setSize(vuint width, vuint height);
 private:
@@ -83,8 +85,7 @@ private:
 	v3d::scene::IVShooting* m_pShooting;
 	v3d::VSharedPtr<v3d::graphics::VOpenGLDevice> m_pDevice;
 	HWND m_HWND;
-	v3d::input::IVInputManager* m_pInputManager;
-
+	v3d::input::VDIInputManager* m_pInputManager;
 };
 
 class VUpdateManagerCallAction : public IVFrameAction

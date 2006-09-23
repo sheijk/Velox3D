@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="opengl32.lib glu32.lib SingleTrimesh.lib DxErr8.lib DxErr.lib"
+				AdditionalDependencies="opengl32.lib glu32.lib SingleTrimesh.lib DxErr8.lib"
 				OutputFile="$(OutDir)/VeloxLib.lib"
 				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
 				IgnoreAllDefaultLibraries="false"

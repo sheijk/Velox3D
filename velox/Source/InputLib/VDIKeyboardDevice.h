@@ -67,6 +67,8 @@ public:
 
 	RelativeAxisIterator	RelativeAxisBegin();
 	RelativeAxisIterator	RelativeAxisEnd();
+
+	void ClearInputData();
 };
 
 //-----------------------------------------------------------------------------

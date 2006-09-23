@@ -15,16 +15,13 @@
 namespace v3d {
 namespace input {
 //-----------------------------------------------------------------------------
-VDIInputManager::VDIInputManager()
-: m_hWnd(0), m_pDI(0), m_bRegistered(false), m_pStandardMouse(0),
-  m_pStandardKeyboard(0)
-{
-
-}
-
-VDIInputManager::VDIInputManager( HWND in_hWnd )
-: m_hWnd(in_hWnd), m_pDI(0), m_bRegistered(false), m_pStandardMouse(0),
-  m_pStandardKeyboard(0)
+VDIInputManager::VDIInputManager( HWND in_hWnd ) : 
+	m_hWnd(in_hWnd), 
+	m_pDI(0), 
+	m_bRegistered(false), 
+	m_pStandardMouse(0),
+	m_pStandardKeyboard(0),
+	m_bActive(false)
 {
 	V3D_ASSERT(in_hWnd != 0);
 	
@@ -98,7 +95,7 @@ void VDIInputManager::Create()
 	if ( !InitStandardMouseDevice() )
 		V3D_THROW( VCreationException, "Could not create standard mouse device" );
 
-	IVUpdateable::Register();
+	SetActive(true);
 
 	// enumerate devices
 	if ( !EnumerateDevices() )
@@ -293,35 +290,37 @@ vbool VDIInputManager::EnumDevicesCallback(const DIDEVICEINSTANCE* in_pdiDeviceI
 	return true;
 }
 
-// from IVUpdateable
 void VDIInputManager::Update(vfloat32 in_fSeconds)
 {
-	// update standard devices
-	m_pStandardKeyboard->Update();
-    m_pStandardMouse->Update();
-
-	// update mouse devices
-	for ( std::list<VDIMouseDevice*>::iterator Iter = m_MouseList.begin();
-		  Iter != m_MouseList.end();
-		  ++Iter)
+	if( m_bActive )
 	{
-		(*Iter)->Update();
-	}
+		// update standard devices
+		m_pStandardKeyboard->Update();
+		m_pStandardMouse->Update();
 
-	// update keyboard devices
-	for ( std::list<VDIKeyboardDevice*>::iterator Iter = m_KeyboardList.begin();
-		  Iter != m_KeyboardList.end();
-		  ++Iter)
-	{
-		(*Iter)->Update();
-	}
+		// update mouse devices
+		for ( std::list<VDIMouseDevice*>::iterator Iter = m_MouseList.begin();
+			Iter != m_MouseList.end();
+			++Iter)
+		{
+			(*Iter)->Update();
+		}
 
-	// update other devices
-	for ( std::list<VDIInputDevice*>::iterator Iter = m_InputDeviceList.begin();
-		  Iter != m_InputDeviceList.end();
-		  ++Iter )
-	{
-		(*Iter)->Update();
+		// update keyboard devices
+		for ( std::list<VDIKeyboardDevice*>::iterator Iter = m_KeyboardList.begin();
+			Iter != m_KeyboardList.end();
+			++Iter)
+		{
+			(*Iter)->Update();
+		}
+
+		// update other devices
+		for ( std::list<VDIInputDevice*>::iterator Iter = m_InputDeviceList.begin();
+			Iter != m_InputDeviceList.end();
+			++Iter )
+		{
+			(*Iter)->Update();
+		}
 	}
 }
 
@@ -350,9 +349,17 @@ void VDIInputManager::SetActive(vbool in_bStatus)
 			
 			IVUpdateable::Unregister();
 			m_bRegistered = false;
-//			ClearInputData();
+			ClearInputData();
 		}
 	}
+
+	m_bActive = in_bStatus;
+}
+
+void VDIInputManager::ClearInputData()
+{
+	m_pStandardKeyboard->ClearInputData();
+	m_pStandardMouse->ClearInputData();
 }
 
 /**

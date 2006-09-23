@@ -10,7 +10,13 @@
 #include <v3d/Core/VAssert.h>
 #include <v3d/Input/VInputExceptions.h>
 #include <v3d/Core/MemManager.h>
+
+#if DIRECTINPUT_VERSION > 0x0800
 #include <Dxerr.h>
+#pragma lib "dxerr.lib"
+#else
+const char* DXGetErrorString(HRESULT) { return "No error info available in this DirectX version"; }
+#endif
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -223,6 +229,15 @@ vbool VDIKeyboardDevice::CreateDeviceObjects()
 	}
 
 	return true;
+}
+
+void VDIKeyboardDevice::ClearInputData()
+{
+	std::list<VDIKeyboardButton*>::iterator key = m_ButtonList.begin();
+	for( ; key != m_ButtonList.end(); ++key)
+	{
+		(*key)->SetDown(false);
+	}
 }
 
 VStringRetVal VDIKeyboardDevice::GetKeyboardButtonName( vlong in_Index )

@@ -42,8 +42,6 @@ namespace input {
 class VDIInputManager : public IVInputManager
 {
 protected:
-						VDIInputManager();
-
 	HWND							m_hWnd;
 	LPDIRECTINPUT8					m_pDI; 
 	VDIMouseDevice*					m_pStandardMouse;
@@ -87,6 +85,7 @@ private:
 	static BOOL CALLBACK			StaticDIEnumDevicesCallback(LPCDIDEVICEINSTANCE lpddi,
 																LPVOID pvRef );
 	vbool							m_bRegistered;
+	vbool m_bActive;
 };
 
 //-----------------------------------------------------------------------------

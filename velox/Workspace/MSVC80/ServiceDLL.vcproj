@@ -1075,6 +1075,14 @@
 				<File
 					RelativePath="..\..\Source\InputLib\VDIKeyboardDevice.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							GeneratePreprocessedFile="0"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\..\Source\InputLib\VDIKeyboardDevice.h"

@@ -7,6 +7,7 @@
 
 package de.velox.editor;
 
+import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.plugin.*;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.osgi.framework.BundleContext;
