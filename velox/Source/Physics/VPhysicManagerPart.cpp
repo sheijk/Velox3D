@@ -30,14 +30,12 @@ VPhysicManagerPart::~VPhysicManagerPart()
 
 void VPhysicManagerPart::Activate()
 {
-	//m_pPhysicManager->RegisterToUpdater();
 	m_pUpdateManager->Register(this);
 }
 
 void VPhysicManagerPart::Deactivate()
 {
 	m_pUpdateManager->Unregister(this);
-	//m_pPhysicManager->UnregisterToUpdater();
 }
 
 void VPhysicManagerPart::Update(vfloat32 in_fSeconds)

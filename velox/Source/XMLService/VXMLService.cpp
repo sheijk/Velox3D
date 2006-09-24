@@ -129,8 +129,12 @@ IVXMLService::IVXMLElementPtr VXMLService::GetRootElement(IVStream* in_pStream)
 	//create a class to read from the stream
 	VStreamReader Reader(in_pStream);
 	
-	Doc.Parse((char*)Reader.GetStreamBuffer());
+	Doc.Parse((vchar*)Reader.GetStreamBuffer());
 	
+	if( Doc.RootElement() == 0 )
+	{
+		V3D_THROWMSG(VXMLTinyXMLException, "Document is empty");
+	}
 	if( Doc.Error())
 	{
 //TODO:: in_pStream in die Fehlermeldung einbauen

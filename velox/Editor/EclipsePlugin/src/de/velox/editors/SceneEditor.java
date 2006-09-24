@@ -235,16 +235,6 @@ public class SceneEditor extends VeloxEditorBase {
 		renderLayer.addMouseListener(new MouseHandler());
 		renderAction = renderLayer.getRenderAction();
 		
-		parent.addFocusListener(new FocusListener() {
-			public void focusLost(FocusEvent e) {
-				System.out.print("lalalal LOST");
-			}
-		
-			public void focusGained(FocusEvent e) {
-				System.out.print("gained");
-			}
-		});
-		
 		IVDevice device = renderAction.GetDevice();
 		VMatrix44f viewMatrix = new VMatrix44f();
 		viewMatrix.SetTransform(1.0f, 1.0f, -7.0f);
@@ -299,7 +289,7 @@ public class SceneEditor extends VeloxEditorBase {
 			void restoreScene() {
 				if( preupdateScene == null )
 					return;
-				
+	
 				root.applySettings(preupdateScene);
 				
 //				VXMLNodeIterator node = preupdateScene.ChildBegin();

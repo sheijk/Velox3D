@@ -71,23 +71,6 @@
 		<part type="v3d::physics::VCollisionPart" Active="false" tags=""/>
 		<part type="v3d::physics::VBoundingPlaneVolumePart" Distance="10" Normal="(0,1,0)" tags=""/>
 	</entity>
-	<entity name="JointTest">
-		<part type="v3d::physics::VJointHinge2Part" Anchor="(-388.159,-217.994,34.9483)" Axis1="(1,0,0)" Axis2="(0,1,0)" Body1="06848718" Body2="06878008" Bounce="0" CFM="1.17549e-038" FudgeFactor="1" HighStop="3.40282e+038" LinkedByBodyOne="true" LinkedByBodyTwo="true" LowStop="-3.40282e+038" MaxForce="0" MaxForce2="0" StopCFM="1.17549e-038" StopERP="0.2" SuspensionCFM="1" SuspensionERP="1" Velocity="0" Velocity2="0" tags=""/>
-		<entity name="Body1">
-			<part type="v3d::physics::VBodyPart" Address="06848718" Enabled="true" Mass="1" Position="(-54.303,4.51615,1.32021)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
-			<part type="v3d::entity::VRigidBodyPart" pos="(-54.303,4.51615,1.32021)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-			<part type="v3d::physics::VBoundingSphereVolumePart" Position="(-50,100,0)" Radius="5" tags=""/>
-			<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="5" tags=""/>
-			<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
-		</entity>
-		<entity name="Body2">
-			<part type="v3d::physics::VBodyPart" Address="06878008" Enabled="true" Mass="1" Position="(43.9031,3.1437,-8.50472)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
-			<part type="v3d::entity::VRigidBodyPart" pos="(43.9031,3.1437,-8.50472)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-			<part type="v3d::physics::VBoundingSphereVolumePart" Position="(50,100,0)" Radius="5" tags=""/>
-			<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="5" tags=""/>
-			<part type="v3d::physics::VJointHinge2LinkPart" tags=""/>
-		</entity>
-	</entity>
 	<entity name="kugel">
 		<part type="v3d::entity::VRigidBodyPart" pos="(-39.2693,95.8724,-1.68082)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="10" tags=""/>

@@ -20,8 +20,6 @@
 
 #include <V3d/Physics/VBodyPart.h>
 #include <V3d/Physics/VCollisionPart.h>
-#include <V3d/Physics/VJointHinge2LinkAncestorBodyPart.h>
-#include <V3d/Physics/VJointHinge2LinkPart.h>
 #include <V3d/Physics/VJointHinge2ModifierPart.h>
 #include <V3d/Physics/VJointHinge2Part.h>
 #include <V3d/Physics/VPhysicManagerPart.h>

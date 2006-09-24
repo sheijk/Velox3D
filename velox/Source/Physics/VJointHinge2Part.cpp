@@ -178,7 +178,8 @@ void VJointHinge2Part::OnMessage(
 		{
 			VVector3f pos = in_Message.GetAs<VVector3f>("value");
 			m_Joint.SetAnchor(pos);
-			m_Joint.Apply();
+			//m_Joint.Apply();
+			RegisterLink();
 		}
 
 		if( name == "Axis1" )
@@ -309,6 +310,8 @@ VJointHinge2& VJointHinge2Part::GetJointHinge2()
 
 void VJointHinge2Part::RegisterLink()
 {
+
+	
 	if( m_pPhysicManagerPart.IsConnected() )
 	{
 		VBody* pBody1 = m_pPhysicManagerPart->GetPhysicManager()->QueryBodyByName(m_sBody1Name);
@@ -316,6 +319,15 @@ void VJointHinge2Part::RegisterLink()
 
 		if(pBody1 && pBody2)
 		{
+			for (int i = 0; i < 10000; i++)
+			{
+				for(int j= 0; j < 1000; j++);
+			}
+			//if(m_Joint.IsActive())
+			{
+				m_Joint.Destroy();
+				m_Joint.Create(m_pPhysicManagerPart->GetPhysicManager()->GetWorld());
+			}
 			m_Joint.AddBody(pBody1, pBody2);
 			m_Joint.Apply();
 			m_pPhysicManagerPart->GetPhysicManager()->RegisterJoint(&m_Joint);

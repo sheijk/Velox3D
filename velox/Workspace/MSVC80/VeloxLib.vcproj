@@ -734,14 +734,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Physics\VJointHinge2LinkAncestorBodyPart.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Physics\VJointHinge2LinkPart.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\API\V3d\Physics\VJointHinge2ModifierPart.h"
 						>
 					</File>
@@ -1940,30 +1932,6 @@
 					<File
 						RelativePath="..\..\Source\Physics\VCollisionPart.cpp"
 						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Physics\VJointHinge2LinkAncestorBodyPart.cpp"
-						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-					</File>
-					<File
-						RelativePath="..\..\Source\Physics\VJointHinge2LinkPart.cpp"
-						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\Source\Physics\VJointHinge2ModifierPart.cpp"

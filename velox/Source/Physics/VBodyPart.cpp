@@ -183,6 +183,7 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 
 		//TODO will not take joints into account. coming with new physic manager design
 		//restore the old values
+		m_pPhysicManagerPart->GetPhysicManager()->RefreshJoint(m_pBody.Get());
 		m_pBody->SetPosition(
 			graphics::VVertex3f(
 			m_Position[0],

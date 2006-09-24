@@ -43,6 +43,7 @@ void VJointHinge2::Apply()
 void VJointHinge2::Create(VWorld* in_PhysicWorld)
 {
 
+	V3D_ASSERT(in_PhysicWorld != 0);
 	AddWorld(in_PhysicWorld);
 
 	// check if a joint group is specified, if not use default group 0
@@ -148,8 +149,8 @@ void VJointHinge2::SetAxis2(VVector3f in_Axis)
 
 VVector3f VJointHinge2::GetAnchor()
 {
-	VVector3f anchor;
-	dVector3 result;
+//	VVector3f anchor;
+//	dVector3 result;
 	/*if(m_JointID)
 	{
 		dJointGetHinge2Anchor (m_JointID, result);

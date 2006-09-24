@@ -331,6 +331,15 @@
 			<File
 				RelativePath="..\..\Editor\NativeBindings\Jamfile"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						CommandLine="echo foo: $(SWIG_HOME)"
+						Outputs="dasds"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\Editor\NativeBindings\main.java"
