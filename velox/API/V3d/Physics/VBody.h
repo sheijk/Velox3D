@@ -38,7 +38,7 @@ public:
 	void Delete(VState* in_pState);
 	void SetCollisionMesh(VGeometry* in_Geometry);
 
-	void SetPosition(graphics::VVertex3f in_Position);
+	void SetPosition(math::VVector3f in_Position);
 	void SetOrientation(math::VQuatf in_Orientation);
 	void SetMass(vfloat32 in_fMass);
 	void VBody::SetOrientation(math::VVector4f in_Orientation);

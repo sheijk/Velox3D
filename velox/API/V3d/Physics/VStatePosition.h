@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Physics/VState.h>
-#include <V3d/Graphics/Geometry/VVertex3f.h>
+#include <V3d/Math/VVector.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{
@@ -30,15 +30,15 @@ public:
 	virtual ~VStatePosition();
 
 	void SetPosition(vfloat32 x, vfloat32 y, vfloat32 z);
-	void SetPosition(graphics::VVertex3f in_Position);
-	graphics::VVertex3f GetPositon();
+	void SetPosition(math::VVector3f in_Position);
+	math::VVector3f GetPositon();
 
 	virtual void Apply();
 
 private:
 
 	
-	graphics::VVertex3f m_Position;
+	math::VVector3f m_Position;
 };
 
 //-----------------------------------------------------------------------------

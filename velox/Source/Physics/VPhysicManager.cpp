@@ -14,6 +14,7 @@
 #include <v3d/math/VBoundingBox.h>
 #include <v3d/math/VBoundingSphere.h>
 #include <v3d/Physics/Bounding/VBoundingMesh.h>
+#include <V3d/Core.h>
 #include <algorithm>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -394,22 +395,26 @@ void VPhysicManager::UnregisterJoint(VJointHinge2* in_pJoint)
 
 void VPhysicManager::RefreshJoint(VBody* in_pBody)
 {
-	////check if body has any connections to joints
-	//JointList::const_iterator it = m_JointList.begin();
-	//JointList::const_iterator itEnd = m_JointList.end();
+	//check if body has any connections to joints
+	JointList::const_iterator it = m_JointList.begin();
+	JointList::const_iterator itEnd = m_JointList.end();
 
-	//for( ; it != itEnd; ++it)
-	//{
-	//	VBody* pBody1 = (*it)->GetBody1();
-	//	VBody* pBody2 = (*it)->GetBody2();
+	for( ; it != itEnd; ++it)
+	{
+		VBody* pBody1 = (*it)->GetBody1();
+		VBody* pBody2 = (*it)->GetBody2();
 
-	//	//joint exists, thats connected and needs to be reseted
-	//	if(pBody1 == in_pBody || pBody2 == in_pBody)
-	//	{
-	//		(*it)->Destroy();
-	//		(*it)->Create(this->GetWorld());
-	//	}
-	//}
+		//joint exists, thats connected and needs to be reseted
+		if(pBody1 == in_pBody || pBody2 == in_pBody)
+		{
+			vout << "Physics: BodyPart position change announced" << vendl;
+			(*it)->Destroy();
+			(*it)->Create(this->GetWorld());
+			(*it)->AddBody(pBody1, pBody2);
+			(*it)->Apply();
+			RegisterJoint((*it));
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

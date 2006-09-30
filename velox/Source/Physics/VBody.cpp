@@ -93,7 +93,7 @@ void VBody::SetCollisionMesh(VGeometry* in_Geometry)
 	m_OrientationState.Apply();
 }
 
-void VBody::SetPosition(graphics::VVertex3f in_Position)
+void VBody::SetPosition(math::VVector3f in_Position)
 {
 	m_PositionState.SetPosition(in_Position);
 	m_PositionState.Apply();

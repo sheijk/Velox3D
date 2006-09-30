@@ -7,6 +7,7 @@
 
 #include <V3d/Physics/VJointHinge2.h>
 #include <V3d/Physics/VBody.h>
+#include <V3d/Core.h>
 //-----------------------------------------------------------------------------
 #include <v3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -74,6 +75,7 @@ void VJointHinge2::AddBody(VBody* in_pBody1, VBody* in_pBody2)
 	V3D_ASSERT(*m_pBody2->GetOdeBody()->GetBodyID() != 0);
 
 	//SetParameters();
+	vout << "Joint: attaching body: " << "Body1: "<< m_pBody1->GetPositionState().GetPositon() << " Body2: " << m_pBody2->GetPositionState().GetPositon() << vendl;
 	dJointAttach(
 		m_JointID,
 		*m_pBody1->GetOdeBody()->GetBodyID(),

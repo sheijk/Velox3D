@@ -66,12 +66,7 @@ void VBodyPart::Create()
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
 		m_pBody->Deactivate();
 
-		m_pBody->SetPosition(
-			graphics::VVertex3f(
-			m_Position[0],
-			m_Position[1],
-			m_Position[2])
-			);
+		m_pBody->SetPosition(m_Position);
 		//TODO: set orientation
 		m_pBody->Activate();
 		m_fMass = m_pBody->GetMass();
@@ -170,8 +165,8 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 
 		//m_pRigidBodyPart->SetTransform(math::VRBTransform(trans));
 		m_pRigidBodyPart->GetTransform().Rotate(m_pBody->GetOrientation().GetQuat());
- 		m_pRigidBodyPart->SetPosition(m_pBody->GetPositionState().GetPositon().AsVector());
-		m_Position = m_pBody->GetPositionState().GetPositon().AsVector();
+ 		m_pRigidBodyPart->SetPosition(m_pBody->GetPositionState().GetPositon());
+		m_Position = m_pBody->GetPositionState().GetPositon();
 
 	}
 	else
@@ -184,12 +179,7 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 		//TODO will not take joints into account. coming with new physic manager design
 		//restore the old values
 		m_pPhysicManagerPart->GetPhysicManager()->RefreshJoint(m_pBody.Get());
-		m_pBody->SetPosition(
-			graphics::VVertex3f(
-			m_Position[0],
-			m_Position[1],
-			m_Position[2])
-			);
+		m_pBody->SetPosition(m_Position);
 		//m_pBody->SetOrientation(rigidQuat);
 		m_pBody->Activate();
 	}
@@ -246,7 +236,7 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 			
 			if(m_pBody.Get())
 			{
-				m_pBody->SetPosition(graphics::VVertex3f(pos.GetX(),pos.GetY(),pos.GetZ()));
+				m_pBody->SetPosition(pos);
 				vout << "Physics: pos set to " << pos << vendl;
 			}
 		}

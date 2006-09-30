@@ -93,6 +93,7 @@ void VJointHinge2Part::Activate()
 
 	if( !m_bIsActive && ! m_Joint.IsActive())
 	{
+		vout << "Joint: activating" << vendl; 
 		m_Joint.Create(m_pPhysicManagerPart.Get()->GetPhysicManager().Get()->GetWorld());
 		m_bIsActive = true;
 		//create the link of the 2 bodies
@@ -145,8 +146,8 @@ void VJointHinge2Part::OnMessage(
 			 * cannot explain it but entity systems seems to do some mess up
 			 * with ode...never seen this kind of strange behavior
 			 */
-			m_Joint.SetAnchor(m_Joint.GetAnchor());
-			m_Joint.Apply();
+			//m_Joint.SetAnchor(m_Joint.GetAnchor());
+			//m_Joint.Apply();
 			
 			in_pAnswer->AddProperty("Axis1", m_Joint.GetAxis1());
 			in_pAnswer->AddProperty("Axis2", m_Joint.GetAxis2());
@@ -310,8 +311,6 @@ VJointHinge2& VJointHinge2Part::GetJointHinge2()
 
 void VJointHinge2Part::RegisterLink()
 {
-
-	
 	if( m_pPhysicManagerPart.IsConnected() )
 	{
 		VBody* pBody1 = m_pPhysicManagerPart->GetPhysicManager()->QueryBodyByName(m_sBody1Name);
@@ -319,17 +318,15 @@ void VJointHinge2Part::RegisterLink()
 
 		if(pBody1 && pBody2)
 		{
-			for (int i = 0; i < 10000; i++)
-			{
-				for(int j= 0; j < 1000; j++);
-			}
 			//if(m_Joint.IsActive())
 			{
+				vout << "Joint: Destroy" << vendl;
 				m_Joint.Destroy();
 				m_Joint.Create(m_pPhysicManagerPart->GetPhysicManager()->GetWorld());
 			}
 			m_Joint.AddBody(pBody1, pBody2);
 			m_Joint.Apply();
+			vout << "Joint: created: "<< m_Joint.GetAnchor() << " Body1: " << math::VVector3f(pBody1->GetPositionState().GetPositon()) << " Body2: " << math::VVector3f(pBody2->GetPositionState().GetPositon()) << vendl;
 			m_pPhysicManagerPart->GetPhysicManager()->RegisterJoint(&m_Joint);
 		}
 	}
