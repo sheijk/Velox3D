@@ -6,9 +6,9 @@ Worklog von sheijk
 ----- current assigned tasks:
 
 - velox design
-- skripting moeglichkeiten erforschen (www.swigs.org, etc)
-- editor planung
 - graphics system erweitern + ueberarbeiten
+- editor planung
+- skripting moeglichkeiten erforschen (www.swigs.org, etc)
 
 -------------------------------------------------------------------------------
 ----- random thoughts:
@@ -29,6 +29,9 @@ Doku:
 
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
+
+30.09.06
+- first approach at shadow mapping, still plenty of artefacts
 
 23.09.06
 - fixed input handling in editor

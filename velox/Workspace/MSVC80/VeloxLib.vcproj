@@ -429,6 +429,10 @@
 							>
 						</File>
 						<File
+							RelativePath="..\..\API\V3d\Scene\Shootings\VShadowMapShooting.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Scene\Shootings\VShootingBase.h"
 							>
 						</File>
@@ -449,6 +453,10 @@
 							>
 						</File>
 						<File
+							RelativePath="..\..\API\V3d\Scene\Shapes\VFrustumVisPart.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VOrientationGridPart.h"
 							>
 						</File>
@@ -466,10 +474,6 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VTerrainPart.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Scene\Shapes\VTorusMeshPart.cpp"
 							>
 						</File>
 						<File
@@ -2166,6 +2170,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\Source\Scene\Shapes\VFrustumVisPart.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Source\Scene\Shapes\VSkyboxPart.cpp"
 						>
 					</File>
@@ -2175,6 +2183,10 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Scene\Shapes\VTerrainPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Scene\Shapes\VTorusMeshPart.cpp"
 						>
 					</File>
 				</Filter>
@@ -2190,7 +2202,19 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\Source\Scene\Shootings\VShadowMapShooting.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Source\Scene\Shootings\VShootingBase.cpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Rendering"
+					>
+					<File
+						RelativePath="..\..\Source\Scene\Rendering\VShadowMapRenderStepPart.cpp"
 						>
 					</File>
 				</Filter>
@@ -2204,22 +2228,6 @@
 					<File
 						RelativePath="..\..\Source\Scene\Lights\VNaiveLightManager.cpp"
 						>
-					</File>
-				</Filter>
-				<Filter
-					Name="Rendering"
-					>
-					<File
-						RelativePath="..\..\Source\Scene\Rendering\VShadowMapRenderStepPart.cpp"
-						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 				</Filter>
 			</Filter>

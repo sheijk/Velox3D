@@ -46,6 +46,7 @@ namespace v3d { namespace scene {
 		extern void* AssureVArrowMeshPartExist();
 		extern void* AssureVBoxMeshPartExist();
 		extern void* AssureVCoordSysDisplayPartExist();
+		extern void* AssureVFrustumVisPartExist();
 		extern void* AssureVDefaultRenderStepPartExist();
 		extern void* AssureVLightPartExist();
 		extern void* AssureVMeshPartExist();
@@ -54,6 +55,7 @@ namespace v3d { namespace scene {
 		extern void* AssureVModelPartExist();
 		extern void* AssureVNaiveSceneManagerPartExist();
 		extern void* AssureVOffscreenShootingExist();
+		extern void* AssureVShadowMapShootingExist();
 		extern void* AssureVOrientationGridPartExist();
 		extern void* AssureVPlaneMeshPartExist();
 		extern void* AssureVPostProcesssingRenderStepPartExist();
@@ -116,6 +118,7 @@ void foo()
 	v3d::scene::AssureVArrowMeshPartExist();
 	v3d::scene::AssureVBoxMeshPartExist();
 	v3d::scene::AssureVCoordSysDisplayPartExist();
+	v3d::scene::AssureVFrustumVisPartExist();
 	v3d::scene::AssureVDefaultRenderStepPartExist();
 	v3d::scene::AssureVLightPartExist();
 	v3d::scene::AssureVMeshPartExist();
@@ -124,6 +127,7 @@ void foo()
 	v3d::scene::AssureVModelPartExist();
 	v3d::scene::AssureVNaiveSceneManagerPartExist();
 	v3d::scene::AssureVOffscreenShootingExist();
+	v3d::scene::AssureVShadowMapShootingExist();
 	v3d::scene::AssureVOrientationGridPartExist();
 	v3d::scene::AssureVPlaneMeshPartExist();
 	v3d::scene::AssureVPostProcesssingRenderStepPartExist();

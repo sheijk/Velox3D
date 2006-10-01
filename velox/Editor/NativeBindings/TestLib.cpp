@@ -506,6 +506,23 @@ void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
 #include <V3d/Utils/VInputPart.h>
 #include "../../Source/InputLib/VDIInputManager.h"
 
+v3d::scene::IVShooting* FindShooting(v3d::entity::VEntity* in_pEntity)
+{
+	if( in_pEntity != 0 )
+		return in_pEntity->GetPart<IVShooting>();
+	else
+		return 0;
+}
+
+v3d::scene::IVShooting* ToShooting(v3d::entity::IVPart* in_pPart)
+{
+	if( in_pPart != 0 )
+		return in_pPart->Convert<IVShooting>();
+	else
+		return 0;
+}
+
+
 v3d::input::IVInputManager* CreateInputManager(int hwnd)
 {
 	return new input::VDIInputManager(HWND(hwnd));

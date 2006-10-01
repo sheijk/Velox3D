@@ -37,6 +37,7 @@ public:
 	 * safely casted to an instance of the type in_DestType represents
 	 */
 	vbool CanBeCastedTo(const VTypeInfo& in_DestType) const;
+	vbool CanBeCastedTo(const std::string& in_TypeName) const;
 
 	/**
 	 * Returns whether the instance has been initialized using InitTypeInfo

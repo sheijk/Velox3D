@@ -122,9 +122,10 @@ void ApplySettings(xml::IVXMLElement& in_Node, IVPart& in_Part)
 	using namespace xml;
 	using std::string;
 
-	const std::string typeName = in_Node.GetAttributeValue<std::string>("type");
+	const std::string xmlTypeName = in_Node.GetAttributeValue<std::string>("type");
+	const std::string partTypeName = in_Part.GetTypeInfo().GetName();
 
-	if( typeName == in_Part.GetTypeInfo().GetName() )
+	if( xmlTypeName == partTypeName )
 	{
 		IVXMLElement::AttributeIter attrib = in_Node.AttributeBegin();
 		while( attrib.HasNext() )
@@ -157,6 +158,15 @@ void ApplySettings(xml::IVXMLElement& in_Node, IVPart& in_Part)
 
 			++attrib;
 		}
+	}
+	else
+	{
+		// this is the wrong part, continue
+
+		//V3D_THROWMSG(VException, 
+		//	"Error while applying settings to scene: expected '"
+		//	<< partTypeName << "' but found xml node for '"
+		//	<< xmlTypeName << "'");
 	}
 }
 

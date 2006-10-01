@@ -18,6 +18,8 @@
 #include <V3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
+	class IVMaterial;
+	class IVParameterValue;
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
@@ -42,6 +44,13 @@ public:
 
     virtual VAutoPtr<IVDevice> CreateOffscreenDevice(
 		const VDisplaySettings&) const = 0;
+
+	virtual void SetSystemParam(
+		const std::string& in_strName, 
+		VSharedPtr<IVParameterValue> in_pNewSystemParam) = 0;
+	virtual void RemoveSystemParam(const std::string& in_strName) = 0;
+
+	virtual void ApplySystemParams(IVMaterial& in_Material) = 0;
 };
 
 typedef VServicePtr<IVGraphicsService> VGraphicsServicePtr;

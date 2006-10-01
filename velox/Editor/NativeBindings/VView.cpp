@@ -354,6 +354,7 @@ void VRenderFrameAction::Init()
 	m_pInputManager = new input::VDIInputManager(hWnd);
 	m_pInputManager->SetActive(false);
 }
+
 v3d::input::IVInputManager* VRenderFrameAction::GetInputManager()
 {
 	return m_pInputManager;
@@ -484,6 +485,14 @@ void VRenderFrameAction::SetIgnoreInput(vbool ignore)
 void VRenderFrameAction::SetShooting(v3d::scene::IVShooting* in_pShooting)
 {
 	m_pShooting = in_pShooting;
+	if( in_pShooting == 0 )
+		return;
+
+	VSimpleShooting* baseShooting = in_pShooting->Convert<VSimpleShooting>();
+	if( baseShooting != 0 )
+	{
+		baseShooting->SetRenderTarget( GetDevice() );
+	}
 }
 
 v3d::graphics::IVDevice* VRenderFrameAction::GetDevice()

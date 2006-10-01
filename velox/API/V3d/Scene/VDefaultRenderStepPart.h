@@ -31,7 +31,7 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
-	vbool RenderShape(const IVGraphicsPart& shape) const;
+	vbool IsShapeToBeRendered(const IVGraphicsPart& shape) const;
 
 	graphics::VColor4f m_BackgroundColor;
 

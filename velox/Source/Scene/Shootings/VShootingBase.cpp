@@ -125,13 +125,15 @@ void VShootingBase::RenderPreShootings()
 
 void VShootingBase::Render()
 {
-	RenderPreShootings();
-	UpdateAndCull();
+	if( ! m_bActive )
+		V3D_THROW(VException, "VShootingBase.Render called while shooting part not active");
 
 	graphics::IVDevice* pDevice = GetRenderTarget();
+	if( pDevice == 0 )
+		V3D_THROW(VException, "Shooting has no device, cannot render");
 
-	V3D_ASSERT(m_bActive);
-	V3D_ASSERT(pDevice != 0);
+	RenderPreShootings();
+	UpdateAndCull();
 
 	if( GetScene() == 0 )
 		return;
@@ -156,11 +158,8 @@ void VShootingBase::Render()
 	if( m_pLightManager.IsConnected() )
 		m_pLightManager->ApplyLights(activeDevice, NULL);
 
-	//for(vuint stepNum = 0; stepNum < m_RenderSteps.size(); ++stepNum)
 	while( renderStep.HasNext() )
 	{
-		//IVRenderStepPart* renderStep = m_RenderSteps[stepNum];
-
 		if( activeDevice != renderStep->GetOutputDevice() )
 		{
 			activeDevice->EndScene();

@@ -3,38 +3,55 @@
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
-	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags="" include-all="true" include-tags="" tags=""/>
-	<part type="v3d::scene::VShadowMapRenderStepPart" tags=""/>
-	<part type="shooting" tags=""/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags=" " include-all="true" include-tags=" " tags=""/>
+	<part type="v3d::scene::VShadowMapShooting" tags=""/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/pp/blur.v3dmat" tags=""/>
 	<entity name="editorCam">
-		<part type="v3d::entity::VRigidBodyPart" pos="(4,40,163)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(29.6708,274.106,207.657)" updir="(0.00282943,0.657332,-0.753596)" viewdir="(-0.0832304,-0.750829,-0.655231)" tags=""/>
 		<part type="v3d::utils::VCameraPart" tags=""/>
-		<part type="v3d::utils::VTrackballPart" tags=""/>
+		<part type="v3d::utils::VFPSMoverPart" ignore-mouse="true" tags=""/>
 	</entity>
 	<entity name="debug">
-		<part type="v3d::entity::VRigidBodyPart" pos="(-21,64,0)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-105,53,0)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
 		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
 	</entity>
 	<entity name="terrain">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-		<part type="v3d::scene::VTerrainPart" extent="(200,200)" mat_mud="/data/tex/mud1.tga" mat_mudColor="(0.2,0.2,0.2,1)" material="/edit/mat/terrain.v3dmat" resolution="64" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(2,-46,5)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VTerrainPart" extent="(200,200)" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" resolution="64" tags=""/>
 	</entity>
 	<entity name="light">
-		<part type="v3d::entity::VRigidBodyPart" pos="(13,60,-21)" updir="(0,0,1)" viewdir="(0,-1,0)" tags=""/>
-		<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(1,1,1,1)" position="(13,60,-21)" specularColor="(0,0,0,0)" w="1" tags=""/>
-		<part type="v3d::scene::VOffscreenShooting" render-target="/depthmap" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-11.3488,5.47217,9.86213)" updir="(0.258154,0.939696,-0.224338)" viewdir="(0.709296,-0.34201,-0.616383)" tags=""/>
+		<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(1,0.5,0,1)" specularColor="(0,0,0,0)" w="1" tags=""/>
 		<part type="v3d::scene::VCoordSysDisplayPart" material="/system/graphics/defaultMaterial" tags=""/>
+		<part type="v3d::utils::VTrackballPart" tags=""/>
+		<part type="v3d::scene::VFrustumVisPart" aspect-ratio="1" fov="45" linedist="50" material="/system/graphics/defaultMaterial" xy-offset="0" zfar="200" znear="10" tags=""/>
 	</entity>
 	<entity name="caster">
-		<part type="v3d::entity::VRigidBodyPart" pos="(18,16,-19)" updir="(0.554415,-0.293613,0.778727)" viewdir="(0.173328,0.955917,0.237024)" tags=""/>
-		<part type="v3d::scene::VTorusMeshPart" bottom-radius="3" color="(1,1,1,1)" height="5" material="/edit/mat/phong.v3dmat" slices="15" stacks="15" top-radius="5" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(3,-35,-30)" updir="(0.640253,0.766109,0.0561545)" viewdir="(0.294293,-0.177101,-0.939163)" tags=""/>
+		<part type="v3d::scene::VTorusMeshPart" bottom-radius="5" color="(1,1,1,1)" height="5" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" slices="3" stacks="50" top-radius="15" tags=""/>
 	</entity>
 	<entity name="display">
-		<part type="v3d::entity::VRigidBodyPart" pos="(-1,45,126)" updir="(0,1,0)" viewdir="(-0,-0,1)" tags=""/>
-		<part type="v3d::scene::VPlaneMeshPart" mat_texture="/depthmap" material="/edit/mat/textured.v3dmat" pos="(0,0,0)" right="(10,0,0)" up="(0,10,0)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-14,223,126)" updir="(0.105206,0.905965,-0.410073)" viewdir="(-0.452468,-0.323597,-0.830998)" tags=""/>
+		<part type="v3d::scene::VPlaneMeshPart" mat_texScale="(1,1)" mat_texture="/graphics/shadowX" material="/edit/mat/textured.v3dmat" pos="(0,0,0)" right="(10,0,0)" up="(0,10,0)" tags=""/>
 	</entity>
 	<entity name="sphere">
-		<part type="v3d::entity::VRigidBodyPart" pos="(2,4,-17)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/phong.v3dmat" radius="5" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(5,-5,-45)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" radius="5" tags=""/>
+	</entity>
+	<entity name="edge1">
+		<part type="v3d::entity::VRigidBodyPart" pos="(27,1,-20)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(10,100,10)" MinPoint="(0,0,0)" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" tags=""/>
+	</entity>
+	<entity name="edge2">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-93,-20,62)" updir="(-0.676946,0.0803341,0.731635)" viewdir="(-0.150815,0.957796,-0.244708)" tags=""/>
+		<part type="v3d::scene::VArrowMeshPart" color="(1,1,0,1)" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" size="50" tags=""/>
+	</entity>
+	<entity name="sky">
+		<part type="v3d::entity::VRigidBodyPart" pos="(29.6708,274.106,207.657)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/" tags=""/>
+	</entity>
+	<entity name="bigsphere">
+		<part type="v3d::entity::VRigidBodyPart" pos="(58,-27,-86)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" radius="50" tags=""/>
 	</entity>
 </entity>

@@ -35,9 +35,14 @@ void VTypeInfo::SetName(const std::string& in_strName)
 
 vbool VTypeInfo::CanBeCastedTo(const VTypeInfo& in_DestType) const
 {
+	return CanBeCastedTo(in_DestType.GetName());
+}
+
+vbool VTypeInfo::CanBeCastedTo(const std::string& in_TypeName) const
+{
 	// can be casted to itself and any one if it's supertypes
-	return (m_strName == in_DestType.m_strName) ||
-		(m_SuperTypes.find(in_DestType.GetName()) != m_SuperTypes.end());
+	return (m_strName == in_TypeName) ||
+		(m_SuperTypes.find(in_TypeName) != m_SuperTypes.end());
 }
 
 vbool VTypeInfo::IsInitialized() const

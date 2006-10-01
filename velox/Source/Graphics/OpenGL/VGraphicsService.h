@@ -11,6 +11,8 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Graphics/IVGraphicsService.h>
+#include <V3d/Graphics/Parameters/IVParameterValue.h>
+#include <V3d/Graphics/IVMaterial.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -29,8 +31,18 @@ public:
 
 	virtual VAutoPtr<IVDevice> CreateOffscreenDevice(const VDisplaySettings&) const;
 
+	void SetSystemParam(
+		const std::string& in_strName, 
+		VSharedPtr<IVParameterValue> in_pNewSystemParam);
+	void RemoveSystemParam(const std::string& in_strName);
+
+	void ApplySystemParams(IVMaterial& in_Material);
+
 private:
 	IVDevice* m_pMainDevice;
+
+	typedef std::map<std::string, VSharedPtr<IVParameterValue> > SystemParamMap;
+	SystemParamMap m_SystemParams;
 };
 
 //-----------------------------------------------------------------------------

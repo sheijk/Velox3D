@@ -29,6 +29,9 @@ VFrameBufferObjectContext::VFrameBufferObjectContext(
 	:
 	VOffscreenContextBase(in_DisplaySettings, in_pParentContext)
 {
+	if( ! IsFormatValid(in_DisplaySettings) )
+		V3D_THROW(VException, "Cannot create FBO because display format is not supported");
+
 	vout << "Creating FBO context from thread " << glfwGetThreadID() << vendl;
 
 	in_pParentContext->MakeCurrent();
@@ -86,31 +89,40 @@ VFrameBufferObjectContext::~VFrameBufferObjectContext()
 	glDeleteTextures(1, &m_TextureId);
 }
 
+vbool VFrameBufferObjectContext::IsFormatValid(const VDisplaySettings& in_Settings)
+{
+	return true;
+}
+
 void VFrameBufferObjectContext::MakeCurrent()
 {
 	m_pParentContext->MakeCurrent();
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_FBOId);
-	//glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_TextureId, 0);
 }
 
 void VFrameBufferObjectContext::SwapBuffers()
 {
-	//glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, 0, 0);
+	glBindTexture(GL_TEXTURE_2D, m_TextureId);
+	glGenerateMipmapEXT(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
 void VFrameBufferObjectContext::BindAsTexture(vuint in_nTextureUnit)
 {
-	//glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_TextureId, 0);
+	m_nTextureUnit = in_nTextureUnit;
+
 	glEnable(GL_TEXTURE_2D);
+	glActiveTexture(GL_TEXTURE0 + in_nTextureUnit);
 	glBindTexture(GL_TEXTURE_2D, m_TextureId);
 }
 
 void VFrameBufferObjectContext::UnbindTexture()
 {
-	//glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, 0, 0);
-	glDisable(GL_TEXTURE_2D);
+	glActiveTexture(GL_TEXTURE0 + m_nTextureUnit);
 	glBindTexture(GL_TEXTURE_2D, 0);
+	glDisable(GL_TEXTURE_2D);
 }
 
 //-----------------------------------------------------------------------------

@@ -336,8 +336,8 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						CommandLine="echo foo: $(SWIG_HOME)"
-						Outputs="dasds"
+						CommandLine=""
+						Outputs=""
 					/>
 				</FileConfiguration>
 			</File>
@@ -1001,14 +1001,6 @@
 						</File>
 						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLDevice.h"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\VOpenGlUtils.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLUtils.h"
 							>
 						</File>
 						<File

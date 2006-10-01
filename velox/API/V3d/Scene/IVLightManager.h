@@ -38,7 +38,7 @@ public:
 	virtual void Remove(VLightPart* in_pLight) = 0;
 
 	/** Apply all lights for the given shape */
-	virtual void ApplyLights(graphics::IVDevice* in_pDevice, IVShapePart* in_pShape) = 0;
+	virtual void ApplyLights(graphics::IVDevice* in_pDevice, const IVShapePart* in_pShape) = 0;
 
 	virtual VRangeIterator<graphics::VLight> Lights() = 0;
 };

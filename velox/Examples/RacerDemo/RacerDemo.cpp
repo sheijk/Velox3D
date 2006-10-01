@@ -70,7 +70,8 @@ private:
 	VServicePtr<updater::IVUpdateManager> m_pUpdater;
 	VServicePtr<system::IVSystemManager> m_pSystem;
 
-	VSharedPtr<VSimpleShooting> m_pRootShooting;
+//	VSharedPtr<VSimpleShooting> m_pRootShooting;
+	VSimpleShooting* m_pRootShooting;
 	VSharedPtr<IVLightManager> m_pLightManager;
 	VUpdateManagerPart* m_pUpdateManager;
 	VPhysicManagerPtr m_pPhysicManager;
@@ -156,10 +157,14 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	VSharedPtr<VEntity> pRoot = LoadScene(sceneFileName);
 	m_pUpdateManager = pRoot->GetPart<VUpdateManagerPart>();
-	VSharedPtr<VSimpleShooting> pShooting(new VSimpleShooting());
-	pShooting->SetRenderTarget(m_pDevice);
-	m_pRootShooting = pShooting;
-	pRoot->AddPart(m_pRootShooting);
+	//VSharedPtr<VSimpleShooting> pShooting(new VSimpleShooting());
+	//pShooting->SetRenderTarget(m_pDevice);
+	//m_pRootShooting = pShooting;
+	//pRoot->AddPart(m_pRootShooting);
+	m_pRootShooting = pRoot->GetPart<VSimpleShooting>();
+	m_pRootShooting->SetRenderTarget(m_pDevice);
+	if( m_pRootShooting == 0 )
+		V3D_THROW(VException, "could not find a shooting in the root node");
 	VInputPart* pInputPart = pRoot->GetPart<VInputPart>();
 	pInputPart->SetInputManager(&m_pWindow->QueryInputManager());
 
@@ -167,7 +172,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	m_pPhysicManager->RegisterToUpdater();
 
 	pRoot->Activate();
-	pRoot->DumpInfo();
+	//pRoot->DumpInfo();
 
 	m_pF1Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF1);
 	m_pF2Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF2);
@@ -217,12 +222,16 @@ vint RacerDemo::Main(std::vector<std::string> args)
 			timeTillNextToggle = .1f;
 		}
 
+		if( m_pF1Key->IsDown() )
+		{
+			pRoot->DumpInfo("#");
+			VResourceId("/")->DumpInfo("");
+		}
+
 		if( m_pEscapeKey->IsDown() )
 			m_pSystem->SetStatus(false);
-
-		
-
 	}
+
 	m_pUpdater->Stop();
 
 	pRoot->Deactivate();

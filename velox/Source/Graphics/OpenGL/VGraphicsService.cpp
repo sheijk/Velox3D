@@ -64,6 +64,34 @@ VAutoPtr<IVDevice> VGraphicsService::CreateOffscreenDevice(
 	}
 }
 
+void VGraphicsService::SetSystemParam(
+	const std::string& in_strName, 
+	VSharedPtr<IVParameterValue> in_pNewSystemParam)
+{
+	m_SystemParams.erase(in_strName);
+	m_SystemParams.insert(SystemParamMap::value_type(in_strName, in_pNewSystemParam));
+}
+
+void VGraphicsService::RemoveSystemParam(const std::string& in_strName)
+{
+	m_SystemParams.erase(in_strName);
+}
+
+void VGraphicsService::ApplySystemParams(IVMaterial& in_Material)
+{
+	for(SystemParamMap::iterator value = m_SystemParams.begin();
+		value != m_SystemParams.end();
+		++value)
+	{
+		IVParameter* pParam = in_Material.GetParameterByName(value->first);
+
+		if( pParam != 0 )
+		{
+			value->second->Apply(*pParam);
+		}
+	}
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------

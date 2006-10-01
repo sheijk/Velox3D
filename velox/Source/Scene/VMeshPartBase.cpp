@@ -7,9 +7,11 @@
 
 #include <V3d/Scene/VMeshPartBase.h>
 //-----------------------------------------------------------------------------
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 #include <V3d/Resource.h>
 #include <V3d/Utils/VStringValue.h>
 #include <V3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/IVGraphicsService.h>
 #include <V3d/Updater/IVUpdateManager.h>
 #include <V3d/Graphics/Misc/MiscUtils.h>
 #include <V3d/Messaging/VMessageInterpreter.h>
@@ -58,6 +60,13 @@ VMeshPartBase::VMeshPartBase(const std::string& in_strMaterialResource)
 	m_hMaterial = GetMutableResourceData<IVMaterial>(in_strMaterialResource.c_str());
 }
 
+VMeshPartBase::VMeshPartBase()
+	: m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
+	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
+{
+	SetMaterial(graphics::IVDevice::GetDefaultMaterial());
+}
+
 
 /**
 * d'tor
@@ -81,11 +90,15 @@ vuint VMeshPartBase::GetPassCount() const
 
 void VMeshPartBase::ApplyPassStates(vuint in_nPassNum, IVDevice& in_Device) const
 {
+	static VGraphicsServicePtr pGfxService;
+
 	//bad.. texture parameter values need to be updated before the material is
 	// applied, all other after that..
 	ApplyParameterValues(in_Device);
+	pGfxService->ApplySystemParams(*m_hMaterial);
 	ApplyMaterial(in_Device, &m_hMaterial->GetPass(in_nPassNum));
 	ApplyParameterValues(in_Device);
+	pGfxService->ApplySystemParams(*m_hMaterial);
 }
 
 void VMeshPartBase::UnapplyPassStates(vuint in_nPassNum, IVDevice& in_Device) const

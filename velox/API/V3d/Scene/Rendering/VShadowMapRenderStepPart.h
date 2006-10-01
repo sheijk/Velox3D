@@ -18,6 +18,10 @@
 
 #include <V3d/Scene/IVRenderStepPart.h>
 //-----------------------------------------------------------------------------
+namespace v3d { namespace graphics {
+	class IVRenderContext;
+}}
+
 namespace v3d { namespace scene {
 	class IVLightManager;
 //-----------------------------------------------------------------------------
@@ -37,17 +41,16 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
+	virtual void Activate();
+	virtual void Deactivate();
 private:
 	void AquireResources();
 	vbool HasAquiredResources() const;
 
 	entity::VPartConnection<IVLightManager> m_pLightManager;
 
-	resource::VResourceDataPtr<graphics::IVDevice> m_hShadowMapDevice;
-	resource::VResourceDataPtr<const graphics::IVTexture> m_hDepthTexture;
-	resource::VResourceDataPtr<const graphics::IVMaterial> m_hShadowMapShader;
-
 	vuint m_nShadowMapSize;
+	resource::VResourceDataPtr<graphics::IVRenderContext> m_pDepthMapContext;
 };
 
 //-----------------------------------------------------------------------------

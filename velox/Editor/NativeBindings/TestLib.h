@@ -88,6 +88,9 @@ void UpdatePart(float in_fSeconds, v3d::entity::IVPart* in_pPart);
 v3d::math::VRBTransform GetTransform(v3d::entity::VEntity* in_pEntity);
 void SetTransform(v3d::entity::VEntity* in_pEntity, const v3d::math::VRBTransform& in_Transform);
 
+v3d::scene::IVShooting* FindShooting(v3d::entity::VEntity* in_pEntity);
+v3d::scene::IVShooting* ToShooting(v3d::entity::IVPart* in_pPart);
+
 v3d::input::IVInputManager* CreateInputManager(int hwnd);
 void TellInputManager(
 	v3d::entity::VEntity* pEntity,

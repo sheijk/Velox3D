@@ -752,14 +752,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGlUtils.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLUtils.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\Source\Graphics\OpenGL\VOpenGLVBOMesh.cpp"
 						>
 					</File>

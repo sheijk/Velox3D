@@ -51,10 +51,7 @@ VShadowMapRenderStepPart::~VShadowMapRenderStepPart()
 
 vbool VShadowMapRenderStepPart::HasAquiredResources() const
 {
-	return 
-		m_hShadowMapShader != 0 &&
-		m_hDepthTexture != 0 &&
-		m_hShadowMapDevice != 0;
+	return m_pDepthMapContext != 0;
 }
 
 class VDepthMapFrameBufferObjectContext : public graphics::VFrameBufferObjectContext
@@ -71,112 +68,76 @@ public:
 		const vuint width = in_DisplaySettings.GetWidth();
 		const vuint height = in_DisplaySettings.GetHeight();
 
-		// create texture
-		glGenTextures(1, &m_TextureId);
-		glBindTexture(GL_TEXTURE_2D, m_TextureId);
+		GLuint depthTex = 0;
+		glGenTextures(1, &depthTex);
+		glBindTexture(GL_TEXTURE_2D, depthTex);
+		glTexImage2D(
+			GL_TEXTURE_2D,
+			0,
+			GL_DEPTH_COMPONENT24,
+			width, height,
+			0,
+			GL_DEPTH_COMPONENT,
+			GL_FLOAT,
+			0);
+
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_LUMINANCE);
-		//vbyte pixels[width*height];
-		std::vector<vbyte> pixels;
-		pixels.resize(width*height);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
-		V3D_ASSERT(glGetError() == 0);
-//		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 
-		glGenFramebuffersEXT(1, &m_FBOId);
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_FBOId);
+		GLuint fbo = 0;
+		glGenFramebuffersEXT(1, &fbo);
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo);
 
-		glGenRenderbuffersEXT(1, &m_DepthBufferId);
-		glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, m_DepthBufferId);
-		glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT16, width, height);
-		glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, m_DepthBufferId);
-
-		//glGenRenderbuffersEXT(1, &m_StencilBufferId);
-		//glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, m_StencilBufferId);
-		//glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_STENCIL_INDEX, width, height);
-		//glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_STENCIL_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, m_StencilBufferId);
-
-//		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_TextureId, 0);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, m_TextureId, 0);
+		glFramebufferTexture2DEXT(
+			GL_FRAMEBUFFER_EXT,
+			GL_DEPTH_ATTACHMENT_EXT,
+			GL_TEXTURE_2D,
+			depthTex,
+			0);
 
 		glDrawBuffer(GL_NONE);
+		glReadBuffer(GL_NONE);
+
+		if( GL_FRAMEBUFFER_COMPLETE_EXT != glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) )
+		{
+			V3D_THROW(VException, "Could not create FBO");
+		}
 
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 	}
 };
 
-/*
-class VDepthMapShooting : public VShootingBase
-{
-public:
-	VDepthMapShooting(vuint in_nOffscreenTargetSize)
-	{
-	}
-
-protected:
-	virtual graphics::IVDevice* GetRenderTarget()
-	{
-		return &*m_hShadowMapDevice;
-	}
-
-	virtual graphics::IVCamera* GetCamera()
-	{
-	}
-
-	virtual scene::IVGraphicsPart* GetScene()
-	{
-	}
-
-private:
-	graphics::VCamera m_Camera;
-	resource::VResourceDataPtr<graphics::IVDevice> m_hShadowMapDevice;
-};
-*/
-
 void VShadowMapRenderStepPart::AquireResources()
 {
-	using namespace resource;
+	// create fbo context
+	graphics::VDisplaySettings displaySettings;
+	displaySettings.SetSize(m_nShadowMapSize, m_nShadowMapSize);
+	displaySettings.SetBitsPerPixel(0);
+	displaySettings.SetDepthBits(16);
+ 	
+	graphics::IVRenderContext* pRenderContext = new VDepthMapFrameBufferObjectContext(
+		displaySettings,
+		graphics::VGraphicsServicePtr()->GetMainDevice()->GetRenderContext());
 
-	const std::string textureResourceName =
-		GetTextureResourceName(m_nShadowMapSize).c_str();
-	const char* textureResource = textureResourceName.c_str();
+	resource::VResourceId res = VServicePtr<resource::IVResourceManager>()->CreateResource("/graphics/shadowX");
+	res->AddData(pRenderContext);
+	m_pDepthMapContext = res->GetMutableData<graphics::IVRenderContext>();
 
-	if( ! VResourceManagerPtr()->ExistsResource(textureResource) )
-	{
-		VResourceManagerPtr()->CreateResource(textureResource);
-	}
-
-	VResourceId resource(textureResource);
-
-	if( ! resource->ContainsData<graphics::IVDevice>() )
-	{
-		graphics::VDisplaySettings displaySettings;
-		displaySettings.SetSize(m_nShadowMapSize, m_nShadowMapSize);
-		displaySettings.SetBitsPerPixel(0);
-		displaySettings.SetDepthBits(16);
-
-		graphics::IVRenderContext* pRenderContext = new VDepthMapFrameBufferObjectContext(
-			displaySettings, 
-			graphics::VGraphicsServicePtr()->GetMainDevice()->GetRenderContext());
-//		graphics::IVRenderContext* pRenderContext =	graphics::VGraphicsServicePtr()
-//			->GetMainDevice()->CreateOffscreenContext(&displaySettings);
-
-		resource->AddData(pRenderContext);
-	}
-
-	m_hShadowMapDevice = resource->GetMutableData<graphics::IVDevice>();
-	m_hDepthTexture = resource->GetData<graphics::IVTexture>();
-	m_hShadowMapShader = GetResourceData<graphics::IVMaterial>(g_ShaderResourceName.c_str());
+	//              graphics::IVRenderContext* pRenderContext =     graphics::VGraphicsServicePtr()
+	//                      ->GetMainDevice()->CreateOffscreenContext(&displaySettings);
 }
 
-//void VShadowMapRenderStepPart::Activate()
-//{
-//	IVRenderStepPart::Activate();
-//
-//	if( ! HasAquiredResources() )
-//		AquireResources();
-//}
+void VShadowMapRenderStepPart::Activate()
+{
+	if( ! HasAquiredResources() )
+		AquireResources();
+}
+
+void VShadowMapRenderStepPart::Deactivate()
+{
+}
 
 /*
 TODO:
@@ -184,38 +145,11 @@ merke: shooting(klasse) registrieren, welche der lichtquelle aus (IVLightManager
 in depthmapfborendercontect rendert, dann szene 1x normal rendern und dann mit compare to
 depth / schwarz drueber blenden rendern
 */
-
 void VShadowMapRenderStepPart::Render(IVGraphicsPart* in_pScene)
 {
-	//V3D_ASSERT(HasAquiredResources());
-
-	V3D_ASSERT(GetOutputDevice() != 0);
-	graphics::IVDevice& device(*GetOutputDevice());
-
-	//glClearColor(1.0f, .0f, .0f, .0f);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-/*
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	graphics::ApplyMaterial(device, &m_hShadowMapShader->GetPass(0));
-
-	VRangeIterator<const IVShapePart> shape = in_pScene->GetVisibleMeshes();
-	while( shape.HasNext() )
-	{
-		device.SetMatrix(
-			graphics::IVDevice::ModelMatrix, 
-			shape->GetModelTransform().AsMatrix());
-
-		shape->SendGeometry(*GetOutputDevice());
-
-		++shape;
-	}
-
-	//m_hShadowMapDevice->EndScene();
-
-	//device.BeginScene();
-*/
+	// make fbo current
+	// render from each light's point of view
+	// make previous 
 }
 
 

@@ -51,6 +51,22 @@ public:
 
 	~VAutoPtr()
 	{
+		Release();
+	}
+
+	T* Get() const { return m_pObject; }
+	T* operator->() const { return m_pObject; }
+	T& operator*() const { return *m_pObject; }
+
+	T* DropOwnership()
+	{
+		T* t = m_pObject;
+		m_pObject = NULL;
+		return t;
+	}
+
+	void Release()
+	{
 		if( m_pObject != 0 )
 		{
 			delete m_pObject;
@@ -58,15 +74,12 @@ public:
 		}
 	}
 
-	T* Get() const { return m_pObject; }
-	T* operator->() const { return m_pObject; }
-	T& operator*() const { return m_pObject; }
-
-	T* DropOwnership()
+	template<typename T2>
+	void Assign(T2* in_pNewTarget)
 	{
-		T* t = m_pObject;
-		m_pObject = NULL;
-		return t;
+		Release();
+
+		m_pObject = in_pNewTarget;
 	}
 
 private:

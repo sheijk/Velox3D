@@ -38,6 +38,7 @@ class VMeshPartBase : public entity::VPartBaseAdapter<IVShapePart>
 public:
 	VMeshPartBase(resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial);
 	VMeshPartBase(const std::string& in_strMaterialResource);
+	VMeshPartBase();
 
 	virtual ~VMeshPartBase();
 

@@ -9,6 +9,8 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Math/VQuaternionOps.h>
 #include <V3d/Entity/VGenericPartParser.h>
+#include <V3d/Messaging/VMessageInterpreter.h>
+
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -195,6 +197,24 @@ void VFPSMoverPart::QueryButtons(IVInputManager& in_InputManager)
 
 	m_pFastTriggerButton = &in_InputManager.GetStandardKeyboard().GetKey(KeyLeftShift);
 }
+
+void VFPSMoverPart::OnMessage(
+  const messaging::VMessage& in_Message, 
+  messaging::VMessage* in_pAnswer)
+{
+	using namespace messaging;
+
+	static VMessageInterpreter interpreter;
+
+	if( ! interpreter.IsInitialized() )
+	{
+		interpreter.SetInitialized(true);
+		interpreter.AddMemberOption("ignore-mouse", this, &m_bIgnoreMouse);
+	}
+
+	interpreter.HandleMessage(this, in_Message, in_pAnswer);
+}
+
 
 V3D_REGISTER_PART_PARSER(VFPSMoverPart);
 //-----------------------------------------------------------------------------

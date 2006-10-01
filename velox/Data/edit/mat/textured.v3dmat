@@ -6,10 +6,11 @@
 			<state name="vertex-program">
 				<iparam name="source">
 varying vec2 texCoord;
+uniform vec2 texScale;
 
 void main(void) {
 	gl_Position = ftransform();
-	texCoord = gl_MultiTexCoord0.xy;
+	texCoord = gl_MultiTexCoord0.xy * texScale;
 }
 				</iparam>
 			</state>
@@ -19,9 +20,8 @@ varying vec2 texCoord;
 uniform sampler2D texture;
 
 void main(void) {
-/* this be comment */
-/*	gl_FragColor = vec4(texCoord.x, texCoord.y, 0, 1); */
 	gl_FragColor = texture2D(texture, texCoord);
+/*	gl_FragColor = texture2D(texture, vec2(0.1, 0.1)); */
 }
 				</iparam>
 			</state>

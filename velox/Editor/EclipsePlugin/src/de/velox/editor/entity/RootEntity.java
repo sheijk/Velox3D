@@ -18,7 +18,7 @@ public class RootEntity extends Entity {
 	private static final String INPUT_PART_ID = "v3d::utils::VInputPart";
 	
 	private VRenderFrameAction renderAction = null;
-	private IVShooting shooting = null;
+	private IVShooting shooting;
 	
 	public RootEntity(String name) {
 		super(name);
@@ -27,14 +27,19 @@ public class RootEntity extends Entity {
 	public RootEntity(IVXMLElement xml) {
 		super(xml);
 	}
+
+	private void connectShootingRenderAction() {
+		if( shooting != null && renderAction != null ) {
+			renderAction.SetShooting(shooting);
+		}
+	}
 	
 	public void setRenderAction(VRenderFrameAction ra) {
-		if( renderAction == null ) {
+		if( ra != null && renderAction == null ) {
 			renderAction = ra;
+
+			connectShootingRenderAction();
 			
-			shooting = v3d.CreateShooting(renderAction.GetDevice());
-			renderAction.SetShooting(shooting);
-			super.Add(new Part(SHOOTING_PART_ID, new VPartPtr(shooting)));
 			try {
 				v3d.TellInputManager(this.impl(), renderAction.GetInputManager());
 			}
@@ -46,11 +51,17 @@ public class RootEntity extends Entity {
 	
 	@Override
 	public void Add(Part newPart) {
-		if( newPart != null && valid(newPart.GetPart()) && ! newPart.GetId().equalsIgnoreCase(SHOOTING_PART_ID) ) {
+		if( valid(newPart.GetPart()) ) {
 			super.Add(newPart);
 			
 			if( renderAction != null && newPart.GetId().equalsIgnoreCase(INPUT_PART_ID) ) {
 				v3d.TellInputManager(this.impl(), renderAction.GetInputManager());
+			}
+
+			IVShooting newShooting = v3d.ToShooting(newPart.GetPart().Get());
+			if( newShooting != null ) {
+				shooting = newShooting;
+				connectShootingRenderAction();
 			}
 		}
 	}

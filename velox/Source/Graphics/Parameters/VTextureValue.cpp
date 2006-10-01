@@ -43,8 +43,8 @@ void VTextureValue::SetTextureResource(const std::string& in_Value)
 	//if( resource::ExistsResourceData<graphics::IVTexture>(in_Value.c_str()) )
 	try
 	{
-		resource::GetResourceData<graphics::IVTexture>(in_Value.c_str());
 		m_strTextureResource = in_Value;
+		resource::GetResourceData<graphics::IVTexture>(in_Value.c_str());
 	}
 	catch(VException&)
 	{

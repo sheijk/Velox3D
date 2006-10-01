@@ -13,6 +13,7 @@
 #include <V3d/Graphics/GraphicsExceptions.h>
 #include <V3d/OpenGL.h>
 #include <V3d/Math/VMatrix.h>
+#include <V3d/Graphics/VMeshDescription.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -27,7 +28,13 @@ void GetGLMatrix(GLenum in_Matrix, math::VMatrix44f* out_pMatrix);
 
 void ThrowOnGLError(VStringParam in_strFileName, vuint in_nLine, VStringParam in_strOperation);
 
-#define V3D_GLCHECK(x) (x); if( glGetError() != GL_NO_ERROR ) ThrowOnGLError(__FILE__, __LINE__, #x);
+#define V3D_GLCHECK(x) (x); if( glGetError() != GL_NO_ERROR ) ::v3d::graphics::ThrowOnGLError(__FILE__, __LINE__, #x);
+
+GLint GetGeometryMode(VMeshDescription::GeometryType in_eType);
+
+void MakeGLMatrix(const math::VMatrix44f& mat, vfloat32* out_pGLMat);
+void SetGLMatrix(int mode, const math::VMatrix44f& mat);
+void MultGLMatrix(const math::VMatrix44f& mat);
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics

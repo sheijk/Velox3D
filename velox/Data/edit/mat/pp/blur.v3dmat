@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+void main(void) {
+	gl_Position = ftransform();
+	gl_TexCoord[0] = gl_MultiTexCoord0;
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<iparam name="source">
+uniform sampler2D image;
+
+void main(void) {
+	vec2 pos = gl_TexCoord[0].st;
+	vec4 color = texture2D(image, pos);
+	
+	gl_FragColor = color;
+}
+				</iparam>
+			</state>
+		</renderPass>
+	</shaderPath>
+</effect>

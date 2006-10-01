@@ -41,28 +41,23 @@ void VGLSLTextureParameter::ApplyTexture(VStringParam in_strResourceName) const
 
 	m_pTexture = VResourceDataPtr<IVTexture>();
 
-	try
+	if( in_strResourceName != 0 && in_strResourceName[0] != '\0' )
 	{
-		if( in_strResourceName != 0 && in_strResourceName[0] != '\0' )
+		try
 		{
 			m_pTexture = GetMutableResourceData<IVTexture>(in_strResourceName);
 			m_bWasFineLastTime = true;
 		}
-	}
-	catch(VException& e)
-	{
-		//if( m_bWasFineLastTime )
-		//{
-		//	V3D_LOGLN("Could not apply texture " << in_strResourceName
-		//		<< ":" << e.GetErrorString());
-		//}
+		catch(VException& e)
+		{
+			m_bWasFineLastTime = false;
+		}
 
-		m_bWasFineLastTime = false;
-	}
+		if( &*m_pTexture == 0 )
+			m_pstrTextureResource.Assign(new std::string(in_strResourceName));
 
-	// set texture id as int
-	//glUniform1iARB(m_Location, pTex->GetTextureId());
-	V3D_GLCHECK( glUniform1iARB(GetLocation(), m_nTextureUnit) );	
+		V3D_GLCHECK( glUniform1iARB(GetLocation(), m_nTextureUnit) );	
+	}
 }
 
 std::string VGLSLTextureParameter::TextureResource() const
@@ -75,6 +70,18 @@ std::string VGLSLTextureParameter::TextureResource() const
 
 void VGLSLTextureParameter::BindTexture()
 {	
+	if( m_pstrTextureResource.Get() != 0 )
+	{
+		try
+		{
+			std::string newTextureResource = *m_pstrTextureResource;
+			m_pTexture = resource::GetMutableResourceData<IVTexture>(newTextureResource.c_str());
+			m_pstrTextureResource.Release();
+		}
+		catch(VException&)
+		{}
+	}
+
 	if( &*m_pTexture != 0 )
 	{
 		V3D_GLCHECK( m_pTexture->Bind(m_nTextureUnit) );

@@ -86,6 +86,7 @@ void VOffscreenShooting::SetRenderTargetResource(const std::string& in_strResour
 
 		graphics::VDisplaySettings settings;
 		settings.SetSize(512, 512);
+		settings.SetBitsPerPixel(32);
 
 		graphics::IVRenderContext* pRenderContext =
 			pGfxService->GetMainDevice()->CreateOffscreenContext(&settings);

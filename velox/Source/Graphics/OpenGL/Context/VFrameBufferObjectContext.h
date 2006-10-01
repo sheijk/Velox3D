@@ -39,6 +39,8 @@ public:
 protected:
 	enum NoInitMarker { NoInit };
 
+	virtual vbool IsFormatValid(const VDisplaySettings& in_Settings);
+
 	VFrameBufferObjectContext(
 		const VDisplaySettings& in_DisplaySettings,
 		IVRenderContext* in_pParentContext,
@@ -48,6 +50,8 @@ protected:
 	GLuint m_FBOId;
 	GLuint m_DepthBufferId;
 	GLuint m_StencilBufferId;
+
+	vuint m_nTextureUnit;
 };
 
 //-----------------------------------------------------------------------------

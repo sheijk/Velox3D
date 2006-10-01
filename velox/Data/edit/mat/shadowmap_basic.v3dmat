@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+uniform mat4 v3d_DepthMapMatrix;
+
+varying vec3 normal;
+varying vec4 shadowCoord;
+
+void main(void) {
+	gl_Position = ftransform();	
+	normal = gl_NormalMatrix * gl_Normal;
+	shadowCoord = v3d_DepthMapMatrix * gl_ModelViewMatrix * gl_Vertex;
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<iparam name="source">
+uniform sampler2D v3d_DepthMap;
+uniform sampler2D texture;
+
+varying vec3 normal;
+varying vec4 shadowCoord;
+
+const float bias = -0.005;
+/* ~ 2 times pixel size = 1.0 / 2.0 / resolution */
+const float pixsize = 1.0 / 2.0 / 512.0;
+
+float checkDepth(vec4 t, float z) {
+	if( texture2D(v3d_DepthMap, t).r &gt; z + bias )
+		return 1.0;
+	else
+		return 0.0;
+}
+
+float v3d_ShadowTerm() {
+	float z = shadowCoord.z;
+	vec4 t = shadowCoord / shadowCoord.w;
+	
+	if( min(t.x, t.y) &gt; 0.0 &amp;&amp;
+		1.0 &gt; max(t.x, t.y) &amp;&amp;
+		z &gt; 0.0 )
+	{
+		float shadow =
+			checkDepth(t + vec4(-pixsize, -pixsize, 0.0, 0.0), t.z) +
+			checkDepth(t + vec4(pixsize, -pixsize, 0.0, 0.0), t.z) +
+			checkDepth(t + vec4(pixsize, pixsize, 0.0, 0.0), t.z) +
+			checkDepth(t + vec4(-pixsize, pixsize, 0.0, 0.0), t.z);
+		shadow /= 4.0;
+		
+		return vec4(shadow);
+	}
+	else
+	{
+		return vec4(0.0);
+	}
+}
+
+void main(void) {
+	normal = normalize(normal);
+	gl_FragColor = vec4(v3d_ShadowTerm());
+}
+				</iparam>
+			</state>
+		</renderPass>
+	</shaderPath>
+</effect>

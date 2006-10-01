@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+varying vec3 normal;
+
+void main(void) {
+	gl_Position = ftransform();	
+	normal = gl_NormalMatrix * gl_Normal;
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<iparam name="source">
+varying vec3 normal;
+
+void main(void) {
+	normal = normalize(normal);
+	gl_FragColor = vec4((normal + vec3(1.0)) * 0.5, 1.0);
+}
+				</iparam>
+			</state>
+		</renderPass>
+	</shaderPath>
+</effect>

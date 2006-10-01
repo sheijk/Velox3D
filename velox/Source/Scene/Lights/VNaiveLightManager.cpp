@@ -42,7 +42,7 @@ namespace {
 				const VColor4f ambient = pLight->GetAmbientColor();
 				const VColor4f diffuse = pLight->GetDiffuseColor();
 				const VColor4f specular = pLight->GetSpecularColor();
-				//static vfloat32 pos[4] = {0, 10, 0, 1 };
+				static vfloat32 spotDir[4] = { 0.0f, 0.0f, -1.0f, 0.0f };
 				const VVector4f position = ToVector4f(
 					pLight->GetPosition(), pLight->GetW());
 
@@ -51,6 +51,9 @@ namespace {
 				glLightfv(lightGL, GL_AMBIENT, (float*)&ambient);
 				glLightfv(lightGL, GL_DIFFUSE, (float*)&diffuse);
 				glLightfv(lightGL, GL_SPECULAR, (float*)&specular);
+
+				glLightfv(lightGL, GL_SPOT_DIRECTION, spotDir);
+				glLightf(lightGL, GL_SPOT_EXPONENT, 1.0f);
 
 				glLightf(lightGL, GL_CONSTANT_ATTENUATION, 1.0f);
 				glLightf(lightGL, GL_LINEAR_ATTENUATION, .1f);
@@ -74,7 +77,7 @@ void VNaiveLightManager::Remove(VLightPart* in_pLight)
 	m_Lights.erase(in_pLight);
 }
 
-void VNaiveLightManager::ApplyLights(IVDevice* in_pDevice, IVShapePart* in_pShape)
+void VNaiveLightManager::ApplyLights(IVDevice* in_pDevice, const IVShapePart* in_pShape)
 {
 	V3D_ASSERT(in_pDevice);
 

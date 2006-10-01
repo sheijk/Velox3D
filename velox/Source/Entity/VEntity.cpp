@@ -185,10 +185,19 @@ VEntity::~VEntity()
 IVPart* VEntity::GetPartById(const std::string& in_Id)
 {
 	PartContainer::iterator part = m_Parts.begin();
+	// look for an exact match
 	for( ; part != m_Parts.end(); ++part)
 	{
 		if( part->first == in_Id )
 			return part->second.Get();
+	}
+
+	// if no exact match is found, look if we can convert
+	for(part = m_Parts.begin(); part != m_Parts.end(); ++part)
+	{
+		VSharedPtr<IVPart> p = part->second;
+		if( p->GetTypeInfo().CanBeCastedTo(in_Id) )
+			return p.Get();
 	}
 
 	return 0;

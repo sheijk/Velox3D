@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+uniform mat4 v3d_DepthMapMatrix;
+
+varying vec4 shadowCoord;
+
+varying vec3 normal;
+varying vec3 lightDir;
+varying float dist;
+
+void main(void) {
+	gl_Position = ftransform();	
+	normal = gl_NormalMatrix * gl_Normal;
+	lightDir = normalize(gl_LightSource[0].position.xyz - (gl_ModelViewMatrix * gl_Vertex).xyz);
+	shadowCoord = v3d_DepthMapMatrix * gl_ModelViewMatrix * gl_Vertex;
+
+	vec4 ecPos = gl_ModelViewMatrix * gl_Vertex;
+	dist = length( vec3(gl_LightSource[0].position - ecPos) );
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<iparam name="source">
+uniform sampler2D v3d_DepthMap;
+
+varying vec4 shadowCoord;
+
+const float bias = -0.005;
+/* ~ 2 times pixel size = 1.0 / 2.0 / resolution */
+const float pixsize = 1.0 / 2.0 / 512.0;
+
+float checkDepth(vec4 t, float z) {
+	if( texture2D(v3d_DepthMap, t).r &gt; z + bias )
+		return 1.0;
+	else
+		return 0.0;
+}
+
+float v3d_ShadowTerm(int lightNum) {
+	float z = shadowCoord.z;
+	vec4 t = shadowCoord / shadowCoord.w;
+	
+	if( min(t.x, t.y) &gt; 0.0 &amp;&amp;
+		1.0 &gt; max(t.x, t.y) &amp;&amp;
+		z &gt; 0.0 )
+	{
+		float shadow =
+			checkDepth(t + vec4(-pixsize, -pixsize, 0.0, 0.0), t.z) +
+			checkDepth(t + vec4(pixsize, -pixsize, 0.0, 0.0), t.z) +
+			checkDepth(t + vec4(pixsize, pixsize, 0.0, 0.0), t.z) +
+			checkDepth(t + vec4(-pixsize, pixsize, 0.0, 0.0), t.z);
+		shadow /= 4.0;
+		
+		return vec4(shadow);
+	}
+	else
+	{
+		return vec4(0.0);
+	}
+}
+
+varying vec3 normal;
+varying vec3 lightDir;
+varying float dist;
+
+float spotEffect(int lightNum) {
+	float dx = abs(2.0 * ((shadowCoord.x / shadowCoord.w) - 0.5));
+	float dy = abs(2.0 * ((shadowCoord.y / shadowCoord.w) - 0.5));
+
+/*	float d = max(0.0, 1.0 - sqrt(dx*dx + dy*dy)); */
+
+	float d = sqrt(dx*dx + dy*dy);
+	
+	float innerCircle = 0.7;
+	float f = max(0.0, d - innerCircle);
+	float p = min(1.0, f / (1.0 - innerCircle) );
+	return 1.0 - p;
+}
+
+vec4 phong(int lightNum) {
+	vec4 color = gl_LightSource[lightNum].ambient;
+	
+    float ndotl = max( dot(normal,lightDir), 0.0 );
+/*	float att = 1.0 - dist / 400.0; */
+	float att = 1.0;
+	if( dist &gt; 180.0 )
+		att = 1.0 - (dist - 180.0)/20.0;
+	
+    float shadow = v3d_ShadowTerm(lightNum);
+
+    if( att &gt; 0.0 &amp;&amp;
+    	ndotl &gt; 0.0 &amp;&amp; 
+    	shadow &gt; 0. ) 
+    {
+    	float spot = spotEffect(lightNum);
+        vec4 diffuse = att * spot * max( dot(normal, lightDir), 0.0 );
+        color += shadow * diffuse * gl_LightSource[lightNum].diffuse;
+    }
+    
+    color += vec4(0.4) * 
+    	dot( normal, vec3(0.0, 1.0, 0.0) );
+	
+	return color;
+}
+
+void main(void) {
+	normal = normalize(normal);
+
+	gl_FragColor = phong(0);
+}
+				</iparam>
+			</state>
+		</renderPass>
+	</shaderPath>
+</effect>

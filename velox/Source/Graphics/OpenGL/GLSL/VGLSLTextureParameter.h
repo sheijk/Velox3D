@@ -13,6 +13,7 @@
 #include "VGLSLParameter.h"
 #include <V3d/Resource/VResourceDataPtr.h>
 #include "../Textures/VTexture2D.h"
+#include <V3d/Core/SmartPtr/VAutoPtr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
@@ -41,6 +42,7 @@ private:
 	mutable resource::VResourceDataPtr<IVTexture> m_pTexture;
 	vuint m_nTextureUnit;
 	mutable vbool m_bWasFineLastTime;
+	mutable VAutoPtr<std::string> m_pstrTextureResource;
 };
 
 //-----------------------------------------------------------------------------

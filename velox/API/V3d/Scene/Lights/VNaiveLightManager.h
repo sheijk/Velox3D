@@ -34,7 +34,7 @@ public:
 	virtual void Add(VLightPart* in_pLight);
 	virtual void Remove(VLightPart* in_pLight);
 
-	void ApplyLights(graphics::IVDevice* in_pDevice, IVShapePart* in_pShape);
+	void ApplyLights(graphics::IVDevice* in_pDevice, const IVShapePart* in_pShape);
 
 	void Activate();
 	void Deactivate();

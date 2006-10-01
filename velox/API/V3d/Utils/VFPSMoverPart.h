@@ -39,6 +39,9 @@ public:
 
 	void QueryButtons(input::IVInputManager& in_pInputManager);
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 	void MoveForward(vfloat32 in_fDistance);
 	void StrafeRight(vfloat32 in_fDistance);
 	void MoveUp(vfloat32 in_fDistance);
