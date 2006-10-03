@@ -329,32 +329,7 @@
 			Name="Bindings"
 			>
 			<File
-				RelativePath="..\..\Editor\NativeBindings\Jamfile"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						CommandLine=""
-						Outputs=""
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\Editor\NativeBindings\main.java"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Editor\NativeBindings\makefile"
-				>
-			</File>
-			<File
 				RelativePath="..\..\Editor\NativeBindings\PartParsers.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Editor\NativeBindings\swigbuild.log"
 				>
 			</File>
 			<File
@@ -364,6 +339,20 @@
 			<File
 				RelativePath="..\..\Editor\NativeBindings\TestLib.h"
 				>
+			</File>
+			<File
+				RelativePath="..\..\Editor\NativeBindings\TestLib.i"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Generating java code using swig..."
+						CommandLine="cd ../../Editor/NativeBindings&#x0D;&#x0A;mkdir GlueCode&#x0D;&#x0A;mkdir ..\SourceV3d&#x0D;&#x0A;mkdir ..\SourceV3d\de&#x0D;&#x0A;mkdir ..\SourceV3d\de\velox&#x0D;&#x0A;&quot;$(SWIG_HOME)/swig.exe&quot; -c++ -java -Fmicrosoft -package de.velox -outdir ../SourceV3d/de/velox -o GlueCode/TestLibSWIG.cpp TestLib.i &gt; swigbuild.log&#x0D;&#x0A;"
+						Outputs="../../Editor/NativeBindings/GlueCode/TestLibSWIG.h;../../Editor/NativeBindings/GlueCode/TestLibSWIG.cpp"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\Editor\NativeBindings\VRangeIter.h"
@@ -450,20 +439,6 @@
 				<File
 					RelativePath="..\..\Editor\NativeBindings\Tags.i"
 					>
-				</File>
-				<File
-					RelativePath="..\..\Editor\NativeBindings\TestLib.i"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Generating java code using swig..."
-							CommandLine="cd ../../Editor/NativeBindings&#x0D;&#x0A;mkdir GlueCode&#x0D;&#x0A;mkdir ..\SourceV3d&#x0D;&#x0A;mkdir ..\SourceV3d\de&#x0D;&#x0A;mkdir ..\SourceV3d\de\velox&#x0D;&#x0A;&quot;$(SWIG_HOME)/swig.exe&quot; -c++ -java -Fmicrosoft -package de.velox -outdir ../SourceV3d/de/velox -o GlueCode/TestLibSWIG.cpp TestLib.i &gt; swigbuild.log&#x0D;&#x0A;"
-							Outputs="../../Editor/NativeBindings/GlueCode/TestLibSWIG.h;../../Editor/NativeBindings/GlueCode/TestLibSWIG.cpp"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\..\Editor\NativeBindings\Utils.i"

@@ -1,4 +1,4 @@
-/*
+	/*
  * Copyright 2002-2006 Velox Development Team. This file is licenced under the
  * revised BSD licence. See licence_bsd.txt in the root of the Velox 
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
@@ -8,10 +8,13 @@
 %ignore v3d::math::VVector::m_Vec;
 %ignore v3d::math::VVector::operator[];
 %ignore v3d::math::VVector::operator=;
+
 %include "../../API/V3d/Math/VVector.h"
 %include "../../API/V3d/Math/VVectorOps.h"
+
 %include "../../API/V3d/Math/VQuaternion.h"
 %include "../../API/V3d/Math/VQuaternionOps.h"
+
 %extend v3d::math::VVector {
 	void Assign(const VVector& o) { *self = o; }
 	
@@ -66,8 +69,10 @@
 }
 
 %rename(Assign) v3d::math::VMatrix::operator=;
+
 %include "../../API/V3d/Math/VMatrix.h"
 %include "../../API/V3d/Math/VMatrixOps.h"
+
 %extend v3d::math::VMatrix {
 	void Add(const VMatrix& other) { *self += other; }
 	void Sub(const VMatrix& other) { *self -= other; }
@@ -125,7 +130,30 @@
 	void ApplyColumn(unsigned int columnNum, const math::VVector3f& vector) {
 		ApplyColumn(self, columnNum, vector);
 	}
+
+	VVector4f Mult(const VVector4f& vec) {
+		VVector4f result;
+		Mult(result, *self, vec);
+		return result;
+	}
+
+	VVector3f Mult(const VVector3f& vec) {
+		VVector4f vec4;
+		for(int i = 0; i < 3; ++i)
+			vec4.Set(i, vec.Get(i));
+		vec4.Set(3, 0.0f);
+
+		VVector4f result4;
+		Mult(result4, *self, vec4);
+		
+		VVector3f result;
+   		for(int i = 0; i < 3; ++i)
+			result.Set(i, result4.Get(i) / result4.Get(3));
+
+		return result;
+	}
 };
+
 %include "../../API/V3d/Math/VRBTransform.h"
 
 

@@ -30,6 +30,10 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+03.10.06
+- slightly improved movement of objects in the editor
+- some small improvements in the java bindings
+
 30.09.06
 - first approach at shadow mapping, still plenty of artefacts
 

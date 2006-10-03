@@ -5,7 +5,6 @@
 	<part type="v3d::utils::VInputPart" tags=""/>
 	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags=" " include-all="true" include-tags=" " tags=""/>
 	<part type="v3d::scene::VShadowMapShooting" tags=""/>
-	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/pp/blur.v3dmat" tags=""/>
 	<entity name="editorCam">
 		<part type="v3d::entity::VRigidBodyPart" pos="(29.6708,274.106,207.657)" updir="(0.00282943,0.657332,-0.753596)" viewdir="(-0.0832304,-0.750829,-0.655231)" tags=""/>
 		<part type="v3d::utils::VCameraPart" tags=""/>

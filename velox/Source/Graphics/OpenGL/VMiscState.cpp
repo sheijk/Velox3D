@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Graphics/GraphicsExceptions.h>
 #include <V3d/Graphics/Materials/VModeTypeInfo.h>
-#include "VOpenGLUtils.h"
+#include <V3d/Graphics/OpenGLUtils.h>
 
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>

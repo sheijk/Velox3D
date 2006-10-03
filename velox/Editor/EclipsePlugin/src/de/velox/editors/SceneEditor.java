@@ -331,12 +331,25 @@ public class SceneEditor extends VeloxEditorBase {
 			SceneView.getDefaultInstance().setEntity(root);
 	}
 
-	private static class MouseHandler implements RenderLayer.MouseEventListener
+	private static VVector3f createVector(float x, float y, float z) {
+		VVector3f vec = new VVector3f();
+		vec.Set(x, y, z);
+		return vec;
+	}
+	
+	private static final VVector3f X_AXIS = createVector(1, 0, 0);
+	private static final VVector3f Y_AXIS = createVector(0, 1, 0);
+	private static final VVector3f Z_AXIS = createVector(0, 0, 1);
+	private enum Interaction { NONE, MOVE, ROTATE }
+	private enum DominantDir { NONE, X, Y, Z }; 
+		
+	private class MouseHandler implements RenderLayer.MouseEventListener
 	{
-		private static VVector3f createVector(float x, float y, float z) {
-			VVector3f vec = new VVector3f();
-			vec.Set(x, y, z);
-			return vec;
+		
+		VVector3f scaled(VVector3f vec, float factor) {
+			VVector3f result = new VVector3f(vec);
+			result.Scale(factor);
+			return result;
 		}
 		
 		private void move(float x, float y, float z) {
@@ -347,9 +360,48 @@ public class SceneEditor extends VeloxEditorBase {
 			if( selectedEntity != null ) {
 				VRBTransform transform = v3d.GetTransform(selectedEntity.impl());
 				VVector3f newPos = transform.GetPosition();
-				newPos.Add(createVector(x, y, z));
+
+//				VRBTransform viewrb = new VRBTransform(
+//						renderLayer.getDevice().GetMatrix(
+//								IVDevice.MatrixMode.ViewMatrix));
+//				viewrb.SetXAxis(viewrb.GetXAxis().Normalized());
+//				viewrb.SetYAxis(viewrb.GetYAxis().Normalized());
+//				viewrb.SetZAxis(viewrb.GetZAxis().Normalized());
+
+				if( dominantDir == DominantDir.NONE ) {
+					decideDominantDirection(x, y, z);
+				}
+				
+				if( dominantDir != DominantDir.X )
+					x = .0f;
+				if( dominantDir != DominantDir.Y )
+					y = .0f;
+				if( dominantDir != DominantDir.Z )
+					z = .0f;
+
+				newPos.Add( scaled(transform.GetXAxis(), -x) );
+				newPos.Add( scaled(transform.GetYAxis(), y) );
+				newPos.Add( scaled(transform.GetZAxis(), z) );
+//				newPos.Add(createVector(x, y, z));
+				
 				transform.SetPosition(newPos);
 				v3d.SetTransform(selectedEntity.impl(), transform);
+			}
+		}
+
+		private void decideDominantDirection(float x, float y, float z) {
+			final float absx = Math.abs(x);
+			final float absy = Math.abs(y);
+			final float absz = Math.abs(z);
+			
+			if( absx > absy && absx > absz ) {
+				dominantDir = DominantDir.X;
+			}
+			if( absy > absx && absy > absz ) {
+				dominantDir = DominantDir.Y;
+			}
+			if( absz > absx && absz > absy ) {
+				dominantDir = DominantDir.Z;
 			}
 		}
 		
@@ -366,9 +418,6 @@ public class SceneEditor extends VeloxEditorBase {
 		private static final int MB_LEFT = 1;
 		private static final int MB_RIGHT = 3;
 				
-		private static final VVector3f X_AXIS = createVector(1, 0, 0);
-		private static final VVector3f Y_AXIS = createVector(0, 1, 0);
-		private static final VVector3f Z_AXIS = createVector(0, 0, 1);
 		
 		private final float moveScale = 1.0f / 100;
 		private final float rotationScale = 1.0f;
@@ -378,7 +427,11 @@ public class SceneEditor extends VeloxEditorBase {
 		private boolean leftDown = false;
 		private boolean rightDown = false;
 
+		private DominantDir dominantDir = DominantDir.NONE;
+		
 		public void mouseDown(MouseEvent e) {
+			dominantDir = DominantDir.NONE;
+			
 			if( e.button == MB_LEFT ) {
 				leftDown = true;			
 			}
@@ -403,11 +456,9 @@ public class SceneEditor extends VeloxEditorBase {
 		
 		public void mouseDoubleClick(MouseEvent e) {
 		}
-
-		private enum Action { NONE, MOVE, ROTATE }
 		
 		public void mouseMove(MouseEvent e) {
-			Action action = Action.NONE;
+			Interaction action = Interaction.NONE;
 			float scale = 1.0f;
 			
 //			final boolean controlDown = (e.stateMask & SWT.CONTROL) != 0;
@@ -422,13 +473,13 @@ public class SceneEditor extends VeloxEditorBase {
 			lastY = e.y;
 			
 			if( leftDown ) {
-				action = Action.MOVE;
+				action = Interaction.MOVE;
 			}
 			else if( rightDown ) {
-				action = Action.ROTATE;
+				action = Interaction.ROTATE;
 			}
 			
-			if( action == Action.MOVE ) {
+			if( action == Interaction.MOVE ) {
 				scale *= moveScale;
 				
 				if( shiftDown )
@@ -442,23 +493,44 @@ public class SceneEditor extends VeloxEditorBase {
 				
 				move(dx, dy, dz);
 			}
-			else if( action == Action.ROTATE ) {
+			else if( action == Interaction.ROTATE ) {
 				scale *= rotationScale;
 				
 				if( shiftDown )
 					scale *= .1f;
 				
 				if( altDown ) {
-					if( Math.abs(dx) < Math.abs(dy) )
-						dx = .0f;
-					
-					if( Math.abs(dy) < Math.abs(dx) )
-						dy = .0f;
+					dz = dy;
+					dx = 0.0f;
+					dy = 0.0f;
 				}
 				
-				rotate(-dy * scale, X_AXIS);
-				rotate(dx * scale, Y_AXIS);
-//				rotate(-dz * scale, Z_AXIS);
+				if( dominantDir == DominantDir.NONE ) {
+					decideDominantDirection(dx, dy, dz);
+				}
+				
+				if( dominantDir == DominantDir.X ) {
+					dy = 0.0f;
+					dz = 0.0f;
+				}
+				else if( dominantDir == DominantDir.Y ) {
+					dx = 0.0f;
+					dz = 0.0f;
+				}
+				else if( dominantDir == DominantDir.Z ) {
+					dx = 0.0f;
+					dy = 0.0f;
+				}
+				
+				Entity selectedEntity = SceneView.getDefaultInstance().getActiveEntity();
+				
+				if( selectedEntity != null ) {
+					VRBTransform transform = v3d.GetTransform(selectedEntity.impl());
+				
+					rotate(dy * scale, transform.GetXAxis());
+					rotate(-dx * scale, transform.GetYAxis());
+					rotate(dz * scale, transform.GetZAxis());
+				}
 			}
 		}
 	}

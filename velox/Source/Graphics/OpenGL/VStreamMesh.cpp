@@ -7,7 +7,7 @@
 
 #include "VStreamMesh.h"
 //-----------------------------------------------------------------------------
-#include "VOpenGLUtils.h"
+#include <V3d/Graphics/OpenGLUtils.h>
 
 #include <V3d/Graphics/Geometry.h>
 

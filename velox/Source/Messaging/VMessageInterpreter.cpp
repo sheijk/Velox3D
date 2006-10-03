@@ -47,8 +47,8 @@ VMessageInterpreter::Result VMessageInterpreter::HandleMessage(void* object,
 	}
 	else if( request == "update" )
 	{
-		const std::string name = in_Message.Get("name").Get<std::string>();
-		const std::string value = in_Message.Get("value").Get<std::string>();
+		const std::string name = in_Message.GetAs<std::string>("name");
+		const std::string value = in_Message.GetAs<std::string>("value");
 
 		OptionMap::iterator option = m_Options.find(name);
 
