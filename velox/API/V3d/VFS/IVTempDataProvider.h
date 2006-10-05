@@ -23,7 +23,7 @@ namespace vfs {
  * @author: ins
  */
 #undef CreateFile //windows defines sucks..
-class IVTempDataProvider : VNamedObject
+class IVTempDataProvider : public VNamedObject
 {
 public:
 
@@ -50,7 +50,8 @@ public:
 	 */
 
 	virtual VStringParam CreateFile() = 0;
-    	
+
+	virtual ~IVTempDataProvider() {}
 };
 
 //-----------------------------------------------------------------------------

@@ -99,7 +99,6 @@ class VVeloxModules : public v3d::VModuleBase
 
 	// system
 	VSharedPtr<system::VSystemManager> g_pSystemManager;
-
 	VSharedPtr<graphics::VGraphicsService> g_pGraphicsService;
 
 	// image

@@ -86,10 +86,10 @@ VStringParam VTempDataProvider::CreateFile(IVStream* in_pStream)
 	vulong theByteCount = 0;
 	vulong theCurrentPosition = in_pStream->GetPos();
 
-	in_pStream->SetPos(vfs::IVStream::Anchor::End,0);
+	in_pStream->SetPos(vfs::IVStream::End,0);
 	theByteCount = in_pStream->GetPos();
 
-	in_pStream->SetPos(vfs::IVStream::Anchor::Begin, theCurrentPosition);
+	in_pStream->SetPos(vfs::IVStream::Begin, theCurrentPosition);
 
 	vuchar* theDataBuffer = new vuchar[theByteCount]; //TODO error checking
 	in_pStream->Read(theDataBuffer, theByteCount);
