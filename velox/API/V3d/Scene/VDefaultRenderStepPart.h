@@ -39,6 +39,10 @@ private:
 	vbool m_bIncludeAll;
 	std::vector<tags::VTag> m_ExcludeTags;
 
+	vfloat32 m_fNearPlane;
+	vfloat32 m_fFarPlane;
+	vfloat32 m_fFOV;
+
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
 };

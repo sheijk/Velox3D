@@ -46,6 +46,9 @@ namespace {
 VDefaultRenderStepPart::VDefaultRenderStepPart()
 {
 	m_bIncludeAll = true;
+	m_fFOV = 45.0f;
+	m_fNearPlane = 1.0f;
+	m_fFarPlane = 1000.0f;
 }
 
 /**
@@ -55,11 +58,27 @@ VDefaultRenderStepPart::~VDefaultRenderStepPart()
 {
 }
 
+vfloat32 GetAspect(graphics::IVDevice& in_Device)
+{
+	const graphics::VDisplaySettings& displaySettings =
+		*in_Device.GetRenderContext()->GetDisplaySettings();
+
+	const vuint width = displaySettings.GetWidth();
+	const vuint height = displaySettings.GetWidth();
+
+	return vfloat32(width) / vfloat32(height);
+}
+
 void VDefaultRenderStepPart::Render(IVGraphicsPart* in_pScene)
 {
 	V3D_ASSERT(in_pScene != 0);
 
 	static VServicePtr<graphics::IVGraphicsService> pGfxService;
+
+	const vfloat32 aspect = GetAspect(*GetOutputDevice());
+	math::VMatrix44f projectionMatrix;
+	math::MakeProjectionMatrix(&projectionMatrix, m_fFOV, aspect, m_fNearPlane, m_fFarPlane);
+	GetOutputDevice()->SetMatrix(graphics::IVDevice::ProjectionMatrix, projectionMatrix);
 
 	glClearColor(m_BackgroundColor.red, m_BackgroundColor.green,
 		m_BackgroundColor.blue, m_BackgroundColor.alpha);
@@ -162,6 +181,9 @@ void VDefaultRenderStepPart::OnMessage(
 		interpreter.AddOption(SharedPtr(new messaging::VMemberVarOption<g::VColor4f>(
 			"clearColor", this, &m_BackgroundColor)));
 		interpreter.AddMemberOption("include-all", this, &m_bIncludeAll);
+		interpreter.AddMemberOption("fov", this, &m_fFOV);
+		interpreter.AddMemberOption("near-plane", this, &m_fNearPlane);
+		interpreter.AddMemberOption("far-plane", this, &m_fFarPlane);
 	}
 
 	switch( interpreter.HandleMessage(this, in_Message, in_pAnswer) )

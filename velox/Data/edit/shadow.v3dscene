@@ -19,7 +19,7 @@
 		<part type="v3d::scene::VTerrainPart" extent="(200,200)" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" resolution="64" tags=""/>
 	</entity>
 	<entity name="light">
-		<part type="v3d::entity::VRigidBodyPart" pos="(-11.3488,5.47217,9.86213)" updir="(0.258154,0.939696,-0.224338)" viewdir="(0.709296,-0.34201,-0.616383)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0.01)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
 		<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(1,0.5,0,1)" specularColor="(0,0,0,0)" w="1" tags=""/>
 		<part type="v3d::scene::VCoordSysDisplayPart" material="/system/graphics/defaultMaterial" tags=""/>
 		<part type="v3d::utils::VTrackballPart" tags=""/>
@@ -52,5 +52,10 @@
 	<entity name="bigsphere">
 		<part type="v3d::entity::VRigidBodyPart" pos="(58,-27,-86)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" radius="50" tags=""/>
+	</entity>
+	<entity name="model">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-43,132,39)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VModelPart" material="" model="/data/models/om/canon2.3ds" tags=""/>
+		<part type="v3d::scene::VCoordSysDisplayPart" material="/system/graphics/defaultMaterial" tags=""/>
 	</entity>
 </entity>

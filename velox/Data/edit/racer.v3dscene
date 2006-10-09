@@ -4,9 +4,9 @@
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
-	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/water_pp.v3dmat" tags=""/>
+	<!-- part type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/water_pp.v3dmat" tags=""/>
 	<part type="v3d::scene::VPostProcesssingRenderStepPart3" material="/edit/mat/fakehdr_pp.v3dmat" tags=""/>
-	<part type="v3d::scene::VPostProcesssingRenderStepPart2" material="/edit/mat/fakehdr2_pp.v3dmat" tags=""/>
+	<part type="v3d::scene::VPostProcesssingRenderStepPart2" material="/edit/mat/fakehdr2_pp.v3dmat" tags=""/ -->
 	<part type="v3d::scene::VSimpleShooting" tags=""/>
 	<entity name="ambient">
 		<entity name="skybox">
