@@ -20,12 +20,11 @@ VJointHinge2::VJointHinge2()
 {
 	m_pBody1 = 0;
 	m_pBody2 = 0;
-
 	m_fMaxForce2 = 0.0f;
-	
 	SetAxis1(1,0,0);
 	SetAxis2(0,1,0);
 	SetAnchor(0,0,0);
+	m_sName = "";
 }
 
 VJointHinge2::~VJointHinge2()
@@ -43,7 +42,6 @@ void VJointHinge2::Apply()
 
 void VJointHinge2::Create(VWorld* in_PhysicWorld)
 {
-
 	V3D_ASSERT(in_PhysicWorld != 0);
 	AddWorld(in_PhysicWorld);
 
@@ -62,7 +60,15 @@ void VJointHinge2::Create(VWorld* in_PhysicWorld)
 	}
 	m_bIsActive = true;
 }
+std::string VJointHinge2::GetName()
+{
+  return m_sName;
+}
 
+void VJointHinge2::SetName(std::string in_sName)
+{
+  m_sName = in_sName;
+}
 void VJointHinge2::AddBody(VBody* in_pBody1, VBody* in_pBody2)
 {
 	m_pBody1 = in_pBody1;
@@ -205,6 +211,8 @@ vfloat32 VJointHinge2::GetAnchorAngle1()
 void VJointHinge2::SetMaxForce2(vfloat32 in_fMaxForce2)
 {
 	m_fMaxForce2 = in_fMaxForce2;
+	if(m_JointID)
+	  dJointSetHinge2Param (m_JointID, dParamFMax2, m_fMaxForce2);
 }
 
 vfloat32 VJointHinge2::GetMaxForce2()
@@ -234,15 +242,11 @@ void VJointHinge2::SetAxisAndAnchor()
 		dJointSetHinge2Anchor(m_JointID, m_Anchor[0], m_Anchor[1], m_Anchor[2]);
 		dJointSetHinge2Axis1(m_JointID, m_Axis1[0], m_Axis1[1], m_Axis1[2]);
 		dJointSetHinge2Axis2(m_JointID, m_Axis2[0], m_Axis2[1], m_Axis2[2]);
-
-
 		//debug purpose
 		GetAnchor();
 	}
 }
-
 //-----------------------------------------------------------------------------
 } // namespace physics
 } // namespace v3d
 //-----------------------------------------------------------------------------
-

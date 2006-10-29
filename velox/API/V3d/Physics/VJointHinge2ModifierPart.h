@@ -37,9 +37,13 @@ public:
 private:
 
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
-	entity::VPartConnection<physics::VJointHinge2Part> m_pJointHinge2;
+	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
 	entity::VPartConnection<utils::VInputPart> m_pInputManager;
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+
+	void Steer(float in_fSpeed, VJointHinge2* pJoint1, VJointHinge2* pJoint2);
+	void GetButtons();
+	void Accel(float in_fSpeed, float in_fAccel, VJointHinge2* pJoint1, VJointHinge2* pJoint2 );
 
 	input::VKeyCode m_ListeningEvent;
 	input::VKeyCode m_ListeningEvent2;
@@ -55,6 +59,10 @@ private:
 	vfloat32 m_fSteering;
 	vfloat32 m_fSpeed;
 	vfloat32 m_fMaxSpeed;
+	vfloat32 m_fAccel;
+
+	std::string m_sJoint1Identifer;
+	std::string m_sJoint2Identifer;
 };
 
 //-----------------------------------------------------------------------------

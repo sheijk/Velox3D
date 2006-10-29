@@ -417,6 +417,20 @@ void VPhysicManager::RefreshJoint(VBody* in_pBody)
 	}
 }
 
+physics::VJointHinge2* VPhysicManager::GetJointByName(std::string in_sName)
+{
+  JointList::const_iterator it = m_JointList.begin();
+  JointList::const_iterator itEnd = m_JointList.end();
+
+  for( ; it != itEnd; ++it)
+  {
+	if((*it)->GetName() == in_sName)
+	  return (*it);
+  }
+  return 0;
+
+}
+
 //-----------------------------------------------------------------------------
 }} // namespace v3d::
 //-----------------------------------------------------------------------------

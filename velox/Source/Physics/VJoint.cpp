@@ -86,6 +86,8 @@ vfloat32 VJoint::GetHighStop()
 void VJoint::SetVelocity(vfloat32 in_fVelocity)
 {
 	m_fVelocity = in_fVelocity;
+	if(m_JointID)
+	  dJointSetHinge2Param (m_JointID, dParamVel, m_fVelocity);
 }
 
 vfloat32 VJoint::GetVelocity()
@@ -95,9 +97,10 @@ vfloat32 VJoint::GetVelocity()
 
 void VJoint::SetMaxForce(vfloat32 in_fMaxForce)
 {
-	m_fMaxForce = in_fMaxForce;
+  m_fMaxForce = in_fMaxForce;
+  if(m_JointID) 
+	dJointSetHinge2Param(m_JointID, dParamFMax, m_fMaxForce);
 }
-
 vfloat32 VJoint::GetMaxForce()
 {
 	return m_fMaxForce;
@@ -106,6 +109,8 @@ vfloat32 VJoint::GetMaxForce()
 void VJoint::SetFudgeFactor(vfloat32 in_fFudgeFactor)
 {
 	m_fFudgeFactor = in_fFudgeFactor;
+	if(m_JointID)
+	  dJointSetHinge2Param(m_JointID, dParamFudgeFactor, m_fFudgeFactor);
 }
 
 vfloat32 VJoint::GetFudgeFactor()
@@ -175,6 +180,8 @@ vfloat32 VJoint::GetSuspensionCFM()
 void VJoint::SetVelocity2(vfloat32 in_fVelocity2)
 {
 	m_fVelocity2 = in_fVelocity2;
+	if(m_JointID)
+	  dJointSetHinge2Param (m_JointID, dParamVel2, m_fVelocity2);
 }
 
 vfloat32 VJoint::GetVelocity2()

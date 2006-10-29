@@ -55,6 +55,8 @@ public:
 	math::VVector3f GetAxis2();
 	math::VVector3f GetAnchor();
 	math::VVector3f GetOwnAnchor();
+	std::string GetName();
+	void SetName(std::string in_sName);
 
 	VBody* GetBody1();
 	VBody* GetBody2();
@@ -79,6 +81,8 @@ private:
 	math::VVector3f m_Axis1;
 	math::VVector3f m_Axis2;
 	math::VVector3f m_Anchor;
+
+	std::string m_sName;
 };
 
 //-----------------------------------------------------------------------------

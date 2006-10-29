@@ -112,6 +112,7 @@ public:
 	void RegisterJoint(VJointHinge2* in_pJoint);
 	void UnregisterJoint(VJointHinge2* in_pJoint);
 	void RefreshJoint(VBody* in_pBody);
+	VJointHinge2* GetJointByName(std::string in_sName);
 
 private:
 	vbool IsRegisteredName(std::string in_sName);

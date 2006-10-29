@@ -31,6 +31,7 @@ VJointHinge2Part::VJointHinge2Part() :
 	m_pBodyAddressTwo = 0;
 	m_sBody1Name = "";
 	m_sBody2Name = "";
+	m_sName = "";
 }
 VJointHinge2Part::~VJointHinge2Part()
 {
@@ -168,6 +169,7 @@ void VJointHinge2Part::OnMessage(
 			in_pAnswer->AddProperty("Body2", m_pBodyAddressTwo);
 			in_pAnswer->AddProperty("Body1Name", m_sBody1Name);
 			in_pAnswer->AddProperty("Body2Name", m_sBody2Name);
+			in_pAnswer->AddProperty("Name", m_sName);
 		}
 	}
 
@@ -300,6 +302,12 @@ void VJointHinge2Part::OnMessage(
 			std::string name = in_Message.GetAs<std::string>("value");
 			m_sBody2Name = name;
 			RegisterLink();
+		}
+		if (name == "Name")
+		{
+		  std::string name = in_Message.GetAs<std::string>("value");
+		  m_sName = name;
+		  m_Joint.SetName(name);
 		}
 	}
 }

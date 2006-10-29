@@ -65,6 +65,8 @@ private:
 	vbool m_bIsReady;
 	std::string m_sBody1Name;
 	std::string m_sBody2Name;
+
+	std::string m_sName;
 };
 
 //-----------------------------------------------------------------------------
