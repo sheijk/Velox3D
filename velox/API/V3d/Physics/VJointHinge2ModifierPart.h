@@ -41,7 +41,7 @@ private:
 	entity::VPartConnection<utils::VInputPart> m_pInputManager;
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
-	void Steer(float in_fSpeed, VJointHinge2* pJoint1, VJointHinge2* pJoint2);
+	void Steer(float in_fSteer, VJointHinge2* pJoint1, VJointHinge2* pJoint2);
 	void GetButtons();
 	void Accel(float in_fSpeed, float in_fAccel, VJointHinge2* pJoint1, VJointHinge2* pJoint2 );
 
@@ -60,6 +60,7 @@ private:
 	vfloat32 m_fSpeed;
 	vfloat32 m_fMaxSpeed;
 	vfloat32 m_fAccel;
+	vfloat32 m_fMaxSteer;
 
 	std::string m_sJoint1Identifer;
 	std::string m_sJoint2Identifer;

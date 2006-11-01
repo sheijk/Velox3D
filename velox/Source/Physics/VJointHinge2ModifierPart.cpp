@@ -38,6 +38,7 @@ m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 	m_sJoint1Identifer = "";
 	m_sJoint2Identifer = "";
 	m_fAccel = 30.0f;
+	m_fMaxSteer = 2;
 		
 }
 
@@ -151,23 +152,40 @@ void VJointHinge2ModifierPart::GetButtons()
 		m_fAccel-=m_fSpeedFactor;
    	}
   }
+  //m_fSteering = 0;
+
+  bool bIsSteered = false;
+
   if(m_pButton3)
   {
   	if(m_pButton3->IsDown())
   	{
-  		m_fSteering += m_fSteerFactor;
+	  bIsSteered = true;
+  		m_fSteering -= 0.4f;
+		if(m_fSteering < -m_fMaxSteer )
+		  m_fSteering = - m_fMaxSteer;
 		//m_fSpeed -=1.0f;
    	}
   }
 
   if(m_pButton4)
   {
+	if(m_pButton4->IsDown())
   	{
-  		m_fSteering -= m_fSteerFactor;
+	  bIsSteered = true;
+  		m_fSteering += 0.4f;
+		if(m_fSteering > m_fMaxSteer )
+		  m_fSteering =  m_fMaxSteer;
+		
 		//m_fSpeed +=1.0f;
    	}
   }
-  
+  // slowy adjust to zero
+  /*if(!bIsSteered)
+  {
+	m_fSteering = 0;
+  }
+  */
   if(m_pButton5)
   {
   	if(m_pButton5->IsDown())
@@ -189,9 +207,9 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 
   if(pJoint1 && pJoint2)
   {
-	//Steer(m_fSteering, pJoint1, pJoint2);
 	Accel(m_fMaxSpeed, m_fAccel, pJoint1, pJoint2);
-	vout << "Speed: " << m_fMaxSpeed << "Accel: " << m_fAccel << vendl;
+	Steer(m_fSteering, pJoint1, pJoint2);
+	vout << "Speed: " << m_fMaxSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
   }
   else
   {
@@ -202,68 +220,57 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	
 }
 
-void VJointHinge2ModifierPart::Steer(float in_fSpeed, VJointHinge2* pJoint1, VJointHinge2* pJoint2)
+void VJointHinge2ModifierPart::Steer(float in_fSteer, VJointHinge2* pJoint1, VJointHinge2* pJoint2)
 {
-  float leftAdjust = (in_fSpeed > 0 ? in_fSpeed : in_fSpeed * 1.2);
-  float rightAdjust = (in_fSpeed < 0 ? in_fSpeed : in_fSpeed * 1.2);
+  /*float leftAdjust = (in_fSpeed > 0 ? in_fSpeed : in_fSpeed * 1.2);
+  float rightAdjust = (in_fSpeed < 0 ? in_fSpeed : in_fSpeed * 1.2);*/
 
-  pJoint1->SetLowStop(leftAdjust);
-  pJoint1->SetHighStop(leftAdjust);
-  //ode bug!? 
-  pJoint1->SetLowStop(leftAdjust);
-  pJoint1->SetHighStop(leftAdjust);
+  vfloat32 v1 = in_fSteer - pJoint1->GetAnchorAngle1();
+  if (v1 > 0.1) v1 = 0.1;
+  if (v1 < -0.1) v1 = -0.1;
+  v1 *= 10.0;
+  pJoint1->SetVelocity(v1);
+  pJoint1->SetLowStop(-0.65f);
+  pJoint1->SetHighStop(0.65f);
+  pJoint1->SetMaxForce(0.4f);
+  
+  vfloat32 v2 = in_fSteer - pJoint2->GetAnchorAngle1();
+  if (v2 > 0.1) v2 = 0.1;
+  if (v2 < -0.1) v2 = -0.1;
+  v2 *= 10.0;
+  
+  pJoint2->SetVelocity(v2);
+  pJoint2->SetLowStop(-0.65f);
+  pJoint2->SetHighStop(0.65f);
+  pJoint2->SetMaxForce(0.4f);
 
-  pJoint2->SetLowStop(rightAdjust);
-  pJoint2->SetHighStop(rightAdjust);
-  //ode bug!? 
-  pJoint2->SetLowStop(rightAdjust);
-  pJoint2->SetHighStop(rightAdjust);
+  //pJoint1->SetLowStop(leftAdjust);
+  //pJoint1->SetHighStop(leftAdjust);
+  ////ode bug!? 
+  //pJoint1->SetLowStop(leftAdjust);
+  //pJoint1->SetHighStop(leftAdjust);
 
- /* pJoint1->Apply();
-  pJoint2->Apply();*/
+  //pJoint2->SetLowStop(rightAdjust);
+  //pJoint2->SetHighStop(rightAdjust);
+  ////ode bug!? 
+  //pJoint2->SetLowStop(rightAdjust);
+  //pJoint2->SetHighStop(rightAdjust);
+
+  /*pJoint1->SetVelocity(v);
+  pJoint1->SetMaxForce(0.2);
+  pJoint1->SetFudgeFactor(0.1);
+
+  pJoint1->SetVelocity(v);
+  pJoint1->SetMaxForce(0.2);
+  pJoint1->SetFudgeFactor(0.1);*/
 }
 
 void VJointHinge2ModifierPart::Accel(float in_fSpeed, float in_fAccel, VJointHinge2* pJoint1, VJointHinge2* pJoint2 )
 {
-  /*if(in_fSpeed < 0 && m_fAccel > 0)
-	m_fAccel *= -1;
-  else
-  {
-	if(in_fSpeed > 0 && m_fAccel < 0)
-	  m_fAccel *=-1;
-  }*/
-  
   pJoint1->SetMaxForce2(in_fSpeed);
   pJoint1->SetVelocity2(in_fAccel);
   pJoint2->SetVelocity2(in_fAccel);
   pJoint2->SetMaxForce2(in_fSpeed);
-
-
-  //pJoint2->SetMaxForce(0.2);
-  //pJoint2->SetMaxForce(0.2);
-
-
-
-  /*dReal v = 0 - pJoint1->GetAnchorAngle1();
-  if (v > 0.1) v = 0.1;
-  if (v < -0.1) v = -0.1;
-  v *= 10.0;*/
-
-  //pJoint1->SetVelocity(v);
-  //pJoint1->SetMaxForce(0.2);
-  //pJoint1->SetFudgeFactor(0.1);
- 
-  //pJoint2->SetVelocity(v);
- // pJoint2->SetFudgeFactor(0.1);
-
- // dJointSetHinge2Param (joint[0],dParamVel,v);
- // dJointSetHinge2Param (joint[0],dParamFMax,0.2);
- // dJointSetHinge2Param (joint[0],dParamLoStop,-0.75);
-//  dJointSetHinge2Param (joint[0],dParamHiStop,0.75);
-  //dJointSetHinge2Param (joint[0],dParamFudgeFactor,0.1);
-  
-  /*pJoint1->Apply();
-  pJoint2->Apply();*/
 }
 
 V3D_REGISTER_PART_PARSER(VJointHinge2ModifierPart);

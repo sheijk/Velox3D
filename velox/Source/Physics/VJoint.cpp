@@ -66,6 +66,8 @@ void VJoint::AddJointGroup(VJointGroup* in_pJointGroup)
 void VJoint::SetLowStop(vfloat32 in_fLowStop)
 {
 	m_fLowStop = in_fLowStop;
+	if(m_JointID)
+	  dJointSetHinge2Param( m_JointID, dParamLoStop, m_fLowStop);
 }
 
 vfloat32 VJoint::GetLowStop()
@@ -76,6 +78,8 @@ vfloat32 VJoint::GetLowStop()
 void VJoint::SetHighStop(vfloat32 in_fHighStop)
 {
 	m_fHighStop = in_fHighStop;
+	if(m_JointID)
+	  dJointSetHinge2Param( m_JointID, dParamHiStop, m_fHighStop);
 }
 
 vfloat32 VJoint::GetHighStop()
@@ -121,6 +125,8 @@ vfloat32 VJoint::GetFudgeFactor()
 void VJoint::SetBounce(vfloat32 in_fBounce)
 {
 	m_fBounce = in_fBounce;
+	if(m_JointID)
+	  dJointSetHinge2Param( m_JointID, dParamBounce, m_fBounce);
 }
 
 vfloat32 VJoint::GetBounce()
@@ -131,6 +137,8 @@ vfloat32 VJoint::GetBounce()
 void VJoint::SetCFM(vfloat32 in_fCFM)
 {
 	m_fCFM = in_fCFM;
+	if(m_JointID)
+	  dJointSetHinge2Param( m_JointID, dParamCFM, m_fCFM);
 }
 
 vfloat32 VJoint::GetCFM()
@@ -171,6 +179,8 @@ vfloat32 VJoint::GetSuspensionERP()
 void VJoint::SetSuspensionCFM(vfloat32 in_fSuspensionCFM)
 {
 	m_fSuspensionCFM = in_fSuspensionCFM;
+	if(m_JointID)	  
+	  dJointSetHinge2Param( m_JointID, dParamSuspensionCFM, m_fSuspensionCFM);
 }
 vfloat32 VJoint::GetSuspensionCFM()
 {
