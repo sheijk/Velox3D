@@ -124,5 +124,77 @@
             id="de.velox.editor.materials.GLSLEditor"
             name="GLSL Editor"/>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Velox Commands"
+            id="de.velox.editor.commands"
+            name="Velox"/>
+      <command
+            categoryId="de.velox.editor.commands"
+            defaultHandler="de.velox.editor.scene.RunSceneAction"
+            description="Runs the scene in the active editor"
+            id="de.velox.editor.commands.runscene"
+            name="Run Scene"/>
+      <command
+            categoryId="de.velox.editor.commands"
+            defaultHandler="de.velox.editor.scene.ActivateInputAction"
+            description="Toggles routing of mouse+keyboard to Velox"
+            id="de.velox.editor.commands.activateinput"
+            name="Activate Input"/>
+      <command
+            categoryId="de.velox.editor.commands"
+            defaultHandler="de.velox.editor.scene.RestoreSceneAction"
+            description="Reset the scene to the state it had before the last &quot;Run scene&quot; command"
+            id="de.velox.editor.commands.restorescene"
+            name="Restore scene"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            id="de.velox.editor.editorContribution"
+            targetID="de.velox.editors.SceneEditor">
+         <action
+               class="de.velox.editor.scene.RunSceneAction"
+               definitionId="de.velox.editor.commands.runscene"
+               id="de.velox.editor.editoractions.runscene"
+               label="Play"
+               menubarPath="window/additions"
+               toolbarPath="/Normal/V3d"
+               tooltip="Play the scene. You can restore it afterwards using &quot;Restore&quot;"/>
+         <action
+               class="de.velox.editor.scene.RestoreSceneAction"
+               definitionId="de.velox.editor.commands.restorescene"
+               id="de.velox.editor.editoractions.restorescene"
+               label="Restore"
+               menubarPath="window/additions"
+               toolbarPath="/Normal/V3d"
+               tooltip="Restore the scene to the state it had before Play" />
+         <action
+               class="de.velox.editor.scene.ActivateInputAction"
+               definitionId="de.velox.editor.commands.activateinput"
+               helpContextId="Enables routing of keyboard and mouse input to the engine. Disable by hitting Escape"
+               id="de.velox.editor.editoractions.activateinput"
+               label="Enable input"
+               menubarPath="window/additions"
+               toolbarPath="/Normal/V3d"
+               tooltip="Enables routing of keyboard and mouse input to the engine. Disable by hitting Escape"/>
+      </editorContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="de.velox.editor.commands.activateinput"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="F8"/>
+      <key
+            commandId="de.velox.editor.commands.runscene"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="F6"/>
+      <key
+            commandId="de.velox.editor.commands.restorescene"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Alt+F6"/>
+   </extension>
 
 </plugin>

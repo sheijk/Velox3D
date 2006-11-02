@@ -247,65 +247,8 @@ public class SceneEditor extends VeloxEditorBase {
 		
 		if( root != null )
 			root.setRenderAction(renderAction);
-		
-		IActionBars bars = getEditorSite().getActionBars();
-		
-		Action enableInputAction = new SyncAction(){
-			@Override protected void exec() {
-				renderAction.SetIgnoreInput(false);
-			}
-		};
-		enableInputAction.setText("Enable input");
-		enableInputAction.setToolTipText("Press Escape to disable again");
-		bars.getToolBarManager().add(enableInputAction);
-		
-		Action playAction = new SyncAction() {
-			private boolean playing = false;
-			private IVXMLElement preupdateScene = null;
-			
-			@Override
-			public void exec() {
-				if( playing ) {
-					updateAction.SetUpdateSpeedFactor(.0f);
-					this.setText("Play");
-					
-					restoreScene();
-				}
-				else {
-					updateAction.SetUpdateSpeedFactor(1.0f);
-					this.setText("Pause");
-					
-					saveCurrentScene();
-				}
-				
-				playing = ! playing;
-			}
-			
-			void saveCurrentScene() {
-				preupdateScene = v3d.CreateXMLElement(root.GetName());
-				root.writeToXML(preupdateScene);
-			}
-			
-			void restoreScene() {
-				if( preupdateScene == null )
-					return;
-	
-				root.applySettings(preupdateScene);
-				
-//				VXMLNodeIterator node = preupdateScene.ChildBegin();
-//				while( node.HasNext() ) {
-//					final IVXMLElement element = node.Get().ToElement();
-//					if( element != null && element.GetName().AsCString().equalsIgnoreCase("entity") ) {
-//						root.applySettings(element);
-//					}
-//				}
-			}
-		};
-		playAction.setText("Play/Pause");
-		
-		bars.getToolBarManager().add(playAction);
 	}
-
+	
 	@Override
 	public void dispose() {
 		//TODO: this must happen _earlier_, before the widget (and it's windows
@@ -534,5 +477,49 @@ public class SceneEditor extends VeloxEditorBase {
 			}
 		}
 	}
+
+	private boolean playing = false;
+	private IVXMLElement preupdateScene = null;
+
+	private void saveCurrentScene() {
+		preupdateScene = v3d.CreateXMLElement(root.GetName());
+		root.writeToXML(preupdateScene);
+	}
+	
+	public void restoreScene() {
+		if( preupdateScene == null )
+			return;
+
+		root.applySettings(preupdateScene);
+	}
+
+	public void toggleRunScene() {
+		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+			@Override
+			public void Run() throws RuntimeException {
+				if( playing ) {
+					updateAction.SetUpdateSpeedFactor(.0f);
+					
+//					restoreScene();
+				}
+				else {
+					updateAction.SetUpdateSpeedFactor(1.0f);
+					
+					saveCurrentScene();
+				}
+				
+				playing = ! playing;
+			}
+		});
+	}
+
+	public void enableInput() {
+		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+			@Override public void Run() throws RuntimeException {
+				renderAction.SetIgnoreInput(false);
+			}
+		});
+	}
+
 }
 

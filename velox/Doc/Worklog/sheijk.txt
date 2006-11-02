@@ -30,6 +30,16 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+02.11.06
+- reimplemented toolbar actions in the editor
+- scene is not restored automatically after playing in the editor
+- added "restore" action for this
+- keyboard shortcuts for Play(F6)/Restore(Alt+F6)/Activate Input(F8) available
+- editor does not add shooting to root node -> you will need to add a VSimpleShootingPart to older scenes (but can also choose other implementations of IVShooting)
+
+??.10.06
+???
+
 03.10.06
 - slightly improved movement of objects in the editor
 - some small improvements in the java bindings
