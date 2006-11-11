@@ -5,7 +5,7 @@
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
 	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-10,0)" MaxContacts="40" ObjectCount="6" Slip1="0.1" Slip2="0.1" SoftCFM="0" SoftERP="0" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="0.5" SurfaceMu2="0.5" UpdateStep="0.05" tags=""/>
-	<part type="shooting" tags=""/>
+	<part type="v3d::scene::VSimpleShooting" tags=""/>
 	<entity name="ambient">
 		<entity name="editorCam">
 			<part type="v3d::entity::VRigidBodyPart" pos="(114.61,30.7989,-0.000174946)" updir="(0.104509,0.994522,-0.00183871)" viewdir="(-0.994366,0.10455,0.0174991)" tags=""/>
