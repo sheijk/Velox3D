@@ -1,4 +1,4 @@
-<entity name="NewCarTest">
+<entity name="BuggyTest">
 	<part type="v3d::scene::VNaiveSceneManagerPart" tags=""/>
 	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)" exclude-tags=" " far-plane="1000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
