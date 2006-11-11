@@ -329,6 +329,14 @@
 			Name="Bindings"
 			>
 			<File
+				RelativePath="..\..\Editor\NativeBindings\IVFrameAction.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Editor\NativeBindings\IVSynchronizedAction.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Editor\NativeBindings\PartParsers.cpp"
 				>
 			</File>
@@ -359,7 +367,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Editor\NativeBindings\VRenderFrameAction.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Editor\NativeBindings\VRenderFrameAction.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Editor\NativeBindings\VSharedPtr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Editor\NativeBindings\VUpdateManagerCallAction.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Editor\NativeBindings\VUpdateManagerCallAction.h"
 				>
 			</File>
 			<File

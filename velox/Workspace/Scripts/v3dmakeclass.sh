@@ -9,6 +9,12 @@ name=$1
 namespace=$2
 templatedir=`v3dgetdir.sh`/Workspace/Templates
 
+if [ ! $1 ] || [ ! $2 ]
+then
+	echo Usage: v3dmakeclass.sh ClassName NamespaceName
+	exit
+fi
+
 v3dmakeinterface.sh $1 $2
 
 cp ${templatedir}/VeloxClass.cpp ${name}.cpp

@@ -19,6 +19,7 @@ using namespace v3d::scene;
 using namespace v3d::graphics;
 using namespace v3d::math;
 using namespace v3d::input;
+using namespace v3d::editor;
 
 typedef IVPart::Dependency Dependency;
 

@@ -9,6 +9,12 @@ name=$1
 namespace=$2
 veloxdir=`v3dgetdir.sh`
 
+if [ ! $1 ] || [ ! $2 ]
+then
+	echo Usage: v3dmakeinterface.sh InterfaceName NamespaceName
+	exit
+fi
+
 # copy velox template to temp file
 cp ${veloxdir}/Workspace/Templates/VeloxClass.h ./$name.temp
 

@@ -7,6 +7,10 @@
 
 %feature("director") IVFrameAction;
 %feature("director") IVSynchronizedAction;
+%include "IVFrameAction.h"
+%include "IVSynchronizedAction.h"
+%include "VRenderFrameAction.h"
+%include "VUpdateManagerCallAction.h"
 %include "VView.h"
 
 
