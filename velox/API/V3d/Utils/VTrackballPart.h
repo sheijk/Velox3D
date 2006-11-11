@@ -22,7 +22,8 @@ using namespace v3d; // anti auto indenting
 /**
  * @author sheijk
  */
-class VTrackballPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VTrackballPart : 
+	public entity::VPartBaseAdapter<entity::IVUpdateablePart>
 {
 public:
 	VTrackballPart();
@@ -35,7 +36,23 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 	void SetTrackball(const VSharedPtr<VMouseTrackball>& in_Trackball);
+
+
+	vfloat32 GetAltitudeAngle() const;
+	void SetAltitudeAngle(const vfloat32& in_AltitudeAngle);
+
+	vfloat32 GetDirectionAngle() const;
+	void SetDirectionAngle(const vfloat32& in_DirectionAngle);
+
+	vfloat32 GetDistance() const;
+	void SetDistance(const vfloat32& in_Distance);
+
+	math::VVector3f GetCenter() const;
+	void SetCenter(const math::VVector3f& in_Center);
 private:
+	virtual void OnMessage(const messaging::VMessage& in_Message, 
+		messaging::VMessage* in_pAnswer = 0);
+
 	VSharedPtr<VMouseTrackball> m_pTrackball;
 
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;

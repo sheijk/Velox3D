@@ -30,6 +30,9 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+11.11.06
+- VTrackballPart saves it's orientation etc.
+
 02.11.06
 - reimplemented toolbar actions in the editor
 - scene is not restored automatically after playing in the editor

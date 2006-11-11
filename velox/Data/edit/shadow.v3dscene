@@ -3,7 +3,7 @@
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
-	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags=" " include-all="true" include-tags=" " tags=""/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags=" " far-plane="1000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
 	<part type="v3d::scene::VShadowMapShooting" tags=""/>
 	<entity name="editorCam">
 		<part type="v3d::entity::VRigidBodyPart" pos="(29.6708,274.106,207.657)" updir="(0.00282943,0.657332,-0.753596)" viewdir="(-0.0832304,-0.750829,-0.655231)" tags=""/>
@@ -19,10 +19,10 @@
 		<part type="v3d::scene::VTerrainPart" extent="(200,200)" mat_v3d_DepthMap="" mat_v3d_DepthMapMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 " material="/edit/mat/shadowmap_phong.v3dmat" resolution="64" tags=""/>
 	</entity>
 	<entity name="light">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0.01)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-0.005,0.0070709,0.00500023)" updir="(0.499977,0.707123,-0.5)" viewdir="(0.5,-0.70709,-0.500023)" tags=""/>
 		<part type="v3d::scene::VLightPart" ambientColor="(0,0,0,0)" diffuseColor="(1,0.5,0,1)" specularColor="(0,0,0,0)" w="1" tags=""/>
 		<part type="v3d::scene::VCoordSysDisplayPart" material="/system/graphics/defaultMaterial" tags=""/>
-		<part type="v3d::utils::VTrackballPart" tags=""/>
+		<part type="v3d::utils::VTrackballPart" altitude-angle="-45" center="(0,0,0)" direction-angle="-45" distance="0.01" tags=""/>
 		<part type="v3d::scene::VFrustumVisPart" aspect-ratio="1" fov="45" linedist="50" material="/system/graphics/defaultMaterial" xy-offset="0" zfar="200" znear="10" tags=""/>
 	</entity>
 	<entity name="caster">
