@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d { namespace  physics{
 //-----------------------------------------------------------------------------
+V3D_DECLARE_EXCEPTION(VPhysicManagerException, v3d::VException);
 using namespace v3d;
 using namespace v3d::math;
 using namespace std;
@@ -427,6 +428,7 @@ physics::VJointHinge2* VPhysicManager::GetJointByName(std::string in_sName)
 	if((*it)->GetName() == in_sName)
 	  return (*it);
   }
+  V3D_THROW(VPhysicManagerException, "joint not found");
   return 0;
 
 }

@@ -4,7 +4,7 @@
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
-	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-10,0)" MaxContacts="40" ObjectCount="6" Slip1="0.1" Slip2="0.1" SoftCFM="0" SoftERP="0" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="0.5" SurfaceMu2="0.5" UpdateStep="0.05" tags=""/>
+	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-10,0)" MaxContacts="40" ObjectCount="6" Slip1="0.0" Slip2="0.0" SoftCFM="0" SoftERP="0.0" SurfaceBounce="0.0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="2.0" SurfaceMu2="1.0" UpdateStep="0.05" tags=""/>
 	<part type="v3d::scene::VSimpleShooting" tags=""/>
 	<entity name="ambient">
 		<entity name="editorCam">
@@ -28,7 +28,7 @@
 			<part type="v3d::physics::VCollisionPart" Active="true" tags=""/>
 			<part type="v3d::physics::VBoundingTerrainVolumePart" IndexCount="388626" IndexStride="12" NormalCount="0" NormalStride="0" VertexCount="65536" VertexStride="12" tags=""/>
 			<part type="v3d::scene::VTerrainPart" extent="(600,600)" material="/edit/mat/white-lit.v3dmat" resolution="256" tags=""/>
-			<part type="v3d::physics::VCollisionVisualizationPart" tags=""/>
+			<!--part type="v3d::physics::VCollisionVisualizationPart" tags=""/-->
 		</entity>
 	</entity>
 	<entity name="Car">

@@ -42,7 +42,7 @@ private:
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
 	void Steer(float in_fSteer, VJointHinge2* pJoint1, VJointHinge2* pJoint2);
-	void GetButtons();
+	bool GetButtons();
 	void Accel(float in_fSpeed, float in_fAccel, VJointHinge2* pJoint1, VJointHinge2* pJoint2 );
 
 	input::VKeyCode m_ListeningEvent;
@@ -52,6 +52,8 @@ private:
 	input::IVButton* m_pButton3;
 	input::IVButton* m_pButton4;
 	input::IVButton* m_pButton5;
+	input::IVButton* m_pButton6;
+	input::IVButton* m_pButton7;
 
 	vfloat32 m_fSpeedFactor;
 	vfloat32 m_fSteerFactor;
