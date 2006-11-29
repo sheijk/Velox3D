@@ -121,6 +121,8 @@ private:
 	Geometry CreateMeshGeom(VBoundingMesh* in_pBoundingMesh);
 	Geometry CreateSphereGeom(math::VBoundingSphere* in_pBoundingMesh);
 	Geometry CreateBoxGeom(math::VBoundingBox* in_pBoundingMesh);
+	Geometry CreateCCylinderGeom(math::VCCylinder* in_pBoundingMesh);
+	BodyPtr CreateCCylinder(vfloat32 in_fMass, vfloat32 in_fLength, vfloat32 in_fRadius, std::string in_sName);
 	BodyPtr CreateSphere(vfloat32 in_fMass, vfloat32 in_fRadius, std::string in_sName);
 	BodyPtr CreateBox(vfloat32 in_fMass, math::VVector3f in_Expansion, std::string in_sName);
 	BodyPtr CreateMesh(vfloat32 in_fMass, VBoundingMesh* in_BoundingMesh, std::string in_sName);

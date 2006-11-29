@@ -47,6 +47,11 @@ math::VBoundingSphere* VBoundingMeshVolumePart::GetBoundingSphere()
 {
 	return 0;
 }
+math::VCCylinder* VBoundingMeshVolumePart::GetBoundingCylinder()
+{
+  return 0;
+}
+
 
 void VBoundingMeshVolumePart::Activate()
 {

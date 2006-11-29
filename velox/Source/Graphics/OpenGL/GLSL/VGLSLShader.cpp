@@ -90,12 +90,6 @@ VGLSLShader::VGLSLShader(
 	glAttachObjectARB(m_hProgram, m_hVertexShader);
 	glAttachObjectARB(m_hProgram, m_hFragmentShader);
 
-	/* TODO: right here?!? "Only shaders that are not attached can be deleted so this operation is not irrelevant." 
-	 * see http://www.lighthouse3d.com/opengl/glsl/index.php?oglcleanup --ins
-	 */
-	glDeleteObjectARB(m_hVertexShader); 
-	glDeleteObjectARB(m_hFragmentShader);
-
 	glLinkProgramARB(m_hProgram);
 	if( LinkErrorOccured(m_hProgram, &errorMessage) )
 		V3D_THROWMSG(VGLSLException, "Could not link glsl program: " << errorMessage);

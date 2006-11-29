@@ -34,6 +34,7 @@ public:
 	math::VBoundingBox* GetBoundingBox();
 	math::VBoundingSphere* GetBoundingSphere();
 	VBoundingMesh* GetBoundingMesh();
+	math::VCCylinder* GetBoundingCylinder();
 	vbool HasBoundingMesh();
 	math::VPlane* GetBoundingPlane();
 

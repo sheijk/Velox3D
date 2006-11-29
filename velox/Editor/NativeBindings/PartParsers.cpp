@@ -69,6 +69,7 @@ namespace v3d { namespace scene {
 		extern void* AssureVSphereMeshPartExist();
 		extern void* AssureVTerrainPartExist();
 		extern void* AssureVTorusMeshPartExist();
+		extern void* AssureVCylinderMeshPartExist();
 }}
 
 namespace v3d { namespace physics {
@@ -81,6 +82,7 @@ namespace v3d { namespace physics {
 		extern void* AssureVPhysicManagerPartExist();
 		extern void* AssureVBoundingBoxVolumePartExist();
 		extern void* AssureVBoundingMeshVolumePartExist();
+		extern void* AssureVBoundingCCylinderVolumePartExist();
 		extern void* AssureVBoundingPlaneVolumePartExist();
 		extern void* AssureVBoundingSphereVolumePartExist();
 		extern void* AssureVBoundingTerrainVolumePartExist();
@@ -141,6 +143,7 @@ void foo()
 	v3d::scene::AssureVSphereMeshPartExist();
 	v3d::scene::AssureVTerrainPartExist();
 	v3d::scene::AssureVTorusMeshPartExist();
+	v3d::scene::AssureVCylinderMeshPartExist();
 
 	v3d::physics::AssureVBodyPartExist();
 	v3d::physics::AssureVBoundingBoxVolumePartExist();
@@ -148,6 +151,7 @@ void foo()
 	v3d::physics::AssureVBoundingPlaneVolumePartExist();
 	v3d::physics::AssureVBoundingSphereVolumePartExist();
 	v3d::physics::AssureVBoundingTerrainVolumePartExist();
+	v3d::physics::AssureVBoundingCCylinderVolumePartExist();
 	v3d::physics::AssureVCollisionPartExist();
 //	v3d::physics::AssureVJointHinge2LinkAncestorBodyPartExist();
 //	v3d::physics::AssureVJointHinge2LinkPartExist();

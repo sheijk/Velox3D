@@ -40,6 +40,11 @@ math::VPlane* VBoundingPlaneVolumePart::GetBoundingPlane()
 {
 	return &m_Plane;
 }
+math::VCCylinder* VBoundingPlaneVolumePart::GetBoundingCylinder()
+{
+  return 0;
+}
+
 
 void VBoundingPlaneVolumePart::Activate()
 {

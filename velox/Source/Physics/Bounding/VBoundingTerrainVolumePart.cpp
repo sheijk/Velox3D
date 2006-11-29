@@ -22,6 +22,14 @@ VBoundingTerrainVolumePart::VBoundingTerrainVolumePart() :
 	m_bActive = false;
 	m_pIndicesPointer = 0;
 }
+VBoundingTerrainVolumePart::~VBoundingTerrainVolumePart()
+{
+  if(m_pIndicesPointer)
+  {
+	delete m_pIndicesPointer;
+	m_pIndicesPointer = 0;
+  }
+}
 
 VBoundingMesh* VBoundingTerrainVolumePart::GetBoundingMesh()
 {
@@ -48,6 +56,11 @@ math::VBoundingBox* VBoundingTerrainVolumePart::GetBoundingBox()
 math::VBoundingSphere* VBoundingTerrainVolumePart::GetBoundingSphere()
 {
 	return 0;
+}
+
+math::VCCylinder* VBoundingTerrainVolumePart::GetBoundingCylinder()
+{
+  return 0;
 }
 
 void VBoundingTerrainVolumePart::Activate()

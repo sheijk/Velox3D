@@ -270,6 +270,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Math\VCCylinder.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Math\VHalfRay.h"
 						>
 					</File>
@@ -450,6 +454,10 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VCoordSysDisplayPart.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Scene\Shapes\VCylinderMeshPart.h"
 							>
 						</File>
 						<File
@@ -714,6 +722,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Physics\VGeometryCappedCylinder.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Physics\VGeometryMesh.h"
 						>
 					</File>
@@ -774,6 +786,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Physics\VStateCCylinderMass.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Physics\VStateListContainer.h"
 						>
 					</File>
@@ -802,6 +818,10 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Physics\Bounding\VBoundingBoxVolumePart.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Physics\Bounding\VBoundingCCylinderVolumePart.h"
 							>
 						</File>
 						<File
@@ -1795,6 +1815,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Source\Math\VCCylinder.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Source\Math\VMiscMath.cpp"
 					>
 				</File>
@@ -1824,6 +1848,10 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Physics\VGeometryBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Physics\VGeometryCappedCylinder.cpp"
 					>
 				</File>
 				<File
@@ -1875,6 +1903,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Source\Physics\VStateCCylinderMass.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Source\Physics\VStateListContainer.cpp"
 					>
 				</File>
@@ -1899,6 +1931,10 @@
 					>
 					<File
 						RelativePath="..\..\Source\Physics\Bounding\VBoundingBoxVolumePart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Physics\Bounding\VBoundingCCylinderVolumePart.cpp"
 						>
 					</File>
 					<File
@@ -2167,6 +2203,10 @@
 					>
 					<File
 						RelativePath="..\..\Source\Scene\Shapes\VBoxMeshPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Scene\Shapes\VCylinderMeshPart.cpp"
 						>
 					</File>
 					<File

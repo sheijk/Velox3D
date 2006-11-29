@@ -11,7 +11,7 @@
 #include <v3d/Core/VCoreLib.h>
 #include <v3d/Math/VBoundingSphere.h>
 #include <V3d/Math/VBoundingBox.h>
-
+#include <V3d/Math/VCCylinder.h>
 #include "VBoundingMesh.h"
 //-----------------------------------------------------------------------------
 namespace v3d { 
@@ -32,7 +32,7 @@ public:
 	virtual VBoundingMesh* GetBoundingMesh() = 0;
 	virtual vbool HasBoundingMesh() = 0;
 	virtual math::VPlane* GetBoundingPlane() = 0;
-
+	virtual math::VCCylinder* GetBoundingCylinder() = 0;
 };
 
 //-----------------------------------------------------------------------------

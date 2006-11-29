@@ -7,6 +7,7 @@
 
 #include <V3d/Physics/VPhysicManager.h> 
 #include <V3d/Physics/VStateSphereMass.h>
+#include <V3d/Physics/VStateCCylinderMass.h>
 #include <V3d/Physics/VGeometrySphere.h>
 #include <V3d/Physics/VGeometryBox.h>
 #include <V3d/Physics/VGeometryPlane.h>
@@ -14,6 +15,7 @@
 #include <v3d/math/VBoundingBox.h>
 #include <v3d/math/VBoundingSphere.h>
 #include <v3d/Physics/Bounding/VBoundingMesh.h>
+#include <V3d/Physics/VGeometryCappedCylinder.h>
 #include <V3d/Core.h>
 #include <algorithm>
 //-----------------------------------------------------------------------------
@@ -174,6 +176,7 @@ VPhysicManager::Geometry VPhysicManager::CreateGeom(IVBoundingVolumePart* in_pBo
 	VBoundingBox* pBox = in_pBoundingPart->GetBoundingBox();
 	VBoundingSphere* pSphere = in_pBoundingPart->GetBoundingSphere();
 	math::VPlane* pPlane = in_pBoundingPart->GetBoundingPlane();
+	math::VCCylinder* pCylinder = in_pBoundingPart->GetBoundingCylinder();
 	VBoundingMesh* pMesh = 0;
 
 	if( in_pBoundingPart->HasBoundingMesh() )
@@ -189,6 +192,8 @@ VPhysicManager::Geometry VPhysicManager::CreateGeom(IVBoundingVolumePart* in_pBo
 		return CreateMeshGeom(pMesh);
 	if(pPlane)
 		return CreatePlane(pPlane->GetNormal(), pPlane->GetDistance());
+	if(pCylinder)
+	  return CreateCCylinderGeom(pCylinder);
 	
 	V3D_THROW(VException, "no valid bounding part found");
 	Geometry retValue;
@@ -205,6 +210,14 @@ VPhysicManager::Geometry VPhysicManager::CreateBoxGeom(VBoundingBox* in_pBoundin
 
 	pGeometryBox->CreateBox(m_World.GetSpace());
 	return pGeometryBox;
+}
+
+VPhysicManager::Geometry VPhysicManager::CreateCCylinderGeom(VCCylinder* in_pBoundingMesh)
+{
+  VSharedPtr<VGeometryCappedCylinder> pCylinder(new VGeometryCappedCylinder());
+  pCylinder->SetParams(in_pBoundingMesh->GetLength(), in_pBoundingMesh->GetRadius());
+  pCylinder->CreateCylinder(m_World.GetSpace());
+  return pCylinder;
 }
 VPhysicManager::Geometry VPhysicManager::CreateMeshGeom(VBoundingMesh* in_pBoundingMesh)
 {
@@ -242,6 +255,7 @@ VPhysicManager::BodyPtr VPhysicManager::Create(IVBoundingVolumePart* in_pBoundin
 	VBoundingBox* pBox = in_pBoundingPart->GetBoundingBox();
 	VBoundingSphere* pSphere = in_pBoundingPart->GetBoundingSphere();
 	VBoundingMesh* pMesh = 0;
+	VCCylinder* pCylinder = in_pBoundingPart->GetBoundingCylinder();
 
 	if( in_pBoundingPart->HasBoundingMesh() )
 	{
@@ -252,8 +266,11 @@ VPhysicManager::BodyPtr VPhysicManager::Create(IVBoundingVolumePart* in_pBoundin
 		return CreateBox(in_fMass, pBox->GetLength(), in_sIdentifierName);
 	if(pSphere)
 		return CreateSphere(in_fMass, pSphere->GetRadius(), in_sIdentifierName);
+	if(pCylinder)
+		return CreateCCylinder(in_fMass, pCylinder->GetLength(), pCylinder->GetRadius(), in_sIdentifierName);
 	if(pMesh)
 		return CreateMesh(in_fMass, pMesh, in_sIdentifierName);
+	
 
 	return BodyPtr(0);
 
@@ -330,6 +347,27 @@ VPhysicManager::BodyPtr VPhysicManager::CreateMesh(
 
 	m_BodyList.push_back(pBody);
 
+	return pBody;
+}
+VPhysicManager::BodyPtr VPhysicManager::CreateCCylinder(
+  vfloat32 in_fMass,
+  vfloat32 in_fLength,
+  vfloat32 in_fRadius,
+  std::string in_sName)
+{
+	BodyPtr pBody = CreateBody(in_sName);
+
+	VStateCCylinderMass* pMassState(new VStateCCylinderMass(pBody->GetOdeBody()));
+	VGeometryCappedCylinder* pGeometry(new VGeometryCappedCylinder());
+	//assign values
+	pMassState->SetMass(in_fMass);
+	pMassState->SetRadius(in_fRadius);
+	pMassState->SetLength(in_fLength);
+	pBody->Add(pMassState);
+	pGeometry->CreateCylinder(m_World.GetSpace());
+	pGeometry->SetParams(in_fLength, in_fRadius);
+	pBody->SetCollisionMesh(pGeometry);
+	m_BodyList.push_back(pBody);
 	return pBody;
 }
 

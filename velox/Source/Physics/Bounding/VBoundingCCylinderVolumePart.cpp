@@ -5,7 +5,7 @@
  * complete licence text
  */
 
-#include <v3d/Physics/Bounding/VBoundingSphereVolumePart.h>
+#include <v3d/Physics/Bounding/VBoundingCCylinderVolumePart.h>
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
@@ -17,45 +17,45 @@ namespace physics {
 using namespace v3d; // anti auto indent
 using namespace math;
 
-math::VBoundingBox* VBoundingSphereVolumePart::GetBoundingBox()
+math::VBoundingBox* VBoundingCCylinderVolumePart::GetBoundingBox()
 {
 	return 0;
 }
-math::VBoundingSphere* VBoundingSphereVolumePart::GetBoundingSphere()
-{
-	return &m_BoundingSphere;
-}
-
-VBoundingMesh* VBoundingSphereVolumePart::GetBoundingMesh()
+math::VBoundingSphere* VBoundingCCylinderVolumePart::GetBoundingSphere()
 {
 	return 0;
 }
-math::VCCylinder* VBoundingSphereVolumePart::GetBoundingCylinder()
+
+VBoundingMesh* VBoundingCCylinderVolumePart::GetBoundingMesh()
 {
-  return 0;
+	return 0;
+}
+math::VCCylinder* VBoundingCCylinderVolumePart::GetBoundingCylinder()
+{
+  return &m_BoundingCCylinder;
 }
 
-vbool VBoundingSphereVolumePart::HasBoundingMesh()
+vbool VBoundingCCylinderVolumePart::HasBoundingMesh()
 {
 	return false;
 }
 
-void VBoundingSphereVolumePart::Activate()
+void VBoundingCCylinderVolumePart::Activate()
 {
 	;
 }
 
-void VBoundingSphereVolumePart::Deactivate()
+void VBoundingCCylinderVolumePart::Deactivate()
 {
 	;
 }
 
-math::VPlane* VBoundingSphereVolumePart::GetBoundingPlane()
+math::VPlane* VBoundingCCylinderVolumePart::GetBoundingPlane()
 {
 	return 0;
 }
 
-void VBoundingSphereVolumePart::OnMessage(
+void VBoundingCCylinderVolumePart::OnMessage(
 	const messaging::VMessage& in_Message,
 	messaging::VMessage* in_pAnswer)
 {
@@ -70,8 +70,8 @@ void VBoundingSphereVolumePart::OnMessage(
 	{
 		if( in_pAnswer != 0 )
 		{
-			in_pAnswer->AddProperty("Position", m_BoundingSphere.GetPosition());
-			in_pAnswer->AddProperty("Radius", m_BoundingSphere.GetRadius());
+			in_pAnswer->AddProperty("Length", m_BoundingCCylinder.GetLength());
+			in_pAnswer->AddProperty("Radius", m_BoundingCCylinder.GetRadius());
 		}
 	}
 	else if( request == "update" )
@@ -79,25 +79,23 @@ void VBoundingSphereVolumePart::OnMessage(
 		const string name = in_Message.GetAs<string>("name");
 		//const string val = in_pAnswer->GetAs<string>("value");
 
-		if( name == "Position" )
+		if( name == "Length" )
 		{
-			VVector3f pos = in_Message.GetAs<VVector3f>("value");
-			m_BoundingSphere.SetPosition(pos);
-
-			vout << "BoundingSphere: position set to " << pos << vendl;
+			vfloat32 length = in_Message.GetAs<vfloat32>("value");
+			m_BoundingCCylinder.SetParams(length, m_BoundingCCylinder.GetRadius());
 		}
 
 		if( name == "Radius" )
 		{
 			vfloat32 radius = in_Message.GetAs<vfloat32>("value");
-			m_BoundingSphere.SetRadius(radius);
+			m_BoundingCCylinder.SetParams(m_BoundingCCylinder.GetLength(), radius);
 
 			vout << "BoundingSphere: radius set to " << radius << vendl;
 		}
 	}
 }
 
-V3D_REGISTER_PART_PARSER(VBoundingSphereVolumePart);
+V3D_REGISTER_PART_PARSER(VBoundingCCylinderVolumePart);
 //-----------------------------------------------------------------------------
 } // namespace v3d::
 }

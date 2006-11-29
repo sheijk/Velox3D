@@ -30,11 +30,13 @@ class VBoundingTerrainVolumePart : public entity::VPartBaseAdapter<IVBoundingVol
 {
 public:
 	VBoundingTerrainVolumePart();
+	~VBoundingTerrainVolumePart();
 
 
 	math::VBoundingBox* GetBoundingBox();
 	math::VBoundingSphere* GetBoundingSphere();
 	math::VBoundingMesh* GetBoundingMesh();
+	math::VCCylinder* GetBoundingCylinder();
 	vbool HasBoundingMesh();
 	math::VPlane* GetBoundingPlane();
 	

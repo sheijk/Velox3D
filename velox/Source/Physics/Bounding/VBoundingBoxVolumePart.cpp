@@ -35,6 +35,11 @@ VBoundingMesh* VBoundingBoxVolumePart::GetBoundingMesh()
 {
 	return 0;
 }
+math::VCCylinder* VBoundingBoxVolumePart::GetBoundingCylinder()
+{
+  return 0;
+}
+
 
 vbool VBoundingBoxVolumePart::HasBoundingMesh()
 {
