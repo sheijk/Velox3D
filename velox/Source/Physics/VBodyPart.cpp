@@ -64,9 +64,14 @@ void VBodyPart::Create()
 		m_sIdentifier = m_pPhysicManagerPart->GetPhysicManager()->QueryAvailableIdentifier(m_sIdentifier);
 		m_pBody = m_pPhysicManagerPart->GetPhysicManager()->Create(m_pVolumePart.Get(), m_fMass, m_sIdentifier);
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
+		VRBTransform transform = m_pRigidBodyPart.Get()->GetTransform();
+		VQuatf orient;
+		//convert translation matrix to quaterion
+		gmtl::set(orient.m_Data, transform.AsMatrix().m_Mat);
+		
 		m_pBody->Deactivate();
-
 		m_pBody->SetPosition(m_Position);
+		m_pBody->SetOrientation(orient);
 		//TODO: set orientation
 		m_pBody->Activate();
 		m_fMass = m_pBody->GetMass();
@@ -113,10 +118,20 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 	//	m_Position.GetY() == m_pRigidBodyPart.Get()->GetPosition().GetY() &&
 	//	m_Position.GetZ() == m_pRigidBodyPart.Get()->GetPosition().GetZ())
 
+	VRBTransform transform = m_pRigidBodyPart.Get()->GetTransform();
+	VQuatf orient;
+	//convert translation matrix to quaterion
+	gmtl::set(orient.m_Data, transform.AsMatrix().m_Mat);
+	VQuatf rigidQuat = m_pBody->GetOrientation().GetQuat();
 	if(
 		fabs( m_Position.GetX() - m_pRigidBodyPart.Get()->GetPosition().GetX() ) <= std::numeric_limits<vfloat32>::epsilon() &&
 		fabs( m_Position.GetY() - m_pRigidBodyPart.Get()->GetPosition().GetY() ) <= std::numeric_limits<vfloat32>::epsilon() &&
-		fabs( m_Position.GetZ() - m_pRigidBodyPart.Get()->GetPosition().GetZ() ) <= std::numeric_limits<vfloat32>::epsilon() )
+		fabs( m_Position.GetZ() - m_pRigidBodyPart.Get()->GetPosition().GetZ() ) <= std::numeric_limits<vfloat32>::epsilon()  
+		||
+		fabs( rigidQuat[0] - orient[0] ) <= std::numeric_limits<vfloat32>::epsilon() &&
+		fabs( rigidQuat[1] - orient[1] ) <= std::numeric_limits<vfloat32>::epsilon() &&
+		fabs( rigidQuat[2] - orient[2] ) <= std::numeric_limits<vfloat32>::epsilon() &&
+		fabs( rigidQuat[3] - orient[3] ) <= std::numeric_limits<vfloat32>::epsilon() )
 	{
 		//VVector3f x1,y1,z1;
 		//VMatrix<vfloat32, 3, 3> axis;
@@ -171,6 +186,7 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 	}
 	else
 	{
+	  vout << "change" << vendl;
 		//delete body
 		VQuatf rigidQuat = m_pBody->GetOrientation().GetQuat();
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
@@ -180,7 +196,7 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 		//restore the old values
 		m_pPhysicManagerPart->GetPhysicManager()->RefreshJoint(m_pBody.Get());
 		m_pBody->SetPosition(m_Position);
-		//m_pBody->SetOrientation(rigidQuat);
+		m_pBody->SetOrientation(orient);
 		m_pBody->Activate();
 	}
 }
@@ -247,7 +263,7 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 
 			if(m_pBody.Get())
 			{
-				m_pBody->SetOrientation(pos);
+			//	m_pBody->SetOrientation(pos);
 			}
 		}
 
@@ -266,7 +282,7 @@ void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMes
 			
 			if(m_pBody.Get())
 			{
-				m_pBody->SetOrientation(quat);
+				//m_pBody->SetOrientation(quat);
 			}
 		}
 		if( name == "Identifier" )

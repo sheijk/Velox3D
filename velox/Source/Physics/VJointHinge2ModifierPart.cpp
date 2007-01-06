@@ -37,8 +37,8 @@ m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 	m_fSteerFactor = 0.6f;
 	m_sJoint1Identifer = "";
 	m_sJoint2Identifer = "";
-	m_fAccel = 30.0f;
-	m_fMaxSteer = 2;
+	m_fAccel = 10.0f;
+	m_fMaxSteer = 1.0f;
 	m_fMaxSpeed = 10;
 		
 }
@@ -124,14 +124,14 @@ bool VJointHinge2ModifierPart::GetButtons()
   {
 	if(m_pButton6->IsDown())
 	{
-	  m_fSpeed +=0.4f;
+	  m_fSpeed +=m_fSpeedFactor;
 	}
   }
   if(m_pButton7)
   {
 	if(m_pButton7->IsDown())
 	{
-	  m_fSpeed -=0.4f;
+	  m_fSpeed -=m_fSpeedFactor;
 	}
   }
 
@@ -176,7 +176,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
   {
 	Accel(m_fMaxSpeed, m_fAccel, pJoint1, pJoint2);
 	Steer(m_fSteering, pJoint1, pJoint2);
-	vout << "Speed: " << m_fSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
+	//vout << "Speed: " << m_fSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
   }
   else
   {
@@ -199,7 +199,7 @@ void VJointHinge2ModifierPart::Steer(float in_fSteer, VJointHinge2* pJoint1, VJo
   pJoint1->SetVelocity(v1);
   pJoint1->SetLowStop(-0.65f);
   pJoint1->SetHighStop(0.65f);
-  pJoint1->SetMaxForce(0.6f);
+  pJoint1->SetMaxForce(5.0f);
   
   vfloat32 v2 = in_fSteer - pJoint2->GetAnchorAngle1();
   if (v2 > 0.1) v2 = 0.1;
@@ -209,7 +209,7 @@ void VJointHinge2ModifierPart::Steer(float in_fSteer, VJointHinge2* pJoint1, VJo
   pJoint2->SetVelocity(v2);
   pJoint2->SetLowStop(-0.65f);
   pJoint2->SetHighStop(0.65f);
-  pJoint2->SetMaxForce(0.6f);
+  pJoint2->SetMaxForce(5.0f);
 
   //pJoint1->SetLowStop(leftAdjust);
   //pJoint1->SetHighStop(leftAdjust);

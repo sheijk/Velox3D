@@ -5,7 +5,7 @@
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
 	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-15,0)" MaxContacts="40" ObjectCount="8" Slip1="0.1" Slip2="0.1" SoftCFM="0.001" SoftERP="0.001" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="0.5" SurfaceMu2="0.5" UpdateStep="0.05" tags=""/>
-	<part type="shooting" tags=""/>
+	<part type="v3d::scene::VSimpleShooting" tags=""/>
 	<entity name="ambient">
 		<entity name="editorCam">
 			<part type="v3d::entity::VRigidBodyPart" pos="(-36,54,250)" updir="(-0.00638127,0.999825,-0.0175541)" viewdir="(0.017115,-0.0174427,-0.9997)" tags=""/>
@@ -76,5 +76,11 @@
 		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="10" tags=""/>
 		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="10" tags=""/>
 		<part type="v3d::physics::VBodyPart" Address="06886E18" Enabled="true" Mass="1" Position="(-39.2693,95.8724,-1.68082)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+	</entity>
+<entity name="objects">
+		<part type="v3d::entity::VRigidBodyPart" pos="(40,30,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="10" Radius="1" tags=""/>
+		<part type="v3d::scene::VCylinderMeshPart" bottom-radius="1" color="(1,1,1,1)" height="10" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="1" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="00000000" Enabled="false" Identifier="" Mass="0.1" Position="(40,30,0)" Quat="(0,0,0,0)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 	</entity>
 </entity>

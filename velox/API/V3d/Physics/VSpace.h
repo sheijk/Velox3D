@@ -222,7 +222,7 @@ private:
 
 	enum CollisionConstants
 	{
-		MaxNumContacts = 40
+		MaxNumContacts = 32
 	};
 	
 

@@ -77,11 +77,13 @@ void VCylinderMeshPart::SetColor(const VColor4f& in_Color)
 
 void VCylinderMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
+  	glDisable(GL_CULL_FACE);
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	glColor4f(m_Color.red, m_Color.green, m_Color.blue, m_Color.alpha);
 	gluCylinder(pGluObject, m_fButtonRadius, m_fTopRadius, m_fHeight, m_iSlices, m_iStacks);
 	glPopMatrix();
+	glEnable(GL_CULL_FACE);
 }
 
 void v3d::scene::VCylinderMeshPart::OnMessage(
