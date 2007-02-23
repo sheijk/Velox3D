@@ -23,9 +23,6 @@ m_pPhysicManagerPart(VPartDependency::Ancestor, RegisterTo()),
 m_pInputManager(VPartDependency::Ancestor, RegisterTo()),
 m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 {
-	m_ListeningEvent = KeyUp;
-	m_ListeningEvent2 = KeyDown;
-
 	m_pButton = 0;
 	m_pButton2 = 0;
 	m_pButton3 = 0;
@@ -33,14 +30,12 @@ m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 	m_pButton5 = 0;
 	m_fSpeed = 0.0f;
 	m_fSteering = 0.0f;
-	m_fSpeedFactor = 0.05f;
-	m_fSteerFactor = 0.6f;
-	m_sJoint1Identifer = "";
-	m_sJoint2Identifer = "";
-	m_fAccel = 10.0f;
-	m_fMaxSteer = 1.0f;
-	m_fMaxSpeed = 10;
-		
+	m_fSpeedFactor = 5.0f;
+	m_fSteerFactor = 0.2f;
+	m_fAccel = 0;
+	m_fMaxAccel = 1000.0f;
+	m_fMaxSteer = 0.5f;
+	m_fMaxSpeed = 1000.0f;
 }
 
 void VJointHinge2ModifierPart::Activate()
@@ -52,8 +47,8 @@ void VJointHinge2ModifierPart::Activate()
 
 	if(m_pInputManager->GetInputManager())
 	{
-		m_pButton = &m_pInputManager->GetInputManager()->GetStandardKey(m_ListeningEvent);
-		m_pButton2 = &m_pInputManager->GetInputManager()->GetStandardKey(m_ListeningEvent2);
+		m_pButton = &m_pInputManager->GetInputManager()->GetStandardKey(KeyUp);
+		m_pButton2 = &m_pInputManager->GetInputManager()->GetStandardKey(KeyDown);
 		m_pButton3 = &m_pInputManager->GetInputManager()->GetStandardKey(KeyLeft);
 		m_pButton4 = &m_pInputManager->GetInputManager()->GetStandardKey(KeyRight);
 		m_pButton5 = &m_pInputManager->GetInputManager()->GetStandardKey(KeySpace);
@@ -69,23 +64,37 @@ void VJointHinge2ModifierPart::Deactivate()
 	m_pUpdateManager->Unregister(this);
 }
 
-
-
 bool VJointHinge2ModifierPart::GetButtons()
 {
- if(m_pButton)
+  bool pushed = false;
+ if(m_pButton2)
  {
- 	if(m_pButton->IsDown())
+ 	if(m_pButton2->IsDown())
  	{
-	  m_fAccel+=m_fSpeedFactor;
+	  m_fSpeed = m_fMaxSpeed;
+	  m_fAccel = m_fMaxAccel;
+	  pushed = true;
   	}
+	if( ! pushed )
+	{
+	  m_fAccel = 0;
+	  m_fSpeed = 0;
+	}
   }
-  if(m_pButton2)
+
+  if(m_pButton)
   {
-  	if(m_pButton2->IsDown())
+  	if(m_pButton->IsDown())
   	{
-		m_fAccel-=m_fSpeedFactor;
+	  m_fSpeed = m_fMaxSpeed;
+	  m_fAccel = -m_fMaxAccel;
+	  pushed = true;
    	}
+	if( ! pushed )
+	{
+	  m_fSpeed = 0;
+	  m_fAccel = 0;
+	}
   }
   bool bIsSteered = false;
 
@@ -120,20 +129,28 @@ bool VJointHinge2ModifierPart::GetButtons()
    	}
   }
 
-  if(m_pButton6)
+  /*if(m_pButton6)
   {
 	if(m_pButton6->IsDown())
 	{
-	  m_fSpeed +=m_fSpeedFactor;
+	  if(m_fAccel > 0)
+	  {
+		m_fAccel = 0;
+	  }
+	  m_fAccel -=m_fSpeedFactor;
 	}
   }
   if(m_pButton7)
   {
 	if(m_pButton7->IsDown())
 	{
-	  m_fSpeed -=m_fSpeedFactor;
+	  if(m_fAccel < 0)
+	  {
+		m_fAccel = 0;
+	  }
+	  m_fAccel +=m_fSpeedFactor;
 	}
-  }
+  }*/
 
   return bIsSteered;
 }
@@ -141,10 +158,12 @@ bool VJointHinge2ModifierPart::GetButtons()
 void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 {
   //get the joints we are looking for
-  VJointHinge2* pJoint1 =  m_pPhysicManagerPart->GetPhysicManager()->GetJointByName(m_sJoint1Identifer);
-  VJointHinge2* pJoint2 =  m_pPhysicManagerPart->GetPhysicManager()->GetJointByName(m_sJoint2Identifer);
-
-  if( ! GetButtons())
+  for(vuint i = 0; i < 4 ; i++)
+  {
+	m_pJoint[i] = m_pPhysicManagerPart->GetPhysicManager()->GetJointByName(m_sJointName[i]);
+  }
+  
+  if( ! GetButtons() )
   {
 	//get the wheels back to 0
 	if( m_fSteering > 0)
@@ -158,7 +177,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	}
 	else
 	{
-	  if(m_fSteering < -.1)
+	  if(m_fSteering > -.1)
 	  {
 		m_fSteering = 0;
 	  }
@@ -167,16 +186,27 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	  	  m_fSteering +=in_fSeconds;
 	  }
 	}
+
+	/*if(m_fAccel > 0)
+	{
+	  m_fAccel-= in_fSeconds*10;
+	  if(m_fAccel < 0)
+		m_fAccel = 0;
+	}
+	else
+	{
+	  m_fAccel += in_fSeconds*10;
+	  if(m_fAccel > 0)
+		m_fAccel = 0;
+	}*/
+
   }
-
-  if(fabs(m_fSteering) < 0.1)
-	m_fSteering = 0;
-
-  if(pJoint1 && pJoint2)
+  
+  if(m_pJoint[0] && m_pJoint[1])
   {
-	Accel(m_fMaxSpeed, m_fAccel, pJoint1, pJoint2);
-	Steer(m_fSteering, pJoint1, pJoint2);
-	//vout << "Speed: " << m_fSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
+	Accel(m_fSpeed, m_fAccel);
+	Steer(m_fSteering);
+	vout << "Speed: " << m_fSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
   }
   else
   {
@@ -187,57 +217,64 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	
 }
 
-void VJointHinge2ModifierPart::Steer(float in_fSteer, VJointHinge2* pJoint1, VJointHinge2* pJoint2)
+void VJointHinge2ModifierPart::Steer(float in_fSteer)
 {
-  /*float leftAdjust = (in_fSpeed > 0 ? in_fSpeed : in_fSpeed * 1.2);
-  float rightAdjust = (in_fSpeed < 0 ? in_fSpeed : in_fSpeed * 1.2);*/
+  //float leftAdjust = (in_fSpeed > 0 ? in_fSpeed : in_fSpeed * 1.2);
+  //float rightAdjust = (in_fSpeed < 0 ? in_fSpeed : in_fSpeed * 1.2);
 
-  vfloat32 v1 = in_fSteer - pJoint1->GetAnchorAngle1();
-  if (v1 > 0.1) v1 = 0.1;
-  if (v1 < -0.1) v1 = -0.1;
-  v1 *= 10.0;
-  pJoint1->SetVelocity(v1);
-  pJoint1->SetLowStop(-0.65f);
+  float v[2];
+  v[0] = (in_fSteer > 0 ? in_fSteer : in_fSteer * 1.2f);
+  v[1] = (in_fSteer < 0 ? in_fSteer : in_fSteer * 1.2f);
+  
+  for(vuint i = 0; i < 2; i++)
+  {
+	m_pJoint[i]->SetLowStop(v[i]);
+	m_pJoint[i]->SetLowStop(v[i]); // do this twice; ode may have trouble
+	m_pJoint[i]->SetHighStop(v[i]);
+	//m_pJoint[i]->SetVelocity(v[i]);
+	float s = in_fSteer - m_pJoint[i]->GetAnchorAngle1();
+	m_pJoint[i]->SetVelocity(s);
+	m_pJoint[i+1]->SetVelocity(s);
+	m_pJoint[i+2]->SetVelocity(s);
+	//m_pJoint[i]->SetFudgeFactor(0.1f);
+	//m_pJoint[i]->SetMaxForce(10.0);
+  }
+  //float s = in_fSteer - dJointGetHinge2Angle1 (joint[0]);
+
+  //vfloat32 v1 = in_fSteer - pJoint1->GetAnchorAngle1();
+  //if (v1 > 0.1) v1 = 0.1;
+  //if (v1 < -0.1) v1 = -0.1;
+  //v1 *= 10.0;
+  //pJoint1->SetVelocity(v1);
+  /*pJoint1->SetLowStop(-0.65f);
   pJoint1->SetHighStop(0.65f);
-  pJoint1->SetMaxForce(5.0f);
+  pJoint1->SetMaxForce(10.5f);*/
+  //vfloat32 v2 = in_fSteer - pJoint2->GetAnchorAngle1();
+  //if (v2 > 0.1) v2 = 0.1;
+  //if (v2 < -0.1) v2 = -0.1;
+  //v2 *= 10.0;
   
-  vfloat32 v2 = in_fSteer - pJoint2->GetAnchorAngle1();
-  if (v2 > 0.1) v2 = 0.1;
-  if (v2 < -0.1) v2 = -0.1;
-  v2 *= 10.0;
-  
-  pJoint2->SetVelocity(v2);
-  pJoint2->SetLowStop(-0.65f);
+  //pJoint2->SetVelocity(v2);
+  /*pJoint2->SetLowStop(-0.65f);
   pJoint2->SetHighStop(0.65f);
-  pJoint2->SetMaxForce(5.0f);
-
-  //pJoint1->SetLowStop(leftAdjust);
-  //pJoint1->SetHighStop(leftAdjust);
-  ////ode bug!? 
-  //pJoint1->SetLowStop(leftAdjust);
-  //pJoint1->SetHighStop(leftAdjust);
-
-  //pJoint2->SetLowStop(rightAdjust);
-  //pJoint2->SetHighStop(rightAdjust);
-  ////ode bug!? 
-  //pJoint2->SetLowStop(rightAdjust);
-  //pJoint2->SetHighStop(rightAdjust);
-
-  /*pJoint1->SetVelocity(v);
-  pJoint1->SetMaxForce(0.2);
-  pJoint1->SetFudgeFactor(0.1);
-
-  pJoint1->SetVelocity(v);
-  pJoint1->SetMaxForce(0.2);
-  pJoint1->SetFudgeFactor(0.1);*/
+  pJoint2->SetMaxForce(10.5f);*/
 }
 
-void VJointHinge2ModifierPart::Accel(float in_fSpeed, float in_fAccel, VJointHinge2* pJoint1, VJointHinge2* pJoint2 )
+void VJointHinge2ModifierPart::Accel(float in_fSpeed, float in_fAccel)
 {
-  pJoint1->SetMaxForce2(in_fSpeed);
-  pJoint1->SetVelocity2(in_fAccel);
-  pJoint2->SetVelocity2(in_fAccel);
-  pJoint2->SetMaxForce2(in_fSpeed);
+  for(vuint i = 0; i < 4; i++)
+  {
+	m_pJoint[i]->SetVelocity2(in_fAccel);
+	m_pJoint[i]->SetMaxForce2(in_fSpeed);
+  }
+
+  /*m_pJoint[0]->SetVelocity2(in_fAccel);
+  m_pJoint[1]->SetVelocity2(in_fAccel);
+  m_pJoint[2]->SetVelocity2(in_fAccel);
+  m_pJoint[3]->SetVelocity2(in_fAccel);*/
+
+  //m_pJoint[0]->SetVelocity2(in_fSpeed);
+  //m_pJoint[1]->SetVelocity2(in_fSpeed);
 }
 
 void VJointHinge2ModifierPart::OnMessage(
@@ -255,12 +292,14 @@ void VJointHinge2ModifierPart::OnMessage(
   {
 	if( in_pAnswer != 0 )
 	{
-	  in_pAnswer->AddProperty("KeyEvent", m_ListeningEvent);
 	  in_pAnswer->AddProperty("Speed", m_fSpeedFactor);
 	  in_pAnswer->AddProperty("Steer", m_fSteerFactor);
 	  in_pAnswer->AddProperty("MaxSpeed", m_fMaxSpeed);
-	  in_pAnswer->AddProperty("ControlJoint1", m_sJoint1Identifer);
-	  in_pAnswer->AddProperty("ControlJoint2", m_sJoint2Identifer);
+	  in_pAnswer->AddProperty("Accel", m_fMaxAccel);
+	  in_pAnswer->AddProperty("ControlJoint1", m_sJointName[0]);
+	  in_pAnswer->AddProperty("ControlJoint2", m_sJointName[1]);
+	  in_pAnswer->AddProperty("ControlJoint3", m_sJointName[2]);
+	  in_pAnswer->AddProperty("ControlJoint4", m_sJointName[3]);
 	}
   }
   else if( request == "update" )
@@ -271,14 +310,14 @@ void VJointHinge2ModifierPart::OnMessage(
 	{
 	  //update button event
 	  vfloat32 speed = in_Message.GetAs<vfloat32>("value");
-	  m_fSpeedFactor = speed;
+	//  m_fSpeedFactor = speed;
 	}
 
 	if( name == "Steer" )
 	{
 	  //update button event
 	  vfloat32 steer = in_Message.GetAs<vfloat32>("value");
-	  m_fSteerFactor = steer;
+	  //m_fSteerFactor = steer;
 	}
 
 	if( name == "MaxSpeed" )
@@ -287,24 +326,32 @@ void VJointHinge2ModifierPart::OnMessage(
 	  vfloat32 maxSpeed = in_Message.GetAs<vfloat32>("value");
 	  m_fMaxSpeed = maxSpeed;
 	}
+
+	if( name == "Accel" )
+	{
+	  //update button event
+	  vfloat32 acc = in_Message.GetAs<vfloat32>("value");
+	  m_fMaxAccel = acc;
+	}
+
+
 	if( name == "ControlJoint1" )
 	{
-	  m_sJoint1Identifer = in_Message.GetAs<std::string>("value");
+	  m_sJointName[0] = in_Message.GetAs<std::string>("value");
 	}
 	if( name == "ControlJoint2" )
 	{
-	  m_sJoint2Identifer = in_Message.GetAs<std::string>("value");
+	  m_sJointName[1] = in_Message.GetAs<std::string>("value");
 	}
 
-	//type cast crashes
-	//if( name == "KeyEvent" )
-	//{
-	//	//update button event
-	//	vuint number = in_Message.GetAs<vuint>("value");
-	//	m_ListeningEvent = static_cast<VKeyCode>(number);
-	//	
-	//	m_pButton = &m_pInputManager->GetInputManager()->GetStandardKey(m_ListeningEvent);
-	//}
+	if( name == "ControlJoint3" )
+	{
+	  m_sJointName[2] = in_Message.GetAs<std::string>("value");
+	}
+	if(name == "ControlJoint4" )
+	{
+	  m_sJointName[3] = in_Message.GetAs<std::string>("value");
+	}
   }
 }
 

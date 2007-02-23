@@ -1,10 +1,10 @@
 <entity name="BuggyTest">
 	<part type="v3d::scene::VNaiveSceneManagerPart" tags=""/>
-	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)" exclude-tags=" " far-plane="1000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)" exclude-tags=" " far-plane="10000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>
 	<part type="v3d::utils::VInputPart" tags=""/>
-	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-10,0)" MaxContacts="10" ObjectCount="6" Slip1="0" Slip2="0" SoftCFM="0" SoftERP="0" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="2" SurfaceMu2="0.1" UpdateStep="0.05" tags=""/>
+	<part type="v3d::physics::VPhysicManagerPart" ContactMode="12696" Gravity="(0,-500,0)" MaxContacts="10" ObjectCount="6" Slip1="0" Slip2="0" SoftCFM="0" SoftERP="0" SurfaceBounce="0" SurfaceBounceVelocity="0" SurfaceMotion1="0" SurfaceMotion2="0" SurfaceMu="2" SurfaceMu2="0.1" UpdateStep="0.05" tags=""/>
 	<part type="v3d::scene::VSimpleShooting" tags=""/>
 	<entity name="ambient">
 		<entity name="editorCam">
@@ -24,55 +24,47 @@
 		<part type="v3d::physics::VBoundingPlaneVolumePart" Distance="20" Normal="(0,1,0)" tags=""/>
 		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 	</entity>
-	<entity name="world">
-		<entity name="terrain">
-			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-			<part type="v3d::scene::VTerrainPart" extent="(300,300)" material="/edit/mat/white-lit.v3dmat" resolution="36" tags=""/>
-			<part type="v3d::physics::VBoundingTerrainVolumePart" IndexCount="23442" IndexStride="12" NormalCount="0" NormalStride="0" VertexCount="4096" VertexStride="12" tags=""/>
-			<part type="v3d::physics::VCollisionPart" Active="true" tags=""/>
-		</entity>
-	</entity>
-
+	
 	<entity name="Car">
-		<part type="v3d::entity::VRigidBodyPart" pos="(1,20,1)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(30,0.5,30)" MaxPoint="(30,0.5,30)" MinPoint="(0,0,0)" tags=""/>
-		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(30,0.5,30)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
-		<part type="v3d::physics::VBodyPart" Address="0ED0CBC0" Enabled="true" Identifier="chassi" Mass="0.1" Position="(1,20,1)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(1,16,1)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(40,0.5,40)" MaxPoint="(40,0.5,40)" MinPoint="(0,0,0)" tags=""/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(40,0.5,40)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="0ED0CBC0" Enabled="true" Identifier="chassi" Mass="14.0" Position="(1,16,1)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 		<entity name="Joint3">
-			<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,-10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel1" Bounce="0" CFM="1.17549e-038" FudgeFactor="1" HighStop="0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="" StopCFM="1.17549e-038" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
+			<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,-15)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel1" Bounce="0" CFM="0" FudgeFactor="0" HighStop="0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="rear1" StopCFM="0" StopERP="0.2" SuspensionCFM="0.0" SuspensionERP="0.0" Velocity="0" Velocity2="0" tags=""/>
 			<entity name="Wheel3">
-				<part type="v3d::entity::VRigidBodyPart" pos="(10,15,-10)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
+				<part type="v3d::entity::VRigidBodyPart" pos="(10,15,-15)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
 			<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>\
 			<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
-			<part type="v3d::physics::VBodyPart" Address="0ED0A608" Enabled="true" Identifier="wheel1" Mass="0.1" Position="(10,15,-10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+			<part type="v3d::physics::VBodyPart" Address="0ED0A608" Enabled="true" Identifier="wheel1" Mass="3.0" Position="(10,15,-15)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 			</entity>
 		</entity>
 		<entity name="Joint4">
-			<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,-10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel2" Bounce="0" CFM="0" FudgeFactor="1" HighStop="0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="0" tags=""/>
+			<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,-15)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel2" Bounce="0" CFM="0" FudgeFactor="0" HighStop="0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="rear2" StopCFM="0" StopERP="0.2" SuspensionCFM="0.0" SuspensionERP="0.0" Velocity="0" Velocity2="0" tags=""/>
 			<entity name="Wheel4">
-			<part type="v3d::entity::VRigidBodyPart" pos="(-10,15,-10)" updir="(0,1,0)" viewdir="(1,-0,0)" tags=""/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(-10,15,-15)" updir="(0,1,0)" viewdir="(1,-0,0)" tags=""/>
 			<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>\
 			<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
 
-				<part type="v3d::physics::VBodyPart" Address="0ED0ACC0" Enabled="true" Identifier="wheel2" Mass="0.1" Position="(-10,15,-10)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+				<part type="v3d::physics::VBodyPart" Address="0ED0ACC0" Enabled="true" Identifier="wheel2" Mass="3.0" Position="(-10,15,-15)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 			</entity>
 		</entity>
 		<entity name="Steering">
-			<part type="v3d::physics::VJointHinge2ModifierPart" ControlJoint1="RightSteer" ControlJoint2="LeftSteer" KeyEvent="10" MaxSpeed="150" Speed="1" Steer="0.1" tags=""/>
+			<part type="v3d::physics::VJointHinge2ModifierPart" ControlJoint1="RightSteer" ControlJoint2="LeftSteer" ControlJoint3="rear1" ControlJoint4="rear2" KeyEvent="10" MaxSpeed="9000" Speed="0" Steer="0" Accel="2000" tags=""/>
 			<entity name="Joint1">
-				<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel0" Bounce="0" CFM="0" FudgeFactor="0.1" HighStop="0.65" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="-0.65" MaxForce="0.6" MaxForce2="150" Name="LeftSteer" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="30" tags=""/>
+				<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,15)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel0" Bounce="0" CFM="0" FudgeFactor="0" HighStop="0.0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="LeftSteer" StopCFM="0" StopERP="0.2" SuspensionCFM="0" SuspensionERP="0" Velocity="0" Velocity2="0" tags=""/>
 				<entity name="Wheel1">
-					<part type="v3d::entity::VRigidBodyPart" pos="(10,15,10)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
-					<part type="v3d::physics::VBodyPart" Address="0ED0B458" Enabled="true" Identifier="wheel0" Mass="0.1" Position="(10,15,10)"  QuatAxisAngle="(0,0,0,0)" tags=""/>
+					<part type="v3d::entity::VRigidBodyPart" pos="(10,15,15)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
+					<part type="v3d::physics::VBodyPart" Address="0ED0B458" Enabled="true" Identifier="wheel0" Mass="3.0" Position="(10,15,15)"  QuatAxisAngle="(0,0,0,0)" tags=""/>
 					<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>
 					<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
 				</entity>
 			</entity>
 			<entity name="Joint2">
-				<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,10)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel3" Bounce="0" CFM="0" FudgeFactor="0.1" HighStop="0.65" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="-0.65" MaxForce="0.6" MaxForce2="150" Name="RightSteer" StopCFM="0" StopERP="0.2" SuspensionCFM="0.2" SuspensionERP="0.8" Velocity="0" Velocity2="30" tags=""/>
+				<part type="v3d::physics::VJointHinge2Part" Anchor="(-10,15,15)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel3" Bounce="0" CFM="0" FudgeFactor="0" HighStop="0." LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="RightSteer" StopCFM="0" StopERP="0.2" SuspensionCFM="0" SuspensionERP="0" Velocity="0" Velocity2="0" tags=""/>
 				<entity name="Wheel2">
-					<part type="v3d::entity::VRigidBodyPart" pos="(-10,15,10)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
-					<part type="v3d::physics::VBodyPart" Address="0ED0BBF0" Enabled="true" Identifier="wheel3" Mass="0.1" Position="(-10,15,10)"  QuatAxisAngle="(0,0,0,0)" tags=""/>
+					<part type="v3d::entity::VRigidBodyPart" pos="(-10,15,15)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
+					<part type="v3d::physics::VBodyPart" Address="0ED0BBF0" Enabled="true" Identifier="wheel3" Mass="3.0" Position="(-10,15,15)"  QuatAxisAngle="(0,0,0,0)" tags=""/>
 					<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>
 					<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
 				</entity>
