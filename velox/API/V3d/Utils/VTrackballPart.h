@@ -54,8 +54,10 @@ private:
 		messaging::VMessage* in_pAnswer = 0);
 
 	VSharedPtr<VMouseTrackball> m_pTrackball;
+	vbool m_bCenterOnParent;
 
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
+	entity::VPartConnection<entity::VRigidBodyPart> m_pParentRigidBodyPart;
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 	entity::VPartConnection<utils::VInputPart> m_pInputPart;
 };

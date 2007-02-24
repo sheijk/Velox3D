@@ -24,8 +24,10 @@ using namespace entity;
 VTrackballPart::VTrackballPart() :
 	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
 	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo()),
-	m_pInputPart(VPartDependency::Ancestor, RegisterTo())
+	m_pInputPart(VPartDependency::Ancestor, RegisterTo()),
+	m_pParentRigidBodyPart(VPartDependency::Ancestor, VPartDependency::Optional, RegisterTo())
 {
+	m_bCenterOnParent = false;
 }
 
 /**
@@ -60,6 +62,11 @@ void VTrackballPart::Update(vfloat32 in_fSeconds)
 	{
 		m_pTrackball->Update(in_fSeconds);
 		m_pRigidBodyPart->SetTransform(m_pTrackball->GetTransform());
+	}
+
+	if( m_bCenterOnParent && m_pParentRigidBodyPart.Get() != 0 )
+	{
+		SetCenter(m_pParentRigidBodyPart->GetPosition());
 	}
 }
 
@@ -150,6 +157,7 @@ void VTrackballPart::OnMessage(
 			"center",
 			&VTrackballPart::GetCenter,
 			&VTrackballPart::SetCenter);
+		interpreter.AddMemberOption("centerOnParent", this, &m_bCenterOnParent);
 	}
 
 	interpreter.HandleMessage(this, in_Message, in_pAnswer);

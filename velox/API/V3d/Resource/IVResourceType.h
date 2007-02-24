@@ -42,6 +42,9 @@ public:
 	/** 
 	 * Generates a data object of the given type and adds it to the given
 	 * resource. Returns true if successful
+	 *
+	 * Attention: if this call fails no data may be added to the resource
+	 * system at all. 
 	 */
     virtual vbool Generate(VResource* in_pResource, VTypeInfo in_Type) = 0;
 
