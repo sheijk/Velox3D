@@ -32,6 +32,7 @@ VTerrainPart::VTerrainPart() : VMeshPartBase(IVDevice::GetDefaultMaterial())
 	const vfloat32 size = 100.0f;
 	m_XZMax = ToVector2f(size, size);
 	m_XZMin = ToVector2f(-size, -size);
+	m_fHeightScale = 1.0f;
 	//m_XZMax = ToVector2f(30, 5);
 	//m_XZMin = ToVector2f(-10, -3);
 
@@ -95,7 +96,7 @@ void VTerrainPart::ApplyHeightValues(const VArray2d<vfloat32>& in_Array)
 	for(vuint x = 0; x < m_nVertexCountHor; ++x)
 	{
 		VVertex3f coord = m_hVertexBuffer->GetCoordinate(GetVertexNum(x, y));
-		coord.y = in_Array.Get(x, y) + 20;
+		coord.y = (in_Array.Get(x, y) * m_fHeightScale) + 20;
 		m_hVertexBuffer->SetCoordinate(coord, GetVertexNum(x, y));
 	}
 
@@ -360,6 +361,17 @@ void VTerrainPart::SetExtent(const VVector2f& in_Extent)
 	SetVertexCount(res, res);
 }
 
+void v3d::scene::VTerrainPart::SetHeightScale( const vfloat32& in_NewHeightScale )
+{
+  m_fHeightScale = in_NewHeightScale;
+  SetResolution(GetResolution());
+}
+
+vfloat32 v3d::scene::VTerrainPart::GetHeightScale() const
+{
+  return m_fHeightScale;
+}
+
 void VTerrainPart::OnMessage(
 	const messaging::VMessage& in_Message, 
 	messaging::VMessage* in_pAnswer)
@@ -371,6 +383,10 @@ void VTerrainPart::OnMessage(
 	{
 		interpreter.SetInitialized(true);
 
+		interpreter.AddAccessorOption<VTerrainPart, vfloat32>(
+		  "heightScale",
+		  &VTerrainPart::GetHeightScale,
+		  &VTerrainPart::SetHeightScale);
 		interpreter.AddAccessorOption<VTerrainPart, vuint>(
 			"resolution",
 			&VTerrainPart::GetResolution, 

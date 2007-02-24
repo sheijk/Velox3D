@@ -12,6 +12,7 @@
 			<part type="v3d::utils::VCameraPart" tags=""/>
 			<part type="v3d::utils::VTrackballPart" altitude-angle="-20" center="(183.8,62.2,0)" direction-angle="-272" distance="0.01" tags=""/>
 		</entity>
+	
 		<entity name="sun">
 			<part type="v3d::entity::VRigidBodyPart" pos="(19.9828,50,-0.828204)" updir="(0,1,0)" viewdir="(-0.0414102,0,-0.999142)" tags=""/>
 			<part type="v3d::scene::VLightPart" ambientColor="(7,3,3,8)" diffuseColor="(0.8,0.3,0,1)" specularColor="(0,1,0,1)" w="1" tags=""/>
@@ -19,21 +20,62 @@
 			<part type="v3d::utils::VCircleMoverPart" angle="51.8777" center="(0,50,0)" radius="20" speed="3.1415" tags=""/>
 		</entity>
 	</entity>
-	<entity name="ground">
-		<part type="v3d::physics::VCollisionPart" Active="true" tags=""/>
-		<part type="v3d::physics::VBoundingPlaneVolumePart" Distance="20" Normal="(0,1,0)" tags=""/>
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+	<entity name="world">
+		<entity name="terrain">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
+			<part type="v3d::scene::VTerrainPart" heightScale="5.0f" extent="(1600,1600)" material="/edit/mat/phong.v3dmat" resolution="128" tags=""/>
+			<part type="v3d::physics::VBoundingTerrainVolumePart" IndexCount="388626" IndexStride="12" NormalCount="0" NormalStride="0" VertexCount="65536" VertexStride="12"/>
+			<part type="v3d::physics::VCollisionPart" Active="true"/>
+		</entity>
 	</entity>
-	
+
+
+	<entity name="sphere">
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(100,20,50)" Radius="3" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(100, 20, 50)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="3" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="06828F98" Enabled="true" Mass="1" Position="(100,20,50)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+	</entity>
+	<entity name="sphere2">
+		<part type="v3d::physics::VBodyPart" Address="06836560" Enabled="true" Mass="1" Position="(-18.3014,45.1522,22.6505)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="7" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-18.3014,45.1522,22.6505)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="7" tags=""/>
+	</entity>
+	<entity name="box">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-40.2579,51.14,23.8599)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="04DCEEC8" Enabled="true" Mass="1" Position="(-40.2579,51.14,23.8599)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(10,10,10)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(10,10,10)" MaxPoint="(10,10,10)" MinPoint="(0,0,0)" tags=""/>
+	</entity>
+	<entity name="sphere3">
+		<part type="v3d::physics::VBodyPart" Address="04DD3340" Enabled="true" Mass="1" Position="(36.7701,40.2624,-33.8602)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(36.7701,40.2624,-33.8602)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="5" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="5" tags=""/>
+	</entity>
+	<entity name="box2">
+		<part type="v3d::entity::VRigidBodyPart" pos="(4.6767,54.3968,-19.049)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="06832418" Enabled="true" Mass="1" Position="(4.6767,54.3968,-19.049)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(20,10,30)" MaxPoint="(20,10,30)" MinPoint="(0,0,0)" tags=""/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(20,10,30)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
+	</entity>
+	<entity name="kugel">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-39.2693,95.8724,-1.68082)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingSphereVolumePart" Position="(0,0,0)" Radius="10" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" material="/edit/mat/white-lit.v3dmat" radius="10" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="06886E18" Enabled="true" Mass="1" Position="(-39.2693,95.8724,-1.68082)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+	</entity>
+
 	<entity name="Car">
-		<part type="v3d::entity::VRigidBodyPart" pos="(1,16,1)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(40,0.5,40)" MaxPoint="(40,0.5,40)" MinPoint="(0,0,0)" tags=""/>
-		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(40,0.5,40)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
-		<part type="v3d::physics::VBodyPart" Address="0ED0CBC0" Enabled="true" Identifier="chassi" Mass="14.0" Position="(1,16,1)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-1,15,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::physics::VBoundingBoxVolumePart" Length="(20,0.5,40)" MaxPoint="(20,0.5,40)" MinPoint="(0,0,0)" tags=""/>
+		<part type="v3d::scene::VBoxMeshPart" MaxPoint="(20,0.5,40)" MinPoint="(0,0,0)" material="/edit/mat/white-lit.v3dmat" tags=""/>
+		<part type="v3d::physics::VBodyPart" Address="0ED0CBC0" Enabled="true" Identifier="chassi" Mass="14.0" Position="(-1,15,0)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 		<entity name="Joint3">
 			<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,-15)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel1" Bounce="0" CFM="0" FudgeFactor="0" HighStop="0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="rear1" StopCFM="0" StopERP="0.2" SuspensionCFM="0.0" SuspensionERP="0.0" Velocity="0" Velocity2="0" tags=""/>
 			<entity name="Wheel3">
-				<part type="v3d::entity::VRigidBodyPart" pos="(10,15,-15)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
+			<part type="v3d::entity::VRigidBodyPart" pos="(10,15,-15)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
 			<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>\
 			<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
 			<part type="v3d::physics::VBodyPart" Address="0ED0A608" Enabled="true" Identifier="wheel1" Mass="3.0" Position="(10,15,-15)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
@@ -45,8 +87,7 @@
 			<part type="v3d::entity::VRigidBodyPart" pos="(-10,15,-15)" updir="(0,1,0)" viewdir="(1,-0,0)" tags=""/>
 			<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>\
 			<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
-
-				<part type="v3d::physics::VBodyPart" Address="0ED0ACC0" Enabled="true" Identifier="wheel2" Mass="3.0" Position="(-10,15,-15)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
+			<part type="v3d::physics::VBodyPart" Address="0ED0ACC0" Enabled="true" Identifier="wheel2" Mass="3.0" Position="(-10,15,-15)" Quat="(0,0,0,1)" QuatAxisAngle="(0,0,0,0)" tags=""/>
 			</entity>
 		</entity>
 		<entity name="Steering">
@@ -55,9 +96,9 @@
 				<part type="v3d::physics::VJointHinge2Part" Anchor="(10,15,15)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel0" Bounce="0" CFM="0" FudgeFactor="0" HighStop="0.0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="LeftSteer" StopCFM="0" StopERP="0.2" SuspensionCFM="0" SuspensionERP="0" Velocity="0" Velocity2="0" tags=""/>
 				<entity name="Wheel1">
 					<part type="v3d::entity::VRigidBodyPart" pos="(10,15,15)" updir="(0,1,0)" viewdir="(1,0,0)" tags=""/>
-					<part type="v3d::physics::VBodyPart" Address="0ED0B458" Enabled="true" Identifier="wheel0" Mass="3.0" Position="(10,15,15)"  QuatAxisAngle="(0,0,0,0)" tags=""/>
 					<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>
 					<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
+					<part type="v3d::physics::VBodyPart" Address="0ED0B458" Enabled="true" Identifier="wheel0" Mass="3.0" Position="(10,15,15)"  QuatAxisAngle="(0,0,0,0)" tags=""/>
 				</entity>
 			</entity>
 			<entity name="Joint2">
@@ -67,8 +108,13 @@
 					<part type="v3d::physics::VBodyPart" Address="0ED0BBF0" Enabled="true" Identifier="wheel3" Mass="3.0" Position="(-10,15,15)"  QuatAxisAngle="(0,0,0,0)" tags=""/>
 					<part type="v3d::physics::VBoundingCCylinderVolumePart" Length="2" Radius="4" tags=""/>
 					<part type="v3d::scene::VCylinderMeshPart" bottom-radius="4" color="(1,1,1,1)" height="2" material="/system/graphics/defaultMaterial" slices="10" stacks="10" top-radius="4" tags=""/>
+
 				</entity>
 			</entity>
 		</entity>
 	</entity>
+		<entity name="skybox">
+			<part type="v3d::entity::VRigidBodyPart" pos="(157.677,100.024,175.126)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+			<part type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/" tags=""/>
+		</entity>
 </entity>

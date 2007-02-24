@@ -55,6 +55,9 @@ private:
 	vuint GetResolution() const;
 	void SetResolution(const vuint& in_nNewCount);
 
+	void SetHeightScale(const vfloat32& in_NewHeightScale);
+	vfloat32 GetHeightScale() const;
+
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hVertexBuffer;
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hIndexBuffer;	
 	resource::VResourceDataPtr<const graphics::IVMesh> m_hMesh;
@@ -67,6 +70,8 @@ private:
 
 	math::VVector2f m_XZMin;
 	math::VVector2f m_XZMax;
+
+	vfloat32 m_fHeightScale;
 };
 
 //-----------------------------------------------------------------------------
