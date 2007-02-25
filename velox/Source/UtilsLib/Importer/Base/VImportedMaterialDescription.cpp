@@ -126,10 +126,14 @@ resource::VResourceId VImportedMaterialDescription::CreateResource()
 	if(m_sTextureImageName.size())
 	{
 		FilenamePath = m_sResourcePath;
+		FilenamePath.append("/");
 		FilenamePath.append(m_sTextureImageName.c_str());
-
+		
+		std::string test = "/data/";
+		test.append(m_sTextureImageName);
 		result->AddData(
-			new resource::VFileName(FilenamePath.c_str())
+			//new resource::VFileName(FilenamePath.c_str())
+			new resource::VFileName(test.c_str())
 			);
 	}
 

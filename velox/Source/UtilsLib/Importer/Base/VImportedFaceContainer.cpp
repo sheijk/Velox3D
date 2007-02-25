@@ -31,7 +31,7 @@ VImportedFaceContainer::VImportedFaceContainer()
 
 VImportedFaceContainer::~VImportedFaceContainer()
 {
-	std::list<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
+	std::vector<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
 
 	for(; begin != m_FaceList.end(); begin++)
 		delete (*begin);
@@ -50,13 +50,13 @@ void VImportedFaceContainer::Add(VImportedFaceDescription* in_pFace)
 
 void VImportedFaceContainer::Remove(VImportedFaceDescription* in_pFace)
 {
-	m_FaceList.remove(in_pFace);
+  //	m_FaceList.remove(in_pFace);
 }
 
 void VImportedFaceContainer::CreateFaceResources(
 	VImportedBufferDescription* in_pBufferDescription)
 {
-	std::list<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
+	std::vector<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
 
 	for(; begin != m_FaceList.end(); begin++)
 		(*begin)->CreateResource(in_pBufferDescription);
@@ -92,7 +92,7 @@ void VImportedFaceContainer::CreateMeshes(
 	graphics::VModelMesh::MaterialPtr materialResourcePtr = 0;
 	
 
-	std::list<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
+	std::vector<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
 	
 	for(; begin != m_FaceList.end(); begin++)
 	{
@@ -147,7 +147,7 @@ void VImportedFaceContainer::CreateMeshes(graphics::VModel* in_pModel)
 	graphics::VModelMesh::MaterialPtr materialResourcePtr = 0;
 	
 
-	std::list<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
+	std::vector<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
 	
 	for(; begin != m_FaceList.end(); begin++)
 	{
@@ -198,7 +198,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 	graphics::VModelMesh::MeshPtr meshResourcePtr;
 	graphics::VModelMesh::MaterialPtr materialResourcePtr = 0;
 
-	std::list<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
+	std::vector<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
 
 	for(; begin != m_FaceList.end(); begin++)
 	{
@@ -213,10 +213,12 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 	if(!m_FaceList.size())
 		return;
     		
-	vuint* indexArray = m_FaceList.front()->GetBufferDescription()->GetIndexBufferArray();
+	
 
 	for(; i != mymap.GetMaterialFaceMap().end(); ++i)
 	{
+		
+		
 		//cast to resource pointer
 		materialResourcePtr = pResManager->GetResourceByName((*i).key->GetResourceName())->GetData<graphics::IVMaterial>();
 
@@ -228,9 +230,15 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 		vuint32* indexBuffer = new vuint32[(*i).listForKey->size() * 3];
 		vuint32 nCount = 0;
 
+		
+
 		for(; begin != mymap.GetFaceList((*i).key)->end(); ++begin)
 		{
-			if(indexArray[(*begin)] < 0)
+		  //vuint* indexArray = m_FaceList.front()->GetBufferDescription()->GetIndexBufferArray();
+		  vuint index = m_FaceList[((*begin) / 3 )]->GetFaceIndexStart();
+		  vuint* indexArray = m_FaceList[0]->GetBufferDescription()->GetIndexBufferArray();
+
+			/*if(indexArray[(*begin)] < 0)
 			{
 				std::stringstream ss;
 				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
@@ -242,7 +250,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 				std::stringstream ss;
 				ss << "index: " <<(*begin)+1 << " array value: "<< indexArray[(*begin)+1] << " with valid size of " << n*3;
 				V3D_THROW(graphics::VImporterException, ss.str().c_str());
-			}
+			} 
 				
 			if(indexArray[(*begin)+2] < 0)
 			{
@@ -270,10 +278,22 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
 				V3D_THROW(graphics::VImporterException, ss.str().c_str());
 			}
-			
-			indexBuffer[nCount] = indexArray[(*begin)];
-			indexBuffer[nCount+1] = indexArray[(*begin)+1];
-			indexBuffer[nCount+2] = indexArray[(*begin)+2];
+			*/
+
+			vuint a = indexArray[index];
+			vuint b = indexArray[index +1];
+			vuint c = indexArray[index +2];
+
+			if( a > m_FaceList.size() )
+			  V3D_THROW(graphics::VImporterException, "index buffer invalid");
+			if( b > m_FaceList.size() )
+			  V3D_THROW(graphics::VImporterException, "index buffer invalid");
+			if( c > m_FaceList.size() )
+			  V3D_THROW(graphics::VImporterException, "index buffer invalid");
+
+			indexBuffer[nCount]   = a;
+			indexBuffer[nCount+1] = b; 
+			indexBuffer[nCount+2] = c;
 
 			nCount +=3;
 		}

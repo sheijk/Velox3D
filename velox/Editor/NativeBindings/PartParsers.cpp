@@ -42,64 +42,62 @@
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
-		extern void* AssureVPlaneMeshPartExist();
-		extern void* AssureVArrowMeshPartExist();
-		extern void* AssureVBoxMeshPartExist();
-		extern void* AssureVCoordSysDisplayPartExist();
-		extern void* AssureVFrustumVisPartExist();
-		extern void* AssureVDefaultRenderStepPartExist();
-		extern void* AssureVLightPartExist();
-		extern void* AssureVMeshPartExist();
-		extern void* AssureVNaiveLightManagerExist();
-		extern void* AssureVMirrorShootingExist();
-		extern void* AssureVModelPartExist();
-		extern void* AssureVNaiveSceneManagerPartExist();
-		extern void* AssureVOffscreenShootingExist();
-		extern void* AssureVShadowMapShootingExist();
-		extern void* AssureVOrientationGridPartExist();
-		extern void* AssureVPlaneMeshPartExist();
-		extern void* AssureVPostProcesssingRenderStepPartExist();
-		extern void* AssureVPostProcesssingRenderStepPart2Exist();
-		extern void* AssureVPostProcesssingRenderStepPart3Exist();
-		extern void* AssureVPostProcesssingRenderStepPart4Exist();
-		extern void* AssureVProjectTextureRenderStepPartExist();
-		extern void* AssureVShadowMapRenderStepPartExist();
-		extern void* AssureVSimpleShootingExist();
-		extern void* AssureVSkyboxPartExist();
-		extern void* AssureVSphereMeshPartExist();
-		extern void* AssureVTerrainPartExist();
-		extern void* AssureVTorusMeshPartExist();
-		extern void* AssureVCylinderMeshPartExist();
+		extern void* AssureVPlaneMeshPartExists();
+		extern void* AssureVArrowMeshPartExists();
+		extern void* AssureVBoxMeshPartExists();
+		extern void* AssureVCoordSysDisplayPartExists();
+		extern void* AssureVFrustumVisPartExists();
+		extern void* AssureVDefaultRenderStepPartExists();
+		extern void* AssureVLightPartExists();
+		extern void* AssureVMeshPartExists();
+		extern void* AssureVNaiveLightManagerExists();
+		extern void* AssureVMirrorShootingExists();
+		extern void* AssureVModelPartExists();
+		extern void* AssureVNaiveSceneManagerPartExists();
+		extern void* AssureVOffscreenShootingExists();
+		extern void* AssureVShadowMapShootingExists();
+		extern void* AssureVOrientationGridPartExists();
+		extern void* AssureVPlaneMeshPartExists();
+		extern void* AssureVPostProcesssingRenderStepPartExists();
+		extern void* AssureVPostProcesssingRenderStepPart2Exists();
+		extern void* AssureVPostProcesssingRenderStepPart3Exists();
+		extern void* AssureVPostProcesssingRenderStepPart4Exists();
+		extern void* AssureVProjectTextureRenderStepPartExists();
+		extern void* AssureVShadowMapRenderStepPartExists();
+		extern void* AssureVSimpleShootingExists();
+		extern void* AssureVSkyboxPartExists();
+		extern void* AssureVSphereMeshPartExists();
+		extern void* AssureVTerrainPartExists();
+		extern void* AssureVTorusMeshPartExists();
+		extern void* AssureVCylinderMeshPartExists();
 }}
 
 namespace v3d { namespace physics {
-		extern void* AssureVBodyPartExist();
-		extern void* AssureVCollisionPartExist();
-	//	extern void* AssureVJointHinge2LinkAncestorBodyPartExist();
-	//	extern void* AssureVJointHinge2LinkPartExist();
-		extern void* AssureVJointHinge2ModifierPartExist();
-		extern void* AssureVJointHinge2PartExist();
-		extern void* AssureVPhysicManagerPartExist();
-		extern void* AssureVBoundingBoxVolumePartExist();
-		extern void* AssureVBoundingMeshVolumePartExist();
-		extern void* AssureVBoundingCCylinderVolumePartExist();
-		extern void* AssureVBoundingPlaneVolumePartExist();
-		extern void* AssureVBoundingSphereVolumePartExist();
-		extern void* AssureVBoundingTerrainVolumePartExist();
-		extern void* AssureVCollisionVisualizationPartExist();
+		extern void* AssureVBodyPartExists();
+		extern void* AssureVCollisionPartExists();
+		extern void* AssureVJointHinge2ModifierPartExists();
+		extern void* AssureVJointHinge2PartExists();
+		extern void* AssureVPhysicManagerPartExists();
+		extern void* AssureVBoundingBoxVolumePartExists();
+		extern void* AssureVBoundingMeshVolumePartExists();
+		extern void* AssureVBoundingCCylinderVolumePartExists();
+		extern void* AssureVBoundingPlaneVolumePartExists();
+		extern void* AssureVBoundingSphereVolumePartExists();
+		extern void* AssureVBoundingTerrainVolumePartExists();
+		extern void* AssureVCollisionVisualizationPartExists();
 }}
 
 namespace v3d { namespace entity {
-		//extern void* AssureVUpdateablePartExist();
-		extern void* AssureVUpdateManagerPartExist();
-		extern void* AssureVRigidBodyPartExist();
+		//extern void* AssureVUpdateablePartExists();
+		extern void* AssureVUpdateManagerPartExists();
+		extern void* AssureVRigidBodyPartExists();
 }}
 namespace v3d { namespace utils {
-		extern void* AssureVCameraPartExist();
-		extern void* AssureVCircleMoverPartExist();
-		extern void* AssureVFPSMoverPartExist();
-		extern void* AssureVInputPartExist();
-		extern void* AssureVTrackballPartExist();
+		extern void* AssureVCameraPartExists();
+		extern void* AssureVCircleMoverPartExists();
+		extern void* AssureVFPSMoverPartExists();
+		extern void* AssureVInputPartExists();
+		extern void* AssureVTrackballPartExists();
 }}
 
 namespace v3d { namespace editor {
@@ -117,58 +115,55 @@ namespace {
 
 void foo()
 {
-	v3d::scene::AssureVArrowMeshPartExist();
-	v3d::scene::AssureVBoxMeshPartExist();
-	v3d::scene::AssureVCoordSysDisplayPartExist();
-	v3d::scene::AssureVFrustumVisPartExist();
-	v3d::scene::AssureVDefaultRenderStepPartExist();
-	v3d::scene::AssureVLightPartExist();
-	v3d::scene::AssureVMeshPartExist();
-	v3d::scene::AssureVNaiveLightManagerExist();
-	v3d::scene::AssureVMirrorShootingExist();
-	v3d::scene::AssureVModelPartExist();
-	v3d::scene::AssureVNaiveSceneManagerPartExist();
-	v3d::scene::AssureVOffscreenShootingExist();
-	v3d::scene::AssureVShadowMapShootingExist();
-	v3d::scene::AssureVOrientationGridPartExist();
-	v3d::scene::AssureVPlaneMeshPartExist();
-	v3d::scene::AssureVPostProcesssingRenderStepPartExist();
-	v3d::scene::AssureVPostProcesssingRenderStepPart2Exist();
-	v3d::scene::AssureVPostProcesssingRenderStepPart3Exist();
-	v3d::scene::AssureVPostProcesssingRenderStepPart4Exist();
-	v3d::scene::AssureVProjectTextureRenderStepPartExist();
-	//v3d::scene::AssureVShadowMapRenderStepPartExist();
-	v3d::scene::AssureVSimpleShootingExist();
-	v3d::scene::AssureVSkyboxPartExist();
-	v3d::scene::AssureVSphereMeshPartExist();
-	v3d::scene::AssureVTerrainPartExist();
-	v3d::scene::AssureVTorusMeshPartExist();
-	v3d::scene::AssureVCylinderMeshPartExist();
+	v3d::scene::AssureVArrowMeshPartExists();
+	v3d::scene::AssureVBoxMeshPartExists();
+	v3d::scene::AssureVCoordSysDisplayPartExists();
+	v3d::scene::AssureVFrustumVisPartExists();
+	v3d::scene::AssureVDefaultRenderStepPartExists();
+	v3d::scene::AssureVLightPartExists();
+	v3d::scene::AssureVMeshPartExists();
+	v3d::scene::AssureVNaiveLightManagerExists();
+	v3d::scene::AssureVMirrorShootingExists();
+	v3d::scene::AssureVModelPartExists();
+	v3d::scene::AssureVNaiveSceneManagerPartExists();
+	v3d::scene::AssureVOffscreenShootingExists();
+	v3d::scene::AssureVShadowMapShootingExists();
+	v3d::scene::AssureVOrientationGridPartExists();
+	v3d::scene::AssureVPlaneMeshPartExists();
+	v3d::scene::AssureVPostProcesssingRenderStepPartExists();
+	v3d::scene::AssureVPostProcesssingRenderStepPart2Exists();
+	v3d::scene::AssureVPostProcesssingRenderStepPart3Exists();
+	v3d::scene::AssureVPostProcesssingRenderStepPart4Exists();
+	v3d::scene::AssureVProjectTextureRenderStepPartExists();
+	v3d::scene::AssureVSimpleShootingExists();
+	v3d::scene::AssureVSkyboxPartExists();
+	v3d::scene::AssureVSphereMeshPartExists();
+	v3d::scene::AssureVTerrainPartExists();
+	v3d::scene::AssureVTorusMeshPartExists();
+	v3d::scene::AssureVCylinderMeshPartExists();
 
-	v3d::physics::AssureVBodyPartExist();
-	v3d::physics::AssureVBoundingBoxVolumePartExist();
-	v3d::physics::AssureVBoundingMeshVolumePartExist();
-	v3d::physics::AssureVBoundingPlaneVolumePartExist();
-	v3d::physics::AssureVBoundingSphereVolumePartExist();
-	v3d::physics::AssureVBoundingTerrainVolumePartExist();
-	v3d::physics::AssureVBoundingCCylinderVolumePartExist();
-	v3d::physics::AssureVCollisionPartExist();
-//	v3d::physics::AssureVJointHinge2LinkAncestorBodyPartExist();
-//	v3d::physics::AssureVJointHinge2LinkPartExist();
-	v3d::physics::AssureVJointHinge2ModifierPartExist();
-	v3d::physics::AssureVJointHinge2PartExist();
-	v3d::physics::AssureVPhysicManagerPartExist();
-	v3d::physics::AssureVCollisionVisualizationPartExist();
+	v3d::physics::AssureVBodyPartExists();
+	v3d::physics::AssureVBoundingBoxVolumePartExists();
+	v3d::physics::AssureVBoundingMeshVolumePartExists();
+	v3d::physics::AssureVBoundingPlaneVolumePartExists();
+	v3d::physics::AssureVBoundingSphereVolumePartExists();
+	v3d::physics::AssureVBoundingTerrainVolumePartExists();
+	v3d::physics::AssureVBoundingCCylinderVolumePartExists();
+	v3d::physics::AssureVCollisionPartExists();
+	v3d::physics::AssureVJointHinge2ModifierPartExists();
+	v3d::physics::AssureVJointHinge2PartExists();
+	v3d::physics::AssureVPhysicManagerPartExists();
+	v3d::physics::AssureVCollisionVisualizationPartExists();
 
-	v3d::entity::AssureVRigidBodyPartExist();
-	//v3d::entity::AssureVUpdateablePartExist();
-	v3d::entity::AssureVUpdateManagerPartExist();
+	v3d::entity::AssureVRigidBodyPartExists();
+	//v3d::entity::AssureVUpdateablePartExists();
+	v3d::entity::AssureVUpdateManagerPartExists();
 
-	v3d::utils::AssureVCameraPartExist();
-	v3d::utils::AssureVCircleMoverPartExist();
-	v3d::utils::AssureVFPSMoverPartExist();
-	v3d::utils::AssureVInputPartExist();
-	v3d::utils::AssureVTrackballPartExist();
+	v3d::utils::AssureVCameraPartExists();
+	v3d::utils::AssureVCircleMoverPartExists();
+	v3d::utils::AssureVFPSMoverPartExists();
+	v3d::utils::AssureVInputPartExists();
+	v3d::utils::AssureVTrackballPartExists();
 
 }
 

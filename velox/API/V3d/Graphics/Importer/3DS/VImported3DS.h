@@ -92,6 +92,7 @@ private:
 	
 	vbool LoadModel();
 	vbool LoadNode(Lib3dsNode* in_pNode);
+	bool LoadMesh();
 	void CreateMeshResourceName(VStringParam in_sName);
 	vbool CopyBuffers(Lib3dsMesh* in_pMesh, ArrayBuffer* in_pArrayBuffer);
 	VStringRetVal CreateMeshPartName(VStringParam in_sMeshPartName);

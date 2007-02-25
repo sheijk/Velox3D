@@ -104,7 +104,7 @@ resource::VResourceId VImportedFaceDescription::CreateResource(
 		in_pBufferDescription->GetTexCoordBufferFormat1()->GetTexCoordFormat(0));
 	}
 
-	//TODO: insert 2. texcoods
+	//TODO: insert 2. texcoodrs
 
 	//face->AddData(m_pMeshDescription);
 	

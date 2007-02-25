@@ -206,11 +206,11 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
   {
 	Accel(m_fSpeed, m_fAccel);
 	Steer(m_fSteering);
-	vout << "Speed: " << m_fSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
+	//vout << "Speed: " << m_fSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
   }
   else
   {
-	vout << "physics modifier: could not find requested joints" << vendl;
+	//vout << "physics modifier: could not find requested joints" << vendl;
   }
 	//TODO: ugly test code; clean up
 

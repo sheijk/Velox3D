@@ -37,8 +37,7 @@ VRangeIterator<VTypeInfo> VXMLModelResourceType::CreatedTypes()
 	return CreateSingleValueIterator(&modelTypeInfo);
 }
 
-vbool VXMLModelResourceType::Generate(
-									  resource::VResource* in_pResource, VTypeInfo in_Type)
+vbool VXMLModelResourceType::Generate(resource::VResource* in_pResource, VTypeInfo in_Type)
 {
 	try
 	{

@@ -17,8 +17,8 @@ namespace v3d { namespace utils {
 using namespace v3d;
 
 /**
- * hold a map of materials associated with faces
- * can be quried for a list of faces associated with a material
+ * holds a map of materials associated with faces
+ * can be queried for a list of faces associated with a material
  *
  * @author: ins
  */

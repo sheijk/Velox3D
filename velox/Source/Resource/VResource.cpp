@@ -223,11 +223,8 @@ VResource* VResource::GetResourceByPath(const std::string& in_strChildName)
 	// resource could not be found
 	if( 0 == pCurrentResource )
 	{
-		std::stringstream message;
-		message << "Could not find resource '" << in_strChildName  
-			<< "' from resource '" << GetQualifiedName() << "'";
-
-		V3D_THROW(VResourceNotFoundException, message.str().c_str());
+		V3D_THROWMSG(VResourceNotFoundException, "Could not find resource '" << in_strChildName  
+		  << "' from resource '" << GetQualifiedName() << "'";);
 	}
 	// resource could be found
 	else

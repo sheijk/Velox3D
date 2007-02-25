@@ -58,7 +58,7 @@ private:
 	typedef std::list<std::string> MaterialLoadedList;
 	vbool IsInMaterialLoadedList(VStringParam in_sName);
 
-	std::list<VImportedFaceDescription*> m_FaceList;
+	std::vector<VImportedFaceDescription*> m_FaceList;
 	MaterialLoadedList m_MaterialLoadedList;
 };
 

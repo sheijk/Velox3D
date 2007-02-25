@@ -64,7 +64,7 @@ protected:
 	namespace {\
 		entity::VPartParser<PartClass> parser##PartClass;\
 	}\
-	void* Assure##PartClass##Exist()\
+	void* Assure##PartClass##Exists()\
 	{\
 	return &parser##PartClass;\
 	}
