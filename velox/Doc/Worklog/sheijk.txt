@@ -30,6 +30,9 @@ Doku:
 -------------------------------------------------------------------------------
 ----- last things sheijk finished:
 
+10.03.07
+- still alive.. working on the terrain :)
+
 11.11.06
 - VTrackballPart saves it's orientation etc.
 - cleaned up some code
