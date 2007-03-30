@@ -1,6 +1,0 @@
-//	vec2 pos = gl_TexCoord[0].st;	
-//	color = gl_FragColor(image, pos);
-//	for(int i = -stepCount; i < stepCount; ++i) {
-//		color += vec4(.1, 0.0, .0, .0);
-//		color += texture2D(image, pos);
-//	}
