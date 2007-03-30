@@ -79,7 +79,7 @@ void VNaiveLightManager::Remove(VLightPart* in_pLight)
 
 void VNaiveLightManager::ApplyLights(IVDevice* in_pDevice, const IVShapePart* in_pShape)
 {
-	V3D_ASSERT(in_pDevice);
+	V3D_ASSERT(in_pDevice != 0);
 
 	if( in_pDevice != NULL )
 	{

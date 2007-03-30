@@ -1684,18 +1684,6 @@
 								>
 							</File>
 							<Filter
-								Name="CPUDetect"
-								>
-								<File
-									RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp"
-									>
-								</File>
-								<File
-									RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.h"
-									>
-								</File>
-							</Filter>
-							<Filter
 								Name="Camera"
 								>
 								<File

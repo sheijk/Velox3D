@@ -31,7 +31,7 @@ public:
 	// alternativ einfach Shutdown(), mehr tut die Fkt doch nicht, oder?
 	virtual void SetStatus(vbool in_Param) = 0; //true for running false for quit
 	virtual vbool GetStatus() = 0; //returs true for running false for quit
-	virtual void GetCPU() = 0; //for testing reasions
+	//virtual void GetCPU() = 0; //for testing reasions
 
 };
 

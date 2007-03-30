@@ -26,9 +26,16 @@ public:
 	VSystemManager(VStringParam in_Name);
 	virtual ~VSystemManager();
 
-	virtual void SetStatus(vbool in_Param); //true for running false for quit
-	virtual vbool GetStatus(); //returs true for running false for quit
-	virtual void GetCPU(); // vout's cpu info
+	/*
+	 * true for running false for quit
+	 */
+	virtual void SetStatus(vbool in_Param);
+	/*
+	 * returns true for running false for quit 
+	 */
+	virtual vbool GetStatus(); 
+	
+	//virtual void GetCPU(); // vout's cpu info
 
 private:
 

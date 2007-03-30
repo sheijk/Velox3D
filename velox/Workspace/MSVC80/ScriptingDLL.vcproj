@@ -690,26 +690,6 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="UtilsLib"
-				>
-				<Filter
-					Name="Implementation"
-					>
-					<Filter
-						Name="CPUDetect"
-						>
-						<File
-							RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\Source\UtilsLib\CPUDetect\VDetectProcessor.h"
-							>
-						</File>
-					</Filter>
-				</Filter>
-			</Filter>
-			<Filter
 				Name="UpdateManager"
 				>
 				<Filter
