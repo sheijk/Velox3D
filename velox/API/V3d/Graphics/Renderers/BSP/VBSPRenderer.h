@@ -8,7 +8,7 @@
 #ifndef V3D_VBSPRENDERER_21_04_04_H
 #define V3D_VBSPRENDERER_21_04_04_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <v3dLib/Graphics.h>
 #include <v3dLib/Utils/VStreamReader.h>
 #include <v3dLib/Graphics/Importer/VQ3BspImporter.h>

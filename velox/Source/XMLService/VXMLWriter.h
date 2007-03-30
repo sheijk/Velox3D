@@ -8,11 +8,11 @@
 #ifndef V3D_VXMLWRITER_H
 #define V3D_VXMLWRITER_H
 //-----------------------------------------------------------------------------
-#include <v3d/XML/IVXMLWriter.h>
-#include <v3d/XML/IVXMLService.h>
-#include <v3d/Core/Wrappers/VString.h>
+#include <V3d/XML/IVXMLWriter.h>
+#include <V3d/XML/IVXMLService.h>
+#include <V3d/Core/Wrappers/VString.h>
 #include <V3d/VFS/IVStream.h>
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Core/VObjectRegistry.h>
 #include <V3d/VFS/VStreamOps.h>
 #include "../VirtualFileSystem/VFileStream.h"
 //-----------------------------------------------------------------------------

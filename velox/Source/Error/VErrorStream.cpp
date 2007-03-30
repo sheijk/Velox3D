@@ -8,7 +8,7 @@
 #include "VErrorStream.h"
 #include <iostream>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {

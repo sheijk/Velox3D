@@ -8,7 +8,7 @@
 #ifndef V3D_VACCESSRIGHTS_H
 #define V3D_VACCESSRIGHTS_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

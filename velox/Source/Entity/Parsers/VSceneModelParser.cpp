@@ -13,7 +13,7 @@
 #include <V3d/Entity/IVEntitySerializationService.h>
 #include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------

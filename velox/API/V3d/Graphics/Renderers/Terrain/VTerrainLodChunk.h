@@ -8,7 +8,7 @@
 #ifndef V3D_VTERRAINLODCHUNK_2004_05_10_H_H
 #define V3D_VTERRAINLODCHUNK_2004_05_10_H_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3dLib/Graphics/Renderers/Terrain/VLodHeightmap.h>
 #include <V3dLib/Graphics/Generators/VHeightmapMesh.h>

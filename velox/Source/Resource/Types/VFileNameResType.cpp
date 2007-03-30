@@ -14,7 +14,7 @@
 #include <V3d/Resource/Types/VFileName.h>
 #include <V3d/Resource/VResource.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------

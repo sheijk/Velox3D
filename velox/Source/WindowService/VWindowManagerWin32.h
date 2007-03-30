@@ -8,7 +8,7 @@
 #ifndef V3D_VWINDOWMANAGERWIN32_H
 #define V3D_VWINDOWMANAGERWIN32_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 //-----------------------------------------------------------------------------
 #include "VWindowManagerBase.h"
 //-----------------------------------------------------------------------------

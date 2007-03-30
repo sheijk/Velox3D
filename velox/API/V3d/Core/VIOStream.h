@@ -9,7 +9,7 @@
 #ifndef V3D_VIOSTREAM_H
 #define V3D_VIOSTREAM_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Utils/IVStringStream.h>
 //-----------------------------------------------------------------------------
 namespace v3d {

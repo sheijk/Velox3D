@@ -5,13 +5,13 @@
  * complete licence text
  */
 
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 
-#include <v3d/Core/Modules/VModuleBase.h>
+#include <V3d/Core/Modules/VModuleBase.h>
 
 #include "VXMLService.h"
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 
 //-----------------------------------------------------------------------------
 

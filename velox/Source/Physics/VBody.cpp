@@ -6,7 +6,7 @@
  */
 
 //-----------------------------------------------------------------------------
-#include <v3d/Physics/VBody.h>
+#include <V3d/Physics/VBody.h>
 //#include <V3dLib/Physics/VPhysicWorld.h>
 //#include <V3dLib/Physics/VPhysicPositionState.h>
 //#include <V3dLib/Physics/VPhysicGeometry.h>

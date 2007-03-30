@@ -8,7 +8,7 @@
 #ifndef V3D_VRESOURCEDATAPTR_H
 #define V3D_VRESOURCEDATAPTR_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VTypeInfo.h>
 
 #include <V3d/Resource/VTypedResourceData.h>

@@ -9,7 +9,7 @@
 #include <windows.h>
 #include <sstream>
 #include <fstream>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 #undef CreateFile
 //-----------------------------------------------------------------------------
 namespace v3d {

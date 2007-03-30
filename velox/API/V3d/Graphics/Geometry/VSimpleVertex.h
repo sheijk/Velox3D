@@ -8,7 +8,7 @@
 #ifndef V3D_VSIMPLEVERTEX_H
 #define V3D_VSIMPLEVERTEX_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Graphics/Geometry/VVertex3f.h>
 #include <V3d/Graphics/Geometry/VVertexDataLayout.h>
 //-----------------------------------------------------------------------------

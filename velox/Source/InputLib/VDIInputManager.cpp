@@ -6,9 +6,9 @@
  */
 
 #include "VDIInputManager.h"
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Input/VInputExceptions.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Input/VInputExceptions.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

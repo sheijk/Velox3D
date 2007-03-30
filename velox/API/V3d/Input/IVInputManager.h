@@ -8,14 +8,14 @@
 #ifndef V3D_IVINPUTMANAGER_2004_08_09_H
 #define V3D_IVINPUTMANAGER_2004_08_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Updater/IVUpdateable.h>
-#include <v3d/Input/IVInputDevice.h>
-#include <v3d/Input/IVKeyboardDevice.h>
-#include <v3d/Input/IVMouseDevice.h>
-#include <v3d/Input/IVButton.h>
-#include <v3d/Input/IVRelativeAxis.h>
-#include <v3d/Input/VKeyCode.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Updater/IVUpdateable.h>
+#include <V3d/Input/IVInputDevice.h>
+#include <V3d/Input/IVKeyboardDevice.h>
+#include <V3d/Input/IVMouseDevice.h>
+#include <V3d/Input/IVButton.h>
+#include <V3d/Input/IVRelativeAxis.h>
+#include <V3d/Input/VKeyCode.h>
 #include <V3d/Core/RangeIter/VRangeIterator.h>
 //-----------------------------------------------------------------------------
 namespace v3d {

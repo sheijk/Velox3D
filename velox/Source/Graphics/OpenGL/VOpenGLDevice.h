@@ -8,12 +8,12 @@
 #ifndef V3D_VOPENGLDEVICE_H
 #define V3D_VOPENGLDEVICE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VTypeInfo.h>
-#include <v3d/Graphics/IVDevice.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
+#include <V3d/Graphics/IVDevice.h>
 #include <V3d/Graphics/IVRenderContext.h>
 
-#include <v3d/Graphics/VDisplaySettings.h>
+#include <V3d/Graphics/VDisplaySettings.h>
 #include <V3d/Math/VMatrix.h>
 
 #include <V3d/OpenGL.h>

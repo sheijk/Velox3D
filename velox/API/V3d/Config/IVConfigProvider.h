@@ -8,14 +8,14 @@
 #ifndef V3D_IVConfigProvider_H
 #define V3D_IVConfigProvider_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VNamedObject.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VNamedObject.h>
 
-#include <v3d/XML/IVXMLVisitor.h>
-#include <v3d/XML/IVXMLWriter.h>
+#include <V3d/XML/IVXMLVisitor.h>
+#include <V3d/XML/IVXMLWriter.h>
 
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -9,8 +9,8 @@
 #define V3D_VDEBUGMONITOR_H
 //-----------------------------------------------------------------------------
 #include <windows.h>
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/IVErrorListener.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Error/IVErrorListener.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {

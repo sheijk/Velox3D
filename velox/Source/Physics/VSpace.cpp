@@ -5,11 +5,11 @@
  * complete licence text
  */
 
-#include <v3d/Physics/VSpace.h>
-#include <v3d/Physics/VWorld.h>
+#include <V3d/Physics/VSpace.h>
+#include <V3d/Physics/VWorld.h>
 #include <V3d/Physics/VJointGroup.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

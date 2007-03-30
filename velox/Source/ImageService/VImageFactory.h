@@ -8,8 +8,8 @@
 #ifndef V3D_VIMAGEFACTORY_H
 #define V3D_VIMAGEFACTORY_H
 //-----------------------------------------------------------------------------
-#include <v3d/Image/IVImageFactory.h>
-#include <v3d/Image/IVImageLoader.h>
+#include <V3d/Image/IVImageFactory.h>
+#include <V3d/Image/IVImageLoader.h>
 #include <map>
 #include <vector>
 //-----------------------------------------------------------------------------

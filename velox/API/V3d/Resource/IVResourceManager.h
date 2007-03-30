@@ -8,13 +8,13 @@
 #ifndef V3D_IVRESOURCEMANAGER_2004_11_06_H
 #define V3D_IVRESOURCEMANAGER_2004_11_06_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource/VResourceId.h>
 #include <V3d/Resource/IVResourceType.h>
 
 #include <V3d/Core/VNamedObject.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 #include <V3d/Core.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {

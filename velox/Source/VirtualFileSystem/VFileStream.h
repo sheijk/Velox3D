@@ -8,10 +8,10 @@
 #ifndef V3D_VFILESTREAM_H
 #define V3D_VFILESTREAM_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/VFS/IVBufferStream.h>
-#include <v3d/VFS/VFlags.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/VFS/IVBufferStream.h>
+#include <V3d/VFS/VFlags.h>
 
 #include "VLegalOperations.h"
 

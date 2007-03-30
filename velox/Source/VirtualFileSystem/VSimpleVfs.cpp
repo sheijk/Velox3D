@@ -7,17 +7,17 @@
 
 #include "VSimpleVfs.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Core/VObjectRegistry.h>
 
-#include <v3d/VFS/IVStreamFactory.h>
-#include <v3d/VFS/IVAccessRights.h>
-#include <v3d/VFS/VIOException.h>
-#include <v3d/VFS/IVDataProviderPool.h>
-#include <v3d/VFS/VMountOptions.h>
+#include <V3d/VFS/IVStreamFactory.h>
+#include <V3d/VFS/IVAccessRights.h>
+#include <V3d/VFS/VIOException.h>
+#include <V3d/VFS/IVDataProviderPool.h>
+#include <V3d/VFS/VMountOptions.h>
 
 #include <V3d/Utils/VSimpleTokenizer.h>
 
-#include <v3d/XML/IVXMLService.h>
+#include <V3d/XML/IVXMLService.h>
 
 #include <V3d/Core/VIOStream.h>
 
@@ -30,7 +30,7 @@
 #include <string>
 
 #include <boost/filesystem/operations.hpp>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

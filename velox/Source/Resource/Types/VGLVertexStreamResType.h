@@ -9,7 +9,7 @@
 #ifndef V3D_VGLVERTEXSTREAMRESTYPE_2005_02_03_H
 #define V3D_VGLVERTEXSTREAMRESTYPE_2005_02_03_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------

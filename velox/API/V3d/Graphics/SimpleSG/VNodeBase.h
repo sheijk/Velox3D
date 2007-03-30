@@ -8,7 +8,7 @@
 #ifndef V3D_VNODEBASE_H
 #define V3D_VNODEBASE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Graphics/SimpleSG/IVNode.h>
 #include <list>
 

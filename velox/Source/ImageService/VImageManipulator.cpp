@@ -6,14 +6,14 @@
  */
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Image/IVImageFactory.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Image/IVImageFactory.h>
 #include "VImageManipulator.h"
 
 #include <IL/il.h>
 #include <IL/ilu.h>
 
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace image{

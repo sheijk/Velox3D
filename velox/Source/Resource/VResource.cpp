@@ -23,7 +23,7 @@
 #include <sstream>
 #include <boost/filesystem/operations.hpp>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace resource {
 //-----------------------------------------------------------------------------

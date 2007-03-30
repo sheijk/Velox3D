@@ -14,7 +14,7 @@
 #include <V3d/Messaging/VMessageInterpreter.h>
 #include <V3d/Graphics/Geometry/Conversions.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------

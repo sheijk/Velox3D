@@ -8,12 +8,12 @@
 #ifndef V3D_VWINDOWBASE_H
 #define V3D_VWINDOWBASE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Graphics/IVDevice.h>
-#include <v3d/Window/IVWindow.h>
-#include <v3d/Updater/IVUpdateable.h>
-#include <v3d/Graphics/VDisplaySettings.h>
-#include <v3d/Input/IVInputManager.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Window/IVWindow.h>
+#include <V3d/Updater/IVUpdateable.h>
+#include <V3d/Graphics/VDisplaySettings.h>
+#include <V3d/Input/IVInputManager.h>
 //-----------------------------------------------------------------------------
 #include <string>
 //-----------------------------------------------------------------------------

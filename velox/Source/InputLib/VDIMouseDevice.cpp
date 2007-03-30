@@ -6,11 +6,11 @@
  */
 
 #include "VDIMouseDevice.h"
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Core/VAssert.h>
-#include <v3d/Input/VInputExceptions.h>
-#include <v3d/Input/IVInputDevice.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Core/VAssert.h>
+#include <V3d/Input/VInputExceptions.h>
+#include <V3d/Input/IVInputDevice.h>
+#include <V3d/Core/MemManager.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

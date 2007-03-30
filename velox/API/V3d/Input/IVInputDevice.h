@@ -8,12 +8,12 @@
 #ifndef V3D_IVINPUTDEVICE_09_02_2004_H
 #define V3D_IVINPUTDEVICE_09_02_2004_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-//#include <v3d/Core/Wrappers/VIterator.h>
+#include <V3d/Core/VCoreLib.h>
+//#include <V3d/Core/Wrappers/VIterator.h>
 #include <V3d/Core/RangeIter/VRangeIterator.h>
-#include <v3d/Input/IVButton.h>
-#include <v3d/Input/IVRelativeAxis.h>
-#include <v3d/Input/IVAbsoluteAxis.h>
+#include <V3d/Input/IVButton.h>
+#include <V3d/Input/IVRelativeAxis.h>
+#include <V3d/Input/IVAbsoluteAxis.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -5,8 +5,8 @@
  * complete licence text
  */
 
-#include <v3d/Physics/VGeometrySphere.h>
-#include <v3d/Physics/VSpace.h>
+#include <V3d/Physics/VGeometrySphere.h>
+#include <V3d/Physics/VSpace.h>
 #include <V3d/Core.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>

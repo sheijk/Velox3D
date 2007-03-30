@@ -8,7 +8,7 @@
 #ifndef V3D_VGEOSPHERE_H
 #define V3D_VGEOSPHERE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Graphics/Geometry/VVertex3f.h>
 #include <V3d/Graphics/Geometry/VTexCoord2f.h>
 #include <V3d/Graphics/Geometry/VColor4f.h>

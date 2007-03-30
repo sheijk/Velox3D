@@ -8,7 +8,7 @@
 #ifndef V3D_VERRORCONSOLELISTENER_H
 #define V3D_VERRORCONSOLELISTENER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Error/IVErrorListener.h>
 
 //-----------------------------------------------------------------------------

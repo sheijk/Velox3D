@@ -8,8 +8,8 @@
 #ifndef V3D_IVBOUNDINGVOLUMEPART_12_28_05
 #define V3D_IVBOUNDINGVOLUMEPART_12_28_05
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Math/VBoundingSphere.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Math/VBoundingSphere.h>
 #include <V3d/Math/VBoundingBox.h>
 #include <V3d/Math/VCCylinder.h>
 #include "VBoundingMesh.h"

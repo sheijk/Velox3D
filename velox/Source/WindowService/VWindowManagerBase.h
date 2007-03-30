@@ -8,10 +8,10 @@
 #ifndef V3D_VWINDOWMANAGERBASE_H
 #define V3D_VWINDOWMANAGERBASE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Window/IVWindow.h>
-#include <v3d/Window/IVWindowManager.h>
-#include <v3d/Core/VNamedObject.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Window/IVWindow.h>
+#include <V3d/Window/IVWindowManager.h>
+#include <V3d/Core/VNamedObject.h>
 //-----------------------------------------------------------------------------
 #include <list>
 //-----------------------------------------------------------------------------

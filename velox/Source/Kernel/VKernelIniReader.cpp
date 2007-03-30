@@ -5,12 +5,12 @@
  * complete licence text
  */
 
-#include <v3d/Core/VIOStream.h>
-#include <v3d/XML/IVXMLElement.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/XML/IVXMLElement.h>
 #include "VKernelIniReader.h"
 #include "VKernelException.h"
 //#include <iostream>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d::xml;
 //-----------------------------------------------------------------------------

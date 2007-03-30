@@ -8,9 +8,9 @@
 #ifndef V3D_VDEVICEMATRIX_H
 #define V3D_VDEVICEMATRIX_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Math/VMatrix.h>
+#include <V3d/Math/VMatrix.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

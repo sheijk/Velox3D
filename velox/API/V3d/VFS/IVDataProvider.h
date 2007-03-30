@@ -8,12 +8,12 @@
 #ifndef V3D_IVDataProvider_H
 #define V3D_IVDataProvider_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/VFlags.h>
-#include <v3d/VFS/IVOfflineStream.h>
-#include <v3d/VFS/VMountOptions.h>
-#include <v3d/VFS/IVDirectory.h>
-#include <v3d/VFS/IVFile.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/VFlags.h>
+#include <V3d/VFS/IVOfflineStream.h>
+#include <V3d/VFS/VMountOptions.h>
+#include <V3d/VFS/IVDirectory.h>
+#include <V3d/VFS/IVFile.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -8,14 +8,14 @@
 #ifndef V3D_IVIMAGEFACTORY_H
 #define V3D_IVIMAGEFACTORY_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 
-#include <v3d/Image/VImage.h>
-#include <v3d/Image/IVImageLoader.h>
-#include <v3d/Image/IVImageSaver.h>
-#include <v3d/Image/IVImageManipulator.h>
+#include <V3d/Image/VImage.h>
+#include <V3d/Image/IVImageLoader.h>
+#include <V3d/Image/IVImageSaver.h>
+#include <V3d/Image/IVImageManipulator.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace image{

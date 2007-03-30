@@ -8,9 +8,9 @@
 #ifndef V3D_VConfigProvider_H
 #define V3D_VConfigProvider_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Config/IVConfigProvider.h>
+#include <V3d/Config/IVConfigProvider.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace config {

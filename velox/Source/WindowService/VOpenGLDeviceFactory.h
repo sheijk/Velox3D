@@ -9,7 +9,7 @@
 #define V3D_VOPENGLDEVICEFACTORY_08_30_04_H_H
 //-----------------------------------------------------------------------------
 #include "VDeviceFactory.h"
-#include <v3d/Graphics/VDisplaySettings.h>
+#include <V3d/Graphics/VDisplaySettings.h>
 #include "../Graphics/OpenGL/Context/VWin32WindowContext.h"
 
 #include <windows.h>

@@ -8,7 +8,7 @@
 #ifndef V3D_VSIMPLETOKENIZER_2005_03_07_H
 #define V3D_VSIMPLETOKENIZER_2005_03_07_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <list>
 #include <string>

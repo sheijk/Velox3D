@@ -5,9 +5,9 @@
  * complete licence text
  */
 
-#include <v3d/Physics/Bounding/VBoundingMesh.h>
+#include <V3d/Physics/Bounding/VBoundingMesh.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------

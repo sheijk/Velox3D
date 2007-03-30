@@ -8,9 +8,9 @@
 #ifndef V3D_STATETYPES_2004_09_23_H
 #define V3D_STATETYPES_2004_09_23_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Math/VMatrixOps.h>
+#include <V3d/Math/VMatrixOps.h>
 
 #include <iostream>
 

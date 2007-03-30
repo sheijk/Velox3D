@@ -9,8 +9,8 @@
 #ifndef V3D_VOPENGLVBOMESH_H
 #define V3D_VOPENGLVBOMESH_H
 //-----------------------------------------------------------------------------
-#include <v3d/Math/VVector.h>
-#include <v3d/Graphics/VMeshDescription.h>
+#include <V3d/Math/VVector.h>
+#include <V3d/Graphics/VMeshDescription.h>
 
 #include "../DeviceBase/VMeshBase.h"
 #include <map>

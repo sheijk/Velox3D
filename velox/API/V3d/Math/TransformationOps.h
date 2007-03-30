@@ -8,7 +8,7 @@
 #ifndef V3D_TRANSFORMATIONOPS_2004_04_09_H
 #define V3D_TRANSFORMATIONOPS_2004_04_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Math/VMatrix.h>
 #include <V3d/Math/VVector.h>

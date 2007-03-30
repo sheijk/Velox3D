@@ -8,8 +8,8 @@
 #ifndef V3D_EXCEPTION_H
 #define V3D_EXCEPTION_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Wrappers/VString.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/Wrappers/VString.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------

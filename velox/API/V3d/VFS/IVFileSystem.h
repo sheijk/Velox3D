@@ -8,14 +8,14 @@
 #ifndef V3D_IVFILESYSTEM_H
 #define V3D_IVFILESYSTEM_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/VFS/VFlags.h>
-#include <v3d/VFS/IVBufferStream.h>
-#include <v3d/VFS/IVDirectory.h>
-#include <v3d/VFS/IVFile.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/VFS/VFlags.h>
+#include <V3d/VFS/IVBufferStream.h>
+#include <V3d/VFS/IVDirectory.h>
+#include <V3d/VFS/IVFile.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -6,8 +6,8 @@
  */
 
 #include "VDIKeyboardButton.h"
-#include <v3d/Core/VAssert.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/VAssert.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {

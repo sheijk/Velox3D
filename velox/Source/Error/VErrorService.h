@@ -8,8 +8,8 @@
 #ifndef V3D_VERRORSERVICE_H
 #define V3D_VERRORSERVICE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Error/IVErrorService.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Error/IVErrorService.h>
 #include <list>
 #include <utility>
 

@@ -8,9 +8,9 @@
 #ifndef V3D_VVERTEXSHADERCATEGORY_2005_03_23_H
 #define V3D_VVERTEXSHADERCATEGORY_2005_03_23_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/IVStateCategory.h>
+#include <V3d/Graphics/IVStateCategory.h>
 #include "VCGVertexShaderState.h"
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {

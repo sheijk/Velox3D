@@ -12,9 +12,9 @@
 #include <V3d/Physics/VGeometryBox.h>
 #include <V3d/Physics/VGeometryPlane.h>
 #include <V3d/Physics/VGeometryMesh.h>
-#include <v3d/math/VBoundingBox.h>
-#include <v3d/math/VBoundingSphere.h>
-#include <v3d/Physics/Bounding/VBoundingMesh.h>
+#include <V3d/math/VBoundingBox.h>
+#include <V3d/math/VBoundingSphere.h>
+#include <V3d/Physics/Bounding/VBoundingMesh.h>
 #include <V3d/Physics/VGeometryCappedCylinder.h>
 #include <V3d/Core.h>
 #include <algorithm>

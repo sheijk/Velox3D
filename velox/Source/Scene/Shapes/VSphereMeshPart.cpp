@@ -10,7 +10,7 @@
 #include <V3d/OpenGL.h>
 #include <GL/glut.h>
 
-#include <v3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/IVDevice.h>
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------

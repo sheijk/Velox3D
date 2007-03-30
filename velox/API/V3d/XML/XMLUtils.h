@@ -8,7 +8,7 @@
 #ifndef V3D_XMLUTILS_2005_02_15_H
 #define V3D_XMLUTILS_2005_02_15_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/XML/IVXMLElement.h>
 //-----------------------------------------------------------------------------

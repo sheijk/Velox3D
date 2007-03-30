@@ -5,8 +5,8 @@
  * complete licence text
  */
 
-#include <v3d/Window/IVWindow.h>
-#include <v3d/Core/VIOStream.h>
+#include <V3d/Window/IVWindow.h>
+#include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 #include "VWindowManagerWin32.h"
 #include "VWindowWin32.h"
@@ -17,7 +17,7 @@
 #undef CreateWindow
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {

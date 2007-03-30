@@ -8,11 +8,11 @@
 #ifndef V3D_VMeshBase_H
 #define V3D_VMeshBase_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/IVMesh.h>
-//#include <v3d/Graphics/IVMaterial.h>
-//#include <v3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/IVMesh.h>
+//#include <V3d/Graphics/IVMaterial.h>
+//#include <V3d/Graphics/VMeshDescription.h>
 
 #include <vector>
 //-----------------------------------------------------------------------------

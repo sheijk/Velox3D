@@ -8,9 +8,9 @@
 #ifndef V3D_VIMPORTEDFACECONTAINER_2005_05_21_H
 #define V3D_VIMPORTEDFACECONTAINER_2005_05_21_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Graphics/IVDevice.h>
-#include <v3d/Graphics/VModel.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/VModel.h>
 #include <list>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {

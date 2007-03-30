@@ -8,7 +8,7 @@
 #ifndef V3D_VVERTEXBUFFER_2005_02_02_H
 #define V3D_VVERTEXBUFFER_2005_02_02_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VTypeInfo.h>
 
 #include <V3d/Math/VVector.h>

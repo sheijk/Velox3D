@@ -5,11 +5,11 @@
  * complete licence text
  */
 
-#include <v3d/Physics/Bounding/VBoundingPlaneVolumePart.h>
+#include <V3d/Physics/Bounding/VBoundingPlaneVolumePart.h>
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics {

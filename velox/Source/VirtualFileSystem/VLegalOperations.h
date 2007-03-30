@@ -8,8 +8,8 @@
 #ifndef V3D_VLEGALOPERATIONS_H
 #define V3D_VLEGALOPERATIONS_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVLegalOperations.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVLegalOperations.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

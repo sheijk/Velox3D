@@ -7,7 +7,7 @@
 
 #include "VTextureStateCategory.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Graphics/GraphicsExceptions.h>
+#include <V3d/Graphics/GraphicsExceptions.h>
 #include <V3d/Graphics/Materials/StateTypes.h>
 //#include "VCubemapTextureState.h"
 
@@ -16,7 +16,7 @@
 #include <V3d/Image/VImage.h>
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

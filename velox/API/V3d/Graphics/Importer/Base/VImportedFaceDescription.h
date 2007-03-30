@@ -8,9 +8,9 @@
 #ifndef V3D_VIMPORTEDFACEDESCRIPTION_2005_05_21_H
 #define V3D_VIMPORTEDFACEDESCRIPTION_2005_05_21_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Resource/VResourceId.h>
-#include <v3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/VMeshDescription.h>
 #include <string>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace utils {

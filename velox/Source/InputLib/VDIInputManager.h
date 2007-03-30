@@ -8,8 +8,8 @@
 #ifndef V3D_VDIINPUTMANAGER_H
 #define V3D_VDIINPUTMANAGER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Input/IVInputManager.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Input/IVInputManager.h>
 #include <windows.h>
 #define DIRECTINPUT_VERSION 0x800
 #include <dinput.h>

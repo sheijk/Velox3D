@@ -8,11 +8,11 @@
 #ifndef V3D_IVTEMPDATAPROVIDER_H
 #define V3D_IVTEMPDATAPROVIDER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Vfs/IVStream.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Vfs/IVStream.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

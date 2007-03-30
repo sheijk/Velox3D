@@ -8,8 +8,8 @@
 #ifndef V3D_IVXMLNODE_08_31_04_H
 #define V3D_IVXMLNODE_08_31_04_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/XML/IVXMLVisitor.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/XML/IVXMLVisitor.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace xml {

@@ -8,11 +8,11 @@
 #ifndef V3D_IVDirectory_H
 #define V3D_IVDirectory_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/RangeIter/VRangeIterator.h>
-#include <v3d/VFS/IVFileSysObject.h>
-#include <v3d/VFS/IVFile.h>
-#include <v3d/VFS/VAccessRightsFlags.h>
+#include <V3d/VFS/IVFileSysObject.h>
+#include <V3d/VFS/IVFile.h>
+#include <V3d/VFS/VAccessRightsFlags.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -8,13 +8,13 @@
 #ifndef V3D_VIMPORTED3DS_04_08_23_H
 #define V3D_VIMPORTED3DS_04_08_23_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VTypes.h>
+#include <V3d/Core/VTypes.h>
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Graphics/VModel.h>
 #include <vector>
 #include <list>
 #include <map>
-#include <v3d/Graphics.h>
+#include <V3d/Graphics.h>
 
 #include <V3d/Graphics/Importer/Base/VImportedMaterialContainer.h>
 #include <V3d/Graphics/Importer/Base/VImportedMaterialDescription.h>

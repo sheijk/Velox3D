@@ -8,7 +8,7 @@
 #ifndef V3D_VOPOCODESYSTEM_09_10_04_H
 #define V3D_VOPOCODESYSTEM_09_10_04_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Graphics/Geometry/VVertex3f.h>
 #include "VContactReport.h"
 #include "VCollisionException.h"

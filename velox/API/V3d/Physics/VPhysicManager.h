@@ -13,7 +13,7 @@
 #include <V3d/Entity.h>
 #include <V3d/Updater.h>
 #include <V3d/Physics/VBodyPart.h>
-#include <v3d/Physics/Bounding/IVBoundingVolumePart.h>
+#include <V3d/Physics/Bounding/IVBoundingVolumePart.h>
 #include <V3d/Math/VBoundingBox.h>
 #include <V3d/Math/VBoundingSphere.h>
 #include <V3d/Physics/VJointHinge2.h>

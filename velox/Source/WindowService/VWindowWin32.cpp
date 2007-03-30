@@ -7,13 +7,13 @@
 
 #include "VWindowWin32.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VIOStream.h>
+#include <V3d/Core/VIOStream.h>
 #include "../Graphics/OpenGL/VOpenGLDevice.h"
 #include "../InputLib/VDIInputManager.h"
 
 #include "VOpenGLDeviceFactory.h"
 
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

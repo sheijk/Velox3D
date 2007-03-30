@@ -5,7 +5,7 @@
  * complete licence text
  */
 
-#include <v3d/Physics/VGeometry.h>
+#include <V3d/Physics/VGeometry.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

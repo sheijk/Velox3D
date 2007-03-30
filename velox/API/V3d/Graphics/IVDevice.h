@@ -8,8 +8,8 @@
 #ifndef V3D_IVDEVICE_H
 #define V3D_IVDEVICE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Graphics/VBuffer.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Graphics/VBuffer.h>
 #include <V3d/Graphics/IVRenderContext.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Math/VMatrix.h>

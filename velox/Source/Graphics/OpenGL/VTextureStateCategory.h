@@ -8,14 +8,14 @@
 #ifndef V3D_VTEXTURESTATECATEGORY_H
 #define V3D_VTEXTURESTATECATEGORY_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include "Textures/VBaseTexture.h"
 #include "VTextureState.h"
 #include "VCubemapTextureState.h"
 #include "Textures/VUntextured.h"
 
-#include <v3d/Graphics/IVStateCategory.h>
+#include <V3d/Graphics/IVStateCategory.h>
 
 #include <map>
 

@@ -10,7 +10,7 @@
 #include <V3d/Graphics/VModel.h>
 #include <V3d/Graphics/Importer/3DS/VImported3DS.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils {

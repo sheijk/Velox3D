@@ -8,9 +8,9 @@
 #ifndef V3D_VALLFILTER_H
 #define V3D_VALLFILTER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/IVErrorFilter.h> //TODO: namspace inkonsistent mit dir name
-#include <v3d/Error/VMessageTypeEnum.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Error/IVErrorFilter.h> //TODO: namspace inkonsistent mit dir name
+#include <V3d/Error/VMessageTypeEnum.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace utils {

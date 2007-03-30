@@ -8,15 +8,15 @@
 #ifndef V3D_IVERRORSERVICE_H
 #define V3D_IVERRORSERVICE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-//#include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Error/VMessageTypeEnum.h>
-#include <v3d/Error/IVErrorListener.h>
-#include <v3d/Error/IVErrorStream.h>
-#include <v3d/Error/IVErrorFilter.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VCoreLib.h>
+//#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Error/VMessageTypeEnum.h>
+#include <V3d/Error/IVErrorListener.h>
+#include <V3d/Error/IVErrorStream.h>
+#include <V3d/Error/IVErrorFilter.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {

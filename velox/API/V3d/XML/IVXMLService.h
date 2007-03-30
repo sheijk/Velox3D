@@ -8,13 +8,13 @@
 #ifndef V3D_IVXMLSERVICE_H
 #define V3D_IVXMLSERVICE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Vfs/IVStream.h>
-#include <v3d/XML/IVXMLWriter.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Vfs/IVStream.h>
+#include <V3d/XML/IVXMLWriter.h>
 #include <V3d/XML/IVXMLVisitor.h>
 #include <V3d/Core/SmartPtr/VGuards.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 #include <V3d/Core/SmartPtr/VSharedPtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d{

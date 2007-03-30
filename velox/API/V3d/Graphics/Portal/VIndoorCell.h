@@ -8,7 +8,7 @@
 #ifndef V3D_INDOORCELL_2004_04_11_H
 #define V3D_INDOORCELL_2004_04_11_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <v3dLib/Graphics/Portal/IVCell.h>
 #include <V3dLib/Graphics/Generators/VBoxMesh.h>
 #include <V3dLib/Graphics/Geometry/VSimpleVertex.h>

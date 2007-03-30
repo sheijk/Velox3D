@@ -8,11 +8,11 @@
 #ifndef V3D_VCONSOLEREDIRECTOR_H
 #define V3D_VCONSOLEREDIRECTOR_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VObjectRegistry.h>
 #include <V3d/Utils/IVStringStream.h>
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Console/IVConsoleService.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Console/IVConsoleService.h>
 #include <iostream>
 #include <list>
 #include <string>
@@ -21,7 +21,7 @@
 #include <windows.h>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 

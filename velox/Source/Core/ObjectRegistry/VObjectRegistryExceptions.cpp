@@ -5,11 +5,11 @@
  * complete licence text
  */
 
-#include <v3d/Core/VObjectRegistryExceptions.h>
+#include <V3d/Core/VObjectRegistryExceptions.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 #ifndef V3D_VPART_2004_10_09_H
 #define V3D_VPART_2004_10_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Entity/VEntityExceptions.h>
 #include <V3d/Entity/VPartDependency.h>

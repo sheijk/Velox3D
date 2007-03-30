@@ -8,9 +8,9 @@
 #ifndef V3D_IVKEYBOARDDEVICE_2004_08_09_H
 #define V3D_IVKEYBOARDDEVICE_2004_08_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Input/IVInputDevice.h>
-#include <v3d/Input/VKeyCode.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Input/IVInputDevice.h>
+#include <V3d/Input/VKeyCode.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {

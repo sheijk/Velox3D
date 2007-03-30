@@ -9,7 +9,7 @@
 #ifndef V3D_VOPENGLVBORENDERINGMETHOD_H
 #define V3D_VOPENGLVBORENDERINGMETHOD_H
 //-------------------------------------------------------------------------
-#include <v3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/VMeshDescription.h>
 #include "../DeviceBase/VRenderMethodRegistry.h"
 #include "VOpenGLVBOMesh.h"
 //-------------------------------------------------------------------------

@@ -8,9 +8,9 @@
 #ifndef V3D_IVUPDATEABLE_H
 #define V3D_IVUPDATEABLE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Updater/IVUpdateManager.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Updater/IVUpdateManager.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

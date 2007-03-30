@@ -8,9 +8,9 @@
 #ifndef V3D_VDIBUTTON_09_02_2004_H
 #define V3D_VDIBUTTON_09_02_2004_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/Wrappers/VString.h>
-#include <v3d/Input/IVButton.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/Wrappers/VString.h>
+#include <V3d/Input/IVButton.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {

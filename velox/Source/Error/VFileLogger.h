@@ -8,8 +8,8 @@
 #ifndef V3D_VFILELOGGER_H
 #define V3D_VFILELOGGER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Error/IVErrorListener.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Error/IVErrorListener.h>
 #include <fstream>
 
 //-----------------------------------------------------------------------------

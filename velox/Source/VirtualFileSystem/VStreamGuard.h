@@ -8,9 +8,9 @@
 #ifndef V3D_VStreamGuard_H
 #define V3D_VStreamGuard_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVStream.h>
-#include <v3d/VFS/VIOException.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVStream.h>
+#include <V3d/VFS/VIOException.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

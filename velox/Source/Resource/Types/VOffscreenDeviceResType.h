@@ -8,7 +8,7 @@
 #ifndef V3D_VOFFSCREENDEVICERESTYPE_H
 #define V3D_VOFFSCREENDEVICERESTYPE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Image/VImage.h>
 #include <V3d/Resource.h>

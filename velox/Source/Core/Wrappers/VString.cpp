@@ -5,13 +5,13 @@
  * complete licence text
  */
 
-#include <v3d/Core/Wrappers/VString.h>
+#include <V3d/Core/Wrappers/VString.h>
 //-----------------------------------------------------------------------------
 #include <cstring>
 #include <algorithm>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------

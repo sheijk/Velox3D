@@ -8,13 +8,13 @@
 #ifndef V3D_IVWINDOWMANAGER_H
 #define V3D_IVWINDOWMANAGER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Window/IVWindow.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Window/IVWindow.h>
 #include <V3d/Core/SmartPtr/VGuards.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
-#include <v3d/Graphics/IVDevice.h>
-#include <v3d/Graphics/VDisplaySettings.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/VDisplaySettings.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace window {

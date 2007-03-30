@@ -5,8 +5,8 @@
  * complete licence text
  */
 
-#include <v3d/Physics/VWorld.h>
-#include <v3d/Physics/VBody.h>
+#include <V3d/Physics/VWorld.h>
+#include <V3d/Physics/VBody.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

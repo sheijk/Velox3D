@@ -8,9 +8,9 @@
 #ifndef V3D_VSTATEBOXMASS_27_10_04_H
 #define V3D_VSTATEBOXMASS_27_10_04_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Physics/VMass.h>
-#include <v3d/Physics/VState.h>
+#include <V3d/Physics/VState.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

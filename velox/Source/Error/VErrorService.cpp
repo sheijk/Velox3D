@@ -8,12 +8,12 @@
 #include "VErrorService.h"
 
 #include "VErrorStream.h"
-#include <v3d/Core/VAssert.h>
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Core/VAssert.h>
+#include <V3d/Core/VObjectRegistry.h>
 
 #include <exception>
 #include <iostream>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

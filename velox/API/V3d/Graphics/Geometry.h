@@ -8,7 +8,7 @@
 #ifndef V3D_GEOMETRY_2004_04_09_H
 #define V3D_GEOMETRY_2004_04_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Graphics/Geometry/VColor4f.h>
 #include <V3d/Graphics/Geometry/VVertex3f.h>

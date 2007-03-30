@@ -9,11 +9,11 @@
 #define V3D_VWIN32WINDOWCONTEXT_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-#include <v3d/Core/VException.h>
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Graphics/GraphicsExceptions.h>
-#include <v3d/Graphics/VDisplaySettings.h>
-#include <v3d/Graphics/IVRenderContext.h>
+#include <V3d/Core/VException.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Graphics/GraphicsExceptions.h>
+#include <V3d/Graphics/VDisplaySettings.h>
+#include <V3d/Graphics/IVRenderContext.h>
 #include "VPBufferWindowContext.h"
 
 #define WIN32_LEAN_AND_MEAN

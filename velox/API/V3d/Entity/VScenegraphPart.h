@@ -8,7 +8,7 @@
 #ifndef V3D_VSCENEGRAPHPART_2004_11_14_H
 #define V3D_VSCENEGRAPHPART_2004_11_14_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity.h>
 #include <V3d/Math/VRBTransform.h>

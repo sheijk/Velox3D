@@ -8,11 +8,11 @@
 #ifndef V3D_VRESOURCE_H
 #define V3D_VRESOURCE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource/VResourceData.h>
 #include <V3d/Resource/VTypedResourceData.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Resource/ResourceExceptions.h>
 #include <V3d/Core/RangeIter/VRangeIterator.h>

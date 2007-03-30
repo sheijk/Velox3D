@@ -8,7 +8,7 @@
 #ifndef V3D_VMATERIALMAP_2005_08_29_H
 #define V3D_VMATERIALMAP_2005_08_29_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <map>
 #include <list>
 //-----------------------------------------------------------------------------

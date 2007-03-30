@@ -5,10 +5,10 @@
  * complete licence text
  */
 
-#include <v3d/Physics/VState.h>
+#include <V3d/Physics/VState.h>
 #include <V3d/Physics/VBody.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

@@ -8,7 +8,7 @@
 #ifndef V3D_VTERRAIN_CHUNK_2004_04_10_H
 #define V3D_VTERRAIN_CHUNK_2004_04_10_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VObjectRegistry.h>
 #include <V3d/Image.h>
 #include <V3d/Graphics/Misc/MiscUtils.h>

@@ -8,8 +8,8 @@
 #ifndef V3D_VTEMPDATAPROVIDER_H
 #define V3D_VTEMPDATAPROVIDER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Vfs/IVTempDataProvider.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Vfs/IVTempDataProvider.h>
 #include <fstream>
 #include <string>
 #include <list>

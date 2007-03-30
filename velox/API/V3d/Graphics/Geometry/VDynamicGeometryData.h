@@ -8,9 +8,9 @@
 #ifndef V3D_VDYNAMICGEOMETRYDATA_2004_04_09_H
 #define V3D_VDYNAMICGEOMETRYDATA_2004_04_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/VMeshDescription.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

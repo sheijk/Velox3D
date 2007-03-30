@@ -8,8 +8,8 @@
 #ifndef V3D_IVVERTEXSTREAM_2005_02_03_H
 #define V3D_IVVERTEXSTREAM_2005_02_03_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VTypeInfo.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VTypeInfo.h>
 
 #include <V3d/Graphics/VVertexFormat.h>
 //-----------------------------------------------------------------------------

@@ -8,8 +8,8 @@
 #include "VMemoryStream.h"
 //-----------------------------------------------------------------------------
 #include "VLegalOperations.h"
-#include <v3d/VFS/VIOException.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/VFS/VIOException.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

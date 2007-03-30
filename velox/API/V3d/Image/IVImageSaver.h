@@ -8,8 +8,8 @@
 #ifndef V3D_IVIMAGESAVER_04_07_13_H
 #define V3D_IVIMAGESAVER_04_07_13_H
 //-------------------------------------------------------------------------
-#include <v3d/Image/VImage.h>
-#include <v3d/VFS/IVStream.h>
+#include <V3d/Image/VImage.h>
+#include <V3d/VFS/IVStream.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace image{

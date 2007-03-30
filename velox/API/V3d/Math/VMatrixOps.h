@@ -8,10 +8,10 @@
 #ifndef V3D_VMATRIXOPS_H
 #define V3D_VMATRIXOPS_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Math/VMatrix.h>
-#include <v3d/Math/VVector.h>
+#include <V3d/Math/VMatrix.h>
+#include <V3d/Math/VVector.h>
 #include <V3d/Math/VQuaternion.h>
 #include <gmtl/gmtl.h>
 //-----------------------------------------------------------------------------

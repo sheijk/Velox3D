@@ -9,8 +9,8 @@
 #ifndef V3D_VOfflineStreamGuard_H
 #define V3D_VOfflineStreamGuard_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVOfflineStream.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVOfflineStream.h>
 
 #include "VStreamGuard.h"
 //-----------------------------------------------------------------------------

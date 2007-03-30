@@ -8,7 +8,7 @@
 #ifndef V3D_IVRESOURCETYPE_2004_11_06_H
 #define V3D_IVRESOURCETYPE_2004_11_06_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource/VResourceData.h>
 #include <V3d/Resource/VResourceId.h>

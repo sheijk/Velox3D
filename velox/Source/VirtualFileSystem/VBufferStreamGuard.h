@@ -9,8 +9,8 @@
 #ifndef V3D_VBufferStreamGuard_H
 #define V3D_VBufferStreamGuard_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVBufferStream.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVBufferStream.h>
 
 #include "VStreamGuard.h"
 //-----------------------------------------------------------------------------

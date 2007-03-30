@@ -8,10 +8,10 @@
 #ifndef V3D_IVSTATECATEGORY_H
 #define V3D_IVSTATECATEGORY_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/IVRenderState.h>
-#include <v3d/Graphics/VEffectDescription.h>
+#include <V3d/Graphics/IVRenderState.h>
+#include <V3d/Graphics/VEffectDescription.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

@@ -8,7 +8,7 @@
 #ifndef V3D_VSTREAMMESH_2005_02_03_H
 #define V3D_VSTREAMMESH_2005_02_03_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource.h>
 
@@ -17,7 +17,7 @@
 #include <V3d/Graphics/VVertexBuffer.h>
 #include "IVVertexStream.h"
 #include "../DeviceBase/VMeshBase.h"
-#include <v3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/VMeshDescription.h>
 
 #include <memory>
 

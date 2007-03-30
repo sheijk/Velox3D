@@ -8,8 +8,8 @@
 #ifndef V3D_VBUFFER_H
 #define V3D_VBUFFER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VException.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VException.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

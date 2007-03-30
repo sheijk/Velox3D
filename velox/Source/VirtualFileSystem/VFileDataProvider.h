@@ -8,9 +8,9 @@
 #ifndef V3D_VFILEDATAPROVIDER_H
 #define V3D_VFILEDATAPROVIDER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVDataProvider.h>
-#include <v3d/VFS/IVStreamFactory.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVDataProvider.h>
+#include <V3d/VFS/IVStreamFactory.h>
 //-----------------------------------------------------------------------------
 #include "VDirectory.h"
 //-----------------------------------------------------------------------------

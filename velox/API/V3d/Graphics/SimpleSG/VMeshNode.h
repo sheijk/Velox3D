@@ -8,8 +8,8 @@
 #ifndef V3D_VMESHNODE_H
 #define V3D_VMESHNODE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Graphics/IVDevice.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Graphics/IVDevice.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include "VNodeBase.h"
 //-----------------------------------------------------------------------------

@@ -6,8 +6,8 @@
  */
 
 #include "VFileLogger.h"
-#include <v3d/Core/VException.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/VException.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace error {

@@ -18,7 +18,7 @@
 #include <V3d/OpenGL.h>
 #include <GL/glfw.h>
 #include "../../Source/InputLib/VDIInputManager.h"
-#include <v3d/Input/IVInputManager.h>
+#include <V3d/Input/IVInputManager.h>
 
 #include <vector>
 

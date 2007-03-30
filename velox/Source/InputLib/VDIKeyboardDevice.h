@@ -8,8 +8,8 @@
 #ifndef V3D_VDIKEYBOARDDEVICE_2004_08_09_H
 #define V3D_VDIKEYBOARDDEVICE_2004_08_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Input/IVKeyboardDevice.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Input/IVKeyboardDevice.h>
 #include "VDIInputDevice.h"
 #include "VDIKeyboardButton.h"
 

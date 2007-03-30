@@ -8,9 +8,9 @@
 #ifndef V3D_VSERVICEPROXY_H
 #define V3D_VSERVICEPROXY_H
 //------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Core/Modules/VModuleParams.h>
+#include <V3d/Core/Modules/VModuleParams.h>
 
 #include "VKernelException.h"
 

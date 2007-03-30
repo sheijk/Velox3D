@@ -8,7 +8,7 @@
 #ifndef V3D_VMISCSTATECATEGORY_H
 #define V3D_VMISCSTATECATEGORY_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include "VMiscState.h"
 

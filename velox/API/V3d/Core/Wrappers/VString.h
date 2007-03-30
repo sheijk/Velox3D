@@ -8,8 +8,8 @@
 #ifndef V3D_VSTRING_H
 #define V3D_VSTRING_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

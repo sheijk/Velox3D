@@ -12,7 +12,7 @@
 #include <V3d/Graphics/Geometry/VNormal3f.h>
 #include <V3d/Graphics/Geometry/VTexCoord2f.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------

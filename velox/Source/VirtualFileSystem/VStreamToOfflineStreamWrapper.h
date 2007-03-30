@@ -8,9 +8,9 @@
 #ifndef V3D_VSTREAMTOOFFLINESTREAMWRAPPER_H
 #define V3D_VSTREAMTOOFFLINESTREAMWRAPPER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/VFS/IVOfflineStream.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/VFS/IVOfflineStream.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

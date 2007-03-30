@@ -7,11 +7,11 @@
 
 #include "VDirectory.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/Wrappers/VString.h>
-#include <v3d/VFS/IVAccessRights.h>
-#include <v3d/VFS/VIOException.h>
-#include <v3d/VFS/IVDataProviderPool.h>
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Core/Wrappers/VString.h>
+#include <V3d/VFS/IVAccessRights.h>
+#include <V3d/VFS/VIOException.h>
+#include <V3d/VFS/IVDataProviderPool.h>
+#include <V3d/Core/VObjectRegistry.h>
 
 #include "VfsUtils.h"
 #include "VAccessRights.h"
@@ -22,7 +22,7 @@
 
 #include <algorithm>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

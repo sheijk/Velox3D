@@ -8,9 +8,9 @@
 #ifndef V3D_IVSYSTEMMANAGER_H
 #define V3D_IVSYSTEMMANAGER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace system {

@@ -8,8 +8,8 @@
 #ifndef V3D_VERRORSTREAM_H
 #define V3D_VERRORSTREAM_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-//#include <v3d/Error/IVErrorService.h>
+#include <V3d/Core/VCoreLib.h>
+//#include <V3d/Error/IVErrorService.h>
 #include "VErrorService.h"
 #include <sstream>
 //-----------------------------------------------------------------------------

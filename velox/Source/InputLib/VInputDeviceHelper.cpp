@@ -6,10 +6,10 @@
  */
 
 #include "VInputDeviceHelper.h"
-#include <v3d/Input/IVButton.h>
-#include <v3d/Input/IVRelativeAxis.h>
-#include <v3d/Input/IVAbsoluteAxis.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Input/IVButton.h>
+#include <V3d/Input/IVRelativeAxis.h>
+#include <V3d/Input/IVAbsoluteAxis.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace input {

@@ -8,9 +8,9 @@
 #ifndef V3D_VBOUNDINGMTERRAINVOLUMEPART_12_28_05
 #define V3D_VBOUNDINGMTERRAINVOLUMEPART_12_28_05
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Entity/VUnconnectedPart.h>
-#include <v3d/Entity.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Entity/VUnconnectedPart.h>
+#include <V3d/Entity.h>
 #include "VBoundingMesh.h"
 #include <V3d/Scene/Shapes/VTerrainPart.h>
 #include "IVBoundingVolumePart.h"

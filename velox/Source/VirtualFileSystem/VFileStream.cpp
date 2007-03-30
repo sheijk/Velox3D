@@ -7,12 +7,12 @@
 
 #include "VFileStream.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VException.h>
-#include <v3d/Core/VLogging.h>
+#include <V3d/Core/VException.h>
+#include <V3d/Core/VLogging.h>
 
 #include <sstream>
 #include <iostream>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace std;
 

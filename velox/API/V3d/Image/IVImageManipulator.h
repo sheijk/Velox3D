@@ -8,7 +8,7 @@
 #ifndef V3D_IVIMAGEMANIPULATOR_04_07_23_H
 #define V3D_IVIMAGEMANIPULATOR_04_07_23_H
 //-------------------------------------------------------------------------
-#include <v3d/Image/VImage.h>
+#include <V3d/Image/VImage.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace image{

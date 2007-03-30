@@ -11,7 +11,7 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/VTypeInfo.h>
 #include <V3d/Graphics/IVRenderContext.h>
-#include <v3d/Graphics/VDisplaySettings.h>
+#include <V3d/Graphics/VDisplaySettings.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {

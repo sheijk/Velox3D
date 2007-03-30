@@ -5,10 +5,10 @@
  * complete licence text
  */
 
-#include <v3d/Physics/VJoint.h>
+#include <V3d/Physics/VJoint.h>
 #include <limits>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

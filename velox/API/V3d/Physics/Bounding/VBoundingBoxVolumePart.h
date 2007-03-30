@@ -8,9 +8,9 @@
 #ifndef V3D_VBOUNDINGBOXVOLUMEPART_12_28_05
 #define V3D_VBOUNDINGBOXVOLUMEPART_12_28_05
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Math/VBoundingBox.h>
-#include <v3d/Entity/VUnconnectedPart.h>
+#include <V3d/Entity/VUnconnectedPart.h>
 
 #include "IVBoundingVolumePart.h"
 //-----------------------------------------------------------------------------

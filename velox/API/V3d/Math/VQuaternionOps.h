@@ -8,7 +8,7 @@
 #ifndef V3D_VQUATERNIONOPS_01_09_05_H
 #define V3D_VQUATERNIONOPS_01_09_05_H
 //-----------------------------------------------------------------------------
-#include <v3d/Math/VVector.h>
+#include <V3d/Math/VVector.h>
 #include <V3d/Math/VQuaternion.h>
 #include <V3d/Math/Numerics.h>
 #include <gmtl/QuatOps.h>

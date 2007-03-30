@@ -8,9 +8,9 @@
 #ifndef V3D_VUPDATEMANAGER_H
 #define V3D_VUPDATEMANAGER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Updater/IVUpdateManager.h>
-#include <v3d/Updater/IVTimer.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Updater/IVUpdateManager.h>
+#include <V3d/Updater/IVTimer.h>
 //-----------------------------------------------------------------------------
 #include "VPerformanceCounter.h"
 #include <list>

@@ -7,10 +7,10 @@
 
 #include "VDataProviderPool.h"
 //-----------------------------------------------------------------------------
-#include <v3d/vfs/VIOException.h>
+#include <V3d/vfs/VIOException.h>
 
 #include <algorithm>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

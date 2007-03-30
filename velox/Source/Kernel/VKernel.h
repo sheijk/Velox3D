@@ -8,8 +8,8 @@
 #ifndef V3D_VKERNEL_H
 #define V3D_VKERNEL_H
 //------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 #include <V3d/XML/IVXMLService.h>
 //------------------------------------------------------------------------
 #include "VKernelException.h"

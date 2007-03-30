@@ -8,11 +8,11 @@
 #ifndef V3D_SHEIJKUTILS20040407_H
 #define V3D_SHEIJKUTILS20040407_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Image.h>
-#include <v3d/Graphics.h>
+#include <V3d/Image.h>
+#include <V3d/Graphics.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {

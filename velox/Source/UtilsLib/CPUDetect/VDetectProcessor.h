@@ -18,7 +18,7 @@
 #include <string.h>
 #include <memory.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VTypes.h>
+#include <V3d/Core/VTypes.h>
 //-----------------------------------------------------------------------------
 // *nochmal.raeusper* V3D_CAPS fuer makros. + fuer sowas reicht ne inline
 // fkt voellig aus -sheijk

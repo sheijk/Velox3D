@@ -8,7 +8,7 @@
 #ifndef V3D_VENTITYMANAGER_2004_10_09_H
 #define V3D_VENTITYMANAGER_2004_10_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Core/VNamedObject.h>
 #include <V3d/Entity/VEntity.h>

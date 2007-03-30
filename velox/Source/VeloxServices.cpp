@@ -5,9 +5,9 @@
  * complete licence text
  */
 
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/Core/Modules/VModuleBase.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/Modules/VModuleBase.h>
 
 //-----------------------------------------------------------------------------
 #include "VirtualFileSystem/VStreamFactory.h"
@@ -50,7 +50,7 @@
 
 #include "Error/VErrorConsoleListener.h"
 #include "Error/VErrorService.h"
-#include <v3d/Utils/VAllFilter.h>
+#include <V3d/Utils/VAllFilter.h>
 
 #include <V3d/Entity/VEntityManager.h>
 
@@ -62,7 +62,7 @@
 #include <V3d/Utils/VRegisterGuard.h>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using namespace v3d;
 using namespace v3d::vfs;

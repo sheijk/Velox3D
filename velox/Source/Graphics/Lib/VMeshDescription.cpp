@@ -5,12 +5,12 @@
  * complete licence text
  */
 
-#include <v3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/VMeshDescription.h>
 #include <set>
 
 #include <V3d/Resource.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------

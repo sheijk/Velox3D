@@ -8,8 +8,8 @@
 #ifndef V3D_INPUT_09_02_2004_H
 #define V3D_INPUT_09_02_2004_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Input/IVInputManager.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Input/IVInputManager.h>
 //-----------------------------------------------------------------------------
 #endif // V3D_INPUT_09_02_2004_H
 

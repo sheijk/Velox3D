@@ -5,14 +5,14 @@
  * complete licence text
  */
 
-#include <v3d/Core/VLogging.h>
+#include <V3d/Core/VLogging.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Error/IVErrorService.h>
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/Error/IVErrorService.h>
+#include <V3d/Core/VObjectRegistry.h>
 #include <sstream>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 using v3d::error::IVErrorService;
 

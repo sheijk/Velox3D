@@ -8,7 +8,7 @@
 #ifndef V3D_VMODEL_2005_04_13_H
 #define V3D_VMODEL_2005_04_13_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <vector>
 

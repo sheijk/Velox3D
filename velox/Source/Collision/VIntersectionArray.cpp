@@ -10,7 +10,7 @@
 #include <V3d/Core.h>
 
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace collision {

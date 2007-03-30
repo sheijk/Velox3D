@@ -5,9 +5,9 @@
  * complete licence text
  */
 
-#include <v3d/Physics/VJointGroup.h>
+#include <V3d/Physics/VJointGroup.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

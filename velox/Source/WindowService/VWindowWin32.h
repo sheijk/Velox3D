@@ -8,7 +8,7 @@
 #ifndef V3D_VWINDOWWIN32_H
 #define V3D_VWINDOWWIN32_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 //-----------------------------------------------------------------------------
 #include "VWindowBase.h"
 #include "VDeviceFactory.h"

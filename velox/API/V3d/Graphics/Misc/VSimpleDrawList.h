@@ -8,7 +8,7 @@
 #ifndef V3D_VSIMPLEDRAWLIST_H
 #define V3D_VSIMPLEDRAWLIST_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Graphics/Misc/IVDrawList.h>
 #include <list>
 #include <vector>

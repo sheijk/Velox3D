@@ -9,12 +9,12 @@
 #ifndef V3D_IVStreamFactory_H
 #define V3D_IVStreamFactory_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVBufferStream.h>
-#include <v3d/VFS/VFlags.h>
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/Core/SmartPtr/VServicePtr.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVBufferStream.h>
+#include <V3d/VFS/VFlags.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/Core/SmartPtr/VServicePtr.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

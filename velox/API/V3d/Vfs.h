@@ -8,7 +8,7 @@
 #ifndef V3D_VFS_H
 #define V3D_VFS_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/VFS/IVAccessRights.h>
 #include <V3d/VFS/IVStreamFactory.h>

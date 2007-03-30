@@ -8,7 +8,7 @@
 #ifndef V3D_IVSTRINGSTREAM_H
 #define V3D_IVSTRINGSTREAM_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <sstream>
 //-----------------------------------------------------------------------------
 namespace v3d {

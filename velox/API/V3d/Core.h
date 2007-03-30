@@ -8,7 +8,7 @@
 #ifndef V3D_CONFIG_2004_09_26_H
 #define V3D_CONFIG_2004_09_26_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Core/IVApplication.h>
 

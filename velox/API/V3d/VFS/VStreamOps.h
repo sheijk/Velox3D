@@ -8,10 +8,10 @@
 #ifndef V3D_VSTREAMOPS_H
 #define V3D_VSTREAMOPS_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/VFS/IVStream.h>
-#include <v3d/Core/Wrappers/VString.h>
-#include <v3d/VFS/VIOException.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/VFS/IVStream.h>
+#include <V3d/Core/Wrappers/VString.h>
+#include <V3d/VFS/VIOException.h>
 
 #include <cstring>
 //-----------------------------------------------------------------------------

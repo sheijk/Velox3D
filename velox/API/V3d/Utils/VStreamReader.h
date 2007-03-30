@@ -8,8 +8,8 @@
 #ifndef V3D_VSTREAMREADER_H
 #define V3D_VSTREAMREADER_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Vfs/IVStream.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Vfs/IVStream.h>
 #include <V3d/Core/VException.h>
 #include <list>
 //-----------------------------------------------------------------------------

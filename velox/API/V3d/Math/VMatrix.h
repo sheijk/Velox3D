@@ -8,7 +8,7 @@
 #ifndef V3D_VMATRIX_H
 #define V3D_VMATRIX_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <gmtl/Matrix.h>
 #include <gmtl/MatrixOps.h>

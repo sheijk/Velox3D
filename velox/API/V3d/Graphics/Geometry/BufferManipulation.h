@@ -8,8 +8,8 @@
 #ifndef V3D_BUFFERMANIPULATION_H
 #define V3D_BUFFERMANIPULATION_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Graphics.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Graphics.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { 

@@ -1,6 +1,6 @@
 <entity name="NewScene.v3dscene">
 	<part type="v3d::scene::VNaiveSceneManagerPart"/>
-	<part type="v3d::scene::VDefaultRenderStepPart"/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)" exclude-tags=" " far-plane="10000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
 	<part type="shooting"/>
 	<entity name="ship">
 		<part type="v3d::entity::VRigidBodyPart" pos="(0,5,0)"/>

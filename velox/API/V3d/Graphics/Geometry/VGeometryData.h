@@ -8,10 +8,10 @@
 #ifndef V3D_VGEOMETRYDATA_H
 #define V3D_VGEOMETRYDATA_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Graphics/VMeshDescription.h>
-#include <v3d/Graphics/VBuffer.h>
+#include <V3d/Graphics/VMeshDescription.h>
+#include <V3d/Graphics/VBuffer.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {

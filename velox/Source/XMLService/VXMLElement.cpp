@@ -6,8 +6,8 @@
  */
 
 #include "VXmlElement.h"
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Core/MemManager.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------

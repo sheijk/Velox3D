@@ -8,7 +8,7 @@
 #ifndef V3D_VRESOURCEID_H
 #define V3D_VRESOURCEID_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource/VResourceDataPtr.h>
 //-----------------------------------------------------------------------------

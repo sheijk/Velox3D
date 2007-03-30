@@ -8,7 +8,7 @@
 #ifndef V3D_IVCELL_H
 #define V3D_IVCELL_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3dLib/Graphics/Misc/VCamera.h>
 #include <V3dLib/Graphics/Misc/VMultipassDrawList.h>
 //-----------------------------------------------------------------------------

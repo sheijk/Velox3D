@@ -8,7 +8,7 @@
 #ifndef V3D_VRECT_2004_06_19_H
 #define V3D_VRECT_2004_06_19_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace math {

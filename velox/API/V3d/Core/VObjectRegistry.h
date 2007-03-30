@@ -9,9 +9,9 @@
 #define V3D_VOBJECTREGISTRY_H
 //------------------------------------------------------------------------
 
-#include <v3d/Core/VObjectKey.h>
-#include <v3d/Core/VNamedObject.h>
-#include <v3d/Core/VObjectRegistryExceptions.h>
+#include <V3d/Core/VObjectKey.h>
+#include <V3d/Core/VNamedObject.h>
+#include <V3d/Core/VObjectRegistryExceptions.h>
 
 #pragma warning(disable:4786) //TODO: restore warning --ins
 #include <map>

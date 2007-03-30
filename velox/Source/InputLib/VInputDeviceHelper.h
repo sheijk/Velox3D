@@ -8,9 +8,9 @@
 #ifndef V3D_VINPUTDEVICEHELPER_2004_08_18_H
 #define V3D_VINPUTDEVICEHELPER_2004_08_18_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/RangeIter/VRangeIterator.h>
-#include <v3d/Input/IVInputDevice.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/RangeIter/VRangeIterator.h>
+#include <V3d/Input/IVInputDevice.h>
 #include <list>
 #include <map>
 #include "VDIButton.h"

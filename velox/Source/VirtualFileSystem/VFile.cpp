@@ -7,12 +7,12 @@
 
 #include "VFile.h"
 //-----------------------------------------------------------------------------
-#include <v3d/VFS/IVAccessRights.h>
-#include <v3d/VFS/IVDataProvider.h>
-#include <v3d/VFS/IVDataProviderPool.h>
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/VFS/VIOException.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/VFS/IVAccessRights.h>
+#include <V3d/VFS/IVDataProvider.h>
+#include <V3d/VFS/IVDataProviderPool.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/VFS/VIOException.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

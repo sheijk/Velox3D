@@ -8,7 +8,7 @@
 #ifndef V3D_VIMMEDIATEVERTEXSTREAM_2005_02_03_H
 #define V3D_VIMMEDIATEVERTEXSTREAM_2005_02_03_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource.h>
 #include <V3d/Graphics/VVertexBuffer.h>

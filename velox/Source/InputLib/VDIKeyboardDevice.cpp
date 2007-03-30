@@ -6,10 +6,10 @@
  */
 
 #include "VDIKeyboardDevice.h"
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Core/VAssert.h>
-#include <v3d/Input/VInputExceptions.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Core/VAssert.h>
+#include <V3d/Input/VInputExceptions.h>
+#include <V3d/Core/MemManager.h>
 
 #if DIRECTINPUT_VERSION > 0x0800
 #include <Dxerr.h>

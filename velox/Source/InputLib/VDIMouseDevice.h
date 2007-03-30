@@ -8,8 +8,8 @@
 #ifndef V3D_VDIMOUSEDEVICE_2004_08_09_H
 #define V3D_VDIMOUSEDEVICE_2004_08_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Input/IVMouseDevice.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Input/IVMouseDevice.h>
 #include "VDIInputDevice.h"
 #include "VInputDeviceHelper.h"
 

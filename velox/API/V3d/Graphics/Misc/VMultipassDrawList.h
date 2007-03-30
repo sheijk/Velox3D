@@ -9,11 +9,11 @@ thisBeError();
 //#ifndef V3D_VMULTIPASSDRAWLIST_2004_04_10_H
 //#define V3D_VMULTIPASSDRAWLIST_2004_04_10_H
 ////-----------------------------------------------------------------------------
-//#include <v3d/Core/VCoreLib.h>
+//#include <V3d/Core/VCoreLib.h>
 //
-//#include <v3d/Core/SmartPtr/VGuards.h>
+//#include <V3d/Core/SmartPtr/VGuards.h>
 //
-//#include <v3d/Graphics.h>
+//#include <V3d/Graphics.h>
 //
 //#include <V3dLib/Graphics/Misc/IVDrawList.h>
 //

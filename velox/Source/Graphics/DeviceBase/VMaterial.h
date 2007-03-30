@@ -8,10 +8,10 @@
 #ifndef V3D_VMATERIAL_2005_04_16_H
 #define V3D_VMATERIAL_2005_04_16_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Core/SmartPtr/VSharedPtr.h>
-#include <v3d/Graphics/IVMaterial.h>
+#include <V3d/Graphics/IVMaterial.h>
 #include "VRenderStateList.h"
 
 #include <vector>

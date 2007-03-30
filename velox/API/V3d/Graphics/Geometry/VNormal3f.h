@@ -8,7 +8,7 @@
 #ifndef V3D_VNORMAL3F_2005_02_26_H
 #define V3D_VNORMAL3F_2005_02_26_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Math/VVector.h>
 //-----------------------------------------------------------------------------

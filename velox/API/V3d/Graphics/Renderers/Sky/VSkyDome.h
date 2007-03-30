@@ -8,9 +8,9 @@
 #ifndef V3D_VSKYDOMEBODY_2004_04_26_H
 #define V3D_VSKYDOMEBODY_2004_04_26_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Graphics/IVDevice.h>
-#include <v3d/Graphics/VBuffer.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/VBuffer.h>
 #include <V3dLib/Graphics/Geometry.h>
 #include <V3dLib/Graphics/Generators.h>
 #include <v3dLib/Graphics/Renderers/Sky/VDaylightSkyColorizer.h>

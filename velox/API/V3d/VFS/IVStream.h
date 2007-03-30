@@ -8,10 +8,10 @@
 #ifndef V3D_IVSTREAM_H
 #define V3D_IVSTREAM_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
 
-#include <v3d/Vfs/IVLegalOperations.h>
+#include <V3d/Vfs/IVLegalOperations.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

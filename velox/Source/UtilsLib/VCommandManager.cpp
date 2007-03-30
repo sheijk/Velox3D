@@ -9,8 +9,8 @@
 //-----------------------------------------------------------------------------
 #include <string>
 
-#include <v3d/Console.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Console.h>
+#include <V3d/Core/MemManager.h>
 
 #pragma warning (push)
 #pragma warning (disable : 4355)

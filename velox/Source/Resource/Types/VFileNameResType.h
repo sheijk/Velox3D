@@ -9,7 +9,7 @@
 #ifndef V3D_VFILENAMERESTYPE_2005_02_25_H
 #define V3D_VFILENAMERESTYPE_2005_02_25_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource/IVResourceType.h>
 

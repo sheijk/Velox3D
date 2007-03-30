@@ -8,9 +8,9 @@
 #ifndef V3D_VDirectory_H
 #define V3D_VDirectory_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/Core/SmartPtr/VGuards.h>
-#include <v3d/VFS/IVDirectory.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VGuards.h>
+#include <V3d/VFS/IVDirectory.h>
 
 #include <string>
 #include <list>

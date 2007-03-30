@@ -8,8 +8,8 @@
 #ifndef V3D_VXmlIniReader_H
 #define V3D_VXmlIniReader_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
-#include <v3d/XML/IVXMLVisitor.h>
+#include <V3d/Core/VCoreLib.h>
+#include <V3d/XML/IVXMLVisitor.h>
 
 #include <stack>
 //-----------------------------------------------------------------------------

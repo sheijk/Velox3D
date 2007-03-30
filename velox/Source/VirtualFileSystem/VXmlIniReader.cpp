@@ -7,11 +7,11 @@
 
 #include "VXmlIniReader.h"
 //-----------------------------------------------------------------------------
-#include <v3d/VFS/IVDirectory.h>
-#include <v3d/XML/IVXMLElement.h>
-#include <v3d/VFS/VIOException.h>
-#include <v3d/VFS/IVDataProviderPool.h>
-#include <v3d/Core/VObjectRegistry.h>
+#include <V3d/VFS/IVDirectory.h>
+#include <V3d/XML/IVXMLElement.h>
+#include <V3d/VFS/VIOException.h>
+#include <V3d/VFS/IVDataProviderPool.h>
+#include <V3d/Core/VObjectRegistry.h>
 #include <V3d/Core/VIOStream.h>
 
 #include "VAccessRights.h"
@@ -19,7 +19,7 @@
 #include "VFile.h"
 
 #include <string>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

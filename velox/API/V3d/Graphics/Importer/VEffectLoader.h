@@ -9,7 +9,7 @@
 #ifndef V3D_VEFFECTLOADER_2005_02_15_H
 #define V3D_VEFFECTLOADER_2005_02_15_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Resource/VResourceId.h>
 #include <V3d/XML.h>

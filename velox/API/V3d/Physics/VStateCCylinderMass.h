@@ -8,7 +8,7 @@
 #ifndef V3D_VSTATECCYLINDERMASS_16_11_04_H
 #define V3D_VSTATECCYLINDERMASS_16_11_04_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Physics/VMass.h>
 #include <V3d/Physics/VState.h>
 //-----------------------------------------------------------------------------

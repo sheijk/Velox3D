@@ -8,7 +8,7 @@
 #ifndef V3D_VIMPORTED3DSRESOURCETYPE_H
 #define V3D_VIMPORTED3DSRESOURCETYPE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 #include <V3d/Resource/Types/VFileName.h>
 #include <V3d/Resource.h>
 

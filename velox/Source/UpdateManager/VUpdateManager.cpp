@@ -7,10 +7,10 @@
 
 #include "VUpdateManager.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Updater/IVUpdateable.h>
+#include <V3d/Updater/IVUpdateable.h>
 #include <algorithm>
 #include <functional>
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 
 using namespace std;
 //-----------------------------------------------------------------------------

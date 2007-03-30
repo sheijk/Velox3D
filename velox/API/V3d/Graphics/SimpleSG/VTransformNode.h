@@ -8,9 +8,9 @@
 #ifndef V3D_VTRANSFORMNODE_H
 #define V3D_VTRANSFORMNODE_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
-#include <v3d/Math/VMatrix.h>
+#include <V3d/Math/VMatrix.h>
 #include "VNodeBase.h"
 //-----------------------------------------------------------------------------
 namespace v3d {

@@ -8,7 +8,7 @@
 #ifndef V3D_VTERRAINCELL_2004_04_12_H
 #define V3D_VTERRAINCELL_2004_04_12_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 #include <V3dLib/Graphics/Portal/IVCell.h>
 #include <V3dLib/Graphics/Generators/VTerrainChunkMesh.h>

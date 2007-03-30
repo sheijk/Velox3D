@@ -7,9 +7,9 @@
 
 #include "VFileDataProvider.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VObjectRegistry.h>
-#include <v3d/VFS/IVAccessRights.h>
-#include <v3d/VFS/VIOException.h>
+#include <V3d/Core/VObjectRegistry.h>
+#include <V3d/VFS/IVAccessRights.h>
+#include <V3d/VFS/VIOException.h>
 
 #include <V3d/VFS/IVFileSystem.h>
 #include "VAccessRights.h"

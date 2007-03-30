@@ -7,8 +7,8 @@
 
 #include "VXMLWriter.h"
 
-#include <v3d/VFS/IVFileSystem.h>
-#include <v3d/Core/MemManager.h>
+#include <V3d/VFS/IVFileSystem.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace xml{

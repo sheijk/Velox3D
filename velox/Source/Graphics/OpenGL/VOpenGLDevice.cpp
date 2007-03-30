@@ -7,19 +7,19 @@
 
 #include "VOpenGLDevice.h"
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VIOStream.h>
-#include <v3d/Core/VLogging.h>
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Core/VLogging.h>
 #include <V3d/Graphics/VMeshDescription.h>
 #include <V3d/Graphics/VEffectDescription.h>
 
 #include <V3d/Graphics/Materials/EffectUtils.h>
 
-#include <v3d/Graphics/VDeviceMatrix.h>
-#include <v3d/Math/VMatrixOps.h>
+#include <V3d/Graphics/VDeviceMatrix.h>
+#include <V3d/Math/VMatrixOps.h>
 
 #include "IVOpenGLRenderState.h"
 
-#include <v3d/Graphics/GraphicsExceptions.h>
+#include <V3d/Graphics/GraphicsExceptions.h>
 #include <V3d/Graphics/Misc/MiscUtils.h>
 #include <V3d/Graphics/VLight.h>
 
@@ -34,7 +34,7 @@
 
 #include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
-#include <v3d/Core/MemManager.h>
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace graphics {
