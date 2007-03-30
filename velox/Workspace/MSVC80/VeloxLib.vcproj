@@ -863,34 +863,6 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="Collision"
-					>
-					<File
-						RelativePath="..\..\API\V3d\Collision\VCollisionException.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\API\V3d\Collision\VCollisionObject.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\API\V3d\Collision\VContactReport.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\API\V3d\Collision\VIntersectionArray.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\API\V3d\Collision\VOpcode.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\API\V3d\Collision\VOpcodeSystem.h"
-						>
-					</File>
-				</Filter>
-				<Filter
 					Name="Property"
 					>
 					<File
@@ -1390,30 +1362,6 @@
 						</File>
 					</Filter>
 				</Filter>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Collision"
-			>
-			<Filter
-				Name="Implementation"
-				>
-				<File
-					RelativePath="..\..\Source\Collision\VCollisionObject.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Collision\VContactReport.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Collision\VIntersectionArray.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Collision\VOpcodeSystem.cpp"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
