@@ -7,7 +7,9 @@
 
 #include <V3d/Core/VAssert.h>
 //-----------------------------------------------------------------------------
+#ifdef V3D_WIN32
 #include <windows.h>
+#endif
 //#include <Error/VDebugLogger.h>
 #include <sstream>
 
@@ -19,17 +21,19 @@ namespace v3d {
 
 void _V3DAssert( bool bExp, const char* cFile, const vuint iLine, const vchar* cExp )
 {
-	int iResult;
 
 	if ( bExp == false ) //assertion failed
 	{
 		std::ostringstream Error;
 		Error <<"ASSERTION FAILED: " << "(" << cExp << ")" << " File: " << cFile << ", Line: " << iLine << "\0";
 
+#ifdef V3D_WIN32
+	    int iResult;
 		iResult = MessageBox(NULL, Error.str().c_str(), "Velox3D Assertion Error", MB_OKCANCEL | MB_ICONERROR );
 
 		if (iResult == IDOK) return;
 		if (iResult == IDCANCEL) abort();
+#endif 
 	}
 }
 

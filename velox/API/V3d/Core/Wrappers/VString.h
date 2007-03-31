@@ -24,7 +24,7 @@ namespace v3d {
 class VString
 {
 private:
-	vchar* m_pCStr;
+	vchar[] m_pCStr;
 	vuint m_nLength;
 
 	virtual void FreeMem();

@@ -7,11 +7,14 @@
 
 #include <V3d/Core/VException.h>
 //-----------------------------------------------------------------------------
+#ifdef V3D_WIN32
 #include <windows.h>
+#endif
 
 #include <sstream>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
+#include <V3d/Core/VIOStream.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
@@ -31,11 +34,14 @@ VException::VException(
 	m_ErrorString = in_strError;
 
 
-	std::stringstream message;
-	message << "Throwing Exception from [" << in_strFile << "|"
+	vout << "Throwing Exception from [" << in_strFile << "|"
 		<< in_nLine << "]: '" << in_strError << "'\n";
 	
-	OutputDebugString(message.str().c_str());
+}
+
+VException::~VException()
+{
+    //destructor
 }
 
 vuint VException::GetErrorLine() const

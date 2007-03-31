@@ -17,6 +17,9 @@ namespace utils {
 class IVStringStream
 {
 public:
+    //destructor has to be virtual
+    virtual ~IVStringStream(){};
+
 	virtual void Write( VStringParam in_strString ) = 0;
 	virtual void Flush() = 0;
 };

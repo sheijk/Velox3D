@@ -198,7 +198,7 @@ void InitTypeInfo<T>::operator()(VTypeInfo* out_pTypeInfo)
 	// VTypeInfo object. See example in declaration above (~ line 62ff)
 	// This error will also occur if you try to get type info for a type
 	// which has been forward declared only
-	typeLacksGetTypeInfoSpecialization();
+	typeLacksGetTypeInfoSpecialization(new T);
 }
 
 template<typename T>

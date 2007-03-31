@@ -31,6 +31,7 @@ protected:
 
 public:
 	VException();
+    virtual ~VException();
 	VException(VStringParam Error, VStringParam File, vuint Line);
 
 	/** returns the line where the exception was thrown */
