@@ -31,6 +31,7 @@ then
 	echo echo `pwd` > $1/v3dgetdir.sh
 else
 	echo Usage: ./install.sh installdir
+    echo This script installs the velox scripts, needed for source files etc.
 fi
 
 

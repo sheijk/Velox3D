@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 # Copyright 2002-2006 Velox Development Team. This file is licenced under the
 # revised BSD licence. See licence_bsd.txt in the root of the Velox 

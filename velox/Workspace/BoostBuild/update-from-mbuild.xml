@@ -1,5 +1,0 @@
-#!/bin/bash
-
-v3dsynch.sh mb2vc ../mbuild.xml
-v3dsynch.sh mb2bj ../mbuild.xml Jamfile
-

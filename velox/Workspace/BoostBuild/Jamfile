@@ -53,6 +53,7 @@ lib gdi32 ;
 #-------------------------------------------------------------------------------
 lib CoreLib
     : # source files 
+    ../../Source/Core/DebugUtils.cpp
     ../../Source/Core/MemManager.cpp
     ../../Source/Core/VIOStream.cpp
     ../../Source/Core/VLogging.cpp
@@ -76,6 +77,17 @@ lib KernelLib
     ../../Source/Kernel/VKernelIniReader.cpp
     ../../Source/Kernel/VServiceProxy.cpp
     ../../Source/Module/VeloxModule.cpp
+    ../../Source/XMLService/VXMLAttribute.cpp
+    ../../Source/XMLService/VXMLComment.cpp
+    ../../Source/XMLService/VXMLElement.cpp
+    ../../Source/XMLService/VXMLService.cpp
+    ../../Source/XMLService/VXMLText.cpp
+    ../../Source/XMLService/VXMLWriter.cpp
+    ../../Source/XMLService/XmlServiceDLL.cpp
+    ../../Source/XMLService/TinyXML/tinystr.cpp
+    ../../Source/XMLService/TinyXML/tinyxml.cpp
+    ../../Source/XMLService/TinyXML/tinyxmlerror.cpp
+    ../../Source/XMLService/TinyXML/tinyxmlparser.cpp
 
 	: # settings
 	<link>static
@@ -83,10 +95,6 @@ lib KernelLib
 
 lib VeloxLib
     : # source files 
-    ../../Source/Collision/VCollisionObject.cpp
-    ../../Source/Collision/VContactReport.cpp
-    ../../Source/Collision/VIntersectionArray.cpp
-    ../../Source/Collision/VOpcodeSystem.cpp
     ../../Source/Entity/IVPart.cpp
     ../../Source/Entity/VEntity.cpp
     ../../Source/Entity/VEntityManager.cpp
@@ -103,15 +111,18 @@ lib VeloxLib
     ../../Source/Graphics/Lib/EffectUtils.cpp
     ../../Source/Graphics/Lib/GeometryUtils.cpp
     ../../Source/Graphics/Lib/MiscUtils.cpp
+    ../../Source/Graphics/Lib/OpenGLUtils.cpp
     ../../Source/Graphics/Lib/StateTypes.cpp
     ../../Source/Graphics/Lib/VDisplaySettings.cpp
     ../../Source/Graphics/Lib/VEffectDescription.cpp
+    ../../Source/Graphics/Lib/VLight.cpp
     ../../Source/Graphics/Lib/VMeshDescription.cpp
     ../../Source/Graphics/Lib/VModel.cpp
     ../../Source/Graphics/Lib/VModeTypeInfo.cpp
     ../../Source/Graphics/Lib/VPointLight.cpp
     ../../Source/Graphics/Lib/VVertexBuffer.cpp
     ../../Source/Graphics/Lib/VVertexFormat.cpp
+    ../../Source/Graphics/OpenGL/VDeviceCaps.cpp
     ../../Source/Graphics/OpenGL/VMeshHandle.cpp
     ../../Source/Graphics/OpenGL/Context/RenderTexture.cpp
     ../../Source/Graphics/OpenGL/Context/VCopyPixelsContext.cpp
@@ -119,29 +130,79 @@ lib VeloxLib
     ../../Source/Graphics/OpenGL/Context/VOffscreenContextBase.cpp
     ../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.cpp
     ../../Source/Graphics/OpenGL/Context/VWin32WindowContext.cpp
+    ../../Source/UtilsLib/ColorConversion.cpp
+    ../../Source/UtilsLib/VCameraPart.cpp
+    ../../Source/UtilsLib/VCircleMoverPart.cpp
+    ../../Source/UtilsLib/VCommandManager.cpp
+    ../../Source/UtilsLib/VFourCC.cpp
+    ../../Source/UtilsLib/VFPSMoverPart.cpp
+    ../../Source/UtilsLib/VFrameCounter.cpp
+    ../../Source/UtilsLib/VImage.cpp
+    ../../Source/UtilsLib/VInputPart.cpp
+    ../../Source/UtilsLib/VMouseTrackball.cpp
+    ../../Source/UtilsLib/VRegisterGuard.cpp
+    ../../Source/UtilsLib/VSimpleTokenizer.cpp
+    ../../Source/UtilsLib/VStreamReader.cpp
+    ../../Source/UtilsLib/VTrackball.cpp
+    ../../Source/UtilsLib/VTrackballPart.cpp
+    ../../Source/UtilsLib/Camera/VCamera.cpp
+    ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp
+    ../../Source/UtilsLib/DrawList/VSimpleDrawList.cpp
+    ../../Source/UtilsLib/Importer/VEffectLoader.cpp
+    ../../Source/UtilsLib/Importer/VModelLoader.cpp
+    ../../Source/UtilsLib/Importer/VQ3BspImporter.cpp
+    ../../Source/UtilsLib/Importer/Base/VImportedBufferDescription.cpp
+    ../../Source/UtilsLib/Importer/Base/VImportedFaceContainer.cpp
+    ../../Source/UtilsLib/Importer/Base/VImportedFaceDescription.cpp
+    ../../Source/UtilsLib/Importer/Base/VImportedMaterialContainer.cpp
+    ../../Source/UtilsLib/Importer/Base/VImportedMaterialDescription.cpp
+    ../../Source/UtilsLib/Importer/Base/VMaterialMap.cpp
+    ../../Source/UtilsLib/Importer/3ds/VImported3DS.cpp
+    ../../Source/UtilsLib/Xml/XMLUtils.cpp
     ../../Source/Graphics/Generators/VBoxGenerator.cpp
     ../../Source/Graphics/Generators/VPolarSphereGenerator.cpp
     ../../Source/Graphics/Parameters/VMaterialSetup.cpp
+    ../../Source/Graphics/Parameters/VTextureValue.cpp
     ../../Source/Math/TransformationOps.cpp
+    ../../Source/Math/VCCylinder.cpp
+    ../../Source/Math/VMiscMath.cpp
     ../../Source/Math/VRBTransform.cpp
     ../../Source/Math/VVector.cpp
-    ../../Source/Physics/VPhysicBody.cpp
-    ../../Source/Physics/VPhysicBoxMassState.cpp
-    ../../Source/Physics/VPhysicGeometry.cpp
-    ../../Source/Physics/VPhysicGeometryBox.cpp
-    ../../Source/Physics/VPhysicGeometryPlane.cpp
-    ../../Source/Physics/VPhysicGeometrySphere.cpp
-    ../../Source/Physics/VPhysicJoint.cpp
-    ../../Source/Physics/VPhysicJointGroup.cpp
-    ../../Source/Physics/VPhysicJointHinge2State.cpp
+    ../../Source/Physics/VBody.cpp
+    ../../Source/Physics/VGeometry.cpp
+    ../../Source/Physics/VGeometryBox.cpp
+    ../../Source/Physics/VGeometryCappedCylinder.cpp
+    ../../Source/Physics/VGeometryMesh.cpp
+    ../../Source/Physics/VGeometryPlane.cpp
+    ../../Source/Physics/VGeometrySphere.cpp
+    ../../Source/Physics/VJoint.cpp
+    ../../Source/Physics/VJointGroup.cpp
+    ../../Source/Physics/VJointHinge2.cpp
+    ../../Source/Physics/VMass.cpp
+    ../../Source/Physics/VOdeBody.cpp
+    ../../Source/Physics/VPhysicManager.cpp
+    ../../Source/Physics/VSpace.cpp
+    ../../Source/Physics/VState.cpp
+    ../../Source/Physics/VStateBoxMass.cpp
+    ../../Source/Physics/VStateCCylinderMass.cpp
+    ../../Source/Physics/VStateListContainer.cpp
+    ../../Source/Physics/VStateOrientation.cpp
+    ../../Source/Physics/VStatePosition.cpp
+    ../../Source/Physics/VStateSphereMass.cpp
+    ../../Source/Physics/VWorld.cpp
+    ../../Source/Physics/Bounding/VBoundingBoxVolumePart.cpp
+    ../../Source/Physics/Bounding/VBoundingCCylinderVolumePart.cpp
+    ../../Source/Physics/Bounding/VBoundingMesh.cpp
+    ../../Source/Physics/Bounding/VBoundingMeshVolumePart.cpp
+    ../../Source/Physics/Bounding/VBoundingPlaneVolumePart.cpp
+    ../../Source/Physics/Bounding/VBoundingSphereVolumePart.cpp
+    ../../Source/Physics/Bounding/VBoundingTerrainVolumePart.cpp
+    ../../Source/Physics/Bounding/VCollisionVisualizationPart.cpp
+    ../../Source/Physics/VBodyPart.cpp
+    ../../Source/Physics/VCollisionPart.cpp
+    ../../Source/Physics/VJointHinge2ModifierPart.cpp
+    ../../Source/Physics/VJointHinge2Part.cpp
     ../../Source/Physics/VPhysicManagerPart.cpp
-    ../../Source/Physics/VPhysicMass.cpp
-    ../../Source/Physics/VPhysicObject.cpp
-    ../../Source/Physics/VPhysicPositionState.cpp
-    ../../Source/Physics/VPhysicSpace.cpp
-    ../../Source/Physics/VPhysicSphereMassState.cpp
-    ../../Source/Physics/VPhysicState.cpp
-    ../../Source/Physics/VPhysicWorld.cpp
     ../../Source/Property/VPropertyManager.cpp
     ../../Source/Resource/VResource.cpp
     ../../Source/Resource/VResourceData.cpp
@@ -160,6 +221,7 @@ lib VeloxLib
     ../../Source/Resource/Types/VTextFile.cpp
     ../../Source/Resource/Types/VTextFileResType.cpp
     ../../Source/Resource/Types/VTextureStateResType.cpp
+    ../../Source/Resource/Types/VXMLModelResourceType.cpp
     ../../Source/Scene/IVRenderStepPart.cpp
     ../../Source/Scene/VArrowMeshPart.cpp
     ../../Source/Scene/VCoordSysDisplayPart.cpp
@@ -171,35 +233,28 @@ lib VeloxLib
     ../../Source/Scene/VOrientationGridPart.cpp
     ../../Source/Scene/VPlaneMeshPart.cpp
     ../../Source/Scene/VPostProcessingRenderStepPart.cpp
-    ../../Source/Scene/VProjectedTextureShooting.cpp
     ../../Source/Scene/VProjectTextureRenderStepPart.cpp
     ../../Source/Scene/VSimpleShooting.cpp
-    ../../Source/UtilsLib/ColorConversion.cpp
-    ../../Source/UtilsLib/VCommandManager.cpp
-    ../../Source/UtilsLib/VFourCC.cpp
-    ../../Source/UtilsLib/VFrameCounter.cpp
-    ../../Source/UtilsLib/VMouseTrackball.cpp
-    ../../Source/UtilsLib/VRegisterGuard.cpp
-    ../../Source/UtilsLib/VSimpleTokenizer.cpp
-    ../../Source/UtilsLib/VStreamReader.cpp
-    ../../Source/UtilsLib/VTrackball.cpp
-    ../../Source/UtilsLib/CPUDetect/VDetectProcessor.cpp
-    ../../Source/UtilsLib/Camera/VCamera.cpp
-    ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp
-    ../../Source/UtilsLib/DrawList/VSimpleDrawList.cpp
-    ../../Source/UtilsLib/Importer/VEffectLoader.cpp
-    ../../Source/UtilsLib/Importer/VModelLoader.cpp
-    ../../Source/UtilsLib/Importer/VQ3BspImporter.cpp
-    ../../Source/UtilsLib/Importer/Base/VImportedBufferDescription.cpp
-    ../../Source/UtilsLib/Importer/Base/VImportedFaceContainer.cpp
-    ../../Source/UtilsLib/Importer/Base/VImportedFaceDescription.cpp
-    ../../Source/UtilsLib/Importer/Base/VImportedMaterialContainer.cpp
-    ../../Source/UtilsLib/Importer/Base/VImportedMaterialDescription.cpp
-    ../../Source/UtilsLib/Importer/Base/VMaterialMap.cpp
-    ../../Source/UtilsLib/Importer/3ds/VImported3DS.cpp
-    ../../Source/UtilsLib/Xml/XMLUtils.cpp
+    ../../Source/Scene/Shapes/VBoxMeshPart.cpp
+    ../../Source/Scene/Shapes/VCylinderMeshPart.cpp
+    ../../Source/Scene/Shapes/VFrustumVisPart.cpp
+    ../../Source/Scene/Shapes/VSkyboxPart.cpp
+    ../../Source/Scene/Shapes/VSphereMeshPart.cpp
+    ../../Source/Scene/Shapes/VTerrainPart.cpp
+    ../../Source/Scene/Shapes/VTorusMeshPart.cpp
+    ../../Source/Scene/Shootings/VMirrorShooting.cpp
+    ../../Source/Scene/Shootings/VOffscreenShooting.cpp
+    ../../Source/Scene/Shootings/VShadowMapShooting.cpp
+    ../../Source/Scene/Shootings/VShootingBase.cpp
+    ../../Source/Scene/Rendering/VShadowMapRenderStepPart.cpp
+    ../../Source/Scene/Lights/VLightPart.cpp
+    ../../Source/Scene/Lights/VNaiveLightManager.cpp
     ../../Source/Messaging/VMessage.cpp
+    ../../Source/Messaging/VMessageInterpreter.cpp
+    ../../Source/Messaging/VOption.cpp
     ../../Source/Messaging/VProtocol.cpp
+    ../../Source/Tags/VTag.cpp
+    ../../Source/Tags/VTagRegistry.cpp
 
 	: # settings
 	<link>static
@@ -231,11 +286,12 @@ lib ServiceDLL
     ../../Source/Graphics/DeviceBase/VStateCategoryList.cpp
     ../../Source/Graphics/OpenGL/VCGVertexShaderState.cpp
     ../../Source/Graphics/OpenGL/VCubemapTextureState.cpp
+    ../../Source/Graphics/OpenGL/VDeviceCaps.cpp
+    ../../Source/Graphics/OpenGL/VGraphicsService.cpp
     ../../Source/Graphics/OpenGL/VImmediateVertexStream.cpp
     ../../Source/Graphics/OpenGL/VMeshHandle.cpp
     ../../Source/Graphics/OpenGL/VMiscState.cpp
     ../../Source/Graphics/OpenGL/VOpenGLDevice.cpp
-    ../../Source/Graphics/OpenGL/VOpenGlUtils.cpp
     ../../Source/Graphics/OpenGL/VOpenGLVBOMesh.cpp
     ../../Source/Graphics/OpenGL/VOpenGLVBORenderMethod.cpp
     ../../Source/Graphics/OpenGL/VPBufferTexture.cpp
@@ -250,12 +306,14 @@ lib ServiceDLL
     ../../Source/Graphics/OpenGL/Materials/VCGFXState.cpp
     ../../Source/Graphics/OpenGL/Materials/VFixedFunctionPass.cpp
     ../../Source/Graphics/OpenGL/Textures/VBaseTexture.cpp
+    ../../Source/Graphics/OpenGL/Textures/VCubeMapTexture.cpp
     ../../Source/Graphics/OpenGL/Textures/VTexture2D.cpp
     ../../Source/Graphics/OpenGL/Textures/VUntextured.cpp
     ../../Source/Graphics/OpenGL/Glsl/VGLSLParameter.cpp
     ../../Source/Graphics/OpenGL/Glsl/VGLSLPass.cpp
     ../../Source/Graphics/OpenGL/Glsl/VGLSLShader.cpp
     ../../Source/Graphics/OpenGL/Glsl/VGLSLTextureParameter.cpp
+    ../../Source/Graphics/OpenGL/States/VDepthState.cpp
     ../../Source/ImageService/VDevILLoader.cpp
     ../../Source/ImageService/VDevILSaver.cpp
     ../../Source/ImageService/VImageFactory.cpp
@@ -274,7 +332,6 @@ lib ServiceDLL
     ../../Source/SystemManager/VSystemManager.cpp
     ../../Source/UpdateManager/VPerformanceCounter.cpp
     ../../Source/UpdateManager/VUpdateManager.cpp
-    ../../Source/UtilsLib/CPUDetect/VDetectProcessor.cpp
     ../../Source/VirtualFileSystem/VAccessRights.cpp
     ../../Source/VirtualFileSystem/VBufferStreamGuard.cpp
     ../../Source/VirtualFileSystem/VDataProviderPool.cpp
@@ -295,20 +352,14 @@ lib ServiceDLL
     ../../Source/WindowService/VWindowManagerBase.cpp
     ../../Source/WindowService/VWindowManagerWin32.cpp
     ../../Source/WindowService/VWindowWin32.cpp
+    ../../Editor/NativeBindings/PartParsers.cpp
     ../../Source/Entity/Parsers/VSceneModelParser.cpp
+    ../../Source/Entity/EntityParts/VSceneGraphPart.cpp
+    ../../Source/Entity/EntityParts/VSGAnimationPart.cpp
     ../../Source/Scene/IVRenderStepPart.cpp
-    ../../Source/Scene/VArrowMeshPart.cpp
-    ../../Source/Scene/VCoordSysDisplayPart.cpp
-    ../../Source/Scene/VDefaultRenderStepPart.cpp
-    ../../Source/Scene/VMeshPart.cpp
     ../../Source/Scene/VMeshPartBase.cpp
-    ../../Source/Scene/VModelPart.cpp
-    ../../Source/Scene/VNaiveSceneManagerPart.cpp
-    ../../Source/Scene/VOrientationGridPart.cpp
-    ../../Source/Scene/VPlaneMeshPart.cpp
-    ../../Source/Scene/VProjectedTextureShooting.cpp
-    ../../Source/Scene/VProjectTextureRenderStepPart.cpp
-    ../../Source/Scene/VSimpleShooting.cpp
+    ../../Source/Scene/Shootings/VShootingBase.cpp
+    ../../Editor/NativeBindings/PartParsers.cpp
 
 	# stop-sync
 	
@@ -433,12 +484,15 @@ exe ImporterDemoApp
 
 
 
+
+
 # Object targets
 # WARNING: this section is replaced entirely in the sync process
 #------------------------------------------------------------------------------
 
 
 # CoreLib
+obj DebugUtils : ../../Source/Core/DebugUtils.cpp ;
 obj MemManager : ../../Source/Core/MemManager.cpp ;
 obj VIOStream : ../../Source/Core/VIOStream.cpp ;
 obj VLogging : ../../Source/Core/VLogging.cpp ;
@@ -457,12 +511,19 @@ obj VKernel : ../../Source/Kernel/VKernel.cpp ;
 obj VKernelIniReader : ../../Source/Kernel/VKernelIniReader.cpp ;
 obj VServiceProxy : ../../Source/Kernel/VServiceProxy.cpp ;
 obj VeloxModule : ../../Source/Module/VeloxModule.cpp ;
+obj VXMLAttribute : ../../Source/XMLService/VXMLAttribute.cpp ;
+obj VXMLComment : ../../Source/XMLService/VXMLComment.cpp ;
+obj VXMLElement : ../../Source/XMLService/VXMLElement.cpp ;
+obj VXMLService : ../../Source/XMLService/VXMLService.cpp ;
+obj VXMLText : ../../Source/XMLService/VXMLText.cpp ;
+obj VXMLWriter : ../../Source/XMLService/VXMLWriter.cpp ;
+obj XmlServiceDLL : ../../Source/XMLService/XmlServiceDLL.cpp ;
+obj tinystr : ../../Source/XMLService/TinyXML/tinystr.cpp ;
+obj tinyxml : ../../Source/XMLService/TinyXML/tinyxml.cpp ;
+obj tinyxmlerror : ../../Source/XMLService/TinyXML/tinyxmlerror.cpp ;
+obj tinyxmlparser : ../../Source/XMLService/TinyXML/tinyxmlparser.cpp ;
 
 # VeloxLib
-obj VCollisionObject : ../../Source/Collision/VCollisionObject.cpp ;
-obj VContactReport : ../../Source/Collision/VContactReport.cpp ;
-obj VIntersectionArray : ../../Source/Collision/VIntersectionArray.cpp ;
-obj VOpcodeSystem : ../../Source/Collision/VOpcodeSystem.cpp ;
 obj IVPart : ../../Source/Entity/IVPart.cpp ;
 obj VEntity : ../../Source/Entity/VEntity.cpp ;
 obj VEntityManager : ../../Source/Entity/VEntityManager.cpp ;
@@ -479,15 +540,18 @@ obj DefaultVertexStructures : ../../Source/Graphics/Lib/DefaultVertexStructures.
 obj EffectUtils : ../../Source/Graphics/Lib/EffectUtils.cpp ;
 obj GeometryUtils : ../../Source/Graphics/Lib/GeometryUtils.cpp ;
 obj MiscUtils : ../../Source/Graphics/Lib/MiscUtils.cpp ;
+obj OpenGLUtils : ../../Source/Graphics/Lib/OpenGLUtils.cpp ;
 obj StateTypes : ../../Source/Graphics/Lib/StateTypes.cpp ;
 obj VDisplaySettings : ../../Source/Graphics/Lib/VDisplaySettings.cpp ;
 obj VEffectDescription : ../../Source/Graphics/Lib/VEffectDescription.cpp ;
+obj VLight : ../../Source/Graphics/Lib/VLight.cpp ;
 obj VMeshDescription : ../../Source/Graphics/Lib/VMeshDescription.cpp ;
 obj VModel : ../../Source/Graphics/Lib/VModel.cpp ;
 obj VModeTypeInfo : ../../Source/Graphics/Lib/VModeTypeInfo.cpp ;
 obj VPointLight : ../../Source/Graphics/Lib/VPointLight.cpp ;
 obj VVertexBuffer : ../../Source/Graphics/Lib/VVertexBuffer.cpp ;
 obj VVertexFormat : ../../Source/Graphics/Lib/VVertexFormat.cpp ;
+obj VDeviceCaps : ../../Source/Graphics/OpenGL/VDeviceCaps.cpp ;
 obj VMeshHandle : ../../Source/Graphics/OpenGL/VMeshHandle.cpp ;
 obj RenderTexture : ../../Source/Graphics/OpenGL/Context/RenderTexture.cpp ;
 obj VCopyPixelsContext : ../../Source/Graphics/OpenGL/Context/VCopyPixelsContext.cpp ;
@@ -495,29 +559,79 @@ obj VFrameBufferObjectContext : ../../Source/Graphics/OpenGL/Context/VFrameBuffe
 obj VOffscreenContextBase : ../../Source/Graphics/OpenGL/Context/VOffscreenContextBase.cpp ;
 obj VPBufferWindowContext : ../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.cpp ;
 obj VWin32WindowContext : ../../Source/Graphics/OpenGL/Context/VWin32WindowContext.cpp ;
+obj ColorConversion : ../../Source/UtilsLib/ColorConversion.cpp ;
+obj VCameraPart : ../../Source/UtilsLib/VCameraPart.cpp ;
+obj VCircleMoverPart : ../../Source/UtilsLib/VCircleMoverPart.cpp ;
+obj VCommandManager : ../../Source/UtilsLib/VCommandManager.cpp ;
+obj VFourCC : ../../Source/UtilsLib/VFourCC.cpp ;
+obj VFPSMoverPart : ../../Source/UtilsLib/VFPSMoverPart.cpp ;
+obj VFrameCounter : ../../Source/UtilsLib/VFrameCounter.cpp ;
+obj VImage : ../../Source/UtilsLib/VImage.cpp ;
+obj VInputPart : ../../Source/UtilsLib/VInputPart.cpp ;
+obj VMouseTrackball : ../../Source/UtilsLib/VMouseTrackball.cpp ;
+obj VRegisterGuard : ../../Source/UtilsLib/VRegisterGuard.cpp ;
+obj VSimpleTokenizer : ../../Source/UtilsLib/VSimpleTokenizer.cpp ;
+obj VStreamReader : ../../Source/UtilsLib/VStreamReader.cpp ;
+obj VTrackball : ../../Source/UtilsLib/VTrackball.cpp ;
+obj VTrackballPart : ../../Source/UtilsLib/VTrackballPart.cpp ;
+obj VCamera : ../../Source/UtilsLib/Camera/VCamera.cpp ;
+obj VKeyboardCamera : ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp ;
+obj VSimpleDrawList : ../../Source/UtilsLib/DrawList/VSimpleDrawList.cpp ;
+obj VEffectLoader : ../../Source/UtilsLib/Importer/VEffectLoader.cpp ;
+obj VModelLoader : ../../Source/UtilsLib/Importer/VModelLoader.cpp ;
+obj VQ3BspImporter : ../../Source/UtilsLib/Importer/VQ3BspImporter.cpp ;
+obj VImportedBufferDescription : ../../Source/UtilsLib/Importer/Base/VImportedBufferDescription.cpp ;
+obj VImportedFaceContainer : ../../Source/UtilsLib/Importer/Base/VImportedFaceContainer.cpp ;
+obj VImportedFaceDescription : ../../Source/UtilsLib/Importer/Base/VImportedFaceDescription.cpp ;
+obj VImportedMaterialContainer : ../../Source/UtilsLib/Importer/Base/VImportedMaterialContainer.cpp ;
+obj VImportedMaterialDescription : ../../Source/UtilsLib/Importer/Base/VImportedMaterialDescription.cpp ;
+obj VMaterialMap : ../../Source/UtilsLib/Importer/Base/VMaterialMap.cpp ;
+obj VImported3DS : ../../Source/UtilsLib/Importer/3ds/VImported3DS.cpp ;
+obj XMLUtils : ../../Source/UtilsLib/Xml/XMLUtils.cpp ;
 obj VBoxGenerator : ../../Source/Graphics/Generators/VBoxGenerator.cpp ;
 obj VPolarSphereGenerator : ../../Source/Graphics/Generators/VPolarSphereGenerator.cpp ;
 obj VMaterialSetup : ../../Source/Graphics/Parameters/VMaterialSetup.cpp ;
+obj VTextureValue : ../../Source/Graphics/Parameters/VTextureValue.cpp ;
 obj TransformationOps : ../../Source/Math/TransformationOps.cpp ;
+obj VCCylinder : ../../Source/Math/VCCylinder.cpp ;
+obj VMiscMath : ../../Source/Math/VMiscMath.cpp ;
 obj VRBTransform : ../../Source/Math/VRBTransform.cpp ;
 obj VVector : ../../Source/Math/VVector.cpp ;
-obj VPhysicBody : ../../Source/Physics/VPhysicBody.cpp ;
-obj VPhysicBoxMassState : ../../Source/Physics/VPhysicBoxMassState.cpp ;
-obj VPhysicGeometry : ../../Source/Physics/VPhysicGeometry.cpp ;
-obj VPhysicGeometryBox : ../../Source/Physics/VPhysicGeometryBox.cpp ;
-obj VPhysicGeometryPlane : ../../Source/Physics/VPhysicGeometryPlane.cpp ;
-obj VPhysicGeometrySphere : ../../Source/Physics/VPhysicGeometrySphere.cpp ;
-obj VPhysicJoint : ../../Source/Physics/VPhysicJoint.cpp ;
-obj VPhysicJointGroup : ../../Source/Physics/VPhysicJointGroup.cpp ;
-obj VPhysicJointHinge2State : ../../Source/Physics/VPhysicJointHinge2State.cpp ;
+obj VBody : ../../Source/Physics/VBody.cpp ;
+obj VGeometry : ../../Source/Physics/VGeometry.cpp ;
+obj VGeometryBox : ../../Source/Physics/VGeometryBox.cpp ;
+obj VGeometryCappedCylinder : ../../Source/Physics/VGeometryCappedCylinder.cpp ;
+obj VGeometryMesh : ../../Source/Physics/VGeometryMesh.cpp ;
+obj VGeometryPlane : ../../Source/Physics/VGeometryPlane.cpp ;
+obj VGeometrySphere : ../../Source/Physics/VGeometrySphere.cpp ;
+obj VJoint : ../../Source/Physics/VJoint.cpp ;
+obj VJointGroup : ../../Source/Physics/VJointGroup.cpp ;
+obj VJointHinge2 : ../../Source/Physics/VJointHinge2.cpp ;
+obj VMass : ../../Source/Physics/VMass.cpp ;
+obj VOdeBody : ../../Source/Physics/VOdeBody.cpp ;
+obj VPhysicManager : ../../Source/Physics/VPhysicManager.cpp ;
+obj VSpace : ../../Source/Physics/VSpace.cpp ;
+obj VState : ../../Source/Physics/VState.cpp ;
+obj VStateBoxMass : ../../Source/Physics/VStateBoxMass.cpp ;
+obj VStateCCylinderMass : ../../Source/Physics/VStateCCylinderMass.cpp ;
+obj VStateListContainer : ../../Source/Physics/VStateListContainer.cpp ;
+obj VStateOrientation : ../../Source/Physics/VStateOrientation.cpp ;
+obj VStatePosition : ../../Source/Physics/VStatePosition.cpp ;
+obj VStateSphereMass : ../../Source/Physics/VStateSphereMass.cpp ;
+obj VWorld : ../../Source/Physics/VWorld.cpp ;
+obj VBoundingBoxVolumePart : ../../Source/Physics/Bounding/VBoundingBoxVolumePart.cpp ;
+obj VBoundingCCylinderVolumePart : ../../Source/Physics/Bounding/VBoundingCCylinderVolumePart.cpp ;
+obj VBoundingMesh : ../../Source/Physics/Bounding/VBoundingMesh.cpp ;
+obj VBoundingMeshVolumePart : ../../Source/Physics/Bounding/VBoundingMeshVolumePart.cpp ;
+obj VBoundingPlaneVolumePart : ../../Source/Physics/Bounding/VBoundingPlaneVolumePart.cpp ;
+obj VBoundingSphereVolumePart : ../../Source/Physics/Bounding/VBoundingSphereVolumePart.cpp ;
+obj VBoundingTerrainVolumePart : ../../Source/Physics/Bounding/VBoundingTerrainVolumePart.cpp ;
+obj VCollisionVisualizationPart : ../../Source/Physics/Bounding/VCollisionVisualizationPart.cpp ;
+obj VBodyPart : ../../Source/Physics/VBodyPart.cpp ;
+obj VCollisionPart : ../../Source/Physics/VCollisionPart.cpp ;
+obj VJointHinge2ModifierPart : ../../Source/Physics/VJointHinge2ModifierPart.cpp ;
+obj VJointHinge2Part : ../../Source/Physics/VJointHinge2Part.cpp ;
 obj VPhysicManagerPart : ../../Source/Physics/VPhysicManagerPart.cpp ;
-obj VPhysicMass : ../../Source/Physics/VPhysicMass.cpp ;
-obj VPhysicObject : ../../Source/Physics/VPhysicObject.cpp ;
-obj VPhysicPositionState : ../../Source/Physics/VPhysicPositionState.cpp ;
-obj VPhysicSpace : ../../Source/Physics/VPhysicSpace.cpp ;
-obj VPhysicSphereMassState : ../../Source/Physics/VPhysicSphereMassState.cpp ;
-obj VPhysicState : ../../Source/Physics/VPhysicState.cpp ;
-obj VPhysicWorld : ../../Source/Physics/VPhysicWorld.cpp ;
 obj VPropertyManager : ../../Source/Property/VPropertyManager.cpp ;
 obj VResource : ../../Source/Resource/VResource.cpp ;
 obj VResourceData : ../../Source/Resource/VResourceData.cpp ;
@@ -536,6 +650,7 @@ obj VPBufferTextureResType : ../../Source/Resource/Types/VPBufferTextureResType.
 obj VTextFile : ../../Source/Resource/Types/VTextFile.cpp ;
 obj VTextFileResType : ../../Source/Resource/Types/VTextFileResType.cpp ;
 obj VTextureStateResType : ../../Source/Resource/Types/VTextureStateResType.cpp ;
+obj VXMLModelResourceType : ../../Source/Resource/Types/VXMLModelResourceType.cpp ;
 obj IVRenderStepPart : ../../Source/Scene/IVRenderStepPart.cpp ;
 obj VArrowMeshPart : ../../Source/Scene/VArrowMeshPart.cpp ;
 obj VCoordSysDisplayPart : ../../Source/Scene/VCoordSysDisplayPart.cpp ;
@@ -547,35 +662,28 @@ obj VNaiveSceneManagerPart : ../../Source/Scene/VNaiveSceneManagerPart.cpp ;
 obj VOrientationGridPart : ../../Source/Scene/VOrientationGridPart.cpp ;
 obj VPlaneMeshPart : ../../Source/Scene/VPlaneMeshPart.cpp ;
 obj VPostProcessingRenderStepPart : ../../Source/Scene/VPostProcessingRenderStepPart.cpp ;
-obj VProjectedTextureShooting : ../../Source/Scene/VProjectedTextureShooting.cpp ;
 obj VProjectTextureRenderStepPart : ../../Source/Scene/VProjectTextureRenderStepPart.cpp ;
 obj VSimpleShooting : ../../Source/Scene/VSimpleShooting.cpp ;
-obj ColorConversion : ../../Source/UtilsLib/ColorConversion.cpp ;
-obj VCommandManager : ../../Source/UtilsLib/VCommandManager.cpp ;
-obj VFourCC : ../../Source/UtilsLib/VFourCC.cpp ;
-obj VFrameCounter : ../../Source/UtilsLib/VFrameCounter.cpp ;
-obj VMouseTrackball : ../../Source/UtilsLib/VMouseTrackball.cpp ;
-obj VRegisterGuard : ../../Source/UtilsLib/VRegisterGuard.cpp ;
-obj VSimpleTokenizer : ../../Source/UtilsLib/VSimpleTokenizer.cpp ;
-obj VStreamReader : ../../Source/UtilsLib/VStreamReader.cpp ;
-obj VTrackball : ../../Source/UtilsLib/VTrackball.cpp ;
-obj VDetectProcessor : ../../Source/UtilsLib/CPUDetect/VDetectProcessor.cpp ;
-obj VCamera : ../../Source/UtilsLib/Camera/VCamera.cpp ;
-obj VKeyboardCamera : ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp ;
-obj VSimpleDrawList : ../../Source/UtilsLib/DrawList/VSimpleDrawList.cpp ;
-obj VEffectLoader : ../../Source/UtilsLib/Importer/VEffectLoader.cpp ;
-obj VModelLoader : ../../Source/UtilsLib/Importer/VModelLoader.cpp ;
-obj VQ3BspImporter : ../../Source/UtilsLib/Importer/VQ3BspImporter.cpp ;
-obj VImportedBufferDescription : ../../Source/UtilsLib/Importer/Base/VImportedBufferDescription.cpp ;
-obj VImportedFaceContainer : ../../Source/UtilsLib/Importer/Base/VImportedFaceContainer.cpp ;
-obj VImportedFaceDescription : ../../Source/UtilsLib/Importer/Base/VImportedFaceDescription.cpp ;
-obj VImportedMaterialContainer : ../../Source/UtilsLib/Importer/Base/VImportedMaterialContainer.cpp ;
-obj VImportedMaterialDescription : ../../Source/UtilsLib/Importer/Base/VImportedMaterialDescription.cpp ;
-obj VMaterialMap : ../../Source/UtilsLib/Importer/Base/VMaterialMap.cpp ;
-obj VImported3DS : ../../Source/UtilsLib/Importer/3ds/VImported3DS.cpp ;
-obj XMLUtils : ../../Source/UtilsLib/Xml/XMLUtils.cpp ;
+obj VBoxMeshPart : ../../Source/Scene/Shapes/VBoxMeshPart.cpp ;
+obj VCylinderMeshPart : ../../Source/Scene/Shapes/VCylinderMeshPart.cpp ;
+obj VFrustumVisPart : ../../Source/Scene/Shapes/VFrustumVisPart.cpp ;
+obj VSkyboxPart : ../../Source/Scene/Shapes/VSkyboxPart.cpp ;
+obj VSphereMeshPart : ../../Source/Scene/Shapes/VSphereMeshPart.cpp ;
+obj VTerrainPart : ../../Source/Scene/Shapes/VTerrainPart.cpp ;
+obj VTorusMeshPart : ../../Source/Scene/Shapes/VTorusMeshPart.cpp ;
+obj VMirrorShooting : ../../Source/Scene/Shootings/VMirrorShooting.cpp ;
+obj VOffscreenShooting : ../../Source/Scene/Shootings/VOffscreenShooting.cpp ;
+obj VShadowMapShooting : ../../Source/Scene/Shootings/VShadowMapShooting.cpp ;
+obj VShootingBase : ../../Source/Scene/Shootings/VShootingBase.cpp ;
+obj VShadowMapRenderStepPart : ../../Source/Scene/Rendering/VShadowMapRenderStepPart.cpp ;
+obj VLightPart : ../../Source/Scene/Lights/VLightPart.cpp ;
+obj VNaiveLightManager : ../../Source/Scene/Lights/VNaiveLightManager.cpp ;
 obj VMessage : ../../Source/Messaging/VMessage.cpp ;
+obj VMessageInterpreter : ../../Source/Messaging/VMessageInterpreter.cpp ;
+obj VOption : ../../Source/Messaging/VOption.cpp ;
 obj VProtocol : ../../Source/Messaging/VProtocol.cpp ;
+obj VTag : ../../Source/Tags/VTag.cpp ;
+obj VTagRegistry : ../../Source/Tags/VTagRegistry.cpp ;
 
 # V3dConsoleApp
 obj main : ../../Source/Kernel/main.cpp ;
@@ -593,10 +701,10 @@ obj VRenderStateList : ../../Source/Graphics/DeviceBase/VRenderStateList.cpp ;
 obj VStateCategoryList : ../../Source/Graphics/DeviceBase/VStateCategoryList.cpp ;
 obj VCGVertexShaderState : ../../Source/Graphics/OpenGL/VCGVertexShaderState.cpp ;
 obj VCubemapTextureState : ../../Source/Graphics/OpenGL/VCubemapTextureState.cpp ;
+obj VGraphicsService : ../../Source/Graphics/OpenGL/VGraphicsService.cpp ;
 obj VImmediateVertexStream : ../../Source/Graphics/OpenGL/VImmediateVertexStream.cpp ;
 obj VMiscState : ../../Source/Graphics/OpenGL/VMiscState.cpp ;
 obj VOpenGLDevice : ../../Source/Graphics/OpenGL/VOpenGLDevice.cpp ;
-obj VOpenGlUtils : ../../Source/Graphics/OpenGL/VOpenGlUtils.cpp ;
 obj VOpenGLVBOMesh : ../../Source/Graphics/OpenGL/VOpenGLVBOMesh.cpp ;
 obj VOpenGLVBORenderMethod : ../../Source/Graphics/OpenGL/VOpenGLVBORenderMethod.cpp ;
 obj VPBufferTexture : ../../Source/Graphics/OpenGL/VPBufferTexture.cpp ;
@@ -611,12 +719,14 @@ obj VCGFXPass : ../../Source/Graphics/OpenGL/Materials/VCGFXPass.cpp ;
 obj VCGFXState : ../../Source/Graphics/OpenGL/Materials/VCGFXState.cpp ;
 obj VFixedFunctionPass : ../../Source/Graphics/OpenGL/Materials/VFixedFunctionPass.cpp ;
 obj VBaseTexture : ../../Source/Graphics/OpenGL/Textures/VBaseTexture.cpp ;
+obj VCubeMapTexture : ../../Source/Graphics/OpenGL/Textures/VCubeMapTexture.cpp ;
 obj VTexture2D : ../../Source/Graphics/OpenGL/Textures/VTexture2D.cpp ;
 obj VUntextured : ../../Source/Graphics/OpenGL/Textures/VUntextured.cpp ;
 obj VGLSLParameter : ../../Source/Graphics/OpenGL/Glsl/VGLSLParameter.cpp ;
 obj VGLSLPass : ../../Source/Graphics/OpenGL/Glsl/VGLSLPass.cpp ;
 obj VGLSLShader : ../../Source/Graphics/OpenGL/Glsl/VGLSLShader.cpp ;
 obj VGLSLTextureParameter : ../../Source/Graphics/OpenGL/Glsl/VGLSLTextureParameter.cpp ;
+obj VDepthState : ../../Source/Graphics/OpenGL/States/VDepthState.cpp ;
 obj VDevILLoader : ../../Source/ImageService/VDevILLoader.cpp ;
 obj VDevILSaver : ../../Source/ImageService/VDevILSaver.cpp ;
 obj VImageFactory : ../../Source/ImageService/VImageFactory.cpp ;
@@ -654,20 +764,21 @@ obj VWindowBase : ../../Source/WindowService/VWindowBase.cpp ;
 obj VWindowManagerBase : ../../Source/WindowService/VWindowManagerBase.cpp ;
 obj VWindowManagerWin32 : ../../Source/WindowService/VWindowManagerWin32.cpp ;
 obj VWindowWin32 : ../../Source/WindowService/VWindowWin32.cpp ;
+obj PartParsers : ../../Editor/NativeBindings/PartParsers.cpp ;
 obj VSceneModelParser : ../../Source/Entity/Parsers/VSceneModelParser.cpp ;
 
 # XmlServiceDLL
-obj VXMLAttribute : ../../Source/XMLService/VXMLAttribute.cpp ;
-obj VXMLComment : ../../Source/XMLService/VXMLComment.cpp ;
-obj VXMLElement : ../../Source/XMLService/VXMLElement.cpp ;
-obj VXMLService : ../../Source/XMLService/VXMLService.cpp ;
-obj VXMLText : ../../Source/XMLService/VXMLText.cpp ;
-obj VXMLWriter : ../../Source/XMLService/VXMLWriter.cpp ;
-obj XmlServiceDLL : ../../Source/XMLService/XmlServiceDLL.cpp ;
 
 # GraphicsDemo
 obj GraphicsDemo : ../../Examples/GraphicsDemo/GraphicsDemo.cpp ;
 
 # ImporterDemo
 obj ImporterMain : ../../Examples/ImporterDemo/ImporterMain.cpp ;
+
+# ScriptingDLL
+obj TestLib : ../../Editor/NativeBindings/TestLib.cpp ;
+obj VRenderFrameAction : ../../Editor/NativeBindings/VRenderFrameAction.cpp ;
+obj VUpdateManagerCallAction : ../../Editor/NativeBindings/VUpdateManagerCallAction.cpp ;
+obj VView : ../../Editor/NativeBindings/VView.cpp ;
+obj TestLibSWIG : ../../Editor/NativeBindings/GlueCode/TestLibSWIG.cpp ;
 
