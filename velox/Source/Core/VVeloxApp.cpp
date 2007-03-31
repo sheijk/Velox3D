@@ -14,8 +14,8 @@
 namespace v3d {
 //-----------------------------------------------------------------------------
 
-VVeloxApp::VVeloxMainProxy::VVeloxMainProxy(VVeloxApp* pApp) : 
-	m_pApp(pApp), VNamedObject("main", 0)
+VVeloxApp::VVeloxMainProxy::VVeloxMainProxy(VVeloxApp* pApp) :
+	VNamedObject("main", 0), m_pApp(pApp)
 {
 }
 

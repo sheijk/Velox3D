@@ -85,6 +85,8 @@ static void operator delete[](void* size)
 #endif
 
 //-----------------------------------------------------------------------------
+#ifdef V3D_WIN32
 #define	new	(SetOwnerStatus(__FILE__,__LINE__, "???"),false) ? NULL : new
 #define delete (SetOwnerStatus(__FILE__,__LINE__, "???"),false) ? NULL : delete
+#endif
 //-----------------------------------------------------------------------------

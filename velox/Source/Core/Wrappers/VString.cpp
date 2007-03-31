@@ -39,8 +39,7 @@ VString::~VString()
 
 void VString::FreeMem()
 {
-	//FIXME: das muss wieder rein, aber so dass es keinen absturz gibt :) -- sheijk
-    delete[] m_pCStr;
+	delete[] m_pCStr;
 	m_pCStr = 0;
 	m_nLength = 0;
 }
@@ -105,10 +104,10 @@ VString operator+(const char* in_pcChar, const VString& in_VStr)
 
 	char* pChars = new char[nVStrLen + nCStrLen + 1];
 
-	strcpy(pChars, in_pcChar);
-	strcpy(pChars + nCStrLen, in_VStr.AsCString());
+// 	strcpy(pChars, in_pcChar);
+// 	strcpy(pChars + nCStrLen, in_VStr.AsCString());
 
-	pChars[nVStrLen+nCStrLen] = '\0';
+// 	pChars[nVStrLen+nCStrLen] = '\0';
 
 	VString vstr(pChars);
 
