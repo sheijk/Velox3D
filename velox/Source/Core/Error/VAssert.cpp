@@ -5,7 +5,7 @@
  * complete licence text
  */
 
-#include <V3D/Core/VAssert.h>
+#include <V3d/Core/VAssert.h>
 //-----------------------------------------------------------------------------
 #include <windows.h>
 //#include <Error/VDebugLogger.h>
