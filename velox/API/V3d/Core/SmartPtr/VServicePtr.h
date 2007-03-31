@@ -20,7 +20,7 @@ ServiceType* QueryService()
 {
 	// create a template specialisation for QueryService for each service
 	// in order to use VServicePtr
-	ErrorTypeNotSupported();
+  	ErrorTypeNotSupported(new ServiceType);
 }
 
 /**

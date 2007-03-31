@@ -71,10 +71,16 @@ public:
 } // error
 } // v3d
 //-----------------------------------------------------------------------------
+
+namespace v3d {
+
 template<>
-inline v3d::error::IVErrorService* v3d::QueryService<v3d::error::IVErrorService>()
+inline error::IVErrorService* QueryService<error::IVErrorService>()
 {
-	return QueryObject<v3d::error::IVErrorService>("error.service");
+	return QueryObject<error::IVErrorService>("error.service");
 }
+
+} // namespace v3d
+
 //-----------------------------------------------------------------------------
 #endif // V3D_IVERRORSERVICE_H

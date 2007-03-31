@@ -86,7 +86,7 @@ protected:
 	/** unregister a registered object */
 	virtual void UnregisterObject(VNamedObject& in_Object);
 
-	friend VNamedObject;
+	friend class VNamedObject;
 };
 
 /**
