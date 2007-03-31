@@ -18,7 +18,7 @@
 #include <string>
 #include <fstream>
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+//#include <windows.h>
 
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -82,7 +82,9 @@ namespace {
 		cout << in_strString;
 		cout.flush();
 
+#ifdef V3D_WIN32
 		OutputDebugString(in_strString);
+#endif
 
 		if(m_Console)
 		{

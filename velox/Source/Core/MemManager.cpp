@@ -648,11 +648,17 @@ namespace v3d { namespace mem {
 
 }} // namespace v3d::mem
 
+#ifdef V3D_WIN32
 #include <windows.h>
+#endif
 
 void SendDebugMessage(const char* text)
 {
+#ifdef V3D_WIN32
 	OutputDebugString(text);
+#else
+        printf("%s\n", text);
+#endif
 }
 
 //-----------------------------------------------------------------------------
