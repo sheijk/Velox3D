@@ -16,7 +16,6 @@
 #include <sstream>
 #include "lib3ds/mesh.h"
 #include "lib3ds/material.h"
-
 #include <V3d/Graphics/Importer/Base/VImportedBufferDescription.h>
 #include <V3d/Graphics/Importer/Base/VImportedFaceDescription.h>
 #include <V3d/Core/MemManager.h>
@@ -24,7 +23,7 @@
 using namespace v3d::resource;
 using namespace v3d::graphics;
 
-#undef CreateFile //windows defines sucks..
+#undef CreateFile
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace utils{
@@ -42,8 +41,9 @@ VImported3DS::VImported3DS()
 VImported3DS::~VImported3DS()
 {
 	BufferDescriptionList::iterator i = m_BufferDescriptionList.begin();
+	BufferDescriptionList::iterator itEnd = m_BufferDescriptionList.end();
 
-	for(; i != m_BufferDescriptionList.end(); ++i)
+	for(; i != itEnd; ++i)
 	{
 		delete (*i);
 	}
@@ -54,7 +54,7 @@ vbool VImported3DS::LoadFile(VStringParam in_sFilename)
 	CreateMeshResourceName(in_sFilename);
 	
 	/**
-	 * create a tempory file on disk because we need to include
+	 * create a temporary file on disk because we need to include
 	 * the vfs to handle files
 	 */
 
@@ -87,29 +87,41 @@ vbool VImported3DS::LoadModel()
 {
 	Lib3dsNode* pNode = m_p3DSFile->nodes;
 	bool retVal = false;
-	for (; pNode != 0; pNode = pNode->next)
-	{
-		 if(LoadNode(pNode) == false)
-			return false;
-		 else
-		 {
-		   m_MaterialContainer.CreateResources();
-		   return true;
-		 }
-	}
-
+	bool bLoadMesh = false;
+	
 	if( ! pNode )
 	{
 	  retVal = LoadMesh();
 	}
+	else
+	{
+	  for (; pNode != 0; pNode = pNode->next)
+	  {
+		  LoadingState state = LoadNode(pNode);
+		  if( state == NodeFalse )
+		  {
+			retVal = false;
+		  }
+		  else if ( state == NodeOk )
+		  {
+			retVal = true;
+		  }
+		  else
+		  {
+		   bLoadMesh = true;
+		  }
+	  }
+	}
+	if( bLoadMesh )
+	{
+	  retVal = LoadMesh();
+	}
 	m_MaterialContainer.CreateResources();
-
 	return retVal;
 }
 
 bool VImported3DS::LoadMesh()
 {
-  
   Lib3dsMesh* pMesh = m_p3DSFile->meshes;
   while ( pMesh )
   {
@@ -132,10 +144,10 @@ bool VImported3DS::LoadMesh()
 
 	  m_iNumFaces++;
 
-	  if (f->material[0])
+	  if(f->material[0])
 		mat=lib3ds_file_material_by_name(m_p3DSFile, f->material);
 
-	  if (mat)
+	  if(mat)
 	  {
 		std::string sMaterialName(mat->name);
 
@@ -212,16 +224,13 @@ bool VImported3DS::LoadMesh()
 		  (name.c_str(),
 		  p,
 		  nIndexCount,
-		  m_MaterialContainer.GetMaterialByName("default")//load the default material
+		  m_MaterialContainer.GetMaterialByName("defaultMaterial")//load the default material
 		  );
 		m_FaceContainer.Add(pFace);
 	  }
 
 	  for (vint i = 0; i < 3; i++)
 	  {
-		
-		if(nIndexCount == 107)
-		  int a = 2;
 		//write indices to our buffer
 		buffer.pIndexBuffer[nIndexCount] = f->points[i];
 		nIndexCount++;
@@ -234,14 +243,14 @@ bool VImported3DS::LoadMesh()
 	  mesh->faces*3,
 	  mesh->texels);
 
-	m_BufferDescriptionList.push_back(pBufferDescription);
-
 	if(buffer.pVertexBuffer)
 	  pBufferDescription->SetVertexArray(buffer.pVertexBuffer);
 	if(buffer.pTextureCoordBuffer)
 	  pBufferDescription->SetTexCoordArray1(buffer.pTextureCoordBuffer);
 	if(buffer.pIndexBuffer)
 	  pBufferDescription->SetIndexArray(buffer.pIndexBuffer);
+
+	m_BufferDescriptionList.push_back(pBufferDescription);
 
 	std::string meshname = mesh->name;
 
@@ -250,8 +259,6 @@ bool VImported3DS::LoadMesh()
 
 	pMesh = pMesh->next;
   }
-
-
   return true;
 }
 
@@ -293,16 +300,16 @@ vbool VImported3DS::CopyBuffers(Lib3dsMesh* in_pMesh, ArrayBuffer* in_pArrayBuff
 	return true;
 }
 
-vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
+VImported3DS::LoadingState VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 {
 	vuint nIndexCount = 0;
 
 	//if we have an object node check if it's real data or just a dummy
-	if (in_pNode->type == LIB3DS_OBJECT_NODE)
+	/*if (in_pNode->type == LIB3DS_OBJECT_NODE)
 	{
 		if (strcmp(in_pNode->name,"$$$DUMMY") == 0)
 			return true;
-	}
+	}*/
 
 	if (!in_pNode->user.d)
 	{
@@ -310,12 +317,12 @@ vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 		
 		//if not found skip
 		if (!mesh)
-            return true;
+            return NodeDummy;
 
 		ArrayBuffer buffer;
 
 		if(!CopyBuffers(mesh, &buffer))
-			return false;
+			return NodeFalse;
 
 		for (vuint p = 0; p < mesh->faces; ++p)
 		{
@@ -404,7 +411,7 @@ vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 					(name.c_str(),
 					p,
 					nIndexCount,
-					m_MaterialContainer.GetMaterialByName("default")//load the default material
+					m_MaterialContainer.GetMaterialByName("defaultMaterial")//load the default material
 					);
 				m_FaceContainer.Add(pFace);
 			}
@@ -437,8 +444,7 @@ vbool VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 		CreateMeshBufferResource(meshname.c_str(), pBufferDescription);
 		m_FaceContainer.CreateFaceResources(pBufferDescription);
 	}
-
-	return true;
+	return NodeOk;
 }
 
 void VImported3DS::CreateMeshResourceName(VStringParam in_sName)
@@ -492,20 +498,20 @@ VStringRetVal VImported3DS::CreateMeshPartName(VStringParam in_sMeshPartName)
 	return meshName.c_str();
 }
 
-vbool VImported3DS::CreateModel(graphics::IVDevice* in_pDevice,
-							   graphics::VModel* in_pModel,
-							   VStringParam in_sFilename)
-{
-	if(LoadFile(in_sFilename))
-	{
-		//m_FaceContainer.CreateMeshes(in_pDevice, in_pModel);
-		m_FaceContainer.CreateOptimizedMeshes(in_pModel, in_sFilename);
-		return true;
-	}
-	
-	else
-		return false;
-}
+//vbool VImported3DS::CreateModel(graphics::IVDevice* in_pDevice,
+//							   graphics::VModel* in_pModel,
+//							   VStringParam in_sFilename)
+//{
+//	if(LoadFile(in_sFilename))
+//	{
+//		//m_FaceContainer.CreateMeshes(in_pDevice, in_pModel);
+//		m_FaceContainer.CreateOptimizedMeshes(in_pModel, in_sFilename);
+//		return true;
+//	}
+//	
+//	else
+//		return false;
+//}
 
 vbool VImported3DS::CreateModel(
 							   graphics::VModel* in_pModel,
@@ -517,7 +523,6 @@ vbool VImported3DS::CreateModel(
  		m_FaceContainer.CreateOptimizedMeshes(in_pModel, in_sFilename);
 		return true;
 	}
-
 	else
 		return false;
 }

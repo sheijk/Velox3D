@@ -68,48 +68,56 @@ VImportedMaterialDescription* VImportedFaceDescription::GetMaterial()
 resource::VResourceId VImportedFaceDescription::CreateResource(
 		VImportedBufferDescription* in_pBufferDescription)
 {
-	m_pBufferDescription = in_pBufferDescription;
-
-	resource::VResourceManagerPtr pResourceManager;
-	std::string sFaceName = m_sParentName;
-	std::string sIndices = m_sParentName;
-	std::string sTexCoords = m_sParentName;
-		
-	//create a unique resource name by it's id
-	m_sName.append("/faceSet_");
-	std::stringstream ss;
-	ss << m_nFaceId;
-	m_sName.append(ss.str());
-
-	sIndices.append("/indices");
-	sTexCoords.append("/texcoords");
-	
-	//resource::VResourceId face =
-	//	pResourceManager->CreateResource(m_sName.c_str());
-
-	m_pMeshDescription = new VMeshDescription();
-
-	m_pMeshDescription->SetGeometryType(VMeshDescription::GeometryType::Triangles);
-	m_pMeshDescription->SetCoordinateResource(m_sParentName.c_str());
-	m_pMeshDescription->SetCoordinateFormat(
-		in_pBufferDescription->GetVertexBufferFormat()->GetCoordinateFormat());
-	
-	m_pMeshDescription->SetIndexResource(sIndices.c_str());
-	m_pMeshDescription->SetIndexFormat(VDataFormat(m_nFaceIndexStart, 3, 0));
-	
-	if(in_pBufferDescription->GetTexCoordCount1())
+	if( m_pBufferDescription )
 	{
-		m_pMeshDescription->SetTexCoordResource(0, sTexCoords.c_str());
-		m_pMeshDescription->SetTexCoordFormat(0,
-		in_pBufferDescription->GetTexCoordBufferFormat1()->GetTexCoordFormat(0));
+	  return 0;
 	}
+	else
+	{
 
-	//TODO: insert 2. texcoodrs
+	  m_pBufferDescription = in_pBufferDescription;
 
-	//face->AddData(m_pMeshDescription);
-	
-	//return face;
-	return 0;
+	  resource::VResourceManagerPtr pResourceManager;
+	  std::string sFaceName = m_sParentName;
+	  std::string sIndices = m_sParentName;
+	  std::string sTexCoords = m_sParentName;
+  		
+	  //create a unique resource name by it's id
+	  m_sName.append("/faceSet_");
+	  std::stringstream ss;
+	  ss << m_nFaceId;
+	  m_sName.append(ss.str());
+
+	  sIndices.append("/indices");
+	  sTexCoords.append("/texcoords");
+  	
+	  //resource::VResourceId face =
+	  //	pResourceManager->CreateResource(m_sName.c_str());
+
+	  m_pMeshDescription = new VMeshDescription();
+
+	  m_pMeshDescription->SetGeometryType(VMeshDescription::GeometryType::Triangles);
+	  m_pMeshDescription->SetCoordinateResource(m_sParentName.c_str());
+	  m_pMeshDescription->SetCoordinateFormat(
+		  in_pBufferDescription->GetVertexBufferFormat()->GetCoordinateFormat());
+  	
+	  m_pMeshDescription->SetIndexResource(sIndices.c_str());
+	  m_pMeshDescription->SetIndexFormat(VDataFormat(m_nFaceIndexStart, 3, 0));
+  	
+	  if(in_pBufferDescription->GetTexCoordCount1())
+	  {
+		  m_pMeshDescription->SetTexCoordResource(0, sTexCoords.c_str());
+		  m_pMeshDescription->SetTexCoordFormat(0,
+		  in_pBufferDescription->GetTexCoordBufferFormat1()->GetTexCoordFormat(0));
+	  }
+
+	  //TODO: insert 2. texcoodrs
+
+	  //face->AddData(m_pMeshDescription);
+  	
+	  //return face;
+	  return 0;
+	}
 }
 
 VStringRetVal VImportedFaceDescription::GetResourceName()

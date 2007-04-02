@@ -23,8 +23,8 @@ VImportedMaterialDescription::VImportedMaterialDescription(
 {
 	m_sMaterialName = sName;
 	m_sTextureImageName = sTextureImageName;
-	m_sResourcePath = "/data/";
-	m_sResourceParentName = "/textures";
+	m_sResourcePath = "/system";
+	m_sResourceParentName = "/graphics";
 
 	Initialize();
 }
@@ -99,13 +99,20 @@ VStringRetVal VImportedMaterialDescription::GetResourceName()
 
 resource::VResourceId VImportedMaterialDescription::CreateResource()
 {
+	bool isDefault = false;
 	std::string FilenamePath;
 	resource::VResourceManagerPtr pResourceManager;
-
-	
 	std::string name;
-	name = m_sResourcePath;
-	name.append("/textures");
+	if(m_sMaterialName == "defaultMaterial")
+	{
+		name = "/system/graphics/defaultMaterial";
+		isDefault = true;
+	}
+	else
+	{
+	  name = m_sResourcePath;
+	  name.append("/textures");
+	}
 
 
 	//look if we have alread created a texture subresource
@@ -121,26 +128,31 @@ resource::VResourceId VImportedMaterialDescription::CreateResource()
 	}
 
 	resource::VResourceId m_Resource = pResourceManager->GetResourceByName(name.c_str());
-	resource::VResourceId result = m_Resource->AddSubResource(m_sMaterialName.c_str());
-    
-	if(m_sTextureImageName.size())
+	if( !isDefault )
 	{
-		FilenamePath = m_sResourcePath;
-		FilenamePath.append("/");
-		FilenamePath.append(m_sTextureImageName.c_str());
-		
-		std::string test = "/data/";
-		test.append(m_sTextureImageName);
-		result->AddData(
-			//new resource::VFileName(FilenamePath.c_str())
-			new resource::VFileName(test.c_str())
-			);
+	  resource::VResourceId result = m_Resource->AddSubResource(m_sMaterialName.c_str());
+    
+	  if(m_sTextureImageName.size())
+	  {
+		  FilenamePath = m_sResourcePath;
+		  FilenamePath.append("/");
+		  FilenamePath.append(m_sTextureImageName.c_str());
+  		
+		  std::string test = "/data/";
+		  test.append(m_sTextureImageName);
+		  result->AddData(
+			  //new resource::VFileName(FilenamePath.c_str())
+			  new resource::VFileName(test.c_str())
+			  );
+	  }
+
+	  result->AddData(new graphics::VEffectDescription(
+		  CreateEffectDescription()));
+
+	  return result;
 	}
-
-	result->AddData(new graphics::VEffectDescription(
-		CreateEffectDescription()));
-
-	return result;
+	else
+	  return m_Resource;
 }
 
 graphics::VEffectDescription

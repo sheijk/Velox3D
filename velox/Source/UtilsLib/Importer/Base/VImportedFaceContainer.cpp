@@ -17,6 +17,7 @@
 #include <V3d/Graphics/VModel.h>
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Math/TransformationOps.h>
+#include <map>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -193,14 +194,13 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 	)
 {
 	VMaterialMap mymap;
-
 	resource::VResourceManagerPtr pResManager;
 	graphics::VModelMesh::MeshPtr meshResourcePtr;
 	graphics::VModelMesh::MaterialPtr materialResourcePtr = 0;
+	FaceList::const_iterator begin = m_FaceList.begin();
+	FaceList::const_iterator itEnd = m_FaceList.end();
 
-	std::vector<VImportedFaceDescription*>::iterator begin = m_FaceList.begin();
-
-	for(; begin != m_FaceList.end(); begin++)
+	for(; begin != itEnd; begin++)
 	{
 		if((*begin)->GetMaterial())
 			mymap.AddMaterialFacePair((*begin)->GetMaterial(), (*begin)->GetFaceIndexStart());
@@ -212,74 +212,24 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 	V3D_ASSERT(m_FaceList.size() != 0);
 	if(!m_FaceList.size())
 		return;
-    		
-	
 
 	for(; i != mymap.GetMaterialFaceMap().end(); ++i)
 	{
-		
-		
 		//cast to resource pointer
 		materialResourcePtr = pResManager->GetResourceByName((*i).key->GetResourceName())->GetData<graphics::IVMaterial>();
 
-		VMaterialMap::FaceIDList::iterator begin;
-		begin = mymap.GetFaceList((*i).key)->begin();
-
-		vuint n = static_cast<vuint>(m_FaceList.size());
-
+		VMaterialMap::FaceIDList::iterator begin = mymap.GetFaceList((*i).key)->begin();
 		vuint32* indexBuffer = new vuint32[(*i).listForKey->size() * 3];
 		vuint32 nCount = 0;
-
-		
+		VertexPool vertexPool;
 
 		for(; begin != mymap.GetFaceList((*i).key)->end(); ++begin)
 		{
-		  //vuint* indexArray = m_FaceList.front()->GetBufferDescription()->GetIndexBufferArray();
-		  vuint index = m_FaceList[((*begin) / 3 )]->GetFaceIndexStart();
-		  vuint* indexArray = m_FaceList[0]->GetBufferDescription()->GetIndexBufferArray();
-
-			/*if(indexArray[(*begin)] < 0)
-			{
-				std::stringstream ss;
-				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
-				V3D_THROW(graphics::VImporterException, ss.str().c_str());
-			}
-				
-			if(indexArray[(*begin)+1] < 0)
-			{
-				std::stringstream ss;
-				ss << "index: " <<(*begin)+1 << " array value: "<< indexArray[(*begin)+1] << " with valid size of " << n*3;
-				V3D_THROW(graphics::VImporterException, ss.str().c_str());
-			} 
-				
-			if(indexArray[(*begin)+2] < 0)
-			{
-				std::stringstream ss;
-				ss << "index: " <<(*begin)+2 << " array value: "<< indexArray[(*begin)+2] << " with valid size of " << n*3;
-				V3D_THROW(graphics::VImporterException, ss.str().c_str());
-			}
+			vuint index = m_FaceList[((*begin) / 3 )]->GetFaceIndexStart();
+			vuint* indexArray = m_FaceList[((*begin) / 3 )]->GetBufferDescription()->GetIndexBufferArray();
+			const vfloat32* vertexArray = reinterpret_cast<const vfloat32*>(m_FaceList[((*begin) / 3)]->GetBufferDescription()->GetVertexBuffer()->GetBufferAddress());
+			vuint nBufferSize = m_FaceList[((*begin) / 3)]->GetBufferDescription()->GetVertexBuffer()->GetCoordinateCount();
 			
-			if(indexArray[(*begin)] > n*3-1)
-			{
-				std::stringstream ss;
-				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
-				V3D_THROW(graphics::VImporterException, ss.str().c_str());
-			}
-			if(indexArray[(*begin)+1] > n*3-1)
-			{
-				std::stringstream ss;
-				ss << "index: " <<(*begin)+1 << " array value: "<< indexArray[(*begin)+1] << " with valid size of " << n*3;
-				V3D_THROW(graphics::VImporterException, ss.str().c_str());
-			}
-				
-			if(indexArray[(*begin)+2] > n*3-1)
-			{
-				std::stringstream ss;
-				ss << "index: " <<(*begin) << " array value: "<< indexArray[(*begin)] << " with valid size of " << n*3;
-				V3D_THROW(graphics::VImporterException, ss.str().c_str());
-			}
-			*/
-
 			vuint a = indexArray[index];
 			vuint b = indexArray[index +1];
 			vuint c = indexArray[index +2];
@@ -291,13 +241,21 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 			if( c > m_FaceList.size() )
 			  V3D_THROW(graphics::VImporterException, "index buffer invalid");
 
-			indexBuffer[nCount]   = a;
-			indexBuffer[nCount+1] = b; 
-			indexBuffer[nCount+2] = c;
+			VVector3f v1(vertexArray[a*3], vertexArray[a*3+1], vertexArray[a*3+2]);
+			VVector3f v2(vertexArray[b*3], vertexArray[b*3+1], vertexArray[b*3+2]);
+			VVector3f v3(vertexArray[c*3], vertexArray[c*3+1], vertexArray[c*3+2]);
 
+			vuint newIndexA = vertexPool.GetIndex(v1);
+			vuint newIndexB = vertexPool.GetIndex(v2);
+			vuint newIndexC = vertexPool.GetIndex(v3);
+
+			indexBuffer[nCount]   = newIndexA;
+			indexBuffer[nCount+1] = newIndexB; 
+			indexBuffer[nCount+2] = newIndexC;
 			nCount +=3;
 		}
-		//TODO: hier namen fixen
+		vfloat32* pVertexBuffer = vertexPool.CreateVertexBuffer();
+
 		std::stringstream ss;
 		std::string name = in_strResource;
 		name.append("/face");
@@ -307,7 +265,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 		std::string sIndicesName;
 		sIndicesName.append(name);
 		sIndicesName.append("/indices");
-
+		
 		resource::VResourceId meshResource = pResManager->CreateResource(name.c_str());
 		graphics::VMeshDescription* meshDescription = new graphics::VMeshDescription();
 
@@ -328,9 +286,22 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 			nCount,
 			*pIndexBufferFormat);
 
+		graphics::VVertexFormat vertexBufferFormat(
+		  graphics::VVertexFormat::Coordinates,
+		  vertexPool.GetVertexCount(),
+		  0);
+
+		graphics::VVertexBuffer* pBuffer = new graphics::VVertexBuffer(
+		  pVertexBuffer,
+		  vertexPool.GetVertexCount() * 3,
+		  vertexBufferFormat);
+
 		meshResource->AddSubResource("indices")->AddData(indexBufferHandle);
-		meshDescription->SetGeometryType(m_FaceList.front()->GetMeshDescription()->GetGeometryType());
-		meshDescription->SetCoordinateResource(m_FaceList.front()->GetMeshDescription()->GetCoordinateResource());
+		meshResource->AddData(pBuffer);
+		meshDescription->SetGeometryType(graphics::VMeshDescription::Triangles);
+		
+		//meshDescription->SetCoordinateResource(m_FaceList.front()->GetMeshDescription()->GetCoordinateResource());
+		meshDescription->SetCoordinateResource(meshResource->GetQualifiedName());
 		meshDescription->SetCoordinateFormat(m_FaceList.front()->GetMeshDescription()->GetCoordinateFormat());
 		meshDescription->SetIndexResource(sIndicesName.c_str());
 		meshDescription->SetIndexFormat(graphics::VDataFormat(0,nCount ,0));
@@ -348,6 +319,51 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 
 		in_pModel->Add(model);
 	}
+}
+
+int VImportedFaceContainer::VertexPool::GetIndex(const math::VVector3f &in_Vector)
+{
+  VertexPool::VertexList::const_iterator it = m_VertexPool.begin();
+  VertexPool::VertexList::const_iterator itEnd = m_VertexPool.end();
+  vuint index = 0;
+  for( ; it != itEnd; ++it)
+  {
+	gmtl::Vec3f a;
+	a.set((*it)[0], (*it)[1], (*it)[2]);
+	gmtl::Vec3f b;
+	b.set(in_Vector[0], in_Vector[1], in_Vector[2]);
+	if ( gmtl::isEqual( a, b, 0.0001f ) )
+	{
+	  return index;
+	}
+	else
+	{
+	  index++;
+	}
+  }
+
+  m_VertexPool.push_back(in_Vector);
+  
+  return (m_VertexPool.size() - 1);
+}
+
+vfloat32* VImportedFaceContainer::VertexPool::CreateVertexBuffer()
+{
+  vfloat32* pBuffer = new vfloat32[m_VertexPool.size() * 3];
+
+  for(vuint i = 0; i < m_VertexPool.size(); i++)
+  {
+	pBuffer[i*3] = m_VertexPool[i][0];
+	pBuffer[i*3+1] = m_VertexPool[i][1];
+	pBuffer[i*3+2] = m_VertexPool[i][2];
+  }
+
+  return pBuffer;
+}
+
+vuint VImportedFaceContainer::VertexPool::GetVertexCount()
+{
+  return m_VertexPool.size();
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils

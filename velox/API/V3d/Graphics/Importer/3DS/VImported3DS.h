@@ -45,10 +45,10 @@ public:
 	/**
 	 * @note: returns true on success, false otherwise
 	 */
-	vbool CreateModel(
-		graphics::IVDevice* in_pDevice,
-		graphics::VModel* in_pModel,
-		VStringParam in_sFilename);
+	//vbool CreateModel(
+	//	graphics::IVDevice* in_pDevice,
+	//	graphics::VModel* in_pModel,
+	//	VStringParam in_sFilename);
 
 	/**
 	 * loads the model into the resource with included filename
@@ -63,6 +63,12 @@ public:
 	vuint m_nTexCoords;
 
 private:
+	enum LoadingState
+	{
+	  NodeDummy,
+	  NodeOk,
+	  NodeFalse
+	};
 
 	struct ArrayBuffer
 	{
@@ -91,7 +97,7 @@ private:
 	 */
 	
 	vbool LoadModel();
-	vbool LoadNode(Lib3dsNode* in_pNode);
+	LoadingState LoadNode(Lib3dsNode* in_pNode);
 	bool LoadMesh();
 	void CreateMeshResourceName(VStringParam in_sName);
 	vbool CopyBuffers(Lib3dsMesh* in_pMesh, ArrayBuffer* in_pArrayBuffer);

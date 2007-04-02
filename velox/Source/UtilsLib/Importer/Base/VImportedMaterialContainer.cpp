@@ -31,10 +31,11 @@ void VImportedMaterialContainer::CreateDefaultMaterial()
 {
 	//create a default material for this list
 	VImportedMaterialDescription* pDefaultMaterial =
-		new VImportedMaterialDescription("default", "");
+		new VImportedMaterialDescription("defaultMaterial", "");
+	pDefaultMaterial->CreateResource();
 
 	//TODO: externer Verweis auf globale DefaultMaterial
-	//m_MaterialList.push_back(pDefaultMaterial); 
+	m_MaterialList.push_back(pDefaultMaterial); 
 }
 
 void VImportedMaterialContainer::Add(VImportedMaterialDescription* in_pMaterial)

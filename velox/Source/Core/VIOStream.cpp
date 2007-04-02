@@ -18,8 +18,10 @@
 #include <string>
 #include <fstream>
 #define WIN32_LEAN_AND_MEAN
-//#include <windows.h>
 
+#ifdef V3D_WIN32
+#include <windows.h>
+#endif
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------

@@ -27,6 +27,7 @@ class VImportedBufferDescription;
 class VImportedFaceContainer
 {
 public:
+	typedef std::vector<VImportedFaceDescription*> FaceList;
 	VImportedFaceContainer();
 	~VImportedFaceContainer();
 
@@ -54,11 +55,23 @@ public:
 	void CreateOptimizedMeshes(graphics::VModel* in_pModel, VStringParam in_strResource);
 
 private:
+
+	class VertexPool
+	{
+	  public:
+		typedef std::vector<math::VVector3f> VertexList;
+		int GetIndex(const math::VVector3f& in_Vector);
+		vfloat32* CreateVertexBuffer();
+		vuint GetVertexCount();
+
+	  private:
+		VertexList m_VertexPool;
+	};
 	
 	typedef std::list<std::string> MaterialLoadedList;
 	vbool IsInMaterialLoadedList(VStringParam in_sName);
 
-	std::vector<VImportedFaceDescription*> m_FaceList;
+	FaceList m_FaceList;
 	MaterialLoadedList m_MaterialLoadedList;
 };
 
