@@ -105,7 +105,7 @@ resource::VResourceId VImportedMaterialDescription::CreateResource()
 	std::string name;
 	if(m_sMaterialName == "defaultMaterial")
 	{
-		name = "/system/graphics/defaultMaterial";
+		name = "/edit/mat/white-lit.v3dmat";
 		isDefault = true;
 	}
 	else

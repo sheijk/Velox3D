@@ -158,7 +158,7 @@ void VModelPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMe
 				if( wasActive )
 					Activate();
 			}
-			else if( name == "set-material" )
+			else if( name == "material" )
 			{
 				ChangeMaterialForAllMeshes(value);
 			}

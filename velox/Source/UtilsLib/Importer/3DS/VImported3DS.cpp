@@ -13,12 +13,12 @@
 #include <V3d/Graphics.h>
 #include <V3d/Graphics.h>
 #include <V3d/Graphics/IVDevice.h>
-#include <sstream>
-#include "lib3ds/mesh.h"
-#include "lib3ds/material.h"
 #include <V3d/Graphics/Importer/Base/VImportedBufferDescription.h>
 #include <V3d/Graphics/Importer/Base/VImportedFaceDescription.h>
 #include <V3d/Core/MemManager.h>
+#include <sstream>
+#include "lib3ds/mesh.h"
+#include "lib3ds/material.h"
 
 using namespace v3d::resource;
 using namespace v3d::graphics;
@@ -400,7 +400,6 @@ VImported3DS::LoadingState VImported3DS::LoadNode(Lib3dsNode* in_pNode)
 				}
 				m_iNumMaterials++;
 			}
-
 			else
 			{
 				std::string name = m_sMeshResourceName;
@@ -497,21 +496,6 @@ VStringRetVal VImported3DS::CreateMeshPartName(VStringParam in_sMeshPartName)
 
 	return meshName.c_str();
 }
-
-//vbool VImported3DS::CreateModel(graphics::IVDevice* in_pDevice,
-//							   graphics::VModel* in_pModel,
-//							   VStringParam in_sFilename)
-//{
-//	if(LoadFile(in_sFilename))
-//	{
-//		//m_FaceContainer.CreateMeshes(in_pDevice, in_pModel);
-//		m_FaceContainer.CreateOptimizedMeshes(in_pModel, in_sFilename);
-//		return true;
-//	}
-//	
-//	else
-//		return false;
-//}
 
 vbool VImported3DS::CreateModel(
 							   graphics::VModel* in_pModel,

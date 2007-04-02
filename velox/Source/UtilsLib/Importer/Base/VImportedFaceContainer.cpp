@@ -17,6 +17,7 @@
 #include <V3d/Graphics/VModel.h>
 #include <V3d/Math/VMatrixOps.h>
 #include <V3d/Math/TransformationOps.h>
+#include <V3d/Math/VVectorOps.h>
 #include <map>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -255,6 +256,8 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 			nCount +=3;
 		}
 		vfloat32* pVertexBuffer = vertexPool.CreateVertexBuffer();
+		vfloat32* pNormalBuffer = vertexPool.CreateNormalBuffer(indexBuffer, nCount);
+		//vfloat32* pNormalBuffer = vertexPool.CreateNormalBuffer(indexBuffer, vertexPool.GetVertexCount());
 
 		std::stringstream ss;
 		std::string name = in_strResource;
@@ -265,6 +268,9 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 		std::string sIndicesName;
 		sIndicesName.append(name);
 		sIndicesName.append("/indices");
+		std::string sNormalName;
+		sNormalName.append(name);
+		sNormalName.append("/normals");
 		
 		resource::VResourceId meshResource = pResManager->CreateResource(name.c_str());
 		graphics::VMeshDescription* meshDescription = new graphics::VMeshDescription();
@@ -295,18 +301,30 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 		  pVertexBuffer,
 		  vertexPool.GetVertexCount() * 3,
 		  vertexBufferFormat);
+		
+		graphics::VVertexFormat normalBufferFormat(
+		  graphics::VVertexFormat::Normals,
+		  vertexPool.GetVertexCount(),
+		  0);
+
+		graphics::VVertexBuffer* pNormalBufferHandle = new graphics::VVertexBuffer(
+		  pNormalBuffer,
+		  vertexPool.GetVertexCount() * 3,
+		  normalBufferFormat);
+
 
 		meshResource->AddSubResource("indices")->AddData(indexBufferHandle);
+		meshResource->AddSubResource("normals")->AddData(pNormalBufferHandle);
 		meshResource->AddData(pBuffer);
 		meshDescription->SetGeometryType(graphics::VMeshDescription::Triangles);
-		
-		//meshDescription->SetCoordinateResource(m_FaceList.front()->GetMeshDescription()->GetCoordinateResource());
 		meshDescription->SetCoordinateResource(meshResource->GetQualifiedName());
-		meshDescription->SetCoordinateFormat(m_FaceList.front()->GetMeshDescription()->GetCoordinateFormat());
+		meshDescription->SetCoordinateFormat(graphics::VDataFormat(0, vertexPool.GetVertexCount(), 0));
 		meshDescription->SetIndexResource(sIndicesName.c_str());
 		meshDescription->SetIndexFormat(graphics::VDataFormat(0,nCount ,0));
-		meshDescription->SetTexCoordResource(0, m_FaceList.front()->GetMeshDescription()->GetTexCoordResource(0));
-		meshDescription->SetTexCoordFormat(0, m_FaceList.front()->GetMeshDescription()->GetTexCoordFormat(0));
+		//meshDescription->SetTexCoordResource(0, m_FaceList.front()->GetMeshDescription()->GetTexCoordResource(0));
+		//meshDescription->SetTexCoordFormat(0, m_FaceList.front()->GetMeshDescription()->GetTexCoordFormat(0));
+		meshDescription->SetNormalResource(sNormalName.c_str());
+		meshDescription->SetNormalFormat(graphics::VDataFormat(0, vertexPool.GetVertexCount() * 3, 0));
 		meshResource->AddData(meshDescription);
 
 		meshResourcePtr = meshResource->GetData<graphics::IVMesh>();
@@ -323,7 +341,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 
 int VImportedFaceContainer::VertexPool::GetIndex(const math::VVector3f &in_Vector)
 {
-  VertexPool::VertexList::const_iterator it = m_VertexPool.begin();
+  /*VertexPool::VertexList::const_iterator it = m_VertexPool.begin();
   VertexPool::VertexList::const_iterator itEnd = m_VertexPool.end();
   vuint index = 0;
   for( ; it != itEnd; ++it)
@@ -340,7 +358,7 @@ int VImportedFaceContainer::VertexPool::GetIndex(const math::VVector3f &in_Vecto
 	{
 	  index++;
 	}
-  }
+  }*/
 
   m_VertexPool.push_back(in_Vector);
   
@@ -364,6 +382,59 @@ vfloat32* VImportedFaceContainer::VertexPool::CreateVertexBuffer()
 vuint VImportedFaceContainer::VertexPool::GetVertexCount()
 {
   return m_VertexPool.size();
+}
+
+vfloat32* VImportedFaceContainer::VertexPool::CreateNormalBuffer(
+  const vuint32* in_pIndexBuffer, const vuint in_IndexSize)
+{
+  vfloat32* pBuffer = new vfloat32[m_VertexPool.size() * 3];
+  //set all normals to zero
+  const vuint sizeVertexPool = m_VertexPool.size();
+  for(vuint i = 0; i < sizeVertexPool * 3; i++)
+	pBuffer[i] = 0;
+  //calculate face normals and add to normal buffer
+  for(vuint i = 0; i < in_IndexSize / 3; i++)
+  {
+	  math::VVector3f v1,v2,v3, normal;
+	  vuint a = in_pIndexBuffer[i*3];
+	  vuint b = in_pIndexBuffer[i*3+1];
+	  vuint c = in_pIndexBuffer[i*3+2];
+
+	  v1 = m_VertexPool[a];
+	  v2 = m_VertexPool[b];
+	  v3 = m_VertexPool[c];
+
+	  math::VVector3f x = v3 - v1;
+	  math::VVector3f y = v3 - v2;
+
+	  normal = math::Cross(x,y);
+	  math::Normalize(normal);		
+	  pBuffer[a*3] += normal[0];
+	  pBuffer[a*3+1] += normal[1];
+	  pBuffer[a*3+2] += normal[2];
+
+	  pBuffer[b*3] += normal[0];
+	  pBuffer[b*3+1] += normal[1];
+	  pBuffer[b*3+2] += normal[2];
+
+	  pBuffer[c*3] += normal[0];
+	  pBuffer[c*3+1] += normal[1];
+	  pBuffer[c*3+2] += normal[2];
+  }
+  //normalize all average normals in buffer
+  for(vuint i = 0; i < sizeVertexPool; i++)
+  {
+	math::VVector3f a;
+	a[0] = pBuffer[i*3];
+	a[1] = pBuffer[i*3+1];
+	a[2] = pBuffer[i*3+2];
+	math::Normalize(a);
+    pBuffer[i*3] = a[0];
+    pBuffer[i*3+1] = a[1];
+    pBuffer[i*3+2] = a[2];
+  }
+  
+  return pBuffer;
 }
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils

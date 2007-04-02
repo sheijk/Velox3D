@@ -11,17 +11,17 @@
 #include <V3d/Core/VTypes.h>
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Graphics/VModel.h>
-#include <vector>
-#include <list>
-#include <map>
 #include <V3d/Graphics.h>
-
 #include <V3d/Graphics/Importer/Base/VImportedMaterialContainer.h>
 #include <V3d/Graphics/Importer/Base/VImportedMaterialDescription.h>
 #include <V3d/Graphics/Importer/Base/VImportedFaceContainer.h>
 
 #include "lib3ds/file.h"
 #include "lib3ds/node.h"
+
+#include <vector>
+#include <list>
+#include <map>
 //-----------------------------------------------------------------------------
 namespace v3d{
 namespace utils{
@@ -38,18 +38,9 @@ class VImportedBufferDescription;
 class VImported3DS
 {
 public:
-
 	VImported3DS();
 	~VImported3DS();
-
-	/**
-	 * @note: returns true on success, false otherwise
-	 */
-	//vbool CreateModel(
-	//	graphics::IVDevice* in_pDevice,
-	//	graphics::VModel* in_pModel,
-	//	VStringParam in_sFilename);
-
+	
 	/**
 	 * loads the model into the resource with included filename
 	 */
@@ -105,7 +96,7 @@ private:
 	VStringRetVal GetMeshResourceName();
 	void CreateMeshBufferResource(VStringParam in_sMeshname,
 		VImportedBufferDescription* in_BufferInfo);
-	
+
 	/**
 	 * looks for global materials
 	 */
@@ -115,12 +106,10 @@ private:
 	//the libs file structure for loading
 	Lib3dsFile* m_p3DSFile;
 	std::string m_sMeshResourceName;
-
 	VImportedFaceContainer m_FaceContainer;
 	VImportedMaterialContainer m_MaterialContainer;
 	typedef std::list<VImportedBufferDescription*> BufferDescriptionList;
 	BufferDescriptionList m_BufferDescriptionList;
-
 };
 //-----------------------------------------------------------------------------
 } // namespace utils

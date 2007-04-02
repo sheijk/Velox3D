@@ -62,6 +62,7 @@ private:
 		typedef std::vector<math::VVector3f> VertexList;
 		int GetIndex(const math::VVector3f& in_Vector);
 		vfloat32* CreateVertexBuffer();
+		vfloat32* CreateNormalBuffer(const vuint* in_pIndexBuffer, const vuint in_Size);
 		vuint GetVertexCount();
 
 	  private:
