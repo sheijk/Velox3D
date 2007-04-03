@@ -85,6 +85,6 @@
 	</entity>
 	<entity name="model">
 		<part type="v3d::entity::VRigidBodyPart" pos="(0,100,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
-		<part type="v3d::scene::VModelPart" material="/edit/mat/showNormals.v3dmat" model="/data/FastEinFahrzeugScale.3ds" tags=""/>
+		<part type="v3d::scene::VModelPart" material="/edit/mat/showNormals.v3dmat" model="/data/RacerWheel.3ds" tags=""/>
 	</entity>
 </entity>

@@ -235,12 +235,12 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 			vuint b = indexArray[index +1];
 			vuint c = indexArray[index +2];
 
-			if( a > m_FaceList.size() )
+			/*if( a > m_FaceList.size() )
 			  V3D_THROW(graphics::VImporterException, "index buffer invalid");
 			if( b > m_FaceList.size() )
 			  V3D_THROW(graphics::VImporterException, "index buffer invalid");
 			if( c > m_FaceList.size() )
-			  V3D_THROW(graphics::VImporterException, "index buffer invalid");
+			  V3D_THROW(graphics::VImporterException, "index buffer invalid");*/
 
 			VVector3f v1(vertexArray[a*3], vertexArray[a*3+1], vertexArray[a*3+2]);
 			VVector3f v2(vertexArray[b*3], vertexArray[b*3+1], vertexArray[b*3+2]);

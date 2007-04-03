@@ -77,58 +77,70 @@ void VBoxMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 		- length.GetY() / 2,
 		+ length.GetZ() / 2 
 		);
+	glNormal3i(0,0,1);
 	glVertex3f(
 		+ length.GetX() / 2,
 		- length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(0,0,1);
 	glVertex3f(
 		+ length.GetX() / 2,
 		+ length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(0,0,1);
 	glVertex3f(
 		- length.GetX() / 2,
 		+ length.GetY() / 2,
 		+ length.GetZ() / 2);
-
+	glNormal3i(0,0,1);
 	//second one
 
 	glVertex3f(
 		- length.GetX()  / 2,
 		- length.GetY()  /2,
 		- length.GetZ() / 2);
+	glNormal3i(0,0,-1);
 	glVertex3f(
 		+ length.GetX() / 2,
 		- length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(0,0,-1);
 	glVertex3f(
 		+ length.GetX() / 2,
 		+ length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(0,0,-1);
 	glVertex3f(
 		- length.GetX() / 2,
 		+ length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(0,0,-1);
+
 
 	//3
 	glVertex3f(
 		- length.GetX() / 2,
 		+ length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(0,1,0);
 
 	glVertex3f(
 		+ length.GetX() / 2,
 		+ length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(0,1,0);
 
 	glVertex3f(
 		+ length.GetX() / 2,
 		+ length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(0,1,0);
 
 	glVertex3f(
 		- length.GetX() / 2,
 		+ length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(0,1,0);
 
 	//
 
@@ -136,42 +148,50 @@ void VBoxMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 		- length.GetX() / 2,
 		- length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(0,-1,0);
 
 	glVertex3f(
 		+ length.GetX() / 2,
 		- length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(0,-1,0);
 
 	glVertex3f(
 		+ length.GetX() / 2,
 		- length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(0,-1,0);
 
 	glVertex3f(
 		- length.GetX() / 2,
 		- length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(0,-1,0);
 
 	//
 	glVertex3f(
 		- length.GetX() / 2,
 		- length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(-1,0,0);
 
 	glVertex3f(
 		- length.GetX() / 2,
 		- length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(-1,0,0);
 
 	glVertex3f(
 		- length.GetX() / 2,
 		+ length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(-1,0,0);
 
 	glVertex3f(
 		- length.GetX() / 2,
 		+ length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(-1,0,0);
 
 	//
 
@@ -179,21 +199,25 @@ void VBoxMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 		+ length.GetX() / 2,
 		- length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(1,0,0);
 
 	glVertex3f(
 		+ length.GetX() / 2,
 		- length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(1,0,0);
 
 	glVertex3f(
 		+ length.GetX() / 2,
 		+ length.GetY() / 2,
 		- length.GetZ() / 2);
+	glNormal3i(1,0,0);
 
 	glVertex3f(
 		+ length.GetX() / 2,
 		+ length.GetY() / 2,
 		+ length.GetZ() / 2);
+	glNormal3i(1,0,0);
 
 	glEnd();
 	glPopAttrib();
