@@ -44,7 +44,17 @@ public:
 protected:
 	virtual VSharedPtr<IVPart> CreatePart()
 	{
-		return SharedPtr(new PartType());
+		VSharedPtr<IVPart> part = SharedPtr(new PartType());
+
+		if( part != 0 && part->GetTypeInfo().GetName() != GetType() )
+		{
+			V3D_THROWMSG(VException, "Created part is of unexpected type."
+				<< " Maybe you forgot to override GetTypeInfo()?."
+				<< " Expected: " << GetType()
+				<< " but found: " << part->GetTypeInfo().GetName() << "\n");
+		}
+
+		return part;
 	}
 
 	virtual std::string GetType() const

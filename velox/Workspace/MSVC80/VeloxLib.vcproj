@@ -488,6 +488,30 @@
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VTorusMeshPart.h"
 							>
 						</File>
+						<Filter
+							Name="Terrain"
+							>
+							<File
+								RelativePath="..\..\API\V3d\Scene\Shapes\Terrain\IVGCMHeightmapSourcePart.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\API\V3d\Scene\Shapes\Terrain\VGCMDummyHeightmapPart.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\API\V3d\Scene\Shapes\Terrain\VGCMRawHeightmapPart.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\API\V3d\Scene\Shapes\Terrain\VGCMStretchedHeightmapPart.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\API\V3d\Scene\Shapes\Terrain\VGCMTerrainPart.h"
+								>
+							</File>
+						</Filter>
 					</Filter>
 					<Filter
 						Name="Rendering"
@@ -2165,6 +2189,114 @@
 						RelativePath="..\..\Source\Scene\Shapes\VTorusMeshPart.cpp"
 						>
 					</File>
+					<Filter
+						Name="Terrain"
+						>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\CommonMath.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\CompressedHeightmapSource.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\CompressedHeightmapSource.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\DummyLodObjects.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\HeightmapSource.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\HeightmapSource.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Noise.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Noise.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\OpenGL.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\RawHeightmapSource.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Shader.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Shader.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\StretchedHeightmapSource.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Terrain.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\terrain.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Terrain.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\terrain.vert"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Types.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Utils.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\Utils.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\VertexBuffer.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\VertexBuffer.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\VGCMDummyHeightmapPart.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\VGCMRawHeightmapPart.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\VGCMStretchedHeightmapPart.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Scene\Shapes\Terrain\VGCMTerrainPart.cpp"
+							>
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="Shootings"

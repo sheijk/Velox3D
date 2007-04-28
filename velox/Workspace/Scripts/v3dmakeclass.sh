@@ -19,11 +19,12 @@ v3dmakeinterface.sh $1 $2
 
 cp ${templatedir}/VeloxClass.cpp ${name}.cpp
 
-# lieber leser, wenn du jetzt meinst das kann man besser machen:
-# tu es. und stell das ergebnis aufn ftp :)
+# YES, this can be done better. If you do so, don't hesitate to
+# commit / send us the file :)
 sed -e "s#%%classname%%#$name#" ${name}.cpp > ${name}.temp
 sed -e "s#%%classname%%#$name#" ${name}.temp > ${name}.cpp
 sed -e "s#%%namespace%%#$namespace#" ${name}.cpp > ${name}.temp
 
 mv ${name}.temp ${name}.cpp
+mv ${name}.cpp `v3dsourcedir.pl`/
 

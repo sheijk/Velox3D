@@ -4,8 +4,6 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
-//TODO: insert header file name
 #include "/*filename*/.h"
 //-----------------------------------------------------------------------------
 

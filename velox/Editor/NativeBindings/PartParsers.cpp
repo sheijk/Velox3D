@@ -4,40 +4,6 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
-
-#include <V3d/Entity/VGenericPartParser.h>
-#include <V3d/Scene/Shapes/VPlaneMeshPart.h>
-
-#include <V3d/Scene/Shapes/VArrowMeshPart.h>
-#include <V3d/Scene/Shapes/VBoxMeshPart.h>
-#include <V3d/Scene/Shapes/VCoordSysDisplayPart.h>
-#include <V3d/Scene/Shapes/VPlaneMeshPart.h>
-#include <V3d/Scene/Shapes/VSkyboxPart.h>
-#include <V3d/Scene/Shapes/VSphereMeshPart.h>
-#include <V3d/Scene/Shapes/VTerrainPart.h>
-#include <V3d/Scene/Shapes/VTorusMeshPart.h>
-
-#include <V3d/Physics/VBodyPart.h>
-#include <V3d/Physics/VCollisionPart.h>
-#include <V3d/Physics/VJointHinge2ModifierPart.h>
-#include <V3d/Physics/VJointHinge2Part.h>
-#include <V3d/Physics/VPhysicManagerPart.h>
-
-#include <V3d/Physics/Bounding/VBoundingBoxVolumePart.h>
-#include <V3d/Physics/Bounding/VBoundingMeshVolumePart.h>
-#include <V3d/Physics/Bounding/VBoundingPlaneVolumePart.h>
-#include <V3d/Physics/Bounding/VBoundingSphereVolumePart.h>
-#include <V3d/Physics/Bounding/VBoundingTerrainVolumePart.h>
-#include <V3d/Physics/Bounding/VCollisionVisualizationPart.h>
-
-#include <V3d/Entity/VRigidBodyPart.h>
-#include <V3d/Entity/VUpdateablePart.h>
-#include <V3d/Utils/VCameraPart.h>
-#include <V3d/Utils/VCircleMoverPart.h>
-#include <V3d/Utils/VFPSMoverPart.h>
-#include <V3d/Utils/VInputPart.h>
-#include <V3d/Utils/VTrackballPart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -70,6 +36,10 @@ namespace v3d { namespace scene {
 		extern void* AssureVTerrainPartExists();
 		extern void* AssureVTorusMeshPartExists();
 		extern void* AssureVCylinderMeshPartExists();
+		extern void* AssureVGCMTerrainPartExists();
+		extern void* AssureVGCMDummyHeightmapPartExists();
+		extern void* AssureVGCMRawHeightmapPartExists();
+		extern void* AssureVGCMStretchedHeightmapPartExists();
 }}
 
 namespace v3d { namespace physics {
@@ -103,12 +73,6 @@ namespace v3d { namespace utils {
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
-using namespace v3d::entity;
-using namespace v3d::scene;
-using namespace v3d::graphics;
-
-namespace {
-}
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::editor
@@ -141,6 +105,10 @@ void foo()
 	v3d::scene::AssureVTerrainPartExists();
 	v3d::scene::AssureVTorusMeshPartExists();
 	v3d::scene::AssureVCylinderMeshPartExists();
+	v3d::scene::AssureVGCMTerrainPartExists();
+	v3d::scene::AssureVGCMDummyHeightmapPartExists();
+	v3d::scene::AssureVGCMRawHeightmapPartExists();
+	v3d::scene::AssureVGCMStretchedHeightmapPartExists();
 
 	v3d::physics::AssureVBodyPartExists();
 	v3d::physics::AssureVBoundingBoxVolumePartExists();

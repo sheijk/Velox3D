@@ -153,8 +153,13 @@ void VView::FrameUpdateLoop()
 				vout << "[VView] executing " << m_SyncActions.size()
 					<< " synchronized actions" << vendl;
 			}
-			for_each(m_SyncActions.begin(), m_SyncActions.end(),
-				mem_fun<void, IVSynchronizedAction>(&IVSynchronizedAction::Run));
+
+			for(SyncActions::iterator syncAction = m_SyncActions.begin(); syncAction != m_SyncActions.end(); ++syncAction)
+			{
+				(*syncAction)->Run();
+			}
+			//for_each(m_SyncActions.begin(), m_SyncActions.end(),
+				//mem_fun<void, IVSynchronizedAction>(&IVSynchronizedAction::Run));
 			m_SyncActions.clear();
 			glfwUnlockMutex(m_SyncMutex);
 			glfwBroadcastCond(m_SyncDoneCondition);

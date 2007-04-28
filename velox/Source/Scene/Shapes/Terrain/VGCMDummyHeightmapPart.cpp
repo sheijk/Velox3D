@@ -4,31 +4,63 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-#include "%%classname%%.h"
+#include <V3d/Scene/Shapes/Terrain/VGCMDummyHeightmapPart.h>
 //-----------------------------------------------------------------------------
 
+#include "HeightmapSource.h"
+#include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
-namespace v3d { namespace %%namespace%% {
+namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
+using namespace geomclip;
+
+namespace {
+	class DummyHeightmapSource : public geomclip::HeightmapSource
+	{
+	public:
+		virtual u32 colorAt( WorldCoord x, WorldCoord y ) const
+		{
+			return 0;
+		}
+	};
+}
 
 /**
  * standard c'tor
  */
-%%classname%%::%%classname%%()
+VGCMDummyHeightmapPart::VGCMDummyHeightmapPart()
 {
 }
 
 /**
  * d'tor
  */
-%%classname%%::~%%classname%%()
+VGCMDummyHeightmapPart::~VGCMDummyHeightmapPart()
 {
 }
 
+HeightmapSource* VGCMDummyHeightmapPart::GetHeightmapSource()
+{
+	return m_pHeightmapSource.Get();
+}
+
+void VGCMDummyHeightmapPart::Activate()
+{
+	if( m_pHeightmapSource == 0 )
+	{
+		m_pHeightmapSource.Assign( new DummyHeightmapSource() );
+	}
+}
+
+void VGCMDummyHeightmapPart::Deactivate()
+{
+}
+
+V3D_REGISTER_PART_PARSER(VGCMDummyHeightmapPart);
 //-----------------------------------------------------------------------------
-}} // namespace v3d::%%namespace%%
+}} // namespace v3d::scene
 //-----------------------------------------------------------------------------
 
