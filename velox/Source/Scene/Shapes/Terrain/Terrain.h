@@ -59,7 +59,7 @@ namespace geomclip {
         Orientation camera_;
         std::vector<LodRegion*> regions_;
         Shader shader_;
-		std::auto_ptr<HeightmapSource> heightmapSource_;
+		HeightmapSource* heightmapSource_;
 
 		friend LodRegion;
 

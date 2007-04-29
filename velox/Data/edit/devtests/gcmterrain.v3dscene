@@ -6,10 +6,9 @@
 	<part type="v3d::scene::VSimpleShooting" tags=""/>
 	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags=" " far-plane="100000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
 	<entity name="editorCam">
-		<part type="v3d::entity::VRigidBodyPart" pos="(203.922,145.834,285.219)" updir="(-0.194628,0.980735,0.0167215)" viewdir="(-0.960185,-0.193977,0.201042)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(-4228.03,6962.72,-3423.33)" updir="(0.61242,0.615683,0.49586)" viewdir="(0.478501,-0.787994,0.38743)" tags=""/>
 		<part type="v3d::utils::VCameraPart" tags=""/>
-		<!-- part type="v3d::utils::VFPSMoverPart" ignore-mouse="false" tags=""/ -->
-		<part type="v3d::utils::VTrackballPart" />
+		<part type="v3d::utils::VTrackballPart" altitude-angle="-52" center="(0,0,0)" centerOnParent="false" direction-angle="-129" distance="8836" tags=""/>
 	</entity>
 	<entity name="debug">
 		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
@@ -19,12 +18,25 @@
 	<entity name="terrain">
 		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 		<part type="v3d::scene::VGCMTerrainPart" material="/system/graphics/defaultMaterial" tags=""/>
-		<!--<part type="v3d::scene::VGCMRawHeightmapPart" file-bigendian="false" file-bitdepth="16" file-name="G:\volcanic_1025_16.raw" file-width="1025" max-height="150" tags=""/>-->
 		<part type="v3d::scene::VGCMStretchedHeightmapPart" file-bigendian="true" file-bitdepth="16" file-name="G:\kaputte_alpen_6000_16.raw" file-width="6000" max-height="300000" tags=""/>
 	</entity>
 	<entity name="sun">
-		<part type="v3d::entity::VRigidBodyPart" pos="(1,12,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(2,12,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
 		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_color="(1,1,0,1)" material="/edit/mat/red.v3dmat" radius="1" tags=""/>
 		<part type="v3d::scene::VLightPart" ambientColor="(0.2,0,0,0)" diffuseColor="(1,1,1,1)" specularColor="(1,1,1,1)" w="1" tags=""/>
+	</entity>
+	<entity name="cameras">
+		<entity name="fps">
+			<part type="v3d::entity::VRigidBodyPart" pos="(2473,1815,1503)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+			<part type="v3d::utils::VFPSMoverPart" ignore-mouse="true" tags=""/>
+			<part type="v3d::utils::VCameraPart" tags=""/>
+			<part type="v3d::scene::VArrowMeshPart" color="(1,1,1,1)" material="/system/graphics/defaultMaterial" size="300" tags=""/>
+		</entity>
+		<entity name="trackball">
+			<part type="v3d::entity::VRigidBodyPart" pos="(931.61,5298.47,-4033.67)" updir="(-0.177326,0.615683,0.767783)" viewdir="(-0.13855,-0.787994,0.599891)" tags=""/>
+			<part type="v3d::utils::VTrackballPart" altitude-angle="-52" center="(0,0,0)" centerOnParent="false" direction-angle="167" distance="6724" tags=""/>
+			<part type="v3d::utils::VCameraPart" tags=""/>
+			<part type="v3d::scene::VSphereMeshPart" detail="20" mat_color="(0,1,1,1)" material="/edit/mat/red.v3dmat" radius="2" tags=""/>
+		</entity>
 	</entity>
 </entity>

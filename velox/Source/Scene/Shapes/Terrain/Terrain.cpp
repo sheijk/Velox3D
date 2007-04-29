@@ -919,7 +919,7 @@ void geomclip::Terrain::setShaderSource(const std::string& vertexSource, const s
 
 void geomclip::Terrain::init(HeightmapSource* heightmapSource) {
 	//heightmapSource.reset( new RawHeightmapSource("../volcanic_1025_16.raw", 1025, 16, 100.0f) );
-	heightmapSource_.reset( heightmapSource );
+	heightmapSource_ = heightmapSource;
 	//heightmapSource_.reset( new RawHeightmapSource("../bitmap", 6000, 16, 3.0f) );
 	//heightmapSource_.reset( new RawHeightmapSource("../terrains/island_1025_8.raw", 1025, 8, 10.0f) );
 	//heightmapSource_.reset( new RawHeightmapSource("../terrains/island_8193_8.raw", 8193, 8, 100.0f) );
@@ -941,7 +941,7 @@ void geomclip::Terrain::init(HeightmapSource* heightmapSource) {
 	for( int i = 0; i < regionsSize; ++i ) {
 		LodRegion* r = regions_[i];
 
-        r->init( heightmapSource_.get(), &shader_, i, lowerLevel );
+        r->init( heightmapSource_, &shader_, i, lowerLevel );
 
 		lowerLevel = r;
     }
