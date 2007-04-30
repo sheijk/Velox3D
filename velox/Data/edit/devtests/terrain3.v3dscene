@@ -1,0 +1,35 @@
+<entity name="terrain3">
+	<part type="v3d::scene::VNaiveSceneManagerPart" tags=""/>
+	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
+	<part type="v3d::scene::VNaiveLightManager" tags=""/>
+	<part type="v3d::utils::VInputPart" tags=""/>
+	<part type="v3d::scene::VSimpleShooting" tags=""/>
+	<part type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" exclude-tags=" " far-plane="10000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
+	<entity name="editorCam">
+		<part type="v3d::entity::VRigidBodyPart" pos="(-726.053,51.8147,100.504)" updir="(0.0869136,0.991607,-0.0956601)" viewdir="(0.925926,-0.115834,-0.359468)" tags=""/>
+		<part type="v3d::utils::VCameraPart" tags=""/>
+	</entity>
+	<entity name="debug">
+		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
+		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
+	</entity>
+	<entity name="terrain">
+		<part type="v3d::scene::VGCMTerrainPart" colored-regions="false" fragment-shader-res="/system/mat/gcmterrain.frag" material="/system/graphics/defaultMaterial" update-regions="true" vertex-shader-res="/system/mat/gcmterrain.vert" wireframe="false" tags=""/>
+		<part type="v3d::scene::VGCMRawHeightmapPart" file-bigendian="false" file-bitdepth="16" file-name="G:\volcanic_1025_16.raw" file-width="1025" max-height="100" tags=""/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(5,0,0)" updir="(0,1,0)" viewdir="(-0,-0,-1)" tags=""/>
+	</entity>
+	<entity name="cameras">
+		<entity name="fps">
+			<part type="v3d::entity::VRigidBodyPart" pos="(0,175,0)" updir="(0.523988,-0.406684,-0.748361)" viewdir="(-0.233258,-0.913569,0.33314)" tags=""/>
+			<part type="v3d::utils::VFPSMoverPart" ignore-mouse="false" tags=""/>
+			<part type="v3d::utils::VCameraPart" tags=""/>
+			<part type="v3d::scene::VArrowMeshPart" color="(1,1,1,1)" material="/system/graphics/defaultMaterial" size="0.5" tags=""/>
+		</entity>
+		<entity name="trackball">
+			<part type="v3d::entity::VRigidBodyPart" pos="(657.61,140.544,-69.0847)" updir="(-0.206768,0.978149,0.0217218)" viewdir="(-0.972796,-0.207906,0.102196)" tags=""/>
+			<part type="v3d::utils::VTrackballPart" altitude-angle="-12" center="(0,0,0)" centerOnParent="false" direction-angle="96" distance="676" tags=""/>
+			<part type="v3d::utils::VCameraPart" tags=""/>
+			<part type="v3d::scene::VArrowMeshPart" color="(0,1,0,1)" material="/system/graphics/defaultMaterial" size="1" tags=""/>
+		</entity>
+	</entity>
+</entity>

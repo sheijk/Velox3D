@@ -54,8 +54,27 @@ namespace geomclip {
 		 * Returns 0 for invalid hole ids
 		 */
 		uint holeDetail(HoleId holeNum);
-        
+
+		enum GeometryMode {
+			RMDefault,
+			RMPoints,
+			RMLines
+		};
+
+		void setGeometryMode( GeometryMode mode );
+
+		enum SurfaceMode {
+			SMShaded,
+			SMColored,
+			SMTextured
+		};
+
+		void setSurfaceMode( SurfaceMode mode );
+
     private:
+		GeometryMode geometryMode_;
+		SurfaceMode surfaceMode_;
+
         Orientation camera_;
         std::vector<LodRegion*> regions_;
         Shader shader_;

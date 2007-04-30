@@ -1205,6 +1205,16 @@ void geomclip::Terrain::renderHoleBorder(const HoleInfo& holeInfo) {
 	buffer.send( GL_TRIANGLES, shader_.program() );
 }
 
+void geomclip::Terrain::setGeometryMode( GeometryMode mode )
+{
+	geometryMode_ = mode;
+}
+
+void geomclip::Terrain::setSurfaceMode( SurfaceMode mode )
+{
+	surfaceMode_ = mode;
+}
+
 void geomclip::Terrain::render() {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -1214,65 +1224,12 @@ void geomclip::Terrain::render() {
 
 	glDisable( GL_LIGHTING );
 
-	//for(RectList::iterator hole = holes_.begin();
-	//	hole != holes_.end();
-	//	++hole)
-	//{
-	//	Rect<float> area( hole->area );
-	//	sendBorder( area, 100.0f );
-	//}
-
-	enum GeometryMode {
-		RMDefault,
-		RMPoints,
-		RMLines
-	};
-	static GeometryMode renderMode = RMDefault;
-
-	enum SurfaceMode {
-		SMShaded,
-		SMColored,
-		SMTextured
-	};
-	static SurfaceMode surfaceMode = SMColored;
-
 	static bool renderMeshes = true;
 	static bool renderHoleBorders = true;
 
-	if( glfwGetKey( '1' ) == GL_TRUE ) {
-		renderMode = RMDefault;
-	}
-	else if( glfwGetKey( '2' ) == GL_TRUE ) {
-		renderMode = RMLines;
-	}
-	else if( glfwGetKey( '3' ) == GL_TRUE ) {
-		renderMode = RMPoints;
-	}
-	else if( glfwGetKey( '4' ) == GL_TRUE ) {
-		surfaceMode = SMShaded;
-	}
-	else if( glfwGetKey( '5' ) == GL_TRUE ) {
-		surfaceMode = SMColored;
-	}
-	else if( glfwGetKey( '6' ) == GL_TRUE ) {
-		surfaceMode = SMTextured;
-	}
-	//else if( glfwGetKey( '4' ) == GL_TRUE ) {
-	//	renderMeshes = true;
-	//}
-	//else if( glfwGetKey( '5' ) == GL_TRUE ) {
-	//	renderMeshes = false;
-	//}
-	//else if( glfwGetKey( '6' ) == GL_TRUE ) {
-	//	renderHoleBorders = true;
-	//}
-	//else if( glfwGetKey( '7' ) == GL_TRUE ) {
-	//	renderHoleBorders = false;
-	//}
-
 	GLenum polygonMode = GL_FILL;
 
-	switch( renderMode ) {
+	switch( geometryMode_ ) {
 		case RMLines: polygonMode = GL_LINE; break;
 		case RMPoints: polygonMode = GL_POINT; break;
 	}
@@ -1282,7 +1239,7 @@ void geomclip::Terrain::render() {
 
 	if( false ) {
 		glActiveTexture( GL_TEXTURE1 );
-		if( renderMode == RMDefault && surfaceMode == SMTextured ) {
+		if( geometryMode_ == RMDefault && surfaceMode_ == SMTextured ) {
 			glBindTexture( GL_TEXTURE_2D, texture_ );
 		}
 		else {
@@ -1305,7 +1262,7 @@ void geomclip::Terrain::render() {
 		holeIter != holes_.end();
 		++holeIter)
 	{
-		if( surfaceMode == SMColored )
+		if( surfaceMode_ == SMColored )
 			glColor3f( 1.f, 0.8f, 0.8f );
 		else
 			glColor3f( 1.f, 1.f, 1.f );
@@ -1341,7 +1298,7 @@ void geomclip::Terrain::render() {
 			mymod( float(region->desiredRegion_.top) / float(scale), REGION_SIZE ) / float(REGION_SIZE) );
 		//glUniform2f( textureOffsetLoc, 0.0f, 0.0f );
 
-		if( renderMode != RMDefault ) {
+		if( geometryMode_ != RMDefault ) {
 			glPushMatrix();
 			glTranslatef( 0.f, -1.f, 0.f );
 
@@ -1360,7 +1317,7 @@ void geomclip::Terrain::render() {
 			glPopMatrix();
 		}
 
-		if( surfaceMode == SMColored )
+		if( surfaceMode_ == SMColored )
 			glColorForDetailLevel(i);
 		else
 			glColor3f( 1.f, 1.f, 1.f );

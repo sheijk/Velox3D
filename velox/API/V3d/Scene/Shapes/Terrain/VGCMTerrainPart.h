@@ -49,11 +49,27 @@ public:
 		entity::IVPart& in_Part);
 
 private:
+	void OnMessage(
+		const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
+
+	//std::string GetVertexShaderRes() const;
+	//void SetVertexShaderRes(const std::string& newVertexShaderRes);
+
+	//std::string GetFragmentShaderRes() const;
+	//void SetFragmentShaderRes(const std::string& newFragmentShaderRes);
+		
 	entity::VPartConnection<IVGCMHeightmapSourcePart> m_pHeightmapSourcePart;
 	entity::VPartConnection<VSimpleShooting> m_pShooting;
 
 	VSharedPtr<geomclip::HeightmapSource> m_pHeightmapSource;
 	VSharedPtr<geomclip::Terrain> m_pTerrain;
+
+	vbool m_bColoredRegions;
+	vbool m_bWireframe;
+	vbool m_bUpdateRegions;
+
+	std::string m_strVertexShaderRes;
+	std::string m_strFragmentShaderRes;
 };
 
 //-----------------------------------------------------------------------------

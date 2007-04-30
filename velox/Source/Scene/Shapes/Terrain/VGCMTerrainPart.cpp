@@ -13,6 +13,7 @@
 
 #include <V3d/Resource.h>
 
+#include <V3d/Messaging/VMessageInterpreter.h>
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -22,6 +23,11 @@ namespace v3d { namespace scene {
 using namespace v3d; // anti auto indent
 using namespace geomclip;
 
+namespace {
+	const std::string DEFAULT_VERTEX_SHADER_RES = "/system/mat/gcmterrain.vert";
+	const std::string DEFAULT_FRAGMENT_SHADER_RES = "/system/mat/gcmterrain.frag";
+}
+
 /**
  * standard c'tor
  */
@@ -29,6 +35,12 @@ VGCMTerrainPart::VGCMTerrainPart() :
 	m_pHeightmapSourcePart(entity::VPartDependency::Neighbour, RegisterTo()),
 	m_pShooting(entity::VPartDependency::Ancestor, RegisterTo())
 {
+	m_bColoredRegions = false;
+	m_bWireframe = false;
+	m_bUpdateRegions = true;
+
+	m_strVertexShaderRes = DEFAULT_VERTEX_SHADER_RES;
+	m_strFragmentShaderRes = DEFAULT_FRAGMENT_SHADER_RES;
 }
 
 /**
@@ -43,14 +55,21 @@ void VGCMTerrainPart::SendGeometry(graphics::IVDevice& in_Device) const
 	//glutWireSphere( 4.0f, 10, 10 );
 	if( m_pTerrain != NULL )
 	{
-		geomclip::Orientation orientation;
-		math::VVector3f campos = m_pShooting->GetCamera()->GetPosition();
-		orientation.pos.x = campos.GetX();
-		orientation.pos.y = campos.GetY();
-		orientation.pos.z = campos.GetZ();
+		if( m_bUpdateRegions )
+		{
+			geomclip::Orientation orientation;
+			math::VVector3f campos = m_pShooting->GetCamera()->GetPosition();
+			orientation.pos.x = campos.GetX();
+			orientation.pos.y = campos.GetY();
+			orientation.pos.z = campos.GetZ();
 
-		m_pTerrain->tellCamera( orientation );
-		m_pTerrain->update( 0.0f );
+			m_pTerrain->tellCamera( orientation );
+			m_pTerrain->update( 0.0f );
+		}
+
+		m_pTerrain->setGeometryMode( m_bWireframe ? Terrain::RMLines : Terrain::RMDefault );
+		m_pTerrain->setSurfaceMode( m_bColoredRegions ? Terrain::SMColored : Terrain::SMShaded );
+
 		m_pTerrain->render();
 	}
 }
@@ -88,8 +107,8 @@ void v3d::scene::VGCMTerrainPart::Activate()
 
 		using resource::VTextFile;
 		using resource::GetResourceData;
-		std::string vertexSource = GetResourceData<VTextFile>("/system/mat/gcmterrain.vert")->GetContent();
-		std::string fragmentSource = GetResourceData<VTextFile>("/system/mat/gcmterrain.frag")->GetContent();
+		std::string vertexSource = GetResourceData<VTextFile>(m_strVertexShaderRes.c_str())->GetContent();
+		std::string fragmentSource = GetResourceData<VTextFile>(m_strFragmentShaderRes.c_str())->GetContent();
 		m_pTerrain->setShaderSource( vertexSource, fragmentSource );
 		//m_pTerrain->init( m_pHeightmapSource.Get() );
 		m_pTerrain->init( heightmapSource );
@@ -110,6 +129,26 @@ void VGCMTerrainPart::Disconnect(
 	{
 		m_pTerrain.Release();
 	}
+}
+
+void VGCMTerrainPart::OnMessage(
+	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+{
+	static messaging::VMessageInterpreter interpreter;
+
+	if( ! interpreter.IsInitialized() )
+	{
+		interpreter.AddMemberOption("colored-regions", this, &m_bColoredRegions);
+		interpreter.AddMemberOption("wireframe", this, &m_bWireframe);
+		interpreter.AddMemberOption("update-regions", this, &m_bUpdateRegions);
+
+		interpreter.AddMemberOption("vertex-shader-res", this, &m_strVertexShaderRes);
+		interpreter.AddMemberOption("fragment-shader-res", this, &m_strFragmentShaderRes);
+
+		interpreter.SetInitialized(true);
+	}
+
+	InterpreteMessage(interpreter, in_Message, in_pAnswer);
 }
 
 namespace {
