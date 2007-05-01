@@ -30,6 +30,12 @@ public:
 
 	/** Change the attribute's value */
 	virtual void SetValue(const v3d::utils::VStringValue& in_NewValue) = 0;
+
+	template<typename T>
+	T GetValueAs() const
+	{
+		return GetValue().Get<T>();
+	}
 };
 //-----------------------------------------------------------------------------
 } //xml

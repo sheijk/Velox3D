@@ -42,30 +42,34 @@ std::string VSceneModelParser::GetType() const
 	return VModelPart::GetDefaultId();
 }
 
-VSharedPtr<IVPart> VSceneModelParser::Parse(xml::IVXMLElement& in_Node)
+VSharedPtr<IVPart> VSceneModelParser::Create()
 {
-	try
-	{
-		// read mesh and material resource
-		std::string meshResource = in_Node.GetAttributeValue<std::string>("mesh");
-		std::string materialResource = in_Node.GetAttributeValue<std::string>("material");
-
-		VModel model(VModelMesh(
-			GetResourceData<IVMesh>( meshResource.c_str() ),
-			GetResourceData<IVMaterial>( materialResource.c_str() )));
-
-		// create part
-		VSharedPtr<IVPart> pPart(new VModelPart(model));
-		return pPart;
-	}
-	catch(VException& e)
-	{
-		V3D_THROWMSG(VPartParseException,
-			"Could not parse part of type " << GetType().c_str()
-			<< " due to exception: \n"
-			<< e.ToString());
-	}
+	return SharedPtr( new VModelPart() );
 }
+//VSharedPtr<IVPart> VSceneModelParser::Parse(xml::IVXMLElement& in_Node)
+//{
+//	try
+//	{
+//		// read mesh and material resource
+//		std::string meshResource = in_Node.GetAttributeValue<std::string>("mesh");
+//		std::string materialResource = in_Node.GetAttributeValue<std::string>("material");
+//
+//		VModel model(VModelMesh(
+//			GetResourceData<IVMesh>( meshResource.c_str() ),
+//			GetResourceData<IVMaterial>( materialResource.c_str() )));
+//
+//		// create part
+//		VSharedPtr<IVPart> pPart(new VModelPart(model));
+//		return pPart;
+//	}
+//	catch(VException& e)
+//	{
+//		V3D_THROWMSG(VPartParseException,
+//			"Could not parse part of type " << GetType().c_str()
+//			<< " due to exception: \n"
+//			<< e.ToString());
+//	}
+//}
 
 //namespace {
 //	//VSceneModelParser p;

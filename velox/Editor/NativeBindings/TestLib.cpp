@@ -361,7 +361,7 @@ VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement)
 }
 
 namespace {
-	entity::VPartParser<VTestPart> testParser();
+	entity::VGenericPartParser<VTestPart> testParser();
 }
 
 v3d::scene::IVShooting* CreateShooting(v3d::graphics::IVDevice* in_pDevice)

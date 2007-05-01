@@ -33,32 +33,37 @@ public class Entity implements XMLSerializable {
 		this.name = name;
 	}
 	
-	public Entity(IVXMLElement xml) {
-		this(xml.GetAttribute(ENTITY_NAME_ATTRIB).GetValue().ToString());
-		
-		// for each child
-		VXMLNodeIterator node = xml.ChildBegin();
-		while( node.HasNext() ) {
-			IVXMLElement element = node.Get().ToElement();
+	public Entity(VEntityPtr entityImpl) {
+		impl = entityImpl;
 
-			// skip comments + text
-			if( element != null ) {
-				final String elementName = element.GetName().AsCString();
+		if( impl != null && impl.Get() != null ) {
+			name = impl.GetName();
+			
+			VPartPtrIterator partIter = entityImpl.PartPtrIterator();
+			while( partIter.HasNext() ) {
+				VPartPtr part = partIter.Get();
 				
-				// if it's an entity create and add child
-				if( elementName.equalsIgnoreCase(NODE_TYPE_ENTITY) ) {
-					Entity child = new Entity(element);
-					Add(child);
-				}
-				// if it's a part create and add part
-				else if( elementName.equalsIgnoreCase(NODE_TYPE_PART) ) {
-					Part part = new Part(element);
-					Add(part);
-				}
+				AddAdapter( new Part(part) );
+				
+				partIter.Next();
 			}
 			
-			node.Next();
+			VEntityPtrIterator childIter = entityImpl.ChildPtrIterator();
+			while( childIter.HasNext() ) {
+				VEntityPtr child = childIter.Get();
+				
+				AddAdapter( new Entity(child) );
+				
+				childIter.Next();
+			}
 		}
+		else {
+			throw new RuntimeException("Tried to create Entity from null value");
+		}
+	}
+	
+	public Entity(IVXMLElement xml) {
+		this( v3d.GetEntitySerializationService().ParseScene(xml) );
 	}
 	
 	/** 
@@ -79,21 +84,11 @@ public class Entity implements XMLSerializable {
 					for(Entity child : entities) {
 						child.applySettings(childElement);
 					}
-//					final String childElementName = childElement.GetAttribute(ENTITY_NAME_ATTRIB).GetValue().ToString();
-//					Entity child = getChildByName(childElementName);
-//					if( child != null ) {
-//						child.applySettings(childElement);
-//					}
 				}
 				else if( NODE_TYPE_PART.equalsIgnoreCase(type) ) {
 					for(Part part : parts) {
 						part.applySettings(childElement);
 					}
-//					final String partType = childElement.GetAttribute("type").GetValue().ToString();
-//					Part part = getPartByName(partType);
-//					if( part != null ) {
-//						part.applySettings(childElement);
-//					}
 				}
 			}
 			
@@ -149,11 +144,15 @@ public class Entity implements XMLSerializable {
 		if( valid(impl) )
 			impl.Deactivate();
 	}
-	
-	public void Add(Entity newEntity) {
+
+	private void AddAdapter(Entity newEntity) {
 		entities.add(newEntity);
 		
 		newEntity.parent = this;
+	}
+	
+	public void Add(Entity newEntity) {
+		AddAdapter(newEntity);
 
 		if( valid(impl) )
 			impl.AddChild(newEntity.impl);
@@ -196,25 +195,29 @@ public class Entity implements XMLSerializable {
 		}
 	}
 	
-	public void Add(Part newPart) {
-		if( newPart != null && valid(newPart.GetPart()) ) {		
-			if( valid(impl) ) {
-				impl.AddPart(newPart.GetId(), newPart.GetPart());
-			}
-			
-			newPart.setOwner(this);			
+	private void AddAdapter(Part newPart) {
+		if( newPart != null && valid(newPart.GetPart()) ) {
+			newPart.setOwner(this);
 			parts.add(newPart);
+			
+			onNewPart(newPart);
 		}
 		else {
 			System.err.println("Tried to add invalid part: " + newPart.toString());
 		}
 	}
-
-//	public void Remove(Part partToBeRemoved) {
-//		if( impl != null )
-//			impl.rem
-//		parts.remove(partToBeRemoved);
-//	}
+	
+	public void Add(Part newPart) {
+		if( newPart != null && valid(newPart.GetPart()) ) {		
+			if( valid(impl) ) {
+				impl.AddPart(newPart.GetId(), newPart.GetPart());
+			}
+		}
+		
+		AddAdapter(newPart);
+	}
+	
+	protected void onNewPart(Part newPart) {}
 	
 	public Iterator<Entity> EntityIterator() {
 		return entities.iterator();
@@ -242,20 +245,9 @@ public class Entity implements XMLSerializable {
 	}
 
 	public void writeToXML(IVXMLElement outElement) {
-		outElement.SetName("entity");
-		
-		outElement.AddAttribute("name", new VStringValue(name));
-		
-		// add all parts
-		for(Part part : parts) {
-			IVXMLElement partXML = outElement.AddElement("part");
-			part.writeToXML(partXML);
-		}
-		
-		// add all childs
-		for(Entity child : entities) {
-			IVXMLElement childXML = outElement.AddElement("entity");
-			child.writeToXML(childXML);
+		if( valid(impl) )
+		{
+			impl.ToXML(outElement);
 		}
 	}
 	

@@ -37,6 +37,7 @@ public:
 	virtual IVXMLAttribute* GetAttribute(VStringParam Name) const;
 	virtual AttributeIter AttributeBegin();
 	virtual AttributeIter AttributeEnd();
+	virtual VRangeIterator<const IVXMLAttribute> AttributeBegin() const;
 
 	void AddAttribute(VXMLAttribute* p_Attribute);
 

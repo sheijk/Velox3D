@@ -15,17 +15,15 @@ import java.util.LinkedList;
 import de.velox.*;
 
 public class Part implements XMLSerializable {
-	private String type;
+	private final String type;
 	
 	private LinkedList<Setting> settings = new LinkedList<Setting>();
 	private LinkedList<VPartDependency> dependencies = new LinkedList<VPartDependency>();
 	private Entity owner = null;
 	
-	private VPartPtr impl = null;
+	private final VPartPtr impl;
 	
 	public Part(String type) {
-		this.type = type;
-		
 		IVXMLElement xmlElement = v3d.CreateXMLElement("part");
 		xmlElement.AddAttribute("type", new VStringValue(type));
 		
@@ -44,32 +42,9 @@ public class Part implements XMLSerializable {
 		updateSettingsFromPart();
 	}
 	
-	public Part(IVXMLElement xml)
-	{
-		this(xml.GetAttribute("type").GetValue().ToString());
-		settings.clear();
-		
-		// for each attribute
-		VXMLAttributeIterator attrib = xml.AttributeBegin();
-		while( attrib.HasNext() ) {
-			// get name and value
-			final String name = attrib.Get().GetName().toString();
-			final String value = attrib.Get().GetValue().ToString();
-			
-			// store as setting
-			Setting setting = new Setting(this, name, value); 
-			settings.add(setting);
-			
-			// send change message to part
-			updateSetting(setting);
-			
-			attrib.Next();
-		}
-		
-		// refresh settings from part
-		synchronize();
-		
-		//TODO: check for differences and warn if any changes detected
+	public Part(VPartPtr partImpl) {
+		impl = partImpl;
+		type = partImpl.GetTypeInfo().GetName();
 	}
 	
 	public void applySettings(IVXMLElement xml) {
@@ -96,16 +71,6 @@ public class Part implements XMLSerializable {
 			
 			attrib.Next();
 		}
-				
-//		VXMLNodeIterator node = xml.ChildBegin();
-//		while( node.HasNext() ) {
-//			IVXMLElement childElement = node.Get().ToElement();
-//			if( childElement != null ) {
-//				VXML
-//			}
-//			
-//			node.Next();
-//		}
 	}
 	
 	public void updateSettingsFromPart() {
@@ -181,27 +146,6 @@ public class Part implements XMLSerializable {
 	public Iterator<VPartDependency> dependencyIterator() {
 		return dependencies.iterator();
 	}
-	
-//	public Iterator<String> SettingNameIterator() {
-//		return new Iterator<String>() {
-//			private Iterator<Setting> impl = settings.iterator();
-//			
-//			public boolean hasNext() {
-//				return impl.hasNext();
-//			}
-//
-//			public String next() {
-//				return impl.next().GetName();
-//			}
-//
-//			public void remove() {
-//			}
-//		};
-//	}
-	
-//	public void SetSetting(String name, String value) {
-//		settings.add(new Setting(name, value));
-//	}
 	
 	public Iterator<Setting> settingsIterator() {
 		return settings.iterator();

@@ -18,13 +18,11 @@ namespace xml{
 VXMLElement::VXMLElement()
 {
 	m_strName = "NoName";
-	//m_iPos = 0;
 }
 
 VXMLElement::VXMLElement(VStringParam in_strName)
 {
 	m_strName = in_strName;
-	//m_iPos = 0;
 }
 
 VXMLElement::~VXMLElement()
@@ -46,17 +44,6 @@ VStringRetVal VXMLElement::GetName()
 {
 	return m_strName;
 }
-
-//IVXMLAttribute* VXMLElement::GetFirstAttribute()
-//{
-//	if(m_AttributeList.empty())
-//		return NULL;
-//	else 
-//	{
-//		m_iPos = 0;
-//		return m_AttributeList[0];
-//	}
-//}
 
 IVXMLAttribute* VXMLElement::GetAttribute(VStringParam in_strName) const
 {
@@ -112,16 +99,6 @@ void VXMLElement::RemoveAttribute(VStringParam in_strName)
 	m_AttributeList.remove(pAttribute);
 }
 
-//IVXMLAttribute* VXMLElement::NextAttribute()
-//{
-//	m_iPos++;
-//
-//	if(m_iPos <= m_AttributeList.size())
-//		return m_AttributeList[m_iPos];
-//	else
-//		return NULL;
-//}
-
 void VXMLElement::SetName(const VStringParam in_strName)
 {
 	m_strName = in_strName;
@@ -173,37 +150,26 @@ void VXMLElement::RemoveChild(NodeIter in_Node)
 
 IVXMLElement::NodeIter VXMLElement::ChildBegin()
 {
-	//	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
-	//		IVXMLNode> IterPol;
-	//
-	//	return NodeIter(new IterPol(m_Childs.begin()));
 	return CreateDerefBeginIterator<IVXMLNode>(m_Childs);
 }
 
 IVXMLElement::NodeIter VXMLElement::ChildEnd()
 {
-	//	typedef VSTLDerefIteratorPol<std::list<IVXMLNode*>::iterator,
-	//		IVXMLNode> IterPol;
-	//
-	//	return NodeIter(new IterPol(m_Childs.end()));
 	return CreateDerefEndIterator<IVXMLNode>(m_Childs);
 }
 
 IVXMLElement::AttributeIter VXMLElement::AttributeBegin()
 {
-	//	typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
-	//		IVXMLAttribute> IterPol;
-	//
-	//	return AttributeIter(new IterPol(m_AttributeList.begin()));
 	return CreateDerefBeginIterator<IVXMLAttribute>(m_AttributeList);
+}
+
+VRangeIterator<const IVXMLAttribute> VXMLElement::AttributeBegin() const
+{
+	return CreateDerefBeginIterator<const IVXMLAttribute>(m_AttributeList);
 }
 
 IVXMLElement::AttributeIter VXMLElement::AttributeEnd()
 {
-	//	typedef VSTLDerefIteratorPol<std::vector <VXMLAttribute*>::iterator,
-	//		IVXMLAttribute> IterPol;
-	//
-	//	return AttributeIter(new IterPol(m_AttributeList.end()));
 	return CreateDerefEndIterator<IVXMLAttribute>(m_AttributeList);
 }
 

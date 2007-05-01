@@ -16,6 +16,8 @@
 #include <V3d/Messaging/VMessage.h>
 #include <V3d/Tags/VTag.h>
 
+#include <V3d/xml/IVXMLElement.h>
+
 #include <vector>
 #include <string>
 //-----------------------------------------------------------------------------
@@ -110,6 +112,8 @@ public:
 	vbool HasTag(const tags::VTag& tag) const;
 	VRangeIterator<const tags::VTag> Tags() const;
 
+	virtual void ToXML(xml::IVXMLElement& node);
+	virtual void FromXML(const xml::IVXMLElement& node);
 private:
 	/** Override for parts which will handle messages */
 	virtual void OnMessage(const messaging::VMessage& in_Message, 

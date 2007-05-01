@@ -5,10 +5,15 @@
  * complete licence text
  */
 
+%template(VPartPtrIterator) v3d::VRangeIterator< v3d::VSharedPtr<v3d::entity::IVPart> >;
+%template(VEntityPtrIterator) v3d::VRangeIterator< v3d::VSharedPtr<v3d::entity::VEntity> >;
+
 %template(VEntityPtr) v3d::VSharedPtr<v3d::entity::VEntity>;
 %template(VPartPtr) v3d::VSharedPtr<v3d::entity::IVPart>;
+
 %template(VEntityIterator) v3d::VRangeIterator<v3d::entity::VEntity>;
 %template(VPartIterator) v3d::VRangeIterator<v3d::entity::IVPart>;
+
 %include "../../API/V3d/Entity/VPartDependency.h"
 %include "../../API/V3d/Entity/IVPart.h"
 %include "../../API/V3d/Entity/VEntity.h"

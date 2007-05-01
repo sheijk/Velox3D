@@ -57,19 +57,16 @@ void VEntitySerializationService::Unregister(IVPartParser* in_pParser)
 	m_Parsers.erase(in_pParser->GetType());
 }
 
-namespace {
-	vbool IsEditorOnlyPartType(const std::string& in_strPartType)
-	{
-		return in_strPartType == "shooting";
-	}
-}
+//namespace {
+//	vbool IsEditorOnlyPartType(const std::string& in_strPartType)
+//	{
+//		return in_strPartType == "shooting";
+//	}
+//}
 
 VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_Node)
 {
-	std::string type(in_Node.GetAttributeValue<std::string>("type"));
-
-	if( IsEditorOnlyPartType(type) )
-		return VSharedPtr<IVPart>(0);
+	const std::string type( in_Node.GetAttributeValue<std::string>("type") );
 
 	ParserMap::iterator parserIter = m_Parsers.find(type);
 
@@ -77,7 +74,10 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 	{
 		IVPartParser* parser = parserIter->second;
 
-		return parser->Parse(in_Node);
+		VSharedPtr<IVPart> part = parser->Create();
+		part->FromXML( in_Node );
+
+		return part;
 	}
 	else
 	{
@@ -86,6 +86,29 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 			<< "\" because no part parser for the type exists");
 	}
 }
+
+//VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_Node)
+//{
+//	std::string type(in_Node.GetAttributeValue<std::string>("type"));
+//
+//	if( IsEditorOnlyPartType(type) )
+//		return VSharedPtr<IVPart>(0);
+//
+//	ParserMap::iterator parserIter = m_Parsers.find(type);
+//
+//	if( parserIter != m_Parsers.end() )
+//	{
+//		IVPartParser* parser = parserIter->second;
+//
+//		return parser->Create();
+//	}
+//	else
+//	{
+//		V3D_THROWMSG(VNoParserForTypeException,
+//			"Could not parse part with type \"" << type.c_str()
+//			<< "\" because no part parser for the type exists");
+//	}
+//}
 
 VSharedPtr<VEntity> VEntitySerializationService::Parse(xml::IVXMLElement& in_Node)
 {
@@ -127,37 +150,7 @@ void ApplySettings(xml::IVXMLElement& in_Node, IVPart& in_Part)
 
 	if( xmlTypeName == partTypeName )
 	{
-		IVXMLElement::AttributeIter attrib = in_Node.AttributeBegin();
-		while( attrib.HasNext() )
-		{
-			string name = attrib->GetName();
-			string value = attrib->GetValue().Get<string>();
-
-			if( name != "type" && name != "tags" )
-			{
-				messaging::VMessage message;
-				message.AddProperty("type", "update");
-				message.AddProperty("name", name);
-				message.AddProperty("value", value);
-
-				in_Part.Send(message);
-			}
-			else if( name == "tags" )
-			{
-				tags::VTagRegistryPtr pTagRegistry;
-
-				std::stringstream tags(value);
-				std::string tagName;
-
-				while( ! tags.eof() )
-				{
-					tags >> tagName;
-					in_Part.AttachTag(pTagRegistry->GetTagWithName(tagName));
-				}
-			}
-
-			++attrib;
-		}
+		in_Part.FromXML( in_Node );
 	}
 	else
 	{
@@ -214,16 +207,16 @@ VSharedPtr<VEntity> VEntitySerializationService::ParseScene(xml::IVXMLElement& i
 {
 	VSharedPtr<VEntity> pEntity = Parse(in_Node);
 
-	if( pEntity != 0 )
-	{
-		//TODO: find a nice solution..
-		// we don't know in which order settings of a part will be loaded
-		// at least "material" needs to be set before any "mat.*" parameters
-		// are set
-		// thus we apply them twice
-		ApplySettings(in_Node, *pEntity);
-		ApplySettings(in_Node, *pEntity);
-	}
+	//if( pEntity != 0 )
+	//{
+	//	//TODO: find a nice solution..
+	//	// we don't know in which order settings of a part will be loaded
+	//	// at least "material" needs to be set before any "mat.*" parameters
+	//	// are set
+	//	// thus we apply them twice
+	//	ApplySettings(in_Node, *pEntity);
+	//	ApplySettings(in_Node, *pEntity);
+	//}
 
 	return pEntity;
 }

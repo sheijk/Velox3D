@@ -54,7 +54,7 @@ namespace {
 		CheckEnum initChecker;
 	};
 
-	static VSimpleMallocList<VGenericPartParser> g_Parsers;
+	static VSimpleMallocList<IVPartParser> g_Parsers;
 
 	class Registerer : public utils::VRegisterGuardBase
 	{
@@ -73,9 +73,9 @@ namespace {
 		{
 			VEntitySerializationServicePtr pSerialService;
 
-			VSimpleMallocList<VGenericPartParser>* x = &g_Parsers;
+			VSimpleMallocList<IVPartParser>* x = &g_Parsers;
 
-			VSimpleMallocList<VGenericPartParser>* parser = g_Parsers.next;
+			VSimpleMallocList<IVPartParser>* parser = g_Parsers.next;
 			while( parser ) 
 			{
 				pSerialService->Register(parser->obj);
@@ -87,7 +87,7 @@ namespace {
 		{
 			VEntitySerializationServicePtr pSerialService;
 
-			VSimpleMallocList<VGenericPartParser>* parser = g_Parsers.next;
+			VSimpleMallocList<IVPartParser>* parser = g_Parsers.next;
 			while( parser ) 
 			{
 				pSerialService->Unregister(parser->obj);
@@ -102,30 +102,9 @@ namespace {
 /**
  * standard c'tor
  */
-VGenericPartParser::VGenericPartParser()
+void RegisterPartParser(IVPartParser* parser)
 {
-	g_Parsers.Append(this);
-}
-
-/**
- * d'tor
- */
-VGenericPartParser::~VGenericPartParser()
-{
-}
-
-VSharedPtr<IVPart> VGenericPartParser::Parse(xml::IVXMLElement& in_Node)
-{
-	using namespace xml;
-	using std::string;
-
-
-	VSharedPtr<IVPart> pPart = CreatePart();
-
-	//if( pPart != 0 )
-	//	ApplyParameters(in_Node, *pPart);
-
-	return pPart;
+	g_Parsers.Append( parser );
 }
 
 //-----------------------------------------------------------------------------

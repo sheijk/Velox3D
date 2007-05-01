@@ -58,6 +58,7 @@ public:
 
 	/** Returns an iterator at first position through all attributes on this element */
 	virtual AttributeIter AttributeBegin() = 0;
+	virtual VRangeIterator<const IVXMLAttribute> AttributeBegin() const = 0;
 
 	/** Returns an iterator to the last position in all attributes on this element */
 	virtual AttributeIter AttributeEnd() = 0;

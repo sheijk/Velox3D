@@ -81,8 +81,10 @@ public:
 
 	VRangeIterator<VEntity> ChildIterator();
 	VRangeIterator<const VEntity> ChildIterator() const;
+	VRangeIterator< VSharedPtr<VEntity> > ChildPtrIterator();
 	VRangeIterator<IVPart> PartIterator();
 	VRangeIterator<const IVPart> PartIterator() const;
+	VRangeIterator< VSharedPtr<IVPart> > PartPtrIterator();
 
 	std::string GetName() const;
 	void SetName(const std::string& in_strName);
@@ -95,6 +97,7 @@ public:
 	/** print all sub entities and parts to vout */
 	void DumpInfo(const std::string& prefix = "") const;
 
+	virtual void ToXML(xml::IVXMLElement& node);
 private:
 	typedef std::multimap<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;

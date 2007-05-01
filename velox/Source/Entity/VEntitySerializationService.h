@@ -30,6 +30,7 @@ public:
 
 	virtual void Register(IVPartParser* in_pPartParser);
 	virtual void Unregister(IVPartParser* in_pPartParser);
+
 	virtual VSharedPtr<IVPart> ParsePart(xml::IVXMLElement& in_Node);
 	virtual VSharedPtr<VEntity> ParseScene(xml::IVXMLElement& in_Node);
 

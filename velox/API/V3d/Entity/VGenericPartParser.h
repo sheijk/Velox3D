@@ -17,32 +17,19 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-/**
- */
+void RegisterPartParser(IVPartParser* parser);
+
+template<typename PartType>
 class VGenericPartParser : public IVPartParser
 {
 public:
-	VGenericPartParser();
-	virtual ~VGenericPartParser();
-
-	virtual std::string GetType() const = 0;
-	virtual VSharedPtr<IVPart> Parse(xml::IVXMLElement& in_Node);
-
-protected:
-	virtual VSharedPtr<IVPart> CreatePart() = 0;
-};
-
-template<typename PartType>
-class VPartParser : public VGenericPartParser
-{
-public:
-	VPartParser() 
-	{}
-	//VPartParser(VStringParam in_strId) : VGenericPartParser(in_strId)
-	//{}
+	VGenericPartParser()
+	{
+		RegisterPartParser(this);
+	}
 
 protected:
-	virtual VSharedPtr<IVPart> CreatePart()
+	virtual VSharedPtr<IVPart> Create()
 	{
 		VSharedPtr<IVPart> part = SharedPtr(new PartType());
 
@@ -72,7 +59,7 @@ protected:
  */
 #define V3D_REGISTER_PART_PARSER(PartClass) \
 	namespace {\
-		entity::VPartParser<PartClass> parser##PartClass;\
+		entity::VGenericPartParser<PartClass> parser##PartClass;\
 	}\
 	void* Assure##PartClass##Exists()\
 	{\

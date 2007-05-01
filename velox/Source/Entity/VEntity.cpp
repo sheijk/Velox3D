@@ -10,6 +10,7 @@
 #include <V3d/Core/VIOStream.h>
 
 #include <V3d/Core/RangeIter/VSTLAccessorRangePolicy.h>
+#include <V3d/XML/IVXMLElement.h>
 
 #include <sstream>
 //-----------------------------------------------------------------------------
@@ -515,6 +516,11 @@ VRangeIterator<const VEntity> VEntity::ChildIterator() const
 	return CreateDerefBeginIterator<const VEntity>(m_Entities);
 }
 
+VRangeIterator< VSharedPtr<VEntity> > VEntity::ChildPtrIterator()
+{
+	return CreateBeginIterator(m_Entities);
+}
+
 VRangeIterator<IVPart> VEntity::PartIterator()
 {
 	return CreateAccesssorIterator<
@@ -526,6 +532,13 @@ VRangeIterator<const IVPart> VEntity::PartIterator() const
 {
 	return CreateAccesssorIterator<
 		VPair2ndDerefAccessor, const IVPart, PartContainer::const_iterator>(
+		m_Parts.begin(), m_Parts.end());
+}
+
+VRangeIterator< VSharedPtr<IVPart> > VEntity::PartPtrIterator()
+{
+	return CreateAccesssorIterator<
+		VPair2ndAccessor, VSharedPtr<IVPart>, PartContainer::iterator>(
 		m_Parts.begin(), m_Parts.end());
 }
 
@@ -615,6 +628,31 @@ void VEntity::DumpInfo(const std::string& prefix) const
 	{
 		vout << prefix << "Entity.this = 0";
 	}
+}
+
+void VEntity::ToXML(xml::IVXMLElement& node)
+{
+	node.SetName("entity");
+	node.AddAttribute("name", VStringValue(m_strName));
+
+	VRangeIterator<IVPart> part = PartIterator();
+	while( part.HasNext() )
+	{
+		xml::IVXMLElement* element = node.AddElement("part");
+		part->ToXML(*element);
+
+		++part;
+	}
+
+	VRangeIterator<VEntity> child = ChildIterator();
+	while( child.HasNext() )
+	{
+		xml::IVXMLElement* element = node.AddElement("entity");
+		child->ToXML(*element);
+
+		++child;
+	}
+	
 }
 
 //-----------------------------------------------------------------------------
