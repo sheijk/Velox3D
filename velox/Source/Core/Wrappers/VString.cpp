@@ -39,7 +39,8 @@ VString::~VString()
 
 void VString::FreeMem()
 {
-	delete[] m_pCStr;
+//	delete (static_cast<char*>(m_pCStr));
+    delete[]    m_pCStr;
 	m_pCStr = 0;
 	m_nLength = 0;
 }

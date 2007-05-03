@@ -11,7 +11,7 @@
 #include <V3d/XML/IVXMLService.h>
 //-----------------------------------------------------------------------------
 #include "VXMLWriter.h"
-#include "TinyXml/tinyxml.h"
+#include "TinyXML/tinyxml.h"
 #include "VXMLAttribute.h"
 #include "VXMLElement.h"
 //-----------------------------------------------------------------------------

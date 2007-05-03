@@ -29,7 +29,7 @@ namespace kernel {
  */
 class VKernel{
 protected:
-	virtual void CreateObjectRegistry();
+    virtual void CreateObjectRegistry();
 	virtual void ParseFile(const std::string& in_strFileName);
 	virtual void GenerateInitSequence();
 	virtual void LoadServices();

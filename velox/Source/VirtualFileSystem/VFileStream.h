@@ -16,8 +16,10 @@
 #include "VLegalOperations.h"
 
 #include <string>
-#include <windows.h>
 
+#ifdef V3D WIN32
+#include <windows.h>
+#endif
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

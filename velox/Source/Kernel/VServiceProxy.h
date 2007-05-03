@@ -15,7 +15,10 @@
 #include "VKernelException.h"
 
 #include <string>
+
+#ifdef V3D_WIN32
 #include <windows.h>
+#endif
 
 //-----------------------------------------------------------------------------
 namespace v3d {
