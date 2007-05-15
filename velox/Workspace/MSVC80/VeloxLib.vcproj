@@ -110,7 +110,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_HAS_ITERATOR_DEBUGGING=0"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -129,8 +129,10 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="opengl32.lib glu32.lib ode.lib DxErr8.lib"
 				OutputFile="$(OutDir)/VeloxLib.lib"
-				IgnoreAllDefaultLibraries="true"
+				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
+				IgnoreAllDefaultLibraries="false"
 			/>
 			<Tool
 				Name="VCALinkTool"

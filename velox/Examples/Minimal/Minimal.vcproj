@@ -123,8 +123,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
-				RuntimeLibrary="0"
+				PreprocessorDefinitions="_HAS_ITERATOR_DEBUGGING=0;WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
+				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -142,11 +142,13 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="opengl32.lib glu32.lib"
 				OutputFile="$(OutDir)/Minimal.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
+				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				ImportLibrary="$(OutDir)/Minimal.lib"
@@ -188,6 +190,14 @@
 			<File
 				RelativePath="Minimal.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						RuntimeLibrary="2"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -196,10 +206,26 @@
 			<File
 				RelativePath="..\..\Source\Kernel\main.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						RuntimeLibrary="2"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="..\..\Source\Module\VeloxModule.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						RuntimeLibrary="2"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 	</Files>

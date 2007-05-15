@@ -126,7 +126,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;EXAMPLESERVICE_EXPORTS;_HAS_ITERATOR_DEBUGGING=0"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -145,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="boostd.lib jpeg.lib tinyxmld.lib extgl.lib DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib"
+				AdditionalDependencies="DevIL.lib ilu.lib dinput8.lib dxguid.lib opengl32.lib glu32.lib cg.lib cgGL.lib glew32.lib lib3ds-120d.lib glfw.lib libboost_filesystem-vc80-mt-1_33_1.lib"
 				OutputFile="$(OutDir)/ServiceDLL.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"

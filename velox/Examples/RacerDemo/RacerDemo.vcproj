@@ -69,7 +69,6 @@
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/RacerDemo.pdb"
 				SubSystem="1"
-				ImportLibrary="$(OutDir)/RacerDemo.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -101,7 +100,7 @@
 			Name="Release|Win32"
 			OutputDirectory="../../Local/Build8/$(ConfigurationName)"
 			IntermediateDirectory="../../Local/Build8/intermediate/$(ProjectName)/$(ConfigurationName)"
-			ConfigurationType="2"
+			ConfigurationType="1"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="2"
 			>
@@ -123,8 +122,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;GRAPHICSDEMO_EXPORTS"
-				RuntimeLibrary="0"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_HAS_ITERATOR_DEBUGGING=0"
+				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -146,10 +145,9 @@
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../Local\ExternalLibs\Lib"
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/RacerDemo.lib"
 				TargetMachine="1"
 			/>
 			<Tool

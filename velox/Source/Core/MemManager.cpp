@@ -661,12 +661,5 @@ void SendDebugMessage(const char* text)
 #endif
 }
 
-void bar() {}
-void foo() {
-    if( bar(), false ? true : false ) {
-        int i;
-    }
-}
-
 //-----------------------------------------------------------------------------
 

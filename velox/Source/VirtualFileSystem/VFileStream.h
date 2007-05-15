@@ -17,7 +17,7 @@
 
 #include <string>
 
-#ifdef V3D WIN32
+#ifdef V3D_WIN32
 #include <windows.h>
 #endif
 //-----------------------------------------------------------------------------

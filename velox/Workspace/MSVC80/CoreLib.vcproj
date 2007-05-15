@@ -108,7 +108,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../API;../../Local/ExternalLibs/Include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="_HAS_ITERATOR_DEBUGGING=0;WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
@@ -128,7 +128,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				OutputFile="$(OutDir)/CoreLib.lib"
-				IgnoreAllDefaultLibraries="true"
+				IgnoreAllDefaultLibraries="false"
 			/>
 			<Tool
 				Name="VCALinkTool"
