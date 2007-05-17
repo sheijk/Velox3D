@@ -49,7 +49,7 @@ VBodyPart::VBodyPart() : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo
 
 VBodyPart::~VBodyPart()
 {
-	m_pPhysicManagerPart->GetPhysicManager()->Delete(m_pBody);
+	;
 }
 
 std::string VBodyPart::GetDefaultId()
@@ -95,6 +95,7 @@ void VBodyPart::Activate()
 
 void VBodyPart::Deactivate() 
 {
+	m_pPhysicManagerPart->GetPhysicManager()->Delete(m_pBody);
 	m_pUpdateManager->Unregister(this);
 }
 
