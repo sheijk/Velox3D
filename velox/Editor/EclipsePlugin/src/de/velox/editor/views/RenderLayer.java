@@ -17,6 +17,7 @@ import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Widget;
@@ -32,12 +33,19 @@ public class RenderLayer /* extends Canvas <- hilft nicht */ {
 	private final int windowHandle;
 	private final IVDevice device;
 	private final VRenderFrameAction renderAction;
-	private final Composite parent;
+	private final Control parent;
 	private final VCamera camera = new VCamera();
 	private IVInputManager inputManager = null;
+	
+//	static boolean mainRenderLayerInitialized = false;
+//	static RenderLayer mainWindowRenderLayer = null;
 
-	public RenderLayer(final Composite parent) {
-//		super(parent, SWT.DEFAULT);
+	public RenderLayer(final Control parent) {
+//		if( ! mainRenderLayerInitialized ) {
+//			mainRenderLayerInitialized = true;
+//			
+//			mainWindowRenderLayer = new RenderLayer( parent.getShell() );
+//		}
 		
 		windowHandle = parent.handle;
 		renderAction = new VRenderFrameAction(windowHandle);

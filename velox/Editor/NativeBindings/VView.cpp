@@ -227,6 +227,9 @@ void VView::Add(IVFrameAction* in_pTestAction)
 	//if( ! fu )
 	//	V3D_THROW(VException, "no fu!");
 
+	vout << "Registered frame action " << in_pTestAction << "\n";
+
+	// will only be accessed if m_bInitCalled == false
 	m_NewFrameActions.push_back(in_pTestAction);
 	
 	m_bInitCalled = false;
@@ -246,6 +249,8 @@ void VView::Add(IVFrameAction* in_pTestAction)
 
 void VView::Remove(IVFrameAction* in_pAction)
 {
+	vout << "Unregistered frame action " << in_pAction << "\n";
+
 	m_OldFrameActions.push_back(in_pAction);
 }
 

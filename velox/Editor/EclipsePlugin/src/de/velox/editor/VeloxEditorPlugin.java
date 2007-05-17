@@ -7,10 +7,15 @@
 
 package de.velox.editor;
 
-import org.eclipse.ui.IActionBars;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.*;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.osgi.framework.BundleContext;
+
+import de.velox.VRenderFrameAction;
+import de.velox.v3d;
+import de.velox.editor.views.RenderLayer;
 
 import java.util.*;
  
@@ -18,10 +23,10 @@ import java.util.*;
  * The main plugin class to be used in the desktop.
  */
 public class VeloxEditorPlugin extends AbstractUIPlugin {
-	//The shared instance.
 	private static VeloxEditorPlugin plugin;
-	//Resource bundle.
 	private ResourceBundle resourceBundle;
+	
+	private RenderLayer renderLayer = null;
 	
 	/**
 	 * The constructor.
@@ -29,6 +34,16 @@ public class VeloxEditorPlugin extends AbstractUIPlugin {
 	public VeloxEditorPlugin() {
 		super();
 		plugin = this;
+		
+		try {
+			v3d.Initialize();
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
+		
+//		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+//		renderLayer = new RenderLayer( shell );
+//		renderLayer.getRenderAction().GetDevice().Clear();
  	}  
     
  	/**
