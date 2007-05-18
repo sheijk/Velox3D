@@ -1583,6 +1583,14 @@
 							>
 						</File>
 						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VSubAreaContext.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\Source\Graphics\OpenGL\Context\VSubAreaContext.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\Source\Graphics\OpenGL\Context\VWin32WindowContext.cpp"
 							>
 						</File>

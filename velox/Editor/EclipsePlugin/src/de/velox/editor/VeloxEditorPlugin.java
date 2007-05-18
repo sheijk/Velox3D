@@ -14,6 +14,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.osgi.framework.BundleContext;
 
 import de.velox.VRenderFrameAction;
+import de.velox.VView;
 import de.velox.v3d;
 import de.velox.editor.views.RenderLayer;
 
@@ -60,6 +61,9 @@ public class VeloxEditorPlugin extends AbstractUIPlugin {
 		super.stop(context);
 		plugin = null;
 		resourceBundle = null;
+	
+		VView.Shutdown();
+//		VRenderFrameAction.ShutdownRendering();
 	}
 
 	/**

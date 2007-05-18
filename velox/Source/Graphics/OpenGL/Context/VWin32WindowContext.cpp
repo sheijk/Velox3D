@@ -11,6 +11,8 @@
 #include "VFrameBufferObjectContext.h"
 #include <V3d/Property.h>
 #include <V3d/OpenGL.h>
+#include <V3d/Graphics/OpenGLUtils.h>
+
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
@@ -126,6 +128,18 @@ IVRenderContext* VWin32WindowContext::CreateOffscreenContext(const graphics::VDi
 	else
 	{
 		return new VCopyPixelsContext(*in_pDisplaySettings, this);
+	}
+}
+
+void VWin32WindowContext::ShareListsWith(VWin32WindowContext* other)
+{
+	if( other != 0 )
+	{
+		if( wglShareLists( other->m_RenderContext, m_RenderContext ) == FALSE )
+		{
+			V3D_THROW(VException, "Could not share context's data");
+			//ThrowOnGLError(__FILE__, __LINE__, "sharing context's data");
+		}
 	}
 }
 

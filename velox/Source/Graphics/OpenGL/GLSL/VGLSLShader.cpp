@@ -125,6 +125,12 @@ VGLSLShader::~VGLSLShader()
 
 void VGLSLShader::Bind()
 {
+#ifdef V3D_DEBUG
+	if( ! glIsProgram(m_hProgram) ) {
+		V3D_LOGLN( "Binding an invalid shader program: " << m_hProgram );
+	}
+#endif
+
 	glUseProgramObjectARB(m_hProgram);
 
 	for(vuint texNum = 0; texNum < m_Textures.size(); ++texNum)

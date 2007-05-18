@@ -37,19 +37,22 @@ public class RenderLayer /* extends Canvas <- hilft nicht */ {
 	private final VCamera camera = new VCamera();
 	private IVInputManager inputManager = null;
 	
-//	static boolean mainRenderLayerInitialized = false;
+	static boolean mainRenderLayerInitialized = false;
 //	static RenderLayer mainWindowRenderLayer = null;
 
 	public RenderLayer(final Control parent) {
-//		if( ! mainRenderLayerInitialized ) {
-//			mainRenderLayerInitialized = true;
-//			
+		if( ! mainRenderLayerInitialized ) {
+			mainRenderLayerInitialized = true;
+//			VRenderFrameAction.InitRendering( parent.getShell().handle );
+			VView.Init( parent.getShell().handle );
+			
 //			mainWindowRenderLayer = new RenderLayer( parent.getShell() );
-//		}
+		}
 		
 		windowHandle = parent.handle;
 		renderAction = new VRenderFrameAction(windowHandle);
-		VView.GetInstance().Add(renderAction);
+//		VView.GetInstance().Add(renderAction);
+		renderAction.RegisterSelf();
 		device = renderAction.GetDevice();
 
 		camera.GetPosition().SetX(1.0f);
@@ -60,10 +63,16 @@ public class RenderLayer /* extends Canvas <- hilft nicht */ {
 		
 		parent.addControlListener(new ControlListener() {
 			public void controlResized(ControlEvent e) {
-				int width = parent.getSize().x;
-				int height = parent.getSize().y;
+				int left = parent.getLocation().x;
+				int top = parent.getLocation().y;
+				int right = left + parent.getSize().x;
+				int bottom = top + parent.getSize().y;
 				
-				renderAction.setSize(width, height);
+				renderAction.SetArea(left, top, right, bottom);
+//				int width = parent.getSize().x;
+//				int height = parent.getSize().y;
+				
+//				renderAction.setSize(width, height);
 			}
 		
 			public void controlMoved(ControlEvent e) {
@@ -72,8 +81,9 @@ public class RenderLayer /* extends Canvas <- hilft nicht */ {
 		
 		parent.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
-				VView.GetInstance().Remove(renderAction);
-				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction());
+//				VView.GetInstance().Remove(renderAction);
+//				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction());
+				renderAction.UnregisterSelf();
 			}
 		});
 		
@@ -90,7 +100,8 @@ public class RenderLayer /* extends Canvas <- hilft nicht */ {
 	// might crash when the renderAction tries to make the context of the
 	// deleted window current
 	public void windowClosed() {
-		VView.GetInstance().Remove(renderAction);
+		renderAction.UnregisterSelf();
+//		VView.GetInstance().Remove(renderAction);
 	}
 	
 	public IVInputManager getInputManager() {

@@ -49,6 +49,7 @@ public:
 	/** @see v3d::graphics::IVRenderContext::CreateOffscreenContext */
 	IVRenderContext* CreateOffscreenContext(const graphics::VDisplaySettings* in_pDisplaySettings);
 
+	void ShareListsWith(VWin32WindowContext* other);
 private:
 
 	graphics::VDisplaySettings m_DisplaySettings;

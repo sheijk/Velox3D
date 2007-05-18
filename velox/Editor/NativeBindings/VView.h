@@ -11,9 +11,13 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/SmartPtr/VSharedPtr.h>
 #include <V3d/Graphics/IVDevice.h>
+#include <V3d/Graphics/IVRenderContext.h>
 #include <V3d/Entity.h>
 #include <V3d/Scene.h>
 #include <V3d/Entity/VUpdateablePart.h>
+
+#include "../../Source/Graphics/OpenGL/Context/VSubAreaContext.h"
+#include "../../Source/Graphics/OpenGL/Context/VWin32WindowContext.h"
 
 #include <V3d/OpenGL.h>
 #include <GL/glfw.h>
@@ -54,6 +58,12 @@ public:
 	bool IsRunning() const { return m_bIsRunning; }
 		
 	static VView* GetInstance();
+
+	static void Init(VNativeWindowHandle windowHandle);
+	static void Shutdown();
+
+	graphics::VSubAreaContext* CreateSubAreaContext();
+
 //	VView(VNativeWindowHandle hwnd);
 //	bool IsRendering() const;
 	
@@ -64,6 +74,7 @@ public:
 	
 //	v3d::entity::VEntity& GetSceneRoot();
 
+	graphics::VWin32WindowContext* GetMainContext();
 private:
 #ifndef SWIG
 	static void GLFWCALL FrameUpdateLoop(void* arg);
@@ -89,6 +100,8 @@ private:
 	GLFWmutex m_SyncMutex;
 	GLFWcond m_SyncDoneCondition;
 	
+	static VSharedPtr<graphics::VWin32WindowContext> m_pMainContext;
+	//statgraphics::IVRenderContext* m_pMainContext;
 //	bool m_bIsRendering;
 //	v3d::VSharedPtr<v3d::graphics::VOpenGLDevice> m_pDevice;
 //	HWND m_HWND;

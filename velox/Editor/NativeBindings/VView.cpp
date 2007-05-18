@@ -12,7 +12,6 @@
 #include <V3d/Math.h>
 #include <V3d/Resource.h>
 #include <V3d/Core/VException.h>
-#include "../../Source/Graphics/OpenGL/Context/VWin32WindowContext.h"
 #include "../../Source/Graphics/OpenGL/VOpenGLDevice.h"
 #include "../../Source/Graphics/OpenGL/glsl/VGLSLShader.h"
 #include "../../Source/Graphics/OpenGL/Context/VFrameBufferObjectContext.h"
@@ -33,6 +32,7 @@ using namespace v3d::entity;
 using namespace std;
 
 VSharedPtr<VView> VView::s_pInstance;
+VSharedPtr<graphics::VWin32WindowContext> VView::m_pMainContext;
 
 VView::VView()
 {
@@ -127,6 +127,11 @@ void VView::FrameUpdateLoop()
 
 			m_bInitCalled = true;
 
+			if( m_pMainContext != 0 )
+			{
+				//m_pMainContext->MakeCurrent();
+			}
+
 			// tell all frame actions to execute
 			for(FrameActions::iterator action = m_FrameActions.begin();
 				action != m_FrameActions.end(); ++action)
@@ -164,6 +169,11 @@ void VView::FrameUpdateLoop()
 			glfwUnlockMutex(m_SyncMutex);
 			glfwBroadcastCond(m_SyncDoneCondition);
 
+			if( m_pMainContext != 0 )
+			{
+				//m_pMainContext->SwapBuffers();
+			}
+
 			// sleep for n seconds
 			glfwSleep(delay);
 			pUpdater->StartNextFrame();
@@ -181,6 +191,30 @@ void VView::FrameUpdateLoop()
 		mem_fun<void, IVFrameAction>(&IVFrameAction::Shutdown));
 	
 	cout << "Finished rendering" << endl;	
+}
+
+graphics::VWin32WindowContext* VView::GetMainContext()
+{
+	return m_pMainContext.Get();
+}
+
+void VView::Init(VNativeWindowHandle windowHandle)
+{
+	HWND toplevelHandle = GetAncestor( (HWND)windowHandle, GA_ROOT );
+
+	VDisplaySettings settings;
+	settings.SetWidth(200);
+	settings.SetHeight(200);
+	settings.SetPosition(0, 0);
+
+	cout << "\tCreating context" << endl;
+	VWin32WindowContext* pContext = new VWin32WindowContext(toplevelHandle, &settings);
+	m_pMainContext.Assign( pContext );
+}
+
+void VView::Shutdown()
+{
+	m_pMainContext.Release();
 }
 
 void VView::ExecSynchronized(IVSynchronizedAction* in_pAction)
@@ -263,6 +297,18 @@ bool contains(const Container& container, T t)
 bool VView::Contains(IVFrameAction* in_pAction)
 {
 	return contains(m_FrameActions, in_pAction) || contains(m_NewFrameActions, in_pAction);
+}
+
+graphics::VSubAreaContext* VView::CreateSubAreaContext()
+{
+	if( m_pMainContext != 0 )
+	{
+		return new graphics::VSubAreaContext( m_pMainContext );
+	}
+	else
+	{
+		V3D_THROW(VException, "Could not create sub area context: main context is 0");
+	}
 }
 
 ////void CreateTestModel(const std::string& resname);

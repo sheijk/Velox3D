@@ -4,8 +4,10 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
 #include "VBaseTexture.h"
+
+#include <V3d/Core/VIOStream.h>
+#include <V3d/Core/VLogging.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d { namespace graphics {
@@ -32,6 +34,12 @@ VBaseTexture::~VBaseTexture()
 
 void VBaseTexture::Bind(vuint in_nTextureUnit)
 {
+#ifdef V3D_DEBUG
+	if( ! glIsTexture(m_iTextureID) ) {
+		V3D_LOGLN( "Warning: binding non-existant texture no." << m_iTextureID );
+	}
+#endif
+
 	m_nTextureUnit = in_nTextureUnit;
 	glEnable(m_iTextureTarget);
 	glActiveTexture(GL_TEXTURE0 + m_nTextureUnit);

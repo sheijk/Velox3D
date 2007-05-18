@@ -43,13 +43,22 @@ public:
 	virtual void UpdateFrame(vfloat32 in_fFrameDuration);
 	virtual void Shutdown();
 
+	void Render();
+
+	void RegisterSelf();
+	void UnregisterSelf();
+
 	void SetShooting(v3d::scene::IVShooting* in_pShooting);
 	v3d::graphics::IVDevice* GetDevice();
 	v3d::input::IVInputManager* GetInputManager();
 
 	void SetIgnoreInput(vbool ignore);
 
-	void setSize(vuint width, vuint height);
+	//void setSize(vuint width, vuint height);
+	void SetArea(vint left, vint top, vint right, vint bottom);
+
+	static void InitRendering(VNativeWindowHandle handle);
+	static void ShutdownRendering();
 private:
 	vuint m_nWidth;
 	vuint m_nHeight;
