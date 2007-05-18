@@ -27,7 +27,6 @@ class VBody;
 class VJointHinge2Part : public entity::VPartBase
 {
 public:
-	
 	VJointHinge2Part();
 	~VJointHinge2Part();
 	
@@ -35,11 +34,7 @@ public:
 	void Activate();
 	void Deactivate();
 	
-	//void RegisterBody(VBody* in_pAddress);
-	//void UnregisterBody(VBody* in_pAddress);
-	
 	VJointHinge2& GetJointHinge2();
-
 	static std::string GetDefaultId();
 
 	virtual const VTypeInfo& GetTypeInfo() const 
@@ -47,8 +42,7 @@ public:
 
 private:
 
-	//void Create();
-	void RegisterLink();
+	vbool RegisterLink();
 
 	virtual void OnMessage(
 		const messaging::VMessage& in_Message,
@@ -58,14 +52,10 @@ private:
 	VJointHinge2 m_Joint;
 	vbool m_bIsLinkedByBodyOne;
 	vbool m_bIsLinkedByBodyTwo;
-	VBody* m_pBodyAddressOne;
-	VBody* m_pBodyAddressTwo;
-
 	vbool m_bIsActive;
 	vbool m_bIsReady;
 	std::string m_sBody1Name;
 	std::string m_sBody2Name;
-
 	std::string m_sName;
 };
 
@@ -74,4 +64,3 @@ private:
 V3D_TYPEINFO_WITHPARENT(v3d::physics::VJointHinge2Part, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif //V3D_VJOINTHINGE2PART_2006_05_05_H
-

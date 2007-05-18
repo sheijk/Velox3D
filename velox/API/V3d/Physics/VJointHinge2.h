@@ -8,6 +8,7 @@
 #ifndef V3D_VJOINTHINGE2_2004_11_07_H
 #define V3D_VJOINTHINGE2_2004_11_07_H
 //-----------------------------------------------------------------------------
+#include <V3d/Core/VTypes.h>
 #include <V3d/Physics/VJoint.h>
 //#include <V3dLib/Graphics/Geometry/VVertex3f.h>
 #include <V3d/Math/VVector.h>
@@ -34,7 +35,8 @@ public:
 
 	void Create(VWorld* in_PhysicWorld);
 	void AddBody(VBody* in_pBody1, VBody* in_pBody2);
-
+	void SetBody1Name(VStringParam in_Name);
+	void SetBody2Name(VStringParam in_Name);
 	void SetAxis1(math::VVector3f in_Axis);
 	void SetAxis1(vfloat32 x, vfloat32 y, vfloat32 z);
 	void SetAxis2(math::VVector3f in_Axis);
@@ -42,27 +44,22 @@ public:
 	void SetAnchor(math::VVector3f in_Anchor);
 	void SetAnchor(vfloat32 x, vfloat32 y, vfloat32 z);
 	void SetMaxForce2(vfloat32 in_fMaxForce2);
+	void SetName(std::string in_sName);
 
 	vfloat32 GetMaxForce2();
 	vfloat32 GetAnchorAngle1();
-
-	/*graphics::VVertex3f  GetAxis1();
-	graphics::VVertex3f  GetAxis2();
-	graphics::VVertex3f  GetAnchor();
-	*/
-
 	math::VVector3f GetAxis1();
 	math::VVector3f GetAxis2();
 	math::VVector3f GetAnchor();
 	math::VVector3f GetOwnAnchor();
 	std::string GetName();
-	void SetName(std::string in_sName);
+	std::string GetBody1Name();
+	std::string GetBody2Name();
+	
+
 
 	VBody* GetBody1();
 	VBody* GetBody2();
-
-	
-
 	virtual void Apply();
 	void SetParameters();
 
@@ -75,6 +72,8 @@ private:
 
 	VBody* m_pBody1;
 	VBody* m_pBody2;
+	std::string m_Body1Name;
+	std::string m_Body2Name;
 
 	vfloat32 m_fMaxForce2;
 

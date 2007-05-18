@@ -40,14 +40,9 @@ void VPhysicManagerPart::Deactivate()
 
 void VPhysicManagerPart::Update(vfloat32 in_fSeconds)
 {
-	if(in_fSeconds == 0) //no step plz
+	if(in_fSeconds == 0) //no step please
 		return;
 	m_pPhysicManager->Update(in_fSeconds);
-}
-
-std::string VPhysicManagerPart::GetDefaultId()
-{
-	return "physicManagerPart";
 }
 
 VPhysicManagerPtr VPhysicManagerPart::GetPhysicManager()
@@ -102,8 +97,10 @@ void VPhysicManagerPart::OnMessage(const messaging::VMessage& in_Message, messag
 		{
 			vfloat32 pos = in_Message.GetAs<vfloat32>("value");
 			//m_pPhysicManager->GetWorld()->SetWorldStep(pos);
-
+#ifdef V3D_DEBUG
 			//vout << "Physics: world update step size set to " << pos << vendl;
+			vout << "Physics: step modify not supported anymore" << vendl;
+#endif
 		}
 
 		if( name == "SurfaceMu" )
@@ -187,8 +184,6 @@ void VPhysicManagerPart::OnMessage(const messaging::VMessage& in_Message, messag
 		}
 	}
 }
-
-
 V3D_REGISTER_PART_PARSER(VPhysicManagerPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::

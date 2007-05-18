@@ -44,7 +44,7 @@ private:
 	void Steer(float in_fSteer);
 	bool GetButtons();
 	void Accel(float in_fSpeed, float in_fAccel);
-
+	vbool AreValidJoints();
 	input::IVButton* m_pButton;
 	input::IVButton* m_pButton2;
 	input::IVButton* m_pButton3;
@@ -62,7 +62,6 @@ private:
 	vfloat32 m_fAccel;
 	vfloat32 m_fMaxSteer;
 	vfloat32 m_fMaxAccel;
-  
 	std::string m_sJointName[4];
 	VJointHinge2* m_pJoint[4];
 };

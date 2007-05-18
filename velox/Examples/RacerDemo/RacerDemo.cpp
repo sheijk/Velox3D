@@ -169,7 +169,6 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	pInputPart->SetInputManager(&m_pWindow->QueryInputManager());
 
 	m_pPhysicManager.Assign(new VPhysicManager());
-	m_pPhysicManager->RegisterToUpdater();
 
 	pRoot->Activate();
 	//pRoot->DumpInfo();
@@ -205,7 +204,6 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 		
 		Device().EndScene();
-
 		m_pUpdater->StartNextFrame();
 
 		static vfloat32 timeTillNextToggle = .0f;

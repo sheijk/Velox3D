@@ -38,16 +38,6 @@ VPhysicManager::~VPhysicManager()
 	;
 }
 
-void VPhysicManager::RegisterToUpdater()
-{
-	//Register();
-}
-
-void VPhysicManager::UnregisterToUpdater()
-{
-	//Unregister();
-}
-
 void VPhysicManager::Update(vfloat32 in_fSeconds)
 {
 	//limit time of physic simulation
@@ -61,12 +51,10 @@ void VPhysicManager::Update(vfloat32 in_fSeconds)
 	//step small fixed steps forward in time
 	while( m_fTimeDelta >= m_fTimeStep )
 	{
-		//t+=m_fTimeStep;
-		//m_World.SetWorldStep(m_fTimeStep);
 		m_World.SetWorldStep(m_fTimeStep);
 		m_World.Update();
 		UpdateBodies();
-		//timeDelta -= m_fTimeStep;
+		UpdateJoints();
 		m_fTimeDelta -= m_fTimeStep;
 	}
 }
@@ -80,7 +68,44 @@ void VPhysicManager::UpdateBodies()
 	for(; begin != end; ++begin)
 		(*begin)->Update();
 
-	//for_each(begin, end, mem_fun(&VBody::Update));
+	//for_each(begin, end, std::mem_fun(&VBody::Update));
+}
+
+void VPhysicManager::UpdateJoints()
+{
+  typedef JointList::const_iterator JLIter;
+  JLIter it = m_UnconnectedJoints.begin();
+  JLIter itEnd = m_UnconnectedJoints.end();
+
+  for ( ; it != itEnd; ++it)
+  {
+	//get the 2 bodies we want to attach
+	std::string reqName1 = (*it)->GetBody1Name();
+	std::string reqName2 = (*it)->GetBody2Name();
+
+   	VBody* pBody1 = QueryBodyByName(reqName1);
+	VBody* pBody2 = QueryBodyByName(reqName2);
+	
+	if( pBody1 && pBody2 )
+	{
+	  (*it)->Destroy();
+	  (*it)->Create(GetWorld());
+	  (*it)->AddBody(pBody1, pBody2);
+	  (*it)->Apply();
+	  m_ConnectedJoints.push_back(*it);
+	}
+  }
+
+  //remove connected joints from list
+  it = m_ConnectedJoints.begin();
+  itEnd = m_ConnectedJoints.end();
+
+  for( ; it != itEnd; ++it )
+  {
+	JLIter findIt =	std::find(m_UnconnectedJoints.begin(), m_UnconnectedJoints.end(), (*it));
+	if( findIt != m_UnconnectedJoints.end() )
+	  m_UnconnectedJoints.remove(*it);
+  }
 }
 
 void VPhysicManager::Delete(BodyPtr in_Body)
@@ -88,8 +113,8 @@ void VPhysicManager::Delete(BodyPtr in_Body)
 	m_BodyList.remove(in_Body);
 
 	//check if we need to deactivate a joint
-	JointList::const_iterator it = m_JointList.begin();
-	JointList::const_iterator itEnd = m_JointList.end();
+	JointList::const_iterator it = m_ConnectedJoints.begin();
+	JointList::const_iterator itEnd = m_ConnectedJoints.end();
 	for ( ; it != itEnd; ++it )
 	{
 		VBody* pBody1 = (*it)->GetBody1();
@@ -98,16 +123,6 @@ void VPhysicManager::Delete(BodyPtr in_Body)
 		if(pBody1 == in_Body.Get() || pBody2 == in_Body.Get() )
 			(*it)->Destroy();
 	}
-}
-
-void VPhysicManager::Activate()
-{
-	;
-}
-
-void VPhysicManager::Deactivate()
-{
-	;
 }
 
 std::string VPhysicManager::QueryAvailableIdentifier(std::string in_sIdentifier)
@@ -271,9 +286,7 @@ VPhysicManager::BodyPtr VPhysicManager::Create(IVBoundingVolumePart* in_pBoundin
 	if(pMesh)
 		return CreateMesh(in_fMass, pMesh, in_sIdentifierName);
 	
-
 	return BodyPtr(0);
-
 }
 
 VPhysicManager::BodyPtr VPhysicManager::CreateSphere(
@@ -384,16 +397,6 @@ VPhysicManager::Geometry VPhysicManager::CreatePlane(
 	return pGeometryPlane;
 }
 
-//void VPhysicManager::LinkBody(
-//      VPhysicManager::BodyPtr in_pBody1,
-//	  VPhysicManager::BodyPtr in_pBody2,
-//	  VPhysicManager::JointPtr in_LinkMode)
-//{
-//	in_LinkMode->Create(&m_World);
-//	in_LinkMode->AddBody(in_pBody1.Get(), in_pBody2.Get());
-//	in_LinkMode->Apply();
-//}
-
 void VPhysicManager::DeleteCollisionMesh(VGeometry* in_Geometry)
 {
 	V3D_ASSERT(in_Geometry != 0);
@@ -415,28 +418,31 @@ void VPhysicManager::RegisterJoint(VJointHinge2* in_pJoint)
 {
 	if(in_pJoint)
 	{
-		JointList::const_iterator it = m_JointList.begin();
-		JointList::const_iterator itEnd = m_JointList.end();
+		JointList::const_iterator it = m_ConnectedJoints.begin();
+		JointList::const_iterator itEnd = m_ConnectedJoints.end();
 		for ( ; it != itEnd; ++it)
 		{
 			if(in_pJoint == (*it) )
 				return;
 		}
 
-		m_JointList.push_back(in_pJoint);
+		m_ConnectedJoints.push_back(in_pJoint);
 	}
 }
 void VPhysicManager::UnregisterJoint(VJointHinge2* in_pJoint)
 {
 	if(in_pJoint)
-		m_JointList.remove(in_pJoint);
+	{
+		m_UnconnectedJoints.remove(in_pJoint);
+		m_ConnectedJoints.remove(in_pJoint);
+	}
 }
 
 void VPhysicManager::RefreshJoint(VBody* in_pBody)
 {
 	//check if body has any connections to joints
-	JointList::const_iterator it = m_JointList.begin();
-	JointList::const_iterator itEnd = m_JointList.end();
+	JointList::const_iterator it = m_ConnectedJoints.begin();
+	JointList::const_iterator itEnd = m_ConnectedJoints.end();
 
 	for( ; it != itEnd; ++it)
 	{
@@ -456,17 +462,23 @@ void VPhysicManager::RefreshJoint(VBody* in_pBody)
 	}
 }
 
+void VPhysicManager::RegisterJointForCreation(VJointHinge2* in_pJointPart)
+{
+  m_UnconnectedJoints.push_back(in_pJointPart);
+}
+
 physics::VJointHinge2* VPhysicManager::GetJointByName(std::string in_sName)
 {
-  JointList::const_iterator it = m_JointList.begin();
-  JointList::const_iterator itEnd = m_JointList.end();
+  JointList::const_iterator it = m_ConnectedJoints.begin();
+  JointList::const_iterator itEnd = m_ConnectedJoints.end();
 
   for( ; it != itEnd; ++it)
   {
 	if((*it)->GetName() == in_sName)
 	  return (*it);
   }
-  V3D_THROW(VPhysicManagerException, "joint not found");
+  //V3D_THROW(VPhysicManagerException, "joint not found");
+  //nothing found; handle gracefully
   return 0;
 
 }

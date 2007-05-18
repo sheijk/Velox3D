@@ -25,14 +25,14 @@ namespace physics{
 class VBody
 {
 public:
-		
+    VBody(VOdeBody* in_pOdeBody, std::string in_sName);
+	virtual ~VBody();
+
 	void Update();
 	void SetCollisionMesh();
 
 	VStateOrientation& GetOrientation();
 	VStatePosition& GetPositionState();
-	VBody(VOdeBody* in_pOdeBody, std::string in_sName);
-	virtual ~VBody();
 	VOdeBody* GetOdeBody();
 	void Add(VState* in_pState);
 	void Delete(VState* in_pState);

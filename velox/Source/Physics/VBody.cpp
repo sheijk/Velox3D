@@ -32,12 +32,12 @@ VBody::~VBody()
 {
 	if(m_Body)
 	{
-		m_Body->Destroy(); //todo tell the manager about this delete name
+		m_Body->Destroy(); //unregister body done by VBodyPart
 		delete m_Body;
 	}
 	if(m_CollisionMesh)
 	{
-		//delete m_CollisionMesh;
+		//delete m_CollisionMesh; //TODO
 	}
 }
 

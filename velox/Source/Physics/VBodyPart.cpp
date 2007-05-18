@@ -49,7 +49,7 @@ VBodyPart::VBodyPart() : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo
 
 VBodyPart::~VBodyPart()
 {
-	;
+  ;
 }
 
 std::string VBodyPart::GetDefaultId()
@@ -106,22 +106,9 @@ VBodyPart::BodyPtr VBodyPart::GetBody()
 
 void VBodyPart::Update(vfloat32 in_fSeconds)
 {
-
-	//hack!
-	/*if(
-		m_Position.GetX() - m_pRigidBodyPart.Get()->GetPosition().GetX() <= std::numeric_limits<float>::epsilon() &&
-		m_Position.GetY() - m_pRigidBodyPart.Get()->GetPosition().GetY() <= std::numeric_limits<float>::epsilon() &&
-		m_Position.GetZ() - m_pRigidBodyPart.Get()->GetPosition().GetZ() <= std::numeric_limits<float>::epsilon()
-		) //makes all things oscillating
-	*/
-	//if(
-	//	m_Position.GetX() == m_pRigidBodyPart.Get()->GetPosition().GetX() &&
-	//	m_Position.GetY() == m_pRigidBodyPart.Get()->GetPosition().GetY() &&
-	//	m_Position.GetZ() == m_pRigidBodyPart.Get()->GetPosition().GetZ())
-
 	VRBTransform transform = m_pRigidBodyPart.Get()->GetTransform();
 	VQuatf orient;
-	//convert translation matrix to quaterion
+	//convert translation matrix to quaternion
 	gmtl::set(orient.m_Data, transform.AsMatrix().m_Mat);
 	VQuatf rigidQuat = m_pBody->GetOrientation().GetQuat();
 	if(
@@ -187,14 +174,10 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 	}
 	else
 	{
-	  vout << "change" << vendl;
-		//delete body
+	  	//delete body
 		VQuatf rigidQuat = m_pBody->GetOrientation().GetQuat();
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
 		m_pBody->Deactivate();
-
-		//TODO will not take joints into account. coming with new physic manager design
-		//restore the old values
 		m_pPhysicManagerPart->GetPhysicManager()->RefreshJoint(m_pBody.Get());
 		m_pBody->SetPosition(m_Position);
 		m_pBody->SetOrientation(orient);
@@ -306,4 +289,3 @@ V3D_REGISTER_PART_PARSER(VBodyPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::physics
 //-----------------------------------------------------------------------------
-

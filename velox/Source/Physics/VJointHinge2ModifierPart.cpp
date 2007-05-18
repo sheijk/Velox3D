@@ -36,14 +36,19 @@ m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 	m_fMaxAccel = 1000.0f;
 	m_fMaxSteer = 0.5f;
 	m_fMaxSpeed = 1000.0f;
+
+	for(vuint i = 0; i < 4; i++ )
+	{
+	  m_pJoint[i] = 0;
+	}
 }
 
 void VJointHinge2ModifierPart::Activate()
 {
-	if( m_pPhysicManagerPart.Get() == 0)
+	/*if( m_pPhysicManagerPart.Get() == 0)
 		V3D_THROW(entity::VMissingPartException, "missing part phyic manager");
 	if( m_pInputManager.Get() == 0)
-		V3D_THROW(entity::VMissingPartException, "missing part VInputPart");
+		V3D_THROW(entity::VMissingPartException, "missing part VInputPart");*/
 
 	if(m_pInputManager->GetInputManager())
 	{
@@ -128,30 +133,6 @@ bool VJointHinge2ModifierPart::GetButtons()
 		m_fAccel = 0;
    	}
   }
-
-  /*if(m_pButton6)
-  {
-	if(m_pButton6->IsDown())
-	{
-	  if(m_fAccel > 0)
-	  {
-		m_fAccel = 0;
-	  }
-	  m_fAccel -=m_fSpeedFactor;
-	}
-  }
-  if(m_pButton7)
-  {
-	if(m_pButton7->IsDown())
-	{
-	  if(m_fAccel < 0)
-	  {
-		m_fAccel = 0;
-	  }
-	  m_fAccel +=m_fSpeedFactor;
-	}
-  }*/
-
   return bIsSteered;
 }
 
@@ -160,7 +141,8 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
   //get the joints we are looking for
   for(vuint i = 0; i < 4 ; i++)
   {
-	m_pJoint[i] = m_pPhysicManagerPart->GetPhysicManager()->GetJointByName(m_sJointName[i]);
+	  VJointHinge2* pJoint = m_pPhysicManagerPart->GetPhysicManager()->GetJointByName(m_sJointName[i]);
+  	  m_pJoint[i] = pJoint;
   }
   
   if( ! GetButtons() )
@@ -186,78 +168,63 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
 	  	  m_fSteering +=in_fSeconds;
 	  }
 	}
-
-	/*if(m_fAccel > 0)
-	{
-	  m_fAccel-= in_fSeconds*10;
-	  if(m_fAccel < 0)
-		m_fAccel = 0;
-	}
-	else
-	{
-	  m_fAccel += in_fSeconds*10;
-	  if(m_fAccel > 0)
-		m_fAccel = 0;
-	}*/
-
   }
   
-  if(m_pJoint[0] && m_pJoint[1])
+  if( AreValidJoints() )
   {
 	Accel(m_fSpeed, m_fAccel);
 	Steer(m_fSteering);
-	//vout << "Speed: " << m_fSpeed << "Accel: " << m_fAccel << "Steer: " << m_fSteering << vendl;
   }
   else
   {
-	//vout << "physics modifier: could not find requested joints" << vendl;
+	;
   }
-	//TODO: ugly test code; clean up
-
-	
 }
 
-void VJointHinge2ModifierPart::Steer(float in_fSteer)
+vbool VJointHinge2ModifierPart::AreValidJoints()
+{
+  vbool state = true;
+  for( vuint i = 0; i < 4 ; i++ )
+  {
+	if ( !m_pJoint[i] )
+	  state = false;
+  }
+  return state;
+}
+
+void VJointHinge2ModifierPart::Steer(vfloat32 in_fSteer)
 {
   //float leftAdjust = (in_fSpeed > 0 ? in_fSpeed : in_fSpeed * 1.2);
   //float rightAdjust = (in_fSpeed < 0 ? in_fSpeed : in_fSpeed * 1.2);
-
-  float v[2];
-  v[0] = (in_fSteer > 0 ? in_fSteer : in_fSteer * 1.2f);
-  v[1] = (in_fSteer < 0 ? in_fSteer : in_fSteer * 1.2f);
   
-  for(vuint i = 0; i < 2; i++)
+  //check if all joints are valid; if not skip this and try in next frame
+  if ( AreValidJoints() )
   {
-	m_pJoint[i]->SetLowStop(v[i]);
-	m_pJoint[i]->SetLowStop(v[i]); // do this twice; ode may have trouble
-	m_pJoint[i]->SetHighStop(v[i]);
-	//m_pJoint[i]->SetVelocity(v[i]);
-	float s = in_fSteer - m_pJoint[i]->GetAnchorAngle1();
-	m_pJoint[i]->SetVelocity(s);
-	m_pJoint[i+1]->SetVelocity(s);
-	m_pJoint[i+2]->SetVelocity(s);
-	//m_pJoint[i]->SetFudgeFactor(0.1f);
-	//m_pJoint[i]->SetMaxForce(10.0);
+	float v[2];
+	v[0] = (in_fSteer > 0 ? in_fSteer : in_fSteer * 1.2f);
+	v[1] = (in_fSteer < 0 ? in_fSteer : in_fSteer * 1.2f);
+    
+	for(vuint i = 0; i < 2; i++)
+	{
+	  m_pJoint[i]->SetLowStop(v[i]);
+	  m_pJoint[i]->SetLowStop(v[i]); // do this twice; ode may have trouble
+	  m_pJoint[i]->SetHighStop(v[i]);
+	  //m_pJoint[i]->SetVelocity(v[i]);
+	  float s = in_fSteer - m_pJoint[i]->GetAnchorAngle1();
+	  m_pJoint[i]->SetVelocity(s);
+	  m_pJoint[i+1]->SetVelocity(s);
+	  m_pJoint[i+2]->SetVelocity(s);
+	  //m_pJoint[i]->SetFudgeFactor(0.1f);
+	  //m_pJoint[i]->SetMaxForce(10.0);
+	}
   }
-  //float s = in_fSteer - dJointGetHinge2Angle1 (joint[0]);
-
-  //vfloat32 v1 = in_fSteer - pJoint1->GetAnchorAngle1();
-  //if (v1 > 0.1) v1 = 0.1;
-  //if (v1 < -0.1) v1 = -0.1;
-  //v1 *= 10.0;
-  //pJoint1->SetVelocity(v1);
-  /*pJoint1->SetLowStop(-0.65f);
-  pJoint1->SetHighStop(0.65f);
-  pJoint1->SetMaxForce(10.5f);*/
-  //vfloat32 v2 = in_fSteer - pJoint2->GetAnchorAngle1();
-  //if (v2 > 0.1) v2 = 0.1;
-  //if (v2 < -0.1) v2 = -0.1;
-  //v2 *= 10.0;
-  
-  //pJoint2->SetVelocity(v2);
-  /*pJoint2->SetLowStop(-0.65f);
-  pJoint2->SetHighStop(0.65f);
-  pJoint2->SetMaxForce(10.5f);*/
+  else
+  {
+#ifdef V3D_DEBUG
+	vout << "JointHinge2ModiferParttried to modified unexisting joints" << vendl;
+#endif
+	;
+  }
 }
 
 void VJointHinge2ModifierPart::Accel(float in_fSpeed, float in_fAccel)
