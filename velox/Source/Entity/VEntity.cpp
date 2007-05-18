@@ -630,7 +630,7 @@ void VEntity::DumpInfo(const std::string& prefix) const
 	}
 }
 
-void VEntity::ToXML(xml::IVXMLElement& node)
+void VEntity::Save(xml::IVXMLElement& node)
 {
 	node.SetName("entity");
 	node.AddAttribute("name", VStringValue(m_strName));
@@ -639,7 +639,7 @@ void VEntity::ToXML(xml::IVXMLElement& node)
 	while( part.HasNext() )
 	{
 		xml::IVXMLElement* element = node.AddElement("part");
-		part->ToXML(*element);
+		part->Save(*element);
 
 		++part;
 	}
@@ -648,7 +648,7 @@ void VEntity::ToXML(xml::IVXMLElement& node)
 	while( child.HasNext() )
 	{
 		xml::IVXMLElement* element = node.AddElement("entity");
-		child->ToXML(*element);
+		child->Save(*element);
 
 		++child;
 	}

@@ -50,10 +50,11 @@ public:
 	virtual void Deactivate();
 	virtual void UpdateAndCull();
 
-private:
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+private:
 	virtual graphics::IVDevice* GetRenderTarget();
 	virtual graphics::IVCamera* GetCamera();
 	virtual scene::IVGraphicsPart* GetScene();

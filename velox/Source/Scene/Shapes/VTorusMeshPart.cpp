@@ -42,12 +42,12 @@ VTorusMeshPart::VTorusMeshPart(const VColor4f& in_Color) :
 }
 
 VTorusMeshPart::VTorusMeshPart(
-				  vfloat32 in_fTopRadius,
-				  vfloat32 in_fButtonRadius,
-				  vfloat32 in_fHeight,
-				  int in_iSlices,
-				  int in_iStacks) : m_Color((VColor4f(1,1,1,1))),
-				  VMeshPartBase(graphics::IVDevice::GetDefaultMaterial())
+	vfloat32 in_fTopRadius,
+	vfloat32 in_fButtonRadius,
+	vfloat32 in_fHeight,
+	int in_iSlices,
+	int in_iStacks) : m_Color((VColor4f(1,1,1,1))),
+	VMeshPartBase(graphics::IVDevice::GetDefaultMaterial())
 {
 	m_fTopRadius = in_fTopRadius;
 	m_fButtonRadius = in_fButtonRadius;
@@ -93,28 +93,47 @@ void VTorusMeshPart::sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals)
 	}
 }
 
-void v3d::scene::VTorusMeshPart::OnMessage(
-	const messaging::VMessage& in_Message,  
-	messaging::VMessage* in_pAnswer) 
+messaging::VMessageInterpreter* VTorusMeshPart::GetMessageInterpreterForClass()
 {
-	using namespace messaging;
+	static messaging::VMessageInterpreter interpreter;
 
-	static VMessageInterpreter interpreter;
-
-	if( !interpreter.IsInitialized() )
-	{
-		interpreter.SetInitialized(true);
-
-		interpreter.AddMemberOption("color", this, &m_Color);
-		interpreter.AddMemberOption("top-radius", this, &m_fTopRadius);
-		interpreter.AddMemberOption("bottom-radius", this, &m_fButtonRadius);
-		interpreter.AddMemberOption("height", this, &m_fHeight);
-		interpreter.AddMemberOption("slices", this, &m_iSlices);
-		interpreter.AddMemberOption("stacks", this, &m_iStacks);
-	}
-
-	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+	return &interpreter;
 }
+
+void VTorusMeshPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption("color", this, &m_Color);
+	interpreter.AddMemberOption("top-radius", this, &m_fTopRadius);
+	interpreter.AddMemberOption("bottom-radius", this, &m_fButtonRadius);
+	interpreter.AddMemberOption("height", this, &m_fHeight);
+	interpreter.AddMemberOption("slices", this, &m_iSlices);
+	interpreter.AddMemberOption("stacks", this, &m_iStacks);
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//void v3d::scene::VTorusMeshPart::OnMessage(
+//	const messaging::VMessage& in_Message,  
+//	messaging::VMessage* in_pAnswer) 
+//{
+//	using namespace messaging;
+//
+//	static VMessageInterpreter interpreter;
+//
+//	if( !interpreter.IsInitialized() )
+//	{
+//		interpreter.SetInitialized(true);
+//
+//		interpreter.AddMemberOption("color", this, &m_Color);
+//		interpreter.AddMemberOption("top-radius", this, &m_fTopRadius);
+//		interpreter.AddMemberOption("bottom-radius", this, &m_fButtonRadius);
+//		interpreter.AddMemberOption("height", this, &m_fHeight);
+//		interpreter.AddMemberOption("slices", this, &m_iSlices);
+//		interpreter.AddMemberOption("stacks", this, &m_iStacks);
+//	}
+//
+//	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+//}
 
 V3D_REGISTER_PART_PARSER(VTorusMeshPart);
 //-----------------------------------------------------------------------------

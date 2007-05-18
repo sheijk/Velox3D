@@ -38,27 +38,46 @@ VFrustumVisPart::~VFrustumVisPart()
 {
 }
 
-void VFrustumVisPart::OnMessage(
-	const messaging::VMessage& in_Message, 
-	messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VFrustumVisPart::GetMessageInterpreterForClass()
 {
-	using namespace messaging;
+	static messaging::VMessageInterpreter interpreter;
 
-	static VMessageInterpreter interpreter;
-	if( ! interpreter.IsInitialized() )
-	{
-		interpreter.SetInitialized(true);
-
-		interpreter.AddMemberOption("fov", this, &m_fFOV);
-		interpreter.AddMemberOption("znear", this, &m_fZNear);
-		interpreter.AddMemberOption("zfar", this, &m_fZFar);
-		interpreter.AddMemberOption("linedist", this, &m_fLineDist);
-		interpreter.AddMemberOption("aspect-ratio", this, &m_fAspectRatio);
-		interpreter.AddMemberOption("xy-offset", this, &m_fXYOffset);
-	}
-
-	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+	return &interpreter;
 }
+
+void VFrustumVisPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption("fov", this, &m_fFOV);
+	interpreter.AddMemberOption("znear", this, &m_fZNear);
+	interpreter.AddMemberOption("zfar", this, &m_fZFar);
+	interpreter.AddMemberOption("linedist", this, &m_fLineDist);
+	interpreter.AddMemberOption("aspect-ratio", this, &m_fAspectRatio);
+	interpreter.AddMemberOption("xy-offset", this, &m_fXYOffset);
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//void VFrustumVisPart::OnMessage(
+//	const messaging::VMessage& in_Message, 
+//	messaging::VMessage* in_pAnswer)
+//{
+//	using namespace messaging;
+//
+//	static VMessageInterpreter interpreter;
+//	if( ! interpreter.IsInitialized() )
+//	{
+//		interpreter.SetInitialized(true);
+//
+//		interpreter.AddMemberOption("fov", this, &m_fFOV);
+//		interpreter.AddMemberOption("znear", this, &m_fZNear);
+//		interpreter.AddMemberOption("zfar", this, &m_fZFar);
+//		interpreter.AddMemberOption("linedist", this, &m_fLineDist);
+//		interpreter.AddMemberOption("aspect-ratio", this, &m_fAspectRatio);
+//		interpreter.AddMemberOption("xy-offset", this, &m_fXYOffset);
+//	}
+//
+//	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+//}
 
 namespace {
 	void glVertex(const math::VVector3f& pos)

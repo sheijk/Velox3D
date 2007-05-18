@@ -20,6 +20,8 @@
 #include <V3d/Graphics/IVGraphicsService.h>
 
 #include <V3d/Entity/VGenericPartParser.h>
+
+#include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -347,42 +349,59 @@ void VMirrorShooting::SetPlane(const math::VPlane& in_Plane)
 	m_Plane = in_Plane;
 }
 
-void VMirrorShooting::OnMessage(
-	const messaging::VMessage& in_Message, 
-	messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VMirrorShooting::GetMessageInterpreterForClass()
 {
-	using std::string;
+	static messaging::VMessageInterpreter interpreter;
 
-	if( ! in_Message.HasProperty("type") )
-		return;
-
-	string request = in_Message.Get("type").Get<string>();
-
-	if( request == "getSettings" )
-	{
-		if( in_pAnswer == 0 )
-			return;
-
-		std::string renderTargetResource = "";
-		if( m_pRenderTarget != 0 &&
-			m_pRenderTarget.GetEnclosingResource() != 0 )
-		{
-			renderTargetResource = m_pRenderTarget.GetEnclosingResource()->GetQualifiedName();
-		}
-
-		in_pAnswer->AddProperty(g_strRenderTargetPropertyName, renderTargetResource);
-	}
-	else if( request == "update" )
-	{
-		const string name = in_Message.Get("name").Get<string>();
-		const string value = in_Message.Get("value").Get<string>();
-
-		if( name == g_strRenderTargetPropertyName )
-		{
-			SetRenderTargetResource(value);
-		}
-	}
+	return &interpreter;
 }
+
+void VMirrorShooting::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddAccessorOption<VMirrorShooting, std::string>(
+		g_strRenderTargetPropertyName,
+		&VMirrorShooting::GetRenderTargetResource,
+		&VMirrorShooting::SetRenderTargetResource);
+
+	VShootingBase::SetupProperties( interpreter );
+}
+
+//void VMirrorShooting::OnMessage(
+//	const messaging::VMessage& in_Message, 
+//	messaging::VMessage* in_pAnswer)
+//{
+//	using std::string;
+//
+//	if( ! in_Message.HasProperty("type") )
+//		return;
+//
+//	string request = in_Message.Get("type").Get<string>();
+//
+//	if( request == "getSettings" )
+//	{
+//		if( in_pAnswer == 0 )
+//			return;
+//
+//		std::string renderTargetResource = "";
+//		if( m_pRenderTarget != 0 &&
+//			m_pRenderTarget.GetEnclosingResource() != 0 )
+//		{
+//			renderTargetResource = m_pRenderTarget.GetEnclosingResource()->GetQualifiedName();
+//		}
+//
+//		in_pAnswer->AddProperty(g_strRenderTargetPropertyName, renderTargetResource);
+//	}
+//	else if( request == "update" )
+//	{
+//		const string name = in_Message.Get("name").Get<string>();
+//		const string value = in_Message.Get("value").Get<string>();
+//
+//		if( name == g_strRenderTargetPropertyName )
+//		{
+//			SetRenderTargetResource(value);
+//		}
+//	}
+//}
 
 //namespace {
 //	using namespace v3d::entity;

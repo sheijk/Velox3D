@@ -37,21 +37,36 @@ void VSphereMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 	glPopAttrib() ;
 }
 
-void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message, 
-	messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VSphereMeshPart::GetMessageInterpreterForClass()
 {
 	static messaging::VMessageInterpreter interpreter;
 
-	if( ! interpreter.IsInitialized() )
-	{
-		interpreter.AddMemberOption("radius", this, &m_fRadius);
-		interpreter.AddMemberOption("detail", this, &m_nDetail);
-
-		interpreter.SetInitialized(true);
-	}
-
-	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+	return &interpreter;
 }
+
+void VSphereMeshPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption( "radius", this, &m_fRadius );
+	interpreter.AddMemberOption( "detail", this, &m_nDetail );
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//void VSphereMeshPart::OnMessage(const messaging::VMessage& in_Message, 
+//	messaging::VMessage* in_pAnswer)
+//{
+//	static messaging::VMessageInterpreter interpreter;
+//
+//	if( ! interpreter.IsInitialized() )
+//	{
+//		interpreter.AddMemberOption("radius", this, &m_fRadius);
+//		interpreter.AddMemberOption("detail", this, &m_nDetail);
+//
+//		interpreter.SetInitialized(true);
+//	}
+//
+//	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+//}
 
 V3D_REGISTER_PART_PARSER(VSphereMeshPart);
 //-----------------------------------------------------------------------------

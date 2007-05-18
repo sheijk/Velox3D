@@ -299,17 +299,17 @@ bool VView::Contains(IVFrameAction* in_pAction)
 	return contains(m_FrameActions, in_pAction) || contains(m_NewFrameActions, in_pAction);
 }
 
-graphics::VSubAreaContext* VView::CreateSubAreaContext()
-{
-	if( m_pMainContext != 0 )
-	{
-		return new graphics::VSubAreaContext( m_pMainContext );
-	}
-	else
-	{
-		V3D_THROW(VException, "Could not create sub area context: main context is 0");
-	}
-}
+//graphics::VSubAreaContext* VView::CreateSubAreaContext()
+//{
+//	if( m_pMainContext != 0 )
+//	{
+//		return new graphics::VSubAreaContext( m_pMainContext );
+//	}
+//	else
+//	{
+//		V3D_THROW(VException, "Could not create sub area context: main context is 0");
+//	}
+//}
 
 ////void CreateTestModel(const std::string& resname);
 //

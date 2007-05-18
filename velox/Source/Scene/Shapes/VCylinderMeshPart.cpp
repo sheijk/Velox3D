@@ -86,28 +86,47 @@ void VCylinderMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 	glEnable(GL_CULL_FACE);
 }
 
-void v3d::scene::VCylinderMeshPart::OnMessage(
-	const messaging::VMessage& in_Message,  
-	messaging::VMessage* in_pAnswer) 
+messaging::VMessageInterpreter* VCylinderMeshPart::GetMessageInterpreterForClass()
 {
-	using namespace messaging;
+	static messaging::VMessageInterpreter interpreter;
 
-	static VMessageInterpreter interpreter;
-
-	if( !interpreter.IsInitialized() )
-	{
-		interpreter.SetInitialized(true);
-
-		interpreter.AddMemberOption("color", this, &m_Color);
-		interpreter.AddMemberOption("top-radius", this, &m_fTopRadius);
-		interpreter.AddMemberOption("bottom-radius", this, &m_fButtonRadius);
-		interpreter.AddMemberOption("slices", this, &m_iSlices);
-		interpreter.AddMemberOption("stacks", this, &m_iStacks);
-		interpreter.AddMemberOption("height", this, &m_fHeight);
-	}
-
-	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+	return &interpreter;
 }
+
+void VCylinderMeshPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption("color", this, &m_Color);
+	interpreter.AddMemberOption("top-radius", this, &m_fTopRadius);
+	interpreter.AddMemberOption("bottom-radius", this, &m_fButtonRadius);
+	interpreter.AddMemberOption("slices", this, &m_iSlices);
+	interpreter.AddMemberOption("stacks", this, &m_iStacks);
+	interpreter.AddMemberOption("height", this, &m_fHeight);
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//void v3d::scene::VCylinderMeshPart::OnMessage(
+//	const messaging::VMessage& in_Message,  
+//	messaging::VMessage* in_pAnswer) 
+//{
+//	using namespace messaging;
+//
+//	static VMessageInterpreter interpreter;
+//
+//	if( !interpreter.IsInitialized() )
+//	{
+//		interpreter.SetInitialized(true);
+//
+//		interpreter.AddMemberOption("color", this, &m_Color);
+//		interpreter.AddMemberOption("top-radius", this, &m_fTopRadius);
+//		interpreter.AddMemberOption("bottom-radius", this, &m_fButtonRadius);
+//		interpreter.AddMemberOption("slices", this, &m_iSlices);
+//		interpreter.AddMemberOption("stacks", this, &m_iStacks);
+//		interpreter.AddMemberOption("height", this, &m_fHeight);
+//	}
+//
+//	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+//}
 
 V3D_REGISTER_PART_PARSER(VCylinderMeshPart);
 //-----------------------------------------------------------------------------

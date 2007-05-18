@@ -48,9 +48,12 @@ public:
 protected:
 	math::VMatrix44f CalculateTextureMatrix();
 
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
 private:
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+	std::string GetTextureResource() const;
+	void SetTextureResource(const std::string& in_NewResource);
 
 	math::VRBTransform m_ProjectorOrientation;
 	resource::VResourceDataPtr<const graphics::IVTexture> m_pTexture;

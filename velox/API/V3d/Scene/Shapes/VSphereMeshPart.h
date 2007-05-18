@@ -30,8 +30,11 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
+	//virtual void OnMessage(const messaging::VMessage& in_Message, 
+		//messaging::VMessage* in_pAnswer = 0);
 	
 	vfloat32 m_fRadius;
 	vuint m_nDetail;

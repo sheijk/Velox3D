@@ -62,17 +62,7 @@ public:
 	static void Init(VNativeWindowHandle windowHandle);
 	static void Shutdown();
 
-	graphics::VSubAreaContext* CreateSubAreaContext();
-
-//	VView(VNativeWindowHandle hwnd);
-//	bool IsRendering() const;
-	
-//	void StartRendering();
-//	void StopRendering();
-//	void Render();
-//	HWND GetHWND() const;
-	
-//	v3d::entity::VEntity& GetSceneRoot();
+	//graphics::VSubAreaContext* CreateSubAreaContext();
 
 	graphics::VWin32WindowContext* GetMainContext();
 private:
@@ -101,17 +91,6 @@ private:
 	GLFWcond m_SyncDoneCondition;
 	
 	static VSharedPtr<graphics::VWin32WindowContext> m_pMainContext;
-	//statgraphics::IVRenderContext* m_pMainContext;
-//	bool m_bIsRendering;
-//	v3d::VSharedPtr<v3d::graphics::VOpenGLDevice> m_pDevice;
-//	HWND m_HWND;
-	
-//	v3d::graphics::IVDevice::MeshHandle m_hMesh;
-//	v3d::graphics::IVDevice::MaterialHandle m_hMaterial;
-
-//	v3d::entity::VEntity m_SceneRoot;
-	
-//	VSharedPtr<v3d::scene::VShooting> m_pShooting;
 };
 
 //-----------------------------------------------------------------------------

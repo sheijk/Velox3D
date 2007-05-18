@@ -41,8 +41,9 @@ private:
 
 	static void sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals);
 
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 };
 
 //-----------------------------------------------------------------------------

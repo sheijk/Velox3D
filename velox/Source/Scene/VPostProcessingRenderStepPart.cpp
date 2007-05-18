@@ -13,6 +13,7 @@
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Resource/VResource.h>
 
+#include <V3d/Messaging/VMessageInterpreter.h>
 #include <string>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -140,40 +141,70 @@ const VTypeInfo& VPostProcesssingRenderStepPart::GetTypeInfo() const
 	return ::v3d::GetTypeInfo<VPostProcesssingRenderStepPart>();
 }
 
-void VPostProcesssingRenderStepPart::OnMessage(
-	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VPostProcesssingRenderStepPart::GetMessageInterpreterForClass()
 {
-	if( ! in_Message.HasProperty("type") )
-		return;
+	static messaging::VMessageInterpreter interpreter;
 
-	const string request = in_Message.GetAs<string>("type");
-
-	if( request == "getSettings" )
-	{
-		if( in_pAnswer != 0 )
-		{
-			string materialRes;
-			if( &*m_hPostProcessingShader != 0 &&
-				m_hPostProcessingShader.GetEnclosingResource() != 0 )
-			{
-				materialRes = m_hPostProcessingShader.GetEnclosingResource()->GetQualifiedName();
-			}
-
-			in_pAnswer->AddProperty("material", materialRes);
-		}
-	}
-	else if( request == "update" )
-	{
-		const string name = in_Message.GetAs<string>("name");
-
-		if( name == "material" )
-		{
-			const string resource = in_Message.GetAs<string>("value");
-			SetPostProcessingShader(
-				GetMutableResourceData<IVMaterial>(resource.c_str()));
-		}
-	}
+	return &interpreter;
 }
+
+void VPostProcesssingRenderStepPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddAccessorOption<VPostProcesssingRenderStepPart, std::string>(
+		"material",
+		&VPostProcesssingRenderStepPart::GetMaterialResource,
+		&VPostProcesssingRenderStepPart::SetMaterialResource);
+
+	IVRenderStepPart::SetupProperties( interpreter );
+}
+
+std::string VPostProcesssingRenderStepPart::GetMaterialResource() const
+{
+	return m_hPostProcessingShader.GetResourceName();
+}
+
+void VPostProcesssingRenderStepPart::SetMaterialResource(const std::string& newName)
+{
+	using resource::GetMutableResourceData;
+	using graphics::IVMaterial;
+
+	SetPostProcessingShader(GetMutableResourceData<IVMaterial>(newName.c_str()));
+}
+
+//void VPostProcesssingRenderStepPart::OnMessage(
+//	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+//{
+//	if( ! in_Message.HasProperty("type") )
+//		return;
+//
+//	const string request = in_Message.GetAs<string>("type");
+//
+//	if( request == "getSettings" )
+//	{
+//		if( in_pAnswer != 0 )
+//		{
+//			string materialRes;
+//			if( &*m_hPostProcessingShader != 0 &&
+//				m_hPostProcessingShader.GetEnclosingResource() != 0 )
+//			{
+//				materialRes = m_hPostProcessingShader.GetEnclosingResource()->GetQualifiedName();
+//			}
+//
+//			in_pAnswer->AddProperty("material", materialRes);
+//		}
+//	}
+//	else if( request == "update" )
+//	{
+//		const string name = in_Message.GetAs<string>("name");
+//
+//		if( name == "material" )
+//		{
+//			const string resource = in_Message.GetAs<string>("value");
+//			SetPostProcessingShader(
+//				GetMutableResourceData<IVMaterial>(resource.c_str()));
+//		}
+//	}
+//}
 
 V3D_REGISTER_PART_PARSER(VPostProcesssingRenderStepPart);
 V3D_REGISTER_PART_PARSER(VPostProcesssingRenderStepPart2);

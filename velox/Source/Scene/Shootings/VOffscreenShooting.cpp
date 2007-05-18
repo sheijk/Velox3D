@@ -13,6 +13,7 @@
 #include <V3d/Resource/VResource.h>
 #include <V3d/Resource/IVResourceManager.h>
 #include <V3d/Graphics/IVGraphicsService.h>
+#include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -97,32 +98,54 @@ void VOffscreenShooting::SetRenderTargetResource(const std::string& in_strResour
 	m_pRenderTarget = res->GetMutableData<IVDevice>();
 }
 
-void VOffscreenShooting::OnMessage(
-	const messaging::VMessage& in_Message, 
-	messaging::VMessage* in_pAnswer)
+std::string VOffscreenShooting::GetRenderTargetResource() const
 {
-	using std::string;
-
-	const string request = in_Message.GetAs<string>("type");
-
-	if( request == "getSettings" )
-	{
-		if( in_pAnswer == 0 )
-			return;
-
-		in_pAnswer->AddProperty("render-target", m_pRenderTarget.GetResourceName());
-	}
-	else if( request == "update" )
-	{
-		const std::string name = in_Message.GetAs<string>("name");
-		const std::string value = in_Message.GetAs<string>("value");
-
-		if( name == "render-target" )
-		{
-			SetRenderTargetResource(value);
-		}
-	}
+	return m_pRenderTarget.GetResourceName();
 }
+
+messaging::VMessageInterpreter* VOffscreenShooting::GetMessageInterpreterForClass()
+{
+	static messaging::VMessageInterpreter interpreter;
+
+	return &interpreter;
+}
+
+void VOffscreenShooting::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddAccessorOption<VOffscreenShooting, std::string>(
+		"render-target",
+		&VOffscreenShooting::GetRenderTargetResource,
+		&VOffscreenShooting::SetRenderTargetResource);
+
+	VShootingBase::SetupProperties( interpreter );
+}
+
+//void VOffscreenShooting::OnMessage(
+//	const messaging::VMessage& in_Message, 
+//	messaging::VMessage* in_pAnswer)
+//{
+//	using std::string;
+//
+//	const string request = in_Message.GetAs<string>("type");
+//
+//	if( request == "getSettings" )
+//	{
+//		if( in_pAnswer == 0 )
+//			return;
+//
+//		in_pAnswer->AddProperty("render-target", m_pRenderTarget.GetResourceName());
+//	}
+//	else if( request == "update" )
+//	{
+//		const std::string name = in_Message.GetAs<string>("name");
+//		const std::string value = in_Message.GetAs<string>("value");
+//
+//		if( name == "render-target" )
+//		{
+//			SetRenderTargetResource(value);
+//		}
+//	}
+//}
 
 V3D_REGISTER_PART_PARSER(VOffscreenShooting);
 //-----------------------------------------------------------------------------

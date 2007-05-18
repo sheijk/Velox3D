@@ -58,9 +58,14 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 protected:
-	virtual void OnMessage(
-		const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
 private:
+	std::string GetTextureDir() const;
+	void SetTextureDir(const std::string& dirname);
+	std::string m_strTextureDir;
+
 	class VSide;
 
 	const math::VRBTransform& GetModelTransform() const;
@@ -70,8 +75,6 @@ private:
 	entity::VPartConnection<scene::IVSceneManagerPart> m_pSceneManager;
 
 	graphics::VColor4f m_BaseColor;
-
-	std::string m_strTextureDir;
 };
 
 //-----------------------------------------------------------------------------

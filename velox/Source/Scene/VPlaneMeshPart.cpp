@@ -119,37 +119,51 @@ void VPlaneMeshPart::SetUp(const VVector3f& in_Up)
 	m_Up = in_Up;
 }
 
-void VPlaneMeshPart::OnMessage(
-	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VPlaneMeshPart::GetMessageInterpreterForClass()
 {
 	static messaging::VMessageInterpreter interpreter;
 
-	if( ! interpreter.IsInitialized() )
-	{
-		interpreter.AddMemberOption("right", this, &m_Right);
-		interpreter.AddMemberOption("up", this, &m_Up);
-		interpreter.AddMemberOption("pos", this, &m_Position);
-
-		interpreter.SetInitialized(true);
-	}
-
-	messaging::VMessageInterpreter::Result result = 
-		interpreter.HandleMessage(this, in_Message, in_pAnswer);
-
-	if( result != messaging::VMessageInterpreter::Done )
-		VMeshPartBase::OnMessage(in_Message, in_pAnswer);
-
-	//switch(result) {
-	//case messaging::VMessageInterpreter::GetSettings:
-	//	{
-	//		AddVariables(in_pAnswer);
-	//	} break;
-	//case messaging::VMessageInterpreter::ApplySetting:
-	//	{
-	//		ApplySetting(in_Message);
-	//	} break;
-	//}
+	return &interpreter;
 }
+
+void VPlaneMeshPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption("right", this, &m_Right);
+	interpreter.AddMemberOption("up", this, &m_Up);
+	interpreter.AddMemberOption("pos", this, &m_Position);
+}
+
+//void VPlaneMeshPart::OnMessage(
+//	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+//{
+//	static messaging::VMessageInterpreter interpreter;
+//
+//	if( ! interpreter.IsInitialized() )
+//	{
+//		interpreter.AddMemberOption("right", this, &m_Right);
+//		interpreter.AddMemberOption("up", this, &m_Up);
+//		interpreter.AddMemberOption("pos", this, &m_Position);
+//
+//		interpreter.SetInitialized(true);
+//	}
+//
+//	messaging::VMessageInterpreter::Result result = 
+//		interpreter.HandleMessage(this, in_Message, in_pAnswer);
+//
+//	if( result != messaging::VMessageInterpreter::Done )
+//		VMeshPartBase::OnMessage(in_Message, in_pAnswer);
+//
+//	//switch(result) {
+//	//case messaging::VMessageInterpreter::GetSettings:
+//	//	{
+//	//		AddVariables(in_pAnswer);
+//	//	} break;
+//	//case messaging::VMessageInterpreter::ApplySetting:
+//	//	{
+//	//		ApplySetting(in_Message);
+//	//	} break;
+//	//}
+//}
 
 //-----------------------------------------------------------------------------
 

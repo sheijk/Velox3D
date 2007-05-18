@@ -36,10 +36,11 @@ public:
 	resource::VResourceDataPtr<graphics::VVertexBuffer> GetIndexBuffer();
 	vuint GetIndexCount() const;
 
-private:
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+private:
 	vuint GetVertexNum(vuint x, vuint y) const;
 
 	void SetVertexCount(vuint in_nWidth, vuint in_nHeigth);

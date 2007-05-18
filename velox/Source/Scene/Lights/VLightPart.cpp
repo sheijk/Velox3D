@@ -58,23 +58,40 @@ void VLightPart::Update(vfloat32 in_fSeconds)
 	}
 }
 
-void VLightPart::OnMessage(const messaging::VMessage& in_Message, 
-	messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VLightPart::GetMessageInterpreterForClass()
 {
 	static messaging::VMessageInterpreter interpreter;
 
-	if( ! interpreter.IsInitialized() )
-	{
-        interpreter.AddMemberOption("ambientColor", this, &m_Light.ambientColor);
-		interpreter.AddMemberOption("diffuseColor", this, &m_Light.diffuseColor);
-		interpreter.AddMemberOption("specularColor", this, &m_Light.specularColor);
-		interpreter.AddMemberOption("w", this, &m_Light.m_fW);
-
-		interpreter.SetInitialized(true);
-	}
-
-	interpreter.HandleMessage(this, in_Message, in_pAnswer);
+	return &interpreter;
 }
+
+void VLightPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption("ambientColor", this, &m_Light.ambientColor);
+	interpreter.AddMemberOption("diffuseColor", this, &m_Light.diffuseColor);
+	interpreter.AddMemberOption("specularColor", this, &m_Light.specularColor);
+	interpreter.AddMemberOption("w", this, &m_Light.m_fW);
+
+	IVUpdateablePart::SetupProperties( interpreter );
+}
+
+//void VLightPart::OnMessage(const messaging::VMessage& in_Message, 
+//	messaging::VMessage* in_pAnswer)
+//{
+//	static messaging::VMessageInterpreter interpreter;
+//
+//	if( ! interpreter.IsInitialized() )
+//	{
+//        interpreter.AddMemberOption("ambientColor", this, &m_Light.ambientColor);
+//		interpreter.AddMemberOption("diffuseColor", this, &m_Light.diffuseColor);
+//		interpreter.AddMemberOption("specularColor", this, &m_Light.specularColor);
+//		interpreter.AddMemberOption("w", this, &m_Light.m_fW);
+//
+//		interpreter.SetInitialized(true);
+//	}
+//
+//	interpreter.HandleMessage(this, in_Message, in_pAnswer);
+//}
 
 V3D_REGISTER_PART_PARSER(VLightPart);
 

@@ -41,10 +41,11 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-private:
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+private:
 	graphics::VLight m_Light;
 	entity::VPartConnection<IVLightManager> m_LightManager;
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;

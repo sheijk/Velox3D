@@ -169,45 +169,94 @@ void SetTags(const std::string& tagNames, std::vector<VTag>* tags)
 	}
 }
 
-void VDefaultRenderStepPart::OnMessage(
-	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+std::string VDefaultRenderStepPart::GetExcludeTagList() const
 {
-	namespace g = v3d::graphics;
+	return TagNames( m_ExcludeTags );
+}
 
+void VDefaultRenderStepPart::SetExcludeTagList(const std::string& newTags)
+{
+	SetTags( newTags, &m_ExcludeTags );
+}
+
+std::string VDefaultRenderStepPart::GetIncludeTagList() const
+{
+	return TagNames( m_IncludeTags );
+}
+
+void VDefaultRenderStepPart::SetIncludeTagList(const std::string& newTags)
+{
+	SetTags( newTags, &m_IncludeTags );
+}
+
+messaging::VMessageInterpreter* VDefaultRenderStepPart::GetMessageInterpreterForClass()
+{
 	static messaging::VMessageInterpreter interpreter;
 
-	if( ! interpreter.IsInitialized() )
-	{
-		interpreter.AddOption(SharedPtr(new messaging::VMemberVarOption<g::VColor4f>(
-			"clearColor", this, &m_BackgroundColor)));
-		interpreter.AddMemberOption("include-all", this, &m_bIncludeAll);
-		interpreter.AddMemberOption("fov", this, &m_fFOV);
-		interpreter.AddMemberOption("near-plane", this, &m_fNearPlane);
-		interpreter.AddMemberOption("far-plane", this, &m_fFarPlane);
-	}
-
-	switch( interpreter.HandleMessage(this, in_Message, in_pAnswer) )
-	{
-	case messaging::VMessageInterpreter::GetSettings:
-		{
-			in_pAnswer->AddProperty(excludePropertyName, TagNames(m_ExcludeTags));
-			in_pAnswer->AddProperty(includePropertyName, TagNames(m_IncludeTags));
-
-		} break;
-
-	case messaging::VMessageInterpreter::ApplySetting:
-		{
-			const string name = in_Message.GetAs<string>("name");
-			const string tagList = in_Message.GetAs<string>("value");
-
-			if( name == excludePropertyName )
-				SetTags(tagList, &m_ExcludeTags);
-			else if( name == includePropertyName )
-				SetTags(tagList, &m_IncludeTags);
-				
-		} break;
-	}
+	return &interpreter;
 }
+
+void VDefaultRenderStepPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddOption(SharedPtr(new messaging::VMemberVarOption<graphics::VColor4f>(
+		"clearColor", this, &m_BackgroundColor)));
+	interpreter.AddMemberOption("include-all", this, &m_bIncludeAll);
+	interpreter.AddMemberOption("fov", this, &m_fFOV);
+	interpreter.AddMemberOption("near-plane", this, &m_fNearPlane);
+	interpreter.AddMemberOption("far-plane", this, &m_fFarPlane);
+
+	interpreter.AddAccessorOption<VDefaultRenderStepPart, std::string>(
+		excludePropertyName,
+		&VDefaultRenderStepPart::GetExcludeTagList,
+		&VDefaultRenderStepPart::SetExcludeTagList);
+
+	interpreter.AddAccessorOption<VDefaultRenderStepPart, std::string>(
+		includePropertyName,
+		&VDefaultRenderStepPart::GetIncludeTagList,
+		&VDefaultRenderStepPart::SetIncludeTagList);
+
+	IVRenderStepPart::SetupProperties( interpreter );
+}
+
+//void VDefaultRenderStepPart::OnMessage(
+//	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+//{
+//	namespace g = v3d::graphics;
+//
+//	static messaging::VMessageInterpreter interpreter;
+//
+//	if( ! interpreter.IsInitialized() )
+//	{
+//		interpreter.AddOption(SharedPtr(new messaging::VMemberVarOption<g::VColor4f>(
+//			"clearColor", this, &m_BackgroundColor)));
+//		interpreter.AddMemberOption("include-all", this, &m_bIncludeAll);
+//		interpreter.AddMemberOption("fov", this, &m_fFOV);
+//		interpreter.AddMemberOption("near-plane", this, &m_fNearPlane);
+//		interpreter.AddMemberOption("far-plane", this, &m_fFarPlane);
+//	}
+//
+//	switch( interpreter.HandleMessage(this, in_Message, in_pAnswer) )
+//	{
+//	case messaging::VMessageInterpreter::GetSettings:
+//		{
+//			in_pAnswer->AddProperty(excludePropertyName, TagNames(m_ExcludeTags));
+//			in_pAnswer->AddProperty(includePropertyName, TagNames(m_IncludeTags));
+//
+//		} break;
+//
+//	case messaging::VMessageInterpreter::ApplySetting:
+//		{
+//			const string name = in_Message.GetAs<string>("name");
+//			const string tagList = in_Message.GetAs<string>("value");
+//
+//			if( name == excludePropertyName )
+//				SetTags(tagList, &m_ExcludeTags);
+//			else if( name == includePropertyName )
+//				SetTags(tagList, &m_IncludeTags);
+//				
+//		} break;
+//	}
+//}
 
 V3D_REGISTER_PART_PARSER(VDefaultRenderStepPart);
 //-----------------------------------------------------------------------------

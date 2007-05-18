@@ -372,46 +372,71 @@ vfloat32 v3d::scene::VTerrainPart::GetHeightScale() const
   return m_fHeightScale;
 }
 
-void VTerrainPart::OnMessage(
-	const messaging::VMessage& in_Message, 
-	messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VTerrainPart::GetMessageInterpreterForClass()
 {
-	using namespace messaging;
-	static VMessageInterpreter interpreter;
+	static messaging::VMessageInterpreter interpreter;
 
-	if( ! interpreter.IsInitialized() )
-	{
-		interpreter.SetInitialized(true);
-
-		interpreter.AddAccessorOption<VTerrainPart, vfloat32>(
-		  "heightScale",
-		  &VTerrainPart::GetHeightScale,
-		  &VTerrainPart::SetHeightScale);
-		interpreter.AddAccessorOption<VTerrainPart, vuint>(
-			"resolution",
-			&VTerrainPart::GetResolution, 
-			&VTerrainPart::SetResolution);
-		interpreter.AddAccessorOption<VTerrainPart, VVector2f>(
-			"extent",
-			&VTerrainPart::GetExtent,
-			&VTerrainPart::SetExtent);
-		//interpreter.AddOption(new VSignalOption(
-	}
-
-	messaging::VMessageInterpreter::Result result = 
-		interpreter.HandleMessage(this, in_Message, in_pAnswer);
-
-	switch(result) {
-	case messaging::VMessageInterpreter::GetSettings:
-		{
-			AddVariables(in_pAnswer);
-		} break;
-	case messaging::VMessageInterpreter::ApplySetting:
-		{
-			ApplySetting(in_Message);
-		} break;
-	}
+	return &interpreter;
 }
+
+void VTerrainPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddAccessorOption<VTerrainPart, vfloat32>(
+		"heightScale",
+		&VTerrainPart::GetHeightScale,
+		&VTerrainPart::SetHeightScale);
+	interpreter.AddAccessorOption<VTerrainPart, vuint>(
+		"resolution",
+		&VTerrainPart::GetResolution, 
+		&VTerrainPart::SetResolution);
+	interpreter.AddAccessorOption<VTerrainPart, VVector2f>(
+		"extent",
+		&VTerrainPart::GetExtent,
+		&VTerrainPart::SetExtent);
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//void VTerrainPart::OnMessage(
+//	const messaging::VMessage& in_Message, 
+//	messaging::VMessage* in_pAnswer)
+//{
+//	using namespace messaging;
+//	static VMessageInterpreter interpreter;
+//
+//	if( ! interpreter.IsInitialized() )
+//	{
+//		interpreter.SetInitialized(true);
+//
+//		interpreter.AddAccessorOption<VTerrainPart, vfloat32>(
+//		  "heightScale",
+//		  &VTerrainPart::GetHeightScale,
+//		  &VTerrainPart::SetHeightScale);
+//		interpreter.AddAccessorOption<VTerrainPart, vuint>(
+//			"resolution",
+//			&VTerrainPart::GetResolution, 
+//			&VTerrainPart::SetResolution);
+//		interpreter.AddAccessorOption<VTerrainPart, VVector2f>(
+//			"extent",
+//			&VTerrainPart::GetExtent,
+//			&VTerrainPart::SetExtent);
+//		//interpreter.AddOption(new VSignalOption(
+//	}
+//
+//	messaging::VMessageInterpreter::Result result = 
+//		interpreter.HandleMessage(this, in_Message, in_pAnswer);
+//
+//	switch(result) {
+//	case messaging::VMessageInterpreter::GetSettings:
+//		{
+//			AddVariables(in_pAnswer);
+//		} break;
+//	case messaging::VMessageInterpreter::ApplySetting:
+//		{
+//			ApplySetting(in_Message);
+//		} break;
+//	}
+//}
 
 //-----------------------------------------------------------------------------
 

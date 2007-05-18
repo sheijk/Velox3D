@@ -37,10 +37,16 @@ public:
 	void SendGeometry(graphics::IVDevice& in_Device) const;
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
-private:
 
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
+private:
+	math::VVector3f GetMinPoint() const;
+	void SetMinPoint(const math::VVector3f& newPoint);
+	math::VVector3f GetMaxPoint() const;
+	void SetMaxPoint(const math::VVector3f& newPoint);
 
 	graphics::VColor4f m_Color;
 	math::VBoundingBox m_BoundingBox;

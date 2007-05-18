@@ -4,7 +4,6 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
 #ifndef V3D_VENTITY_2004_10_09_H
 #define V3D_VENTITY_2004_10_09_H
 //-----------------------------------------------------------------------------
@@ -12,6 +11,8 @@
 
 #include <V3d/Entity/VEntityExceptions.h>
 #include <V3d/Entity/IVPart.h>
+#include <V3d/Entity/VNode.h>
+
 #include <V3d/Core/RangeIter/VRangeIterator.h>
 
 #include <map>
@@ -97,7 +98,7 @@ public:
 	/** print all sub entities and parts to vout */
 	void DumpInfo(const std::string& prefix = "") const;
 
-	virtual void ToXML(xml::IVXMLElement& node);
+	virtual void Save(xml::IVXMLElement& node);
 private:
 	typedef std::multimap<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;

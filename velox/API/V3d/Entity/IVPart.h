@@ -12,6 +12,7 @@
 
 #include <V3d/Entity/VEntityExceptions.h>
 #include <V3d/Entity/VPartDependency.h>
+#include <V3d/Entity/VNode.h>
 
 #include <V3d/Messaging/VMessage.h>
 #include <V3d/Tags/VTag.h>
@@ -40,7 +41,7 @@ using namespace v3d; // prevent auto indenting
  * 
  * @author sheijk
  */
-class IVPart
+class IVPart : public VNode
 {
 public:
 	typedef VPartDependency Dependency;
@@ -91,11 +92,6 @@ public:
 	/** Return information about the type of the part */
 	virtual const VTypeInfo& GetTypeInfo() const = 0;
 
-	/** Send a message to the part. Used by the serialization manager, the
-	 * editor and maybe in the future to notify parts about events */
-	void Send(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
-
 	template<typename T>
 		vbool IsOfType() const;
 
@@ -112,12 +108,9 @@ public:
 	vbool HasTag(const tags::VTag& tag) const;
 	VRangeIterator<const tags::VTag> Tags() const;
 
-	virtual void ToXML(xml::IVXMLElement& node);
-	virtual void FromXML(const xml::IVXMLElement& node);
+	virtual void Save(xml::IVXMLElement& node);
+	virtual void Load(const xml::IVXMLElement& node);
 private:
-	/** Override for parts which will handle messages */
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
 
 	std::vector<const tags::VTag*> m_Tags;
 };

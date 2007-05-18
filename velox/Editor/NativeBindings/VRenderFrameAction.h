@@ -54,11 +54,7 @@ public:
 
 	void SetIgnoreInput(vbool ignore);
 
-	//void setSize(vuint width, vuint height);
 	void SetArea(vint left, vint top, vint right, vint bottom);
-
-	static void InitRendering(VNativeWindowHandle handle);
-	static void ShutdownRendering();
 private:
 	vuint m_nWidth;
 	vuint m_nHeight;

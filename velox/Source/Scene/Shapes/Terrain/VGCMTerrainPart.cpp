@@ -131,25 +131,44 @@ void VGCMTerrainPart::Disconnect(
 	}
 }
 
-void VGCMTerrainPart::OnMessage(
-	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VGCMTerrainPart::GetMessageInterpreterForClass()
 {
 	static messaging::VMessageInterpreter interpreter;
 
-	if( ! interpreter.IsInitialized() )
-	{
-		interpreter.AddMemberOption("colored-regions", this, &m_bColoredRegions);
-		interpreter.AddMemberOption("wireframe", this, &m_bWireframe);
-		interpreter.AddMemberOption("update-regions", this, &m_bUpdateRegions);
-
-		interpreter.AddMemberOption("vertex-shader-res", this, &m_strVertexShaderRes);
-		interpreter.AddMemberOption("fragment-shader-res", this, &m_strFragmentShaderRes);
-
-		interpreter.SetInitialized(true);
-	}
-
-	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+	return &interpreter;
 }
+
+void VGCMTerrainPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption("colored-regions", this, &m_bColoredRegions);
+	interpreter.AddMemberOption("wireframe", this, &m_bWireframe);
+	interpreter.AddMemberOption("update-regions", this, &m_bUpdateRegions);
+
+	interpreter.AddMemberOption("vertex-shader-res", this, &m_strVertexShaderRes);
+	interpreter.AddMemberOption("fragment-shader-res", this, &m_strFragmentShaderRes);
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//void VGCMTerrainPart::OnMessage(
+//	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+//{
+//	static messaging::VMessageInterpreter interpreter;
+//
+//	if( ! interpreter.IsInitialized() )
+//	{
+//		interpreter.AddMemberOption("colored-regions", this, &m_bColoredRegions);
+//		interpreter.AddMemberOption("wireframe", this, &m_bWireframe);
+//		interpreter.AddMemberOption("update-regions", this, &m_bUpdateRegions);
+//
+//		interpreter.AddMemberOption("vertex-shader-res", this, &m_strVertexShaderRes);
+//		interpreter.AddMemberOption("fragment-shader-res", this, &m_strFragmentShaderRes);
+//
+//		interpreter.SetInitialized(true);
+//	}
+//
+//	InterpreteMessage(interpreter, in_Message, in_pAnswer);
+//}
 
 namespace {
 	math::VRBTransform identityTransform;

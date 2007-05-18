@@ -8,11 +8,15 @@
 #include <V3d/Scene/Shapes/VSkyboxPart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/RangeIter.h>
+
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Graphics.h>
 #include <V3d/Graphics.h>
 #include <V3d/OpenGL.h>
+
 #include <V3d/Entity/VGenericPartParser.h>
+
+#include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -310,34 +314,61 @@ namespace {
 	const std::string PN_TEXTURE_DIR = "texture-dir";
 }
 
-void VSkyboxPart::OnMessage(
-	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VSkyboxPart::GetMessageInterpreterForClass()
 {
-	using std::string;
+	static messaging::VMessageInterpreter interpreter;
 
-	if( ! in_Message.HasProperty("type") )
-		return;
-
-	string request = in_Message.Get("type").Get<string>();
-
-	if( request == "getSettings" )
-	{
-		if( in_pAnswer == 0 )
-			return;
-
-		in_pAnswer->AddProperty(PN_TEXTURE_DIR, m_strTextureDir);
-	}
-	else if( request == "update" )
-	{
-		const string name = in_Message.Get("name").Get<string>();
-		const string value = in_Message.Get("value").Get<string>();
-
-		if( name == PN_TEXTURE_DIR )
-		{
-			SetTextureDir(value, ".jpg");
-		}
-	}
+	return &interpreter;
 }
+
+std::string VSkyboxPart::GetTextureDir() const
+{
+	return m_strTextureDir;
+}
+
+void VSkyboxPart::SetTextureDir(const std::string& dirname)
+{
+	SetTextureDir(dirname, ".jpg");
+}
+
+void VSkyboxPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddAccessorOption<VSkyboxPart, std::string>(
+		PN_TEXTURE_DIR,
+		&VSkyboxPart::GetTextureDir,
+		&VSkyboxPart::SetTextureDir);
+
+	IVGraphicsPart::SetupProperties( interpreter );
+}
+
+//void VSkyboxPart::OnMessage(
+//	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+//{
+//	using std::string;
+//
+//	if( ! in_Message.HasProperty("type") )
+//		return;
+//
+//	string request = in_Message.Get("type").Get<string>();
+//
+//	if( request == "getSettings" )
+//	{
+//		if( in_pAnswer == 0 )
+//			return;
+//
+//		in_pAnswer->AddProperty(PN_TEXTURE_DIR, m_strTextureDir);
+//	}
+//	else if( request == "update" )
+//	{
+//		const string name = in_Message.Get("name").Get<string>();
+//		const string value = in_Message.Get("value").Get<string>();
+//
+//		if( name == PN_TEXTURE_DIR )
+//		{
+//			SetTextureDir(value, ".jpg");
+//		}
+//	}
+//}
 
 V3D_REGISTER_PART_PARSER(VSkyboxPart);
 //-----------------------------------------------------------------------------

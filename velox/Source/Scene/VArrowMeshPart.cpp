@@ -126,32 +126,47 @@ void VArrowMeshPart::sendCircleVertices(vfloat32 z1, vfloat32 z2, bool normals)
 	}
 }
 
-using namespace messaging;
-
-void VArrowMeshPart::OnMessage(
-	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VArrowMeshPart::GetMessageInterpreterForClass()
 {
-	static VMessageInterpreter interpreter;
+	static messaging::VMessageInterpreter interpreter;
 
-	if( interpreter.IsInitialized() == false )
-	{
-		interpreter.SetInitialized(true);
-
-		interpreter.AddMemberOption("size", this, &m_fSize);
-		interpreter.AddMemberOption("color", this, &m_Color);
-	}
-
-	switch( interpreter.HandleMessage(this, in_Message, in_pAnswer) )
-	{
-	case VMessageInterpreter::GetSettings:
-		VMeshPartBase::AddVariables(in_pAnswer);
-		break;
-
-	case VMessageInterpreter::ApplySetting:
-		VMeshPartBase::ApplySetting(in_Message);
-		break;
-	}
+	return &interpreter;
 }
+
+void VArrowMeshPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddMemberOption("size", this, &m_fSize);
+	interpreter.AddMemberOption("color", this, &m_Color);
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//using namespace messaging;
+//
+//void VArrowMeshPart::OnMessage(
+//	const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+//{
+//	static VMessageInterpreter interpreter;
+//
+//	if( interpreter.IsInitialized() == false )
+//	{
+//		interpreter.SetInitialized(true);
+//
+//		interpreter.AddMemberOption("size", this, &m_fSize);
+//		interpreter.AddMemberOption("color", this, &m_Color);
+//	}
+//
+//	switch( interpreter.HandleMessage(this, in_Message, in_pAnswer) )
+//	{
+//	case VMessageInterpreter::GetSettings:
+//		VMeshPartBase::AddVariables(in_pAnswer);
+//		break;
+//
+//	case VMessageInterpreter::ApplySetting:
+//		VMeshPartBase::ApplySetting(in_Message);
+//		break;
+//	}
+//}
 
 V3D_REGISTER_PART_PARSER(VArrowMeshPart);
 //-----------------------------------------------------------------------------

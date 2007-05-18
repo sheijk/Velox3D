@@ -48,10 +48,11 @@ public:
 		const std::string& in_Id,
 		entity::IVPart& in_Part);
 
-private:
-	void OnMessage(
-		const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+private:
 	//std::string GetVertexShaderRes() const;
 	//void SetVertexShaderRes(const std::string& newVertexShaderRes);
 

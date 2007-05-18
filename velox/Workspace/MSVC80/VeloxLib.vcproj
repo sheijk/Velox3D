@@ -696,6 +696,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\API\V3d\Entity\VNode.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Api\V3d\Entity\VPartBase.h"
 						>
 					</File>
@@ -1418,6 +1422,10 @@
 				</File>
 				<File
 					RelativePath="..\..\Source\Entity\VGenericPartParser.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Source\Entity\VNode.cpp"
 					>
 				</File>
 				<File

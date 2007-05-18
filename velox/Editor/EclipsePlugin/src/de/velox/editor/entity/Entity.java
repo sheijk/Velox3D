@@ -247,7 +247,7 @@ public class Entity implements XMLSerializable {
 	public void writeToXML(IVXMLElement outElement) {
 		if( valid(impl) )
 		{
-			impl.ToXML(outElement);
+			impl.Save(outElement);
 		}
 	}
 	

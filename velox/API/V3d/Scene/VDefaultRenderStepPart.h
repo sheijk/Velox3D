@@ -30,6 +30,15 @@ public:
 	virtual void Render(IVGraphicsPart* in_pScene);
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
+	std::string GetExcludeTagList() const;
+	void SetExcludeTagList(const std::string& newTags);
+	std::string GetIncludeTagList() const;
+	void SetIncludeTagList(const std::string& newTags);
+
 private:
 	vbool IsShapeToBeRendered(const IVGraphicsPart& shape) const;
 
@@ -42,9 +51,6 @@ private:
 	vfloat32 m_fNearPlane;
 	vfloat32 m_fFarPlane;
 	vfloat32 m_fFOV;
-
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
 };
 
 //-----------------------------------------------------------------------------

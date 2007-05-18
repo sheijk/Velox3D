@@ -12,6 +12,9 @@
 #include <V3d/Scene/IVShapePart.h>
 #include <V3d/Entity/VGenericPartParser.h>
 
+#include <V3d/Messaging/VMessageInterpreter.h>
+#include <V3d/Resource.h>
+
 #include <string>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
@@ -159,51 +162,75 @@ void VProjectTextureRenderStepPart::SetTextureSize(const vfloat32& in_TextureSiz
 	m_fTextureSize = in_TextureSize;
 }
 
-void VProjectTextureRenderStepPart::OnMessage(const messaging::VMessage& in_Message, 
-				  messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VProjectTextureRenderStepPart::GetMessageInterpreterForClass()
 {
-	try
-	{
-		vout << "VProjectTextureRenderStepPart received messsage" << vendl;
+	static messaging::VMessageInterpreter interpreter;
 
-		if( ! in_Message.HasProperty("type") )
-			return;
-
-		string request = in_Message.Get("type").Get<string>();
-
-		vout << "\trequest=" << request << vendl;
-
-		if( request == "getSettings" )
-		{
-			if( in_pAnswer == 0 )
-				return;
-
-			string textureRes;
-
-			if( &*m_pTexture != 0 && m_pTexture.GetEnclosingResource() != 0 )
-				textureRes = m_pTexture.GetEnclosingResource()->GetQualifiedName();
-            
-			in_pAnswer->AddProperty("texture", textureRes);
-		}
-		else if( request == "update" )
-		{
-			const string name = in_Message.Get("name").Get<string>();
-			const string value = in_Message.Get("value").Get<string>();
-
-			if( name == "texture" )
-			{
-				try
-				{
-					m_pTexture = GetResourceData<IVTexture>(value.c_str());
-				}
-				catch(VDataNotFoundException&)
-				{}
-			}
-		}
-	}
-	catch(VException&)
-	{}
+	return &interpreter;
 }
+
+void VProjectTextureRenderStepPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddAccessorOption<VProjectTextureRenderStepPart, std::string>("texture", 
+		&VProjectTextureRenderStepPart::GetTextureResource, 
+		&VProjectTextureRenderStepPart::SetTextureResource);
+}
+
+std::string VProjectTextureRenderStepPart::GetTextureResource() const
+{
+	return m_pTexture.GetResourceName();
+}
+
+void VProjectTextureRenderStepPart::SetTextureResource(const std::string& in_NewResource)
+{
+	SetTexture( resource::GetResourceData<IVTexture>(in_NewResource.c_str()) );
+}
+
+//void VProjectTextureRenderStepPart::OnMessage(const messaging::VMessage& in_Message, 
+//				  messaging::VMessage* in_pAnswer)
+//{
+//	try
+//	{
+//		vout << "VProjectTextureRenderStepPart received messsage" << vendl;
+//
+//		if( ! in_Message.HasProperty("type") )
+//			return;
+//
+//		string request = in_Message.Get("type").Get<string>();
+//
+//		vout << "\trequest=" << request << vendl;
+//
+//		if( request == "getSettings" )
+//		{
+//			if( in_pAnswer == 0 )
+//				return;
+//
+//			string textureRes;
+//
+//			if( &*m_pTexture != 0 && m_pTexture.GetEnclosingResource() != 0 )
+//				textureRes = m_pTexture.GetEnclosingResource()->GetQualifiedName();
+//            
+//			in_pAnswer->AddProperty("texture", textureRes);
+//		}
+//		else if( request == "update" )
+//		{
+//			const string name = in_Message.Get("name").Get<string>();
+//			const string value = in_Message.Get("value").Get<string>();
+//
+//			if( name == "texture" )
+//			{
+//				try
+//				{
+//					m_pTexture = GetResourceData<IVTexture>(value.c_str());
+//				}
+//				catch(VDataNotFoundException&)
+//				{}
+//			}
+//		}
+//	}
+//	catch(VException&)
+//	{}
+//}
 
 
 //-----------------------------------------------------------------------------

@@ -49,10 +49,14 @@ public:
 	void AddMaterialParameter(VStringParam in_strParamName, 
 		VSharedPtr<graphics::IVParameterValue> in_Value);
 
-private:
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+	std::string GetMaterialResource() const;
+	void SetMaterialResource(const std::string& newName);
+
+private:
 	resource::VResourceDataPtr<graphics::IVDevice> m_hOffscreenDevice;
 	resource::VResourceDataPtr<graphics::IVMaterial> m_hPostProcessingShader;
 	resource::VResourceDataPtr<graphics::IVTexture> m_hOffscreenTexture;

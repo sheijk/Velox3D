@@ -46,10 +46,11 @@ public:
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-private:
-	virtual void OnMessage(const messaging::VMessage& in_Message, 
-		messaging::VMessage* in_pAnswer = 0);
+protected:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+private:
 	math::VVector3f m_Position;
 	math::VVector3f m_Right;
 	math::VVector3f m_Up;

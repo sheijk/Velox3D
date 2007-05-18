@@ -194,6 +194,8 @@ void VMeshPartBase::OnMessage(
 {
 	using std::string;
 
+	VNode::OnMessage( in_Message, in_pAnswer );
+
 	if( ! in_Message.HasProperty("type") )
 		return;
 

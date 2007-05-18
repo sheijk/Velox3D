@@ -75,7 +75,7 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 		IVPartParser* parser = parserIter->second;
 
 		VSharedPtr<IVPart> part = parser->Create();
-		part->FromXML( in_Node );
+		part->Load( in_Node );
 
 		return part;
 	}
@@ -150,7 +150,7 @@ void ApplySettings(xml::IVXMLElement& in_Node, IVPart& in_Part)
 
 	if( xmlTypeName == partTypeName )
 	{
-		in_Part.FromXML( in_Node );
+		in_Part.Load( in_Node );
 	}
 	else
 	{

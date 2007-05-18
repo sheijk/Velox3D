@@ -18,8 +18,8 @@
 		<part type="v3d::utils::VFPSMoverPart" ignore-mouse="false" tags=""/>
 	</entity>
 	<entity name="sphere">
-		<part type="v3d::entity::VRigidBodyPart" pos="(2.82641,10,9.59226)" updir="(0,1,0)" viewdir="(0.959226,0,-0.282641)" tags=""/>
-		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_mud="" mat_mudColor="(0,0,0,0)" material="/edit/mat/terrain.v3dmat" radius="4" tags="test bar"/>
+		<part type="v3d::entity::VRigidBodyPart" pos="(2.82639,10,9.59226)" updir="(0,1,0)" viewdir="(0.959226,0,-0.282639)" tags=""/>
+		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_mud="" mat_mudColor="(0.1,0,0,0)" material="/edit/mat/terrain.v3dmat" radius="4" tags="test bar"/>
 		<part type="v3d::utils::VCircleMoverPart" angle="6.56973" center="(0,10,0)" radius="10" speed="3.1415" tags=""/>
 	</entity>
 	<entity name="player">

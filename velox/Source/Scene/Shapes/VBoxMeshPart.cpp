@@ -11,6 +11,7 @@
 #include <V3d/OpenGL.h>
 #include <V3d/Math/Numerics.h>
 #include <V3d/Entity/VGenericPartParser.h>
+#include <V3d/Messaging/VMessageInterpreter.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -229,44 +230,85 @@ void VBoxMeshPart::SendGeometry(graphics::IVDevice& in_Device) const
 		glEnable(GL_CULL_FACE);
 }
 
-void VBoxMeshPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+messaging::VMessageInterpreter* VBoxMeshPart::GetMessageInterpreterForClass()
 {
-	using std::string;
+	static messaging::VMessageInterpreter interpreter;
 
-	if( ! in_Message.HasProperty("type") )
-		return;
-
-	const string request = in_Message.GetAs<string>("type");
-
-	if( request == "getSettings" )
-	{
-		if( in_pAnswer != 0 )
-		{
-			in_pAnswer->AddProperty("MinPoint", m_BoundingBox.GetMinPoint());
-			in_pAnswer->AddProperty("MaxPoint", m_BoundingBox.GetMaxPoint());
-			AddVariables(in_pAnswer);
-		}
-	}
-	else if( request == "update" )
-	{
-		const string name = in_Message.GetAs<string>("name");
-
-		if( name == "MinPoint" )
-		{
-			VVector3f pos = in_Message.GetAs<VVector3f>("value");
-
-			m_BoundingBox.SetMinPoint(pos);
-		}
-		if( name == "MaxPoint" )
-		{
-			VVector3f pos = in_Message.GetAs<VVector3f>("value");
-
-			m_BoundingBox.SetMaxPoint(pos);
-		}
-
-		ApplySetting(in_Message);
-	}
+	return &interpreter;
 }
+
+math::VVector3f VBoxMeshPart::GetMinPoint() const
+{
+	return m_BoundingBox.GetMinPoint();
+}
+
+void VBoxMeshPart::SetMinPoint(const math::VVector3f& newPoint)
+{
+	m_BoundingBox.SetMinPoint( newPoint );
+}
+
+math::VVector3f VBoxMeshPart::GetMaxPoint() const
+{
+	return m_BoundingBox.GetMaxPoint();
+}
+
+void VBoxMeshPart::SetMaxPoint(const math::VVector3f& newPoint)
+{
+	m_BoundingBox.SetMaxPoint( newPoint );
+}
+
+void VBoxMeshPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	interpreter.AddAccessorOption<VBoxMeshPart, VVector3f>(
+		"MinPoint",
+		&VBoxMeshPart::GetMinPoint,
+		&VBoxMeshPart::SetMinPoint);
+	interpreter.AddAccessorOption<VBoxMeshPart, VVector3f>(
+		"MaxPoint",
+		&VBoxMeshPart::GetMaxPoint,
+		&VBoxMeshPart::SetMaxPoint);
+
+	VMeshPartBase::SetupProperties( interpreter );
+}
+
+//void VBoxMeshPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)
+//{
+//	using std::string;
+//
+//	if( ! in_Message.HasProperty("type") )
+//		return;
+//
+//	const string request = in_Message.GetAs<string>("type");
+//
+//	if( request == "getSettings" )
+//	{
+//		if( in_pAnswer != 0 )
+//		{
+//			in_pAnswer->AddProperty("MinPoint", m_BoundingBox.GetMinPoint());
+//			in_pAnswer->AddProperty("MaxPoint", m_BoundingBox.GetMaxPoint());
+//			AddVariables(in_pAnswer);
+//		}
+//	}
+//	else if( request == "update" )
+//	{
+//		const string name = in_Message.GetAs<string>("name");
+//
+//		if( name == "MinPoint" )
+//		{
+//			VVector3f pos = in_Message.GetAs<VVector3f>("value");
+//
+//			m_BoundingBox.SetMinPoint(pos);
+//		}
+//		if( name == "MaxPoint" )
+//		{
+//			VVector3f pos = in_Message.GetAs<VVector3f>("value");
+//
+//			m_BoundingBox.SetMaxPoint(pos);
+//		}
+//
+//		ApplySetting(in_Message);
+//	}
+//}
 
 V3D_REGISTER_PART_PARSER(VBoxMeshPart);
 //-----------------------------------------------------------------------------
