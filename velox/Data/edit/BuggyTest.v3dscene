@@ -86,7 +86,7 @@
 			</entity>
 		</entity>
 		<entity name="Steering">
-			<part type="v3d::physics::VJointHinge2ModifierPart" Accel="2000" ControlJoint1="RightSteer" ControlJoint2="LeftSteer" ControlJoint3="rear1" ControlJoint4="rear2" MaxSpeed="9000" Speed="5" Steer="0.2" tags=""/>
+			<part type="v3d::physics::VJointHinge2ModifierPart" Accel="100" ControlJoint1="RightSteer" ControlJoint2="LeftSteer" ControlJoint3="rear1" ControlJoint4="rear2" MaxSpeed="300" Speed="5" Steer="0.2" tags=""/>
 			<entity name="Joint1">
 				<part type="v3d::physics::VJointHinge2Part" Anchor="(12,15,15)" Axis1="(0,1,0)" Axis2="(1,0,0)" Body1="00000000" Body1Name="chassi" Body2="00000000" Body2Name="wheel0" Bounce="0" CFM="0" FudgeFactor="0" HighStop="0" LinkedByBodyOne="false" LinkedByBodyTwo="false" LowStop="0" MaxForce="0" MaxForce2="0" Name="LeftSteer" StopCFM="0" StopERP="0.2" SuspensionCFM="0" SuspensionERP="0" Velocity="0" Velocity2="0" tags=""/>
 				<entity name="Wheel1">

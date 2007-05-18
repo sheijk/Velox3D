@@ -27,14 +27,11 @@ public:
 	VOdeBody();
 	virtual ~VOdeBody();
 
-	dBodyID* GetBodyID();
+	dBodyID GetBodyID();
 	void Create(VWorld* in_pWorld);
 	void Destroy();
-	vbool IsAlive();
 
 private:
-
-	vbool m_bIsAlive;
 	dBodyID m_Body;
 };
 

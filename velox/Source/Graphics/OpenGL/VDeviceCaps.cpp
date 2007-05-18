@@ -30,8 +30,23 @@ void VDeviceCaps::GatherInfoFromCurrentContext()
 	glGetIntegerv(GL_MAX_TEXTURE_UNITS, &textureUnits);
 	maxTextures = textureUnits;
 
-	supportsGLSL = GLEW_ARB_fragment_program;
-	supportsFBO = GLEW_EXT_framebuffer_object;
+	if ( GLEW_ARB_fragment_program  == GL_TRUE )
+	{
+	  supportsGLSL = true;
+	}
+	else
+	{
+	  supportsGLSL = false;
+	}
+	if ( GLEW_EXT_framebuffer_object == GL_TRUE )
+	{
+	  supportsFBO = true;
+	}
+	else
+	{
+	  supportsFBO = false;
+	}
+
 }
 
 void VDeviceCaps::PrintInfo() const

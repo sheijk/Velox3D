@@ -40,8 +40,6 @@ public:
 	void Deactivate();
 	void Update(vfloat32 in_fSeconds);
 
-	static std::string GetDefaultId();
-
 	virtual const VTypeInfo& GetTypeInfo() const 
 	{ return GetCompileTimeTypeInfo(this); }
 

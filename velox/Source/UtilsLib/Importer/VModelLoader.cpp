@@ -470,7 +470,7 @@ VModelMesh VModelLoader::CreateMeshNode(
 			vertices->SetNormal(VNormal3f(0., 0., 0.), vertexNum);
 		}
 
-		for(int indexNum = 0; indexNum < indexCount - 2; indexNum += 3)
+		for(vuint indexNum = 0; indexNum < indexCount - 2; indexNum += 3)
 		{
 			vuint faceIndices[3] = 
 			{ 

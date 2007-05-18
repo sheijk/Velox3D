@@ -133,7 +133,10 @@ void VBoundingTerrainVolumePart::Create()
 void VBoundingTerrainVolumePart::Deactivate()
 {
 	if(m_pIndicesPointer)
+	{
 		delete [] m_pIndicesPointer;
+		m_pIndicesPointer = 0;
+	}
 	m_bActive = false;
 }
 

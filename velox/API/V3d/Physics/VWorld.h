@@ -17,9 +17,6 @@
 
 #include <ode/ode.h>
 #include <list>
-
-V3D_DECLARE_EXCEPTION(PhysicException, VException);
-
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace physics{

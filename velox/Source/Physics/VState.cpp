@@ -23,11 +23,6 @@ VState::~VState()
 {
 }
 
-//void VState::SetOwner(VState::Owner in_Object)
-//{
-//	m_Owner = in_Object;
-//}
-
 VState::Parent VState::GetParent()
 {
 	return m_Parent;

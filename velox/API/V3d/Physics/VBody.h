@@ -25,7 +25,10 @@ namespace physics{
 class VBody
 {
 public:
-    VBody(VOdeBody* in_pOdeBody, std::string in_sName);
+	typedef VSharedPtr<VOdeBody> SpOdeBody;
+	typedef VSharedPtr<VGeometry> SpGeom;
+    
+	VBody(SpOdeBody in_pOdeBody, std::string in_sName);
 	virtual ~VBody();
 
 	void Update();
@@ -33,10 +36,10 @@ public:
 
 	VStateOrientation& GetOrientation();
 	VStatePosition& GetPositionState();
-	VOdeBody* GetOdeBody();
+	SpOdeBody GetOdeBody();
 	void Add(VState* in_pState);
 	void Delete(VState* in_pState);
-	void SetCollisionMesh(VGeometry* in_Geometry);
+	void SetCollisionMesh(SpGeom in_Geometry);
 
 	void SetPosition(math::VVector3f in_Position);
 	void SetOrientation(math::VQuatf in_Orientation);
@@ -53,22 +56,21 @@ public:
 	 * returns 0 if no mesh is set
 	 * use this to remove a collision mesh with the manager
 	 */
-	VGeometry* GetCollisionMesh();
+	SpGeom GetCollisionMesh();
 
 	//returns true if the body is taking part in the simulation
 	vbool IsEnabled();
 	vfloat32 GetMass();
 	std::string GetName();
 	void SetName(std::string in_sName);
-
 			
 protected: 
 
 	VBody(const VBody&);
 	VBody& operator=(const VBody&);
 	
-	VOdeBody* m_Body;
-	VGeometry* m_CollisionMesh;
+	VSharedPtr<VOdeBody> m_Body;
+	VSharedPtr<VGeometry> m_CollisionMesh;
 
 	/**
 	 * States supported

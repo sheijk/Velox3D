@@ -36,7 +36,7 @@ public:
 
 	void RegisterForUpdate(VState* in_pState);
 	void UnregisterForUpdate(VState* in_pState);
-
+	void ClearStates();
 	virtual void Update();
 
 protected:

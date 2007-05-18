@@ -33,8 +33,6 @@ VJointHinge2Part::VJointHinge2Part() :
 }
 VJointHinge2Part::~VJointHinge2Part()
 {
-	//TODO: see #119
-	m_pPhysicManagerPart->GetPhysicManager()->UnregisterJoint(&m_Joint);
 }
 
 void VJointHinge2Part::Activate()
@@ -59,8 +57,9 @@ void VJointHinge2Part::Activate()
 
 void VJointHinge2Part::Deactivate()
 {
+	m_pPhysicManagerPart->GetPhysicManager()->UnregisterJoint(&m_Joint);
 	m_bIsActive = false;
-	m_Joint.Destroy(); //not sure if this is a good idea
+	//m_Joint.Destroy(); //not sure if this is a good idea
 }
 
 void VJointHinge2Part::OnMessage(

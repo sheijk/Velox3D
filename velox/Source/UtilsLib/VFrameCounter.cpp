@@ -15,9 +15,10 @@ namespace utils {
 //-----------------------------------------------------------------------------
 
 VFrameCounter::VFrameCounter(vuint in_nHistoryLen)
-	:
-	m_nHistoryLen(in_nHistoryLen)
+	: m_nHistoryLen(in_nHistoryLen)
 {
+  if( m_nHistoryLen == 0 )
+	V3D_THROW(VException, "history length must be greater > 0");
 	for( ; in_nHistoryLen > 0; --in_nHistoryLen)
 	{
 		m_LastFrameDurations.push_front(0.0f);
@@ -37,13 +38,13 @@ void VFrameCounter::LogLastFrameDuration()
 
 vfloat32 VFrameCounter::GetAverageFPS() const
 {
-	const vfloat32 fFrameFactor = 1.0f / m_nHistoryLen;
+	const vfloat32 fFrameFactor = 1.0f / (vfloat32) m_nHistoryLen;
 	vfloat32 fAverage = 0.0f;
 
 	std::list<vfloat32>::const_iterator fps = m_LastFrameDurations.begin();
 	for( ; fps != m_LastFrameDurations.end(); ++fps )
 	{
-		fAverage += fFrameFactor * *fps;
+		fAverage += fFrameFactor * (*fps);
 	}
 
 	return 1.0f / fAverage;

@@ -9,6 +9,7 @@
 #define V3D_VSTATE_27_10_04_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
+#include <V3d/Core/SmartPtr/VSharedPtr.h>
 #include <V3d/Physics/VOdeBody.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -27,7 +28,7 @@ class VBody;
 class VState
 {
 public:
-	typedef VOdeBody* Parent;
+	typedef VSharedPtr<VOdeBody> Parent;
 	
 	VState(Parent in_pParent);
 	virtual ~VState();
@@ -37,23 +38,11 @@ public:
 	 * Returns 0 if no Parent is set
 	 */
     Parent GetParent();
-	//void SetParent(StateListContainerPtr in_Parent);
-
-
-
-
+	
 	/**
 	 * Override this method to add functionality
 	 */
     virtual void Apply() = 0;
-
-	///**
-	//* notifies the VStateListContainer to update all
-	//* elements
-	//*/
-
-	//virtual void Update();
-
 protected:
 
 	Parent m_Parent;

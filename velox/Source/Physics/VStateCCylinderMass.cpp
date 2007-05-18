@@ -26,11 +26,11 @@ VStateCCylinderMass::~VStateCCylinderMass()
 
 void VStateCCylinderMass::Apply()
 {
-	VState::Parent pParent = static_cast<VState::Parent>(GetParent());
+	VState::Parent pParent = GetParent();
 
 	dMassSetCappedCylinder(&m_Mass, GetDensity(), m_iDirection, m_fRadius, m_fLength);
 	dMassAdjust (&m_Mass, GetMass());
-	dBodySetMass (*pParent->GetBodyID(),&m_Mass);
+	dBodySetMass (pParent->GetBodyID(),&m_Mass);
 }
 
 vfloat32 VStateCCylinderMass::GetRadius()

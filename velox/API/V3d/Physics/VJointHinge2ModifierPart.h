@@ -42,7 +42,7 @@ private:
 	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
 	void Steer(float in_fSteer);
-	bool GetButtons();
+	bool GetButtons(vfloat32 in_fSeconds);
 	void Accel(float in_fSpeed, float in_fAccel);
 	vbool AreValidJoints();
 	input::IVButton* m_pButton;

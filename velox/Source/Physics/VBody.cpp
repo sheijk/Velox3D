@@ -19,9 +19,10 @@ namespace v3d {
 namespace physics{
 //-----------------------------------------------------------------------------
 using namespace math;
-VBody::VBody(VOdeBody* in_pOdeBody, std::string in_sName) : m_PositionState(in_pOdeBody), m_OrientationState(in_pOdeBody)
+VBody::VBody(VBody::SpOdeBody in_pOdeBody, std::string in_sName) : m_PositionState(in_pOdeBody), m_OrientationState(in_pOdeBody)
 {
-	m_CollisionMesh = 0;
+	m_CollisionMesh.Assign(0);
+	V3D_ASSERT( in_pOdeBody != 0 );
 	m_Body = in_pOdeBody;
 	m_PositionState.Apply();
 	m_OrientationState.Apply();
@@ -30,35 +31,27 @@ VBody::VBody(VOdeBody* in_pOdeBody, std::string in_sName) : m_PositionState(in_p
 
 VBody::~VBody()
 {
-	if(m_Body)
-	{
-		m_Body->Destroy(); //unregister body done by VBodyPart
-		delete m_Body;
-	}
-	if(m_CollisionMesh)
-	{
-		//delete m_CollisionMesh; //TODO
-	}
+  ;
 }
 
 std::string VBody::GetName()
 {
 	return m_sName;
 }
-VOdeBody* VBody::GetOdeBody()
+VBody::SpOdeBody VBody::GetOdeBody()
 {
 	return m_Body;
 }
 
-VGeometry* VBody::GetCollisionMesh()
+VBody::SpGeom VBody::GetCollisionMesh()
 {
 	return m_CollisionMesh;
 }
 
 void VBody::Update()
 {
-	const dReal* p = dBodyGetPosition(*m_Body->GetBodyID());
-	const dReal* q = dBodyGetQuaternion(*m_Body->GetBodyID());
+	const dReal* p = dBodyGetPosition(m_Body->GetBodyID());
+	const dReal* q = dBodyGetQuaternion(m_Body->GetBodyID());
 
 	m_PositionState.SetPosition(p[0],p[1],p[2]);
 	m_OrientationState.GetQuat().Set(q[1], q[2], q[3],q[0]); //convert to x,y,z,w format
@@ -83,12 +76,11 @@ void VBody::Delete(VState* in_pState)
 {
 	m_StateListContainer.UnregisterForUpdate(in_pState);
 }
-void VBody::SetCollisionMesh(VGeometry* in_Geometry)
+void VBody::SetCollisionMesh(VSharedPtr<VGeometry> in_Geometry)
 {
 	V3D_ASSERT(in_Geometry != 0);
-
 	m_CollisionMesh = in_Geometry;
-	dGeomSetBody(*in_Geometry->GetGeomID(), *m_Body->GetBodyID());
+	dGeomSetBody(*in_Geometry->GetGeomID(), m_Body->GetBodyID());
 	m_PositionState.Apply();
 	m_OrientationState.Apply();
 }
@@ -112,7 +104,7 @@ void VBody::SetOrientation(math::VQuatf in_Orientation)
 
 void VBody::SetOrientation(VVector4f in_Orientation)
 {
-	//ode quat representation w,x,y,z but recheck
+	//ode quaternion representation w,x,y,z but recheck
 	m_OrientationState.GetQuat().Set(
 		in_Orientation[0],
 		in_Orientation[1],
@@ -125,39 +117,38 @@ void VBody::SetOrientation(VVector4f in_Orientation)
 void VBody::Destroy()
 {
 	//TODO unregister name!!!
-	m_Body->Destroy();
-	delete m_Body;
-	m_Body = 0;
+	//m_Body->Destroy();
+	m_Body.Release();
+	m_Body.Assign(0);
 }
 
 bool VBody::IsValid()
 {
-	if(m_Body)
+	if(m_Body.Get())
 		return true;
-
 	return false;
 }
 void VBody::Deactivate()
 {
-	if(m_Body)
-		dBodyDisable(*m_Body->GetBodyID());
+	if( m_Body.Get() )
+		dBodyDisable(m_Body->GetBodyID());
 }
 
 void VBody::Activate()
 {
-	if (m_Body)
+	if ( m_Body.Get() )
 	{
-		dBodyEnable(*m_Body->GetBodyID());
-		dBodySetLinearVel  (*m_Body->GetBodyID(), 0,0,0);
-		dBodySetAngularVel (*m_Body->GetBodyID(), 0,0,0);
+		dBodyEnable(m_Body->GetBodyID());
+		dBodySetLinearVel  (m_Body->GetBodyID(), 0,0,0);
+		dBodySetAngularVel (m_Body->GetBodyID(), 0,0,0);
 	}
 }
 
 vbool VBody::IsEnabled()
 {
-	if(m_Body)
+	if( m_Body.Get() )
 	{
-		if(dBodyIsEnabled(*m_Body->GetBodyID()))
+		if(dBodyIsEnabled(m_Body->GetBodyID()))
 			return true;
 	}
 
@@ -166,21 +157,21 @@ vbool VBody::IsEnabled()
 
 void VBody::SetMass(vfloat32 in_fMass)
 {
-	if(m_Body)
+	if( m_Body.Get() )
 	{
 		dMass mass;
-		dBodyGetMass(*m_Body->GetBodyID(), &mass);
+		dBodyGetMass(m_Body->GetBodyID(), &mass);
 		mass.adjust(in_fMass);
-		dBodySetMass(*m_Body->GetBodyID(), &mass);
+		dBodySetMass(m_Body->GetBodyID(), &mass);
 	}
 }
 
 vfloat32 VBody::GetMass()
 {
-	if(m_Body)
+	if( m_Body.Get() )
 	{
 		dMass mass;
-		dBodyGetMass(*m_Body->GetBodyID(), &mass);
+		dBodyGetMass(m_Body->GetBodyID(), &mass);
 		return mass.mass;
 	}
 	else

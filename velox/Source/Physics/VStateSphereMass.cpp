@@ -25,11 +25,11 @@ VStateSphereMass::~VStateSphereMass()
 
 void VStateSphereMass::Apply()
 {
-	VState::Parent pParent = static_cast<VState::Parent>(GetParent());
+	VState::Parent pParent = GetParent();
 
 	dMassSetSphere (&m_Mass, GetDensity(), m_fRadius);
 	dMassAdjust (&m_Mass, GetMass());
-	dBodySetMass (*pParent->GetBodyID(),&m_Mass);
+	dBodySetMass (pParent->GetBodyID(),&m_Mass);
 }
 
 vfloat32 VStateSphereMass::GetRadius()

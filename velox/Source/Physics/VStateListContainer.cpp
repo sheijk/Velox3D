@@ -17,21 +17,24 @@ namespace physics {
 
 VStateListContainer::VStateListContainer()
 {
-	typedef StateList::iterator ListIter;
-
-	ListIter itBegin = m_StateList.begin();
-	ListIter itEnd = m_StateList.end();
-
-	for(; itBegin != itEnd; ++itBegin)
-	{
-		delete (*itBegin);
-	}
 }
 
 VStateListContainer::~VStateListContainer()
 {
+  ClearStates();
 }
+void VStateListContainer::ClearStates()
+{
+  typedef StateList::iterator ListIter;
 
+  ListIter itBegin = m_StateList.begin();
+  ListIter itEnd = m_StateList.end();
+
+  for(; itBegin != itEnd; ++itBegin)
+  {
+	delete (*itBegin);
+  }
+}
 
 void VStateListContainer::RegisterForUpdate(VState* in_pState)
 {

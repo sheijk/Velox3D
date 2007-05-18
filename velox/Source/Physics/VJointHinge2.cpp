@@ -80,8 +80,8 @@ void VJointHinge2::AddBody(VBody* in_pBody1, VBody* in_pBody2)
 	V3D_ASSERT(m_JointID != 0);
 	V3D_ASSERT(m_pBody1  != 0);
 	V3D_ASSERT(m_pBody2  != 0);
-	V3D_ASSERT(*m_pBody1->GetOdeBody()->GetBodyID() != 0);
-	V3D_ASSERT(*m_pBody2->GetOdeBody()->GetBodyID() != 0);
+	V3D_ASSERT(m_pBody1->GetOdeBody()->GetBodyID() != 0);
+	V3D_ASSERT(m_pBody2->GetOdeBody()->GetBodyID() != 0);
 
 	//SetParameters();
 #ifdef V3D_DEBUG
@@ -89,8 +89,8 @@ void VJointHinge2::AddBody(VBody* in_pBody1, VBody* in_pBody2)
 #endif
 	dJointAttach(
 		m_JointID,
-		*m_pBody1->GetOdeBody()->GetBodyID(),
-		*m_pBody2->GetOdeBody()->GetBodyID()
+		m_pBody1->GetOdeBody()->GetBodyID(),
+		m_pBody2->GetOdeBody()->GetBodyID()
 		);
 	Apply(); //ode wiki tells to attach joint before applying settings
 }

@@ -14,7 +14,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indent
+using namespace v3d;
 using namespace v3d::entity;
 using namespace v3d::input;
 
@@ -45,11 +45,6 @@ m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 
 void VJointHinge2ModifierPart::Activate()
 {
-	/*if( m_pPhysicManagerPart.Get() == 0)
-		V3D_THROW(entity::VMissingPartException, "missing part phyic manager");
-	if( m_pInputManager.Get() == 0)
-		V3D_THROW(entity::VMissingPartException, "missing part VInputPart");*/
-
 	if(m_pInputManager->GetInputManager())
 	{
 		m_pButton = &m_pInputManager->GetInputManager()->GetStandardKey(KeyUp);
@@ -69,17 +64,17 @@ void VJointHinge2ModifierPart::Deactivate()
 	m_pUpdateManager->Unregister(this);
 }
 
-bool VJointHinge2ModifierPart::GetButtons()
+bool VJointHinge2ModifierPart::GetButtons(vfloat32 in_fSeconds)
 {
-  bool pushed = false;
- if(m_pButton2)
- {
- 	if(m_pButton2->IsDown())
- 	{
-	  m_fSpeed = m_fMaxSpeed;
-	  m_fAccel = m_fMaxAccel;
+   bool pushed = false;
+   if(m_pButton2)
+   {
+		if(m_pButton2->IsDown())
+		{
+	  m_fSpeed = m_fMaxSpeed /** (in_fSeconds)*/;
+	  m_fAccel = m_fMaxAccel /** (in_fSeconds)*/;
 	  pushed = true;
-  	}
+		}
 	if( ! pushed )
 	{
 	  m_fAccel = 0;
@@ -89,12 +84,12 @@ bool VJointHinge2ModifierPart::GetButtons()
 
   if(m_pButton)
   {
-  	if(m_pButton->IsDown())
-  	{
-	  m_fSpeed = m_fMaxSpeed;
-	  m_fAccel = -m_fMaxAccel;
+		if(m_pButton->IsDown())
+		{
+	  m_fSpeed = m_fMaxSpeed /* * (in_fSeconds)*/; 
+	  m_fAccel = -m_fMaxAccel/* *( in_fSeconds )*/;
 	  pushed = true;
-   	}
+ 		}
 	if( ! pushed )
 	{
 	  m_fSpeed = 0;
@@ -105,13 +100,13 @@ bool VJointHinge2ModifierPart::GetButtons()
 
   if(m_pButton3)
   {
-  	if(m_pButton3->IsDown())
-  	{
+		if(m_pButton3->IsDown())
+		{
 	  bIsSteered = true;
-  		m_fSteering -= m_fSteerFactor;
+			m_fSteering -= m_fSteerFactor;
 		if(m_fSteering < -m_fMaxSteer )
 		  m_fSteering = - m_fMaxSteer;
-   	}
+ 		}
   }
 
   if(m_pButton4)
@@ -133,6 +128,8 @@ bool VJointHinge2ModifierPart::GetButtons()
 		m_fAccel = 0;
    	}
   }
+
+  vout << "Accel: " << m_fAccel << "Speed: " << m_fSpeed << vendl;
   return bIsSteered;
 }
 
@@ -145,7 +142,7 @@ void VJointHinge2ModifierPart::Update(vfloat32 in_fSeconds)
   	  m_pJoint[i] = pJoint;
   }
   
-  if( ! GetButtons() )
+  if( ! GetButtons(in_fSeconds) )
   {
 	//get the wheels back to 0
 	if( m_fSteering > 0)
@@ -221,7 +218,7 @@ void VJointHinge2ModifierPart::Steer(vfloat32 in_fSteer)
   else
   {
 #ifdef V3D_DEBUG
-	vout << "JointHinge2ModiferParttried to modified unexisting joints" << vendl;
+	vout << "JointHinge2ModiferParttried to modified nonexistent joints" << vendl;
 #endif
 	;
   }

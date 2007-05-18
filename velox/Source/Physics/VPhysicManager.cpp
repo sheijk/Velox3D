@@ -253,7 +253,8 @@ VPhysicManager::Geometry VPhysicManager::CreateSphereGeom(VBoundingSphere* in_pB
 VPhysicManager::BodyPtr VPhysicManager::CreateBody(std::string in_sName)
 {
 	//body will take ownership of odeBody
-	VOdeBody* pOdeBody = new VOdeBody();
+	VSharedPtr<VOdeBody> pOdeBody;
+	pOdeBody.Assign(new VOdeBody());
 	pOdeBody->Create(&m_World);
 	BodyPtr pBody(new VBody(pOdeBody, in_sName));
 	//VSharedPtr<VBodyPart> bodyPart(new VBodyPart(body));
@@ -298,8 +299,8 @@ VPhysicManager::BodyPtr VPhysicManager::CreateSphere(
 	BodyPtr pBody = CreateBody(in_sName);
 
 	//physic stuff
-	VStateSphereMass* pMassState(new VStateSphereMass(pBody->GetOdeBody())); //FIXME: no deletion!!!!!!!!!
-	VGeometrySphere* pSphereGeometry(new VGeometrySphere());//FIXME: no deletion!!!!!!!!!
+	VStateSphereMass* pMassState(new VStateSphereMass(pBody->GetOdeBody())); //deleted by VBody StateList
+	VSharedPtr<VGeometrySphere> pSphereGeometry(new VGeometrySphere());
 	//assign values
 	pMassState->SetMass(in_fMass);
 	pMassState->SetRadius(in_fRadius);
@@ -323,7 +324,7 @@ VPhysicManager::BodyPtr VPhysicManager::CreateBox(
 	BodyPtr pBody = CreateBody(in_sName);
 
 	VStateBoxMass* pMassState(new VStateBoxMass(pBody->GetOdeBody())); //!!!!!
-	VGeometryBox* pGeometryBox(new VGeometryBox());//!!!
+	VSharedPtr<VGeometryBox> pGeometryBox(new VGeometryBox());
 
 	pMassState->SetMass(in_fMass);
 	pMassState->SetLength(in_Expansion[0]); //fix this settings!!
@@ -351,7 +352,7 @@ VPhysicManager::BodyPtr VPhysicManager::CreateMesh(
 	BodyPtr pBody = CreateBody(in_sName);
 
 	VStateBoxMass* pMassState(new VStateBoxMass(pBody->GetOdeBody()));
-	VGeometryMesh* pGeometryMesh(new VGeometryMesh(*in_BoundingMesh));
+	VSharedPtr<VGeometryMesh> pGeometryMesh(new VGeometryMesh(*in_BoundingMesh));
 
 	pMassState->SetMass(in_fMass);
 	pGeometryMesh->Create(m_World.GetSpace());
@@ -371,7 +372,7 @@ VPhysicManager::BodyPtr VPhysicManager::CreateCCylinder(
 	BodyPtr pBody = CreateBody(in_sName);
 
 	VStateCCylinderMass* pMassState(new VStateCCylinderMass(pBody->GetOdeBody()));
-	VGeometryCappedCylinder* pGeometry(new VGeometryCappedCylinder());
+	VSharedPtr<VGeometryCappedCylinder> pGeometry(new VGeometryCappedCylinder());
 	//assign values
 	pMassState->SetMass(in_fMass);
 	pMassState->SetRadius(in_fRadius);

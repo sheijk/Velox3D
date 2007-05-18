@@ -17,7 +17,6 @@ using namespace v3d; // anti auto indent
 VOdeBody::VOdeBody()
 {
 	m_Body = 0;
-	m_bIsAlive = false;
 }
 
 VOdeBody::~VOdeBody()
@@ -29,30 +28,21 @@ void VOdeBody::Create(VWorld* in_pWorld)
 {
 	V3D_ASSERT(in_pWorld != 0);
 
-	if(!m_bIsAlive)
-	{
-		m_Body = dBodyCreate(*in_pWorld->GetWorld());
-		m_bIsAlive = true;
-	}
+  	m_Body = dBodyCreate(*in_pWorld->GetWorld());
 }
 
 void VOdeBody::Destroy()
 {
-	if(m_Body != 0 && m_bIsAlive)
+	if( m_Body )
 	{
-		dBodyDestroy(m_Body);
-		m_bIsAlive = false;
+//		dBodyDestroy(m_Body); //TODO #148
+		m_Body = 0;
 	}
 }
 
-vbool VOdeBody::IsAlive()
+dBodyID VOdeBody::GetBodyID()
 {
-	return m_bIsAlive;
-}
-
-dBodyID* VOdeBody::GetBodyID()
-{
-	return &m_Body;
+	return m_Body;
 }
 
 //-----------------------------------------------------------------------------

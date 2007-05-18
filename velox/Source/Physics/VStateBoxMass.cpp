@@ -30,11 +30,11 @@ void VStateBoxMass::Apply()
 	dMassSetBox (&m_Mass, GetDensity(), m_fLength , m_fWidth ,m_fHeight);
 	dMassAdjust (&m_Mass, GetMass());
 
-	VState::Parent parent = static_cast<VState::Parent>(GetParent());
+	VState::Parent parent = GetParent();
 
 	V3D_ASSERT(parent != 0);
 
-	dBodySetMass (*parent->GetBodyID(), &m_Mass);
+	dBodySetMass (parent->GetBodyID(), &m_Mass);
 }
 
 void VStateBoxMass::SetLength(vfloat32 in_fLength)

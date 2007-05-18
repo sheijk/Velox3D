@@ -52,11 +52,6 @@ VBodyPart::~VBodyPart()
   ;
 }
 
-std::string VBodyPart::GetDefaultId()
-{
-	return "physicPart";
-}
-
 void VBodyPart::Create()
 {
 	if( ! m_pBody.Get() || ! m_pBody.Get()->IsValid() )

@@ -44,8 +44,8 @@ math::VVector3f VStatePosition::GetPositon()
 
 void VStatePosition::Apply()
 {
-	VState::Parent pParent = static_cast<VState::Parent>(GetParent());
-    dBodySetPosition(*(pParent->GetBodyID()),m_Position[0], m_Position[1], m_Position[2]);
+	VState::Parent pParent = GetParent();
+    dBodySetPosition((pParent->GetBodyID()),m_Position[0], m_Position[1], m_Position[2]);
 }
 
 //-----------------------------------------------------------------------------

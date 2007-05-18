@@ -94,7 +94,7 @@ namespace {
 		vb->setIndexCount(indexCount);
 
 		// ???
-		for(int i = 0; i < indexCount; ++i) {
+		for(uint i = 0; i < indexCount; ++i) {
 			vb->setIndex(i, 64);
 		}
 

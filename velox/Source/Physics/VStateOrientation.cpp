@@ -40,8 +40,8 @@ void VStateOrientation::Apply()
 	q[3]=m_Quaternion[2];
 	q[0]=m_Quaternion[3];
 
-	VState::Parent pParent = static_cast<VState::Parent>(GetParent());
-    dBodySetQuaternion(*pParent->GetBodyID(), q);
+	VState::Parent pParent = GetParent();
+    dBodySetQuaternion(pParent->GetBodyID(), q);
 }
 
 VQuatf& VStateOrientation::GetQuat()

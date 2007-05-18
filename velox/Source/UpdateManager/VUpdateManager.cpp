@@ -26,7 +26,7 @@ VUpdateManager::VUpdateManager(VStringParam in_strId)
 {
 	m_pTimer = 0;
 
-	// instanciate VTimer here
+	// instantiate VTimer here
 	m_pTimer = new VPerformanceCounter();
 
 	m_nMilliSecondsSinceStart = 0;

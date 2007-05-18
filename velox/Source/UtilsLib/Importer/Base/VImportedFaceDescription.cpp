@@ -96,7 +96,7 @@ resource::VResourceId VImportedFaceDescription::CreateResource(
 
 	  m_pMeshDescription = new VMeshDescription();
 
-	  m_pMeshDescription->SetGeometryType(VMeshDescription::GeometryType::Triangles);
+	  m_pMeshDescription->SetGeometryType(VMeshDescription::Triangles);
 	  m_pMeshDescription->SetCoordinateResource(m_sParentName.c_str());
 	  m_pMeshDescription->SetCoordinateFormat(
 		  in_pBufferDescription->GetVertexBufferFormat()->GetCoordinateFormat());
