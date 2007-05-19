@@ -83,10 +83,10 @@ public class SceneView extends VeloxViewBase {
 		abstract public void run();
 	}
 	
-	class EntityContentProvider implements IStructuredContentProvider, 
+	class UpperPaneContentProvider implements IStructuredContentProvider, 
 										   ITreeContentProvider 
 	{
-		EntityContentProvider() {
+		UpperPaneContentProvider() {
 		}
 		
 		public Object[] getElements(Object parent) {
@@ -121,14 +121,13 @@ public class SceneView extends VeloxViewBase {
 					childs.add(entityIter.next());
 				}
 				
-//				// add entity parts
-//				Iterator<Part> partIter = entity.PartIterator();
-//				while( partIter.hasNext() ) {
-//					childs.add(partIter.next());
-//				}
+				// add entity parts
+				Iterator<Part> partIter = entity.PartIterator();
+				while( partIter.hasNext() ) {
+					childs.add(partIter.next());
+				}
 				
 			}
-			/*
 			// if the object is a part, add it's settings and values
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
@@ -159,7 +158,6 @@ public class SceneView extends VeloxViewBase {
 					childs.add(settingIter.next());
 				}
 			}
-			*/
 			
 			return childs.toArray();				
 		}
@@ -173,9 +171,9 @@ public class SceneView extends VeloxViewBase {
 				Entity entity = (Entity)parent;
 				
 				// entity has childs if it has either sub entities or parts
-				return entity.EntityIterator().hasNext();
-//				return entity.EntityIterator().hasNext() ||
-//					entity.PartIterator().hasNext();
+//				return entity.EntityIterator().hasNext();
+				return entity.EntityIterator().hasNext() ||
+					entity.PartIterator().hasNext();
 			}
 //			else if( parent instanceof Part ) {
 //				return true;
@@ -186,10 +184,10 @@ public class SceneView extends VeloxViewBase {
 		}
 	}
 	
-	class PartContentProvider implements IStructuredContentProvider, 
+	class LowerPaneContentProvider implements IStructuredContentProvider, 
 	ITreeContentProvider 
 	{
-		PartContentProvider() {
+		LowerPaneContentProvider() {
 		}
 		
 		public Object[] getElements(Object parent) {
@@ -197,7 +195,16 @@ public class SceneView extends VeloxViewBase {
 				return new Object[] {};
 			}
 			if (parent.equals(getViewSite())) {
-				return getChildren(getSelectedEntity());
+				final Entity selectedEntity = getSelectedEntity();
+				
+				if( selectedEntity != null ) {
+					return getChildren( selectedEntity );
+				}
+				else {
+					final Part selectedPart = getSelectedPart();
+					
+					return getChildren( selectedPart );
+				}
 			}
 			else {
 				return getChildren(parent);
@@ -338,6 +345,16 @@ public class SceneView extends VeloxViewBase {
 		
 		public Image getImage(Object obj) {
 			String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
+			
+			if( obj instanceof Entity )
+				imageKey = ISharedImages.IMG_OBJ_FOLDER;
+			else if( obj instanceof Part )
+				imageKey = ISharedImages.IMG_OBJ_FILE;
+			else if( getText(obj).matches("[AN].*") )
+				imageKey = ISharedImages.IMG_OBJS_INFO_TSK;
+			else if( getText(obj).equals("Tags") )
+				imageKey = ISharedImages.IMG_OPEN_MARKER;
+			
 			return PlatformUI.getWorkbench().getSharedImages().getImage(imageKey);
 		}
 	}
@@ -371,7 +388,7 @@ public class SceneView extends VeloxViewBase {
 		drillDownAdapter = new DrillDownAdapter(viewer);
 		drillDownAdapter.addNavigationActions(
 			getViewSite().getActionBars().getToolBarManager());
-		viewer.setContentProvider(new EntityContentProvider());
+		viewer.setContentProvider(new UpperPaneContentProvider());
 		viewer.setLabelProvider(new ViewLabelProvider());
 		viewer.setInput(getViewSite());
 
@@ -379,7 +396,7 @@ public class SceneView extends VeloxViewBase {
 		DrillDownAdapter settingsDrillDownAdapter = new DrillDownAdapter(settingsViewer);
 		settingsDrillDownAdapter.addNavigationActions(
 			getViewSite().getActionBars().getToolBarManager());
-		settingsViewer.setContentProvider(new PartContentProvider());
+		settingsViewer.setContentProvider(new LowerPaneContentProvider());
 		settingsViewer.setLabelProvider(new ViewLabelProvider());
 		settingsViewer.setInput(getViewSite());
 
@@ -390,11 +407,12 @@ public class SceneView extends VeloxViewBase {
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				final Entity selectedEntity = getSelectedEntity();
+				final Part selectedPart = getSelectedPart();
 				
-				if( selectedEntity != null ) {
+				if( selectedEntity != null || selectedPart != null ) {
 					settingsViewer.refresh();
 					settingsViewer.expandAll();
-				}
+				}				
 			}
 		});
 		
@@ -902,10 +920,17 @@ public class SceneView extends VeloxViewBase {
 	private Part getSelectedPart() {
 		Object selectedElement = getSelectedObjectInPartView();
 		
-		if( selectedElement instanceof Part )
+		if( selectedElement instanceof Part ) {
 			return (Part)selectedElement;
-		else
-			return null;
+		}
+		else {
+			Object selectedUpperElement = getSelectedObject();
+			
+			if( selectedUpperElement instanceof Part )
+				return (Part)selectedUpperElement;
+			else
+				return null;
+		}
 	}
 	
 	private Setting getSelectedSetting() {

@@ -151,8 +151,12 @@ public class ResourceView extends VeloxViewBase {
 		
 		public Image getImage(Object obj) {
 			String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
-//			if (obj instanceof TreeParent)
-//			   imageKey = ISharedImages.IMG_OBJ_FOLDER;
+			
+			if( obj instanceof VResource )
+				imageKey = ISharedImages.IMG_OBJ_FOLDER;
+			else if( obj instanceof VResourceData )
+				imageKey = ISharedImages.IMG_OBJ_FILE;
+
 			return PlatformUI.getWorkbench().getSharedImages().getImage(imageKey);
 		}
 	}

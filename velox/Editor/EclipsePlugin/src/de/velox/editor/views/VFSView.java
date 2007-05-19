@@ -123,6 +123,11 @@ public class VFSView extends VeloxViewBase {
 		
 		public Image getImage(Object obj) {
 			String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
+			
+			if( obj instanceof IVDirectory )
+				imageKey = ISharedImages.IMG_OBJ_FOLDER;
+			else if( obj instanceof IVFile )
+				imageKey = ISharedImages.IMG_OBJ_FILE;
 
 			return PlatformUI.getWorkbench().getSharedImages().getImage(imageKey);
 		}
