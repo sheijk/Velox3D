@@ -16,6 +16,7 @@
 #include <V3d/Messaging/VMemberFunctionOption.h>
 
 #include <string>
+#include <list>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace messaging {
 //-----------------------------------------------------------------------------
@@ -60,8 +61,11 @@ public:
 		typename VMemberFunctionOption<ClassType, OptionType>::Setter setter);
 
 private:
-	typedef std::map<std::string, VSharedPtr<VOption> > OptionMap;
-	OptionMap m_Options;
+	typedef std::list< std::pair<std::string, VSharedPtr<VOption> > > OptionList;
+	//typedef std::map<std::string, VSharedPtr<VOption> > OptionMap;
+	OptionList m_Options;
+
+	OptionList::iterator FindOption(const std::string& name);
 
 	vbool m_bInitialized;
 };

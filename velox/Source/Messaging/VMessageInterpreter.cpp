@@ -17,7 +17,7 @@ using namespace v3d; // anti auto indent
 
 void v3d::messaging::VMessageInterpreter::AddOption(VSharedPtr<VOption> option) 
 {
-	m_Options.insert(make_pair(option->GetName(), option));
+	m_Options.push_back(make_pair(option->GetName(), option));
 }
 
 VMessageInterpreter::Result VMessageInterpreter::HandleMessage(void* object,
@@ -34,7 +34,7 @@ VMessageInterpreter::Result VMessageInterpreter::HandleMessage(void* object,
 		if( io_pAnswer == 0 )
 			return Done;
 
-		OptionMap::iterator option = m_Options.begin();
+		OptionList::iterator option = m_Options.begin();
 		for( ; option != m_Options.end(); ++option)
 		{
 			std::string name = option->first;
@@ -50,7 +50,7 @@ VMessageInterpreter::Result VMessageInterpreter::HandleMessage(void* object,
 		const std::string name = in_Message.GetAs<std::string>("name");
 		const std::string value = in_Message.GetAs<std::string>("value");
 
-		OptionMap::iterator option = m_Options.find(name);
+		OptionList::iterator option = findKey<std::string, VSharedPtr<VOption> >(name, m_Options);
 
 		if( option != m_Options.end() )
 		{
@@ -64,6 +64,20 @@ VMessageInterpreter::Result VMessageInterpreter::HandleMessage(void* object,
 	{
 		return NotProcessed;
 	}
+}
+
+VMessageInterpreter::OptionList::iterator VMessageInterpreter::FindOption(const std::string& name)
+{
+	const OptionList::iterator optionsEnd = m_Options.end();
+	for(OptionList::iterator iter = m_Options.begin();
+		iter != optionsEnd;
+		++iter)
+	{
+		if( iter->first == name )
+			return iter;
+	}	
+
+	return optionsEnd;
 }
 
 vbool VMessageInterpreter::IsInitialized() const

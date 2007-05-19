@@ -13,7 +13,7 @@
 #include <V3d/Utils/VStringValue.h>
 #include <V3d/Core/RangeIter/VRangeIterator.h>
 
-#include <map>
+#include <list>
 #include <string>
 
 //-----------------------------------------------------------------------------
@@ -56,10 +56,43 @@ public:
 
 	std::string ToString() const;
 private:
-	typedef std::map<std::string, utils::VStringValue> PropertyMap;
+	typedef std::list< std::pair<std::string, utils::VStringValue> > PropertyMap;
 
     PropertyMap m_Properties;
 };
+
+#ifndef SWIG
+// If you don't understand this, you suck.
+template<typename Key, typename Value, template<typename, typename> class ContainerT, typename Allocator >
+typename ContainerT< std::pair<Key, Value>, Allocator >::const_iterator findKey(const Key& key, const ContainerT< std::pair<Key, Value>, Allocator >& container)
+{
+	const ContainerT< std::pair<Key, Value> >::const_iterator containerEnd = container.end();
+	for(ContainerT< std::pair<Key, Value> >::const_iterator iter = container.begin();
+		iter != containerEnd;
+		++iter)
+	{
+		if( iter->first == key )
+			return iter;
+	}
+
+	return containerEnd;
+}
+
+template<typename Key, typename Value, template<typename, typename> class ContainerT, typename Allocator >
+typename ContainerT< std::pair<Key, Value>, Allocator >::iterator findKey(const Key& key, ContainerT< std::pair<Key, Value>, Allocator >& container)
+{
+	const ContainerT< std::pair<Key, Value> >::iterator containerEnd = container.end();
+	for(ContainerT< std::pair<Key, Value> >::iterator iter = container.begin();
+		iter != containerEnd;
+		++iter)
+	{
+		if( iter->first == key )
+			return iter;
+	}
+
+	return containerEnd;
+}
+#endif
 
 //-----------------------------------------------------------------------------
 template<typename T>

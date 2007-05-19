@@ -34,7 +34,7 @@ VMessage::~VMessage()
 
 void VMessage::Set(const std::string& in_strName, const utils::VStringValue& in_Value)
 {
-	PropertyMap::iterator prop = m_Properties.find(in_strName);
+	PropertyMap::iterator prop = findKey( in_strName, m_Properties );
 
 	if( prop != m_Properties.end() )
 	{
@@ -56,7 +56,7 @@ void VMessage::Set(const std::string& in_strName, const std::string& in_strValue
 
 utils::VStringValue VMessage::Get(const std::string& in_strName) const
 {
-	PropertyMap::const_iterator prop = m_Properties.find(in_strName);
+	PropertyMap::const_iterator prop = findKey( in_strName, m_Properties );
 
 	if( prop != m_Properties.end() )
 	{
@@ -72,7 +72,7 @@ utils::VStringValue VMessage::Get(const std::string& in_strName) const
 
 vbool VMessage::HasProperty(const std::string& in_strName) const
 {
-	PropertyMap::const_iterator pos = m_Properties.find(std::string(in_strName));
+	PropertyMap::const_iterator pos = findKey( in_strName, m_Properties );
 
 	return ( pos != m_Properties.end() );
 }
@@ -81,7 +81,7 @@ void VMessage::AddProperty(const std::string& in_strName, const utils::VStringVa
 {
 	if( ! HasProperty(in_strName) )
 	{
-		m_Properties.insert(PropertyMap::value_type(in_strName, in_Default));
+		m_Properties.push_back(PropertyMap::value_type(in_strName, in_Default));
 	}
 }
 

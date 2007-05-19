@@ -14,6 +14,7 @@
 %template(VEntityIterator) v3d::VRangeIterator<v3d::entity::VEntity>;
 %template(VPartIterator) v3d::VRangeIterator<v3d::entity::IVPart>;
 
+%include "../../API/V3d/Entity/VNode.h"
 %include "../../API/V3d/Entity/VPartDependency.h"
 %include "../../API/V3d/Entity/IVPart.h"
 %include "../../API/V3d/Entity/VEntity.h"
