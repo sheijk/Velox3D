@@ -29,7 +29,7 @@ graphics::VLight& VLightPart::Light()
 	return m_Light;
 }
 
-void VLightPart::Activate()
+void VLightPart::OnActivate()
 {
 	if( m_LightManager.IsConnected() )
 		m_LightManager->Add(this);
@@ -37,7 +37,7 @@ void VLightPart::Activate()
 	m_pUpdateManager->Register(this);
 }
 
-void VLightPart::Deactivate()
+void VLightPart::OnDeactivate()
 {
 	if( m_LightManager.IsConnected() )
 		m_LightManager->Remove(this);

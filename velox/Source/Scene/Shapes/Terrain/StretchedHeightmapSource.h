@@ -4,6 +4,8 @@
 #include "RawHeightmapSource.h"
 #include "Noise.h"
 
+#include <V3d/Core/VException.h>
+
 namespace geomclip {
 
 	class StretchedHeightmapSource : public RawHeightmapSource {
@@ -154,6 +156,8 @@ namespace geomclip {
 			else if( index == 1 ) {
 				return "normals";
 			}
+
+			V3D_THROW(v3d::VException, "Invalid index");
 			//return "colorTex";
 		}
 

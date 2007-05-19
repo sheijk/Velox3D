@@ -178,7 +178,7 @@ void VShootingBase::Render()
 	activeDevice->EndScene();
 }
 
-void VShootingBase::Activate()
+void VShootingBase::OnActivate()
 {
 	m_bActive = true;
 	SetupRenderSteps();
@@ -189,7 +189,7 @@ void VShootingBase::Activate()
 		m_pParentShooting->AddPreShooting(this);
 }
 
-void VShootingBase::Deactivate()
+void VShootingBase::OnDeactivate()
 {
 	m_bActive = false;
 

@@ -17,15 +17,18 @@ class VDataPart : public entity::VUnconnectedPart
 public:
 	VDataPart(vint d) { data = d; }
 
-	void Activate()
+protected:
+	void OnActivate()
 	{
 		vout << "activating VDataPart, " << data << vendl;
 	}
 
-	void Deactivate()
+	void OnDeactivate()
 	{
 		vout << "deactivating VDataPart, " << data << vendl;
 	}
+
+public:
 
 	vint GetData() { return data; }
 	void SetData(int d) { data = d; }

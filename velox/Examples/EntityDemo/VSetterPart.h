@@ -21,7 +21,8 @@ public:
 	{
 	}
 
-	void Activate()
+protected:
+	void OnActivate()
 	{
 		if( pData.Get() == 0 )
 			V3D_THROW(entity::VMissingPartException, "missing part 'data'");
@@ -30,11 +31,12 @@ public:
 		vout << "data = " << pData->GetData() << vendl;
 	}
 
-	void Deactivate() 
+	void OnDeactivate() 
 	{
 		vout << "deactivating setter part" << vendl;
 	}
 
+public:
 	virtual vbool IsReady() const
 	{
 		return pData.Get() != 0;

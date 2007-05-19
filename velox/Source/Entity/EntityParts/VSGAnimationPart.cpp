@@ -63,13 +63,13 @@ void VSGAnimationPart::Update(vfloat32 in_Seconds)
 	m_pSceneGraphPart->SetRelativeTransform(m_Transform);
 }
 
-void VSGAnimationPart::Activate()
+void VSGAnimationPart::OnActivate()
 {
 	if(m_pParent.IsConnected())
 		m_pParent->Register(this);
 }
 
-void VSGAnimationPart::Deactivate()
+void VSGAnimationPart::OnDeactivate()
 {
 	if(m_pParent.IsConnected())
 		m_pParent->Unregister(this);

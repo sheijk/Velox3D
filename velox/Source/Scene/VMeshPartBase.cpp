@@ -148,13 +148,13 @@ VRangeIterator<const IVShapePart> VMeshPartBase::GetVisibleMeshes() const
 	return CreateSingleValueIterator<const IVShapePart>(this);
 }
 
-void VMeshPartBase::Activate()
+void VMeshPartBase::OnActivate()
 {
 	if( m_pSceneManager.IsConnected() )
 		m_pSceneManager->Add(this);
 }
 
-void VMeshPartBase::Deactivate()
+void VMeshPartBase::OnDeactivate()
 {
 	if( m_pSceneManager.IsConnected() )
 		m_pSceneManager->Remove(this);

@@ -35,7 +35,7 @@ VJointHinge2Part::~VJointHinge2Part()
 {
 }
 
-void VJointHinge2Part::Activate()
+void VJointHinge2Part::OnActivate()
 {
 	if( m_pPhysicManagerPart.Get() == 0)
 		V3D_THROW(entity::VMissingPartException, "missing part physic manager 'data'");
@@ -55,7 +55,7 @@ void VJointHinge2Part::Activate()
 	m_Joint.Apply();
 }
 
-void VJointHinge2Part::Deactivate()
+void VJointHinge2Part::OnDeactivate()
 {
 	m_pPhysicManagerPart->GetPhysicManager()->UnregisterJoint(&m_Joint);
 	m_bIsActive = false;

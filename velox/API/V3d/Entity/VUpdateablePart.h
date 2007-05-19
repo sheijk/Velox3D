@@ -28,7 +28,6 @@ using namespace v3d; // prevent auto indenting
 class IVUpdateablePart : public VPartBase
 {
 public:
-
 	IVUpdateablePart() {};
 	virtual ~IVUpdateablePart() {};
 
@@ -47,24 +46,11 @@ private:
 class VUpdateManagerPart : public VPartBase
 {
 public:
-
 	VUpdateManagerPart();
 	virtual ~VUpdateManagerPart();
 
 	/** Update all the Animation Part */
 	void Update(vfloat32 in_Seconds);
-
-	/** 
-	* When called, the part registers itself to it's parent and
-	* activates its children
-	*/
-	virtual void Activate();
-
-	/**
-	* When called, the part unregisters itself from it's parent and
-	* deactivates its children
-	*/
-	virtual void Deactivate();
 
 	/** Register all IVUpdateableParts */
 	void Register(IVUpdateablePart* in_pChild);
@@ -75,6 +61,9 @@ public:
 	static std::string GetDefaultId();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	std::list<IVUpdateablePart*> m_pChilds;
 };
 //-----------------------------------------------------------------------------

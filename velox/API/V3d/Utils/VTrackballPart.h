@@ -31,8 +31,6 @@ public:
 
 	virtual void Update(vfloat32 in_fSeconds);
 
-	virtual void Activate();
-	virtual void Deactivate();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 	void SetTrackball(const VSharedPtr<VMouseTrackball>& in_Trackball);
@@ -50,6 +48,9 @@ public:
 	math::VVector3f GetCenter() const;
 	void SetCenter(const math::VVector3f& in_Center);
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
 

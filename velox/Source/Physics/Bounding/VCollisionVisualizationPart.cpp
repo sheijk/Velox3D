@@ -34,19 +34,19 @@ VCollisionVisualizationPart::VCollisionVisualizationPart() :
 //	return &m_BoundingMesh;
 //}
 
-void VCollisionVisualizationPart::Activate()
+void VCollisionVisualizationPart::OnActivate()
 {
 	if( m_pVolumePart.Get() == 0 )
 		V3D_THROW(entity::VMissingPartException, "missing terrain volume part 'data'");
 	if( !m_bCreated )
 		Create();
 
-	VMeshPartBase::Activate();
+	VMeshPartBase::OnActivate();
 }
 
-void VCollisionVisualizationPart::Deactivate()
+void VCollisionVisualizationPart::OnDeactivate()
 {
-	VMeshPartBase::Deactivate();
+	VMeshPartBase::OnDeactivate();
 }
 
 void VCollisionVisualizationPart::SendGeometry(graphics::IVDevice& in_Device) const

@@ -55,6 +55,26 @@ messaging::VMessageInterpreter* VNode::GetMessageInterpreterForClass()
 	return &interpreter;
 }
 
+VNode::ActivationResult VNode::Activate()
+{
+	OnActivate();
+
+	return ActivatedNone;
+}
+
+void VNode::Deactivate()
+{
+	OnDeactivate();
+}
+
+void VNode::OnActivate()
+{
+}
+
+void VNode::OnDeactivate()
+{
+}
+
 void VNode::OnMessage(
 	const messaging::VMessage& in_Message, 
 	messaging::VMessage* in_pAnswer)

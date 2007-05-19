@@ -52,14 +52,14 @@ public:
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 protected:
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 private:
 	std::string GetTextureDir() const;

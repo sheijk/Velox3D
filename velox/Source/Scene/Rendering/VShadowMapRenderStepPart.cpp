@@ -129,13 +129,13 @@ void VShadowMapRenderStepPart::AquireResources()
 	//                      ->GetMainDevice()->CreateOffscreenContext(&displaySettings);
 }
 
-void VShadowMapRenderStepPart::Activate()
+void VShadowMapRenderStepPart::OnActivate()
 {
 	if( ! HasAquiredResources() )
 		AquireResources();
 }
 
-void VShadowMapRenderStepPart::Deactivate()
+void VShadowMapRenderStepPart::OnDeactivate()
 {
 }
 

@@ -106,7 +106,7 @@ void VFPSMoverPart::Update(vfloat32 in_fSeconds)
 		 RotateZ(m_fRotationSpeedZ * in_fSeconds);
 }
 
-void VFPSMoverPart::Activate()
+void VFPSMoverPart::OnActivate()
 {
 	if( m_pInputPart->GetInputManager() != 0 )
 	{
@@ -115,7 +115,7 @@ void VFPSMoverPart::Activate()
 	}
 }
 
-void VFPSMoverPart::Deactivate()
+void VFPSMoverPart::OnDeactivate()
 {
 	m_pUpdateManager->Unregister(this);
 }

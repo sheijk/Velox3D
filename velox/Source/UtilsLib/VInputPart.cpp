@@ -34,14 +34,6 @@ input::IVInputManager* VInputPart::GetInputManager() const
 	return m_pInputManager;
 }
 
-void VInputPart::Activate()
-{
-}
-
-void VInputPart::Deactivate()
-{
-}
-
 V3D_REGISTER_PART_PARSER(VInputPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::utils

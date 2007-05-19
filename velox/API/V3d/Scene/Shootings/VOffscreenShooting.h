@@ -32,12 +32,12 @@ public:
 
 	virtual void UpdateAndCull();
 
-	void Activate();
-	void Deactivate();
-
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	virtual graphics::IVDevice* GetRenderTarget();
 	virtual graphics::IVCamera* GetCamera();
 	virtual scene::IVGraphicsPart* GetScene();

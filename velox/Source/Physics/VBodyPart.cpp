@@ -73,7 +73,7 @@ void VBodyPart::Create()
 	}
 }
 
-void VBodyPart::Activate()
+void VBodyPart::OnActivate()
 {
 	if( m_pUpdateManager.Get() == 0 )
 		V3D_THROW(entity::VMissingPartException, "missing part updater 'data'");
@@ -88,7 +88,7 @@ void VBodyPart::Activate()
 	m_pUpdateManager->Register(this);
 }
 
-void VBodyPart::Deactivate() 
+void VBodyPart::OnDeactivate() 
 {
 	m_pPhysicManagerPart->GetPhysicManager()->Delete(m_pBody);
 	m_pUpdateManager->Unregister(this);

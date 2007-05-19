@@ -51,7 +51,7 @@ class VEntityHelper;
  *
  * @author sheijk
  */
-class VEntity
+class VEntity : public VNode
 {
 public:
 	typedef VSharedPtr<VEntity> EntityPtr;
@@ -61,7 +61,7 @@ public:
 	virtual ~VEntity();
 
 	/** Will activate all parts */
-    void Activate();
+    ActivationResult Activate();
 
 	/** Will deactivate all parts */
 	void Deactivate();
@@ -99,6 +99,7 @@ public:
 	void DumpInfo(const std::string& prefix = "") const;
 
 	virtual void Save(xml::IVXMLElement& node);
+	virtual void Load(const xml::IVXMLElement& in_Element);
 private:
 	typedef std::multimap<std::string, PartPtr> PartContainer;
 	typedef std::vector<EntityPtr> EntityContainer;

@@ -112,9 +112,6 @@ public:
 	void SetMaterial(
 		resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial);
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 	virtual const graphics::IVMaterial& GetMaterial() const;
 	virtual vuint GetPassCount() const;
@@ -153,14 +150,6 @@ void VSkyboxPart::VSide::SetMaterial(
 	resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial)
 {
 	m_hMaterial = in_hMaterial;
-}
-
-void VSkyboxPart::VSide::Activate()
-{
-}
-
-void VSkyboxPart::VSide::Deactivate()
-{
 }
 
 void glVertex(const math::VVector3f& vertex)
@@ -299,12 +288,12 @@ const math::VRBTransform& VSkyboxPart::GetModelTransform() const
 	return m_pRigidBodyPart->GetTransform();
 }
 
-void VSkyboxPart::Activate()
+void VSkyboxPart::OnActivate()
 {
 	m_pSceneManager->Add(this);
 }
 
-void VSkyboxPart::Deactivate()
+void VSkyboxPart::OnDeactivate()
 {
 	m_pSceneManager->Remove(this);
 }

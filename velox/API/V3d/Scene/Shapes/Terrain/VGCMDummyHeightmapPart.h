@@ -28,8 +28,9 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-	virtual void Activate();
-	virtual void Deactivate();
+protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 private:
 	VSharedPtr<geomclip::HeightmapSource> m_pHeightmapSource;

@@ -21,15 +21,6 @@ public:
 	{
 	}
 
-	void Activate()
-	{
-		m_pBasePart->SayHello();
-	}
-
-	void Deactivate()
-	{
-	}
-
 	static std::string GetDefaultId() { return "basepartuser"; }
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 

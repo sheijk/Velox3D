@@ -46,9 +46,6 @@ public:
 	void SetMass(vfloat32 in_fMass);
 	void VBody::SetOrientation(math::VVector4f in_Orientation);
 
-	void Deactivate();
-	void Activate();
-
 	void Destroy();
 	bool IsValid();
 	
@@ -64,8 +61,9 @@ public:
 	std::string GetName();
 	void SetName(std::string in_sName);
 			
-protected: 
-
+	void Activate();
+	void Deactivate();
+protected:
 	VBody(const VBody&);
 	VBody& operator=(const VBody&);
 	

@@ -27,7 +27,8 @@ public:
 	{
 	}
 
-	void Activate()
+protected:
+	void OnActivate()
 	{
 		if( pData.Get() == 0 )
 			V3D_THROW(entity::VMissingPartException, "missing part 'data'");
@@ -37,12 +38,13 @@ public:
 		pManager->Register(this);
 	}
 
-	void Deactivate()
+	void OnDeactivate()
 	{
 		vout << "deactivating VReaderPart" << vendl;
 		pManager->Unregister(this);
 	}
 
+public:
 	virtual vbool IsReady() const
 	{
 		return pData.Get() != 0 &&

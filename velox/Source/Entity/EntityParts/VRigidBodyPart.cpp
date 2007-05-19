@@ -24,11 +24,11 @@ VRigidBodyPart::VRigidBodyPart()
 	m_Transformation.SetPosition(VVector3f(0.0f, 0.0f, 0.0f));
 }
 
-void VRigidBodyPart::Activate()
+void VRigidBodyPart::OnActivate()
 {
 }
 
-void VRigidBodyPart::Deactivate()
+void VRigidBodyPart::OnDeactivate()
 {
 }											 
 

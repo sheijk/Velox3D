@@ -43,13 +43,13 @@ void IVRenderStepPart::SetOutputDevice(graphics::IVDevice* in_OutputDevice)
 	m_pOutputDevice = in_OutputDevice;
 }
 
-void IVRenderStepPart::Activate()
+void IVRenderStepPart::OnActivate()
 {
 	if( m_pShooting.IsConnected() != 0 )
 		m_pShooting->Add(this);
 }
 
-void IVRenderStepPart::Deactivate()
+void IVRenderStepPart::OnDeactivate()
 {
 	if( m_pShooting.IsConnected() != 0 )
 		m_pShooting->Remove(this);

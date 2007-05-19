@@ -30,18 +30,17 @@ public:
 	VJointHinge2Part();
 	~VJointHinge2Part();
 	
-	// IVPart derived
-	void Activate();
-	void Deactivate();
-	
 	VJointHinge2& GetJointHinge2();
 	static std::string GetDefaultId();
 
 	virtual const VTypeInfo& GetTypeInfo() const 
 	{ return GetCompileTimeTypeInfo(this); }
 
-private:
+protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
+private:
 	vbool RegisterLink();
 
 	virtual void OnMessage(

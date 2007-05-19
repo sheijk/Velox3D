@@ -35,16 +35,16 @@ public:
 	virtual ~VBodyPart();
 	BodyPtr GetBody();
 
-	// IVPart derived
-	void Activate();
-	void Deactivate();
 	void Update(vfloat32 in_fSeconds);
 
 	virtual const VTypeInfo& GetTypeInfo() const 
 	{ return GetCompileTimeTypeInfo(this); }
 
-private:
+protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
+private:
 	void Create();
 
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);

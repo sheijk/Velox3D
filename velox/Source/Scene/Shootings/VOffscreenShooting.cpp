@@ -40,16 +40,16 @@ VOffscreenShooting::~VOffscreenShooting()
 {
 }
 
-void VOffscreenShooting::Activate()
+void VOffscreenShooting::OnActivate()
 {
-	VShootingBase::Activate();
+	VShootingBase::OnActivate();
 	m_pMainShooting->AddPreShooting(this);
 }
 
-void VOffscreenShooting::Deactivate()
+void VOffscreenShooting::OnDeactivate()
 {
 	m_pMainShooting->RemovePreShooting(this);
-	VShootingBase::Deactivate();
+	VShootingBase::OnDeactivate();
 }
 
 graphics::IVDevice* VOffscreenShooting::GetRenderTarget()

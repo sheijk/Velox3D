@@ -43,12 +43,12 @@ void VCircleMoverPart::Update(vfloat32 in_fSeconds)
 	//m_pRigidBody->
 }
 
-void VCircleMoverPart::Activate()
+void VCircleMoverPart::OnActivate()
 {
 	m_pUpdateManager->Register(this);
 }
 
-void VCircleMoverPart::Deactivate()
+void VCircleMoverPart::OnDeactivate()
 {
 	m_pUpdateManager->Unregister(this);
 }

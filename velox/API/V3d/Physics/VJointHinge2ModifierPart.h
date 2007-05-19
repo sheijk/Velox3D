@@ -24,9 +24,6 @@ public:
 	
 	VJointHinge2ModifierPart();
 	
-	// IVPart derived
-	void Activate();
-	void Deactivate();
 	void Update(vfloat32 in_fSeconds);
 	
 	static std::string GetDefaultId();
@@ -35,6 +32,8 @@ public:
 	{ return GetCompileTimeTypeInfo(this); }
 
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;

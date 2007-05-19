@@ -41,9 +41,10 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-	virtual void Activate();
-	virtual void Deactivate();
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	void AquireResources();
 	vbool HasAquiredResources() const;
 

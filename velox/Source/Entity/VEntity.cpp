@@ -218,7 +218,7 @@ void VEntity::SetAllPartsActive(vbool in_bActive)
 	}
 }
 
-void VEntity::Activate()
+VNode::ActivationResult VEntity::Activate()
 {
 	if( ! m_bActivated )
 	{
@@ -232,7 +232,7 @@ void VEntity::Activate()
 			VSharedPtr<IVPart> pPart = part->second;
 
 			if( ! pPart->IsReady() )
-				return;
+				return ActivatedNone;
 		}
 
 		// activate all parts
@@ -248,6 +248,8 @@ void VEntity::Activate()
 	
 		m_bActivated = true;
 	}
+
+	return ActivatedSome;
 }
 
 void VEntity::Deactivate()
@@ -653,6 +655,11 @@ void VEntity::Save(xml::IVXMLElement& node)
 		++child;
 	}
 	
+}
+
+void VEntity::Load(const xml::IVXMLElement& in_Element)
+{
+	V3D_THROW(VException, "not implemented, yet");
 }
 
 //-----------------------------------------------------------------------------

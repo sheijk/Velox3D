@@ -71,7 +71,7 @@ namespace geomclip {
 			T minh = std::numeric_limits<T>::max();
 			T maxh = std::numeric_limits<T>::min();
 
-			const uint dataSize = data.size();
+			const uint dataSize = uint( data.size() );
 			for( uint i = 0; i < dataSize; ++i ) {
 				T* pData = &data[i];
 
@@ -91,14 +91,14 @@ namespace geomclip {
 					double height = data[x + y*size_];
 					height -= minh;
 					height *= maxHeight / range;
-					heightValues_.push_back( height );
+					heightValues_.push_back( float(height) );
 				}
 			}
 
 			minHeight_ = std::numeric_limits<T>::max();
 			maxHeight_ = std::numeric_limits<T>::min();
 
-			for( int i = heightValues_.size() - 1; i >= 0; --i ) {
+			for( int i = (int)heightValues_.size() - 1; i >= 0; --i ) {
 				const float h = heightValues_[i];
 
 				minHeight_ = std::min( minHeight_, h );
@@ -119,10 +119,10 @@ namespace geomclip {
 			//const float centerDiff = sqrt( float(xWorld * xWorld + yWorld * yWorld) );
 
 			xWorld = mymod( xWorld, 2 * size_ );
-			if( xWorld >= size_ )
+			if( xWorld >= uint(size_) )
 				xWorld = 2 * size_ - xWorld - 1;
 			yWorld = mymod( yWorld, 2 * size_ );
-			if( yWorld >= size_ )
+			if( yWorld >= uint(size_) )
 				yWorld = 2 * size_ - yWorld - 1;
 
 			const uint index = yWorld * size_ + xWorld;

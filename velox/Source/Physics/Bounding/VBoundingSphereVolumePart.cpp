@@ -40,16 +40,6 @@ vbool VBoundingSphereVolumePart::HasBoundingMesh()
 	return false;
 }
 
-void VBoundingSphereVolumePart::Activate()
-{
-	;
-}
-
-void VBoundingSphereVolumePart::Deactivate()
-{
-	;
-}
-
 math::VPlane* VBoundingSphereVolumePart::GetBoundingPlane()
 {
 	return 0;

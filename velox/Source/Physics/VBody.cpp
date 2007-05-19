@@ -128,6 +128,7 @@ bool VBody::IsValid()
 		return true;
 	return false;
 }
+
 void VBody::Deactivate()
 {
 	if( m_Body.Get() )

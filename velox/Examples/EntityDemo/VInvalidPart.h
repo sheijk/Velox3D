@@ -17,22 +17,23 @@ using namespace v3d; // anti auto indenting
 class VInvalidPart : public entity::VUnconnectedPart
 {
 public:
-	virtual void Activate()
-	{
-		vout << "Error: invalid part activated" << vendl;
-	}
-
-	virtual void Deactivate()
-	{
-		vout << "Error: invalid part deactivated" << vendl;
-	}
-
 	virtual vbool IsReady() const
 	{
 		return false;
 	}
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	virtual void OnActivate()
+	{
+		vout << "Error: invalid part activated" << vendl;
+	}
+
+	virtual void OnDeactivate()
+	{
+		vout << "Error: invalid part deactivated" << vendl;
+	}
 };
 
 //-----------------------------------------------------------------------------

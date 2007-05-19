@@ -40,9 +40,6 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual void Disconnect(
 		entity::VPartDependency::Location in_Location,
 		const std::string& in_Id,
@@ -52,6 +49,8 @@ protected:
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 private:
 	//std::string GetVertexShaderRes() const;
 	//void SetVertexShaderRes(const std::string& newVertexShaderRes);

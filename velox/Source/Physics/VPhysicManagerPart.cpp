@@ -28,12 +28,12 @@ VPhysicManagerPart::~VPhysicManagerPart()
 	;
 }
 
-void VPhysicManagerPart::Activate()
+void VPhysicManagerPart::OnActivate()
 {
 	m_pUpdateManager->Register(this);
 }
 
-void VPhysicManagerPart::Deactivate()
+void VPhysicManagerPart::OnDeactivate()
 {
 	m_pUpdateManager->Unregister(this);
 }

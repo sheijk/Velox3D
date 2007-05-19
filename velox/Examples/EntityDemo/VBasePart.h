@@ -15,14 +15,6 @@ using namespace v3d; // anti auto indenting
 class VBasePart : public entity::VUnconnectedPart
 {
 public:
-	void Activate()
-	{
-	}
-
-	void Deactivate()
-	{
-	}
-
 	virtual void SayHello() 
 	{
 		vout << "VBasePart::SayHello" << vendl;

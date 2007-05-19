@@ -52,17 +52,6 @@ math::VCCylinder* VBoundingMeshVolumePart::GetBoundingCylinder()
   return 0;
 }
 
-
-void VBoundingMeshVolumePart::Activate()
-{
-	;
-}
-
-void VBoundingMeshVolumePart::Deactivate()
-{
-	;
-}
-
 void VBoundingMeshVolumePart::OnMessage(
 										const messaging::VMessage& in_Message,
 										messaging::VMessage* in_pAnswer)

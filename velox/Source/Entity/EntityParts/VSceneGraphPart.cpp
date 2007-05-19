@@ -68,7 +68,7 @@ void VSceneGraphPart::RemoveChild(VSceneGraphPart* in_pChild)
 	m_pChilds.erase(iter);
 }
 
-void VSceneGraphPart::Activate()
+void VSceneGraphPart::OnActivate()
 {
 	if(!m_bActive)
 	{
@@ -79,7 +79,7 @@ void VSceneGraphPart::Activate()
 	}
 }
 
-void VSceneGraphPart::Deactivate()
+void VSceneGraphPart::OnDeactivate()
 {
 	if(m_bActive)
 	{

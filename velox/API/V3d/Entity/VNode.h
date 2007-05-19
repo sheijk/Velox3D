@@ -56,19 +56,37 @@ public:
 	virtual void Load(const xml::IVXMLElement& in_Element) = 0;
 	virtual void Save(xml::IVXMLElement& in_Element) = 0;
 
+	enum ActivationResult
+	{
+		ActivatedAll, ActivatedSome, ActivatedNone
+	};
+
+	/** When called, the part has to register itself to it's subsystem */
+	virtual ActivationResult Activate();
+
+	/** When called, the part has to unregister itself from it's subsystem */
+	virtual void Deactivate();
+
 	/** Send a message to the part. Used by the serialization manager, the
 	 * editor and maybe in the future to notify parts about events */
 	void Send(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
-protected:
+
+private:
 	/** 
-	 * Each node class needs it's own message interpreter, return the correct
-	 * one for this classes instance
-	 */
+	* Each node class needs it's own message interpreter, return the correct
+	* one for this classes instance
+	*/
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+
+protected:
 	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
+
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 };
 
 //-----------------------------------------------------------------------------

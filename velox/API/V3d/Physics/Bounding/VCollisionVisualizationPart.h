@@ -35,15 +35,14 @@ class VCollisionVisualizationPart : public scene::VMeshPartBase
 public:
 	VCollisionVisualizationPart();
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 	
 	void Update(vfloat32 in_fSeconds);
 	void SendGeometry(graphics::IVDevice& in_Device) const;
 
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 	void Create();	
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);

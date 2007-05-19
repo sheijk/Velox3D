@@ -85,21 +85,12 @@ public:
 	 */
 	virtual void RemoveChild(VSceneGraphPart* in_pChild);
 
-	/** 
-	 * When called, the part registers itself to it's parent and
-	 * activates its children
-	 */
-	virtual void Activate();
-
-    /**
-	 * When called, the part unregisters itself from it's parent and
-	 * deactivates its children
-	 */
-	virtual void Deactivate();
-
 	static std::string GetDefaultId();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 	vbool	                         m_bActive;
 	VPartConnection<VSceneGraphPart> m_pParent;

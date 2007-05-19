@@ -31,18 +31,6 @@ public:
 	{
 	}
 
-	void Activate()
-	{
-		if( m_pParent.IsConnected() )
-			m_pParent->Register(this);
-	}
-
-	void Deactivate()
-	{
-		if( m_pParent.IsConnected() )
-			m_pParent->Unregister(this);
-	}
-
 	void Print(const std::string prefix)
 	{
 		vout << prefix << "hierarchical part (" << m_Childs.size() << " childs)" << vendl;
@@ -55,6 +43,19 @@ public:
 
 	static std::string GetDefaultId() { return "hierarchyPart"; }
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	void OnActivate()
+	{
+		if( m_pParent.IsConnected() )
+			m_pParent->Register(this);
+	}
+
+	void OnDeactivate()
+	{
+		if( m_pParent.IsConnected() )
+			m_pParent->Unregister(this);
+	}
 
 private:
 	void Register(VHierarchyPart* child)

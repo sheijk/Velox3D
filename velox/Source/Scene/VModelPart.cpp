@@ -84,7 +84,7 @@ VRangeIterator<const IVShapePart> VModelPart::GetVisibleMeshes() const
 //	return CreateIterator<MeshList::const_iterator>(m_Meshes.begin(), m_Meshes.end());
 }
 
-void VModelPart::Activate()
+void VModelPart::OnActivate()
 {
 	if( m_pParent.Get() != 0 )
 	{
@@ -99,7 +99,7 @@ void VModelPart::Activate()
 	m_bIsActive = true;
 }
 
-void VModelPart::Deactivate()
+void VModelPart::OnDeactivate()
 {
 	if( m_pParent.Get() != 0 )
 	{

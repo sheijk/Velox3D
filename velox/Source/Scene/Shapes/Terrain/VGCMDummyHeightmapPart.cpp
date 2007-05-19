@@ -47,7 +47,7 @@ HeightmapSource* VGCMDummyHeightmapPart::GetHeightmapSource()
 	return m_pHeightmapSource.Get();
 }
 
-void VGCMDummyHeightmapPart::Activate()
+void VGCMDummyHeightmapPart::OnActivate()
 {
 	if( m_pHeightmapSource == 0 )
 	{
@@ -55,7 +55,7 @@ void VGCMDummyHeightmapPart::Activate()
 	}
 }
 
-void VGCMDummyHeightmapPart::Deactivate()
+void VGCMDummyHeightmapPart::OnDeactivate()
 {
 }
 

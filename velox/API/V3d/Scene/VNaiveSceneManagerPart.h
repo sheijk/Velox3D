@@ -38,9 +38,6 @@ public:
 	virtual void Add(IVGraphicsPart* in_pShape);
 	virtual void Remove(IVGraphicsPart* in_pShape);
 
-	void Activate();
-	void Deactivate();
-
 	static std::string GetDefaultId() { return IVGraphicsPart::GetDefaultId(); }
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 

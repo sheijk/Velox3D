@@ -37,7 +37,7 @@ VTrackballPart::~VTrackballPart()
 {
 }
 
-void VTrackballPart::Activate()
+void VTrackballPart::OnActivate()
 {
 	m_pUpdateManager->Register(this);
 
@@ -51,7 +51,7 @@ void VTrackballPart::Activate()
 	}
 }
 
-void VTrackballPart::Deactivate()
+void VTrackballPart::OnDeactivate()
 {
 	m_pUpdateManager->Unregister(this);
 }

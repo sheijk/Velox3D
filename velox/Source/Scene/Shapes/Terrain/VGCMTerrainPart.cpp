@@ -92,9 +92,9 @@ void VGCMTerrainPart::UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& i
 //	"../nepal_6000_16.raw", 6000, 16, 150000.0f,
 //	RawHeightmapSource::BigEndian );
 
-void v3d::scene::VGCMTerrainPart::Activate()
+void v3d::scene::VGCMTerrainPart::OnActivate()
 {
-	VMeshPartBase::Activate();
+	VMeshPartBase::OnActivate();
 
 	HeightmapSource* heightmapSource = 
 		m_pHeightmapSourcePart.IsConnected() 
@@ -115,9 +115,9 @@ void v3d::scene::VGCMTerrainPart::Activate()
 	}
 }
 
-void v3d::scene::VGCMTerrainPart::Deactivate() 
+void v3d::scene::VGCMTerrainPart::OnDeactivate() 
 {
-	VMeshPartBase::Deactivate();
+	VMeshPartBase::OnDeactivate();
 }
 
 void VGCMTerrainPart::Disconnect(

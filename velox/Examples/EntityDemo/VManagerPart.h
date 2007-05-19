@@ -21,17 +21,18 @@ class VReaderPart;
  */
 class VManagerPart : public entity::VUnconnectedPart
 {
-public:
-	void Activate()
+protected:
+	void OnActivate()
 	{
 		vout << "VManagerPart activated" << vendl;
 	}
 
-	void Deactivate()
+	void OnDeactivate()
 	{
 		vout << "VManagerPart deactivated" << vendl;
 	}
 
+public:
 	void Register(VReaderPart* in_pPart)
 	{
 		m_Readers.insert(in_pPart);

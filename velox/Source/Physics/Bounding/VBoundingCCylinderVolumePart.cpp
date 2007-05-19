@@ -40,16 +40,6 @@ vbool VBoundingCCylinderVolumePart::HasBoundingMesh()
 	return false;
 }
 
-void VBoundingCCylinderVolumePart::Activate()
-{
-	;
-}
-
-void VBoundingCCylinderVolumePart::Deactivate()
-{
-	;
-}
-
 math::VPlane* VBoundingCCylinderVolumePart::GetBoundingPlane()
 {
 	return 0;

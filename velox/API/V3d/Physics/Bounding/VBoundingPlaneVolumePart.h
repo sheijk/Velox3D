@@ -35,8 +35,6 @@ public:
 	math::VPlane* GetBoundingPlane();
 
 	//entity related methods
-	virtual void Activate();
-	virtual void Deactivate();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:

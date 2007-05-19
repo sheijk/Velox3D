@@ -27,11 +27,10 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	void Update(vfloat32 in_fSeconds);
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 	virtual void OnMessage(
 		const messaging::VMessage& in_Message,

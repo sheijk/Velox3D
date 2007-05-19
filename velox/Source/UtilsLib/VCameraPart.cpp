@@ -39,14 +39,14 @@ VCameraPart::~VCameraPart()
 //	m_pCamera = in_pCamera;
 //}
 
-void VCameraPart::Activate()
+void VCameraPart::OnActivate()
 {
 	m_pShooting->Register(m_pCamera.Get());
 	//m_pShooting->SetCamera(m_pCamera.Get());
 	m_pUpdateManager->Register(this);
 }
 
-void VCameraPart::Deactivate()
+void VCameraPart::OnDeactivate()
 {
 	m_pShooting->Unregister(m_pCamera.Get());
 	//m_pShooting->SetCamera(0);

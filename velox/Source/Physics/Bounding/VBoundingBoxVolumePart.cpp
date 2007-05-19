@@ -51,16 +51,6 @@ math::VPlane* VBoundingBoxVolumePart::GetBoundingPlane()
 	return 0;
 }
 
-void VBoundingBoxVolumePart::Activate()
-{
-	;
-}
-
-void VBoundingBoxVolumePart::Deactivate()
-{
-	;
-}
-
 void VBoundingBoxVolumePart::OnMessage(
 	const messaging::VMessage& in_Message,
 	messaging::VMessage* in_pAnswer)

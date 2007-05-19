@@ -40,10 +40,11 @@ public:
 	vbool HasBoundingMesh();
 	math::VPlane* GetBoundingPlane();
 	
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 private:
 

@@ -49,15 +49,8 @@ public:
 
 	virtual ~IVPart() {}
 
-	/** 
-	* When called, the part has to register itself to it's subsystem 
-	*/
-	virtual void Activate() = 0;
-
-	/**
-	* When called, the part has to unregister itself from it's subsystem
-	*/
-	virtual void Deactivate() = 0;
+	//virtual ActivationResult Activate() = 0;
+	//virtual void Deactivate() = 0;
 
 	/** Connect to another entity part */
 	virtual void Connect(

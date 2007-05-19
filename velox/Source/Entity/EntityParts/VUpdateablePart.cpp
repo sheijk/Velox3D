@@ -34,11 +34,11 @@ void VUpdateManagerPart::Update(vfloat32 in_Seconds)
 	}
 }
 
-void VUpdateManagerPart::Activate()
+void VUpdateManagerPart::OnActivate()
 {
 }
 
-void VUpdateManagerPart::Deactivate()
+void VUpdateManagerPart::OnDeactivate()
 {
 }
 

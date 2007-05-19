@@ -43,7 +43,7 @@ m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
 	}
 }
 
-void VJointHinge2ModifierPart::Activate()
+void VJointHinge2ModifierPart::OnActivate()
 {
 	if(m_pInputManager->GetInputManager())
 	{
@@ -59,7 +59,7 @@ void VJointHinge2ModifierPart::Activate()
 	m_pUpdateManager->Register(this);
 }
 
-void VJointHinge2ModifierPart::Deactivate()
+void VJointHinge2ModifierPart::OnDeactivate()
 {
 	m_pUpdateManager->Unregister(this);
 }

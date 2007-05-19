@@ -45,17 +45,6 @@ math::VCCylinder* VBoundingPlaneVolumePart::GetBoundingCylinder()
   return 0;
 }
 
-
-void VBoundingPlaneVolumePart::Activate()
-{
-	;
-}
-
-void VBoundingPlaneVolumePart::Deactivate()
-{
-	;
-}
-
 void VBoundingPlaneVolumePart::OnMessage(
 	const messaging::VMessage& in_Message,
 	messaging::VMessage* in_pAnswer)

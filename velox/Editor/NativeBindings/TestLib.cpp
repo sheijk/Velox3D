@@ -246,9 +246,6 @@ public:
 		m_Settings["acc"] = "ddf";
 	}
 	
-	void Activate() {}
-	void Deactivate() {}
-
 	virtual void Send(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0)
 	{
 		if( in_pAnswer == 0 || ! in_Message.HasProperty("type") )
@@ -290,15 +287,16 @@ public:
 	VConnTestPart() : m_pOtherPart(VPartDependency::Neighbour, RegisterTo())
 	{}
 	
-	void Activate()
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	void OnActivate()
 	{
 		m_pOtherPart->AddSetting("conntest", "me was here");
 	}
 
-	void Deactivate()
+	void OnDeactivate()
 	{}
-	
-	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 };
 V3D_TYPEINFO_WITHPARENT(VConnTestPart, v3d::entity::IVPart);
 

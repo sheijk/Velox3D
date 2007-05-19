@@ -101,14 +101,6 @@ void VNaiveLightManager::ApplyLights(IVDevice* in_pDevice, const IVShapePart* in
 	}
 }
 
-void VNaiveLightManager::Activate()
-{
-}
-
-void VNaiveLightManager::Deactivate()
-{
-}
-
 template<typename STLIterator, typename T>
 struct LightOfPart
 {

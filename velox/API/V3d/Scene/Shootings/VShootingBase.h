@@ -35,16 +35,15 @@ public:
 	void AddPreShooting(IVShooting* in_pPreShooting);
 	void RemovePreShooting(IVShooting* in_pPreShooting);
 
-	// overridden
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual void UpdateAndCull();
 	virtual void Render();
 
 	virtual vbool IsActive() const;
 
 protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	virtual graphics::IVDevice* GetRenderTarget() = 0;
 	virtual graphics::IVCamera* GetCamera() = 0;
 	virtual scene::IVGraphicsPart* GetScene() = 0;

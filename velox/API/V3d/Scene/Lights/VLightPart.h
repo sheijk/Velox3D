@@ -33,15 +33,14 @@ public:
 
 	graphics::VLight& Light();
 
-	virtual void Activate();
-
-	virtual void Deactivate();
-
 	virtual void Update(vfloat32 in_Seconds);
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 

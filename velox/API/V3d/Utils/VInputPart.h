@@ -30,8 +30,6 @@ public:
 	input::IVInputManager* GetInputManager() const;
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
-	virtual void Activate();
-	virtual void Deactivate();
 private:
 	input::IVInputManager* m_pInputManager;
 };

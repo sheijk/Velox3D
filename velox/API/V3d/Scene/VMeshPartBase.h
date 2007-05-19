@@ -62,10 +62,10 @@ public:
 	virtual void UpdateAndCull(const graphics::IVCamera& in_Camera) {}
 	virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
 

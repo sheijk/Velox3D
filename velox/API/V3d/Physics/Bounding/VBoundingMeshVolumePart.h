@@ -36,9 +36,6 @@ public:
 	
 	virtual void SetBoundingMesh(VBoundingMesh in_BoundingMesh);
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:

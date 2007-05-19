@@ -68,14 +68,6 @@ void VNaiveSceneManagerPart::Remove(IVGraphicsPart* in_pChild)
 	m_Childs.erase(in_pChild);
 }
 
-void VNaiveSceneManagerPart::Activate()
-{
-}
-
-void VNaiveSceneManagerPart::Deactivate()
-{
-}
-
 V3D_REGISTER_PART_PARSER(VNaiveSceneManagerPart);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene

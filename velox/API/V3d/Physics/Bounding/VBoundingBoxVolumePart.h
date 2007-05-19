@@ -27,10 +27,7 @@ class VBoundingBoxVolumePart :
 	public entity::VUnconnectedPartAdapter<IVBoundingVolumePart>
 {
 public:
-
 	//derived from IVBoundVolume
-
-	
 	math::VBoundingBox* GetBoundingBox();
 	math::VBoundingSphere* GetBoundingSphere();
 	VBoundingMesh* GetBoundingMesh();
@@ -40,8 +37,6 @@ public:
 
 
 	//entity related methods
-	virtual void Activate();
-	virtual void Deactivate();
 	virtual const VTypeInfo& GetTypeInfo() const 
 	{ return GetCompileTimeTypeInfo(this); }
 

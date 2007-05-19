@@ -43,14 +43,13 @@ public:
 
 	VSharedPtr<graphics::VFloat44ParamValue> GetTextureMatrixValue() const;
 
-	// overridden
-	virtual void Activate();
 	virtual void Render();
-
-	virtual void Deactivate();
 	virtual void UpdateAndCull();
 
 protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 

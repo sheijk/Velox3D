@@ -29,10 +29,11 @@ public:
 
 	virtual geomclip::HeightmapSource* GetHeightmapSource();
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 private:
 	void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);

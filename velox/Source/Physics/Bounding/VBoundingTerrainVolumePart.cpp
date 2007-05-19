@@ -63,7 +63,7 @@ math::VCCylinder* VBoundingTerrainVolumePart::GetBoundingCylinder()
   return 0;
 }
 
-void VBoundingTerrainVolumePart::Activate()
+void VBoundingTerrainVolumePart::OnActivate()
 {
 	if( m_pTerrainPart.Get() == 0 )
 		V3D_THROW(entity::VMissingPartException, "missing terrain volume part 'data'");
@@ -130,7 +130,7 @@ void VBoundingTerrainVolumePart::Create()
 	m_bActive = true;
 }
 
-void VBoundingTerrainVolumePart::Deactivate()
+void VBoundingTerrainVolumePart::OnDeactivate()
 {
 	if(m_pIndicesPointer)
 	{

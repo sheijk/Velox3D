@@ -33,10 +33,12 @@ public:
 
 	virtual void Update(vfloat32 in_fSeconds);
 
-	virtual void Activate();
-	virtual void Deactivate();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	VSharedPtr<graphics::VCamera> m_pCamera;
 
 	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;

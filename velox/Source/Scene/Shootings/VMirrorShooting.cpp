@@ -325,16 +325,16 @@ scene::IVGraphicsPart* VMirrorShooting::GetScene()
 	}
 }
 
-void VMirrorShooting::Activate()
+void VMirrorShooting::OnActivate()
 {
-	VShootingBase::Activate();
+	VShootingBase::OnActivate();
 
 	m_pMainShooting->AddPreShooting(this);
 }
 
-void VMirrorShooting::Deactivate()
+void VMirrorShooting::OnDeactivate()
 {
-	VShootingBase::Deactivate();
+	VShootingBase::OnDeactivate();
 
 	m_pMainShooting->RemovePreShooting(this);
 }

@@ -24,9 +24,6 @@ class VRigidBodyPart : public VUnconnectedPart
 public:
 	VRigidBodyPart();
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 	/**
 	 * Sets the position
 	 *
@@ -59,6 +56,9 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 
 	math::VRBTransform m_Transformation;

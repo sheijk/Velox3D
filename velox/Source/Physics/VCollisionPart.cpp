@@ -4,12 +4,13 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
 #include <V3d/Physics/VCollisionPart.h>
+//-----------------------------------------------------------------------------	
 #include <V3d/Entity/VGenericPartParser.h>
 #include <V3d/Core/VIOStream.h>
 #include <V3d/Physics/VPhysicManagerPart.h>
 #include <V3d/Physics/Bounding/IVBoundingVolumePart.h>
+
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -28,7 +29,7 @@ VCollisionPart::VCollisionPart() :
 	m_bActive = false;
 }
 
-void VCollisionPart::Activate()
+void VCollisionPart::OnActivate()
 {
 	if( m_pVolumePart.Get() == 0 )
 		V3D_THROW(entity::VMissingPartException, "missing part volume part 'data'");
@@ -42,7 +43,7 @@ void VCollisionPart::Activate()
 	}
 }
 
-void VCollisionPart::Deactivate()
+void VCollisionPart::OnDeactivate()
 {
 	m_bActive = false;
 	m_pGeometry->Destroy();

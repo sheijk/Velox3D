@@ -24,9 +24,6 @@ public:
 
 	void Update(vfloat32 in_fSeconds);
 
-	void Activate();
-	void Deactivate();
-
 	vfloat32 GetRadius() const { return m_fRadius; }
 	void SetRadius(const vfloat32& in_Value) { m_fRadius = in_Value; }
 	math::VVector3f GetCenter() const { return m_Center; }
@@ -37,6 +34,10 @@ public:
 	void SetAngle(const vfloat32& in_Value) { m_fAngle = in_Value; }
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 private:
 	virtual void OnMessage(const messaging::VMessage& in_Message, 

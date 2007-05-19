@@ -36,8 +36,6 @@ public:
 
 	void ApplyLights(graphics::IVDevice* in_pDevice, const IVShapePart* in_pShape);
 
-	void Activate();
-	void Deactivate();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 	virtual VRangeIterator<graphics::VLight> Lights();

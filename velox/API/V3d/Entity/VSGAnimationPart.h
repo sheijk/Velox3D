@@ -50,21 +50,12 @@ public:
 	/** Update the Animation Part */
 	virtual void Update(vfloat32 in_Seconds);
 
-	/** 
-	* When called, the part registers itself to it's parent and
-	* activates its children
-	*/
-	virtual void Activate();
-
-	/**
-	* When called, the part unregisters itself from it's parent and
-	* deactivates its children
-	*/
-	virtual void Deactivate();
-
 	static std::string GetDefaultId();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
 
 	VPartConnection<VSceneGraphPart>    m_pSceneGraphPart;
 	VPartConnection<VUpdateManagerPart> m_pParent;

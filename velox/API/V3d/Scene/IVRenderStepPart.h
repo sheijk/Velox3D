@@ -35,10 +35,10 @@ public:
 	virtual graphics::IVDevice* GetOutputDevice() const;
 	virtual void SetOutputDevice(graphics::IVDevice* in_OutputDevice);
 
-	virtual void Activate();
-	virtual void Deactivate();
-
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	/** The device this render step will render to */
 	graphics::IVDevice* m_pOutputDevice;
 

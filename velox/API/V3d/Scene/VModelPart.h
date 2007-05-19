@@ -4,7 +4,6 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
 #ifndef V3D_VMODELPART_2005_05_22_H
 #define V3D_VMODELPART_2005_05_22_H
 //-----------------------------------------------------------------------------
@@ -45,14 +44,13 @@ public:
 	const math::VRBTransform& GetModelTransform() const;
 	void SetModelTransform(const math::VRBTransform& in_Transform);
 
-    // derived from IVPart:
-	virtual void Activate();
-	virtual void Deactivate();
-
 	static std::string GetDefaultId();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
 	void ChangeMaterialForAllMeshes(const std::string& in_strResourceName);
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer = 0);
 
@@ -66,9 +64,6 @@ private:
 		virtual void UnapplyPassStates(vuint in_nPassNum, graphics::IVDevice& in_Device) const;
 		virtual void UpdateAndCull(const graphics::IVCamera& in_Camera);
 		virtual VRangeIterator<const IVShapePart> GetVisibleMeshes() const;
-
-		virtual void Activate() {}
-		virtual void Deactivate() {}
 
         VModelPart* m_pModelPart;
 		resource::VResourceDataPtr<const graphics::IVMesh> m_hMesh;

@@ -40,7 +40,7 @@ geomclip::HeightmapSource* VGCMRawHeightmapPart::GetHeightmapSource()
 	return m_pHeightmap.Get();
 }
 
-void VGCMRawHeightmapPart::Activate()
+void VGCMRawHeightmapPart::OnActivate()
 {
 	if( m_pHeightmap == NULL )
 	{
@@ -48,7 +48,7 @@ void VGCMRawHeightmapPart::Activate()
 	}
 }
 
-void VGCMRawHeightmapPart::Deactivate()
+void VGCMRawHeightmapPart::OnDeactivate()
 {
 }
 
