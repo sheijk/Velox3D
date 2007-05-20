@@ -4,7 +4,6 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include "VBasePart.h"
-#include <V3d/Entity/VPartBase.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {
@@ -13,11 +12,11 @@ using namespace v3d; // anti auto indenting
 
 /**
  */
-class VBasePartUser : public entity::VPartBase
+class VBasePartUser : public entity::VPart
 {
 public:
 	VBasePartUser() :
-		m_pBasePart(entity::VPartDependency::Neighbour, "", RegisterTo())
+		m_pBasePart(RegisterTo())
 	{
 	}
 
@@ -25,7 +24,7 @@ public:
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:
-	entity::VPartConnection<VBasePart> m_pBasePart;
+	entity::VNodeConnection<VBasePart> m_pBasePart;
 
 };
 

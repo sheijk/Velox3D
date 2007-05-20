@@ -11,7 +11,6 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Scene/IVLightManager.h>
-#include <V3d/Entity/VUnconnectedPart.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
@@ -28,7 +27,7 @@ class IVShapePart;
  *
  * @author sheijk
  */
-class VNaiveLightManager : public entity::VUnconnectedPartAdapter<IVLightManager>
+class VNaiveLightManager : public IVLightManager
 {
 public:
 	virtual void Add(VLightPart* in_pLight);
@@ -36,7 +35,8 @@ public:
 
 	void ApplyLights(graphics::IVDevice* in_pDevice, const IVShapePart* in_pShape);
 
-	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+	virtual const VTypeInfo& GetTypeInfo() const 
+	{ return GetCompileTimeTypeInfo(this); }
 
 	virtual VRangeIterator<graphics::VLight> Lights();
 

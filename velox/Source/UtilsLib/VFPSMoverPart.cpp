@@ -23,9 +23,9 @@ using namespace v3d::input;
  * standard c'tor
  */
 VFPSMoverPart::VFPSMoverPart() :
-	m_pRigidBody(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(entity::VPartDependency::Ancestor, RegisterTo()),
-	m_pInputPart(entity::VPartDependency::Ancestor, RegisterTo())
+	m_pRigidBody(RegisterTo()),
+	m_pUpdateManager(RegisterTo()),
+	m_pInputPart(RegisterTo())
 {
 	m_bIgnoreMouse = false;
 

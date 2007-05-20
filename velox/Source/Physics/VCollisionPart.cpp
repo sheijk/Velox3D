@@ -20,10 +20,10 @@ using namespace v3d; // anti auto indent
 using namespace v3d::entity;
 
 VCollisionPart::VCollisionPart() : 
-	m_pVolumePart(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pRigidBodyPart(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pPhysicManagerPart(entity::VPartDependency::Ancestor, RegisterTo()),
-	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
+	m_pVolumePart(RegisterTo()),
+	m_pRigidBodyPart(RegisterTo()),
+	m_pPhysicManagerPart(RegisterTo()),
+	m_pUpdateManager(RegisterTo())
 {
 	m_pGeometry.Assign(0);
 	m_bActive = false;
@@ -31,11 +31,6 @@ VCollisionPart::VCollisionPart() :
 
 void VCollisionPart::OnActivate()
 {
-	if( m_pVolumePart.Get() == 0 )
-		V3D_THROW(entity::VMissingPartException, "missing part volume part 'data'");
-	if( m_pPhysicManagerPart.Get() == 0)
-		V3D_THROW(entity::VMissingPartException, "missing part physic manager 'data'");
-
 	if( !m_bActive )
 	{
 		Create();

@@ -26,7 +26,7 @@ using namespace v3d; // anti auto indenting
  *
  * @author sheijk
  */
-class VNaiveSceneManagerPart : public entity::VUnconnectedPartAdapter<IVSceneManagerPart>
+class VNaiveSceneManagerPart : public IVSceneManagerPart
 {
 public:
 	VNaiveSceneManagerPart();
@@ -38,7 +38,6 @@ public:
 	virtual void Add(IVGraphicsPart* in_pShape);
 	virtual void Remove(IVGraphicsPart* in_pShape);
 
-	static std::string GetDefaultId() { return IVGraphicsPart::GetDefaultId(); }
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
 private:

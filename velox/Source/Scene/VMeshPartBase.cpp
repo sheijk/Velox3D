@@ -47,22 +47,22 @@ namespace {
 }
 
 VMeshPartBase::VMeshPartBase(VResourceDataPtr<const IVMaterial> in_hMaterial) :
-	m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
-	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
+	m_pSceneManager( RegisterTo() ),
+	m_pRigidBody( RegisterTo() )
 {
 	SetMaterial(in_hMaterial);
 }
 
 VMeshPartBase::VMeshPartBase(const std::string& in_strMaterialResource)
-	: m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
-	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
+	: m_pSceneManager( RegisterTo() ),
+	m_pRigidBody( RegisterTo() )
 {
 	m_hMaterial = GetMutableResourceData<IVMaterial>(in_strMaterialResource.c_str());
 }
 
 VMeshPartBase::VMeshPartBase()
-	: m_pSceneManager(VPartDependency::Ancestor, RegisterTo()),
-	m_pRigidBody(VPartDependency::Neighbour, RegisterTo())
+	: m_pSceneManager( RegisterTo() ),
+	m_pRigidBody( RegisterTo() )
 {
 	SetMaterial(graphics::IVDevice::GetDefaultMaterial());
 }

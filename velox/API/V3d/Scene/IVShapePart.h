@@ -53,8 +53,6 @@ public:
 	 * before the geometry is rendered
 	 */
 	virtual const math::VRBTransform& GetModelTransform() const = 0;
-
-	static std::string GetDefaultId() { return IVGraphicsPart::GetDefaultId(); }
 };
 
 //-----------------------------------------------------------------------------

@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Scene/IVGraphicsPart.h>
 //-----------------------------------------------------------------------------
@@ -22,7 +22,7 @@ class VShootingBase;
 
 /**
  */
-class IVRenderStepPart : public entity::VPartBase
+class IVRenderStepPart : public entity::IVPart
 {
 public:
 	IVRenderStepPart();
@@ -42,7 +42,7 @@ private:
 	/** The device this render step will render to */
 	graphics::IVDevice* m_pOutputDevice;
 
-	entity::VPartConnection<VShootingBase> m_pShooting;
+	entity::VNodeConnection<VShootingBase> m_pShooting;
 };
 
 //-----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
 
-class VJointHinge2ModifierPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VJointHinge2ModifierPart : public entity::IVUpdateablePart
 {
 public:
 	
@@ -26,8 +26,6 @@ public:
 	
 	void Update(vfloat32 in_fSeconds);
 	
-	static std::string GetDefaultId();
-
 	virtual const VTypeInfo& GetTypeInfo() const 
 	{ return GetCompileTimeTypeInfo(this); }
 
@@ -36,9 +34,10 @@ private:
 	virtual void OnDeactivate();
 
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
-	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
-	entity::VPartConnection<utils::VInputPart> m_pInputManager;
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+
+	entity::VNodeConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
+	entity::VNodeConnection<utils::VInputPart> m_pInputManager;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
 	void Steer(float in_fSteer);
 	bool GetButtons(vfloat32 in_fSeconds);

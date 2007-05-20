@@ -36,7 +36,6 @@ public:
 	VShadowMapRenderStepPart();
 	virtual ~VShadowMapRenderStepPart();
 
-	//virtual void Activate();
 	virtual void Render(IVGraphicsPart* in_pScene);
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
@@ -48,7 +47,7 @@ private:
 	void AquireResources();
 	vbool HasAquiredResources() const;
 
-	entity::VPartConnection<IVLightManager> m_pLightManager;
+	entity::VNodeConnection<IVLightManager> m_pLightManager;
 
 	vuint m_nShadowMapSize;
 	resource::VResourceDataPtr<graphics::IVRenderContext> m_pDepthMapContext;

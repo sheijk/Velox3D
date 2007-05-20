@@ -18,7 +18,7 @@ using namespace v3d;
 using namespace math;
 
 VPhysicManagerPart::VPhysicManagerPart() : 
-m_pUpdateManager(entity::VPartDependency::Neighbour, RegisterTo())
+	m_pUpdateManager(RegisterTo())
 {
 	m_pPhysicManager.Assign(new VPhysicManager());
 }

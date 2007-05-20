@@ -51,15 +51,10 @@ protected:
 
 	virtual void OnActivate();
 	virtual void OnDeactivate();
-private:
-	//std::string GetVertexShaderRes() const;
-	//void SetVertexShaderRes(const std::string& newVertexShaderRes);
 
-	//std::string GetFragmentShaderRes() const;
-	//void SetFragmentShaderRes(const std::string& newFragmentShaderRes);
-		
-	entity::VPartConnection<IVGCMHeightmapSourcePart> m_pHeightmapSourcePart;
-	entity::VPartConnection<VSimpleShooting> m_pShooting;
+private:
+	entity::VNodeConnection<IVGCMHeightmapSourcePart> m_pHeightmapSourcePart;
+	entity::VNodeConnection<VSimpleShooting> m_pShooting;
 
 	VSharedPtr<geomclip::HeightmapSource> m_pHeightmapSource;
 	VSharedPtr<geomclip::Terrain> m_pTerrain;

@@ -16,7 +16,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d { namespace physics {
 //-----------------------------------------------------------------------------
-class VPhysicManagerPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VPhysicManagerPart : public entity::IVUpdateablePart
 {
 public:
 
@@ -36,7 +36,7 @@ private:
 		const messaging::VMessage& in_Message,
 		messaging::VMessage* in_pAnswer);
 
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
 	physics::VPhysicManagerPtr m_pPhysicManager;
 };

@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/VRigidBodyPart.h>
 #include <V3d/Graphics/Misc/VCamera.h>
 #include <V3d/Scene/VSimpleShooting.h>
@@ -23,7 +23,7 @@ using namespace v3d; // anti auto indenting
 /**
  * @author sheijk
  */
-class VCameraPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VCameraPart : public entity::IVUpdateablePart
 {
 public:
 	VCameraPart();
@@ -41,9 +41,9 @@ private:
 
 	VSharedPtr<graphics::VCamera> m_pCamera;
 
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
-	entity::VPartConnection<scene::VSimpleShooting> m_pShooting;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VNodeConnection<scene::VSimpleShooting> m_pShooting;
 };
 
 //-----------------------------------------------------------------------------

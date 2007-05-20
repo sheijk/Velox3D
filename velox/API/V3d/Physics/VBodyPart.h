@@ -24,7 +24,7 @@ namespace v3d { namespace physics {
 class VPhysicManagerPart;
 class IVBoundingVolumePart;
 
-class VBodyPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VBodyPart : public entity::IVUpdateablePart
 {
 public:
 	typedef VSharedPtr<VBody> BodyPtr;
@@ -49,10 +49,10 @@ private:
 
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;	
-	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
-	entity::VPartConnection<physics::IVBoundingVolumePart> m_pVolumePart;
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBodyPart;	
+	entity::VNodeConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
+	entity::VNodeConnection<physics::IVBoundingVolumePart> m_pVolumePart;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 	
 	BodyPtr m_pBody;
 	vfloat32 m_fMass;

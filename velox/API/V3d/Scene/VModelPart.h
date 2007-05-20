@@ -10,7 +10,7 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Scene/IVSceneManagerPart.h>
 #include <V3d/Scene/IVGraphicsPart.h>
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/VUnconnectedPart.h>
 #include <V3d/Graphics/VModel.h>
 #include <V3d/Entity/VRigidBodyPart.h>
@@ -23,7 +23,7 @@ namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-class VModelPart : public entity::VPartBaseAdapter<IVGraphicsPart>
+class VModelPart : public IVGraphicsPart
 {
 public:
 	VModelPart(const graphics::VModel& in_Model);
@@ -73,8 +73,8 @@ private:
 	typedef std::list<VSharedPtr<MeshPart> > MeshList;
 	MeshList m_Meshes;
 
-	entity::VPartConnection<IVSceneManagerPart> m_pParent;
-	entity::VPartConnection<entity::VRigidBodyPart> m_RigidBodyPart;
+	entity::VNodeConnection<IVSceneManagerPart> m_pParent;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_RigidBodyPart;
 
 	std::string m_strMeshRes;
 	std::string m_strMatRes;

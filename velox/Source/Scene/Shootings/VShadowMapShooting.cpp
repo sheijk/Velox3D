@@ -110,7 +110,7 @@ namespace {
  * standard c'tor
  */
 VShadowMapShooting::VShadowMapShooting()
-: m_pLightManager(VPartDependency::Neighbour, RegisterTo())
+: m_pLightManager(RegisterTo())
 {
 	m_nShadowMapSize = g_ShadowMapDefaultSize;
 }

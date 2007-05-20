@@ -279,12 +279,12 @@ public:
 };
 V3D_TYPEINFO_WITHPARENT(VTestPart, v3d::entity::IVPart);
 
-class VConnTestPart : public v3d::entity::VPartBase
+class VConnTestPart : public v3d::entity::VPart
 {
-	VPartConnection<VTestPart> m_pOtherPart;
+	VNodeConnection<VTestPart> m_pOtherPart;
 
 public:
-	VConnTestPart() : m_pOtherPart(VPartDependency::Neighbour, RegisterTo())
+	VConnTestPart() : m_pOtherPart(RegisterTo())
 	{}
 	
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
@@ -300,62 +300,63 @@ protected:
 };
 V3D_TYPEINFO_WITHPARENT(VConnTestPart, v3d::entity::IVPart);
 
-template<typename PartType>
-VPartAndId PartWithId(PartType* in_pPart, const std::string& in_Id)
-{
-	VPartAndId partAndId;
-	
-	partAndId.part = SharedPtr(in_pPart);
-	partAndId.id = in_Id;
-	
-	return partAndId;
-}
+//template<typename PartType>
+//VPartAndId PartWithId(PartType* in_pPart, const std::string& in_Id)
+//{
+//	VPartAndId partAndId;
+//	
+//	partAndId.part = SharedPtr(in_pPart);
+//	partAndId.id = in_Id;
+//	
+//	return partAndId;
+//}
 
-VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement)
+v3d::VSharedPtr<v3d::entity::VNode> CreatePart(const std::string& type)
 {
-	std::string type = in_pElement->GetAttributeValue<std::string>("type");
-	VPartAndId result;
-	result.SetId(type);
+	return VEntitySerializationServicePtr()->CreateNode(type);
+	//std::string type = in_pElement->GetAttributeValue<std::string>("type");
+	//VPartAndId result;
+	//result.SetId(type);
 
 //	if( type == "model" ) 
 //	{
 //		result.SetPart(CreateModelPart(in_pElement));
 //	}
 //	else 
-	if( type == "scene" )
-	{
-		vout << "creating scene. ";
-		VNaiveSceneManagerPart* pSceneManager = new v3d::scene::VNaiveSceneManagerPart();
+	//if( type == "scene" )
+	//{
+		//vout << "creating scene. ";
+		//VNaiveSceneManagerPart* pSceneManager = new v3d::scene::VNaiveSceneManagerPart();
 		
-		vout << "building smart pointer.";
-		VSharedPtr<v3d::scene::VNaiveSceneManagerPart> smartptr(pSceneManager);
+		//vout << "building smart pointer.";
+		//VSharedPtr<v3d::scene::VNaiveSceneManagerPart> smartptr(pSceneManager);
 		
-		vout << "return " << vendl;
-		result.SetPart(smartptr);
-		result.SetId(VNaiveSceneManagerPart::GetDefaultId());
-	}
-	else if( type == "body" )
-	{
-		result.SetPart(SharedPtr(new VRigidBodyPart()));
-	}
+		//vout << "return " << vendl;
+		//result.SetPart(smartptr);
+		//result.SetId(VNaiveSceneManagerPart::GetDefaultId());
+	//}
+	//else if( type == "body" )
+	//{
+		//result.SetPart(SharedPtr(new VRigidBodyPart()));
+	//}
 //	else if( type == "x" )
 //	{
 //		result.SetPart(SharedPtr(new VTestPart()));
 //	}
-	else if( type == "y" )
-	{
-		result.SetPart(SharedPtr(new VConnTestPart()));
-	}
+	//else if( type == "y" )
+	//{
+		//result.SetPart(SharedPtr(new VConnTestPart()));
+	//}
 //	else if( type == "shooting" ) {
 //	}
-	else
-	{
-		VServicePtr<entity::IVEntitySerializationService> serializer;
+	//else
+	//{
+		//VServicePtr<entity::IVEntitySerializationService> serializer;
 		//serializer->DumpInfo();
-		result.SetPart(serializer->ParsePart(*in_pElement));
-	}
+		//result.SetPart(serializer->ParsePart(*in_pElement));
+	//}
 	
-	return result;
+	//return result;
 }
 
 namespace {
@@ -436,7 +437,7 @@ void setTextFile(v3d::resource::VResource* in_pResource, const std::string& in_s
 //	}
 //}
 
-bool CanBeUpdated(v3d::entity::IVPart* in_pPart)
+bool CanBeUpdated(v3d::entity::VNode* in_pPart)
 {
 	if( in_pPart != 0 )
 		return in_pPart->IsOfType<IVUpdateablePart>();
@@ -444,7 +445,7 @@ bool CanBeUpdated(v3d::entity::IVPart* in_pPart)
 		return false;
 }
 
-void UpdatePart(vfloat32 in_fSeconds, v3d::entity::IVPart* in_pPart)
+void UpdatePart(vfloat32 in_fSeconds, v3d::entity::VNode* in_pPart)
 {
 	if( in_pPart == 0 )
 		return;
@@ -457,35 +458,35 @@ void UpdatePart(vfloat32 in_fSeconds, v3d::entity::IVPart* in_pPart)
 	}
 }
 
-namespace {
-	template<typename T>
-	T* GetPart(VEntity* in_pEntity)
-	{
-		if( in_pEntity != NULL )
-		{
-			VRangeIterator<IVPart> part = in_pEntity->PartIterator();
-			while(part.HasNext())
-			{
-                T* t = part->Convert<T>();
-
-				if( t != NULL )
-					return t;
-
-				++part;
-			}
-
-			return NULL;
-		}
-		else
-		{
-			return NULL;
-		}
-	}
-}
+//namespace {
+//	template<typename T>
+//	T* GetPart(VEntity* in_pEntity)
+//	{
+//		if( in_pEntity != NULL )
+//		{
+//			VRangeIterator<VNode> node = in_pEntity->ChildIterator();
+//			while( node.HasNext() )
+//			{
+//                T* t = node->Convert<T>();
+//
+//				if( t != NULL )
+//					return t;
+//
+//				++node;
+//			}
+//
+//			return NULL;
+//		}
+//		else
+//		{
+//			return NULL;
+//		}
+//	}
+//}
 
 math::VRBTransform GetTransform(VEntity* in_pEntity)
 {
-	VRigidBodyPart* pRBPart = GetPart<VRigidBodyPart>(in_pEntity);
+	VRigidBodyPart* pRBPart = in_pEntity->GetFirst<VRigidBodyPart>();
 
 	if( pRBPart != NULL )
 		return pRBPart->GetTransform();
@@ -495,7 +496,7 @@ math::VRBTransform GetTransform(VEntity* in_pEntity)
 
 void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
 {
-	VRigidBodyPart* pRBPart = GetPart<VRigidBodyPart>(in_pEntity);
+	VRigidBodyPart* pRBPart = in_pEntity->GetFirst<VRigidBodyPart>();
 
 	if( pRBPart != NULL )
 		pRBPart->SetTransform(in_Transform);
@@ -507,12 +508,12 @@ void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
 v3d::scene::IVShooting* FindShooting(v3d::entity::VEntity* in_pEntity)
 {
 	if( in_pEntity != 0 )
-		return in_pEntity->GetPart<IVShooting>();
+		return in_pEntity->GetFirst<IVShooting>();
 	else
 		return 0;
 }
 
-v3d::scene::IVShooting* ToShooting(v3d::entity::IVPart* in_pPart)
+v3d::scene::IVShooting* Convert::ToShooting(v3d::entity::VNode* in_pPart)
 {
 	if( in_pPart != 0 )
 		return in_pPart->Convert<IVShooting>();
@@ -532,7 +533,7 @@ void TellInputManager(
 {
 	if( pEntity != 0 )
 	{
-		utils::VInputPart* pInputPart = pEntity->GetPart<utils::VInputPart>();
+		utils::VInputPart* pInputPart = pEntity->GetFirst<utils::VInputPart>();
 
 		if( pInputPart != 0 )
 		{

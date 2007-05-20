@@ -32,8 +32,8 @@ namespace {
  * standard c'tor
  */
 VGCMTerrainPart::VGCMTerrainPart() :
-	m_pHeightmapSourcePart(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pShooting(entity::VPartDependency::Ancestor, RegisterTo())
+	m_pHeightmapSourcePart(RegisterTo()),
+	m_pShooting(RegisterTo())
 {
 	m_bColoredRegions = false;
 	m_bWireframe = false;

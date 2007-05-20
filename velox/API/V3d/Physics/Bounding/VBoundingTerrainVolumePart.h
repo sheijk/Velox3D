@@ -26,7 +26,7 @@ using namespace v3d;
  *
  * @author: ins
  */
-class VBoundingTerrainVolumePart : public entity::VPartBaseAdapter<IVBoundingVolumePart>
+class VBoundingTerrainVolumePart : public IVBoundingVolumePart
 {
 public:
 	VBoundingTerrainVolumePart();
@@ -51,7 +51,7 @@ private:
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 	void Create();
 
-	entity::VPartConnection<scene::VTerrainPart> m_pTerrainPart;
+	entity::VNodeConnection<scene::VTerrainPart> m_pTerrainPart;
 
 	math::VBoundingMesh m_BoundingMesh;
 	vbool m_bActive;

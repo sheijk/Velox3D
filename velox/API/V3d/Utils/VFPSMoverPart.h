@@ -25,7 +25,7 @@ using namespace v3d; // anti auto indenting
 
 /**
  */
-class VFPSMoverPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VFPSMoverPart : public entity::IVUpdateablePart
 {
 public:
 	VFPSMoverPart();
@@ -55,9 +55,9 @@ private:
 	void MoveBy(const math::VVector3f& in_Distance);
 	void RotateAround(const math::VVector3f& in_Axis, vfloat32 in_fAngle);
 
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
-	entity::VPartConnection<utils::VInputPart> m_pInputPart;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBody;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VNodeConnection<utils::VInputPart> m_pInputPart;
 
 	vbool m_bIgnoreMouse;
 

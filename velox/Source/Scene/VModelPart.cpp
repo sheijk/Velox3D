@@ -24,8 +24,8 @@ using namespace std;
 using namespace v3d::entity;
 
 VModelPart::VModelPart(const graphics::VModel& in_Model) :
-	m_pParent(VPartDependency::Ancestor, RegisterTo()),
-	m_RigidBodyPart(VPartDependency::Neighbour,	RegisterTo())
+	m_pParent(RegisterTo()),
+	m_RigidBodyPart(RegisterTo())
 {
 	Add(in_Model);
 
@@ -33,8 +33,8 @@ VModelPart::VModelPart(const graphics::VModel& in_Model) :
 }
 
 VModelPart::VModelPart() :
-	m_pParent(VPartDependency::Ancestor, RegisterTo()),
-	m_RigidBodyPart(VPartDependency::Neighbour,	RegisterTo())
+	m_pParent(RegisterTo()),
+	m_RigidBodyPart(RegisterTo())
 {
 	m_bIsActive = false;
 }

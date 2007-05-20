@@ -17,7 +17,7 @@ namespace physics {
 using namespace v3d; // anti auto indent
 
 VBoundingTerrainVolumePart::VBoundingTerrainVolumePart() :
-	m_pTerrainPart(entity::VPartDependency::Neighbour, RegisterTo())
+	m_pTerrainPart(RegisterTo())
 {
 	m_bActive = false;
 	m_pIndicesPointer = 0;

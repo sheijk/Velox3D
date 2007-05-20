@@ -3,21 +3,21 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/VEntityExceptions.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-class VSettingPart : public entity::VPartBase
+class VSettingPart : public entity::IVPart
 {
-	entity::VPartConnection<VDataPart> pData;
+	entity::VNodeConnection<VDataPart> pData;
 	//VDataPart* pData;
 public:
 	VSettingPart() :
 		// create connection + make it known to parent
-		pData(entity::VPartDependency::Neighbour, RegisterTo())
+		pData(RegisterTo())
 	{
 	}
 

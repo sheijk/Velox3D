@@ -21,17 +21,15 @@ using namespace graphics;
 using namespace entity;
 
 VSimpleShooting::VSimpleShooting() :
-	m_pScene(VPartDependency::Neighbour, RegisterTo())
+	m_pScene(RegisterTo())
 {
 	m_pDevice = 0;
 	m_pCamera = 0;
 }
 
-VSimpleShooting::VSimpleShooting(VPartDependency::Location in_SceneLocation,
-				const std::string& in_SceneId,
-				VPartDependency::Condition in_SceneCondition)
+VSimpleShooting::VSimpleShooting(VNodeDependency::Condition in_SceneCondition)
 				:
-	m_pScene(in_SceneLocation, in_SceneId, in_SceneCondition, RegisterTo())
+	m_pScene(in_SceneCondition, RegisterTo())
 {
 	m_pDevice = 0;
 	m_pCamera = 0;

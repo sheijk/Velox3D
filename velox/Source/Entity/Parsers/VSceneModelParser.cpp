@@ -42,7 +42,7 @@ std::string VSceneModelParser::GetType() const
 	return VModelPart::GetDefaultId();
 }
 
-VSharedPtr<IVPart> VSceneModelParser::Create()
+VSharedPtr<VNode> VSceneModelParser::Create()
 {
 	return SharedPtr( new VModelPart() );
 }

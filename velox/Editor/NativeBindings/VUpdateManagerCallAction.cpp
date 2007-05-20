@@ -39,7 +39,7 @@ void VUpdateManagerCallAction::Shutdown()
 
 void VUpdateManagerCallAction::SetEntity(entity::VEntity* in_pEntity)
 {
-	m_pUpdateManager = in_pEntity->GetPart<VUpdateManagerPart>();
+	m_pUpdateManager = in_pEntity->GetFirst<VUpdateManagerPart>();
 //	m_pUpdateManager = GetPart<VUpdateManagerPart>(in_pEntity);
 }
 

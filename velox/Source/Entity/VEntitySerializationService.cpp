@@ -64,7 +64,7 @@ void VEntitySerializationService::Unregister(IVPartParser* in_pParser)
 //	}
 //}
 
-VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_Node)
+VSharedPtr<VNode> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_Node)
 {
 	const std::string type( in_Node.GetAttributeValue<std::string>("type") );
 
@@ -74,7 +74,7 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 	{
 		IVPartParser* parser = parserIter->second;
 
-		VSharedPtr<IVPart> part = parser->Create();
+		VSharedPtr<VNode> part = parser->Create();
 		part->Load( in_Node );
 
 		return part;
@@ -83,6 +83,24 @@ VSharedPtr<IVPart> VEntitySerializationService::ParsePart(xml::IVXMLElement& in_
 	{
 		V3D_THROWMSG(VNoParserForTypeException,
 			"Could not parse part with type \"" << type.c_str()
+			<< "\" because no part parser for the type exists");
+	}
+}
+
+VSharedPtr<VNode> VEntitySerializationService::CreateNode(const std::string& kind)
+{
+	ParserMap::iterator parserIter = m_Parsers.find(kind);
+
+	if( parserIter != m_Parsers.end() )
+	{
+		IVPartParser* parser = parserIter->second;
+		VSharedPtr<VNode> part = parser->Create();
+		return part;
+	}
+	else
+	{
+		V3D_THROWMSG(VNoParserForTypeException,
+			"Could not parse part with type \"" << kind.c_str()
 			<< "\" because no part parser for the type exists");
 	}
 }
@@ -114,28 +132,30 @@ VSharedPtr<VEntity> VEntitySerializationService::Parse(xml::IVXMLElement& in_Nod
 {
 	VSharedPtr<VEntity> pEntity(new VEntity());
 
-	IVXMLAttribute* attrib = in_Node.GetAttribute("name");
-	std::string name;
-	if( attrib != NULL )
-	{
-		name = attrib->GetValue().Get<std::string>();
-		pEntity->SetName(name);
-	}
+	pEntity->Load( in_Node );
 
-	VRangeIterator<IVXMLNode> childNode = in_Node.ChildBegin();
-	while( childNode.HasNext() )
-	{
-		IVXMLElement* element = childNode->ToElement();
-		if( element != NULL )
-		{
-			if( element->GetName() == "part" )
-				pEntity->AddPart(ParsePart(*element));
-			else if( element->GetName() == "entity" )
-				pEntity->AddChild(Parse(*element));
-		}
+	//IVXMLAttribute* attrib = in_Node.GetAttribute("name");
+	//std::string name;
+	//if( attrib != NULL )
+	//{
+	//	name = attrib->GetValue().Get<std::string>();
+	//	pEntity->SetName(name);
+	//}
 
-		++childNode;
-	}
+	//VRangeIterator<IVXMLNode> childNode = in_Node.ChildBegin();
+	//while( childNode.HasNext() )
+	//{
+	//	IVXMLElement* element = childNode->ToElement();
+	//	if( element != NULL )
+	//	{
+	//		if( element->GetName() == "part" )
+	//			pEntity->Add(ParsePart(*element));
+	//		else if( element->GetName() == "entity" )
+	//			pEntity->Add(Parse(*element));
+	//	}
+
+	//	++childNode;
+	//}
 
 	return pEntity;		
 }
@@ -165,42 +185,42 @@ void ApplySettings(xml::IVXMLElement& in_Node, IVPart& in_Part)
 
 void ApplySettings(xml::IVXMLElement& in_Node, VEntity& in_Entity)
 {
-	try
-	{
-		IVXMLAttribute* attrib = in_Node.GetAttribute("name");
+	//try
+	//{
+	//	IVXMLAttribute* attrib = in_Node.GetAttribute("name");
 
-		VRangeIterator<IVXMLNode> childNode = in_Node.ChildBegin();
-		while( childNode.HasNext() )
-		{
-			IVXMLElement* element = childNode->ToElement();
-			if( element != NULL )
-			{
-				if( element->GetName() == "part" )
-				{
-					VRangeIterator<IVPart> partIter = in_Entity.PartIterator();
-					while( partIter.HasNext() )
-					{
-						ApplySettings(*element, *partIter);
-						++partIter;
-					}
-				}
-				else if( element->GetName() == "entity" )
-				{
-					std::string entityName = element->GetAttributeValue<std::string>("name");
-					VSharedPtr<VEntity> pChild = in_Entity.GetChildWithName(entityName);
+	//	VRangeIterator<IVXMLNode> childNode = in_Node.ChildBegin();
+	//	while( childNode.HasNext() )
+	//	{
+	//		IVXMLElement* element = childNode->ToElement();
+	//		if( element != NULL )
+	//		{
+	//			if( element->GetName() == "part" )
+	//			{
+	//				VRangeIterator<IVPart> partIter = in_Entity.PartIterator();
+	//				while( partIter.HasNext() )
+	//				{
+	//					ApplySettings(*element, *partIter);
+	//					++partIter;
+	//				}
+	//			}
+	//			else if( element->GetName() == "entity" )
+	//			{
+	//				std::string entityName = element->GetAttributeValue<std::string>("name");
+	//				VSharedPtr<VEntity> pChild = in_Entity.GetChildWithName(entityName);
 
-					if( pChild != 0 )
-						ApplySettings(*element, *pChild);
-				}
-			}
+	//				if( pChild != 0 )
+	//					ApplySettings(*element, *pChild);
+	//			}
+	//		}
 
-			++childNode;
-		}
-	}
-	catch(VException& e)
-	{
-		vout << "Catched exception while parsing scene: " << e.ToString();
-	}
+	//		++childNode;
+	//	}
+	//}
+	//catch(VException& e)
+	//{
+	//	vout << "Catched exception while parsing scene: " << e.ToString();
+	//}
 }
 
 VSharedPtr<VEntity> VEntitySerializationService::ParseScene(xml::IVXMLElement& in_Node)

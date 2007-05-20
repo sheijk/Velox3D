@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Scene/IVLightManager.h>
 #include <V3d/Graphics/VLight.h>
 #include <V3d/Entity/VUpdateablePart.h>
@@ -26,7 +26,7 @@ using namespace v3d; // anti auto indenting
  *
  * @author sheijk
  */
-class VLightPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VLightPart : public entity::IVUpdateablePart
 {
 public:
 	VLightPart();
@@ -46,9 +46,9 @@ protected:
 
 private:
 	graphics::VLight m_Light;
-	entity::VPartConnection<IVLightManager> m_LightManager;
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VNodeConnection<IVLightManager> m_LightManager;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBody;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 };
 
 //-----------------------------------------------------------------------------

@@ -37,7 +37,7 @@ namespace {
  * standard c'tor
  */
 VShadowMapRenderStepPart::VShadowMapRenderStepPart()
-	: m_pLightManager(entity::VPartDependency::Neighbour, RegisterTo())
+	: m_pLightManager(RegisterTo())
 {
 	m_nShadowMapSize = 512;
 }

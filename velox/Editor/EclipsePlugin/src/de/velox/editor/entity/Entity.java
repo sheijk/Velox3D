@@ -39,23 +39,45 @@ public class Entity implements XMLSerializable {
 		if( impl != null && impl.Get() != null ) {
 			name = impl.GetName();
 			
-			VPartPtrIterator partIter = entityImpl.PartPtrIterator();
-			while( partIter.HasNext() ) {
-				VPartPtr part = partIter.Get();
+			VNodePtrIterator nodeIter = entityImpl.ChildPtrIterator();
+			while( nodeIter.HasNext() )
+			{
+				VNodePtr node = nodeIter.Get();
 				
-				AddAdapter( new Part(part) );
+				VEntity asEntity = node.ToEntity();
+				IVPart asPart = node.ToPart();
 				
-				partIter.Next();
+				if( asEntity != null ) {
+					AddAdapter( new Entity( new VEntityPtr(asEntity) ) );					
+				}
+				else if( asPart != null ) {
+					AddAdapter( new Part(node) );
+//					AddAdapter( new Part(new VPartPtr(asPart)) );
+				}
+				else {
+					System.out.println( "Found unknown node type: " 
+							+ node.GetTypeInfo().GetName() );
+				}
+
+				nodeIter.Next();
 			}
-			
-			VEntityPtrIterator childIter = entityImpl.ChildPtrIterator();
-			while( childIter.HasNext() ) {
-				VEntityPtr child = childIter.Get();
-				
-				AddAdapter( new Entity(child) );
-				
-				childIter.Next();
-			}
+//			VPartPtrIterator partIter = entityImpl.PartPtrIterator();
+//			while( partIter.HasNext() ) {
+//				VPartPtr part = partIter.Get();
+//				
+//				AddAdapter( new Part(part) );
+//				
+//				partIter.Next();
+//			}
+//			
+//			VEntityPtrIterator childIter = entityImpl.ChildPtrIterator();
+//			while( childIter.HasNext() ) {
+//				VEntityPtr child = childIter.Get();
+//				
+//				AddAdapter( new Entity(child) );
+//				
+//				childIter.Next();
+//			}
 		}
 		else {
 			throw new RuntimeException("Tried to create Entity from null value");
@@ -111,7 +133,7 @@ public class Entity implements XMLSerializable {
 	
 	public boolean IsActive() {
 		if( valid(impl) )
-			return impl.IsActive();
+			return impl.GetState() == VNode.State.Active;
 		else
 			return false;
 	}
@@ -155,7 +177,7 @@ public class Entity implements XMLSerializable {
 		AddAdapter(newEntity);
 
 		if( valid(impl) )
-			impl.AddChild(newEntity.impl);
+			impl.Add( newEntity.impl.ToNodePtr() );
 		else
 			System.err.println("Tried to add invalid entity: " + newEntity.toString());
 	}
@@ -167,7 +189,7 @@ public class Entity implements XMLSerializable {
 			Deactivate();
 		
 		if( valid(impl) )
-			impl.RemoveChild(entityToBeRemoved.impl);
+			impl.Remove( entityToBeRemoved.impl.ToNodePtr() );
 		
 		entityToBeRemoved.parent = null;
 		
@@ -185,7 +207,7 @@ public class Entity implements XMLSerializable {
 		}
 		
 		if( valid(impl) )
-			impl.RemovePart(partToBeRemoved.GetId());
+			impl.Remove( partToBeRemoved.GetPart() );
 		
 		partToBeRemoved.setOwner(null);
 		parts.remove(partToBeRemoved);
@@ -210,7 +232,7 @@ public class Entity implements XMLSerializable {
 	public void Add(Part newPart) {
 		if( newPart != null && valid(newPart.GetPart()) ) {		
 			if( valid(impl) ) {
-				impl.AddPart(newPart.GetId(), newPart.GetPart());
+				impl.Add( newPart.GetPart() );
 			}
 		}
 		
@@ -231,7 +253,7 @@ public class Entity implements XMLSerializable {
 		return ptr != null && ptr.Get() != null;
 	}
 	
-	protected static boolean valid(VPartPtr ptr) {
+	protected static boolean valid(VNodePtr ptr) {
 		return ptr != null && ptr.Get() != null;
 	}
 	

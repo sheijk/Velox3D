@@ -24,7 +24,7 @@ using namespace math;
 
 VCollisionVisualizationPart::VCollisionVisualizationPart() :
 	VMeshPartBase(IVDevice::GetDefaultMaterial()),
-	m_pVolumePart(entity::VPartDependency::Neighbour, RegisterTo())
+	m_pVolumePart(RegisterTo())
 {
 	m_bCreated = false;
 }

@@ -10,7 +10,6 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Utils/VMouseTrackball.h>
-#include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity/VUpdateablePart.h>
 #include <V3d/Entity/VRigidBodyPart.h>
 #include <V3d/Utils/VInputPart.h>
@@ -22,8 +21,7 @@ using namespace v3d; // anti auto indenting
 /**
  * @author sheijk
  */
-class VTrackballPart : 
-	public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VTrackballPart : public entity::IVUpdateablePart
 {
 public:
 	VTrackballPart();
@@ -57,10 +55,10 @@ private:
 	VSharedPtr<VMouseTrackball> m_pTrackball;
 	vbool m_bCenterOnParent;
 
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
-	entity::VPartConnection<entity::VRigidBodyPart> m_pParentRigidBodyPart;
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
-	entity::VPartConnection<utils::VInputPart> m_pInputPart;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pParentRigidBodyPart;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VNodeConnection<utils::VInputPart> m_pInputPart;
 };
 
 //-----------------------------------------------------------------------------

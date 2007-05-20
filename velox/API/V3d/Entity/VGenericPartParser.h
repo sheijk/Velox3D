@@ -29,9 +29,9 @@ public:
 	}
 
 protected:
-	virtual VSharedPtr<IVPart> Create()
+	virtual VSharedPtr<VNode> Create()
 	{
-		VSharedPtr<IVPart> part = SharedPtr(new PartType());
+		VSharedPtr<VNode> part = SharedPtr(new PartType());
 
 		if( part != 0 && part->GetTypeInfo().GetName() != GetType() )
 		{

@@ -28,8 +28,8 @@ using namespace v3d::graphics;
  * standard c'tor
  */
 VOffscreenShooting::VOffscreenShooting() :
-	m_pMainShooting(VPartDependency::Ancestor, RegisterTo()),
-	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo())
+	m_pMainShooting(RegisterTo()),
+	m_pRigidBodyPart(RegisterTo())
 {
 }
 

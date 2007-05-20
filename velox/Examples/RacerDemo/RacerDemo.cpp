@@ -156,22 +156,20 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	}
 
 	VSharedPtr<VEntity> pRoot = LoadScene(sceneFileName);
-	m_pUpdateManager = pRoot->GetPart<VUpdateManagerPart>();
-	//VSharedPtr<VSimpleShooting> pShooting(new VSimpleShooting());
-	//pShooting->SetRenderTarget(m_pDevice);
-	//m_pRootShooting = pShooting;
-	//pRoot->AddPart(m_pRootShooting);
-	m_pRootShooting = pRoot->GetPart<VSimpleShooting>();
+	m_pUpdateManager = pRoot->GetFirst<VUpdateManagerPart>();
+
+	m_pRootShooting = pRoot->GetFirst<VSimpleShooting>();
+	V3D_ASSERT( m_pRootShooting != 0 );
 	m_pRootShooting->SetRenderTarget(m_pDevice);
 	if( m_pRootShooting == 0 )
 		V3D_THROW(VException, "could not find a shooting in the root node");
-	VInputPart* pInputPart = pRoot->GetPart<VInputPart>();
+	VInputPart* pInputPart = pRoot->GetFirst<VInputPart>();
 	pInputPart->SetInputManager(&m_pWindow->QueryInputManager());
 
 	m_pPhysicManager.Assign(new VPhysicManager());
 
-	pRoot->Activate();
-	//pRoot->DumpInfo();
+	const VNode::ActivationResult activationResult = pRoot->Activate();
+	pRoot->DumpInfo();
 
 	m_pF1Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF1);
 	m_pF2Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF2);

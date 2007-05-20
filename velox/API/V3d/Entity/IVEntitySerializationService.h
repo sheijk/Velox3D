@@ -48,7 +48,7 @@ public:
 	 * @throws VNoParserForTypeException if no parser for the given type has
 	 * been registered
 	 */
-	virtual VSharedPtr<IVPart> ParsePart(xml::IVXMLElement& in_Node) = 0;
+	virtual VSharedPtr<VNode> ParsePart(xml::IVXMLElement& in_Node) = 0;
 
 	virtual VSharedPtr<VEntity> ParseScene(xml::IVXMLElement& in_Node) = 0;
 
@@ -69,6 +69,8 @@ public:
 	virtual void Unregister(IVPartParser* in_pPartParser) = 0;
 
 	virtual VRangeIterator<IVPartParser> PartParsers() = 0;
+
+	virtual VSharedPtr<VNode> CreateNode(const std::string& name) = 0;
 
 	virtual void DumpInfo() = 0;
 };

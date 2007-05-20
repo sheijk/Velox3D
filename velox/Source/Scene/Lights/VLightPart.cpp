@@ -19,9 +19,9 @@ using namespace v3d; // anti auto indent
 using namespace math;
 
 VLightPart::VLightPart() : 
-	m_LightManager(entity::VPartDependency::Ancestor, RegisterTo()),
-	m_pRigidBody(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(entity::VPartDependency::Ancestor, RegisterTo())
+	m_LightManager( RegisterTo()),
+	m_pRigidBody(RegisterTo()),
+	m_pUpdateManager(RegisterTo())
 {}
 
 graphics::VLight& VLightPart::Light()

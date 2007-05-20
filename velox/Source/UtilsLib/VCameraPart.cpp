@@ -20,9 +20,9 @@ using namespace entity;
  * standard c'tor
  */
 VCameraPart::VCameraPart() :
-	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo()),
-	m_pShooting(VPartDependency::Ancestor, RegisterTo())
+	m_pRigidBodyPart(RegisterTo()),
+	m_pUpdateManager(RegisterTo()),
+	m_pShooting(RegisterTo())
 {
 	m_pCamera.Assign(new graphics::VCamera());
 }

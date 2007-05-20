@@ -57,6 +57,7 @@ namespace v3d {
 	{
 	public:
 		std::string GetName() const;
+		vbool CanBeCastedTo(const std::string& in_TypeName) const;		
 	};
 }
 

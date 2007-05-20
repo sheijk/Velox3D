@@ -23,12 +23,10 @@ using namespace v3d; // anti auto indent
  */
 VShootingBase::VShootingBase() : 
 	m_pLightManager(
-		entity::VPartDependency::Neighbour, 
-		entity::VPartDependency::Optional, 
+		entity::VNodeDependency::Optional, 
 		RegisterTo()),
 	m_pParentShooting(
-		entity::VPartDependency::Ancestor,
-		entity::VPartDependency::Optional,
+		entity::VNodeDependency::Optional,
 		RegisterTo())
 {
 	m_bActive = false;
@@ -103,7 +101,7 @@ void VShootingBase::UpdateAndCullPreShootings()
 
 void VShootingBase::UpdateAndCull()
 {
-	V3D_ASSERT(m_bActive);
+	//V3D_ASSERT(m_bActive);
 
 	//UpdateAndCullPreShootings();
 
@@ -125,7 +123,7 @@ void VShootingBase::RenderPreShootings()
 
 void VShootingBase::Render()
 {
-	if( ! m_bActive )
+	if( GetState() != Active )
 		V3D_THROW(VException, "VShootingBase.Render called while shooting part not active");
 
 	graphics::IVDevice* pDevice = GetRenderTarget();

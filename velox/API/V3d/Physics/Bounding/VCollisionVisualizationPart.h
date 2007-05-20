@@ -47,7 +47,7 @@ private:
 	void Create();	
 	virtual void OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer);
 	
-	entity::VPartConnection<physics::IVBoundingVolumePart> m_pVolumePart;
+	entity::VNodeConnection<physics::IVBoundingVolumePart> m_pVolumePart;
 	//math::VBoundingMesh m_BoundingMesh;
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hVertexBuffer;
 	resource::VResourceDataPtr<graphics::VVertexBuffer> m_hIndexBuffer;	

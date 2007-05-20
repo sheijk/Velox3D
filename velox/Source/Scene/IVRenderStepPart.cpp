@@ -19,7 +19,7 @@ using namespace v3d; // anti auto indent
 using namespace entity;
 
 IVRenderStepPart::IVRenderStepPart() :
-	m_pShooting(VPartDependency::Neighbour, RegisterTo())
+	m_pShooting(RegisterTo())
 {
 	m_pOutputDevice = 0;
 }

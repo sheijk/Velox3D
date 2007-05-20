@@ -21,8 +21,6 @@ using namespace v3d::math;
 using namespace v3d::input;
 using namespace v3d::editor;
 
-typedef IVPart::Dependency Dependency;
-
 #undef CreateFile
 #undef DeleteFile
 %}

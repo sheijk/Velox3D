@@ -44,95 +44,13 @@ using namespace v3d; // prevent auto indenting
 class IVPart : public VNode
 {
 public:
-	typedef VPartDependency Dependency;
-	typedef VPartDependency::Location Location;
-
 	virtual ~IVPart() {}
-
-	//virtual ActivationResult Activate() = 0;
-	//virtual void Deactivate() = 0;
-
-	/** Connect to another entity part */
-	virtual void Connect(
-		VPartDependency::Location in_Location, 
-		const std::string& in_Id, 
-		IVPart& in_Part)
-	{}
-
-	/** 
-	* Notify the part that another connected part has been removed 
-	* The disconnected part might be deleted right after this call. Thus all
-	* references to it must be reset to null
-	*/
-	virtual void Disconnect(
-		VPartDependency::Location in_Location,
-		const std::string& in_Id,
-		IVPart& in_Part)
-	{}
-
-	/** 
-	* The part can activated and used if this function returns true. (all
-	* dependencies must be fulfilled etc.)
-	*/
-	virtual vbool IsReady() const = 0;
-
-	/** Return the number of dependencies */
-	virtual vuint DependencyCount() const = 0;
-
-	/** Return information about the n-th dependency */
-	virtual VPartDependency GetDependencyInfo(vuint in_nIndex) const = 0;
-
-	/** Return information about the type of the part */
-	virtual const VTypeInfo& GetTypeInfo() const = 0;
-
-	template<typename T>
-		vbool IsOfType() const;
-
-	/** Returns 0 if part could not be converted */
-	template<typename T>
-		const T* Convert() const;
-
-	/** Returns 0 if part could not be converted */
-	template<typename T>
-		T* Convert();
-
-	void AttachTag(const tags::VTag& tag);
-	void RemoveTag(const tags::VTag& tag);
-	vbool HasTag(const tags::VTag& tag) const;
-	VRangeIterator<const tags::VTag> Tags() const;
 
 	virtual void Save(xml::IVXMLElement& node);
 	virtual void Load(const xml::IVXMLElement& node);
-private:
-
-	std::vector<const tags::VTag*> m_Tags;
 };
 
-//-----------------------------------------------------------------------------
-template<typename T>
-	vbool IVPart::IsOfType() const
-{
-	return GetTypeInfo().CanBeCastedTo(GetCompileTimeTypeInfo<T>(0));
-	//return (typeid(*this) == typeid(T)) != 0;
-}
-
-template<typename T>
-	const T* IVPart::Convert() const
-{
-	if( IsOfType<T>() )
-		return reinterpret_cast<const T*>(this);
-	else
-		return 0;
-}
-
-template<typename T>
-	T* IVPart::Convert()
-{
-	if( IsOfType<T>() )
-		return reinterpret_cast<T*>(this);
-	else
-		return 0;
-}
+typedef IVPart VPart;
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity

@@ -12,7 +12,7 @@
 #include <V3d/Scene/IVShapePart.h>
 #include <V3d/Scene/IVSceneManagerPart.h>
 #include <V3d/Graphics/Parameters/IVParameterValue.h>
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Resource/VResourceDataPtr.h>
 #include <V3d/Entity/VRigidBodyPart.h>
 
@@ -33,7 +33,7 @@ using namespace v3d; // anti auto indenting
  *
  * @author sheijk
  */
-class VMeshPartBase : public entity::VPartBaseAdapter<IVShapePart>
+class VMeshPartBase : public IVShapePart
 {
 public:
 	VMeshPartBase(resource::VResourceDataPtr<const graphics::IVMaterial> in_hMaterial);
@@ -79,8 +79,8 @@ protected:
 		const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer);
 
-	entity::VPartConnection<IVSceneManagerPart> m_pSceneManager;
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
+	entity::VNodeConnection<IVSceneManagerPart> m_pSceneManager;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBody;
 
 	typedef std::map<std::string, VSharedPtr<graphics::IVParameterValue> > ParamValueMap;
 	ParamValueMap m_ParameterValues;

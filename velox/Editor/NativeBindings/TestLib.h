@@ -50,46 +50,24 @@ bool replaceCGFXSource(v3d::resource::VResource* in_pResource, const std::string
 
 void setTextFile(v3d::resource::VResource* in_pResource, const std::string& in_strSource);
 
-class VPartAndId {
+class Convert
+{
 public:
-	v3d::VSharedPtr<v3d::entity::IVPart> GetPart() const
-	{
-		return part;
-	}
-
-	void SetPart(const v3d::VSharedPtr<v3d::entity::IVPart>& in_Part)
-	{
-		part = in_Part;
-	}
-
-	std::string GetId() const
-	{
-		return id;
-	}
-
-	void SetId(const std::string& in_Id)
-	{
-		id = in_Id;
-	}
-
-private:
-	v3d::VSharedPtr<v3d::entity::IVPart> part;
-	std::string id;
+	static v3d::scene::IVShooting* ToShooting(v3d::entity::VNode* in_pPart);
 };
 
-VPartAndId CreatePart(v3d::xml::IVXMLElement* in_pElement);
+v3d::VSharedPtr<v3d::entity::VNode> CreatePart(const std::string& type);
 
 v3d::entity::VEntity* CreateEntity();
 
 // no v3d types because swig has trouble with it TODO: fix
-bool CanBeUpdated(v3d::entity::IVPart* in_pPart);
-void UpdatePart(float in_fSeconds, v3d::entity::IVPart* in_pPart);
+bool CanBeUpdated(v3d::entity::VNode* in_pPart);
+void UpdatePart(float in_fSeconds, v3d::entity::VNode* in_pPart);
 
 v3d::math::VRBTransform GetTransform(v3d::entity::VEntity* in_pEntity);
 void SetTransform(v3d::entity::VEntity* in_pEntity, const v3d::math::VRBTransform& in_Transform);
 
 v3d::scene::IVShooting* FindShooting(v3d::entity::VEntity* in_pEntity);
-v3d::scene::IVShooting* ToShooting(v3d::entity::IVPart* in_pPart);
 
 v3d::input::IVInputManager* CreateInputManager(int hwnd);
 void TellInputManager(

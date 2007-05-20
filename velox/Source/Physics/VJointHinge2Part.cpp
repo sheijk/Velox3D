@@ -20,7 +20,7 @@ using namespace v3d::entity;
 using namespace math;
 
 VJointHinge2Part::VJointHinge2Part() : 
-	m_pPhysicManagerPart(entity::VPartDependency::Ancestor, RegisterTo())
+	m_pPhysicManagerPart(RegisterTo())
 {
 	m_bIsLinkedByBodyOne = false;
 	m_bIsLinkedByBodyTwo = false;

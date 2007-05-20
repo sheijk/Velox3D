@@ -54,109 +54,23 @@ class VEntityHelper;
 class VEntity : public VNode
 {
 public:
-	typedef VSharedPtr<VEntity> EntityPtr;
-	typedef VSharedPtr<IVPart> PartPtr;
-
 	VEntity();
 	virtual ~VEntity();
 
-	/** Will activate all parts */
-    ActivationResult Activate();
-
-	/** Will deactivate all parts */
-	void Deactivate();
-	
-	vbool IsActive() const;
-
-	/** Adds a part to the entity. Entity will own part */
-	void AddPart(const std::string& in_Id, PartPtr in_pPart);
-
-	/** Adds a part using it's  */
-	void AddPart(VSharedPtr<IVPart> in_pPart);
-
-	/** Removes the part with the given id */
-	void RemovePart(const std::string& in_Id);
-
-	void AddChild(EntityPtr in_pEntity);
-	void RemoveChild(EntityPtr in_pEntity);
-
-	VRangeIterator<VEntity> ChildIterator();
-	VRangeIterator<const VEntity> ChildIterator() const;
-	VRangeIterator< VSharedPtr<VEntity> > ChildPtrIterator();
-	VRangeIterator<IVPart> PartIterator();
-	VRangeIterator<const IVPart> PartIterator() const;
-	VRangeIterator< VSharedPtr<IVPart> > PartPtrIterator();
-
-	std::string GetName() const;
-	void SetName(const std::string& in_strName);
-
-	template<typename PartType>
-	PartType* GetPart();
-
-	VSharedPtr<VEntity> GetChildWithName(const std::string& in_strName);
-
-	/** print all sub entities and parts to vout */
-	void DumpInfo(const std::string& prefix = "") const;
-
 	virtual void Save(xml::IVXMLElement& node);
 	virtual void Load(const xml::IVXMLElement& in_Element);
-private:
-	typedef std::multimap<std::string, PartPtr> PartContainer;
-	typedef std::vector<EntityPtr> EntityContainer;
 
+	virtual const VTypeInfo& GetTypeInfo() const 
+	{ return GetCompileTimeTypeInfo(this); }
+
+private:
 	VEntity(const VEntity&);
 	void operator=(const VEntity&);
-
-	IVPart* GetPartById(const std::string& in_Id);
-
-	void UnconnectAllParts();
-	void ReconnectAllParts();
-	void ConnectPart(IVPart* in_pPart, const std::string& in_Id);
-	void UnconnectPart(IVPart* in_pPart, const std::string& in_Id);
-
-	void SetAllPartsActive(vbool in_bActive);
-
-	/* deactivate if any dependency of a part is not fulfilled */
-	void CheckDependencies();
-
-	std::string m_strName;
-
-	PartContainer m_Parts;
-	vbool m_bActivated;
-
-	VEntity* m_pParent;
-	EntityContainer m_Entities;
-
-	// put util functions in helper class to keep changes local to VEntity.cpp
-	friend class ::v3d::entity::VEntityHelper;
 };
 
 //-----------------------------------------------------------------------------
-
-template<typename PartType>
-PartType* VEntity::GetPart()
-{
-	IVPart* part = GetPartById(GetTypeInfo<PartType>().GetName());
-	if( part != 0 && part->IsOfType<PartType>() )
-	{
-		return part->Convert<PartType>();
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-//template<typename PartType>
-//void VEntity::AddPart(VSharedPtr<PartType> in_pPart)
-//{
-//	// the part's class neeed a "static std::string GetDefaultId()" method
-//	AddPart(
-//	//AddPart(PartType::GetDefaultId(), in_pPart);
-//}
-
-//-----------------------------------------------------------------------------
 }} // namespace v3d::entity
+V3D_TYPEINFO_WITHPARENT( v3d::entity::VEntity, v3d::entity::VNode );
 //-----------------------------------------------------------------------------
 #endif // V3D_VENTITY_2004_10_09_H
 

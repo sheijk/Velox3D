@@ -50,8 +50,8 @@ private:
 
 	resource::VResourceDataPtr<graphics::IVDevice> m_pRenderTarget;
 
-	entity::VPartConnection<VSimpleShooting> m_pMainShooting;
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
+	entity::VNodeConnection<VSimpleShooting> m_pMainShooting;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
 	graphics::VCamera m_Camera;
 };
 

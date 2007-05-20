@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/VEntityExceptions.h>
 
 #include "VDataPart.h"
@@ -14,16 +14,16 @@ namespace v3d {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
 
-class VReaderPart : public entity::VPartBase
+class VReaderPart : public entity::VPart
 {
-	entity::VPartConnection<VDataPart> pData;
-	entity::VPartConnection<VManagerPart> pManager;
+	entity::VNodeConnection<VDataPart> pData;
+	entity::VNodeConnection<VManagerPart> pManager;
 	//VDataPart* pData;
 
 public:
 	VReaderPart() :
-		pData(entity::VPartDependency::Neighbour, RegisterTo()),
-		pManager(entity::VPartDependency::Ancestor, RegisterTo())
+		pData(RegisterTo()),
+		pManager(RegisterTo())
 	{
 	}
 

@@ -11,7 +11,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Math.h>
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Entity.h>
 
 #include <list>
@@ -25,7 +25,7 @@ using namespace v3d; // prevent auto indenting
 *
 * @author lars
 */
-class IVUpdateablePart : public VPartBase
+class IVUpdateablePart : public VPart
 {
 public:
 	IVUpdateablePart() {};
@@ -33,9 +33,6 @@ public:
 
 	/** Update the Animation Part */
 	virtual void Update(vfloat32 in_Seconds) = 0;
-
-	static std::string GetDefaultId() { return "sgiu"; };
-private:
 };
 
 /**
@@ -43,7 +40,7 @@ private:
 *
 * @author lars
 */
-class VUpdateManagerPart : public VPartBase
+class VUpdateManagerPart : public VPart
 {
 public:
 	VUpdateManagerPart();
@@ -58,8 +55,8 @@ public:
 	/** Unregister all IVUpdateableParts */
 	void Unregister(IVUpdateablePart* in_pChild);
 
-	static std::string GetDefaultId();
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
 private:
 	virtual void OnActivate();
 	virtual void OnDeactivate();

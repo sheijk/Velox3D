@@ -26,10 +26,11 @@ using namespace v3d; // anti auto indent
 using namespace v3d::entity;
 using namespace math;
 
-VBodyPart::VBodyPart(BodyPtr in_pBody) : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
-										 m_pPhysicManagerPart(VPartDependency::Ancestor, RegisterTo()),
-										 m_pVolumePart(VPartDependency::Neighbour, RegisterTo()),
-										 m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
+VBodyPart::VBodyPart(BodyPtr in_pBody) : 
+	m_pRigidBodyPart(RegisterTo()),
+	m_pPhysicManagerPart(RegisterTo()),
+	m_pVolumePart(RegisterTo()),
+	m_pUpdateManager(RegisterTo())
 {
 	V3D_ASSERT(in_pBody.Get() != 0);
 	m_fMass = 0.1f;
@@ -37,10 +38,11 @@ VBodyPart::VBodyPart(BodyPtr in_pBody) : m_pRigidBodyPart(VPartDependency::Neigh
 	m_sIdentifier = "";
 }
 
-VBodyPart::VBodyPart() : m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
-						 m_pPhysicManagerPart(VPartDependency::Ancestor, RegisterTo()),
-						 m_pVolumePart(VPartDependency::Neighbour, RegisterTo()),
-						 m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
+VBodyPart::VBodyPart() : 
+	m_pRigidBodyPart(RegisterTo()),
+	m_pPhysicManagerPart(RegisterTo()),
+	m_pVolumePart(RegisterTo()),
+	m_pUpdateManager(RegisterTo())
 {
 	m_pBody.Assign(0);
 	m_fMass  = 0.1f;

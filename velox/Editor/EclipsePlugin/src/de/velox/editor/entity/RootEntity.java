@@ -7,6 +7,7 @@
 
 package de.velox.editor.entity;
 
+import de.velox.Convert;
 import de.velox.IVShooting;
 import de.velox.IVXMLElement;
 import de.velox.VPartPtr;
@@ -55,7 +56,7 @@ public class RootEntity extends Entity {
 				v3d.TellInputManager(this.impl(), renderAction.GetInputManager());
 			}
 
-			IVShooting newShooting = v3d.ToShooting(newPart.GetPart().Get());
+			IVShooting newShooting = Convert.ToShooting(newPart.GetPart().Get());
 			if( newShooting != null ) {
 				shooting = newShooting;
 				connectShootingRenderAction();

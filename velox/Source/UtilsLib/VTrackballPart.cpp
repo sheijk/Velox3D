@@ -22,10 +22,10 @@ using namespace entity;
  * standard c'tor
  */
 VTrackballPart::VTrackballPart() :
-	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(VPartDependency::Ancestor, RegisterTo()),
-	m_pInputPart(VPartDependency::Ancestor, RegisterTo()),
-	m_pParentRigidBodyPart(VPartDependency::Ancestor, VPartDependency::Optional, RegisterTo())
+	m_pRigidBodyPart( RegisterTo() ),
+	m_pUpdateManager( RegisterTo()),
+	m_pInputPart( RegisterTo() ),
+	m_pParentRigidBodyPart( VNodeDependency::Optional, RegisterTo() )
 {
 	m_bCenterOnParent = false;
 }

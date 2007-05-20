@@ -58,9 +58,9 @@ private:
 	virtual graphics::IVCamera* GetCamera();
 	virtual scene::IVGraphicsPart* GetScene();
 
-	entity::VPartConnection<VSimpleShooting> m_pMainShooting;
-	entity::VPartConnection<IVGraphicsPart> m_pMirrorMesh;
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidyBodyPart;
+	entity::VNodeConnection<VSimpleShooting> m_pMainShooting;
+	entity::VNodeConnection<IVGraphicsPart> m_pMirrorMesh;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidyBodyPart;
 
 	resource::VResourceDataPtr<graphics::IVDevice> m_pRenderTarget;
 	VSharedPtr<graphics::VFloat44ParamValue> m_pTextureMatrixValue;

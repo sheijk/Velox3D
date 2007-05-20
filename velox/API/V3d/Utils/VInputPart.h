@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/VUnconnectedPart.h>
+#include <V3d/Entity/IVPart.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace input {
 	class IVInputManager;
@@ -20,7 +20,7 @@ namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-class VInputPart : public entity::VUnconnectedPart
+class VInputPart : public entity::VPart
 {
 public:
 	VInputPart();

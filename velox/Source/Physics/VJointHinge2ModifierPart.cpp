@@ -19,9 +19,9 @@ using namespace v3d::entity;
 using namespace v3d::input;
 
 VJointHinge2ModifierPart::VJointHinge2ModifierPart() : 
-m_pPhysicManagerPart(VPartDependency::Ancestor, RegisterTo()),
-m_pInputManager(VPartDependency::Ancestor, RegisterTo()),
-m_pUpdateManager(VPartDependency::Ancestor, RegisterTo())
+	m_pPhysicManagerPart(RegisterTo()),
+	m_pInputManager(RegisterTo()),
+	m_pUpdateManager(RegisterTo())
 {
 	m_pButton = 0;
 	m_pButton2 = 0;

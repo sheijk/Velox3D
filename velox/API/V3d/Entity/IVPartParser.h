@@ -35,7 +35,7 @@ public:
 	 *
 	 * @throws VPartParseException if an error occured
 	 */
-	virtual VSharedPtr<IVPart> Create() = 0;
+	virtual VSharedPtr<VNode> Create() = 0;
 	//virtual VSharedPtr<IVPart> Parse(xml::IVXMLElement& in_Node) = 0;
 };
 

@@ -41,9 +41,9 @@ namespace {
  * standard c'tor
  */
 VMirrorShooting::VMirrorShooting() :
-	m_pMainShooting(VPartDependency::Ancestor, RegisterTo()),
-	m_pMirrorMesh(VPartDependency::Neighbour, VPartDependency::Optional, RegisterTo()),
-	m_pRigidyBodyPart(VPartDependency::Neighbour, RegisterTo())
+	m_pMainShooting(RegisterTo()),
+	m_pMirrorMesh(VNodeDependency::Optional, RegisterTo()),
+	m_pRigidyBodyPart(RegisterTo())
 {
 	m_pTextureMatrixValue.Assign(new VFloat44ParamValue());
 }

@@ -10,11 +10,11 @@
 //-----------------------------------------------------------------------------
 
 #include <V3d/Entity/VEntityExceptions.h>
+#include <V3d/Entity/VNode.h>
 #include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/VEntity.h>
 #include <V3d/Entity/VEntityManager.h>
 #include <V3d/Entity/VUnconnectedPart.h>
-#include <V3d/Entity/VPartBase.h>
 #include <V3d/Entity/IVEntitySerializationService.h>
 
 //-----------------------------------------------------------------------------

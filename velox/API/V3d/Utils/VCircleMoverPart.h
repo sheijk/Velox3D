@@ -9,7 +9,7 @@
 #define V3D_VCIRCLEMOVERPART_2006_01_30_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Entity/VUpdateablePart.h>
 #include <V3d/Entity/VRigidBodyPart.h>
 //-----------------------------------------------------------------------------
@@ -17,7 +17,7 @@ namespace v3d { namespace utils {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
-class VCircleMoverPart : public entity::VPartBaseAdapter<entity::IVUpdateablePart>
+class VCircleMoverPart : public entity::IVUpdateablePart
 {
 public:
 	VCircleMoverPart();
@@ -43,8 +43,8 @@ private:
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
 
-	entity::VPartConnection<entity::VUpdateManagerPart> m_pUpdateManager;
-	entity::VPartConnection<entity::VRigidBodyPart> m_pRigidBody;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBody;
 
 	vfloat32 m_fRadius;
 	math::VVector3f m_Center;

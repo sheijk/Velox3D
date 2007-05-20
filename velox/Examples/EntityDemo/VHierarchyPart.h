@@ -3,7 +3,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 
 #include <set>
 //-----------------------------------------------------------------------------
@@ -17,16 +17,15 @@ using namespace v3d; // anti auto indenting
  *
  * @author sheijk
  */
-class VHierarchyPart : public entity::VPartBase
+class VHierarchyPart : public entity::VPart
 {
-	entity::VPartConnection<VHierarchyPart> m_pParent;
+	entity::VNodeConnection<VHierarchyPart> m_pParent;
 
 	std::set<VHierarchyPart*> m_Childs;
 public:
 	VHierarchyPart() : 
 	  m_pParent(
-		  entity::VPartDependency::Ancestor,
-		  entity::VPartDependency::Optional,
+		  entity::VNodeDependency::Optional,
 		  RegisterTo())
 	{
 	}

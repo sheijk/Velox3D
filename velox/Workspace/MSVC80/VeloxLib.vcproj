@@ -700,23 +700,11 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Entity\VPartBase.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\Api\V3d\Entity\VPartDependency.h"
 						>
 					</File>
 					<File
 						RelativePath="..\..\API\V3d\Entity\VRigidBodyPart.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\API\V3d\Entity\VScenegraphPart.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\API\V3d\Entity\VSGAnimationPart.h"
 						>
 					</File>
 					<File
@@ -1429,10 +1417,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Source\Entity\VPartBase.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\Source\Entity\VUnconnectedPart.cpp"
 					>
 				</File>
@@ -1441,14 +1425,6 @@
 					>
 					<File
 						RelativePath="..\..\Source\Entity\EntityParts\VRigidBodyPart.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Entity\EntityParts\VSGAnimationPart.cpp"
 						>
 					</File>
 					<File

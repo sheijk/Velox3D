@@ -21,20 +21,22 @@ public class Part implements XMLSerializable {
 	private LinkedList<VPartDependency> dependencies = new LinkedList<VPartDependency>();
 	private Entity owner = null;
 	
-	private final VPartPtr impl;
+	private final VNodePtr impl;
 	
 	public Part(String type) {
 		IVXMLElement xmlElement = v3d.CreateXMLElement("part");
 		xmlElement.AddAttribute("type", new VStringValue(type));
 		
-		VPartAndId partAndId = v3d.CreatePart(xmlElement);
-		impl = partAndId.GetPart();
-		this.type = partAndId.GetId();
+		impl = v3d.CreatePart(type);
+		this.type = impl.GetTypeInfo().GetName();
+//		VPartAndId partAndId = v3d.CreatePart(xmlElement);
+//		impl = partAndId.GetPart();
+//		this.type = partAndId.GetId();
 		
 		updateSettingsFromPart();
 	}
 	
-	public Part(String type, VPartPtr impl)
+	public Part(String type, VNodePtr impl)
 	{
 		this.type = type;
 		this.impl = impl;
@@ -42,7 +44,7 @@ public class Part implements XMLSerializable {
 		updateSettingsFromPart();
 	}
 	
-	public Part(VPartPtr partImpl) {
+	public Part(VNodePtr partImpl) {
 		impl = partImpl;
 		type = partImpl.GetTypeInfo().GetName();
 	}
@@ -92,17 +94,18 @@ public class Part implements XMLSerializable {
 			nameIter.Next();
 		}
 		
+//		TODO
 		// get dependencies
-		dependencies.clear();
-		for(int depNum = 0; depNum < impl.DependencyCount(); ++depNum) {
-			VPartDependency dependency = new VPartDependency();
-			dependency.SetId(impl.GetDependencyInfo(depNum).GetId());
-			dependency.SetLocation(impl.GetDependencyInfo(depNum).GetLocation());
-			dependency.SetTypeInfo(impl.GetDependencyInfo(depNum).GetTypeInfo());
-			dependency.SetCondition(impl.GetDependencyInfo(depNum).GetCondition());
-			
-			dependencies.add(dependency);
-		}
+//		dependencies.clear();
+//		for(int depNum = 0; depNum < impl.DependencyCount(); ++depNum) {
+//			VPartDependency dependency = new VPartDependency();
+//			dependency.SetId(impl.GetDependencyInfo(depNum).GetId());
+//			dependency.SetLocation(impl.GetDependencyInfo(depNum).GetLocation());
+//			dependency.SetTypeInfo(impl.GetDependencyInfo(depNum).GetTypeInfo());
+//			dependency.SetCondition(impl.GetDependencyInfo(depNum).GetCondition());
+//			
+//			dependencies.add(dependency);
+//		}
 	}
 	
 	public Setting getSetting(String name) {
@@ -191,7 +194,7 @@ public class Part implements XMLSerializable {
 		outElement.AddAttribute("tags", new VStringValue(tagList.toString()));
 	}
 	
-	private static boolean valid(VPartPtr ptr) {
+	private static boolean valid(VNodePtr ptr) {
 		return ptr != null && ptr.Get() != null;
 	}
 	
@@ -201,7 +204,7 @@ public class Part implements XMLSerializable {
 		LinkedList<String> tags = new LinkedList<String>();
 		
 		if( valid(impl) ) {
-			if( ! impl.IsReady() )
+			if( impl.GetState() != VNode.State.Active )
 				tags.add("unready");
 		}
 		else {
@@ -228,7 +231,7 @@ public class Part implements XMLSerializable {
 		return description;	
 	}
 
-	public VPartPtr GetPart() {
+	public VNodePtr GetPart() {
 		return impl;
 	}
 	

@@ -61,6 +61,8 @@ namespace v3d { namespace entity {
 		//extern void* AssureVUpdateablePartExists();
 		extern void* AssureVUpdateManagerPartExists();
 		extern void* AssureVRigidBodyPartExists();
+
+		extern void* AssureVEntityExists();
 }}
 namespace v3d { namespace utils {
 		extern void* AssureVCameraPartExists();
@@ -126,6 +128,7 @@ void foo()
 	v3d::entity::AssureVRigidBodyPartExists();
 	//v3d::entity::AssureVUpdateablePartExists();
 	v3d::entity::AssureVUpdateManagerPartExists();
+	v3d::entity::AssureVEntityExists();
 
 	v3d::utils::AssureVCameraPartExists();
 	v3d::utils::AssureVCircleMoverPartExists();

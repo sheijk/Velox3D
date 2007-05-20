@@ -86,31 +86,31 @@ VSharedPtr<VEntity> CreateDemoEntity(vint in_nValue)
 
 	VSharedPtr<VEntity> pEntity(new VEntity());
 
-	pEntity->AddPart(VDataPart::GetDefaultId(), PartPtr(new VDataPart(in_nValue)));
-	pEntity->AddPart(VReaderPart::GetDefaultId(), PartPtr(new VReaderPart()));
+	pEntity->Add(SharedPtr(new VDataPart(in_nValue)));
+	pEntity->Add(SharedPtr(new VReaderPart()));
 	//pEntity->AddPart(VSettingPart::GetDefaultId(), PartPtr(new VSettingPart()));
 
 	return pEntity;
 }
 
-void DumpInfo(VEntity& in_Entity, const std::string& prefix = "")
-{
-	vout << prefix << "Entity" << (in_Entity.IsActive() ? "" : "(inactive)") << vendl;
-
-	VRangeIterator<IVPart> partIter = in_Entity.PartIterator();
-	while( partIter.HasNext() )
-	{
-		vout << prefix << "\tPart" << (partIter->IsReady() ? "" : " (misssing requirements)") << vendl;
-		++partIter;
-	}
-
-	VRangeIterator<VEntity> childIter = in_Entity.ChildIterator();
-	while( childIter.HasNext() )
-	{
-		DumpInfo(*childIter, prefix + "\t");
-		++childIter;
-	}
-}
+//void DumpInfo(VEntity& in_Entity, const std::string& prefix = "")
+//{
+//	vout << prefix << "Entity" << (in_Entity.IsActive() ? "" : "(inactive)") << vendl;
+//
+//	VRangeIterator<IVPart> partIter = in_Entity.PartIterator();
+//	while( partIter.HasNext() )
+//	{
+//		vout << prefix << "\tPart" << (partIter->IsReady() ? "" : " (misssing requirements)") << vendl;
+//		++partIter;
+//	}
+//
+//	VRangeIterator<VEntity> childIter = in_Entity.ChildIterator();
+//	while( childIter.HasNext() )
+//	{
+//		DumpInfo(*childIter, prefix + "\t");
+//		++childIter;
+//	}
+//}
 
 /**
  * This example demonstratetes sharing of data between multiple subsystems
@@ -173,38 +173,38 @@ vint VEntityDemoApp::Main(std::vector<std::string> args)
 	VSharedPtr<VHierarchyPart> pHierarchicalRoot(new VHierarchyPart());
 
 	{
-		root.AddPart(pHierarchicalRoot);
+		root.Add(pHierarchicalRoot);
 
 		VSharedPtr<VEntity> pChild1 = SharedPtr(new VEntity());
-		root.AddChild(pChild1);
-		pChild1->AddPart(SharedPtr(new VHierarchyPart()));
+		root.Add(pChild1);
+		pChild1->Add(SharedPtr(new VHierarchyPart()));
 		VSharedPtr<VEntity> pChildSub1 = SharedPtr(new VEntity());
-		pChild1->AddChild(pChildSub1);
-		pChildSub1->AddPart(SharedPtr(new VHierarchyPart()));
+		pChild1->Add(pChildSub1);
+		pChildSub1->Add(SharedPtr(new VHierarchyPart()));
 
 		VSharedPtr<VEntity> pChild2 = SharedPtr(new VEntity());
-		pChild2->AddPart(SharedPtr(new VHierarchyPart()));
-		root.AddChild(pChild2);
+		pChild2->Add(SharedPtr(new VHierarchyPart()));
+		root.Add(pChild2);
 	}
 
 	// add parts to demonstrate accessing VDerivedPart as VBasePart
 	{
 		VSharedPtr<VEntity> pDeriveEntity = SharedPtr(new VEntity());
-		root.AddChild(pDeriveEntity);
-		pDeriveEntity->AddPart(SharedPtr(new VDerivedPart()));
-		pDeriveEntity->AddPart(SharedPtr(new VBasePartUser()));
+		root.Add(pDeriveEntity);
+		pDeriveEntity->Add(SharedPtr(new VDerivedPart()));
+		pDeriveEntity->Add(SharedPtr(new VBasePartUser()));
 	}
 
 	// activate the whole scene and all entities
 	root.Activate();
-	V3D_ASSERT(root.IsActive());
+	V3D_ASSERT( root.GetState() == VNode::Active );
 
 	vout << "\n\n\nScene is now active\n\n\n";
 
 	// change value of the settable part
 	//pSettingPart->SetValue(9999);
 
-	DumpInfo(root);
+	root.DumpInfo();
 
 	vout << "Hierarchical parts:" << vendl;
 	pHierarchicalRoot->Print("\t");

@@ -101,7 +101,7 @@ namespace {
 
 //-----------------------------------------------------------------------------
 
-class VSkyboxPart::VSide : public entity::VPartBaseAdapter<IVShapePart>
+class VSkyboxPart::VSide : public IVShapePart
 {
 public:
 	VSide(VSkyboxPart* in_pContainer, 
@@ -221,8 +221,8 @@ VRangeIterator<const IVShapePart> VSkyboxPart::VSide::GetVisibleMeshes() const
  * standard c'tor
  */
 VSkyboxPart::VSkyboxPart() :
-	m_pRigidBodyPart(VPartDependency::Neighbour, RegisterTo()),
-	m_pSceneManager(VPartDependency::Ancestor, RegisterTo())
+	m_pRigidBodyPart(RegisterTo()),
+	m_pSceneManager(RegisterTo())
 {
 	const float size = 100.0f;
 	m_BaseColor = VColor4f(1, 1, 1, 1);

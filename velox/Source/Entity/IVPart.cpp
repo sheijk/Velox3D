@@ -19,54 +19,6 @@ namespace v3d { namespace entity {
 using namespace v3d; // anti auto indent
 
 namespace {
-	vbool IsValidTagName(const tags::VTag& tag)
-	{
-		return tag.GetName().length() > 0;
-	}
-}
-
-void IVPart::AttachTag(const tags::VTag& tag)
-{
-	if( IsValidTagName(tag) && ! HasTag(tag) )
-	{
-		m_Tags.push_back(&tag);
-	}
-}
-
-
-void IVPart::RemoveTag(const tags::VTag& tag)
-{
-	for(std::vector<const tags::VTag*>::iterator tagIter = m_Tags.begin();
-		tagIter != m_Tags.end();
-		++tagIter)
-	{
-		if( (**tagIter) == tag )
-		{
-			m_Tags.erase(tagIter);
-			break;
-		}
-	}
-}
-
-vbool IVPart::HasTag(const tags::VTag& tag) const
-{
-	for(std::vector<const tags::VTag*>::const_iterator tagIter = m_Tags.begin();
-		tagIter != m_Tags.end();
-		++tagIter)
-	{
-		if( **tagIter == tag )
-			return true;
-	}
-
-	return false;
-}
-
-VRangeIterator<const tags::VTag> IVPart::Tags() const
-{
-	return CreateDerefBeginIterator<const tags::VTag>(m_Tags);
-}
-
-namespace {
 	typedef std::map<std::string, std::string> SettingsMap;
 	
 	SettingsMap CollectSettings(IVPart& part)
@@ -96,75 +48,78 @@ namespace {
 
 void IVPart::Save(xml::IVXMLElement& node)
 {
-	node.SetName("part");
-	node.AddAttribute( "type", utils::VStringValue(GetTypeInfo().GetName()) );
+	VNode::Save( node );
+	//node.SetName("part");
+	//node.AddAttribute( "type", utils::VStringValue(GetTypeInfo().GetName()) );
 
-	SettingsMap settings = CollectSettings(*this);
+	//SettingsMap settings = CollectSettings(*this);
 
-	const SettingsMap::iterator settingsEnd = settings.end();
-	for(SettingsMap::iterator setting = settings.begin();
-		setting != settingsEnd;
-		++setting)
-	{
-		const std::string name = setting->first;
-		const std::string value = setting->second;
+	//const SettingsMap::iterator settingsEnd = settings.end();
+	//for(SettingsMap::iterator setting = settings.begin();
+	//	setting != settingsEnd;
+	//	++setting)
+	//{
+	//	const std::string name = setting->first;
+	//	const std::string value = setting->second;
 
-		node.AddAttribute(name.c_str(), utils::VStringValue(value));
-	}
+	//	node.AddAttribute(name.c_str(), utils::VStringValue(value));
+	//}
 
-	std::string tagList;
-	const vuint tagCount = m_Tags.size();
-	for(vuint tagNum = 0; tagNum < tagCount; ++tagNum)
-	{
-		const tags::VTag* tag = m_Tags[tagNum];
+	//std::string tagList;
+	//const vuint tagCount = m_Tags.size();
+	//for(vuint tagNum = 0; tagNum < tagCount; ++tagNum)
+	//{
+	//	const tags::VTag* tag = m_Tags[tagNum];
 
-		if( tag != NULL )
-		{
-			const std::string tagName = tag->GetName();
-			if( tagNum > 0 )
-				tagList += " ";
+	//	if( tag != NULL )
+	//	{
+	//		const std::string tagName = tag->GetName();
+	//		if( tagNum > 0 )
+	//			tagList += " ";
 
-			tagList += tagName;
-		}
-	}
+	//		tagList += tagName;
+	//	}
+	//}
 
-	node.AddAttribute("tags", utils::VStringValue(tagList));
+	//node.AddAttribute("tags", utils::VStringValue(tagList));
 }
 
 void IVPart::Load(const xml::IVXMLElement& in_Node)
 {
-	VRangeIterator<const xml::IVXMLAttribute> attrib = in_Node.AttributeBegin();
-	while( attrib.HasNext() )
-	{
-		std::string name = attrib->GetName();
-		std::string value = attrib->GetValueAs<std::string>();
+	VNode::Load( in_Node );
+	//VRangeIterator<const xml::IVXMLAttribute> attrib = in_Node.AttributeBegin();
+	//while( attrib.HasNext() )
+	//{
+	//	std::string name = attrib->GetName();
+	//	std::string value = attrib->GetValueAs<std::string>();
 
-		if( name != "type" && name != "tags" )
-		{
-			messaging::VMessage message;
-			message.AddProperty("type", "update");
-			message.AddProperty("name", name);
-			message.AddProperty("value", value);
+	//	if( name != "type" && name != "tags" )
+	//	{
+	//		messaging::VMessage message;
+	//		message.AddProperty("type", "update");
+	//		message.AddProperty("name", name);
+	//		message.AddProperty("value", value);
 
-			Send(message);
-		}
-		else if( name == "tags" )
-		{
-			tags::VTagRegistryPtr pTagRegistry;
+	//		Send(message);
+	//	}
+	//	else if( name == "tags" )
+	//	{
+	//		tags::VTagRegistryPtr pTagRegistry;
 
-			std::stringstream tags(value);
-			std::string tagName;
+	//		std::stringstream tags(value);
+	//		std::string tagName;
 
-			while( ! tags.eof() )
-			{
-				tags >> tagName;
-				AttachTag(pTagRegistry->GetTagWithName(tagName));
-			}
-		}
+	//		while( ! tags.eof() )
+	//		{
+	//			tags >> tagName;
+	//			AttachTag(pTagRegistry->GetTagWithName(tagName));
+	//		}
+	//	}
 
-		++attrib;
-	}
+	//	++attrib;
+	//}
 }
+
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d

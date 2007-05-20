@@ -18,8 +18,8 @@ using namespace v3d; // anti auto indent
 using namespace math;
 
 VCircleMoverPart::VCircleMoverPart() :
-	m_pRigidBody(entity::VPartDependency::Neighbour, RegisterTo()),
-	m_pUpdateManager(entity::VPartDependency::Ancestor, RegisterTo())
+	m_pRigidBody(RegisterTo()),
+	m_pUpdateManager(RegisterTo())
 {
 	m_fSpeed = math::Pi() * 1;
 	m_fAngle = .0f;

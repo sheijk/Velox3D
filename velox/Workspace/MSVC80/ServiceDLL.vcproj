@@ -1377,18 +1377,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="EntityParts"
-				>
-				<File
-					RelativePath="..\..\Source\Entity\EntityParts\VSceneGraphPart.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\Source\Entity\EntityParts\VSGAnimationPart.cpp"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Scene"

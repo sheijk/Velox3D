@@ -4,8 +4,7 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
-#include <V3d/Entity/VSGAnimationPart.h>
+#include <V3d/Entity/VUpdateablePart.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Entity/VGenericPartParser.h>
 //-----------------------------------------------------------------------------
@@ -68,11 +67,6 @@ void VUpdateManagerPart::Unregister(IVUpdateablePart* in_pChild)
 	}
 
 	m_pChilds.erase(iter); 
-}
-
-std::string VUpdateManagerPart::GetDefaultId()
-{
-	return "sgum";
 }
 
 V3D_REGISTER_PART_PARSER(VUpdateManagerPart);

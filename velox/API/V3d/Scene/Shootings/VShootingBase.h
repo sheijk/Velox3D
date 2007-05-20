@@ -11,7 +11,7 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Scene/IVShooting.h>
-#include <V3d/Entity/VPartBase.h>
+#include <V3d/Entity/IVPart.h>
 #include <V3d/Scene/IVRenderStepPart.h>
 
 //-----------------------------------------------------------------------------
@@ -23,7 +23,7 @@ class IVLightManager;
 
 /**
  */
-class VShootingBase : public entity::VPartBaseAdapter<IVShooting>
+class VShootingBase : public IVShooting
 {
 public:
 	VShootingBase();
@@ -59,9 +59,9 @@ protected:
 	typedef std::vector<IVShooting*> ShootingArray;
 	ShootingArray m_PreShootings;
 
-	entity::VPartConnection<IVLightManager> m_pLightManager;
+	entity::VNodeConnection<IVLightManager> m_pLightManager;
 
-	entity::VPartConnection<VShootingBase> m_pParentShooting;
+	entity::VNodeConnection<VShootingBase> m_pParentShooting;
 private:
 	vbool m_bActive;
 };

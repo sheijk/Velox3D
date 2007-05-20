@@ -24,7 +24,7 @@ namespace v3d { namespace physics {
 class VPhysicManagerPart;
 class VBody;
 
-class VJointHinge2Part : public entity::VPartBase
+class VJointHinge2Part : public entity::IVPart
 {
 public:
 	VJointHinge2Part();
@@ -46,7 +46,7 @@ private:
 	virtual void OnMessage(
 		const messaging::VMessage& in_Message,
 		messaging::VMessage* in_pAnswer);
-	entity::VPartConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
+	entity::VNodeConnection<physics::VPhysicManagerPart> m_pPhysicManagerPart;
 	
 	VJointHinge2 m_Joint;
 	vbool m_bIsLinkedByBodyOne;

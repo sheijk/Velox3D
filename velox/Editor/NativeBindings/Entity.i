@@ -5,14 +5,18 @@
  * complete licence text
  */
 
-%template(VPartPtrIterator) v3d::VRangeIterator< v3d::VSharedPtr<v3d::entity::IVPart> >;
-%template(VEntityPtrIterator) v3d::VRangeIterator< v3d::VSharedPtr<v3d::entity::VEntity> >;
+%template(VNodePtrIterator) v3d::VRangeIterator< v3d::VSharedPtr<v3d::entity::VNode> >;
+%template(VNodeIterator) v3d::VRangeIterator<v3d::entity::VNode>;
 
+%template(VNodePtr) v3d::VSharedPtr<v3d::entity::VNode>;
 %template(VEntityPtr) v3d::VSharedPtr<v3d::entity::VEntity>;
 %template(VPartPtr) v3d::VSharedPtr<v3d::entity::IVPart>;
 
-%template(VEntityIterator) v3d::VRangeIterator<v3d::entity::VEntity>;
-%template(VPartIterator) v3d::VRangeIterator<v3d::entity::IVPart>;
+// %template(VPartPtrIterator) v3d::VRangeIterator< v3d::VSharedPtr<v3d::entity::IVPart> >;
+// %template(VEntityPtrIterator) v3d::VRangeIterator< v3d::VSharedPtr<v3d::entity::VEntity> >;
+
+//%template(VEntityIterator) v3d::VRangeIterator<v3d::entity::VEntity>;
+//%template(VPartIterator) v3d::VRangeIterator<v3d::entity::IVPart>;
 
 %include "../../API/V3d/Entity/VNode.h"
 %include "../../API/V3d/Entity/VPartDependency.h"
@@ -21,6 +25,28 @@
 %include "../../API/V3d/Entity/IVPartParser.h"
 %template(VPartParserIter) v3d::VRangeIterator<v3d::entity::IVPartParser>;
 %include "../../API/V3d/Entity/IVEntitySerializationService.h"
+
+%extend v3d::entity::VNode {
+	v3d::entity::IVPart* ToPart() {
+		return self->Convert<v3d::entity::IVPart>();
+	}
+	
+	v3d::entity::VEntity* ToEntity() {
+		return self->Convert<v3d::entity::VEntity>();
+	}
+}
+
+%extend v3d::VSharedPtr<v3d::entity::IVPart> {
+	v3d::VSharedPtr<v3d::entity::VNode> ToNodePtr() {
+		return VSharedPtr<VNode>( *self );
+	}
+}
+
+%extend v3d::VSharedPtr<v3d::entity::VEntity> {
+	v3d::VSharedPtr<v3d::entity::VNode> ToNodePtr() {
+		return VSharedPtr<VNode>( *self );
+	}
+}
 
 %javaexception("Exception") v3d::entity::IVSceneParser::ParsePart {
 	try {

@@ -79,7 +79,7 @@ vbool VTextFileResType::Generate(VResource* in_pResource, VTypeInfo in_Type)
 
 		return true;
 	}
-	catch(VException& e)
+	catch(VException&)
 	{
 		return false;
 	}

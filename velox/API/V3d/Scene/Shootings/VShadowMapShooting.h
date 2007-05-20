@@ -47,7 +47,7 @@ private:
 	//resource::VResourceDataPtr<graphics::IVRenderContext> m_pDepthMapContext;
 	resource::VResourceDataPtr<graphics::IVDevice> m_pDevice;
 
-	entity::VPartConnection<IVLightManager> m_pLightManager;
+	entity::VNodeConnection<IVLightManager> m_pLightManager;
 
 	VSharedPtr<graphics::VTextureValue> m_pDepthMapValue;
 	VSharedPtr<graphics::VFloat44ParamValue> m_pDepthMapMatrixValue;
