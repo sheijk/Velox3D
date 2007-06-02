@@ -39,15 +39,20 @@ class VServiceProxy
 private:
 	VServiceProxy();
 	
-	std::string m_strDLL;
-
 	typedef void (*InitFunction)(VModuleParams*);
 	typedef void (*ShutdownFunction)();
+#ifdef V3D_WIN32
+	typedef HINSTANCE InstanceType;
+#endif
+#ifdef V3D_LX
+	typedef int InstanceType;
+#endif
 
 	InitFunction m_pInitFunction;
 	ShutdownFunction m_pDeInitFunction;
 
-	HINSTANCE m_hDllInstance;
+	InstanceType m_hDllInstance;
+	std::string m_strDLL;
 	vbool m_bIsLoaded;
 public:
 	VServiceProxy(const std::string& in_strDLL);

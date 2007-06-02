@@ -1,13 +1,6 @@
 /*
- * Copyright 2002-2006 Velox Development Team. This file is licenced under the
- * revised BSD licence. See licence_bsd.txt in the root of the Velox 
- * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
- * complete licence text
- */
-
-/*
 www.sourceforge.net/projects/tinyxml
-Original code (2.0 and earlier )copyright (c) 2000-2002 Lee Thomason (www.grinninglizard.com)
+Original code (2.0 and earlier )copyright (c) 2000-2006 Lee Thomason (www.grinninglizard.com)
 
 This software is provided 'as-is', without any express or implied 
 warranty. In no event will the authors be held liable for any 
@@ -33,7 +26,7 @@ distribution.
 
 // The goal of the seperate error file is to make the first
 // step towards localization. tinyxml (currently) only supports
-// latin-1, but at least the error messages could now be translated.
+// english error messages, but the could now be translated.
 //
 // It also cleans up the code a bit.
 //
@@ -53,6 +46,8 @@ const char* TiXmlBase::errorString[ TIXML_ERROR_STRING_COUNT ] =
 	"Error parsing Unknown.",
 	"Error parsing Comment.",
 	"Error parsing Declaration.",
-	"Error document empty."
+	"Error document empty.",
+	"Error null (0) or unexpected EOF found in input stream.",
+	"Error parsing CDATA.",
+	"Error when TiXmlDocument added to document, because TiXmlDocument can only be at the root.",
 };
-

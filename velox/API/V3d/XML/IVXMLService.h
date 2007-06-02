@@ -9,7 +9,7 @@
 #define V3D_IVXMLSERVICE_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VNamedObject.h>
-#include <V3d/Vfs/IVStream.h>
+#include <V3d/VFS/IVStream.h>
 #include <V3d/XML/IVXMLWriter.h>
 #include <V3d/XML/IVXMLVisitor.h>
 #include <V3d/Core/SmartPtr/VGuards.h>
@@ -99,14 +99,18 @@ protected:
 };
 
 typedef VServicePtr<IVXMLService> VXMLServicePtr;
+
 //-----------------------------------------------------------------------------
 } //xml
+
+template<>
+inline xml::IVXMLService* QueryService<xml::IVXMLService>()
+{
+	return QueryObject<xml::IVXMLService>("xml.service");
+}
+
 } //v3d
 //-----------------------------------------------------------------------------
-template<>
-inline v3d::xml::IVXMLService* v3d::QueryService<v3d::xml::IVXMLService>()
-{
-	return QueryObject<v3d::xml::IVXMLService>("xml.service");
-}
+
 //-----------------------------------------------------------------------------
 #endif //V3D_IVXMLSERVICE_H

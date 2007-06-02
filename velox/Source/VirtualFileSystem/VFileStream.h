@@ -12,7 +12,6 @@
 #include <V3d/Core/SmartPtr/VGuards.h>
 #include <V3d/VFS/IVBufferStream.h>
 #include <V3d/VFS/VFlags.h>
-
 #include "VLegalOperations.h"
 
 #include <string>

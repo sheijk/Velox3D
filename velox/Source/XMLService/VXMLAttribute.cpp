@@ -5,7 +5,7 @@
  * complete licence text
  */
 
-#include "VXmlAttribute.h"
+#include "VXMLAttribute.h"
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d{

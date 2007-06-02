@@ -5,7 +5,7 @@
  * complete licence text
  */
 
-#include "VXmlElement.h"
+#include "VXMLElement.h"
 #include <V3d/Core/VIOStream.h>
 #include <V3d/Core/MemManager.h>
 

@@ -8,8 +8,7 @@
 #ifndef V3D_IVOFFLINESTREAM_H
 #define V3D_IVOFFLINESTREAM_H
 //-----------------------------------------------------------------------------
-#include <V3d\VFS\IVStream.h>
-
+#include <V3d/VFS/IVStream.h>
 //-----------------------------------------------------------------------------
 namespace v3d {
 namespace vfs {

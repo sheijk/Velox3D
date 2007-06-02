@@ -11,7 +11,7 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/SmartPtr/VGuards.h>
 
-#include <V3d/Vfs/IVLegalOperations.h>
+#include <V3d/VFS/IVLegalOperations.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

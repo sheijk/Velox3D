@@ -24,18 +24,19 @@ template<
 class VSTLRangePolicy : public VSTLRangePolicyBase<STLIterator, T>
 {
 public:
+        typedef T Type;
 	VSTLRangePolicy(const STLIterator& in_Begin, const STLIterator& in_End)
 		: VSTLRangePolicyBase<STLIterator, T>(in_Begin, in_End)
 	{}
-		
+        // access through this to signal protected variables as dependant type
 	virtual Type* Get() const
 	{
-		return &(*m_Current);
+		return &(*this->m_Current);
 	}
 		
 	virtual IVRangeIteratorPolicy<Type>* Clone() const
 	{
-		return new VSTLRangePolicy(m_Current, m_End);
+		return new VSTLRangePolicy(this->m_Current, this->m_End);
 	}
 };
 	
