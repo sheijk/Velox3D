@@ -50,13 +50,13 @@ public class RootEntity extends Entity {
 	}
 
 	@Override
-	protected void onNewPart(Part newPart) {
-		if( valid(newPart.GetPart()) ) {
+	protected void onNewPart(Node newPart) {
+		if( newPart.impl() != null ) {
 			if( renderAction != null && newPart.GetId().equalsIgnoreCase(INPUT_PART_ID) ) {
 				v3d.TellInputManager(this.impl(), renderAction.GetInputManager());
 			}
 
-			IVShooting newShooting = Convert.ToShooting(newPart.GetPart().Get());
+			IVShooting newShooting = Convert.ToShooting(newPart.impl());
 			if( newShooting != null ) {
 				shooting = newShooting;
 				connectShootingRenderAction();

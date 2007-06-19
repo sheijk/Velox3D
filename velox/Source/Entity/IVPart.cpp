@@ -18,34 +18,6 @@ namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 
-namespace {
-	typedef std::map<std::string, std::string> SettingsMap;
-	
-	SettingsMap CollectSettings(IVPart& part)
-	{
-		messaging::VMessage request;
-		request.AddProperty("type", "getSettings");
-
-		messaging::VMessage reply;
-		part.Send(request, &reply);
-
-		std::map<std::string, std::string> settings;
-
-		VRangeIterator<const std::string> property = reply.PropertyIterator();
-		while( property.HasNext() )
-		{
-			const std::string name = *property;
-			const std::string value = reply.GetAs<std::string>(name);
-
-			settings.insert( std::make_pair(name, value) );
-
-			++property;
-		}
-
-		return settings;
-	}
-}
-
 void IVPart::Save(xml::IVXMLElement& node)
 {
 	VNode::Save( node );

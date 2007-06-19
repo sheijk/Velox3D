@@ -61,27 +61,6 @@ VEntity::~VEntity()
 void VEntity::Save(xml::IVXMLElement& node)
 {
 	VNode::Save( node );
-	//node.SetName("entity");
-	//node.AddAttribute("name", VStringValue(m_strName));
-
-	//VRangeIterator<IVPart> part = PartIterator();
-	//while( part.HasNext() )
-	//{
-	//	xml::IVXMLElement* element = node.AddElement("part");
-	//	part->Save(*element);
-
-	//	++part;
-	//}
-
-	//VRangeIterator<VEntity> child = ChildIterator();
-	//while( child.HasNext() )
-	//{
-	//	xml::IVXMLElement* element = node.AddElement("entity");
-	//	child->Save(*element);
-
-	//	++child;
-	//}
-	//
 }
 
 void VEntity::Load(const xml::IVXMLElement& in_Element)

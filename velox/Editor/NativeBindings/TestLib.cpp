@@ -484,7 +484,7 @@ void UpdatePart(vfloat32 in_fSeconds, v3d::entity::VNode* in_pPart)
 //	}
 //}
 
-math::VRBTransform GetTransform(VEntity* in_pEntity)
+math::VRBTransform GetTransform(VNode* in_pEntity)
 {
 	VRigidBodyPart* pRBPart = in_pEntity->GetFirst<VRigidBodyPart>();
 
@@ -494,7 +494,7 @@ math::VRBTransform GetTransform(VEntity* in_pEntity)
 		return math::VRBTransform();	
 }
 
-void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
+void SetTransform(VNode* in_pEntity, const math::VRBTransform& in_Transform)
 {
 	VRigidBodyPart* pRBPart = in_pEntity->GetFirst<VRigidBodyPart>();
 
@@ -505,7 +505,7 @@ void SetTransform(VEntity* in_pEntity, const math::VRBTransform& in_Transform)
 #include <V3d/Utils/VInputPart.h>
 #include "../../Source/InputLib/VDIInputManager.h"
 
-v3d::scene::IVShooting* FindShooting(v3d::entity::VEntity* in_pEntity)
+v3d::scene::IVShooting* FindShooting(v3d::entity::VNode* in_pEntity)
 {
 	if( in_pEntity != 0 )
 		return in_pEntity->GetFirst<IVShooting>();
@@ -528,7 +528,7 @@ v3d::input::IVInputManager* CreateInputManager(int hwnd)
 }
 
 void TellInputManager(
-	v3d::entity::VEntity* pEntity, 
+	v3d::entity::VNode* pEntity, 
 	v3d::input::IVInputManager* pInputManager)
 {
 	if( pEntity != 0 )

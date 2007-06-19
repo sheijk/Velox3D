@@ -83,6 +83,34 @@ public class SceneView extends VeloxViewBase {
 		abstract public void run();
 	}
 	
+	private static void addSettings(LinkedList<Object> childs, Node part) {
+		Iterator<Setting> settingIter = part.settingsIterator();
+		while( settingIter.hasNext() ) {
+			childs.add(settingIter.next());
+		}
+	}
+
+	private static void addDependencies(LinkedList<Object> childs, Node part) {
+		Iterator<VPartDependency> depIter = part.dependencyIterator();
+		while( depIter.hasNext() ) {
+			VPartDependency dep = depIter.next();
+			
+			String descr = "" + dep.GetLocation().toString().charAt(0);
+			
+			if( dep.GetCondition() == VPartDependency.Condition.Optional )
+				descr += "? ";
+			else
+				descr += " ";
+			
+			descr += dep.GetTypeInfo().GetName();
+			
+			if( dep.GetId().length() > 0 )
+				descr += "(id:" + dep.GetId() + ")";
+			
+			childs.add(descr);
+		}
+	}
+
 	class UpperPaneContentProvider implements IStructuredContentProvider, 
 										   ITreeContentProvider 
 	{
@@ -127,36 +155,15 @@ public class SceneView extends VeloxViewBase {
 					childs.add(partIter.next());
 				}
 				
+				addDependencies(childs, entity);
+				addSettings(childs, entity);
 			}
 			// if the object is a part, add it's settings and values
 			else if( parent instanceof Part ) {
 				Part part = (Part)parent;
 				
-				Iterator<VPartDependency> depIter = part.dependencyIterator();
-				while( depIter.hasNext() ) {
-					VPartDependency dep = depIter.next();
-					
-					String descr = "" + dep.GetLocation().toString().charAt(0);
-					
-					if( dep.GetCondition() == VPartDependency.Condition.Optional )
-						descr += "? ";
-					else
-						descr += " ";
-					
-					descr += dep.GetTypeInfo().GetName();
-					
-					if( dep.GetId().length() > 0 )
-						descr += "(id:" + dep.GetId() + ")";
-					
-					childs.add(descr);
-				}				
-//				childs.add(dependencyList);
-				
-				// add all settings				
-				Iterator<Setting> settingIter = part.settingsIterator();
-				while( settingIter.hasNext() ) {
-					childs.add(settingIter.next());
-				}
+				addDependencies(childs, part);				
+				addSettings(childs, part);
 			}
 			
 			return childs.toArray();				
@@ -239,7 +246,7 @@ public class SceneView extends VeloxViewBase {
 			return childs.toArray();				
 		}
 
-		private void addTags(LinkedList<Object> childs, Part part) {
+		private void addTags(LinkedList<Object> childs, Node part) {
 			VTagIterator tags = part.tags();
 			while( tags.HasNext() ) {
 				childs.add(new TagNode(tags.Get(), part));
@@ -248,6 +255,10 @@ public class SceneView extends VeloxViewBase {
 		}
 
 		private void addEntityChilds(LinkedList<Object> childs, Entity entity) {
+			addDependencies(childs, entity);
+			addSettings(childs, entity);
+			childs.add(new TagListNode(entity));
+			
 			// add entity parts
 			Iterator<Part> partIter = entity.PartIterator();
 			while( partIter.hasNext() ) {
@@ -256,31 +267,33 @@ public class SceneView extends VeloxViewBase {
 		}
 
 		private void addPartChilds(LinkedList<Object> childs, Part part) {
-			Iterator<VPartDependency> depIter = part.dependencyIterator();
-			while( depIter.hasNext() ) {
-				VPartDependency dep = depIter.next();
-				
-				String descr = "" + dep.GetLocation().toString().charAt(0);
-				
-				if( dep.GetCondition() == VPartDependency.Condition.Optional )
-					descr += "? ";
-				else
-					descr += " ";
-				
-				descr += dep.GetTypeInfo().GetName();
-				
-				if( dep.GetId().length() > 0 )
-					descr += "(id:" + dep.GetId() + ")";
-				
-				childs.add(descr);
-			}				
+//			Iterator<VPartDependency> depIter = part.dependencyIterator();
+//			while( depIter.hasNext() ) {
+//				VPartDependency dep = depIter.next();
+//				
+//				String descr = "" + dep.GetLocation().toString().charAt(0);
+//				
+//				if( dep.GetCondition() == VPartDependency.Condition.Optional )
+//					descr += "? ";
+//				else
+//					descr += " ";
+//				
+//				descr += dep.GetTypeInfo().GetName();
+//				
+//				if( dep.GetId().length() > 0 )
+//					descr += "(id:" + dep.GetId() + ")";
+//				
+//				childs.add(descr);
+//			}				
+//			
+//			// add all settings				
+//			Iterator<Setting> settingIter = part.settingsIterator();
+//			while( settingIter.hasNext() ) {
+//				childs.add(settingIter.next());
+//			}
 			
-			// add all settings				
-			Iterator<Setting> settingIter = part.settingsIterator();
-			while( settingIter.hasNext() ) {
-				childs.add(settingIter.next());
-			}
-			
+			addDependencies(childs, part);
+			addSettings(childs, part);
 			childs.add(new TagListNode(part));
 		}
 		
@@ -307,11 +320,11 @@ public class SceneView extends VeloxViewBase {
 	}
 	
 	private static class TagListNode {
-		public TagListNode(Part part2) {
+		public TagListNode(Node part2) {
 			part = part2;
 		}
 
-		public final Part part;
+		private final Node part;
 
 		@Override public String toString() {
 			return "Tags";
@@ -319,13 +332,13 @@ public class SceneView extends VeloxViewBase {
 	}
 	
 	private static class TagNode {
-		public TagNode(VTag tag, Part part) {
+		public TagNode(VTag tag, Node part) {
 			this.tag = tag;
 			this.part = part;
 		}
 		
 		private final VTag tag;
-		private final Part part;
+		private final Node part;
 		
 		@Override public String toString() {
 			return tag.GetName();

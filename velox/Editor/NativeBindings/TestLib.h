@@ -64,14 +64,14 @@ v3d::entity::VEntity* CreateEntity();
 bool CanBeUpdated(v3d::entity::VNode* in_pPart);
 void UpdatePart(float in_fSeconds, v3d::entity::VNode* in_pPart);
 
-v3d::math::VRBTransform GetTransform(v3d::entity::VEntity* in_pEntity);
-void SetTransform(v3d::entity::VEntity* in_pEntity, const v3d::math::VRBTransform& in_Transform);
+v3d::math::VRBTransform GetTransform(v3d::entity::VNode* in_pEntity);
+void SetTransform(v3d::entity::VNode* in_pEntity, const v3d::math::VRBTransform& in_Transform);
 
-v3d::scene::IVShooting* FindShooting(v3d::entity::VEntity* in_pEntity);
+v3d::scene::IVShooting* FindShooting(v3d::entity::VNode* in_pEntity);
 
 v3d::input::IVInputManager* CreateInputManager(int hwnd);
 void TellInputManager(
-	v3d::entity::VEntity* pEntity,
+	v3d::entity::VNode* pEntity,
 	v3d::input::IVInputManager* pInputManager);
 
 void DumpDir(v3d::vfs::IVDirectory& dir, const std::string& prefix);

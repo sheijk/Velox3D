@@ -336,8 +336,10 @@ std::string VNode::ShortInfo() const
 
 void VNode::SetupProperties(messaging::VMessageInterpreter& interpreter)
 {
-	// Nothing to do here. Override in classe which have properties, add
-	// the classes' properties and call super.SetupProperties
+	// Override in classes which have properties, add the classes' properties 
+	// and call super.SetupProperties
+
+	interpreter.AddAccessorOption<VNode, std::string>("name", &VNode::GetName, &VNode::SetName);
 }
 
 messaging::VMessageInterpreter* VNode::GetMessageInterpreterForClass()
@@ -549,7 +551,8 @@ void VNode::Load(const xml::IVXMLElement& in_Node)
 		xml::IVXMLElement* element = childNode->ToElement();
 		if( element != NULL &&
 			(element->GetName() == "part" ||
-			element->GetName() == "entity") )
+			element->GetName() == "entity" ||
+			element->GetName() == "node") )
 		{
 			std::string type;
 			
@@ -571,9 +574,82 @@ void VNode::Load(const xml::IVXMLElement& in_Node)
 	}
 }
 
-void VNode::Save(xml::IVXMLElement& in_Element)
+namespace {
+	typedef std::map<std::string, std::string> SettingsMap;
+
+	SettingsMap CollectSettings(VNode& part)
+	{
+		messaging::VMessage request;
+		request.AddProperty("type", "getSettings");
+
+		messaging::VMessage reply;
+		part.Send(request, &reply);
+
+		std::map<std::string, std::string> settings;
+
+		VRangeIterator<const std::string> property = reply.PropertyIterator();
+		while( property.HasNext() )
+		{
+			const std::string name = *property;
+			const std::string value = reply.GetAs<std::string>(name);
+
+			settings.insert( std::make_pair(name, value) );
+
+			++property;
+		}
+
+		return settings;
+	}
+}
+
+void VNode::Save(xml::IVXMLElement& node)
 {
-	V3D_THROW( VException, "not implemented, yet" );
+	node.SetName("node");
+
+	node.AddAttribute( "type", utils::VStringValue(GetTypeInfo().GetName()) );
+
+	SettingsMap settings = CollectSettings(*this);
+
+	const SettingsMap::iterator settingsEnd = settings.end();
+	for(SettingsMap::iterator setting = settings.begin();
+		setting != settingsEnd;
+		++setting)
+	{
+		const std::string name = setting->first;
+		const std::string value = setting->second;
+
+		node.AddAttribute(name.c_str(), utils::VStringValue(value));
+	}
+
+	std::string tagList;
+	const vuint tagCount = m_Tags.size();
+	if( tagCount > 0 )
+	{
+		for(vuint tagNum = 0; tagNum < tagCount; ++tagNum)
+		{
+			const tags::VTag* tag = m_Tags[tagNum];
+
+			if( tag != NULL )
+			{
+				const std::string tagName = tag->GetName();
+				if( tagNum > 0 )
+					tagList += " ";
+
+				tagList += tagName;
+			}
+		}
+
+		node.AddAttribute("tags", utils::VStringValue(tagList));
+	}
+
+	VRangeIterator<VNode> child = ChildIterator();
+	while( child.HasNext() )
+	{
+		xml::IVXMLElement* element = node.AddElement("part");
+		child->Save(*element);
+
+		++child;
+	}
 }
 
 //-----------------------------------------------------------------------------

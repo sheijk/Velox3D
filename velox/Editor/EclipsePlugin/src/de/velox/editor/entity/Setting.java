@@ -14,11 +14,11 @@ public class Setting {
 	private final String name;
 	private String value;
 	
-	private final Part part;
+	private final Node part;
 	
 //	private LinkedList<Setting> childs = new LinkedList<Setting>();
 	
-	public Setting(Part part, String name, String value) {
+	public Setting(Node part, String name, String value) {
 		this.part = part;
 		this.name = name;
 		this.value = value;

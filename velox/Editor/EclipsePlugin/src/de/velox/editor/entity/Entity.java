@@ -15,7 +15,7 @@ import java.util.LinkedList;
 
 import de.velox.*;
 
-public class Entity implements XMLSerializable {
+public class Entity extends Node {
 	private final static String NODE_TYPE_ENTITY = "entity";
 	private final static String NODE_TYPE_PART = "part";
 	private final static String ENTITY_NAME_ATTRIB = "name";
@@ -26,15 +26,13 @@ public class Entity implements XMLSerializable {
 	
 	private Entity parent = null;
 	
-	private VEntityPtr impl = null;	
-	
 	public Entity(String name) {
-		impl = new VEntityPtr(v3d.CreateEntity());
+		super( new VNodePtr(v3d.CreateEntity()) );
 		this.name = name;
 	}
 	
-	public Entity(VEntityPtr entityImpl) {
-		impl = entityImpl;
+	public Entity(VNodePtr entityImpl) {
+		super( entityImpl );
 
 		if( impl != null && impl.Get() != null ) {
 			name = impl.GetName();
@@ -48,7 +46,7 @@ public class Entity implements XMLSerializable {
 				IVPart asPart = node.ToPart();
 				
 				if( asEntity != null ) {
-					AddAdapter( new Entity( new VEntityPtr(asEntity) ) );					
+					AddAdapter( new Entity( new VNodePtr(asEntity) ) );					
 				}
 				else if( asPart != null ) {
 					AddAdapter( new Part(node) );
@@ -85,7 +83,7 @@ public class Entity implements XMLSerializable {
 	}
 	
 	public Entity(IVXMLElement xml) {
-		this( v3d.GetEntitySerializationService().ParseScene(xml) );
+		this( v3d.GetEntitySerializationService().ParseScene(xml).ToNodePtr() );
 	}
 	
 	/** 
@@ -149,6 +147,8 @@ public class Entity implements XMLSerializable {
 				for(Entity entity : entities) {
 					entity.synchronize();
 				}
+				
+				updateSettingsFromPart();
 //			}
 //		});
 	}
@@ -177,7 +177,7 @@ public class Entity implements XMLSerializable {
 		AddAdapter(newEntity);
 
 		if( valid(impl) )
-			impl.Add( newEntity.impl.ToNodePtr() );
+			impl.Add( newEntity.impl );
 		else
 			System.err.println("Tried to add invalid entity: " + newEntity.toString());
 	}
@@ -189,7 +189,7 @@ public class Entity implements XMLSerializable {
 			Deactivate();
 		
 		if( valid(impl) )
-			impl.Remove( entityToBeRemoved.impl.ToNodePtr() );
+			impl.Remove( entityToBeRemoved.impl );
 		
 		entityToBeRemoved.parent = null;
 		
@@ -239,7 +239,7 @@ public class Entity implements XMLSerializable {
 		AddAdapter(newPart);
 	}
 	
-	protected void onNewPart(Part newPart) {}
+	protected void onNewPart(Node newPart) {}
 	
 	public Iterator<Entity> EntityIterator() {
 		return entities.iterator();
@@ -249,13 +249,13 @@ public class Entity implements XMLSerializable {
 		return parts.iterator();
 	}
 	
-	protected static boolean valid(VEntityPtr ptr) {
-		return ptr != null && ptr.Get() != null;
-	}
-	
-	protected static boolean valid(VNodePtr ptr) {
-		return ptr != null && ptr.Get() != null;
-	}
+//	protected static boolean valid(VEntityPtr ptr) {
+//		return ptr != null && ptr.Get() != null;
+//	}
+//	
+//	protected static boolean valid(VNodePtr ptr) {
+//		return ptr != null && ptr.Get() != null;
+//	}
 	
 	public String toString() {
 		String description = "(E) " + GetName();
@@ -271,13 +271,6 @@ public class Entity implements XMLSerializable {
 		{
 			impl.Save(outElement);
 		}
-	}
-	
-	public VEntity impl() {
-		if( impl != null )
-			return impl.Get();
-		else
-			return null;
 	}
 }
 

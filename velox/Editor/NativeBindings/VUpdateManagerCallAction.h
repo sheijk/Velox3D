@@ -27,7 +27,7 @@ public:
 	virtual void UpdateFrame(vfloat32 in_fFrameDuration);
 	virtual void Shutdown();
 
-	void SetEntity(v3d::entity::VEntity* in_pEntity);
+	void SetEntity(v3d::entity::VNode* in_pEntity);
 
 	vfloat32 GetUpdateSpeedFactor() const { return m_fUpdateSpeedFactor; }
 	void SetUpdateSpeedFactor(const vfloat32& in_Value) { m_fUpdateSpeedFactor = in_Value; }
