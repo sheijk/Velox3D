@@ -28,14 +28,14 @@ public class Entity extends Node {
 	
 	public Entity(String name) {
 		super( new VNodePtr(v3d.CreateEntity()) );
-		this.name = name;
+		SetName( name );
 	}
 	
 	public Entity(VNodePtr entityImpl) {
 		super( entityImpl );
 
 		if( impl != null && impl.Get() != null ) {
-			name = impl.GetName();
+			SetName( impl.GetName() );
 			
 			VNodePtrIterator nodeIter = entityImpl.ChildPtrIterator();
 			while( nodeIter.HasNext() )
@@ -127,6 +127,10 @@ public class Entity extends Node {
 	
 	public void SetName(String out_name) {
 		name = out_name;
+		
+		if( valid(impl) ) {
+			impl.SetName( out_name );
+		}
 	}
 	
 	public boolean IsActive() {

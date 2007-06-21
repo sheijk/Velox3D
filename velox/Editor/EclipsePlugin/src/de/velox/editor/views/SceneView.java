@@ -155,8 +155,8 @@ public class SceneView extends VeloxViewBase {
 					childs.add(partIter.next());
 				}
 				
-				addDependencies(childs, entity);
-				addSettings(childs, entity);
+//				addDependencies(childs, entity);
+//				addSettings(childs, entity);
 			}
 			// if the object is a part, add it's settings and values
 			else if( parent instanceof Part ) {
