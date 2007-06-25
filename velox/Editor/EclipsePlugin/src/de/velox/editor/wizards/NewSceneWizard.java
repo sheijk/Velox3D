@@ -143,9 +143,9 @@ public class NewSceneWizard extends Wizard implements INewWizard {
 			final String contents =
 				"<entity name=\"" + sceneName + "\">\n" + 
 				"	<part type=\"v3d::scene::VNaiveSceneManagerPart\"/>\n" + 
-				"	<part type=\"shooting\"/>\n" + 
 				"	<part type=\"v3d::entity::VUpdateManagerPart\"/>\n" + 
 				"	<part type=\"v3d::scene::VNaiveLightManager\"/>\n" +
+				"	<part type=\"v3d::scene::VSimpleShooting\"/>\n" + 
 				"	<part type=\"v3d::utils::VInputPart\" tags=\"\"/>\n" + 
 				"	<entity name=\"editorCam\">\n" + 
 				"		<part type=\"v3d::entity::VRigidBodyPart\" pos=\"(0,0,5)\" updir=\"(0,1,0)\" viewdir=\"(0,0,-1)\" tags=\"\"/>\n" + 

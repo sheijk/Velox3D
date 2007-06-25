@@ -4,48 +4,41 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
-#ifndef V3D_VCUBEMAPTEXTURE_2005_11_30_H
-#define V3D_VCUBEMAPTEXTURE_2005_11_30_H
+#ifndef V3D_VCUBEMAPSHOOTING_2007_06_23_H
+#define V3D_VCUBEMAPSHOOTING_2007_06_23_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 
-#include <V3d/Graphics/IVTexture.h>
-#include <V3d/Image/VImage.h>
+#include <V3d/Scene/IVShooting.h>
 
-#include <V3d/OpenGL.h>
 //-----------------------------------------------------------------------------
-namespace v3d { namespace graphics {
+namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
 
 /**
+ * Will render to an (axis aligned) cube map
+ *
+ * @author sheijk
  */
-class VCubeMapTexture : public IVTexture
+class VCubemapShooting : public IVShooting
 {
 public:
-	VCubeMapTexture(
-		const image::VImage& in_Front,
-		const image::VImage& in_Back,
-		const image::VImage& in_Left,
-		const image::VImage& in_Right,
-		const image::VImage& in_Top,
-		const image::VImage& in_Bottom);
+	VCubemapShooting();
+	virtual ~VCubemapShooting();
 
-	virtual ~VCubeMapTexture();
+	virtual void UpdateAndCull();
+	virtual void Render();
+	virtual vbool IsActive() const;
 
-	virtual void Bind(vuint in_nTextureUnit = 0);
-	virtual void Unbind();
-
+	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 private:
-	vuint m_nTextureUnit;
-	GLuint m_TextureId[6];
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::graphics
+}} // namespace v3d::scene
 
-V3D_TYPEINFO_WITHPARENT(v3d::graphics::VCubeMapTexture, v3d::graphics::IVTexture);
+V3D_TYPEINFO_WITHPARENT(v3d::scene::VCubemapShooting, v3d::scene::IVShooting);
 //-----------------------------------------------------------------------------
-#endif // V3D_VCUBEMAPTEXTURE_2005_11_30_H
+#endif // V3D_VCUBEMAPSHOOTING_2007_06_23_H
 

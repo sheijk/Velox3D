@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<effect version="1.0">
+	<shaderPath>
+	
+		<renderPass> 
+			<state name="vertex-program">
+				<iparam name="source">
+/*uniform vec2 texScale;*/
+
+varying vec2 texCoord;
+varying vec3 normal;
+varying vec3 reflected;
+
+void main(void) {
+	gl_Position = ftransform();
+	normal = gl_NormalMatrix * gl_Normal;
+	vec3 view = vec3(0.0, 0.0, 1.0);
+	reflected = reflect( normal, view );
+/*	texCoord = gl_MultiTexCoord0.xy * texScale;*/
+}
+				</iparam>
+			</state>
+			<state name="fragment-program">
+				<iparam name="source">
+/*uniform sampler2D texture;*/
+uniform samplerCube cubemap;
+
+varying vec2 texCoord;
+varying vec3 normal;
+varying vec3 reflected;
+
+void main(void) {
+	gl_FragColor = textureCube( cubemap, reflected ) + vec4(0.1);
+/*	gl_FragColor = vec4( normalize(normal), 1.0 ); */
+/*	gl_FragColor = texture2D(texture, texCoord) + vec4(0.3);*/
+}
+				</iparam>
+			</state>
+		</renderPass>
+		
+	</shaderPath>
+</effect>

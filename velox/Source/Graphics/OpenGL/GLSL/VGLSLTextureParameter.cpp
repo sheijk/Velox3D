@@ -78,7 +78,7 @@ void VGLSLTextureParameter::BindTexture()
 			m_pTexture = resource::GetMutableResourceData<IVTexture>(newTextureResource.c_str());
 			m_pstrTextureResource.Release();
 		}
-		catch(VException&)
+		catch(VException& e)
 		{}
 	}
 

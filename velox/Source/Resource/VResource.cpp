@@ -289,6 +289,8 @@ VResourceData* VResource::FindInstanceOf(VTypeInfo in_Type)
 
 VResourceData* VResource::GetData(VTypeInfo in_Type)
 {
+	std::vector<std::string> errorMessages;
+
 	// if such data exists, return it
 	VResourceData* pData = FindInstanceOf(in_Type);
 
@@ -312,10 +314,14 @@ VResourceData* VResource::GetData(VTypeInfo in_Type)
 				// try to get data again
 				pData = FindInstanceOf(in_Type);
 			}
-			// if the resource type tried to get data which does not exists
-			// just continue the generation process
-			catch(VDataNotFoundException&)
-			{}
+			catch(const VException& e)
+			{
+				errorMessages.push_back( e.ToString().AsCString() );
+			}
+			//// if the resource type tried to get data which does not exists
+			//// just continue the generation process
+			//catch(VDataNotFoundException&)
+			//{}
 
 			// if data could be generated, break
 			if( pData != 0 )
@@ -332,8 +338,17 @@ VResourceData* VResource::GetData(VTypeInfo in_Type)
 	{
 		std::stringstream message;
 		message << "Could not find data of type '" << in_Type.GetName();
-		//message << typeid(VTypedResourceData<DataType>).name() << "'";
 		message << "' in resource '" << GetQualifiedName() << "'";
+
+		if( errorMessages.size() > 0 )
+		{
+			message << ", failure reasons:\n";
+
+			for(vuint num = 0; num < errorMessages.size(); ++num)
+			{
+				message << "\t" << errorMessages[num] << "\n";
+			}
+		}
 
 		V3D_THROW(VDataNotFoundException, message.str().c_str());
 	}

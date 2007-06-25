@@ -4,33 +4,46 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
-#ifndef V3D_IVSHOOTING_2005_05_20_H
-#define V3D_IVSHOOTING_2005_05_20_H
+#include <V3d/Scene/Shootings/VCubemapShooting.h>
 //-----------------------------------------------------------------------------
-#include <V3d/Core/VCoreLib.h>
-#include <V3d/Entity/IVPart.h>
-#include <V3d/Graphics/Misc/IVCamera.h>
+
+#include <V3d/Entity/VGenericPartParser.h>
+//-----------------------------------------------------------------------------
+#include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indenting
+using namespace v3d; //  auto indent
 
-class IVShooting : public entity::IVPart
+/**
+ * standard c'tor
+ */
+VCubemapShooting::VCubemapShooting()
 {
-public:
-	virtual ~IVShooting() {}
+}
 
-	virtual void UpdateAndCull() = 0;
-	virtual void Render() = 0;
+/**
+ * d'tor
+ */
+VCubemapShooting::~VCubemapShooting()
+{
+}
 
-	virtual vbool IsActive() const = 0;
-};
+void VCubemapShooting::UpdateAndCull()
+{
+}
 
+void VCubemapShooting::Render()
+{
+}
+
+vbool VCubemapShooting::IsActive() const
+{
+	V3D_THROW(VException, "ooops, this is called?");
+}
+
+V3D_REGISTER_PART_PARSER(VCubemapShooting);
 //-----------------------------------------------------------------------------
 }} // namespace v3d::scene
-
-V3D_TYPEINFO_WITHPARENT(v3d::scene::IVShooting, v3d::entity::IVPart);
 //-----------------------------------------------------------------------------
-#endif // V3D_IVSHOOTING_2005_05_20_H
 

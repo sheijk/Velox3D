@@ -431,6 +431,10 @@
 						Name="Shootings"
 						>
 						<File
+							RelativePath="..\..\API\V3d\Scene\Shootings\VCubemapShooting.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Scene\Shootings\VMirrorShooting.h"
 							>
 						</File>
@@ -2295,6 +2299,10 @@
 				<Filter
 					Name="Shootings"
 					>
+					<File
+						RelativePath="..\..\Source\Scene\Shootings\VCubemapShooting.cpp"
+						>
+					</File>
 					<File
 						RelativePath="..\..\Source\Scene\Shootings\VMirrorShooting.cpp"
 						>

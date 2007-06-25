@@ -35,6 +35,9 @@ class VTextureStateResType : public resource::IVResourceType
 
 	GLenum GetTextureTarget(VTypeInfo in_Type) const;
 
+	vbool Create2DTexture(resource::VResource* in_pResource, const VTypeInfo& in_Type);
+	vbool CreateCubeTexture(resource::VResource* in_pResource, const VTypeInfo& in_Type);
+
 public:
 	VTextureStateResType();
 	virtual ~VTextureStateResType();

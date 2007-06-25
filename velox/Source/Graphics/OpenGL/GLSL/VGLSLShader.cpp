@@ -45,6 +45,12 @@ namespace {
 			return IVParameter::Unknown;
 		}
 	}
+
+	vbool IsTextureSampler(GLenum e)
+	{
+		return e == GL_SAMPLER_2D || 
+			e == GL_SAMPLER_CUBE;
+	}
 }
 
 VGLSLShader::VGLSLShader(
@@ -223,7 +229,7 @@ IVParameter* VGLSLShader::GetActiveUniformParameter(vuint in_nIndex)
 	GLchar name[100];
 	glGetActiveUniformARB(m_hProgram, in_nIndex, 100, &length, &size, &type, name);
 
-	if( type == GL_SAMPLER_2D )
+	if( IsTextureSampler(type) )
 	{
 		VGLSLTextureParameter* pTexParam = new VGLSLTextureParameter(
 			m_hProgram, name, m_nTextureCount);

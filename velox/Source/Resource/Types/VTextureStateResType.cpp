@@ -13,6 +13,8 @@
 #include <V3d/Graphics/Materials/VModeTypeInfo.h>
 #include "../../Graphics/OpenGL/VTextureState.h"
 
+#include "../../Graphics/OpenGL/Textures/VCubeMapTexture.h"
+
 #include <V3d/OpenGL.h>
 
 //-----------------------------------------------------------------------------
@@ -234,6 +236,7 @@ VTextureStateResType::VTextureStateResType()
 {
 	m_TextureTargets[GetTypeInfo<VTexture2D>()] = GL_TEXTURE_2D;
 	m_TextureTargets[GetTypeInfo<IVTexture>()] = GL_TEXTURE_2D;
+	m_TextureTargets[GetTypeInfo<VCubeMapTexture>()] = GL_TEXTURE_CUBE_MAP;
 
 	//m_TextureTargets[VTypeId::Create<VCubemapPosX>()] = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 	//m_TextureTargets[VTypeId::Create<VCubemapNegX>()] = GL_TEXTURE_CUBE_MAP_NEGATIVE_X;
@@ -275,56 +278,118 @@ VRangeIterator<VTypeInfo> VTextureStateResType::ManagedTypes()
 	return CreatedTypes();
 }
 
+vbool VTextureStateResType::Create2DTexture(VResource* in_pResource, const VTypeInfo& in_Type)
+{
+	VResourceDataPtr<const VImage> pImage;
+
+	// get VImage for resource
+	try
+	{
+		pImage = in_pResource->GetData<VImage>();
+	}
+	catch(resource::VDataNotFoundException&)
+	{
+		return false;
+	}
+
+	// try to get texture options
+	VTextureOptions options;
+
+	try
+	{
+		VResourceDataPtr<const VTextureOptions> pOptions = 
+			in_pResource->GetData<VTextureOptions>();
+
+		options = *pOptions;
+	}
+	catch(resource::VDataNotFoundException&)
+	{
+	}
+
+	// determine texture target
+	GLenum target = GetTextureTarget(in_Type);
+
+	// create opengl texture state from it
+	in_pResource->AddData<VTexture2D>(CreateTexture2D(*pImage, options, target));
+
+	return true;
+}
+
+namespace {
+	VResource* ChildOrException(VResource* in_pResource, const std::string& name) 
+	{
+		VResource* res = in_pResource->GetSubResource(name);
+
+		if( res == 0 )
+		{
+			V3D_THROWMSG( VResourceException, 
+				"Could not find child '" << name << "' of resource '"
+				<< in_pResource->GetQualifiedName() << "'" );
+		}
+		else
+		{
+			return res;
+		}
+	}
+}
+
+vbool VTextureStateResType::CreateCubeTexture(VResource* in_pResource, const VTypeInfo& in_Type)
+{
+	VResourceDataPtr<const VImage> left = ChildOrException(in_pResource, "left.jpg")->GetData<VImage>();
+	VResourceDataPtr<const VImage> right = ChildOrException(in_pResource, "right.jpg")->GetData<VImage>();
+	VResourceDataPtr<const VImage> top = ChildOrException(in_pResource, "top.jpg")->GetData<VImage>();
+	VResourceDataPtr<const VImage> bottom = ChildOrException(in_pResource, "bottom.jpg")->GetData<VImage>();
+	VResourceDataPtr<const VImage> front = ChildOrException(in_pResource, "front.jpg")->GetData<VImage>();
+	VResourceDataPtr<const VImage> back = ChildOrException(in_pResource, "back.jpg")->GetData<VImage>();
+
+	std::auto_ptr<VCubeMapTexture> cubemap( new VCubeMapTexture(
+		*front, *back, *left, *right, *top, *bottom) );
+
+	in_pResource->AddData<VCubeMapTexture>( cubemap.release() );
+
+	return true;
+}
+
 vbool VTextureStateResType::Generate(
 	resource::VResource* in_pResource,
 	VTypeInfo in_Type)
 {
-	//V3D_ASSERT(std::find(m_ManagedTypes.begin(), m_ManagedTypes.end(), in_Type) 
-	//	!= m_ManagedTypes.end());
-
-//	V3D_ASSERT(resource::VTypeId::Create<VTextureState2D>() == in_Type);
-
 	// if texture state does not exist, yet
-
 	if( ! in_pResource->ContainsData(in_Type) )
-	//if( ! in_pResource->ContainsData<VTextureState>() )
 	{
-		VResourceDataPtr<const VImage> pImage;
-
-		// get VImage for resource
-		try
+		if( in_Type == GetTypeInfo<VTexture2D>() )
 		{
-			pImage = in_pResource->GetData<VImage>();
+			return Create2DTexture( in_pResource, in_Type );
 		}
-		catch(resource::VDataNotFoundException&)
+		else if( in_Type == GetTypeInfo<VCubeMapTexture>() )
+		{
+			return CreateCubeTexture( in_pResource, in_Type );
+		}
+		else if( in_Type == GetTypeInfo<IVTexture>() )
+		{
+			vbool createdTexture = false;
+			
+			if( ! createdTexture )
+			{
+				createdTexture = Create2DTexture( in_pResource, in_Type );
+			}
+
+			if( ! createdTexture )
+			{
+				createdTexture = CreateCubeTexture( in_pResource, in_Type );
+			}
+
+			return createdTexture;
+		}
+		else
 		{
 			return false;
 		}
-
-		// try to get texture options
-		VTextureOptions options;
-
-		try
-		{
-			VResourceDataPtr<const VTextureOptions> pOptions = 
-				in_pResource->GetData<VTextureOptions>();
-
-			options = *pOptions;
-		}
-		catch(resource::VDataNotFoundException&)
-		{
-		}
-
-		// determine texture target
-		GLenum target = GetTextureTarget(in_Type);
-
-		// create opengl texture state from it
-		in_pResource->AddData<VTexture2D>(CreateTexture2D(*pImage, options, target));
-
-		//in_pResource->DumpInfo(":::");
 	}
-
-	return true;
+	else
+	{
+		return true;
+	}
 }
 
 vbool VTextureStateResType::AllowMutableAccess(
