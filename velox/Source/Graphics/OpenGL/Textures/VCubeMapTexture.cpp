@@ -7,7 +7,7 @@
 
 #include "VCubeMapTexture.h"
 //-----------------------------------------------------------------------------
-
+#include <V3d/Graphics/GraphicsExceptions.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -17,7 +17,7 @@ using namespace v3d; // anti auto indent
 using namespace v3d::image;
 
 namespace {
-	GLint CreateTexture(const VImage& image, GLenum in_TextureTarget)
+	void CreateTexture(const VImage& image, GLenum in_TextureTarget)
 	{
 		V3D_ASSERT(image.GetWidth() > 0);
 		V3D_ASSERT(image.GetHeight() > 0);
@@ -25,30 +25,16 @@ namespace {
 
 		const vbyte* temp = image.GetPixelData();
 
-		GLuint id;
-		glGenTextures(1, &id);
-		glBindTexture(in_TextureTarget, id);
+		//GLuint id;
+		//glGenTextures(1, &id);
+		//glBindTexture(in_TextureTarget, id);
 
 		glPixelStorei  (GL_UNPACK_ALIGNMENT, 1);
-		glTexParameteri(
-			in_TextureTarget,
-			GL_TEXTURE_WRAP_S,
-			GL_CLAMP_TO_EDGE
-			);
-		glTexParameteri(
-			in_TextureTarget,
-			GL_TEXTURE_WRAP_T,
-			GL_CLAMP_TO_EDGE
-			);
-		glTexParameteri(
-			in_TextureTarget,
-			GL_TEXTURE_MIN_FILTER,
-			GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(
-			in_TextureTarget,
-			GL_TEXTURE_MAG_FILTER,
-			GL_LINEAR_MIPMAP_LINEAR);
-		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glTexParameteri( in_TextureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+		glTexParameteri( in_TextureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+		glTexParameteri( in_TextureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri( in_TextureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
 
 		gluBuild2DMipmaps(
 			in_TextureTarget, 
@@ -59,8 +45,6 @@ namespace {
 			GL_UNSIGNED_BYTE, 
 			image.GetPixelData()
 			);
-
-		return id;
 	}
 
 	const vuint FRONT_NUM = 0;
@@ -71,6 +55,29 @@ namespace {
 	const vuint BOTTOM_NUM = 5;
 }
 
+namespace {
+	vuint SquareSize(const VImage& image)
+	{
+		if( image.GetWidth() == image.GetHeight() )
+		{
+			return image.GetWidth();
+		}
+		else
+		{
+			return -1;
+		}
+	}
+}
+
+void VCubeMapTexture::ExceptionOnUnmatchingSize(const VImage& image)
+{
+	if( SquareSize(image) != m_nSize || m_nSize <= 0 )
+	{
+		V3D_THROW(VGraphicException, 
+			"all images of cube map must be square and the same size > 0" );
+	}
+}
+
 VCubeMapTexture::VCubeMapTexture(
 	const VImage& in_Front,
 	const VImage& in_Back,
@@ -79,32 +86,46 @@ VCubeMapTexture::VCubeMapTexture(
 	const VImage& in_Top,
 	const VImage& in_Bottom)
 {
-	m_TextureId[FRONT_NUM] = CreateTexture(in_Front, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
-	m_TextureId[BACK_NUM] = CreateTexture(in_Back, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
-	m_TextureId[LEFT_NUM] = CreateTexture(in_Left, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
-	m_TextureId[RIGHT_NUM] = CreateTexture(in_Right, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-	m_TextureId[TOP_NUM] = CreateTexture(in_Top, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
-	m_TextureId[BOTTOM_NUM] = CreateTexture(in_Bottom, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+	m_nSize = SquareSize( in_Front );
+	ExceptionOnUnmatchingSize( in_Back );
+	ExceptionOnUnmatchingSize( in_Left );
+	ExceptionOnUnmatchingSize( in_Right );
+	ExceptionOnUnmatchingSize( in_Top );
+	ExceptionOnUnmatchingSize( in_Bottom );
+
+	glGenTextures( 1, &m_TextureId );
+	glBindTexture( GL_TEXTURE_CUBE_MAP, m_TextureId );
+
+	CreateTexture(in_Front, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
+	CreateTexture(in_Back, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
+	CreateTexture(in_Left, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
+	CreateTexture(in_Right, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+	CreateTexture(in_Top, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
+	CreateTexture(in_Bottom, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+
+	glBindTexture( GL_TEXTURE_CUBE_MAP, 0 );
 
 	m_nTextureUnit = 0;
 }
 
 VCubeMapTexture::~VCubeMapTexture()
 {
-	glDeleteTextures(6, m_TextureId);
+	glDeleteTextures( 1, &m_TextureId );
+	//glDeleteTextures(6, m_TextureId);
 }
 
 void VCubeMapTexture::Bind(vuint in_nTextureUnit)
 {
 	//TODO: textur matrix aus kamera (view matrix) position berechnen
 	m_nTextureUnit = in_nTextureUnit;
-//	glActiveTexture(GL_TEXTURE0 + m_nTextureUnit);
-	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, m_TextureId[FRONT_NUM]);
-	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, m_TextureId[BACK_NUM]);
-	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X, m_TextureId[RIGHT_NUM]);
-	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, m_TextureId[LEFT_NUM]);
-	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, m_TextureId[TOP_NUM]);
-	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, m_TextureId[BOTTOM_NUM]);
+	glActiveTexture(GL_TEXTURE0 + m_nTextureUnit);
+	glBindTexture( GL_TEXTURE_CUBE_MAP, m_TextureId );
+	//glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, m_TextureId[FRONT_NUM]);
+	//glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, m_TextureId[BACK_NUM]);
+	//glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X, m_TextureId[RIGHT_NUM]);
+	//glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, m_TextureId[LEFT_NUM]);
+	//glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, m_TextureId[TOP_NUM]);
+	//glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, m_TextureId[BOTTOM_NUM]);
 
 	const GLenum texGenMode = GL_REFLECTION_MAP;
 	const GLenum texPlane = GL_EYE_PLANE;
@@ -151,6 +172,16 @@ void VCubeMapTexture::Unbind()
 	glDisable(GL_TEXTURE_GEN_Q);
 
 	glDisable(GL_TEXTURE_CUBE_MAP);
+}
+
+vuint VCubeMapTexture::GetSize() const
+{
+	return m_nSize;
+}
+
+GLuint VCubeMapTexture::GetTextureId() const
+{
+	return m_TextureId;
 }
 
 //-----------------------------------------------------------------------------

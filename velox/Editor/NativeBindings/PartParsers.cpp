@@ -8,34 +8,43 @@
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
 namespace v3d { namespace scene {
-		extern void* AssureVPlaneMeshPartExists();
-		extern void* AssureVArrowMeshPartExists();
-		extern void* AssureVBoxMeshPartExists();
-		extern void* AssureVCoordSysDisplayPartExists();
-		extern void* AssureVFrustumVisPartExists();
-		extern void* AssureVDefaultRenderStepPartExists();
 		extern void* AssureVLightPartExists();
-		extern void* AssureVMeshPartExists();
 		extern void* AssureVNaiveLightManagerExists();
-		extern void* AssureVMirrorShootingExists();
-		extern void* AssureVModelPartExists();
+
 		extern void* AssureVNaiveSceneManagerPartExists();
-		extern void* AssureVOffscreenShootingExists();
-		extern void* AssureVShadowMapShootingExists();
-		extern void* AssureVOrientationGridPartExists();
-		extern void* AssureVPlaneMeshPartExists();
+
 		extern void* AssureVPostProcesssingRenderStepPartExists();
 		extern void* AssureVPostProcesssingRenderStepPart2Exists();
 		extern void* AssureVPostProcesssingRenderStepPart3Exists();
 		extern void* AssureVPostProcesssingRenderStepPart4Exists();
+
 		extern void* AssureVProjectTextureRenderStepPartExists();
 		extern void* AssureVShadowMapRenderStepPartExists();
+		extern void* AssureVDefaultRenderStepPartExists();
+
 		extern void* AssureVSimpleShootingExists();
+		extern void* AssureVMirrorShootingExists();
+		extern void* AssureVOffscreenShootingExists();
+		extern void* AssureVShadowMapShootingExists();
+		extern void* AssureVCubemapShootingExists();
+
 		extern void* AssureVSkyboxPartExists();
-		extern void* AssureVSphereMeshPartExists();
 		extern void* AssureVTerrainPartExists();
+
+		extern void* AssureVCoordSysDisplayPartExists();
+		extern void* AssureVOrientationGridPartExists();
+		extern void* AssureVFrustumVisPartExists();
+
+		extern void* AssureVSphereMeshPartExists();
 		extern void* AssureVTorusMeshPartExists();
 		extern void* AssureVCylinderMeshPartExists();
+		extern void* AssureVPlaneMeshPartExists();
+		extern void* AssureVArrowMeshPartExists();
+		extern void* AssureVBoxMeshPartExists();
+
+		extern void* AssureVMeshPartExists();
+		extern void* AssureVModelPartExists();
+
 		extern void* AssureVGCMTerrainPartExists();
 		extern void* AssureVGCMDummyHeightmapPartExists();
 		extern void* AssureVGCMRawHeightmapPartExists();
@@ -111,6 +120,7 @@ void foo()
 	v3d::scene::AssureVGCMDummyHeightmapPartExists();
 	v3d::scene::AssureVGCMRawHeightmapPartExists();
 	v3d::scene::AssureVGCMStretchedHeightmapPartExists();
+	v3d::scene::AssureVCubemapShootingExists();
 
 	v3d::physics::AssureVBodyPartExists();
 	v3d::physics::AssureVBoundingBoxVolumePartExists();

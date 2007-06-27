@@ -18,6 +18,7 @@
 	</node>
 	<node type="v3d::entity::VEntity" name="ring">
 		<node type="v3d::entity::VRigidBodyPart" pos="(-1.2532,7.67574,2.9205)" updir="(-0.190195,0.974247,-0.121113)" viewdir="(-0.961888,-0.160236,0.221574)"/>
-		<node type="v3d::scene::VTorusMeshPart" bottom-radius="1" color="(1,1,1,1)" height="5" mat_cubemap="/data/cubemap" material="/edit/mat/cubemap.v3dmat" name="" slices="15" stacks="15" top-radius="3"/>
+		<node type="v3d::scene::VTorusMeshPart" bottom-radius="1" color="(1,1,1,1)" height="5" material="/edit/mat/cubemap.v3dmat" mat_cubemap="/data/cubemap" name="" slices="15" stacks="15" top-radius="3"/>
+        <node type="v3d::scene::VCubemapShooting" cubemap_resource="/data/cubemap" />
 	</node>
 </node>

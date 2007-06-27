@@ -10,11 +10,20 @@
 #include <V3d/Core/VCoreLib.h>
 
 #include <V3d/Scene/IVShooting.h>
+#include <V3d/Scene/Shootings/VShootingBase.h>
+#include <V3d/Resource/VResourceDataPtr.h>
 
 //-----------------------------------------------------------------------------
+namespace v3d { namespace graphics {
+	class VCubeMapTexture;
+	class VCubeMapContext;
+}}
+
 namespace v3d { namespace scene {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indenting
+
+class IVSceneManagerPart;
 
 /**
  * Will render to an (axis aligned) cube map
@@ -32,7 +41,26 @@ public:
 	virtual vbool IsActive() const;
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+protected:
+	virtual void OnActivate();
+	virtual void OnDeactivate();
+
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 private:
+	void SetCubeMapResource(const std::string& resourceName);
+	std::string GetCubeMapResource() const;
+
+	entity::VNodeConnection<IVSceneManagerPart> m_pScene;
+	entity::VNodeConnection<VShootingBase> m_pParentShooting;
+
+	resource::VResourceDataPtr<graphics::VCubeMapTexture> m_pCubeMapTexture;
+	resource::VResourceDataPtr<graphics::IVDevice> m_pDevice;
+	resource::VResourceDataPtr<graphics::VCubeMapContext> m_pContext;
+	//graphics::VCubeMapContext* m_pContext;
+	//graphics::IVDevice* m_pDevice;
+
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 };
 
 //-----------------------------------------------------------------------------

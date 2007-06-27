@@ -37,9 +37,15 @@ public:
 	virtual void Bind(vuint in_nTextureUnit = 0);
 	virtual void Unbind();
 
+	vuint GetSize() const;
+	GLuint GetTextureId() const;
 private:
+	void ExceptionOnUnmatchingSize(const image::VImage& image);
+
 	vuint m_nTextureUnit;
-	GLuint m_TextureId[6];
+	GLuint m_TextureId;
+	//GLuint m_TextureId[6];
+	vuint m_nSize;
 };
 
 //-----------------------------------------------------------------------------
