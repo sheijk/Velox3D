@@ -339,7 +339,7 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 	}
 }
 
-int VImportedFaceContainer::VertexPool::GetIndex(const math::VVector3f &in_Vector)
+vint VImportedFaceContainer::VertexPool::GetIndex(const math::VVector3f &in_Vector)
 {
   /*VertexPool::VertexList::const_iterator it = m_VertexPool.begin();
   VertexPool::VertexList::const_iterator itEnd = m_VertexPool.end();
@@ -389,7 +389,7 @@ vfloat32* VImportedFaceContainer::VertexPool::CreateNormalBuffer(
 {
   vfloat32* pBuffer = new vfloat32[m_VertexPool.size() * 3];
   //set all normals to zero
-  const vuint sizeVertexPool = m_VertexPool.size();
+  const vuint sizeVertexPool = static_cast<vuint>(m_VertexPool.size());
   for(vuint i = 0; i < sizeVertexPool * 3; i++)
 	pBuffer[i] = 0;
   //calculate face normals and add to normal buffer

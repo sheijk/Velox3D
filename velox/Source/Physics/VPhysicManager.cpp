@@ -49,6 +49,7 @@ void VPhysicManager::Update(vfloat32 in_fSeconds)
 
 	m_fTimeDelta += in_fSeconds;
 	//step small fixed steps forward in time
+	//vuint steps = 0;
 	while( m_fTimeDelta >= m_fTimeStep )
 	{
 		m_World.SetWorldStep(m_fTimeStep);
@@ -56,7 +57,9 @@ void VPhysicManager::Update(vfloat32 in_fSeconds)
 		UpdateBodies();
 		UpdateJoints();
 		m_fTimeDelta -= m_fTimeStep;
+		//steps++;
 	}
+	//vout << "PhysManager steps: " << steps << vendl;
 }
 
 void VPhysicManager::UpdateBodies()
@@ -108,8 +111,9 @@ void VPhysicManager::UpdateJoints()
   }
 }
 
-void VPhysicManager::Delete(BodyPtr in_Body)
+void VPhysicManager::Delete(VBodyPart* in_Body)
 {
+    V3D_ASSERT( in_Body != 0 );
 	m_BodyList.remove(in_Body);
 
 	//check if we need to deactivate a joint
@@ -120,7 +124,7 @@ void VPhysicManager::Delete(BodyPtr in_Body)
 		VBody* pBody1 = (*it)->GetBody1();
 		VBody* pBody2 = (*it)->GetBody2();
 		
-		if(pBody1 == in_Body.Get() || pBody2 == in_Body.Get() )
+		if(pBody1 == in_Body->GetBody().Get() || pBody2 == in_Body->GetBody().Get() )
 			(*it)->Destroy();
 	}
 }
@@ -150,7 +154,7 @@ vbool VPhysicManager::IsRegisteredName(std::string in_sName)
 
 	for ( ; it != itEnd; ++it)
 	{
-		std::string name = (*it)->GetName();
+		std::string name = (*it)->GetBody()->GetName();
 		if ( name == in_sName)
 		{
 			return true;
@@ -179,9 +183,9 @@ VBody* VPhysicManager::QueryBodyByName(std::string in_sName)
 
 	for( ; it != itEnd; ++it)
 	{
-		std::string name = (*it)->GetName();
+		std::string name = (*it)->GetBody()->GetName();
 		if(name == in_sName)
-			return (*it).Get();
+			return (*it)->GetBody().Get();
 	}
 	return 0;
 }
@@ -264,7 +268,8 @@ VPhysicManager::BodyPtr VPhysicManager::CreateBody(std::string in_sName)
 
 VPhysicManager::BodyPtr VPhysicManager::Create(IVBoundingVolumePart* in_pBoundingPart,
 											   vfloat32 in_fMass,
-											   std::string in_sIdentifierName)
+											   std::string in_sIdentifierName,
+											   VBodyPart* in_pPart)
 {
 	//check if name is not already taken
 
@@ -276,18 +281,30 @@ VPhysicManager::BodyPtr VPhysicManager::Create(IVBoundingVolumePart* in_pBoundin
 	if( in_pBoundingPart->HasBoundingMesh() )
 	{
 		pMesh = in_pBoundingPart->GetBoundingMesh();
-	}	
+	}
+	BodyPtr body(0);
 
 	if(pBox)
-		return CreateBox(in_fMass, pBox->GetLength(), in_sIdentifierName);
+	{
+		body = CreateBox(in_fMass, pBox->GetLength(), in_sIdentifierName);
+	}
 	if(pSphere)
-		return CreateSphere(in_fMass, pSphere->GetRadius(), in_sIdentifierName);
+	{
+		body = CreateSphere(in_fMass, pSphere->GetRadius(), in_sIdentifierName);
+	}
 	if(pCylinder)
-		return CreateCCylinder(in_fMass, pCylinder->GetLength(), pCylinder->GetRadius(), in_sIdentifierName);
+	{
+		body = CreateCCylinder(in_fMass, pCylinder->GetLength(), pCylinder->GetRadius(), in_sIdentifierName);
+	}
 	if(pMesh)
-		return CreateMesh(in_fMass, pMesh, in_sIdentifierName);
+	{
+		body = CreateMesh(in_fMass, pMesh, in_sIdentifierName);
+	}
+
+	if( body.Get() )
+	  m_BodyList.push_back(in_pPart);
 	
-	return BodyPtr(0);
+	return body;
 }
 
 VPhysicManager::BodyPtr VPhysicManager::CreateSphere(
@@ -311,7 +328,7 @@ VPhysicManager::BodyPtr VPhysicManager::CreateSphere(
 
 	pBody->SetCollisionMesh(pSphereGeometry);
 	
-	m_BodyList.push_back(pBody);
+	//m_BodyList.push_back(pBody);
 	
 	return pBody;
 }
@@ -340,7 +357,7 @@ VPhysicManager::BodyPtr VPhysicManager::CreateBox(
 	
 	pBody->SetCollisionMesh(pGeometryBox);
 
-	m_BodyList.push_back(pBody);
+	//m_BodyList.push_back(pBody);
 	return pBody;
 }
 
@@ -359,7 +376,7 @@ VPhysicManager::BodyPtr VPhysicManager::CreateMesh(
 	pBody->Add(pMassState);
 	pBody->SetCollisionMesh(pGeometryMesh);
 
-	m_BodyList.push_back(pBody);
+	//m_BodyList.push_back(pBody);
 
 	return pBody;
 }
@@ -381,7 +398,7 @@ VPhysicManager::BodyPtr VPhysicManager::CreateCCylinder(
 	pGeometry->CreateCylinder(m_World.GetSpace());
 	pGeometry->SetParams(in_fLength, in_fRadius);
 	pBody->SetCollisionMesh(pGeometry);
-	m_BodyList.push_back(pBody);
+	//m_BodyList.push_back(pBody);
 	return pBody;
 }
 

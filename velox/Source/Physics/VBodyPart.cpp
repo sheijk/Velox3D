@@ -29,8 +29,8 @@ using namespace math;
 VBodyPart::VBodyPart(BodyPtr in_pBody) : 
 	m_pRigidBodyPart(RegisterTo()),
 	m_pPhysicManagerPart(RegisterTo()),
-	m_pVolumePart(RegisterTo()),
-	m_pUpdateManager(RegisterTo())
+	m_pVolumePart(RegisterTo())
+//	m_pUpdateManager(RegisterTo())
 {
 	V3D_ASSERT(in_pBody.Get() != 0);
 	m_fMass = 0.1f;
@@ -41,8 +41,8 @@ VBodyPart::VBodyPart(BodyPtr in_pBody) :
 VBodyPart::VBodyPart() : 
 	m_pRigidBodyPart(RegisterTo()),
 	m_pPhysicManagerPart(RegisterTo()),
-	m_pVolumePart(RegisterTo()),
-	m_pUpdateManager(RegisterTo())
+	m_pVolumePart(RegisterTo())
+//	m_pUpdateManager(RegisterTo())
 {
 	m_pBody.Assign(0);
 	m_fMass  = 0.1f;
@@ -59,11 +59,11 @@ void VBodyPart::Create()
 	if( ! m_pBody.Get() || ! m_pBody.Get()->IsValid() )
 	{
 		m_sIdentifier = m_pPhysicManagerPart->GetPhysicManager()->QueryAvailableIdentifier(m_sIdentifier);
-		m_pBody = m_pPhysicManagerPart->GetPhysicManager()->Create(m_pVolumePart.Get(), m_fMass, m_sIdentifier);
+		m_pBody = m_pPhysicManagerPart->GetPhysicManager()->Create(m_pVolumePart.Get(), m_fMass, m_sIdentifier, this);
 		m_Position = m_pRigidBodyPart.Get()->GetPosition();
 		VRBTransform transform = m_pRigidBodyPart.Get()->GetTransform();
 		VQuatf orient;
-		//convert translation matrix to quaterion
+		//convert translation matrix to quaternion
 		gmtl::set(orient.m_Data, transform.AsMatrix().m_Mat);
 		
 		m_pBody->Deactivate();
@@ -77,23 +77,12 @@ void VBodyPart::Create()
 
 void VBodyPart::OnActivate()
 {
-	if( m_pUpdateManager.Get() == 0 )
-		V3D_THROW(entity::VMissingPartException, "missing part updater 'data'");
-	if( m_pVolumePart.Get() == 0 )
-		V3D_THROW(entity::VMissingPartException, "missing part volume part 'data'");
-	if( m_pPhysicManagerPart.Get() == 0)
-		V3D_THROW(entity::VMissingPartException, "missing part physic manager 'data'");
-	if( m_pRigidBodyPart.Get() == 0 )
-		V3D_THROW(entity::VMissingPartException, "missing part 'data'");
-	
 	Create();
-	m_pUpdateManager->Register(this);
 }
 
 void VBodyPart::OnDeactivate() 
 {
-	m_pPhysicManagerPart->GetPhysicManager()->Delete(m_pBody);
-	m_pUpdateManager->Unregister(this);
+	m_pPhysicManagerPart->GetPhysicManager()->Delete(this);
 }
 
 VBodyPart::BodyPtr VBodyPart::GetBody()
@@ -101,7 +90,7 @@ VBodyPart::BodyPtr VBodyPart::GetBody()
 	return m_pBody;
 }
 
-void VBodyPart::Update(vfloat32 in_fSeconds)
+void VBodyPart::Update()
 {
 	VRBTransform transform = m_pRigidBodyPart.Get()->GetTransform();
 	VQuatf orient;
@@ -140,7 +129,7 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 
 		//Rotate(axis, m_pBody->GetOrientation().GetQuat());
 		//graphics::VVertex3f pos = m_pBody->GetPositionState().GetPositon();
-		//MakeTranspose(axis); //TODO: should be coorect but recheck!
+		//MakeTranspose(axis); //TODO: should be correct but recheck!
 		//m_Position = pos.AsVector();
 
 		//trans.Set(0,0, axis.Get(0,0));
@@ -180,6 +169,7 @@ void VBodyPart::Update(vfloat32 in_fSeconds)
 		m_pBody->SetOrientation(orient);
 		m_pBody->Activate();
 	}
+	m_pBody->Update();
 }
 
 void VBodyPart::OnMessage(const messaging::VMessage& in_Message, messaging::VMessage* in_pAnswer)

@@ -30,7 +30,7 @@ public:
 	typedef VSharedPtr<VJoint> JointPtr;
 	typedef VSharedPtr<entity::VEntity> EntityPtr;
 	typedef VSharedPtr<VGeometry> Geometry;
-	typedef std::list<BodyPtr> BodyList;
+	typedef std::list<VBodyPart*> BodyList;
 	typedef std::list<VJointHinge2*> JointList;
 
 	VPhysicManager();
@@ -59,9 +59,10 @@ public:
 	BodyPtr Create(
 		IVBoundingVolumePart* in_pBoundingPart, 
 		vfloat32 in_fMass,
-		std::string in_sIdentifierName);
+		std::string in_sIdentifierName,
+		VBodyPart* in_pPart);
 	
-	void Delete(BodyPtr in_Body);
+	void Delete(VBodyPart* in_Body);
 
 	Geometry CreateGeom(IVBoundingVolumePart* in_pBoundingPart);
 	/**

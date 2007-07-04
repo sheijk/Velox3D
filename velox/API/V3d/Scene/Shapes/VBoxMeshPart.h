@@ -18,7 +18,7 @@ namespace v3d { namespace scene {
 using namespace v3d; // anti auto indenting
 
 /**
- * Renders a bounding box mesh
+ * Render a bounding box mesh
  * @author ins
  */
 class VBoxMeshPart : public VMeshPartBase

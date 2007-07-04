@@ -115,7 +115,7 @@ resource::VResourceId VImportedMaterialDescription::CreateResource()
 	}
 
 
-	//look if we have alread created a texture subresource
+	//look if we have already created a texture sub resource
 	try
 	{
 		resource::VResourceId texResource = pResourceManager->GetResourceByName(name.c_str());
