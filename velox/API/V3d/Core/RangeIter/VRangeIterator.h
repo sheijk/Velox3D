@@ -56,7 +56,7 @@ template<typename T>
 		{
 			V3D_THROW(VException, "Detected more than 100 accesses to an "
 				"iterator without progressing to the next element, cancelling "
-				"du to infinity loop");
+				"due to infinity loop");
 		}
 	}
 
