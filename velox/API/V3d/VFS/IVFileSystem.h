@@ -79,13 +79,14 @@ inline void DumpFileSystem() { VFileSystemPtr()->DumpFileSystem(); }
 
 //-----------------------------------------------------------------------------
 } // namespace vfs
-} // namespace v3d
-//-----------------------------------------------------------------------------
 template<>
-inline v3d::vfs::IVFileSystem* v3d::QueryService<v3d::vfs::IVFileSystem>()
+  inline v3d::vfs::IVFileSystem* QueryService<v3d::vfs::IVFileSystem>()
 {
-	return QueryObject<v3d::vfs::IVFileSystem>("vfs.fs");
+  return QueryObject<v3d::vfs::IVFileSystem>("vfs.fs");
 }
 //-----------------------------------------------------------------------------
-#endif // V3D_IVFILESYSTEM_H
+} // namespace v3d
 
+//-----------------------------------------------------------------------------
+
+#endif // V3D_IVFILESYSTEM_H
