@@ -17,7 +17,7 @@
 #include <V3d/Messaging/VMessage.h>
 #include <V3d/Tags/VTag.h>
 
-#include <V3d/xml/IVXMLElement.h>
+#include <V3d/XML/IVXMLElement.h>
 
 #include <vector>
 #include <string>
@@ -53,9 +53,18 @@ public:
 typedef IVPart VPart;
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::entity
+}
+  //V3D_TYPEINFO(v3d::entity::IVPart);
 
-V3D_TYPEINFO(v3d::entity::IVPart);
+template<> class InitTypeInfo< v3d::entity::IVPart >
+	{
+	public:
+		void operator()(VTypeInfo* out_pTypeInfo)
+		{
+		  out_pTypeInfo->SetName( "v3d::entity::IVPart" );
+		}
+	};
+} // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VPART_2004_10_09_H
 
