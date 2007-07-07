@@ -22,7 +22,13 @@
 #define V3D_WIN32
 #endif
 
-//#define V3D_LX //enable if on gcc under lx //TODO: __GNUC__ __APPLE__
+#ifdef __GNUC__
+#ifdef __APPLE__
+#define V3D_MAC
+#else
+#define V3D_LX
+#endif
+#endif
 
 // compiler constants
 #ifdef _MSC_VER
