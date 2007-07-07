@@ -43,7 +43,7 @@ private:
 template<typename Subject>
 typename VPointer<Subject>::SharedPtr SharedPtr(Subject* in_pValue)
 {
-	return VPointer<Subject>::SharedPtr(in_pValue);
+  return typename v3d::VPointer<Subject>::SharedPtr(in_pValue);
 }
 
 /**
