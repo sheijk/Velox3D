@@ -28,8 +28,7 @@ using namespace v3d; // prevent auto indenting
 template<
 	typename STLIterator, 
 	typename Accessor,
-	typename T = Accessor::Type
->
+    typename T = Accessor/*::T*/ >
 class VSTLAccessorRangePolicy : public VSTLRangePolicyBase<STLIterator, T>
 {
 public:
@@ -37,14 +36,14 @@ public:
 		: VSTLRangePolicyBase<STLIterator, T>(in_Begin, in_End)
 	{}
 
-	virtual Type* Get() const
+virtual T* Get() const
 	{
-		return Accessor::Convert(m_Current);
+		return Accessor::Convert(this->m_Current);
 	}
 
-	virtual IVRangeIteratorPolicy<Type>* Clone() const
+	virtual IVRangeIteratorPolicy<T>* Clone() const
 	{
-		return new VSTLAccessorRangePolicy(m_Current, m_End);
+		return new VSTLAccessorRangePolicy(this->m_Current, this->m_End);
 	}
 };
 
@@ -154,7 +153,7 @@ template<
 VRangeIterator<typename Accessor<STLIterator, T>::Type> 
 CreateAccesssorIterator(STLIterator begin, STLIterator end)
 {
-	VSTLAccessorRangePolicy<STLIterator, Accessor<STLIterator, T> > pol(begin, end);
+  VSTLAccessorRangePolicy<STLIterator, Accessor<STLIterator, T>, T> pol(begin, end);
 	return VRangeIterator<typename Accessor<STLIterator, T>::Type>(pol);
 }
 
