@@ -9,7 +9,7 @@
 #define V3D_VSTREAMREADER_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-#include <V3d/Vfs/IVStream.h>
+#include <V3d/VFS/IVStream.h>
 #include <V3d/Core/VException.h>
 #include <list>
 //-----------------------------------------------------------------------------
