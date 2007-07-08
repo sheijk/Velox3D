@@ -67,13 +67,18 @@ void VJointHinge2ModifierPart::OnDeactivate()
 bool VJointHinge2ModifierPart::GetButtons(vfloat32 in_fSeconds)
 {
    bool pushed = false;
+   //check if we have to throttle the input
+   
+   vfloat32 fFactor = 1.0f / in_fSeconds; //greater if faster
+   fFactor = 100.0f - fFactor;
    if(m_pButton2)
    {
 		if(m_pButton2->IsDown())
 		{
-	  m_fSpeed = m_fMaxSpeed /** (in_fSeconds)*/;
-	  m_fAccel = m_fMaxAccel /** (in_fSeconds)*/;
-	  pushed = true;
+		  vout << "f: " << fFactor << " acc: "<< m_fAccel << "speed: " << m_fSpeed << vendl;
+		  m_fSpeed = m_fMaxSpeed /* fFactor*/;
+		  m_fAccel = m_fMaxAccel /** fFactor*/;
+		  pushed = true;
 		}
 	if( ! pushed )
 	{
@@ -86,8 +91,8 @@ bool VJointHinge2ModifierPart::GetButtons(vfloat32 in_fSeconds)
   {
 		if(m_pButton->IsDown())
 		{
-	  m_fSpeed = m_fMaxSpeed /* * (in_fSeconds)*/; 
-	  m_fAccel = -m_fMaxAccel/* *( in_fSeconds )*/;
+	  m_fSpeed = m_fMaxSpeed /* fFactor*/;
+	  m_fAccel = -m_fMaxAccel /* fFactor*/;
 	  pushed = true;
  		}
 	if( ! pushed )
@@ -129,7 +134,7 @@ bool VJointHinge2ModifierPart::GetButtons(vfloat32 in_fSeconds)
    	}
   }
 
-  vout << "Accel: " << m_fAccel << "Speed: " << m_fSpeed << vendl;
+  //vout << "Accel: " << m_fAccel << "Speed: " << m_fSpeed << vendl;
   return bIsSteered;
 }
 
@@ -274,7 +279,7 @@ void VJointHinge2ModifierPart::OnMessage(
 	{
 	  //update button event
 	  vfloat32 speed = in_Message.GetAs<vfloat32>("value");
-	//  m_fSpeedFactor = speed;
+	  m_fSpeedFactor = speed;
 	}
 
 	if( name == "Steer" )

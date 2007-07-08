@@ -83,17 +83,19 @@ private:
 		std::istringstream iss(s);
 		return !(iss>>f>>t).fail();
 	}
+
+	template<>
+	vbool VStringValue::ConvertString<std::string>(
+	  std::string& t,
+	  const std::string &s,
+	  std::ios_base &(*f)(std::ios_base&)) const
+	{
+	  t = s;
+	  return true;
+	}
 };
 
-template<>
-vbool VStringValue::ConvertString<std::string>(
-		std::string& t,
-		const std::string &s,
-		std::ios_base &(*f)(std::ios_base&)) const
-{
-	t = s;
-	return true;
-}
+
 //-----------------------------------------------------------------------------
 template<typename T>
 void VStringValue::Set(const T& val)

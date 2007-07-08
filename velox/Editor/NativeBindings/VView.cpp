@@ -40,7 +40,7 @@ VView::VView()
 	m_bIsRunning = true;
 	m_Thread = 0;
 	
-	cout << "Creating view for hwnd... " << endl;
+	vout << "Creating view for hwnd... " << vendl;
 
 	// start rendering
 	try {		
@@ -54,14 +54,14 @@ VView::VView()
 		m_SyncMutex = glfwCreateMutex();
 		m_SyncDoneCondition = glfwCreateCond();
 
-		cout << "done. ThreadId = " << m_Thread << endl;
+		vout << "done. ThreadId = " << m_Thread << vendl;
 	} catch(VException& e) {
-		cout << endl
+		vout << vendl
 			<< "Error: "
-			<< e.GetErrorString() << endl
-			<< e.GetErrorFile() << ":" << e.GetErrorLine() << endl;
+			<< e.GetErrorString() << vendl
+			<< e.GetErrorFile() << ":" << e.GetErrorLine() << vendl;
 	} catch(...) {
-		cout << "Unknown exception occured" << endl;
+		vout << "Unknown exception occured" << vendl;
 	}
 }
 

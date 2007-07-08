@@ -16,6 +16,7 @@
 #include <V3d/Vfs.h>
 #include <V3d/Xml.h>
 #include <V3d/Physics/VPhysics.h>
+#include <V3d/Utils/VFrameCounter.h>
 
 #include <sstream>
 #include <string>
@@ -24,6 +25,9 @@
 #include <glew/glew.h>
 #include <glew/wglew.h>
 #include <GL/gl.h>
+#include <GL/glfw.h>
+
+#pragma comment(lib, "glfw.lib")
 
 using namespace v3d;
 using namespace v3d::updater;
@@ -51,7 +55,37 @@ const std::string APP_NAME = "RacerDemo";
 
 const VColor4f fogColor(.6f, .4f, .4f, 1.0f);
 //-----------------------------------------------------------------------------
+class TimeTest
+{
+public:
 
+  TimeTest()
+  {
+	lastTime = 0;
+	deltaTime = 0;
+  }
+
+  void UpdateTime()
+  {
+	 vfloat32 curTime = glfwGetTime();
+	 deltaTime = curTime - lastTime;
+	 lastTime = curTime;
+  }
+  vfloat32 GetTimeDelta() { return deltaTime; }
+  void LimitFps(vuint FPS)
+  {
+	vfloat32 waitFactor = 1.0f / FPS;
+	vfloat32 deltaTime = GetTimeDelta();
+
+	while (deltaTime < waitFactor)
+	{
+	  ;//idle
+	}
+	
+  }
+  vfloat32 deltaTime;
+  vfloat32 lastTime;
+};
 class RacerDemo : public VVeloxApp
 {
 public:
@@ -74,7 +108,7 @@ private:
 	VSimpleShooting* m_pRootShooting;
 	VSharedPtr<IVLightManager> m_pLightManager;
 	VUpdateManagerPart* m_pUpdateManager;
-	VPhysicManagerPtr m_pPhysicManager;
+	VSharedPtr<v3d::utils::VFrameCounter> m_pFrameCounter;
 
 	IVDevice& Device();
 
@@ -147,6 +181,8 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	Init();
 	CreateResources();
 
+	TimeTest time;
+
 	std::string sceneFileName = "/edit/racer.v3dscene";
 
 	VCommandLineOptions commandLineOptions(args);
@@ -166,14 +202,8 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	VInputPart* pInputPart = pRoot->GetFirst<VInputPart>();
 	pInputPart->SetInputManager(&m_pWindow->QueryInputManager());
 
-	m_pPhysicManager.Assign(new VPhysicManager());
-
 	const VNode::ActivationResult activationResult = pRoot->Activate();
 	pRoot->DumpInfo();
-
-	m_pF1Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF1);
-	m_pF2Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF2);
-	m_pSpace = &m_pWindow->QueryInputManager().GetStandardKey(KeySpace);
 
 	//TODO: support im device oder so
 	glEnable(GL_FOG);
@@ -184,14 +214,32 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	glFogf(GL_FOG_START, 300.f);
 	glFogf(GL_FOG_END, 400.0f);
 
-	VMatrix44f test = math::ScaleMatrix(10.0f);
-	vout << test << vendl;
+	/*VMatrix44f test = math::ScaleMatrix(10.0f);
+	vout << test << vendl;*/
 
 	m_pUpdater->Start();
+	glfwInit();
+	vfloat32 startTime = glfwGetTime();
+	long frameCounter = 0;
+	vfloat32 lastTime = 0;
 	while(m_pSystem->GetStatus())
 	{
-		Device().BeginScene();
+	  
+	  //time.UpdateTime();
+	  /*vout << "time: " << time.GetTimeDelta() << "fps: " << 1.0f /time.GetTimeDelta() << vendl;*/
+	   //time.LimitFps(10);
+	   vfloat32 curTime = glfwGetTime();
+	   vfloat32 deltaTime = curTime - lastTime;
+	   lastTime = curTime;
 
+	   vfloat32 waitFactor = 1.0f / 60;
+
+	   while (deltaTime < waitFactor)
+	   {
+		 vfloat32 curTime = glfwGetTime();
+		 deltaTime = curTime -lastTime;
+	   }
+		Device().BeginScene();
 		const vfloat32 frameDuration = vfloat32(m_pUpdater->GetFrameDuration());
 
 		//if(m_pSpace->IsDown())
@@ -202,7 +250,9 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 		
 		Device().EndScene();
+		frameCounter++;
 		m_pUpdater->StartNextFrame();
+		m_pFrameCounter->LogLastFrameDuration();
 
 		static vfloat32 timeTillNextToggle = .0f;
 		timeTillNextToggle -= frameDuration;
@@ -227,8 +277,11 @@ vint RacerDemo::Main(std::vector<std::string> args)
 		if( m_pEscapeKey->IsDown() )
 			m_pSystem->SetStatus(false);
 	}
-
+	vout << "Average frames: " << m_pFrameCounter->GetAverageFPS() << vendl;
 	m_pUpdater->Stop();
+	vfloat32 dieTime = glfwGetTime();
+	vfloat32 deltaTime = dieTime - startTime;
+	vout << "fps / time: " << 1.0f / (deltaTime / frameCounter) << vendl;
 
 	pRoot->Deactivate();
 	
@@ -263,9 +316,13 @@ void RacerDemo::Init()
 	// get the escape key
 	m_pEscapeKey = &m_pWindow->QueryInputManager().GetStandardKey(KeyEscape);
 	m_pCamToggleKey = &m_pWindow->QueryInputManager().GetStandardKey(KeyTab);
+	m_pF1Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF1);
+	m_pF2Key = &m_pWindow->QueryInputManager().GetStandardKey(KeyF2);
+	m_pSpace = &m_pWindow->QueryInputManager().GetStandardKey(KeySpace);
 
 	// init system and updater service
 	m_pSystem->SetStatus(true);
+	m_pFrameCounter.Assign(new v3d::utils::VFrameCounter( 50 ));
 
 	//m_pCamera.Assign(new VKeyboardCamera(m_pWindow->QueryInputManager()));
 }
