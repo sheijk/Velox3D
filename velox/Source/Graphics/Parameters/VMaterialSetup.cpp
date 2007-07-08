@@ -10,15 +10,20 @@
 
 #include <V3d/Core/VIOStream.h>
 #include <V3d/Core/VLogging.h>
+
 #include <V3d/Graphics/Parameters/IVParameterValue.h>
 #include <V3d/Graphics/Parameters/VGenericValue.h>
 #include <V3d/Graphics/IVMaterial.h>
-#include <V3d/Utils/VStringValue.h>
-#include <V3d/Math/VVectorOps.h>
-#include <V3d/Math/VMatrixOps.h>
 #include <V3d/Graphics/Parameters/VTextureValue.h>
 #include <V3d/Graphics/IVDevice.h>
+
+#include <V3d/Utils/VStringValue.h>
 #include <V3d/Updater/IVUpdateManager.h>
+
+#include <V3d/Math/VVectorOps.h>
+#include <V3d/Math/VMatrixOps.h>
+#include <V3d/Math/VRBTransform.h>
+
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -118,6 +123,9 @@ namespace {
 	const std::string LIGHT_COUNT_PARAM_NAME = "v3d_MaxLight";
 	const std::string TIME_PARAM_NAME = "v3d_TimeFraction";
 	const std::string TIME_MIN_PARAM_NAME = "v3d_TimeFraction60";
+	const std::string CAM_POS_PARAM_NAME = "v3d_CameraPos";
+	const std::string MODEL_MATRIX_PARAM_NAME = "v3d_ModelMatrix";
+	const std::string VIEW_MATRIX_PARAM_NAME = "v3d_ViewMatrix";
 }
 
 std::string IVParameter::AsString() const
@@ -169,6 +177,21 @@ void IVParameter::ApplyAutoValue(IVDevice& in_Device)
 		vuint32 ms = updater::VUpdateManagerPtr()->GetMilliSecondsSinceStart() % (1000 * 60);
 		vfloat32 secondFraction = vfloat32(ms) / 1000.0f / 60.0f;
 		Apply(secondFraction);
+	}
+	else if( name == CAM_POS_PARAM_NAME )
+	{
+		math::VVector4f camPos = math::ToVector4f( 
+			in_Device.GetViewTransform().GetPosition(), 1.0f );
+
+		Apply( camPos );
+	}
+	else if( name == MODEL_MATRIX_PARAM_NAME )
+	{
+		Apply( in_Device.GetMatrix(IVDevice::ModelMatrix) );
+	}
+	else if( name == VIEW_MATRIX_PARAM_NAME )
+	{
+		Apply( in_Device.GetViewMatrix() );
 	}
 }
 

@@ -285,9 +285,10 @@ void VShadowMapShooting::CalculateTextureMatrix(
 	MakeInverse(lightT);
 	Mult(out_TextureMatrix, out_TextureMatrix, lightT.AsMatrix());
 // inverse view
-	VMatrix44f viewMat = GetRenderTarget()->GetMatrix(graphics::IVDevice::ViewMatrix);
-	VRBTransform viewTransform;
-	viewTransform.Set(viewMat);
+	//VMatrix44f viewMat = GetRenderTarget()->GetMatrix(graphics::IVDevice::ViewMatrix);
+	//VRBTransform viewTransform;
+	//viewTransform.Set(viewMat);
+	VRBTransform viewTransform = GetRenderTarget()->GetViewTransform();
 	MakeInverse(viewTransform);
 	//out_TextureMatrix = viewTransform.AsMatrix();
 	Mult(out_TextureMatrix, out_TextureMatrix, viewTransform.AsMatrix());
@@ -309,7 +310,9 @@ void VShadowMapShooting::RenderDepthMap(const graphics::VLight& light)
 
 	math::VRBTransform lightT = light.GetTransform();
 	MakeInverse(lightT);
-	m_pDevice->SetMatrix(graphics::IVDevice::ViewMatrix, lightT.AsMatrix());
+	m_pDevice->SetViewTransform( lightT );
+	//m_pDevice->SetMatrix(graphics::IVDevice::ViewMatrix, lightT.AsMatrix());
+
 	//glMatrixMode(GL_MODELVIEW);
 	//glLoadIdentity();
 	//math::VRBTransform lightT = light.GetTransform();

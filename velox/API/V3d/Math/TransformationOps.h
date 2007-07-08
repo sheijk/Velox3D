@@ -244,6 +244,8 @@ void RotateAxis(VMatrix44f& matrix, VVector3f axis, float angle);
 
 
 
+void SetTranslate( VMatrix44f& out_Matrix, const VVector3f& in_Position );
+
 /**
  * @author: sheijk
  */

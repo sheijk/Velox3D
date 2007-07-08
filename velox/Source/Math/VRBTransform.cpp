@@ -38,6 +38,17 @@ VRBTransform::VRBTransform(
 	SetLookAt(in_Position, in_LookAt, in_Up);
 }
 
+VRBTransform::VRBTransform(
+	vfloat32 posx, vfloat32 posy, vfloat32 posz,
+	vfloat32 lookatx, vfloat32 lookaty, vfloat32 lookatz,
+	vfloat32 upx, vfloat32 upy, vfloat32 upz )
+{
+	SetLookAt(
+		posx, posy, posz,
+		lookatx, lookaty, lookatz,
+		upx, upy, upz );
+}
+
 VRBTransform::VRBTransform(VMatrix44f in_Matrix)
 {
 	Set(in_Matrix); 

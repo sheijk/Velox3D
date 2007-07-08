@@ -26,6 +26,11 @@ void Translate(VMatrix44f& matrix, float x, float y, float z)
 	Mult(matrix, matrix, transl);
 }
 
+void SetTranslate( VMatrix44f& out_Matrix, const VVector3f& in_Position )
+{
+	SetTranslate( out_Matrix, in_Position[0], in_Position[1], in_Position[2] );
+}
+
 void RotateX(VMatrix44f& matrix, float angle)
 {
 	VMatrix44f rot;

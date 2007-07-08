@@ -11,6 +11,7 @@
 #include <V3d/OpenGL.h>
 #include <V3d/Graphics/IVDevice.h>
 
+#include <V3d/Messaging/VMessageInterpreter.h>
 #include <V3d/Entity/IVEntitySerializationService.h>
 
 #include <V3d/Entity/VGenericPartParser.h>
@@ -24,6 +25,8 @@ using namespace v3d; // anti auto indent
 VCoordSysDisplayPart::VCoordSysDisplayPart(vfloat32 in_fBrightness)
 	: VMeshPartBase(graphics::IVDevice::GetDefaultMaterial())
 {
+	m_fLength = 1.0f;
+
 	m_XColor = graphics::VColor4f(in_fBrightness, 0, 0);
 	m_YColor = graphics::VColor4f(0, in_fBrightness, 0);
 	m_ZColor = graphics::VColor4f(0, 0, in_fBrightness);
@@ -40,18 +43,32 @@ void VCoordSysDisplayPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
 	glBegin(GL_LINES);
 	glColor(m_XColor);
-	glVertex3f(0, 0, 0);
-	glVertex3f(1, 0, 0);
+	glVertex3f(0.f, 0.f, 0.f);
+	glVertex3f(m_fLength, 0.f, 0.f);
 
 	glColor(m_YColor);
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, 1, 0);
+	glVertex3f(0.f, 0.f, 0.f);
+	glVertex3f(0.f, m_fLength, 0.f);
 
 	glColor(m_ZColor);
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, 0, 1);
+	glVertex3f(0.f, 0.f, 0.f);
+	glVertex3f(0.f, 0.f, m_fLength);
 	glEnd();
 }
+
+messaging::VMessageInterpreter* VCoordSysDisplayPart::GetMessageInterpreterForClass()
+{
+	static messaging::VMessageInterpreter interpreter;
+	return &interpreter;
+}
+
+void VCoordSysDisplayPart::SetupProperties(messaging::VMessageInterpreter& interpreter)
+{
+	VMeshPartBase::SetupProperties( interpreter );
+
+	interpreter.AddMemberOption<vfloat32>( "length", this, &m_fLength );
+}
+
 
 V3D_REGISTER_PART_PARSER(VCoordSysDisplayPart);
 //-----------------------------------------------------------------------------

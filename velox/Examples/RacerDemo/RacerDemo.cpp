@@ -203,7 +203,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	pInputPart->SetInputManager(&m_pWindow->QueryInputManager());
 
 	const VNode::ActivationResult activationResult = pRoot->Activate();
-	pRoot->DumpInfo();
+	//pRoot->DumpInfo();
 
 	//TODO: support im device oder so
 	glEnable(GL_FOG);
@@ -216,6 +216,8 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	/*VMatrix44f test = math::ScaleMatrix(10.0f);
 	vout << test << vendl;*/
+
+	//pRoot->Add( SharedPtr(new VEntity()) );
 
 	m_pUpdater->Start();
 	glfwInit();

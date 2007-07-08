@@ -32,7 +32,14 @@ public:
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
+protected:
+	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
+
 private:
+	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
+
+	vfloat32 m_fLength;
+
 	graphics::VColor4f m_XColor;
 	graphics::VColor4f m_YColor;
 	graphics::VColor4f m_ZColor;

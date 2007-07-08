@@ -15,8 +15,11 @@
 #include <V3d/Resource.h>
 #include <V3d/Resource/ResourceExceptions.h>
 
+#include <V3d/Math/TransformationOps.h>
+
 #include <V3d/Graphics/GraphicsExceptions.h>
 #include <V3d/Graphics/IVGraphicsService.h>
+#include <V3d/Graphics/Misc/VCamera.h>
 #include "../../Graphics/OpenGL/Textures/VCubeMapTexture.h"
 #include "../../Graphics/OpenGL/Context/VFrameBufferObjectContext.h"
 
@@ -180,11 +183,43 @@ void VCubemapShooting::OnDeactivate()
 	m_pParentShooting->RemovePreShooting( this );
 }
 
+namespace {
+	using namespace v3d::math;
+	// to be migrated to mathlib
+
+	VMatrix44f ProjectionMatrix(float fovy, float aspect, float znear, float zfar)
+	{
+		VMatrix44f mat;
+		MakeProjectionMatrix( &mat, fovy, aspect, znear, zfar );
+		return mat;
+	}
+
+	VMatrix44f LookAtMatrix(
+		float posx, float posy, float posz,
+		float lookatx, float lookaty, float lookatz,
+		float upx, float upy, float upz)
+	{
+		VRBTransform transform;
+		transform.SetLookAt( posx, posy, posz, lookatx, lookaty, lookatz, upx, upy, upz );
+		return transform.AsMatrix();
+	}
+
+	VMatrix44f LookAtDirMatrix(
+		float lookatx, float lookaty, float lookatz, 
+		float upx, float upy, float upz)
+	{
+		return LookAtMatrix( 0.f, 0.f, 0.f, lookatx, lookaty, lookatz, upx, upy, upz );
+	}
+}
+
 void VCubemapShooting::Render()
 {
 	V3D_ASSERT( m_pScene.Get() != NULL );
 
-	static float sideColors[6*4] = {
+	const vuint sideCount = 6;
+	const vuint colorComponentCount = 4;
+
+	static float sideColors[sideCount * colorComponentCount] = {
 		1.0f, 0.0f, 0.0f, 1.0f,
 		0.0f, 1.0f, 1.0f, 1.0f,
 		0.0f, 1.0f, 0.0f, 1.0f,
@@ -193,11 +228,43 @@ void VCubemapShooting::Render()
 		1.0f, 1.0f, 0.0f, 1.0f
 	};
 
+	static math::VRBTransform cameraTransforms[6] = {
+		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f )
+
+		//math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  -1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 1.f, 0.f,  0.f, 0.f, 1.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, -1.f, 0.f,  0.f, 0.f, -1.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 0.f, 1.f, 0.f, 1.f, 0.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 0.f, -1.f, 0.f, 1.f, 0.f )
+	};
+
+	//static math::VMatrix44f cameraMatrices[6] = {
+	//	cameraTransforms[0].AsMatrix(),
+	//	cameraTransforms[1].AsMatrix(),
+	//	cameraTransforms[2].AsMatrix(),
+	//	cameraTransforms[3].AsMatrix(),
+	//	cameraTransforms[4].AsMatrix(),
+	//	cameraTransforms[5].AsMatrix()
+	//	//LookAtDirMatrix( 1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+	//	//LookAtDirMatrix( -1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+	//	//LookAtDirMatrix( 0.f, 1.f, 0.f,  0.f, 0.f, 1.f ),
+	//	//LookAtDirMatrix( 0.f, -1.f, 0.f,  0.f, 0.f, -1.f ),
+	//	//LookAtDirMatrix( 0.f, 0.f, 1.f, 0.f, 1.f, 0.f ),
+	//	//LookAtDirMatrix( 0.f, 0.f, -1.f, 0.f, 1.f, 0.f )
+	//};
+
 	float* c = &sideColors[0];
 
 	if( m_pContext != NULL )
 	{
 		using graphics::VCubeMapContext;
+		using graphics::IVDevice;
 
 		//glClearColor( 1.0f, 1.0f, 0.0f, 1.0f );
 
@@ -205,23 +272,24 @@ void VCubemapShooting::Render()
 			side <= VCubeMapContext::NegZ;
 			++side )
 		{
-			glClearColor( c[0], c[1], c[2], c[3] );
-			c += 4;
+			graphics::VCamera camera;
+			camera.SetTransform( cameraTransforms[int(side)] );
+			m_pScene->UpdateAndCull( camera );
+
+			static math::VMatrix44f projectionMatrix = 
+				ProjectionMatrix( 90.0f, 1.0f, 1.0f, 1000.0f );
+			m_pDevice->SetMatrix( IVDevice::ProjectionMatrix, projectionMatrix );
+			m_pDevice->SetViewTransform( cameraTransforms[int(side)] );
+			//m_pDevice->SetMatrix( IVDevice::ViewMatrix, cameraMatrices[int(side)] );
 
 			m_pContext->SetActiveSide(side);
-			m_pContext->MakeCurrent();
+			//m_pContext->MakeCurrent();
+			m_pDevice->BeginScene();
 
+			//glClearColor( .2f, .2f, .2f, 1.f );
+			glClearColor( c[0], c[1], c[2], c[3] );
+			c += 4;
 			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-			// TODO: set up camera matrix of device
-			glMatrixMode( GL_MODELVIEW );
-			glPushMatrix();
-			glLoadIdentity();
-
-			glMatrixMode( GL_PROJECTION );
-			glPushMatrix();
-			glLoadIdentity();
-			glFrustum( -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1000.0f );
 
 			VRangeIterator<const IVShapePart> visibleObject = m_pScene->GetVisibleMeshes();
 			while( visibleObject.HasNext() )
@@ -237,13 +305,10 @@ void VCubemapShooting::Render()
 
 				++visibleObject;
 			}
-
-			glPopMatrix();
-			glMatrixMode( GL_MODELVIEW );
-			glPopMatrix();
 		}
 
-		m_pContext->SwapBuffers();
+		m_pDevice->EndScene();
+		//m_pContext->SwapBuffers();
 	}
 }
 

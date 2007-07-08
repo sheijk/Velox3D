@@ -44,6 +44,38 @@ VVector4f ToVector4f(float x, float y, float z, float w)
 	return vec;
 }
 
+VVector3f XYZToVector3f(const VVector4f& vec4)
+{
+	VVector3f result;
+
+	for(vint i = 2; i >= 0; --i)
+		result[i] = vec4[i];
+
+	return result;
+}
+
+VVector3f DeHomogenize(const VVector4f& vec4)
+{
+	VVector3f result;
+
+	for(vint i = 2; i >= 0; --i)
+		result[i] = vec4[i] / vec4[3];
+
+	return result;
+}
+
+VVector4f ToVector4f(const VVector3f& vec3, float w)
+{
+	VVector4f result;
+
+	for(vint i = 2; i >= 0; --i)
+		result[i] = vec3[i];
+
+	result[3] = w;
+
+	return result;
+}
+
 //-----------------------------------------------------------------------------
 } 
 } // namespace v3d

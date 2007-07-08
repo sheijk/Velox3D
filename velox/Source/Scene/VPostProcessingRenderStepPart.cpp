@@ -90,7 +90,8 @@ void VPostProcesssingRenderStepPart::Render(IVGraphicsPart* in_pScene)
 
 	GetOutputDevice()->SetMatrix(IVDevice::ProjectionMatrix, math::IdentityMatrix());
 	GetOutputDevice()->SetMatrix(IVDevice::ModelMatrix, math::IdentityMatrix());
-	GetOutputDevice()->SetMatrix(IVDevice::ViewMatrix, math::IdentityMatrix());
+	GetOutputDevice()->SetViewTransform( math::VRBTransform() );
+	//GetOutputDevice()->SetMatrix(IVDevice::ViewMatrix, math::IdentityMatrix());
 
 	if( &*m_hPostProcessingShader != 0 )
 	{

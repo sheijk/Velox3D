@@ -158,7 +158,10 @@ typedef VVector<vfloat32, 4> VVector4f;
 
 VVector2f ToVector2f(float x, float y);
 VVector3f ToVector3f(float x, float y, float z);
+VVector3f XYZToVector3f(const VVector4f& vec4);
+VVector3f DeHomogenize(const VVector4f& vec4);
 VVector4f ToVector4f(float x, float y, float z, float w);
+VVector4f ToVector4f(const VVector3f& vec3, float w);
 
 typedef VVector<vfloat64, 2> VVector2d;
 typedef VVector<vfloat64, 3> VVector3d;

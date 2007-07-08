@@ -16,6 +16,9 @@
 
 //-----------------------------------------------------------------------------
 namespace v3d {
+	namespace math {
+		class VRBTransform;
+	}
 namespace graphics {
 //-----------------------------------------------------------------------------
 class VMeshDescription;
@@ -42,8 +45,7 @@ public:
 	{
 		ProjectionMatrix,
 		TextureMatrix,
-		ModelMatrix,
-		ViewMatrix
+		ModelMatrix
 	};
 
 	/**
@@ -80,8 +82,19 @@ public:
 	/** set the projection, view, model and texture matrices */
 	virtual void SetMatrix(MatrixMode in_Mode, const math::VMatrix44f& in_Matrix) = 0;
 
+	virtual void SetProjectionMatrix(const math::VMatrix44f& in_Matrix) = 0;
+	virtual const math::VMatrix44f& GetProjectionMatrix() const = 0;
+	virtual void SetModelMatrix(const math::VMatrix44f& in_Matrix) = 0;
+	virtual const math::VMatrix44f& GetModelMatrix() const = 0;
+	virtual const math::VMatrix44f& GetViewMatrix() const = 0;
+
+	/** the camera position+orientation in world space */
+	virtual const math::VRBTransform& GetViewTransform() const = 0;
+	/** Set the view transformation (view matrix as rbtransform) */
+	virtual void SetViewTransform(const math::VRBTransform& in_Transform) = 0;
+
 	/** Returns the current matrix */
-	virtual const math::VMatrix44f& GetMatrix(MatrixMode in_Mode) = 0;
+	virtual const math::VMatrix44f& GetMatrix(MatrixMode in_Mode) const = 0;
 
 	/**
 	 * Begin rendering to the render target. All render calls and state settings

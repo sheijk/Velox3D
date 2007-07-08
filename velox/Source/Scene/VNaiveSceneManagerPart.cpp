@@ -23,6 +23,7 @@ using namespace v3d; // anti auto indent
  */
 VNaiveSceneManagerPart::VNaiveSceneManagerPart()
 {
+	m_bVisibleShapesDirty = false;
 }
 
 /**
@@ -51,21 +52,33 @@ void VNaiveSceneManagerPart::UpdateAndCull(const graphics::IVCamera& in_Camera)
 			++shape;
 		}
 	}
+
+	m_bVisibleShapesDirty = false;
 }
 
 VRangeIterator<const IVShapePart> VNaiveSceneManagerPart::GetVisibleMeshes() const
 {
-	return CreateDerefBeginIterator<const IVShapePart>(m_VisibleShapes);
+	if( ! m_bVisibleShapesDirty )
+	{
+		return CreateDerefBeginIterator<const IVShapePart>(m_VisibleShapes);
+	}
+	else
+	{
+		V3D_THROW(VException, 
+			"Need to call UpdateAndCull after adding/removing meshes" );
+	}
 }
 
 void VNaiveSceneManagerPart::Add(IVGraphicsPart* in_pChild)
 {
 	m_Childs.insert(in_pChild);
+	m_bVisibleShapesDirty = true;
 }
 
 void VNaiveSceneManagerPart::Remove(IVGraphicsPart* in_pChild)
 {
 	m_Childs.erase(in_pChild);
+	m_bVisibleShapesDirty = true;
 }
 
 V3D_REGISTER_PART_PARSER(VNaiveSceneManagerPart);

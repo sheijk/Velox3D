@@ -203,8 +203,9 @@ void VMirrorShooting::Render()
 
 	activeDevice->BeginScene();
 
-	VMatrix44f viewMatrix = GetCamera()->ViewMatrix();
-	activeDevice->SetMatrix(IVDevice::ViewMatrix, viewMatrix);
+	GetCamera()->ApplyTo( *activeDevice );
+	//VMatrix44f viewMatrix = GetCamera()->ViewMatrix();
+	//activeDevice->SetMatrix(IVDevice::ViewMatrix, viewMatrix);
 	
 	VMatrix44f projMatrix;
 	MakeProjectionMatrix(&projMatrix, 45.0f, 4.0f/3.0f, 1.0f, 1000.0f);

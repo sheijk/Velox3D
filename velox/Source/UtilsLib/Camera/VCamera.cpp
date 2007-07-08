@@ -43,7 +43,8 @@ VCamera::VCamera()
 
 void VCamera::ApplyTo(IVDevice& in_Device) const
 {
-	in_Device.SetMatrix(IVDevice::ViewMatrix, m_ViewMatrix);
+	in_Device.SetViewTransform( m_Transform );
+	//in_Device.SetMatrix(IVDevice::ViewMatrix, m_ViewMatrix);
 }
 
 void VCamera::Move(vfloat32 in_fX, vfloat32 in_fY, vfloat32 in_fZ)

@@ -59,6 +59,10 @@ public:
 	             const VVector3f& in_LookAt,
 			     const VVector3f& in_Up);
 
+	VRBTransform(vfloat32 m_fPosX, vfloat32 m_fPosY, vfloat32 m_fPosZ,
+		vfloat32 m_fLookAtX, vfloat32 m_fLookAtY, vfloat32 m_fLookAtZ,
+		vfloat32 m_fUpX, vfloat32 m_fUpY, vfloat32 m_fUpZ);
+
 	/**
 	 * Initialize the orthogonal coordinate system with a given
 	 * matrix

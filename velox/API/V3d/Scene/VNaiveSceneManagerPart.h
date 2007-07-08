@@ -43,6 +43,7 @@ public:
 private:
 	typedef	std::set<const IVShapePart*> ShapeList;
 	ShapeList m_VisibleShapes;
+	vbool m_bVisibleShapesDirty;
 
 	typedef std::set<IVGraphicsPart*> GraphicsPartList;
 	GraphicsPartList m_Childs;

@@ -14,11 +14,11 @@
 #include <V3d/Graphics/IVRenderContext.h>
 
 #include <V3d/Graphics/VDisplaySettings.h>
+
 #include <V3d/Math/VMatrix.h>
+#include <V3d/Math/VRBTransform.h>
 
 #include <V3d/OpenGL.h>
-
-//#include "../DeviceBase/VBufferManager.h"
 
 #include "../DeviceBase/VMaterial.h"
 #include "../DeviceBase/VStateCategoryList.h"
@@ -72,8 +72,15 @@ public:
 	virtual vbool IsActive() const;
 
 	virtual void SetMatrix(MatrixMode in_Mode, const math::VMatrix44f& in_Matrix);
+	virtual const math::VMatrix44f& GetMatrix(MatrixMode in_Mode) const;
 
-	virtual const math::VMatrix44f& GetMatrix(MatrixMode in_Mode);
+	virtual void SetProjectionMatrix(const math::VMatrix44f& in_Matrix);
+	virtual const math::VMatrix44f& GetProjectionMatrix() const;
+	virtual void SetModelMatrix(const math::VMatrix44f& in_Matrix);
+	virtual const math::VMatrix44f& GetModelMatrix() const;
+	virtual const math::VRBTransform& GetViewTransform() const;
+	virtual void SetViewTransform(const math::VRBTransform& in_Transform);
+	virtual const math::VMatrix44f& GetViewMatrix() const;
 	
 	virtual LightId MaxActiveLight() const;
 	void ApplyLight(LightId in_Number, const VLight* in_pLight);
@@ -107,6 +114,8 @@ private:
 	VColor4f m_ClearColor;
 
 	// the matrices
+	//math::VMatrix44f m_ViewMatrix;
+	math::VRBTransform m_ViewTransform;
 	math::VMatrix44f m_ViewMatrix;
 	math::VMatrix44f m_ModelMatrix;
 	math::VMatrix44f m_ProjectionMatrix;

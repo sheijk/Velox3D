@@ -91,7 +91,7 @@ namespace {
 	template<typename T>
 		vbool BitsSet(T value, T bits)
 	{
-		return value & bits == bits;
+		return (value & bits) == bits;
 	}
 }
 
@@ -131,7 +131,7 @@ VOpenGLDevice::VOpenGLDevice(
 	//m_StateCategories.RegisterCategory(m_PixelShaderCategory);
 
 	Identity(m_ModelMatrix);
-	Identity(m_ViewMatrix);
+	//Identity(m_ViewMatrix);
 	Identity(m_ProjectionMatrix);
 	Identity(m_TextureMatrix);
 
@@ -682,11 +682,10 @@ void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const math::VMatrix44f& in_Mat
 		RecalcModelViewMatrix();
 		break;
 
-	case ViewMatrix:
-		m_ViewMatrix = in_Matrix;
-		RecalcModelViewMatrix();
-		break;
-
+	//case ViewMatrix:
+	//	m_ViewMatrix = in_Matrix;
+	//	RecalcModelViewMatrix();
+	//	break;
 	case TextureMatrix:
 		m_TextureMatrix = in_Matrix;
 		SetGLMatrix(GL_TEXTURE, m_TextureMatrix, this);
@@ -699,9 +698,45 @@ void VOpenGLDevice::SetMatrix(MatrixMode in_Mode, const math::VMatrix44f& in_Mat
 	}
 }
 
+void VOpenGLDevice::SetProjectionMatrix(const math::VMatrix44f& in_Matrix)
+{
+	SetMatrix( ProjectionMatrix, in_Matrix );
+}
+
+const math::VMatrix44f& VOpenGLDevice::GetProjectionMatrix() const
+{
+	return GetMatrix( ProjectionMatrix );
+}
+
+void VOpenGLDevice::SetModelMatrix(const math::VMatrix44f& in_Matrix)
+{
+	SetMatrix( ModelMatrix, in_Matrix );
+}
+
+const math::VMatrix44f& VOpenGLDevice::GetModelMatrix() const
+{
+	return GetMatrix( ModelMatrix );
+}
+
+const math::VMatrix44f& VOpenGLDevice::GetViewMatrix() const
+{
+	return m_ViewMatrix;
+}
+
+const math::VRBTransform& VOpenGLDevice::GetViewTransform() const
+{
+	return m_ViewTransform;
+}
+
+void VOpenGLDevice::SetViewTransform(const math::VRBTransform& in_Transform)
+{
+	m_ViewTransform = in_Transform;
+	RecalcModelViewMatrix();
+}
+
 //-----------------------------------------------------------------------------
 
-const math::VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode)
+const math::VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode) const
 {
 	switch(in_Mode)
 	{
@@ -711,9 +746,9 @@ const math::VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode)
 		case TextureMatrix:
 			return m_TextureMatrix;
 			break;
-		case ViewMatrix:
-			return m_ViewMatrix;
-			break;
+		//case ViewMatrix:
+		//	return m_ViewMatrix;
+		//	break;
 		case ProjectionMatrix:
 			return m_ProjectionMatrix;
 			break;
@@ -726,9 +761,51 @@ const math::VMatrix44f& VOpenGLDevice::GetMatrix(MatrixMode in_Mode)
 
 void VOpenGLDevice::RecalcModelViewMatrix()
 {
-	math::VMatrix44f modelView;
-	Mult(modelView, m_ViewMatrix, m_ModelMatrix);
-	//Mult(modelView, m_ModelMatrix, m_ViewMatrix);
+	using namespace math;
+
+	//TODO: this code is copied from VCamera.
+	// it should be investigated + documented...
+	VVector3f f = - m_ViewTransform.GetZAxis();
+	Normalize(f);
+
+	VVector3f up = m_ViewTransform.GetYAxis();
+	Normalize(up);
+
+	VVector3f s;
+
+	s = Cross(f,up);
+
+	VVector3f u;
+
+	u = Cross(s,f);
+
+	VMatrix44f m;
+	Identity(m);
+	m.Set(0, 0, s.Get(0));
+	m.Set(0, 1, s.Get(1));
+	m.Set(0, 2, s.Get(2));
+
+	m.Set(1, 0, u.Get(0));
+	m.Set(1, 1, u.Get(1));
+	m.Set(1, 2, u.Get(2));
+
+	m.Set(2, 0, -f.Get(0));
+	m.Set(2, 1, -f.Get(1));
+	m.Set(2, 2, -f.Get(2));
+
+	VMatrix44f t;
+	Identity(t);
+	const VVector3f pos = m_ViewTransform.GetPosition();
+	t.SetTransform(-pos[0], -pos[1], -pos[2]);
+
+	VMatrix44f r;
+	Identity(r);
+	Mult(r, m, t);
+
+	m_ViewMatrix = r;
+	VMatrix44f modelView = m_ViewMatrix;
+
+	Mult(modelView, modelView, m_ModelMatrix);
 
 	SetGLMatrix(GL_MODELVIEW, modelView, this);
 }
@@ -802,7 +879,7 @@ void VOpenGLDevice::ApplyLight(LightId in_Number, const VLight* in_pLight)
 
 IVDevice::LightId VOpenGLDevice::MaxActiveLight() const
 {
-	return m_Lights.size();
+	return LightId( m_Lights.size() );
 }
 
 const VLight* VOpenGLDevice::GetLight(LightId in_Number) const

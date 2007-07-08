@@ -236,9 +236,12 @@ public class SceneEditor extends VeloxEditorBase {
 		renderAction = renderLayer.getRenderAction();
 		
 		IVDevice device = renderAction.GetDevice();
-		VMatrix44f viewMatrix = new VMatrix44f();
-		viewMatrix.SetTransform(1.0f, 1.0f, -7.0f);
-		device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
+		VRBTransform viewTransform = new VRBTransform();
+		viewTransform.SetPosition( new VVector3f(1.0f, 1.0f, -7.0f) );
+		device.SetViewTransform( viewTransform );
+//		VMatrix44f viewMatrix = new VMatrix44f();
+//		viewMatrix.SetTransform(1.0f, 1.0f, -7.0f);
+//		device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
 
 		// delayed loading, if required (see above)
 		if( needsLoading == true ) {

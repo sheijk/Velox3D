@@ -102,7 +102,8 @@ vint VImporterDemo::Main(vector<string> args)
 		VMatrix44f trans;
 		trans.SetTransform(0,0,-2);
 		device.SetMatrix(IVDevice::ModelMatrix, trans);
-		device.SetMatrix(IVDevice::ViewMatrix, cam.GetTransform());
+		device.SetViewTransform( cam.GetCamera().GetTransform() );
+		//device.SetMatrix(IVDevice::ViewMatrix, cam.GetTransform());
 
 		device.BeginScene();
 

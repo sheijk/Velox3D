@@ -15,23 +15,6 @@ namespace v3d { namespace graphics {
 //-----------------------------------------------------------------------------
 using namespace v3d; // anti auto indent
 using namespace math;
-VVector3f DeHomogenize(const VVector4f& in_Vec)
-{
-	const vfloat32 w = in_Vec[3];
-
-	return VVector3f(in_Vec[0]/w, in_Vec[1]/w, in_Vec[2]/w);
-}
-
-VVector4f ToVector4f(const VVector3f& in_Vec, vfloat32 in_fW)
-{
-	VVector4f vec;
-	vec[0] = in_Vec[0];
-	vec[1] = in_Vec[1];
-	vec[2] = in_Vec[2];
-	vec[3] = in_fW;
-
-	return vec;
-}
 
 VVector3f ToVector3f(const VColor4f& in_Color)
 {

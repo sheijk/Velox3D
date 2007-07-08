@@ -32,8 +32,10 @@ import org.eclipse.ui.editors.text.TextEditor;
 
 import de.velox.IVDevice;
 import de.velox.VMatrix44f;
+import de.velox.VRBTransform;
 import de.velox.VRenderFrameAction;
 import de.velox.VResourceId;
+import de.velox.VVector3f;
 import de.velox.v3d;
 import de.velox.editor.entity.Entity;
 import de.velox.editor.entity.Part;
@@ -120,9 +122,12 @@ public class CGFXEditor extends TextEditor {
 		VRenderFrameAction	renderAction = renderLayer.getRenderAction();
 		
 		IVDevice device = renderAction.GetDevice();
-		VMatrix44f viewMatrix = new VMatrix44f();
-		viewMatrix.SetTransform(1.0f, 1.0f, -7.0f);
-		device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
+		VRBTransform viewTransform = new VRBTransform();
+		viewTransform.SetPosition( new VVector3f(1.0f, 1.0f, -7.0f) );
+		device.SetViewTransform( viewTransform );
+//		VMatrix44f viewMatrix = new VMatrix44f();
+//		viewMatrix.SetTransform(1.0f, 1.0f, -7.0f);
+//		device.SetMatrix(IVDevice.MatrixMode.ViewMatrix, viewMatrix);
 		
 		// create a test material
 		String source = INITIAL_SOURCE;
