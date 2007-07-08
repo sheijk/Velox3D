@@ -48,7 +48,7 @@ void VGLSLTextureParameter::ApplyTexture(VStringParam in_strResourceName) const
 			m_pTexture = GetMutableResourceData<IVTexture>(in_strResourceName);
 			m_bWasFineLastTime = true;
 		}
-		catch(VException& e)
+		catch(VException&)
 		{
 			m_bWasFineLastTime = false;
 		}
@@ -78,7 +78,7 @@ void VGLSLTextureParameter::BindTexture()
 			m_pTexture = resource::GetMutableResourceData<IVTexture>(newTextureResource.c_str());
 			m_pstrTextureResource.Release();
 		}
-		catch(VException& e)
+		catch(VException&)
 		{}
 	}
 

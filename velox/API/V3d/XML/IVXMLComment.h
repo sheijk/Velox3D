@@ -22,6 +22,7 @@ namespace xml {
 class IVXMLComment : public IVXMLNode
 {
 public:
+	virtual ~IVXMLComment(){};
 	/** Returns the Comment */
 	virtual VStringRetVal GetComment() const = 0;
 	virtual void SetComment(VStringParam in_strComment) = 0;

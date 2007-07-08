@@ -60,7 +60,7 @@ IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(VStringParam in_strFil
 * Creates the writer class that writes a xml file in the virtual file
 * system.
 * 
-* @param in_pStream The stream to which the data is written ?!?! (muß besser werden :( )
+* @param in_pStream The stream to which the data is written ?!?! (muï¿½ besser werden :( )
 */
 IVXMLService::IVXMLWriterPtr VXMLService::CreateXMLWriter(IVStreamPtr in_pStream)
 {
@@ -153,10 +153,10 @@ VXMLElement* VXMLService::BeginTranslation(TiXmlDocument& in_Doc)
 {
 	VXMLElement* pReturn = TranslateElement(in_Doc.RootElement());
 
-	TiXmlElement* pRootElement = in_Doc.RootElement();
+	//TiXmlElement* pRootElement = in_Doc.RootElement();
 
 	//skip the decleration
-//	TiXmlNode* pNode = in_Doc.FirstChild();
+	//	TiXmlNode* pNode = in_Doc.FirstChild();
 /*		
 	//add other node to our root element
 	TiXmlNode* pChild = 0;
@@ -173,7 +173,7 @@ VXMLElement* VXMLService::BeginTranslation(TiXmlDocument& in_Doc)
  *
  * @author acrlysword
  * @version 1.0
- * @todo Exception werfen statt 0 zurückzugeben
+ * @todo Exception werfen statt 0 zurï¿½ckzugeben
  */
 IVXMLNode* VXMLService::TranslateNode(TiXmlNode* in_pNode)
 {
@@ -221,7 +221,7 @@ VXMLElement* VXMLService::TranslateElement(TiXmlElement* in_pElement)
 
 	// Translate all children
 	TiXmlNode* pChild = 0;
-	while( pChild = in_pElement->IterateChildren(pChild))
+	while( (pChild = in_pElement->IterateChildren( pChild ) ) )
 	{
 		pReturn->AddChild(TranslateNode(pChild));
 	}

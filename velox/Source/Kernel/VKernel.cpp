@@ -125,7 +125,6 @@ void VKernel::CreateObjectRegistry()
 void VKernel::ParseFile(const string &in_strFileName)
 {
 	m_Services.clear();
-
 	LoadXMLService();
 
 	VKernelIniReader IniReader(&m_Services);
@@ -151,13 +150,9 @@ void VKernel::LoadServices()
 	// load all services
 	for( ; serviceIter != m_Services.end(); ++serviceIter )
 	{
-		VServiceProxy& service(**serviceIter);
-
+		//VServiceProxy& service(**serviceIter);
 		(*serviceIter)->Initialize(VObjectRegistry::GetInstance());
 	}
-
-	// load the application
-	//m_App->Initialize(VObjectRegistry::GetInstance());
 }
 
 void VKernel::DelegateControl()
@@ -181,9 +176,6 @@ void VKernel::DelegateControl()
 
 void VKernel::Shutdown()
 {
-	// deinitialize app
-	//m_App->Shutdown();	
-
 	// deinitialize all services
 	ServiceList::iterator serviceIter = m_Services.begin();
 
@@ -192,7 +184,6 @@ void VKernel::Shutdown()
 		(*serviceIter)->Shutdown();
 	}
 }
-
 
 void VKernel::SetArguments(int argc, char* argv[])
 {
@@ -206,4 +197,3 @@ void VKernel::SetArguments(int argc, char* argv[])
 } // namespace kernel
 } // namespace v3d
 //-----------------------------------------------------------------------------
-

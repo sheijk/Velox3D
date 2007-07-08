@@ -38,7 +38,6 @@ vbool VErrorService::RegisterListener(IVErrorListener* in_pListener,
 	V3D_ASSERT( (in_pListener != NULL) );
 	V3D_ASSERT( (in_pFilter != NULL) );
 
-//TODO: Falls push_back fehlschlägt, false zurückgeben
 	try {
 		m_Listeners.push_back( FLPair( in_pFilter, in_pListener ) );
 	}

@@ -25,6 +25,7 @@ using namespace v3d; // anti auto indenting
 class VRegisterGuardBase
 {
 public:
+  virtual ~VRegisterGuardBase(){};
 	static void RegisterAll();
 	static void UnregisterAll();
 

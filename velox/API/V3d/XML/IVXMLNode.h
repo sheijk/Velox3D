@@ -34,7 +34,7 @@ public:
 		Text,
 		Element
 	};
-	
+	virtual ~IVXMLNode(){};
 	/** Visit this node */
 	virtual void Visit(IVXMLVisitor& in_Visitor) = 0;
 

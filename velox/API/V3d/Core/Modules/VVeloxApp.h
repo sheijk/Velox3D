@@ -23,7 +23,7 @@ namespace v3d {
 using namespace v3d; // prevent auto indenting
 
 /**
- * Base class for a velox application. Derive a new application class from
+ * Base class for a velox application. Dervice a new application class from
  * this class. Override the main method. Create a global instance of your
  * class
  *

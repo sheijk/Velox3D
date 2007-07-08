@@ -22,6 +22,7 @@ namespace xml{
 class IVXMLAttribute
 {
 public:
+	virtual ~IVXMLAttribute(){};
 	/** Returns the name of the xml attribute*/
     virtual VStringRetVal GetName() const = 0;
 

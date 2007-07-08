@@ -36,10 +36,9 @@ private:
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::resource
-
+}
 V3D_TYPEINFO(v3d::resource::VFileName);
-
+} // namespace v3d::resource
 //-----------------------------------------------------------------------------
 #endif // V3D_VFILENAME_H
 

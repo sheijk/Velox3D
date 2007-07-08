@@ -362,7 +362,7 @@ vint VImportedFaceContainer::VertexPool::GetIndex(const math::VVector3f &in_Vect
 
   m_VertexPool.push_back(in_Vector);
   
-  return (m_VertexPool.size() - 1);
+  return (static_cast<vint>(m_VertexPool.size() ) - 1);
 }
 
 vfloat32* VImportedFaceContainer::VertexPool::CreateVertexBuffer()
@@ -381,7 +381,7 @@ vfloat32* VImportedFaceContainer::VertexPool::CreateVertexBuffer()
 
 vuint VImportedFaceContainer::VertexPool::GetVertexCount()
 {
-  return m_VertexPool.size();
+  return static_cast<vuint>(m_VertexPool.size());
 }
 
 vfloat32* VImportedFaceContainer::VertexPool::CreateNormalBuffer(

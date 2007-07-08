@@ -141,7 +141,7 @@ public:
 
 /** Use this for types which don't have a parent */
 #define V3D_TYPEINFO(TheType) \
-	template<> class v3d::InitTypeInfo<TheType>\
+	template<> class InitTypeInfo<TheType>\
 	{\
 	public:\
 		void operator()(VTypeInfo* out_pTypeInfo)\

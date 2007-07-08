@@ -13,7 +13,7 @@
 #include <V3d/Core/VNamedObject.h>
 #include <V3d/Core/VObjectRegistryExceptions.h>
 
-#pragma warning(disable:4786) //TODO: restore warning --ins
+//#pragma warning(disable:4786) //TODO: restore warning --ins
 #include <map>
 
 //-----------------------------------------------------------------------------

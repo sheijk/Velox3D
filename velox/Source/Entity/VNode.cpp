@@ -622,7 +622,7 @@ void VNode::Save(xml::IVXMLElement& node)
 	}
 
 	std::string tagList;
-	const vuint tagCount = m_Tags.size();
+	const vuint tagCount = static_cast<vuint>(m_Tags.size());
 	if( tagCount > 0 )
 	{
 		for(vuint tagNum = 0; tagNum < tagCount; ++tagNum)

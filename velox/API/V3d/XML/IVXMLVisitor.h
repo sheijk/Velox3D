@@ -21,7 +21,8 @@ class IVXMLElement;
 class IVXMLVisitor
 {
 public:
-	//TODO Text parsing
+	//TODO: Text parsing
+	virtual ~IVXMLVisitor(){};
 
 	/** Will be called on an element closing event */
 	virtual void OnElementClose(IVXMLElement* pElement) = 0;

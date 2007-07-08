@@ -25,8 +25,7 @@ class IVXMLWriter
 
 public:
 
-	virtual ~IVXMLWriter() {}
-
+	virtual ~IVXMLWriter(){};
 
 	/*
 	* Creates a new xml element (<Name)

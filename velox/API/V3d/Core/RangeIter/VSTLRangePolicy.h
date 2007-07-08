@@ -28,6 +28,7 @@ public:
 	VSTLRangePolicy(const STLIterator& in_Begin, const STLIterator& in_End)
 		: VSTLRangePolicyBase<STLIterator, T>(in_Begin, in_End)
 	{}
+	virtual ~VSTLRangePolicy(){};
         // access through this to signal protected variables as dependant type
 	virtual Type* Get() const
 	{

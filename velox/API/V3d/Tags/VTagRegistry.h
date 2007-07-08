@@ -48,12 +48,14 @@ private:
 
 typedef VServicePtr<VTagRegistry> VTagRegistryPtr;
 //-----------------------------------------------------------------------------
-}} // namespace v3d::tags
+}
 template<>
-inline v3d::tags::VTagRegistry* v3d::QueryService<v3d::tags::VTagRegistry>()
+inline v3d::tags::VTagRegistry* QueryService<v3d::tags::VTagRegistry>()
 {
 	return QueryObject<v3d::tags::VTagRegistry>("tag.registry");
 }
+} // namespace v3d::tags
+
 //-----------------------------------------------------------------------------
 #endif // V3D_VTAGREGISTRY_2006_05_31_H
 

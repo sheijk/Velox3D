@@ -19,6 +19,7 @@ template<typename T>
 	class IVRangeIteratorPolicy
 {
 public:
+	virtual ~IVRangeIteratorPolicy(){};
 	virtual void Proceed() = 0;
 	virtual T* Get() const = 0;
 	virtual vbool HasNext() const = 0;

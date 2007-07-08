@@ -55,7 +55,7 @@ void VDevILSaver::SaveImageToFile(VImage& in_Image, ImageType in_ImageType,
 
 	switch(in_ImageType)
 	{
-	case IVImageSaver::ImageType::SaveBMP:
+	case IVImageSaver::SaveBMP:
 		{
 			if(in_Image.GetBitsPerPixel() == 8 ||
 			   in_Image.GetBitsPerPixel() == 32)
@@ -67,7 +67,7 @@ void VDevILSaver::SaveImageToFile(VImage& in_Image, ImageType in_ImageType,
 			break;
 		}
 
-	case IVImageSaver::ImageType::SaveJPG:
+	case IVImageSaver::SaveJPG:
 		{
 			if(in_Image.GetBitsPerPixel() == 32)
 				V3D_THROW(VException, "32 bit per pixel are not supported by jpg format!");
@@ -75,7 +75,7 @@ void VDevILSaver::SaveImageToFile(VImage& in_Image, ImageType in_ImageType,
 			ilSave(IL_JPG, (vchar*)in_sFilename);
 			break;
 		}
-	case IVImageSaver::ImageType::SaveTGA:
+	case IVImageSaver::SaveTGA:
 		{
 			if(in_Image.GetBitsPerPixel() == 8)
 				V3D_THROW(VException, "8 bit per pixel are not supported by tga format!");

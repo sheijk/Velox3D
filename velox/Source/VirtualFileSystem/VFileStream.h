@@ -31,12 +31,20 @@ class VFileStream : public IVBufferStream
 {
 private:
 	VFileStream();	
-
+//todo: hack
+#ifdef V3D_WIN32
 	HANDLE m_hFile;
-	std::string m_strFileName;
 	DWORD m_nAccessMode;
 	DWORD m_nCreationMode;
 	LONG m_nFilePos;
+#else
+	int m_hFile;
+	int m_nAccessMode;
+	int m_nCreationMode;
+	int m_nFilePos;
+#endif
+
+	std::string m_strFileName;
 	vbool m_bConnected;
 	VSharedPtr<VLegalOperations> m_pLegalOps;
 

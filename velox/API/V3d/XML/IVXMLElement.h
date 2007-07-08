@@ -29,8 +29,9 @@ namespace xml{
 class IVXMLElement : public IVXMLNode
 {
 public:
-	typedef VRangeIterator<IVXMLAttribute> AttributeIter;
+  	typedef VRangeIterator<IVXMLAttribute> AttributeIter;
 	typedef VRangeIterator<IVXMLNode> NodeIter;
+	virtual ~IVXMLElement(){};
 
 	/** Returns the name od the xml element */
 	virtual VStringRetVal GetName() = 0;

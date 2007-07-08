@@ -21,32 +21,16 @@ namespace v3d {
 
 namespace 
 {
-	//IVErrorService* g_pErrorService = 0;
-
 	IVErrorService* GetLogDevice()
 	{
 		try 
 		{
 			return QueryObject<IVErrorService>("error.service");
 		}
-		//TODO: eleminate warning - ins
 		catch(VObjectRegistryException& )
 		{
 			return 0;
 		}
-
-		//if(0 == g_pErrorService)
-		//{
-			//try 
-			//{
-			//	g_pErrorService = QueryObject<IVErrorService>("error.service");
-			//}
-			//catch(VObjectRegistryException& e)
-			//{
-			//}
-		//}
-
-	//	return g_pErrorService;
 	}
 }
 
