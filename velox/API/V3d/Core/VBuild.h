@@ -23,6 +23,7 @@
 #endif
 
 #ifdef __GNUC__
+#define V3D_GCC
 #ifdef __APPLE__
 #define V3D_MAC
 #else

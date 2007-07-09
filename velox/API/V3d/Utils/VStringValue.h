@@ -84,6 +84,8 @@ private:
 		return !(iss>>f>>t).fail();
 	}
 
+#ifdef V3D_MSVC //TODO: hack
+
 	template<>
 	vbool VStringValue::ConvertString<std::string>(
 	  std::string& t,
@@ -93,6 +95,7 @@ private:
 	  t = s;
 	  return true;
 	}
+#endif
 };
 
 

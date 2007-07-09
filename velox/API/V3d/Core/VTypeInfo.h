@@ -155,7 +155,7 @@ public:
  * class of TheType
  */
 #define V3D_TYPEINFO_WITHPARENT(TheType, TheParent) \
-	template<> class v3d::InitTypeInfo<TheType>\
+	template<> class InitTypeInfo<TheType>\
 	{\
 	public:\
 		void operator()(VTypeInfo* out_pTypeInfo)\

@@ -9,7 +9,6 @@
 #define V3D_VENTITYMANAGER_2004_10_09_H
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
-
 #include <V3d/Core/VNamedObject.h>
 #include <V3d/Entity/VEntity.h>
 #include <V3d/Core/SmartPtr/VServicePtr.h>
@@ -17,9 +16,12 @@
 
 #include <vector>
 //-----------------------------------------------------------------------------
-namespace v3d { namespace entity {
+namespace v3d
+{
+namespace entity
+{
 //-----------------------------------------------------------------------------
-using namespace v3d; // prevent auto indenting
+using namespace v3d;
 
 /**
  * @author sheijk
@@ -32,7 +34,7 @@ public:
 	VEntityManager();
 	virtual ~VEntityManager();
 
-    virtual void Add(EntityPtr in_pEntity);
+	virtual void Add(EntityPtr in_pEntity);
 	virtual void Remove(EntityPtr in_pEntity);
 
 private:
@@ -46,13 +48,11 @@ typedef VEntityManager IVEntityManager;
 typedef VServicePtr<IVEntityManager> VEntityManagerPtr;
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::entity
-//-----------------------------------------------------------------------------
-template<>
-inline v3d::entity::IVEntityManager* v3d::QueryService<v3d::entity::IVEntityManager>()
-{
-	return QueryObject<v3d::entity::IVEntityManager>("entity.manager");
 }
+template<> inline entity::IVEntityManager* QueryService<entity::IVEntityManager>()
+{
+	return QueryObject<entity::IVEntityManager>("entity.manager");
+}
+} // namespace v3d::entity
 //-----------------------------------------------------------------------------
 #endif // V3D_VENTITYMANAGER_2004_10_09_H
-

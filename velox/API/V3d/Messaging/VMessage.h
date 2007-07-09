@@ -66,10 +66,10 @@ private:
 template<typename Key, typename Value, template<typename, typename> class ContainerT, typename Allocator >
 typename ContainerT< std::pair<Key, Value>, Allocator >::const_iterator findKey(const Key& key, const ContainerT< std::pair<Key, Value>, Allocator >& container)
 {
-	const ContainerT< std::pair<Key, Value> >::const_iterator containerEnd = container.end();
-	for(ContainerT< std::pair<Key, Value> >::const_iterator iter = container.begin();
-		iter != containerEnd;
-		++iter)
+	const typename ContainerT< std::pair<Key, Value>, Allocator >::const_iterator iter = container.begin();
+	const typename ContainerT< std::pair< Key, Value >, Allocator >::const_iterator containerEnd = container.end();
+		
+	for( ; iter != containerEnd; ++iter)
 	{
 		if( iter->first == key )
 			return iter;
@@ -81,10 +81,9 @@ typename ContainerT< std::pair<Key, Value>, Allocator >::const_iterator findKey(
 template<typename Key, typename Value, template<typename, typename> class ContainerT, typename Allocator >
 typename ContainerT< std::pair<Key, Value>, Allocator >::iterator findKey(const Key& key, ContainerT< std::pair<Key, Value>, Allocator >& container)
 {
-	const ContainerT< std::pair<Key, Value> >::iterator containerEnd = container.end();
-	for(ContainerT< std::pair<Key, Value> >::iterator iter = container.begin();
-		iter != containerEnd;
-		++iter)
+	const typename ContainerT< std::pair<Key, Value>, Allocator >::iterator containerEnd = container.end();
+	const typename ContainerT< std::pair<Key, Value>, Allocator >::iterator iter = container.begin();
+	for( ; iter != containerEnd; ++iter)
 	{
 		if( iter->first == key )
 			return iter;

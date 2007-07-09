@@ -20,7 +20,7 @@
 //-----------------------------------------------------------------------------
 namespace v3d { namespace entity {
 //-----------------------------------------------------------------------------
-using namespace v3d; // prevent auto indenting
+//using namespace v3d;
 
 class VEntityHelper;
 
@@ -69,8 +69,9 @@ private:
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::entity
-V3D_TYPEINFO_WITHPARENT( v3d::entity::VEntity, v3d::entity::VNode );
+}
+V3D_TYPEINFO_WITHPARENT( entity::VEntity, entity::VNode );
+} // namespace v3d::entity
 //-----------------------------------------------------------------------------
 #endif // V3D_VENTITY_2004_10_09_H
 
