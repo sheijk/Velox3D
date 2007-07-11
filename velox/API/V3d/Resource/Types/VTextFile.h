@@ -36,8 +36,8 @@ private:
 
 //-----------------------------------------------------------------------------
 }
-V3D_TYPEINFO(v3d::resource::VTextFile);
 } // namespace v3d::resource
+V3D_TYPEINFO(v3d::resource::VTextFile);
 //-----------------------------------------------------------------------------
 #endif // V3D_VTEXTFILE_2005_10_31_H
 

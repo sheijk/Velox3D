@@ -70,8 +70,8 @@ private:
 
 //-----------------------------------------------------------------------------
 }
-V3D_TYPEINFO_WITHPARENT( entity::VEntity, entity::VNode );
 } // namespace v3d::entity
+V3D_TYPEINFO_WITHPARENT( v3d::entity::VEntity, v3d::entity::VNode );
 //-----------------------------------------------------------------------------
 #endif // V3D_VENTITY_2004_10_09_H
 

@@ -63,7 +63,7 @@ private:
 };
 //-----------------------------------------------------------------------------
 } // namespace image
-V3D_TYPEINFO(v3d::image::VImage);
 } // namespace v3d
+V3D_TYPEINFO(v3d::image::VImage);
 //-----------------------------------------------------------------------------
 #endif // V3D_VIMAGE_H

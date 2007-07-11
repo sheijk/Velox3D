@@ -141,6 +141,7 @@ public:
 
 /** Use this for types which don't have a parent */
 #define V3D_TYPEINFO(TheType) \
+  namespace v3d { \
 	template<> class InitTypeInfo<TheType>\
 	{\
 	public:\
@@ -148,13 +149,15 @@ public:
 		{\
 			out_pTypeInfo->SetName(#TheType);\
 		}\
-	};
+	};\
+  }
 
 /**
  * Use this if your type has only one parent. TheParent must be the super
  * class of TheType
  */
 #define V3D_TYPEINFO_WITHPARENT(TheType, TheParent) \
+  namespace v3d { \
 	template<> class InitTypeInfo<TheType>\
 	{\
 	public:\
@@ -166,7 +169,8 @@ public:
 				out_pTypeInfo->SetName(#TheType);\
 				out_pTypeInfo->AddSuperType<TheParent>();\
 			}\
-	};
+	};\
+  }
 
 //-----------------------------------------------------------------------------
 
@@ -212,4 +216,3 @@ void VTypeInfo::AddSuperType()
 } // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_VTYPEINFO_2005_07_20_H
-

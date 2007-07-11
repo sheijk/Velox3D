@@ -69,7 +69,6 @@ void VEntity::Load(const xml::IVXMLElement& in_Element)
 }
 
 V3D_REGISTER_PART_PARSER(VEntity);
-
 //-----------------------------------------------------------------------------
 }} // namespace v3d::entity
 //-----------------------------------------------------------------------------

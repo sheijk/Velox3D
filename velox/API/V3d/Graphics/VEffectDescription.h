@@ -186,8 +186,8 @@ private:
 #include "VEffectDescription.inl"
 //-----------------------------------------------------------------------------
 }
-V3D_TYPEINFO(v3d::graphics::VEffectDescription);
 } // namespace v3d::graphics
+V3D_TYPEINFO(v3d::graphics::VEffectDescription);
 //-----------------------------------------------------------------------------
 #endif // V3D_VEFFECTDESCRIPTION_2004_08_28_H
 

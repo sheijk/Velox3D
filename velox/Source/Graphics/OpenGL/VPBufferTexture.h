@@ -48,8 +48,8 @@ private:
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::graphics
-//-----------------------------------------------------------------------------
+}
+} // namespace v3d::graphics
 V3D_TYPEINFO_WITHPARENT(v3d::graphics::VPBufferTexture, v3d::graphics::IVTexture);
-
+//-----------------------------------------------------------------------------
 #endif //V3D_VPBUFFERTEXTURE_H

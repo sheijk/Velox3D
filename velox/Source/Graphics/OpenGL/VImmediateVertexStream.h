@@ -47,10 +47,8 @@ private:
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
-
-V3D_TYPEINFO_WITHPARENT(v3d::graphics::VImmediateVertexStream, v3d::graphics::IVVertexStream);
-
 } // namespace v3d
+V3D_TYPEINFO_WITHPARENT(v3d::graphics::VImmediateVertexStream, v3d::graphics::IVVertexStream);
 //-----------------------------------------------------------------------------
 #endif // V3D_VIMMEDIATEVERTEXSTREAM_2005_02_03_H
 

@@ -33,8 +33,8 @@ public:
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
-V3D_TYPEINFO(v3d::graphics::IVMesh);
 } // namespace v3d
+V3D_TYPEINFO(v3d::graphics::IVMesh);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVMESH_H
 

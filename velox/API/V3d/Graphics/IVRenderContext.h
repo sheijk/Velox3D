@@ -47,8 +47,8 @@ public:
 
 //-----------------------------------------------------------------------------
 }
-V3D_TYPEINFO(v3d::graphics::IVRenderContext);
 } // namespace v3d::graphics
+V3D_TYPEINFO(v3d::graphics::IVRenderContext);
 //-----------------------------------------------------------------------------
 
 #endif //V3D_IVRENDERCONTEXT_H

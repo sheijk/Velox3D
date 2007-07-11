@@ -44,9 +44,8 @@ protected:
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::graphics
-
+}
+} // namespace v3d::graphics
 V3D_TYPEINFO_WITHPARENT(v3d::graphics::VOffscreenContextBase, v3d::graphics::IVRenderContext);
 //-----------------------------------------------------------------------------
 #endif // V3D_VOFFSCREENCONTEXTBASE_2005_11_04_H
-

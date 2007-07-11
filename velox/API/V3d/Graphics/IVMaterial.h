@@ -43,8 +43,8 @@ public:
 
 //-----------------------------------------------------------------------------
 } // namespace graphics
-V3D_TYPEINFO(v3d::graphics::IVMaterial);
 } // namespace v3d
+V3D_TYPEINFO(v3d::graphics::IVMaterial);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVMATERIAL_H
 

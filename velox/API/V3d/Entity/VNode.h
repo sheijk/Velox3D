@@ -282,8 +282,8 @@ PartType* VNode::GetFirst()
 
 //-----------------------------------------------------------------------------
 }
-V3D_TYPEINFO( v3d::entity::VNode );
 } // namespace v3d::entity
+V3D_TYPEINFO( v3d::entity::VNode );
 //-----------------------------------------------------------------------------
 #endif // V3D_VNODE_2007_05_18_H
 

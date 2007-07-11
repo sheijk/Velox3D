@@ -42,7 +42,7 @@ public:
 
 //-----------------------------------------------------------------------------
 }
-V3D_TYPEINFO(v3d::graphics::IVTexture);
 } // namespace v3d::graphics
+V3D_TYPEINFO(v3d::graphics::IVTexture);
 //-----------------------------------------------------------------------------
 #endif // V3D_IVTEXTURE_H

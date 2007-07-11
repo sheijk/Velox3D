@@ -54,17 +54,8 @@ typedef IVPart VPart;
 
 //-----------------------------------------------------------------------------
 }
-  //V3D_TYPEINFO(v3d::entity::IVPart);
-
-template<> class InitTypeInfo< v3d::entity::IVPart >
-	{
-	public:
-		void operator()(VTypeInfo* out_pTypeInfo)
-		{
-		  out_pTypeInfo->SetName( "v3d::entity::IVPart" );
-		}
-	};
 } // namespace v3d
+V3D_TYPEINFO(entity::IVPart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VPART_2004_10_09_H
 

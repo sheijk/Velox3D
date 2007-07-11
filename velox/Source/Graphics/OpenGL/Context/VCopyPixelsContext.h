@@ -42,9 +42,8 @@ private:
 };
 
 //-----------------------------------------------------------------------------
-}} // namespace v3d::graphics
-
+}
+} // namespace v3d::graphics
 V3D_TYPEINFO_WITHPARENT(v3d::graphics::VCopyPixelsContext, v3d::graphics::VOffscreenContextBase);
 //-----------------------------------------------------------------------------
 #endif // V3D_VCOPYPIXELSCONTEXT_2005_11_04_H
-
