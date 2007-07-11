@@ -269,29 +269,29 @@ void VCubemapShooting::Render()
 			m_pContext->SetActiveSide(side);
 			m_pDevice->BeginScene();
 
-			////glClearColor( .2f, .2f, .2f, 1.f );
-			//glClearColor( c[0], c[1], c[2], c[3] );
-			//c += 4;
-			//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+			//glClearColor( .2f, .2f, .2f, 1.f );
+			glClearColor( c[0], c[1], c[2], c[3] );
+			c += 4;
+			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-			//VRangeIterator<const IVShapePart> visibleObject = m_pScene->GetVisibleMeshes();
-			//while( visibleObject.HasNext() )
-			//{
-			//	math::VRBTransform transform = visibleObject->GetModelTransform();
-			//	m_pDevice->SetMatrix(
-			//		IVDevice::ModelMatrix, transform.AsMatrix());
+			VRangeIterator<const IVShapePart> visibleObject = m_pScene->GetVisibleMeshes();
+			while( visibleObject.HasNext() )
+			{
+				math::VRBTransform transform = visibleObject->GetModelTransform();
+				m_pDevice->SetMatrix(
+					IVDevice::ModelMatrix, transform.AsMatrix());
 
-			//	for(vint passNum = visibleObject->GetPassCount() - 1;
-			//		passNum >= 0;
-			//		--passNum)
-			//	{
-			//		visibleObject->ApplyPassStates( passNum, *m_pDevice );
-			//		visibleObject->SendGeometry( *m_pDevice );
-			//		visibleObject->UnapplyPassStates( passNum, *m_pDevice );
-			//	}
+				for(vint passNum = visibleObject->GetPassCount() - 1;
+					passNum >= 0;
+					--passNum)
+				{
+					visibleObject->ApplyPassStates( passNum, *m_pDevice );
+					visibleObject->SendGeometry( *m_pDevice );
+					visibleObject->UnapplyPassStates( passNum, *m_pDevice );
+				}
 
-			//	++visibleObject;
-			//}
+				++visibleObject;
+			}
 		}
 
 		m_pDevice->EndScene();
