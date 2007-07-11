@@ -575,7 +575,7 @@ void VNode::Load(const xml::IVXMLElement& in_Node)
 }
 
 namespace {
-	typedef std::map<std::string, std::string> SettingsMap;
+	typedef std::list< std::pair<std::string, std::string> > SettingsMap;
 
 	SettingsMap CollectSettings(VNode& part)
 	{
@@ -585,7 +585,7 @@ namespace {
 		messaging::VMessage reply;
 		part.Send(request, &reply);
 
-		std::map<std::string, std::string> settings;
+		SettingsMap settings;
 
 		VRangeIterator<const std::string> property = reply.PropertyIterator();
 		while( property.HasNext() )
@@ -593,7 +593,7 @@ namespace {
 			const std::string name = *property;
 			const std::string value = reply.GetAs<std::string>(name);
 
-			settings.insert( std::make_pair(name, value) );
+			settings.push_back( std::make_pair(name, value) );
 
 			++property;
 		}

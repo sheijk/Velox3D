@@ -21,77 +21,12 @@ using namespace v3d; // anti auto indent
 void IVPart::Save(xml::IVXMLElement& node)
 {
 	VNode::Save( node );
-	//node.SetName("part");
-	//node.AddAttribute( "type", utils::VStringValue(GetTypeInfo().GetName()) );
-
-	//SettingsMap settings = CollectSettings(*this);
-
-	//const SettingsMap::iterator settingsEnd = settings.end();
-	//for(SettingsMap::iterator setting = settings.begin();
-	//	setting != settingsEnd;
-	//	++setting)
-	//{
-	//	const std::string name = setting->first;
-	//	const std::string value = setting->second;
-
-	//	node.AddAttribute(name.c_str(), utils::VStringValue(value));
-	//}
-
-	//std::string tagList;
-	//const vuint tagCount = m_Tags.size();
-	//for(vuint tagNum = 0; tagNum < tagCount; ++tagNum)
-	//{
-	//	const tags::VTag* tag = m_Tags[tagNum];
-
-	//	if( tag != NULL )
-	//	{
-	//		const std::string tagName = tag->GetName();
-	//		if( tagNum > 0 )
-	//			tagList += " ";
-
-	//		tagList += tagName;
-	//	}
-	//}
-
-	//node.AddAttribute("tags", utils::VStringValue(tagList));
 }
 
 void IVPart::Load(const xml::IVXMLElement& in_Node)
 {
 	VNode::Load( in_Node );
-	//VRangeIterator<const xml::IVXMLAttribute> attrib = in_Node.AttributeBegin();
-	//while( attrib.HasNext() )
-	//{
-	//	std::string name = attrib->GetName();
-	//	std::string value = attrib->GetValueAs<std::string>();
-
-	//	if( name != "type" && name != "tags" )
-	//	{
-	//		messaging::VMessage message;
-	//		message.AddProperty("type", "update");
-	//		message.AddProperty("name", name);
-	//		message.AddProperty("value", value);
-
-	//		Send(message);
-	//	}
-	//	else if( name == "tags" )
-	//	{
-	//		tags::VTagRegistryPtr pTagRegistry;
-
-	//		std::stringstream tags(value);
-	//		std::string tagName;
-
-	//		while( ! tags.eof() )
-	//		{
-	//			tags >> tagName;
-	//			AttachTag(pTagRegistry->GetTagWithName(tagName));
-	//		}
-	//	}
-
-	//	++attrib;
-	//}
 }
-
 
 //-----------------------------------------------------------------------------
 }} // namespace v3d

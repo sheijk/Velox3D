@@ -4,10 +4,11 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
 #include "VCubeMapTexture.h"
 //-----------------------------------------------------------------------------
 #include <V3d/Graphics/GraphicsExceptions.h>
+
+#include <vector>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
 //-----------------------------------------------------------------------------
@@ -105,6 +106,46 @@ VCubeMapTexture::VCubeMapTexture(
 
 	glBindTexture( GL_TEXTURE_CUBE_MAP, 0 );
 
+	m_nTextureUnit = 0;
+}
+
+VCubeMapTexture::VCubeMapTexture(vuint in_nSize)
+{
+	const vuint componentCount = 3;
+	const GLenum pixelFormat = GL_RGB;
+	const GLenum pixelDataType = GL_UNSIGNED_BYTE;
+
+	std::vector<vuint8> pixels;
+	pixels.resize( componentCount * in_nSize * in_nSize );
+
+	m_nSize = in_nSize;
+
+	glGenTextures( 1, &m_TextureId );
+	glBindTexture( GL_TEXTURE_CUBE_MAP, m_TextureId );
+
+	for(vuint side = 0; side < 6; ++side)
+	{
+		const GLenum textureTarget = GL_TEXTURE_CUBE_MAP_POSITIVE_X + side;
+
+		glPixelStorei  (GL_UNPACK_ALIGNMENT, 1);
+		glTexParameteri( textureTarget, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+		glTexParameteri( textureTarget, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+		glTexParameteri( textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri( textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
+
+		gluBuild2DMipmaps(
+			textureTarget, 
+			pixelFormat,
+			m_nSize,
+			m_nSize,
+			pixelFormat,
+			pixelDataType,
+			&pixels[0]
+			);
+	}
+
+	glBindTexture( GL_TEXTURE_CUBE_MAP, 0 );
 	m_nTextureUnit = 0;
 }
 

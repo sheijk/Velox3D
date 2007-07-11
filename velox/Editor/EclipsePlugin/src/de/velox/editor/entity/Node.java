@@ -15,17 +15,21 @@ public abstract class Node {
 	protected final String type;
 
 	Node(VNodePtr impl) {
-		this.impl = impl;
+		this.setImpl(impl);
 		this.type = impl.GetTypeInfo().GetName();
 		
 		updateSettingsFromPart();
 	}
 	
 	Node(String type, VNodePtr impl) {
-		this.impl = impl;
+		this.setImpl(impl);
 		this.type = type;
 		
 		updateSettingsFromPart();
+	}
+
+	protected boolean isImplValid() {
+		return valid(impl);
 	}
 	
 	public VNode impl() {
@@ -54,7 +58,7 @@ public abstract class Node {
 
 	
 	
-	protected VNodePtr impl = null;
+	private VNodePtr impl = null;
 	
 	protected static boolean valid(VNodePtr ptr) {
 		return ptr != null && ptr.Get() != null;
@@ -75,7 +79,7 @@ public abstract class Node {
 		requestMessage.AddProperty("type", "getSettings");
 		
 		VMessage answer = new VMessage();
-		impl.Send(requestMessage, answer);
+		getImpl().Send(requestMessage, answer);
 
 		settings.clear();
 		
@@ -109,7 +113,7 @@ public abstract class Node {
 		
 		if( valid(impl) ) {
 			try {
-				impl.Send(msg);
+				getImpl().Send(msg);
 				updateSettingsFromPart();
 			}
 			catch(Throwable e) {
@@ -118,17 +122,27 @@ public abstract class Node {
 			}
 		}
 	}
-		
-	
+
 	public VTagIterator tags() {
-		return impl.Tags();
+		return getImpl().Tags();
 	}
 	
 	public void AttachTag(String id) {
-		impl.AttachTag(v3d.GetTagRegistry().GetTagWithName(id));
+		getImpl().AttachTag(v3d.GetTagRegistry().GetTagWithName(id));
 	}
 	
 	public void RemoveTag(String id) {
-		impl.RemoveTag(v3d.GetTagRegistry().GetTagWithName(id));
+		getImpl().RemoveTag(v3d.GetTagRegistry().GetTagWithName(id));
+	}
+
+	protected void setImpl(VNodePtr impl) {
+		this.impl = impl;
+	}
+
+	protected VNodePtr getImpl() {
+		if( ! valid(impl) )
+			throw new NullPointerException();
+		
+		return impl;
 	}
 }

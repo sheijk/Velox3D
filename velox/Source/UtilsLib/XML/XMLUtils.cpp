@@ -124,6 +124,7 @@ void SaveXMLElementToFileNoVFS(IVXMLElement* in_pElement, VStringParam in_strFil
 {
 	std::ofstream file(in_strFileName);
 
+	file << "<?" << "xml version=\"1.0\"?>" <<"\n";
     Save(file, *in_pElement, "");
 }
 

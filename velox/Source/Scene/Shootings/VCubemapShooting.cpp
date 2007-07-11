@@ -160,6 +160,7 @@ VCubemapShooting::VCubemapShooting() :
 	m_pScene( RegisterTo() ),
 	m_pParentShooting( RegisterTo() )
 {
+	m_nCubemapSize = 512;
 }
 
 /**
@@ -229,35 +230,20 @@ void VCubemapShooting::Render()
 	};
 
 	static math::VRBTransform cameraTransforms[6] = {
-		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f )
-
 		//math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-		//math::VRBTransform( 0.f, 0.f, 0.f,  -1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 1.f, 0.f,  0.f, 0.f, 1.f ),
-		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, -1.f, 0.f,  0.f, 0.f, -1.f ),
-		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 0.f, 1.f, 0.f, 1.f, 0.f ),
-		//math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 0.f, -1.f, 0.f, 1.f, 0.f )
-	};
+		//math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
+		//math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, 1.f, 0.f )
 
-	//static math::VMatrix44f cameraMatrices[6] = {
-	//	cameraTransforms[0].AsMatrix(),
-	//	cameraTransforms[1].AsMatrix(),
-	//	cameraTransforms[2].AsMatrix(),
-	//	cameraTransforms[3].AsMatrix(),
-	//	cameraTransforms[4].AsMatrix(),
-	//	cameraTransforms[5].AsMatrix()
-	//	//LookAtDirMatrix( 1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-	//	//LookAtDirMatrix( -1.f, 0.f, 0.f,  0.f, 1.f, 0.f ),
-	//	//LookAtDirMatrix( 0.f, 1.f, 0.f,  0.f, 0.f, 1.f ),
-	//	//LookAtDirMatrix( 0.f, -1.f, 0.f,  0.f, 0.f, -1.f ),
-	//	//LookAtDirMatrix( 0.f, 0.f, 1.f, 0.f, 1.f, 0.f ),
-	//	//LookAtDirMatrix( 0.f, 0.f, -1.f, 0.f, 1.f, 0.f )
-	//};
+		math::VRBTransform( 0.f, 0.f, 0.f,  1.f, 0.f, 0.f,  0.f, -1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  -1.f, 0.f, 0.f,  0.f, -1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 1.f, 0.f,  0.f, 0.f, 1.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  0.f, -1.f, 0.f,  0.f, 0.f, -1.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 0.f, 1.f,  0.f, -1.f, 0.f ),
+		math::VRBTransform( 0.f, 0.f, 0.f,  0.f, 0.f, -1.f,  0.f, -1.f, 0.f )
+	};
 
 	float* c = &sideColors[0];
 
@@ -265,8 +251,6 @@ void VCubemapShooting::Render()
 	{
 		using graphics::VCubeMapContext;
 		using graphics::IVDevice;
-
-		//glClearColor( 1.0f, 1.0f, 0.0f, 1.0f );
 
 		for( VCubeMapContext::Side side = VCubeMapContext::PosX;
 			side <= VCubeMapContext::NegZ;
@@ -283,28 +267,31 @@ void VCubemapShooting::Render()
 			//m_pDevice->SetMatrix( IVDevice::ViewMatrix, cameraMatrices[int(side)] );
 
 			m_pContext->SetActiveSide(side);
-			//m_pContext->MakeCurrent();
 			m_pDevice->BeginScene();
 
-			//glClearColor( .2f, .2f, .2f, 1.f );
-			glClearColor( c[0], c[1], c[2], c[3] );
-			c += 4;
-			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+			////glClearColor( .2f, .2f, .2f, 1.f );
+			//glClearColor( c[0], c[1], c[2], c[3] );
+			//c += 4;
+			//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-			VRangeIterator<const IVShapePart> visibleObject = m_pScene->GetVisibleMeshes();
-			while( visibleObject.HasNext() )
-			{
-				for(vint passNum = visibleObject->GetPassCount() - 1;
-					passNum >= 0;
-					--passNum)
-				{
-					visibleObject->ApplyPassStates( passNum, *m_pDevice );
-					visibleObject->SendGeometry( *m_pDevice );
-					visibleObject->UnapplyPassStates( passNum, *m_pDevice );
-				}
+			//VRangeIterator<const IVShapePart> visibleObject = m_pScene->GetVisibleMeshes();
+			//while( visibleObject.HasNext() )
+			//{
+			//	math::VRBTransform transform = visibleObject->GetModelTransform();
+			//	m_pDevice->SetMatrix(
+			//		IVDevice::ModelMatrix, transform.AsMatrix());
 
-				++visibleObject;
-			}
+			//	for(vint passNum = visibleObject->GetPassCount() - 1;
+			//		passNum >= 0;
+			//		--passNum)
+			//	{
+			//		visibleObject->ApplyPassStates( passNum, *m_pDevice );
+			//		visibleObject->SendGeometry( *m_pDevice );
+			//		visibleObject->UnapplyPassStates( passNum, *m_pDevice );
+			//	}
+
+			//	++visibleObject;
+			//}
 		}
 
 		m_pDevice->EndScene();
@@ -323,9 +310,20 @@ void VCubemapShooting::SetCubeMapResource(const std::string& resourceName)
 	{
 		using namespace graphics;
 
+		if( ! VResourceManagerPtr()->ExistsResource(resourceName.c_str()) )
+			VResourceManagerPtr()->CreateResource(resourceName.c_str());
+
 		VResourceId res( resourceName.c_str() );
 
-		m_pCubeMapTexture = res->GetMutableData<VCubeMapTexture>();
+		if( ! res->ContainsData<VCubeMapTexture>() )
+		{
+			std::auto_ptr<VCubeMapTexture> pTexture( 
+				new VCubeMapTexture(m_nCubemapSize) );
+
+			res->AddData( pTexture.release() );
+
+			m_pCubeMapTexture = res->GetMutableData<VCubeMapTexture>();
+		}
 
 		if( ! res->ContainsData<VCubeMapContext>() )
 		{

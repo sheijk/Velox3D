@@ -20,14 +20,6 @@ void main(void) {
 	vec4 viewdir = (v3d_ModelMatrix * gl_Vertex) - v3d_CameraPos;
 	viewdir = normalize(viewdir);
 	reflected = viewdir.xyz;
-/*	reflected = reflect( viewdir.xyz, normal ); */
-	
-/*	vec3 viewdir = normalize( (gl_ModelViewMatrixInverse * gl_Position) ).xyz; */
-/*	reflected = reflect( viewdir, normal ); */
-/*	vec4 viewdir = (gl_ModelViewMatrix * gl_Vertex);
-	reflected = viewdir.xyz; */
-/*	viewdir = gl_ModelViewMatrixInverse * gl_Position; */
-/*	reflected = reflect( viewdir.xyz, normal ); */
 }
 				</iparam>
 			</state>
@@ -44,15 +36,12 @@ void main(void) {
 	normal = normalize( normal );
 	
 	vec4 reflectedColor = textureCube( cubemap, reflect(reflected, normal) );
-	vec4 refractedColor = textureCube( cubemap, refract(reflected, normal, 0.87) );
+	vec4 refractedColor = textureCube( cubemap, refract(reflected, normal, 0.8) );
 
-	gl_FragColor = reflectedColor;
-/*
-	float index = 1.0 - smoothstep( 0.1, 0.5, dot(normal, -reflected) );
+	float index = smoothstep( 0.3, 0.9, dot(normal, -reflected) );
 	index = max( 0.0, min(1.0, index) );
-	
+	index = 0.0;
 	gl_FragColor = mix( reflectedColor, refractedColor, index );
-*/
 }
 				</iparam>
 			</state>

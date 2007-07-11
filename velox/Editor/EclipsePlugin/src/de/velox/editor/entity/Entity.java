@@ -13,12 +13,13 @@ package de.velox.editor.entity;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import sun.security.krb5.internal.crypto.n;
+
 import de.velox.*;
 
 public class Entity extends Node {
 	private final static String NODE_TYPE_ENTITY = "entity";
 	private final static String NODE_TYPE_PART = "part";
-	private final static String ENTITY_NAME_ATTRIB = "name";
 	
 	private String name = "";
 	private LinkedList<Part> parts = new LinkedList<Part>();
@@ -34,10 +35,39 @@ public class Entity extends Node {
 	public Entity(VNodePtr entityImpl) {
 		super( entityImpl );
 
-		if( impl != null && impl.Get() != null ) {
-			SetName( impl.GetName() );
+		createAdaptors();
+		
+		if( ! isImplValid() ) {
+			throw new RuntimeException("Tried to create Entity from null value");
+		}
+	}
+
+	private static boolean contains(LinkedList<? extends Node> list, Node node) {
+		Iterator<? extends Node> current = list.iterator();
+		while( current.hasNext() ) {
+			Node n = current.next();
 			
-			VNodePtrIterator nodeIter = entityImpl.ChildPtrIterator();
+			if( n.impl() == node.impl() ) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private void createAdaptors() {
+		parts.clear();
+		entities.clear();
+		
+//		final LinkedList<Part> oldParts = parts;
+//		final LinkedList<Entity> oldEntities = entities;
+//		parts = new LinkedList<Part>();
+//		entities = new LinkedList<Entity>();
+		
+		if( isImplValid() ) {
+			SetName( getImpl().GetName() );
+			
+			VNodePtrIterator nodeIter = getImpl().ChildPtrIterator();
 			while( nodeIter.HasNext() )
 			{
 				VNodePtr node = nodeIter.Get();
@@ -46,11 +76,11 @@ public class Entity extends Node {
 				IVPart asPart = node.ToPart();
 				
 				if( asEntity != null ) {
-					AddAdapter( new Entity( new VNodePtr(asEntity) ) );					
+					AddAdapter( new Entity(node) );
+//					AddAdapter( new Entity( new VNodePtr(asEntity) ) );					
 				}
 				else if( asPart != null ) {
 					AddAdapter( new Part(node) );
-//					AddAdapter( new Part(new VPartPtr(asPart)) );
 				}
 				else {
 					System.out.println( "Found unknown node type: " 
@@ -59,26 +89,6 @@ public class Entity extends Node {
 
 				nodeIter.Next();
 			}
-//			VPartPtrIterator partIter = entityImpl.PartPtrIterator();
-//			while( partIter.HasNext() ) {
-//				VPartPtr part = partIter.Get();
-//				
-//				AddAdapter( new Part(part) );
-//				
-//				partIter.Next();
-//			}
-//			
-//			VEntityPtrIterator childIter = entityImpl.ChildPtrIterator();
-//			while( childIter.HasNext() ) {
-//				VEntityPtr child = childIter.Get();
-//				
-//				AddAdapter( new Entity(child) );
-//				
-//				childIter.Next();
-//			}
-		}
-		else {
-			throw new RuntimeException("Tried to create Entity from null value");
 		}
 	}
 	
@@ -128,14 +138,14 @@ public class Entity extends Node {
 	public void SetName(String out_name) {
 		name = out_name;
 		
-		if( valid(impl) ) {
-			impl.SetName( out_name );
+		if( isImplValid() ) {
+			getImpl().SetName( out_name );
 		}
 	}
 	
 	public boolean IsActive() {
-		if( valid(impl) )
-			return impl.GetState() == VNode.State.Active;
+		if( isImplValid() )
+			return getImpl().GetState() == VNode.State.Active;
 		else
 			return false;
 	}
@@ -162,13 +172,13 @@ public class Entity extends Node {
 	}
 	
 	public void Activate() {
-		if( valid(impl) )
-			impl.Activate();
+		if( isImplValid() )
+			getImpl().Activate();
 	}
 		
 	public void Deactivate() {
-		if( valid(impl) )
-			impl.Deactivate();
+		if( isImplValid() )
+			getImpl().Deactivate();
 	}
 
 	private void AddAdapter(Entity newEntity) {
@@ -178,12 +188,12 @@ public class Entity extends Node {
 	}
 	
 	public void Add(Entity newEntity) {
-		AddAdapter(newEntity);
-
-		if( valid(impl) )
-			impl.Add( newEntity.impl );
+		if( isImplValid() )
+			getImpl().Add( newEntity.getImpl() );
 		else
 			System.err.println("Tried to add invalid entity: " + newEntity.toString());
+		
+		createAdaptors();
 	}
 	
 	public void Remove(Entity entityToBeRemoved) {
@@ -192,12 +202,13 @@ public class Entity extends Node {
 		if( wasActive )
 			Deactivate();
 		
-		if( valid(impl) )
-			impl.Remove( entityToBeRemoved.impl );
+		if( isImplValid() )
+			getImpl().Remove( entityToBeRemoved.getImpl() );
 		
 		entityToBeRemoved.parent = null;
 		
-		entities.remove(entityToBeRemoved);
+		createAdaptors();
+//		entities.remove(entityToBeRemoved);
 		
 		if( wasActive )
 			Activate();
@@ -210,11 +221,13 @@ public class Entity extends Node {
 			Deactivate();
 		}
 		
-		if( valid(impl) )
-			impl.Remove( partToBeRemoved.GetPart() );
+		if( isImplValid() )
+			getImpl().Remove( partToBeRemoved.GetPart() );
 		
 		partToBeRemoved.setOwner(null);
-		parts.remove(partToBeRemoved);
+		
+		createAdaptors();
+//		parts.remove(partToBeRemoved);
 		
 		if( wasActive ) {
 			Activate();
@@ -235,12 +248,12 @@ public class Entity extends Node {
 	
 	public void Add(Part newPart) {
 		if( newPart != null && valid(newPart.GetPart()) ) {		
-			if( valid(impl) ) {
-				impl.Add( newPart.GetPart() );
+			if( isImplValid() ) {
+				getImpl().Add( newPart.GetPart() );
 			}
 		}
 		
-		AddAdapter(newPart);
+		createAdaptors();
 	}
 	
 	protected void onNewPart(Node newPart) {}
@@ -271,9 +284,9 @@ public class Entity extends Node {
 	}
 
 	public void writeToXML(IVXMLElement outElement) {
-		if( valid(impl) )
+		if( isImplValid() )
 		{
-			impl.Save(outElement);
+			getImpl().Save(outElement);
 		}
 	}
 }

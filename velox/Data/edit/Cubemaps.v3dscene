@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <node type="v3d::entity::VEntity" name="Cubemaps">
 	<node type="v3d::scene::VNaiveSceneManagerPart" name=""/>
 	<node type="v3d::entity::VUpdateManagerPart" name=""/>
@@ -5,29 +6,35 @@
 	<node type="v3d::scene::VSimpleShooting" name=""/>
 	<node type="v3d::utils::VInputPart" name=""/>
 	<node type="v3d::entity::VEntity" name="editorCam">
-		<node type="v3d::entity::VRigidBodyPart" pos="(12.6021,-0.558376,9.84259)" updir="(0.0275038,0.999391,0.0214813)" viewdir="(-0.787628,0.0348985,-0.615161)"/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(15.002,8.95895,17.8795)" viewdir="(-0.600082,-0.358358,-0.715179)" updir="(-0.230342,0.933584,-0.274523)"/>
 		<node type="v3d::utils::VCameraPart" name=""/>
-		<node type="v3d::utils::VTrackballPart" altitude-angle="2" center="(0,0,0)" centerOnParent="false" direction-angle="-308" distance="16"/>
+		<node type="v3d::utils::VTrackballPart" distance="25" direction-angle="40" altitude-angle="-21" center="(0,0,0)" centerOnParent="false"/>
 	</node>
 	<node type="v3d::entity::VEntity" name="debug">
-		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,1)"/>
-		<node type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" name=""/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(0,0,1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VOrientationGridPart" name="" material="/system/graphics/defaultMaterial"/>
 	</node>
 	<node type="v3d::entity::VEntity" name="sphere">
-		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(-0.564409,0.719297,-0.405036)" viewdir="(-0.396134,-0.666473,-0.631578)"/>
-		<node type="v3d::scene::VSphereMeshPart" detail="20" material="/edit/mat/cubemap.v3dmat" mat_cubemap="/data/cubemap" name="" radius="5"/>
-		<node type="v3d::scene::VCoordSysDisplayPart" length="20" material="/system/graphics/defaultMaterial" name=""/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(-0.396134,-0.666473,-0.631578)" updir="(-0.564409,0.719297,-0.405036)"/>
+		<node type="v3d::scene::VSphereMeshPart" radius="5" detail="20" name="" material="/edit/mat/cubemap.v3dmat" mat_cubemap="/dynenv" mat_v3d_CameraPos="(0,0,0,0)" mat_v3d_ModelMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 "/>
+<!--		<node type="v3d::scene::VSphereMeshPart" radius="5" detail="20" name="" material="/edit/mat/cubemap.v3dmat" mat_cubemap="/data/cubemap" mat_v3d_CameraPos="(0,0,0,0)" mat_v3d_ModelMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 "/> -->
+		<node type="v3d::scene::VCoordSysDisplayPart" name="" length="20" material="/system/graphics/defaultMaterial"/>
+		<node type="v3d::scene::VCubemapShooting" cubemap_resource="/dynenv"/>
 	</node>
 	<node type="v3d::entity::VEntity" name="blue-ring">
-		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,1)"/>
-		<node type="v3d::scene::VTorusMeshPart" bottom-radius="1" color="(1,1,1,1)" height="5" material="/edit/mat/red.v3dmat" mat_color="(0,0,1,1)" name="" slices="15" stacks="15" top-radius="10"/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(0,0,1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VTorusMeshPart" color="(1,1,1,1)" top-radius="10" bottom-radius="1" height="5" slices="15" stacks="15" name="" material="/edit/mat/red.v3dmat" mat_color="(0,0,1,1)"/>
 	</node>
 	<node type="v3d::entity::VEntity" name="green-ring">
-		<node type="v3d::entity::VRigidBodyPart" pos="(-3,0,0)" updir="(0,-0.0348524,0.999393)" viewdir="(-0,-0.999393,-0.0348524)"/>
-		<node type="v3d::scene::VTorusMeshPart" bottom-radius="1" color="(1,1,1,1)" height="5" material="/edit/mat/red.v3dmat" mat_color="(0,1,0,1)" name="" slices="15" stacks="15" top-radius="20"/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(-3,0,0)" viewdir="(-0,-0.999393,-0.0348524)" updir="(0,-0.0348524,0.999393)"/>
+		<node type="v3d::scene::VTorusMeshPart" color="(1,1,1,1)" top-radius="20" bottom-radius="1" height="5" slices="15" stacks="15" name="" material="/edit/mat/red.v3dmat" mat_color="(0,1,0,1)"/>
 	</node>
 	<node type="v3d::entity::VEntity" name="red-ring">
-		<node type="v3d::entity::VRigidBodyPart" pos="(3,0,0)" updir="(-0.138581,0.990269,0.0127288)" viewdir="(0.984835,0.139153,-0.103621)"/>
-		<node type="v3d::scene::VTorusMeshPart" bottom-radius="1" color="(1,1,1,1)" height="5" material="/edit/mat/red.v3dmat" mat_color="(1,0,0,1)" name="" slices="15" stacks="15" top-radius="15"/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(3,0,0)" viewdir="(0.984835,0.139153,-0.103621)" updir="(-0.138581,0.990269,0.0127288)"/>
+		<node type="v3d::scene::VTorusMeshPart" color="(1,1,1,1)" top-radius="15" bottom-radius="1" height="5" slices="15" stacks="15" name="" material="/edit/mat/red.v3dmat" mat_color="(1,0,0,1)"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="sky">
+		<node type="v3d::entity::VRigidBodyPart" pos="(15.002,8.95895,17.8795)" viewdir="(0.0174519,-0,-0.999848)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/" name=""/>
 	</node>
 </node>

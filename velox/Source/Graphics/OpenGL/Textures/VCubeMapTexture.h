@@ -32,6 +32,8 @@ public:
 		const image::VImage& in_Top,
 		const image::VImage& in_Bottom);
 
+	explicit VCubeMapTexture(vuint m_nSize);
+
 	virtual ~VCubeMapTexture();
 
 	virtual void Bind(vuint in_nTextureUnit = 0);

@@ -60,6 +60,8 @@ private:
 	//graphics::VCubeMapContext* m_pContext;
 	//graphics::IVDevice* m_pDevice;
 
+	vuint m_nCubemapSize;
+
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 };
 

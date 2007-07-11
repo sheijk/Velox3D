@@ -58,7 +58,7 @@ public class Part extends Node {
 		
 	public VMessage Send(VMessage inMessage) {
 		VMessage reply = new VMessage();
-		impl.Send(inMessage, reply);
+		getImpl().Send(inMessage, reply);
 		return reply;
 	}
 	
@@ -107,8 +107,8 @@ public class Part extends Node {
 		
 		LinkedList<String> tags = new LinkedList<String>();
 		
-		if( valid(impl) ) {
-			if( impl.GetState() != VNode.State.Active )
+		if( isImplValid() ) {
+			if( getImpl().GetState() != VNode.State.Active )
 				tags.add("unready");
 		}
 		else {
@@ -136,7 +136,7 @@ public class Part extends Node {
 	}
 
 	public VNodePtr GetPart() {
-		return impl;
+		return getImpl();
 	}
 }
 
