@@ -13,8 +13,6 @@ package de.velox.editor.entity;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import sun.security.krb5.internal.crypto.n;
-
 import de.velox.*;
 
 public class Entity extends Node {
