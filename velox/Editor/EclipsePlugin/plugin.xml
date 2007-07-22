@@ -9,7 +9,9 @@
 
    <runtime>
       <library name="VeloxEditor.jar">
-         <export name="*"/>
+         <export
+               name="*">
+         </export>
       </library>
       <library name="SourceV3d/">
          <export name="*"/>

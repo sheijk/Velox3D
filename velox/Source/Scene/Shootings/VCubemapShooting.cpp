@@ -72,6 +72,16 @@ public:
 			GL_RENDERBUFFER_EXT,
 			m_DepthBufferId );
 
+		//for( vuint side = 0; side < 6; ++side )
+		//{
+		//	glFramebufferTexture2DEXT(
+		//		GL_FRAMEBUFFER_EXT,
+		//		GL_COLOR_ATTACHMENT0_EXT + side,
+		//		GL_TEXTURE_CUBE_MAP_POSITIVE_X + side,
+		//		m_pCubeMapTexture->GetTextureId(),
+		//		0 );
+		//}
+
 		const GLuint fboStatus = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 		if( fboStatus != GL_FRAMEBUFFER_COMPLETE_EXT )
 		{
@@ -83,6 +93,14 @@ public:
 
 	enum Side { PosX, NegX, PosY, NegY, PosZ, NegZ };
 
+	void BindFBO()
+	{
+		glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, m_FBOId );
+		glViewport( 0, 0, m_nSize, m_nSize );
+
+		glDrawBuffer( GL_COLOR_ATTACHMENT0_EXT );
+	}
+
 	void SetActiveSide(Side side)
 	{
 		m_ActiveSide = side;
@@ -90,14 +108,13 @@ public:
 
 	virtual void MakeCurrent()
 	{
-		glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, m_FBOId );
-		glViewport( 0, 0, m_nSize, m_nSize );
-
 		static GLuint targetForSide[6] = {
 			GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X,
 			GL_TEXTURE_CUBE_MAP_POSITIVE_Y, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
 			GL_TEXTURE_CUBE_MAP_POSITIVE_Z, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 		};
+
+		//glDrawBuffer( GL_COLOR_ATTACHMENT0_EXT + int(m_ActiveSide) );
 
 		glFramebufferTexture2DEXT(
 			GL_FRAMEBUFFER_EXT,
@@ -112,6 +129,8 @@ public:
 		glBindTexture( GL_TEXTURE_CUBE_MAP, m_pCubeMapTexture->GetTextureId() );
 		glGenerateMipmapEXT( GL_TEXTURE_CUBE_MAP );
 		glBindFramebufferEXT( GL_FRAMEBUFFER_EXT, 0 );
+
+		glDrawBuffer( GL_BACK );
 		//glViewport( 0, 0, m_pParentContext->)
 	}
 
@@ -160,7 +179,7 @@ VCubemapShooting::VCubemapShooting() :
 	m_pScene( RegisterTo() ),
 	m_pParentShooting( RegisterTo() )
 {
-	m_nCubemapSize = 512;
+	m_nCubemapSize = 256;
 }
 
 /**
@@ -252,6 +271,26 @@ void VCubemapShooting::Render()
 		using graphics::VCubeMapContext;
 		using graphics::IVDevice;
 
+		//m_pContext->MakeCurrent();
+		//m_pContext->MakeCurrent();
+		//m_pContext->MakeCurrent();
+		//m_pContext->MakeCurrent();
+		//m_pContext->MakeCurrent();
+		//m_pContext->MakeCurrent();
+		//m_pContext->SwapBuffers();
+
+		//m_pDevice->BeginScene();
+		//m_pDevice->BeginScene();
+		//m_pDevice->BeginScene();
+		//m_pDevice->BeginScene();
+		//m_pDevice->BeginScene();
+		//m_pDevice->BeginScene();
+		//m_pDevice->EndScene();
+
+		//return;
+
+		m_pContext->BindFBO();
+
 		for( VCubeMapContext::Side side = VCubeMapContext::PosX;
 			side <= VCubeMapContext::NegZ;
 			++side )
@@ -264,15 +303,14 @@ void VCubemapShooting::Render()
 				ProjectionMatrix( 90.0f, 1.0f, 1.0f, 1000.0f );
 			m_pDevice->SetMatrix( IVDevice::ProjectionMatrix, projectionMatrix );
 			m_pDevice->SetViewTransform( cameraTransforms[int(side)] );
-			//m_pDevice->SetMatrix( IVDevice::ViewMatrix, cameraMatrices[int(side)] );
 
 			m_pContext->SetActiveSide(side);
 			m_pDevice->BeginScene();
 
 			//glClearColor( .2f, .2f, .2f, 1.f );
-			glClearColor( c[0], c[1], c[2], c[3] );
-			c += 4;
-			glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+			//glClearColor( c[0], c[1], c[2], c[3] );
+			//c += 4;
+			//glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 			VRangeIterator<const IVShapePart> visibleObject = m_pScene->GetVisibleMeshes();
 			while( visibleObject.HasNext() )
@@ -295,7 +333,6 @@ void VCubemapShooting::Render()
 		}
 
 		m_pDevice->EndScene();
-		//m_pContext->SwapBuffers();
 	}
 }
 

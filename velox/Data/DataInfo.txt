@@ -6,4 +6,4 @@ Bigger binary files are put in the "data" directory which is excluded from subve
 
 The "system" directory contains files which are required by velox itself. Usually these files are loaded by some velox classes which will rely on the presence of these files.
 
-If you intend to add your own date we recommend putting it inside a "local" file so that it won't conflict with new files in the subversion repository. Don't forget to mount add it inside the vfs.xml file.
+If you intend to add your own data we recommend putting it inside a "local" file so that it won't conflict with new files in the subversion repository. Don't forget to mount it inside the vfs.xml file.

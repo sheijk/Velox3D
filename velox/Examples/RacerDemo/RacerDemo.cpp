@@ -221,9 +221,28 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	m_pUpdater->Start();
 	glfwInit();
+
 	vfloat32 startTime = glfwGetTime();
 	long frameCounter = 0;
 	vfloat32 lastTime = 0;
+
+	//while( m_pSystem->GetStatus() )
+	//{
+	//	Device().BeginScene();
+
+	//	m_pRootShooting->UpdateAndCull();
+ //		m_pRootShooting->Render();
+
+	//	Device().EndScene();
+
+	//	++frameCounter;
+	//	m_pUpdater->StartNextFrame();
+	//	m_pFrameCounter->LogLastFrameDuration();
+
+	//	if( m_pEscapeKey->IsDown() )
+	//		m_pSystem->SetStatus( false );
+	//}
+
 	while(m_pSystem->GetStatus())
 	{
 	  
@@ -234,17 +253,18 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	   vfloat32 deltaTime = curTime - lastTime;
 	   lastTime = curTime;
 
-	   vfloat32 waitFactor = 1.0f / 60;
+	  // vfloat32 waitFactor = 1.0f / 60;
 
-	   while (deltaTime < waitFactor)
-	   {
-		 vfloat32 curTime = glfwGetTime();
-		 deltaTime = curTime -lastTime;
-	   }
+	  // while (deltaTime < waitFactor)
+	  // {
+		 //vfloat32 curTime = glfwGetTime();
+		 //deltaTime = curTime -lastTime;
+	  // }
 		Device().BeginScene();
 		const vfloat32 frameDuration = vfloat32(m_pUpdater->GetFrameDuration());
 
-		//if(m_pSpace->IsDown())
+		// use space to pause scene
+		if( ! m_pSpace->IsDown() )
 			m_pUpdateManager->Update(frameDuration);
 		
 		m_pRootShooting->UpdateAndCull();
@@ -279,6 +299,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 		if( m_pEscapeKey->IsDown() )
 			m_pSystem->SetStatus(false);
 	}
+
 	vout << "Average frames: " << m_pFrameCounter->GetAverageFPS() << vendl;
 	m_pUpdater->Stop();
 	vfloat32 dieTime = glfwGetTime();

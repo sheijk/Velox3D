@@ -407,6 +407,8 @@ void VOpenGLDevice::SetDisplay()
 	//glClearDepth(m_DisplaySettings.m_fClearDepth);
 	glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);
+
+	m_pContext->SwapBuffers();
 }
 //-----------------------------------------------------------------------------
 /*

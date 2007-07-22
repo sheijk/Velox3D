@@ -102,7 +102,10 @@ VWin32WindowContext::~VWin32WindowContext()
 
 void VWin32WindowContext::MakeCurrent()
 {
-	wglMakeCurrent(m_DeviceContext, m_RenderContext);
+	if( wglGetCurrentContext() != m_RenderContext )
+	{
+		wglMakeCurrent(m_DeviceContext, m_RenderContext);
+	}
 }
 
 void VWin32WindowContext::SwapBuffers()
