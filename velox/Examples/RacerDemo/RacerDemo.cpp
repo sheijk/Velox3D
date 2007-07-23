@@ -226,40 +226,34 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	long frameCounter = 0;
 	vfloat32 lastTime = 0;
 
-	//while( m_pSystem->GetStatus() )
-	//{
-	//	Device().BeginScene();
+/*
+	while( m_pSystem->GetStatus() )
+	{
+		Device().BeginScene();
 
-	//	m_pRootShooting->UpdateAndCull();
- //		m_pRootShooting->Render();
+		const vfloat32 frameDuration = vfloat32( m_pUpdater->GetFrameDuration() );
+		m_pUpdateManager->Update( frameDuration );
 
-	//	Device().EndScene();
+		m_pRootShooting->UpdateAndCull();
+ 		m_pRootShooting->Render();
 
-	//	++frameCounter;
-	//	m_pUpdater->StartNextFrame();
-	//	m_pFrameCounter->LogLastFrameDuration();
+		Device().EndScene();
 
-	//	if( m_pEscapeKey->IsDown() )
-	//		m_pSystem->SetStatus( false );
-	//}
+		++frameCounter;
+		m_pUpdater->StartNextFrame();
+		m_pFrameCounter->LogLastFrameDuration();
 
+		if( m_pEscapeKey->IsDown() )
+			m_pSystem->SetStatus( false );
+	}
+
+/*/
 	while(m_pSystem->GetStatus())
 	{
-	  
-	  //time.UpdateTime();
-	  /*vout << "time: " << time.GetTimeDelta() << "fps: " << 1.0f /time.GetTimeDelta() << vendl;*/
-	   //time.LimitFps(10);
-	   vfloat32 curTime = glfwGetTime();
-	   vfloat32 deltaTime = curTime - lastTime;
-	   lastTime = curTime;
+		vfloat32 curTime = glfwGetTime();
+		vfloat32 deltaTime = curTime - lastTime;
+		lastTime = curTime;
 
-	  // vfloat32 waitFactor = 1.0f / 60;
-
-	  // while (deltaTime < waitFactor)
-	  // {
-		 //vfloat32 curTime = glfwGetTime();
-		 //deltaTime = curTime -lastTime;
-	  // }
 		Device().BeginScene();
 		const vfloat32 frameDuration = vfloat32(m_pUpdater->GetFrameDuration());
 
@@ -269,9 +263,9 @@ vint RacerDemo::Main(std::vector<std::string> args)
 		
 		m_pRootShooting->UpdateAndCull();
 		m_pRootShooting->Render();
-
 		
 		Device().EndScene();
+
 		frameCounter++;
 		m_pUpdater->StartNextFrame();
 		m_pFrameCounter->LogLastFrameDuration();
@@ -299,6 +293,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 		if( m_pEscapeKey->IsDown() )
 			m_pSystem->SetStatus(false);
 	}
+/**/
 
 	vout << "Average frames: " << m_pFrameCounter->GetAverageFPS() << vendl;
 	m_pUpdater->Stop();

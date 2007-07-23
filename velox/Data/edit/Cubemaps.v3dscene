@@ -19,10 +19,9 @@
 
 		<node type="v3d::scene::VSphereMeshPart" radius="5" detail="40" name="" material="/edit/mat/cubemap.v3dmat" mat_cubemap="/dynenv" mat_v3d_CameraPos="(0,0,0,0)" mat_v3d_ModelMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 "/>
 		<node type="v3d::scene::VCubemapShooting" cubemap_resource="/dynenv"/>
-        
-<!--
+        <!--        
 		<node type="v3d::scene::VSphereMeshPart" radius="5" detail="20" name="" material="/edit/mat/cubemap.v3dmat" mat_cubemap="/data/cubemap" mat_v3d_CameraPos="(0,0,0,0)" mat_v3d_ModelMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 "/>
-    -->    
+        -->
 <!--		<node type="v3d::scene::VCubemapShooting" cubemap_resource="/dynenv"/> -->
 
 		<node type="v3d::scene::VCoordSysDisplayPart" name="" length="20" material="/system/graphics/defaultMaterial"/>

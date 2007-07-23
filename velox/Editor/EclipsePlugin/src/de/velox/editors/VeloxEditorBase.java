@@ -15,11 +15,11 @@ public abstract class VeloxEditorBase extends EditorPart {
 	public VeloxEditorBase() {
 		super();
 		
-		try {
-			v3d.Initialize();
-		} catch (Exception e) {
-			e.printStackTrace(System.err);
-		}
+//		try {
+//			v3d.Initialize();
+//		} catch (Exception e) {
+//			e.printStackTrace(System.err);
+//		}
 	}
 }
 

@@ -27,30 +27,11 @@ abstract class VeloxViewBase extends ViewPart {
 	public VeloxViewBase() {
 		super();
 		
-		try {
-			
-			v3d.Initialize();
-			
-			// get the workspace directory
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			IPath workspaceDir = workspace.getRoot().getLocation();
-			v3d.PrintLn("Workspace path = " + workspaceDir.toString());
-			
-			v3d.GetFileSystem().SetWorkingDir(workspaceDir.toString());
-			
-			IPath mountfile = workspaceDir.append("vfs.xml");
-			if( mountfile.toFile().exists() ) {
-				v3d.PrintLn("Found vfs.xml, mounting it");
-				
-				// look for vfs.xml and let the vfs load it if it exists
-				v3d.GetFileSystem().MountFromXML(mountfile.toString());
-			}
-			else {
-				v3d.PrintLn("No vfs.xml file found, nothing mounted");
-			}
-		} catch (Exception e) {
-			e.printStackTrace(System.err);
-		}
+//		try {
+//			v3d.Initialize();
+//		} catch (Exception e) {
+//			e.printStackTrace(System.err);
+//		}
 	}
 }
 
