@@ -20,7 +20,7 @@ VImportedMaterialContainer::VImportedMaterialContainer()
 
 VImportedMaterialContainer::~VImportedMaterialContainer()
 {
-	MaterialList::iterator begin = m_MaterialList.begin();
+	MaterialList::const_iterator begin = m_MaterialList.begin();
 
 	for(; begin != m_MaterialList.end(); begin++)
 	{
@@ -50,9 +50,10 @@ void VImportedMaterialContainer::Remove(VImportedMaterialDescription* in_pMateri
 
 vbool VImportedMaterialContainer::FindMaterialByName(VStringParam in_sName)
 {
-	MaterialList::iterator begin = m_MaterialList.begin();
+	MaterialList::const_iterator begin = m_MaterialList.begin();
+	MaterialList::const_iterator end = m_MaterialList.end();
 
-	for(; begin != m_MaterialList.end(); begin++)
+	for(; begin != end; begin++)
 	{
 		std::string theName = (*begin)->GetMaterialName();
 		std::string queryName = in_sName;

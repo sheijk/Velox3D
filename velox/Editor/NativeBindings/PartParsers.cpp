@@ -49,6 +49,7 @@ namespace v3d { namespace scene {
 		extern void* AssureVGCMDummyHeightmapPartExists();
 		extern void* AssureVGCMRawHeightmapPartExists();
 		extern void* AssureVGCMStretchedHeightmapPartExists();
+		extern void* AssureVSkyPartExists();
 }}
 
 namespace v3d { namespace physics {
@@ -70,7 +71,6 @@ namespace v3d { namespace entity {
 		//extern void* AssureVUpdateablePartExists();
 		extern void* AssureVUpdateManagerPartExists();
 		extern void* AssureVRigidBodyPartExists();
-
 		extern void* AssureVEntityExists();
 }}
 namespace v3d { namespace utils {
@@ -83,8 +83,7 @@ namespace v3d { namespace utils {
 
 namespace v3d { namespace editor {
 //-----------------------------------------------------------------------------
-using namespace v3d; // anti auto indent
-
+using namespace v3d;
 //-----------------------------------------------------------------------------
 }} // namespace v3d::editor
 
@@ -121,6 +120,7 @@ void foo()
 	v3d::scene::AssureVGCMRawHeightmapPartExists();
 	v3d::scene::AssureVGCMStretchedHeightmapPartExists();
 	v3d::scene::AssureVCubemapShootingExists();
+	v3d::scene::AssureVSkyPartExists();
 
 	v3d::physics::AssureVBodyPartExists();
 	v3d::physics::AssureVBoundingBoxVolumePartExists();
@@ -145,8 +145,5 @@ void foo()
 	v3d::utils::AssureVFPSMoverPartExists();
 	v3d::utils::AssureVInputPartExists();
 	v3d::utils::AssureVTrackballPartExists();
-
 }
-
 //-----------------------------------------------------------------------------
-

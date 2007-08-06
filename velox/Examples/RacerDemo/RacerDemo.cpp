@@ -206,13 +206,13 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	//pRoot->DumpInfo();
 
 	//TODO: support im device oder so
-	glEnable(GL_FOG);
+	/*glEnable(GL_FOG);
 	vfloat32 fogColor2[4] = { fogColor.red, fogColor.green, fogColor.blue, 1.0f };
 	glFogfv(GL_FOG_COLOR, fogColor2);
 	glFogf(GL_FOG_DENSITY, 1.0f);
 	glFogf(GL_FOG_MODE, GL_LINEAR);
 	glFogf(GL_FOG_START, 300.f);
-	glFogf(GL_FOG_END, 400.0f);
+	glFogf(GL_FOG_END, 400.0f);*/
 
 	/*VMatrix44f test = math::ScaleMatrix(10.0f);
 	vout << test << vendl;*/
@@ -226,28 +226,6 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	long frameCounter = 0;
 	vfloat32 lastTime = 0;
 
-/*
-	while( m_pSystem->GetStatus() )
-	{
-		Device().BeginScene();
-
-		const vfloat32 frameDuration = vfloat32( m_pUpdater->GetFrameDuration() );
-		m_pUpdateManager->Update( frameDuration );
-
-		m_pRootShooting->UpdateAndCull();
- 		m_pRootShooting->Render();
-
-		Device().EndScene();
-
-		++frameCounter;
-		m_pUpdater->StartNextFrame();
-		m_pFrameCounter->LogLastFrameDuration();
-
-		if( m_pEscapeKey->IsDown() )
-			m_pSystem->SetStatus( false );
-	}
-
-/*/
 	while(m_pSystem->GetStatus())
 	{
 		vfloat32 curTime = glfwGetTime();
@@ -291,7 +269,6 @@ vint RacerDemo::Main(std::vector<std::string> args)
 		if( m_pEscapeKey->IsDown() )
 			m_pSystem->SetStatus(false);
 	}
-/**/
 
 	vout << "Average frames: " << m_pFrameCounter->GetAverageFPS() << vendl;
 	m_pUpdater->Stop();

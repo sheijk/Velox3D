@@ -483,6 +483,10 @@
 							>
 						</File>
 						<File
+							RelativePath="..\..\API\V3d\Scene\Shapes\VSkyPart.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VSphereMeshPart.h"
 							>
 						</File>
@@ -2173,6 +2177,10 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Scene\Shapes\VSkyboxPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Scene\Shapes\VSkyPart.cpp"
 						>
 					</File>
 					<File
