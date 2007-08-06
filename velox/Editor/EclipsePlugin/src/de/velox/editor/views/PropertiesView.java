@@ -47,6 +47,7 @@ public class PropertiesView extends VeloxViewBase {
 	private Action addAction;
 	private Action refreshAction;
 	private Action doubleClickAction;
+	private Action autoRefreshAction;
 	private Composite myParent = null;
 
 	private static class Property {
@@ -95,8 +96,6 @@ public class PropertiesView extends VeloxViewBase {
 		public void dispose() {
 		}
 		public Object[] getElements(Object parent) {
-			v3d.PrintLn("This is a test line");
-			
 			VPropertyManager propertyManager = v3d.GetPropertyManager();
 			
 			List<Property> strings = new LinkedList<Property>();
@@ -175,6 +174,7 @@ public class PropertiesView extends VeloxViewBase {
 		manager.add(addAction);
 		manager.add(new Separator());
 		manager.add(refreshAction);
+		manager.add(autoRefreshAction);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
@@ -185,10 +185,18 @@ public class PropertiesView extends VeloxViewBase {
 	}
 	
 	private void fillLocalToolBar(IToolBarManager manager) {
-		manager.add(addAction);
-		manager.add(refreshAction);
+		manager.add( addAction );
+		manager.add( refreshAction );
+		manager.add( autoRefreshAction );
 	}
 
+	private boolean autoRefresh = false;
+	
+	private void toggleAutoRefresh() {
+		autoRefresh = ! autoRefresh;
+		autoRefreshAction.setChecked( autoRefresh );
+	}
+	
 	private void makeActions() {
 		addAction = new Action() {
 			public void run() {
@@ -219,7 +227,6 @@ public class PropertiesView extends VeloxViewBase {
 		
 		refreshAction = new Action() {
 			public void run() {
-				
 				viewer.refresh();
 			}
 		};
@@ -228,6 +235,14 @@ public class PropertiesView extends VeloxViewBase {
 //		refreshAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 //				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 
+		autoRefreshAction = new Action("Auto", Action.AS_CHECK_BOX) {
+			@Override public void run() {
+				toggleAutoRefresh();
+			}
+		};
+		autoRefreshAction.setToolTipText("Toggle refreshing properties periodically");
+		autoRefreshAction.setChecked( autoRefresh );
+		
 		doubleClickAction = new Action() {
 			public void run() {
 				IStructuredSelection selection = 

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import de.velox.VMessage;
 import de.velox.VNode;
+import de.velox.VNodeDependencyIterator;
 import de.velox.VNodePtr;
 import de.velox.VPartDependency;
 import de.velox.VStringIter;
@@ -39,9 +40,16 @@ public abstract class Node {
 			return null;
 	}
 
-	public Iterator<VPartDependency> dependencyIterator() {
-		return dependencies.iterator();
+	public VNodeDependencyIterator dependencyIterator() {
+		if( isImplValid() )
+			return impl().Connections();
+		else
+			return null;
 	}
+	
+//	public Iterator<VPartDependency> dependencyIterator() {
+//		return dependencies.iterator();
+//	}
 
 	public Iterator<Setting> settingsIterator() {
 		return settings.iterator();

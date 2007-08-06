@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <entity name="simple">
 	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
 	<part type="v3d::scene::VNaiveLightManager" tags=""/>

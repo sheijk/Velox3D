@@ -1,14 +1,34 @@
-<entity name="postproc.v3dscene">
-	<part type="v3d::scene::VNaiveSceneManagerPart"/>
-	<part type="v3d::scene::VDefaultRenderStepPart"/>
-	<part type="v3d::scene::VPostProcesssingRenderStepPart" material="/test/postproc.fx"/>
-	<part type="shooting"/>
-	<entity name="obj">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
-		<part type="v3d::scene::VModelPart" material="" mesh="" model="/data/afighter.3ds"/>
-	</entity>
-	<entity name="coordsys">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)"/>
-		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial"/>
-	</entity>
-</entity>
+<?xml version="1.0"?>
+<node type="v3d::entity::VEntity" name="postproc">
+	<node type="v3d::entity::VUpdateManagerPart" name=""/>
+	<node type="v3d::scene::VNaiveLightManager" name=""/>
+	<node type="v3d::scene::VNaiveSceneManagerPart" name=""/>
+	<node type="v3d::scene::VSimpleShooting" name=""/>
+	<node type="v3d::scene::VDefaultRenderStepPart" clearColor="(0,0,0,0)" include-all="true" fov="45" near-plane="1" far-plane="1000" exclude-tags="" include-tags="" name=""/>
+	<node type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/sepia_pp.v3dmat" name=""/>
+	<node type="v3d::scene::VPostProcesssingRenderStepPart" material="/edit/mat/water_pp.v3dmat" name=""/>
+	<node type="v3d::utils::VInputPart" name=""/>
+	<node type="v3d::entity::VEntity" name="editorCam">
+		<node type="v3d::entity::VRigidBodyPart" pos="(6,16,73)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::utils::VCameraPart" name=""/>
+	</node>
+	<node type="v3d::entity::VEntity" name="debug">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(0,0,1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VOrientationGridPart" name="" material="/system/graphics/defaultMaterial"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="gameCam">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,10)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::utils::VCameraPart" name=""/>
+		<node type="v3d::utils::VFPSMoverPart" ignore-mouse="false"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="sphere">
+		<node type="v3d::entity::VRigidBodyPart" pos="(2.82639,10,9.59226)" viewdir="(0.959226,0,-0.282639)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VSphereMeshPart" radius="4" detail="20" name="" material="/edit/mat/terrain.v3dmat" mat_mud="" mat_mudColor="(0,0,0,0)" tags="test bar"/>
+		<node type="v3d::utils::VCircleMoverPart" radius="10" center="(0,10,0)" speed="3.1415" angle="6.56973"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="player">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0.01)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VArrowMeshPart" size="1" color="(1,1,1,1)" name="" material="/system/graphics/defaultMaterial"/>
+		<node type="v3d::utils::VTrackballPart" distance="0.01" direction-angle="0" altitude-angle="0" center="(0,0,0)" centerOnParent="false"/>
+	</node>
+</node>

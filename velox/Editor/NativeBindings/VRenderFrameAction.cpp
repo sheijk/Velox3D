@@ -200,7 +200,7 @@ void VRenderFrameAction::Render()
 
 		++count;
 	}
-
+	
 	if( m_pInputManager->GetStandardKey(input::KeyEscape).IsDown() )
 	{
 		SetIgnoreInput(true);

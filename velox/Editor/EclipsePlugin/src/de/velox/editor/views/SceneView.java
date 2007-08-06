@@ -91,23 +91,29 @@ public class SceneView extends VeloxViewBase {
 	}
 
 	private static void addDependencies(LinkedList<Object> childs, Node part) {
-		Iterator<VPartDependency> depIter = part.dependencyIterator();
-		while( depIter.hasNext() ) {
-			VPartDependency dep = depIter.next();
+		VNodeDependencyIterator depIter = part.dependencyIterator();
+		
+		while( depIter.HasNext() ) {
+			VNodeDependency dep = depIter.Get();
 			
-			String descr = "" + dep.GetLocation().toString().charAt(0);
+			String description = "Dep: ";
 			
-			if( dep.GetCondition() == VPartDependency.Condition.Optional )
-				descr += "? ";
-			else
-				descr += " ";
+			if( dep.GetCondition() == VNodeDependency.Condition.Optional ) {
+				description += "[" + dep.GetTypeInfo().GetName() + "]";
+				
+				if( dep.GetTarget() == null )
+					description += " (unconnected)";
+			}
+			else {
+				if( dep.GetTarget() == null )
+					description += "(missing) ";
+				
+				description += dep.GetTypeInfo().GetName();
+			}
 			
-			descr += dep.GetTypeInfo().GetName();
+			childs.add( description );
 			
-			if( dep.GetId().length() > 0 )
-				descr += "(id:" + dep.GetId() + ")";
-			
-			childs.add(descr);
+			depIter.Next();
 		}
 	}
 

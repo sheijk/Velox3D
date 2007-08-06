@@ -169,10 +169,8 @@ void VView::FrameUpdateLoop()
 			glfwUnlockMutex(m_SyncMutex);
 			glfwBroadcastCond(m_SyncDoneCondition);
 
-			if( m_pMainContext != 0 )
-			{
-				//m_pMainContext->SwapBuffers();
-			}
+			const vfloat64 fps = 1.0 / pUpdater->GetFrameDuration();
+			v3d::property::SetProperty( "fps.current", fps );
 
 			// sleep for n seconds
 			glfwSleep(delay);

@@ -38,6 +38,7 @@ import de.velox.editor.views.RenderLayer;
 import de.velox.editor.views.SceneView;
 
 public class SceneEditor extends VeloxEditorBase {
+	private Composite parent = null;
 	private VRenderFrameAction renderAction = null;
 	private final VUpdateManagerCallAction updateAction = new VUpdateManagerCallAction();
 	
@@ -130,12 +131,21 @@ public class SceneEditor extends VeloxEditorBase {
 		public T get() { return value; }
 		public void set(T newValue) { value = newValue; }
 	};
+
+	@SuppressWarnings("unused")
+	private void showMessage(String message) {
+		MessageDialog.openInformation(
+			parent.getShell(),
+			"Scene Editor",
+			message);
+	}
 	
-	private void loadFromFile(final String fileName) {
+	private void loadFromFile(final String fileName) throws LoadSceneException {
 		// we need a valid opengl context
 		if( renderLayer != null ) {
 			final Reference<RootEntity> rootEntity = new Reference<RootEntity>();
 			final Reference<VXMLElementPtr> xml = new Reference<VXMLElementPtr>();
+			final Reference<String> errorMessage = new Reference<String>();
 			
 			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
 				@Override public void Run() throws RuntimeException {
@@ -146,23 +156,30 @@ public class SceneEditor extends VeloxEditorBase {
 					catch(Throwable t) {
 						System.err.println("Error when loading scene: " + t.getMessage());
 						t.printStackTrace(System.err);
+						errorMessage.set( t.getMessage() );
 					}
 				}
 			});
 			
-			setRootEntity(rootEntity.get());
-			
-			name = generateDisplayName(fileName);
-			root.SetName(name);
-			setPartName(name);
-			
-			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
-				@Override public void Run() throws RuntimeException {
-					// activate here, because shooting is created in setRootEntity
-					rootEntity.get().Activate();
-					rootEntity.get().applySettings(xml.get().Get());
-				}
-			});
+			if( rootEntity.get() != null ) {
+				setRootEntity( rootEntity.get() );
+				
+				name = generateDisplayName(fileName);
+				root.SetName(name);
+				setPartName(name);
+				
+				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+					@Override public void Run() throws RuntimeException {
+						// activate here, because shooting is created in setRootEntity
+						rootEntity.get().Activate();
+						rootEntity.get().applySettings(xml.get().Get());
+					}
+				});
+			}
+			else {
+				showMessage( "Could not open scene " + errorMessage.get() );
+				throw new LoadSceneException( errorMessage.get() );
+			}
 			
 			needsLoading = false;
 		}
@@ -198,18 +215,11 @@ public class SceneEditor extends VeloxEditorBase {
 			try {
 				loadFromFile(fileName);
 			}
-			catch(RuntimeException e) {
-				createNewScene();
-//				throw new PartInitException(
-//					"Could not load scene: " + e.getMessage(), e);
-			}
-			
-//			if( fileInput.exists() ) {
-//				loadFromFile(fileName);
-//			}
-//			else {
+			catch(Throwable e) {
 //				createNewScene();
-//			}
+				throw new PartInitException(
+					"Could not load scene: " + e.getMessage(), e);
+			}
 						
 			setInput(input);
 			setSite(site);
@@ -231,6 +241,7 @@ public class SceneEditor extends VeloxEditorBase {
 
 	@Override
 	public void createPartControl(final Composite parent) {
+		this.parent = parent;
 		renderLayer = new RenderLayer(parent);
 		renderLayer.addMouseListener(new MouseHandler());
 		renderAction = renderLayer.getRenderAction();
@@ -245,7 +256,12 @@ public class SceneEditor extends VeloxEditorBase {
 
 		// delayed loading, if required (see above)
 		if( needsLoading == true ) {
-			loadFromFile(fileName);
+			try {
+				loadFromFile(fileName);
+			} catch (LoadSceneException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		if( root != null )
@@ -524,5 +540,14 @@ public class SceneEditor extends VeloxEditorBase {
 		});
 	}
 
+	private static class LoadSceneException extends Exception {
+		public LoadSceneException() {
+			super();
+		}
+
+		public LoadSceneException(String arg0) {
+			super(arg0);
+		}
+	}
 }
 
