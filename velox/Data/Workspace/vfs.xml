@@ -6,20 +6,20 @@
 	<Mount
 		name="data"
 		type="localfs"
-		source="data"
+		source="../data"
 		rights="rwfd"
 		/>
 	<Mount
 		name="edit"
 		type="localfs"
-		source="edit"
+		source="../edit"
 		rights="rwfd"
 		/>
 
 	<Mount
 		name="system"
 		type="localfs"
-		source="system"
+		source="../system"
 		rights="rwfd"
 		/>
 </FileSystem>
