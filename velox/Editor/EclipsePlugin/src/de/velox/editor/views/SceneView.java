@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 
 import de.velox.*;
+import de.velox.editor.VeloxEditorPlugin;
 import de.velox.editor.entity.*;
 import de.velox.editor.widgets.FilterDialog;
 
@@ -90,28 +91,52 @@ public class SceneView extends VeloxViewBase {
 		}
 	}
 
+	private static final class DependencyItem {
+		private final String targetType;
+		private final boolean targetFound;
+		private final boolean optional;
+		
+		private final String description;
+		
+		public DependencyItem(VNodeDependency dep) {
+			targetType = dep.GetTypeInfo().GetName();
+			targetFound = dep.GetTarget() != null;
+			optional = dep.GetCondition() == VNodeDependency.Condition.Optional;
+			
+			description = getDescription();
+		}
+		
+		@Override public String toString() {
+			return description;
+		}
+		
+		private String getDescription() {
+			String description = "Dep: ";
+			
+			if( optional ) {
+				description += "[" + targetType + "]";
+				
+				if( targetFound )
+					description += " (unconnected)";
+			}
+			else {
+				if( ! targetFound )
+					description += "(missing) ";
+				
+				description += targetType;
+			}
+			
+			return description;
+		}
+	}
+	
 	private static void addDependencies(LinkedList<Object> childs, Node part) {
 		VNodeDependencyIterator depIter = part.dependencyIterator();
 		
 		while( depIter.HasNext() ) {
 			VNodeDependency dep = depIter.Get();
 			
-			String description = "Dep: ";
-			
-			if( dep.GetCondition() == VNodeDependency.Condition.Optional ) {
-				description += "[" + dep.GetTypeInfo().GetName() + "]";
-				
-				if( dep.GetTarget() == null )
-					description += " (unconnected)";
-			}
-			else {
-				if( dep.GetTarget() == null )
-					description += "(missing) ";
-				
-				description += dep.GetTypeInfo().GetName();
-			}
-			
-			childs.add( description );
+			childs.add( new DependencyItem(dep) );
 			
 			depIter.Next();
 		}
@@ -363,18 +388,35 @@ public class SceneView extends VeloxViewBase {
 		}
 		
 		public Image getImage(Object obj) {
-			String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
+			Image image = null;
+			String imageKey = null;
 			
 			if( obj instanceof Entity )
 				imageKey = ISharedImages.IMG_OBJ_FOLDER;
 			else if( obj instanceof Part )
 				imageKey = ISharedImages.IMG_OBJ_FILE;
+			else if( obj instanceof DependencyItem ) {
+				DependencyItem depItem = (DependencyItem)obj;
+				
+				String imageName = null;
+				if( depItem.targetFound )
+					imageName = "icons/Dependency.png";
+				else
+					imageName = "icons/MissingDependency.png";
+				
+				image = VeloxEditorPlugin.getImage( imageName );
+			}
 			else if( getText(obj).matches("[AN].*") )
 				imageKey = ISharedImages.IMG_OBJS_INFO_TSK;
 			else if( getText(obj).equals("Tags") )
 				imageKey = ISharedImages.IMG_OPEN_MARKER;
-			
-			return PlatformUI.getWorkbench().getSharedImages().getImage(imageKey);
+			else
+				imageKey = ISharedImages.IMG_OBJ_ELEMENT;
+
+			if( image == null )
+				return PlatformUI.getWorkbench().getSharedImages().getImage(imageKey);
+			else
+				return image;
 		}
 	}
 

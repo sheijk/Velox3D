@@ -7,6 +7,7 @@
 
 package de.velox.editor;
 
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.*;
@@ -129,6 +130,20 @@ public class VeloxEditorPlugin extends AbstractUIPlugin {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return AbstractUIPlugin.imageDescriptorFromPlugin("VeloxEditor", path);
+	}
+
+	/**
+	 * Will return an image from the 'icons' directory
+	 * 
+	 * TODO: do this without recreating the image all the time :) (use an
+	 * ImageRegistry)
+	 */
+	public static Image getImage(String path) {
+		ImageDescriptor descriptor = getImageDescriptor(path);
+		if( descriptor != null )
+			return descriptor.createImage();
+		else
+			return null;
 	}
 }
 
