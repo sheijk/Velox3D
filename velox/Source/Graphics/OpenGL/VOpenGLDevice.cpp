@@ -408,7 +408,7 @@ void VOpenGLDevice::SetDisplay()
 	glEnable(GL_DEPTH_TEST);						// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);
 
-	m_pContext->SwapBuffers();
+	Flip();
 }
 //-----------------------------------------------------------------------------
 /*
@@ -531,11 +531,11 @@ void VOpenGLDevice::SetScreenSize()
 
 void VOpenGLDevice::SetBackgroundColor()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	//glClearColor(m_DisplaySettings.m_fBackgroundRed,
-	//			 m_DisplaySettings.m_fBackgroundGreen,
-	//			 m_DisplaySettings.m_fBackgroundBlue,
-	//			 m_DisplaySettings.m_fBackgroundAlpha);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f); 
+	/*glClearColor(m_DisplaySettings.m_fBackgroundRed,
+				 m_DisplaySettings.m_fBackgroundGreen,
+				 m_DisplaySettings.m_fBackgroundBlue,
+				 m_DisplaySettings.m_fBackgroundAlpha);*/
 }
 //-----------------------------------------------------------------------------
 
@@ -595,38 +595,32 @@ void VOpenGLDevice::BeginScene()
 	m_bActive = true;
 
 	m_pContext->MakeCurrent();
+	Clear();
 
 	glViewport(0, 0,
 		m_DisplaySettings.GetWidth(), m_DisplaySettings.GetHeight());
 
 	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
 
-	glClearColor(m_ClearColor.red, m_ClearColor.green, m_ClearColor.blue, 
-		m_ClearColor.alpha);
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	static vfloat32 ambient[4] = { .5f, .5f, .5f, 1.0f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity();
 
 	RecalcModelViewMatrix();
 	SetGLMatrix(GL_PROJECTION, m_ProjectionMatrix, this);
 	SetGLMatrix(GL_TEXTURE, m_TextureMatrix, this);
+
+	
 }
 
 //-----------------------------------------------------------------------------
 void VOpenGLDevice::EndScene(EndSceneFlags in_Flags)
 {
 	m_bActive = false;
-
 	m_pContext->MakeCurrent();
+	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
 
 	if( (in_Flags & NoFlip) == NoFlip )
-		m_pContext->SwapBuffers();
-
-	ApplyMaterial(*this, &m_pDefaultMaterial->GetPass(0));
+		Flip();
 }
 
 void VOpenGLDevice::Flip()

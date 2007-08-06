@@ -264,8 +264,6 @@ vint RacerDemo::Main(std::vector<std::string> args)
 		m_pRootShooting->UpdateAndCull();
 		m_pRootShooting->Render();
 		
-		Device().EndScene();
-
 		frameCounter++;
 		m_pUpdater->StartNextFrame();
 		m_pFrameCounter->LogLastFrameDuration();

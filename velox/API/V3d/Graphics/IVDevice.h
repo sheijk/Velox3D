@@ -111,6 +111,7 @@ public:
 	/**
 	 * End rendering to the render target and flip buffer. Other render targets
 	 * may not begin their scene before EndScene has been called
+	 * Do not use a call to EndScene in your own application
 	 */
 	virtual void EndScene(EndSceneFlags in_Flags = FlipScene) = 0;
 
