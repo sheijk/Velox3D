@@ -103,6 +103,9 @@ public class Part extends Node {
 //	}
 	
 	public String toString() {
+		if( ! isImplValid() )
+			return "invalid";
+			
 		String description = "(P) " + GetId();
 		
 		LinkedList<String> tags = new LinkedList<String>();

@@ -29,8 +29,12 @@ public abstract class Node {
 		updateSettingsFromPart();
 	}
 
-	protected boolean isImplValid() {
+	public boolean isImplValid() {
 		return valid(impl);
+	}
+	
+	public VNodePtr nodeptr() {
+		return impl;
 	}
 	
 	public VNode impl() {
@@ -145,6 +149,14 @@ public abstract class Node {
 
 	protected void setImpl(VNodePtr impl) {
 		this.impl = impl;
+		
+		if( ! isImplValid() ) {
+			throw new RuntimeException("Assigned invalid impl to node");
+		}
+		
+		if( this.impl().GetName().contains("ShowSelection") ) {
+			throw new RuntimeException("i should not exist");
+		}
 	}
 
 	protected VNodePtr getImpl() {

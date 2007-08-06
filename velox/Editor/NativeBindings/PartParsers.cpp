@@ -35,6 +35,8 @@ namespace v3d { namespace scene {
 		extern void* AssureVOrientationGridPartExists();
 		extern void* AssureVFrustumVisPartExists();
 
+		extern void* AssureVShowSelectionPartExists();
+
 		extern void* AssureVSphereMeshPartExists();
 		extern void* AssureVTorusMeshPartExists();
 		extern void* AssureVCylinderMeshPartExists();
@@ -120,6 +122,7 @@ void foo()
 	v3d::scene::AssureVGCMRawHeightmapPartExists();
 	v3d::scene::AssureVGCMStretchedHeightmapPartExists();
 	v3d::scene::AssureVCubemapShootingExists();
+	v3d::scene::AssureVShowSelectionPartExists();
 	v3d::scene::AssureVSkyPartExists();
 
 	v3d::physics::AssureVBodyPartExists();

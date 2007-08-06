@@ -161,6 +161,12 @@ void VNode::Add( VSharedPtr<VNode> node, vint pos )
 
 void VNode::Remove( VSharedPtr<VNode> node )
 {
+	if( node.Get() == NULL || node->GetState() == NotInScene )
+		return;
+
+	if( node.Get() == this )
+		return;
+
 	if( node->GetState() == Inactive )
 	{
 		m_ChildNodes.erase( FindChildNode(node.Get()) );
@@ -277,7 +283,9 @@ VNode::ActivationResult VNode::Activate()
 		++child;
 	}
 
-	OnActivate();
+	if( m_State == Inactive )
+		OnActivate();
+
 	m_State = Active;
 
 	return result;
@@ -285,6 +293,9 @@ VNode::ActivationResult VNode::Activate()
 
 void VNode::Deactivate()
 {
+	if( GetState() == NotInScene )
+		return;
+
 	if( GetState() == Active )
 		OnDeactivate();
 
@@ -311,6 +322,8 @@ void VNode::OnDeactivate()
 
 VNode::State VNode::GetState() const
 {
+	V3D_ASSERT( this != NULL );
+
 	return m_State;
 }
 
@@ -642,11 +655,16 @@ void VNode::Save(xml::IVXMLElement& node)
 		node.AddAttribute("tags", utils::VStringValue(tagList));
 	}
 
+	tags::VTag editorOnlyTag = tags::VTagRegistryPtr()->GetTagWithName("v3d-editor-internal");
+
 	VRangeIterator<VNode> child = ChildIterator();
 	while( child.HasNext() )
 	{
-		xml::IVXMLElement* element = node.AddElement("part");
-		child->Save(*element);
+		if( ! child->HasTag(editorOnlyTag) )
+		{
+			xml::IVXMLElement* element = node.AddElement("part");
+			child->Save(*element);
+		}
 
 		++child;
 	}

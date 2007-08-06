@@ -109,8 +109,11 @@ public class SceneEditor extends VeloxEditorBase {
 		
 		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
 			@Override public void Run() throws RuntimeException {
-				root.synchronize();
-				root.writeToXML(xml);
+//				root.synchronize();
+//				root.writeToXML(xml);
+				if( root.impl() != null ) {
+					root.impl().Save( xml );
+				}
 			}
 		});
 		
@@ -201,8 +204,6 @@ public class SceneEditor extends VeloxEditorBase {
 	
 	private void createNewScene() {
 		setRootEntity(new RootEntity(fileName));
-
-		root.Add(new Part("scene"));
 	}
 
 	@Override

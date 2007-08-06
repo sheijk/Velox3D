@@ -240,35 +240,31 @@
 					Name="Math"
 					>
 					<File
-						RelativePath="..\..\Api\V3d\Math\ArrayOps.h"
+						RelativePath="..\..\API\V3d\Math\ArrayOps.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\ArrayOps.inl"
+						RelativePath="..\..\API\V3d\Math\ArrayOps.inl"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math.h"
+						RelativePath="..\..\API\V3d\Math\Numerics.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\Numerics.h"
+						RelativePath="..\..\API\V3d\Math\Numerics.inl"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\Numerics.inl"
+						RelativePath="..\..\API\V3d\Math\TransformationOps.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\TransformationOps.h"
+						RelativePath="..\..\API\V3d\Math\VBoundingBox.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VBoundingBox.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Api\V3d\Math\VBoundingSphere.h"
+						RelativePath="..\..\API\V3d\Math\VBoundingSphere.h"
 						>
 					</File>
 					<File
@@ -276,55 +272,55 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VHalfRay.h"
+						RelativePath="..\..\API\V3d\Math\VHalfRay.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VLine.h"
+						RelativePath="..\..\API\V3d\Math\VLine.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VMatrix.h"
+						RelativePath="..\..\API\V3d\Math\VMatrix.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VMatrixOps.h"
+						RelativePath="..\..\API\V3d\Math\VMatrixOps.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VPlane.h"
+						RelativePath="..\..\API\V3d\Math\VPlane.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VQuaternion.h"
+						RelativePath="..\..\API\V3d\Math\VQuaternion.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VQuaternionOps.h"
+						RelativePath="..\..\API\V3d\Math\VQuaternionOps.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VRBTransform.h"
+						RelativePath="..\..\API\V3d\Math\VRBTransform.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VRect.h"
+						RelativePath="..\..\API\V3d\Math\VRect.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VRect3D.h"
+						RelativePath="..\..\API\V3d\Math\VRect3D.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VVector.h"
+						RelativePath="..\..\API\V3d\Math\VVector.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VVectorBase.h"
+						RelativePath="..\..\API\V3d\Math\VVectorBase.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\Api\V3d\Math\VVectorOps.h"
+						RelativePath="..\..\API\V3d\Math\VVectorOps.h"
 						>
 					</File>
 				</Filter>
@@ -476,6 +472,10 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VPlaneMeshPart.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Scene\Shapes\VShowSelectionPart.h"
 							>
 						</File>
 						<File
@@ -2173,6 +2173,10 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Scene\Shapes\VFrustumVisPart.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\Source\Scene\Shapes\VShowSelectionPart.cpp"
 						>
 					</File>
 					<File

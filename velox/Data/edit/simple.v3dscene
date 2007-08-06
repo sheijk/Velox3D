@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
-<entity name="simple">
-	<part type="v3d::entity::VUpdateManagerPart" tags=""/>
-	<part type="v3d::scene::VNaiveLightManager" tags=""/>
-	<part type="v3d::scene::VNaiveSceneManagerPart" tags=""/>
-	<part type="v3d::scene::VSimpleShooting" tags=""/>
-	<part type="v3d::utils::VInputPart" tags=""/>
-	<entity name="editorCam">
-		<part type="v3d::entity::VRigidBodyPart" pos="(6,16,73)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-		<part type="v3d::utils::VCameraPart" tags=""/>
-	</entity>
-	<entity name="debug">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,1)" tags=""/>
-		<part type="v3d::scene::VOrientationGridPart" material="/system/graphics/defaultMaterial" tags=""/>
-	</entity>
-	<entity name="gameCam">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,10)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-		<part type="v3d::utils::VCameraPart" tags=""/>
-		<part type="v3d::utils::VFPSMoverPart" ignore-mouse="false" tags=""/>
-	</entity>
-	<entity name="sphere">
-		<part type="v3d::entity::VRigidBodyPart" pos="(2.82639,10,9.59226)" updir="(0,1,0)" viewdir="(0.959226,0,-0.282639)" tags=""/>
-		<part type="v3d::scene::VSphereMeshPart" detail="20" mat_mud="" mat_mudColor="(0.1,0,0,0)" material="/edit/mat/terrain.v3dmat" radius="4" tags="test bar"/>
-		<part type="v3d::utils::VCircleMoverPart" angle="6.56973" center="(0,10,0)" radius="10" speed="3.1415" tags=""/>
-	</entity>
-	<entity name="player">
-		<part type="v3d::entity::VRigidBodyPart" pos="(0,0,0.01)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-		<part type="v3d::scene::VArrowMeshPart" color="(1,1,1,1)" material="/system/graphics/defaultMaterial" size="1" tags=""/>
-		<part type="v3d::utils::VTrackballPart" altitude-angle="0" center="(0,0,0)" centerOnParent="false" direction-angle="0" distance="0.01" tags=""/>
-	</entity>
-</entity>
+<node type="v3d::entity::VEntity" name="simple">
+	<node type="v3d::entity::VUpdateManagerPart" name=""/>
+	<node type="v3d::scene::VNaiveLightManager" name=""/>
+	<node type="v3d::scene::VNaiveSceneManagerPart" name=""/>
+	<node type="v3d::scene::VSimpleShooting" name=""/>
+	<node type="v3d::utils::VInputPart" name=""/>
+	<node type="v3d::entity::VEntity" name="editorCam">
+		<node type="v3d::entity::VRigidBodyPart" pos="(6,16,73)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::utils::VCameraPart" name=""/>
+	</node>
+	<node type="v3d::entity::VEntity" name="debug">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(0,0,1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VOrientationGridPart" name="" material="/system/graphics/defaultMaterial"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="gameCam">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,10)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::utils::VCameraPart" name=""/>
+		<node type="v3d::utils::VFPSMoverPart" ignore-mouse="false"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="sphere">
+		<node type="v3d::entity::VRigidBodyPart" pos="(2.82639,10,9.59226)" viewdir="(0.959226,0,-0.282639)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VSphereMeshPart" radius="4" detail="20" name="" material="/edit/mat/terrain.v3dmat" mat_mud="" mat_mudColor="(0.1,0,0,0)" tags="test bar"/>
+		<node type="v3d::utils::VCircleMoverPart" radius="10" center="(0,10,0)" speed="3.1415" angle="6.56973"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="player">
+		<node type="v3d::entity::VRigidBodyPart" pos="(18.0136,9.3649,14.5879)" viewdir="(-0.720545,-0.374596,-0.583517)" updir="(-0.29111,0.927188,-0.235749)"/>
+		<node type="v3d::scene::VArrowMeshPart" size="1" color="(1,1,1,1)" name="" material="/system/graphics/defaultMaterial"/>
+		<node type="v3d::utils::VTrackballPart" distance="25" direction-angle="51" altitude-angle="-22" center="(0,0,0)" centerOnParent="false"/>
+	</node>
+</node>

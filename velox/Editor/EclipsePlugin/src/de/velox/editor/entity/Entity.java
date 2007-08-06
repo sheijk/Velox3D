@@ -149,7 +149,7 @@ public class Entity extends Node {
 	}
 	
 	/** Resynchronize state with VEntity and it's parts */
-	public void synchronize() {
+	private void synchronize() {
 //		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
 //			@Override public void Run() throws RuntimeException {
 				for(Part part : parts) {
@@ -194,7 +194,7 @@ public class Entity extends Node {
 		createAdaptors();
 	}
 	
-	public void Remove(Entity entityToBeRemoved) {
+	private void Remove(Entity entityToBeRemoved) {
 		final boolean wasActive = IsActive();
 		
 		if( wasActive )
