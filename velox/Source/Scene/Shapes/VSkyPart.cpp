@@ -28,7 +28,7 @@ void VSkyDomeGenerator::Generate()
 	m_pTexCoords = 0;
 	m_pIndexBuffer = 0;
 	
-	m_fRadius = 20;
+	m_fRadius = 200;
 	m_nSides = 40;
 	m_nSlices = 40;
 

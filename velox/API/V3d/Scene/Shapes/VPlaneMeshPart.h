@@ -42,7 +42,7 @@ public:
 	 */
 	void CenterAt(const math::VVector3f& in_Center);
 
-	// overidden
+	// overridden
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
@@ -64,4 +64,3 @@ private:
 V3D_TYPEINFO_WITHPARENT(v3d::scene::VPlaneMeshPart, v3d::scene::IVShapePart);
 //-----------------------------------------------------------------------------
 #endif // V3D_VPLANEMESHPART_2005_10_15_H
-

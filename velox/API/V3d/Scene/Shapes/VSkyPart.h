@@ -9,7 +9,9 @@
 #include <V3d/Messaging/VMessageInterpreter.h>
 
 namespace v3d { namespace scene {
-
+/**
+ * @author ins
+ */
 class VSkyDomeGenerator
 {
 public:

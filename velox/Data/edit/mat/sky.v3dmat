@@ -3,30 +3,12 @@
 	<shaderPath>
 		<renderPass> 
 			<state name="vertex-program">
-				<iparam name="source">
-
-varying float intensitySqrd, intensity;
-void main(void)
-{
-    intensity        = gl_Vertex.y/ 40.0;
-    intensity        = exp(clamp(intensity, 0.0, 1.0))/1.8;
-    intensitySqrd    = intensity*intensity;
-  gl_Position = ftransform();	
-}
-</iparam>
-</state>
-<state name="fragment-program">
-<iparam name="source">
-varying float     intensitySqrd, intensity;
-void main(void)
-{
-   vec4  skyColor = vec4((1.0 - intensity),
-		     (1.0 - intensity),
-		     intensity, 0.0);
-   gl_FragColor = skyColor;
-}
-</iparam>
-</state>
-</renderPass>
-</shaderPath>
+				<param name="res" value="/edit/mat/sky.vert"/>
+			</state>
+			<state name="fragment-program">
+				<param name="res" value="/edit/mat/sky.frag"/>
+			</state>
+		</renderPass>
+	</shaderPath>
 </effect>
+
