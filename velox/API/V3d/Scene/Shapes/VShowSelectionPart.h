@@ -30,11 +30,15 @@ public:
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
 
+protected:
+	virtual void OnActivate();
+
 private:
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
 	graphics::VColor4f m_Color;
+	vfloat32 m_fSize;
 };
 
 //-----------------------------------------------------------------------------

@@ -27,7 +27,7 @@ using namespace v3d; // anti auto indent
  */
 VShowSelectionPart::VShowSelectionPart()
 {
-	m_Color = graphics::VColor4f( 1.0f, 1.0f, 1.0f, 1.0f );
+	m_Color = graphics::VColor4f( 1.0f, 1.0f, 0.0f, 1.0f );
 }
 
 /**
@@ -41,6 +41,10 @@ void VShowSelectionPart::SendGeometry(graphics::IVDevice& in_Device) const
 {
 	glColor4f( m_Color.red, m_Color.green, m_Color.blue, m_Color.alpha );
 	glutWireSphere( 1.0, 10, 10 );
+}
+
+void VShowSelectionPart::OnActivate()
+{
 }
 
 messaging::VMessageInterpreter* VShowSelectionPart::GetMessageInterpreterForClass()

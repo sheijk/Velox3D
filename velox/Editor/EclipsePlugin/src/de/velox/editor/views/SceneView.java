@@ -754,26 +754,26 @@ public class SceneView extends VeloxViewBase {
 	}
 
 	private void changeSelectedNode() {
-		if( markerNode == null || markerNode.Get() == null )
-			return;
-
-		final VNodePtr selectedNode = getSelectedNode();
-		
-		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
-			@Override public void Run() throws RuntimeException {
-				if( selectedEntity != null && selectedEntity.Get() != null ) {
-					markerNode.Deactivate();
-					selectedEntity.Remove( markerNode );
-				}
-				
-				if( selectedNode != null && selectedNode.Get() != null ) {
-					selectedNode.Add( markerNode );
-					markerNode.Activate();
-				}
-			}
-		});
-		
-		selectedEntity = selectedNode;
+//		if( markerNode == null || markerNode.Get() == null )
+//			return;
+//
+//		final VNodePtr selectedNode = getSelectedNode();
+//		
+//		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+//			@Override public void Run() throws RuntimeException {
+//				if( selectedEntity != null && selectedEntity.Get() != null ) {
+//					markerNode.Deactivate();
+//					selectedEntity.Remove( markerNode );
+//				}
+//				
+//				if( selectedNode != null && selectedNode.Get() != null ) {
+//					selectedNode.Add( markerNode );
+//					markerNode.Activate();
+//				}
+//			}
+//		});
+//		
+//		selectedEntity = selectedNode;
 	}
 	
 	/**
