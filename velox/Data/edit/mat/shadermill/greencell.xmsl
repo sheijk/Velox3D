@@ -1,0 +1,66 @@
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:/Development/mental/mill_file_io/mill_file_io.xsd">
+  <metasl_code file_name="color_balance.msl"/>
+  <metasl_code file_name="component_falloff.msl"/>
+  <metasl_code file_name="math_color.msl"/>
+  <node name="Color_brightness_2" class="Color_brightness">
+    <input name="color" value="0.225074 0.409836 0.328056 1"/>
+    <input name="amount" value="1"/>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.2795" height="2.3" open_width="2.2795" open_height="2.3" position="-3.26288 -1.15" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\amount" type_name="Scalar" type_code="scalar" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Color_brightness_1" class="Color_brightness">
+    <input name="color" value="0 1 0 1"/>
+    <input name="amount" value="1"/>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.2795" height="2.3" open_width="2.2795" open_height="2.3" position="-3.26288 -4.45" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\amount" type_name="Scalar" type_code="scalar" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Component_falloff_1" class="Component_falloff">
+    <input name="amount" value="0.702041"/>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.38861" height="2.2" open_width="2.38861" open_height="2.2" position="-3.26288 -7.7" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\amount" type_name="Scalar" type_code="scalar" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Math_color_mix_1" class="Math_color_mix">
+    <input name="color1" value="0 0 0 1">
+      <attachment target_name="result" target_node="Color_brightness_2"/>
+    </input>
+    <input name="color2" value="1 1 1 1">
+      <attachment target_name="result" target_node="Color_brightness_1"/>
+    </input>
+    <input name="mix" value="0.5 0.5 0.5 0.5">
+      <attachment target_name="result" target_node="Component_falloff_1"/>
+    </input>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.13715" height="2.4" open_width="2.13715" open_height="2.4" position="0 -4.4" view_translation="0 0" view_scale="1" open_state="closed" selected_state="true">
+      <preview_data>
+        <preview_data_element name="\mix" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.715398" tilt="0.795398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color1" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color2" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <render_data>
+    <light_list/>
+  </render_data>
+</root>

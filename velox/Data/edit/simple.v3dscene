@@ -19,13 +19,13 @@
 		<node type="v3d::utils::VFPSMoverPart" ignore-mouse="false"/>
 	</node>
 	<node type="v3d::entity::VEntity" name="sphere">
-		<node type="v3d::entity::VRigidBodyPart" pos="(2.82639,10,9.59226)" viewdir="(0.959226,0,-0.282639)" updir="(0,1,0)"/>
-		<node type="v3d::scene::VSphereMeshPart" radius="4" detail="20" name="" material="/edit/mat/terrain.v3dmat" mat_mud="" mat_mudColor="(0.1,0,0,0)" tags="test bar"/>
-		<node type="v3d::utils::VCircleMoverPart" radius="10" center="(0,10,0)" speed="3.1415" angle="6.56973"/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(5.88548,10,8.08463)" viewdir="(0.808463,0,-0.588548)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VSphereMeshPart" radius="4" detail="20" name="" material="/edit/mat/more/sm.v3dmat" mat_flip_normal="0" mat_msl_Component_falloff_1_amount="0.8" mat_msl_Generator_brick_1_brick_color="(1,1,1,1)" mat_msl_Generator_brick_1_brick_height="0.1" mat_msl_Generator_brick_1_brick_horizontal_spacing="0.9" mat_msl_Generator_brick_1_brick_vertical_spacing="0.9" mat_msl_Generator_brick_1_brick_width="0.2" mat_msl_Generator_brick_1_mortar_color="(1,1,1,1)" tags="test bar"/>
+		<node type="v3d::utils::VCircleMoverPart" radius="10" center="(0,10,0)" speed="3.1415" angle="19.4788"/>
 	</node>
 	<node type="v3d::entity::VEntity" name="player">
-		<node type="v3d::entity::VRigidBodyPart" pos="(18.0136,9.3649,14.5879)" viewdir="(-0.720545,-0.374596,-0.583517)" updir="(-0.29111,0.927188,-0.235749)"/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0.01)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
 		<node type="v3d::scene::VArrowMeshPart" size="1" color="(1,1,1,1)" name="" material="/system/graphics/defaultMaterial"/>
-		<node type="v3d::utils::VTrackballPart" distance="25" direction-angle="51" altitude-angle="-22" center="(0,0,0)" centerOnParent="false"/>
+		<node type="v3d::utils::VTrackballPart" distance="0.01" direction-angle="0" altitude-angle="0" center="(0,0,0)" centerOnParent="false"/>
 	</node>
 </node>

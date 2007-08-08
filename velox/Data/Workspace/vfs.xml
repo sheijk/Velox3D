@@ -22,5 +22,13 @@
 		source="../system"
 		rights="rwfd"
 		/>
+
+	<Mount
+		name="repo"
+		type="localfs"
+		source="../repo"
+		rights="rwfd"
+		/>
+
 </FileSystem>
 </Vfs>

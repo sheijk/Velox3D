@@ -362,25 +362,26 @@ public class SceneView extends VeloxViewBase {
 					caption = node.GetTypeInfo().GetName();
 				}
 				
-				if( node.GetState() == VNode.State.Inactive ) {
-					caption += " (inactive)";
-				}
-				
-				boolean connected = true;
-				VNodeDependencyIterator deps = node.Connections();
-				while( deps.HasNext() ) {
-					VNodeDependency dep = deps.Get();
-					if( dep.GetCondition() == VNodeDependency.Condition.Mandatory 
-							&& dep.GetTarget() == null )
-					{
-						connected = false;
+				if( node.GetState() == VNode.State.Active ) {
+					boolean connected = true;
+					VNodeDependencyIterator deps = node.Connections();
+					while( deps.HasNext() ) {
+						VNodeDependency dep = deps.Get();
+						if( dep.GetCondition() == VNodeDependency.Condition.Mandatory 
+								&& dep.GetTarget() == null )
+						{
+							connected = false;
+						}
+						
+						deps.Next();
 					}
 					
-					deps.Next();
+					if( ! connected )
+						caption += " (unconnected)";
 				}
-				
-				if( ! connected )
-					caption += " (unconnected)";
+				else {
+					caption += " (inactive)";
+				}		
 				
 				return caption;
 			}

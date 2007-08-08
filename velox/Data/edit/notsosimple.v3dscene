@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<node type="v3d::entity::VEntity" name="notsosimple">
+	<node type="v3d::entity::VUpdateManagerPart" name=""/>
+	<node type="v3d::scene::VNaiveLightManager" name=""/>
+	<node type="v3d::scene::VNaiveSceneManagerPart" name=""/>
+	<node type="v3d::scene::VSimpleShooting" name=""/>
+	<node type="v3d::utils::VInputPart" name=""/>
+	<node type="v3d::entity::VEntity" name="editorCam">
+		<node type="v3d::entity::VRigidBodyPart" pos="(6,16,73)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::utils::VCameraPart" name=""/>
+	</node>
+	<node type="v3d::entity::VEntity" name="gameCam">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,10)" viewdir="(0.449565,0.335815,-0.82772)" updir="(0.0313794,0.920132,0.39035)"/>
+		<node type="v3d::utils::VCameraPart" name=""/>
+		<node type="v3d::utils::VFPSMoverPart" ignore-mouse="false"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="torus">
+		<node type="v3d::entity::VRigidBodyPart" pos="(-15.1766,10,-13.0257)" viewdir="(-0.651287,0,0.758832)" updir="(0,1,0)"/>
+		<node type="v3d::utils::VCircleMoverPart" radius="20" center="(0,10,0)" speed="0.2" angle="1832.41"/>
+		<node type="v3d::scene::VTorusMeshPart" color="(1,1,1,1)" top-radius="5" bottom-radius="2" height="3" slices="20" stacks="20" name="" material="/edit/mat/shadermill/greencell.v3dmat" mat_flip_normal="0" mat_msl_Color_brightness_1_amount="1" mat_msl_Color_brightness_1_color="(1,0,0,1)" mat_msl_Color_brightness_2_amount="0.25" mat_msl_Color_brightness_2_color="(1,0,0,1)" mat_msl_Component_falloff_1_amount="1"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="player">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0.01)" viewdir="(0,0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VArrowMeshPart" size="1" color="(1,1,1,1)" name="" material="/system/graphics/defaultMaterial"/>
+		<node type="v3d::utils::VTrackballPart" distance="0.01" direction-angle="0" altitude-angle="0" center="(0,0,0)" centerOnParent="false"/>
+	</node>
+	<node type="v3d::entity::VEntity" name="sky">
+		<node type="v3d::entity::VRigidBodyPart" pos="(6,16,73)" viewdir="(-0,-0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VSkyboxPart" texture-dir="/data/cubemap/park3/" name=""/>
+	</node>
+	<node type="v3d::entity::VEntity" name="reflector">
+		<node type="v3d::entity::VRigidBodyPart" pos="(0,4,0)" viewdir="(-0,-0,-1)" updir="(0,1,0)"/>
+		<node type="v3d::scene::VSphereMeshPart" radius="10" detail="30" name="" material="/edit/mat/cubemap.v3dmat" mat_cubemap="/dynenv" mat_v3d_CameraPos="(0,0,0,0)" mat_v3d_ModelMatrix="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 "/>
+		<node type="v3d::scene::VCubemapShooting" cubemap_resource="/dynenv"/>
+	</node>
+</node>
