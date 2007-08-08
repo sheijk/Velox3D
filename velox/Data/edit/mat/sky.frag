@@ -1,35 +1,48 @@
 varying float intensity;
-uniform sampler2D cloud;
-uniform sampler2D sun;
+uniform sampler2D cloudTex;
+uniform sampler2D sunTex;
 uniform float v3d_TimeFraction60;
 void main(void)
 {
+  const vec2 sunDirection = vec2(0.0,0.0);
   const float cutOff = 0.0;
   const float cutOffX = 0.0;
+  const float sunScale = 0.4;
+  const float timeFactor = 1.0;
   vec3 skyColor = vec3((1.0 - intensity),
 			 (1.0 - intensity),
 			 intensity);
 
-  vec2 texCoords = gl_TexCoord[0].x;
-  texCoords[1] = gl_TexCoord[0].y;
-  
+  vec2 texCoords = gl_TexCoord[0].xy;
   texCoords[0] +=(v3d_TimeFraction60);
   
   if(texCoords[0] > 1.0)
   {
-    texCoords[0] = texCoords[0] -1.0;
-    //gl_FragColor = vec4(texCoords[0],0,0,1);
-    //return;
+    texCoords[0] = texCoords[0] - 1.0;
   }
- 
 
+  vec2 sunCoords = gl_TexCoord[0].xy;
+  vec3 cloud = texture2D(cloudTex, texCoords);
 
-  vec3 cloud = texture2D(cloud, texCoords);
-  vec3 sun = texture2D(sun, gl_TexCoord[0]);
+  sunCoords += sunDirection * (v3d_TimeFraction60) * timeFactor;
 
-  skyColor[0] = skyColor[0] + (sun[0]);
-  skyColor[1] = skyColor[1] + (sun[1]);
-  skyColor[2] = skyColor[2] + (sun[2]);
+  //cloud *= noise3(texCoords); //turn on if available sometime
+
+  if(gl_TexCoord[0].x > sunScale)
+  {
+    if(gl_TexCoord[0].y > sunScale)
+    {
+      if(gl_TexCoord[0].x < (1.0 - sunScale))
+      {
+	if(gl_TexCoord[0].y < (1.0 - sunScale))
+	{
+	  vec2 sunCoord = smoothstep(sunScale, (1.0 - sunScale), (gl_TexCoord[0].xy) );
+	  vec3 sun = texture2D(sunTex, sunCoord);
+	  skyColor += sun;
+	}
+      }
+    }
+  }
   
   vec3 base = skyColor;
   if(gl_TexCoord[0].x > cutOffX)
