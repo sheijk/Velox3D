@@ -31,7 +31,7 @@
 		<link>
 			<name>SourceV3d</name>
 			<type>2</type>
-			<location>VELOX_ROOT/Editor/SourceV3d</location>
+			<locationURI>VELOX_ROOT/Editor/SourceV3d</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

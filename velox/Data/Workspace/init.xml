@@ -3,7 +3,6 @@
 <Config>
 	<Services>
 		<Service id="velox"			desc="The velox services"		filename="ServiceDLL.dll"/>
-		<!-- Service id="wx"			desc="The wxWidgets services"	filename="WxServiceDLL.dll"/ -->
 	</Services>
 	<Main id="main"/>
 </Config>
