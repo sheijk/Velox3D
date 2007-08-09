@@ -1,0 +1,98 @@
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:/Development/mental/mill_file_io/mill_file_io.xsd">
+  <metasl_code file_name="color_balance.msl"/>
+  <metasl_code file_name="component_reflection.msl"/>
+  <metasl_code file_name="generator_checker.msl"/>
+  <metasl_code file_name="generator_water.msl"/>
+  <metasl_code file_name="layer_posterize.msl"/>
+  <node name="Component_reflection_2" class="Component_reflection">
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.71564" height="2.1" open_width="2.71564" open_height="2.1" position="-1.43445 5.46737" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Generator_water_1" class="Generator_water">
+    <input name="noise_texture" value="unfiltered_noise_normal.dds"/>
+    <input name="sea_height_texture" value="sea_floor_height.dds"/>
+    <input name="sea_floor_texture" value="sea_floor.dds"/>
+    <input name="water_color" value="0.16 0.29 0.36 1"/>
+    <input name="depth_scale" value="0.640816"/>
+    <input name="wave_speed" value="0.236735"/>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.23239" height="2.7" open_width="2.23239" open_height="2.7" position="-2.52792 -4.79718" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\water_color" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\wave_speed" type_name="Scalar" type_code="scalar" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\depth_scale" type_name="Scalar" type_code="scalar" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\noise_texture" type_name="Texture2d" type_code="texture2d" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\sea_height_texture" type_name="Texture2d" type_code="texture2d" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\sea_floor_texture" type_name="Texture2d" type_code="texture2d" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Generator_checker_1" class="Generator_checker">
+    <input name="color1" value="1 1 1 1">
+      <attachment target_name="result" target_node="Component_reflection_2"/>
+    </input>
+    <input name="color2" value="0 0 0 1">
+      <attachment target_name="result" target_node="Generator_water_1"/>
+    </input>
+    <input name="checkerSize" value="0.1"/>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.77283" height="9.24303" open_width="2.77283" open_height="9.24303" position="2.6455 0.940623" view_translation="0 0" view_scale="1" open_state="closed" selected_state="true">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="-1.4146" tilt="1.7554" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color1" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color2" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\checkerSize" type_name="Scalar" type_code="scalar" show_preview="false" orbit="0.965398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Component_reflection_1" class="Component_reflection">
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.71564" height="2.1" open_width="2.71564" open_height="2.1" position="-2.32804 3.13933" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.775398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Color_saturation_1" class="Color_saturation">
+    <input name="color" value="0 0 0 1">
+      <attachment target_name="result" target_node="Component_reflection_1"/>
+    </input>
+    <input name="saturation" value="1.77143"/>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.25194" height="2.3" open_width="2.25194" open_height="2.3" position="-2.70429 -1.96355" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\saturation" type_name="Scalar" type_code="scalar" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <node name="Layer_posterize_1" class="Layer_posterize">
+    <input name="color" value="1 1 1 1">
+      <attachment target_name="result" target_node="Color_saturation_1"/>
+    </input>
+    <input name="steps" value="4"/>
+    <output name="result" value="0 0 0 0"/>
+    <gui_data width="2.18432" height="2.3" open_width="2.18432" open_height="2.3" position="-0.0940623 -2.19871" view_translation="0 0" view_scale="1" open_state="closed" selected_state="false">
+      <preview_data>
+        <preview_data_element name="\result" type_name="Color" type_code="color" show_preview="true" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\color" type_name="Color" type_code="color" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+        <preview_data_element name="\steps" type_name="Scalar" type_code="scalar" show_preview="false" orbit="0.785398" tilt="0.785398" zoom="2" pan="0 0" preview_object="1" show_children="false" preview_image="0" draw_axis="0" source_space="2" axis_length="0.5" vector_type="1" color_range_min="0" color_range_max="1" color_clamp="true" suspend_float_texture_update="false"/>
+      </preview_data>
+    </gui_data>
+  </node>
+
+  <render_data>
+    <light_list/>
+  </render_data>
+</root>
