@@ -293,6 +293,15 @@ RacerDemo::RacerDemo()
 	m_pCamToggleKey = 0;
 }
 
+//template<typename T>
+//T fromString(const std::string& text)
+//{
+//	std::stringstream str( text );
+//	T t;
+//	t >> str;
+//	return t;
+//}
+
 void RacerDemo::Init()
 {
 	// create window
@@ -300,6 +309,26 @@ void RacerDemo::Init()
 
 	VDisplaySettings displaySettings;
 	displaySettings.SetSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	try
+	{
+		vuint windowX = property::GetProperty<vuint>("window.x");
+		vuint windowY = property::GetProperty<vuint>("window.y");
+
+		displaySettings.SetPosition( windowX, windowY );
+	}
+	catch(VException& e)
+	{}
+
+	try
+	{
+		vuint width = property::GetProperty<vuint>("window.width");
+		vuint height = property::GetProperty<vuint>("window.height");
+
+		displaySettings.SetSize( width, height );
+	}
+	catch(VException& e)
+	{}
 
 	m_pWindow =	pWindowManager->QueryWindow(
 		APP_NAME.c_str(), &displaySettings);

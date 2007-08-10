@@ -60,6 +60,11 @@ public class VeloxEditorPlugin extends AbstractUIPlugin {
 			else {
 				v3d.PrintLn("No vfs.xml file found, nothing mounted");
 			}
+			
+			IPath initFile = workspaceDir.append("init.xml");
+			if( initFile.toFile().exists() ) {
+				v3d.GetPropertyManager().LoadPropertiesFromInitFile( initFile.toOSString() );
+			}
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}

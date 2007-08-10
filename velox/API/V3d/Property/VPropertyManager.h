@@ -19,6 +19,10 @@
 #include <map>
 #include <string>
 //-----------------------------------------------------------------------------
+namespace v3d { namespace xml {
+	class IVXMLElement;
+}}
+
 namespace v3d { namespace property {
 //-----------------------------------------------------------------------------
 using namespace v3d; // prevent auto indenting
@@ -32,12 +36,17 @@ T GetProperty(VStringParam in_strName);
 template<typename T>
 void SetProperty(VStringParam in_strName, const T& in_Value);
 
+
 vbool ExistsProperty(VStringParam in_strName);
 
+/**
+ * Allows to setup global properties. Can be used for configuration options
+ * etc.
+ */
 class VPropertyManager : public VNamedObject
 {
 public:
-	VPropertyManager(VStringParam in_strName) : VNamedObject(in_strName, 0) {}
+	VPropertyManager(VStringParam in_strName);
 
 	void SetValue(VStringParam in_strName, const utils::VStringValue& in_strValue);
 	const utils::VStringValue& GetValue(VStringParam in_strName);
@@ -46,7 +55,11 @@ public:
 	
 	VRangeIterator<const std::string> GetPropertyNames() const;
 
+	void LoadPropertiesFromInitFile(const char* fileName);
+	void LoadProperties(xml::IVXMLElement& element);
+
 private:
+
 	typedef std::map<std::string, utils::VStringValue> PropertyTable;
 
 	PropertyTable m_Properties;

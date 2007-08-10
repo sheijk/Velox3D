@@ -2,7 +2,15 @@
 <!-- Velox3D services load info -->
 <Config>
 	<Services>
-		<Service id="velox"			desc="The velox services"		filename="ServiceDLL.dll"/>
+		<Service id="velox" desc="The velox services" filename="ServiceDLL.dll"/>
 	</Services>
 	<Main id="main"/>
+
+ 	<Properties>
+		<Property name="window.x" value="800" />
+		<Property name="window.y" value="-1000" />
+		<Property name="window.width" value="800" />
+		<Property name="window.height" value="600" />
+	</Properties>
+
 </Config>
