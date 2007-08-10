@@ -19,11 +19,11 @@ vec3 getSkyBaseColor()
 
 vec3 getCloudColor()
 {
-  const float cloudTrans = 0.4;
-  const float timeCloudFactor = 5.0;
+  const float cloudTrans = 1.9;
+  const float timeCloudFactor = 1.0;
   const float cutOffY = 0.0;
   const float cutOffX = 0.0;
-  const float edgeFallOff = 0.015;
+  const float edgeFallOff = 0.6;
 
   vec3 cloudColor;
   vec2 cloudCoords = gl_TexCoord[0].xy;
@@ -70,7 +70,7 @@ vec3 getCloudColor()
 vec3 getSunColor()
 {
   const vec2 sunDirection = vec2(0.0,0.0);
-  const float sunTrans = 0.9;
+  const float sunTrans = 2.9;
   const float sunRiseAngle = 0.0;
   const float sunScale = 0.8;
 
@@ -102,6 +102,7 @@ vec3 getStarColor()
 void main(void)
 {
   const float timeFactor = 10.0;
+  const float starTrans = 0.1;
 
   vec3 finalColor;
 
@@ -113,8 +114,10 @@ void main(void)
   vec3 test = vec3(1,1,1);
 
   finalColor = sunColor + cloudColor;
-  float factor = (1.0 - abs(sin(3.14 * v3d_TimeFraction60)));
-  finalColor += skyColor * factor;
+  float starFactor = abs(sin(3.14 * v3d_TimeFraction60));
+  float skyFactor = (1.0 - starFactor);
+  finalColor += skyColor * skyFactor;
+  finalColor += starColor * starFactor * starTrans;
   
   gl_FragColor = vec4(finalColor[0], finalColor[1], finalColor[2], 1.0);
 }

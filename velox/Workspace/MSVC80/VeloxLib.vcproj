@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="8,00"
 	Name="VeloxLib"
 	ProjectGUID="{20050526-0000-0000-0000-000560019000}"
 	RootNamespace="VeloxLib"
@@ -480,6 +480,10 @@
 						</File>
 						<File
 							RelativePath="..\..\Api\V3d\Scene\Shapes\VSkyboxPart.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\API\V3d\Scene\Shapes\VSkyDomeGenerator.h"
 							>
 						</File>
 						<File
@@ -2184,6 +2188,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\Source\Scene\Shapes\VSkyDomeGenerator.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\..\Source\Scene\Shapes\VSkyPart.cpp"
 						>
 					</File>
@@ -2395,7 +2403,7 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Generating java code using swig..."
-					CommandLine="cd $(OutDir)&#x0D;&#x0A;copy $(ProjectDir)..\..\Local\ExternalLibs\Bin\*.dll /Y"
+					CommandLine="cd $(OutDir)&#x0D;&#x0A;copy $(ProjectDir)..\..\Local\ExternalLibs\Bin\*.dll /Y&#x0D;&#x0A;"
 					Outputs="$(OutDir)glfw.dll"
 				/>
 			</FileConfiguration>
@@ -2405,7 +2413,7 @@
 				<Tool
 					Name="VCCustomBuildTool"
 					Description="Generating java code using swig..."
-					CommandLine="cd $(OutDir)&#x0D;&#x0A;copy $(ProjectDir)..\..\Local\ExternalLibs\Bin\*.dll /Y"
+					CommandLine="cd $(OutDir)&#x0D;&#x0A;copy $(ProjectDir)..\..\Local\ExternalLibs\Bin\*.dll /Y&#x0D;&#x0A;"
 					Outputs="$(OutDir)glfw.dll"
 				/>
 			</FileConfiguration>

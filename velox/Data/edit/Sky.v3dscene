@@ -5,17 +5,30 @@
 	<node type="v3d::scene::VNaiveLightManager" name=""/>
 	<node type="v3d::scene::VSimpleShooting" name=""/>
 	<node type="v3d::utils::VInputPart" name=""/>
+	<node type="v3d::scene::VDefaultRenderStepPart" clearColor="(0.2,0.4,0.8,1)" exclude-tags=" " far-plane="1000000" fov="45" include-all="true" include-tags=" " near-plane="1" tags=""/>
 	<node type="v3d::entity::VEntity" name="editorCam">
-		<node type="v3d::entity::VRigidBodyPart" pos="(15.002,8.95895,17.8795)" viewdir="(-0.600082,-0.358358,-0.715179)" updir="(-0.230342,0.933584,-0.274523)"/>
+		<node type="v3d::entity::VRigidBodyPart" pos="(15.002,28.95895,17.8795)" viewdir="(-0.600082,-0.358358,-0.715179)" updir="(-0.230342,0.933584,-0.274523)"/>
 		<node type="v3d::utils::VCameraPart" name=""/>
-		<node type="v3d::utils::VTrackballPart" distance="25" direction-angle="40" altitude-angle="-21" center="(0,0,0)" centerOnParent="false"/>
+		<node type="v3d::utils::VTrackballPart" distance="25" direction-angle="40" altitude-angle="-21" center="(0,50,0)" centerOnParent="false"/>
 	</node>
-	<node type="v3d::entity::VEntity" name="debug">
-		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(0,0,1)" updir="(0,1,0)"/>
-		<node type="v3d::scene::VOrientationGridPart" name="" material="/system/graphics/defaultMaterial"/>
+<!-- 	<node type="v3d::entity::VEntity" name="debug"> -->
+<!-- 		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(0,0,1)" updir="(0,1,0)"/> -->
+<!-- 		<node type="v3d::scene::VOrientationGridPart" name="" material="/system/graphics/defaultMaterial"/>
+		</node> -->
+<node type="v3d::entity::VEntity" name="terrain">
+  <part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+  <part type="v3d::scene::VTerrainPart" extent="(1400,1400)" mat_mud="/data/tex/mud1.tga" mat_mudColor="(0.1,0.1,0.2,0)" material="/edit/mat/terrain.v3dmat" resolution="256" tags=""/>
+</node>
+
+	<node type="v3d::entity::VEntity" name="moon">
+	  <node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
+	  <node type="v3d::utils::VCircleMoverPart" angle="20" center="(0,20,0)" radius="20" speed="0.1" tags=""/>
+	  <node type="v3d::scene::VSphereMeshPart" detail="20" material="/edit/mat/moon.v3dmat" mat_moonTex="/data/moon.jpg" radius="2" tags=""/>
+
 	</node>
 	<node type="v3d::entity::VEntity" name="sky">
-		<node type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" viewdir="(0.0174519,-0,-0.999848)" updir="(0,1,0)"/>
-		<node type="v3d::scene::VSkyPart" material="/edit/mat/sky.v3dmat" mat_cloudTex="/data/cloud.jpg" mat_sunTex="/data/sun.jpg" name=""/>
+	  <node type="v3d::entity::VRigidBodyPart" pos="(0,-100,0)" viewdir="(0,0,1)" updir="(0,1,0)"/>
+	  <node type="v3d::scene::VSkyPart" material="/edit/mat/sky.v3dmat" mat_cloudTex="/data/cloud.jpg" mat_sunTex="/data/sun.jpg" mat_starTex="/data/stars4.jpg" name=""/>
+		<!-- <node type="v3d::scene::VSkyPart" material="/edit/mat/sky.v3dmat" mat_cloudTex="/data/cloud.jpg" mat_sunTex="/data/sun.jpg" mat_starTex="/data/stars4.jpg" Mode="Dome" Sides="40" Slices="40" DivSteps="20" Radius="2000" Width="1000" Height="100" name=""/> -->
 	</node>
 </node>
