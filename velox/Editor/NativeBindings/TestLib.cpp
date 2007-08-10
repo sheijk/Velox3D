@@ -138,7 +138,7 @@ v3d::resource::IVResourceManager* GetResourceManager()
 		VServicePtr<resource::IVResourceManager> pResourceManager;
 		return &*pResourceManager;
 	}
-	catch(VException& e) {
+	catch(VException&) {
 		return 0;
 	}
 }
@@ -149,7 +149,7 @@ v3d::xml::IVXMLService* GetXMLService()
 		VServicePtr<xml::IVXMLService> pXMLService;
 		return &*pXMLService;
 	}
-	catch(VException& e) {
+	catch(VException&) {
 		return 0;
 	}
 }
@@ -160,7 +160,7 @@ v3d::vfs::IVFileSystem* GetFileSystem()
 		VServicePtr<vfs::IVFileSystem> pFileSystem;
 		return &*pFileSystem;
 	}
-	catch(VException& e) {
+	catch(VException&) {
 		return 0;
 	}
 }
@@ -171,7 +171,7 @@ v3d::entity::IVEntitySerializationService* GetEntitySerializationService()
 		entity::VEntitySerializationServicePtr pSerialService;
 		return &*pSerialService;
 	}
-	catch(VException& e) {
+	catch(VException&) {
 		return 0;
 	}
 }

@@ -10,4 +10,7 @@
 %include "../../API/V3d/Scene/IVShooting.h"
 %include "../../API/V3d/Scene/IVSceneManagerPart.h"
 
+%template(VShowSelectionPartPtr) v3d::VSharedPtr<v3d::scene::VShowSelectionPart>;
+%include "../../API/V3d/Scene/Shapes/VShowSelectionPart.h"
+
 

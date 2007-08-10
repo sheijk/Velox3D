@@ -269,7 +269,7 @@ void VSkyboxPart::SetTextureDir(
 		in_strExtension.size() >= 1 &&
 		in_strExtension[0] == '.' )
 	{
-		try
+			try
 		{
 			for( vuint side = 0; side <= 5; ++side )
 				m_Sides[side]->SetMaterial( CreateTextureMaterial(in_strDirectory + sideNamesA[side] + in_strExtension) );
@@ -279,13 +279,6 @@ void VSkyboxPart::SetTextureDir(
 			for( vuint side = 0; side <= 5; ++side )
 				m_Sides[side]->SetMaterial( CreateTextureMaterial(in_strDirectory + sideNamesB[side] + in_strExtension) );
 		}
-
-		//m_Sides[0]->SetMaterial(CreateTextureMaterial(in_strDirectory + "negx" + in_strExtension));
-		//m_Sides[1]->SetMaterial(CreateTextureMaterial(in_strDirectory + "posx" + in_strExtension));
-		//m_Sides[2]->SetMaterial(CreateTextureMaterial(in_strDirectory + "negz" + in_strExtension));
-		//m_Sides[3]->SetMaterial(CreateTextureMaterial(in_strDirectory + "posz" + in_strExtension));
-		//m_Sides[4]->SetMaterial(CreateTextureMaterial(in_strDirectory + "posy" + in_strExtension));
-		//m_Sides[5]->SetMaterial(CreateTextureMaterial(in_strDirectory + "negy" + in_strExtension));
 
 		m_strTextureDir = in_strDirectory;
 	}

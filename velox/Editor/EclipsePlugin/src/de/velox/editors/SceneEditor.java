@@ -143,6 +143,21 @@ public class SceneEditor extends VeloxEditorBase {
 			message);
 	}
 	
+//	VNodePtr selectedEntity = null;
+//	private final VTag EDITOR_INTERNAL_TAG = v3d.GetTagRegistry().GetTagWithName("v3d-editor-internal");
+//	VNodePtr markerNode = createMarkerNode();
+	
+//	private VNodePtr createMarkerNode() {
+//		VNodePtr root = v3d.CreatePart("v3d::entity::VEntity");
+//		VNodePtr rigidBody = v3d.CreatePart("v3d::entity::VRigidBodyPart");
+//		root.Add( rigidBody );
+//		VNodePtr markerPart = v3d.CreatePart( "v3d::scene::VShowSelectionPart" );
+//		root.Add( markerPart );
+//		markerPart.AttachTag( EDITOR_INTERNAL_TAG );
+//		
+//		return root;
+//	}
+
 	private void loadFromFile(final String fileName) throws LoadSceneException {
 		// we need a valid opengl context
 		if( renderLayer != null ) {
@@ -173,6 +188,8 @@ public class SceneEditor extends VeloxEditorBase {
 				
 				VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
 					@Override public void Run() throws RuntimeException {
+//						rootEntity.get().impl().Add( markerNode );
+						
 						// activate here, because shooting is created in setRootEntity
 						rootEntity.get().Activate();
 						rootEntity.get().applySettings(xml.get().Get());
@@ -281,7 +298,7 @@ public class SceneEditor extends VeloxEditorBase {
 		super.dispose();
 		
 		if( SceneView.getDefaultInstance() != null ) {
-			SceneView.getDefaultInstance().setEntity(null);
+			SceneView.getDefaultInstance().setEntity( null );
 		}
 		
 		VView.GetInstance().Remove(updateAction);
@@ -291,7 +308,7 @@ public class SceneEditor extends VeloxEditorBase {
 	@Override
 	public void setFocus() {
 		if( SceneView.getDefaultInstance() != null )
-			SceneView.getDefaultInstance().setEntity(root);
+			SceneView.getDefaultInstance().setEntity( root.nodeptr() );
 	}
 
 	private static VVector3f createVector(float x, float y, float z) {

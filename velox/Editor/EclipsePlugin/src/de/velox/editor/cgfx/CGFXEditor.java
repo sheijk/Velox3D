@@ -172,7 +172,7 @@ public class CGFXEditor extends TextEditor {
 		super.setFocus();
 		
 		if( SceneView.getDefaultInstance() != null && testScene != null )
-			SceneView.getDefaultInstance().setEntity(testScene);
+			SceneView.getDefaultInstance().setEntity( testScene.nodeptr() );
 	}
 	
 	private String getSourceCode() {

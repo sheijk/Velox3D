@@ -55,20 +55,13 @@ public class SceneView extends VeloxViewBase {
 	
 	private Composite myParent = null;
 	
-	private Entity root = new Entity("root");
-
-	public void setEntity(Entity inEntity) {
-		root = inEntity;
-		
-//		if( root != null ) {
-//			VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
-//				@Override public void Run() throws RuntimeException {
-//					root.synchronize();
-//				}
-//			});
-//		}
-		
-//		viewer.refresh();
+//	private Entity root = new Entity("root");
+	private VNodePtr root = v3d.CreatePart("v3d::entity::VEntity");
+//	private VNodePtr markerPart = null;
+	
+	public void setEntity(VNodePtr newRoot) {
+		root = newRoot;
+//		markerPart = newMarker;		
 		
 		refresh();
 	}
@@ -101,6 +94,10 @@ public class SceneView extends VeloxViewBase {
 		}
 	}
 
+	/**
+	 * @author sheijk
+	 *
+	 */
 	private class NodeSetting {
 		private final VNodePtr node;
 		private final String name;
@@ -130,10 +127,7 @@ public class SceneView extends VeloxViewBase {
 			this.value = value;
 		
 			if( node != null && node.Get() != null ) {
-				VMessage msg = new VMessage();
-				msg.AddProperty("type", "update");
-				msg.AddProperty("name", name);
-				msg.AddProperty("value", value);
+				VMessage msg = createSetPropertyMessage(name, value);
 
 				try {
 					node.Send(msg);
@@ -146,6 +140,7 @@ public class SceneView extends VeloxViewBase {
 			}
 		}
 
+
 		public VNodePtr getNode() {
 			return node;
 		}
@@ -153,6 +148,14 @@ public class SceneView extends VeloxViewBase {
 		public String getName() {
 			return name;
 		}
+	}
+	
+	private static VMessage createSetPropertyMessage(String name, String value) {
+		VMessage msg = new VMessage();
+		msg.AddProperty("type", "update");
+		msg.AddProperty("name", name);
+		msg.AddProperty("value", value);
+		return msg;
 	}
 	
 	private void addSettings(LinkedList<Object> childs, VNodePtr node) {
@@ -242,7 +245,7 @@ public class SceneView extends VeloxViewBase {
 		return node != null 
 		&& node.GetTypeInfo().CanBeCastedTo("v3d::entity::VEntity");
 	}
-	
+
 	private boolean isEditorInternal(VNode node) {
 		if( node == null )
 			return true;
@@ -285,7 +288,7 @@ public class SceneView extends VeloxViewBase {
 				if( rootNode != null )
 					return getChildren( rootNode );
 				else
-					return new Object[] { root.nodeptr() };
+					return new Object[] { root };
 			}
 			else {
 				return getChildren(parent);
@@ -737,7 +740,6 @@ public class SceneView extends VeloxViewBase {
 	private final VTag EDITOR_INTERNAL_TAG = v3d.GetTagRegistry().GetTagWithName("v3d-editor-internal");
 	VNodePtr markerNode = createMarkerPart();
 	
-	
 	private VNodePtr createMarkerPart() {
 		VNodePtr markerPart = v3d.CreatePart( "v3d::scene::VShowSelectionPart" );
 		markerPart.AttachTag( EDITOR_INTERNAL_TAG );
@@ -754,27 +756,34 @@ public class SceneView extends VeloxViewBase {
 			return null;
 	}
 
+	public void SetSelectionMode(VShowSelectionPart.EditMode mode) {
+		if( markerNode != null ) {
+			VMessage message = createSetPropertyMessage( "mode", mode.toString() );
+			markerNode.Send( message );
+		}
+	}
+	
 	private void changeSelectedNode() {
-//		if( markerNode == null || markerNode.Get() == null )
-//			return;
-//
-//		final VNodePtr selectedNode = getSelectedNode();
-//		
-//		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
-//			@Override public void Run() throws RuntimeException {
-//				if( selectedEntity != null && selectedEntity.Get() != null ) {
-//					markerNode.Deactivate();
-//					selectedEntity.Remove( markerNode );
-//				}
-//				
-//				if( selectedNode != null && selectedNode.Get() != null ) {
-//					selectedNode.Add( markerNode );
-//					markerNode.Activate();
-//				}
-//			}
-//		});
-//		
-//		selectedEntity = selectedNode;
+		if( markerNode == null || markerNode.Get() == null )
+			return;
+
+		final VNodePtr selectedNode = getSelectedNode();
+		
+		VView.GetInstance().ExecSynchronized(new IVSynchronizedAction() {
+			@Override public void Run() throws RuntimeException {
+				if( selectedEntity != null && selectedEntity.Get() != null ) {
+					markerNode.Deactivate();
+					selectedEntity.Remove( markerNode );
+				}
+				
+				if( selectedNode != null && selectedNode.Get() != null ) {
+					selectedNode.Add( markerNode );
+					markerNode.Activate();
+				}
+			}
+		});
+		
+		selectedEntity = selectedNode;
 	}
 	
 	/**
@@ -820,9 +829,10 @@ public class SceneView extends VeloxViewBase {
 					settingsContentProvider.setRootNode(selectedNode);
 					settingsViewer.refresh();
 					settingsViewer.expandAll();
+					
+					changeSelectedNode();
 				}
 				
-				changeSelectedNode();
 				
 //				final Entity selectedEntity = getSelectedEntity();
 ////				final Part selectedPart = getSelectedPart();

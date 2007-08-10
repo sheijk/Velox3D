@@ -23,12 +23,22 @@ using namespace v3d; // anti auto indenting
 class VShowSelectionPart : public VMeshPartBase
 {
 public:
+	enum EditMode
+	{
+		EMMove,
+		EMRotate,
+		EMScale
+	};
+
 	VShowSelectionPart();
 	virtual ~VShowSelectionPart();
 
 	virtual void SendGeometry(graphics::IVDevice& in_Device) const;
 
 	virtual const VTypeInfo& GetTypeInfo() const { return GetCompileTimeTypeInfo(this); }
+
+	EditMode GetEditMode() const;
+	void SetEditMode(EditMode newMode);
 
 protected:
 	virtual void OnActivate();
@@ -37,8 +47,17 @@ private:
 	virtual messaging::VMessageInterpreter* GetMessageInterpreterForClass();
 	virtual void SetupProperties(messaging::VMessageInterpreter& interpreter);
 
+	std::string GetEditModeName() const;
+	void SetEditMode(const std::string& modeName);
+
+	void DrawMoveMode() const;
+	void DrawRotateMode() const;
+	void DrawScaleMode() const;
+
 	graphics::VColor4f m_Color;
 	vfloat32 m_fSize;
+
+	mutable EditMode m_EditMode;
 };
 
 //-----------------------------------------------------------------------------

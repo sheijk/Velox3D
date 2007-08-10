@@ -162,6 +162,8 @@
                id="de.velox.editor.editoractions.runscene"
                label="Play"
                menubarPath="window/additions"
+               state="false"
+               style="toggle"
                toolbarPath="/Normal/V3d"
                tooltip="Play the scene. You can restore it afterwards using &quot;Restore&quot;"/>
          <action
@@ -179,8 +181,31 @@
                id="de.velox.editor.editoractions.activateinput"
                label="Enable input"
                menubarPath="window/additions"
+               style="push"
                toolbarPath="/Normal/V3d"
                tooltip="Enables routing of keyboard and mouse input to the engine. Disable by hitting Escape"/>
+         <action
+               class="de.velox.editor.scene.MoveModeAction"
+               definitionId="de.velox.editor.commands.move"
+               id="de.velox.editor.editoractions.move"
+               label="Move"
+               menubarPath="window/additions"
+               state="true"
+               style="radio"
+               toolbarPath="/Normal/v3d"
+               tooltip="Selects mode to move selected part">
+         </action>
+         <action
+               class="de.velox.editor.scene.RotateModeAction"
+               definitionId="de.velox.editor.commands.rotate"
+               id="de.velox.editor.editoractions.rotate"
+               label="Rotate"
+               menubarPath="window/additions"
+               state="false"
+               style="radio"
+               toolbarPath="/Normal/v3d"
+               tooltip="Selects mode to rotate selected part">
+         </action>
       </editorContribution>
    </extension>
    <extension

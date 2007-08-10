@@ -16,6 +16,7 @@
 #include <V3d/Entity.h>
 #include <V3d/Messaging/VProtocol.h>
 #include <V3d/Tags/VTagRegistry.h>
+#include <V3d/Scene/Shapes/VShowSelectionPart.h>
 
 #include <string>
 #include <V3d/OpenGL.h>
