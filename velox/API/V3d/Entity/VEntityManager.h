@@ -26,7 +26,11 @@ using namespace v3d;
 /**
  * @author sheijk
  */
+#ifdef V3D_MSVC //no __attribute__((dep)) for class keyword in gcc
 V3D_DEPRECATED class VEntityManager : public VNamedObject
+#else
+class VEntityManager : public VNamedObject
+#endif
 {
 public:
 	typedef VPointer<VEntity>::SharedPtr EntityPtr;

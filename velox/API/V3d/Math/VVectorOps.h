@@ -295,7 +295,9 @@ Cross(
 	  const VVector<Scalar, 3>& b
 	  )
 {
-	return VVector<Scalar, 3>(gmtl::cross(a.m_Vec, b.m_Vec));
+    VVector<Scalar, 3> result;
+    gmtl::cross(result.m_Vec, a.m_Vec, b.m_Vec);
+    return result;
 }
 
 template<typename Scalar>
@@ -375,12 +377,12 @@ VVector<Scalar, 3> operator*(
 	return result;
 }
 
-template<typename Scalar, vint Dimensions>
+template<typename Scalar, vuint Dimensions>
 std::ostream& operator<<(std::ostream& stream, const VVector<Scalar, Dimensions>& vec)
 {
 	stream << "(";
 
-	for(vint i = 0; i < Dimensions; ++i)
+	for(vuint i = 0; i < Dimensions; ++i)
 	{
 		stream << (i > 0 ? "," : "") << vec.Get(i);
 	}
@@ -392,7 +394,7 @@ std::ostream& operator<<(std::ostream& stream, const VVector<Scalar, Dimensions>
 	return stream;
 }
 
-template<typename Scalar, vint Dimensions>
+template<typename Scalar, vuint Dimensions>
 std::istream& operator>>(std::istream& stream, VVector<Scalar, Dimensions>& vec)
 {
 	VVector<Scalar, Dimensions> res;
@@ -403,7 +405,7 @@ std::istream& operator>>(std::istream& stream, VVector<Scalar, Dimensions>& vec)
 	if( testchar != '(' )
 		return stream;
 
-	for(vint i = 0; i < Dimensions; ++i)
+	for(vuint i = 0; i < Dimensions; ++i)
 	{
 		if( i > 0 )
 		{

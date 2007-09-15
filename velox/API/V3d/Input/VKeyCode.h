@@ -8,7 +8,7 @@
 #ifndef V3D_KEYENUMERATION_2004_08_09_H
 #define V3D_KEYENUMERATION_2004_08_09_H
 //-----------------------------------------------------------------------------
-#include <v3d/Core/VCoreLib.h>
+#include <V3d/Core/VCoreLib.h>
 
 //-----------------------------------------------------------------------------
 namespace v3d {

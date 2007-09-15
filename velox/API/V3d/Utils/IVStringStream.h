@@ -24,8 +24,7 @@ public:
 	virtual void Flush() = 0;
 };
 
-/*
-template <typename Stream, typename T> Stream& operator<<( Stream& in_Stream, T in_Val)
+template <typename T> IVStringStream& operator<<(IVStringStream& in_Stream, T in_Val)
 {
 	std::ostringstream oStream;
 	oStream << std::flush << in_Val;
@@ -33,16 +32,6 @@ template <typename Stream, typename T> Stream& operator<<( Stream& in_Stream, T 
 	oStream.str("");
 	return in_Stream;
 }
-*/
-
-template <typename T> IVStringStream& operator<<(IVStringStream& in_Stream, T in_Val)
-	{
-	std::ostringstream oStream;
-	oStream << std::flush << in_Val;
-	in_Stream.Write( oStream.str().c_str() );
-	oStream.str("");
-	return in_Stream;
-	}
 
 
 // manipulator
