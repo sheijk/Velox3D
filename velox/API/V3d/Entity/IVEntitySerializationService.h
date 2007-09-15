@@ -77,15 +77,19 @@ public:
 
 typedef VServicePtr<IVEntitySerializationService> VEntitySerializationServicePtr;
 //-----------------------------------------------------------------------------
-}} // namespace v3d::entity
+} //namespace v3d::entity
 //-----------------------------------------------------------------------------
 template<>
 inline v3d::entity::IVEntitySerializationService* 
-v3d::QueryService<v3d::entity::IVEntitySerializationService>()
+QueryService<v3d::entity::IVEntitySerializationService>()
 {
-	return QueryObject<v3d::entity::IVEntitySerializationService>(
-		"entity.serialization");
+    return QueryObject<v3d::entity::IVEntitySerializationService>(
+        "entity.serialization");
 }
+//-----------------------------------------------------------------------------
+} // namespace v3d
+//-----------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------
 #endif // V3D_IVENTITYSERIALIZATIONSERVICE_2005_07_18_H
 

@@ -73,7 +73,7 @@ namespace {
 		{
 			VEntitySerializationServicePtr pSerialService;
 
-			VSimpleMallocList<IVPartParser>* x = &g_Parsers;
+			//VSimpleMallocList<IVPartParser>* x = &g_Parsers;
 
 			VSimpleMallocList<IVPartParser>* parser = g_Parsers.next;
 			while( parser ) 

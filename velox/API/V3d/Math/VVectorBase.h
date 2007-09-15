@@ -161,9 +161,10 @@ public:
 	 */
 	vbool IsNormalized(Scalar tolerance = 0.0001 )
 	{
-		return (v3d::IsNormalized(m_i) &&
-			v3d::IsNormalized(m_j) &&
-			v3d::IsNormalized(m_k));
+		return (
+		    IsNormalized(m_i) &&
+			IsNormalized(m_j) &&
+			IsNormalized(m_k));
 	}
 
 	/**
@@ -282,4 +283,4 @@ typedef VVectorBase<vfloat64> VVectorBase3d;
 } // namespace math
 } // namespace v3d
 //-----------------------------------------------------------------------------
-#endif V3D_VVECTORBASE_01_19_04_H
+#endif //V3D_VVECTORBASE_01_19_04_H

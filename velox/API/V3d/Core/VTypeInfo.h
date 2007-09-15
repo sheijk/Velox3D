@@ -164,7 +164,9 @@ public:
 		void operator()(VTypeInfo* out_pTypeInfo)\
 			{\
 				/* Check if TheType derives from TheParent*/\
-				TheParent* p = (TheType*)0;\
+				TheParent* p = static_cast<TheType*>(0);\
+				/* use p to zero out warning */\
+				p = 0;\
 				\
 				out_pTypeInfo->SetName(#TheType);\
 				out_pTypeInfo->AddSuperType<TheParent>();\
