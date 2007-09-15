@@ -364,7 +364,7 @@ void Rotate(
 			const VVector<Scalar, 3> in_Vector, 
 			const VQuaternion<Scalar>& in_Rotation)
 {
-	out_Result.m_Vec = in_Vector.m_Vec * in_Rotation.m_Data;
+	out_Result.m_Vec = in_Rotation.m_Data * in_Vector.m_Vec;
 }
 
 template<typename Scalar>

@@ -17,7 +17,7 @@
 		</node> -->
 <node type="v3d::entity::VEntity" name="terrain">
   <part type="v3d::entity::VRigidBodyPart" pos="(0,0,0)" updir="(0,1,0)" viewdir="(0,0,-1)" tags=""/>
-  <part type="v3d::scene::VTerrainPart" extent="(1400,1400)" mat_mud="/data/tex/mud1.tga" mat_mudColor="(0.1,0.1,0.2,0)" material="/edit/mat/terrain.v3dmat" resolution="256" tags=""/>
+  <part type="v3d::scene::VTerrainPart" extent="(400,400)" mat_mud="/data/tex/mud1.tga" mat_mudColor="(0.1,0.1,0.2,0)" material="/edit/mat/terrain.v3dmat" resolution="256" tags=""/>
 </node>
 
 	<node type="v3d::entity::VEntity" name="moon">
@@ -28,7 +28,7 @@
 	</node>
 	<node type="v3d::entity::VEntity" name="sky">
 	  <node type="v3d::entity::VRigidBodyPart" pos="(0,-100,0)" viewdir="(0,0,1)" updir="(0,1,0)"/>
-	  <node type="v3d::scene::VSkyPart" material="/edit/mat/sky.v3dmat" mat_cloudTex="/data/cloud.jpg" mat_sunTex="/data/sun.jpg" mat_starTex="/data/stars4.jpg" name=""/>
+	  <node type="v3d::scene::VSkyPart" material="/edit/mat/sky.v3dmat" mat_cloudTex="/data/cloud.jpg" mat_sunTex="/data/sun.jpg" mat_starTex="/data/stars.jpg" name=""/>
 		<!-- <node type="v3d::scene::VSkyPart" material="/edit/mat/sky.v3dmat" mat_cloudTex="/data/cloud.jpg" mat_sunTex="/data/sun.jpg" mat_starTex="/data/stars4.jpg" Mode="Dome" Sides="40" Slices="40" DivSteps="20" Radius="2000" Width="1000" Height="100" name=""/> -->
 	</node>
 </node>

@@ -1118,10 +1118,6 @@
 							RelativePath="..\..\API\V3d\Graphics\Generators\VTriangleMesh.h"
 							>
 						</File>
-						<File
-							RelativePath="..\..\API\V3d\Graphics\Generators\VTriangleMesh.inl"
-							>
-						</File>
 					</Filter>
 					<Filter
 						Name="Geometry"
@@ -1692,10 +1688,6 @@
 									RelativePath="..\..\Source\UtilsLib\Importer\VModelLoader.cpp"
 									>
 								</File>
-								<File
-									RelativePath="..\..\Source\UtilsLib\Importer\VQ3BspImporter.cpp"
-									>
-								</File>
 								<Filter
 									Name="Base"
 									>
@@ -1747,14 +1739,6 @@
 				<Filter
 					Name="Generators"
 					>
-					<File
-						RelativePath="..\..\Source\Graphics\Generators\VBoxGenerator.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Graphics\Generators\VPolarSphereGenerator.cpp"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="Parameters"
@@ -2041,14 +2025,6 @@
 					</File>
 					<File
 						RelativePath="..\..\Source\Resource\Types\VMaterialResourceType.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMeshGeneratorResType.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\Source\Resource\Types\VMeshGeneratorResType.h"
 						>
 					</File>
 					<File

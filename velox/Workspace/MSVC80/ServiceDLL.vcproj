@@ -1119,14 +1119,6 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Resource"
-			>
-			<Filter
-				Name="Implementation"
-				>
-			</Filter>
-		</Filter>
-		<Filter
 			Name="SystemManager"
 			>
 			<Filter

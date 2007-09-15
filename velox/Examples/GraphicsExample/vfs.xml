@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<!-- Virtual File System Mount Table -->
-<Vfs version="1.0">
-<FileSystem version="1.0">
-	<Mount name="data"		type="localfs"	source="data" rights="rwfd"/>
-</FileSystem>
-</Vfs>

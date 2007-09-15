@@ -33,7 +33,6 @@
 #include "Resource/Types/VImported3DSResourceType.h"
 #include "Resource/Types/VMeshResourceType.h"
 #include "Resource/Types/VMaterialResourceType.h"
-#include "Resource/Types/VMeshGeneratorResType.h"
 #include "Resource/Types/VOffscreenDeviceResType.h"
 #include "Resource/Types/VPBufferTextureResType.h"
 #include "Resource/Types/VTextFileResType.h"
@@ -187,7 +186,7 @@ void VVeloxModules::Initialize()
 	g_pResourceManager->RegisterResourceType(
 		VSharedPtr<IVResourceType>(new graphics::VMaterialResourceType()));
 
-	g_pResourceManager->RegisterResourceType(SharedPtr(new VMeshGeneratorResType()));
+	//g_pResourceManager->RegisterResourceType(SharedPtr(new VMeshGeneratorResType()));
 
 	g_pResourceManager->RegisterResourceType(SharedPtr(new VTextFileResType()));
 

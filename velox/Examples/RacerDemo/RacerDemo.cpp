@@ -67,7 +67,7 @@ public:
 
   void UpdateTime()
   {
-	 vfloat32 curTime = glfwGetTime();
+	 vfloat32 curTime = static_cast<float>(glfwGetTime());
 	 deltaTime = curTime - lastTime;
 	 lastTime = curTime;
   }
@@ -222,13 +222,13 @@ vint RacerDemo::Main(std::vector<std::string> args)
 	m_pUpdater->Start();
 	glfwInit();
 
-	vfloat32 startTime = glfwGetTime();
+	vfloat32 startTime = static_cast<float>(glfwGetTime());
 	long frameCounter = 0;
 	vfloat32 lastTime = 0;
 
 	while(m_pSystem->GetStatus())
 	{
-		vfloat32 curTime = glfwGetTime();
+		vfloat32 curTime = static_cast<float>(glfwGetTime());
 		vfloat32 deltaTime = curTime - lastTime;
 		lastTime = curTime;
 
@@ -272,7 +272,7 @@ vint RacerDemo::Main(std::vector<std::string> args)
 
 	vout << "Average frames: " << m_pFrameCounter->GetAverageFPS() << vendl;
 	m_pUpdater->Stop();
-	vfloat32 dieTime = glfwGetTime();
+	vfloat32 dieTime = static_cast<float>(glfwGetTime());
 	vfloat32 deltaTime = dieTime - startTime;
 	vout << "fps / time: " << 1.0f / (deltaTime / frameCounter) << vendl;
 
@@ -317,7 +317,7 @@ void RacerDemo::Init()
 
 		displaySettings.SetPosition( windowX, windowY );
 	}
-	catch(VException& e)
+	catch(VException&)
 	{}
 
 	try
@@ -327,7 +327,7 @@ void RacerDemo::Init()
 
 		displaySettings.SetSize( width, height );
 	}
-	catch(VException& e)
+	catch(VException&)
 	{}
 
 	m_pWindow =	pWindowManager->QueryWindow(

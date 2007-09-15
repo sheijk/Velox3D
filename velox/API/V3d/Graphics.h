@@ -35,7 +35,6 @@
 #include <V3d/Graphics/Parameters/VTextureValue.h>
 
 #include <V3d/Graphics/Geometry.h>
-#include <V3d/Graphics/Generators.h>
 #include <V3d/Graphics/Misc.h>
 #include <V3d/Graphics/SimpleSG.h>
 #include <V3d/Graphics/Materials.h>
