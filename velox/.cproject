@@ -8,6 +8,7 @@
 <externalSettings/>
 <extensions>
 <extension id="org.eclipse.cdt.core.Cygwin_PE" point="org.eclipse.cdt.core.BinaryParser"/>
+<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
@@ -15,11 +16,11 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactName="v3d" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.637519282" name="Debug" parent="cdt.managedbuild.config.gnu.cygwin.exe.debug">
+<configuration artifactExtension="exe" artifactName="v3d" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.637519282" name="Debug" parent="cdt.managedbuild.config.gnu.cygwin.exe.debug">
 <folderInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.637519282." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug.155870420" name="Cygwin GCC" superClass="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug">
-<targetPlatform id="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug.1917465142" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug"/>
-<builder buildPath="${workspace_loc:/v3d/Debug}" id="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug.1909031506" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug"/>
+<targetPlatform binaryParser="org.eclipse.cdt.core.Cygwin_PE;org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug.1917465142" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug"/>
+<builder autoBuildTarget="all" buildPath="${workspace_loc:/v3d/Workspace/BoostBuild}" cleanBuildTarget="clean" command="bjam" enableAutoBuild="false" enableCleanBuild="false" enabledIncrementalBuild="false" id="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug.1909031506" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="2" superClass="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug.1606126183" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug">
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.1695271035" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
@@ -49,6 +50,21 @@
 </folderInfo>
 </configuration>
 </storageModule>
+
+<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+
+<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+<buildTargets>
+<target name="All" path="Workspace/BoostBuild" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<buildCommand>bjam</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+</buildTargets>
+</storageModule>
 <storageModule moduleId="scannerConfiguration">
 <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
 <profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
@@ -238,7 +254,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -248,7 +264,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -258,7 +274,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -268,7 +284,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -278,7 +294,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -288,7 +304,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -404,7 +420,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -414,7 +430,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -424,7 +440,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -434,7 +450,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -444,7 +460,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -454,7 +470,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -464,9 +480,6 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
-<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
-<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cconfiguration>
 <cconfiguration id="cdt.managedbuild.config.gnu.cygwin.exe.release.1141715561">
 <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cygwin.exe.release.1141715561" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -480,7 +493,7 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactName="v3d" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.release.1141715561" name="Release" parent="cdt.managedbuild.config.gnu.cygwin.exe.release">
+<configuration artifactName="v3d" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.release.1141715561" name="Release" parent="cdt.managedbuild.config.gnu.cygwin.exe.release">
 <folderInfo id="cdt.managedbuild.config.gnu.cygwin.exe.release.1141715561." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.cygwin.exe.release.1801774438" name="Cygwin GCC" superClass="cdt.managedbuild.toolchain.gnu.cygwin.exe.release">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.cygwin.exe.release.300462224" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.cygwin.exe.release"/>
@@ -510,6 +523,21 @@
 </folderInfo>
 </configuration>
 </storageModule>
+
+<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+
+<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+<buildTargets>
+<target name="All" path="Workspace/BoostBuild" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+<buildCommand>bjam</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+</buildTargets>
+</storageModule>
 <storageModule moduleId="scannerConfiguration">
 <autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
 <profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
@@ -699,7 +727,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -709,7 +737,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -719,7 +747,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -729,7 +757,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -739,7 +767,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -749,7 +777,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -865,7 +893,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -875,7 +903,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -885,7 +913,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -895,7 +923,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -905,7 +933,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -915,7 +943,7 @@
 </profile>
 <profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC">
 <buildOutputProvider>
-<openAction enabled="false" filePath=""/>
+<openAction enabled="true" filePath=""/>
 <parser enabled="false"/>
 </buildOutputProvider>
 <scannerInfoProvider id="specsFile">
@@ -925,9 +953,6 @@
 </profile>
 </scannerConfigBuildInfo>
 </storageModule>
-<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
-<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
