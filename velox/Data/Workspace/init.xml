@@ -7,8 +7,8 @@
 	<Main id="main"/>
 
  	<Properties>
-		<Property name="window.x" value="800" />
-		<Property name="window.y" value="-1000" />
+		<Property name="window.x" value="0" />
+		<Property name="window.y" value="0" />
 		<Property name="window.width" value="800" />
 		<Property name="window.height" value="600" />
 	</Properties>

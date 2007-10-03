@@ -9,7 +9,7 @@
 #include <V3d/Core/RangeIter/VSTLAccessorRangePolicy.h>
 
 #include <V3d/Core/VLogging.h>
-
+#include <V3d/Core/VIOStream.h>
 #include <V3d/XML.h>
 //-----------------------------------------------------------------------------
 #include <V3d/Core/MemManager.h>
