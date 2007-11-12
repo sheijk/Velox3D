@@ -11,7 +11,7 @@
  * for every service dll. The initialize and shutdown functions of
  * your instance will be called automagically
  */
-
+#ifdef V3D_WIN32
 #define V3D_MODULE_API __declspec(dllexport)
 
 //-----------------------------------------------------------------------------
@@ -131,3 +131,4 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 }
 
 //-----------------------------------------------------------------------------
+#endif

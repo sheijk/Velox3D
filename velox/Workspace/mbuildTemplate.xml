@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE workspace SYSTEM "mbuild.dtd">
+<workspace name="Velox" rootdir="">
+  <projects xmlns:exsl="http://exslt.org/common">
+  </projects>
+</workspace>
