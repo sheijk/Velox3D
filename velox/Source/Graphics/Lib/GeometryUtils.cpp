@@ -32,7 +32,7 @@ public:
 
 	void operator=(T* t)
 	{
-		Release();
+		this->Release();
 		ptr = t;
 	}
 

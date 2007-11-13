@@ -69,14 +69,16 @@ protected:
 
 typedef VServicePtr<IVResourceManager> VResourceManagerPtr;
 //-----------------------------------------------------------------------------
-}} // namespace v3d::resource
-//-----------------------------------------------------------------------------
+} // namespace resource
 template<>
 inline v3d::resource::IVResourceManager* 
-	v3d::QueryService<v3d::resource::IVResourceManager>()
+	QueryService<v3d::resource::IVResourceManager>()
 {
 	return QueryObject<v3d::resource::IVResourceManager>("resource.manager");
 }
 //-----------------------------------------------------------------------------
+} // namespace v3d
+//-----------------------------------------------------------------------------
+
 #endif // V3D_IVRESOURCEMANAGER_2004_11_06_H
 

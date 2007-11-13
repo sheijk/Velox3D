@@ -27,7 +27,7 @@ class IVTexture
 public:
 
 	IVTexture() {};
-	~IVTexture() {};
+	virtual ~IVTexture() {};
 	
 	/**
 	 * Bind Texture

@@ -527,7 +527,7 @@ void VNode::Load(const xml::IVXMLElement& in_Node)
 	VRangeIterator<const xml::IVXMLAttribute> attrib = in_Node.AttributeBegin();
 	while( attrib.HasNext() )
 	{
-		std::string name = attrib->GetName();
+		std::string name(attrib->GetName());
 		std::string value = attrib->GetValueAs<std::string>();
 
 		if( name != "type" && name != "tags" )

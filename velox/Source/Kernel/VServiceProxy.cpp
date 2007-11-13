@@ -20,7 +20,7 @@ namespace v3d {
 
 namespace kernel {
 //-----------------------------------------------------------------------------
-
+#ifdef V3D_WIN32
 VServiceProxy::VServiceProxy(const string &in_strDLL)
 {
 	m_strDLL = in_strDLL;
@@ -28,7 +28,7 @@ VServiceProxy::VServiceProxy(const string &in_strDLL)
 	m_pInitFunction = 0;
 	m_pDeInitFunction = 0;
 
-	m_hDllInstance = NULL;
+	m_hDllInstance = 0;
 	m_bIsLoaded = false;
 }
 
@@ -90,7 +90,7 @@ void VServiceProxy::Shutdown()
 	// unload DLL
 	FreeLibrary(m_hDllInstance);
 }
-
+#endif
 //-----------------------------------------------------------------------------
 } // namespace kernel
 } // namespace v3d

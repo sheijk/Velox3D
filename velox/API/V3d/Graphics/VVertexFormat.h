@@ -42,6 +42,7 @@ public:
 		DataTypes in_DataTypes, 
 		vuint in_nVertexCount, 
 		vuint in_nIndexCount);
+	virtual ~VVertexFormat();
 
 	VDataFormat GetCoordinateFormat() const;
 	void SetCoordinateFormat(VDataFormat in_Format);

@@ -10,7 +10,7 @@
 //-----------------------------------------------------------------------------
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Graphics.h>
-
+#include <V3d/Math/Numerics.h>
 //-----------------------------------------------------------------------------
 namespace v3d { 
 namespace graphics {
@@ -29,12 +29,12 @@ void ForEachVertex(VBuffer<VertexStructure>& buffer, Operation& op);
  * @author sheijk
  */
 template<typename VertexStructure>
-class SetColor
+class SetVertexColor //clash with SetColor in VModelLoader.cpp
 {
 	VColor4f color;
 public:
-	SetColor(const VColor4f col) : color(col) {}
-	SetColor(vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha = 1.0f)
+	SetVertexColor(const VColor4f col) : color(col) {}
+	SetVertexColor(vfloat32 red, vfloat32 green, vfloat32 blue, vfloat32 alpha = 1.0f)
 		: color(VColor4f(red, green, blue, alpha))
 	{}
 

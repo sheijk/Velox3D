@@ -36,10 +36,12 @@ public:
 	{
 		Float, Float2, Float4, Float44,
 		Int,
-		Bool,
+		Boolean,
 		Texture,
 		Unknown
 	};
+	
+	virtual ~IVParameter(){};
 
 	virtual std::string GetName() const = 0;
 	virtual Type GetType() const = 0;

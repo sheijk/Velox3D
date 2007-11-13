@@ -30,6 +30,7 @@ class IVDevice;
 class IVCamera
 {
 public:
+	virtual ~IVCamera(){};
 	virtual const math::VMatrix44f& ViewMatrix() const = 0;
 	virtual const math::VRBTransform& Transform() const = 0;
 

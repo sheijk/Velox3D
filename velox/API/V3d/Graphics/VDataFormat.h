@@ -24,15 +24,15 @@ using namespace v3d; // anti auto indenting
  */
 class VDataFormat
 {
+	vuint m_nStride;
 	vuint m_nFirstIndex;
 	vuint m_nCount;
-	vuint m_nStride;
 
 public:
 	VDataFormat() : m_nStride(0), m_nFirstIndex(0), m_nCount(0) {}
 
 	VDataFormat(vuint first, vuint count, vuint stride) :
-		m_nFirstIndex(first), m_nCount(count), m_nStride(stride) {}
+		 m_nStride(stride), m_nFirstIndex(first), m_nCount(count) {}
 
 	vuint GetFirstIndex() const	{ return m_nFirstIndex; }
 	vuint GetCount() const		{ return m_nCount; }

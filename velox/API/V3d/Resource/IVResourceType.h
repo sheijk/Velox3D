@@ -37,6 +37,8 @@ public:
 	/**
 	 * Returns the types which this type can add to a resource using Generate()
 	 */
+	
+	virtual ~IVResourceType(){};
 	virtual VRangeIterator<VTypeInfo> CreatedTypes() = 0;
 
 	/** 

@@ -48,6 +48,7 @@ public:
 	};
 
 	VMeshDescription();
+	virtual ~VMeshDescription();
 
 	VMeshDescription(const VVertexFormat& in_Format);
 	VMeshDescription(const VMeshDescription& in_Source);

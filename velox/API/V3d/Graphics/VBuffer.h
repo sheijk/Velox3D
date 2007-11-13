@@ -99,7 +99,7 @@ public:
 	 * @param in_Mode CopyData -> copy data, DropData -> take over data
 	 */
 	template<typename OldDataType>
-	VBuffer(VBuffer<OldDataType>* in_pSource, CopyMode in_CopyMode)
+	VBuffer(VBuffer<OldDataType>* in_pSource, VBufferBase::CopyMode in_CopyMode)
 	{
 		V3D_ASSERT(in_pSource != 0);
 
@@ -116,7 +116,7 @@ public:
 			V3D_THROW(VException, "type size mismatch");
 		}
 
-		if( in_CopyMode == DropData )
+		if( in_CopyMode == this->DropData )
 		{
 			// take ownership of buffer
 			m_pBuffer = reinterpret_cast<DataType*>(
@@ -125,12 +125,12 @@ public:
 
 			// empty source buffer
 			VBufferBase* pBase = in_pSource;
-			ResetOther(pBase);
+			this->ResetOther(pBase);
 			//pBase->ResetToZero();
 			//in_pSource->m_pBuffer = 0;
 			//in_pSource->m_nSize = 0;
 		}
-		else if( in_CopyMode == CopyData )
+		else if( in_CopyMode == this->CopyData )
 		{
 			// create a copy of the data
 			vbyte* pNewData = new vbyte[nSizeInBytes];
@@ -191,9 +191,9 @@ public:
 	 * @deprecated use VBuffer(VBuffer<OldType>,CopyMode) instead
 	 * @param in_Mode CopyData copies, DropData transfers ownership
 	 */
-	VBuffer<DataType>* CreateCopy(CopyMode in_Mode)
+	VBuffer<DataType>* CreateCopy(VBufferBase::CopyMode in_Mode)
 	{
-		if( in_Mode == DropData )
+		if( in_Mode == this->DropData )
 		{
 			VBuffer* buffer = new VBuffer(m_pBuffer, m_nSize);
 
@@ -252,7 +252,7 @@ public:
 	 * @deprecated use VBuffer(VBuffer<OldType>*, CopyMode) instead
 	 */
 	template<typename DestType>
-	VBuffer<DestType>* Convert(CopyMode in_CopyMode)
+	VBuffer<DestType>* Convert(VBufferBase::CopyMode in_CopyMode)
 	{
 		VBuffer<DestType>* pNewBuffer = 0;
 
@@ -265,7 +265,7 @@ public:
 			V3D_THROW(VException, "type size mismatch");
 		}
 
-		if( in_CopyMode == DropData )
+		if( in_CopyMode == this->DropData )
 		{
 			pNewBuffer = new VBuffer<DestType>(
 				reinterpret_cast<DestType*>(m_pBuffer),
@@ -275,7 +275,7 @@ public:
 			m_pBuffer = 0;
 			m_nSize = 0;
 		}
-		else if( in_CopyMode == CopyData )
+		else if( in_CopyMode == this->CopyData )
 		{
 			vbyte* pNewData = new vbyte[nSizeInBytes];
 			memcpy(pNewData, m_pBuffer, nSizeInBytes);

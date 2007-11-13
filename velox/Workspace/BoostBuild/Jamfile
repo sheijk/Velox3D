@@ -272,23 +272,23 @@ lib KernelLib
     
 #     ;
 
-# # sub-project: VeloxLib
-# #------------------------------------------------------------------------------
-# lib VeloxLib
-#     : # source files 
-#     ../../Source/Entity/IVPart.cpp
-#     ../../Source/Entity/VEntity.cpp
-#     ../../Source/Entity/VEntityManager.cpp
-#     ../../Source/Entity/VEntitySerializationService.cpp
-#     ../../Source/Entity/VGenericPartParser.cpp
-#     ../../Source/Entity/VNode.cpp
-#     ../../Source/Entity/VUnconnectedPart.cpp
-#     ../../Source/Entity/EntityParts/VRigidBodyPart.cpp
-#     ../../Source/Entity/EntityParts/VUpdateablePart.cpp
-#     ../../Source/Graphics/Lib/Conversions.cpp
-#     ../../Source/Graphics/Lib/DefaultVertexStructures.cpp
-#     ../../Source/Graphics/Lib/EffectUtils.cpp
-#     ../../Source/Graphics/Lib/GeometryUtils.cpp
+# sub-project: VeloxLib
+#------------------------------------------------------------------------------
+lib VeloxLib
+     : # source files 
+     ../../Source/Entity/IVPart.cpp
+     ../../Source/Entity/VEntity.cpp
+     ../../Source/Entity/VEntityManager.cpp
+     ../../Source/Entity/VEntitySerializationService.cpp
+     ../../Source/Entity/VGenericPartParser.cpp
+     ../../Source/Entity/VNode.cpp
+     ../../Source/Entity/VUnconnectedPart.cpp
+     ../../Source/Entity/EntityParts/VRigidBodyPart.cpp
+     ../../Source/Entity/EntityParts/VUpdateablePart.cpp
+     ../../Source/Graphics/Lib/Conversions.cpp
+     #../../Source/Graphics/Lib/DefaultVertexStructures.cpp
+     ../../Source/Graphics/Lib/EffectUtils.cpp
+     ../../Source/Graphics/Lib/GeometryUtils.cpp
 #     ../../Source/Graphics/Lib/MiscUtils.cpp
 #     ../../Source/Graphics/Lib/OpenGLUtils.cpp
 #     ../../Source/Graphics/Lib/StateTypes.cpp
@@ -447,5 +447,5 @@ lib KernelLib
 #     ../../Source/Tags/VTag.cpp
 #     ../../Source/Tags/VTagRegistry.cpp
     
-#     ;
+     ;
 

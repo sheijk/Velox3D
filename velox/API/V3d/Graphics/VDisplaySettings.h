@@ -108,5 +108,4 @@ private:
 } // namespace v3d
 V3D_TYPEINFO(v3d::graphics::VDisplaySettings);
 //-----------------------------------------------------------------------------
-#endif V3D_VDISPLAYSETTINGS_H
-
+#endif //V3D_VDISPLAYSETTINGS_H
