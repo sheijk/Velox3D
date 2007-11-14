@@ -9,7 +9,7 @@
  * Link this file to every service module (dll).
  * Derive a class from VModuleBase and create a global instance of it
  * for every service dll. The initialize and shutdown functions of
- * your instance will be called automagically
+ * your instance will be called automatically
  */
 #ifdef V3D_WIN32
 #define V3D_MODULE_API __declspec(dllexport)

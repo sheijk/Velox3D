@@ -23,7 +23,7 @@ namespace image{
 class IVImageLoader
 {
 public:
-
+	virtual ~IVImageLoader(){};
 	/* Create an image out of a vfs stream */
 	virtual VImage* Create(vfs::IVStream* in_pStream, VStringParam in_sExt) = 0;
 

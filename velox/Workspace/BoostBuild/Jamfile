@@ -286,35 +286,35 @@ lib VeloxLib
      ../../Source/Entity/EntityParts/VRigidBodyPart.cpp
      ../../Source/Entity/EntityParts/VUpdateablePart.cpp
      ../../Source/Graphics/Lib/Conversions.cpp
-     #../../Source/Graphics/Lib/DefaultVertexStructures.cpp
+     ../../Source/Graphics/Lib/DefaultVertexStructures.cpp
      ../../Source/Graphics/Lib/EffectUtils.cpp
      ../../Source/Graphics/Lib/GeometryUtils.cpp
-#     ../../Source/Graphics/Lib/MiscUtils.cpp
-#     ../../Source/Graphics/Lib/OpenGLUtils.cpp
-#     ../../Source/Graphics/Lib/StateTypes.cpp
-#     ../../Source/Graphics/Lib/VDisplaySettings.cpp
-#     ../../Source/Graphics/Lib/VEffectDescription.cpp
-#     ../../Source/Graphics/Lib/VLight.cpp
-#     ../../Source/Graphics/Lib/VMeshDescription.cpp
-#     ../../Source/Graphics/Lib/VModel.cpp
-#     ../../Source/Graphics/Lib/VModeTypeInfo.cpp
-#     ../../Source/Graphics/Lib/VPointLight.cpp
-#     ../../Source/Graphics/Lib/VVertexBuffer.cpp
-#     ../../Source/Graphics/Lib/VVertexFormat.cpp
-#     ../../Source/Graphics/OpenGL/VDeviceCaps.cpp
-#     ../../Source/Graphics/OpenGL/VMeshHandle.cpp
-#     ../../Source/Graphics/OpenGL/Context/RenderTexture.cpp
-#     ../../Source/Graphics/OpenGL/Context/VCopyPixelsContext.cpp
-#     ../../Source/Graphics/OpenGL/Context/VFrameBufferObjectContext.cpp
-#     ../../Source/Graphics/OpenGL/Context/VOffscreenContextBase.cpp
-#     ../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.cpp
-#     ../../Source/Graphics/OpenGL/Context/VSubAreaContext.cpp
-#     ../../Source/Graphics/OpenGL/Context/VWin32WindowContext.cpp
-#     ../../Source/UtilsLib/ColorConversion.cpp
-#     ../../Source/UtilsLib/VCameraPart.cpp
-#     ../../Source/UtilsLib/VCircleMoverPart.cpp
-#     ../../Source/UtilsLib/VCommandManager.cpp
-#     ../../Source/UtilsLib/VFourCC.cpp
+     ../../Source/Graphics/Lib/MiscUtils.cpp
+     ../../Source/Graphics/Lib/OpenGLUtils.cpp
+     ../../Source/Graphics/Lib/StateTypes.cpp
+     ../../Source/Graphics/Lib/VDisplaySettings.cpp
+     ../../Source/Graphics/Lib/VEffectDescription.cpp
+     ../../Source/Graphics/Lib/VLight.cpp
+     ../../Source/Graphics/Lib/VMeshDescription.cpp
+     ../../Source/Graphics/Lib/VModel.cpp
+     ../../Source/Graphics/Lib/VModeTypeInfo.cpp
+     ../../Source/Graphics/Lib/VPointLight.cpp
+     ../../Source/Graphics/Lib/VVertexBuffer.cpp
+     ../../Source/Graphics/Lib/VVertexFormat.cpp
+     ../../Source/Graphics/OpenGL/VDeviceCaps.cpp
+     ../../Source/Graphics/OpenGL/VMeshHandle.cpp
+     ../../Source/Graphics/OpenGL/Context/RenderTexture.cpp
+     ../../Source/Graphics/OpenGL/Context/VCopyPixelsContext.cpp
+     ../../Source/Graphics/OpenGL/Context/VFrameBufferObjectContext.cpp
+     ../../Source/Graphics/OpenGL/Context/VOffscreenContextBase.cpp
+     ../../Source/Graphics/OpenGL/Context/VPBufferWindowContext.cpp
+     ../../Source/Graphics/OpenGL/Context/VSubAreaContext.cpp
+     ../../Source/Graphics/OpenGL/Context/VWin32WindowContext.cpp
+     ../../Source/UtilsLib/ColorConversion.cpp
+     ../../Source/UtilsLib/VCameraPart.cpp
+     ../../Source/UtilsLib/VCircleMoverPart.cpp
+     ../../Source/UtilsLib/VCommandManager.cpp
+     ../../Source/UtilsLib/VFourCC.cpp
 #     ../../Source/UtilsLib/VFPSMoverPart.cpp
 #     ../../Source/UtilsLib/VFrameCounter.cpp
 #     ../../Source/UtilsLib/VImage.cpp

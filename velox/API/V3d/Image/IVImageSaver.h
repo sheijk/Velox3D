@@ -29,6 +29,8 @@ public:
 		SaveJPG,
 		SaveTGA
 	};
+	
+	virtual ~IVImageSaver(){};
 
 
 	//TODO: hier sollte wie beim loader IVStream& als parameter sein --sheijk

@@ -43,8 +43,8 @@ private:
 	virtual void OnMessage(const messaging::VMessage& in_Message, 
 		messaging::VMessage* in_pAnswer = 0);
 
-	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBody;
+	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 
 	vfloat32 m_fRadius;
 	math::VVector3f m_Center;

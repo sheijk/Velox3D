@@ -4,7 +4,7 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
+#ifdef V3D_WIN32
 #ifndef V3D_VWIN32WINDOWCONTEXT_H
 #define V3D_VWIN32WINDOWCONTEXT_H
 //-----------------------------------------------------------------------------
@@ -64,3 +64,4 @@ private:
 //-----------------------------------------------------------------------------
 
 #endif //V3D_VWIN32WINDOWCONTEXT_H
+#endif

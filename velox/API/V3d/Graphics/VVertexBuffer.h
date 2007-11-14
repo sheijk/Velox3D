@@ -73,9 +73,9 @@ public:
 private:
 	vuint GetVertexCount(const VVertexFormat& in_Format);
 
-	const vuint m_nVertexCount;
-	VVertexFormat m_Format;
 	VByteBuffer m_VertexData;
+	VVertexFormat m_Format;
+	const vuint m_nVertexCount;
 };
 
 //-----------------------------------------------------------------------------
@@ -85,8 +85,8 @@ VVertexBuffer::VVertexBuffer(
 	const VBuffer<DataType>& in_Data, 
 	VVertexFormat in_Format)
 	:
-	m_Format(in_Format),
 	m_VertexData(in_Data),
+	m_Format(in_Format),
 	m_nVertexCount(GetVertexCount(in_Format))
 {
 }

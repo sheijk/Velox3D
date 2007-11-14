@@ -77,7 +77,7 @@ protected:
 	virtual void Unregister(IVUpdateable* in_pObject) = 0;
 
 	// (un)registering is only allowed for IVUpdateable objects
-	friend IVUpdateable;
+	friend class IVUpdateable;
 
 protected:
 	IVUpdateManager(VStringParam in_strName) 
@@ -89,13 +89,14 @@ protected:
 typedef VServicePtr<IVUpdateManager> VUpdateManagerPtr;
 //-----------------------------------------------------------------------------
 } // namespace updater
-} // namespace v3d
-//-----------------------------------------------------------------------------
 template<>
-inline v3d::updater::IVUpdateManager* v3d::QueryService<v3d::updater::IVUpdateManager>()
+inline v3d::updater::IVUpdateManager* 
+QueryService<v3d::updater::IVUpdateManager>()
 {
 	return QueryObject<v3d::updater::IVUpdateManager>("updater.service");
 }
+//-----------------------------------------------------------------------------
+} // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_IVUPDATEMANAGER_H
 

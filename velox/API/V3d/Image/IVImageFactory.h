@@ -79,14 +79,15 @@ protected:
 
 typedef VServicePtr<IVImageFactory> VImageServicePtr;
 //-----------------------------------------------------------------------------
-} // namespace image
-} // namespace v3d
+}// namespace image
 //-----------------------------------------------------------------------------
 template<>
-inline v3d::image::IVImageFactory* v3d::QueryService<v3d::image::IVImageFactory>()
+inline v3d::image::IVImageFactory* QueryService<v3d::image::IVImageFactory>()
 {
 	return QueryObject<v3d::image::IVImageFactory>("image.service");
 }
+//-----------------------------------------------------------------------------
+} // namespace v3d
 //-----------------------------------------------------------------------------
 #endif // V3D_IVIMAGEFACTORY_H
 

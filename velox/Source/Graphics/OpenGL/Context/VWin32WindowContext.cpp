@@ -4,7 +4,7 @@
  * distribution or http://www.sechsta-sinn.de/velox/licence_bsd.txt for the
  * complete licence text
  */
-
+#ifdef V3D_WIN32
 #include "VWin32WindowContext.h"
 
 #include "VCopyPixelsContext.h"
@@ -149,4 +149,4 @@ void VWin32WindowContext::ShareListsWith(VWin32WindowContext* other)
 //-----------------------------------------------------------------------------
 }} // namespace v3d::graphics
 //-----------------------------------------------------------------------------
-
+#endif

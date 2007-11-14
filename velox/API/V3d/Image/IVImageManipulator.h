@@ -21,7 +21,7 @@ namespace image{
 class IVImageManipulator
 {
 public:
-
+	virtual ~IVImageManipulator(){};
 	virtual void Scale(VImage& in_ImageSource, VImage& in_ImageDest) = 0;
 	virtual void Convert(VImage& in_ImageSource, VImage& in_ImageDest) = 0;
 

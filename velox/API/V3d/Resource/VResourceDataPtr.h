@@ -99,7 +99,7 @@ struct VResDataAccessorUtil
 {
     VResourceDataPtr<T> operator()(const std::string& in_ResName) const
 	{
-		return VResourceId(in_ResName.c_str())->GetMutableData<T>();
+		return typename VResourceId(in_ResName.c_str())->GetMutableData<T>();
 	}
 };
 
