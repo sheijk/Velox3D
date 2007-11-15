@@ -55,7 +55,7 @@ vbool VImportedMaterialContainer::FindMaterialByName(VStringParam in_sName)
 
 	for(; begin != end; begin++)
 	{
-		std::string theName = (*begin)->GetMaterialName();
+		std::string theName((*begin)->GetMaterialName());
 		std::string queryName = in_sName;
 
 		if(theName == queryName)
@@ -73,7 +73,7 @@ VImportedMaterialDescription* VImportedMaterialContainer::GetMaterialByName(
 
 	for(; begin != m_MaterialList.end(); begin++)
 	{
-		std::string theName = (*begin)->GetMaterialName();
+		std::string theName((*begin)->GetMaterialName());
 		std::string queryName = in_sName;
 
 		if(theName == queryName)

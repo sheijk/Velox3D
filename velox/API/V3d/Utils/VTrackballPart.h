@@ -56,9 +56,9 @@ private:
 	vbool m_bCenterOnParent;
 
 	entity::VNodeConnection<entity::VRigidBodyPart> m_pRigidBodyPart;
-	entity::VNodeConnection<entity::VRigidBodyPart> m_pParentRigidBodyPart;
 	entity::VNodeConnection<entity::VUpdateManagerPart> m_pUpdateManager;
 	entity::VNodeConnection<utils::VInputPart> m_pInputPart;
+	entity::VNodeConnection<entity::VRigidBodyPart> m_pParentRigidBodyPart;
 };
 
 //-----------------------------------------------------------------------------

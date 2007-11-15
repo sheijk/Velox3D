@@ -20,7 +20,7 @@ namespace updater{
 class IVTimer
 {
 public:
-
+	virtual ~IVTimer();
 	/* Updates the timer each frame */
 	virtual void Update(vfloat32 in_fSeconds) = 0;
 

@@ -57,13 +57,16 @@ public:
 
 //-----------------------------------------------------------------------------
 } // namespace vfs
-} // namespace v3d
 //-----------------------------------------------------------------------------
 template<>
-inline v3d::vfs::IVStreamFactory* v3d::QueryService<v3d::vfs::IVStreamFactory>()
+inline v3d::vfs::IVStreamFactory* QueryService<v3d::vfs::IVStreamFactory>()
 {
 	return QueryObject<v3d::vfs::IVStreamFactory>("vfs.strfact");
 }
+//-----------------------------------------------------------------------------
+} // namespace v3d
+//-----------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------
 #endif // V3D_IVStreamFactory_H
 

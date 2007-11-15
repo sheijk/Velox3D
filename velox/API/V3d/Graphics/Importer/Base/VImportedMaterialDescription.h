@@ -11,7 +11,7 @@
 #include <V3d/Core/VCoreLib.h>
 #include <V3d/Core/Wrappers/VString.h>
 #include <V3d/Resource.h>
-#include <V3d/graphics/VEffectDescription.h>
+#include <V3d/Graphics/VEffectDescription.h>
 #include <V3d/Graphics/Geometry/VColor4f.h>
 
 #include <string>

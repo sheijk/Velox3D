@@ -51,7 +51,7 @@ void VMouseTrackball::Update(vfloat32 in_fSeconds)
 		if( m_pAltitudeAxis != 0 )
 			deltaAltitude = m_pAltitudeAxis->GetLastMovement();
 
-		if( abs(deltaAltitude) > abs(deltaDirection) )
+		if( fabs(deltaAltitude) > fabs(deltaDirection) )
 			SetAltitudeAngle(GetAltitudeAngle() + deltaAltitude * m_fAltitudeSpeed);
 		else
 			SetDirectionAngle(GetDirectionAngle() + deltaDirection * m_fRotationSpeed);

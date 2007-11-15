@@ -107,13 +107,13 @@ void VImportedFaceContainer::CreateMeshes(
 		
 		if((*begin)->GetMaterial())
 		{
-			std::string name = (*begin)->GetMaterial()->GetResourceName();
-			if(!IsInMaterialLoadedList(name.c_str()))
+			VString name = (*begin)->GetMaterial()->GetResourceName();
+			if(!IsInMaterialLoadedList(name.AsCString()))
 			{
 			
-				material = in_pDevice->CreateMaterial(name.c_str());
+				material = in_pDevice->CreateMaterial(name.AsCString());
 				//save some time cos its usual next face uses same material
-				m_MaterialLoadedList.push_front(name);
+				m_MaterialLoadedList.push_front(std::string(name.AsCString()));
 			
 				//resolve resource id
 				resource::VResourceId matId = pResManager->GetResourceByName(
@@ -141,10 +141,6 @@ void VImportedFaceContainer::CreateMeshes(
 void VImportedFaceContainer::CreateMeshes(graphics::VModel* in_pModel)
 {
 	resource::VResourceManagerPtr pResManager;
-
-	graphics::IVDevice::MeshHandle mesh = 0;
-	graphics::IVDevice::MaterialHandle material = 0;
-
 	graphics::VModelMesh::MeshPtr meshResourcePtr;
 	graphics::VModelMesh::MaterialPtr materialResourcePtr = 0;
 	
@@ -160,12 +156,12 @@ void VImportedFaceContainer::CreateMeshes(graphics::VModel* in_pModel)
 		
 		if((*begin)->GetMaterial())
 		{
-			std::string name = (*begin)->GetMaterial()->GetResourceName();
-			if(!IsInMaterialLoadedList(name.c_str()))
+			VString name = (*begin)->GetMaterial()->GetResourceName();
+			if(!IsInMaterialLoadedList(name.AsCString()))
 			{
 			
 				//save some time cos its usual next face uses same material
-				m_MaterialLoadedList.push_front(name);
+				m_MaterialLoadedList.push_front(name.AsCString());
 			
 				//resolve resource id
 				resource::VResourceId matId = pResManager->GetResourceByName(
@@ -229,7 +225,6 @@ void VImportedFaceContainer::CreateOptimizedMeshes(
 			vuint index = m_FaceList[((*begin) / 3 )]->GetFaceIndexStart();
 			vuint* indexArray = m_FaceList[((*begin) / 3 )]->GetBufferDescription()->GetIndexBufferArray();
 			const vfloat32* vertexArray = reinterpret_cast<const vfloat32*>(m_FaceList[((*begin) / 3)]->GetBufferDescription()->GetVertexBuffer()->GetBufferAddress());
-			vuint nBufferSize = m_FaceList[((*begin) / 3)]->GetBufferDescription()->GetVertexBuffer()->GetCoordinateCount();
 			
 			vuint a = indexArray[index];
 			vuint b = indexArray[index +1];

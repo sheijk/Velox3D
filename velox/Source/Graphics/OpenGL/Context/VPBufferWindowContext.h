@@ -16,10 +16,7 @@
 #include <V3d/Graphics/IVDevice.h>
 #include <V3d/Graphics/IVRenderContext.h>
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 #include <V3d/OpenGL.h>
-
 #include "RenderTexture.h"
 #include "VOffscreenContextBase.h"
 //-----------------------------------------------------------------------------

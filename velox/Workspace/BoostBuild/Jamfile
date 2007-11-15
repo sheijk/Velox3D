@@ -315,25 +315,25 @@ lib VeloxLib
      ../../Source/UtilsLib/VCircleMoverPart.cpp
      ../../Source/UtilsLib/VCommandManager.cpp
      ../../Source/UtilsLib/VFourCC.cpp
-#     ../../Source/UtilsLib/VFPSMoverPart.cpp
-#     ../../Source/UtilsLib/VFrameCounter.cpp
-#     ../../Source/UtilsLib/VImage.cpp
-#     ../../Source/UtilsLib/VInputPart.cpp
-#     ../../Source/UtilsLib/VMouseTrackball.cpp
-#     ../../Source/UtilsLib/VRegisterGuard.cpp
-#     ../../Source/UtilsLib/VSimpleTokenizer.cpp
-#     ../../Source/UtilsLib/VStreamReader.cpp
-#     ../../Source/UtilsLib/VTrackball.cpp
-#     ../../Source/UtilsLib/VTrackballPart.cpp
-#     ../../Source/UtilsLib/Camera/VCamera.cpp
-#     ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp
-#     ../../Source/UtilsLib/DrawList/VSimpleDrawList.cpp
-#     ../../Source/UtilsLib/Importer/VEffectLoader.cpp
-#     ../../Source/UtilsLib/Importer/VModelLoader.cpp
-#     ../../Source/UtilsLib/Importer/Base/VImportedBufferDescription.cpp
-#     ../../Source/UtilsLib/Importer/Base/VImportedFaceContainer.cpp
-#     ../../Source/UtilsLib/Importer/Base/VImportedFaceDescription.cpp
-#     ../../Source/UtilsLib/Importer/Base/VImportedMaterialContainer.cpp
+     ../../Source/UtilsLib/VFPSMoverPart.cpp
+     ../../Source/UtilsLib/VFrameCounter.cpp
+     ../../Source/UtilsLib/VImage.cpp
+     ../../Source/UtilsLib/VInputPart.cpp
+     ../../Source/UtilsLib/VMouseTrackball.cpp
+     ../../Source/UtilsLib/VRegisterGuard.cpp
+     ../../Source/UtilsLib/VSimpleTokenizer.cpp
+     ../../Source/UtilsLib/VStreamReader.cpp
+     ../../Source/UtilsLib/VTrackball.cpp
+     ../../Source/UtilsLib/VTrackballPart.cpp
+     ../../Source/UtilsLib/Camera/VCamera.cpp
+     ../../Source/UtilsLib/Camera/VKeyboardCamera.cpp
+     ../../Source/UtilsLib/DrawList/VSimpleDrawList.cpp
+     ../../Source/UtilsLib/Importer/VEffectLoader.cpp
+     ../../Source/UtilsLib/Importer/VModelLoader.cpp
+     ../../Source/UtilsLib/Importer/Base/VImportedBufferDescription.cpp
+     ../../Source/UtilsLib/Importer/Base/VImportedFaceContainer.cpp
+     ../../Source/UtilsLib/Importer/Base/VImportedFaceDescription.cpp
+     ../../Source/UtilsLib/Importer/Base/VImportedMaterialContainer.cpp
 #     ../../Source/UtilsLib/Importer/Base/VImportedMaterialDescription.cpp
 #     ../../Source/UtilsLib/Importer/Base/VMaterialMap.cpp
 #     ../../Source/UtilsLib/Importer/3DS/VImported3DS.cpp
